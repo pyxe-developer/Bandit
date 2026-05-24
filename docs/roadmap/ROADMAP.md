@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Write the `BANDIT-017` landing verdict.
+**Current next step:** Record the `BANDIT-017` local-record landing action.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -30,8 +30,9 @@ now, and required the remaining findings to become the next chore.
 `docs/work/BANDIT-017/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-017/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-017/implementation-evidence.md`, review evidence is recorded
-in `docs/work/BANDIT-017/review-evidence.md`, and the next step is landing
-verdict.
+in `docs/work/BANDIT-017/review-evidence.md`, landing verdict is recorded in
+`docs/work/BANDIT-017/landing-verdict.md`, and the next step is local-record
+landing action evidence.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -324,8 +325,8 @@ Current rule:
   gap-ledger disposition.
 - `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
 - `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is active as `BANDIT-017`; RED
-  evidence, implementation evidence, and review evidence are recorded, and
-  landing verdict is next.
+  evidence, implementation evidence, review evidence, and landing verdict are
+  recorded, and local-record landing action is next.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -338,7 +339,7 @@ Current rule:
 
 Current priority:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; landing verdict next.
+1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; local-record landing action next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

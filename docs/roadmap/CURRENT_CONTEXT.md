@@ -12,19 +12,20 @@ future-hardening loop, directed Codex PM to land `BANDIT-016` now, and required
 the remaining Local Qwen findings to become the next chore.
 
 `BANDIT-017` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief, RED evidence, and
-implementation evidence are recorded in `docs/work/BANDIT-017/`, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-017` as an active
-chore. Do not begin live escalated-reviewer, work-item creation, artifact
-creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
-Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
-until `BANDIT-017` is landed or explicitly dispositioned.
+`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief, RED evidence,
+implementation evidence, review evidence, and landing verdict are recorded in
+`docs/work/BANDIT-017/`, and `.bandit/bootstrap-gaps.json` links the gap to
+`BANDIT-017` as an active chore. Do not begin live escalated-reviewer,
+work-item creation, artifact creation, heartbeat, cockpit, Phase 6 Coordination
+Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9
+dogfood, or feature work until `BANDIT-017` is landed or explicitly
+dispositioned.
 
 **Last completed milestone:** `BANDIT-016` resolved Stage 4 evidence-head
 semantics and landed under operator-owned loop disposition, with remaining
 Local Qwen complexity findings routed to `BANDIT-017`.
 
-**Current next action:** Write the `BANDIT-017` landing verdict.
+**Current next action:** Record the `BANDIT-017` local-record landing action.
 
 ## Active Work
 
@@ -44,7 +45,7 @@ Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics.
 
-**Expected next deliverable:** `BANDIT-017` landing verdict.
+**Expected next deliverable:** `BANDIT-017` landing action evidence.
 
 ## Known Bootstrap Gaps
 
@@ -154,7 +155,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; landing verdict is next.
+1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; local-record landing action is next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -168,7 +169,7 @@ a resolved, operator-blocked, or no-action ledger disposition.
 ## Required Operator Input
 
 None recorded for the next routing step. Repo artifacts define the
-`BANDIT-017` landing verdict as the next action.
+`BANDIT-017` local-record landing action as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-017
-source_head: 6fc3d03938a0f95496025c564362d7cf55d5c73f
+source_head: bb6a4c554b2fc7cb3c3c1d7e2237749c75ea281d
 verification_state: pass
 verification_evidence:
   - npm test passed 155/155 tests at source head 6fc3d03938a0f95496025c564362d7cf55d5c73f.

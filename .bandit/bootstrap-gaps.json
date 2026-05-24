@@ -74,7 +74,7 @@
       ],
       "linked_work_item": "BANDIT-017",
       "rationale": "Local Qwen accepted BANDIT-016 implementation behavior but repeatedly surfaced non-blocking future-hardening findings: land-check.ts size/complexity and async shallow/promisor git state checks during changed-path error classification.",
-      "next_action": "Continue BANDIT-017: review and cross-model gate evidence, including Local Qwen review, remain required before landing verdict, landing action, retrospective, gap-ledger closeout, or any unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
+      "next_action": "Continue BANDIT-017: landing verdict is recorded; local-record landing action evidence remains required before retrospective, gap-ledger closeout, or any unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
