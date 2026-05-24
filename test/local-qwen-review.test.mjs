@@ -174,7 +174,7 @@ test("committed local Qwen baseline profile uses the spike-backed Mastra Code oM
     "--timeout",
     "180",
     "--prompt",
-    "{{prompt}}"
+    "{{prompt_stdin}}"
   ]);
 });
 
@@ -283,7 +283,7 @@ test("qwen-review fails closed when the configured runtime is unavailable", asyn
       overrides: {
         command: {
           executable: "definitely-missing-qwen-command-for-bandit-tests",
-          args: []
+          args: ["{{prompt}}"]
         }
       }
     }
@@ -375,6 +375,54 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
 
   assert.equal(result.code, 0, result.stderr);
   assert.match(result.stdout, /Local Qwen review: pass/);
+});
+
+test("qwen-review can send the review prompt over stdin for long Mastra Code packets", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        command: {
+          executable: process.execPath,
+          args: ["qwen-stdin-fixture.mjs", "{{prompt_stdin}}"]
+        }
+      }
+    }
+  });
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    [
+      "const chunks = [];",
+      "process.stdin.on('data', (chunk) => chunks.push(chunk));",
+      "process.stdin.on('end', () => {",
+      "  const prompt = Buffer.concat(chunks).toString('utf8');",
+      "  if (process.argv[2] !== '-') process.exit(10);",
+      "  if (!prompt.includes('docs/work/BANDIT-967/implementation-evidence.md')) process.exit(11);",
+      "  if (!prompt.includes('Implementation marker for prompt coverage')) process.exit(12);",
+      "  if (!prompt.includes('Source diff range:')) process.exit(13);",
+      "  if (!prompt.includes('diff --git')) process.exit(14);",
+      "  process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt arrived over stdin' }));",
+      "});"
+    ].join("\n"),
+    "qwen-stdin-fixture.mjs"
+  );
+  await writeWorkBrief(repo, "BANDIT-967", "Stdin Prompt Qwen Review");
+  await writeWorkBrief(repo, "BANDIT-966", "Previous Slice");
+  await writeLandingAction(repo, "BANDIT-966", await commitAll(repo, "Previous landed slice"));
+  await writeImplementationEvidence(repo, "BANDIT-967");
+  await writeFile(path.join(repo, "source.txt"), "source change\n", "utf8");
+  await commitAll(repo, "Current slice source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-967"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Local Qwen review: pass/);
+
+  const artifact = await readFile(
+    path.join(repo, "docs/work/BANDIT-967/local-qwen-review.md"),
+    "utf8"
+  );
+  assert.match(artifact, /Prompt arrived over stdin/);
 });
 
 test("qwen-review writes repo-native evidence for a passing fixture review", async () => {
@@ -569,7 +617,7 @@ async function writeLocalQwenProfile(repo, options = {}) {
     runtime: "command",
     command: {
       executable: process.execPath,
-      args: ["qwen-fixture.mjs"]
+      args: ["qwen-fixture.mjs", "{{prompt}}"]
     },
     model: "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
     prompt_contract: {
@@ -633,8 +681,8 @@ async function writeLocalQwenReview(repo, workItemId, options = {}) {
   );
 }
 
-async function writeReviewerFixture(repo, script) {
-  await writeFile(path.join(repo, "qwen-fixture.mjs"), `${script}\n`, "utf8");
+async function writeReviewerFixture(repo, script, fileName = "qwen-fixture.mjs") {
+  await writeFile(path.join(repo, fileName), `${script}\n`, "utf8");
 }
 
 async function writeImplementationEvidence(repo, workItemId) {

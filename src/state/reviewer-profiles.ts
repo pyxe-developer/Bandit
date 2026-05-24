@@ -201,6 +201,10 @@ function rejectDriftedQwenCodeRoute(executable: string, args: string[]) {
       `Local Qwen profile must use provider_base_url ${EXPECTED_PROVIDER_BASE_URL}`
     );
   }
+
+  if (!args.some((arg) => arg.includes("{{prompt}}") || arg === "{{prompt_stdin}}")) {
+    throw new Error("Local Qwen profile command must include a prompt placeholder");
+  }
 }
 
 async function readRequiredProfile(repoRoot: string) {

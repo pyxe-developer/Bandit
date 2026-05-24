@@ -62,8 +62,9 @@ is the expected faster local endpoint.
 5. The baseline profile records model
    `omlx-local/Qwen3.6-35B-A3B-MLX-8bit`.
 6. The profile command executes `mastracode` with `--model
-   omlx-local/Qwen3.6-35B-A3B-MLX-8bit`, `--output-format json`, and a prompt
-   placeholder.
+   omlx-local/Qwen3.6-35B-A3B-MLX-8bit`, `--output-format json`, and an
+   explicit prompt placeholder. The implementation may pass Bandit's long
+   review packet through stdin when the profile uses `{{prompt_stdin}}`.
 7. `bandit validate` fails closed when a local Qwen profile uses the drifted
    Qwen Code CLI route.
 8. `bandit validate` fails closed when a Mastra Code profile omits provider

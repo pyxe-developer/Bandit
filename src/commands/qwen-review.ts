@@ -79,12 +79,12 @@ function runReviewerCommand(
   profile: LocalQwenProfile,
   prompt: string
 ): Promise<ReviewerOutput> {
-  const args = profile.command.args.map((arg) => expandCommandArg(arg, prompt));
+  const command = prepareReviewerCommand(profile.command.args, prompt);
 
   return new Promise((resolve, reject) => {
-    execFile(
+    const child = execFile(
       profile.command.executable,
-      args,
+      command.args,
       {
         cwd: repoRoot,
         timeout: profile.timeoutMs,
@@ -117,6 +117,10 @@ function runReviewerCommand(
         }
       }
     );
+
+    if (command.stdin) {
+      child.stdin?.end(command.stdin);
+    }
   });
 }
 
@@ -180,8 +184,19 @@ function extractFencedJson(value: string) {
   return match?.[1]?.trim() ?? null;
 }
 
-function expandCommandArg(arg: string, prompt: string) {
-  return arg.replaceAll("{{prompt}}", prompt);
+function prepareReviewerCommand(args: string[], prompt: string) {
+  let stdin: string | undefined;
+
+  const expandedArgs = args.map((arg) => {
+    if (arg === "{{prompt_stdin}}") {
+      stdin = prompt;
+      return "-";
+    }
+
+    return arg.replaceAll("{{prompt}}", prompt);
+  });
+
+  return { args: expandedArgs, stdin };
 }
 
 async function readReviewPacket(repoRoot: string, workItemId: string) {

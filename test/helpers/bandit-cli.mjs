@@ -93,7 +93,7 @@ export async function writeLocalQwenProfile(repo, overrides = {}) {
     runtime: "command",
     command: {
       executable: process.execPath,
-      args: ["qwen-fixture.mjs"]
+      args: ["qwen-fixture.mjs", "{{prompt}}"]
     },
     model: "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
     prompt_contract: {
