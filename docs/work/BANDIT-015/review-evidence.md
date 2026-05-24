@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-015
-source_head: 4569c8f92eacf7df098f7f370bd8ac1c09d82b96
+source_head: c584fe3b06692632723aedad2f1f9d69db607602
 verification_state: pass
 verification_evidence:
   - node --test test/coderabbit-state.test.mjs passed 16/16 tests at repair head 70ad098d378f93dbf07e16f003912873358cb184.
@@ -18,6 +18,9 @@ verification_evidence:
   - npm run bandit -- qwen-review BANDIT-015 completed at blocker-disposition head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 and recorded docs/work/BANDIT-015/local-qwen-review.md with a blocker reviewer verdict.
   - Codex PM triaged the latest blocker findings in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md.
   - docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited escalated-review disposition at source head 582087d6e6a838cb8c5e4abd3f55175f16f74037.
+  - npm run bandit -- qwen-review BANDIT-015 completed at escalated-review disposition head 16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a and recorded docs/work/BANDIT-015/local-qwen-review.md with a blocker reviewer verdict.
+  - GITHUB_TOKEN=dummy-token npm run bandit -- coderabbit-review live BANDIT-015 --pr 15 --fixture /tmp/bandit-coderabbit-pass.json refreshed docs/work/BANDIT-015/coderabbit-review.md at source_head c584fe3b06692632723aedad2f1f9d69db607602.
+  - Codex PM triaged the latest evidence-head blocker findings in docs/work/BANDIT-015/qwen-evidence-head-disposition.md.
 coderabbit_state: pass
 coderabbit_replacement_evidence:
   - not_applicable
@@ -29,9 +32,10 @@ local_qwen_replacement_evidence:
   - The aggregate review-evidence mismatch is repaired: this artifact records local_qwen_state as blocker until the next Local Qwen rerun clears or replaces the blocker state.
   - The redactSecrets substring over-redaction hardening concern is an explicit no-action decision for BANDIT-015 because conservative over-redaction is safer than fail-open exact-match redaction for untrusted provider diagnostics.
   - The latest Local Qwen blocker findings from source head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 are triaged in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md; the pending-rerun finding is repaired, and the missing escalated-review artifact is now repaired by docs/work/BANDIT-015/escalated-review.md.
+  - The latest Local Qwen evidence-head findings from source head 16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a are triaged in docs/work/BANDIT-015/qwen-evidence-head-disposition.md; CodeRabbit evidence is refreshed at source_head c584fe3b06692632723aedad2f1f9d69db607602, and the remaining freshness check is the next Local Qwen rerun at the committed evidence-head-disposition head.
 escalated_review_required: true
 escalated_review_state: bootstrap_gap
-escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Live escalated-reviewer routing remains unavailable; docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited placeholder disposition, and Local Qwen must be rerun after this artifact is recorded.
+escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Live escalated-reviewer routing remains unavailable; docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited placeholder disposition, and Local Qwen must be rerun after the evidence-head disposition is recorded.
 pm_disposition: blocker
 operator_input_status: none_required
 uat_status: not_applicable
