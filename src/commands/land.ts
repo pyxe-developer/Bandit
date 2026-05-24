@@ -22,17 +22,7 @@ export async function land(repoRoot: string, args: string[]) {
   const options = parseLandOptions(args.slice(1));
   const contract = await readLandingAgentContract(repoRoot);
 
-  if (options.action !== CLI_ACTION) {
-    throw new Error(`Unsupported landing action: ${options.action}`);
-  }
-
-  if (!contract.cliActions.includes(options.action)) {
-    throw new Error(`Unsupported landing action: ${options.action}`);
-  }
-
-  if (!contract.supportedActions.includes(RECORDED_ACTION)) {
-    throw new Error(`Unsupported landing action: ${options.action}`);
-  }
+  const actionType = resolveLandingAction(options.action, contract);
 
   const status = await readGitStatusShortIncludingUntrackedFiles(repoRoot);
   if (status === null) {
@@ -60,7 +50,7 @@ export async function land(repoRoot: string, args: string[]) {
   const displayPath = `docs/work/${workItemId}/landing-action.md`;
   await writeLandingActionArtifact(repoRoot, displayPath, {
     workItemId,
-    actionType: RECORDED_ACTION,
+    actionType,
     sourceHead: reviewEvidence.sourceHead,
     currentHead: readiness.currentHead,
     finalVerdict: landingVerdict.finalVerdict
@@ -75,6 +65,21 @@ export async function land(repoRoot: string, args: string[]) {
       `Current head: ${readiness.currentHead ?? "unavailable"}`
     ].join("\n").concat("\n")
   };
+}
+
+function resolveLandingAction(
+  cliAction: string,
+  contract: { cliActions: string[]; supportedActions: string[] }
+) {
+  if (cliAction !== CLI_ACTION || !contract.cliActions.includes(cliAction)) {
+    throw new Error(`Unsupported landing action: ${cliAction}`);
+  }
+
+  if (!contract.supportedActions.includes(RECORDED_ACTION)) {
+    throw new Error(`Unsupported landing action: ${cliAction}`);
+  }
+
+  return RECORDED_ACTION;
 }
 
 function parseLandOptions(args: string[]): LandOptions {
@@ -129,9 +134,17 @@ async function writeLandingActionArtifact(
 ) {
   const filePath = path.join(repoRoot, displayPath);
   await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(
-    filePath,
-    `# ${fields.workItemId} Landing Action
+  await writeFile(filePath, landingActionContent(fields), "utf8");
+}
+
+function landingActionContent(fields: {
+  workItemId: string;
+  actionType: string;
+  sourceHead: string;
+  currentHead: string | null;
+  finalVerdict: string;
+}) {
+  return `# ${fields.workItemId} Landing Action
 
 ## Status
 
@@ -158,9 +171,7 @@ async function writeLandingActionArtifact(
 This work item has landing action evidence for the supported local-record
 Landing Agent path. The next work item may not begin until retrospective,
 bootstrap-gap disposition, and roadmap context closeout are recorded.
-`,
-    "utf8"
-  );
+`;
 }
 
 function allowedDirtyPathPrefixes(
@@ -181,7 +192,12 @@ function hasDisallowedDirtyPaths(status: string, allowedPathPrefixes: string[]) 
     .split("\n")
     .filter((line) => line.trim().length > 0)
     .some((line) => {
-      const filePath = line.slice(3).trim();
+      const filePath = gitStatusPath(line);
       return !allowedPathPrefixes.some((prefix) => filePath.startsWith(prefix));
     });
+}
+
+function gitStatusPath(statusLine: string) {
+  const match = statusLine.match(/^.. (.+)$/);
+  return match?.[1]?.trim() ?? statusLine.trim();
 }

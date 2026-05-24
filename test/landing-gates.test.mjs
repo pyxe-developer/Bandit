@@ -526,6 +526,7 @@ test("land blocks feature slices without current UAT approval", async () => {
     sourceHead,
     uatStatus: "pass"
   });
+  // The aggregate gate can claim pass only when a current UAT artifact exists.
   await writeLandingVerdict(repo, "BANDIT-927", {
     sourceHead,
     uatStatus: "pass"
