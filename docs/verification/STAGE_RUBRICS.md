@@ -25,7 +25,7 @@ Use these verdicts consistently:
 - `docs/roadmap/CURRENT_CONTEXT.md` names current phase, active work, next action, blockers, and bootstrap gaps.
 - `docs/roadmap/ROADMAP.md` maps the work to a phase.
 - The next step is narrow enough to execute.
-- If a prior slice just completed, landing action evidence exists before the next slice is active.
+- If a prior slice just completed, `docs/work/<ID>/landing-action.md` or equivalent PR merge evidence exists before the next slice is active.
 
 **Blockers:**
 
@@ -182,7 +182,7 @@ Use these verdicts consistently:
 **Required evidence:**
 
 - Landing Verdict.
-- Landing action evidence, such as commit SHA, merge SHA, or recorded blocked/needs-repair state.
+- Landing action evidence in `docs/work/<ID>/landing-action.md` or equivalent PR merge artifact, including commit SHA, merge SHA, or recorded blocked/needs-repair state.
 - Tests/CI current at landing head.
 - Required review gates current at landing head.
 - UAT approval for feature slices.

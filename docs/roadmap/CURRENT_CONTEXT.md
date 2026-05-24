@@ -4,7 +4,7 @@
 
 **Phase:** 3 - Routing And Smell Detection.
 
-**State:** `BANDIT-003` closeout evidence is complete; the focused bootstrap commit for this context update is the landing action.
+**State:** `BANDIT-003` closeout evidence is complete; landing action evidence is recorded in `docs/work/BANDIT-003/landing-action.md`.
 
 **Last completed milestone:** `BANDIT-003` delivered deterministic PRD-to-work draft generation from explicit Feature PRD decomposition notes.
 
@@ -23,7 +23,7 @@
 - an escalation policy that Codex PM can apply without asking routine technical questions;
 - a narrow command or validation path only if the brief proves it belongs in the first Phase 3 slice.
 
-BANDIT-003 is safe-to-land and this focused bootstrap commit records its landing action in git history. `docs/work/BANDIT-003/landing-verdict.md` records the safe-to-land verdict; `review-evidence.md` and `retrospective.md` record review gaps, repaired findings, and improvement dispositions. Do not create implementation code for Phase 3 before the BANDIT-004 brief records scope, acceptance criteria, test plan, clean-code read evidence, stage rubrics, bootstrap gaps, expected files, and implementation order.
+BANDIT-003 has landed as commit `e7520e97da0661b641e9d5f08fb4735e1738ac95`. `docs/work/BANDIT-003/landing-action.md` records the concrete landing action; `landing-verdict.md` records the safe-to-land verdict; `review-evidence.md` and `retrospective.md` record review gaps, repaired findings, and improvement dispositions. Do not create implementation code for Phase 3 before the BANDIT-004 brief records scope, acceptance criteria, test plan, clean-code read evidence, stage rubrics, bootstrap gaps, expected files, and implementation order.
 
 ## Known Bootstrap Gaps
 

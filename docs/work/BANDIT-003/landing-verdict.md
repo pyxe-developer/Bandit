@@ -59,9 +59,11 @@ Date: 2026-05-24.
 
 ## Landing Action Evidence
 
-The landing action is the focused bootstrap commit that includes the
-BANDIT-003 implementation, evidence, and context updates. The commit SHA is
-recorded by git history when this verdict is committed.
+The landing action is recorded in `docs/work/BANDIT-003/landing-action.md`.
+
+Landed commit:
+
+`e7520e97da0661b641e9d5f08fb4735e1738ac95`
 
 ## Landing Decision
 

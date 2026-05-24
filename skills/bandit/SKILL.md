@@ -103,8 +103,9 @@ Read these as needed:
    Every slice must land before the next slice begins. A `safe-to-land` verdict
    is not enough. Before creating the next slice brief, RED evidence,
    implementation branch, or active-work context, verify the previous slice has
-   landing action evidence such as a commit SHA, merge SHA, or recorded
-   blocked/needs-repair state.
+   landing action evidence such as `docs/work/<ID>/landing-action.md` with a
+   commit SHA, a PR merge artifact with merge SHA, or recorded blocked/needs-repair
+   state.
 
    If the previous slice has no landing action evidence, the next action is to
    land or repair closeout for that slice. Do not begin the next slice.

@@ -59,13 +59,13 @@ Use `docs/verification/STAGE_RUBRICS.md` to verify each stage. Verifier output s
 
 Every slice must land before the next slice begins.
 
-A `safe-to-land` verdict is necessary but not sufficient. The slice is not landed until the landing action is complete and recorded: for bootstrap work, a focused commit on the repository branch; for PR-based work, a merged PR or equivalent recorded landing artifact.
+A `safe-to-land` verdict is necessary but not sufficient. The slice is not landed until the landing action is complete and recorded: for bootstrap work, a focused commit on the repository branch plus `docs/work/<ID>/landing-action.md`; for PR-based work, a merged PR or equivalent recorded landing artifact.
 
 Do not create the next slice brief, RED evidence, implementation branch, or active-work context until the previous slice has:
 
 - passing required verification or recorded bootstrap gaps;
 - landing verdict;
-- landing action evidence, such as commit SHA or merge SHA;
+- landing action evidence, such as `docs/work/<ID>/landing-action.md` with commit SHA or a PR merge artifact with merge SHA;
 - retrospective and improvement dispositions;
 - updated `CURRENT_CONTEXT.md` and `ROADMAP.md`.
 

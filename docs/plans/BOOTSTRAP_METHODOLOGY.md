@@ -25,13 +25,13 @@ Every bootstrap slice should leave durable repo-native evidence:
 
 Every slice must land before the next slice begins.
 
-During bootstrap, "landed" means the slice has a complete landing verdict and the landing action itself has happened as a focused commit. Later PR-based workflows may replace this with merge evidence, but the rule is the same: a safe-to-land verdict is not the same as landed.
+During bootstrap, "landed" means the slice has a complete landing verdict, the landing action itself has happened as a focused commit, and `docs/work/<ID>/landing-action.md` records the actual landed commit SHA. Later PR-based workflows may replace this with merge evidence, but the rule is the same: a safe-to-land verdict is not the same as landed.
 
 Before creating the next slice brief, RED evidence, implementation branch, or active-work context, confirm the previous slice has:
 
 - verification evidence;
 - landing verdict;
-- landing action evidence, such as commit SHA or merge SHA;
+- landing action evidence in `docs/work/<ID>/landing-action.md`, including commit SHA or merge SHA;
 - retrospective and improvement dispositions;
 - updated roadmap/current-context state.
 

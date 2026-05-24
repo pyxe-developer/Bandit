@@ -57,7 +57,7 @@ A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair,
 _Avoid_: warning dump, looks-good summary, user gut check
 
 **Landed Slice**:
-A slice whose landing verdict is complete and whose landing action has actually happened, recorded with commit SHA, merge SHA, or equivalent landing evidence. A safe-to-land verdict without landing action evidence is ready-to-land, not complete.
+A slice whose landing verdict is complete and whose landing action has actually happened, recorded with a landing-action artifact containing the commit SHA, merge SHA, or equivalent landing evidence. A safe-to-land verdict without landing action evidence is ready-to-land, not complete.
 _Avoid_: treating verdict as landing, beginning the next slice from an unlanded state
 
 **Pre-Landing Review Loop**:
