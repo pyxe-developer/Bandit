@@ -24,6 +24,31 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     throw new Error("Usage: bandit land-check <work-item-id>");
   }
 
+  const result = await readLandingReadiness(repoRoot, workItemId);
+
+  if (result.readiness.problems.length > 0) {
+    throw new Error(result.readiness.problems.join("\n"));
+  }
+
+  return {
+    output: formatLandingCheck(
+      result.reviewEvidence,
+      result.landingVerdict,
+      result.readiness
+    )
+  };
+}
+
+export type LandingReadinessResult = {
+  reviewEvidence: ReviewEvidence;
+  landingVerdict: LandingVerdict;
+  readiness: LandingReadiness;
+};
+
+export async function readLandingReadiness(
+  repoRoot: string,
+  workItemId: string
+): Promise<LandingReadinessResult> {
   await readWorkItem(repoRoot, workItemId);
 
   const reviewEvidence = await readReviewEvidence(repoRoot, workItemId);
@@ -72,16 +97,14 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     uatApproval
   );
 
-  if (readiness.problems.length > 0) {
-    throw new Error(readiness.problems.join("\n"));
-  }
-
   return {
-    output: formatLandingCheck(reviewEvidence, landingVerdict, readiness)
+    reviewEvidence,
+    landingVerdict,
+    readiness
   };
 }
 
-type LandingReadiness = {
+export type LandingReadiness = {
   currentHead: string | null;
   sourceDriftStatus: string;
   reviewEvidenceIsStale: boolean;

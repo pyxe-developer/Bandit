@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { initBandit } from "./commands/init.js";
+import { autoLandCheck } from "./commands/auto-land-check.js";
 import { coderabbitReview } from "./commands/coderabbit-review.js";
 import { draftWork } from "./commands/draft-work.js";
 import { listBootstrapGaps } from "./commands/gaps.js";
@@ -68,6 +69,12 @@ async function main() {
     return;
   }
 
+  if (command === "auto-land-check") {
+    const result = await autoLandCheck(process.cwd(), args[0]);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "uat") {
     const result = await uat(process.cwd(), args);
     process.stdout.write(result.output);
@@ -87,7 +94,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review|coderabbit-review|uat|gaps>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|auto-land-check|qwen-review|coderabbit-review|uat|gaps>`);
   process.exitCode = 1;
 }
 

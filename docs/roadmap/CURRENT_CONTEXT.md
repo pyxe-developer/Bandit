@@ -4,20 +4,24 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-012` is landed. It delivered the CLI-owned UAT approval
-artifact, `bandit uat approve`, validation for UAT approval metadata, and
-stale-UAT detection in `bandit land-check`.
+**State:** `BANDIT-013` is active. Its brief, RED evidence, implementation
+evidence, default auto-landing policy artifact, validation path, and read-only
+`bandit auto-land-check <work-item-id>` command are recorded. Focused and full
+verification pass. Review, landing verdict, landing action, and retrospective
+evidence remain required before this work item can land.
 
 **Last completed milestone:** `BANDIT-012` converted the UAT approval artifact
 bootstrap gap into CLI-owned repo-native state.
 
-**Current next action:** Create the next Phase 5 work item for auto-landing
-eligibility policy for chores and UAT-approved feature slices. Do not begin
-implementation until the new work item brief and RED evidence are recorded.
+**Current next action:** Run and record Stage 4 review evidence for
+`BANDIT-013`, including CodeRabbit bootstrap disposition, local Qwen review,
+escalated-review disposition if required, PM disposition, and then a landing
+verdict. Do not begin the next slice until `BANDIT-013` has landing action
+evidence and retrospective closeout.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-013` - Auto-Landing Eligibility Policy And Check.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -29,8 +33,8 @@ Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 `BANDIT-011` - Bootstrap Gap Chore Tracking And Routing; `BANDIT-012` -
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection.
 
-**Expected next deliverable:** Brief and RED evidence for the next Phase 5
-auto-landing eligibility work item.
+**Expected next deliverable:** Review evidence and landing verdict for
+`BANDIT-013`.
 
 ## Known Bootstrap Gaps
 
@@ -91,18 +95,21 @@ Future cold starts should use `bandit gaps list` and `bandit validate` when
 checking whether bootstrap gaps are active, queued, resolved, or blocked.
 
 `BANDIT-012` completed the first Phase 5 capability: CLI-owned UAT approval
-artifacts and stale-UAT detection. The next Phase 5 step is an auto-landing
-eligibility policy work item for chores and UAT-approved feature slices. Keep
-that next item narrow: policy state, eligibility reporting or checks, and tests.
-Do not build workflow cockpit, SQLite indexing, live CodeRabbit/GitHub polling,
-paid-model reviewer routing, heartbeat chore-agent behavior, or broad
-production Landing Agent behavior unless the new brief explicitly scopes that
-substrate.
+artifacts and stale-UAT detection.
+
+`BANDIT-013` now has implementation evidence for the auto-landing eligibility
+policy. Verification passed with `node --test test/landing-gates.test.mjs`,
+`npm test`, `npm run typecheck`, `npm run bandit -- validate`, and
+`git diff --check`. Keep the remaining closeout narrow: review evidence,
+landing verdict, landing action, retrospective, and context updates. Do not
+build workflow cockpit, SQLite indexing, live CodeRabbit/GitHub polling,
+paid-model reviewer routing, heartbeat chore-agent behavior, actual merge
+automation, or broad production Landing Agent behavior in this work item.
 
 ## Required Operator Input
 
-None before the next Phase 5 brief and RED evidence. Repo artifacts define the
-routing decision.
+None before `BANDIT-013` implementation. Repo artifacts define the routing
+decision.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "require_safe_to_land": true,
+  "require_current_source": true,
+  "allow_chores": true,
+  "allow_feature_slices_with_current_uat": true,
+  "perform_merge": false
+}

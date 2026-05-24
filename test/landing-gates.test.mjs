@@ -374,6 +374,119 @@ test("uat approve writes approval evidence for the current source head", async (
   assert.match(approval, /source_drift_status: current/);
 });
 
+test("auto-land-check reports a safe chore as eligible without UAT", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-921", "Eligible Chore");
+  await writeReviewEvidence(repo, "BANDIT-921", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-921", { sourceHead });
+
+  const result = await runBandit(repo, ["auto-land-check", "BANDIT-921"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Work item: BANDIT-921/);
+  assert.match(result.stdout, /Auto-landing eligibility: eligible/);
+  assert.match(result.stdout, /Auto-landing class: chore/);
+  assert.match(result.stdout, /UAT requirement: not_applicable/);
+});
+
+test("auto-land-check reports a UAT-approved feature slice as eligible", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-922", "Eligible Feature Slice");
+  await writeReviewEvidence(repo, "BANDIT-922", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-922", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeUatApproval(repo, "BANDIT-922", { sourceHead });
+
+  const result = await runBandit(repo, ["auto-land-check", "BANDIT-922"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Work item: BANDIT-922/);
+  assert.match(result.stdout, /Auto-landing eligibility: eligible/);
+  assert.match(result.stdout, /Auto-landing class: feature_slice/);
+  assert.match(result.stdout, /UAT requirement: current_pass/);
+});
+
+test("auto-land-check blocks feature slices without current UAT approval", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-923", "Missing Feature UAT");
+  await writeReviewEvidence(repo, "BANDIT-923", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-923", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+
+  const result = await runBandit(repo, ["auto-land-check", "BANDIT-923"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Auto-landing blocked: safe-to-land requires current UAT approval evidence/
+  );
+});
+
+test("auto-land-check reports usage when the work item ID is omitted", async () => {
+  const repo = await createInitializedRepo();
+
+  const result = await runBandit(repo, ["auto-land-check"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Usage: bandit auto-land-check <work-item-id>/);
+});
+
+test("auto-land-check fails closed when the work item is unknown", async () => {
+  const repo = await createInitializedRepo();
+
+  const result = await runBandit(repo, ["auto-land-check", "BANDIT-924"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Auto-landing blocked: Work item not found: BANDIT-924/);
+});
+
+test("auto-land-check does not mutate git state or repo artifacts", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-925", "Read Only Eligibility");
+  await writeReviewEvidence(repo, "BANDIT-925", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-925", { sourceHead });
+  const beforeStatus = await runGit(repo, ["status", "--short"]);
+  const beforeHead = await runGit(repo, ["rev-parse", "HEAD"]);
+
+  const result = await runBandit(repo, ["auto-land-check", "BANDIT-925"]);
+  const afterStatus = await runGit(repo, ["status", "--short"]);
+  const afterHead = await runGit(repo, ["rev-parse", "HEAD"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(afterStatus.stdout, beforeStatus.stdout);
+  assert.equal(afterHead.stdout, beforeHead.stdout);
+});
+
+test("validate fails closed when the auto-landing policy artifact is malformed", async () => {
+  const repo = await createInitializedRepo();
+  await writeAutoLandingPolicy(repo, {
+    chores: "yes"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Malformed auto-landing policy/);
+});
+
 test("land-check reports usage when the work item ID is omitted", async () => {
   const repo = await createInitializedRepo();
 
@@ -660,6 +773,21 @@ async function writeSmellCatalog(repo, catalog) {
   const destination = path.join(repo, ".bandit/policy/smell-triggers.json");
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
+}
+
+async function writeAutoLandingPolicy(repo, overrides = {}) {
+  const policy = {
+    version: 1,
+    require_safe_to_land: true,
+    require_current_source: true,
+    allow_chores: true,
+    allow_feature_slices_with_current_uat: true,
+    perform_merge: false,
+    ...overrides
+  };
+  const destination = path.join(repo, ".bandit/policy/auto-landing.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
 }
 
 async function writeReviewEvidence(repo, workItemId, options = {}) {

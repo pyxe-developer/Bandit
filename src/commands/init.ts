@@ -1,4 +1,5 @@
 import { mkdir, stat } from "node:fs/promises";
+import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
@@ -8,11 +9,16 @@ export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
   const alreadyInitialized = await pathExists(paths.config);
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
+  const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
 
   await mkdir(paths.stateRoot, { recursive: true });
 
   if (!bootstrapGapsExist) {
     await writeDefaultBootstrapGapLedger(paths.bootstrapGaps);
+  }
+
+  if (!autoLandingPolicyExists) {
+    await writeDefaultAutoLandingPolicy(paths.autoLandingPolicy);
   }
 
   if (alreadyInitialized) {

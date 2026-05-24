@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { validateAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { validateBootstrapGaps } from "../state/bootstrap-gaps.js";
 import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
 import { validateConfig } from "../state/config.js";
@@ -35,6 +36,7 @@ export async function validateBandit(repoRoot: string) {
   await validateLandingVerdictArtifacts(repoRoot);
   await validateUatApprovalArtifacts(repoRoot);
   await validateBootstrapGaps(repoRoot);
+  await validateAutoLandingPolicy(repoRoot);
 
   return { message: "Bandit state is valid." };
 }
