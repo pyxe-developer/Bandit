@@ -4,24 +4,23 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-013` is landed. Its brief, RED evidence, implementation
-evidence, default auto-landing policy artifact, validation path, read-only
-`bandit auto-land-check <work-item-id>` command, review evidence, local Qwen
-review, escalated-review bootstrap disposition, safe-to-land verdict, landing
-action, and retrospective are recorded.
+**State:** `BANDIT-014` is active as the bootstrap-gap chore for
+`BANDIT-GAP-LANDING-AGENT`. Its brief is recorded. RED evidence is the next
+required stage before production implementation.
 
 **Last completed milestone:** `BANDIT-013` converted auto-landing eligibility
 into repo-native policy state and a read-only CLI check.
 
-**Current next action:** Create the first bootstrap-gap chore for
-`BANDIT-GAP-LANDING-AGENT`. Do not create any later gap chore, Phase 6 work,
-Phase 7 work, feature work, or broader cockpit work until that chore has
-landing action evidence, retrospective closeout, and a resolved,
-operator-blocked, or no-action ledger disposition.
+**Current next action:** Create RED evidence for `BANDIT-014` by proving that
+Bandit has no durable Landing Agent contract or command that can execute and
+record landing actions. Do not create any later gap chore, Phase 6 work, Phase
+7 work, feature work, or broader cockpit work until `BANDIT-014` has landing
+action evidence, retrospective closeout, and a resolved, operator-blocked, or
+no-action ledger disposition for `BANDIT-GAP-LANDING-AGENT`.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-014` - Landing Agent Bootstrap Gap Resolution.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -34,8 +33,7 @@ Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check.
 
-**Expected next deliverable:** A single bootstrap-gap chore brief for
-`BANDIT-GAP-LANDING-AGENT`.
+**Expected next deliverable:** RED evidence for `BANDIT-014`.
 
 ## Known Bootstrap Gaps
 
@@ -52,7 +50,8 @@ These are expected because Bandit does not exist yet:
   findings.
 - Escalated adversarial review placeholder gate exists; live escalated reviewer
   routing remains unavailable.
-- No Landing Agent.
+- Landing Agent gap is active as `BANDIT-014`; no durable Landing Agent
+  contract or command exists yet.
 - No general artifact creation command outside explicit PRD draft-work.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
@@ -62,7 +61,8 @@ These are expected because Bandit does not exist yet:
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the post-`BANDIT-013` work queue; do not
 start unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap
-remains queued or active.
+remains queued or active. `BANDIT-GAP-LANDING-AGENT` is active and linked to
+`BANDIT-014`.
 
 ## Context Guardrails
 
@@ -109,7 +109,7 @@ BANDIT-013`, `npm run bandit -- auto-land-check BANDIT-013`, `npm run bandit
 Use `bandit gaps list` as the routing source and create exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-AGENT`.
+1. `BANDIT-GAP-LANDING-AGENT` - active as `BANDIT-014`.
 2. `BANDIT-GAP-LIVE-CODERABBIT`.
 3. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 4. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
@@ -117,14 +117,14 @@ bootstrap-gap chore at a time. Current priority is:
 6. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 7. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Do not create the next gap chore until the previous gap chore has landing
-action evidence, retrospective closeout, and a resolved, operator-blocked, or
+Do not create the next gap chore until `BANDIT-014` has landing action
+evidence, retrospective closeout, and a resolved, operator-blocked, or
 no-action ledger disposition.
 
 ## Required Operator Input
 
-None before creating the `BANDIT-GAP-LANDING-AGENT` bootstrap-gap chore brief.
-Repo artifacts define the routing decision.
+None before creating RED evidence or implementing `BANDIT-014`. Repo artifacts
+define the routing decision.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

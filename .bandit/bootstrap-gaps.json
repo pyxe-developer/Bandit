@@ -58,15 +58,16 @@
     {
       "id": "BANDIT-GAP-LANDING-AGENT",
       "title": "No Landing Agent exists yet",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-005",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/plans/BOOTSTRAP_METHODOLOGY.md"
       ],
+      "linked_work_item": "BANDIT-014",
       "rationale": "Bootstrap landing is recorded manually; final Landing Agent behavior belongs after landing evidence, review gates, and UAT contracts are stable.",
-      "next_action": "After BANDIT-013 lands, select this as the first bootstrap-gap resolution chore unless closeout records a higher-priority blocker."
+      "next_action": "Complete BANDIT-014, then resolve, operator-block, or explicitly disposition this gap before starting the next bootstrap-gap chore."
     },
     {
       "id": "BANDIT-GAP-UAT-ARTIFACT",
