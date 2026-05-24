@@ -143,6 +143,14 @@ function parseReviewerOutput(stdout: string): ReviewerOutput {
     throw new Error("Reviewer output missing findings list");
   }
 
+  if (candidate.findings.some((finding) => typeof finding !== "string")) {
+    throw new Error("Reviewer output findings must be strings");
+  }
+
+  if (candidate.verdict === "pass" && candidate.findings.length > 0) {
+    throw new Error("Reviewer pass output must not include findings");
+  }
+
   if (typeof candidate.summary !== "string" || candidate.summary.trim().length === 0) {
     throw new Error("Reviewer output missing summary");
   }
@@ -312,7 +320,12 @@ function buildReviewPrompt(
     packet.sourceDiff,
     "",
     "Return only JSON with fields: verdict, findings, summary.",
+    "Allowed verdict values: pass, non_blocking, blocker.",
     "Use verdict pass only when no blocker or non-blocking finding remains.",
+    "When verdict is pass, findings must be [].",
+    "When findings is not empty, verdict must be non_blocking or blocker.",
+    "Findings must be an array of strings, not objects.",
+    "Do not include pass findings or informational findings.",
     "Do not edit files or request tools."
   ].join("\n");
 }

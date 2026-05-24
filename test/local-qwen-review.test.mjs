@@ -345,6 +345,38 @@ test("qwen-review fails closed when the reviewer output is inconclusive", async 
   assert.match(result.stderr, /Local Qwen reviewer output was inconclusive/);
 });
 
+test("qwen-review fails closed when a pass verdict includes findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: ['should not pass'], summary: 'Invalid pass' }));"
+  );
+  await writeWorkBrief(repo, "BANDIT-968", "Pass With Findings");
+  await commitAll(repo, "Fixture source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-968"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Local Qwen reviewer output was inconclusive/);
+});
+
+test("qwen-review fails closed when findings are not strings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    "process.stdout.write(JSON.stringify({ verdict: 'non_blocking', findings: [{ issue: 'object finding' }], summary: 'Invalid findings' }));"
+  );
+  await writeWorkBrief(repo, "BANDIT-969", "Object Findings");
+  await commitAll(repo, "Fixture source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-969"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Local Qwen reviewer output was inconclusive/);
+});
+
 test("qwen-review fails closed when the worktree is dirty", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -385,6 +417,8 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
       "if (!prompt.includes('Implementation marker for prompt coverage')) process.exit(12);",
       "if (!prompt.includes('Source diff range:')) process.exit(13);",
       "if (!prompt.includes('diff --git')) process.exit(14);",
+      "if (!prompt.includes('Allowed verdict values: pass, non_blocking, blocker.')) process.exit(15);",
+      "if (!prompt.includes('When verdict is pass, findings must be [].')) process.exit(16);",
       "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt included evidence and diff' }));"
     ].join("\n")
   );
@@ -425,6 +459,7 @@ test("qwen-review can send the review prompt over stdin for long Mastra Code pac
       "  if (!prompt.includes('Implementation marker for prompt coverage')) process.exit(12);",
       "  if (!prompt.includes('Source diff range:')) process.exit(13);",
       "  if (!prompt.includes('diff --git')) process.exit(14);",
+      "  if (!prompt.includes('Findings must be an array of strings, not objects.')) process.exit(15);",
       "  process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt arrived over stdin' }));",
       "});"
     ].join("\n"),
