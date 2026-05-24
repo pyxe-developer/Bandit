@@ -5,6 +5,8 @@ export type LocalQwenProfile = {
   contractVersion: number;
   profileId: string;
   version: number;
+  provider: "mastra-code";
+  providerBaseUrl: string;
   runtime: "command";
   command: {
     executable: string;
@@ -34,6 +36,8 @@ const REQUIRED_FIELDS = [
   "contract_version",
   "profile_id",
   "version",
+  "provider",
+  "provider_base_url",
   "runtime",
   "command",
   "model",
@@ -42,6 +46,13 @@ const REQUIRED_FIELDS = [
   "permissions",
   "output_contract",
   "unavailable_runtime_behavior"
+];
+const EXPECTED_PROVIDER = "mastra-code";
+const EXPECTED_PROVIDER_BASE_URL = "http://127.0.0.1:8000/v1";
+const EXPECTED_MODEL = "omlx-local/Qwen3.6-35B-A3B-MLX-8bit";
+const DISALLOWED_OLLAMA_ENDPOINTS = [
+  "http://localhost:11434/v1",
+  "http://127.0.0.1:11434/v1"
 ];
 
 export async function validateLocalQwenProfile(repoRoot: string) {
@@ -96,6 +107,25 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     "output_contract.required_fields"
   );
   const timeoutMs = requirePositiveNumber(profile.timeout_ms, "timeout_ms");
+  const provider = requireString(profile.provider, "provider");
+  const providerBaseUrl = requireString(profile.provider_base_url, "provider_base_url");
+  const model = requireString(profile.model, "model");
+
+  if (provider !== EXPECTED_PROVIDER) {
+    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+  }
+
+  if (providerBaseUrl !== EXPECTED_PROVIDER_BASE_URL) {
+    throw new Error(
+      `Local Qwen profile must use provider_base_url ${EXPECTED_PROVIDER_BASE_URL}`
+    );
+  }
+
+  if (model !== EXPECTED_MODEL) {
+    throw new Error(`Local Qwen profile must use model ${EXPECTED_MODEL}`);
+  }
+
+  rejectDriftedQwenCodeRoute(executable, args);
 
   if (promptContract.role !== "read_only_adversarial_reviewer") {
     throw new Error("Local Qwen prompt contract must be read-only adversarial reviewer");
@@ -131,9 +161,11 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     contractVersion: 1,
     profileId: "local-qwen-baseline",
     version: requirePositiveNumber(profile.version, "version"),
+    provider: "mastra-code",
+    providerBaseUrl,
     runtime: "command",
     command: { executable, args },
-    model: requireString(profile.model, "model"),
+    model,
     promptContract: {
       role: "read_only_adversarial_reviewer",
       requiredOutputs
@@ -151,6 +183,24 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     },
     unavailableRuntimeBehavior: "fail_closed_or_bootstrap_gap"
   };
+}
+
+function rejectDriftedQwenCodeRoute(executable: string, args: string[]) {
+  const executableName = path.basename(executable);
+
+  if (executableName === "qwen") {
+    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+  }
+
+  if (args.includes("--openai-base-url")) {
+    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+  }
+
+  if (args.some((arg) => DISALLOWED_OLLAMA_ENDPOINTS.includes(arg))) {
+    throw new Error(
+      `Local Qwen profile must use provider_base_url ${EXPECTED_PROVIDER_BASE_URL}`
+    );
+  }
 }
 
 async function readRequiredProfile(repoRoot: string) {

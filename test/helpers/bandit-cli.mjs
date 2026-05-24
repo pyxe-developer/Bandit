@@ -88,12 +88,14 @@ export async function writeLocalQwenProfile(repo, overrides = {}) {
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     version: 1,
+    provider: "mastra-code",
+    provider_base_url: "http://127.0.0.1:8000/v1",
     runtime: "command",
     command: {
       executable: process.execPath,
       args: ["qwen-fixture.mjs"]
     },
-    model: "fixture-qwen",
+    model: "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
     prompt_contract: {
       role: "read_only_adversarial_reviewer",
       required_outputs: ["verdict", "findings", "summary"]
