@@ -7,6 +7,14 @@
     "executable": "qwen",
     "args": [
       "--bare",
+      "--auth-type",
+      "openai",
+      "--openai-base-url",
+      "http://localhost:11434/v1",
+      "--openai-api-key",
+      "ollama",
+      "--model",
+      "qwen3.6:35b-a3b-coding-mxfp8",
       "--approval-mode",
       "plan",
       "--output-format",
@@ -16,12 +24,12 @@
       "{{prompt}}"
     ]
   },
-  "model": "local-qwen",
+  "model": "qwen3.6:35b-a3b-coding-mxfp8 via local Ollama",
   "prompt_contract": {
     "role": "read_only_adversarial_reviewer",
     "required_outputs": ["verdict", "findings", "summary"]
   },
-  "timeout_ms": 30000,
+  "timeout_ms": 180000,
   "permissions": {
     "filesystem": "read_only",
     "network": "disabled",

@@ -1,7 +1,13 @@
 import { execFile } from "node:child_process";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { readLocalQwenProfile } from "../state/reviewer-profiles.js";
 import type { LocalQwenProfile } from "../state/reviewer-profiles.js";
-import { readCurrentGitHead } from "../state/git.js";
+import {
+  readCurrentGitHead,
+  readGitShow,
+  readGitStatusShort
+} from "../state/git.js";
 import { writeLocalQwenReview } from "../state/local-qwen-review.js";
 import { readWorkItem } from "../state/work-items.js";
 
@@ -19,10 +25,16 @@ export async function qwenReview(repoRoot: string, workItemId?: string) {
   const workItem = await readWorkItem(repoRoot, workItemId);
   const profile = await readLocalQwenProfile(repoRoot);
   const sourceHead = (await readCurrentGitHead(repoRoot)) ?? "unknown";
+  const statusShort = await readGitStatusShort(repoRoot);
+  if (statusShort) {
+    throw new Error("Local Qwen review requires a clean worktree before source-head evidence can be recorded");
+  }
+
   const prompt = buildReviewPrompt(
     workItemId,
     workItem.title ?? workItemId,
-    workItem.content
+    workItem.content,
+    await readReviewPacket(repoRoot, workItemId)
   );
   const output = await runReviewerCommand(repoRoot, profile, prompt);
   const findingsStatus = output.findings.length === 0 ? "none" : "open";
@@ -170,13 +182,74 @@ function expandCommandArg(arg: string, prompt: string) {
   return arg.replaceAll("{{prompt}}", prompt);
 }
 
-function buildReviewPrompt(workItemId: string, title: string, briefContent: string) {
+async function readReviewPacket(repoRoot: string, workItemId: string) {
+  const artifactContents = await readWorkItemArtifacts(repoRoot, workItemId);
+  const sourceDiff = await readGitShow(repoRoot);
+
+  return {
+    artifactContents,
+    sourceDiff: sourceDiff ?? "Git source diff unavailable."
+  };
+}
+
+async function readWorkItemArtifacts(repoRoot: string, workItemId: string) {
+  const artifactNames = [
+    "red-evidence.md",
+    "implementation-evidence.md"
+  ];
+  const artifacts: string[] = [];
+
+  for (const artifactName of artifactNames) {
+    const displayPath = `docs/work/${workItemId}/${artifactName}`;
+    const content = await readOptionalText(path.join(repoRoot, displayPath));
+    if (content) {
+      artifacts.push([
+        `## ${displayPath}`,
+        "",
+        content.trim()
+      ].join("\n"));
+    }
+  }
+
+  return artifacts.length > 0
+    ? artifacts.join("\n\n")
+    : "No RED or implementation evidence artifacts were present.";
+}
+
+async function readOptionalText(filePath: string) {
+  try {
+    return await readFile(filePath, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return null;
+    }
+    throw error;
+  }
+}
+
+function buildReviewPrompt(
+  workItemId: string,
+  title: string,
+  briefContent: string,
+  packet: { artifactContents: string; sourceDiff: string }
+) {
   return [
     `Review Bandit work item ${workItemId}: ${title}.`,
     "Act as a read-only adversarial reviewer.",
-    "Use the work item brief below as the review scope.",
+    "Review the work item contract, RED evidence, implementation evidence, and source diff below.",
+    "Look for blocker and non-blocking issues in spec alignment, fail-closed behavior, source-of-truth boundaries, stale evidence handling, and clean-code compliance.",
+    "",
+    "## Work Item Brief",
     "",
     briefContent,
+    "",
+    "## Work Item Evidence",
+    "",
+    packet.artifactContents,
+    "",
+    "## Source Diff",
+    "",
+    packet.sourceDiff,
     "",
     "Return only JSON with fields: verdict, findings, summary.",
     "Use verdict pass only when no blocker or non-blocking finding remains.",

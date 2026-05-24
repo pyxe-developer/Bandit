@@ -239,6 +239,59 @@ test("qwen-review fails closed when the reviewer output is inconclusive", async 
   assert.match(result.stderr, /Local Qwen reviewer output was inconclusive/);
 });
 
+test("qwen-review fails closed when the worktree is dirty", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Fixture pass' }));"
+  );
+  await writeWorkBrief(repo, "BANDIT-964", "Dirty Qwen Review");
+  await commitAll(repo, "Fixture source");
+  await writeFile(path.join(repo, "dirty.txt"), "dirty\n", "utf8");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-964"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Local Qwen review requires a clean worktree before source-head evidence can be recorded/
+  );
+});
+
+test("qwen-review sends work item evidence and source diff to the reviewer", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        command: {
+          executable: process.execPath,
+          args: ["qwen-fixture.mjs", "{{prompt}}"]
+        }
+      }
+    }
+  });
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    [
+      "const prompt = process.argv[2] ?? '';",
+      "if (!prompt.includes('docs/work/BANDIT-965/implementation-evidence.md')) process.exit(11);",
+      "if (!prompt.includes('Implementation marker for prompt coverage')) process.exit(12);",
+      "if (!prompt.includes('diff --git')) process.exit(13);",
+      "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt included evidence and diff' }));"
+    ].join("\n")
+  );
+  await writeWorkBrief(repo, "BANDIT-965", "Prompt Qwen Review");
+  await writeImplementationEvidence(repo, "BANDIT-965");
+  await writeFile(path.join(repo, "source.txt"), "source change\n", "utf8");
+  await commitAll(repo, "Fixture source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-965"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Local Qwen review: pass/);
+});
+
 test("qwen-review writes repo-native evidence for a passing fixture review", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -467,6 +520,16 @@ async function writeLocalQwenReview(repo, workItemId, options = {}) {
 
 async function writeReviewerFixture(repo, script) {
   await writeFile(path.join(repo, "qwen-fixture.mjs"), `${script}\n`, "utf8");
+}
+
+async function writeImplementationEvidence(repo, workItemId) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "implementation-evidence.md"),
+    "# Implementation Evidence\n\nImplementation marker for prompt coverage.\n",
+    "utf8"
+  );
 }
 
 async function writeReviewEvidence(repo, workItemId, options = {}) {
