@@ -47,8 +47,8 @@
     {
       "id": "BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS",
       "title": "Stage 4 iterative review evidence-head semantics are undefined",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-015",
       "source_artifacts": [
         "docs/work/BANDIT-015/local-qwen-review.md",
@@ -58,7 +58,23 @@
       ],
       "linked_work_item": "BANDIT-016",
       "rationale": "BANDIT-015 exposed a recursive Stage 4 loop: each PM disposition and rerun advanced source heads, so Local Qwen kept treating historical evidence-head divergence as a new blocker after accepting implementation behavior.",
-      "next_action": "Continue BANDIT-016 by repairing or explicitly dispositioning the latest Local Qwen non-blocking findings, then rerun Local Qwen from a clean worktree before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
+      "verification_target": "docs/work/BANDIT-016/landing-action.md",
+      "next_action": "Use the Stage 4 evidence-head policy and landing-readiness behavior from BANDIT-016 for iterative review closeout; remaining Local Qwen hardening is routed to BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING."
+    },
+    {
+      "id": "BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING",
+      "title": "Landing gate Stage 4 logic and git diagnostics need hardening",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-016",
+      "source_artifacts": [
+        "docs/work/BANDIT-016/local-qwen-review.md",
+        "docs/work/BANDIT-016/qwen-loop-operator-disposition.md",
+        "docs/work/BANDIT-016/retrospective.md"
+      ],
+      "linked_work_item": "BANDIT-017",
+      "rationale": "Local Qwen accepted BANDIT-016 implementation behavior but repeatedly surfaced non-blocking future-hardening findings: land-check.ts size/complexity and async shallow/promisor git state checks during changed-path error classification.",
+      "next_action": "Run BANDIT-017 next: create RED evidence, extract Stage 4 stale-evaluation and PM-rationale logic out of land-check.ts, reduce repeated git state probes during changed-path error classification, then verify and land before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-016
-source_head: 0f91256131a9f00c33aaa4d1a7b0ff2fff2e379a
+source_head: 83eb14efa4550ab8babaf5b0af41cb4dafbc1bfd
 verification_state: pass
 verification_evidence:
   - node --test test/landing-gates.test.mjs passed 41/41 focused landing-gate tests at implementation source head d9bb6fe78e4ef0aeff4a4f208a650809b750cd61.
