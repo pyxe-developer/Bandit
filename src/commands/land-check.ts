@@ -15,6 +15,8 @@ import { readReviewEvidence } from "../state/review-evidence.js";
 import { readOptionalParsedRoutingDecision } from "../state/routing-decisions.js";
 import type { SmellCatalog } from "../state/smell-triggers.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
+import type { UatApproval } from "../state/uat-approval.js";
+import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
 
 export async function landCheck(repoRoot: string, workItemId?: string) {
@@ -54,6 +56,11 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     landingVerdict,
     escalatedReviewRequired
   );
+  const uatApproval = await readRequiredUatApprovalWhenClaimed(
+    repoRoot,
+    reviewEvidence,
+    landingVerdict
+  );
   const readiness = evaluateLandingReadiness(
     reviewEvidence,
     landingVerdict,
@@ -61,7 +68,8 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     codeRabbitReview,
     localQwenReview,
     escalatedReviewRequired,
-    escalatedReview
+    escalatedReview,
+    uatApproval
   );
 
   if (readiness.problems.length > 0) {
@@ -82,6 +90,7 @@ type LandingReadiness = {
   localQwenReview: LocalQwenReviewEvidence | null;
   escalatedReviewRequired: boolean;
   escalatedReview: EscalatedReviewEvidence | null;
+  uatApproval: UatApproval | null;
   problems: string[];
 };
 
@@ -92,7 +101,8 @@ function evaluateLandingReadiness(
   codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null,
   escalatedReviewRequired: boolean,
-  escalatedReview: EscalatedReviewEvidence | null
+  escalatedReview: EscalatedReviewEvidence | null,
+  uatApproval: UatApproval | null
 ): LandingReadiness {
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
@@ -105,12 +115,16 @@ function evaluateLandingReadiness(
   const escalatedReviewIsStale = escalatedReview
     ? isStale(escalatedReview.sourceHead, currentHead)
     : false;
+  const uatApprovalIsStale = uatApproval
+    ? isStale(uatApproval.sourceHead, currentHead)
+    : false;
   const sourceDriftStatus =
     reviewEvidenceIsStale ||
     landingVerdictIsStale ||
     codeRabbitReviewIsStale ||
     localQwenReviewIsStale ||
-    escalatedReviewIsStale
+    escalatedReviewIsStale ||
+    uatApprovalIsStale
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
   const problems: string[] = [];
@@ -135,6 +149,10 @@ function evaluateLandingReadiness(
     problems.push("Escalated review evidence is stale");
   }
 
+  if (uatApprovalIsStale) {
+    problems.push("UAT approval evidence is stale");
+  }
+
   if (landingVerdict.finalVerdict === "safe-to-land") {
     problems.push(
       ...safeToLandProblems(
@@ -144,11 +162,13 @@ function evaluateLandingReadiness(
           landingVerdictIsStale ||
           codeRabbitReviewIsStale ||
           localQwenReviewIsStale ||
-          escalatedReviewIsStale,
+          escalatedReviewIsStale ||
+          uatApprovalIsStale,
         codeRabbitReview,
         localQwenReview,
         escalatedReviewRequired,
-        escalatedReview
+        escalatedReview,
+        uatApproval
       )
     );
   }
@@ -162,6 +182,7 @@ function evaluateLandingReadiness(
     localQwenReview,
     escalatedReviewRequired,
     escalatedReview,
+    uatApproval,
     problems
   };
 }
@@ -173,7 +194,8 @@ function safeToLandProblems(
   codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null,
   escalatedReviewRequired: boolean,
-  escalatedReview: EscalatedReviewEvidence | null
+  escalatedReview: EscalatedReviewEvidence | null,
+  uatApproval: UatApproval | null
 ) {
   const problems: string[] = [];
 
@@ -253,6 +275,10 @@ function safeToLandProblems(
     problems.push(...escalatedReviewProblems(escalatedReview));
   }
 
+  if (reviewEvidence.uatStatus === "pass" || landingVerdict.uatStatus === "pass") {
+    problems.push(...uatApprovalProblems(uatApproval));
+  }
+
   if (reviewEvidence.pmDisposition !== "pass") {
     problems.push("safe-to-land requires PM disposition pass");
   }
@@ -291,12 +317,25 @@ function formatLandingCheck(
     `Escalated review: ${reviewEvidence.escalatedReviewState}`,
     ...formatEscalatedReviewLines(readiness.escalatedReview),
     `UAT: ${landingVerdict.uatStatus}`,
+    ...formatUatApprovalLines(readiness.uatApproval),
     `Clean code: ${landingVerdict.cleanCodeStatus}`,
     `Landing agent: ${landingVerdict.landingAgentState}`,
     "Bootstrap gaps:",
     ...reviewEvidence.bootstrapGaps.map((gap) => `  - ${gap}`),
     `Final verdict: ${landingVerdict.finalVerdict}`
   ].join("\n").concat("\n");
+}
+
+async function readRequiredUatApprovalWhenClaimed(
+  repoRoot: string,
+  reviewEvidence: ReviewEvidence,
+  landingVerdict: LandingVerdict
+) {
+  if (reviewEvidence.uatStatus !== "pass" && landingVerdict.uatStatus !== "pass") {
+    return null;
+  }
+
+  return readUatApproval(repoRoot, reviewEvidence.workItem);
 }
 
 type OptionalRoutingDecision = Awaited<
@@ -433,6 +472,24 @@ function escalatedReviewProblems(
   return problems;
 }
 
+function uatApprovalProblems(uatApproval: UatApproval | null) {
+  if (!uatApproval) {
+    return ["safe-to-land requires current UAT approval evidence"];
+  }
+
+  const problems: string[] = [];
+
+  if (uatApproval.approvalStatus !== "pass") {
+    problems.push(`UAT approval status blocks landing: ${uatApproval.approvalStatus}`);
+  }
+
+  if (uatApproval.sourceDriftStatus !== "current") {
+    problems.push("safe-to-land requires UAT source_drift_status current");
+  }
+
+  return problems;
+}
+
 function formatCodeRabbitReviewLines(
   codeRabbitReview: CodeRabbitReviewEvidence | null
 ) {
@@ -467,6 +524,17 @@ function formatEscalatedReviewLines(
   return [
     `Escalated review evidence: ${escalatedReview.displayPath}`,
     `Escalated review profile: ${escalatedReview.profileId}`
+  ];
+}
+
+function formatUatApprovalLines(uatApproval: UatApproval | null) {
+  if (!uatApproval) {
+    return [];
+  }
+
+  return [
+    `UAT evidence: ${uatApproval.displayPath}`,
+    `UAT environment: ${uatApproval.environment}`
   ];
 }
 

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -228,6 +228,150 @@ test("land-check prints recorded gate state and final decision for current evide
   assert.match(result.stdout, /UAT: not_applicable/);
   assert.match(result.stdout, /Clean code: pass/);
   assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
+test("land-check fails closed when safe-to-land claims passing UAT without approval evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-915", "Missing UAT Approval");
+  await writeReviewEvidence(repo, "BANDIT-915", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-915", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-915"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing UAT approval artifact: docs\/work\/BANDIT-915\/uat-approval\.md/
+  );
+});
+
+test("land-check fails closed when passing UAT evidence is stale", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-916", "Stale UAT Approval");
+  await writeReviewEvidence(repo, "BANDIT-916", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-916", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeUatApproval(repo, "BANDIT-916", { sourceHead });
+  await writeFile(path.join(repo, "changed-after-uat.txt"), "changed\n", "utf8");
+  const currentHead = await commitAll(repo, "Change after UAT");
+  await writeReviewEvidence(repo, "BANDIT-916", {
+    sourceHead: currentHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-916", {
+    sourceHead: currentHead,
+    uatStatus: "pass"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-916"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /UAT approval evidence is stale/);
+});
+
+test("land-check accepts current passing UAT approval evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-917", "Current UAT Approval");
+  await writeReviewEvidence(repo, "BANDIT-917", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-917", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeUatApproval(repo, "BANDIT-917", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-917"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /UAT: pass/);
+  assert.match(
+    result.stdout,
+    /UAT evidence: docs\/work\/BANDIT-917\/uat-approval\.md/
+  );
+  assert.match(result.stdout, /UAT environment: staging/);
+});
+
+test("validate fails closed for malformed UAT approval metadata", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-918", "Malformed UAT Approval");
+  await writeUatApproval(repo, "BANDIT-918", {
+    approvalStatus: "accepted"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Unsupported UAT approval status: accepted/);
+});
+
+test("uat approve fails closed when operator approval inputs are missing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-919", "Missing UAT Inputs");
+
+  const result = await runBandit(repo, ["uat", "approve", "BANDIT-919"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Usage: bandit uat approve <work-item-id> --environment <name> --approved-by <operator-reference> --notes <approval-notes>/
+  );
+});
+
+test("uat approve writes approval evidence for the current source head", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-920", "Record UAT Approval");
+
+  const result = await runBandit(repo, [
+    "uat",
+    "approve",
+    "BANDIT-920",
+    "--environment",
+    "staging",
+    "--approved-by",
+    "operator:matthew",
+    "--notes",
+    "Approved checkout workflow."
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(
+    result.stdout,
+    /UAT approval recorded: docs\/work\/BANDIT-920\/uat-approval\.md/
+  );
+
+  const approval = await readFile(
+    path.join(repo, "docs/work/BANDIT-920/uat-approval.md"),
+    "utf8"
+  );
+  assert.match(approval, /work_item: BANDIT-920/);
+  assert.match(approval, new RegExp(`source_head: ${sourceHead}`));
+  assert.match(approval, /environment: staging/);
+  assert.match(approval, /approval_status: pass/);
+  assert.match(approval, /approved_by: operator:matthew/);
+  assert.match(approval, /source_drift_status: current/);
 });
 
 test("land-check reports usage when the work item ID is omitted", async () => {
@@ -539,7 +683,7 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     `escalated_review_rationale: ${options.escalatedReviewRationale ?? "No smell trigger requires escalation beyond the baseline bootstrap gap."}`,
     "pm_disposition: pass",
     "operator_input_status: none_required",
-    "uat_status: not_applicable",
+    `uat_status: ${options.uatStatus ?? "not_applicable"}`,
     "clean_code_status: pass",
     `source_drift_status: ${options.sourceDriftStatus ?? "current"}`,
     "bootstrap_gaps:",
@@ -571,7 +715,7 @@ clean_code_status: pass
 coderabbit_state: bootstrap_gap
 local_qwen_state: bootstrap_gap
 escalated_review_state: ${options.escalatedReviewState ?? "not_applicable"}
-uat_status: not_applicable
+uat_status: ${options.uatStatus ?? "not_applicable"}
 source_drift_status: ${options.sourceDriftStatus ?? "current"}
 operator_input_status: none_required
 landing_agent_state: bootstrap_gap
@@ -579,6 +723,27 @@ landing_agent_replacement_evidence:
   - Manual PM review replaces unavailable final gates during bootstrap.
 final_verdict: ${options.finalVerdict ?? "safe-to-land"}
 rationale: Evidence is explicit and unavailable final gates are recorded as bootstrap gaps.
+`,
+    "utf8"
+  );
+}
+
+async function writeUatApproval(repo, workItemId, options = {}) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "uat-approval.md"),
+    `# UAT Approval: ${workItemId}
+
+contract_version: 1
+work_item: ${workItemId}
+source_head: ${options.sourceHead ?? "unknown"}
+environment: ${options.environment ?? "staging"}
+approval_status: ${options.approvalStatus ?? "pass"}
+approved_by: ${options.approvedBy ?? "operator:matthew"}
+approved_at: ${options.approvedAt ?? "2026-05-24T12:00:00.000Z"}
+source_drift_status: ${options.sourceDriftStatus ?? "current"}
+notes: ${options.notes ?? "Operator approved the named environment."}
 `,
     "utf8"
   );

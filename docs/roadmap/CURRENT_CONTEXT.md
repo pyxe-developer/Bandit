@@ -6,15 +6,16 @@
 
 **State:** `BANDIT-012` is the active Phase 5 work item. Its brief defines the
 CLI-owned UAT approval artifact and stale-UAT detection contract. RED evidence
-is pending; do not start production implementation until RED evidence is
-recorded.
+is recorded in `docs/work/BANDIT-012/red-evidence.md`, and implementation
+evidence is recorded in `docs/work/BANDIT-012/implementation-evidence.md`.
 
 **Last completed milestone:** `BANDIT-011` converted bootstrap gaps from
 passive prose into CLI-visible repo-native state.
 
-**Current next action:** Create RED evidence for `BANDIT-012`. Do not write
-production implementation until focused tests or an explicit bootstrap
-verification plan are recorded in `docs/work/BANDIT-012/red-evidence.md`.
+**Current next action:** Complete `BANDIT-012` closeout: record review evidence,
+run local Qwen review when the worktree is clean enough for source-head
+evidence, record escalated-review disposition, landing verdict, retrospective,
+and landing action evidence before starting another work item.
 
 ## Active Work
 
@@ -30,7 +31,7 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 `BANDIT-011` - Bootstrap Gap Chore Tracking And Routing.
 
-**Expected next deliverable:** RED evidence for `BANDIT-012`.
+**Expected next deliverable:** Closeout evidence for `BANDIT-012`.
 
 ## Known Bootstrap Gaps
 
@@ -90,11 +91,13 @@ Future cold starts should use `bandit gaps list` and `bandit validate` when
 checking whether bootstrap gaps are active, queued, resolved, or blocked.
 
 `BANDIT-012` starts Phase 5 by defining the CLI-owned UAT approval artifact and
-stale-UAT detection path. Keep it narrow: artifact contract, validation,
-stale-source detection, command surface, tests, and landing-gate integration
-only. Do not build final auto-merge behavior, workflow cockpit, SQLite
-indexing, live CodeRabbit/GitHub polling, paid-model reviewer routing,
-heartbeat chore-agent behavior, or broad Landing Agent behavior in this item.
+stale-UAT detection path. RED evidence existed for the missing UAT artifact,
+validation, command, and `land-check` integration; implementation evidence now
+records the narrow UAT artifact contract, validator, `uat approve` command,
+stale-source detection, and landing-gate integration. Do not build final
+auto-merge behavior, workflow cockpit, SQLite indexing, live CodeRabbit/GitHub
+polling, paid-model reviewer routing, heartbeat chore-agent behavior, or broad
+Landing Agent behavior in this item.
 
 ## Required Operator Input
 

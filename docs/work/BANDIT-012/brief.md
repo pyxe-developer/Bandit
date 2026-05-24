@@ -2,8 +2,9 @@
 
 ## Status
 
-Phase 5 work-item brief created on 2026-05-24. RED evidence and production
-implementation are pending.
+Phase 5 work-item brief created on 2026-05-24. RED evidence is recorded in
+`docs/work/BANDIT-012/red-evidence.md`. Production implementation is recorded
+in `docs/work/BANDIT-012/implementation-evidence.md`.
 
 ## Goal
 
@@ -157,8 +158,8 @@ and preserved operator/Codex PM responsibilities.
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` name Phase 5, no active work before this brief, `BANDIT-011` landing-action evidence, and UAT artifact/stale-UAT detection as the next action. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
-| Stage 2: Test Design And RED Evidence | `pending` | Required before production implementation. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-012/red-evidence.md` records focused failing tests for missing UAT approval evidence, stale UAT evidence, malformed UAT validation, UAT command usage refusal, current UAT approval writing, and current UAT land-check reporting. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-012/implementation-evidence.md` records the UAT parser/writer, `uat approve` command, validation, `land-check` integration, passing focused/full tests, typecheck, validation, and clean-code self-check. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Live CodeRabbit polling, live escalated reviewer routing, and Landing Agent behavior remain bootstrap-limited; replacement evidence is required during closeout. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | This chore builds the UAT substrate; UAT is not required to accept this non-product workflow-infrastructure work item. Landing Agent remains unavailable. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |

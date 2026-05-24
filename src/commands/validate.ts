@@ -12,6 +12,7 @@ import { validateLocalQwenProfile } from "../state/reviewer-profiles.js";
 import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateTemplates } from "../state/templates.js";
+import { validateUatApprovalArtifacts } from "../state/uat-approval.js";
 import { validateWorkItems } from "../state/work-items.js";
 
 export async function validateBandit(repoRoot: string) {
@@ -32,6 +33,7 @@ export async function validateBandit(repoRoot: string) {
   await validateEscalatedReviewArtifacts(repoRoot);
   await validateReviewEvidenceArtifacts(repoRoot);
   await validateLandingVerdictArtifacts(repoRoot);
+  await validateUatApprovalArtifacts(repoRoot);
   await validateBootstrapGaps(repoRoot);
 
   return { message: "Bandit state is valid." };
