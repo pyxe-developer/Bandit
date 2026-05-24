@@ -4,23 +4,25 @@
 
 **Phase:** 4 - Review And Landing Gates.
 
-**State:** `BANDIT-006` landed as final implementation source head `61279b0ffc9bade9e4eda1ee0b59e1874283a01b`. `docs/work/BANDIT-006/landing-action.md` records the concrete landing action; `retrospective.md` records lessons and dispositions; review evidence, landing verdict, local Qwen timeout evidence, and roadmap context are closed out.
+**State:** `BANDIT-007` is active. `docs/work/BANDIT-007/brief.md` and `docs/work/BANDIT-007/red-evidence.md` define the CodeRabbit state capture scope and RED tests. `BANDIT-006` landed as final implementation source head `61279b0ffc9bade9e4eda1ee0b59e1874283a01b`; `docs/work/BANDIT-006/landing-action.md` records the concrete landing action; `retrospective.md` records lessons and dispositions; review evidence, landing verdict, local Qwen timeout evidence, and roadmap context are closed out.
 
 **Last completed milestone:** `BANDIT-006` delivered the first Phase 4 local Qwen baseline reviewer gate substrate.
 
-**Current next action:** Create the next Phase 4 bootstrap work item, `BANDIT-007`, for CodeRabbit state capture / pre-landing CodeRabbit evidence. Do not begin implementation until the `BANDIT-007` brief and RED evidence are created from repo artifacts.
+**Current next action:** Implement the `BANDIT-007` GREEN path from `docs/work/BANDIT-007/brief.md` and `docs/work/BANDIT-007/red-evidence.md`. Do not broaden beyond CodeRabbit review evidence template/validation, a narrow `coderabbit-review` command surface, and `land-check` integration.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-006` is landed and closed out.
+**Active work item:** `BANDIT-007` - CodeRabbit State Capture.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton; `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` - PRD-To-Work Draft Command; `BANDIT-004` - Routing Decision And Smell Trigger Catalog; `BANDIT-005` - Pre-Landing Review Loop; `BANDIT-006` - Local Qwen Baseline Reviewer Gate.
 
-**Expected next deliverable:** First executable artifact for the next Phase 4 review gate gap:
+**Expected next deliverable:** GREEN implementation for the next Phase 4 review gate gap:
 
-- `docs/work/BANDIT-007/brief.md` for CodeRabbit state capture / pre-landing CodeRabbit evidence;
-- `docs/work/BANDIT-007/red-evidence.md` before production implementation;
-- context updates that keep Phase 4 source-of-truth status clear.
+- `docs/templates/coderabbit-review.md`;
+- CodeRabbit review evidence parser/validator for `docs/work/<ID>/coderabbit-review.md`;
+- a narrow `bandit coderabbit-review <work-item-id>` command surface;
+- `land-check` integration that requires current CodeRabbit evidence when `coderabbit_state: pass` is claimed;
+- implementation evidence, CodeRabbit review evidence, review evidence, landing verdict, landing action, retrospective, and context updates before landing.
 
 BANDIT-004 landed as commit `a0b679217c93c3aeda6646806201d181cd26404c`. `docs/work/BANDIT-004/landing-action.md` records the concrete landing action; `landing-verdict.md` records the safe-to-land verdict and landing evidence; `review-evidence.md` and `retrospective.md` record review gaps, bootstrap gaps, and improvement dispositions. BANDIT-005 landed as commit `17be6d6775f5c8f00b5130f5569c79f97a94751b`. `docs/work/BANDIT-005/brief.md`, `red-evidence.md`, `implementation-evidence.md`, `review-evidence.md`, `landing-verdict.md`, `landing-action.md`, and `retrospective.md` record the complete slice evidence. BANDIT-006 landed as final implementation source head `61279b0ffc9bade9e4eda1ee0b59e1874283a01b`; `docs/work/BANDIT-006/brief.md`, `red-evidence.md`, `implementation-evidence.md`, `local-qwen-review.md`, `review-evidence.md`, `landing-verdict.md`, `landing-action.md`, and `retrospective.md` record the complete slice evidence.
 
@@ -29,7 +31,7 @@ BANDIT-004 landed as commit `a0b679217c93c3aeda6646806201d181cd26404c`. `docs/wo
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command.
-- No CodeRabbit pre-landing loop.
+- No CodeRabbit pre-landing loop yet. `BANDIT-007` has brief and RED evidence for the first repo-native CodeRabbit state capture gate, but GREEN implementation has not started.
 - Local Qwen gate substrate exists, but the live local 35B Qwen review timed
   out during `BANDIT-006`; timeout behavior is recorded as an explicit
   bootstrap gap, not as a pass.
@@ -59,12 +61,12 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 BANDIT-007 CodeRabbit state capture / pre-landing CodeRabbit evidence.
 
-BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing verdict contracts, source-drift checks, validation, and `bandit land-check <work-item-id>`. `BANDIT-006` added the local Qwen baseline reviewer profile/evidence/command substrate and recorded the live runtime timeout as a bootstrap gap.
+BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing verdict contracts, source-drift checks, validation, and `bandit land-check <work-item-id>`. `BANDIT-006` added the local Qwen baseline reviewer profile/evidence/command substrate and recorded the live runtime timeout as a bootstrap gap. `BANDIT-007` now has its brief and RED evidence.
 
-The next step is to create the `BANDIT-007` brief for the next Phase 4 gap: CodeRabbit state capture / pre-landing CodeRabbit evidence. Use `AGENTS.md`, `CONTEXT.md`, this file, `ROADMAP.md`, `docs/plans/BOOTSTRAP_METHODOLOGY.md`, `docs/plans/V0_PLAN.md`, `CLEAN_CODE.md`, `docs/verification/STAGE_RUBRICS.md`, `.bandit/policy/smell-triggers.json`, all `docs/work/BANDIT-006/*` artifacts, and Phase 4 evidence files from `BANDIT-005`.
+The next step is GREEN implementation from `docs/work/BANDIT-007/brief.md` and `docs/work/BANDIT-007/red-evidence.md`. Start with `test/coderabbit-state.test.mjs`; keep the Test Writer-owned assertions intact unless a test-change rationale is recorded. Implement only the CodeRabbit review evidence template, parser/validator, narrow command surface, and `land-check` integration needed to turn the RED tests green.
 
-Keep `BANDIT-007` narrow. It should not build final Landing Agent behavior, UAT artifacts, PR merge automation, workflow cockpit, SQLite indexing, automated review repair, or paid-model reviewer routing. If live CodeRabbit CLI automation is unavailable during bootstrap, record a precise bootstrap gap and define the repo-native CodeRabbit state artifact that later automation will fill.
+Keep `BANDIT-007` narrow. It should not build final Landing Agent behavior, UAT artifacts, PR merge automation, workflow cockpit, SQLite indexing, automated review repair, live CodeRabbit/GitHub polling, or paid-model reviewer routing. If live CodeRabbit CLI automation is unavailable during bootstrap, record a precise bootstrap gap and fill the repo-native CodeRabbit state artifact with deterministic replacement evidence.
 
 ## Required Operator Input
 
-None before creating the `BANDIT-007` brief and RED evidence.
+None before implementing the `BANDIT-007` GREEN path from existing brief and RED evidence.
