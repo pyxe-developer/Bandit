@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "terminalDispositionOnlyPathPatterns": [
+    "docs/work/<work_item_id>/",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    ".bandit/bootstrap-gaps.json"
+  ]
+}

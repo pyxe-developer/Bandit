@@ -177,9 +177,9 @@ policy, business, cost, and risk boundaries.
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and `bandit gaps list` identify `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` as active `BANDIT-016` work. `BANDIT-015` has landing-action evidence, retrospective closeout, and a queued follow-up gap disposition. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `test/landing-gates.test.mjs` now contains focused RED tests for terminal Stage 4 disposition-only evidence, implementation source drift after review, and PM rationale for accepted Local Qwen findings. `docs/work/BANDIT-016/red-evidence.md` records the focused failing run. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
-| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | This chore exists to replace the underdefined Stage 4 evidence-head semantics exposed by `BANDIT-015`; live escalated reviewer routing remains bootstrap-limited. |
-| Stage 5: Landing And UAT | `bootstrap_gap` | UAT is not required for this non-product workflow-infrastructure chore. Landing action evidence is required before the next gap chore can begin. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-016/implementation-evidence.md` maps the Stage 4 policy and landing-readiness code paths to acceptance criteria, records focused passing tests, and evaluates `CLEAN_CODE.md`. |
+| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit/review evidence, Local Qwen review, and escalated-review disposition remain required next; live escalated reviewer routing remains bootstrap-limited. |
+| Stage 5: Landing And UAT | `pending` | UAT is not required for this non-product workflow-infrastructure chore. Landing verdict and landing action evidence are required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 
 ## Relevant Smell Triggers And Routing Plan

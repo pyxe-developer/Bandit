@@ -1,4 +1,4 @@
-import { readCurrentGitHead } from "../state/git.js";
+import { readCurrentGitHead, readGitChangedPaths } from "../state/git.js";
 import {
   codeRabbitReviewHasBlockingFindings,
   type CodeRabbitReviewEvidence,
@@ -15,6 +15,8 @@ import { readReviewEvidence } from "../state/review-evidence.js";
 import { readOptionalParsedRoutingDecision } from "../state/routing-decisions.js";
 import type { SmellCatalog } from "../state/smell-triggers.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
+import type { Stage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
+import { readStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 import type { UatApproval } from "../state/uat-approval.js";
 import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
@@ -54,6 +56,7 @@ export async function readLandingReadiness(
   const reviewEvidence = await readReviewEvidence(repoRoot, workItemId);
   const landingVerdict = await readLandingVerdict(repoRoot, workItemId);
   const currentHead = await readCurrentGitHead(repoRoot);
+  const stage4EvidenceHeadPolicy = await readStage4EvidenceHeadPolicy(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   const routingDecision = await readOptionalParsedRoutingDecision(
     repoRoot,
@@ -86,10 +89,12 @@ export async function readLandingReadiness(
     reviewEvidence,
     landingVerdict
   );
-  const readiness = evaluateLandingReadiness(
+  const readiness = await evaluateLandingReadiness(
+    repoRoot,
     reviewEvidence,
     landingVerdict,
     currentHead,
+    stage4EvidenceHeadPolicy,
     codeRabbitReview,
     localQwenReview,
     escalatedReviewRequired,
@@ -117,26 +122,46 @@ export type LandingReadiness = {
   problems: string[];
 };
 
-function evaluateLandingReadiness(
+async function evaluateLandingReadiness(
+  repoRoot: string,
   reviewEvidence: ReviewEvidence,
   landingVerdict: LandingVerdict,
   currentHead: string | null,
+  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy,
   codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null,
   escalatedReviewRequired: boolean,
   escalatedReview: EscalatedReviewEvidence | null,
   uatApproval: UatApproval | null
-): LandingReadiness {
+): Promise<LandingReadiness> {
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
   const codeRabbitReviewIsStale = codeRabbitReview
-    ? isStale(codeRabbitReview.sourceHead, currentHead)
+    ? await isReviewSourceStale(
+        repoRoot,
+        reviewEvidence.workItem,
+        codeRabbitReview.sourceHead,
+        currentHead,
+        stage4EvidenceHeadPolicy
+      )
     : false;
   const localQwenReviewIsStale = localQwenReview
-    ? isStale(localQwenReview.sourceHead, currentHead)
+    ? await isReviewSourceStale(
+        repoRoot,
+        reviewEvidence.workItem,
+        localQwenReview.sourceHead,
+        currentHead,
+        stage4EvidenceHeadPolicy
+      )
     : false;
   const escalatedReviewIsStale = escalatedReview
-    ? isStale(escalatedReview.sourceHead, currentHead)
+    ? await isReviewSourceStale(
+        repoRoot,
+        reviewEvidence.workItem,
+        escalatedReview.sourceHead,
+        currentHead,
+        stage4EvidenceHeadPolicy
+      )
     : false;
   const uatApprovalIsStale = uatApproval
     ? isStale(uatApproval.sourceHead, currentHead)
@@ -466,6 +491,13 @@ function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
     );
   }
 
+  if (
+    localQwenReview.findingsStatus !== "none" &&
+    !hasConcretePmRationale(localQwenReview.findingsDisposition)
+  ) {
+    problems.push("PM disposition rationale is required for Local Qwen findings");
+  }
+
   if (localQwenReview.sourceDriftStatus !== "current") {
     problems.push("safe-to-land requires local Qwen source_drift_status current");
   }
@@ -588,6 +620,67 @@ function isStale(recordedHead: string, currentHead: string | null) {
   return Boolean(
     currentHead && recordedHead !== "unknown" && recordedHead !== currentHead
   );
+}
+
+async function isReviewSourceStale(
+  repoRoot: string,
+  workItemId: string,
+  recordedHead: string,
+  currentHead: string | null,
+  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy
+) {
+  if (!isStale(recordedHead, currentHead)) {
+    return false;
+  }
+
+  if (!currentHead) {
+    return false;
+  }
+
+  const changedPaths = await readGitChangedPaths(repoRoot, recordedHead, currentHead);
+  if (!changedPaths) {
+    return true;
+  }
+
+  return changedPaths.some(
+    (changedPath) =>
+      !isTerminalDispositionOnlyPath(
+        changedPath,
+        workItemId,
+        stage4EvidenceHeadPolicy
+      )
+  );
+}
+
+function isTerminalDispositionOnlyPath(
+  changedPath: string,
+  workItemId: string,
+  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy
+) {
+  return stage4EvidenceHeadPolicy.terminalDispositionOnlyPathPatterns.some(
+    (pattern) => matchesPolicyPathPattern(changedPath, pattern, workItemId)
+  );
+}
+
+function matchesPolicyPathPattern(
+  changedPath: string,
+  pattern: string,
+  workItemId: string
+) {
+  const resolvedPattern = pattern.replaceAll("<work_item_id>", workItemId);
+  if (resolvedPattern.endsWith("/")) {
+    return changedPath.startsWith(resolvedPattern);
+  }
+
+  return changedPath === resolvedPattern;
+}
+
+function hasConcretePmRationale(disposition: string) {
+  if (/without recorded rationale/i.test(disposition)) {
+    return false;
+  }
+
+  return /\b(because|rationale)\b/i.test(disposition);
 }
 
 function isPassingOrBootstrapGap(value: string) {

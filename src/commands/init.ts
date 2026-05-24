@@ -5,6 +5,7 @@ import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
+import { writeDefaultStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 
 export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
@@ -12,6 +13,9 @@ export async function initBandit(repoRoot: string) {
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
+  const stage4EvidenceHeadPolicyExists = await pathExists(
+    paths.stage4EvidenceHeadPolicy
+  );
 
   await mkdir(paths.stateRoot, { recursive: true });
 
@@ -25,6 +29,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!landingAgentContractExists) {
     await writeDefaultLandingAgentContract(paths.landingAgentContract);
+  }
+
+  if (!stage4EvidenceHeadPolicyExists) {
+    await writeDefaultStage4EvidenceHeadPolicy(paths.stage4EvidenceHeadPolicy);
   }
 
   if (alreadyInitialized) {

@@ -7,28 +7,31 @@
 **State:** `BANDIT-016` is active as the bootstrap-gap chore for
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its brief is recorded in
 `docs/work/BANDIT-016/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-016/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
-the gap to `BANDIT-016` as an active chore. Implementation is the next required
-step. Do not begin live escalated-reviewer, work-item creation, artifact
+`docs/work/BANDIT-016/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-016/implementation-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-016` as an active
+chore. Full verification and Stage 4 review evidence are the next required
+steps. Do not begin live escalated-reviewer, work-item creation, artifact
 creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
-until `BANDIT-016` is implemented, reviewed, landed, retrospectively closed,
-and the gap ledger is dispositioned.
+until `BANDIT-016` is reviewed, landed, retrospectively closed, and the gap
+ledger is dispositioned.
 
 **Last completed milestone:** `BANDIT-015` converted the live CodeRabbit
 bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Implement the narrow Stage 4 evidence-head contract and
-landing-readiness behavior for `BANDIT-016` so the focused RED tests pass:
-terminal disposition-only Stage 4 evidence must stop recursive rerun blockers,
-accepted Local Qwen findings must require concrete PM rationale, and actual
-source drift after review must remain fail-closed. Do not begin live
-escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
-Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
-Cockpit, Phase 9 dogfood, or feature work until this active gap is resolved,
-operator-blocked, or explicitly dispositioned as no-action.
+**Current next action:** Run full implementation verification for
+`BANDIT-016`, then complete the Stage 4 review gate artifacts for the implemented
+Stage 4 evidence-head contract. The focused implementation tests now pass:
+terminal disposition-only Stage 4 evidence stops recursive rerun blockers,
+accepted Local Qwen findings require concrete PM rationale, and actual source
+drift after review remains fail-closed. Do not begin live escalated-reviewer,
+work-item creation, artifact creation, heartbeat, cockpit, Phase 6 Coordination
+Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9
+dogfood, or feature work until this active gap is resolved, operator-blocked, or
+explicitly dispositioned as no-action.
 
 ## Active Work
 
@@ -46,9 +49,11 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** `docs/work/BANDIT-016/implementation-evidence.md`
-with the Stage 4 evidence-head contract, code-path mapping, focused test
-results, clean-code self-check, and preserved source-drift refusal evidence.
+**Expected next deliverable:** `docs/work/BANDIT-016/review-evidence.md`,
+`docs/work/BANDIT-016/coderabbit-review.md`,
+`docs/work/BANDIT-016/local-qwen-review.md`, and
+`docs/work/BANDIT-016/escalated-review.md` after full implementation
+verification passes.
 
 ## Known Bootstrap Gaps
 
@@ -157,7 +162,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; implement the Stage 4 evidence-head contract next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; run full verification and complete Stage 4 review evidence next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

@@ -98,6 +98,28 @@ export function readGitDiff(
   });
 }
 
+export function readGitChangedPaths(
+  repoRoot: string,
+  baseRevision: string,
+  headRevision = "HEAD"
+): Promise<string[] | null> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      ["diff", "--name-only", `${baseRevision}..${headRevision}`],
+      { cwd: repoRoot },
+      (error, stdout) => {
+        if (error) {
+          resolve(null);
+          return;
+        }
+
+        resolve(stdout.split("\n").map((line) => line.trim()).filter(Boolean));
+      }
+    );
+  });
+}
+
 export function readLatestCommitForPath(
   repoRoot: string,
   relativePath: string
