@@ -93,6 +93,7 @@ escalated_review_required:
 escalated_review_state:
 escalated_review_rationale:
 pm_disposition:
+pm_disposition_rationale:
 operator_input_status:
 uat_status:
 clean_code_status:
@@ -910,6 +911,63 @@ test("land-check accepts terminal Stage 4 after disposition-only evidence update
   assert.match(result.stdout, /Final verdict: safe-to-land/);
 });
 
+test("land-check accepts glob Stage 4 disposition-only path patterns", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  await writeStage4EvidenceHeadPolicy(repo, {
+    terminalDispositionOnlyPathPatterns: [
+      "glob:docs/work/<work_item_id>/*.md",
+      "exact:docs/roadmap/CURRENT_CONTEXT.md",
+      "exact:docs/roadmap/ROADMAP.md",
+      "exact:.bandit/bootstrap-gaps.json"
+    ]
+  });
+  const implementationHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-938", "Glob Disposition Path");
+  await writeRoutingDecision(repo, "BANDIT-938", {
+    selectedRoute: "escalated-adversarial-placeholder",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require escalated adversarial review placeholder evidence."
+  });
+  await writeCodeRabbitReview(repo, "BANDIT-938", {
+    sourceHead: implementationHead
+  });
+  await writeLocalQwenReview(repo, "BANDIT-938", {
+    sourceHead: implementationHead
+  });
+  await writeEscalatedReview(repo, "BANDIT-938", {
+    sourceHead: implementationHead
+  });
+  await commitAll(repo, "Stage 4 review accepted implementation");
+  await writeFile(
+    path.join(repo, "docs/work/BANDIT-938/qwen-disposition.md"),
+    "# Qwen Disposition\n\nPM disposition records a procedural finding follow-up.\n",
+    "utf8"
+  );
+  const dispositionHead = await commitAll(repo, "Record PM disposition");
+  await writeReviewEvidence(repo, "BANDIT-938", {
+    sourceHead: dispositionHead,
+    coderabbitState: "pass",
+    localQwenState: "pass",
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-938", {
+    sourceHead: dispositionHead,
+    coderabbitState: "pass",
+    localQwenState: "pass",
+    escalatedReviewState: "bootstrap_gap"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-938"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
 test("land-check keeps blocking when implementation source changes after review", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -1041,6 +1099,33 @@ test("land-check accepts concise concrete PM rationale for Local Qwen findings",
   assert.match(result.stdout, /Final verdict: safe-to-land/);
 });
 
+test("land-check accepts structured PM rationale for Local Qwen findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-939", "Structured PM Finding Rationale");
+  await writeReviewEvidence(repo, "BANDIT-939", {
+    sourceHead,
+    localQwenState: "pass",
+    pmDispositionRationale:
+      "Codex PM accepted the procedural Local Qwen finding as docs-only follow-up."
+  });
+  await writeLandingVerdict(repo, "BANDIT-939", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-939", {
+    sourceHead,
+    findingsStatus: "open",
+    findingsDisposition: "Accepted."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-939"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
 test("land-check fails closed when review changed paths cannot be resolved", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -1070,6 +1155,48 @@ test("land-check fails closed when review changed paths cannot be resolved", asy
     result.stderr,
     /safe-to-land cannot proceed with stale source evidence/
   );
+});
+
+test("land-check reports shallow repository changed-path failures explicitly", async () => {
+  const origin = await createInitializedRepo();
+  await initGitRepo(origin);
+  const missingBaseHead = await commitAll(origin, "Implementation accepted");
+  await writeFile(path.join(origin, "implementation-change.txt"), "changed\n");
+  const currentHead = await commitAll(origin, "Change after implementation");
+  const shallowRepo = await createTempRepo();
+  await rm(shallowRepo, { recursive: true, force: true });
+  await runGit(path.dirname(shallowRepo), [
+    "clone",
+    "--depth",
+    "1",
+    `file://${origin}`,
+    shallowRepo
+  ]);
+  await writeWorkBrief(
+    shallowRepo,
+    "BANDIT-940",
+    "Shallow Changed Path Diagnostics"
+  );
+  await writeReviewEvidence(shallowRepo, "BANDIT-940", {
+    sourceHead: currentHead,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(shallowRepo, "BANDIT-940", {
+    sourceHead: currentHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(shallowRepo, "BANDIT-940", {
+    sourceHead: missingBaseHead
+  });
+
+  const result = await runBandit(shallowRepo, ["land-check", "BANDIT-940"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Local Qwen review changed-path check failed: missing_base_revision_shallow_repository/
+  );
+  assert.match(result.stderr, /Local Qwen review evidence is stale/);
 });
 
 async function createInitializedRepo(options = {}) {
@@ -1112,6 +1239,22 @@ async function writeAutoLandingPolicy(repo, overrides = {}) {
     ...overrides
   };
   const destination = path.join(repo, ".bandit/policy/auto-landing.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
+}
+
+async function writeStage4EvidenceHeadPolicy(repo, overrides = {}) {
+  const policy = {
+    version: 1,
+    terminalDispositionOnlyPathPatterns: [
+      "docs/work/<work_item_id>/",
+      "docs/roadmap/CURRENT_CONTEXT.md",
+      "docs/roadmap/ROADMAP.md",
+      ".bandit/bootstrap-gaps.json"
+    ],
+    ...overrides
+  };
+  const destination = path.join(repo, ".bandit/policy/stage4-evidence-head.json");
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
 }
@@ -1163,13 +1306,18 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     `escalated_review_state: ${options.escalatedReviewState ?? "not_applicable"}`,
     `escalated_review_rationale: ${options.escalatedReviewRationale ?? "No smell trigger requires escalation beyond the baseline bootstrap gap."}`,
     "pm_disposition: pass",
+    options.pmDispositionRationale
+      ? `pm_disposition_rationale: ${options.pmDispositionRationale}`
+      : null,
     "operator_input_status: none_required",
     `uat_status: ${options.uatStatus ?? "not_applicable"}`,
     "clean_code_status: pass",
     `source_drift_status: ${options.sourceDriftStatus ?? "current"}`,
     "bootstrap_gaps:",
     "  - Manual PM review replaces unavailable final gates during bootstrap."
-  ].filter((line) => !line.startsWith(`${options.omitLine}:`));
+  ].filter(
+    (line) => line !== null && !line.startsWith(`${options.omitLine}:`)
+  );
 
   const workDir = path.join(repo, "docs/work", workItemId);
   await mkdir(workDir, { recursive: true });

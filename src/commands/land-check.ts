@@ -305,7 +305,7 @@ function safeToLandProblems(
     reviewEvidence.localQwenState === "pass" ||
     landingVerdict.localQwenState === "pass"
   ) {
-    problems.push(...localQwenProblems(localQwenReview));
+    problems.push(...localQwenProblems(localQwenReview, reviewEvidence));
   }
 
   if (
@@ -477,7 +477,10 @@ function codeRabbitProblems(codeRabbitReview: CodeRabbitReviewEvidence | null) {
   return problems;
 }
 
-function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
+function localQwenProblems(
+  localQwenReview: LocalQwenReviewEvidence | null,
+  reviewEvidence: ReviewEvidence
+) {
   if (!localQwenReview) {
     return ["safe-to-land requires current local Qwen review evidence"];
   }
@@ -499,7 +502,10 @@ function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
 
   if (
     localQwenReview.findingsStatus !== "none" &&
-    !hasConcretePmRationale(localQwenReview.findingsDisposition)
+    !hasConcretePmRationaleForLocalQwenFindings(
+      reviewEvidence.pmDispositionRationale,
+      localQwenReview.findingsDisposition
+    )
   ) {
     problems.push("PM disposition rationale is required for Local Qwen findings");
   }
@@ -679,11 +685,57 @@ function matchesPolicyPathPattern(
   workItemId: string
 ) {
   const resolvedPattern = pattern.replaceAll("<work_item_id>", workItemId);
+  if (resolvedPattern.startsWith("exact:")) {
+    return changedPath === resolvedPattern.slice("exact:".length);
+  }
+
+  if (resolvedPattern.startsWith("prefix:")) {
+    return changedPath.startsWith(resolvedPattern.slice("prefix:".length));
+  }
+
+  if (resolvedPattern.startsWith("glob:")) {
+    return globPatternToRegExp(resolvedPattern.slice("glob:".length)).test(
+      changedPath
+    );
+  }
+
+  if (resolvedPattern.startsWith("regex:")) {
+    try {
+      return new RegExp(resolvedPattern.slice("regex:".length)).test(changedPath);
+    } catch {
+      return false;
+    }
+  }
+
   if (resolvedPattern.endsWith("/")) {
     return changedPath.startsWith(resolvedPattern);
   }
 
   return changedPath === resolvedPattern;
+}
+
+function globPatternToRegExp(pattern: string) {
+  let source = "^";
+
+  for (let index = 0; index < pattern.length; index += 1) {
+    const character = pattern[index];
+    const nextCharacter = pattern[index + 1];
+
+    if (character === "*" && nextCharacter === "*") {
+      source += ".*";
+      index += 1;
+      continue;
+    }
+
+    if (character === "*") {
+      source += "[^/]*";
+      continue;
+    }
+
+    source += escapeRegExp(character ?? "");
+  }
+
+  return new RegExp(`${source}$`);
 }
 
 function hasConcretePmRationale(disposition: string) {
@@ -696,6 +748,17 @@ function hasConcretePmRationale(disposition: string) {
     hasConcreteReasonAfterMarker(disposition, /\b(?:pm\s+)?rationale\s*:/i) ||
     hasConcreteReasonAfterMarker(disposition, /\breason\s*:/i)
   );
+}
+
+function hasConcretePmRationaleForLocalQwenFindings(
+  structuredRationale: string,
+  legacyDisposition: string
+) {
+  if (structuredRationale) {
+    return hasSpecificPmReasonText(structuredRationale);
+  }
+
+  return hasConcretePmRationale(legacyDisposition);
 }
 
 function hasConcreteReasonAfterMarker(disposition: string, marker: RegExp) {
@@ -721,6 +784,10 @@ function hasSpecificPmReasonText(reason: string) {
   return !/^(tbd|todo|pending|none|n\/a|na|later|unknown|unclear|ok|okay|fine|accepted|safe|valid)$/i.test(
     normalizedReason
   );
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function isPassingOrBootstrapGap(value: string) {

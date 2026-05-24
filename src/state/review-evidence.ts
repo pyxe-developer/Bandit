@@ -28,6 +28,7 @@ export type ReviewEvidence = {
   escalatedReviewState: string;
   escalatedReviewRationale: string;
   pmDisposition: string;
+  pmDispositionRationale: string;
   operatorInputStatus: string;
   uatStatus: string;
   cleanCodeStatus: string;
@@ -200,6 +201,7 @@ function parseReviewEvidence(
     escalatedReviewState,
     escalatedReviewRationale,
     pmDisposition,
+    pmDispositionRationale: readScalar(fields, "pm_disposition_rationale"),
     operatorInputStatus,
     uatStatus,
     cleanCodeStatus,

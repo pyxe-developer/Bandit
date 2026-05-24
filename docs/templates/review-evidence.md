@@ -13,6 +13,7 @@ escalated_review_required:
 escalated_review_state:
 escalated_review_rationale:
 pm_disposition:
+pm_disposition_rationale:
 operator_input_status:
 uat_status:
 clean_code_status:

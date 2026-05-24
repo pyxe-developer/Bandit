@@ -33,9 +33,9 @@ behavior. The clean-worktree Local Qwen rerun at follow-up repair head
 with three future-hardening findings: structured PM disposition fields,
 expanded changed-path error categories for shallow clone or partial fetch
 cases, and future glob or regex policy-pattern support if needed. The next
-required step is targeted repair or explicit PM disposition hardening for
-those latest findings, followed by another clean-worktree Local Qwen rerun. Do
-not begin live
+required step is a clean-worktree Local Qwen rerun after the latest targeted
+repair for structured PM disposition rationale, shallow/partial changed-path
+diagnostics, and typed Stage 4 policy patterns. Do not begin live
 escalated-reviewer, work-item creation, artifact
 creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
@@ -47,15 +47,16 @@ bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Perform targeted repair or explicit PM disposition
-hardening for the latest `BANDIT-016` Local Qwen findings, then rerun Local
-Qwen from a clean worktree.
+**Current next action:** Rerun Local Qwen from a clean worktree after the
+latest `BANDIT-016` targeted hardening. Targeted hardening is now recorded in
+`docs/work/BANDIT-016/qwen-finding-repair.md`.
 `docs/work/BANDIT-016/local-qwen-review.md` records persistent findings after
 the follow-up repair rerun: structured PM disposition fields, expanded
 changed-path error categories for shallow clone or partial fetch cases, and
 future glob or regex policy-pattern support if needed.
-`docs/work/BANDIT-016/qwen-finding-repair.md` records both narrow repairs and
-the latest post-repair rerun result.
+`docs/work/BANDIT-016/qwen-finding-repair.md` records both narrow repairs, the
+latest post-repair rerun result, and the targeted hardening for the latest
+structured PM rationale, changed-path diagnostic, and policy-pattern findings.
 Aggregate review evidence is recorded in `docs/work/BANDIT-016/review-evidence.md`,
 but `land-check` still requires a passing Local Qwen reviewer verdict before a
 `safe-to-land` landing verdict can be valid. Do not begin live
@@ -80,9 +81,8 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** Targeted repair or explicit PM disposition
-hardening for the latest `BANDIT-016` Local Qwen findings, followed by a
-clean-worktree Local Qwen rerun.
+**Expected next deliverable:** Clean-worktree Local Qwen rerun for
+`BANDIT-016` after targeted hardening for the latest Local Qwen findings.
 
 ## Known Bootstrap Gaps
 
@@ -191,7 +191,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; targeted repair or explicit PM disposition hardening for the latest Local Qwen findings is next, followed by a clean-worktree rerun.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; clean-worktree Local Qwen rerun is next after targeted hardening for the latest Local Qwen findings.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -204,9 +204,8 @@ a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define `BANDIT-016`
-Local Qwen finding repair or explicit PM disposition hardening as the next
-action.
+None recorded for the next routing step. Repo artifacts define the
+clean-worktree `BANDIT-016` Local Qwen rerun as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

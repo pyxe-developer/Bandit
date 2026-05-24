@@ -109,7 +109,62 @@ for structured PM disposition fields, expanded changed-path error categories
 for shallow clone or partial fetch cases, and future glob or regex
 policy-pattern support if needed.
 
-Next, perform targeted repair or explicit PM disposition hardening, then rerun:
+Codex PM chose targeted repair for the structured PM disposition, shallow
+repository diagnostics, and typed policy-pattern support findings because each
+finding maps directly to existing Stage 4 landing-gate clarity. The repair:
+
+- Adds `pm_disposition_rationale` as a structured review-evidence field and
+  lets `land-check` use it before falling back to legacy findings-disposition
+  text.
+- Categorizes missing review-base changed-path failures in shallow repositories
+  as `missing_base_revision_shallow_repository` and preserves the existing
+  fail-closed stale-review behavior. Partial-clone promisor remotes now receive
+  a distinct `missing_base_revision_partial_clone` category.
+- Adds typed Stage 4 terminal-disposition path patterns for `exact:`,
+  `prefix:`, `glob:`, and `regex:` while preserving the existing bare exact
+  and prefix pattern behavior.
+- Updates the committed review-evidence template contract so future artifacts
+  expose the structured PM rationale field.
+
+Verification:
+
+```sh
+node --test test/landing-gates.test.mjs
+```
+
+Result: `pass` - 48/48.
+
+```sh
+npm run typecheck
+```
+
+Result: `pass`.
+
+```sh
+npm test
+```
+
+Result: `pass` - 154/154.
+
+```sh
+npm run bandit -- validate
+```
+
+Result: `pass`.
+
+```sh
+git diff --check
+```
+
+Result: `pass`.
+
+Clean-code check: `pass` - the repair remains inside the landing-readiness,
+review-evidence parsing, Stage 4 policy matching, and git diagnostics
+boundaries. It keeps source freshness fail-closed, makes PM rationale
+structured without removing backward compatibility, and adds focused behavioral
+coverage for each latest Local Qwen finding.
+
+Next, rerun Local Qwen from a clean worktree:
 
 ```sh
 npm run bandit -- qwen-review BANDIT-016

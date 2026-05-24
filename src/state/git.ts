@@ -2,6 +2,8 @@ import { execFile } from "node:child_process";
 
 export type GitChangedPathsErrorReason =
   | "missing_base_revision"
+  | "missing_base_revision_partial_clone"
+  | "missing_base_revision_shallow_repository"
   | "missing_head_revision"
   | "missing_revision"
   | "not_git_repository"
@@ -136,11 +138,16 @@ export function readGitChangedPaths(
         cwd: repoRoot,
         maxBuffer: 1024 * 1024 * 4
       },
-      (error, stdout, stderr) => {
+      async (error, stdout, stderr) => {
         if (error) {
           resolve({
             status: "error",
-            ...classifyGitChangedPathsError(stderr, baseRevision, headRevision)
+            ...(await classifyGitChangedPathsError(
+              repoRoot,
+              stderr,
+              baseRevision,
+              headRevision
+            ))
           });
           return;
         }
@@ -154,11 +161,12 @@ export function readGitChangedPaths(
   });
 }
 
-function classifyGitChangedPathsError(
+async function classifyGitChangedPathsError(
+  repoRoot: string,
   stderr: string,
   baseRevision: string,
   headRevision: string
-): { reason: GitChangedPathsErrorReason; message: string } {
+): Promise<{ reason: GitChangedPathsErrorReason; message: string }> {
   const message = stderr.trim() || "git diff changed-path read failed";
   const lowerMessage = message.toLowerCase();
 
@@ -173,6 +181,20 @@ function classifyGitChangedPathsError(
     lowerMessage.includes("ambiguous argument")
   ) {
     if (message.includes(baseRevision)) {
+      if (await hasPromisorRemote(repoRoot)) {
+        return {
+          reason: "missing_base_revision_partial_clone",
+          message
+        };
+      }
+
+      if (await isShallowRepository(repoRoot)) {
+        return {
+          reason: "missing_base_revision_shallow_repository",
+          message
+        };
+      }
+
       return { reason: "missing_base_revision", message };
     }
 
@@ -188,6 +210,42 @@ function classifyGitChangedPathsError(
   }
 
   return { reason: "git_diff_failed", message };
+}
+
+function isShallowRepository(repoRoot: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      ["rev-parse", "--is-shallow-repository"],
+      { cwd: repoRoot },
+      (error, stdout) => {
+        if (error) {
+          resolve(false);
+          return;
+        }
+
+        resolve(stdout.trim() === "true");
+      }
+    );
+  });
+}
+
+function hasPromisorRemote(repoRoot: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      ["config", "--get-regexp", "^remote\\..*\\.promisor$"],
+      { cwd: repoRoot },
+      (error, stdout) => {
+        if (error) {
+          resolve(false);
+          return;
+        }
+
+        resolve(stdout.trim().length > 0);
+      }
+    );
+  });
 }
 
 export function readLatestCommitForPath(
