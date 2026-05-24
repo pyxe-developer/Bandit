@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { initBandit } from "./commands/init.js";
+import { coderabbitReview } from "./commands/coderabbit-review.js";
 import { draftWork } from "./commands/draft-work.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
@@ -59,8 +60,14 @@ async function main() {
     return;
   }
 
+  if (command === "coderabbit-review") {
+    const result = await coderabbitReview(process.cwd(), args[0]);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review|coderabbit-review>`);
   process.exitCode = 1;
 }
 

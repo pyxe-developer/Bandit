@@ -147,6 +147,24 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("executable evidence", /^executable_evidence:/im),
       metadata("bootstrap gaps", /^bootstrap_gaps:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/coderabbit-review.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("provider", /^provider:/im),
+      metadata("review target", /^review_target:/im),
+      metadata("review state", /^review_state:/im),
+      metadata("CodeRabbit verdict", /^coderabbit_verdict:/im),
+      metadata("findings status", /^findings_status:/im),
+      metadata("findings disposition", /^findings_disposition:/im),
+      metadata("operator input status", /^operator_input_status:/im),
+      metadata("source drift status", /^source_drift_status:/im),
+      metadata("executable evidence", /^executable_evidence:/im),
+      metadata("bootstrap gaps", /^bootstrap_gaps:/im)
+    ]
   }
 ];
 

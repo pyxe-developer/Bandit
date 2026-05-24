@@ -1,4 +1,9 @@
 import { readCurrentGitHead } from "../state/git.js";
+import {
+  codeRabbitReviewHasBlockingFindings,
+  type CodeRabbitReviewEvidence,
+  readOptionalParsedCodeRabbitReview
+} from "../state/coderabbit-review.js";
 import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
 import type { LocalQwenReviewEvidence } from "../state/local-qwen-review.js";
@@ -17,6 +22,11 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
   const reviewEvidence = await readReviewEvidence(repoRoot, workItemId);
   const landingVerdict = await readLandingVerdict(repoRoot, workItemId);
   const currentHead = await readCurrentGitHead(repoRoot);
+  const codeRabbitReview = await readRequiredCodeRabbitReviewWhenClaimed(
+    repoRoot,
+    reviewEvidence,
+    landingVerdict
+  );
   const localQwenReview = await readRequiredLocalQwenReviewWhenClaimed(
     repoRoot,
     reviewEvidence,
@@ -26,6 +36,7 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     reviewEvidence,
     landingVerdict,
     currentHead,
+    codeRabbitReview,
     localQwenReview
   );
 
@@ -43,6 +54,7 @@ type LandingReadiness = {
   sourceDriftStatus: string;
   reviewEvidenceIsStale: boolean;
   landingVerdictIsStale: boolean;
+  codeRabbitReview: CodeRabbitReviewEvidence | null;
   localQwenReview: LocalQwenReviewEvidence | null;
   problems: string[];
 };
@@ -51,15 +63,22 @@ function evaluateLandingReadiness(
   reviewEvidence: ReviewEvidence,
   landingVerdict: LandingVerdict,
   currentHead: string | null,
+  codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null
 ): LandingReadiness {
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
+  const codeRabbitReviewIsStale = codeRabbitReview
+    ? isStale(codeRabbitReview.sourceHead, currentHead)
+    : false;
   const localQwenReviewIsStale = localQwenReview
     ? isStale(localQwenReview.sourceHead, currentHead)
     : false;
   const sourceDriftStatus =
-    reviewEvidenceIsStale || landingVerdictIsStale || localQwenReviewIsStale
+    reviewEvidenceIsStale ||
+    landingVerdictIsStale ||
+    codeRabbitReviewIsStale ||
+    localQwenReviewIsStale
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
   const problems: string[] = [];
@@ -72,6 +91,10 @@ function evaluateLandingReadiness(
     problems.push("Landing verdict evidence is stale");
   }
 
+  if (codeRabbitReviewIsStale) {
+    problems.push("CodeRabbit review evidence is stale");
+  }
+
   if (localQwenReviewIsStale) {
     problems.push("Local Qwen review evidence is stale");
   }
@@ -81,7 +104,11 @@ function evaluateLandingReadiness(
       ...safeToLandProblems(
         reviewEvidence,
         landingVerdict,
-        reviewEvidenceIsStale || landingVerdictIsStale || localQwenReviewIsStale,
+        reviewEvidenceIsStale ||
+          landingVerdictIsStale ||
+          codeRabbitReviewIsStale ||
+          localQwenReviewIsStale,
+        codeRabbitReview,
         localQwenReview
       )
     );
@@ -92,6 +119,7 @@ function evaluateLandingReadiness(
     sourceDriftStatus,
     reviewEvidenceIsStale,
     landingVerdictIsStale,
+    codeRabbitReview,
     localQwenReview,
     problems
   };
@@ -101,6 +129,7 @@ function safeToLandProblems(
   reviewEvidence: ReviewEvidence,
   landingVerdict: LandingVerdict,
   staleEvidence: boolean,
+  codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null
 ) {
   const problems: string[] = [];
@@ -161,6 +190,13 @@ function safeToLandProblems(
   }
 
   if (
+    reviewEvidence.coderabbitState === "pass" ||
+    landingVerdict.coderabbitState === "pass"
+  ) {
+    problems.push(...codeRabbitProblems(codeRabbitReview));
+  }
+
+  if (
     reviewEvidence.escalatedReviewRequired &&
     (!isPassingOrBootstrapGap(landingVerdict.escalatedReviewState) ||
       !isPassingOrBootstrapGap(reviewEvidence.escalatedReviewState))
@@ -202,6 +238,7 @@ function formatLandingCheck(
     `Source drift: ${readiness.sourceDriftStatus}`,
     `Verification: ${reviewEvidence.verificationState}`,
     `CodeRabbit: ${reviewEvidence.coderabbitState}`,
+    ...formatCodeRabbitReviewLines(readiness.codeRabbitReview),
     `Local Qwen: ${reviewEvidence.localQwenState}`,
     ...formatLocalQwenReviewLines(readiness.localQwenReview),
     `Escalated review: ${reviewEvidence.escalatedReviewState}`,
@@ -212,6 +249,21 @@ function formatLandingCheck(
     ...reviewEvidence.bootstrapGaps.map((gap) => `  - ${gap}`),
     `Final verdict: ${landingVerdict.finalVerdict}`
   ].join("\n").concat("\n");
+}
+
+async function readRequiredCodeRabbitReviewWhenClaimed(
+  repoRoot: string,
+  reviewEvidence: ReviewEvidence,
+  landingVerdict: LandingVerdict
+) {
+  if (
+    reviewEvidence.coderabbitState !== "pass" &&
+    landingVerdict.coderabbitState !== "pass"
+  ) {
+    return null;
+  }
+
+  return readOptionalParsedCodeRabbitReview(repoRoot, reviewEvidence.workItem);
 }
 
 async function readRequiredLocalQwenReviewWhenClaimed(
@@ -227,6 +279,38 @@ async function readRequiredLocalQwenReviewWhenClaimed(
   }
 
   return readLocalQwenReview(repoRoot, reviewEvidence.workItem);
+}
+
+function codeRabbitProblems(codeRabbitReview: CodeRabbitReviewEvidence | null) {
+  if (!codeRabbitReview) {
+    return ["safe-to-land requires current CodeRabbit review evidence"];
+  }
+
+  const problems: string[] = [];
+
+  if (codeRabbitReview.reviewState !== "completed") {
+    problems.push(
+      `CodeRabbit review state blocks landing: ${codeRabbitReview.reviewState}`
+    );
+  }
+
+  if (codeRabbitReview.coderabbitVerdict !== "pass") {
+    problems.push(
+      `CodeRabbit reviewer verdict blocks landing: ${codeRabbitReview.coderabbitVerdict}`
+    );
+  }
+
+  if (codeRabbitReviewHasBlockingFindings(codeRabbitReview)) {
+    problems.push(
+      `CodeRabbit findings are unresolved: ${codeRabbitReview.findingsStatus}`
+    );
+  }
+
+  if (codeRabbitReview.sourceDriftStatus !== "current") {
+    problems.push("safe-to-land requires CodeRabbit source_drift_status current");
+  }
+
+  return problems;
 }
 
 function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
@@ -254,6 +338,19 @@ function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
   }
 
   return problems;
+}
+
+function formatCodeRabbitReviewLines(
+  codeRabbitReview: CodeRabbitReviewEvidence | null
+) {
+  if (!codeRabbitReview) {
+    return [];
+  }
+
+  return [
+    `CodeRabbit evidence: ${codeRabbitReview.displayPath}`,
+    `CodeRabbit provider: ${codeRabbitReview.provider}`
+  ];
 }
 
 function formatLocalQwenReviewLines(localQwenReview: LocalQwenReviewEvidence | null) {

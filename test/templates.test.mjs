@@ -110,6 +110,24 @@ const templateContracts = [
       ["final verdict", /^final_verdict:/im],
       ["rationale", /^rationale:/im]
     ]
+  },
+  {
+    path: "docs/templates/coderabbit-review.md",
+    requirements: [
+      ["contract version", /^contract_version:/im],
+      ["work item", /^work_item:/im],
+      ["source head", /^source_head:/im],
+      ["provider", /^provider:/im],
+      ["review target", /^review_target:/im],
+      ["review state", /^review_state:/im],
+      ["CodeRabbit verdict", /^coderabbit_verdict:/im],
+      ["findings status", /^findings_status:/im],
+      ["findings disposition", /^findings_disposition:/im],
+      ["operator input status", /^operator_input_status:/im],
+      ["source drift status", /^source_drift_status:/im],
+      ["executable evidence", /^executable_evidence:/im],
+      ["bootstrap gaps", /^bootstrap_gaps:/im]
+    ]
   }
 ];
 

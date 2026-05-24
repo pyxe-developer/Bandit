@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
+  coderabbitTemplate,
   createTempRepo,
   localQwenTemplate,
   runBandit,
@@ -116,7 +117,8 @@ landing_agent_replacement_evidence:
 final_verdict:
 rationale:
 `,
-  "docs/templates/local-qwen-review.md": localQwenTemplate
+  "docs/templates/local-qwen-review.md": localQwenTemplate,
+  "docs/templates/coderabbit-review.md": coderabbitTemplate
 };
 
 const validSmellCatalog = {

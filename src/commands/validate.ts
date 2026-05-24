@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
 import { validateConfig } from "../state/config.js";
 import { validateEventLog } from "../state/events.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
@@ -24,6 +25,7 @@ export async function validateBandit(repoRoot: string) {
   await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);
+  await validateCodeRabbitReviewArtifacts(repoRoot);
   await validateLocalQwenReviewArtifacts(repoRoot);
   await validateReviewEvidenceArtifacts(repoRoot);
   await validateLandingVerdictArtifacts(repoRoot);
