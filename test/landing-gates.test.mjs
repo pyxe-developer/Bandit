@@ -1016,6 +1016,31 @@ test("land-check accepts concrete PM rationale for Local Qwen findings", async (
   assert.match(result.stdout, /Final verdict: safe-to-land/);
 });
 
+test("land-check accepts concise concrete PM rationale for Local Qwen findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-937", "Concise PM Finding Rationale");
+  await writeReviewEvidence(repo, "BANDIT-937", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-937", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-937", {
+    sourceHead,
+    findingsStatus: "open",
+    findingsDisposition: "Accepted because docs only."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-937"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
 test("land-check fails closed when review changed paths cannot be resolved", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -1036,6 +1061,10 @@ test("land-check fails closed when review changed paths cannot be resolved", asy
   const result = await runBandit(repo, ["land-check", "BANDIT-936"]);
 
   assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Local Qwen review changed-path check failed: missing_base_revision/
+  );
   assert.match(result.stderr, /Local Qwen review evidence is stale/);
   assert.match(
     result.stderr,

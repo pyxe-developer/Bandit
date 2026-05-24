@@ -5,9 +5,12 @@
 `pass` - implementation is complete for the narrow Stage 4 evidence-head
 contract, and the persistent Local Qwen non-blocking hardening findings have
 focused repair evidence in `docs/work/BANDIT-016/qwen-finding-repair.md`.
-Local Qwen rerun, refreshed aggregate review evidence if needed, landing
-verdict, landing action, retrospective, and gap-ledger closeout remain required
-before `BANDIT-016` can land or the next bootstrap-gap chore can begin.
+The latest narrowed Local Qwen hardening findings have a second targeted
+repair recorded in `docs/work/BANDIT-016/qwen-finding-repair.md`. A clean
+worktree Local Qwen rerun, refreshed aggregate review evidence if needed,
+landing verdict, landing action, retrospective, and gap-ledger closeout remain
+required before `BANDIT-016` can land or the next bootstrap-gap chore can
+begin.
 
 ## Implementation Source Head
 
@@ -92,6 +95,18 @@ pass 44
 fail 0
 ```
 
+Follow-up Local Qwen finding repair verification:
+
+```text
+node --test test/landing-gates.test.mjs
+tests 45
+pass 45
+fail 0
+
+npm run typecheck
+pass
+```
+
 ## CLEAN_CODE.md Self-Check
 
 | Rubric | Verdict | Evidence |
@@ -102,7 +117,7 @@ fail 0
 | Explicit state | `pass` | The durable contract lives in `.bandit/policy/stage4-evidence-head.json`; landing readiness consumes that policy directly. |
 | No hidden authority | `pass` | Git history and repo-native policy remain authoritative. Chat or reviewer prose does not determine source freshness. |
 | Testable behavior | `pass` | Focused tests cover both terminal disposition-only acceptance and protected source drift refusal. |
-| Failure clarity | `pass` | Unknown git diffs, unresolved changed-path bases, and protected-path changes fail closed as stale review evidence. Missing or boilerplate Local Qwen rationale reports a concrete PM-rationale error. |
+| Failure clarity | `pass` | Unknown git diffs, unresolved changed-path bases, and protected-path changes fail closed as stale review evidence with categorized diagnostics. Missing, placeholder, or boilerplate Local Qwen rationale reports a concrete PM-rationale error while concise concrete reasons remain accepted. |
 | Locality | `pass` | Related source-drift behavior remains in `land-check`; policy parsing is isolated under `src/state/`. |
 | Role boundaries | `pass` | Codex PM can record technical rationale for reviewer findings; product UAT, policy changes beyond this brief, business tradeoffs, and cost/risk overrides remain operator-owned. |
 

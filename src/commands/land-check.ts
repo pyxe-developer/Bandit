@@ -134,6 +134,7 @@ async function evaluateLandingReadiness(
   escalatedReview: EscalatedReviewEvidence | null,
   uatApproval: UatApproval | null
 ): Promise<LandingReadiness> {
+  const problems: string[] = [];
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
   const codeRabbitReviewIsStale = codeRabbitReview
@@ -142,7 +143,9 @@ async function evaluateLandingReadiness(
         reviewEvidence.workItem,
         codeRabbitReview.sourceHead,
         currentHead,
-        stage4EvidenceHeadPolicy
+        stage4EvidenceHeadPolicy,
+        "CodeRabbit review",
+        problems
       )
     : false;
   const localQwenReviewIsStale = localQwenReview
@@ -151,7 +154,9 @@ async function evaluateLandingReadiness(
         reviewEvidence.workItem,
         localQwenReview.sourceHead,
         currentHead,
-        stage4EvidenceHeadPolicy
+        stage4EvidenceHeadPolicy,
+        "Local Qwen review",
+        problems
       )
     : false;
   const escalatedReviewIsStale = escalatedReview
@@ -160,7 +165,9 @@ async function evaluateLandingReadiness(
         reviewEvidence.workItem,
         escalatedReview.sourceHead,
         currentHead,
-        stage4EvidenceHeadPolicy
+        stage4EvidenceHeadPolicy,
+        "Escalated review",
+        problems
       )
     : false;
   const uatApprovalIsStale = uatApproval
@@ -175,7 +182,6 @@ async function evaluateLandingReadiness(
     uatApprovalIsStale
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
-  const problems: string[] = [];
 
   if (reviewEvidenceIsStale) {
     problems.push("Review evidence is stale");
@@ -627,7 +633,9 @@ async function isReviewSourceStale(
   workItemId: string,
   recordedHead: string,
   currentHead: string | null,
-  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy
+  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy,
+  evidenceLabel: string,
+  problems: string[]
 ) {
   if (!isStale(recordedHead, currentHead)) {
     return false;
@@ -638,11 +646,14 @@ async function isReviewSourceStale(
   }
 
   const changedPaths = await readGitChangedPaths(repoRoot, recordedHead, currentHead);
-  if (!changedPaths) {
+  if (changedPaths.status === "error") {
+    problems.push(
+      `${evidenceLabel} changed-path check failed: ${changedPaths.reason}`
+    );
     return true;
   }
 
-  return changedPaths.some(
+  return changedPaths.paths.some(
     (changedPath) =>
       !isTerminalDispositionOnlyPath(
         changedPath,
@@ -694,11 +705,22 @@ function hasConcreteReasonAfterMarker(disposition: string, marker: RegExp) {
   }
 
   const reason = disposition.slice(match.index + match[0].length).trim();
-  if (reason.length < 24) {
+  if (!hasSpecificPmReasonText(reason)) {
     return false;
   }
 
-  return !/^(tbd|todo|pending|none|n\/a|na|later)\b[.!:]?$/i.test(reason);
+  return true;
+}
+
+function hasSpecificPmReasonText(reason: string) {
+  const normalizedReason = reason.replace(/[.!:;,\s]+$/g, "").trim();
+  if (normalizedReason.length === 0) {
+    return false;
+  }
+
+  return !/^(tbd|todo|pending|none|n\/a|na|later|unknown|unclear|ok|okay|fine|accepted|safe|valid)$/i.test(
+    normalizedReason
+  );
 }
 
 function isPassingOrBootstrapGap(value: string) {

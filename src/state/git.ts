@@ -1,5 +1,23 @@
 import { execFile } from "node:child_process";
 
+export type GitChangedPathsErrorReason =
+  | "missing_base_revision"
+  | "missing_head_revision"
+  | "missing_revision"
+  | "not_git_repository"
+  | "git_diff_failed";
+
+export type GitChangedPathsResult =
+  | {
+      status: "ok";
+      paths: string[];
+    }
+  | {
+      status: "error";
+      reason: GitChangedPathsErrorReason;
+      message: string;
+    };
+
 export function readCurrentGitHead(repoRoot: string): Promise<string | null> {
   return new Promise((resolve) => {
     execFile("git", ["rev-parse", "HEAD"], { cwd: repoRoot }, (error, stdout) => {
@@ -102,7 +120,7 @@ export function readGitChangedPaths(
   repoRoot: string,
   baseRevision: string,
   headRevision = "HEAD"
-): Promise<string[] | null> {
+): Promise<GitChangedPathsResult> {
   return new Promise((resolve) => {
     execFile(
       "git",
@@ -118,16 +136,58 @@ export function readGitChangedPaths(
         cwd: repoRoot,
         maxBuffer: 1024 * 1024 * 4
       },
-      (error, stdout) => {
+      (error, stdout, stderr) => {
         if (error) {
-          resolve(null);
+          resolve({
+            status: "error",
+            ...classifyGitChangedPathsError(stderr, baseRevision, headRevision)
+          });
           return;
         }
 
-        resolve(stdout.split("\n").map((line) => line.trim()).filter(Boolean));
+        resolve({
+          status: "ok",
+          paths: stdout.split("\n").map((line) => line.trim()).filter(Boolean)
+        });
       }
     );
   });
+}
+
+function classifyGitChangedPathsError(
+  stderr: string,
+  baseRevision: string,
+  headRevision: string
+): { reason: GitChangedPathsErrorReason; message: string } {
+  const message = stderr.trim() || "git diff changed-path read failed";
+  const lowerMessage = message.toLowerCase();
+
+  if (lowerMessage.includes("not a git repository")) {
+    return { reason: "not_git_repository", message };
+  }
+
+  if (
+    lowerMessage.includes("bad object") ||
+    lowerMessage.includes("bad revision") ||
+    lowerMessage.includes("unknown revision") ||
+    lowerMessage.includes("ambiguous argument")
+  ) {
+    if (message.includes(baseRevision)) {
+      return { reason: "missing_base_revision", message };
+    }
+
+    if (message.includes(headRevision)) {
+      return { reason: "missing_head_revision", message };
+    }
+
+    if (headRevision === "HEAD") {
+      return { reason: "missing_base_revision", message };
+    }
+
+    return { reason: "missing_revision", message };
+  }
+
+  return { reason: "git_diff_failed", message };
 }
 
 export function readLatestCommitForPath(
