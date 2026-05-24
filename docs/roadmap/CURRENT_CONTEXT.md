@@ -4,7 +4,8 @@
 
 **Phase:** 4 - Review And Landing Gates.
 
-**State:** `BANDIT-008` has landed as final implementation source head
+**State:** `BANDIT-009` is active for Stage 2 RED evidence. `BANDIT-008`
+landed as final implementation source head
 `9edab178bad9c9cafa9e939f724b86faec261e35`. `docs/work/BANDIT-008/landing-action.md`
 records the concrete landing action; `local-qwen-review.md` records the
 Mastra Code/oMLX full-packet inconclusive bootstrap gap; `review-evidence.md`,
@@ -15,14 +16,14 @@ dispositions.
 reviewer runtime route from Qwen Code/Ollama drift to repo-configured Mastra
 Code/oMLX.
 
-**Current next action:** Create the next Phase 4 bootstrap work item for local
-Qwen full-packet reliability. Do not proceed to the escalated adversarial
-reviewer placeholder while the baseline local reviewer still returns
-inconclusive output for real Bandit review packets.
+**Current next action:** Add RED evidence for `BANDIT-009` local Qwen
+full-packet reliability before production implementation. Do not proceed to
+the escalated adversarial reviewer placeholder while the baseline local
+reviewer still returns inconclusive output for real Bandit review packets.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-009` - Local Qwen Full-Packet Reliability.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -31,15 +32,14 @@ Catalog; `BANDIT-005` - Pre-Landing Review Loop; `BANDIT-006` - Local Qwen
 Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair.
 
-**Expected next deliverable:** the next narrow Phase 4 baseline-reviewer
-reliability gap:
+**Expected next deliverable:** RED evidence for the narrow Phase 4
+baseline-reviewer reliability gap:
 
-- create a `BANDIT-009` brief for local Qwen full-packet reliability;
+- add RED evidence before production implementation;
 - define the smallest change needed for `bandit qwen-review <work-item-id>` to
   return structured reviewer JSON for real Bandit packets, or prove Mastra
   Code is the wrong harness substrate while keeping oMLX as the local model
   endpoint;
-- add RED evidence before production implementation;
 - preserve the Mastra Code/oMLX source-of-truth route unless evidence proves
   the harness path must change;
 - do not broaden into final Landing Agent behavior, UAT artifacts, PR merge
@@ -124,10 +124,11 @@ Qwen review remains inconclusive and is recorded as a bootstrap gap. Because
 local Qwen is the baseline adversarial reviewer for every PR, this gap takes
 priority over new escalated-review placeholder work.
 
-The next step is to create the next bootstrap work item brief for the
-local Qwen full-packet reliability repair. Start by reading `CLEAN_CODE.md`
-and `docs/verification/STAGE_RUBRICS.md`; shape the brief so Stage 1, Stage 2,
-Stage 3, and Stage 4 evidence can be evaluated.
+The next step is to add Stage 2 RED evidence for the local Qwen full-packet
+reliability repair. The `BANDIT-009` brief exists at
+`docs/work/BANDIT-009/brief.md` and records `CLEAN_CODE.md` read evidence plus
+Stage 1 rubric evidence. Production implementation must not start until RED
+evidence is recorded.
 
 Keep `BANDIT-009` narrow. It should diagnose and repair the full-packet local
 review path, including packet sizing, output transport, Mastra Code invocation,
@@ -139,7 +140,7 @@ the escalated reviewer placeholder.
 
 ## Required Operator Input
 
-None before creating the `BANDIT-009` brief. Repo artifacts already define the
+None before RED evidence or implementation. Repo artifacts already define the
 next technical routing decision: the baseline local Qwen reviewer reaches
 Mastra Code/oMLX but fails on real review packets, and that must be repaired
 or explicitly rerouted before adding escalated-review placeholder work.

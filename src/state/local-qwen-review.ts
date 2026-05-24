@@ -28,6 +28,7 @@ export type LocalQwenReviewEvidence = {
   operatorInputStatus: string;
   sourceDriftStatus: string;
   executableEvidence: string[];
+  structuredFindings: unknown[];
   bootstrapGaps: string[];
   displayPath: string;
 };
@@ -42,6 +43,7 @@ export type LocalQwenReviewWriteInput = {
   reviewerVerdict: string;
   findingsStatus: string;
   findingsDisposition: string;
+  structuredFindings?: unknown[];
   sourceDriftStatus: string;
   executableEvidence: string[];
   bootstrapGaps: string[];
@@ -131,6 +133,7 @@ export async function writeLocalQwenReview(
     `source_drift_status: ${input.sourceDriftStatus}`,
     "executable_evidence:",
     ...input.executableEvidence.map((line) => `  - ${line}`),
+    `structured_findings_json: ${stringifyStructuredFindings(input.structuredFindings ?? [])}`,
     "bootstrap_gaps:",
     ...input.bootstrapGaps.map((line) => `  - ${line}`)
   ].join("\n").concat("\n");
@@ -186,6 +189,7 @@ function parseLocalQwenReview(
 
   const executableEvidence = readList(fields, "executable_evidence");
   const bootstrapGaps = readList(fields, "bootstrap_gaps");
+  const structuredFindings = readStructuredFindings(fields);
 
   if (reviewerVerdict === "pass" && executableEvidence.length === 0) {
     throw new Error("Local Qwen pass requires executable evidence");
@@ -212,9 +216,32 @@ function parseLocalQwenReview(
     operatorInputStatus,
     sourceDriftStatus,
     executableEvidence,
+    structuredFindings,
     bootstrapGaps,
     displayPath
   };
+}
+
+function readStructuredFindings(fields: ParsedFields) {
+  const rawJson = readScalar(fields, "structured_findings_json");
+  if (!rawJson) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(rawJson);
+    if (!Array.isArray(parsed)) {
+      throw new Error("structured_findings_json must be an array");
+    }
+
+    return parsed;
+  } catch {
+    throw new Error("Local Qwen structured_findings_json must be valid JSON array");
+  }
+}
+
+function stringifyStructuredFindings(findings: unknown[]) {
+  return JSON.stringify(findings).replaceAll('":"', '": "').replaceAll('","', '", "');
 }
 
 async function readOptionalLocalQwenReview(

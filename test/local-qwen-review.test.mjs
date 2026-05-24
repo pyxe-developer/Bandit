@@ -361,12 +361,12 @@ test("qwen-review fails closed when a pass verdict includes findings", async () 
   assert.match(result.stderr, /Local Qwen reviewer output was inconclusive/);
 });
 
-test("qwen-review fails closed when findings are not strings", async () => {
+test("qwen-review fails closed when structured findings omit an issue", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
   await writeReviewerFixture(
     repo,
-    "process.stdout.write(JSON.stringify({ verdict: 'non_blocking', findings: [{ issue: 'object finding' }], summary: 'Invalid findings' }));"
+    "process.stdout.write(JSON.stringify({ verdict: 'non_blocking', findings: [{ detail: 'object finding' }], summary: 'Invalid findings' }));"
   );
   await writeWorkBrief(repo, "BANDIT-969", "Object Findings");
   await commitAll(repo, "Fixture source");
@@ -539,6 +539,71 @@ test("qwen-review parses Mastra Code JSON envelope output", async () => {
     "utf8"
   );
   assert.match(artifact, /Mastra Code envelope pass/);
+});
+
+test("qwen-review preserves structured findings from a real-packet Mastra Code envelope", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        command: {
+          executable: process.execPath,
+          args: ["qwen-real-packet-fixture.mjs", "{{prompt_stdin}}"]
+        }
+      }
+    }
+  });
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    [
+      "const chunks = [];",
+      "process.stdin.on('data', (chunk) => chunks.push(chunk));",
+      "process.stdin.on('end', () => {",
+      "  const prompt = Buffer.concat(chunks).toString('utf8');",
+      "  if (!prompt.includes('Review Bandit work item BANDIT-970')) process.exit(10);",
+      "  if (!prompt.includes('## Source Diff')) process.exit(11);",
+      "  process.stdout.write(JSON.stringify({",
+      "    text: JSON.stringify({",
+      "      verdict: 'blocker',",
+      "      findings: [{",
+      "        severity: 'blocker',",
+      "        file: 'src/commands/qwen-review.ts',",
+      "        line: 116,",
+      "        issue: 'Empty full-packet envelopes are collapsed into a generic inconclusive result.',",
+      "        recommendation: 'Preserve structured reviewer findings for PM disposition.'",
+      "      }],",
+      "      summary: 'Structured real-packet finding returned',",
+      "      confidence: 'high'",
+      "    }),",
+      "    toolCalls: [],",
+      "    toolResults: []",
+      "  }));",
+      "});"
+    ].join("\n"),
+    "qwen-real-packet-fixture.mjs"
+  );
+  await writeWorkBrief(repo, "BANDIT-970", "Structured Findings Qwen Review");
+  await writeWorkBrief(repo, "BANDIT-969", "Previous Slice");
+  await writeLandingAction(repo, "BANDIT-969", await commitAll(repo, "Previous landed slice"));
+  await writeImplementationEvidence(repo, "BANDIT-970");
+  await writeFile(path.join(repo, "source.txt"), "source change\n", "utf8");
+  await commitAll(repo, "Current slice source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-970"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Local Qwen reviewer verdict blocks landing: blocker/);
+
+  const artifact = await readFile(
+    path.join(repo, "docs/work/BANDIT-970/local-qwen-review.md"),
+    "utf8"
+  );
+  assert.match(artifact, /reviewer_verdict: blocker/);
+  assert.match(artifact, /findings_status: open/);
+  assert.match(artifact, /structured_findings_json:/);
+  assert.match(artifact, /"severity": "blocker"/);
+  assert.match(artifact, /"file": "src\/commands\/qwen-review\.ts"/);
+  assert.match(artifact, /Structured real-packet finding returned/);
 });
 
 test("land-check reports the current local Qwen pass and evidence artifact", async () => {

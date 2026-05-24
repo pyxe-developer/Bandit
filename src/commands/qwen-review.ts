@@ -15,9 +15,12 @@ import { readWorkItem } from "../state/work-items.js";
 
 type ReviewerOutput = {
   verdict: string;
-  findings: string[];
+  findings: ReviewerFinding[];
   summary: string;
+  confidence?: string;
 };
+
+type ReviewerFinding = string | Record<string, unknown>;
 
 export async function qwenReview(repoRoot: string, workItemId?: string) {
   if (!workItemId) {
@@ -43,7 +46,7 @@ export async function qwenReview(repoRoot: string, workItemId?: string) {
   const findingsDisposition =
     output.findings.length === 0
       ? "no unresolved findings"
-      : output.findings.join("; ");
+      : output.findings.map(formatFindingDisposition).join("; ");
   const artifactPath = await writeLocalQwenReview(repoRoot, {
     workItemId,
     sourceHead,
@@ -54,10 +57,13 @@ export async function qwenReview(repoRoot: string, workItemId?: string) {
     reviewerVerdict: output.verdict,
     findingsStatus,
     findingsDisposition,
+    structuredFindings: output.findings,
     sourceDriftStatus: sourceHead === "unknown" ? "unavailable" : "current",
     executableEvidence: [
       `qwen-review command exited 0 using ${profile.profileId}.`,
-      output.summary
+      output.confidence
+        ? `${output.summary} Confidence: ${output.confidence}.`
+        : output.summary
     ],
     bootstrapGaps: ["none"]
   });
@@ -143,8 +149,8 @@ function parseReviewerOutput(stdout: string): ReviewerOutput {
     throw new Error("Reviewer output missing findings list");
   }
 
-  if (candidate.findings.some((finding) => typeof finding !== "string")) {
-    throw new Error("Reviewer output findings must be strings");
+  if (candidate.findings.some((finding) => !isReviewerFinding(finding))) {
+    throw new Error("Reviewer output findings must be strings or structured objects");
   }
 
   if (candidate.verdict === "pass" && candidate.findings.length > 0) {
@@ -157,9 +163,50 @@ function parseReviewerOutput(stdout: string): ReviewerOutput {
 
   return {
     verdict: candidate.verdict,
-    findings: candidate.findings.map((finding) => String(finding)),
-    summary: candidate.summary
+    findings: candidate.findings.map(normalizeReviewerFinding),
+    summary: candidate.summary,
+    confidence:
+      typeof candidate.confidence === "string" && candidate.confidence.trim().length > 0
+        ? candidate.confidence.trim()
+        : undefined
   };
+}
+
+function isReviewerFinding(value: unknown): value is ReviewerFinding {
+  if (typeof value === "string") {
+    return value.trim().length > 0;
+  }
+
+  return (
+    isRecord(value) &&
+    typeof value.issue === "string" &&
+    value.issue.trim().length > 0
+  );
+}
+
+function normalizeReviewerFinding(finding: ReviewerFinding): ReviewerFinding {
+  if (typeof finding === "string") {
+    return finding;
+  }
+
+  return Object.fromEntries(
+    Object.entries(finding).filter(([, value]) => value !== undefined)
+  );
+}
+
+function formatFindingDisposition(finding: ReviewerFinding) {
+  if (typeof finding === "string") {
+    return finding;
+  }
+
+  for (const field of ["issue", "summary", "message", "title"]) {
+    const value = finding[field];
+    if (typeof value === "string" && value.trim().length > 0) {
+      return value.trim();
+    }
+  }
+
+  return JSON.stringify(finding);
 }
 
 function unwrapReviewerPayload(parsed: unknown): unknown {
