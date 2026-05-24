@@ -36,6 +36,16 @@ Sourmash is source material, not planning authority. Use it for lessons, failure
 - Local Qwen is the baseline adversarial reviewer for every PR.
 - Stronger or second reviewers are selected by policy smells, not operator choice.
 
+## Mandatory Clean-Code And Verification Rule
+
+`CLEAN_CODE.md` is not optional.
+
+Before every slice, Codex PM must read `CLEAN_CODE.md` and shape the spec, acceptance criteria, and test plan so clean-code compliance can be evaluated.
+
+Before every slice lands, Codex PM must explicitly evaluate the slice against `CLEAN_CODE.md`. A blocker-level clean-code failure makes the slice `needs-repair` or `blocked`, not safe-to-land.
+
+Bandit uses spec-driven development, test-driven development, and rubric-driven verification together. A good spec informs great TDD. Rubric-driven verification is what makes agentic programming sustainable.
+
 ## Review And Landing Defaults
 
 Every PR needs a pre-landing review loop:

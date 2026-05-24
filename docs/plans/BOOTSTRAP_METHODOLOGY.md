@@ -14,6 +14,7 @@ Every bootstrap slice should leave durable repo-native evidence:
 
 - Scope and acceptance criteria.
 - Test plan or verification plan.
+- `CLEAN_CODE.md` read evidence.
 - Known missing gates.
 - Implementation evidence.
 - Review and landing evidence.
@@ -88,6 +89,16 @@ Use tests for:
 - Improvement chore metadata.
 
 Use manual verification only when an external integration does not exist yet, and record that as a bootstrap gap.
+
+## Verification Strategy
+
+Bandit uses three verification layers:
+
+1. Spec-driven verification: the implementation must satisfy the approved spec and acceptance criteria.
+2. Test-driven verification: important behavior must be covered by tests or an explicit bootstrap gap.
+3. Rubric-driven verification: the implementation must comply with `CLEAN_CODE.md` and any applicable workflow rubrics before landing.
+
+Codex PM must read `CLEAN_CODE.md` before each slice and must perform a clean-code compliance check before landing. This applies during bootstrap, even before Bandit's final review agents exist.
 
 ## Retrospective Rule
 

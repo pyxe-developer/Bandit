@@ -44,7 +44,9 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Context Guardrails
 
+- Before each slice, read `CLEAN_CODE.md`.
 - Before writing code, create or update the current work item brief.
+- Before landing any slice, record whether it complies with `CLEAN_CODE.md`.
 - After each completed step, update this file if the next action changed.
 - If Codex cannot answer “what is next?” from this file and `ROADMAP.md`, stop and repair context.
 - The operator should not need to reconstruct status from chat.
@@ -60,6 +62,8 @@ The brief should include:
 - Out of scope.
 - Acceptance criteria.
 - Test plan.
+- `CLEAN_CODE.md` read evidence.
+- Clean-code landing rubric.
 - Bootstrap gaps.
 - Expected files.
 - First implementation order.

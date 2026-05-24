@@ -27,6 +27,8 @@
 19. Treat the Workflow Improvement Engine as the product differentiator.
 20. Convert retrospective lessons and cross-model tension into tagged improvement chores or explicit no-action decisions.
 21. Evaluate improvement chores with metrics, baselines, windows, and outcomes.
+22. Treat `CLEAN_CODE.md` as mandatory reading before every slice and a mandatory pre-landing compliance rubric.
+23. Use spec-driven development, test-driven development, and rubric-driven verification together.
 
 ## Operator Input Boundaries
 
