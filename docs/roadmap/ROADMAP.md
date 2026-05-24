@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Triage or repair the current local Qwen
-`non_blocking` findings for `BANDIT-015`, then continue the remaining
-landing-gate closeout sequence. `BANDIT-014` resolved the Landing Agent
+**Current next step:** Rerun `npm run bandit -- qwen-review BANDIT-015` at the
+PM disposition head, then continue the remaining landing-gate closeout
+sequence. `BANDIT-014` resolved the Landing Agent
 bootstrap gap by adding a
 repo-native contract, validation path, and local-record landing command.
 `BANDIT-015` is now active for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
@@ -29,7 +29,8 @@ refreshed at the repair head. Local Qwen was rerun at
 `3b78a641fb6a2d01adbac457f9ee28115db1aa9d` and recorded two `non_blocking`
 findings: align aggregate review evidence with local Qwen state before
 closeout, and disposition the `redactSecrets` substring over-redaction
-hardening concern.
+hardening concern. Codex PM disposition is recorded in
+`docs/work/BANDIT-015/qwen-rerun-disposition.md`.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -225,8 +226,8 @@ Completed work:
 
 Queued next:
 
-- Triage or repair the current local Qwen findings for `BANDIT-015` - Live
-  CodeRabbit Pre-Landing Loop, then complete remaining landing-gate closeout.
+- Rerun Local Qwen for `BANDIT-015` - Live CodeRabbit Pre-Landing Loop at the
+  PM disposition head, then complete remaining landing-gate closeout.
 
 Expected capabilities:
 
@@ -256,8 +257,9 @@ Current rule:
   Qwen evidence are recorded. The valid local Qwen `non_blocking` finding is
   repaired in `docs/work/BANDIT-015/qwen-finding-repair.md`; CodeRabbit and
   aggregate review evidence are refreshed at the repair head. The current
-  local Qwen rerun recorded two `non_blocking` findings that must be triaged or
-  repaired before remaining landing-gate closeout.
+  local Qwen rerun findings are dispositioned in
+  `docs/work/BANDIT-015/qwen-rerun-disposition.md`; Local Qwen must be rerun at
+  the PM disposition head before remaining landing-gate closeout.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -269,7 +271,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; local Qwen finding triage or repair and remaining landing-gate closeout next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; Local Qwen rerun at PM disposition head and remaining landing-gate closeout next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

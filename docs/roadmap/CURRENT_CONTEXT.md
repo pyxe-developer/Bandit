@@ -15,22 +15,21 @@ head `70ad098d378f93dbf07e16f003912873358cb184`. Local Qwen was rerun at
 repair evidence head `3b78a641fb6a2d01adbac457f9ee28115db1aa9d` and recorded
 two `non_blocking` findings: align aggregate review evidence with local Qwen
 state before closeout, and disposition the `redactSecrets` substring
-over-redaction hardening concern.
+over-redaction hardening concern. Codex PM disposition is now recorded in
+`docs/work/BANDIT-015/qwen-rerun-disposition.md`.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
-**Current next action:** Triage or repair the current local Qwen
-`non_blocking` findings for `BANDIT-015`: the aggregate review-evidence/local
-Qwen state mismatch and the `redactSecrets` substring over-redaction hardening
-concern. Do not write the escalated-review disposition, landing verdict,
-landing action, retrospective, gap-ledger disposition, or final context updates
-until the local Qwen findings are repaired or explicitly dispositioned. Do not
-begin another bootstrap-gap chore, Phase 6, Phase 7, feature work, or broader
-cockpit work until `BANDIT-015` has landing action evidence, retrospective
-closeout, and a resolved, operator-blocked, or no-action gap-ledger
-disposition.
+**Current next action:** Rerun `npm run bandit -- qwen-review BANDIT-015` at
+the PM disposition head. Do not write the escalated-review disposition, landing
+verdict, landing action, retrospective, gap-ledger disposition, or final context
+updates until the Local Qwen rerun passes or any new findings are repaired or
+explicitly dispositioned. Do not begin another bootstrap-gap chore, Phase 6,
+Phase 7, feature work, or broader cockpit work until `BANDIT-015` has landing
+action evidence, retrospective closeout, and a resolved, operator-blocked, or
+no-action gap-ledger disposition.
 
 ## Active Work
 
@@ -48,10 +47,9 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution.
 
-**Expected next deliverable:** Codex PM triage or repair evidence for the
-current `BANDIT-015` local Qwen findings, followed by escalated-review
-disposition, landing verdict, landing action, retrospective, and gap-ledger
-disposition.
+**Expected next deliverable:** Refreshed Local Qwen evidence for `BANDIT-015`
+at the PM disposition head, followed by escalated-review disposition, landing
+verdict, landing action, retrospective, and gap-ledger disposition.
 
 ## Known Bootstrap Gaps
 
@@ -85,8 +83,9 @@ implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
 `docs/work/BANDIT-015/qwen-finding-repair.md`; CodeRabbit and aggregate review
 evidence are refreshed at the repair head. The current local Qwen rerun
-records two `non_blocking` findings that must be triaged or repaired before
-closeout continues.
+findings are dispositioned in
+`docs/work/BANDIT-015/qwen-rerun-disposition.md`, and Local Qwen must be rerun
+at the PM disposition head before closeout continues.
 
 ## Context Guardrails
 
@@ -140,7 +139,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; local Qwen finding triage or repair and remaining landing-gate closeout next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; Local Qwen rerun at PM disposition head and remaining landing-gate closeout next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

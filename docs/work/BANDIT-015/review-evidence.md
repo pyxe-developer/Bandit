@@ -19,8 +19,10 @@ coderabbit_replacement_evidence:
 local_qwen_state: non_blocking
 local_qwen_replacement_evidence:
   - The prior local Qwen finding about missing refusal-path evidence was triaged and repaired in docs/work/BANDIT-015/qwen-finding-repair.md.
-  - The current local Qwen rerun records two non_blocking findings: align this aggregate review evidence with the local Qwen artifact before closeout, and consider whether redactSecrets substring over-redaction needs a hardening follow-up or no-action disposition.
-  - Codex PM triage or repair is required before escalated-review disposition and landing verdict.
+  - The current local Qwen rerun findings are dispositioned in docs/work/BANDIT-015/qwen-rerun-disposition.md.
+  - The aggregate review-evidence mismatch is repaired: this artifact records local_qwen_state as non_blocking.
+  - The redactSecrets substring over-redaction hardening concern is an explicit no-action decision for BANDIT-015 because conservative over-redaction is safer than fail-open exact-match redaction for untrusted provider diagnostics.
+  - A Local Qwen rerun is required at the PM disposition head before escalated-review disposition and landing verdict.
 escalated_review_required: true
 escalated_review_state: blocker
 escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Escalated-review disposition remains required after local Qwen review.
