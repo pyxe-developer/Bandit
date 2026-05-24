@@ -16,9 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Rerun Local Qwen for `BANDIT-015` at the escalated-review
-disposition head before continuing the remaining landing-gate closeout
-sequence. `BANDIT-014` resolved the Landing Agent
+**Current next step:** Triage the latest Local Qwen blocker findings for
+`BANDIT-015`, repair or explicitly disposition the Stage 4 evidence-head
+mismatch, and rerun Local Qwen at the repaired head before continuing the
+remaining landing-gate closeout sequence. `BANDIT-014` resolved the Landing Agent
 bootstrap gap by adding a
 repo-native contract, validation path, and local-record landing command.
 `BANDIT-015` is now active for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
@@ -40,6 +41,10 @@ returned another `blocker` verdict. Codex PM triage is recorded in
 `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
 blocker was the missing `docs/work/BANDIT-015/escalated-review.md` artifact,
 which is now recorded as the bootstrap-limited escalated-review disposition.
+Local Qwen was rerun at escalated-review disposition head
+`16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a` and returned another `blocker`
+verdict, now focused on procedural Stage 4 rerun state and stale or mismatched
+source heads between local Qwen and CodeRabbit evidence.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -235,8 +240,9 @@ Completed work:
 
 Queued next:
 
-- Rerun Local Qwen for `BANDIT-015` at the escalated-review disposition head
-  before remaining landing-gate closeout.
+- Triage the latest Local Qwen blocker findings for `BANDIT-015`, repair or
+  explicitly disposition the Stage 4 evidence-head mismatch, and rerun Local
+  Qwen at the repaired head before remaining landing-gate closeout.
 
 Expected capabilities:
 
@@ -276,6 +282,10 @@ Current rule:
   `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
   blocker was the missing `docs/work/BANDIT-015/escalated-review.md` artifact,
   which is now recorded as the bootstrap-limited escalated-review disposition.
+  Local Qwen rerun at escalated-review disposition head
+  `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a` returned another `blocker`
+  verdict; triage the latest findings and repair or explicitly disposition the
+  evidence-head mismatch before landing-gate closeout.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -287,7 +297,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; rerun Local Qwen at the escalated-review disposition head next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; triage the latest Local Qwen blocker findings, repair or explicitly disposition the evidence-head mismatch, and rerun Local Qwen at the repaired head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
