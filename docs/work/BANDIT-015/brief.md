@@ -6,7 +6,10 @@ Bootstrap-gap chore brief created on 2026-05-24. RED evidence, implementation
 evidence, CodeRabbit evidence, and review evidence are recorded. Local Qwen
 review recorded a `non_blocking` finding; the valid missing-PR-context refusal
 path was repaired, and CodeRabbit plus aggregate review evidence are refreshed
-at the repair head. The next required action is to rerun local Qwen.
+at the repair head. Local Qwen was rerun at repair evidence head
+`3b78a641fb6a2d01adbac457f9ee28115db1aa9d` and recorded two
+`non_blocking` findings. The next required action is Codex PM triage or repair
+of those findings before escalated-review disposition.
 
 ## Goal
 
@@ -181,7 +184,7 @@ policy, business, cost, and risk boundaries.
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `test/coderabbit-state.test.mjs` now contains seven focused live CodeRabbit loop RED tests, and `docs/work/BANDIT-015/red-evidence.md` records the failing focused run. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-015/implementation-evidence.md` records passing focused tests, full tests, typecheck, validation, clean-code compliance, and the artifact/source-of-truth mapping. |
-| Stage 4: Review And Cross-Model Gates | `blocker` | Review evidence is recorded in `docs/work/BANDIT-015/review-evidence.md` with CodeRabbit pass and current verification at repair head `70ad098d378f93dbf07e16f003912873358cb184`. `docs/work/BANDIT-015/qwen-finding-repair.md` records repair of the valid local Qwen finding. Rerun local Qwen next. Live escalated reviewer routing remains bootstrap-limited and replacement evidence is required during closeout. |
+| Stage 4: Review And Cross-Model Gates | `blocker` | Review evidence is recorded in `docs/work/BANDIT-015/review-evidence.md` with CodeRabbit pass and current verification. `docs/work/BANDIT-015/qwen-finding-repair.md` records repair of the prior valid local Qwen finding. The local Qwen rerun at `3b78a641fb6a2d01adbac457f9ee28115db1aa9d` recorded two `non_blocking` findings requiring Codex PM triage or repair before escalated-review disposition. Live escalated reviewer routing remains bootstrap-limited and replacement evidence is required during closeout. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | UAT is not required for this non-product workflow-infrastructure chore. Landing action evidence is required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 
