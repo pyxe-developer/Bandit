@@ -8,10 +8,13 @@
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its brief is recorded in
 `docs/work/BANDIT-016/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-016/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-016/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-016` as an active
-chore. Full verification and Stage 4 review evidence are the next required
-steps. Do not begin live escalated-reviewer, work-item creation, artifact
+`docs/work/BANDIT-016/implementation-evidence.md`, CodeRabbit evidence is
+recorded in `docs/work/BANDIT-016/coderabbit-review.md`, escalated-review
+bootstrap disposition is recorded in
+`docs/work/BANDIT-016/escalated-review.md`, and `.bandit/bootstrap-gaps.json`
+links the gap to `BANDIT-016` as an active chore. Local Qwen review and
+aggregate review evidence are the next required steps. Do not begin live
+escalated-reviewer, work-item creation, artifact
 creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
 until `BANDIT-016` is reviewed, landed, retrospectively closed, and the gap
@@ -22,16 +25,15 @@ bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Run full implementation verification for
-`BANDIT-016`, then complete the Stage 4 review gate artifacts for the implemented
-Stage 4 evidence-head contract. The focused implementation tests now pass:
-terminal disposition-only Stage 4 evidence stops recursive rerun blockers,
-accepted Local Qwen findings require concrete PM rationale, and actual source
-drift after review remains fail-closed. Do not begin live escalated-reviewer,
-work-item creation, artifact creation, heartbeat, cockpit, Phase 6 Coordination
-Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9
-dogfood, or feature work until this active gap is resolved, operator-blocked, or
-explicitly dispositioned as no-action.
+**Current next action:** Run `npm run bandit -- qwen-review BANDIT-016` from a
+clean worktree, then record aggregate review evidence from the Local Qwen
+result. Full verification passed, fixture-backed live CodeRabbit pass evidence
+is recorded, and the escalated-review bootstrap disposition is recorded for the
+implemented Stage 4 evidence-head contract. Do not begin live
+escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
+Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
+Cockpit, Phase 9 dogfood, or feature work until this active gap is resolved,
+operator-blocked, or explicitly dispositioned as no-action.
 
 ## Active Work
 
@@ -49,11 +51,8 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** `docs/work/BANDIT-016/review-evidence.md`,
-`docs/work/BANDIT-016/coderabbit-review.md`,
-`docs/work/BANDIT-016/local-qwen-review.md`, and
-`docs/work/BANDIT-016/escalated-review.md` after full implementation
-verification passes.
+**Expected next deliverable:** `docs/work/BANDIT-016/local-qwen-review.md` and
+`docs/work/BANDIT-016/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -162,7 +161,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; run full verification and complete Stage 4 review evidence next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; run Local Qwen review and aggregate review evidence next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -176,7 +175,7 @@ a resolved, operator-blocked, or no-action ledger disposition.
 ## Required Operator Input
 
 None recorded for the next routing step. Repo artifacts define `BANDIT-016`
-implementation as the next action.
+Local Qwen review as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

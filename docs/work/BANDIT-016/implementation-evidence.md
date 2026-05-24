@@ -58,7 +58,28 @@ npm run bandit -- validate
 pass
 ```
 
-Full verification remains required before review and landing closeout.
+Full verification completed before review closeout:
+
+```text
+node --test test/landing-gates.test.mjs
+tests 41
+pass 41
+fail 0
+
+npm test
+tests 147
+pass 147
+fail 0
+
+npm run typecheck
+pass
+
+npm run bandit -- validate
+pass
+
+npm run bandit -- land-check BANDIT-016
+expected blocker - Missing review evidence artifact: docs/work/BANDIT-016/review-evidence.md
+```
 
 ## CLEAN_CODE.md Self-Check
 
@@ -79,12 +100,13 @@ Full verification remains required before review and landing closeout.
 | Stage | Verdict | Evidence |
 |---|---|---|
 | Stage 3: Implementation Clean-Code Rubric | `pass` | Focused tests pass, code paths map to acceptance criteria, source-of-truth boundaries are explicit, and `CLEAN_CODE.md` was evaluated above. |
-| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit/review evidence, Local Qwen review, and escalated-review disposition remain required next. |
+| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit evidence and escalated-review bootstrap disposition are recorded. Local Qwen review and aggregate review evidence remain required next. |
 | Stage 5: Landing And UAT | `pending` | Landing verdict and landing action evidence remain required. UAT is not required for this non-product chore. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Retrospective and gap-ledger disposition remain required after review and landing. |
 
 ## Next Step
 
-Run full implementation verification and then complete the Stage 4 review gate
-artifacts for `BANDIT-016`. Do not create another gap chore or begin unrelated
-Phase 6, Phase 7, Phase 8, Phase 9, cockpit, heartbeat, or feature work.
+Run `npm run bandit -- qwen-review BANDIT-016` from a clean worktree, then
+record aggregate review evidence from the Local Qwen result. Do not create
+another gap chore or begin unrelated Phase 6, Phase 7, Phase 8, Phase 9,
+cockpit, heartbeat, or feature work.
