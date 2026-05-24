@@ -58,7 +58,7 @@
       ],
       "linked_work_item": "BANDIT-016",
       "rationale": "BANDIT-015 exposed a recursive Stage 4 loop: each PM disposition and rerun advanced source heads, so Local Qwen kept treating historical evidence-head divergence as a new blocker after accepting implementation behavior.",
-      "next_action": "Continue BANDIT-016 with RED evidence for Stage 4 evidence-head semantics before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
+      "next_action": "Continue BANDIT-016 with implementation of the Stage 4 evidence-head contract before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

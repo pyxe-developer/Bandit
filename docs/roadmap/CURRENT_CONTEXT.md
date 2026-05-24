@@ -6,26 +6,28 @@
 
 **State:** `BANDIT-016` is active as the bootstrap-gap chore for
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its brief is recorded in
-`docs/work/BANDIT-016/brief.md`, and `.bandit/bootstrap-gaps.json` links the
-gap to `BANDIT-016` as an active chore. RED evidence is the next required
-step. Do not begin production implementation, live escalated-reviewer,
-work-item creation, artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until RED evidence for `BANDIT-016` is
-recorded and the work proceeds through the required stages.
+`docs/work/BANDIT-016/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-016/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
+the gap to `BANDIT-016` as an active chore. Implementation is the next required
+step. Do not begin live escalated-reviewer, work-item creation, artifact
+creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
+Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
+until `BANDIT-016` is implemented, reviewed, landed, retrospectively closed,
+and the gap ledger is dispositioned.
 
 **Last completed milestone:** `BANDIT-015` converted the live CodeRabbit
 bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Create RED evidence for `BANDIT-016` proving the
-current Stage 4 landing-readiness path cannot distinguish accepted
-implementation behavior from recursive disposition-only evidence-head updates,
-while preserving source-drift refusal. Do not begin live escalated-reviewer,
-work-item creation, artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until this active gap is resolved,
+**Current next action:** Implement the narrow Stage 4 evidence-head contract and
+landing-readiness behavior for `BANDIT-016` so the focused RED tests pass:
+terminal disposition-only Stage 4 evidence must stop recursive rerun blockers,
+accepted Local Qwen findings must require concrete PM rationale, and actual
+source drift after review must remain fail-closed. Do not begin live
+escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
+Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
+Cockpit, Phase 9 dogfood, or feature work until this active gap is resolved,
 operator-blocked, or explicitly dispositioned as no-action.
 
 ## Active Work
@@ -44,9 +46,9 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** `docs/work/BANDIT-016/red-evidence.md` with
-focused failing tests for recursive disposition-only evidence-head updates and
-source-drift refusal.
+**Expected next deliverable:** `docs/work/BANDIT-016/implementation-evidence.md`
+with the Stage 4 evidence-head contract, code-path mapping, focused test
+results, clean-code self-check, and preserved source-drift refusal evidence.
 
 ## Known Bootstrap Gaps
 
@@ -155,7 +157,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; create RED evidence next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; implement the Stage 4 evidence-head contract next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -168,8 +170,8 @@ a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define `BANDIT-016` RED
-evidence as the next action.
+None recorded for the next routing step. Repo artifacts define `BANDIT-016`
+implementation as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

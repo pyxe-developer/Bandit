@@ -16,10 +16,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create RED evidence for `BANDIT-016` proving the current
-Stage 4 landing-readiness path cannot distinguish accepted implementation
-behavior from recursive disposition-only evidence-head updates, while
-preserving source-drift refusal.
+**Current next step:** Implement the narrow Stage 4 evidence-head contract and
+landing-readiness behavior for `BANDIT-016` so terminal disposition-only Stage
+4 evidence stops recursive rerun blockers, accepted Local Qwen findings require
+concrete PM rationale, and actual source drift after review remains
+fail-closed.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -54,9 +55,10 @@ operator ended that recursive loop, required it to be captured as follow-up
 chore work after landing, and authorized landing now. `BANDIT-015` has landing
 verdict, landing action, retrospective, gap-ledger disposition, and updated
 context.
-`BANDIT-016` is active as the Stage 4 evidence-head bootstrap-gap chore. Open
-bootstrap gaps remain the work queue and must be addressed one at a time before
-unrelated new work proceeds.
+`BANDIT-016` is active as the Stage 4 evidence-head bootstrap-gap chore. Its
+RED evidence is recorded in `docs/work/BANDIT-016/red-evidence.md`; production
+implementation is the next step. Open bootstrap gaps remain the work queue and
+must be addressed one at a time before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass. `BANDIT-008` repaired Local Qwen reviewer runtime drift away from Qwen Code/Ollama. `BANDIT-009` repaired local Qwen full-packet reliability by preserving structured findings, switching the live harness path to direct local oMLX, fixing review-packet diff-base selection, and recording passing live local Qwen evidence for a real Bandit packet. `BANDIT-010` delivered the escalated adversarial reviewer placeholder contract and routing-aware `land-check` enforcement. `BANDIT-011` delivered bootstrap-gap chore tracking and routing with `.bandit/bootstrap-gaps.json`, default ledger creation during `bandit init`, fail-closed validation, `bandit gaps list`, review evidence, local Qwen review, escalated-review bootstrap disposition, landing verdict, retrospective, and landing action evidence. `BANDIT-012` delivered CLI-owned UAT approval artifacts, `bandit uat approve`, UAT metadata validation, stale-UAT `land-check` enforcement, review evidence, local Qwen review, escalated-review bootstrap disposition, landing verdict, retrospective, and landing action evidence. `BANDIT-013` delivered the auto-landing eligibility policy artifact, validation path, default init state, shared landing-readiness integration, read-only `bandit auto-land-check <work-item-id>` command, review evidence, landing verdict, retrospective, and landing action evidence. `BANDIT-014` delivered the repo-native Landing Agent contract, validation path, local-record `bandit land <work-item-id> --action local-record` command, review evidence, local Qwen review, escalated-review disposition, landing verdict, landing action evidence, retrospective, and gap-ledger resolution. `BANDIT-015` delivered the fixture-backed live CodeRabbit pre-landing evidence path, fail-closed provider refusal evidence, CodeRabbit landing-gate integration, landing verdict, landing action evidence, retrospective, and gap-ledger disposition.
 
@@ -253,7 +255,7 @@ Completed work:
 
 Queued next:
 
-- RED evidence for `BANDIT-016`.
+- Implementation for `BANDIT-016`.
 
 Expected capabilities:
 
