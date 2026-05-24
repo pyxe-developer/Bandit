@@ -2,11 +2,11 @@
 
 ## Status
 
-GREEN implementation complete on 2026-05-24.
+GREEN implementation complete on 2026-05-24 and landed as bootstrap
+implementation commit `17be6d6775f5c8f00b5130f5569c79f97a94751b`.
 
-Next required action: record Stage 4 review evidence, run final verification,
-produce a landing verdict, and then perform the landing action if the verdict is
-`safe-to-land`.
+Stage 4 review evidence, Stage 5 landing verdict, landing action evidence, and
+retrospective closeout are recorded in this work item.
 
 ## Implemented Scope
 
@@ -51,7 +51,7 @@ produce a landing verdict, and then perform the landing action if the verdict is
 | AC13 | Historical manual artifacts without `contract_version:` are skipped by new-contract validation; `validate preserves compatibility for historical work items without new-contract landing artifacts` covers the compatibility path. |
 | AC14 | The implementation keeps repo-native Markdown artifacts and Git head checks as the only authority. No database, generated index, cockpit state, or hidden cache was added. |
 | AC15 | `test/landing-gates.test.mjs` covers success output, missing argument, unknown work item, missing evidence, malformed evidence, missing gates, test bootstrap-gap refusal, explicit review bootstrap gaps, stale evidence, unavailable Git metadata, and historical compatibility. |
-| AC16 | Focused and full GREEN verification passed for implementation. Final `bandit land-check BANDIT-005` remains a Stage 4/5 closeout step after BANDIT-005 review evidence and landing verdict are recorded. |
+| AC16 | Focused and full GREEN verification passed for implementation. `bandit land-check BANDIT-005` passed at landed implementation commit `17be6d6775f5c8f00b5130f5569c79f97a94751b` after review evidence and landing verdict source heads were updated. |
 
 ## Verification
 

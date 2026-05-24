@@ -2,13 +2,14 @@
 
 contract_version: 1
 work_item: BANDIT-005
-source_head: a7e9f090e9d4f81e848ce19730ad581b635cc1f2
+source_head: 17be6d6775f5c8f00b5130f5569c79f97a94751b
 verification_state: pass
 verification_evidence:
   - node --test test/landing-gates.test.mjs: pass, 15/15 tests.
   - npm test: pass, 64/64 tests.
   - npm run typecheck: pass.
   - npm run bandit -- validate: pass.
+  - npm run bandit -- land-check BANDIT-005: pass at landed implementation commit 17be6d6775f5c8f00b5130f5569c79f97a94751b.
   - git diff --check: pass.
 coderabbit_state: bootstrap_gap
 coderabbit_replacement_evidence:
@@ -28,18 +29,19 @@ bootstrap_gaps:
   - CodeRabbit pre-landing loop unavailable; replacement evidence is manual PM review and passing local verification.
   - Local Qwen adversarial review unavailable; replacement evidence is manual adversarial review of failure paths.
   - Escalated adversarial review unavailable; replacement evidence is manual smell-trigger review and focused regression coverage.
-  - Landing Agent unavailable; replacement evidence will be the manual landing verdict and land-check output.
+  - Landing Agent unavailable; replacement evidence is the manual landing verdict and land-check output.
   - UAT artifacts unavailable until Phase 5 and not applicable to this workflow-infrastructure slice.
-  - Direct-main bootstrap source state is recorded by Git HEAD plus manual dirty-diff review until PR or committed-source evidence exists.
+  - Direct-main bootstrap source state is recorded by landed implementation commit 17be6d6775f5c8f00b5130f5569c79f97a94751b plus closeout landing-action evidence.
 
 ## Scope
 
 This evidence covers Stage 4: Review And Cross-Model Gates for `BANDIT-005`
 Pre-Landing Review Loop.
 
-The review applies to the current working-tree diff for `BANDIT-005`, including
-the review repair that prevents `safe-to-land` when tests or verification are
-recorded as `bootstrap_gap`.
+The review applies to the `BANDIT-005` implementation that landed as commit
+`17be6d6775f5c8f00b5130f5569c79f97a94751b`, including the review repair that
+prevents `safe-to-land` when tests or verification are recorded as
+`bootstrap_gap`.
 
 ## PM Review Findings
 
@@ -76,8 +78,8 @@ recorded as `bootstrap_gap`.
 | Stage 2: Test Design And RED Evidence | `pass` | `red-evidence.md` records the initial RED suite and acceptance-criteria mapping. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `implementation-evidence.md` records GREEN implementation scope, acceptance-criteria coverage, verification, and clean-code self-check. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Manual PM review passed, and unavailable CodeRabbit, Qwen, escalated review, and Landing Agent gates are recorded as bootstrap gaps with replacement evidence. |
-| Stage 5: Landing And UAT | `pass` | `landing-verdict.md` records the safe-to-land bootstrap verdict. UAT is `not_applicable` because this is workflow infrastructure. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective remains a required next closeout artifact before `BANDIT-005` is complete. |
+| Stage 5: Landing And UAT | `pass` | `landing-verdict.md` records the safe-to-land bootstrap verdict, and `landing-action.md` records landed implementation commit `17be6d6775f5c8f00b5130f5569c79f97a94751b`. UAT is `not_applicable` because this is workflow infrastructure. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `retrospective.md` records lessons and dispositions; no new improvement chore is required. |
 
 ## Stage 4 Verdict
 

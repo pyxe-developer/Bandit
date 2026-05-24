@@ -2,9 +2,9 @@
 
 ## Status
 
-Brief created. RED evidence, GREEN implementation evidence, review evidence,
-and a safe-to-land landing verdict have been created. Retrospective and landing
-action remain pending.
+BANDIT-005 landed as bootstrap implementation commit
+`17be6d6775f5c8f00b5130f5569c79f97a94751b`; landing action evidence and
+retrospective are recorded.
 
 ## Goal
 
@@ -189,8 +189,8 @@ Before landing, Codex PM must evaluate:
 | Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-005/red-evidence.md` records the initial 14 focused RED tests, accepted RED failures before implementation, acceptance-criteria mapping, and Test Writer-owned assertions. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-005/implementation-evidence.md` records GREEN implementation scope, acceptance-criteria coverage, focused/full verification, and clean-code self-check. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Final CodeRabbit, Qwen, escalated adversarial review, and Landing Agent gates are still unavailable during bootstrap; this slice exists to make those gaps explicit and checkable. |
-| Stage 5: Landing And UAT | `not_applicable` | Landing has not started. UAT approval artifacts are Phase 5 and are not implemented in this slice. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before landing but has not started. |
+| Stage 5: Landing And UAT | `pass` | `docs/work/BANDIT-005/landing-verdict.md` records a safe-to-land bootstrap verdict, and `docs/work/BANDIT-005/landing-action.md` records landed implementation commit `17be6d6775f5c8f00b5130f5569c79f97a94751b`. UAT is `not_applicable` because this is workflow infrastructure. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `docs/work/BANDIT-005/retrospective.md` records lessons and dispositions; no new improvement chore is required. |
 
 ## Bootstrap Gaps
 
