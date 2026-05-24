@@ -28,3 +28,11 @@ but are not the current active Bandit work queue.
 - **Follow-up question:** When the current bootstrap-gap lane is exhausted, resolved, blocked, or explicitly dispositioned, what is the first implementation slice for the per-work-item coordination log and shared core state machine?
 - **Why later:** Starting it now would violate the one-gap-at-a-time queue discipline Bandit is trying to enforce.
 - **Expected evaluation point:** After the queued bootstrap gaps in `docs/roadmap/CURRENT_CONTEXT.md` are resolved, blocked, or explicitly dispositioned.
+
+### Move From Local Main Landing To PR And CI/CD Workflow
+
+- **Origin:** GitHub remote setup and workflow discussion on 2026-05-24.
+- **Current decision:** Until bootstrap is complete, the operator will handle pushing to GitHub manually. Bandit's Landing Agent remains scoped to local-record landing evidence and does not perform remote push, PR merge, deploy, or CI/CD orchestration.
+- **Follow-up question:** After bootstrap is complete, how should Bandit define remote publication, GitHub PR workflow, CI checks, merge evidence, and deployment evidence?
+- **Why later:** `.bandit/policy/landing-agent.json` currently disables push/merge/deploy behavior intentionally. Adding real GitHub CI/CD and PR-based landing needs its own policy, credentials, branch protection, review, and evidence contracts.
+- **Expected evaluation point:** After the bootstrap-gap lane is complete and before Bandit replaces local-main landing with a real PR-based GitHub workflow.
