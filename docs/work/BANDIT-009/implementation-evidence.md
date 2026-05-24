@@ -15,6 +15,9 @@ review output instead of inconclusive output.
   - Preserves optional reviewer `confidence` in executable evidence.
   - Formats object findings into a readable disposition while keeping the full
     structured finding available for evidence.
+  - Uses the previous slice landing head as the review diff base when present,
+    including bootstrap landing records that use `Final implementation source
+    head`, so evidence-only commits do not hide the implementation diff.
   - Continues to fail closed for malformed findings, pass verdicts with
     findings, unsupported verdicts, empty envelopes, and malformed JSON.
 - `src/state/local-qwen-review.ts`
@@ -44,6 +47,8 @@ review output instead of inconclusive output.
     structured blocker finding.
   - Adds RED/GREEN coverage for the direct local OpenAI-compatible command path
     with a fixture server.
+  - Adds coverage that `qwen-review` uses a previous bootstrap final
+    implementation source head as the diff base.
   - Retains malformed object-finding fail-closed coverage by requiring
     structured findings to include `issue`.
 
@@ -74,12 +79,13 @@ review output instead of inconclusive output.
 
 | Command | Result |
 |---|---|
-| `node --test test/local-qwen-review.test.mjs` | `pass` - 32/32 tests passed before the test-name cleanup; rerun required after this evidence update. |
-| `npm test` | `pass` - 107/107 tests passed before the test-name cleanup; rerun required after this evidence update. |
+| `node --test test/local-qwen-review.test.mjs` | `pass` - 33/33 tests passed. |
+| `npm test` | `pass` - 107/107 tests passed before the diff-base repair; rerun required before landing. |
 | `npm run typecheck` | `pass`. |
 | `npm run bandit -- validate` | `pass` - `Bandit state is valid.` |
 | `git diff --check` | `pass`. |
 | `npm run bandit -- qwen-review BANDIT-009` at `a5219efc6170bb8839bde5d59adbaea81f04786a` | `non_blocking` - direct oMLX returned structured findings and wrote `docs/work/BANDIT-009/local-qwen-review.md`. |
+| `npm run bandit -- qwen-review BANDIT-009` at `69e1d36524bb2e9586990ad0a4d15b39ba8d7bb6` | `blocker` - direct oMLX correctly returned structured blocker findings showing the review packet omitted the full implementation diff after evidence-only commits. |
 
 ## Clean-Code Self-Check
 
@@ -98,6 +104,6 @@ review output instead of inconclusive output.
 
 ## Remaining Live Verification
 
-Rerun focused/full verification and `npm run bandit -- qwen-review BANDIT-009`
-after this evidence update is committed so review evidence applies to the final
+Rerun full verification and `npm run bandit -- qwen-review BANDIT-009` after
+this diff-base repair is committed so review evidence applies to the final
 landing head.

@@ -497,6 +497,47 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
   assert.match(result.stdout, /Local Qwen review: pass/);
 });
 
+test("qwen-review uses the previous final implementation source head as the diff base", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        command: {
+          executable: process.execPath,
+          args: ["qwen-fixture.mjs", "{{prompt}}"]
+        }
+      }
+    }
+  });
+  await initGitRepo(repo);
+  await writeWorkBrief(repo, "BANDIT-972", "Previous Final Head Diff");
+  await writeWorkBrief(repo, "BANDIT-971", "Previous Slice");
+  const previousHead = await commitAll(repo, "Previous implementation head");
+  await writeBootstrapLandingAction(repo, "BANDIT-971", previousHead);
+  await writeFile(path.join(repo, "implementation.txt"), "implementation change\n", "utf8");
+  await commitAll(repo, "Current implementation source");
+  await writeFile(
+    path.join(repo, "docs/work/BANDIT-972/red-evidence.md"),
+    "# RED Evidence\n\nEvidence update after implementation.\n",
+    "utf8"
+  );
+  await commitAll(repo, "Evidence update after implementation");
+  await writeReviewerFixture(
+    repo,
+    [
+      "const prompt = process.argv[2] ?? '';",
+      "if (!prompt.includes('Source diff range: " + previousHead + "..HEAD')) process.exit(10);",
+      "if (!prompt.includes('implementation change')) process.exit(11);",
+      "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Used previous final head' }));"
+    ].join("\n")
+  );
+  await commitAll(repo, "Reviewer fixture");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-972"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Local Qwen review: pass/);
+});
+
 test("qwen-review can send the review prompt over stdin for long reviewer packets", async () => {
   const repo = await createInitializedRepo({
     profileOptions: {
@@ -891,6 +932,21 @@ async function writeLandingAction(repo, workItemId, commitSha) {
 | Field | Value |
 |---|---|
 | Landed commit | \`${commitSha}\` |
+`,
+    "utf8"
+  );
+}
+
+async function writeBootstrapLandingAction(repo, workItemId, commitSha) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "landing-action.md"),
+    `# ${workItemId} Landing Action
+
+| Field | Value |
+|---|---|
+| Final implementation source head | \`${commitSha}\` |
 `,
     "utf8"
   );

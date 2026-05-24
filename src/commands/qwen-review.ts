@@ -261,7 +261,7 @@ async function readReviewPacket(repoRoot: string, workItemId: string) {
     `docs/work/${workItemId}/red-evidence.md`
   );
   const previousLandingHead = await readPreviousLandingHead(repoRoot, workItemId);
-  const sourceDiffBase = redEvidenceHead ?? previousLandingHead;
+  const sourceDiffBase = previousLandingHead ?? redEvidenceHead;
   const sourceDiff = sourceDiffBase
     ? await readGitDiff(repoRoot, sourceDiffBase)
     : await readGitShow(repoRoot);
@@ -320,7 +320,9 @@ async function readPreviousLandingHead(repoRoot: string, workItemId: string) {
   const landingAction = await readOptionalText(
     path.join(repoRoot, "docs/work", previousWorkItem, "landing-action.md")
   );
-  const landedCommit = landingAction?.match(/\|\s*Landed commit\s*\|\s*`([0-9a-f]{7,40})`\s*\|/i);
+  const landedCommit = landingAction?.match(
+    /\|\s*(?:Landed commit|Final implementation source head)\s*\|\s*`([0-9a-f]{7,40})`\s*\|/i
+  );
 
   return landedCommit?.[1] ?? null;
 }
