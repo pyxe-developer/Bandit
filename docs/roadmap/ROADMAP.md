@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Implement `BANDIT-007` GREEN from the active CodeRabbit state capture brief and RED evidence.
+**Current next step:** Create the next Phase 4 bootstrap work item for the escalated adversarial reviewer placeholder after confirming `BANDIT-007` closeout is committed.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. The live local 35B Qwen review timed out and is recorded as a bootstrap gap, not a pass. `BANDIT-007` has an active brief and RED evidence for the CodeRabbit state capture gate; production implementation has not started.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. The live local 35B Qwen review timed out and is recorded as a bootstrap gap, not a pass. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass.
 
 ## Phase Map
 
@@ -160,17 +160,17 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- `BANDIT-007` - CodeRabbit State Capture.
-- Next step: implement the GREEN path from `docs/work/BANDIT-007/brief.md` and `docs/work/BANDIT-007/red-evidence.md`.
+- none.
+- Next step: create the `BANDIT-008` brief for the escalated adversarial reviewer placeholder after confirming `BANDIT-007` closeout is committed.
 
 Expected capabilities:
 
 - Pre-landing review loop artifact. Complete in `BANDIT-005`.
 - Landing Verdict. Complete in `BANDIT-005`.
 - stale review/source-drift checks. Complete in `BANDIT-005`.
-- CodeRabbit state capture. Active as `BANDIT-007`; brief and RED evidence are complete, GREEN implementation is next.
+- CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate substrate; live CodeRabbit polling remains an explicit bootstrap gap.
 - Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; live local model timeout remains an explicit bootstrap gap.
-- Escalation reviewer placeholder.
+- Escalation reviewer placeholder. Next Phase 4 gap.
 
 Exit criteria:
 
@@ -180,6 +180,7 @@ Completed work:
 
 - `BANDIT-005` - Pre-Landing Review Loop.
 - `BANDIT-006` - Local Qwen Baseline Reviewer Gate.
+- `BANDIT-007` - CodeRabbit State Capture.
 
 ## Phase 5: UAT And Auto-Landing
 
