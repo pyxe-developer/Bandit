@@ -17,11 +17,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
 **Current next step:** Triage the latest Local Qwen blocker findings for
-`BANDIT-015`, repair or explicitly disposition the Stage 4 evidence-head
-mismatch, and rerun Local Qwen at the repaired head before continuing the
-remaining landing-gate closeout sequence. `BANDIT-014` resolved the Landing Agent
-bootstrap gap by adding a
-repo-native contract, validation path, and local-record landing command.
+`BANDIT-015`, repair or explicitly disposition the self-referential Stage 4
+rerun/evidence-head freshness loop, and rerun Local Qwen at the repaired head
+before continuing the remaining landing-gate closeout sequence. `BANDIT-014`
+resolved the Landing Agent bootstrap gap by adding a repo-native contract,
+validation path, and local-record landing command.
 `BANDIT-015` is now active for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -44,7 +44,14 @@ which is now recorded as the bootstrap-limited escalated-review disposition.
 Local Qwen was rerun at escalated-review disposition head
 `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a` and returned another `blocker`
 verdict, now focused on procedural Stage 4 rerun state and stale or mismatched
-source heads between local Qwen and CodeRabbit evidence.
+source heads between local Qwen and CodeRabbit evidence. Codex PM triaged that
+blocker in `docs/work/BANDIT-015/qwen-evidence-head-disposition.md`, refreshed
+CodeRabbit evidence at source head
+`c584fe3b06692632723aedad2f1f9d69db607602`, and committed the disposition at
+`9248f34b104bc45eed91fb752a49eb0de987e470`. Local Qwen was rerun at that
+evidence-head-disposition head and returned another `blocker` verdict: the
+implementation behavior is accepted, but Stage 4 remains blocked on
+self-referential rerun wording and divergent artifact source heads.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -241,8 +248,9 @@ Completed work:
 Queued next:
 
 - Triage the latest Local Qwen blocker findings for `BANDIT-015`, repair or
-  explicitly disposition the Stage 4 evidence-head mismatch, and rerun Local
-  Qwen at the repaired head before remaining landing-gate closeout.
+  explicitly disposition the self-referential Stage 4 rerun/evidence-head
+  freshness loop, and rerun Local Qwen at the repaired head before remaining
+  landing-gate closeout.
 
 Expected capabilities:
 
@@ -284,8 +292,14 @@ Current rule:
   which is now recorded as the bootstrap-limited escalated-review disposition.
   Local Qwen rerun at escalated-review disposition head
   `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a` returned another `blocker`
-  verdict; triage the latest findings and repair or explicitly disposition the
-  evidence-head mismatch before landing-gate closeout.
+  verdict; Codex PM triaged that blocker in
+  `docs/work/BANDIT-015/qwen-evidence-head-disposition.md` and refreshed
+  CodeRabbit evidence at source head
+  `c584fe3b06692632723aedad2f1f9d69db607602`. Local Qwen rerun at
+  evidence-head-disposition head `9248f34b104bc45eed91fb752a49eb0de987e470`
+  returned another `blocker` verdict; triage the latest findings and repair or
+  explicitly disposition the self-referential Stage 4 rerun/evidence-head
+  freshness loop before landing-gate closeout.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -297,7 +311,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; triage the latest Local Qwen blocker findings, repair or explicitly disposition the evidence-head mismatch, and rerun Local Qwen at the repaired head next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; triage the latest Local Qwen blocker findings, repair or explicitly disposition the self-referential Stage 4 rerun/evidence-head freshness loop, and rerun Local Qwen at the repaired head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

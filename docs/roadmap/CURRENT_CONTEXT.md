@@ -30,15 +30,24 @@ bootstrap-limited escalated-review disposition. Local Qwen was rerun at
 escalated-review disposition head `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a`
 and returned another `blocker` verdict: it still reports procedural Stage 4
 rerun blockage and flags stale or mismatched source heads between local Qwen
-and CodeRabbit evidence.
+and CodeRabbit evidence. Codex PM triaged that blocker in
+`docs/work/BANDIT-015/qwen-evidence-head-disposition.md`, refreshed CodeRabbit
+evidence at source head `c584fe3b06692632723aedad2f1f9d69db607602`, and
+committed the disposition at `9248f34b104bc45eed91fb752a49eb0de987e470`.
+Local Qwen was rerun at that evidence-head-disposition head and returned
+another `blocker` verdict: it accepts the implementation behavior but still
+reports the Stage 4 rerun as pending because the brief/review evidence have not
+yet been advanced past the pre-rerun wording and artifact source heads remain
+divergent by process.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
 **Current next action:** Triage the latest Local Qwen blocker findings from
-`docs/work/BANDIT-015/local-qwen-review.md`, repair or explicitly disposition
-the Stage 4 evidence-head mismatch, and then rerun
+`docs/work/BANDIT-015/local-qwen-review.md` at source head
+`9248f34b104bc45eed91fb752a49eb0de987e470`, repair or explicitly disposition
+the self-referential Stage 4 rerun/evidence-head freshness loop, and then rerun
 `npm run bandit -- qwen-review BANDIT-015` at the repaired head. Do not write
 the landing verdict, landing action, retrospective, gap-ledger disposition, or
 final context updates until the Stage 4 blocker state is cleared, repaired, or
@@ -111,8 +120,14 @@ another `blocker` verdict; its findings are triaged in
 blocker was the missing `docs/work/BANDIT-015/escalated-review.md` artifact,
 which is now recorded. Local Qwen rerun at escalated-review disposition head
 `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a` returned a new `blocker` verdict;
-triage the latest findings and repair or explicitly disposition the evidence
-head mismatch next.
+Codex PM triaged that blocker in
+`docs/work/BANDIT-015/qwen-evidence-head-disposition.md` and refreshed
+CodeRabbit evidence at source head
+`c584fe3b06692632723aedad2f1f9d69db607602`. Local Qwen rerun at
+evidence-head-disposition head `9248f34b104bc45eed91fb752a49eb0de987e470`
+returned another `blocker` verdict; triage the latest findings and repair or
+explicitly disposition the self-referential Stage 4 rerun/evidence-head
+freshness loop next.
 
 ## Context Guardrails
 
@@ -166,7 +181,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; triage the latest Local Qwen blocker findings, repair or explicitly disposition the evidence-head mismatch, and rerun Local Qwen at the repaired head next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; triage the latest Local Qwen blocker findings, repair or explicitly disposition the self-referential Stage 4 rerun/evidence-head freshness loop, and rerun Local Qwen at the repaired head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
