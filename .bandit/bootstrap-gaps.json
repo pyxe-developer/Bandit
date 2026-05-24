@@ -71,8 +71,8 @@
     {
       "id": "BANDIT-GAP-UAT-ARTIFACT",
       "title": "No CLI-owned UAT artifact exists yet",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/ROADMAP.md",
@@ -80,9 +80,9 @@
         "docs/work/BANDIT-012/brief.md"
       ],
       "linked_work_item": "BANDIT-012",
-      "rationale": "UAT is the next Phase 5 capability after bootstrap-gap tracking lands.",
+      "rationale": "BANDIT-012 created the CLI-owned UAT approval artifact, validation path, uat approve command, and stale-UAT land-check enforcement.",
       "verification_target": "docs/work/BANDIT-012/landing-action.md",
-      "next_action": "Complete BANDIT-012 to add CLI-owned UAT approval artifacts and stale-UAT detection."
+      "next_action": "Use bandit uat approve and land-check UAT freshness checks for future feature-slice landing gates."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",

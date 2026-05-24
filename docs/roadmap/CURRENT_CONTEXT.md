@@ -4,23 +4,20 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-012` is the active Phase 5 work item. Its brief defines the
-CLI-owned UAT approval artifact and stale-UAT detection contract. RED evidence
-is recorded in `docs/work/BANDIT-012/red-evidence.md`, and implementation
-evidence is recorded in `docs/work/BANDIT-012/implementation-evidence.md`.
+**State:** `BANDIT-012` is landed. It delivered the CLI-owned UAT approval
+artifact, `bandit uat approve`, validation for UAT approval metadata, and
+stale-UAT detection in `bandit land-check`.
 
-**Last completed milestone:** `BANDIT-011` converted bootstrap gaps from
-passive prose into CLI-visible repo-native state.
+**Last completed milestone:** `BANDIT-012` converted the UAT approval artifact
+bootstrap gap into CLI-owned repo-native state.
 
-**Current next action:** Complete `BANDIT-012` closeout: record review evidence,
-run local Qwen review when the worktree is clean enough for source-head
-evidence, record escalated-review disposition, landing verdict, retrospective,
-and landing action evidence before starting another work item.
+**Current next action:** Create the next Phase 5 work item for auto-landing
+eligibility policy for chores and UAT-approved feature slices. Do not begin
+implementation until the new work item brief and RED evidence are recorded.
 
 ## Active Work
 
-**Active work item:** `BANDIT-012` - CLI-Owned UAT Approval Artifact And
-Stale-UAT Detection.
+**Active work item:** none.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -29,9 +26,11 @@ Catalog; `BANDIT-005` - Pre-Landing Review Loop; `BANDIT-006` - Local Qwen
 Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair; `BANDIT-009` - Local Qwen Full-Packet
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
-`BANDIT-011` - Bootstrap Gap Chore Tracking And Routing.
+`BANDIT-011` - Bootstrap Gap Chore Tracking And Routing; `BANDIT-012` -
+CLI-Owned UAT Approval Artifact And Stale-UAT Detection.
 
-**Expected next deliverable:** Closeout evidence for `BANDIT-012`.
+**Expected next deliverable:** Brief and RED evidence for the next Phase 5
+auto-landing eligibility work item.
 
 ## Known Bootstrap Gaps
 
@@ -50,7 +49,8 @@ These are expected because Bandit does not exist yet:
   routing remains unavailable.
 - No Landing Agent.
 - No general artifact creation command outside explicit PRD draft-work.
-- No UAT artifact. This is now the active `BANDIT-012` bootstrap-gap chore.
+- CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
+  landed in `BANDIT-012`.
 - No heartbeat chore-agent.
 - No cockpit.
 
@@ -90,19 +90,19 @@ placeholder set.
 Future cold starts should use `bandit gaps list` and `bandit validate` when
 checking whether bootstrap gaps are active, queued, resolved, or blocked.
 
-`BANDIT-012` starts Phase 5 by defining the CLI-owned UAT approval artifact and
-stale-UAT detection path. RED evidence existed for the missing UAT artifact,
-validation, command, and `land-check` integration; implementation evidence now
-records the narrow UAT artifact contract, validator, `uat approve` command,
-stale-source detection, and landing-gate integration. Do not build final
-auto-merge behavior, workflow cockpit, SQLite indexing, live CodeRabbit/GitHub
-polling, paid-model reviewer routing, heartbeat chore-agent behavior, or broad
-Landing Agent behavior in this item.
+`BANDIT-012` completed the first Phase 5 capability: CLI-owned UAT approval
+artifacts and stale-UAT detection. The next Phase 5 step is an auto-landing
+eligibility policy work item for chores and UAT-approved feature slices. Keep
+that next item narrow: policy state, eligibility reporting or checks, and tests.
+Do not build workflow cockpit, SQLite indexing, live CodeRabbit/GitHub polling,
+paid-model reviewer routing, heartbeat chore-agent behavior, or broad
+production Landing Agent behavior unless the new brief explicitly scopes that
+substrate.
 
 ## Required Operator Input
 
-None before RED evidence or implementation for `BANDIT-012`. Repo artifacts
-define the routing decision.
+None before the next Phase 5 brief and RED evidence. Repo artifacts define the
+routing decision.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
