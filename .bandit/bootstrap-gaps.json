@@ -17,17 +17,17 @@
     {
       "id": "BANDIT-GAP-BOOTSTRAP-GAP-TRACKING",
       "title": "Bootstrap gaps need repo-native tracking and validation",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/work/BANDIT-011/brief.md"
       ],
       "linked_work_item": "BANDIT-011",
-      "rationale": "This active chore creates the gap ledger, validation path, and list command.",
-      "verification_target": "docs/work/BANDIT-011/implementation-evidence.md",
-      "next_action": "Complete and land BANDIT-011 before unrelated Phase 5 work begins."
+      "rationale": "BANDIT-011 created the gap ledger, validation path, default init ledger, and list command.",
+      "verification_target": "docs/work/BANDIT-011/landing-action.md",
+      "next_action": "Use bandit validate and bandit gaps list during cold starts, closeout, and future bootstrap-gap routing."
     },
     {
       "id": "BANDIT-GAP-LIVE-CODERABBIT",
