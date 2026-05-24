@@ -16,6 +16,7 @@ verification_evidence:
   - npm run bandit -- qwen-review BANDIT-015 completed at PM disposition head 068c4482ba156a158abd92faba2fcee2841f2288 and recorded docs/work/BANDIT-015/local-qwen-review.md with a blocker reviewer verdict.
   - Codex PM triaged the blocker findings in docs/work/BANDIT-015/qwen-blocker-disposition.md.
   - npm run bandit -- qwen-review BANDIT-015 completed at blocker-disposition head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 and recorded docs/work/BANDIT-015/local-qwen-review.md with a blocker reviewer verdict.
+  - Codex PM triaged the latest blocker findings in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md.
 coderabbit_state: pass
 coderabbit_replacement_evidence:
   - not_applicable
@@ -26,7 +27,7 @@ local_qwen_replacement_evidence:
   - The prior Local Qwen blocker findings are triaged and dispositioned in docs/work/BANDIT-015/qwen-blocker-disposition.md.
   - The aggregate review-evidence mismatch is repaired: this artifact records local_qwen_state as blocker until the next Local Qwen rerun clears or replaces the blocker state.
   - The redactSecrets substring over-redaction hardening concern is an explicit no-action decision for BANDIT-015 because conservative over-redaction is safer than fail-open exact-match redaction for untrusted provider diagnostics.
-  - The latest Local Qwen blocker findings from source head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 require PM triage/disposition before escalated-review disposition and landing verdict.
+  - The latest Local Qwen blocker findings from source head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 are triaged in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md; the pending-rerun finding is repaired, and the missing escalated-review artifact remains a blocker.
 escalated_review_required: true
 escalated_review_state: blocker
 escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Escalated-review disposition remains required after local Qwen review.

@@ -36,8 +36,9 @@ PM disposition head `068c4482ba156a158abd92faba2fcee2841f2288` and returned a
 triage of those blocker findings is recorded in
 `docs/work/BANDIT-015/qwen-blocker-disposition.md`. Local Qwen was rerun at
 blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96` and
-returned another `blocker` verdict, so the latest findings need Codex PM
-triage/disposition next.
+returned another `blocker` verdict. Codex PM triage is recorded in
+`docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
+blocker is the missing `docs/work/BANDIT-015/escalated-review.md` artifact.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -233,8 +234,8 @@ Completed work:
 
 Queued next:
 
-- Triage and repair or explicitly disposition the latest Local Qwen blocker
-  findings for `BANDIT-015` - Live CodeRabbit Pre-Landing Loop before remaining
+- Create `docs/work/BANDIT-015/escalated-review.md` for `BANDIT-015` - Live
+  CodeRabbit Pre-Landing Loop, then rerun Local Qwen before remaining
   landing-gate closeout.
 
 Expected capabilities:
@@ -271,8 +272,9 @@ Current rule:
   returned a `blocker` verdict; its findings are triaged in
   `docs/work/BANDIT-015/qwen-blocker-disposition.md`. The Local Qwen rerun at
   blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96`
-  returned another `blocker` verdict, and those latest findings must be
-  triaged before remaining landing-gate closeout.
+  returned another `blocker` verdict. Codex PM triage is recorded in
+  `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
+  blocker is the missing `docs/work/BANDIT-015/escalated-review.md` artifact.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -284,7 +286,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; PM triage/disposition of the latest Local Qwen blocker findings next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; create escalated-review disposition and rerun Local Qwen next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
