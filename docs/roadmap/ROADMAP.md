@@ -16,17 +16,19 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Disposition the `BANDIT-016` Local Qwen `non_blocking`
-findings and decide the narrow repair/rerun route from repo evidence. Local
-Qwen and aggregate review evidence are now recorded for `BANDIT-016`; the
-aggregate evidence records Codex PM no-action rationale for this chore, but
-`land-check` still requires a passing Local Qwen reviewer verdict before
-landing. Full verification passed, fixture-backed live CodeRabbit pass evidence
-is recorded, and the escalated-review bootstrap disposition is recorded for the
-implemented evidence-head contract. The narrow landing-readiness implementation
-now lets terminal disposition-only Stage 4 evidence stop recursive rerun
-blockers, requires concrete PM rationale for accepted Local Qwen findings, and
-preserves fail-closed source drift after review.
+**Current next step:** Repair or harden the disposition path for the
+`BANDIT-016` Local Qwen `non_blocking` findings, then rerun Local Qwen from a
+clean worktree. Local Qwen and aggregate review evidence are recorded for
+`BANDIT-016`; Codex PM no-action rationale was recorded, but a clean-worktree
+Local Qwen rerun at `3f86839bbe1450364679a1508602fea83a80537e` preserved the
+same two findings. `land-check` still requires a passing Local Qwen reviewer
+verdict before a `safe-to-land` landing verdict can be valid. Full verification
+passed, fixture-backed live CodeRabbit pass evidence is recorded, and the
+escalated-review bootstrap disposition is recorded for the implemented
+evidence-head contract. The narrow landing-readiness implementation now lets
+terminal disposition-only Stage 4 evidence stop recursive rerun blockers,
+requires concrete PM rationale for accepted Local Qwen findings, and preserves
+fail-closed source drift after review.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -70,7 +72,8 @@ bootstrap disposition is recorded in
 `docs/work/BANDIT-016/escalated-review.md`, Local Qwen evidence is recorded in
 `docs/work/BANDIT-016/local-qwen-review.md`, and aggregate review evidence is
 recorded in `docs/work/BANDIT-016/review-evidence.md`. The next step is
-disposition and repair/rerun routing for the Local Qwen `non_blocking` findings.
+targeted repair or disposition hardening for the persistent Local Qwen
+`non_blocking` findings.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -323,7 +326,8 @@ Current rule:
   verdict, landing action evidence, retrospective closeout, and resolved
   gap-ledger disposition.
 - `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is active as `BANDIT-016`; its
-  brief is recorded and RED evidence is next.
+  review rerun still reports persistent Local Qwen non-blocking findings, so
+  targeted repair or disposition hardening is next.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -336,7 +340,7 @@ Current rule:
 
 Current priority after `BANDIT-015` lands:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; create RED evidence next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; repair persistent Local Qwen non-blocking findings and rerun Local Qwen next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
