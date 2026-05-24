@@ -165,6 +165,8 @@ test("committed local Qwen baseline profile uses the spike-backed Mastra Code oM
   assert.equal(profile.provider_base_url, "http://127.0.0.1:8000/v1");
   assert.equal(profile.command.executable, "mastracode");
   assert.deepEqual(profile.command.args, [
+    "--settings",
+    ".bandit/reviewers/mastracode-local-qwen.settings.json",
     "--model",
     "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
     "--output-format",
@@ -176,6 +178,28 @@ test("committed local Qwen baseline profile uses the spike-backed Mastra Code oM
     "--prompt",
     "{{prompt_stdin}}"
   ]);
+});
+
+test("committed Mastra Code settings keep local Qwen review off the Google-key OM path", async () => {
+  const settings = JSON.parse(
+    await readFile(
+      path.join(repoRoot, ".bandit/reviewers/mastracode-local-qwen.settings.json"),
+      "utf8"
+    )
+  );
+
+  assert.deepEqual(settings.customProviders, [
+    {
+      name: "OMLX Local",
+      url: "http://127.0.0.1:8000/v1",
+      apiKey: "local",
+      models: ["Qwen3.6-35B-A3B-MLX-8bit"]
+    }
+  ]);
+  assert.equal(settings.models.omObservationThreshold, 1000000);
+  assert.equal(settings.models.omReflectionThreshold, 1000000);
+  assert.doesNotMatch(JSON.stringify(settings), /google\/gemini-2\.5-flash/);
+  assert.doesNotMatch(JSON.stringify(settings), /GOOGLE_GENERATIVE_AI_API_KEY/);
 });
 
 test("validate fails closed when local Qwen evidence references the wrong work item", async () => {

@@ -50,6 +50,8 @@ const REQUIRED_FIELDS = [
 const EXPECTED_PROVIDER = "mastra-code";
 const EXPECTED_PROVIDER_BASE_URL = "http://127.0.0.1:8000/v1";
 const EXPECTED_MODEL = "omlx-local/Qwen3.6-35B-A3B-MLX-8bit";
+const EXPECTED_MASTRACODE_SETTINGS_PATH =
+  ".bandit/reviewers/mastracode-local-qwen.settings.json";
 const DISALLOWED_OLLAMA_ENDPOINTS = [
   "http://localhost:11434/v1",
   "http://127.0.0.1:11434/v1"
@@ -204,6 +206,19 @@ function rejectDriftedQwenCodeRoute(executable: string, args: string[]) {
 
   if (!args.some((arg) => arg.includes("{{prompt}}") || arg === "{{prompt_stdin}}")) {
     throw new Error("Local Qwen profile command must include a prompt placeholder");
+  }
+
+  if (path.basename(executable) === "mastracode") {
+    requireMastraCodeArgument(args, "--settings", EXPECTED_MASTRACODE_SETTINGS_PATH);
+    requireMastraCodeArgument(args, "--model", EXPECTED_MODEL);
+    requireMastraCodeArgument(args, "--output-format", "json");
+  }
+}
+
+function requireMastraCodeArgument(args: string[], flag: string, expectedValue: string) {
+  const flagIndex = args.indexOf(flag);
+  if (flagIndex < 0 || args[flagIndex + 1] !== expectedValue) {
+    throw new Error(`Local Qwen Mastra Code command must include ${flag} ${expectedValue}`);
   }
 }
 

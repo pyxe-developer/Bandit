@@ -65,6 +65,9 @@ is the expected faster local endpoint.
    omlx-local/Qwen3.6-35B-A3B-MLX-8bit`, `--output-format json`, and an
    explicit prompt placeholder. The implementation may pass Bandit's long
    review packet through stdin when the profile uses `{{prompt_stdin}}`.
+   The committed Mastra Code command must use a repo-native settings file that
+   keeps the review on the local oMLX provider and does not require
+   `GOOGLE_GENERATIVE_AI_API_KEY`.
 7. `bandit validate` fails closed when a local Qwen profile uses the drifted
    Qwen Code CLI route.
 8. `bandit validate` fails closed when a Mastra Code profile omits provider
@@ -123,6 +126,7 @@ parsing, and preserved role boundaries.
 ## Expected Files
 
 - `.bandit/reviewers/local-qwen.json`
+- `.bandit/reviewers/mastracode-local-qwen.settings.json`
 - `src/state/reviewer-profiles.ts`
 - `test/local-qwen-review.test.mjs`
 - `docs/work/BANDIT-008/red-evidence.md`
