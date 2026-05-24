@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 2 - Work Artifacts.
 
-**Current next step:** Create RED evidence and test design for `BANDIT-002`: Work Artifact Templates And Validation.
+**Current next step:** Create the `BANDIT-003` brief for a PRD-to-work draft command.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` has a brief and is ready for RED evidence.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. Phase 2 still needs a PRD-to-work draft command before exit criteria are satisfied.
 
 ## Phase Map
 
@@ -102,16 +102,20 @@ Goal: Make work visible and structured.
 
 Active work:
 
+- none.
+- Next step: create `BANDIT-003` brief for a PRD-to-work draft command.
+
+Completed work:
+
 - `BANDIT-002` - Work Artifact Templates And Validation.
-- Next step: create RED evidence and test design before production implementation.
 
 Expected capabilities:
 
-- Feature PRD template.
-- Slice template.
-- Chore template.
-- Retrospective-derived chore metadata.
-- PRD-to-work draft command.
+- Feature PRD template. Complete in `BANDIT-002`.
+- Slice template. Complete in `BANDIT-002`.
+- Chore template. Complete in `BANDIT-002`.
+- Retrospective-derived chore metadata. Complete in `BANDIT-002`.
+- PRD-to-work draft command. Remaining.
 
 Exit criteria:
 

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { validateConfig } from "../state/config.js";
 import { validateEventLog } from "../state/events.js";
 import { getBanditPaths } from "../state/paths.js";
+import { validateTemplates } from "../state/templates.js";
 import { validateWorkItems } from "../state/work-items.js";
 
 export async function validateBandit(repoRoot: string) {
@@ -13,6 +14,7 @@ export async function validateBandit(repoRoot: string) {
   validateEventLog(eventLog);
 
   await validateWorkItems(repoRoot);
+  await validateTemplates(repoRoot);
 
   return { message: "Bandit state is valid." };
 }

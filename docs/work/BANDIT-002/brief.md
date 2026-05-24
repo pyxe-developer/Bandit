@@ -2,7 +2,7 @@
 
 ## Status
 
-Brief created; RED evidence not started.
+Closeout evidence complete; safe-to-land bootstrap verdict recorded.
 
 ## Goal
 
@@ -97,11 +97,11 @@ Before landing, Codex PM must evaluate:
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify Phase 2 and `BANDIT-002` as the active next work. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, test plan, clean-code evidence, bootstrap gaps, expected files, implementation order, smell triggers, escalation plan, and operator input status. |
-| Stage 2: Test Design And RED Evidence | `not_applicable` | Next stage; no production implementation should start until RED evidence exists or a bootstrap gap is recorded. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No implementation code in this step. |
-| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | CodeRabbit and Qwen gates are not implemented in Bandit yet; manual review evidence must be recorded before landing implementation. |
-| Stage 5: Landing And UAT | `bootstrap_gap` | Landing Agent and CLI-owned UAT artifacts do not exist yet; this slice is artifact infrastructure, not a feature UAT step. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Required after the implementation slice completes. |
+| Stage 2: Test Design And RED Evidence | `pass` | `test/templates.test.mjs` and `test/validate.test.mjs` encode the template contract and fail closed against the current missing implementation; RED command output is recorded in `docs/work/BANDIT-002/red-evidence.md`. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-002/implementation-evidence.md` maps implementation to acceptance criteria, records clean-code self-check, and lists passing local verification. |
+| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | `docs/work/BANDIT-002/review-evidence.md` records manual PM review and unavailable CodeRabbit/Qwen gates as bootstrap gaps. |
+| Stage 5: Landing And UAT | `pass` | `docs/work/BANDIT-002/landing-verdict.md` records a safe-to-land bootstrap verdict; UAT is `not_applicable` because this is workflow artifact infrastructure, not a user-facing feature slice. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `docs/work/BANDIT-002/retrospective.md` records lessons and durable dispositions. |
 
 ## Bootstrap Gaps
 
@@ -140,6 +140,7 @@ Likely evidence files:
 
 - `docs/work/BANDIT-002/red-evidence.md`
 - `docs/work/BANDIT-002/implementation-evidence.md`
+- `docs/work/BANDIT-002/review-evidence.md`
 - `docs/work/BANDIT-002/landing-verdict.md`
 - `docs/work/BANDIT-002/retrospective.md`
 

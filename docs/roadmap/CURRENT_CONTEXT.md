@@ -4,35 +4,34 @@
 
 **Phase:** 2 - Work Artifacts.
 
-**State:** `BANDIT-002` brief created; RED evidence not started.
+**State:** `BANDIT-002` closeout evidence complete; safe-to-land bootstrap verdict recorded.
 
-**Last completed milestone:** `BANDIT-001` delivered the repo-native CLI skeleton.
+**Last completed milestone:** `BANDIT-002` delivered work artifact templates and fail-closed template validation.
 
-**Current next action:** Create RED evidence and test design for `BANDIT-002`: Work Artifact Templates And Validation.
+**Current next action:** Create the `BANDIT-003` brief for a PRD-to-work draft command.
 
 ## Active Work
 
-**Active work item:** `BANDIT-002` - Work Artifact Templates And Validation.
+**Active work item:** none. Next work item to create: `BANDIT-003` - PRD-To-Work Draft Command.
 
-**Completed work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
+**Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton; `BANDIT-002` - Work Artifact Templates And Validation.
 
-**Expected next deliverable:** `docs/work/BANDIT-002/red-evidence.md`, mapping the brief's acceptance criteria to failing tests for:
+**Expected next deliverable:** `docs/work/BANDIT-003/brief.md`, scoped to the remaining Phase 2 capability:
 
-- Feature PRD template.
-- Slice template.
-- Chore template.
-- Retrospective-derived chore metadata.
-- Template validation refusal paths.
+- a PRD-to-work decomposition or draft command;
+- trackable slice and chore artifact output;
+- chore origin metadata reuse, including retrospective-derived fields;
+- fail-closed validation and refusal paths for generated or drafted work.
 
-No production implementation should start before RED evidence exists or an explicit bootstrap gap is recorded.
+BANDIT-002 is safe to land as the Phase 2 template-validation baseline. The next step is a brief only; do not implement PRD-to-work drafting before the BANDIT-003 brief records scope, acceptance criteria, test plan, clean-code read evidence, stage rubrics, bootstrap gaps, expected files, and implementation order.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command.
-- No PRD, slice, chore, or improvement chore artifact templates.
-- No template validation contract.
+- No PRD-to-work decomposition or draft command.
+- No artifact creation command for PRDs, slices, chores, or improvement chores.
 - No Qwen adversarial gate.
 - No CodeRabbit pre-landing loop.
 - No Landing Agent.
@@ -57,12 +56,12 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Next Step Details
 
-Create RED evidence and test design for `BANDIT-002`.
+Create the `BANDIT-003` brief for the PRD-to-work draft command.
 
-The brief keeps the slice thin by implementing artifact templates and validation before any PRD-to-work decomposition command.
+BANDIT-002 delivered the template contract and validation baseline. V0 Phase 2 still needs the command path that can turn a Feature PRD into trackable slice and chore drafts without making generated artifacts a hidden source of truth.
 
-Do not write Phase 2 production code before RED evidence exists.
+Keep the next step to brief creation. Do not create detailed briefs for later phases yet.
 
 ## Required Operator Input
 
-None before RED evidence or implementation starts.
+None before BANDIT-003 brief creation.
