@@ -96,6 +96,88 @@ test("validate fails closed when the local Qwen profile uses an unsupported runt
   assert.match(result.stderr, /Unsupported local Qwen runtime: paid_api/);
 });
 
+test("validate fails closed when the local Qwen profile uses the drifted Qwen Code CLI route", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        provider: "qwen-code",
+        provider_base_url: "http://localhost:11434/v1",
+        command: {
+          executable: "qwen",
+          args: [
+            "--openai-base-url",
+            "http://localhost:11434/v1",
+            "--model",
+            "qwen3.6:35b-a3b-coding-mxfp8",
+            "{{prompt}}"
+          ]
+        },
+        model: "qwen3.6:35b-a3b-coding-mxfp8 via local Ollama"
+      }
+    }
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Local Qwen profile must use Mastra Code custom provider/
+  );
+});
+
+test("validate fails closed when the Mastra Code local Qwen profile uses the wrong provider endpoint", async () => {
+  const repo = await createInitializedRepo({
+    profileOptions: {
+      overrides: {
+        provider_base_url: "http://127.0.0.1:11434/v1"
+      }
+    }
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Local Qwen profile must use provider_base_url http:\/\/127\.0\.0\.1:8000\/v1/
+  );
+});
+
+test("committed local Qwen baseline profile uses the spike-backed Mastra Code oMLX route", async () => {
+  const repo = await createTempRepo();
+  await runBandit(repo, ["init"]);
+  await copyTemplates(repo);
+  await cp(
+    path.join(repoRoot, ".bandit/reviewers/local-qwen.json"),
+    path.join(repo, ".bandit/reviewers/local-qwen.json")
+  );
+  await writeSmellCatalog(repo, validSmellCatalog);
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 0, result.stderr);
+
+  const profile = JSON.parse(
+    await readFile(path.join(repo, ".bandit/reviewers/local-qwen.json"), "utf8")
+  );
+  assert.equal(profile.provider, "mastra-code");
+  assert.equal(profile.provider_base_url, "http://127.0.0.1:8000/v1");
+  assert.equal(profile.command.executable, "mastracode");
+  assert.deepEqual(profile.command.args, [
+    "--model",
+    "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
+    "--output-format",
+    "json",
+    "--thinking-level",
+    "off",
+    "--timeout",
+    "180",
+    "--prompt",
+    "{{prompt}}"
+  ]);
+});
+
 test("validate fails closed when local Qwen evidence references the wrong work item", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-950", "Wrong Qwen Evidence");
@@ -324,6 +406,34 @@ test("qwen-review writes repo-native evidence for a passing fixture review", asy
   assert.match(artifact, /operator_input_status: none_required/);
 });
 
+test("qwen-review parses Mastra Code JSON envelope output", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeReviewerFixture(
+    repo,
+    [
+      "process.stdout.write(JSON.stringify({",
+      "  text: JSON.stringify({ verdict: 'pass', findings: [], summary: 'Mastra Code envelope pass' }),",
+      "  toolCalls: [],",
+      "  toolResults: []",
+      "}));"
+    ].join("\n")
+  );
+  await writeWorkBrief(repo, "BANDIT-966", "Mastra Code Envelope Review");
+  await commitAll(repo, "Fixture source");
+
+  const result = await runBandit(repo, ["qwen-review", "BANDIT-966"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Local Qwen review: pass/);
+
+  const artifact = await readFile(
+    path.join(repo, "docs/work/BANDIT-966/local-qwen-review.md"),
+    "utf8"
+  );
+  assert.match(artifact, /Mastra Code envelope pass/);
+});
+
 test("land-check reports the current local Qwen pass and evidence artifact", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -454,12 +564,14 @@ async function writeLocalQwenProfile(repo, options = {}) {
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     version: 1,
+    provider: "mastra-code",
+    provider_base_url: "http://127.0.0.1:8000/v1",
     runtime: "command",
     command: {
       executable: process.execPath,
       args: ["qwen-fixture.mjs"]
     },
-    model: "fixture-qwen",
+    model: "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
     prompt_contract: {
       role: "read_only_adversarial_reviewer",
       required_outputs: ["verdict", "findings", "summary"]
