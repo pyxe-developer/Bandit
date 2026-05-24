@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { chmod, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -1197,6 +1197,104 @@ test("land-check reports shallow repository changed-path failures explicitly", a
     /Local Qwen review changed-path check failed: missing_base_revision_shallow_repository/
   );
   assert.match(result.stderr, /Local Qwen review evidence is stale/);
+});
+
+test("land-check reuses git repository state while classifying changed-path failures", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  const fakeGitDir = await createTempRepo();
+  const fakeGitLog = path.join(fakeGitDir, "git-args.log");
+  const currentHead = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+  const missingBaseHead = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+  const fakeGitPath = path.join(fakeGitDir, "git");
+  await writeFile(
+    fakeGitPath,
+    `#!/usr/bin/env node
+const { appendFileSync } = require("node:fs");
+const args = process.argv.slice(2);
+appendFileSync(process.env.FAKE_GIT_LOG, args.join(" ") + "\\n");
+if (args[0] === "rev-parse" && args[1] === "HEAD") {
+  process.stdout.write(process.env.FAKE_CURRENT_HEAD + "\\n");
+  process.exit(0);
+}
+if (args[0] === "diff") {
+  process.stderr.write("fatal: bad object ${missingBaseHead}\\n");
+  process.exit(128);
+}
+if (args[0] === "config" && args[1] === "--get-regexp") {
+  process.exit(1);
+}
+if (args[0] === "rev-parse" && args[1] === "--is-shallow-repository") {
+  process.stdout.write("false\\n");
+  process.exit(0);
+}
+process.stderr.write("unexpected fake git call: " + args.join(" ") + "\\n");
+process.exit(1);
+`,
+    { encoding: "utf8", mode: 0o755 }
+  );
+  await chmod(fakeGitPath, 0o755);
+  await writeWorkBrief(repo, "BANDIT-941", "Changed Path Probe Reuse");
+  await writeRoutingDecision(repo, "BANDIT-941", {
+    selectedRoute: "escalated-adversarial-placeholder",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require escalated adversarial review placeholder evidence."
+  });
+  await writeReviewEvidence(repo, "BANDIT-941", {
+    sourceHead: currentHead,
+    coderabbitState: "pass",
+    localQwenState: "pass",
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-941", {
+    sourceHead: currentHead,
+    coderabbitState: "pass",
+    localQwenState: "pass",
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeCodeRabbitReview(repo, "BANDIT-941", {
+    sourceHead: missingBaseHead
+  });
+  await writeLocalQwenReview(repo, "BANDIT-941", {
+    sourceHead: missingBaseHead
+  });
+  await writeEscalatedReview(repo, "BANDIT-941", {
+    sourceHead: missingBaseHead
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-941"], {
+    env: {
+      PATH: `${fakeGitDir}${path.delimiter}${process.env.PATH}`,
+      FAKE_CURRENT_HEAD: currentHead,
+      FAKE_GIT_LOG: fakeGitLog
+    }
+  });
+  const gitCalls = await readFile(fakeGitLog, "utf8");
+  const promisorProbeCount = gitCalls
+    .split("\n")
+    .filter((line) => line.startsWith("config --get-regexp")).length;
+  const shallowProbeCount = gitCalls
+    .split("\n")
+    .filter((line) => line === "rev-parse --is-shallow-repository").length;
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /CodeRabbit review changed-path check failed: missing_base_revision/
+  );
+  assert.match(
+    result.stderr,
+    /Local Qwen review changed-path check failed: missing_base_revision/
+  );
+  assert.match(
+    result.stderr,
+    /Escalated review changed-path check failed: missing_base_revision/
+  );
+  assert.equal(promisorProbeCount, 1);
+  assert.equal(shallowProbeCount, 1);
 });
 
 async function createInitializedRepo(options = {}) {

@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create RED evidence for `BANDIT-017` - Landing Gate
-Complexity And Git Diagnostics Hardening.
+**Current next step:** Implement `BANDIT-017` - Landing Gate Complexity And Git
+Diagnostics Hardening.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -28,7 +28,8 @@ now, and required the remaining findings to become the next chore.
 
 `BANDIT-017` is active as
 `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief is recorded in
-`docs/work/BANDIT-017/brief.md`; the next step is RED evidence.
+`docs/work/BANDIT-017/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-017/red-evidence.md`, and the next step is implementation.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -266,7 +267,7 @@ Completed work:
 
 Queued next:
 
-- RED evidence for `BANDIT-017`.
+- Implementation for `BANDIT-017`.
 
 Expected capabilities:
 
@@ -321,7 +322,7 @@ Current rule:
   gap-ledger disposition.
 - `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
 - `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is active as `BANDIT-017`; RED
-  evidence is next.
+  evidence is recorded and implementation is next.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -334,7 +335,7 @@ Current rule:
 
 Current priority:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; create RED evidence next.
+1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; implement next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

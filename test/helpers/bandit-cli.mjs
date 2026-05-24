@@ -12,12 +12,12 @@ export async function createTempRepo() {
   return mkdtemp(path.join(tmpdir(), "bandit-test-"));
 }
 
-export function runBandit(cwd, args) {
+export function runBandit(cwd, args, options = {}) {
   return new Promise((resolve) => {
     execFile(
       process.execPath,
       [binPath, ...args],
-      { cwd },
+      { cwd, env: options.env ? { ...process.env, ...options.env } : process.env },
       (error, stdout, stderr) => {
         resolve({
           code: typeof error?.code === "number" ? error.code : 0,
