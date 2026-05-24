@@ -77,8 +77,11 @@ The configured model, prompt, tools, cost budget, timeout, and blocking policy f
 _Avoid_: hard-coded model choice, hidden prompt, permanent default
 
 **Local Qwen Baseline Reviewer**:
-The default no-paid-key adversarial reviewer that runs on every PR before landing.
-_Avoid_: best reviewer forever, optional local check
+The default no-paid-key adversarial reviewer that runs on every PR before
+landing. The bootstrap runtime routes Mastra Code to the repo-local oMLX
+OpenAI-compatible endpoint and must not silently fall back to Qwen Code CLI,
+Ollama, global Mastra Code settings, or paid-key sidecars.
+_Avoid_: best reviewer forever, optional local check, hidden provider drift
 
 **Adversarial Escalation**:
 The policy path that adds or replaces the baseline reviewer with a stronger or second reviewer for complex or high-risk PRs.
@@ -136,7 +139,7 @@ _Avoid_: assumed-valid acceptance, agent-classified product impact
 - Heartbeat Chore Agent prepares eligible chores; Landing Agent decides if PRs can land.
 - Landing Verdict requires a completed Pre-Landing Review Loop.
 - A slice becomes a Landed Slice only after the landing action is recorded; the next slice must not begin before that.
-- Local Qwen Baseline Reviewer runs on every PR; Adversarial Escalation adds stronger review when smells require it.
+- Local Qwen Baseline Reviewer runs on every PR through the repo-configured Mastra Code/oMLX route; Adversarial Escalation adds stronger review when smells require it.
 - Manager-Owned Routing means Codex PM applies the Smell Trigger Catalog without asking routine technical questions.
 - Operator Input Boundary means Codex PM halts and asks directly when the missing decision belongs to the operator.
 - Workflow Improvement Engine turns retrospectives and cross-model tension into Retrospective-Derived Chores, Improvement Analytics, and Improvement Decisions.
