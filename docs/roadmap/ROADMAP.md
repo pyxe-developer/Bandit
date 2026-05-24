@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Create the `BANDIT-005` work-item brief for the Pre-Landing Review Loop.
+**Current next step:** Create `docs/work/BANDIT-005/red-evidence.md` for the Pre-Landing Review Loop.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. Phase 3 is complete; Phase 4 is ready for its first brief.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` now has a Stage 1 brief for the Pre-Landing Review Loop; RED evidence and implementation have not started.
 
 ## Phase Map
 
@@ -160,8 +160,8 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- none.
-- Next step: create the `BANDIT-005` brief for the Pre-Landing Review Loop.
+- `BANDIT-005` - Pre-Landing Review Loop.
+- Next step: create `docs/work/BANDIT-005/red-evidence.md`.
 
 Expected capabilities:
 
