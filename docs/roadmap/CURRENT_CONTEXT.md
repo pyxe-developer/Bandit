@@ -5,18 +5,18 @@
 **Phase:** 5 - UAT And Auto-Landing.
 
 **State:** `BANDIT-015` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LIVE-CODERABBIT`. Its brief, RED evidence, and implementation
-evidence are recorded. Review and landing-gate closeout is the next required
-action.
+`BANDIT-GAP-LIVE-CODERABBIT`. Its brief, RED evidence, implementation
+evidence, and CodeRabbit evidence are recorded. Remaining review and
+landing-gate closeout is the next required action.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
-**Current next action:** Run the `BANDIT-015` review and landing-gate closeout
-sequence: CodeRabbit evidence, review evidence, local Qwen review,
-escalated-review disposition, landing verdict, landing action, retrospective,
-gap-ledger disposition, and final context updates. Do not begin another
+**Current next action:** Continue the `BANDIT-015` review and landing-gate
+closeout sequence with review evidence, local Qwen review, escalated-review
+disposition, landing verdict, landing action, retrospective, gap-ledger
+disposition, and final context updates. Do not begin another
 bootstrap-gap chore, Phase 6, Phase 7, feature work, or broader cockpit work
 until `BANDIT-015` has landing action evidence, retrospective closeout, and a
 resolved, operator-blocked, or no-action gap-ledger disposition.
@@ -38,9 +38,8 @@ Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution.
 
 **Expected next deliverable:** Closeout evidence for `BANDIT-015`, including
-CodeRabbit evidence, review evidence, local Qwen review, escalated-review
-disposition, landing verdict, landing action, retrospective, and gap-ledger
-disposition.
+review evidence, local Qwen review, escalated-review disposition, landing
+verdict, landing action, retrospective, and gap-ledger disposition.
 
 ## Known Bootstrap Gaps
 
@@ -70,7 +69,8 @@ Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is active as `BANDIT-015`;
-implementation evidence is recorded and review/landing-gate closeout is next.
+implementation evidence and CodeRabbit evidence are recorded, and remaining
+review/landing-gate closeout is next.
 
 ## Context Guardrails
 
@@ -124,7 +124,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; review and landing-gate closeout next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; remaining review and landing-gate closeout next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
