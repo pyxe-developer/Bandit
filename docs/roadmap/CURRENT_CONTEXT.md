@@ -4,25 +4,21 @@
 
 **Phase:** 4 - Review And Landing Gates.
 
-**State:** `BANDIT-009` has landed as final implementation source head
-`8634d256eb1409e7c31f5b9baf74223480745167`. It repaired baseline local Qwen
-full-packet reliability by preserving structured findings, switching the live
-harness path from Mastra Code to direct local oMLX, and fixing review-packet
-diff-base selection. `docs/work/BANDIT-009/landing-action.md` records the
-concrete landing action; `local-qwen-review.md`, `review-evidence.md`,
-`landing-verdict.md`, and `retrospective.md` record closeout evidence and
-dispositions.
+**State:** `BANDIT-010` is active as the Phase 4 bootstrap work item for the
+escalated adversarial reviewer placeholder. `docs/work/BANDIT-010/brief.md`
+records the Stage 1 contract. `BANDIT-009` remains the latest landed
+implementation source head at `8634d256eb1409e7c31f5b9baf74223480745167`.
 
 **Last completed milestone:** `BANDIT-009` repaired local Qwen full-packet
 review reliability through direct local oMLX.
 
-**Current next action:** Create the next Phase 4 bootstrap work item for the
-escalated adversarial reviewer placeholder now that the baseline local Qwen
-reviewer returns structured output for real Bandit review packets.
+**Current next action:** Create RED evidence for `BANDIT-010` showing that a
+work item requiring escalated adversarial review is not yet enforced by
+`bandit land-check <work-item-id>`.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-010` - Escalated Adversarial Reviewer Placeholder.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -32,8 +28,8 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair; `BANDIT-009` - Local Qwen Full-Packet
 Reliability.
 
-**Expected next deliverable:** the next narrow Phase 4 work item for escalated
-adversarial reviewer placeholder behavior. Keep it behind the established
+**Expected next deliverable:** RED evidence for the narrow escalated
+adversarial reviewer placeholder contract. Keep it behind the established
 baseline local Qwen gate and do not broaden into final Landing Agent behavior,
 UAT artifacts, PR merge automation, live paid-model routing, workflow cockpit,
 or SQLite indexing.
@@ -86,15 +82,16 @@ the local Qwen baseline reviewer runtime route away from Qwen Code/Ollama
 drift. BANDIT-009 repaired full-packet local Qwen reliability and proved the
 baseline can return structured output for real Bandit packets.
 
-The next step is to create the next bootstrap work item brief for the escalated
-adversarial reviewer placeholder. Keep it narrow: define the placeholder
-artifact/profile/policy behavior needed when smell triggers require review
-beyond the baseline local Qwen gate. Do not build final Landing Agent behavior,
-UAT artifacts, PR merge automation, workflow cockpit, SQLite indexing,
-automated review repair, live CodeRabbit/GitHub polling, or paid-model reviewer
-routing.
+The next step is to create RED evidence for the escalated adversarial reviewer
+placeholder. Keep it narrow: prove the current gap where smell-triggered
+required escalation is not enforced by `land-check`, then implement the
+placeholder artifact/profile/policy behavior needed when smell triggers require
+review beyond the baseline local Qwen gate. Do not build final Landing Agent
+behavior, UAT artifacts, PR merge automation, workflow cockpit, SQLite
+indexing, automated review repair, live CodeRabbit/GitHub polling, or
+paid-model reviewer routing.
 
 ## Required Operator Input
 
-None before creating the next escalated-review placeholder brief. Repo artifacts
-already define the next technical routing decision.
+None before RED evidence or implementation. Repo artifacts already define the
+next technical routing decision.

@@ -4,12 +4,17 @@ import {
   type CodeRabbitReviewEvidence,
   readOptionalParsedCodeRabbitReview
 } from "../state/coderabbit-review.js";
+import type { EscalatedReviewEvidence } from "../state/escalated-review.js";
+import { readOptionalParsedEscalatedReview } from "../state/escalated-review.js";
 import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
 import type { LocalQwenReviewEvidence } from "../state/local-qwen-review.js";
 import { readLocalQwenReview } from "../state/local-qwen-review.js";
 import type { ReviewEvidence } from "../state/review-evidence.js";
 import { readReviewEvidence } from "../state/review-evidence.js";
+import { readOptionalParsedRoutingDecision } from "../state/routing-decisions.js";
+import type { SmellCatalog } from "../state/smell-triggers.js";
+import { readSmellCatalog } from "../state/smell-triggers.js";
 import { readWorkItem } from "../state/work-items.js";
 
 export async function landCheck(repoRoot: string, workItemId?: string) {
@@ -22,6 +27,12 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
   const reviewEvidence = await readReviewEvidence(repoRoot, workItemId);
   const landingVerdict = await readLandingVerdict(repoRoot, workItemId);
   const currentHead = await readCurrentGitHead(repoRoot);
+  const smellCatalog = await readSmellCatalog(repoRoot);
+  const routingDecision = await readOptionalParsedRoutingDecision(
+    repoRoot,
+    workItemId,
+    smellCatalog.smellIds
+  );
   const codeRabbitReview = await readRequiredCodeRabbitReviewWhenClaimed(
     repoRoot,
     reviewEvidence,
@@ -32,12 +43,25 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
     reviewEvidence,
     landingVerdict
   );
+  const escalatedReviewRequired = isEscalatedReviewRequired(
+    reviewEvidence,
+    routingDecision,
+    smellCatalog
+  );
+  const escalatedReview = await readRequiredEscalatedReviewWhenClaimed(
+    repoRoot,
+    reviewEvidence,
+    landingVerdict,
+    escalatedReviewRequired
+  );
   const readiness = evaluateLandingReadiness(
     reviewEvidence,
     landingVerdict,
     currentHead,
     codeRabbitReview,
-    localQwenReview
+    localQwenReview,
+    escalatedReviewRequired,
+    escalatedReview
   );
 
   if (readiness.problems.length > 0) {
@@ -56,6 +80,8 @@ type LandingReadiness = {
   landingVerdictIsStale: boolean;
   codeRabbitReview: CodeRabbitReviewEvidence | null;
   localQwenReview: LocalQwenReviewEvidence | null;
+  escalatedReviewRequired: boolean;
+  escalatedReview: EscalatedReviewEvidence | null;
   problems: string[];
 };
 
@@ -64,7 +90,9 @@ function evaluateLandingReadiness(
   landingVerdict: LandingVerdict,
   currentHead: string | null,
   codeRabbitReview: CodeRabbitReviewEvidence | null,
-  localQwenReview: LocalQwenReviewEvidence | null
+  localQwenReview: LocalQwenReviewEvidence | null,
+  escalatedReviewRequired: boolean,
+  escalatedReview: EscalatedReviewEvidence | null
 ): LandingReadiness {
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
@@ -74,11 +102,15 @@ function evaluateLandingReadiness(
   const localQwenReviewIsStale = localQwenReview
     ? isStale(localQwenReview.sourceHead, currentHead)
     : false;
+  const escalatedReviewIsStale = escalatedReview
+    ? isStale(escalatedReview.sourceHead, currentHead)
+    : false;
   const sourceDriftStatus =
     reviewEvidenceIsStale ||
     landingVerdictIsStale ||
     codeRabbitReviewIsStale ||
-    localQwenReviewIsStale
+    localQwenReviewIsStale ||
+    escalatedReviewIsStale
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
   const problems: string[] = [];
@@ -99,6 +131,10 @@ function evaluateLandingReadiness(
     problems.push("Local Qwen review evidence is stale");
   }
 
+  if (escalatedReviewIsStale) {
+    problems.push("Escalated review evidence is stale");
+  }
+
   if (landingVerdict.finalVerdict === "safe-to-land") {
     problems.push(
       ...safeToLandProblems(
@@ -107,9 +143,12 @@ function evaluateLandingReadiness(
         reviewEvidenceIsStale ||
           landingVerdictIsStale ||
           codeRabbitReviewIsStale ||
-          localQwenReviewIsStale,
+          localQwenReviewIsStale ||
+          escalatedReviewIsStale,
         codeRabbitReview,
-        localQwenReview
+        localQwenReview,
+        escalatedReviewRequired,
+        escalatedReview
       )
     );
   }
@@ -121,6 +160,8 @@ function evaluateLandingReadiness(
     landingVerdictIsStale,
     codeRabbitReview,
     localQwenReview,
+    escalatedReviewRequired,
+    escalatedReview,
     problems
   };
 }
@@ -130,7 +171,9 @@ function safeToLandProblems(
   landingVerdict: LandingVerdict,
   staleEvidence: boolean,
   codeRabbitReview: CodeRabbitReviewEvidence | null,
-  localQwenReview: LocalQwenReviewEvidence | null
+  localQwenReview: LocalQwenReviewEvidence | null,
+  escalatedReviewRequired: boolean,
+  escalatedReview: EscalatedReviewEvidence | null
 ) {
   const problems: string[] = [];
 
@@ -197,13 +240,17 @@ function safeToLandProblems(
   }
 
   if (
-    reviewEvidence.escalatedReviewRequired &&
+    escalatedReviewRequired &&
     (!isPassingOrBootstrapGap(landingVerdict.escalatedReviewState) ||
       !isPassingOrBootstrapGap(reviewEvidence.escalatedReviewState))
   ) {
     problems.push(
       "safe-to-land requires escalated review pass or explicit bootstrap_gap evidence"
     );
+  }
+
+  if (escalatedReviewRequired) {
+    problems.push(...escalatedReviewProblems(escalatedReview));
   }
 
   if (reviewEvidence.pmDisposition !== "pass") {
@@ -242,6 +289,7 @@ function formatLandingCheck(
     `Local Qwen: ${reviewEvidence.localQwenState}`,
     ...formatLocalQwenReviewLines(readiness.localQwenReview),
     `Escalated review: ${reviewEvidence.escalatedReviewState}`,
+    ...formatEscalatedReviewLines(readiness.escalatedReview),
     `UAT: ${landingVerdict.uatStatus}`,
     `Clean code: ${landingVerdict.cleanCodeStatus}`,
     `Landing agent: ${landingVerdict.landingAgentState}`,
@@ -250,6 +298,10 @@ function formatLandingCheck(
     `Final verdict: ${landingVerdict.finalVerdict}`
   ].join("\n").concat("\n");
 }
+
+type OptionalRoutingDecision = Awaited<
+  ReturnType<typeof readOptionalParsedRoutingDecision>
+>;
 
 async function readRequiredCodeRabbitReviewWhenClaimed(
   repoRoot: string,
@@ -279,6 +331,25 @@ async function readRequiredLocalQwenReviewWhenClaimed(
   }
 
   return readLocalQwenReview(repoRoot, reviewEvidence.workItem);
+}
+
+async function readRequiredEscalatedReviewWhenClaimed(
+  repoRoot: string,
+  reviewEvidence: ReviewEvidence,
+  landingVerdict: LandingVerdict,
+  escalatedReviewRequired: boolean
+) {
+  if (
+    !escalatedReviewRequired &&
+    reviewEvidence.escalatedReviewState !== "pass" &&
+    landingVerdict.escalatedReviewState !== "pass" &&
+    reviewEvidence.escalatedReviewState !== "bootstrap_gap" &&
+    landingVerdict.escalatedReviewState !== "bootstrap_gap"
+  ) {
+    return null;
+  }
+
+  return readOptionalParsedEscalatedReview(repoRoot, reviewEvidence.workItem);
 }
 
 function codeRabbitProblems(codeRabbitReview: CodeRabbitReviewEvidence | null) {
@@ -340,6 +411,28 @@ function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
   return problems;
 }
 
+function escalatedReviewProblems(
+  escalatedReview: EscalatedReviewEvidence | null
+) {
+  if (!escalatedReview) {
+    return ["safe-to-land requires current escalated review placeholder evidence"];
+  }
+
+  const problems: string[] = [];
+
+  if (!isPassingOrBootstrapGap(escalatedReview.reviewerVerdict)) {
+    problems.push(
+      `Escalated reviewer verdict blocks landing: ${escalatedReview.reviewerVerdict}`
+    );
+  }
+
+  if (escalatedReview.sourceDriftStatus !== "current") {
+    problems.push("safe-to-land requires escalated review source_drift_status current");
+  }
+
+  return problems;
+}
+
 function formatCodeRabbitReviewLines(
   codeRabbitReview: CodeRabbitReviewEvidence | null
 ) {
@@ -362,6 +455,42 @@ function formatLocalQwenReviewLines(localQwenReview: LocalQwenReviewEvidence | n
     `Local Qwen evidence: ${localQwenReview.displayPath}`,
     `Local Qwen profile: ${localQwenReview.profileId}`
   ];
+}
+
+function formatEscalatedReviewLines(
+  escalatedReview: EscalatedReviewEvidence | null
+) {
+  if (!escalatedReview) {
+    return [];
+  }
+
+  return [
+    `Escalated review evidence: ${escalatedReview.displayPath}`,
+    `Escalated review profile: ${escalatedReview.profileId}`
+  ];
+}
+
+function isEscalatedReviewRequired(
+  reviewEvidence: ReviewEvidence,
+  routingDecision: OptionalRoutingDecision,
+  smellCatalog: SmellCatalog
+) {
+  if (reviewEvidence.escalatedReviewRequired) {
+    return true;
+  }
+
+  if (!routingDecision) {
+    return false;
+  }
+
+  const smellById = new Map(
+    smellCatalog.smells.map((smell) => [smell.id, smell])
+  );
+
+  return routingDecision.applicableSmellIds.some((smellId) => {
+    const smell = smellById.get(smellId);
+    return smell?.defaultAction === "require_escalated_review";
+  });
 }
 
 function isStale(recordedHead: string, currentHead: string | null) {

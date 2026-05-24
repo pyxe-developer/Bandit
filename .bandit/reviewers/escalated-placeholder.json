@@ -1,0 +1,7 @@
+{
+  "profile_id": "escalated-adversarial-placeholder",
+  "provider": "bootstrap-placeholder",
+  "role": "escalated_adversarial_reviewer",
+  "availability_status": "bootstrap_gap",
+  "description": "Records required escalated adversarial review during bootstrap without claiming live paid-model or second-reviewer integration."
+}

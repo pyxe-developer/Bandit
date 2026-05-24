@@ -71,6 +71,26 @@ export async function readRoutingDecision(
   );
 }
 
+export async function readOptionalParsedRoutingDecision(
+  repoRoot: string,
+  workItemId: string,
+  knownSmellIds: Set<string>
+) {
+  await readWorkItem(repoRoot, workItemId);
+
+  const artifact = await readOptionalRoutingDecision(repoRoot, workItemId);
+  if (!artifact) {
+    return null;
+  }
+
+  return parseRoutingDecision(
+    artifact.content,
+    artifact.displayPath,
+    knownSmellIds,
+    workItemId
+  );
+}
+
 function parseRoutingDecision(
   content: string,
   displayPath: string,

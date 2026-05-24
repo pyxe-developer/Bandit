@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
 import { validateConfig } from "../state/config.js";
+import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
@@ -27,6 +28,7 @@ export async function validateBandit(repoRoot: string) {
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);
   await validateCodeRabbitReviewArtifacts(repoRoot);
   await validateLocalQwenReviewArtifacts(repoRoot);
+  await validateEscalatedReviewArtifacts(repoRoot);
   await validateReviewEvidenceArtifacts(repoRoot);
   await validateLandingVerdictArtifacts(repoRoot);
 

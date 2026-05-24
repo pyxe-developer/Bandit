@@ -138,6 +138,23 @@ const validSmellCatalog = {
   ]
 };
 
+const escalatedSmellCatalog = {
+  version: 1,
+  smells: [
+    validSmellCatalog.smells[0],
+    {
+      id: "BANDIT-SMELL-ESCALATED-REVIEW",
+      name: "Escalated Review Required",
+      category: "review_gate",
+      trigger: "A PR or slice requires stronger review beyond baseline local Qwen.",
+      severity: "blocker",
+      default_action: "require_escalated_review",
+      escalation_target: "escalated-adversarial-placeholder",
+      required_evidence: ["escalated-review.md"]
+    }
+  ]
+};
+
 test("validate fails closed when the review evidence template is missing", async () => {
   const repo = await createInitializedRepo({
     omitTemplate: "docs/templates/review-evidence.md"
@@ -326,6 +343,117 @@ test("land-check accepts explicit bootstrap gaps with replacement evidence durin
   assert.match(result.stdout, /Manual PM review replaces unavailable final gates/);
 });
 
+test("land-check fails closed when routing requires escalated review with no placeholder artifact", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await writeWorkBrief(repo, "BANDIT-911", "Missing Escalated Review Evidence");
+  await writeRoutingDecision(repo, "BANDIT-911", {
+    selectedRoute: "escalated-adversarial-placeholder",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require escalated adversarial review placeholder evidence."
+  });
+  await writeReviewEvidence(repo, "BANDIT-911", {
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-911", {
+    escalatedReviewState: "bootstrap_gap"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-911"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /safe-to-land requires current escalated review placeholder evidence/
+  );
+});
+
+test("land-check accepts current escalated review bootstrap-gap placeholder evidence", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-912", "Current Escalated Review Placeholder");
+  await writeRoutingDecision(repo, "BANDIT-912", {
+    selectedRoute: "escalated-adversarial-placeholder",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require escalated adversarial review placeholder evidence."
+  });
+  await writeReviewEvidence(repo, "BANDIT-912", {
+    sourceHead,
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-912", {
+    sourceHead,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeEscalatedReview(repo, "BANDIT-912", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-912"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Escalated review: bootstrap_gap/);
+  assert.match(
+    result.stdout,
+    /Escalated review evidence: docs\/work\/BANDIT-912\/escalated-review\.md/
+  );
+  assert.match(
+    result.stdout,
+    /Escalated review profile: escalated-adversarial-placeholder/
+  );
+});
+
+test("land-check fails closed when escalated review placeholder evidence is stale", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-913", "Stale Escalated Review Placeholder");
+  await writeRoutingDecision(repo, "BANDIT-913", {
+    selectedRoute: "escalated-adversarial-placeholder",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require escalated adversarial review placeholder evidence."
+  });
+  await writeReviewEvidence(repo, "BANDIT-913", {
+    sourceHead,
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-913", {
+    sourceHead,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeEscalatedReview(repo, "BANDIT-913", { sourceHead });
+  await writeFile(path.join(repo, "changed.txt"), "changed\n", "utf8");
+  await commitAll(repo, "Change after escalated review");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-913"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Escalated review evidence is stale/);
+});
+
+test("land-check leaves escalated review not_applicable when no smell requires it", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-914", "No Escalated Review Required");
+  await writeReviewEvidence(repo, "BANDIT-914");
+  await writeLandingVerdict(repo, "BANDIT-914");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-914"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Escalated review: not_applicable/);
+  assert.doesNotMatch(result.stdout, /Escalated review evidence:/);
+});
+
 test("land-check fails closed when safe-to-land evidence is stale", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -367,7 +495,7 @@ async function createInitializedRepo(options = {}) {
   await runBandit(repo, ["init"]);
   await writeTemplates(repo, options);
   await writeLocalQwenProfile(repo);
-  await writeSmellCatalog(repo, validSmellCatalog);
+  await writeSmellCatalog(repo, options.smellCatalog ?? validSmellCatalog);
 
   return repo;
 }
@@ -406,9 +534,9 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     `local_qwen_state: ${options.localQwenState ?? "bootstrap_gap"}`,
     "local_qwen_replacement_evidence:",
     "  - Local Qwen runtime is unavailable during bootstrap.",
-    "escalated_review_required: false",
+    `escalated_review_required: ${options.escalatedReviewRequired ?? false}`,
     `escalated_review_state: ${options.escalatedReviewState ?? "not_applicable"}`,
-    "escalated_review_rationale: No smell trigger requires escalation beyond the baseline bootstrap gap.",
+    `escalated_review_rationale: ${options.escalatedReviewRationale ?? "No smell trigger requires escalation beyond the baseline bootstrap gap."}`,
     "pm_disposition: pass",
     "operator_input_status: none_required",
     "uat_status: not_applicable",
@@ -442,7 +570,7 @@ tests_status: ${options.testsStatus ?? "pass"}
 clean_code_status: pass
 coderabbit_state: bootstrap_gap
 local_qwen_state: bootstrap_gap
-escalated_review_state: not_applicable
+escalated_review_state: ${options.escalatedReviewState ?? "not_applicable"}
 uat_status: not_applicable
 source_drift_status: ${options.sourceDriftStatus ?? "current"}
 operator_input_status: none_required
@@ -451,6 +579,53 @@ landing_agent_replacement_evidence:
   - Manual PM review replaces unavailable final gates during bootstrap.
 final_verdict: ${options.finalVerdict ?? "safe-to-land"}
 rationale: Evidence is explicit and unavailable final gates are recorded as bootstrap gaps.
+`,
+    "utf8"
+  );
+}
+
+async function writeRoutingDecision(repo, workItemId, options = {}) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "routing-decision.md"),
+    `# Routing Decision: ${workItemId}
+
+work_item: ${workItemId}
+decision_kind: reviewer
+selected_route: ${options.selectedRoute ?? "local-qwen-baseline"}
+applicable_smell_ids:
+${(options.smellIds ?? ["BANDIT-SMELL-ADVERSARIAL-REVIEW"]).map((id) => `  - ${id}`).join("\n")}
+evidence_used:
+  - docs/work/${workItemId}/brief.md
+operator_input_status: none_required
+bootstrap_gaps:
+  - Live escalated reviewer integration is unavailable during bootstrap.
+escalation_outcome: ${options.escalationOutcome ?? "require_qwen_review"}
+final_decision: ${options.finalDecision ?? "Use the local Qwen baseline reviewer."}
+`,
+    "utf8"
+  );
+}
+
+async function writeEscalatedReview(repo, workItemId, options = {}) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "escalated-review.md"),
+    `# Escalated Review: ${workItemId}
+
+contract_version: 1
+work_item: ${workItemId}
+source_head: ${options.sourceHead ?? "unknown"}
+profile_id: ${options.profileId ?? "escalated-adversarial-placeholder"}
+trigger_rationale: ${options.triggerRationale ?? "Recorded smell trigger requires review beyond baseline local Qwen."}
+availability_status: ${options.availabilityStatus ?? "bootstrap_gap"}
+reviewer_verdict: ${options.reviewerVerdict ?? "bootstrap_gap"}
+disposition: ${options.disposition ?? "Live escalated reviewer unavailable; placeholder evidence records the bootstrap gap."}
+source_drift_status: ${options.sourceDriftStatus ?? "current"}
+bootstrap_gap_evidence:
+  - No live escalated adversarial reviewer integration exists yet.
 `,
     "utf8"
   );
