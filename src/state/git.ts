@@ -31,7 +31,7 @@ export function readGitShow(repoRoot: string, revision = "HEAD"): Promise<string
   return new Promise((resolve) => {
     execFile(
       "git",
-      ["show", "--stat", "--patch", "--find-renames", "--no-ext-diff", "--unified=80", revision],
+      ["show", "--stat", "--patch", "--find-renames", "--no-ext-diff", "--unified=20", revision],
       {
         cwd: repoRoot,
         maxBuffer: 1024 * 1024 * 4
@@ -62,7 +62,7 @@ export function readGitDiff(
         "--patch",
         "--find-renames",
         "--no-ext-diff",
-        "--unified=80",
+        "--unified=20",
         `${baseRevision}..${headRevision}`
       ],
       {
@@ -76,6 +76,28 @@ export function readGitDiff(
         }
 
         resolve(stdout.trim());
+      }
+    );
+  });
+}
+
+export function readLatestCommitForPath(
+  repoRoot: string,
+  relativePath: string
+): Promise<string | null> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      ["rev-list", "-1", "HEAD", "--", relativePath],
+      { cwd: repoRoot },
+      (error, stdout) => {
+        if (error) {
+          resolve(null);
+          return;
+        }
+
+        const commit = stdout.trim();
+        resolve(commit.length > 0 ? commit : null);
       }
     );
   });

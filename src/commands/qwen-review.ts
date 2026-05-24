@@ -7,7 +7,8 @@ import {
   readCurrentGitHead,
   readGitDiff,
   readGitShow,
-  readGitStatusShort
+  readGitStatusShort,
+  readLatestCommitForPath
 } from "../state/git.js";
 import { writeLocalQwenReview } from "../state/local-qwen-review.js";
 import { readWorkItem } from "../state/work-items.js";
@@ -185,12 +186,17 @@ function expandCommandArg(arg: string, prompt: string) {
 
 async function readReviewPacket(repoRoot: string, workItemId: string) {
   const artifactContents = await readWorkItemArtifacts(repoRoot, workItemId);
+  const redEvidenceHead = await readLatestCommitForPath(
+    repoRoot,
+    `docs/work/${workItemId}/red-evidence.md`
+  );
   const previousLandingHead = await readPreviousLandingHead(repoRoot, workItemId);
-  const sourceDiff = previousLandingHead
-    ? await readGitDiff(repoRoot, previousLandingHead)
+  const sourceDiffBase = redEvidenceHead ?? previousLandingHead;
+  const sourceDiff = sourceDiffBase
+    ? await readGitDiff(repoRoot, sourceDiffBase)
     : await readGitShow(repoRoot);
-  const sourceDiffRange = previousLandingHead
-    ? `${previousLandingHead}..HEAD`
+  const sourceDiffRange = sourceDiffBase
+    ? `${sourceDiffBase}..HEAD`
     : "HEAD";
 
   return {
