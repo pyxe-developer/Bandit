@@ -5,18 +5,19 @@
 **Phase:** 5 - UAT And Auto-Landing.
 
 **State:** `BANDIT-014` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-AGENT`. Its brief is recorded. RED evidence is the next
-required stage before production implementation.
+`BANDIT-GAP-LANDING-AGENT`. Its brief and RED evidence are recorded.
+Implementation is the next required stage.
 
 **Last completed milestone:** `BANDIT-013` converted auto-landing eligibility
 into repo-native policy state and a read-only CLI check.
 
-**Current next action:** Create RED evidence for `BANDIT-014` by proving that
-Bandit has no durable Landing Agent contract or command that can execute and
-record landing actions. Do not create any later gap chore, Phase 6 work, Phase
-7 work, feature work, or broader cockpit work until `BANDIT-014` has landing
-action evidence, retrospective closeout, and a resolved, operator-blocked, or
-no-action ledger disposition for `BANDIT-GAP-LANDING-AGENT`.
+**Current next action:** Implement the smallest Landing Agent contract
+validation path and `bandit land <work-item-id> --action local-record` command
+that satisfies `docs/work/BANDIT-014/red-evidence.md`. Do not create any later
+gap chore, Phase 6 work, Phase 7 work, feature work, or broader cockpit work
+until `BANDIT-014` has landing action evidence, retrospective closeout, and a
+resolved, operator-blocked, or no-action ledger disposition for
+`BANDIT-GAP-LANDING-AGENT`.
 
 ## Active Work
 
@@ -33,7 +34,7 @@ Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check.
 
-**Expected next deliverable:** RED evidence for `BANDIT-014`.
+**Expected next deliverable:** Implementation evidence for `BANDIT-014`.
 
 ## Known Bootstrap Gaps
 
@@ -123,8 +124,8 @@ no-action ledger disposition.
 
 ## Required Operator Input
 
-None before creating RED evidence or implementing `BANDIT-014`. Repo artifacts
-define the routing decision.
+None before implementing `BANDIT-014`. Repo artifacts define the routing
+decision.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

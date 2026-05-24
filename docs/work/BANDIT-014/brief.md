@@ -2,10 +2,11 @@
 
 ## Status
 
-Bootstrap-gap chore brief created on 2026-05-24. RED evidence, implementation
-evidence, review evidence, landing verdict, landing action, and retrospective
-evidence remain required before this work item can land or the next bootstrap
-gap chore can begin.
+Bootstrap-gap chore brief created on 2026-05-24. RED evidence is recorded in
+`docs/work/BANDIT-014/red-evidence.md`. Implementation evidence, review
+evidence, landing verdict, landing action, and retrospective evidence remain
+required before this work item can land or the next bootstrap gap chore can
+begin.
 
 ## Goal
 
@@ -165,7 +166,7 @@ policy, business, cost, and risk boundaries.
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` name Phase 5, no active work before this brief, `BANDIT-013` landing-action evidence, and `BANDIT-GAP-LANDING-AGENT` as the next bootstrap-gap chore. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
-| Stage 2: Test Design And RED Evidence | `pending` | Required before production implementation. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-014/red-evidence.md` records focused failing tests for the missing Landing Agent contract, command, UAT boundary, dirty-worktree refusal, unsupported action refusal, and landing-action evidence. |
 | Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Live CodeRabbit polling and live escalated reviewer routing remain bootstrap-limited; replacement evidence is required during closeout. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | This chore exists to replace the Landing Agent bootstrap gap; UAT is not required for this non-product workflow-infrastructure chore. |

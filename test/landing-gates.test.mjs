@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -475,6 +475,110 @@ test("auto-land-check does not mutate git state or repo artifacts", async () => 
   assert.equal(afterHead.stdout, beforeHead.stdout);
 });
 
+test("validate fails closed when the Landing Agent contract is missing", async () => {
+  const repo = await createInitializedRepo();
+  await rm(path.join(repo, ".bandit/policy/landing-agent.json"), { force: true });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Missing Landing Agent contract/);
+});
+
+test("land records landing action evidence for an eligible chore", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-926", "Landing Agent Eligible Chore");
+  await writeReviewEvidence(repo, "BANDIT-926", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-926", { sourceHead });
+
+  const result = await runBandit(repo, [
+    "land",
+    "BANDIT-926",
+    "--action",
+    "local-record"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(
+    result.stdout,
+    /Landing action recorded: docs\/work\/BANDIT-926\/landing-action\.md/
+  );
+  assert.match(result.stdout, /Action type: local_record/);
+
+  const landingAction = await readFile(
+    path.join(repo, "docs/work/BANDIT-926/landing-action.md"),
+    "utf8"
+  );
+  assert.match(landingAction, /# BANDIT-926 Landing Action/);
+  assert.match(landingAction, /`landed`/);
+  assert.match(landingAction, /local_record/);
+  assert.match(landingAction, new RegExp(sourceHead));
+});
+
+test("land blocks feature slices without current UAT approval", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-927", "Landing Agent Missing UAT");
+  await writeReviewEvidence(repo, "BANDIT-927", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-927", {
+    sourceHead,
+    uatStatus: "pass"
+  });
+
+  const result = await runBandit(repo, [
+    "land",
+    "BANDIT-927",
+    "--action",
+    "local-record"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Landing blocked: safe-to-land requires current UAT approval evidence/
+  );
+});
+
+test("land blocks a dirty worktree before writing landing evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-928", "Landing Agent Dirty Worktree");
+  await writeReviewEvidence(repo, "BANDIT-928", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-928", { sourceHead });
+  await writeFile(path.join(repo, "dirty.txt"), "uncommitted\n", "utf8");
+
+  const result = await runBandit(repo, [
+    "land",
+    "BANDIT-928",
+    "--action",
+    "local-record"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Landing blocked: worktree is dirty/);
+});
+
+test("land refuses unsupported remote or deploy actions", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-929", "Landing Agent Unsupported Action");
+  await writeReviewEvidence(repo, "BANDIT-929", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-929", { sourceHead });
+
+  const result = await runBandit(repo, ["land", "BANDIT-929", "--action", "push"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Unsupported landing action: push/);
+});
+
 test("validate fails closed when the auto-landing policy artifact is malformed", async () => {
   const repo = await createInitializedRepo();
   await writeAutoLandingPolicy(repo, {
@@ -753,6 +857,7 @@ async function createInitializedRepo(options = {}) {
   await writeTemplates(repo, options);
   await writeLocalQwenProfile(repo);
   await writeSmellCatalog(repo, options.smellCatalog ?? validSmellCatalog);
+  await writeLandingAgentContract(repo);
 
   return repo;
 }
@@ -788,6 +893,31 @@ async function writeAutoLandingPolicy(repo, overrides = {}) {
   const destination = path.join(repo, ".bandit/policy/auto-landing.json");
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
+}
+
+async function writeLandingAgentContract(repo, overrides = {}) {
+  const contract = {
+    version: 1,
+    authority: "cli_owned_landing_agent",
+    supported_actions: ["local_record"],
+    require_auto_land_eligible: true,
+    require_clean_worktree: true,
+    write_landing_action: true,
+    allow_merge: false,
+    allow_push: false,
+    allow_deploy: false,
+    operator_owned_boundaries: [
+      "product_uat",
+      "policy_change",
+      "business_tradeoff",
+      "cost_override",
+      "risk_override"
+    ],
+    ...overrides
+  };
+  const destination = path.join(repo, ".bandit/policy/landing-agent.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(contract, null, 2)}\n`, "utf8");
 }
 
 async function writeReviewEvidence(repo, workItemId, options = {}) {
