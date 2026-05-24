@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Implement `BANDIT-017` - Landing Gate Complexity And Git
-Diagnostics Hardening.
+**Current next step:** Record `BANDIT-017` review and cross-model gate evidence,
+including Local Qwen review.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -29,7 +29,9 @@ now, and required the remaining findings to become the next chore.
 `BANDIT-017` is active as
 `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief is recorded in
 `docs/work/BANDIT-017/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-017/red-evidence.md`, and the next step is implementation.
+`docs/work/BANDIT-017/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-017/implementation-evidence.md`, and the next step is review
+and cross-model gate evidence.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -267,7 +269,7 @@ Completed work:
 
 Queued next:
 
-- Implementation for `BANDIT-017`.
+- Review and cross-model gate evidence for `BANDIT-017`.
 
 Expected capabilities:
 

@@ -161,6 +161,26 @@ export function readGitChangedPaths(
   });
 }
 
+export function createCachedGitChangedPathsReader() {
+  const cache = new Map<string, Promise<GitChangedPathsResult>>();
+
+  return (
+    repoRoot: string,
+    baseRevision: string,
+    headRevision = "HEAD"
+  ): Promise<GitChangedPathsResult> => {
+    const cacheKey = `${repoRoot}\0${baseRevision}\0${headRevision}`;
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+
+    const result = readGitChangedPaths(repoRoot, baseRevision, headRevision);
+    cache.set(cacheKey, result);
+    return result;
+  };
+}
+
 async function classifyGitChangedPathsError(
   repoRoot: string,
   stderr: string,

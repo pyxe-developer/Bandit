@@ -1,4 +1,7 @@
-import { readCurrentGitHead, readGitChangedPaths } from "../state/git.js";
+import {
+  createCachedGitChangedPathsReader,
+  readCurrentGitHead
+} from "../state/git.js";
 import {
   codeRabbitReviewHasBlockingFindings,
   type CodeRabbitReviewEvidence,
@@ -8,6 +11,11 @@ import type { EscalatedReviewEvidence } from "../state/escalated-review.js";
 import { readOptionalParsedEscalatedReview } from "../state/escalated-review.js";
 import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
+import {
+  evaluateReviewSourceStaleness,
+  hasConcretePmRationaleForLocalQwenFindings,
+  isRecordedHeadStale
+} from "../state/landing-stage4.js";
 import type { LocalQwenReviewEvidence } from "../state/local-qwen-review.js";
 import { readLocalQwenReview } from "../state/local-qwen-review.js";
 import type { ReviewEvidence } from "../state/review-evidence.js";
@@ -135,8 +143,15 @@ async function evaluateLandingReadiness(
   uatApproval: UatApproval | null
 ): Promise<LandingReadiness> {
   const problems: string[] = [];
-  const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
-  const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
+  const readGitChangedPaths = createCachedGitChangedPathsReader();
+  const reviewEvidenceIsStale = isRecordedHeadStale(
+    reviewEvidence.sourceHead,
+    currentHead
+  );
+  const landingVerdictIsStale = isRecordedHeadStale(
+    landingVerdict.sourceHead,
+    currentHead
+  );
   const codeRabbitReviewIsStale = codeRabbitReview
     ? await isReviewSourceStale(
         repoRoot,
@@ -145,7 +160,8 @@ async function evaluateLandingReadiness(
         currentHead,
         stage4EvidenceHeadPolicy,
         "CodeRabbit review",
-        problems
+        problems,
+        readGitChangedPaths
       )
     : false;
   const localQwenReviewIsStale = localQwenReview
@@ -156,7 +172,8 @@ async function evaluateLandingReadiness(
         currentHead,
         stage4EvidenceHeadPolicy,
         "Local Qwen review",
-        problems
+        problems,
+        readGitChangedPaths
       )
     : false;
   const escalatedReviewIsStale = escalatedReview
@@ -167,11 +184,12 @@ async function evaluateLandingReadiness(
         currentHead,
         stage4EvidenceHeadPolicy,
         "Escalated review",
-        problems
+        problems,
+        readGitChangedPaths
       )
     : false;
   const uatApprovalIsStale = uatApproval
-    ? isStale(uatApproval.sourceHead, currentHead)
+    ? isRecordedHeadStale(uatApproval.sourceHead, currentHead)
     : false;
   const sourceDriftStatus =
     reviewEvidenceIsStale ||
@@ -628,12 +646,6 @@ function isEscalatedReviewRequired(
   });
 }
 
-function isStale(recordedHead: string, currentHead: string | null) {
-  return Boolean(
-    currentHead && recordedHead !== "unknown" && recordedHead !== currentHead
-  );
-}
-
 async function isReviewSourceStale(
   repoRoot: string,
   workItemId: string,
@@ -641,153 +653,23 @@ async function isReviewSourceStale(
   currentHead: string | null,
   stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy,
   evidenceLabel: string,
-  problems: string[]
+  problems: string[],
+  readGitChangedPaths: ReturnType<typeof createCachedGitChangedPathsReader>
 ) {
-  if (!isStale(recordedHead, currentHead)) {
-    return false;
+  const result = await evaluateReviewSourceStaleness({
+    repoRoot,
+    workItemId,
+    recordedHead,
+    currentHead,
+    stage4EvidenceHeadPolicy,
+    evidenceLabel,
+    readGitChangedPaths
+  });
+  if (result.problem) {
+    problems.push(result.problem);
   }
 
-  if (!currentHead) {
-    return false;
-  }
-
-  const changedPaths = await readGitChangedPaths(repoRoot, recordedHead, currentHead);
-  if (changedPaths.status === "error") {
-    problems.push(
-      `${evidenceLabel} changed-path check failed: ${changedPaths.reason}`
-    );
-    return true;
-  }
-
-  return changedPaths.paths.some(
-    (changedPath) =>
-      !isTerminalDispositionOnlyPath(
-        changedPath,
-        workItemId,
-        stage4EvidenceHeadPolicy
-      )
-  );
-}
-
-function isTerminalDispositionOnlyPath(
-  changedPath: string,
-  workItemId: string,
-  stage4EvidenceHeadPolicy: Stage4EvidenceHeadPolicy
-) {
-  return stage4EvidenceHeadPolicy.terminalDispositionOnlyPathPatterns.some(
-    (pattern) => matchesPolicyPathPattern(changedPath, pattern, workItemId)
-  );
-}
-
-function matchesPolicyPathPattern(
-  changedPath: string,
-  pattern: string,
-  workItemId: string
-) {
-  const resolvedPattern = pattern.replaceAll("<work_item_id>", workItemId);
-  if (resolvedPattern.startsWith("exact:")) {
-    return changedPath === resolvedPattern.slice("exact:".length);
-  }
-
-  if (resolvedPattern.startsWith("prefix:")) {
-    return changedPath.startsWith(resolvedPattern.slice("prefix:".length));
-  }
-
-  if (resolvedPattern.startsWith("glob:")) {
-    return globPatternToRegExp(resolvedPattern.slice("glob:".length)).test(
-      changedPath
-    );
-  }
-
-  if (resolvedPattern.startsWith("regex:")) {
-    try {
-      return new RegExp(resolvedPattern.slice("regex:".length)).test(changedPath);
-    } catch {
-      return false;
-    }
-  }
-
-  if (resolvedPattern.endsWith("/")) {
-    return changedPath.startsWith(resolvedPattern);
-  }
-
-  return changedPath === resolvedPattern;
-}
-
-function globPatternToRegExp(pattern: string) {
-  let source = "^";
-
-  for (let index = 0; index < pattern.length; index += 1) {
-    const character = pattern[index];
-    const nextCharacter = pattern[index + 1];
-
-    if (character === "*" && nextCharacter === "*") {
-      source += ".*";
-      index += 1;
-      continue;
-    }
-
-    if (character === "*") {
-      source += "[^/]*";
-      continue;
-    }
-
-    source += escapeRegExp(character ?? "");
-  }
-
-  return new RegExp(`${source}$`);
-}
-
-function hasConcretePmRationale(disposition: string) {
-  if (/without recorded rationale/i.test(disposition)) {
-    return false;
-  }
-
-  return (
-    hasConcreteReasonAfterMarker(disposition, /\bbecause\b/i) ||
-    hasConcreteReasonAfterMarker(disposition, /\b(?:pm\s+)?rationale\s*:/i) ||
-    hasConcreteReasonAfterMarker(disposition, /\breason\s*:/i)
-  );
-}
-
-function hasConcretePmRationaleForLocalQwenFindings(
-  structuredRationale: string,
-  legacyDisposition: string
-) {
-  if (structuredRationale) {
-    return hasSpecificPmReasonText(structuredRationale);
-  }
-
-  return hasConcretePmRationale(legacyDisposition);
-}
-
-function hasConcreteReasonAfterMarker(disposition: string, marker: RegExp) {
-  const match = marker.exec(disposition);
-  if (!match) {
-    return false;
-  }
-
-  const reason = disposition.slice(match.index + match[0].length).trim();
-  if (!hasSpecificPmReasonText(reason)) {
-    return false;
-  }
-
-  return true;
-}
-
-function hasSpecificPmReasonText(reason: string) {
-  const normalizedReason = reason.replace(/[.!:;,\s]+$/g, "").trim();
-  if (normalizedReason.length === 0) {
-    return false;
-  }
-
-  return !/^(tbd|todo|pending|none|n\/a|na|later|unknown|unclear|ok|okay|fine|accepted|safe|valid)$/i.test(
-    normalizedReason
-  );
-}
-
-function escapeRegExp(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return result.isStale;
 }
 
 function isPassingOrBootstrapGap(value: string) {

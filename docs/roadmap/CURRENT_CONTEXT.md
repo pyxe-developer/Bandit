@@ -12,20 +12,20 @@ future-hardening loop, directed Codex PM to land `BANDIT-016` now, and required
 the remaining Local Qwen findings to become the next chore.
 
 `BANDIT-017` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief is recorded in
-`docs/work/BANDIT-017/brief.md`, and `.bandit/bootstrap-gaps.json` links the
-gap to `BANDIT-017` as an active chore. Do not begin live escalated-reviewer,
-work-item creation, artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until `BANDIT-017` is landed or explicitly
-dispositioned.
+`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief, RED evidence, and
+implementation evidence are recorded in `docs/work/BANDIT-017/`, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-017` as an active
+chore. Do not begin live escalated-reviewer, work-item creation, artifact
+creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
+Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
+until `BANDIT-017` is landed or explicitly dispositioned.
 
 **Last completed milestone:** `BANDIT-016` resolved Stage 4 evidence-head
 semantics and landed under operator-owned loop disposition, with remaining
 Local Qwen complexity findings routed to `BANDIT-017`.
 
-**Current next action:** Implement `BANDIT-017` - Landing Gate Complexity And
-Git Diagnostics Hardening.
+**Current next action:** Record `BANDIT-017` review and cross-model gate
+evidence, including Local Qwen review.
 
 ## Active Work
 
@@ -45,7 +45,7 @@ Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics.
 
-**Expected next deliverable:** `BANDIT-017` implementation evidence.
+**Expected next deliverable:** `BANDIT-017` review evidence.
 
 ## Known Bootstrap Gaps
 
@@ -155,7 +155,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; implementation is next.
+1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; review and cross-model gate evidence is next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
