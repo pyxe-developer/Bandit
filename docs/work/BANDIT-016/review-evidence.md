@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-016
-source_head: 81f603e653654558b67a32e1d2fc36201c2523c6
+source_head: 49b7471353458d08d4ba69f1d4cab8dcdd823921
 verification_state: pass
 verification_evidence:
   - node --test test/landing-gates.test.mjs passed 41/41 focused landing-gate tests at implementation source head d9bb6fe78e4ef0aeff4a4f208a650809b750cd61.
@@ -18,6 +18,8 @@ verification_evidence:
   - npm run bandit -- qwen-review BANDIT-016 was rerun from a clean worktree at source head 81f603e653654558b67a32e1d2fc36201c2523c6 and returned a non_blocking reviewer verdict with two narrowed future-hardening findings.
   - Follow-up targeted Local Qwen finding repair is recorded in docs/work/BANDIT-016/qwen-finding-repair.md. node --test test/landing-gates.test.mjs passed 45/45 and npm run typecheck passed after replacing the fixed PM-rationale length cutoff and adding categorized git changed-path diagnostics.
   - npm run bandit -- qwen-review BANDIT-016 was rerun from a clean worktree at source head 954a8efddfb8fa77d0fa4e0a61ed516a5f8e705f and returned a non_blocking reviewer verdict with three future-hardening findings.
+  - Targeted hardening for the three latest Local Qwen findings is recorded in docs/work/BANDIT-016/qwen-finding-repair.md. node --test test/landing-gates.test.mjs passed 48/48, npm test passed 154/154, npm run typecheck passed, npm run bandit -- validate passed, and git diff --check passed before repair commit 49b7471353458d08d4ba69f1d4cab8dcdd823921.
+  - npm run bandit -- qwen-review BANDIT-016 was rerun from a clean worktree at source head 49b7471353458d08d4ba69f1d4cab8dcdd823921 and returned a non_blocking reviewer verdict with two future-hardening findings.
   - The CodeRabbit and escalated-review source head difference is limited to terminal disposition-only paths allowed by .bandit/policy/stage4-evidence-head.json.
 coderabbit_state: pass
 coderabbit_replacement_evidence:
@@ -29,10 +31,11 @@ escalated_review_required: true
 escalated_review_state: bootstrap_gap
 escalated_review_rationale: BANDIT-016 changes Stage 4 landing-readiness semantics, source-freshness policy, PM rationale enforcement, and review-loop closure behavior. Live escalated-reviewer routing remains unavailable; docs/work/BANDIT-016/escalated-review.md records the bootstrap-limited placeholder disposition.
 pm_disposition: non_blocking
+pm_disposition_rationale: Latest Local Qwen findings require targeted repair or explicit PM disposition before landing.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
 source_drift_status: current
 bootstrap_gaps:
   - Live escalated adversarial reviewer routing remains unavailable; docs/work/BANDIT-016/escalated-review.md records the bootstrap-limited placeholder disposition.
-  - Local Qwen recorded three non-blocking concerns after the follow-up repair rerun: structured PM disposition fields, expanded changed-path error categories for shallow clone or partial fetch cases, and future glob or regex policy-pattern support if needed. The next action is targeted repair or explicit PM disposition hardening before another Local Qwen rerun; a safe-to-land landing verdict is not yet valid because the Local Qwen reviewer verdict is not pass.
+  - Local Qwen recorded two non-blocking concerns after the targeted-hardening rerun: land-check.ts size and complexity, and async git state checks during changed-path error classification. The next action is targeted repair or explicit PM disposition hardening before another Local Qwen rerun; a safe-to-land landing verdict is not yet valid because the Local Qwen reviewer verdict is not pass.

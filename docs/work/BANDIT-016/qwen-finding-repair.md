@@ -172,3 +172,23 @@ npm run bandit -- qwen-review BANDIT-016
 
 The rerun must produce a passing Local Qwen reviewer verdict before a valid
 `safe-to-land` landing verdict can be recorded.
+
+## Latest Rerun Result
+
+The clean-worktree Local Qwen rerun at targeted-hardening head
+`49b7471353458d08d4ba69f1d4cab8dcdd823921` completed and returned a
+`non_blocking` verdict. The previous three findings were resolved, and the
+latest findings are narrowed to future hardening for:
+
+- `land-check.ts` size and complexity; consider extracting stale-evaluation
+  and rationale-checking logic into a dedicated module to preserve readability
+  and testability.
+- `classifyGitChangedPathsError` latency on failed diff calls; consider
+  caching shallow/promisor repo state or deferring classification.
+
+Next, perform targeted repair or explicit PM disposition hardening for those
+latest findings, then rerun:
+
+```sh
+npm run bandit -- qwen-review BANDIT-016
+```
