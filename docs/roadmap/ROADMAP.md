@@ -16,11 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Triage the Local Qwen blocker findings recorded for
-`BANDIT-015` at PM disposition head
-`068c4482ba156a158abd92faba2fcee2841f2288`, then repair or explicitly
-disposition them and rerun Local Qwen before continuing the remaining
-landing-gate closeout sequence. `BANDIT-014` resolved the Landing Agent
+**Current next step:** Rerun Local Qwen for `BANDIT-015` at the
+blocker-disposition head before continuing the remaining landing-gate closeout
+sequence. `BANDIT-014` resolved the Landing Agent
 bootstrap gap by adding a
 repo-native contract, validation path, and local-record landing command.
 `BANDIT-015` is now active for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
@@ -34,7 +32,9 @@ closeout, and disposition the `redactSecrets` substring over-redaction
 hardening concern. Codex PM disposition is recorded in
 `docs/work/BANDIT-015/qwen-rerun-disposition.md`. Local Qwen was rerun again at
 PM disposition head `068c4482ba156a158abd92faba2fcee2841f2288` and returned a
-`blocker` verdict in `docs/work/BANDIT-015/local-qwen-review.md`.
+`blocker` verdict in `docs/work/BANDIT-015/local-qwen-review.md`. Codex PM
+triage of those blocker findings is recorded in
+`docs/work/BANDIT-015/qwen-blocker-disposition.md`.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -230,9 +230,8 @@ Completed work:
 
 Queued next:
 
-- Triage, repair, or explicitly disposition Local Qwen blocker findings for
-  `BANDIT-015` - Live CodeRabbit Pre-Landing Loop at the PM disposition head,
-  then rerun Local Qwen before remaining landing-gate closeout.
+- Rerun Local Qwen for `BANDIT-015` - Live CodeRabbit Pre-Landing Loop at the
+  blocker-disposition head before remaining landing-gate closeout.
 
 Expected capabilities:
 
@@ -265,8 +264,9 @@ Current rule:
   Qwen rerun findings are dispositioned in
   `docs/work/BANDIT-015/qwen-rerun-disposition.md`. The current local Qwen
   rerun at PM disposition head `068c4482ba156a158abd92faba2fcee2841f2288`
-  returned a `blocker` verdict; its findings must be triaged, repaired or
-  explicitly dispositioned, and rerun before remaining landing-gate closeout.
+  returned a `blocker` verdict; its findings are triaged in
+  `docs/work/BANDIT-015/qwen-blocker-disposition.md`, and Local Qwen must be
+  rerun before remaining landing-gate closeout.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -278,7 +278,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; Local Qwen blocker triage/repair/disposition and rerun next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; Local Qwen rerun at the blocker-disposition head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
