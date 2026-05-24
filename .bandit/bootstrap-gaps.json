@@ -41,8 +41,8 @@
       ],
       "linked_work_item": "BANDIT-015",
       "rationale": "CodeRabbit evidence can be captured manually, but live API polling, PR comment repair orchestration, and rerun automation need later integration work.",
-      "verification_target": "docs/work/BANDIT-015/red-evidence.md",
-      "next_action": "Implement BANDIT-015 from the recorded RED evidence; do not begin another gap chore until this one lands or is explicitly blocked/dispositioned."
+      "verification_target": "docs/work/BANDIT-015/implementation-evidence.md",
+      "next_action": "Complete BANDIT-015 review and landing-gate closeout; do not begin another gap chore until this one lands or is explicitly blocked/dispositioned."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "command": "bandit coderabbit-review live <work-item-id>",
+  "provider": "coderabbit-live",
+  "source_of_truth": "docs/work/<ID>/coderabbit-review.md",
+  "required_inputs": {
+    "work_item": "docs/work/<ID>/brief.md",
+    "pr_context": "--pr <number> or fixture prNumber",
+    "credential": "GITHUB_TOKEN or CODERABBIT_TOKEN"
+  },
+  "fixture_mode": {
+    "flag": "--fixture <path>",
+    "purpose": "deterministic tests without network, paid services, or operator approval"
+  },
+  "supported_review_states": [
+    "completed",
+    "failed",
+    "queued",
+    "timeout",
+    "blocked",
+    "inconclusive",
+    "unavailable"
+  ],
+  "supported_verdicts": [
+    "pass",
+    "blocker",
+    "non_blocking",
+    "bootstrap_gap"
+  ],
+  "fail_closed_states": [
+    "missing_pr_context",
+    "missing_credential",
+    "request_changes",
+    "unresolved_actionable_findings",
+    "stale_source_head",
+    "provider_unavailable",
+    "provider_timeout",
+    "malformed_provider_response"
+  ],
+  "secret_policy": {
+    "repo_artifact_values_allowed": [
+      "credential variable names",
+      "provider names",
+      "PR numbers",
+      "redacted provider errors"
+    ],
+    "repo_artifact_values_forbidden": [
+      "token values",
+      "authorization headers",
+      "provider secrets"
+    ]
+  },
+  "out_of_scope_actions": [
+    "autofix",
+    "merge",
+    "push",
+    "deploy",
+    "product_uat",
+    "paid_model_routing"
+  ]
+}

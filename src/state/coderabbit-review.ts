@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   requireResolvedOperatorInput,
@@ -30,6 +30,21 @@ export type CodeRabbitReviewEvidence = {
   displayPath: string;
 };
 
+export type CodeRabbitReviewWriteInput = {
+  workItemId: string;
+  sourceHead: string;
+  provider: string;
+  reviewTarget: string;
+  reviewState: string;
+  coderabbitVerdict: string;
+  findingsStatus: string;
+  findingsDisposition: string;
+  operatorInputStatus: string;
+  sourceDriftStatus: string;
+  executableEvidence: string[];
+  bootstrapGaps: string[];
+};
+
 const CODERABBIT_REVIEW_FILE = "coderabbit-review.md";
 const REQUIRED_CODERABBIT_SCALARS = [
   "contract_version",
@@ -53,6 +68,8 @@ const REQUIRED_CODERABBIT_LISTS = [
 const REVIEW_STATES = new Set([
   "completed",
   "failed",
+  "queued",
+  "timeout",
   "blocked",
   "inconclusive",
   "unavailable",
@@ -127,6 +144,38 @@ export function codeRabbitReviewHasBlockingFindings(
   evidence: CodeRabbitReviewEvidence
 ) {
   return BLOCKING_FINDINGS_STATUSES.has(evidence.findingsStatus);
+}
+
+export async function writeCodeRabbitReview(
+  repoRoot: string,
+  input: CodeRabbitReviewWriteInput
+) {
+  const displayPath = codeRabbitReviewDisplayPath(input.workItemId);
+  const workDir = path.join(repoRoot, "docs/work", input.workItemId);
+  const content = [
+    `# CodeRabbit Review: ${input.workItemId}`,
+    "",
+    "contract_version: 1",
+    `work_item: ${input.workItemId}`,
+    `source_head: ${input.sourceHead}`,
+    `provider: ${input.provider}`,
+    `review_target: ${input.reviewTarget}`,
+    `review_state: ${input.reviewState}`,
+    `coderabbit_verdict: ${input.coderabbitVerdict}`,
+    `findings_status: ${input.findingsStatus}`,
+    `findings_disposition: ${input.findingsDisposition}`,
+    `operator_input_status: ${input.operatorInputStatus}`,
+    `source_drift_status: ${input.sourceDriftStatus}`,
+    "executable_evidence:",
+    ...formatList(input.executableEvidence),
+    "bootstrap_gaps:",
+    ...formatList(input.bootstrapGaps)
+  ].join("\n").concat("\n");
+
+  await mkdir(workDir, { recursive: true });
+  await writeFile(path.join(workDir, CODERABBIT_REVIEW_FILE), content, "utf8");
+
+  return displayPath;
 }
 
 function parseCodeRabbitReview(
@@ -276,6 +325,10 @@ function requireField(fields: ParsedFields, field: string) {
 
 function codeRabbitReviewDisplayPath(workItemId: string) {
   return `docs/work/${workItemId}/${CODERABBIT_REVIEW_FILE}`;
+}
+
+function formatList(items: string[]) {
+  return items.length > 0 ? items.map((item) => `  - ${item}`) : ["  - none"];
 }
 
 function isUnavailableReviewState(reviewState: string) {

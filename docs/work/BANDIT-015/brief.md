@@ -2,9 +2,9 @@
 
 ## Status
 
-Bootstrap-gap chore brief created on 2026-05-24. RED evidence is recorded in
-`docs/work/BANDIT-015/red-evidence.md`. Production implementation is the next
-required action.
+Bootstrap-gap chore brief created on 2026-05-24. RED evidence and
+implementation evidence are recorded. Review and landing-gate closeout is the
+next required action.
 
 ## Goal
 
@@ -178,8 +178,8 @@ policy, business, cost, and risk boundaries.
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and `bandit gaps list` identify `BANDIT-GAP-LIVE-CODERABBIT` as the next queued gap. `BANDIT-014` has landing-action evidence, retrospective closeout, and a resolved gap-ledger disposition. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `test/coderabbit-state.test.mjs` now contains seven focused live CodeRabbit loop RED tests, and `docs/work/BANDIT-015/red-evidence.md` records the failing focused run. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
-| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | This chore exists to replace the live CodeRabbit bootstrap gap. Live escalated reviewer routing remains bootstrap-limited and replacement evidence is required during closeout. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-015/implementation-evidence.md` records passing focused tests, full tests, typecheck, validation, clean-code compliance, and the artifact/source-of-truth mapping. |
+| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit/review evidence, local Qwen review, escalated-review disposition, and landing verdict remain required before landing. Live escalated reviewer routing remains bootstrap-limited and replacement evidence is required during closeout. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | UAT is not required for this non-product workflow-infrastructure chore. Landing action evidence is required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 

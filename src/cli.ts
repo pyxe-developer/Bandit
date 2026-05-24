@@ -95,7 +95,7 @@ async function main() {
   }
 
   if (command === "coderabbit-review") {
-    const result = await coderabbitReview(process.cwd(), args[0]);
+    const result = await coderabbitReview(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }
