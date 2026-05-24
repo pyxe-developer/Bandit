@@ -4,7 +4,9 @@ import path from "node:path";
 import test from "node:test";
 import {
   createTempRepo,
+  localQwenTemplate,
   runBandit,
+  writeLocalQwenProfile,
   writeWorkBrief
 } from "./helpers/bandit-cli.mjs";
 
@@ -113,7 +115,8 @@ landing_agent_state:
 landing_agent_replacement_evidence:
 final_verdict:
 rationale:
-`
+`,
+  "docs/templates/local-qwen-review.md": localQwenTemplate
 };
 
 const validSmellCatalog = {
@@ -314,6 +317,7 @@ async function createInitializedRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
   await writeValidTemplates(repo, options);
+  await writeLocalQwenProfile(repo);
 
   return repo;
 }

@@ -3,7 +3,12 @@ import { access, cp, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { createTempRepo, runBandit } from "./helpers/bandit-cli.mjs";
+import {
+  createTempRepo,
+  localQwenTemplate,
+  runBandit,
+  writeLocalQwenProfile
+} from "./helpers/bandit-cli.mjs";
 
 const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
@@ -16,7 +21,8 @@ const requiredTemplateFiles = [
   "docs/templates/improvement-chore.md",
   "docs/templates/routing-decision.md",
   "docs/templates/review-evidence.md",
-  "docs/templates/landing-verdict.md"
+  "docs/templates/landing-verdict.md",
+  "docs/templates/local-qwen-review.md"
 ];
 
 const validTemplates = {
@@ -124,7 +130,8 @@ landing_agent_state:
 landing_agent_replacement_evidence:
 final_verdict:
 rationale:
-`
+`,
+  "docs/templates/local-qwen-review.md": localQwenTemplate
 };
 
 const validSmellCatalog = {
@@ -149,6 +156,7 @@ test("validate passes for initialized repo-native state with committed work arti
   await runBandit(repo, ["init"]);
   await copyCommittedTemplates(repo);
   await writeSmellCatalog(repo, validSmellCatalog);
+  await writeLocalQwenProfile(repo);
 
   const result = await runBandit(repo, ["validate"]);
 

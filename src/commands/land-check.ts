@@ -1,6 +1,8 @@
 import { readCurrentGitHead } from "../state/git.js";
 import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
+import type { LocalQwenReviewEvidence } from "../state/local-qwen-review.js";
+import { readLocalQwenReview } from "../state/local-qwen-review.js";
 import type { ReviewEvidence } from "../state/review-evidence.js";
 import { readReviewEvidence } from "../state/review-evidence.js";
 import { readWorkItem } from "../state/work-items.js";
@@ -15,10 +17,16 @@ export async function landCheck(repoRoot: string, workItemId?: string) {
   const reviewEvidence = await readReviewEvidence(repoRoot, workItemId);
   const landingVerdict = await readLandingVerdict(repoRoot, workItemId);
   const currentHead = await readCurrentGitHead(repoRoot);
+  const localQwenReview = await readRequiredLocalQwenReviewWhenClaimed(
+    repoRoot,
+    reviewEvidence,
+    landingVerdict
+  );
   const readiness = evaluateLandingReadiness(
     reviewEvidence,
     landingVerdict,
-    currentHead
+    currentHead,
+    localQwenReview
   );
 
   if (readiness.problems.length > 0) {
@@ -35,18 +43,23 @@ type LandingReadiness = {
   sourceDriftStatus: string;
   reviewEvidenceIsStale: boolean;
   landingVerdictIsStale: boolean;
+  localQwenReview: LocalQwenReviewEvidence | null;
   problems: string[];
 };
 
 function evaluateLandingReadiness(
   reviewEvidence: ReviewEvidence,
   landingVerdict: LandingVerdict,
-  currentHead: string | null
+  currentHead: string | null,
+  localQwenReview: LocalQwenReviewEvidence | null
 ): LandingReadiness {
   const reviewEvidenceIsStale = isStale(reviewEvidence.sourceHead, currentHead);
   const landingVerdictIsStale = isStale(landingVerdict.sourceHead, currentHead);
+  const localQwenReviewIsStale = localQwenReview
+    ? isStale(localQwenReview.sourceHead, currentHead)
+    : false;
   const sourceDriftStatus =
-    reviewEvidenceIsStale || landingVerdictIsStale
+    reviewEvidenceIsStale || landingVerdictIsStale || localQwenReviewIsStale
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
   const problems: string[] = [];
@@ -59,12 +72,17 @@ function evaluateLandingReadiness(
     problems.push("Landing verdict evidence is stale");
   }
 
+  if (localQwenReviewIsStale) {
+    problems.push("Local Qwen review evidence is stale");
+  }
+
   if (landingVerdict.finalVerdict === "safe-to-land") {
     problems.push(
       ...safeToLandProblems(
         reviewEvidence,
         landingVerdict,
-        reviewEvidenceIsStale || landingVerdictIsStale
+        reviewEvidenceIsStale || landingVerdictIsStale || localQwenReviewIsStale,
+        localQwenReview
       )
     );
   }
@@ -74,6 +92,7 @@ function evaluateLandingReadiness(
     sourceDriftStatus,
     reviewEvidenceIsStale,
     landingVerdictIsStale,
+    localQwenReview,
     problems
   };
 }
@@ -81,7 +100,8 @@ function evaluateLandingReadiness(
 function safeToLandProblems(
   reviewEvidence: ReviewEvidence,
   landingVerdict: LandingVerdict,
-  staleEvidence: boolean
+  staleEvidence: boolean,
+  localQwenReview: LocalQwenReviewEvidence | null
 ) {
   const problems: string[] = [];
 
@@ -134,6 +154,13 @@ function safeToLandProblems(
   }
 
   if (
+    reviewEvidence.localQwenState === "pass" ||
+    landingVerdict.localQwenState === "pass"
+  ) {
+    problems.push(...localQwenProblems(localQwenReview));
+  }
+
+  if (
     reviewEvidence.escalatedReviewRequired &&
     (!isPassingOrBootstrapGap(landingVerdict.escalatedReviewState) ||
       !isPassingOrBootstrapGap(reviewEvidence.escalatedReviewState))
@@ -176,6 +203,7 @@ function formatLandingCheck(
     `Verification: ${reviewEvidence.verificationState}`,
     `CodeRabbit: ${reviewEvidence.coderabbitState}`,
     `Local Qwen: ${reviewEvidence.localQwenState}`,
+    ...formatLocalQwenReviewLines(readiness.localQwenReview),
     `Escalated review: ${reviewEvidence.escalatedReviewState}`,
     `UAT: ${landingVerdict.uatStatus}`,
     `Clean code: ${landingVerdict.cleanCodeStatus}`,
@@ -184,6 +212,59 @@ function formatLandingCheck(
     ...reviewEvidence.bootstrapGaps.map((gap) => `  - ${gap}`),
     `Final verdict: ${landingVerdict.finalVerdict}`
   ].join("\n").concat("\n");
+}
+
+async function readRequiredLocalQwenReviewWhenClaimed(
+  repoRoot: string,
+  reviewEvidence: ReviewEvidence,
+  landingVerdict: LandingVerdict
+) {
+  if (
+    reviewEvidence.localQwenState !== "pass" &&
+    landingVerdict.localQwenState !== "pass"
+  ) {
+    return null;
+  }
+
+  return readLocalQwenReview(repoRoot, reviewEvidence.workItem);
+}
+
+function localQwenProblems(localQwenReview: LocalQwenReviewEvidence | null) {
+  if (!localQwenReview) {
+    return ["safe-to-land requires current local Qwen review evidence"];
+  }
+
+  const problems: string[] = [];
+
+  if (
+    localQwenReview.runStatus === "inconclusive" ||
+    localQwenReview.findingsStatus === "inconclusive"
+  ) {
+    problems.push("Local Qwen review is inconclusive");
+  }
+
+  if (localQwenReview.reviewerVerdict !== "pass") {
+    problems.push(
+      `Local Qwen reviewer verdict blocks landing: ${localQwenReview.reviewerVerdict}`
+    );
+  }
+
+  if (localQwenReview.sourceDriftStatus !== "current") {
+    problems.push("safe-to-land requires local Qwen source_drift_status current");
+  }
+
+  return problems;
+}
+
+function formatLocalQwenReviewLines(localQwenReview: LocalQwenReviewEvidence | null) {
+  if (!localQwenReview) {
+    return [];
+  }
+
+  return [
+    `Local Qwen evidence: ${localQwenReview.displayPath}`,
+    `Local Qwen profile: ${localQwenReview.profileId}`
+  ];
 }
 
 function isStale(recordedHead: string, currentHead: string | null) {

@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import {
   createTempRepo,
   runBandit,
+  writeLocalQwenProfile,
   writeWorkBrief
 } from "./helpers/bandit-cli.mjs";
 
@@ -376,6 +377,7 @@ async function createInitializedRepo() {
   await cp(committedPolicyRoot, path.join(repo, ".bandit/policy"), {
     recursive: true
   });
+  await writeLocalQwenProfile(repo);
   return repo;
 }
 

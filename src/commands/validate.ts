@@ -2,8 +2,10 @@ import { readFile } from "node:fs/promises";
 import { validateConfig } from "../state/config.js";
 import { validateEventLog } from "../state/events.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
+import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
 import { getBanditPaths } from "../state/paths.js";
 import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
+import { validateLocalQwenProfile } from "../state/reviewer-profiles.js";
 import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateTemplates } from "../state/templates.js";
@@ -19,8 +21,10 @@ export async function validateBandit(repoRoot: string) {
 
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
+  await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);
+  await validateLocalQwenReviewArtifacts(repoRoot);
   await validateReviewEvidenceArtifacts(repoRoot);
   await validateLandingVerdictArtifacts(repoRoot);
 

@@ -128,6 +128,25 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("final verdict", /^final_verdict:/im),
       metadata("rationale", /^rationale:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/local-qwen-review.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("profile ID", /^profile_id:/im),
+      metadata("runtime", /^runtime:/im),
+      metadata("model", /^model:/im),
+      metadata("run status", /^run_status:/im),
+      metadata("reviewer verdict", /^reviewer_verdict:/im),
+      metadata("findings status", /^findings_status:/im),
+      metadata("findings disposition", /^findings_disposition:/im),
+      metadata("operator input status", /^operator_input_status:/im),
+      metadata("source drift status", /^source_drift_status:/im),
+      metadata("executable evidence", /^executable_evidence:/im),
+      metadata("bootstrap gaps", /^bootstrap_gaps:/im)
+    ]
   }
 ];
 

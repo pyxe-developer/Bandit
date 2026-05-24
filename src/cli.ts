@@ -3,6 +3,7 @@ import { initBandit } from "./commands/init.js";
 import { draftWork } from "./commands/draft-work.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
+import { qwenReview } from "./commands/qwen-review.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
 import { validateBandit } from "./commands/validate.js";
@@ -52,8 +53,14 @@ async function main() {
     return;
   }
 
+  if (command === "qwen-review") {
+    const result = await qwenReview(process.cwd(), args[0]);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review>`);
   process.exitCode = 1;
 }
 
