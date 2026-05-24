@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 3 - Routing And Smell Detection.
 
-**Current next step:** Create the `BANDIT-004` brief for the first Phase 3 routing and smell-detection slice.
+**Current next step:** Create RED evidence and failing tests for `BANDIT-004`, the first Phase 3 routing and smell-detection slice.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, and passing verification.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` has a brief and is ready for RED evidence.
 
 ## Phase Map
 
@@ -133,8 +133,8 @@ Goal: Let Codex PM manage technical decisions from policy.
 
 Active work:
 
-- none.
-- Next step: create `BANDIT-004` brief for the first routing and smell-detection slice.
+- `BANDIT-004` - Routing Decision And Smell Trigger Catalog.
+- Next step: create RED evidence and failing tests.
 
 Expected capabilities:
 
