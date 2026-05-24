@@ -14,7 +14,9 @@ const requiredTemplateFiles = [
   "docs/templates/slice.md",
   "docs/templates/chore.md",
   "docs/templates/improvement-chore.md",
-  "docs/templates/routing-decision.md"
+  "docs/templates/routing-decision.md",
+  "docs/templates/review-evidence.md",
+  "docs/templates/landing-verdict.md"
 ];
 
 const validTemplates = {
@@ -82,6 +84,46 @@ operator_input_status:
 bootstrap_gaps:
 escalation_outcome:
 final_decision:
+`,
+  "docs/templates/review-evidence.md": `# Review Evidence Template
+
+contract_version:
+work_item:
+source_head:
+verification_state:
+verification_evidence:
+coderabbit_state:
+coderabbit_replacement_evidence:
+local_qwen_state:
+local_qwen_replacement_evidence:
+escalated_review_required:
+escalated_review_state:
+escalated_review_rationale:
+pm_disposition:
+operator_input_status:
+uat_status:
+clean_code_status:
+source_drift_status:
+bootstrap_gaps:
+`,
+  "docs/templates/landing-verdict.md": `# Landing Verdict Template
+
+contract_version:
+work_item:
+source_head:
+review_evidence:
+tests_status:
+clean_code_status:
+coderabbit_state:
+local_qwen_state:
+escalated_review_state:
+uat_status:
+source_drift_status:
+operator_input_status:
+landing_agent_state:
+landing_agent_replacement_evidence:
+final_verdict:
+rationale:
 `
 };
 

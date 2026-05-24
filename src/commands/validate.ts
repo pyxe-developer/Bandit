@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { validateConfig } from "../state/config.js";
 import { validateEventLog } from "../state/events.js";
+import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
 import { getBanditPaths } from "../state/paths.js";
+import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
 import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateTemplates } from "../state/templates.js";
@@ -19,6 +21,8 @@ export async function validateBandit(repoRoot: string) {
   await validateTemplates(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);
+  await validateReviewEvidenceArtifacts(repoRoot);
+  await validateLandingVerdictArtifacts(repoRoot);
 
   return { message: "Bandit state is valid." };
 }

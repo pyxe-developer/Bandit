@@ -283,7 +283,26 @@ test("land-check fails closed when safe-to-land omits required passing tests", a
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /safe-to-land requires tests_status pass or explicit bootstrap_gap evidence/
+    /safe-to-land requires tests_status and verification_state pass/
+  );
+});
+
+test("land-check fails closed when safe-to-land records tests as a bootstrap gap", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-910", "Bootstrap Tests");
+  await writeReviewEvidence(repo, "BANDIT-910", {
+    verificationState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-910", {
+    testsStatus: "bootstrap_gap"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-910"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /safe-to-land requires tests_status and verification_state pass/
   );
 });
 

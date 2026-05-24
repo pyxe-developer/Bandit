@@ -2,8 +2,9 @@
 
 ## Status
 
-Brief created. RED evidence has been created. Production implementation has not
-started.
+Brief created. RED evidence, GREEN implementation evidence, review evidence,
+and a safe-to-land landing verdict have been created. Retrospective and landing
+action remain pending.
 
 ## Goal
 
@@ -185,8 +186,8 @@ Before landing, Codex PM must evaluate:
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify Phase 4 and the next action. `docs/work/BANDIT-004/landing-action.md` records landed commit `a0b679217c93c3aeda6646806201d181cd26404c` before this slice became active. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, test plan, clean-code evidence, bootstrap gaps, expected files, implementation order, smell triggers, escalation plan, and operator input status. |
-| Stage 2: Test Design And RED Evidence | `not_applicable` | RED evidence has not been created in this brief-only step. The next action is to create `docs/work/BANDIT-005/red-evidence.md`. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | Implementation has not started. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-005/red-evidence.md` records the initial 14 focused RED tests, accepted RED failures before implementation, acceptance-criteria mapping, and Test Writer-owned assertions. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-005/implementation-evidence.md` records GREEN implementation scope, acceptance-criteria coverage, focused/full verification, and clean-code self-check. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Final CodeRabbit, Qwen, escalated adversarial review, and Landing Agent gates are still unavailable during bootstrap; this slice exists to make those gaps explicit and checkable. |
 | Stage 5: Landing And UAT | `not_applicable` | Landing has not started. UAT approval artifacts are Phase 5 and are not implemented in this slice. |
 | Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before landing but has not started. |

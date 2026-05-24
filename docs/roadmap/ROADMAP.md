@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Begin GREEN implementation for `BANDIT-005` Pre-Landing Review Loop.
+**Current next step:** Perform the `BANDIT-005` bootstrap landing action and closeout for the Pre-Landing Review Loop.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` now has a Stage 1 brief and Stage 2 RED evidence for the Pre-Landing Review Loop; production implementation has not started.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` now has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 GREEN implementation evidence, Stage 4 review evidence, a Stage 5 `safe-to-land` bootstrap verdict, and passing `land-check` output; retrospective and landing action remain pending.
 
 ## Phase Map
 
@@ -161,7 +161,7 @@ Goal: Make safe landing evidence-driven.
 Active work:
 
 - `BANDIT-005` - Pre-Landing Review Loop.
-- Next step: begin GREEN implementation from `docs/work/BANDIT-005/red-evidence.md`.
+- Next step: perform the bootstrap landing action, then record landing action evidence and retrospective before starting the next slice.
 
 Expected capabilities:
 

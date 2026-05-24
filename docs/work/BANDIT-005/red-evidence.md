@@ -127,7 +127,7 @@ correct RED state for `BANDIT-005`.
 
 | Stage 2 Requirement | Verdict | Evidence |
 |---|---|---|
-| Tests or explicit bootstrap verification plan | `pass` | `test/landing-gates.test.mjs` contains 14 focused tests for the Phase 4 pre-landing review loop contract. |
+| Tests or explicit bootstrap verification plan | `pass` | `test/landing-gates.test.mjs` contained 14 focused RED tests for the Phase 4 pre-landing review loop contract. Stage 4 review later added one regression test for test bootstrap-gap refusal. |
 | RED evidence where feasible | `pass` | The focused test command fails 13/14 tests before production implementation. |
 | Mapping from tests to acceptance criteria | `pass` | The table above maps tests to the brief's acceptance criteria. |
 | Clear distinction between Test Writer-owned tests and Writer-editable tests | `pass` | This artifact marks the assertions as Test Writer-owned. |

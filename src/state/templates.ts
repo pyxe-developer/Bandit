@@ -84,6 +84,50 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("escalation outcome", /^escalation_outcome:/im),
       metadata("final decision", /^final_decision:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/review-evidence.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("verification state", /^verification_state:/im),
+      metadata("verification evidence", /^verification_evidence:/im),
+      metadata("CodeRabbit state", /^coderabbit_state:/im),
+      metadata("CodeRabbit replacement evidence", /^coderabbit_replacement_evidence:/im),
+      metadata("local Qwen state", /^local_qwen_state:/im),
+      metadata("local Qwen replacement evidence", /^local_qwen_replacement_evidence:/im),
+      metadata("escalated review required", /^escalated_review_required:/im),
+      metadata("escalated review state", /^escalated_review_state:/im),
+      metadata("escalated review rationale", /^escalated_review_rationale:/im),
+      metadata("PM disposition", /^pm_disposition:/im),
+      metadata("operator input status", /^operator_input_status:/im),
+      metadata("UAT status", /^uat_status:/im),
+      metadata("clean-code status", /^clean_code_status:/im),
+      metadata("source drift status", /^source_drift_status:/im),
+      metadata("bootstrap gaps", /^bootstrap_gaps:/im)
+    ]
+  },
+  {
+    displayPath: "docs/templates/landing-verdict.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("review evidence", /^review_evidence:/im),
+      metadata("tests status", /^tests_status:/im),
+      metadata("clean-code status", /^clean_code_status:/im),
+      metadata("CodeRabbit state", /^coderabbit_state:/im),
+      metadata("local Qwen state", /^local_qwen_state:/im),
+      metadata("escalated review state", /^escalated_review_state:/im),
+      metadata("UAT status", /^uat_status:/im),
+      metadata("source drift status", /^source_drift_status:/im),
+      metadata("operator input status", /^operator_input_status:/im),
+      metadata("Landing Agent state", /^landing_agent_state:/im),
+      metadata("Landing Agent replacement evidence", /^landing_agent_replacement_evidence:/im),
+      metadata("final verdict", /^final_verdict:/im),
+      metadata("rationale", /^rationale:/im)
+    ]
   }
 ];
 

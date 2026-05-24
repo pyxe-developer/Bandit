@@ -66,6 +66,50 @@ const templateContracts = [
       ["status", /^status:/im],
       ["outcome", /^outcome:/im]
     ]
+  },
+  {
+    path: "docs/templates/review-evidence.md",
+    requirements: [
+      ["contract version", /^contract_version:/im],
+      ["work item", /^work_item:/im],
+      ["source head", /^source_head:/im],
+      ["verification state", /^verification_state:/im],
+      ["verification evidence", /^verification_evidence:/im],
+      ["CodeRabbit state", /^coderabbit_state:/im],
+      ["CodeRabbit replacement evidence", /^coderabbit_replacement_evidence:/im],
+      ["local Qwen state", /^local_qwen_state:/im],
+      ["local Qwen replacement evidence", /^local_qwen_replacement_evidence:/im],
+      ["escalated review required", /^escalated_review_required:/im],
+      ["escalated review state", /^escalated_review_state:/im],
+      ["escalated review rationale", /^escalated_review_rationale:/im],
+      ["PM disposition", /^pm_disposition:/im],
+      ["operator input status", /^operator_input_status:/im],
+      ["UAT status", /^uat_status:/im],
+      ["clean-code status", /^clean_code_status:/im],
+      ["source drift status", /^source_drift_status:/im],
+      ["bootstrap gaps", /^bootstrap_gaps:/im]
+    ]
+  },
+  {
+    path: "docs/templates/landing-verdict.md",
+    requirements: [
+      ["contract version", /^contract_version:/im],
+      ["work item", /^work_item:/im],
+      ["source head", /^source_head:/im],
+      ["review evidence", /^review_evidence:/im],
+      ["tests status", /^tests_status:/im],
+      ["clean-code status", /^clean_code_status:/im],
+      ["CodeRabbit state", /^coderabbit_state:/im],
+      ["local Qwen state", /^local_qwen_state:/im],
+      ["escalated review state", /^escalated_review_state:/im],
+      ["UAT status", /^uat_status:/im],
+      ["source drift status", /^source_drift_status:/im],
+      ["operator input status", /^operator_input_status:/im],
+      ["Landing Agent state", /^landing_agent_state:/im],
+      ["Landing Agent replacement evidence", /^landing_agent_replacement_evidence:/im],
+      ["final verdict", /^final_verdict:/im],
+      ["rationale", /^rationale:/im]
+    ]
   }
 ];
 
