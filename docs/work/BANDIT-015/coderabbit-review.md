@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-015
-source_head: b3ca45584c1cf218fec6369e4f65fa6ab510ba74
+source_head: 70ad098d378f93dbf07e16f003912873358cb184
 provider: coderabbit-live
 review_target: github-pr-15
 review_state: completed
