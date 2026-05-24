@@ -23,6 +23,8 @@ The name matters. Work in this repository should be precise, evidence-backed, an
 - [Product PRD](docs/prds/BANDIT-PRD-001-founding-product.md)
 - [Architecture](docs/architecture/founding-architecture.md)
 - [V0 Plan](docs/plans/V0_PLAN.md)
+- [Roadmap](docs/roadmap/ROADMAP.md)
+- [Current Context](docs/roadmap/CURRENT_CONTEXT.md)
 - [Glossary](CONTEXT.md)
 - [Founding Decisions](docs/decisions/2026-05-24-founding-decisions.md)
 - [Improvement Metrics Catalog](docs/improvement/metrics-catalog.md)

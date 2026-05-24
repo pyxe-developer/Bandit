@@ -4,6 +4,8 @@
 
 Build the smallest Bandit that proves the workflow improvement engine can run real agentic development work safely and learn from itself.
 
+For operator-facing progress and next-step context, use [Roadmap](../roadmap/ROADMAP.md) and [Current Context](../roadmap/CURRENT_CONTEXT.md).
+
 ## Methodology
 
 Use [Bootstrap Methodology](BOOTSTRAP_METHODOLOGY.md) until Bandit's own CLI, gates, agents, and cockpit exist. Bootstrap slices must record missing gates honestly and convert repeated manual steps into artifacts, CLI commands, specialized agents, then cockpit views.

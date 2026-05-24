@@ -1,0 +1,214 @@
+# Bandit Roadmap
+
+## Purpose
+
+This roadmap decomposes the founding PRD into phases the operator and Codex PM can follow without losing context.
+
+It is not a full slice backlog. Slice briefs are created one at a time when a phase is ready to execute. This document answers:
+
+- What are we building?
+- What phase are we in?
+- What is done?
+- What is next?
+- What context must never be lost?
+
+## Current Position
+
+**Current phase:** Phase 0 - Foundation.
+
+**Current next step:** Create the first bootstrap work item for Phase 1: Repo-Native State And CLI Skeleton.
+
+**Current implementation status:** No product code yet. The repository has founding docs, bootstrap methodology, PRD, architecture, and v0 plan.
+
+## Phase Map
+
+| Phase | Name | Outcome | Status |
+|---|---|---|---|
+| 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | In progress |
+| 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Not started |
+| 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Not started |
+| 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Not started |
+| 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Not started |
+| 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Not started |
+| 6 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
+| 7 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, and improvement health. | Not started |
+| 8 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
+
+## Phase 0: Foundation
+
+Goal: Make sure the project has enough context to begin without drifting.
+
+Completed:
+
+- Fresh repo created.
+- Founding PRD drafted.
+- Founding architecture drafted.
+- V0 plan drafted.
+- Bootstrap methodology drafted.
+- Metrics and retrospective-derived chore schema drafted.
+
+Remaining:
+
+- Roadmap and current-context checkpoint.
+- First bootstrap work item for Phase 1.
+
+Exit criteria:
+
+- A new Codex session can open `README.md`, this roadmap, and `CURRENT_CONTEXT.md` and know exactly what to do next.
+
+## Phase 1: Repo-Native CLI Skeleton
+
+Goal: Create the smallest CLI and state system that lets Bandit own durable context.
+
+Expected capabilities:
+
+- `bandit init`
+- `.bandit/config.toml`
+- `bandit validate`
+- `bandit list`
+- `bandit show`
+- lifecycle event JSONL writer
+- work item prefix support
+- basic schema validation
+
+Why this comes first:
+
+Bandit cannot improve workflows until it can create and validate durable workflow state.
+
+Exit criteria:
+
+- A repo can be initialized and validated.
+- State changes are recorded in repo-native files.
+- Bootstrap gaps are explicitly recorded.
+
+## Phase 2: Work Artifacts
+
+Goal: Make work visible and structured.
+
+Expected capabilities:
+
+- Feature PRD template.
+- Slice template.
+- Chore template.
+- Retrospective-derived chore metadata.
+- PRD-to-work draft command.
+
+Exit criteria:
+
+- A PRD can be decomposed into slices and chores.
+- Chores can carry origin, hypothesis, metric, baseline, and evaluation window.
+
+## Phase 3: Routing And Smell Detection
+
+Goal: Let Codex PM manage technical decisions from policy.
+
+Expected capabilities:
+
+- Smell Trigger Catalog.
+- Routing decision artifact.
+- Escalation policy.
+- Command or report explaining why a workflow, model, skill, or reviewer was selected.
+
+Exit criteria:
+
+- Codex PM can make manager-owned routing decisions without asking routine technical questions.
+
+## Phase 4: Review And Landing Gates
+
+Goal: Make safe landing evidence-driven.
+
+Expected capabilities:
+
+- Pre-landing review loop artifact.
+- CodeRabbit state capture.
+- Local Qwen adversarial review artifact.
+- Escalation reviewer placeholder.
+- Landing Verdict.
+- stale review/source-drift checks.
+
+Exit criteria:
+
+- A PR cannot be marked safe-to-land without required evidence.
+
+## Phase 5: UAT And Auto-Landing
+
+Goal: Separate product acceptance from code-safety judgment.
+
+Expected capabilities:
+
+- CLI-owned UAT approval artifact.
+- Stale UAT detection after code changes.
+- Auto-landing eligibility policy.
+
+Exit criteria:
+
+- Feature slices with green code gates but missing or stale UAT are blocked.
+- Eligible chores and UAT-approved feature slices can be auto-landed under policy.
+
+## Phase 6: Improvement Engine
+
+Goal: Prove Bandit's differentiator.
+
+Expected capabilities:
+
+- Retrospective artifact.
+- Cross-model tension log.
+- Improvement chore ledger.
+- Improvement analytics report.
+- Evaluation command for due improvement chores.
+- Outcomes: `keep`, `revise`, `revert`, `double_down`.
+
+Exit criteria:
+
+- A retrospective lesson becomes a tagged improvement chore.
+- That chore can later be evaluated against a metric and outcome.
+
+## Phase 7: Workflow Cockpit
+
+Goal: Give the operator a clear status surface without moving authority out of the CLI.
+
+Expected views:
+
+- Current context.
+- PRDs.
+- Slices.
+- Chores.
+- Landing verdicts.
+- UAT status.
+- Improvement health.
+- Next action.
+
+Exit criteria:
+
+- The operator can answer “where are we and what is next?” from the cockpit.
+- Cockpit state is derived from repo-native state.
+
+## Phase 8: Dogfood And Hardening
+
+Goal: Use Bandit to improve Bandit.
+
+Expected capabilities:
+
+- Bandit work items use Bandit gates.
+- Retrospective-derived chores are evaluated.
+- Routing decisions are updated from evidence.
+- Bad workflow decisions can be reverted.
+- Good workflow decisions can be doubled down.
+
+Exit criteria:
+
+- Bandit has a visible record of improving its own workflow.
+
+## Always-Known Context Rule
+
+At all times, the repo must answer:
+
+- Current phase.
+- Current active work item.
+- Current next action.
+- Current blockers.
+- Current bootstrap gaps.
+- Last completed milestone.
+- What changed since the last checkpoint.
+
+If those answers are unclear, the next task is to repair context before writing code.
