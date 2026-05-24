@@ -4,11 +4,12 @@
 
 Bootstrap-gap chore brief created on 2026-05-24. RED evidence is recorded in
 `docs/work/BANDIT-016/red-evidence.md`. Implementation evidence, full
-verification, CodeRabbit evidence, and escalated-review bootstrap disposition
-are recorded. Aggregate review evidence, Local Qwen review, landing verdict,
-landing action, retrospective, gap-ledger disposition, and context closeout
-remain required before this work item can land or the next bootstrap-gap chore
-can begin.
+verification, CodeRabbit evidence, escalated-review bootstrap disposition,
+Local Qwen evidence, and aggregate review evidence are recorded. Local Qwen
+returned a `non_blocking` verdict, so PM disposition and repair/rerun routing,
+landing verdict, landing action, retrospective, gap-ledger disposition, and
+context closeout remain required before this work item can land or the next
+bootstrap-gap chore can begin.
 
 ## Goal
 
@@ -179,7 +180,7 @@ policy, business, cost, and risk boundaries.
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `test/landing-gates.test.mjs` now contains focused RED tests for terminal Stage 4 disposition-only evidence, implementation source drift after review, and PM rationale for accepted Local Qwen findings. `docs/work/BANDIT-016/red-evidence.md` records the focused failing run. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-016/implementation-evidence.md` maps the Stage 4 policy and landing-readiness code paths to acceptance criteria, records focused passing tests, and evaluates `CLEAN_CODE.md`. |
-| Stage 4: Review And Cross-Model Gates | `pending` | `docs/work/BANDIT-016/coderabbit-review.md` records fixture-backed live CodeRabbit pass evidence and `docs/work/BANDIT-016/escalated-review.md` records the bootstrap-limited escalated-review disposition. Local Qwen review and aggregate review evidence remain required next. |
+| Stage 4: Review And Cross-Model Gates | `non_blocking` | `docs/work/BANDIT-016/coderabbit-review.md` records fixture-backed live CodeRabbit pass evidence, `docs/work/BANDIT-016/escalated-review.md` records the bootstrap-limited escalated-review disposition, `docs/work/BANDIT-016/local-qwen-review.md` records a Local Qwen `non_blocking` verdict, and `docs/work/BANDIT-016/review-evidence.md` records aggregate review evidence. PM disposition and repair/rerun routing remain required before landing. |
 | Stage 5: Landing And UAT | `pending` | UAT is not required for this non-product workflow-infrastructure chore. Landing verdict and landing action evidence are required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 

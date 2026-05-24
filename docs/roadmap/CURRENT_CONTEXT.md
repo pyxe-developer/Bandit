@@ -11,9 +11,13 @@
 `docs/work/BANDIT-016/implementation-evidence.md`, CodeRabbit evidence is
 recorded in `docs/work/BANDIT-016/coderabbit-review.md`, escalated-review
 bootstrap disposition is recorded in
-`docs/work/BANDIT-016/escalated-review.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-016` as an active chore. Local Qwen review and
-aggregate review evidence are the next required steps. Do not begin live
+`docs/work/BANDIT-016/escalated-review.md`, Local Qwen evidence is recorded in
+`docs/work/BANDIT-016/local-qwen-review.md`, aggregate review evidence is
+recorded in `docs/work/BANDIT-016/review-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-016` as an active chore.
+Local Qwen returned a `non_blocking` verdict, so the next required step is
+Codex PM disposition and repair/rerun routing for the two non-blocking
+findings. Do not begin live
 escalated-reviewer, work-item creation, artifact
 creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
@@ -25,11 +29,13 @@ bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Run `npm run bandit -- qwen-review BANDIT-016` from a
-clean worktree, then record aggregate review evidence from the Local Qwen
-result. Full verification passed, fixture-backed live CodeRabbit pass evidence
-is recorded, and the escalated-review bootstrap disposition is recorded for the
-implemented Stage 4 evidence-head contract. Do not begin live
+**Current next action:** Disposition the `BANDIT-016` Local Qwen
+`non_blocking` findings and decide the narrow repair/rerun route from repo
+evidence. `docs/work/BANDIT-016/local-qwen-review.md` records two findings:
+PM-rationale heuristic hardening and git fallback edge-case hardening. Aggregate
+review evidence is recorded in `docs/work/BANDIT-016/review-evidence.md` with
+Codex PM no-action rationale for this chore, but `land-check` still requires a
+passing Local Qwen reviewer verdict before landing. Do not begin live
 escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, or feature work until this active gap is resolved,
@@ -51,8 +57,9 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** `docs/work/BANDIT-016/local-qwen-review.md` and
-`docs/work/BANDIT-016/review-evidence.md`.
+**Expected next deliverable:** PM disposition or narrow repair evidence for the
+`BANDIT-016` Local Qwen `non_blocking` findings, followed by a clean-worktree
+Local Qwen rerun.
 
 ## Known Bootstrap Gaps
 
