@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Create the `BANDIT-006` bootstrap work item brief for the Local Qwen Baseline Reviewer Gate.
+**Current next step:** Create `BANDIT-006` RED evidence for the Local Qwen Baseline Reviewer Gate.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` has a brief for the Local Qwen Baseline Reviewer Gate; RED evidence is next.
 
 ## Phase Map
 
@@ -160,8 +160,8 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- none.
-- Next step: create the `BANDIT-006` brief for the Local Qwen Baseline Reviewer Gate.
+- `BANDIT-006` - Local Qwen Baseline Reviewer Gate.
+- Next step: create `docs/work/BANDIT-006/red-evidence.md`.
 
 Expected capabilities:
 
