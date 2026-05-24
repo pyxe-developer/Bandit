@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Triage and repair or explicitly disposition the latest
-Local Qwen blocker findings for `BANDIT-015` before continuing the remaining
-landing-gate closeout sequence. `BANDIT-014` resolved the Landing Agent
+**Current next step:** Rerun Local Qwen for `BANDIT-015` at the escalated-review
+disposition head before continuing the remaining landing-gate closeout
+sequence. `BANDIT-014` resolved the Landing Agent
 bootstrap gap by adding a
 repo-native contract, validation path, and local-record landing command.
 `BANDIT-015` is now active for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
@@ -38,7 +38,8 @@ triage of those blocker findings is recorded in
 blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96` and
 returned another `blocker` verdict. Codex PM triage is recorded in
 `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
-blocker is the missing `docs/work/BANDIT-015/escalated-review.md` artifact.
+blocker was the missing `docs/work/BANDIT-015/escalated-review.md` artifact,
+which is now recorded as the bootstrap-limited escalated-review disposition.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -234,9 +235,8 @@ Completed work:
 
 Queued next:
 
-- Create `docs/work/BANDIT-015/escalated-review.md` for `BANDIT-015` - Live
-  CodeRabbit Pre-Landing Loop, then rerun Local Qwen before remaining
-  landing-gate closeout.
+- Rerun Local Qwen for `BANDIT-015` at the escalated-review disposition head
+  before remaining landing-gate closeout.
 
 Expected capabilities:
 
@@ -274,7 +274,8 @@ Current rule:
   blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96`
   returned another `blocker` verdict. Codex PM triage is recorded in
   `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
-  blocker is the missing `docs/work/BANDIT-015/escalated-review.md` artifact.
+  blocker was the missing `docs/work/BANDIT-015/escalated-review.md` artifact,
+  which is now recorded as the bootstrap-limited escalated-review disposition.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -286,7 +287,7 @@ Current rule:
 
 Current priority after `BANDIT-014` lands:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; create escalated-review disposition and rerun Local Qwen next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; rerun Local Qwen at the escalated-review disposition head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

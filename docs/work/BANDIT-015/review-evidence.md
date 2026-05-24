@@ -17,6 +17,7 @@ verification_evidence:
   - Codex PM triaged the blocker findings in docs/work/BANDIT-015/qwen-blocker-disposition.md.
   - npm run bandit -- qwen-review BANDIT-015 completed at blocker-disposition head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 and recorded docs/work/BANDIT-015/local-qwen-review.md with a blocker reviewer verdict.
   - Codex PM triaged the latest blocker findings in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md.
+  - docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited escalated-review disposition at source head 582087d6e6a838cb8c5e4abd3f55175f16f74037.
 coderabbit_state: pass
 coderabbit_replacement_evidence:
   - not_applicable
@@ -27,15 +28,15 @@ local_qwen_replacement_evidence:
   - The prior Local Qwen blocker findings are triaged and dispositioned in docs/work/BANDIT-015/qwen-blocker-disposition.md.
   - The aggregate review-evidence mismatch is repaired: this artifact records local_qwen_state as blocker until the next Local Qwen rerun clears or replaces the blocker state.
   - The redactSecrets substring over-redaction hardening concern is an explicit no-action decision for BANDIT-015 because conservative over-redaction is safer than fail-open exact-match redaction for untrusted provider diagnostics.
-  - The latest Local Qwen blocker findings from source head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 are triaged in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md; the pending-rerun finding is repaired, and the missing escalated-review artifact remains a blocker.
+  - The latest Local Qwen blocker findings from source head 4569c8f92eacf7df098f7f370bd8ac1c09d82b96 are triaged in docs/work/BANDIT-015/qwen-latest-blocker-disposition.md; the pending-rerun finding is repaired, and the missing escalated-review artifact is now repaired by docs/work/BANDIT-015/escalated-review.md.
 escalated_review_required: true
-escalated_review_state: blocker
-escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Escalated-review disposition remains required after local Qwen review.
+escalated_review_state: bootstrap_gap
+escalated_review_rationale: BANDIT-015 changes live CodeRabbit review authority, provider-state normalization, credential and PR-context refusal paths, source freshness behavior, and landing-gate inputs. Live escalated-reviewer routing remains unavailable; docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited placeholder disposition, and Local Qwen must be rerun after this artifact is recorded.
 pm_disposition: blocker
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
 source_drift_status: current
 bootstrap_gaps:
-  - Live escalated adversarial reviewer routing remains unavailable and requires closeout disposition.
+  - Live escalated adversarial reviewer routing remains unavailable; docs/work/BANDIT-015/escalated-review.md records the bootstrap-limited placeholder disposition.
   - PR comment repair orchestration and rerun automation remain out of scope for BANDIT-015 unless later artifacts explicitly resolve or disposition them.

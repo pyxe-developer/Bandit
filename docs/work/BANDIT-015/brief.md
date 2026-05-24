@@ -16,7 +16,10 @@ PM disposition head `068c4482ba156a158abd92faba2fcee2841f2288` and returned a
 blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96` and
 returned another `blocker` verdict. Codex PM triage is recorded in
 `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the remaining
-blocker is the missing escalated-review disposition artifact.
+blocker was the missing escalated-review disposition artifact. The
+bootstrap-limited escalated-review disposition is now recorded in
+`docs/work/BANDIT-015/escalated-review.md`; Local Qwen must be rerun at the
+resulting head before landing verdict or closeout work proceeds.
 
 ## Goal
 
@@ -191,7 +194,7 @@ policy, business, cost, and risk boundaries.
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `test/coderabbit-state.test.mjs` now contains seven focused live CodeRabbit loop RED tests, and `docs/work/BANDIT-015/red-evidence.md` records the failing focused run. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-015/implementation-evidence.md` records passing focused tests, full tests, typecheck, validation, clean-code compliance, and the artifact/source-of-truth mapping. |
-| Stage 4: Review And Cross-Model Gates | `blocker` | Review evidence is recorded in `docs/work/BANDIT-015/review-evidence.md` with CodeRabbit pass and current verification. `docs/work/BANDIT-015/qwen-finding-repair.md` records repair of the prior valid local Qwen finding. `docs/work/BANDIT-015/qwen-rerun-disposition.md` records Codex PM disposition of the prior Local Qwen rerun findings. `docs/work/BANDIT-015/qwen-blocker-disposition.md` records PM triage of the prior Local Qwen blocker findings. `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md` records PM triage of the latest Local Qwen blocker findings. The remaining blocker is the missing `docs/work/BANDIT-015/escalated-review.md` artifact. Live escalated reviewer routing remains bootstrap-limited and replacement evidence is required before the next Local Qwen rerun and landing verdict. |
+| Stage 4: Review And Cross-Model Gates | `blocker` | Review evidence is recorded in `docs/work/BANDIT-015/review-evidence.md` with CodeRabbit pass and current verification. `docs/work/BANDIT-015/qwen-finding-repair.md` records repair of the prior valid local Qwen finding. `docs/work/BANDIT-015/qwen-rerun-disposition.md` records Codex PM disposition of the prior Local Qwen rerun findings. `docs/work/BANDIT-015/qwen-blocker-disposition.md` records PM triage of the prior Local Qwen blocker findings. `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md` records PM triage of the latest Local Qwen blocker findings. `docs/work/BANDIT-015/escalated-review.md` records the bootstrap-limited escalated-review disposition. The remaining blocker is the required Local Qwen rerun at the escalated-review disposition head. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | UAT is not required for this non-product workflow-infrastructure chore. Landing action evidence is required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 
