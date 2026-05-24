@@ -4,25 +4,24 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-014` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-AGENT`. Its brief, RED evidence, and implementation
-evidence are recorded. Pre-landing review evidence is the next required stage.
+**State:** `BANDIT-014` has landed as the bootstrap-gap chore for
+`BANDIT-GAP-LANDING-AGENT`. Its brief, RED evidence, implementation evidence,
+pre-landing review evidence, local Qwen review, escalated-review disposition,
+landing verdict, Landing Agent local-record landing action evidence,
+retrospective closeout, and gap-ledger disposition are recorded.
 
-**Last completed milestone:** `BANDIT-013` converted auto-landing eligibility
-into repo-native policy state and a read-only CLI check.
+**Last completed milestone:** `BANDIT-014` converted the Landing Agent
+bootstrap gap into a repo-native contract, validation path, and local-record
+landing command.
 
-**Current next action:** Record `BANDIT-014` pre-landing review evidence,
-local Qwen review evidence, escalated-review disposition, and landing verdict
-for the implemented Landing Agent contract and `bandit land <work-item-id>
---action local-record` command. Do not create any later gap chore, Phase 6
-work, Phase 7 work, feature work, or broader cockpit work until `BANDIT-014`
-has landing action evidence, retrospective closeout, and a resolved,
-operator-blocked, or no-action ledger disposition for
-`BANDIT-GAP-LANDING-AGENT`.
+**Current next action:** Create the next single bootstrap-gap chore for
+`BANDIT-GAP-LIVE-CODERABBIT`, or explicitly block/no-action-disposition that
+gap if required operator-owned input is missing. Do not begin Phase 6, Phase 7,
+feature work, or broader cockpit work while queued bootstrap gaps remain.
 
 ## Active Work
 
-**Active work item:** `BANDIT-014` - Landing Agent Bootstrap Gap Resolution.
+**Active work item:** none.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -33,10 +32,12 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 `BANDIT-011` - Bootstrap Gap Chore Tracking And Routing; `BANDIT-012` -
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
-Auto-Landing Eligibility Policy And Check.
+Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
+Bootstrap Gap Resolution.
 
-**Expected next deliverable:** Review and landing-verdict evidence for
-`BANDIT-014`.
+**Expected next deliverable:** A work-item brief for the next single
+bootstrap-gap chore, `BANDIT-GAP-LIVE-CODERABBIT`, unless repo evidence shows
+operator-owned input is required first.
 
 ## Known Bootstrap Gaps
 
@@ -53,8 +54,9 @@ These are expected because Bandit does not exist yet:
   findings.
 - Escalated adversarial review placeholder gate exists; live escalated reviewer
   routing remains unavailable.
-- Landing Agent gap is active as `BANDIT-014`; no durable Landing Agent
-  contract or command exists yet.
+- Landing Agent gap is resolved by `BANDIT-014`; a durable local-record Landing
+  Agent contract, command, review evidence, landing verdict, landing action
+  evidence, retrospective, and gap-ledger disposition exist.
 - No general artifact creation command outside explicit PRD draft-work.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
@@ -62,10 +64,9 @@ These are expected because Bandit does not exist yet:
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
-gates ran. Open bootstrap gaps are the post-`BANDIT-013` work queue; do not
-start unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap
-remains queued or active. `BANDIT-GAP-LANDING-AGENT` is active and linked to
-`BANDIT-014`.
+gates ran. Open bootstrap gaps are the current work queue; do not start
+unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap remains
+queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is the next queued gap.
 
 ## Context Guardrails
 
@@ -109,25 +110,32 @@ typecheck`, `npm run bandit -- validate`, `npm run bandit -- land-check
 BANDIT-013`, `npm run bandit -- auto-land-check BANDIT-013`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
+`BANDIT-014` implemented, reviewed, marked safe-to-land, locally recorded its
+Landing Agent landing action, and closed out the Landing Agent bootstrap gap.
+Verification passed with `node --test test/landing-gates.test.mjs`, `npm test`,
+`npm run typecheck`, `npm run bandit -- validate`, `npm run bandit -- land-check
+BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
+-- gaps list`, and `git diff --check`.
+
 Use `bandit gaps list` as the routing source and create exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-AGENT` - active as `BANDIT-014`.
-2. `BANDIT-GAP-LIVE-CODERABBIT`.
-3. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
-4. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
-5. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
-6. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
-7. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. `BANDIT-GAP-LIVE-CODERABBIT`.
+2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
+5. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Do not create the next gap chore until `BANDIT-014` has landing action
-evidence, retrospective closeout, and a resolved, operator-blocked, or
-no-action ledger disposition.
+Create exactly one next gap chore at a time. Do not create any gap chore after
+`BANDIT-GAP-LIVE-CODERABBIT` until that next gap has landing action evidence,
+retrospective closeout, and a resolved, operator-blocked, or no-action ledger
+disposition.
 
 ## Required Operator Input
 
-None before implementing `BANDIT-014`. Repo artifacts define the routing
-decision.
+None recorded for the next routing step. Repo artifacts define
+`BANDIT-GAP-LIVE-CODERABBIT` as the next queued gap.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

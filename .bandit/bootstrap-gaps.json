@@ -58,16 +58,17 @@
     {
       "id": "BANDIT-GAP-LANDING-AGENT",
       "title": "No Landing Agent exists yet",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-005",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/plans/BOOTSTRAP_METHODOLOGY.md"
       ],
       "linked_work_item": "BANDIT-014",
-      "rationale": "Bootstrap landing is recorded manually; final Landing Agent behavior belongs after landing evidence, review gates, and UAT contracts are stable.",
-      "next_action": "Complete BANDIT-014, then resolve, operator-block, or explicitly disposition this gap before starting the next bootstrap-gap chore."
+      "rationale": "BANDIT-014 created the repo-native Landing Agent contract, validation path, and local-record landing command that consumes auto-landing eligibility and records landing action evidence while preserving operator-owned UAT and no-remote-operation boundaries.",
+      "verification_target": "docs/work/BANDIT-014/retrospective.md",
+      "next_action": "Use bandit land <work-item-id> --action local-record for supported local-record landings; keep live remote merge, push, and deploy behavior out of scope until explicitly specified."
     },
     {
       "id": "BANDIT-GAP-UAT-ARTIFACT",
