@@ -47,3 +47,36 @@ export function readGitShow(repoRoot: string, revision = "HEAD"): Promise<string
     );
   });
 }
+
+export function readGitDiff(
+  repoRoot: string,
+  baseRevision: string,
+  headRevision = "HEAD"
+): Promise<string | null> {
+  return new Promise((resolve) => {
+    execFile(
+      "git",
+      [
+        "diff",
+        "--stat",
+        "--patch",
+        "--find-renames",
+        "--no-ext-diff",
+        "--unified=80",
+        `${baseRevision}..${headRevision}`
+      ],
+      {
+        cwd: repoRoot,
+        maxBuffer: 1024 * 1024 * 4
+      },
+      (error, stdout) => {
+        if (error) {
+          resolve(null);
+          return;
+        }
+
+        resolve(stdout.trim());
+      }
+    );
+  });
+}

@@ -277,14 +277,17 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
       "const prompt = process.argv[2] ?? '';",
       "if (!prompt.includes('docs/work/BANDIT-965/implementation-evidence.md')) process.exit(11);",
       "if (!prompt.includes('Implementation marker for prompt coverage')) process.exit(12);",
-      "if (!prompt.includes('diff --git')) process.exit(13);",
+      "if (!prompt.includes('Source diff range:')) process.exit(13);",
+      "if (!prompt.includes('diff --git')) process.exit(14);",
       "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt included evidence and diff' }));"
     ].join("\n")
   );
   await writeWorkBrief(repo, "BANDIT-965", "Prompt Qwen Review");
+  await writeWorkBrief(repo, "BANDIT-964", "Previous Slice");
+  await writeLandingAction(repo, "BANDIT-964", await commitAll(repo, "Previous landed slice"));
   await writeImplementationEvidence(repo, "BANDIT-965");
   await writeFile(path.join(repo, "source.txt"), "source change\n", "utf8");
-  await commitAll(repo, "Fixture source");
+  await commitAll(repo, "Current slice source");
 
   const result = await runBandit(repo, ["qwen-review", "BANDIT-965"]);
 
@@ -528,6 +531,21 @@ async function writeImplementationEvidence(repo, workItemId) {
   await writeFile(
     path.join(workDir, "implementation-evidence.md"),
     "# Implementation Evidence\n\nImplementation marker for prompt coverage.\n",
+    "utf8"
+  );
+}
+
+async function writeLandingAction(repo, workItemId, commitSha) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "landing-action.md"),
+    `# ${workItemId} Landing Action
+
+| Field | Value |
+|---|---|
+| Landed commit | \`${commitSha}\` |
+`,
     "utf8"
   );
 }

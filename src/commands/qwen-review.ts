@@ -5,6 +5,7 @@ import { readLocalQwenProfile } from "../state/reviewer-profiles.js";
 import type { LocalQwenProfile } from "../state/reviewer-profiles.js";
 import {
   readCurrentGitHead,
+  readGitDiff,
   readGitShow,
   readGitStatusShort
 } from "../state/git.js";
@@ -184,11 +185,18 @@ function expandCommandArg(arg: string, prompt: string) {
 
 async function readReviewPacket(repoRoot: string, workItemId: string) {
   const artifactContents = await readWorkItemArtifacts(repoRoot, workItemId);
-  const sourceDiff = await readGitShow(repoRoot);
+  const previousLandingHead = await readPreviousLandingHead(repoRoot, workItemId);
+  const sourceDiff = previousLandingHead
+    ? await readGitDiff(repoRoot, previousLandingHead)
+    : await readGitShow(repoRoot);
+  const sourceDiffRange = previousLandingHead
+    ? `${previousLandingHead}..HEAD`
+    : "HEAD";
 
   return {
     artifactContents,
-    sourceDiff: sourceDiff ?? "Git source diff unavailable."
+    sourceDiff: sourceDiff ?? "Git source diff unavailable.",
+    sourceDiffRange
   };
 }
 
@@ -227,11 +235,40 @@ async function readOptionalText(filePath: string) {
   }
 }
 
+async function readPreviousLandingHead(repoRoot: string, workItemId: string) {
+  const previousWorkItem = previousWorkItemId(workItemId);
+  if (!previousWorkItem) {
+    return null;
+  }
+
+  const landingAction = await readOptionalText(
+    path.join(repoRoot, "docs/work", previousWorkItem, "landing-action.md")
+  );
+  const landedCommit = landingAction?.match(/\|\s*Landed commit\s*\|\s*`([0-9a-f]{7,40})`\s*\|/i);
+
+  return landedCommit?.[1] ?? null;
+}
+
+function previousWorkItemId(workItemId: string) {
+  const match = workItemId.match(/^([A-Z][A-Z0-9]*-)(\d+)$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, prefix, numberText] = match as [string, string, string];
+  const previousNumber = Number(numberText) - 1;
+  if (!Number.isInteger(previousNumber) || previousNumber < 1) {
+    return null;
+  }
+
+  return `${prefix}${String(previousNumber).padStart(numberText.length, "0")}`;
+}
+
 function buildReviewPrompt(
   workItemId: string,
   title: string,
   briefContent: string,
-  packet: { artifactContents: string; sourceDiff: string }
+  packet: { artifactContents: string; sourceDiff: string; sourceDiffRange: string }
 ) {
   return [
     `Review Bandit work item ${workItemId}: ${title}.`,
@@ -248,6 +285,8 @@ function buildReviewPrompt(
     packet.artifactContents,
     "",
     "## Source Diff",
+    "",
+    `Source diff range: ${packet.sourceDiffRange}`,
     "",
     packet.sourceDiff,
     "",
