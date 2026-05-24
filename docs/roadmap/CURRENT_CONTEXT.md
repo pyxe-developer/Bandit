@@ -24,8 +24,7 @@ until `BANDIT-017` is landed or explicitly dispositioned.
 semantics and landed under operator-owned loop disposition, with remaining
 Local Qwen complexity findings routed to `BANDIT-017`.
 
-**Current next action:** Record `BANDIT-017` review and cross-model gate
-evidence, including Local Qwen review.
+**Current next action:** Write the `BANDIT-017` landing verdict.
 
 ## Active Work
 
@@ -45,7 +44,7 @@ Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics.
 
-**Expected next deliverable:** `BANDIT-017` review evidence.
+**Expected next deliverable:** `BANDIT-017` landing verdict.
 
 ## Known Bootstrap Gaps
 
@@ -155,7 +154,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; review and cross-model gate evidence is next.
+1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; landing verdict is next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -168,8 +167,8 @@ a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define `BANDIT-017`
-implementation as the next action.
+None recorded for the next routing step. Repo artifacts define the
+`BANDIT-017` landing verdict as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

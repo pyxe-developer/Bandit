@@ -3,8 +3,11 @@
 ## Status
 
 Bootstrap-gap chore brief created on 2026-05-24 after `BANDIT-016` landing.
-RED evidence is recorded in `docs/work/BANDIT-017/red-evidence.md`. The next
-action is implementation for the deferred Local Qwen findings. Do not begin
+RED evidence is recorded in `docs/work/BANDIT-017/red-evidence.md`,
+implementation evidence is recorded in
+`docs/work/BANDIT-017/implementation-evidence.md`, and review evidence is
+recorded in `docs/work/BANDIT-017/review-evidence.md`. The next action is
+landing verdict. Do not begin
 unrelated live escalated-reviewer, work-item creation, artifact creation,
 heartbeat, cockpit, Phase 6, Phase 7, Phase 8, Phase 9, or feature work until
 this chore is landed or explicitly dispositioned.
