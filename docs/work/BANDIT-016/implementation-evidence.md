@@ -3,9 +3,11 @@
 ## Status
 
 `pass` - implementation is complete for the narrow Stage 4 evidence-head
-contract. Review, landing verdict, landing action, retrospective, and
-gap-ledger closeout remain required before `BANDIT-016` can land or the next
-bootstrap-gap chore can begin.
+contract, and the persistent Local Qwen non-blocking hardening findings have
+focused repair evidence in `docs/work/BANDIT-016/qwen-finding-repair.md`.
+Local Qwen rerun, refreshed aggregate review evidence if needed, landing
+verdict, landing action, retrospective, and gap-ledger closeout remain required
+before `BANDIT-016` can land or the next bootstrap-gap chore can begin.
 
 ## Implementation Source Head
 
@@ -81,17 +83,26 @@ npm run bandit -- land-check BANDIT-016
 expected blocker - Missing review evidence artifact: docs/work/BANDIT-016/review-evidence.md
 ```
 
+Local Qwen finding repair verification:
+
+```text
+node --test test/landing-gates.test.mjs
+tests 44
+pass 44
+fail 0
+```
+
 ## CLEAN_CODE.md Self-Check
 
 | Rubric | Verdict | Evidence |
 |---|---|---|
 | Spec alignment | `pass` | The change implements the `BANDIT-016` Stage 4 evidence-head semantics without widening live reviewer, artifact creation, heartbeat, cockpit, or feature scope. |
-| Small surface area | `pass` | The diff is limited to the landing-readiness path, git helper, Stage 4 policy artifact, init/validate wiring, and implementation evidence. |
+| Small surface area | `pass` | The diff is limited to the landing-readiness path, git helper, Stage 4 policy artifact, init/validate wiring, implementation evidence, and focused Qwen finding repair. |
 | Simple design | `pass` | The logic uses changed-path comparison against a small explicit policy rather than introducing a new state machine or database. |
 | Explicit state | `pass` | The durable contract lives in `.bandit/policy/stage4-evidence-head.json`; landing readiness consumes that policy directly. |
 | No hidden authority | `pass` | Git history and repo-native policy remain authoritative. Chat or reviewer prose does not determine source freshness. |
 | Testable behavior | `pass` | Focused tests cover both terminal disposition-only acceptance and protected source drift refusal. |
-| Failure clarity | `pass` | Unknown git diffs and protected-path changes fail closed as stale review evidence. Missing Local Qwen rationale reports a concrete PM-rationale error. |
+| Failure clarity | `pass` | Unknown git diffs, unresolved changed-path bases, and protected-path changes fail closed as stale review evidence. Missing or boilerplate Local Qwen rationale reports a concrete PM-rationale error. |
 | Locality | `pass` | Related source-drift behavior remains in `land-check`; policy parsing is isolated under `src/state/`. |
 | Role boundaries | `pass` | Codex PM can record technical rationale for reviewer findings; product UAT, policy changes beyond this brief, business tradeoffs, and cost/risk overrides remain operator-owned. |
 
@@ -100,13 +111,13 @@ expected blocker - Missing review evidence artifact: docs/work/BANDIT-016/review
 | Stage | Verdict | Evidence |
 |---|---|---|
 | Stage 3: Implementation Clean-Code Rubric | `pass` | Focused tests pass, code paths map to acceptance criteria, source-of-truth boundaries are explicit, and `CLEAN_CODE.md` was evaluated above. |
-| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit evidence and escalated-review bootstrap disposition are recorded. Local Qwen review and aggregate review evidence remain required next. |
+| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit evidence, escalated-review bootstrap disposition, prior Local Qwen evidence, aggregate review evidence, and Local Qwen finding repair evidence are recorded. A clean-worktree Local Qwen rerun remains required next. |
 | Stage 5: Landing And UAT | `pending` | Landing verdict and landing action evidence remain required. UAT is not required for this non-product chore. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Retrospective and gap-ledger disposition remain required after review and landing. |
 
 ## Next Step
 
-Run `npm run bandit -- qwen-review BANDIT-016` from a clean worktree, then
-record aggregate review evidence from the Local Qwen result. Do not create
+Run `npm run bandit -- qwen-review BANDIT-016` from a clean worktree and
+refresh aggregate review evidence from the Local Qwen result. Do not create
 another gap chore or begin unrelated Phase 6, Phase 7, Phase 8, Phase 9,
 cockpit, heartbeat, or feature work.

@@ -965,6 +965,84 @@ test("land-check requires PM rationale for accepted Local Qwen findings", async 
   assert.match(result.stderr, /PM disposition rationale is required/);
 });
 
+test("land-check rejects boilerplate PM rationale markers for Local Qwen findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-934", "Boilerplate PM Finding Rationale");
+  await writeReviewEvidence(repo, "BANDIT-934", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-934", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-934", {
+    sourceHead,
+    findingsStatus: "open",
+    findingsDisposition: "Rationale: pending"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-934"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /PM disposition rationale is required/);
+});
+
+test("land-check accepts concrete PM rationale for Local Qwen findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-935", "Concrete PM Finding Rationale");
+  await writeReviewEvidence(repo, "BANDIT-935", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-935", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-935", {
+    sourceHead,
+    findingsStatus: "open",
+    findingsDisposition:
+      "Accepted because this is a procedural hardening follow-up with no source behavior change."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-935"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
+test("land-check fails closed when review changed paths cannot be resolved", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-936", "Missing Review Base");
+  await writeReviewEvidence(repo, "BANDIT-936", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-936", {
+    sourceHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-936", {
+    sourceHead: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-936"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Local Qwen review evidence is stale/);
+  assert.match(
+    result.stderr,
+    /safe-to-land cannot proceed with stale source evidence/
+  );
+});
+
 async function createInitializedRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);

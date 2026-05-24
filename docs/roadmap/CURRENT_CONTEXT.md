@@ -18,9 +18,10 @@ recorded in `docs/work/BANDIT-016/review-evidence.md`, and
 Local Qwen returned a `non_blocking` verdict, Codex PM recorded aggregate
 disposition, and a clean-worktree Local Qwen rerun at
 `3f86839bbe1450364679a1508602fea83a80537e` preserved the same two
-`non_blocking` findings. The next required step is targeted repair or
-disposition hardening for the PM-rationale heuristic and git fallback edge
-case before another Local Qwen rerun. Do not begin live
+`non_blocking` findings. Targeted repair evidence for the PM-rationale
+heuristic and git fallback edge case is recorded in
+`docs/work/BANDIT-016/qwen-finding-repair.md`. The next required step is to
+rerun Local Qwen from a clean worktree. Do not begin live
 escalated-reviewer, work-item creation, artifact
 creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
@@ -32,14 +33,14 @@ bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
 landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
 bootstrap-gap chore work.
 
-**Current next action:** Repair or harden the disposition path for the
-`BANDIT-016` Local Qwen `non_blocking` findings, then rerun Local Qwen from a
-clean worktree. `docs/work/BANDIT-016/local-qwen-review.md` records persistent
-findings after rerun: PM-rationale heuristic hardening and git fallback
-edge-case hardening. Aggregate review evidence is recorded in
-`docs/work/BANDIT-016/review-evidence.md`, but `land-check` still requires a
-passing Local Qwen reviewer verdict before a `safe-to-land` landing verdict can
-be valid. Do not begin live
+**Current next action:** Rerun Local Qwen from a clean worktree after the
+targeted `BANDIT-016` Local Qwen finding repair.
+`docs/work/BANDIT-016/local-qwen-review.md` records persistent findings after
+rerun: PM-rationale heuristic hardening and git fallback edge-case hardening.
+`docs/work/BANDIT-016/qwen-finding-repair.md` records the narrow repair.
+Aggregate review evidence is recorded in `docs/work/BANDIT-016/review-evidence.md`,
+but `land-check` still requires a passing Local Qwen reviewer verdict before a
+`safe-to-land` landing verdict can be valid. Do not begin live
 escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, or feature work until this active gap is resolved,
@@ -61,9 +62,8 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** Narrow repair evidence for the persistent
-`BANDIT-016` Local Qwen `non_blocking` findings, followed by a clean-worktree
-Local Qwen rerun.
+**Expected next deliverable:** Clean-worktree Local Qwen rerun evidence at the
+focused `BANDIT-016` repair head.
 
 ## Known Bootstrap Gaps
 
@@ -172,7 +172,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; repair persistent Local Qwen non-blocking findings and rerun Local Qwen next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; rerun Local Qwen from the focused repair head next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.

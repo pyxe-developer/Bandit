@@ -680,7 +680,25 @@ function hasConcretePmRationale(disposition: string) {
     return false;
   }
 
-  return /\b(because|rationale)\b/i.test(disposition);
+  return (
+    hasConcreteReasonAfterMarker(disposition, /\bbecause\b/i) ||
+    hasConcreteReasonAfterMarker(disposition, /\b(?:pm\s+)?rationale\s*:/i) ||
+    hasConcreteReasonAfterMarker(disposition, /\breason\s*:/i)
+  );
+}
+
+function hasConcreteReasonAfterMarker(disposition: string, marker: RegExp) {
+  const match = marker.exec(disposition);
+  if (!match) {
+    return false;
+  }
+
+  const reason = disposition.slice(match.index + match[0].length).trim();
+  if (reason.length < 24) {
+    return false;
+  }
+
+  return !/^(tbd|todo|pending|none|n\/a|na|later)\b[.!:]?$/i.test(reason);
 }
 
 function isPassingOrBootstrapGap(value: string) {

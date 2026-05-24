@@ -106,8 +106,18 @@ export function readGitChangedPaths(
   return new Promise((resolve) => {
     execFile(
       "git",
-      ["diff", "--name-only", `${baseRevision}..${headRevision}`],
-      { cwd: repoRoot },
+      [
+        "diff",
+        "--name-only",
+        "--no-ext-diff",
+        baseRevision,
+        headRevision,
+        "--"
+      ],
+      {
+        cwd: repoRoot,
+        maxBuffer: 1024 * 1024 * 4
+      },
       (error, stdout) => {
         if (error) {
           resolve(null);
