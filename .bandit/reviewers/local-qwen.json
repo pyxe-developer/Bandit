@@ -2,27 +2,17 @@
   "contract_version": 1,
   "profile_id": "local-qwen-baseline",
   "version": 1,
-  "provider": "mastra-code",
+  "provider": "omlx-openai-compatible",
   "provider_base_url": "http://127.0.0.1:8000/v1",
   "runtime": "command",
   "command": {
-    "executable": "mastracode",
+    "executable": "node",
     "args": [
-      "--settings",
-      ".bandit/reviewers/mastracode-local-qwen.settings.json",
-      "--model",
-      "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
-      "--output-format",
-      "json",
-      "--thinking-level",
-      "off",
-      "--timeout",
-      "180",
-      "--prompt",
+      "bin/omlx-chat-completions.mjs",
       "{{prompt_stdin}}"
     ]
   },
-  "model": "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
+  "model": "Qwen3.6-35B-A3B-MLX-8bit",
   "prompt_contract": {
     "role": "read_only_adversarial_reviewer",
     "required_outputs": ["verdict", "findings", "summary"]

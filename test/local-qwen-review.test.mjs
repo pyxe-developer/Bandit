@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import http from "node:http";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -122,7 +123,7 @@ test("validate fails closed when the local Qwen profile uses the drifted Qwen Co
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /Local Qwen profile must use Mastra Code custom provider/
+    /Local Qwen profile must use Mastra Code or direct oMLX provider/
   );
 });
 
@@ -144,7 +145,7 @@ test("validate fails closed when the Mastra Code local Qwen profile uses the wro
   );
 });
 
-test("committed local Qwen baseline profile uses the spike-backed Mastra Code oMLX route", async () => {
+test("committed local Qwen baseline profile uses the direct local oMLX route", async () => {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
   await copyTemplates(repo);
@@ -161,23 +162,14 @@ test("committed local Qwen baseline profile uses the spike-backed Mastra Code oM
   const profile = JSON.parse(
     await readFile(path.join(repo, ".bandit/reviewers/local-qwen.json"), "utf8")
   );
-  assert.equal(profile.provider, "mastra-code");
+  assert.equal(profile.provider, "omlx-openai-compatible");
   assert.equal(profile.provider_base_url, "http://127.0.0.1:8000/v1");
-  assert.equal(profile.command.executable, "mastracode");
+  assert.equal(profile.command.executable, "node");
   assert.deepEqual(profile.command.args, [
-    "--settings",
-    ".bandit/reviewers/mastracode-local-qwen.settings.json",
-    "--model",
-    "omlx-local/Qwen3.6-35B-A3B-MLX-8bit",
-    "--output-format",
-    "json",
-    "--thinking-level",
-    "off",
-    "--timeout",
-    "180",
-    "--prompt",
+    "bin/omlx-chat-completions.mjs",
     "{{prompt_stdin}}"
   ]);
+  assert.equal(profile.model, "Qwen3.6-35B-A3B-MLX-8bit");
 });
 
 test("committed Mastra Code settings keep local Qwen review off the Google-key OM path", async () => {
@@ -200,6 +192,76 @@ test("committed Mastra Code settings keep local Qwen review off the Google-key O
   assert.equal(settings.models.omReflectionThreshold, 1000000);
   assert.doesNotMatch(JSON.stringify(settings), /google\/gemini-2\.5-flash/);
   assert.doesNotMatch(JSON.stringify(settings), /GOOGLE_GENERATIVE_AI_API_KEY/);
+});
+
+test("direct oMLX command posts stdin packets to the local OpenAI-compatible endpoint", async () => {
+  const server = await createOpenAiFixtureServer((body) => {
+    assert.equal(body.model, "Qwen3.6-35B-A3B-MLX-8bit");
+    assert.equal(body.temperature, 0);
+    assert.equal(body.messages[0].role, "system");
+    assert.match(body.messages[0].content, /read-only adversarial reviewer/);
+    assert.equal(body.messages[1].role, "user");
+    assert.match(body.messages[1].content, /Review Bandit work item BANDIT-971/);
+
+    return {
+      choices: [
+        {
+          message: {
+            content: JSON.stringify({
+              verdict: "blocker",
+              findings: [
+                {
+                  severity: "blocker",
+                  issue: "Direct oMLX fixture finding"
+                }
+              ],
+              summary: "Direct oMLX fixture summary",
+              confidence: "high"
+            })
+          }
+        }
+      ]
+    };
+  });
+
+  try {
+    const repo = await createInitializedRepo({
+      profileOptions: {
+        overrides: {
+          provider: "omlx-openai-compatible",
+          model: "Qwen3.6-35B-A3B-MLX-8bit",
+          command: {
+            executable: process.execPath,
+            args: [
+              path.join(repoRoot, "bin/omlx-chat-completions.mjs"),
+              "{{prompt_stdin}}"
+            ]
+          }
+        }
+      }
+    });
+    await initGitRepo(repo);
+    await writeWorkBrief(repo, "BANDIT-971", "Direct oMLX Qwen Review");
+    await commitAll(repo, "Fixture source");
+
+    const result = await runBanditWithEnv(
+      repo,
+      ["qwen-review", "BANDIT-971"],
+      { BANDIT_OMLX_BASE_URL: server.baseUrl }
+    );
+
+    assert.equal(result.code, 1);
+    assert.match(result.stderr, /Local Qwen reviewer verdict blocks landing: blocker/);
+
+    const artifact = await readFile(
+      path.join(repo, "docs/work/BANDIT-971/local-qwen-review.md"),
+      "utf8"
+    );
+    assert.match(artifact, /Direct oMLX fixture finding/);
+    assert.match(artifact, /structured_findings_json:/);
+  } finally {
+    await server.close();
+  }
 });
 
 test("validate fails closed when local Qwen evidence references the wrong work item", async () => {
@@ -915,6 +977,71 @@ function runGit(cwd, args) {
       }
 
       resolve({ stdout, stderr });
+    });
+  });
+}
+
+function runBanditWithEnv(cwd, args, env) {
+  return new Promise((resolve) => {
+    execFile(
+      process.execPath,
+      [path.join(repoRoot, "bin/bandit.mjs"), ...args],
+      { cwd, env: { ...process.env, ...env } },
+      (error, stdout, stderr) => {
+        resolve({
+          code: typeof error?.code === "number" ? error.code : 0,
+          stdout,
+          stderr
+        });
+      }
+    );
+  });
+}
+
+function createOpenAiFixtureServer(handler) {
+  return new Promise((resolve, reject) => {
+    const server = http.createServer((request, response) => {
+      if (request.method !== "POST" || request.url !== "/v1/chat/completions") {
+        response.writeHead(404);
+        response.end();
+        return;
+      }
+
+      const chunks = [];
+      request.on("data", (chunk) => chunks.push(chunk));
+      request.on("end", () => {
+        try {
+          const body = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+          const payload = handler(body);
+          response.writeHead(200, { "content-type": "application/json" });
+          response.end(JSON.stringify(payload));
+        } catch (error) {
+          response.writeHead(500, { "content-type": "text/plain" });
+          response.end(error instanceof Error ? error.message : String(error));
+        }
+      });
+    });
+
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", () => {
+      const address = server.address();
+      if (!address || typeof address === "string") {
+        reject(new Error("OpenAI fixture server did not expose a TCP address"));
+        return;
+      }
+
+      resolve({
+        baseUrl: `http://127.0.0.1:${address.port}/v1`,
+        close: () => new Promise((closeResolve, closeReject) => {
+          server.close((error) => {
+            if (error) {
+              closeReject(error);
+              return;
+            }
+            closeResolve();
+          });
+        })
+      });
     });
   });
 }

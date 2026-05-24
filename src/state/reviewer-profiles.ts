@@ -5,7 +5,7 @@ export type LocalQwenProfile = {
   contractVersion: number;
   profileId: string;
   version: number;
-  provider: "mastra-code";
+  provider: "mastra-code" | "omlx-openai-compatible";
   providerBaseUrl: string;
   runtime: "command";
   command: {
@@ -47,11 +47,13 @@ const REQUIRED_FIELDS = [
   "output_contract",
   "unavailable_runtime_behavior"
 ];
-const EXPECTED_PROVIDER = "mastra-code";
+const EXPECTED_PROVIDERS = new Set(["mastra-code", "omlx-openai-compatible"]);
 const EXPECTED_PROVIDER_BASE_URL = "http://127.0.0.1:8000/v1";
-const EXPECTED_MODEL = "omlx-local/Qwen3.6-35B-A3B-MLX-8bit";
+const EXPECTED_MASTRACODE_MODEL = "omlx-local/Qwen3.6-35B-A3B-MLX-8bit";
+const EXPECTED_OMLX_MODEL = "Qwen3.6-35B-A3B-MLX-8bit";
 const EXPECTED_MASTRACODE_SETTINGS_PATH =
   ".bandit/reviewers/mastracode-local-qwen.settings.json";
+const EXPECTED_OMLX_COMMAND_PATH = "bin/omlx-chat-completions.mjs";
 const DISALLOWED_OLLAMA_ENDPOINTS = [
   "http://localhost:11434/v1",
   "http://127.0.0.1:11434/v1"
@@ -109,12 +111,12 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     "output_contract.required_fields"
   );
   const timeoutMs = requirePositiveNumber(profile.timeout_ms, "timeout_ms");
-  const provider = requireString(profile.provider, "provider");
+  const provider = requireProvider(profile.provider);
   const providerBaseUrl = requireString(profile.provider_base_url, "provider_base_url");
   const model = requireString(profile.model, "model");
 
-  if (provider !== EXPECTED_PROVIDER) {
-    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+  if (!EXPECTED_PROVIDERS.has(provider)) {
+    throw new Error("Local Qwen profile must use Mastra Code or direct oMLX provider");
   }
 
   if (providerBaseUrl !== EXPECTED_PROVIDER_BASE_URL) {
@@ -123,11 +125,13 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     );
   }
 
-  if (model !== EXPECTED_MODEL) {
-    throw new Error(`Local Qwen profile must use model ${EXPECTED_MODEL}`);
+  const expectedModel =
+    provider === "mastra-code" ? EXPECTED_MASTRACODE_MODEL : EXPECTED_OMLX_MODEL;
+  if (model !== expectedModel) {
+    throw new Error(`Local Qwen profile must use model ${expectedModel}`);
   }
 
-  rejectDriftedQwenCodeRoute(executable, args);
+  validateReviewerCommand(provider, executable, args);
 
   if (promptContract.role !== "read_only_adversarial_reviewer") {
     throw new Error("Local Qwen prompt contract must be read-only adversarial reviewer");
@@ -163,7 +167,7 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
     contractVersion: 1,
     profileId: "local-qwen-baseline",
     version: requirePositiveNumber(profile.version, "version"),
-    provider: "mastra-code",
+    provider,
     providerBaseUrl,
     runtime: "command",
     command: { executable, args },
@@ -187,15 +191,15 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
   };
 }
 
-function rejectDriftedQwenCodeRoute(executable: string, args: string[]) {
+function validateReviewerCommand(provider: string, executable: string, args: string[]) {
   const executableName = path.basename(executable);
 
   if (executableName === "qwen") {
-    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+    throw new Error("Local Qwen profile must use Mastra Code or direct oMLX provider");
   }
 
   if (args.includes("--openai-base-url")) {
-    throw new Error("Local Qwen profile must use Mastra Code custom provider");
+    throw new Error("Local Qwen profile must use Mastra Code or direct oMLX provider");
   }
 
   if (args.some((arg) => DISALLOWED_OLLAMA_ENDPOINTS.includes(arg))) {
@@ -208,10 +212,19 @@ function rejectDriftedQwenCodeRoute(executable: string, args: string[]) {
     throw new Error("Local Qwen profile command must include a prompt placeholder");
   }
 
-  if (path.basename(executable) === "mastracode") {
-    requireMastraCodeArgument(args, "--settings", EXPECTED_MASTRACODE_SETTINGS_PATH);
-    requireMastraCodeArgument(args, "--model", EXPECTED_MODEL);
-    requireMastraCodeArgument(args, "--output-format", "json");
+  if (provider === "mastra-code") {
+    if (path.basename(executable) === "mastracode") {
+      requireMastraCodeArgument(args, "--settings", EXPECTED_MASTRACODE_SETTINGS_PATH);
+      requireMastraCodeArgument(args, "--model", EXPECTED_MASTRACODE_MODEL);
+      requireMastraCodeArgument(args, "--output-format", "json");
+    }
+    return;
+  }
+
+  if (provider === "omlx-openai-compatible") {
+    if (!["node", "nodejs"].includes(executableName) && executable !== process.execPath) {
+      throw new Error("Local Qwen direct oMLX profile must execute node");
+    }
   }
 }
 
@@ -255,6 +268,15 @@ function requireString(value: unknown, field: string) {
   }
 
   return value;
+}
+
+function requireProvider(value: unknown): LocalQwenProfile["provider"] {
+  const provider = requireString(value, "provider");
+  if (!EXPECTED_PROVIDERS.has(provider)) {
+    throw new Error("Local Qwen profile must use Mastra Code or direct oMLX provider");
+  }
+
+  return provider as LocalQwenProfile["provider"];
 }
 
 function requireStringArray(
