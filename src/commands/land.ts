@@ -2,14 +2,14 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { autoLandCheck } from "./auto-land-check.js";
 import { readLandingReadiness } from "./land-check.js";
-import { readGitStatusShort } from "../state/git.js";
+import { readGitStatusShortIncludingUntrackedFiles } from "../state/git.js";
 import { readLandingAgentContract } from "../state/landing-agent-contract.js";
 
 type LandOptions = {
   action: string;
 };
 
-const SUPPORTED_ACTION = "local-record";
+const CLI_ACTION = "local-record";
 const RECORDED_ACTION = "local_record";
 
 export async function land(repoRoot: string, args: string[]) {
@@ -22,7 +22,11 @@ export async function land(repoRoot: string, args: string[]) {
   const options = parseLandOptions(args.slice(1));
   const contract = await readLandingAgentContract(repoRoot);
 
-  if (options.action !== SUPPORTED_ACTION) {
+  if (options.action !== CLI_ACTION) {
+    throw new Error(`Unsupported landing action: ${options.action}`);
+  }
+
+  if (!contract.cliActions.includes(options.action)) {
     throw new Error(`Unsupported landing action: ${options.action}`);
   }
 
@@ -30,12 +34,15 @@ export async function land(repoRoot: string, args: string[]) {
     throw new Error(`Unsupported landing action: ${options.action}`);
   }
 
-  const status = await readGitStatusShort(repoRoot);
+  const status = await readGitStatusShortIncludingUntrackedFiles(repoRoot);
   if (status === null) {
     throw new Error("Landing blocked: unable to inspect git worktree");
   }
 
-  if (hasUnrelatedDirtyPaths(status, workItemId)) {
+  if (
+    contract.requireCleanWorktree &&
+    hasDisallowedDirtyPaths(status, allowedDirtyPathPrefixes(contract, workItemId))
+  ) {
     throw new Error("Landing blocked: worktree is dirty");
   }
 
@@ -156,17 +163,25 @@ bootstrap-gap disposition, and roadmap context closeout are recorded.
   );
 }
 
-function hasUnrelatedDirtyPaths(status: string, workItemId: string) {
+function allowedDirtyPathPrefixes(
+  contract: { allowedDirtyPaths: string[] },
+  workItemId: string
+) {
+  return contract.allowedDirtyPaths.map((allowedPath) =>
+    allowedPath.replace("<work_item_id>", workItemId)
+  );
+}
+
+function hasDisallowedDirtyPaths(status: string, allowedPathPrefixes: string[]) {
   if (status.length === 0) {
     return false;
   }
 
-  const allowedWorkItemPrefix = `docs/work/${workItemId}/`;
   return status
     .split("\n")
     .filter((line) => line.trim().length > 0)
     .some((line) => {
       const filePath = line.slice(3).trim();
-      return !filePath.startsWith(allowedWorkItemPrefix);
+      return !allowedPathPrefixes.some((prefix) => filePath.startsWith(prefix));
     });
 }

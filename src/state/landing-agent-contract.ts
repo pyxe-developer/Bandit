@@ -6,8 +6,10 @@ export type LandingAgentContract = {
   version: 1;
   authority: "cli_owned_landing_agent";
   supportedActions: ["local_record"];
+  cliActions: ["local-record"];
   requireAutoLandEligible: true;
   requireCleanWorktree: true;
+  allowedDirtyPaths: ["docs/work/<work_item_id>/"];
   writeLandingAction: true;
   allowMerge: false;
   allowPush: false;
@@ -20,8 +22,10 @@ const SUPPORTED_CONTRACT_FIELDS = new Set([
   "version",
   "authority",
   "supported_actions",
+  "cli_actions",
   "require_auto_land_eligible",
   "require_clean_worktree",
+  "allowed_dirty_paths",
   "write_landing_action",
   "allow_merge",
   "allow_push",
@@ -44,8 +48,10 @@ export async function writeDefaultLandingAgentContract(filePath: string) {
     version: 1,
     authority: "cli_owned_landing_agent",
     supported_actions: ["local_record"],
+    cli_actions: ["local-record"],
     require_auto_land_eligible: true,
     require_clean_worktree: true,
+    allowed_dirty_paths: ["docs/work/<work_item_id>/"],
     write_landing_action: true,
     allow_merge: false,
     allow_push: false,
@@ -89,11 +95,13 @@ export function parseLandingAgentContract(
 
   const authority = requireString(parsed, "authority");
   const supportedActions = requireStringArray(parsed, "supported_actions");
+  const cliActions = requireStringArray(parsed, "cli_actions");
   const requireAutoLandEligible = requireBoolean(
     parsed,
     "require_auto_land_eligible"
   );
   const requireCleanWorktree = requireBoolean(parsed, "require_clean_worktree");
+  const allowedDirtyPaths = requireStringArray(parsed, "allowed_dirty_paths");
   const writeLandingAction = requireBoolean(parsed, "write_landing_action");
   const allowMerge = requireBoolean(parsed, "allow_merge");
   const allowPush = requireBoolean(parsed, "allow_push");
@@ -115,6 +123,12 @@ export function parseLandingAgentContract(
     );
   }
 
+  if (cliActions.length !== 1 || cliActions[0] !== "local-record") {
+    throw new Error(
+      "Malformed Landing Agent contract: cli_actions must be [local-record]"
+    );
+  }
+
   if (!requireAutoLandEligible) {
     throw new Error(
       "Malformed Landing Agent contract: require_auto_land_eligible must be true"
@@ -124,6 +138,15 @@ export function parseLandingAgentContract(
   if (!requireCleanWorktree) {
     throw new Error(
       "Malformed Landing Agent contract: require_clean_worktree must be true"
+    );
+  }
+
+  if (
+    allowedDirtyPaths.length !== 1 ||
+    allowedDirtyPaths[0] !== "docs/work/<work_item_id>/"
+  ) {
+    throw new Error(
+      "Malformed Landing Agent contract: allowed_dirty_paths must be [docs/work/<work_item_id>/]"
     );
   }
 
@@ -143,8 +166,10 @@ export function parseLandingAgentContract(
     version: 1,
     authority,
     supportedActions: ["local_record"],
+    cliActions: ["local-record"],
     requireAutoLandEligible,
     requireCleanWorktree,
+    allowedDirtyPaths: ["docs/work/<work_item_id>/"],
     writeLandingAction,
     allowMerge,
     allowPush,

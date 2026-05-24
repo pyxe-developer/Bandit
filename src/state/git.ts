@@ -15,20 +15,32 @@ export function readCurrentGitHead(repoRoot: string): Promise<string | null> {
 }
 
 export function readGitStatusShort(repoRoot: string): Promise<string | null> {
-  return new Promise((resolve) => {
-    execFile(
-      "git",
-      ["status", "--short", "--untracked-files=all"],
-      { cwd: repoRoot },
-      (error, stdout) => {
-        if (error) {
-          resolve(null);
-          return;
-        }
+  return readGitStatus(repoRoot, ["status", "--short"]);
+}
 
-        resolve(stdout.trim());
+export function readGitStatusShortIncludingUntrackedFiles(
+  repoRoot: string
+): Promise<string | null> {
+  return readGitStatus(repoRoot, [
+    "status",
+    "--short",
+    "--untracked-files=all"
+  ]);
+}
+
+function readGitStatus(
+  repoRoot: string,
+  args: string[]
+): Promise<string | null> {
+  return new Promise((resolve) => {
+    execFile("git", args, { cwd: repoRoot }, (error, stdout) => {
+      if (error) {
+        resolve(null);
+        return;
       }
-    );
+
+      resolve(stdout.trim());
+    });
   });
 }
 
