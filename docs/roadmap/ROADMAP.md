@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Create RED evidence for `BANDIT-010`, the Phase 4 escalated adversarial reviewer placeholder work item.
+**Current next step:** Create the next Phase 5 bootstrap work item for CLI-owned UAT approval artifacts and stale-UAT detection.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass. `BANDIT-008` repaired Local Qwen reviewer runtime drift away from Qwen Code/Ollama. `BANDIT-009` repaired local Qwen full-packet reliability by preserving structured findings, switching the live harness path to direct local oMLX, fixing review-packet diff-base selection, and recording passing live local Qwen evidence for a real Bandit packet.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass. `BANDIT-008` repaired Local Qwen reviewer runtime drift away from Qwen Code/Ollama. `BANDIT-009` repaired local Qwen full-packet reliability by preserving structured findings, switching the live harness path to direct local oMLX, fixing review-packet diff-base selection, and recording passing live local Qwen evidence for a real Bandit packet. `BANDIT-010` delivered the escalated adversarial reviewer placeholder contract and routing-aware `land-check` enforcement.
 
 ## Phase Map
 
@@ -28,8 +28,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 | 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Complete |
 | 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Complete |
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Complete |
-| 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | In progress |
-| 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Not started |
+| 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Complete |
+| 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Next |
 | 6 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
 | 7 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, and improvement health. | Not started |
 | 8 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
@@ -160,8 +160,7 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- `BANDIT-010` - Escalated Adversarial Reviewer Placeholder.
-- Next step: create RED evidence showing required escalated review is not yet enforced by `bandit land-check <work-item-id>`.
+- none.
 
 Expected capabilities:
 
@@ -170,7 +169,8 @@ Expected capabilities:
 - stale review/source-drift checks. Complete in `BANDIT-005`.
 - CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate substrate; live CodeRabbit polling remains an explicit bootstrap gap.
 - Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; `BANDIT-008` repaired runtime drift and `BANDIT-009` repaired full-packet reliability through direct local oMLX.
-- Escalation reviewer placeholder. Still required and now next.
+- Escalation reviewer placeholder. Complete in `BANDIT-010` as a bootstrap
+  placeholder contract; live escalated reviewer routing remains a later gap.
 
 Exit criteria:
 
@@ -183,10 +183,11 @@ Completed work:
 - `BANDIT-007` - CodeRabbit State Capture.
 - `BANDIT-008` - Local Reviewer Runtime Drift Repair.
 - `BANDIT-009` - Local Qwen Full-Packet Reliability.
+- `BANDIT-010` - Escalated Adversarial Reviewer Placeholder.
 
 Queued next:
 
-- RED evidence and implementation for `BANDIT-010`.
+- Phase 5 CLI-owned UAT approval artifact and stale-UAT detection.
 
 ## Phase 5: UAT And Auto-Landing
 
