@@ -2,21 +2,21 @@
 
 ## Status
 
-**Phase:** 0 - Foundation.
+**Phase:** 1 - Repo-Native CLI Skeleton.
 
-**State:** Founding docs exist. Implementation has not started.
+**State:** `BANDIT-001` brief exists. Implementation has not started.
 
-**Last completed milestone:** Bandit cold-start Codex skill created, installed, and updated with the Operator Input Boundary.
+**Last completed milestone:** First bootstrap work item brief created for `BANDIT-001` - Repo-Native State And CLI Skeleton.
 
-**Current next action:** Create the first bootstrap work item for Phase 1: Repo-Native State And CLI Skeleton.
+**Current next action:** Begin `BANDIT-001` test design and RED evidence before production implementation.
 
 ## Active Work
 
-**Active work item:** none yet.
+**Active work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
 
-**Planned first work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
+**Work item brief:** `docs/work/BANDIT-001/brief.md`.
 
-**Expected first deliverable:** A bootstrap work item brief with acceptance criteria, test strategy, explicit missing gates, and initial implementation scope for:
+**Expected next deliverable:** Test design and RED evidence for:
 
 - `bandit init`
 - `.bandit/config.toml`
@@ -25,7 +25,7 @@
 - `bandit list`
 - `bandit show`
 
-The brief should also state whether any operator-owned input is required before implementation starts.
+The work item brief records that no operator-owned input is required before test design or implementation starts.
 
 ## Known Bootstrap Gaps
 
@@ -59,20 +59,12 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Next Step Details
 
-Create `docs/work/BANDIT-001/brief.md` or the agreed bootstrap equivalent.
+Use `docs/work/BANDIT-001/brief.md` as the active contract.
 
-The brief should include:
+Next executable step:
 
-- Goal.
-- Scope.
-- Out of scope.
-- Acceptance criteria.
-- Test plan.
-- `CLEAN_CODE.md` read evidence.
-- Clean-code landing rubric.
-- Bootstrap gaps.
-- Required operator input, if any.
-- Expected files.
-- First implementation order.
+1. Confirm TypeScript/Node package and test tooling.
+2. Write focused tests for `bandit init`, config creation, and event JSONL append behavior.
+3. Record RED evidence before production implementation unless a specific path requires a documented bootstrap gap.
 
-Do not create detailed briefs for every future phase yet. Keep the roadmap high-level and create work-item detail only for the next executable step.
+Do not implement production CLI behavior before test design and RED evidence exist.

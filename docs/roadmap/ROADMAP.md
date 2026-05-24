@@ -14,18 +14,18 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 0 - Foundation.
+**Current phase:** Phase 1 - Repo-Native CLI Skeleton.
 
-**Current next step:** Create the first bootstrap work item for Phase 1: Repo-Native State And CLI Skeleton.
+**Current next step:** Begin `BANDIT-001` test design and RED evidence before production implementation.
 
-**Current implementation status:** No product code yet. The repository has founding docs, bootstrap methodology, PRD, architecture, and v0 plan.
+**Current implementation status:** No product code yet. The repository has founding docs, bootstrap methodology, PRD, architecture, v0 plan, and the first bootstrap work item brief.
 
 ## Phase Map
 
 | Phase | Name | Outcome | Status |
 |---|---|---|---|
-| 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | In progress |
-| 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Not started |
+| 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | Complete |
+| 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | In progress |
 | 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Not started |
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Not started |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Not started |
@@ -46,11 +46,12 @@ Completed:
 - V0 plan drafted.
 - Bootstrap methodology drafted.
 - Metrics and retrospective-derived chore schema drafted.
+- Roadmap and current-context checkpoint created.
+- First bootstrap work item for Phase 1 created.
 
 Remaining:
 
-- Roadmap and current-context checkpoint.
-- First bootstrap work item for Phase 1.
+- None.
 
 Exit criteria:
 
@@ -59,6 +60,12 @@ Exit criteria:
 ## Phase 1: Repo-Native CLI Skeleton
 
 Goal: Create the smallest CLI and state system that lets Bandit own durable context.
+
+Active work:
+
+- `BANDIT-001` - Repo-Native State And CLI Skeleton.
+- Brief: `docs/work/BANDIT-001/brief.md`.
+- Next step: test design and RED evidence before production implementation.
 
 Expected capabilities:
 
