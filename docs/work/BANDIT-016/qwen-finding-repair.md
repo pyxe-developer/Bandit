@@ -48,11 +48,16 @@ workflow authority.
 
 ## Next Required Action
 
-After this repair is committed at a focused source head, rerun:
+The clean-worktree Local Qwen rerun at repair head
+`81f603e653654558b67a32e1d2fc36201c2523c6` completed and returned a
+`non_blocking` verdict. The remaining findings are narrowed to future hardening
+for concrete-rationale minimum-length diagnostics and git error categorization.
+
+Next, perform targeted repair or explicit PM disposition hardening, then rerun:
 
 ```sh
 npm run bandit -- qwen-review BANDIT-016
 ```
 
-The rerun must happen from a clean worktree before a valid `safe-to-land`
-landing verdict can be recorded.
+The rerun must happen from a clean worktree and produce a passing Local Qwen
+reviewer verdict before a valid `safe-to-land` landing verdict can be recorded.
