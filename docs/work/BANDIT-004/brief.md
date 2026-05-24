@@ -2,7 +2,7 @@
 
 ## Status
 
-Review evidence and safe-to-land bootstrap verdict recorded; landing action evidence and retrospective are pending. Do not begin the next slice.
+BANDIT-004 landed as bootstrap commit `a0b679217c93c3aeda6646806201d181cd26404c`; landing action evidence and retrospective are recorded.
 
 ## Goal
 
@@ -126,8 +126,8 @@ Before landing, Codex PM must evaluate:
 | Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-004/red-evidence.md` maps acceptance criteria to `test/routing.test.mjs`; focused RED run fails 11/11 tests because validation ignores missing routing policy and `bandit route` is not implemented. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-004/implementation-evidence.md` records the GREEN implementation, clean-code self-check, passing focused/full tests, `bandit validate`, `bandit route BANDIT-004`, typecheck, and `git diff --check`. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | `docs/work/BANDIT-004/review-evidence.md` records manual PM review with no blocker-level finding and records final CodeRabbit, Qwen, and escalated adversarial gates as unavailable bootstrap gaps. |
-| Stage 5: Landing And UAT | `blocker` | `docs/work/BANDIT-004/landing-verdict.md` records a safe-to-land bootstrap verdict, but landing action evidence does not exist yet. The slice is ready-to-land, not landed. UAT is `not_applicable` because this is workflow infrastructure, not a user-facing feature slice. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before this slice closes. |
+| Stage 5: Landing And UAT | `pass` | `docs/work/BANDIT-004/landing-verdict.md` records a safe-to-land bootstrap verdict, and `docs/work/BANDIT-004/landing-action.md` records landed commit `a0b679217c93c3aeda6646806201d181cd26404c`. UAT is `not_applicable` because this is workflow infrastructure, not a user-facing feature slice. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `docs/work/BANDIT-004/retrospective.md` records lessons and dispositions; no new improvement chore is required. |
 
 ## Bootstrap Gaps
 

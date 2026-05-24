@@ -14,11 +14,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 3 - Routing And Smell Detection.
+**Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Land `BANDIT-004` with a focused bootstrap commit, then record landing-action evidence and retrospective closeout before any next slice begins.
+**Current next step:** Create the `BANDIT-005` work-item brief for the Pre-Landing Review Loop.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` has a brief, RED evidence, GREEN implementation, route artifact, passing verification, review evidence, and a safe-to-land bootstrap verdict. It is ready-to-land, not complete, because landing action evidence and retrospective are still pending.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. Phase 3 is complete; Phase 4 is ready for its first brief.
 
 ## Phase Map
 
@@ -27,8 +27,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 | 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | Complete |
 | 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Complete |
 | 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Complete |
-| 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | In progress |
-| 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Not started |
+| 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Complete |
+| 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | In progress |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Not started |
 | 6 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
 | 7 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, and improvement health. | Not started |
@@ -133,8 +133,7 @@ Goal: Let Codex PM manage technical decisions from policy.
 
 Active work:
 
-- `BANDIT-004` - Routing Decision And Smell Trigger Catalog.
-- Next step: land the slice, record landing-action evidence, and complete retrospective closeout.
+- none.
 
 Expected capabilities:
 
@@ -147,9 +146,22 @@ Exit criteria:
 
 - Codex PM can make manager-owned routing decisions without asking routine technical questions.
 
+Completed work:
+
+- `BANDIT-004` - Routing Decision And Smell Trigger Catalog.
+
+Status:
+
+- Complete.
+
 ## Phase 4: Review And Landing Gates
 
 Goal: Make safe landing evidence-driven.
+
+Active work:
+
+- none.
+- Next step: create the `BANDIT-005` brief for the Pre-Landing Review Loop.
 
 Expected capabilities:
 

@@ -7,23 +7,22 @@
 This is a bootstrap verdict. Final Bandit review gates do not exist yet, so
 unavailable gates are recorded as `bootstrap_gap`.
 
-This verdict authorizes the landing action. It does not make the slice landed.
-The slice remains `ready-to-land` until a focused bootstrap commit exists and
-`docs/work/BANDIT-004/landing-action.md` records the actual landed commit SHA.
+This verdict authorized the landing action. The landing action has now been
+recorded in `docs/work/BANDIT-004/landing-action.md`.
 
 ## Evidence
 
 | Gate | Verdict | Evidence |
 |---|---|---|
-| Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify `BANDIT-004` as the active Phase 3 work and identify review/landing readiness as the current step. |
+| Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify the current phase, active work state, completed `BANDIT-004` landing, and next action. |
 | Stage 1: Work-Item Brief And Spec | `pass` | `brief.md` includes goal, scope, out of scope, acceptance criteria, test plan, clean-code evidence, bootstrap gaps, expected files, implementation order, smell triggers, escalation plan, and operator input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `red-evidence.md` records Test Writer-owned behavior assertions and the expected 11/11 failing RED run before production implementation. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `implementation-evidence.md` maps the implementation to acceptance criteria and records focused/full verification, route output, typecheck, validate, and `git diff --check`. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | `review-evidence.md` records manual PM review with no blocker-level finding and records unavailable CodeRabbit/Qwen/escalation gates as bootstrap gaps. |
 | Landing verdict substep | `pass` | Tests and review evidence are current for the source being landed. This verdict is a decision, not a warning dump. |
-| Landing action evidence | `blocker` | `docs/work/BANDIT-004/landing-action.md` does not exist yet. The next action is to land the slice and record the actual commit SHA before any next slice begins. |
+| Landing action evidence | `pass` | `docs/work/BANDIT-004/landing-action.md` records landed commit `a0b679217c93c3aeda6646806201d181cd26404c`. |
 | UAT | `not_applicable` | This is workflow infrastructure, not a user-facing feature slice. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before closeout, after the landing action is performed and recorded. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `docs/work/BANDIT-004/retrospective.md` records lessons and dispositions; no new improvement chore is required. |
 
 ## Verification Run
 
@@ -66,10 +65,9 @@ Date: 2026-05-24.
 
 ## Landing Decision
 
-BANDIT-004 is safe to land as the first Phase 3 routing and smell-trigger
-baseline.
+BANDIT-004 was safe to land as the first Phase 3 routing and smell-trigger
+baseline, and it landed as bootstrap commit
+`a0b679217c93c3aeda6646806201d181cd26404c`.
 
-The next action is a focused bootstrap landing commit, followed by
-`docs/work/BANDIT-004/landing-action.md` with the actual landed commit SHA,
-retrospective evidence, and context closeout. Do not begin the next slice until
-that landing action evidence and retrospective exist.
+Do not begin the next slice until this landing action evidence, retrospective,
+and context closeout are committed.

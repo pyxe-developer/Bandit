@@ -5,8 +5,8 @@
 This evidence covers Stage 4: Review And Cross-Model Gates for Routing Decision
 And Smell Trigger Catalog.
 
-The review applies to the current uncommitted `BANDIT-004` implementation and
-its work-item evidence.
+The review applies to the `BANDIT-004` implementation that landed as commit
+`a0b679217c93c3aeda6646806201d181cd26404c` and its work-item evidence.
 
 ## Reviewed Source
 
@@ -89,8 +89,8 @@ Date: 2026-05-24.
 | Stage 2: Test Design And RED Evidence | `pass` | `red-evidence.md` maps acceptance criteria to focused tests and records the 11/11 failing RED run before implementation. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | `implementation-evidence.md` maps the implementation to acceptance criteria and records passing focused/full verification and clean-code self-check. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Manual PM review passed, but final CodeRabbit, Qwen, and escalated adversarial gates are unavailable during bootstrap. |
-| Stage 5: Landing And UAT | `blocker` | A safe-to-land verdict may be recorded, but landing action evidence does not exist yet. The slice is ready-to-land, not landed. UAT is `not_applicable` because this is workflow infrastructure, not a feature slice. |
-| Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before closeout, after the landing action is performed and recorded. |
+| Stage 5: Landing And UAT | `pass` | `landing-verdict.md` records a safe-to-land bootstrap verdict, and `landing-action.md` records landed commit `a0b679217c93c3aeda6646806201d181cd26404c`. UAT is `not_applicable` because this is workflow infrastructure, not a feature slice. |
+| Stage 6: Retrospective And Improvement Capture | `pass` | `retrospective.md` records lessons and dispositions; no new improvement chore is required. |
 
 ## Stage 4 Verdict
 
