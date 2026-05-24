@@ -84,6 +84,10 @@ _Avoid_: manual panic review, permanent expensive default
 The rule that Codex PM selects the right workflow, skill, agent, reviewer, and escalation path from recorded policy and repo evidence instead of asking the operator to make technical routing decisions.
 _Avoid_: operator-as-engineering-manager, every-choice questionnaire
 
+**Operator Input Boundary**:
+The rule that Codex PM must call out missing operator-owned input when repo artifacts cannot answer a product, UAT, policy, business tradeoff, explicit cost/risk override, or genuinely ambiguous scope question.
+_Avoid_: guessing user intent, burying uncertainty, asking the operator routine technical routing questions
+
 **Smell Trigger Catalog**:
 A repo-native policy list of risk signals that require stronger review, narrower slice planning, mechanical enforcement, or halt-and-surface behavior.
 _Avoid_: gut feel, buried retrospective lesson, ad hoc escalation
@@ -129,6 +133,7 @@ _Avoid_: assumed-valid acceptance, agent-classified product impact
 - Landing Verdict requires a completed Pre-Landing Review Loop.
 - Local Qwen Baseline Reviewer runs on every PR; Adversarial Escalation adds stronger review when smells require it.
 - Manager-Owned Routing means Codex PM applies the Smell Trigger Catalog without asking routine technical questions.
+- Operator Input Boundary means Codex PM halts and asks directly when the missing decision belongs to the operator.
 - Workflow Improvement Engine turns retrospectives and cross-model tension into Retrospective-Derived Chores, Improvement Analytics, and Improvement Decisions.
 - Feature slices require Approved UAT before auto-landing.
 - Any branch code change after a UAT Approval Artifact creates Stale UAT for v0.

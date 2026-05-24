@@ -10,6 +10,13 @@ Codex owns routine technical routing decisions: which skill to use, which agent 
 
 Ask the operator for product direction, UAT, business tradeoffs, explicit cost/risk overrides, policy changes, and genuinely ambiguous scope.
 
+If required operator-owned input is missing, call it out directly and halt the
+blocked action. State the exact input needed, why repo artifacts cannot answer
+it, and what will happen next after the input is provided. Do not guess on
+product direction, UAT, policy, business tradeoffs, or explicit cost/risk
+overrides. Do not ask for routine technical routing decisions that Codex PM can
+make from repo evidence.
+
 ## Core Product Intent
 
 Bandit is a workflow improvement engine for agentic software delivery. The harness is substrate. The differentiator is making agentic workflows measurably better over time.

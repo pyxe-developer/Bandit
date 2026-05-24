@@ -6,7 +6,7 @@
 
 **State:** Founding docs exist. Implementation has not started.
 
-**Last completed milestone:** Bandit cold-start Codex skill created and installed.
+**Last completed milestone:** Bandit cold-start Codex skill created, installed, and updated with the Operator Input Boundary.
 
 **Current next action:** Create the first bootstrap work item for Phase 1: Repo-Native State And CLI Skeleton.
 
@@ -24,6 +24,8 @@
 - `bandit validate`
 - `bandit list`
 - `bandit show`
+
+The brief should also state whether any operator-owned input is required before implementation starts.
 
 ## Known Bootstrap Gaps
 
@@ -45,10 +47,13 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 ## Context Guardrails
 
 - In a cold session, invoke `$bandit` or type `/bandit` to restore context from repo artifacts.
+- `CONTEXT.md` is a required first-read file for cold sessions.
 - Before each slice, read `CLEAN_CODE.md`.
 - Before writing code, create or update the current work item brief.
+- If required operator-owned input is missing, call it out directly and halt the blocked action.
 - Before landing any slice, record whether it complies with `CLEAN_CODE.md` and `docs/verification/STAGE_RUBRICS.md`.
 - After each completed step, update this file if the next action changed.
+- If the Bandit skill or operating vocabulary changes, update `CONTEXT.md` in the same turn.
 - If Codex cannot answer “what is next?” from this file and `ROADMAP.md`, stop and repair context.
 - The operator should not need to reconstruct status from chat.
 
@@ -66,6 +71,7 @@ The brief should include:
 - `CLEAN_CODE.md` read evidence.
 - Clean-code landing rubric.
 - Bootstrap gaps.
+- Required operator input, if any.
 - Expected files.
 - First implementation order.
 

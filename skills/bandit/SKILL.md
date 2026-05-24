@@ -1,6 +1,6 @@
 ---
 name: bandit
-description: Use when the operator types /bandit, invokes $bandit, asks to start or continue Bandit, asks for the next Bandit slice, or starts a cold session that needs to recover Bandit context and kick off the next correct step from /Users/matthewflebbe/Bandit.
+description: Use when the operator types /bandit, invokes $bandit, asks to start or continue Bandit, asks for the next Bandit slice, or starts a cold session that needs to recover Bandit context, surface missing operator input, and kick off the next correct step from /Users/matthewflebbe/Bandit.
 ---
 
 # Bandit
@@ -13,6 +13,7 @@ The goal is to answer, from repo artifacts rather than chat memory:
 - what is the next correct step?
 - which rules apply before work begins?
 - what evidence must be created or updated?
+- is any operator-owned input missing?
 
 ## Hard Boundary
 
@@ -29,20 +30,22 @@ next Bandit slice, treat it as:
 
 1. restore Bandit context from the repo;
 2. identify the next action;
-3. perform only the next appropriate bootstrap step unless the operator clearly
+3. identify whether missing operator-owned input blocks that action;
+4. perform only the next appropriate bootstrap step unless the operator clearly
    asks to continue further;
-4. update context artifacts if the next action changes.
+5. update context artifacts if the next action changes.
 
 ## Required First Reads
 
 Read these files before deciding what to do:
 
 1. `/Users/matthewflebbe/Bandit/AGENTS.md`
-2. `/Users/matthewflebbe/Bandit/docs/roadmap/CURRENT_CONTEXT.md`
-3. `/Users/matthewflebbe/Bandit/docs/roadmap/ROADMAP.md`
-4. `/Users/matthewflebbe/Bandit/docs/plans/BOOTSTRAP_METHODOLOGY.md`
-5. `/Users/matthewflebbe/Bandit/CLEAN_CODE.md`
-6. `/Users/matthewflebbe/Bandit/docs/verification/STAGE_RUBRICS.md`
+2. `/Users/matthewflebbe/Bandit/CONTEXT.md`
+3. `/Users/matthewflebbe/Bandit/docs/roadmap/CURRENT_CONTEXT.md`
+4. `/Users/matthewflebbe/Bandit/docs/roadmap/ROADMAP.md`
+5. `/Users/matthewflebbe/Bandit/docs/plans/BOOTSTRAP_METHODOLOGY.md`
+6. `/Users/matthewflebbe/Bandit/CLEAN_CODE.md`
+7. `/Users/matthewflebbe/Bandit/docs/verification/STAGE_RUBRICS.md`
 
 Read these as needed:
 
@@ -75,6 +78,7 @@ Read these as needed:
    - current next action
    - known blockers
    - bootstrap gaps
+   - required operator input, if any
    - required rubrics for the current stage
 
 3. **Repair context first if needed.**
@@ -103,7 +107,8 @@ Read these as needed:
 7. **Update current context when the next action changes.**
 
    If you create or complete a step, update `CURRENT_CONTEXT.md` so a future
-   cold session can resume without chat history.
+   cold session can resume without chat history. If you change the skill or
+   change Bandit's operating vocabulary, update `CONTEXT.md` in the same turn.
 
 8. **Verify and commit when appropriate.**
 
@@ -153,6 +158,22 @@ Ask the operator only for:
 - explicit cost or risk overrides
 - genuinely ambiguous scope
 
+## Missing Operator Input Boundary
+
+Call the operator out when required operator-owned input is missing. Do not
+guess, bury the uncertainty, or convert it into a technical decision.
+
+When blocked by missing input, state:
+
+- the exact artifact or action blocked;
+- the exact input needed from the operator;
+- why repo artifacts cannot answer it;
+- what Codex will do next after the input is provided.
+
+Ask one direct question whenever possible. If the missing input is actually a
+technical routing decision, do not ask; make the call from repo policy and
+record the decision.
+
 ## Output Shape
 
 When invoked, provide a concise status like:
@@ -162,6 +183,7 @@ Bandit context restored.
 Phase: <phase>
 Active work: <work item or none>
 Next action: <action>
+Required operator input: <none or exact input>
 I am doing: <single next step>
 ```
 
