@@ -2,8 +2,11 @@
 
 ## Decision
 
-At this stage of Bandit, a newly identified bootstrap gap must become the next
-work item, and that work item should be a chore.
+At this stage of Bandit, bootstrap gaps must become executable gap-resolution
+work. A newly identified bootstrap gap must become the next work item, and that
+work item should be a chore. After the current active slice lands, already
+recorded open gaps become the work queue and must be addressed one at a time
+before unrelated new work proceeds.
 
 The chore should correct the gap directly, convert it into an enforced
 artifact/command/validator/agent contract, or record an explicit no-action
@@ -26,7 +29,10 @@ background assumptions.
 
 - Bootstrap gaps may be recorded only to avoid pretending a final gate ran.
 - A newly identified bootstrap gap should route the next work item to a chore.
-- The chore should have source metadata naming the gap, source artifact,
+- After the current active slice lands, open ledger gaps should route the next
+  work items one at a time until every gap is resolved, blocked on
+  operator-owned input, or explicitly dispositioned as no-action.
+- Each chore should have source metadata naming the gap, source artifact,
   hypothesis, expected improvement, metric or verification target, and closeout
   criteria.
 - Unrelated feature or slice work should wait until the gap is corrected,
@@ -37,7 +43,7 @@ background assumptions.
 
 ## Consequences
 
-- The current next work item changes from Phase 5 UAT work to a bootstrap-gap
-  chore that makes known gaps executable work rather than passive context.
+- After `BANDIT-013` lands, the next work item changes from Phase 5
+  auto-landing work to the bootstrap-gap resolution lane.
 - Future retrospectives and closeout artifacts should not add meaningful gaps
   without either creating the next chore or recording why no action is required.

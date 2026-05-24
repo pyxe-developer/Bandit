@@ -79,11 +79,11 @@ A bounded non-product work unit for trust-layer maintenance, tooling, documentat
 _Avoid_: slice, feature, backlog junk drawer
 
 **Bootstrap Gap**:
-A missing final workflow capability identified while Bandit is still bootstrapping. A gap may be recorded only to avoid pretending a gate ran, and it must become the next executable chore when discovered at this stage of the project unless an operator-owned product or policy decision blocks that chore.
+A missing final workflow capability identified while Bandit is still bootstrapping. A gap may be recorded only to avoid pretending a gate ran, and it must become executable gap-resolution work at this stage of the project unless an operator-owned product or policy decision blocks that work. After the current active slice lands, open bootstrap gaps are addressed one at a time before unrelated new work proceeds.
 _Avoid_: deferred forever, passive known issue, hidden missing gate
 
 **Bootstrap-Gap Chore**:
-A chore whose purpose is to convert a Bootstrap Gap into a durable artifact, CLI command, validator, agent contract, or explicit no-action policy decision.
+A chore whose purpose is to convert one Bootstrap Gap into a durable artifact, CLI command, validator, agent contract, or explicit no-action policy decision.
 _Avoid_: feature slice, vague cleanup, future note
 
 **Heartbeat Chore Agent**:

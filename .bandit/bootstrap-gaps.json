@@ -12,7 +12,7 @@
         "docs/work/BANDIT-011/brief.md"
       ],
       "rationale": "Manual work-item creation remains acceptable during bootstrap, but the gap should be converted once the repeated artifact shape stabilizes.",
-      "next_action": "Keep queued until the next work-artifact automation chore is selected."
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after higher-priority landing/review gaps are resolved or explicitly dispositioned."
     },
     {
       "id": "BANDIT-GAP-BOOTSTRAP-GAP-TRACKING",
@@ -40,7 +40,7 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "rationale": "CodeRabbit evidence can be captured manually, but live API polling, PR comment repair orchestration, and rerun automation need later integration work.",
-      "next_action": "Queue a dedicated integration chore when PR-based landing automation starts."
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after the Landing Agent gap is resolved or explicitly dispositioned."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
@@ -53,7 +53,7 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "rationale": "The placeholder gate exists; live stronger-reviewer routing needs a later reviewer integration chore with cost and credential boundaries.",
-      "next_action": "Create a reviewer-routing integration chore when escalation policy needs live execution."
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after live CodeRabbit integration is resolved or explicitly dispositioned."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",
@@ -66,7 +66,7 @@
         "docs/plans/BOOTSTRAP_METHODOLOGY.md"
       ],
       "rationale": "Bootstrap landing is recorded manually; final Landing Agent behavior belongs after landing evidence, review gates, and UAT contracts are stable.",
-      "next_action": "Keep queued for the Phase 5 auto-landing policy path."
+      "next_action": "After BANDIT-013 lands, select this as the first bootstrap-gap resolution chore unless closeout records a higher-priority blocker."
     },
     {
       "id": "BANDIT-GAP-UAT-ARTIFACT",
@@ -85,6 +85,18 @@
       "next_action": "Use bandit uat approve and land-check UAT freshness checks for future feature-slice landing gates."
     },
     {
+      "id": "BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND",
+      "title": "No general artifact creation command outside explicit PRD draft-work",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "Work-item briefs, review evidence, landing evidence, retrospectives, and follow-up artifacts are still created manually unless a narrow command exists for that artifact family.",
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after the general work-item creation command gap is resolved or explicitly dispositioned."
+    },
+    {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
       "title": "No heartbeat chore-agent exists yet",
       "status": "open",
@@ -94,7 +106,7 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "rationale": "Recurring chore automation should wait until repo-native chore and gate contracts are stronger.",
-      "next_action": "Keep queued until chore eligibility and safety policy are explicit."
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after artifact creation gaps are resolved or explicitly dispositioned."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
@@ -107,7 +119,7 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
-      "next_action": "Keep queued for Phase 7 after CLI authority and derived state contracts are ready."
+      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after automation-agent gaps are resolved or explicitly dispositioned; do not start broader cockpit work while earlier open gaps remain."
     }
   ]
 }
