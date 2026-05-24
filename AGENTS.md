@@ -90,3 +90,14 @@ Do not ask the operator whether to merge despite code warnings. Produce an agent
 Retrospective-derived chores and cross-model tension follow-ups must carry source metadata, hypothesis, metric, baseline, evaluation window, and outcome. The desired outcomes are `keep`, `revise`, `revert`, and `double_down`.
 
 If a lesson matters enough to mention, it must become a durable artifact or an explicit no-action decision.
+
+## Bootstrap Gap Default
+
+At this stage of the project, any newly identified bootstrap gap is not passive
+context. The next work item should be a chore to correct the gap, convert it
+into an enforced artifact/command/validator/agent contract, or record an
+explicit no-action policy decision.
+
+Do not proceed to the next unrelated slice or feature work while a newly
+identified bootstrap gap remains only in prose. If operator-owned input is
+needed to correct the gap, halt and ask for that input directly.

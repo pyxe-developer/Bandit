@@ -16,11 +16,10 @@ closeout evidence and dispositions.
 **Last completed milestone:** `BANDIT-010` added the escalated adversarial
 reviewer placeholder gate.
 
-**Current next action:** Create the next bootstrap work item for Phase 5 UAT
-and auto-landing groundwork. Keep it narrow and start with the CLI-owned UAT
-approval artifact and stale-UAT detection contract; do not build final
-auto-merge behavior, workflow cockpit, SQLite indexing, or live external API
-polling.
+**Current next action:** Create the next bootstrap work item as a chore that
+turns known bootstrap gaps into executable tracked work. This supersedes
+starting Phase 5 UAT work because the operator clarified that newly identified
+gaps at this stage should become the next chore, not passive context.
 
 ## Active Work
 
@@ -34,10 +33,10 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair; `BANDIT-009` - Local Qwen Full-Packet
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder.
 
-**Expected next deliverable:** the next narrow Phase 5 work item brief for
-CLI-owned UAT approval artifacts and stale-UAT detection. Do not broaden into
-final auto-merge behavior, workflow cockpit, SQLite indexing, live CodeRabbit
-or GitHub polling, or paid-model reviewer routing.
+**Expected next deliverable:** a narrow bootstrap-gap chore brief. It should
+define how Bandit records, validates, lists, and routes bootstrap gaps as
+chores or explicit no-action decisions before unrelated feature/slice work
+continues.
 
 ## Known Bootstrap Gaps
 
@@ -76,7 +75,7 @@ gates ran.
 
 ## Next Step Details
 
-BANDIT-011 Phase 5 UAT approval artifact and stale-UAT detection.
+BANDIT-011 bootstrap-gap chore tracking and routing.
 
 BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing
 verdict contracts, source-drift checks, validation, and
@@ -90,13 +89,15 @@ baseline can return structured output for real Bandit packets. BANDIT-010 added
 the escalated adversarial reviewer placeholder gate and completed the Phase 4
 placeholder set.
 
-The next step is to create the next bootstrap work item brief for Phase 5. Keep
-it narrow: define the CLI-owned UAT approval artifact and stale-UAT detection
-contract needed before any auto-landing behavior. Do not build final auto-merge
-behavior, workflow cockpit, SQLite indexing, live CodeRabbit/GitHub polling,
-paid-model reviewer routing, or broad Landing Agent behavior.
+The next step is to create the next bootstrap work item brief as a chore for
+bootstrap-gap tracking and routing. Keep it narrow: define how known gaps become
+repo-native executable chores or explicit no-action decisions, and how future
+gap recording blocks unrelated work until dispositioned. Do not build Phase 5
+UAT artifacts, final auto-merge behavior, workflow cockpit, SQLite indexing,
+live CodeRabbit/GitHub polling, paid-model reviewer routing, or broad Landing
+Agent behavior in this chore.
 
 ## Required Operator Input
 
-None before creating the next Phase 5 UAT/stale-UAT work item brief. Repo
-artifacts already define the next technical routing decision.
+None before creating the bootstrap-gap chore brief. Repo artifacts and the
+operator's policy clarification define the next routing decision.
