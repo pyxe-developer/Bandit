@@ -7,10 +7,12 @@ contract, and the persistent Local Qwen non-blocking hardening findings have
 focused repair evidence in `docs/work/BANDIT-016/qwen-finding-repair.md`.
 The latest narrowed Local Qwen hardening findings have a second targeted
 repair recorded in `docs/work/BANDIT-016/qwen-finding-repair.md`. A clean
-worktree Local Qwen rerun, refreshed aggregate review evidence if needed,
-landing verdict, landing action, retrospective, and gap-ledger closeout remain
-required before `BANDIT-016` can land or the next bootstrap-gap chore can
-begin.
+worktree Local Qwen rerun at follow-up repair head returned a `non_blocking`
+verdict with three future-hardening findings. Targeted repair or explicit PM
+disposition hardening, another clean-worktree Local Qwen rerun, refreshed
+aggregate review evidence if needed, landing verdict, landing action,
+retrospective, and gap-ledger closeout remain required before `BANDIT-016` can
+land or the next bootstrap-gap chore can begin.
 
 ## Implementation Source Head
 
@@ -126,7 +128,7 @@ pass
 | Stage | Verdict | Evidence |
 |---|---|---|
 | Stage 3: Implementation Clean-Code Rubric | `pass` | Focused tests pass, code paths map to acceptance criteria, source-of-truth boundaries are explicit, and `CLEAN_CODE.md` was evaluated above. |
-| Stage 4: Review And Cross-Model Gates | `pending` | CodeRabbit evidence, escalated-review bootstrap disposition, prior Local Qwen evidence, aggregate review evidence, and Local Qwen finding repair evidence are recorded. A clean-worktree Local Qwen rerun remains required next. |
+| Stage 4: Review And Cross-Model Gates | `non_blocking` | CodeRabbit evidence, escalated-review bootstrap disposition, prior Local Qwen evidence, aggregate review evidence, and Local Qwen finding repair evidence are recorded. The latest clean-worktree Local Qwen rerun returned non-blocking future-hardening findings, so targeted repair or explicit PM disposition hardening remains required next. |
 | Stage 5: Landing And UAT | `pending` | Landing verdict and landing action evidence remain required. UAT is not required for this non-product chore. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Retrospective and gap-ledger disposition remain required after review and landing. |
 

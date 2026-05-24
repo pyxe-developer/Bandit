@@ -102,7 +102,14 @@ and preserves fail-closed review-source drift behavior.
 
 ## Next Required Action
 
-Run a clean-worktree Local Qwen rerun:
+The clean-worktree Local Qwen rerun at follow-up repair head
+`954a8efddfb8fa77d0fa4e0a61ed516a5f8e705f` completed and returned a
+`non_blocking` verdict. The latest findings are narrowed to future hardening
+for structured PM disposition fields, expanded changed-path error categories
+for shallow clone or partial fetch cases, and future glob or regex
+policy-pattern support if needed.
+
+Next, perform targeted repair or explicit PM disposition hardening, then rerun:
 
 ```sh
 npm run bandit -- qwen-review BANDIT-016

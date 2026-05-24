@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Rerun Local Qwen for `BANDIT-016` from a clean
-worktree after the follow-up targeted repair. Local Qwen and aggregate
+**Current next step:** Perform targeted repair or explicit PM disposition
+hardening for the latest `BANDIT-016` Local Qwen findings, then rerun Local
+Qwen from a clean worktree. Local Qwen and aggregate
 review evidence are recorded for `BANDIT-016`; Codex PM no-action rationale
 was recorded, but a clean-worktree Local Qwen rerun at
 `3f86839bbe1450364679a1508602fea83a80537e` preserved the same two findings.
@@ -31,8 +32,13 @@ diagnostics. Follow-up targeted repair is recorded in
 `docs/work/BANDIT-016/qwen-finding-repair.md`; it removes the fixed
 PM-rationale length cutoff, allows concise concrete rationale, and reports
 categorized git changed-path diagnostics while preserving fail-closed stale
-review behavior. `land-check` still requires a passing Local Qwen reviewer
-verdict before a `safe-to-land` landing verdict can be valid. Full verification passed, fixture-backed live
+review behavior. The clean-worktree Local Qwen rerun at follow-up repair head
+`954a8efddfb8fa77d0fa4e0a61ed516a5f8e705f` returned a `non_blocking` verdict
+with three future-hardening findings: structured PM disposition fields,
+expanded changed-path error categories for shallow clone or partial fetch
+cases, and future glob or regex policy-pattern support if needed. `land-check`
+still requires a passing Local Qwen reviewer verdict before a `safe-to-land`
+landing verdict can be valid. Full verification passed, fixture-backed live
 CodeRabbit pass evidence is recorded, and the escalated-review bootstrap
 disposition is recorded for the implemented evidence-head contract. The narrow
 landing-readiness implementation now lets terminal disposition-only Stage 4
@@ -83,8 +89,9 @@ bootstrap disposition is recorded in
 `docs/work/BANDIT-016/local-qwen-review.md`, and aggregate review evidence is
 recorded in `docs/work/BANDIT-016/review-evidence.md`. Targeted repair
 evidence and the post-repair rerun result are recorded in
-`docs/work/BANDIT-016/qwen-finding-repair.md`. The next step is a
-clean-worktree Local Qwen rerun.
+`docs/work/BANDIT-016/qwen-finding-repair.md`. The next step is targeted
+repair or explicit PM disposition hardening for the latest Local Qwen findings,
+followed by a clean-worktree rerun.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -283,7 +290,8 @@ Completed work:
 
 Queued next:
 
-- Clean-worktree Local Qwen rerun for `BANDIT-016`.
+- Targeted repair or explicit PM disposition hardening for the latest
+  `BANDIT-016` Local Qwen findings, followed by a clean-worktree rerun.
 
 Expected capabilities:
 
@@ -337,8 +345,8 @@ Current rule:
   verdict, landing action evidence, retrospective closeout, and resolved
   gap-ledger disposition.
 - `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is active as `BANDIT-016`; its
-  review rerun reported narrowed Local Qwen non-blocking findings. Follow-up
-  targeted repair is recorded, so a clean-worktree Local Qwen rerun is next.
+  latest review rerun still reports Local Qwen non-blocking findings, so
+  targeted repair or disposition hardening is next.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -351,7 +359,7 @@ Current rule:
 
 Current priority after `BANDIT-015` lands:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; follow-up targeted repair is recorded, and rerunning Local Qwen is next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; repair or disposition the latest Local Qwen non-blocking findings and rerun Local Qwen next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
