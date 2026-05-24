@@ -579,6 +579,15 @@ test("land refuses unsupported remote or deploy actions", async () => {
   assert.match(result.stderr, /Unsupported landing action: push/);
 });
 
+test("land refuses unsupported landing options", async () => {
+  const repo = await createInitializedRepo();
+
+  const result = await runBandit(repo, ["land", "BANDIT-930", "--merge"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Unsupported landing option: --merge/);
+});
+
 test("validate fails closed when the auto-landing policy artifact is malformed", async () => {
   const repo = await createInitializedRepo();
   await writeAutoLandingPolicy(repo, {

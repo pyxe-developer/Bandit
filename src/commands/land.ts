@@ -48,6 +48,8 @@ export async function land(repoRoot: string, args: string[]) {
 
   const { reviewEvidence, landingVerdict, readiness } =
     await readLandingReadiness(repoRoot, workItemId);
+  assertCurrentReadinessForLanding(readiness);
+
   const displayPath = `docs/work/${workItemId}/landing-action.md`;
   await writeLandingActionArtifact(repoRoot, displayPath, {
     workItemId,
@@ -69,16 +71,42 @@ export async function land(repoRoot: string, args: string[]) {
 }
 
 function parseLandOptions(args: string[]): LandOptions {
-  if (args.length !== 2 || args[0] !== "--action") {
-    throw new Error("Usage: bandit land <work-item-id> --action local-record");
+  let action: string | null = null;
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+
+    if (arg !== "--action") {
+      throw new Error(`Unsupported landing option: ${arg}`);
+    }
+
+    const value = args[index + 1];
+    if (!value) {
+      throw new Error("Usage: bandit land <work-item-id> --action local-record");
+    }
+
+    action = value;
+    index += 1;
   }
 
-  const action = args[1];
   if (!action) {
     throw new Error("Usage: bandit land <work-item-id> --action local-record");
   }
 
   return { action };
+}
+
+function assertCurrentReadinessForLanding(readiness: {
+  sourceDriftStatus: string;
+  problems: string[];
+}) {
+  if (readiness.sourceDriftStatus !== "current") {
+    throw new Error("Landing blocked: source evidence is stale");
+  }
+
+  if (readiness.problems.length > 0) {
+    throw new Error(`Landing blocked: ${readiness.problems.join("\n")}`);
+  }
 }
 
 async function writeLandingActionArtifact(
