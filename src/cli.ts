@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { initBandit } from "./commands/init.js";
+import { draftWork } from "./commands/draft-work.js";
 import { listWorkItems } from "./commands/list.js";
 import { showWorkItem } from "./commands/show.js";
 import { validateBandit } from "./commands/validate.js";
@@ -25,6 +26,12 @@ async function main() {
     return;
   }
 
+  if (command === "draft-work") {
+    const result = await draftWork(process.cwd(), args[0]);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "show") {
     const result = await showWorkItem(process.cwd(), args[0]);
     process.stdout.write(result.output);
@@ -32,7 +39,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work>`);
   process.exitCode = 1;
 }
 

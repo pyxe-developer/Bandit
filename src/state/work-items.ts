@@ -50,7 +50,7 @@ async function readWorkDirectories(workRoot: string) {
 async function readWorkItemBrief(workRoot: string, directoryName: string) {
   const briefPath = path.join(workRoot, directoryName, "brief.md");
   const content = await readFile(briefPath, "utf8");
-  const header = content.match(/^# ([A-Z]+-\d+): (.+)$/m);
+  const header = content.match(/^# ([A-Z][A-Z0-9]*-\d+): (.+)$/m);
 
   if (!header) {
     throw new Error(`Malformed work item brief: ${briefPath}`);

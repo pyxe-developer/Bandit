@@ -2,39 +2,41 @@
 
 ## Status
 
-**Phase:** 2 - Work Artifacts.
+**Phase:** 3 - Routing And Smell Detection.
 
-**State:** `BANDIT-002` closeout evidence complete; safe-to-land bootstrap verdict recorded.
+**State:** `BANDIT-003` closeout evidence is complete; the focused bootstrap commit for this context update is the landing action.
 
-**Last completed milestone:** `BANDIT-002` delivered work artifact templates and fail-closed template validation.
+**Last completed milestone:** `BANDIT-003` delivered deterministic PRD-to-work draft generation from explicit Feature PRD decomposition notes.
 
-**Current next action:** Create the `BANDIT-003` brief for a PRD-to-work draft command.
+**Current next action:** Create the `BANDIT-004` brief for the first Phase 3 routing and smell-detection slice.
 
 ## Active Work
 
-**Active work item:** none. Next work item to create: `BANDIT-003` - PRD-To-Work Draft Command.
+**Active work item:** none. Next work item to create: `BANDIT-004` - Routing Decision And Smell Trigger Catalog.
 
-**Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton; `BANDIT-002` - Work Artifact Templates And Validation.
+**Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton; `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` - PRD-To-Work Draft Command.
 
-**Expected next deliverable:** `docs/work/BANDIT-003/brief.md`, scoped to the remaining Phase 2 capability:
+**Expected next deliverable:** `docs/work/BANDIT-004/brief.md`, scoped to the first Phase 3 capability:
 
-- a PRD-to-work decomposition or draft command;
-- trackable slice and chore artifact output;
-- chore origin metadata reuse, including retrospective-derived fields;
-- fail-closed validation and refusal paths for generated or drafted work.
+- a repo-native Smell Trigger Catalog seed;
+- a routing decision artifact contract;
+- an escalation policy that Codex PM can apply without asking routine technical questions;
+- a narrow command or validation path only if the brief proves it belongs in the first Phase 3 slice.
 
-BANDIT-002 is safe to land as the Phase 2 template-validation baseline. The next step is a brief only; do not implement PRD-to-work drafting before the BANDIT-003 brief records scope, acceptance criteria, test plan, clean-code read evidence, stage rubrics, bootstrap gaps, expected files, and implementation order.
+BANDIT-003 is safe-to-land and this focused bootstrap commit records its landing action in git history. `docs/work/BANDIT-003/landing-verdict.md` records the safe-to-land verdict; `review-evidence.md` and `retrospective.md` record review gaps, repaired findings, and improvement dispositions. Do not create implementation code for Phase 3 before the BANDIT-004 brief records scope, acceptance criteria, test plan, clean-code read evidence, stage rubrics, bootstrap gaps, expected files, and implementation order.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command.
-- No PRD-to-work decomposition or draft command.
-- No artifact creation command for PRDs, slices, chores, or improvement chores.
-- No Qwen adversarial gate.
+- No Smell Trigger Catalog.
+- No routing decision artifact.
 - No CodeRabbit pre-landing loop.
+- No Qwen adversarial gate.
+- No escalated adversarial review gate.
 - No Landing Agent.
+- No general artifact creation command outside explicit PRD draft-work.
 - No UAT artifact.
 - No heartbeat chore-agent.
 - No cockpit.
@@ -56,12 +58,12 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Next Step Details
 
-Create the `BANDIT-003` brief for the PRD-to-work draft command.
+Create the `BANDIT-004` brief for Phase 3 routing and smell detection.
 
-BANDIT-002 delivered the template contract and validation baseline. V0 Phase 2 still needs the command path that can turn a Feature PRD into trackable slice and chore drafts without making generated artifacts a hidden source of truth.
+BANDIT-003 completed Phase 2 by adding the command path that can turn a Feature PRD into trackable slice and chore drafts without making generated artifacts a hidden source of truth.
 
-Keep the next step to brief creation. Do not create detailed briefs for later phases yet.
+The next slice should start Phase 3 with policy and artifact shape before implementation. Keep the next step to brief creation. Do not create detailed briefs for later phases yet.
 
 ## Required Operator Input
 
-None before BANDIT-003 brief creation.
+None before BANDIT-004 brief creation.

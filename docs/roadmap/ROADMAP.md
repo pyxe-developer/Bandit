@@ -14,11 +14,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 2 - Work Artifacts.
+**Current phase:** Phase 3 - Routing And Smell Detection.
 
-**Current next step:** Create the `BANDIT-003` brief for a PRD-to-work draft command.
+**Current next step:** Create the `BANDIT-004` brief for the first Phase 3 routing and smell-detection slice.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. Phase 2 still needs a PRD-to-work draft command before exit criteria are satisfied.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, and passing verification.
 
 ## Phase Map
 
@@ -26,8 +26,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 |---|---|---|---|
 | 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | Complete |
 | 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Complete |
-| 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | In progress |
-| 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Not started |
+| 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Complete |
+| 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | In progress |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Not started |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Not started |
 | 6 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
@@ -103,11 +103,12 @@ Goal: Make work visible and structured.
 Active work:
 
 - none.
-- Next step: create `BANDIT-003` brief for a PRD-to-work draft command.
+- Phase 2 is complete.
 
 Completed work:
 
 - `BANDIT-002` - Work Artifact Templates And Validation.
+- `BANDIT-003` - PRD-To-Work Draft Command.
 
 Expected capabilities:
 
@@ -115,16 +116,25 @@ Expected capabilities:
 - Slice template. Complete in `BANDIT-002`.
 - Chore template. Complete in `BANDIT-002`.
 - Retrospective-derived chore metadata. Complete in `BANDIT-002`.
-- PRD-to-work draft command. Remaining.
+- PRD-to-work draft command. Complete in `BANDIT-003`.
 
 Exit criteria:
 
 - A PRD can be decomposed into slices and chores.
 - Chores can carry origin, hypothesis, metric, baseline, and evaluation window.
 
+Status:
+
+- Complete.
+
 ## Phase 3: Routing And Smell Detection
 
 Goal: Let Codex PM manage technical decisions from policy.
+
+Active work:
+
+- none.
+- Next step: create `BANDIT-004` brief for the first routing and smell-detection slice.
 
 Expected capabilities:
 
