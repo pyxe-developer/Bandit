@@ -2,7 +2,8 @@
 
 ## Status
 
-Brief created on 2026-05-24. No RED evidence or production implementation has
+Brief created on 2026-05-24. RED evidence was created on 2026-05-24 in
+`docs/work/BANDIT-006/red-evidence.md`. Production implementation has not
 started.
 
 ## Goal
@@ -190,7 +191,7 @@ Before landing, Codex PM must evaluate:
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify Phase 4, active work `BANDIT-006`, and RED evidence as the next action after this brief. `docs/work/BANDIT-005/landing-action.md` records landed commit `17be6d6775f5c8f00b5130f5569c79f97a94751b` before this slice became active. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, test plan, clean-code evidence, bootstrap gaps, expected files, implementation order, routing decision, smell triggers, escalation plan, and operator-input status. |
-| Stage 2: Test Design And RED Evidence | `not_applicable` | Next stage; no production implementation should start until RED evidence exists or a precise bootstrap gap is recorded. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-006/red-evidence.md` records 20 focused RED tests, 19 expected failures before implementation, acceptance-criteria mapping, and Test Writer-owned assertions. |
 | Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No implementation code in this step. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | CodeRabbit, final escalated reviewer, and Landing Agent gates still do not exist. This slice is scoped to reduce the local Qwen bootstrap gap. |
 | Stage 5: Landing And UAT | `bootstrap_gap` | Landing Agent and CLI-owned UAT artifacts do not exist yet; this is workflow infrastructure, not a feature UAT step. |
