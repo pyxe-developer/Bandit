@@ -32,17 +32,32 @@
     {
       "id": "BANDIT-GAP-LIVE-CODERABBIT",
       "title": "Live CodeRabbit polling and repair orchestration unavailable",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-007",
       "source_artifacts": [
         "docs/work/BANDIT-007/retrospective.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-015",
-      "rationale": "CodeRabbit evidence can be captured manually, but live API polling, PR comment repair orchestration, and rerun automation need later integration work.",
-      "verification_target": "docs/work/BANDIT-015/implementation-evidence.md",
-      "next_action": "Complete BANDIT-015 review and landing-gate closeout; do not begin another gap chore until this one lands or is explicitly blocked/dispositioned."
+      "rationale": "BANDIT-015 created a CLI-owned fixture-backed live CodeRabbit evidence path with fail-closed missing PR context, missing credential, unavailable provider, request-changes, unresolved finding, stale source, and secret-redaction behavior. Live PR comment repair orchestration and rerun automation remain future integration scope, but this bootstrap gap is resolved for the current live evidence capture contract.",
+      "verification_target": "docs/work/BANDIT-015/landing-action.md",
+      "next_action": "Use bandit coderabbit-review live <work-item-id> --pr <number> --fixture <path> for fixture-backed live CodeRabbit evidence until later provider integrations are explicitly scoped."
+    },
+    {
+      "id": "BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS",
+      "title": "Stage 4 iterative review evidence-head semantics are undefined",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-015",
+      "source_artifacts": [
+        "docs/work/BANDIT-015/local-qwen-review.md",
+        "docs/work/BANDIT-015/qwen-evidence-head-disposition.md",
+        "docs/work/BANDIT-015/qwen-loop-operator-disposition.md",
+        "docs/work/BANDIT-015/retrospective.md"
+      ],
+      "rationale": "BANDIT-015 exposed a recursive Stage 4 loop: each PM disposition and rerun advanced source heads, so Local Qwen kept treating historical evidence-head divergence as a new blocker after accepting implementation behavior.",
+      "next_action": "Resolve as the next bootstrap-gap chore after BANDIT-015 lands, before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

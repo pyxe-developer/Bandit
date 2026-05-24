@@ -102,6 +102,10 @@ _Avoid_: warning dump, looks-good summary, user gut check
 A CLI-driven quality loop that runs required external and cross-model review gates before the Landing Agent can produce a safe-to-land verdict.
 _Avoid_: post-merge cleanup, optional advisory scan
 
+**Stage 4 Evidence-Head Semantics**:
+The contract that distinguishes historical review artifacts from current landing-gate evidence during iterative review and disposition loops. The contract must keep actual source-code drift fail-closed without requiring every historical review artifact to share one final source head.
+_Avoid_: recursive rerun loop, stale-evidence waiver, reviewer-by-inertia
+
 **CodeRabbit Pre-Landing Loop**:
 A CLI-driven CodeRabbit cycle that requests or reads review, repairs actionable findings, waits for reruns when needed, and records the final CodeRabbit state before landing.
 _Avoid_: GitHub-only waiting, after-merge review, unchecked queue delay
@@ -211,6 +215,7 @@ _Avoid_: planner, architect
 - A **Heartbeat Chore Agent** prepares eligible work; a **Landing Agent** decides whether a PR can land under policy.
 - A **Landing Verdict** replaces asking the operator to judge routine code-safety warnings.
 - A **Landing Verdict** requires a completed **Pre-Landing Review Loop**.
+- **Stage 4 Evidence-Head Semantics** keeps iterative review closeout from becoming recursive while preserving fail-closed behavior for actual source drift.
 - A **CodeRabbit Pre-Landing Loop** runs before landing so review queues and repair loops do not happen after merge.
 - An **Adversarial Review Gate** is required for every PR and is configured by an **Adversarial Reviewer Profile**.
 - The **Local Qwen Baseline Reviewer** runs on every PR; **Adversarial Escalation** adds a stronger or second reviewer when policy says complexity or risk requires it.
