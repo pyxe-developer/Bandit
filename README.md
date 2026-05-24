@@ -27,6 +27,7 @@ The name matters. Work in this repository should be precise, evidence-backed, an
 - [Current Context](docs/roadmap/CURRENT_CONTEXT.md)
 - [Clean Code Rubric](CLEAN_CODE.md)
 - [Rubric-Driven Verification](docs/verification/RUBRIC_DRIVEN_VERIFICATION.md)
+- [Stage Rubrics](docs/verification/STAGE_RUBRICS.md)
 - [Glossary](CONTEXT.md)
 - [Founding Decisions](docs/decisions/2026-05-24-founding-decisions.md)
 - [Improvement Metrics Catalog](docs/improvement/metrics-catalog.md)

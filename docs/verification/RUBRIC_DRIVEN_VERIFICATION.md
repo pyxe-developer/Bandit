@@ -19,6 +19,7 @@ Every slice must be evaluated against:
 - The slice spec and acceptance criteria.
 - The test plan and test results.
 - [CLEAN_CODE.md](../../CLEAN_CODE.md).
+- [Stage Rubrics](STAGE_RUBRICS.md).
 - The Smell Trigger Catalog when applicable.
 - Bootstrap gap honesty when final Bandit gates do not exist yet.
 

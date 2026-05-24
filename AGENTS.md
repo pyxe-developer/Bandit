@@ -46,6 +46,8 @@ Before every slice lands, Codex PM must explicitly evaluate the slice against `C
 
 Bandit uses spec-driven development, test-driven development, and rubric-driven verification together. A good spec informs great TDD. Rubric-driven verification is what makes agentic programming sustainable.
 
+Use `docs/verification/STAGE_RUBRICS.md` to verify each stage. Verifier output should use the shared verdict values: `pass`, `blocker`, `non_blocking`, `not_applicable`, and `bootstrap_gap`.
+
 ## Review And Landing Defaults
 
 Every PR needs a pre-landing review loop:

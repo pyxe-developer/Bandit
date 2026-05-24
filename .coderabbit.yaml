@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  review_status: true
+  review_details: true
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "**/*.{js,mjs,cjs,jsx,ts,tsx,py,sql,json,jsonl,toml,yaml,yml}"
+      instructions: >-
+        Review implementation and structured state against CLEAN_CODE.md and
+        docs/verification/STAGE_RUBRICS.md. Request changes for hidden
+        authority, weak validation, fail-open behavior, parser/writer mismatch,
+        unsafe path handling, stale evidence logic, oversized orchestration,
+        unclear source-of-truth boundaries, or tests that do not prove the
+        relevant acceptance criteria.
+    - path: "docs/work/**"
+      instructions: >-
+        Review work-item evidence against docs/verification/STAGE_RUBRICS.md.
+        Request changes if briefs omit acceptance criteria, test plans,
+        CLEAN_CODE.md read evidence, bootstrap gaps, or expected files. Request
+        changes if landing evidence omits current-head test/review status, UAT
+        status for feature work, stale evidence checks, or a real landing
+        verdict. Request changes if retrospectives contain actionable lessons
+        without tagged improvement chores, cross-model tension entries, smell
+        catalog updates, or explicit no-action decisions.
+    - path: "docs/roadmap/**"
+      instructions: >-
+        Request changes if current phase, active work, next action, blockers,
+        or bootstrap gaps conflict with each other or with the changed files.
+        The repo must always answer "where are we and what is next?" without
+        relying on chat history.
+    - path: "docs/verification/**"
+      instructions: >-
+        Review rubric edits for enforceability. Request changes if a rubric is
+        vague, not evidence-based, not assignable to a verifier/CodeRabbit, or
+        cannot produce pass/blocker/non_blocking/not_applicable/bootstrap_gap
+        outcomes.
+    - path: "CLEAN_CODE.md"
+      instructions: >-
+        Request changes if edits weaken the mandatory read-before-slice or
+        clean-code-before-landing rules, or if the rubric stops covering source
+        authority, failure clarity, role boundaries, testability, and
+        improvement capture.
+    - path: "AGENTS.md"
+      instructions: >-
+        Request changes if agent instructions drift from Bandit's core rules:
+        Codex PM owns routine technical routing, CLEAN_CODE.md is mandatory,
+        rubric-driven verification is required, repo-native state is canonical,
+        and operator questions are reserved for product, UAT, policy, cost/risk
+        overrides, or ambiguous scope.
+chat:
+  auto_reply: true

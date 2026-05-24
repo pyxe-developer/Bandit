@@ -29,6 +29,7 @@
 21. Evaluate improvement chores with metrics, baselines, windows, and outcomes.
 22. Treat `CLEAN_CODE.md` as mandatory reading before every slice and a mandatory pre-landing compliance rubric.
 23. Use spec-driven development, test-driven development, and rubric-driven verification together.
+24. Decompose verification into stage rubrics that Codex PM, specialized verifiers, and CodeRabbit can apply.
 
 ## Operator Input Boundaries
 

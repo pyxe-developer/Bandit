@@ -46,7 +46,7 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 - Before each slice, read `CLEAN_CODE.md`.
 - Before writing code, create or update the current work item brief.
-- Before landing any slice, record whether it complies with `CLEAN_CODE.md`.
+- Before landing any slice, record whether it complies with `CLEAN_CODE.md` and `docs/verification/STAGE_RUBRICS.md`.
 - After each completed step, update this file if the next action changed.
 - If Codex cannot answer “what is next?” from this file and `ROADMAP.md`, stop and repair context.
 - The operator should not need to reconstruct status from chat.
