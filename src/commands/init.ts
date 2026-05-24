@@ -3,6 +3,7 @@ import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
+import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
 
 export async function initBandit(repoRoot: string) {
@@ -10,6 +11,7 @@ export async function initBandit(repoRoot: string) {
   const alreadyInitialized = await pathExists(paths.config);
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
+  const landingAgentContractExists = await pathExists(paths.landingAgentContract);
 
   await mkdir(paths.stateRoot, { recursive: true });
 
@@ -19,6 +21,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!autoLandingPolicyExists) {
     await writeDefaultAutoLandingPolicy(paths.autoLandingPolicy);
+  }
+
+  if (!landingAgentContractExists) {
+    await writeDefaultLandingAgentContract(paths.landingAgentContract);
   }
 
   if (alreadyInitialized) {

@@ -6,6 +6,7 @@ import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
+import { validateLandingAgentContract } from "../state/landing-agent-contract.js";
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
 import { getBanditPaths } from "../state/paths.js";
 import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
@@ -37,6 +38,7 @@ export async function validateBandit(repoRoot: string) {
   await validateUatApprovalArtifacts(repoRoot);
   await validateBootstrapGaps(repoRoot);
   await validateAutoLandingPolicy(repoRoot);
+  await validateLandingAgentContract(repoRoot);
 
   return { message: "Bandit state is valid." };
 }

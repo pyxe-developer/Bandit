@@ -16,14 +16,19 @@ export function readCurrentGitHead(repoRoot: string): Promise<string | null> {
 
 export function readGitStatusShort(repoRoot: string): Promise<string | null> {
   return new Promise((resolve) => {
-    execFile("git", ["status", "--short"], { cwd: repoRoot }, (error, stdout) => {
-      if (error) {
-        resolve(null);
-        return;
-      }
+    execFile(
+      "git",
+      ["status", "--short", "--untracked-files=all"],
+      { cwd: repoRoot },
+      (error, stdout) => {
+        if (error) {
+          resolve(null);
+          return;
+        }
 
-      resolve(stdout.trim());
-    });
+        resolve(stdout.trim());
+      }
+    );
   });
 }
 

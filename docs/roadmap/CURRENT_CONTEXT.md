@@ -5,18 +5,19 @@
 **Phase:** 5 - UAT And Auto-Landing.
 
 **State:** `BANDIT-014` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-AGENT`. Its brief and RED evidence are recorded.
-Implementation is the next required stage.
+`BANDIT-GAP-LANDING-AGENT`. Its brief, RED evidence, and implementation
+evidence are recorded. Pre-landing review evidence is the next required stage.
 
 **Last completed milestone:** `BANDIT-013` converted auto-landing eligibility
 into repo-native policy state and a read-only CLI check.
 
-**Current next action:** Implement the smallest Landing Agent contract
-validation path and `bandit land <work-item-id> --action local-record` command
-that satisfies `docs/work/BANDIT-014/red-evidence.md`. Do not create any later
-gap chore, Phase 6 work, Phase 7 work, feature work, or broader cockpit work
-until `BANDIT-014` has landing action evidence, retrospective closeout, and a
-resolved, operator-blocked, or no-action ledger disposition for
+**Current next action:** Record `BANDIT-014` pre-landing review evidence,
+local Qwen review evidence, escalated-review disposition, and landing verdict
+for the implemented Landing Agent contract and `bandit land <work-item-id>
+--action local-record` command. Do not create any later gap chore, Phase 6
+work, Phase 7 work, feature work, or broader cockpit work until `BANDIT-014`
+has landing action evidence, retrospective closeout, and a resolved,
+operator-blocked, or no-action ledger disposition for
 `BANDIT-GAP-LANDING-AGENT`.
 
 ## Active Work
@@ -34,7 +35,8 @@ Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check.
 
-**Expected next deliverable:** Implementation evidence for `BANDIT-014`.
+**Expected next deliverable:** Review and landing-verdict evidence for
+`BANDIT-014`.
 
 ## Known Bootstrap Gaps
 

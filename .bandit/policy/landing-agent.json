@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "authority": "cli_owned_landing_agent",
+  "supported_actions": [
+    "local_record"
+  ],
+  "require_auto_land_eligible": true,
+  "require_clean_worktree": true,
+  "write_landing_action": true,
+  "allow_merge": false,
+  "allow_push": false,
+  "allow_deploy": false,
+  "operator_owned_boundaries": [
+    "product_uat",
+    "policy_change",
+    "business_tradeoff",
+    "cost_override",
+    "risk_override"
+  ]
+}
