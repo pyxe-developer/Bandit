@@ -4,61 +4,33 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-015` landed as the bootstrap-gap chore for
-`BANDIT-GAP-LIVE-CODERABBIT`. Its brief, RED evidence, implementation
-evidence, CodeRabbit evidence, review evidence, and local Qwen evidence are
-recorded. Local Qwen completed with a `non_blocking` finding about
-fail-closed refusal paths not always writing actionable repo-native evidence
-before throwing. Codex PM triaged and repaired the valid missing-PR-context
-evidence path; CodeRabbit and aggregate review evidence are refreshed at repair
-head `70ad098d378f93dbf07e16f003912873358cb184`. Local Qwen was rerun at
-repair evidence head `3b78a641fb6a2d01adbac457f9ee28115db1aa9d` and recorded
-two `non_blocking` findings: align aggregate review evidence with local Qwen
-state before closeout, and disposition the `redactSecrets` substring
-over-redaction hardening concern. Codex PM disposition is recorded in
-`docs/work/BANDIT-015/qwen-rerun-disposition.md`. Local Qwen was rerun again at
-PM disposition head `068c4482ba156a158abd92faba2fcee2841f2288` and returned a
-`blocker` verdict in `docs/work/BANDIT-015/local-qwen-review.md`. Codex PM
-triage of those blocker findings is recorded in
-`docs/work/BANDIT-015/qwen-blocker-disposition.md`. Local Qwen was rerun at
-blocker-disposition head `4569c8f92eacf7df098f7f370bd8ac1c09d82b96` and
-returned another `blocker` verdict. Codex PM triage of those latest findings
-is recorded in `docs/work/BANDIT-015/qwen-latest-blocker-disposition.md`; the
-pending-rerun finding is repaired, and the previously missing
-`docs/work/BANDIT-015/escalated-review.md` artifact is now recorded as the
-bootstrap-limited escalated-review disposition. Local Qwen was rerun at
-escalated-review disposition head `16e7ecac0f2d590f9413c8f30d8ed3f554ceb91a`
-and returned another `blocker` verdict: it still reports procedural Stage 4
-rerun blockage and flags stale or mismatched source heads between local Qwen
-and CodeRabbit evidence. Codex PM triaged that blocker in
-`docs/work/BANDIT-015/qwen-evidence-head-disposition.md`, refreshed CodeRabbit
-evidence at source head `c584fe3b06692632723aedad2f1f9d69db607602`, and
-committed the disposition at `9248f34b104bc45eed91fb752a49eb0de987e470`.
-Local Qwen was rerun at that evidence-head-disposition head and returned
-another `blocker` verdict: it accepts the implementation behavior but still
-reports the Stage 4 rerun as pending because the brief/review evidence have not
-yet been advanced past the pre-rerun wording and artifact source heads remain
-divergent by process. The operator ended that recursive Local Qwen
-evidence-head loop, directed Codex PM to capture it as follow-up chore work
-after landing, and authorized landing now. `BANDIT-015` now has landing verdict,
-landing action, retrospective, gap-ledger disposition, and updated context.
+**State:** `BANDIT-016` is active as the bootstrap-gap chore for
+`BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its brief is recorded in
+`docs/work/BANDIT-016/brief.md`, and `.bandit/bootstrap-gaps.json` links the
+gap to `BANDIT-016` as an active chore. RED evidence is the next required
+step. Do not begin production implementation, live escalated-reviewer,
+work-item creation, artifact creation, heartbeat, cockpit, Phase 6
+Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
+Phase 9 dogfood, or feature work until RED evidence for `BANDIT-016` is
+recorded and the work proceeds through the required stages.
 
 **Last completed milestone:** `BANDIT-015` converted the live CodeRabbit
 bootstrap gap into a CLI-owned fixture-backed live CodeRabbit evidence path and
-landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as the next
-bootstrap-gap chore.
+landed with `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` queued as follow-up
+bootstrap-gap chore work.
 
-**Current next action:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` as `BANDIT-016`. Do not begin live
-escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
-Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
-Cockpit, Phase 9 dogfood, or feature work until this newly queued gap is
-resolved, operator-blocked, or explicitly dispositioned as no-action.
+**Current next action:** Create RED evidence for `BANDIT-016` proving the
+current Stage 4 landing-readiness path cannot distinguish accepted
+implementation behavior from recursive disposition-only evidence-head updates,
+while preserving source-drift refusal. Do not begin live escalated-reviewer,
+work-item creation, artifact creation, heartbeat, cockpit, Phase 6
+Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
+Phase 9 dogfood, or feature work until this active gap is resolved,
+operator-blocked, or explicitly dispositioned as no-action.
 
 ## Active Work
 
-**Active work item:** none. Next queued work is `BANDIT-016` for
-`BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`.
+**Active work item:** `BANDIT-016` - Stage 4 Evidence-Head Semantics.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -72,9 +44,9 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
-**Expected next deliverable:** `docs/work/BANDIT-016/brief.md` for
-`BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`, with RED evidence as the following
-step.
+**Expected next deliverable:** `docs/work/BANDIT-016/red-evidence.md` with
+focused failing tests for recursive disposition-only evidence-head updates and
+source-drift refusal.
 
 ## Known Bootstrap Gaps
 
@@ -104,7 +76,8 @@ Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
-queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
+queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is active as
+`BANDIT-016`. `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
 `docs/work/BANDIT-015/qwen-finding-repair.md`; CodeRabbit and aggregate review
@@ -182,7 +155,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - queued as the next chore; create `BANDIT-016` brief next.
+1. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` - active as `BANDIT-016`; create RED evidence next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -190,13 +163,13 @@ bootstrap-gap chore at a time. Current priority is:
 6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 Create exactly one next gap chore at a time. Do not create any gap chore after
-`BANDIT-015` until it has landing action evidence, retrospective closeout, and
+`BANDIT-016` until it has landing action evidence, retrospective closeout, and
 a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define the `BANDIT-015`
-review and landing-gate closeout sequence as the next action.
+None recorded for the next routing step. Repo artifacts define `BANDIT-016` RED
+evidence as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

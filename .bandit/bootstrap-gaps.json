@@ -47,8 +47,8 @@
     {
       "id": "BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS",
       "title": "Stage 4 iterative review evidence-head semantics are undefined",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-015",
       "source_artifacts": [
         "docs/work/BANDIT-015/local-qwen-review.md",
@@ -56,8 +56,9 @@
         "docs/work/BANDIT-015/qwen-loop-operator-disposition.md",
         "docs/work/BANDIT-015/retrospective.md"
       ],
+      "linked_work_item": "BANDIT-016",
       "rationale": "BANDIT-015 exposed a recursive Stage 4 loop: each PM disposition and rerun advanced source heads, so Local Qwen kept treating historical evidence-head divergence as a new blocker after accepting implementation behavior.",
-      "next_action": "Resolve as the next bootstrap-gap chore after BANDIT-015 lands, before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
+      "next_action": "Continue BANDIT-016 with RED evidence for Stage 4 evidence-head semantics before unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
