@@ -2,7 +2,8 @@
 
 ## Status
 
-Brief created. RED evidence and implementation have not started.
+Brief created. RED evidence has been created. Production implementation has not
+started.
 
 ## Goal
 
