@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 4 - Review And Landing Gates.
 
-**Current next step:** Add RED evidence for `BANDIT-009` local Qwen full-packet reliability. Do not proceed to the escalated adversarial reviewer placeholder while the baseline local reviewer still returns inconclusive output for real Bandit review packets.
+**Current next step:** Create the next Phase 4 bootstrap work item for the escalated adversarial reviewer placeholder now that `BANDIT-009` repaired baseline local Qwen full-packet reliability.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass. `BANDIT-008` repaired the Local Qwen reviewer runtime route to Mastra Code over the local oMLX OpenAI-compatible endpoint, added repo-local Mastra Code settings, added stdin prompt transport, tightened reviewer-output parsing, and recorded full-packet local Qwen review as an inconclusive bootstrap gap, not a pass. `BANDIT-009` is active with a Stage 1 brief for repairing or evidence-backed rerouting of that full-packet reliability gap.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` delivered the Smell Trigger Catalog seed, routing decision artifact contract, validation path, route command, review evidence, landing verdict, landing action evidence, and retrospective. `BANDIT-005` delivered the first Phase 4 pre-landing review loop substrate with review evidence and landing verdict contracts, source-drift checks, `bandit land-check <work-item-id>`, landing action evidence, and retrospective closeout. `BANDIT-006` delivered the Local Qwen Baseline Reviewer Gate substrate with profile/evidence validation, `bandit qwen-review <work-item-id>`, dirty-worktree refusal, review-packet construction, land-check integration, review evidence, landing verdict, landing action evidence, and retrospective closeout. `BANDIT-007` delivered the CodeRabbit State Capture substrate with a CodeRabbit evidence template, parser/validator, `bandit coderabbit-review <work-item-id>`, `land-check` integration for claimed CodeRabbit pass state, closeout evidence, and retrospective. Live CodeRabbit polling remains a bootstrap gap, not a pass. `BANDIT-008` repaired Local Qwen reviewer runtime drift away from Qwen Code/Ollama. `BANDIT-009` repaired local Qwen full-packet reliability by preserving structured findings, switching the live harness path to direct local oMLX, fixing review-packet diff-base selection, and recording passing live local Qwen evidence for a real Bandit packet.
 
 ## Phase Map
 
@@ -160,8 +160,8 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- `BANDIT-009` - Local Qwen Full-Packet Reliability.
-- Next step: add Stage 2 RED evidence before production implementation.
+- none.
+- Next step: create the escalated adversarial reviewer placeholder work item.
 
 Expected capabilities:
 
@@ -169,8 +169,8 @@ Expected capabilities:
 - Landing Verdict. Complete in `BANDIT-005`.
 - stale review/source-drift checks. Complete in `BANDIT-005`.
 - CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate substrate; live CodeRabbit polling remains an explicit bootstrap gap.
-- Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; `BANDIT-008` repaired the runtime route to Mastra Code/oMLX. Full-packet local review remains the next blocking Phase 4 gap.
-- Escalation reviewer placeholder. Still required, but queued behind local Qwen full-packet reliability.
+- Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; `BANDIT-008` repaired runtime drift and `BANDIT-009` repaired full-packet reliability through direct local oMLX.
+- Escalation reviewer placeholder. Still required and now next.
 
 Exit criteria:
 
@@ -182,10 +182,11 @@ Completed work:
 - `BANDIT-006` - Local Qwen Baseline Reviewer Gate.
 - `BANDIT-007` - CodeRabbit State Capture.
 - `BANDIT-008` - Local Reviewer Runtime Drift Repair.
+- `BANDIT-009` - Local Qwen Full-Packet Reliability.
 
 Queued next:
 
-- `BANDIT-009` - Local Qwen Full-Packet Reliability.
+- Escalated adversarial reviewer placeholder.
 
 ## Phase 5: UAT And Auto-Landing
 
