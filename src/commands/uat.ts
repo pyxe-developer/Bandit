@@ -15,6 +15,12 @@ type ApprovalArgs = {
   notes?: string;
 };
 
+const APPROVAL_FLAGS = new Set([
+  "--environment",
+  "--approved-by",
+  "--notes"
+]);
+
 export async function uat(repoRoot: string, args: string[]) {
   if (args[0] !== "approve") {
     throw new Error("Usage: bandit uat <approve>");
@@ -62,8 +68,8 @@ function parseApprovalArgs(args: string[]): ApprovalArgs {
     const flag = args[index];
     const value = args[index + 1];
 
-    if (!flag || !value) {
-      break;
+    if (!flag || !APPROVAL_FLAGS.has(flag) || !value || value.startsWith("--")) {
+      throw new Error(UAT_APPROVE_USAGE);
     }
 
     if (flag === "--environment") {

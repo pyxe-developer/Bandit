@@ -18,6 +18,9 @@ Production implementation completed on 2026-05-24.
   work.
 - Kept operator-owned product acceptance explicit: the command records supplied
   operator approval inputs, and agents do not infer approval.
+- Repaired local Qwen `non_blocking` findings by adding artifact-path context
+  to malformed UAT validation failures and making `uat approve` flag parsing
+  reject malformed or unknown flags with usage guidance.
 
 ## Verification
 
@@ -36,6 +39,7 @@ Results:
 - `npm run typecheck` passed.
 - `npm run bandit -- validate` passed.
 - `git diff --check` passed.
+- These commands also passed again after the local Qwen non-blocking repair.
 
 ## Acceptance Criteria Mapping
 

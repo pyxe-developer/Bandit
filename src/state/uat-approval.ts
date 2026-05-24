@@ -58,7 +58,13 @@ export async function validateUatApprovalArtifacts(repoRoot: string) {
     const artifact = await readOptionalUatApproval(repoRoot, workItem.id);
 
     if (artifact && hasMetadataField(artifact.content, "contract_version")) {
-      parseUatApproval(artifact.content, artifact.displayPath, workItem.id);
+      try {
+        parseUatApproval(artifact.content, artifact.displayPath, workItem.id);
+      } catch (error) {
+        throw new Error(
+          `Malformed UAT approval artifact: ${artifact.displayPath}; ${errorMessage(error)}`
+        );
+      }
     }
   }
 }
@@ -203,4 +209,8 @@ function uatApprovalDisplayPath(workItemId: string) {
 
 function isMissingPathError(error: unknown) {
   return error instanceof Error && "code" in error && error.code === "ENOENT";
+}
+
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error);
 }
