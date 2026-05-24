@@ -4,34 +4,35 @@
 
 **Phase:** 2 - Work Artifacts.
 
-**State:** `BANDIT-001` implemented, verified, and documented with bootstrap evidence.
+**State:** `BANDIT-002` brief created; RED evidence not started.
 
 **Last completed milestone:** `BANDIT-001` delivered the repo-native CLI skeleton.
 
-**Current next action:** Create the next bootstrap work item brief for Phase 2: PRD, Slice, And Chore Artifacts.
+**Current next action:** Create RED evidence and test design for `BANDIT-002`: Work Artifact Templates And Validation.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-002` - Work Artifact Templates And Validation.
 
 **Completed work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
 
-**Expected next deliverable:** A bootstrap work item brief for Phase 2 covering:
+**Expected next deliverable:** `docs/work/BANDIT-002/red-evidence.md`, mapping the brief's acceptance criteria to failing tests for:
 
 - Feature PRD template.
 - Slice template.
 - Chore template.
 - Retrospective-derived chore metadata.
-- PRD-to-work draft command or equivalent next thin slice.
+- Template validation refusal paths.
 
-The next brief must state whether any operator-owned input is required before implementation starts.
+No production implementation should start before RED evidence exists or an explicit bootstrap gap is recorded.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command.
-- No PRD, slice, or chore artifact templates.
+- No PRD, slice, chore, or improvement chore artifact templates.
+- No template validation contract.
 - No Qwen adversarial gate.
 - No CodeRabbit pre-landing loop.
 - No Landing Agent.
@@ -56,8 +57,12 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Next Step Details
 
-Create the next work item brief, likely `BANDIT-002`, for the first Phase 2 slice.
+Create RED evidence and test design for `BANDIT-002`.
 
-The brief should keep the slice thin. Prefer one artifact family or one creation command over building the whole Phase 2 surface at once.
+The brief keeps the slice thin by implementing artifact templates and validation before any PRD-to-work decomposition command.
 
-Do not write Phase 2 production code before the new brief and RED evidence exist.
+Do not write Phase 2 production code before RED evidence exists.
+
+## Required Operator Input
+
+None before RED evidence or implementation starts.

@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 2 - Work Artifacts.
 
-**Current next step:** Create the next bootstrap work item brief for Phase 2: PRD, Slice, And Chore Artifacts.
+**Current next step:** Create RED evidence and test design for `BANDIT-002`: Work Artifact Templates And Validation.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. The next work item has not been created yet.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` has a brief and is ready for RED evidence.
 
 ## Phase Map
 
@@ -102,8 +102,8 @@ Goal: Make work visible and structured.
 
 Active work:
 
-- none yet.
-- Next step: create the first Phase 2 work item brief, likely `BANDIT-002`.
+- `BANDIT-002` - Work Artifact Templates And Validation.
+- Next step: create RED evidence and test design before production implementation.
 
 Expected capabilities:
 
