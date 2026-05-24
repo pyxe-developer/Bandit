@@ -62,14 +62,33 @@ async function liveCodeRabbitReview(repoRoot: string, options: LiveOptions) {
 
   const fixture = await readFixture(options.fixturePath);
   const prNumber = options.prNumber ?? formatPrNumber(fixture.prNumber);
-  if (!prNumber) {
-    throw new Error("Missing PR context for live CodeRabbit review");
-  }
-
   const sourceHead =
     fixture.sourceHead ?? (await readCurrentGitHead(repoRoot)) ?? "unknown";
   const currentHead = (await readCurrentGitHead(repoRoot)) ?? "unknown";
   const sourceDrift = sourceDriftStatus(sourceHead, currentHead);
+
+  if (!prNumber) {
+    await writeCodeRabbitReview(repoRoot, {
+      workItemId,
+      sourceHead,
+      provider: "coderabbit-live",
+      reviewTarget: "missing-pr-context",
+      reviewState: "blocked",
+      coderabbitVerdict: "blocker",
+      findingsStatus: "unavailable",
+      findingsDisposition: "Missing PR context for live CodeRabbit review",
+      operatorInputStatus: "operator_input_blocked",
+      sourceDriftStatus: sourceDrift,
+      executableEvidence: [
+        "coderabbit-review live refused before provider access because PR context was not provided."
+      ],
+      bootstrapGaps: [
+        "Live CodeRabbit review requires operator-owned GitHub pull request context."
+      ]
+    });
+    throw new Error("Missing PR context for live CodeRabbit review");
+  }
+
   const credential = readCredential();
 
   if (!credential) {

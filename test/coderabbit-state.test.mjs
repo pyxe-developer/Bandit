@@ -314,6 +314,15 @@ test("coderabbit-review live fails closed when PR context is missing", async () 
 
   assert.equal(result.code, 1);
   assert.match(result.stderr, /Missing PR context for live CodeRabbit review/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-978/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /review_target: missing-pr-context/);
+  assert.match(evidence, /review_state: blocked/);
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /Missing PR context for live CodeRabbit review/);
 });
 
 test("coderabbit-review live records missing credentials as operator input blocked evidence", async () => {

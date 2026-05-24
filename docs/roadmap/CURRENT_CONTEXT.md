@@ -6,20 +6,26 @@
 
 **State:** `BANDIT-015` is active as the bootstrap-gap chore for
 `BANDIT-GAP-LIVE-CODERABBIT`. Its brief, RED evidence, implementation
-evidence, CodeRabbit evidence, and review evidence are recorded. Local Qwen
-review is the next required action.
+evidence, CodeRabbit evidence, review evidence, and local Qwen evidence are
+recorded. Local Qwen completed with a `non_blocking` finding about
+fail-closed refusal paths not always writing actionable repo-native evidence
+before throwing. Codex PM triaged and repaired the valid missing-PR-context
+evidence path; source changed after the existing review artifacts.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
-**Current next action:** Run `npm run bandit -- qwen-review BANDIT-015`, then
-continue the `BANDIT-015` landing-gate closeout sequence with
-escalated-review disposition, landing verdict, landing action, retrospective,
-gap-ledger disposition, and final context updates. Do not begin another
-bootstrap-gap chore, Phase 6, Phase 7, feature work, or broader cockpit work
-until `BANDIT-015` has landing action evidence, retrospective closeout, and a
-resolved, operator-blocked, or no-action gap-ledger disposition.
+**Current next action:** Refresh `BANDIT-015` CodeRabbit and aggregate review
+evidence at the repair head, then rerun `npm run bandit -- qwen-review
+BANDIT-015`. Because source changed after the prior review artifacts, do not
+write the escalated-review disposition, landing verdict, landing action,
+retrospective, gap-ledger disposition, or final context updates until required
+review evidence is current and local Qwen passes or records an explicit
+bootstrap gap. Do not begin another bootstrap-gap chore, Phase 6, Phase 7,
+feature work, or broader cockpit work until `BANDIT-015` has landing action
+evidence, retrospective closeout, and a resolved, operator-blocked, or
+no-action gap-ledger disposition.
 
 ## Active Work
 
@@ -37,9 +43,10 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution.
 
-**Expected next deliverable:** Local Qwen review evidence for `BANDIT-015`,
-followed by escalated-review disposition, landing verdict, landing action,
-retrospective, and gap-ledger disposition.
+**Expected next deliverable:** Current repair-head CodeRabbit/review evidence
+for `BANDIT-015`, followed by a rerun local Qwen review, escalated-review
+disposition, landing verdict, landing action, retrospective, and gap-ledger
+disposition.
 
 ## Known Bootstrap Gaps
 
@@ -69,8 +76,10 @@ Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is active as `BANDIT-015`;
-implementation evidence, CodeRabbit evidence, and review evidence are
-recorded, and local Qwen review is next.
+implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
+evidence are recorded. The local Qwen finding repair is recorded in
+`docs/work/BANDIT-015/qwen-finding-repair.md`; review evidence must be
+refreshed at the repair head before closeout continues.
 
 ## Context Guardrails
 
@@ -124,7 +133,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; local Qwen review and remaining landing-gate closeout next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; repair-head CodeRabbit/review evidence refresh, local Qwen rerun, and remaining landing-gate closeout next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
