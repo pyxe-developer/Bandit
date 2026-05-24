@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bandit"
+  short_description: "Restore Bandit context and start next slice"
+  default_prompt: "Use $bandit to restore Bandit context and take the next correct bootstrap step."

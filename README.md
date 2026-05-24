@@ -28,6 +28,7 @@ The name matters. Work in this repository should be precise, evidence-backed, an
 - [Clean Code Rubric](CLEAN_CODE.md)
 - [Rubric-Driven Verification](docs/verification/RUBRIC_DRIVEN_VERIFICATION.md)
 - [Stage Rubrics](docs/verification/STAGE_RUBRICS.md)
+- [Bandit Skill Source](skills/bandit/SKILL.md)
 - [Glossary](CONTEXT.md)
 - [Founding Decisions](docs/decisions/2026-05-24-founding-decisions.md)
 - [Improvement Metrics Catalog](docs/improvement/metrics-catalog.md)
@@ -35,4 +36,4 @@ The name matters. Work in this repository should be precise, evidence-backed, an
 
 ## Current Status
 
-Fresh repo created. Implementation has not started.
+Fresh repo created. Implementation has not started. The Codex skill is installed at `/Users/matthewflebbe/.codex/skills/bandit/SKILL.md` and can be invoked as `$bandit` or `/bandit` language in a new session.

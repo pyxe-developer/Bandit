@@ -6,7 +6,7 @@
 
 **State:** Founding docs exist. Implementation has not started.
 
-**Last completed milestone:** Bootstrap methodology committed in `ede3fd0`.
+**Last completed milestone:** Bandit cold-start Codex skill created and installed.
 
 **Current next action:** Create the first bootstrap work item for Phase 1: Repo-Native State And CLI Skeleton.
 
@@ -44,6 +44,7 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Context Guardrails
 
+- In a cold session, invoke `$bandit` or type `/bandit` to restore context from repo artifacts.
 - Before each slice, read `CLEAN_CODE.md`.
 - Before writing code, create or update the current work item brief.
 - Before landing any slice, record whether it complies with `CLEAN_CODE.md` and `docs/verification/STAGE_RUBRICS.md`.
