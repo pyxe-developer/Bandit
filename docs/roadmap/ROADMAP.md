@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 3 - Routing And Smell Detection.
 
-**Current next step:** Create RED evidence and failing tests for `BANDIT-004`, the first Phase 3 routing and smell-detection slice.
+**Current next step:** Land `BANDIT-004` with a focused bootstrap commit, then record landing-action evidence and retrospective closeout before any next slice begins.
 
-**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` has a brief and is ready for RED evidence.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. `BANDIT-002` delivered work artifact templates, template validation, local verification, review evidence, landing verdict, and retrospective. `BANDIT-003` delivered the remaining Phase 2 PRD-to-work draft command with RED evidence, implementation evidence, review evidence, landing verdict, retrospective, landing action evidence, and passing verification. `BANDIT-004` has a brief, RED evidence, GREEN implementation, route artifact, passing verification, review evidence, and a safe-to-land bootstrap verdict. It is ready-to-land, not complete, because landing action evidence and retrospective are still pending.
 
 ## Phase Map
 
@@ -134,7 +134,7 @@ Goal: Let Codex PM manage technical decisions from policy.
 Active work:
 
 - `BANDIT-004` - Routing Decision And Smell Trigger Catalog.
-- Next step: create RED evidence and failing tests.
+- Next step: land the slice, record landing-action evidence, and complete retrospective closeout.
 
 Expected capabilities:
 

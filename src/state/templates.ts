@@ -70,6 +70,20 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("status", /^status:/im),
       metadata("outcome", /^outcome:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/routing-decision.md",
+    requirements: [
+      metadata("work item", /^work_item:/im),
+      metadata("decision kind", /^decision_kind:/im),
+      metadata("selected route", /^selected_route:/im),
+      metadata("applicable smell IDs", /^applicable_smell_ids:/im),
+      metadata("evidence used", /^evidence_used:/im),
+      metadata("operator input status", /^operator_input_status:/im),
+      metadata("bootstrap gaps", /^bootstrap_gaps:/im),
+      metadata("escalation outcome", /^escalation_outcome:/im),
+      metadata("final decision", /^final_decision:/im)
+    ]
   }
 ];
 

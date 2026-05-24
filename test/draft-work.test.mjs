@@ -12,6 +12,7 @@ import {
 const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
 const committedTemplateRoot = path.join(repoRoot, "docs/templates");
+const committedPolicyRoot = path.join(repoRoot, ".bandit/policy");
 
 test("draft-work creates slice and chore briefs from explicit PRD decomposition", async () => {
   const repo = await createInitializedRepo();
@@ -370,6 +371,9 @@ async function createInitializedRepo() {
   const init = await runBandit(repo, ["init"]);
   assert.equal(init.code, 0, init.stderr);
   await cp(committedTemplateRoot, path.join(repo, "docs/templates"), {
+    recursive: true
+  });
+  await cp(committedPolicyRoot, path.join(repo, ".bandit/policy"), {
     recursive: true
   });
   return repo;

@@ -2,7 +2,7 @@
 
 ## Status
 
-Brief created; next action is RED evidence. No implementation has started.
+Review evidence and safe-to-land bootstrap verdict recorded; landing action evidence and retrospective are pending. Do not begin the next slice.
 
 ## Goal
 
@@ -123,10 +123,10 @@ Before landing, Codex PM must evaluate:
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` identify Phase 3 and the next action. `docs/work/BANDIT-003/landing-action.md` records the prior slice landing action before this slice became active. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, test plan, clean-code evidence, bootstrap gaps, expected files, implementation order, smell triggers, escalation plan, and operator input status. |
-| Stage 2: Test Design And RED Evidence | `not_applicable` | RED evidence has not started; this is the recorded next action. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation has started. |
-| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | Final CodeRabbit, Qwen, and escalated adversarial gates do not exist yet; replacement manual evidence must be recorded before landing. |
-| Stage 5: Landing And UAT | `not_applicable` | Landing has not started. UAT is expected to be `not_applicable` because this is workflow infrastructure, not a user-facing feature slice. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-004/red-evidence.md` maps acceptance criteria to `test/routing.test.mjs`; focused RED run fails 11/11 tests because validation ignores missing routing policy and `bandit route` is not implemented. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-004/implementation-evidence.md` records the GREEN implementation, clean-code self-check, passing focused/full tests, `bandit validate`, `bandit route BANDIT-004`, typecheck, and `git diff --check`. |
+| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | `docs/work/BANDIT-004/review-evidence.md` records manual PM review with no blocker-level finding and records final CodeRabbit, Qwen, and escalated adversarial gates as unavailable bootstrap gaps. |
+| Stage 5: Landing And UAT | `blocker` | `docs/work/BANDIT-004/landing-verdict.md` records a safe-to-land bootstrap verdict, but landing action evidence does not exist yet. The slice is ready-to-land, not landed. UAT is `not_applicable` because this is workflow infrastructure, not a user-facing feature slice. |
 | Stage 6: Retrospective And Improvement Capture | `not_applicable` | Retrospective is required before this slice closes. |
 
 ## Bootstrap Gaps

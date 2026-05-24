@@ -13,7 +13,8 @@ const requiredTemplateFiles = [
   "docs/templates/feature-prd.md",
   "docs/templates/slice.md",
   "docs/templates/chore.md",
-  "docs/templates/improvement-chore.md"
+  "docs/templates/improvement-chore.md",
+  "docs/templates/routing-decision.md"
 ];
 
 const validTemplates = {
@@ -69,13 +70,43 @@ expected_direction:
 evaluation_window:
 status:
 outcome:
+`,
+  "docs/templates/routing-decision.md": `# Routing Decision Template
+
+work_item:
+decision_kind:
+selected_route:
+applicable_smell_ids:
+evidence_used:
+operator_input_status:
+bootstrap_gaps:
+escalation_outcome:
+final_decision:
 `
+};
+
+const validSmellCatalog = {
+  version: 1,
+  smells: [
+    {
+      id: "BANDIT-SMELL-ADVERSARIAL-REVIEW",
+      name: "Adversarial Review Required",
+      category: "review_gate",
+      trigger:
+        "A PR or slice requires a baseline adversarial review before landing.",
+      severity: "blocker",
+      default_action: "require_qwen_review",
+      escalation_target: "local-qwen-baseline",
+      required_evidence: ["review-evidence.md"]
+    }
+  ]
 };
 
 test("validate passes for initialized repo-native state with committed work artifact templates", async () => {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
   await copyCommittedTemplates(repo);
+  await writeSmellCatalog(repo, validSmellCatalog);
 
   const result = await runBandit(repo, ["validate"]);
 
@@ -255,6 +286,12 @@ async function writeValidTemplates(repo, options = {}) {
     await mkdir(path.dirname(destination), { recursive: true });
     await writeFile(destination, finalContent, "utf8");
   }
+}
+
+async function writeSmellCatalog(repo, catalog) {
+  const destination = path.join(repo, ".bandit/policy/smell-triggers.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(catalog, null, 2)}\n`, "utf8");
 }
 
 function escapeRegExp(value) {

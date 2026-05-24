@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "smells": [
+    {
+      "id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "name": "Workflow Gate Missing",
+      "category": "workflow_gate",
+      "trigger": "A slice attempts to proceed or land without required stage evidence, landing verdict, or landing action evidence.",
+      "severity": "blocker",
+      "default_action": "require_landing_repair",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["docs/verification/STAGE_RUBRICS.md", "docs/work/<ID>/landing-verdict.md"]
+    },
+    {
+      "id": "BANDIT-SMELL-OPERATOR-INPUT-BOUNDARY",
+      "name": "Operator Input Boundary",
+      "category": "operator_boundary",
+      "trigger": "Required product direction, UAT, policy, business, or explicit cost/risk input is missing.",
+      "severity": "blocker",
+      "default_action": "halt_for_operator_input",
+      "escalation_target": "operator",
+      "required_evidence": ["operator-input-status"]
+    },
+    {
+      "id": "BANDIT-SMELL-UAT-APPROVAL",
+      "name": "UAT Approval Boundary",
+      "category": "approval_uat",
+      "trigger": "A feature slice needs UAT approval, has stale UAT, or changed code after approval.",
+      "severity": "blocker",
+      "default_action": "require_uat_refresh",
+      "escalation_target": "operator",
+      "required_evidence": ["uat-approval-artifact", "source-drift-check"]
+    },
+    {
+      "id": "BANDIT-SMELL-EVIDENCE-FRESHNESS",
+      "name": "Evidence Freshness",
+      "category": "evidence_freshness",
+      "trigger": "Tests, review evidence, UAT, landing verdicts, or source-drift checks no longer apply to the current source.",
+      "severity": "blocker",
+      "default_action": "refresh_evidence",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["current-head", "verification-output"]
+    },
+    {
+      "id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "name": "CodeRabbit Waiver Or Request Changes",
+      "category": "review_gate",
+      "trigger": "CodeRabbit has actionable comments, stale status, unresolved request changes, or a proposed waiver.",
+      "severity": "blocker",
+      "default_action": "require_pm_disposition",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["coderabbit-state", "pm-disposition"]
+    },
+    {
+      "id": "BANDIT-SMELL-ADVERSARIAL-REVIEW",
+      "name": "Adversarial Review Required",
+      "category": "review_gate",
+      "trigger": "A PR or slice requires baseline local Qwen review or stronger review before landing.",
+      "severity": "blocker",
+      "default_action": "require_qwen_review",
+      "escalation_target": "local-qwen-baseline",
+      "required_evidence": ["review-evidence.md"]
+    },
+    {
+      "id": "BANDIT-SMELL-SECURITY-PRIVACY-AUTH",
+      "name": "Security Privacy Auth Boundary",
+      "category": "security_privacy_auth",
+      "trigger": "Work touches authentication, authorization, secrets, privacy posture, trust boundaries, or sensitive data handling.",
+      "severity": "blocker",
+      "default_action": "require_escalated_review",
+      "escalation_target": "security-reviewer",
+      "required_evidence": ["security-review", "threat-boundary-notes"]
+    },
+    {
+      "id": "BANDIT-SMELL-DATA-INTEGRITY",
+      "name": "Data Integrity Boundary",
+      "category": "data_integrity",
+      "trigger": "Work changes durable records, canonical workflow state, migrations, destructive updates, or reconciliation behavior.",
+      "severity": "blocker",
+      "default_action": "require_data_integrity_review",
+      "escalation_target": "data-integrity-reviewer",
+      "required_evidence": ["state-transition-evidence", "rollback-or-rebuild-notes"]
+    },
+    {
+      "id": "BANDIT-SMELL-SCHEMA-MIGRATION",
+      "name": "Schema Or Migration Boundary",
+      "category": "schema_migration",
+      "trigger": "Work adds or changes schemas, migration contracts, validation shape, or persisted artifact versions.",
+      "severity": "blocker",
+      "default_action": "require_schema_review",
+      "escalation_target": "schema-reviewer",
+      "required_evidence": ["schema-contract", "migration-plan-or-gap"]
+    },
+    {
+      "id": "BANDIT-SMELL-INFRA-DEPLOY-RELEASE-BILLING",
+      "name": "Infra Deploy Release Billing Boundary",
+      "category": "infra_deploy_release_billing",
+      "trigger": "Work touches infrastructure, deploys, releases, billing, paid services, or irreversible operational actions.",
+      "severity": "blocker",
+      "default_action": "require_release_review",
+      "escalation_target": "release-manager",
+      "required_evidence": ["release-risk-notes", "operator-override-if-required"]
+    },
+    {
+      "id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "name": "Parser Validator Boundary",
+      "category": "parser_validator",
+      "trigger": "Work changes parsers, validators, refusal paths, schema checks, or artifact readers and writers.",
+      "severity": "blocker",
+      "default_action": "require_parser_validator_tests",
+      "escalation_target": "test-writer",
+      "required_evidence": ["focused-parser-validator-tests"]
+    },
+    {
+      "id": "BANDIT-SMELL-JSONL-LOG",
+      "name": "JSONL Log Boundary",
+      "category": "jsonl_log",
+      "trigger": "Work changes JSONL append, replay, lifecycle event, or audit log behavior.",
+      "severity": "blocker",
+      "default_action": "require_jsonl_replay_tests",
+      "escalation_target": "test-writer",
+      "required_evidence": ["jsonl-replay-test", "append-safety-check"]
+    },
+    {
+      "id": "BANDIT-SMELL-REGISTRY-INDEX-AUTHORITY",
+      "name": "Registry Index Authority Boundary",
+      "category": "registry_index",
+      "trigger": "Work adds registries, caches, indexes, or UI state that might become hidden authority over repo-native artifacts.",
+      "severity": "blocker",
+      "default_action": "reject_hidden_authority",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["source-of-truth-check", "rebuildability-notes"]
+    },
+    {
+      "id": "BANDIT-SMELL-GENERATED-SCHEMA",
+      "name": "Generated Schema Boundary",
+      "category": "generated_schema",
+      "trigger": "Work introduces generated schemas or generated artifacts that could obscure the maintained source contract.",
+      "severity": "blocker",
+      "default_action": "require_generated_schema_source",
+      "escalation_target": "schema-reviewer",
+      "required_evidence": ["source-schema", "generation-command"]
+    },
+    {
+      "id": "BANDIT-SMELL-LARGE-SCOPE",
+      "name": "Large Scope",
+      "category": "scope",
+      "trigger": "A slice is broad enough to mix unrelated behaviors, artifacts, gates, or refactors.",
+      "severity": "blocker",
+      "default_action": "split_slice",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["slice-scope-review"]
+    },
+    {
+      "id": "BANDIT-SMELL-MULTI-PHASE-ORCHESTRATION",
+      "name": "Multi-Phase Orchestration",
+      "category": "orchestration",
+      "trigger": "A single implementation path mixes planning, validation, subprocesses, writes, review, landing, or retrospective capture.",
+      "severity": "blocker",
+      "default_action": "split_orchestration",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["phase-boundary-notes"]
+    },
+    {
+      "id": "BANDIT-SMELL-TEST-BOUNDARY-VIOLATION",
+      "name": "Test Boundary Violation",
+      "category": "test_boundary",
+      "trigger": "Implementation weakens Test Writer-owned assertions or changes tests without recorded test-change rationale.",
+      "severity": "blocker",
+      "default_action": "require_test_change_rationale",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["test-change-rationale"]
+    },
+    {
+      "id": "BANDIT-SMELL-MISSING-COVERAGE",
+      "name": "Missing Coverage",
+      "category": "test_coverage",
+      "trigger": "Important behavior, refusal paths, state transitions, or evidence freshness checks lack tests or an explicit bootstrap gap.",
+      "severity": "blocker",
+      "default_action": "require_coverage",
+      "escalation_target": "test-writer",
+      "required_evidence": ["test-coverage-map"]
+    },
+    {
+      "id": "BANDIT-SMELL-REPEATED-REPAIR-LOOP",
+      "name": "Repeated Repair Loop",
+      "category": "improvement",
+      "trigger": "A slice needs repeated repairs for the same class of issue or exposes a recurring workflow failure.",
+      "severity": "non_blocking",
+      "default_action": "create_improvement_chore",
+      "escalation_target": "workflow-improvement-engine",
+      "required_evidence": ["repair-loop-count", "retrospective.md"]
+    },
+    {
+      "id": "BANDIT-SMELL-CONTEXT-PRESSURE",
+      "name": "Context Pressure",
+      "category": "context",
+      "trigger": "The task requires enough state, files, or history that future agents may lose the operating contract.",
+      "severity": "non_blocking",
+      "default_action": "compress_context",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["context-update", "handoff-summary-if-needed"]
+    },
+    {
+      "id": "BANDIT-SMELL-UNAVAILABLE-AGENT",
+      "name": "Unavailable Agent Or Gate",
+      "category": "bootstrap_gap",
+      "trigger": "A required reviewer, agent, or integration does not exist yet during bootstrap.",
+      "severity": "bootstrap_gap",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["bootstrap-gap-record"]
+    },
+    {
+      "id": "BANDIT-SMELL-MALFORMED-EVIDENCE",
+      "name": "Malformed Evidence",
+      "category": "evidence_shape",
+      "trigger": "Required evidence exists but omits required fields, uses unsupported values, or cannot be parsed.",
+      "severity": "blocker",
+      "default_action": "repair_artifact",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["validation-error", "repaired-artifact"]
+    },
+    {
+      "id": "BANDIT-SMELL-POLICY-DRIFT",
+      "name": "Policy Drift",
+      "category": "policy",
+      "trigger": "Implementation, templates, docs, or routing decisions diverge from AGENTS.md, CONTEXT.md, CLEAN_CODE.md, or stage rubrics.",
+      "severity": "blocker",
+      "default_action": "update_policy",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["policy-source", "updated-artifact-or-no-action-decision"]
+    }
+  ]
+}
