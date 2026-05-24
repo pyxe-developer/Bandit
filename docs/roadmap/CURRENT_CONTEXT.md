@@ -5,17 +5,19 @@
 **Phase:** 5 - UAT And Auto-Landing.
 
 **State:** `BANDIT-015` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LIVE-CODERABBIT`. Its brief is recorded. RED evidence is the next
-required action before any production implementation.
+`BANDIT-GAP-LIVE-CODERABBIT`. Its brief and RED evidence are recorded.
+Production implementation is the next required action.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
-**Current next action:** Create RED evidence for `BANDIT-015` - Live
-CodeRabbit Pre-Landing Loop. Do not begin implementation, another bootstrap-gap
-chore, Phase 6, Phase 7, feature work, or broader cockpit work until
-`BANDIT-015` has the required evidence for its current stage.
+**Current next action:** Implement the smallest live CodeRabbit loop contract
+for `BANDIT-015` - Live CodeRabbit Pre-Landing Loop that makes the focused RED
+tests pass. Do not begin another bootstrap-gap chore, Phase 6, Phase 7, feature
+work, or broader cockpit work until `BANDIT-015` has landing action evidence,
+retrospective closeout, and a resolved, operator-blocked, or no-action
+gap-ledger disposition.
 
 ## Active Work
 
@@ -33,9 +35,10 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution.
 
-**Expected next deliverable:** RED evidence for `BANDIT-015`, including
-focused failing tests or an explicit bootstrap verification plan for the live
-CodeRabbit loop contract.
+**Expected next deliverable:** Implementation evidence for `BANDIT-015`,
+including a live CodeRabbit loop contract, fixture-backed provider boundary,
+evidence writer, credential/PR-context refusal paths, redaction, and
+landing-gate integration sufficient to pass the focused RED tests.
 
 ## Known Bootstrap Gaps
 
@@ -118,7 +121,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; RED evidence next.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; implementation next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -131,8 +134,8 @@ a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define RED evidence
-for `BANDIT-015` as the next action.
+None recorded for the next routing step. Repo artifacts define implementation
+from the recorded `BANDIT-015` RED evidence as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

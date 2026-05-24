@@ -188,6 +188,254 @@ test("land-check fails closed when CodeRabbit evidence is stale", async () => {
   assert.match(result.stderr, /CodeRabbit review evidence is stale/);
 });
 
+test("coderabbit-review live reports usage when the work item ID is omitted", async () => {
+  const repo = await createInitializedRepo();
+
+  const result = await runBandit(repo, ["coderabbit-review", "live"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Usage: bandit coderabbit-review live <work-item-id>/
+  );
+});
+
+test("coderabbit-review live captures clean current review evidence from a fixture", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-976", "Live CodeRabbit Clean Review");
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    prNumber: 123,
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+  const secret = "ghp_live_secret_123";
+
+  const result = await runBanditWithEnv(
+    repo,
+    [
+      "coderabbit-review",
+      "live",
+      "BANDIT-976",
+      "--pr",
+      "123",
+      "--fixture",
+      fixturePath
+    ],
+    { GITHUB_TOKEN: secret }
+  );
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /CodeRabbit live review: pass/);
+  assert.match(
+    result.stdout,
+    /Evidence: docs\/work\/BANDIT-976\/coderabbit-review\.md/
+  );
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-976/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /provider: coderabbit-live/);
+  assert.match(evidence, /review_target: github-pr-123/);
+  assert.match(evidence, new RegExp(`source_head: ${sourceHead}`));
+  assert.match(evidence, /coderabbit_verdict: pass/);
+  assert.doesNotMatch(evidence, new RegExp(secret));
+});
+
+test("coderabbit-review live records request changes as blocking evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-977", "Live CodeRabbit Request Changes");
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    prNumber: 124,
+    reviewState: "completed",
+    verdict: "blocker",
+    findings: [
+      {
+        severity: "blocker",
+        status: "unresolved",
+        body: "CodeRabbit requested changes on the landing gate."
+      }
+    ]
+  });
+
+  const result = await runBanditWithEnv(
+    repo,
+    [
+      "coderabbit-review",
+      "live",
+      "BANDIT-977",
+      "--pr",
+      "124",
+      "--fixture",
+      fixturePath
+    ],
+    { GITHUB_TOKEN: "ghp_request_changes_secret" }
+  );
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /CodeRabbit review has unresolved actionable findings/
+  );
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-977/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /findings_status: unresolved/);
+  assert.match(evidence, /operator_input_status: none_required/);
+});
+
+test("coderabbit-review live fails closed when PR context is missing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-978", "Live CodeRabbit Missing PR");
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+
+  const result = await runBanditWithEnv(
+    repo,
+    ["coderabbit-review", "live", "BANDIT-978", "--fixture", fixturePath],
+    { GITHUB_TOKEN: "ghp_missing_pr_secret" }
+  );
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Missing PR context for live CodeRabbit review/);
+});
+
+test("coderabbit-review live records missing credentials as operator input blocked evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-979", "Live CodeRabbit Missing Credential");
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    prNumber: 125,
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "live",
+    "BANDIT-979",
+    "--pr",
+    "125",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Missing required operator input: GITHUB_TOKEN/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-979/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /operator_input_status: operator_input_blocked/);
+  assert.match(evidence, /GITHUB_TOKEN/);
+  assert.doesNotMatch(evidence, /ghp_/);
+});
+
+test("coderabbit-review live redacts credential values from provider errors", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-980", "Live CodeRabbit Redaction");
+  const secret = "ghp_redaction_secret_456";
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    prNumber: 126,
+    reviewState: "unavailable",
+    verdict: "blocker",
+    providerError: `CodeRabbit rejected token ${secret}`
+  });
+
+  const result = await runBanditWithEnv(
+    repo,
+    [
+      "coderabbit-review",
+      "live",
+      "BANDIT-980",
+      "--pr",
+      "126",
+      "--fixture",
+      fixturePath
+    ],
+    { GITHUB_TOKEN: secret }
+  );
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /CodeRabbit live review unavailable/);
+  assert.doesNotMatch(result.stderr, new RegExp(secret));
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-980/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /review_state: unavailable/);
+  assert.match(evidence, /provider error redacted/);
+  assert.doesNotMatch(evidence, new RegExp(secret));
+});
+
+test("land-check consumes live-normalized CodeRabbit pass evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-981", "Live CodeRabbit Land Check");
+  await writeReviewEvidence(repo, "BANDIT-981", {
+    sourceHead,
+    coderabbitState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-981", {
+    sourceHead,
+    coderabbitState: "pass"
+  });
+  const fixturePath = await writeLiveCodeRabbitFixture(repo, {
+    sourceHead,
+    prNumber: 127,
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+
+  const liveResult = await runBanditWithEnv(
+    repo,
+    [
+      "coderabbit-review",
+      "live",
+      "BANDIT-981",
+      "--pr",
+      "127",
+      "--fixture",
+      fixturePath
+    ],
+    { GITHUB_TOKEN: "ghp_land_check_secret" }
+  );
+  assert.equal(liveResult.code, 0, liveResult.stderr);
+
+  const landCheck = await runBandit(repo, ["land-check", "BANDIT-981"]);
+
+  assert.equal(landCheck.code, 0, landCheck.stderr);
+  assert.match(landCheck.stdout, /CodeRabbit: pass/);
+  assert.match(landCheck.stdout, /CodeRabbit provider: coderabbit-live/);
+});
+
 async function createInitializedRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
@@ -336,5 +584,39 @@ function runGit(cwd, args) {
 
       resolve({ stdout, stderr });
     });
+  });
+}
+
+async function writeLiveCodeRabbitFixture(repo, fixture) {
+  const destination = path.join(repo, ".bandit/fixtures/coderabbit-live.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(fixture, null, 2)}\n`, "utf8");
+  return destination;
+}
+
+function runBanditWithEnv(cwd, args, env = {}) {
+  const binPath = path.join(repoRoot, "bin/bandit.mjs");
+
+  return new Promise((resolve) => {
+    execFile(
+      process.execPath,
+      [binPath, ...args],
+      {
+        cwd,
+        env: {
+          ...process.env,
+          GITHUB_TOKEN: "",
+          CODERABBIT_TOKEN: "",
+          ...env
+        }
+      },
+      (error, stdout, stderr) => {
+        resolve({
+          code: typeof error?.code === "number" ? error.code : 0,
+          stdout,
+          stderr
+        });
+      }
+    );
   });
 }
