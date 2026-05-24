@@ -67,9 +67,10 @@ before unrelated new work proceeds.
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Complete |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Complete |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Active |
-| 6 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
-| 7 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, and improvement health. | Not started |
-| 8 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
+| 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Not started |
+| 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
+| 8 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, coordination state, and improvement health. | Not started |
+| 9 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
 
 ## Phase 0: Foundation
 
@@ -308,8 +309,9 @@ Current rule:
 - Do not create the next gap chore until the previous gap chore has landing
   action evidence, retrospective closeout, and a resolved, operator-blocked, or
   no-action ledger disposition.
-- Do not begin Phase 6, Phase 7, feature work, or unrelated cockpit work while
-  any open bootstrap gap remains queued or active.
+- Do not begin Phase 6 Coordination Primitive, Phase 7 Improvement Engine,
+  Phase 8 Workflow Cockpit, Phase 9 dogfood, feature work, or unrelated cockpit
+  work while any open bootstrap gap remains queued or active.
 
 Current priority after `BANDIT-014` lands:
 
@@ -320,7 +322,40 @@ Current priority after `BANDIT-014` lands:
 5. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-## Phase 6: Improvement Engine
+## Phase 6: Coordination Primitive
+
+Goal: Make workflow progress and agent coordination explicit instead of inferred
+from chat or artifact presence.
+
+Expected capabilities:
+
+- Per-work-item append-only coordination log.
+- Shared core state machine for slices and chores.
+- Typed state extensions for feature UAT and chore-specific disposition.
+- Step transition events and actor coordination events in the same work-item log.
+- Derived current-state and next-action reports.
+- Safe trigger points emitted only from validated step transitions.
+- Runtime-agnostic agent coordination actions: claim, handoff, block, complete,
+  repair-request, and resume.
+
+Sequencing:
+
+- Do not begin this phase while the active bootstrap-gap lane still has queued
+  or active gaps, unless a queued gap directly requires the coordination
+  primitive.
+- `FOLLOWUPS.md` tracks the post-bootstrap claim requirement and possible
+  repo-wide derived transition index questions.
+
+Exit criteria:
+
+- A work item can answer current state, next action, accountable actor, accepted
+  block state, and safe trigger points from repo-native coordination state.
+- The cockpit and future heartbeat work can read coordination state without
+  owning it.
+- Cross-repo coordination can rely on self-governing repositories that share the
+  same core coordination contracts.
+
+## Phase 7: Improvement Engine
 
 Goal: Prove Bandit's differentiator.
 
@@ -338,13 +373,15 @@ Exit criteria:
 - A retrospective lesson becomes a tagged improvement chore.
 - That chore can later be evaluated against a metric and outcome.
 
-## Phase 7: Workflow Cockpit
+## Phase 8: Workflow Cockpit
 
 Goal: Give the operator a clear status surface without moving authority out of the CLI.
 
 Expected views:
 
 - Current context.
+- Coordination state.
+- Safe trigger points.
 - PRDs.
 - Slices.
 - Chores.
@@ -358,7 +395,7 @@ Exit criteria:
 - The operator can answer “where are we and what is next?” from the cockpit.
 - Cockpit state is derived from repo-native state.
 
-## Phase 8: Dogfood And Hardening
+## Phase 9: Dogfood And Hardening
 
 Goal: Use Bandit to improve Bandit.
 

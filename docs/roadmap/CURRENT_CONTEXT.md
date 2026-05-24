@@ -51,8 +51,9 @@ bootstrap-gap chore.
 **Current next action:** Create the next bootstrap-gap chore for
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` as `BANDIT-016`. Do not begin live
 escalated-reviewer, work-item creation, artifact creation, heartbeat, cockpit,
-Phase 6, Phase 7, or feature work until this newly queued gap is resolved,
-operator-blocked, or explicitly dispositioned as no-action.
+Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
+Cockpit, Phase 9 dogfood, or feature work until this newly queued gap is
+resolved, operator-blocked, or explicitly dispositioned as no-action.
 
 ## Active Work
 
@@ -101,7 +102,8 @@ These are expected because Bandit does not exist yet:
 
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
-unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap remains
+Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
+Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in

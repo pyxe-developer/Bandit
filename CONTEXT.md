@@ -55,12 +55,96 @@ The rule that workflow state changes and enforcement decisions are performed by 
 _Avoid_: UI-owned enforcement, dashboard-as-source-of-truth
 
 **Workflow Cockpit**:
-A lean web application that visualizes repo-backed workflow state and triggers approved CLI commands without becoming the enforcement layer.
+A lean web application that visualizes repo-backed workflow and coordination state and triggers approved CLI commands without becoming the enforcement layer.
 _Avoid_: full agent IDE, autonomous factory, separate project tracker
 
 **Repo-Native Workflow State**:
 Versioned project files that are the canonical record for PRDs, slices, chores, runs, reviews, lessons, follow-ups, approvals, UAT, bootstrap gaps, and improvement decisions.
 _Avoid_: dashboard database truth, hidden app state
+
+**Coordination Primitive**:
+A repo-native contract that makes work-item position, next action, actor handoff, and blocked state explicit for agents and automation.
+_Avoid_: chat context, GitHub issue thread, implied workflow state
+
+**SDLC Microstep State Machine**:
+A durable sequence of small workflow states that governs one work item from brief through closeout.
+_Avoid_: artifact pile, coarse SDLC phase, checklist-only workflow
+
+**Shared Core State Machine**:
+The common SDLC microstep sequence used by both slices and chores before work-type-specific extensions apply.
+_Avoid_: separate workflow per work type, duplicated stage model, feature-only lifecycle
+
+**Typed State Extension**:
+A work-type-specific addition to the shared core state machine, such as feature UAT or chore-specific no-action disposition.
+_Avoid_: forked lifecycle, hidden exception, ad hoc state
+
+**Retrospective Recorded State**:
+A workflow state proving the work item's retrospective artifact exists.
+_Avoid_: closed, done, all lessons dispositioned
+
+**Closed Work Item**:
+A work item whose required artifacts, dispositions, context updates, and follow-up routing are complete.
+_Avoid_: landed, retro written, inactive
+
+**Step Transition Ledger**:
+The canonical repo-native record of a work item's workflow-state transitions.
+_Avoid_: derived status only, prose progress note, checklist checkbox
+
+**Append-Only Transition Log**:
+A Step Transition Ledger shape where every workflow-state change is recorded as a new immutable transition entry.
+_Avoid_: current-state-only file, overwritten progress, mutable audit trail
+
+**Per-Work-Item Transition Log**:
+An append-only transition log scoped to one work item.
+_Avoid_: repo-wide canonical ledger, shared hot file, global mutable queue
+
+**Per-Work-Item Coordination Log**:
+A unified append-only work-item log containing typed workflow transitions and actor coordination events.
+_Avoid_: split timeline, actor-only source of truth, workflow-only audit trail
+
+**Derived Current State View**:
+A rebuildable view of the latest accepted workflow state computed from the append-only transition log.
+_Avoid_: canonical state, hidden cache, dashboard truth
+
+**Agent Coordination Contract**:
+A repo-native protocol for agents to claim, hand off, block, complete, request repair, and resume bounded work.
+_Avoid_: informal delegation, chat-only handoff, human task board
+
+**Agent Coordination Event**:
+A repo-native actor action recorded against a work item and, when relevant, a current workflow state.
+_Avoid_: workflow state transition, chat update, unstructured status note
+
+**Accepted Block**:
+A validated coordination state meaning a work item cannot legally advance until the recorded resume condition is satisfied.
+_Avoid_: actor opinion, warning, advisory concern
+
+**Block Event**:
+An Agent Coordination Event where an actor reports a blocking condition, owner, required input, and resume condition.
+_Avoid_: accepted workflow state, vague concern, hidden blocker
+
+**Safe Trigger Point**:
+A CLI-confirmed workflow transition where automation may observe or begin a bounded follow-up action.
+_Avoid_: webhook as authority, arbitrary event trigger, UI-owned trigger
+
+**Trigger Signal**:
+A non-authoritative coordination event that may prompt inspection but cannot start automation until reconciled into a Safe Trigger Point.
+_Avoid_: safe trigger point, automation authority, accepted workflow state
+
+**Runtime-Agnostic Coordination**:
+The rule that Bandit coordinates bounded work steps without owning the runtime that executes those steps.
+_Avoid_: VM-first architecture, swarm platform, provider-specific orchestration
+
+**Bandit-Governed Repository**:
+A repository whose agentic workflow is coordinated by Bandit's shared contracts, gates, and evidence model.
+_Avoid_: bespoke repo workflow, local convention, one-off automation
+
+**Self-Governing Repository**:
+A Bandit-governed repository that retains canonical authority over its own workflow state and evidence.
+_Avoid_: centrally owned repo state, external source of truth, dashboard-controlled workflow
+
+**Cross-Repo Coordination**:
+Bandit's ability to coordinate consistent workflow states and safe trigger points across multiple Bandit-governed repositories.
+_Avoid_: fleet runtime, shared dashboard only, multi-repo script
 
 **State Index**:
 A rebuildable local cache, likely SQLite, that helps the Workflow Cockpit query and filter Repo-Native Workflow State without becoming canonical.
@@ -209,6 +293,18 @@ _Avoid_: planner, architect
 - **Bandit** preserves Sourmash's **Trust Layer** contracts while replacing Sourmash's deprecated subprocess-first architecture.
 - **CLI Authority** keeps the **Trust Layer** enforceable while the **Workflow Cockpit** keeps slices, chores, reviews, lessons, follow-ups, and UAT readiness visible.
 - **Repo-Native Workflow State** is canonical; a **State Index** may be rebuilt from it for cockpit speed and filtering.
+- A **Coordination Primitive** is part of **Repo-Native Workflow State**.
+- An **SDLC Microstep State Machine** is recorded in a **Step Transition Ledger** so work-item progress is explicit instead of inferred from artifacts alone.
+- A **Shared Core State Machine** governs both **Slices** and **Chores**, with **Typed State Extensions** for work-type-specific requirements.
+- A **Retrospective Recorded State** is not the same as a **Closed Work Item**.
+- A **Step Transition Ledger** lives inside a **Per-Work-Item Coordination Log** as typed workflow transition events.
+- A **Derived Current State View** may summarize a **Step Transition Ledger**, but it is not canonical.
+- An **Agent Coordination Contract** uses **Runtime-Agnostic Coordination** so Codex, Claude, Qwen, CI jobs, Owner VMs, or future harnesses can execute bounded steps without becoming Bandit's planning authority.
+- An **Agent Coordination Event** lives inside a **Per-Work-Item Coordination Log** without becoming workflow state itself.
+- A **Block Event** becomes an **Accepted Block** only when accepted by CLI validation or Codex PM policy.
+- A **Safe Trigger Point** is exposed by **CLI Authority** from validated step transitions and displayed by the **Workflow Cockpit**.
+- An **Agent Coordination Event** may be a **Trigger Signal**, but it is not a **Safe Trigger Point** until validated into workflow state.
+- **Cross-Repo Coordination** depends on **Self-Governing Repositories** that share the same core coordination contracts while retaining repo-local canonical state.
 - A **Feature PRD** is split into **Slices** and **Chores** so product delivery and maintenance can use different workflows.
 - A **Bootstrap Gap** discovered at this stage becomes the next **Bootstrap-Gap Chore** before unrelated feature or slice work proceeds.
 - A **Heartbeat Chore Agent** may run selected **Chores**, but it does not get the same authority as a feature implementation workflow.
@@ -242,6 +338,8 @@ _Avoid_: planner, architect
 - "subagent" was used to mean both **True Agent** and **Process Adapter**; resolved: Bandit requires bidirectional agent-to-agent communication for true agents.
 - "Claude" was used as both planner and worker; resolved: model workers are not Bandit planning authority by default.
 - "Mastra" was used as shorthand for multiple related surfaces; resolved: **Mastra** and **Mastra Code** are distinct harness candidates and must be evaluated separately.
+- "software factory" overlaps Bandit's coordination problem but is not the primary product category; resolved: Bandit is a **Workflow Improvement Engine** whose **Coordination Primitive** can support software-factory use cases.
+- "swarm" and "fleet" describe runtime scaling patterns; resolved: Bandit adopts **Runtime-Agnostic Coordination**, not a VM, fleet, or swarm architecture.
 
 ## Imported Decision Context
 
