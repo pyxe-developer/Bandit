@@ -32,15 +32,17 @@
     {
       "id": "BANDIT-GAP-LIVE-CODERABBIT",
       "title": "Live CodeRabbit polling and repair orchestration unavailable",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-007",
       "source_artifacts": [
         "docs/work/BANDIT-007/retrospective.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
+      "linked_work_item": "BANDIT-015",
       "rationale": "CodeRabbit evidence can be captured manually, but live API polling, PR comment repair orchestration, and rerun automation need later integration work.",
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after the Landing Agent gap is resolved or explicitly dispositioned."
+      "verification_target": "docs/work/BANDIT-015/brief.md",
+      "next_action": "Create RED evidence for BANDIT-015 before implementation; do not begin another gap chore until this one lands or is explicitly blocked/dispositioned."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

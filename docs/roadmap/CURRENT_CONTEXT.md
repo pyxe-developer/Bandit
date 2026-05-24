@@ -4,24 +4,22 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-014` has landed as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-AGENT`. Its brief, RED evidence, implementation evidence,
-pre-landing review evidence, local Qwen review, escalated-review disposition,
-landing verdict, Landing Agent local-record landing action evidence,
-retrospective closeout, and gap-ledger disposition are recorded.
+**State:** `BANDIT-015` is active as the bootstrap-gap chore for
+`BANDIT-GAP-LIVE-CODERABBIT`. Its brief is recorded. RED evidence is the next
+required action before any production implementation.
 
 **Last completed milestone:** `BANDIT-014` converted the Landing Agent
 bootstrap gap into a repo-native contract, validation path, and local-record
 landing command.
 
-**Current next action:** Create the next single bootstrap-gap chore for
-`BANDIT-GAP-LIVE-CODERABBIT`, or explicitly block/no-action-disposition that
-gap if required operator-owned input is missing. Do not begin Phase 6, Phase 7,
-feature work, or broader cockpit work while queued bootstrap gaps remain.
+**Current next action:** Create RED evidence for `BANDIT-015` - Live
+CodeRabbit Pre-Landing Loop. Do not begin implementation, another bootstrap-gap
+chore, Phase 6, Phase 7, feature work, or broader cockpit work until
+`BANDIT-015` has the required evidence for its current stage.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -35,9 +33,9 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution.
 
-**Expected next deliverable:** A work-item brief for the next single
-bootstrap-gap chore, `BANDIT-GAP-LIVE-CODERABBIT`, unless repo evidence shows
-operator-owned input is required first.
+**Expected next deliverable:** RED evidence for `BANDIT-015`, including
+focused failing tests or an explicit bootstrap verification plan for the live
+CodeRabbit loop contract.
 
 ## Known Bootstrap Gaps
 
@@ -66,7 +64,7 @@ These are expected because Bandit does not exist yet:
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 unrelated Phase 6, Phase 7, feature, or cockpit work while any open gap remains
-queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is the next queued gap.
+queued or active. `BANDIT-GAP-LIVE-CODERABBIT` is active as `BANDIT-015`.
 
 ## Context Guardrails
 
@@ -117,10 +115,10 @@ Verification passed with `node --test test/landing-gates.test.mjs`, `npm test`,
 BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
-Use `bandit gaps list` as the routing source and create exactly one
+Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-CODERABBIT`.
+1. `BANDIT-GAP-LIVE-CODERABBIT` - active as `BANDIT-015`; RED evidence next.
 2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
@@ -128,14 +126,13 @@ bootstrap-gap chore at a time. Current priority is:
 6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 Create exactly one next gap chore at a time. Do not create any gap chore after
-`BANDIT-GAP-LIVE-CODERABBIT` until that next gap has landing action evidence,
-retrospective closeout, and a resolved, operator-blocked, or no-action ledger
-disposition.
+`BANDIT-015` until it has landing action evidence, retrospective closeout, and
+a resolved, operator-blocked, or no-action ledger disposition.
 
 ## Required Operator Input
 
-None recorded for the next routing step. Repo artifacts define
-`BANDIT-GAP-LIVE-CODERABBIT` as the next queued gap.
+None recorded for the next routing step. Repo artifacts define RED evidence
+for `BANDIT-015` as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
