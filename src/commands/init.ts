@@ -1,4 +1,5 @@
 import { mkdir, stat } from "node:fs/promises";
+import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
 import { getBanditPaths } from "../state/paths.js";
@@ -6,8 +7,13 @@ import { getBanditPaths } from "../state/paths.js";
 export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
   const alreadyInitialized = await pathExists(paths.config);
+  const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
 
   await mkdir(paths.stateRoot, { recursive: true });
+
+  if (!bootstrapGapsExist) {
+    await writeDefaultBootstrapGapLedger(paths.bootstrapGaps);
+  }
 
   if (alreadyInitialized) {
     await appendLifecycleEvent(paths.events, {

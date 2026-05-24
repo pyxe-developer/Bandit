@@ -7,8 +7,13 @@
 **State:** `BANDIT-011` is active as a bootstrap-gap chore tracking and routing
 work item. `docs/work/BANDIT-011/brief.md` records the scope, acceptance
 criteria, verification plan, clean-code read evidence, and stage-rubric
-checklist. Production implementation has not started and RED evidence has not
-been recorded yet.
+checklist. `docs/work/BANDIT-011/red-evidence.md` records focused RED tests
+showing the current CLI cannot list bootstrap gaps and `bandit validate` does
+not yet fail closed for undispositioned, no-action-without-rationale, or
+missing-linked-work bootstrap-gap records. `docs/work/BANDIT-011/implementation-evidence.md`
+records the production implementation and passing verification for the
+bootstrap-gap ledger, validator, seeded known gaps, and `bandit gaps list`
+command.
 
 `BANDIT-010` has landed as final implementation source head
 `c1333d1cb54c99d9bbaa31ac37a975420454a0da`. It added the escalated adversarial
@@ -22,10 +27,10 @@ dispositions.
 **Last completed milestone:** `BANDIT-010` added the escalated adversarial
 reviewer placeholder gate.
 
-**Current next action:** Create RED evidence for `BANDIT-011` before production
-implementation. The RED evidence should show that Bandit cannot yet list
-bootstrap gaps as tracked work and cannot validate an undispositioned
-bootstrap-gap record.
+**Current next action:** Complete `BANDIT-011` closeout evidence: review
+evidence, local Qwen review or bootstrap-gap disposition, escalated-review
+disposition, landing verdict, retrospective, and landing action before Phase 5
+work begins.
 
 ## Active Work
 
@@ -39,16 +44,16 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair; `BANDIT-009` - Local Qwen Full-Packet
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder.
 
-**Expected next deliverable:** `docs/work/BANDIT-011/red-evidence.md` with
-focused failing tests mapped to the brief's acceptance criteria.
+**Expected next deliverable:** `BANDIT-011` review and landing evidence for
+the implemented bootstrap-gap tracking and routing behavior.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command.
-- No bootstrap-gap tracking artifact, listing command, or validation path exists
-  yet. This gap is active work in `BANDIT-011`.
+- Bootstrap-gap tracking artifact, listing command, and validation path exist
+  as active `BANDIT-011` implementation. Landing evidence is still pending.
 - CodeRabbit state capture substrate exists, but live CodeRabbit API, GitHub
   API, PR comment polling, repair orchestration, and rerun automation remain
   unavailable.
@@ -97,10 +102,11 @@ placeholder set.
 
 `BANDIT-011` is now the active bootstrap-gap chore because Bandit must convert
 known and newly identified bootstrap gaps into repo-native tracked work or
-explicit no-action decisions before unrelated Phase 5 work starts. The next
-step is RED evidence, not production implementation. Keep the tests narrow:
-prove the absence of a gap ledger/listing command and the lack of fail-closed
-validation for undispositioned bootstrap-gap records.
+explicit no-action decisions before unrelated Phase 5 work starts. RED evidence
+and implementation evidence have been recorded. The next step is closeout:
+review evidence, local Qwen review or honest bootstrap-gap disposition,
+escalated-review disposition, landing verdict, retrospective, and landing
+action.
 
 Do not build Phase 5 UAT artifacts, final auto-merge behavior, workflow
 cockpit, SQLite indexing, live CodeRabbit/GitHub polling, paid-model reviewer

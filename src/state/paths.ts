@@ -9,6 +9,7 @@ export function getBanditPaths(repoRoot: string) {
     policyRoot,
     config: path.join(stateRoot, "config.toml"),
     events: path.join(stateRoot, "events.jsonl"),
+    bootstrapGaps: path.join(stateRoot, "bootstrap-gaps.json"),
     smellTriggers: path.join(policyRoot, "smell-triggers.json")
   };
 }

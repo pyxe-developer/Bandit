@@ -2,6 +2,7 @@
 import { initBandit } from "./commands/init.js";
 import { coderabbitReview } from "./commands/coderabbit-review.js";
 import { draftWork } from "./commands/draft-work.js";
+import { listBootstrapGaps } from "./commands/gaps.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
 import { qwenReview } from "./commands/qwen-review.js";
@@ -26,6 +27,18 @@ async function main() {
 
   if (command === "list") {
     const result = await listWorkItems(process.cwd());
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "gaps") {
+    if (args[0] !== "list") {
+      console.error("Usage: bandit gaps <list>");
+      process.exitCode = 1;
+      return;
+    }
+
+    const result = await listBootstrapGaps(process.cwd());
     process.stdout.write(result.output);
     return;
   }
@@ -67,7 +80,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review|coderabbit-review>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|qwen-review|coderabbit-review|gaps>`);
   process.exitCode = 1;
 }
 

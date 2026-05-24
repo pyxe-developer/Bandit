@@ -2,8 +2,8 @@
 
 ## Status
 
-Bootstrap-gap chore brief created on 2026-05-24. Production implementation has
-not started.
+Bootstrap-gap chore brief created on 2026-05-24. Production implementation and
+focused fail-closed repair are complete. Closeout evidence is pending.
 
 ## Goal
 

@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "gaps": [
+    {
+      "id": "BANDIT-GAP-WORK-ITEM-CREATE-COMMAND",
+      "title": "No general Bandit work-item creation command",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/work/BANDIT-011/brief.md"
+      ],
+      "rationale": "Manual work-item creation remains acceptable during bootstrap, but the gap should be converted once the repeated artifact shape stabilizes.",
+      "next_action": "Keep queued until the next work-artifact automation chore is selected."
+    },
+    {
+      "id": "BANDIT-GAP-BOOTSTRAP-GAP-TRACKING",
+      "title": "Bootstrap gaps need repo-native tracking and validation",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/work/BANDIT-011/brief.md"
+      ],
+      "linked_work_item": "BANDIT-011",
+      "rationale": "This active chore creates the gap ledger, validation path, and list command.",
+      "verification_target": "docs/work/BANDIT-011/implementation-evidence.md",
+      "next_action": "Complete and land BANDIT-011 before unrelated Phase 5 work begins."
+    },
+    {
+      "id": "BANDIT-GAP-LIVE-CODERABBIT",
+      "title": "Live CodeRabbit polling and repair orchestration unavailable",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-007",
+      "source_artifacts": [
+        "docs/work/BANDIT-007/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "CodeRabbit evidence can be captured manually, but live API polling, PR comment repair orchestration, and rerun automation need later integration work.",
+      "next_action": "Queue a dedicated integration chore when PR-based landing automation starts."
+    },
+    {
+      "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
+      "title": "Live escalated adversarial reviewer routing unavailable",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-010",
+      "source_artifacts": [
+        "docs/work/BANDIT-010/landing-action.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "The placeholder gate exists; live stronger-reviewer routing needs a later reviewer integration chore with cost and credential boundaries.",
+      "next_action": "Create a reviewer-routing integration chore when escalation policy needs live execution."
+    },
+    {
+      "id": "BANDIT-GAP-LANDING-AGENT",
+      "title": "No Landing Agent exists yet",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-005",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/plans/BOOTSTRAP_METHODOLOGY.md"
+      ],
+      "rationale": "Bootstrap landing is recorded manually; final Landing Agent behavior belongs after landing evidence, review gates, and UAT contracts are stable.",
+      "next_action": "Keep queued for the Phase 5 auto-landing policy path."
+    },
+    {
+      "id": "BANDIT-GAP-UAT-ARTIFACT",
+      "title": "No CLI-owned UAT artifact exists yet",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/ROADMAP.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "UAT is the next Phase 5 capability after bootstrap-gap tracking lands.",
+      "next_action": "Start Phase 5 UAT work only after BANDIT-011 lands."
+    },
+    {
+      "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
+      "title": "No heartbeat chore-agent exists yet",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "Recurring chore automation should wait until repo-native chore and gate contracts are stronger.",
+      "next_action": "Keep queued until chore eligibility and safety policy are explicit."
+    },
+    {
+      "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
+      "title": "No workflow cockpit exists yet",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-011",
+      "source_artifacts": [
+        "docs/roadmap/ROADMAP.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
+      "next_action": "Keep queued for Phase 7 after CLI authority and derived state contracts are ready."
+    }
+  ]
+}
