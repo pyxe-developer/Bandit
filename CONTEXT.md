@@ -56,6 +56,10 @@ _Avoid_: human rubber-stamp, direct-main chore runner, deploy bot
 A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair, or requires operator approval, backed by CI, tests, CodeRabbit, adversarial review, review freshness, PR accuracy, UAT, and policy evidence.
 _Avoid_: warning dump, looks-good summary, user gut check
 
+**Landed Slice**:
+A slice whose landing verdict is complete and whose landing action has actually happened, recorded with commit SHA, merge SHA, or equivalent landing evidence. A safe-to-land verdict without landing action evidence is ready-to-land, not complete.
+_Avoid_: treating verdict as landing, beginning the next slice from an unlanded state
+
 **Pre-Landing Review Loop**:
 A CLI-driven quality loop that runs required external and cross-model review gates before the Landing Agent can produce a safe-to-land verdict.
 _Avoid_: post-merge cleanup, optional advisory scan
@@ -131,6 +135,7 @@ _Avoid_: assumed-valid acceptance, agent-classified product impact
 - Feature PRDs split into Slices and Chores.
 - Heartbeat Chore Agent prepares eligible chores; Landing Agent decides if PRs can land.
 - Landing Verdict requires a completed Pre-Landing Review Loop.
+- A slice becomes a Landed Slice only after the landing action is recorded; the next slice must not begin before that.
 - Local Qwen Baseline Reviewer runs on every PR; Adversarial Escalation adds stronger review when smells require it.
 - Manager-Owned Routing means Codex PM applies the Smell Trigger Catalog without asking routine technical questions.
 - Operator Input Boundary means Codex PM halts and asks directly when the missing decision belongs to the operator.

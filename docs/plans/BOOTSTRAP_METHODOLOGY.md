@@ -21,6 +21,22 @@ Every bootstrap slice should leave durable repo-native evidence:
 - Retrospective.
 - Improvement chores or explicit no-action decisions.
 
+## Slice Boundary
+
+Every slice must land before the next slice begins.
+
+During bootstrap, "landed" means the slice has a complete landing verdict and the landing action itself has happened as a focused commit. Later PR-based workflows may replace this with merge evidence, but the rule is the same: a safe-to-land verdict is not the same as landed.
+
+Before creating the next slice brief, RED evidence, implementation branch, or active-work context, confirm the previous slice has:
+
+- verification evidence;
+- landing verdict;
+- landing action evidence, such as commit SHA or merge SHA;
+- retrospective and improvement dispositions;
+- updated roadmap/current-context state.
+
+If any of these are missing, the next task is landing or closeout repair for the current slice. Do not begin the next slice.
+
 ## Build Order
 
 The durable path is:

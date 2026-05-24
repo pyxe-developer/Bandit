@@ -25,6 +25,7 @@ Use these verdicts consistently:
 - `docs/roadmap/CURRENT_CONTEXT.md` names current phase, active work, next action, blockers, and bootstrap gaps.
 - `docs/roadmap/ROADMAP.md` maps the work to a phase.
 - The next step is narrow enough to execute.
+- If a prior slice just completed, landing action evidence exists before the next slice is active.
 
 **Blockers:**
 
@@ -32,11 +33,13 @@ Use these verdicts consistently:
 - Active work item cannot be identified.
 - Context must be reconstructed from chat.
 - Implementation starts before context is repaired.
+- A new slice is active while the previous slice has only a safe-to-land verdict and no commit, merge, or landing-action evidence.
 
 **Verifier focus:**
 
 - Check whether the repo itself answers "what is next?"
 - Reject stale current-context files when the change clearly moved the project forward.
+- Confirm the previous slice actually landed before accepting a new active slice.
 
 **CodeRabbit focus:**
 
@@ -179,6 +182,7 @@ Use these verdicts consistently:
 **Required evidence:**
 
 - Landing Verdict.
+- Landing action evidence, such as commit SHA, merge SHA, or recorded blocked/needs-repair state.
 - Tests/CI current at landing head.
 - Required review gates current at landing head.
 - UAT approval for feature slices.
@@ -192,11 +196,13 @@ Use these verdicts consistently:
 - Landing Verdict asks the operator to judge routine code-safety warnings.
 - Tests or review evidence are stale.
 - Missing required gate without bootstrap gap.
+- The next slice begins before landing action evidence exists for the current slice.
 
 **Verifier focus:**
 
 - Confirm the Landing Verdict is a decision, not a warning dump.
 - Confirm product acceptance and code-safety are separated.
+- Confirm `safe-to-land` was followed by an actual landing action before closeout.
 
 **CodeRabbit focus:**
 

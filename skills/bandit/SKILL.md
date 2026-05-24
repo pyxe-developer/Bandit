@@ -98,19 +98,30 @@ Read these as needed:
    required evidence. Use the verdict values from that file: `pass`,
    `blocker`, `non_blocking`, `not_applicable`, `bootstrap_gap`.
 
-6. **Perform the next step only.**
+6. **Enforce slice boundary.**
+
+   Every slice must land before the next slice begins. A `safe-to-land` verdict
+   is not enough. Before creating the next slice brief, RED evidence,
+   implementation branch, or active-work context, verify the previous slice has
+   landing action evidence such as a commit SHA, merge SHA, or recorded
+   blocked/needs-repair state.
+
+   If the previous slice has no landing action evidence, the next action is to
+   land or repair closeout for that slice. Do not begin the next slice.
+
+7. **Perform the next step only.**
 
    Follow the current next action in `CURRENT_CONTEXT.md`. For the initial
    state, this means creating the first bootstrap work item for
    `BANDIT-001 - Repo-Native State And CLI Skeleton`.
 
-7. **Update current context when the next action changes.**
+8. **Update current context when the next action changes.**
 
    If you create or complete a step, update `CURRENT_CONTEXT.md` so a future
    cold session can resume without chat history. If you change the skill or
    change Bandit's operating vocabulary, update `CONTEXT.md` in the same turn.
 
-8. **Verify and commit when appropriate.**
+9. **Verify and commit when appropriate.**
 
    Run `git diff --check`. If the step produced a coherent artifact and the
    operator asked you to proceed, commit with a focused message. Do not bundle
