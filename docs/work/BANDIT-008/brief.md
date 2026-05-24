@@ -38,8 +38,8 @@ is the expected faster local endpoint.
 - Preserve deterministic tests by using fixture commands in temp repos.
 - Run a live Mastra Code/oMLX smoke through Bandit's reviewer command if the
   local service is available; otherwise record a precise bootstrap gap.
-- Update roadmap/current context so the next post-repair step returns to the
-  Phase 4 escalated adversarial reviewer placeholder.
+- Update roadmap/current context so unresolved baseline-reviewer reliability is
+  visible and cannot be skipped by later Phase 4 work.
 
 ## Out Of Scope
 
@@ -106,7 +106,7 @@ parsing, and preserved role boundaries.
 
 | Stage | Verdict | Evidence |
 |---|---|---|
-| Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` showed `BANDIT-007` landed and no active work. Operator correction makes this repair chore the next safe step before `BANDIT-008` escalated-reviewer work. |
+| Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md` and `ROADMAP.md` showed `BANDIT-007` landed and no active work. Operator correction made this repair chore the next safe step before future escalated-reviewer work. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code evidence, expected files, implementation order, bootstrap gaps, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pending` | Required before production implementation. |
 | Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production code in this step. |

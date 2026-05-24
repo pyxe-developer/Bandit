@@ -15,11 +15,10 @@ dispositions.
 reviewer runtime route from Qwen Code/Ollama drift to repo-configured Mastra
 Code/oMLX.
 
-**Current next action:** Create the next Phase 4 bootstrap work item for the
-escalated adversarial reviewer placeholder. Do not create the next slice brief,
-RED evidence, implementation branch, or active-work context until the
-`BANDIT-008` closeout commit containing `landing-action.md`, `retrospective.md`,
-and roadmap context has landed.
+**Current next action:** Create the next Phase 4 bootstrap work item for local
+Qwen full-packet reliability. Do not proceed to the escalated adversarial
+reviewer placeholder while the baseline local reviewer still returns
+inconclusive output for real Bandit review packets.
 
 ## Active Work
 
@@ -32,16 +31,20 @@ Catalog; `BANDIT-005` - Pre-Landing Review Loop; `BANDIT-006` - Local Qwen
 Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 - Local Reviewer Runtime Drift Repair.
 
-**Expected next deliverable:** the next narrow Phase 4 review gate gap:
+**Expected next deliverable:** the next narrow Phase 4 baseline-reviewer
+reliability gap:
 
-- create a `BANDIT-009` brief for the escalated adversarial reviewer
-  placeholder only after confirming `BANDIT-008` is landed;
-- define the smallest repo-native evidence contract needed to represent
-  escalated review policy and unavailable reviewer behavior;
+- create a `BANDIT-009` brief for local Qwen full-packet reliability;
+- define the smallest change needed for `bandit qwen-review <work-item-id>` to
+  return structured reviewer JSON for real Bandit packets, or prove Mastra
+  Code is the wrong harness substrate while keeping oMLX as the local model
+  endpoint;
 - add RED evidence before production implementation;
-- preserve manager-owned routing and smell-trigger policy boundaries;
+- preserve the Mastra Code/oMLX source-of-truth route unless evidence proves
+  the harness path must change;
 - do not broaden into final Landing Agent behavior, UAT artifacts, PR merge
-  automation, live paid-model routing, workflow cockpit, or SQLite indexing.
+  automation, live paid-model routing, workflow cockpit, SQLite indexing, or
+  escalated reviewer placeholder behavior.
 
 BANDIT-004 landed as commit `a0b679217c93c3aeda6646806201d181cd26404c`.
 `docs/work/BANDIT-004/landing-action.md` records the concrete landing action;
@@ -76,9 +79,11 @@ These are expected because Bandit does not exist yet:
   unavailable.
 - Local Qwen gate substrate exists, and `BANDIT-008` repaired its runtime route
   to Mastra Code over the local oMLX OpenAI-compatible endpoint. Small-prompt
-  smoke works, but the full review packet remains inconclusive and is recorded
-  as an explicit bootstrap gap, not as a pass.
-- No escalated adversarial review gate. This is the next Phase 4 gap.
+  smoke works, but the full review packet remains inconclusive. This is now
+  the next blocking Phase 4 gap because the baseline adversarial reviewer must
+  work on real packets before escalation policy is useful.
+- No escalated adversarial review gate. This remains a Phase 4 gap, but it is
+  queued behind local Qwen full-packet reliability.
 - No Landing Agent.
 - No general artifact creation command outside explicit PRD draft-work.
 - No UAT artifact.
@@ -103,7 +108,7 @@ gates ran.
 
 ## Next Step Details
 
-BANDIT-009 escalated adversarial reviewer placeholder.
+BANDIT-009 local Qwen full-packet reliability.
 
 BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing
 verdict contracts, source-drift checks, validation, and
@@ -115,22 +120,26 @@ live CodeRabbit polling as a bootstrap gap. BANDIT-008 repaired the local Qwen
 baseline reviewer runtime route to Mastra Code/oMLX, removed hidden Qwen
 Code/Ollama and Google-key dependencies from the baseline profile, added stdin
 prompt transport, and tightened reviewer-output parsing. Full-packet live local
-Qwen review remains inconclusive and is recorded as a bootstrap gap.
+Qwen review remains inconclusive and is recorded as a bootstrap gap. Because
+local Qwen is the baseline adversarial reviewer for every PR, this gap takes
+priority over new escalated-review placeholder work.
 
 The next step is to create the next bootstrap work item brief for the
-escalated adversarial reviewer placeholder after confirming the `BANDIT-008`
-landing action and closeout artifacts are committed. Start by reading
-`CLEAN_CODE.md` and `docs/verification/STAGE_RUBRICS.md`; shape the brief so
-Stage 1, Stage 2, Stage 3, and Stage 4 evidence can be evaluated.
+local Qwen full-packet reliability repair. Start by reading `CLEAN_CODE.md`
+and `docs/verification/STAGE_RUBRICS.md`; shape the brief so Stage 1, Stage 2,
+Stage 3, and Stage 4 evidence can be evaluated.
 
-Keep `BANDIT-009` narrow. It should not build final Landing Agent behavior,
-UAT artifacts, PR merge automation, workflow cockpit, SQLite indexing,
-automated review repair, live CodeRabbit/GitHub polling, or paid-model reviewer
-routing beyond a recorded placeholder policy and bootstrap-gap behavior.
+Keep `BANDIT-009` narrow. It should diagnose and repair the full-packet local
+review path, including packet sizing, output transport, Mastra Code invocation,
+or an alternate harness path if evidence proves Mastra Code cannot support the
+needed contract. It should not build final Landing Agent behavior, UAT
+artifacts, PR merge automation, workflow cockpit, SQLite indexing, automated
+review repair, live CodeRabbit/GitHub polling, paid-model reviewer routing, or
+the escalated reviewer placeholder.
 
 ## Required Operator Input
 
 None before creating the `BANDIT-009` brief. Repo artifacts already define the
-next technical routing decision: Phase 4 still lacks the escalated adversarial
-reviewer placeholder, and Codex PM owns routine reviewer routing from policy
-and smell-trigger evidence.
+next technical routing decision: the baseline local Qwen reviewer reaches
+Mastra Code/oMLX but fails on real review packets, and that must be repaired
+or explicitly rerouted before adding escalated-review placeholder work.

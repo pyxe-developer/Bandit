@@ -19,7 +19,7 @@ local_qwen_replacement_evidence:
   - Focused tests cover drift rejection, repo-local settings, stdin prompt delivery, JSON-envelope parsing, and false-pass refusal.
 escalated_review_required: true
 escalated_review_state: bootstrap_gap
-escalated_review_rationale: Runtime-routing, local-reviewer, external-harness, provider-drift, and output-contract smells apply. Escalated reviewer substrate remains the next Phase 4 gap; deterministic tests and PM review replace unavailable escalated reviewers during bootstrap.
+escalated_review_rationale: Runtime-routing, local-reviewer, external-harness, provider-drift, and output-contract smells apply. Escalated reviewer substrate remains a Phase 4 gap, but it is queued behind local Qwen full-packet reliability because the baseline reviewer still returns inconclusive output for real packets.
 pm_disposition: pass
 operator_input_status: none_required
 uat_status: not_applicable

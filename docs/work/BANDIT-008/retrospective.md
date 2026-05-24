@@ -29,7 +29,7 @@ packet, so no substantive cross-model disagreement was produced.
 ## Improvement Chores
 
 None created before landing. Material lessons were either repaired in-slice or
-recorded as explicit bootstrap gaps. The remaining full-packet Mastra
-Code/oMLX inconclusive behavior should be reconsidered after the Phase 4 review
-gate substrates are complete, especially if it continues to block live
-adversarial review evidence.
+recorded as explicit bootstrap gaps. After operator review, the remaining
+full-packet Mastra Code/oMLX inconclusive behavior is not a deferrable cleanup
+item: it is the next Phase 4 blocking gap because local Qwen is the baseline
+adversarial reviewer for every PR.
