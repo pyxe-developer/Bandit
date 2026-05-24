@@ -4,26 +4,22 @@
 
 **Phase:** 5 - UAT And Auto-Landing.
 
-**State:** `BANDIT-011` has landed as final implementation source head
-`d8ceb0f6118c6d044fe1b455ddee6d79cbf27e5b`. It added the repo-native
-`.bandit/bootstrap-gaps.json` ledger, default ledger creation during
-`bandit init`, fail-closed bootstrap-gap validation, seeded known bootstrap
-gaps, and `bandit gaps list`. `docs/work/BANDIT-011/landing-action.md`
-records the concrete landing action; `review-evidence.md`,
-`local-qwen-review.md`, `escalated-review.md`, `landing-verdict.md`, and
-`retrospective.md` record closeout evidence and dispositions.
+**State:** `BANDIT-012` is the active Phase 5 work item. Its brief defines the
+CLI-owned UAT approval artifact and stale-UAT detection contract. RED evidence
+is pending; do not start production implementation until RED evidence is
+recorded.
 
 **Last completed milestone:** `BANDIT-011` converted bootstrap gaps from
 passive prose into CLI-visible repo-native state.
 
-**Current next action:** Create the first Phase 5 work item for CLI-owned UAT
-approval artifacts and stale-UAT detection. Do not create implementation,
-RED evidence, or active-work context for that work until this context closeout
-is committed.
+**Current next action:** Create RED evidence for `BANDIT-012`. Do not write
+production implementation until focused tests or an explicit bootstrap
+verification plan are recorded in `docs/work/BANDIT-012/red-evidence.md`.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-012` - CLI-Owned UAT Approval Artifact And
+Stale-UAT Detection.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -34,8 +30,7 @@ Baseline Reviewer Gate; `BANDIT-007` - CodeRabbit State Capture; `BANDIT-008`
 Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 `BANDIT-011` - Bootstrap Gap Chore Tracking And Routing.
 
-**Expected next deliverable:** Phase 5 work-item brief for CLI-owned UAT
-approval artifacts and stale-UAT detection.
+**Expected next deliverable:** RED evidence for `BANDIT-012`.
 
 ## Known Bootstrap Gaps
 
@@ -54,7 +49,7 @@ These are expected because Bandit does not exist yet:
   routing remains unavailable.
 - No Landing Agent.
 - No general artifact creation command outside explicit PRD draft-work.
-- No UAT artifact.
+- No UAT artifact. This is now the active `BANDIT-012` bootstrap-gap chore.
 - No heartbeat chore-agent.
 - No cockpit.
 
@@ -94,15 +89,17 @@ placeholder set.
 Future cold starts should use `bandit gaps list` and `bandit validate` when
 checking whether bootstrap gaps are active, queued, resolved, or blocked.
 
-The next work item should start Phase 5 by defining the CLI-owned UAT approval
-artifact and stale-UAT detection path. Keep the first Phase 5 work item narrow:
-artifact contract, validation, stale-source detection, command surface, tests,
-and landing-gate integration only. Do not build final auto-merge behavior,
-workflow cockpit, SQLite indexing, live CodeRabbit/GitHub polling, paid-model
-reviewer routing, heartbeat chore-agent behavior, or broad Landing Agent
-behavior in the first Phase 5 item.
+`BANDIT-012` starts Phase 5 by defining the CLI-owned UAT approval artifact and
+stale-UAT detection path. Keep it narrow: artifact contract, validation,
+stale-source detection, command surface, tests, and landing-gate integration
+only. Do not build final auto-merge behavior, workflow cockpit, SQLite
+indexing, live CodeRabbit/GitHub polling, paid-model reviewer routing,
+heartbeat chore-agent behavior, or broad Landing Agent behavior in this item.
 
 ## Required Operator Input
 
-None before creating the Phase 5 UAT work-item brief. Repo artifacts define the
-next routing decision.
+None before RED evidence or implementation for `BANDIT-012`. Repo artifacts
+define the routing decision.
+
+Actual product UAT approval for future feature slices remains operator-owned
+and must not be inferred by Codex PM or implementation agents.
