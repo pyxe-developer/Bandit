@@ -3,9 +3,9 @@
 ## Status
 
 Implementation source is complete for the structured-findings repair and the
-Mastra Code harness reroute. Live full-packet local oMLX review must run after
-this source/evidence head is committed so `bandit qwen-review BANDIT-009` can
-record current source evidence from a clean worktree.
+Mastra Code harness reroute. A live full-packet direct oMLX review ran at
+source head `a5219efc6170bb8839bde5d59adbaea81f04786a` and returned structured
+review output instead of inconclusive output.
 
 ## Changes
 
@@ -60,8 +60,10 @@ record current source evidence from a clean worktree.
 - AC4: Empty or malformed reviewer output remains inconclusive; malformed
   structured findings still fail closed.
 - AC5: Full-packet prompt transport coverage remains in
-  `qwen-review can send the review prompt over stdin for long Mastra Code
-  packets`.
+  `qwen-review can send the review prompt over stdin for long reviewer
+  packets`, and direct oMLX prompt transport is covered by
+  `direct oMLX command posts stdin packets to the local OpenAI-compatible
+  endpoint`.
 - AC6: Dirty-worktree refusal, pass-with-findings rejection, profile validation,
   and local-provider validation still pass in the focused suite.
 - AC7: Deterministic tests cover the repaired structured-findings path, the
@@ -72,11 +74,12 @@ record current source evidence from a clean worktree.
 
 | Command | Result |
 |---|---|
-| `node --test test/local-qwen-review.test.mjs` | `pass` - 32/32 tests passed. |
-| `npm test` | `pass` - 107/107 tests passed. |
+| `node --test test/local-qwen-review.test.mjs` | `pass` - 32/32 tests passed before the test-name cleanup; rerun required after this evidence update. |
+| `npm test` | `pass` - 107/107 tests passed before the test-name cleanup; rerun required after this evidence update. |
 | `npm run typecheck` | `pass`. |
 | `npm run bandit -- validate` | `pass` - `Bandit state is valid.` |
 | `git diff --check` | `pass`. |
+| `npm run bandit -- qwen-review BANDIT-009` at `a5219efc6170bb8839bde5d59adbaea81f04786a` | `non_blocking` - direct oMLX returned structured findings and wrote `docs/work/BANDIT-009/local-qwen-review.md`. |
 
 ## Clean-Code Self-Check
 
@@ -87,14 +90,14 @@ record current source evidence from a clean worktree.
   focused tests.
 - **Explicit state:** Structured findings are recorded in a named evidence
   field, `structured_findings_json`.
-- **Failure clarity:** Malformed structured findings and inconclusive output
-  still fail closed.
+- **Failure clarity:** Malformed structured findings, pass-with-findings output,
+  dirty worktrees, unavailable runtime, nonzero reviewer exit, stale local Qwen
+  evidence, and inconclusive output still fail closed in focused tests.
 - **Role boundaries:** The command records reviewer output; PM disposition and
   landing decisions remain separate artifacts.
 
 ## Remaining Live Verification
 
-Run `npm run bandit -- qwen-review BANDIT-009` after the direct oMLX
-source/evidence head is committed and the worktree is clean. Record the result
-in `docs/work/BANDIT-009/local-qwen-review.md` or as precise bootstrap/harness
-evidence if the live direct oMLX full packet is still inconclusive.
+Rerun focused/full verification and `npm run bandit -- qwen-review BANDIT-009`
+after this evidence update is committed so review evidence applies to the final
+landing head.

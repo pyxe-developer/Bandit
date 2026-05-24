@@ -497,7 +497,7 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
   assert.match(result.stdout, /Local Qwen review: pass/);
 });
 
-test("qwen-review can send the review prompt over stdin for long Mastra Code packets", async () => {
+test("qwen-review can send the review prompt over stdin for long reviewer packets", async () => {
   const repo = await createInitializedRepo({
     profileOptions: {
       overrides: {
