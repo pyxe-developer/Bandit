@@ -14,19 +14,19 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 1 - Repo-Native CLI Skeleton.
+**Current phase:** Phase 2 - Work Artifacts.
 
-**Current next step:** Begin `BANDIT-001` test design and RED evidence before production implementation.
+**Current next step:** Create the next bootstrap work item brief for Phase 2: PRD, Slice, And Chore Artifacts.
 
-**Current implementation status:** No product code yet. The repository has founding docs, bootstrap methodology, PRD, architecture, v0 plan, and the first bootstrap work item brief.
+**Current implementation status:** `BANDIT-001` delivered the repo-native CLI skeleton and initialized `.bandit/` state. The next work item has not been created yet.
 
 ## Phase Map
 
 | Phase | Name | Outcome | Status |
 |---|---|---|---|
 | 0 | Foundation | Product intent, architecture, methodology, roadmap, and current-context discipline exist. | Complete |
-| 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | In progress |
-| 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Not started |
+| 1 | Repo-Native CLI Skeleton | Bandit can initialize, validate, list, show, and record lifecycle events in repo-native state. | Complete |
+| 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | In progress |
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Not started |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Not started |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Not started |
@@ -63,9 +63,13 @@ Goal: Create the smallest CLI and state system that lets Bandit own durable cont
 
 Active work:
 
+- none.
+
+Completed work:
+
 - `BANDIT-001` - Repo-Native State And CLI Skeleton.
 - Brief: `docs/work/BANDIT-001/brief.md`.
-- Next step: test design and RED evidence before production implementation.
+- Evidence: `docs/work/BANDIT-001/red-evidence.md`, `implementation-evidence.md`, `landing-verdict.md`, and `retrospective.md`.
 
 Expected capabilities:
 
@@ -88,9 +92,18 @@ Exit criteria:
 - State changes are recorded in repo-native files.
 - Bootstrap gaps are explicitly recorded.
 
+Status:
+
+- Complete.
+
 ## Phase 2: Work Artifacts
 
 Goal: Make work visible and structured.
+
+Active work:
+
+- none yet.
+- Next step: create the first Phase 2 work item brief, likely `BANDIT-002`.
 
 Expected capabilities:
 

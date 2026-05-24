@@ -1,0 +1,19 @@
+{
+  "name": "bandit-workflow",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "bandit": "./bin/bandit.mjs"
+  },
+  "scripts": {
+    "bandit": "node ./bin/bandit.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  }
+}

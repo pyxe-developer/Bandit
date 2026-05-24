@@ -2,7 +2,7 @@
 
 ## Status
 
-Brief ready for test design.
+Implemented; evidence recorded.
 
 ## Goal
 

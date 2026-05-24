@@ -36,4 +36,12 @@ The name matters. Work in this repository should be precise, evidence-backed, an
 
 ## Current Status
 
-Fresh repo created. Implementation has not started. The Codex skill is installed at `/Users/matthewflebbe/.codex/skills/bandit/SKILL.md` and can be invoked as `$bandit` or `/bandit` language in a new session.
+`BANDIT-001` delivered the first repo-native CLI skeleton. Bandit can initialize `.bandit/` state, validate it, list work items, show a work item brief, and append lifecycle events.
+
+The Codex skill is installed at `/Users/matthewflebbe/.codex/skills/bandit/SKILL.md` and can be invoked as `$bandit` or `/bandit` language in a new session.
+
+Local CLI usage:
+
+```sh
+npm run bandit -- <init|validate|list|show>
+```

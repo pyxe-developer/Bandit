@@ -2,39 +2,36 @@
 
 ## Status
 
-**Phase:** 1 - Repo-Native CLI Skeleton.
+**Phase:** 2 - Work Artifacts.
 
-**State:** `BANDIT-001` brief exists. Implementation has not started.
+**State:** `BANDIT-001` implemented, verified, and documented with bootstrap evidence.
 
-**Last completed milestone:** First bootstrap work item brief created for `BANDIT-001` - Repo-Native State And CLI Skeleton.
+**Last completed milestone:** `BANDIT-001` delivered the repo-native CLI skeleton.
 
-**Current next action:** Begin `BANDIT-001` test design and RED evidence before production implementation.
+**Current next action:** Create the next bootstrap work item brief for Phase 2: PRD, Slice, And Chore Artifacts.
 
 ## Active Work
 
-**Active work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
+**Active work item:** none.
 
-**Work item brief:** `docs/work/BANDIT-001/brief.md`.
+**Completed work item:** `BANDIT-001` - Repo-Native State And CLI Skeleton.
 
-**Expected next deliverable:** Test design and RED evidence for:
+**Expected next deliverable:** A bootstrap work item brief for Phase 2 covering:
 
-- `bandit init`
-- `.bandit/config.toml`
-- event JSONL writer
-- `bandit validate`
-- `bandit list`
-- `bandit show`
+- Feature PRD template.
+- Slice template.
+- Chore template.
+- Retrospective-derived chore metadata.
+- PRD-to-work draft command or equivalent next thin slice.
 
-The work item brief records that no operator-owned input is required before test design or implementation starts.
+The next brief must state whether any operator-owned input is required before implementation starts.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
-- No Bandit CLI.
-- No Bandit work-item command.
-- No Bandit event log.
-- No Bandit validation command.
+- No Bandit work-item creation command.
+- No PRD, slice, or chore artifact templates.
 - No Qwen adversarial gate.
 - No CodeRabbit pre-landing loop.
 - No Landing Agent.
@@ -59,12 +56,8 @@ Bootstrap work must record these gaps honestly instead of pretending final gates
 
 ## Next Step Details
 
-Use `docs/work/BANDIT-001/brief.md` as the active contract.
+Create the next work item brief, likely `BANDIT-002`, for the first Phase 2 slice.
 
-Next executable step:
+The brief should keep the slice thin. Prefer one artifact family or one creation command over building the whole Phase 2 surface at once.
 
-1. Confirm TypeScript/Node package and test tooling.
-2. Write focused tests for `bandit init`, config creation, and event JSONL append behavior.
-3. Record RED evidence before production implementation unless a specific path requires a documented bootstrap gap.
-
-Do not implement production CLI behavior before test design and RED evidence exist.
+Do not write Phase 2 production code before the new brief and RED evidence exist.
