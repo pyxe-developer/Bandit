@@ -17,8 +17,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is active at `landed` for typed state
-extensions. Its structured creation
+Coordination Primitive slice. `BANDIT-026` is closed out as the typed state
+extensions slice. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
@@ -35,15 +35,19 @@ is recorded in `docs/work/BANDIT-026/review-evidence.md` with current
 `967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-026/landing-verdict.md` with
 final verdict `safe-to-land`. Local-record landing action evidence is recorded
-in `docs/work/BANDIT-026/landing-action.md`.
+in `docs/work/BANDIT-026/landing-action.md`. Retrospective closeout is recorded
+in `docs/work/BANDIT-026/retrospective.md`, and the per-work-item coordination
+log is advanced through `retrospective_recorded` to `closed`.
 
-The current next step is to record `BANDIT-026` retrospective, improvement
-dispositions, and closeout context.
+The current next step is operator confirmation that
+`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is approved as
+execution authority for post-bootstrap decomposition before Codex PM creates the
+next work item.
 Do not create active-work branches, Phase 7 improvement engine work, Phase 8 web
 cockpit implementation, claim leases, scheduler execution, worktree lifecycle,
 product UAT approval, automatic merge/push/deploy behavior, the next work item,
-or unrelated feature work before retrospective and closeout evidence are
-recorded.
+or unrelated feature work until that operator-owned product/workflow direction
+is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -208,12 +212,12 @@ disposition. `BANDIT-025` is landed and closed out with its Phase 6
 Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
 review, PM finding disposition, aggregate review evidence, landing verdict,
 local-record landing action evidence, retrospective closeout, and terminal
-coordination-log state recorded. No bootstrap gap is currently recorded as open
-or active. `BANDIT-026` is active at `landing_verdict_recorded` with its
-typed-state-extensions spec, brief, RED evidence, focused tests,
-implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
-review evidence, Stage 5 landing verdict, and coordination-log transition
-recorded.
+coordination-log state recorded. `BANDIT-026` is landed and closed out with its
+typed-state-extensions spec, brief, RED evidence, focused tests, implementation
+evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4 review evidence,
+Stage 5 landing verdict, local-record landing action evidence, retrospective
+closeout, and terminal coordination-log state recorded. No bootstrap gap is
+currently recorded as open or active.
 
 ## Phase Map
 
@@ -415,7 +419,7 @@ Completed work:
 
 Active work:
 
-- `BANDIT-024` - Workflow Cockpit Boundary Scope.
+- none.
 
 Expected capabilities:
 
@@ -518,12 +522,11 @@ Current rule:
 
 Current priority:
 
-1. Record `BANDIT-026` retrospective and improvement dispositions.
-2. Update roadmap/current-context closeout and close `BANDIT-026`.
-3. Stop before creating the next work item, active-work branches, claim leases,
-   scheduler execution, worktree lifecycle, cockpit implementation, product UAT
-   approval, or Phase 7 evaluation behavior until retrospective and closeout
-   evidence are recorded.
+1. Ask the operator to confirm whether `BANDIT-PRD-002` is approved as
+   execution authority for post-bootstrap work.
+2. If approved, create exactly one next work item from the approved PRD.
+3. If not approved, record the requested revision or no-action disposition
+   before creating any post-bootstrap work item.
 
 ## Phase 6: Coordination Primitive
 

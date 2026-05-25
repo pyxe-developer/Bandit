@@ -156,11 +156,11 @@ Local-record landing action evidence is recorded in
 `docs/work/BANDIT-025/retrospective.md`, and the per-work-item coordination log
 is advanced through `retrospective_recorded` to `closed`.
 
-`BANDIT-026` is the active Phase 6 Coordination Primitive slice for typed
-state extensions. Its structured creation spec is recorded in
+`BANDIT-026` is closed out as the Phase 6 Coordination Primitive slice for
+typed state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
-recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at `landed`. RED
+recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at `closed`. RED
 evidence is recorded in `docs/work/BANDIT-026/red-evidence.md`, with focused tests in
 `test/coordination-log.test.mjs` and `test/coordination-status.test.mjs`.
 Implementation evidence is recorded in
@@ -179,24 +179,28 @@ worktree lifecycle, Phase 7 Improvement Engine work, or Phase 8 Workflow
 Cockpit implementation has started. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-026/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-026/landing-action.md`.
+`docs/work/BANDIT-026/landing-action.md`. Retrospective closeout is recorded in
+`docs/work/BANDIT-026/retrospective.md`, and the per-work-item coordination log
+is advanced through `retrospective_recorded` to `closed`.
 
-**Last completed milestone:** `BANDIT-026` local-record landing action evidence
-is recorded.
+**Last completed milestone:** `BANDIT-026` retrospective closeout and terminal
+coordination-log state are recorded.
 
-**Current next action:** Record `BANDIT-026` retrospective, improvement
-dispositions, and closeout context.
+**Current next action:** Operator must confirm whether
+`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is approved as
+execution authority for post-bootstrap decomposition before Codex PM creates the
+next work item.
 Do not create active-work branches, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
-approval, or the next work item before retrospective and closeout evidence are
-recorded.
+approval, or the next work item until that operator-owned product/workflow
+direction is recorded.
 
 ## Active Work
 
-**Active work item:** `BANDIT-026` - Typed State Extensions. Current
-coordination state: `landed`; accountable actor: Codex PM; next action: record
-retrospective, improvement dispositions, and closeout context.
+**Active work item:** none. `BANDIT-026` - Typed State Extensions is closed.
+Current next action: operator confirmation that `BANDIT-PRD-002` is approved for
+post-bootstrap execution before Codex PM creates the next work item.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -215,10 +219,11 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
-Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
+Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
+Typed State Extensions.
 
-**Expected next deliverable:** retrospective and improvement disposition
-evidence for `BANDIT-026`.
+**Expected next deliverable:** operator approval, revision, or no-action
+direction for `BANDIT-PRD-002` before post-bootstrap work item creation.
 
 ## Known Bootstrap Gaps
 
@@ -351,16 +356,18 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
 Use `bandit gaps list` as the routing source before starting new work. All
-currently recorded bootstrap gaps are resolved, `BANDIT-025` is closed out, and
-`BANDIT-026` is active at `landed` with local-record landing action evidence
-recorded, so the current priority is:
+currently recorded bootstrap gaps are resolved, `BANDIT-025` and `BANDIT-026`
+are closed out, and
+`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is marked
+`Draft. Ready for post-bootstrap agent decomposition after the active
+bootstrap-gap lane is resolved, blocked, or explicitly dispositioned.` The
+current priority is:
 
-1. Record `BANDIT-026` retrospective and improvement dispositions.
-2. Update roadmap/current-context closeout and close `BANDIT-026`.
-3. Stop before creating the next work item, active-work branches, claim leases,
-   scheduler, worktree lifecycle, cockpit implementation, product UAT approval,
-   or Phase 7 evaluation behavior until retrospective and closeout evidence are
-   recorded.
+1. Ask the operator to confirm whether `BANDIT-PRD-002` is approved as
+   execution authority for post-bootstrap work.
+2. If approved, create exactly one next work item from the approved PRD.
+3. If not approved, record the requested revision or no-action disposition
+   before creating any post-bootstrap work item.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -368,12 +375,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record `BANDIT-026` retrospective,
-improvement dispositions, and closeout context from existing repo artifacts. If
-the next work step requires product direction, UI scope tradeoffs, policy
-changes, explicit cost or risk overrides, actual cockpit implementation
-decisions, product UAT approval, or a typed-state scope decision that the
-roadmap cannot answer, halt and ask for that input directly.
+Operator confirmation is required before creating the next post-bootstrap work
+item: approve, revise, or reject
+`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` as execution
+authority. Repo artifacts show the PRD is a draft and ready for agent
+decomposition after the bootstrap-gap lane is resolved, but they do not record
+operator approval to start post-bootstrap parallel-workstream execution work.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
