@@ -16,10 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-HEARTBEAT-CHORE-AGENT` using `bandit work-item create
-<spec-path>`. All future Stage 4 review evidence should use
-`review_subject_hash`.
+**Current next step:** Create RED evidence for active chore `BANDIT-022`
+(`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`). All future Stage 4 review evidence should
+use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -113,10 +112,15 @@ recorded in `docs/work/BANDIT-021/local-qwen-review.md`, Stage 4 review
 evidence is recorded in `docs/work/BANDIT-021/review-evidence.md`, landing
 verdict and landing action are recorded, retrospective closeout is recorded,
 and `.bandit/bootstrap-gaps.json` marks the gap resolved.
+`BANDIT-022` is active for `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`; its structured
+creation spec is recorded in
+`docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
+`docs/work/BANDIT-022/brief.md`, and `.bandit/bootstrap-gaps.json` links the
+gap to `BANDIT-022` as `active_chore`.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
-landed and closed out. `BANDIT-021` is landed and closed out. The next open
-bootstrap gap is `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
+active at Stage 1 with RED evidence next.
 
 ## Phase Map
 

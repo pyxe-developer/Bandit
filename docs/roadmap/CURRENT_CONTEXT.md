@@ -71,20 +71,26 @@ recorded in `docs/work/BANDIT-021/landing-action.md`, retrospective closeout is
 recorded in `docs/work/BANDIT-021/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
+`BANDIT-022` is the active bootstrap-gap chore for
+`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`. Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
+`docs/work/BANDIT-022/brief.md`, `.bandit/bootstrap-gaps.json` links the gap to
+`BANDIT-022` as `active_chore`, and `.bandit/events.jsonl` records the
+CLI-owned work-item creation event.
+
 **Last completed milestone:** `BANDIT-021` resolved CLI-owned creation for
 selected workflow artifacts from explicit structured specs.
 
-**Current next action:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-HEARTBEAT-CHORE-AGENT` using the repo-native work-item creation
-path. Do not broaden into cockpit, Phase 6 Coordination Primitive, Phase 7
+**Current next action:** Create RED evidence for `BANDIT-022` without broadening
+into implementation before the test-design evidence is recorded. Do not broaden
+into cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
-while `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` remains the next open bootstrap gap.
+while `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` remains the active bootstrap-gap chore.
 All Stage 4 evidence for future work items must use `review_subject_hash`.
 
 ## Active Work
 
-**Active work item:** none. The next queued bootstrap gap is
-`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+**Active work item:** `BANDIT-022` - Heartbeat Chore Agent Contract.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -103,9 +109,8 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command.
 
-**Expected next deliverable:** a structured work-item spec and new chore brief
-for `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`, created through
-`bandit work-item create <spec-path>`.
+**Expected next deliverable:** RED evidence for `BANDIT-022` that defines the
+focused failing tests for the heartbeat chore-agent policy and command contract.
 
 ## Known Bootstrap Gaps
 
@@ -133,7 +138,8 @@ These are expected because Bandit does not exist yet:
   recorded.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
-- No heartbeat chore-agent.
+- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` is active in `BANDIT-022`; no heartbeat
+  chore-agent implementation exists yet.
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
@@ -228,9 +234,8 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Create the next bootstrap-gap chore for
-   `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` using `bandit work-item create
-   <spec-path>`.
+1. Create RED evidence for active chore `BANDIT-022`
+   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`).
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed

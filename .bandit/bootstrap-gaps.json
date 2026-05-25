@@ -158,16 +158,16 @@
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
       "title": "No heartbeat chore-agent exists yet",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-022",
       "rationale": "Recurring chore automation should wait until repo-native chore and gate contracts are stronger.",
       "verification_target": null,
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after artifact creation gaps are resolved or explicitly dispositioned."
+      "next_action": "Complete active chore BANDIT-022."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
