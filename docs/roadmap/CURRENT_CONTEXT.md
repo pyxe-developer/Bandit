@@ -143,28 +143,31 @@ Local Qwen Stage 4 evidence is recorded in
 `46455616e3c579ebbd05f92f8d87f80053de55bb` with a `non_blocking` verdict and
 three open hardening findings. Codex PM disposition and durable routing for
 those findings is recorded in
-`docs/work/BANDIT-025/qwen-finding-disposition.md`.
+`docs/work/BANDIT-025/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-025/review-evidence.md` with current
+`review_subject_hash`
+`747e4bbb35589b08fb042b46f911fd43f50597594c894e0a5fa9916c5704f16b`,
+CodeRabbit bootstrap replacement evidence, Local Qwen `non_blocking` state,
+PM disposition, and durable `non_blocking_findings_routing` entries.
 
 **Last completed milestone:** `BANDIT-024` resolved the workflow-cockpit
 boundary bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Codex PM must record aggregate Stage 4 review evidence
-for `BANDIT-025` with the current `review_subject_hash`, CodeRabbit bootstrap
-replacement evidence, Local Qwen `non_blocking` state, PM disposition from
-`docs/work/BANDIT-025/qwen-finding-disposition.md`, and durable
-`non_blocking_findings_routing` entries. Do not create
-active-work branches, Phase 7 Improvement Engine work, Phase 8 Workflow
+**Current next action:** Codex PM must record the Stage 5 Landing Agent verdict
+for `BANDIT-025` using the current aggregate Stage 4 review evidence. Do not
+create active-work branches, Phase 7 Improvement Engine work, Phase 8 Workflow
 Cockpit implementation, Phase 9 dogfood, claim leases, scheduler execution,
-worktree lifecycle, automatic merge/push/deploy behavior, landing evidence, or
-product UAT approval during this Stage 4 aggregate review evidence step.
+worktree lifecycle, automatic merge/push/deploy behavior, landing action
+evidence, retrospective closeout, or product UAT approval during this landing
+verdict step.
 
 ## Active Work
 
 **Active work item:** `BANDIT-025` - Coordination Log Foundation. Current
-stage: Stage 4 in progress, Local Qwen returned `non_blocking`; PM disposition
-and durable routing are recorded, and aggregate review evidence is required
-next.
+stage: Stage 5 pending, aggregate Stage 4 review evidence is recorded with
+Local Qwen `non_blocking` findings accepted and durably routed; the Landing
+Agent verdict is required next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -185,8 +188,8 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope.
 
-**Expected next deliverable:** aggregate Stage 4 review evidence at
-`docs/work/BANDIT-025/review-evidence.md`.
+**Expected next deliverable:** Stage 5 landing verdict at
+`docs/work/BANDIT-025/landing-verdict.md`.
 
 ## Known Bootstrap Gaps
 
