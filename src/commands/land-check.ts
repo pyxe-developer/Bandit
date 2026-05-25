@@ -151,13 +151,16 @@ async function evaluateLandingReadiness(
     repoRoot,
     reviewEvidence
   );
+  const reviewSubjectHashIsCurrent = Boolean(
+    reviewEvidence.reviewSubjectHash && !reviewSubjectIsStale
+  );
   const reviewEvidenceIsStale = reviewSubjectIsStale
     ? true
     : isRawEvidenceHeadStale(reviewEvidence.sourceHead, currentHead, reviewEvidence);
   const landingVerdictIsStale = reviewSubjectIsStale
     ? true
     : isRawEvidenceHeadStale(landingVerdict.sourceHead, currentHead, reviewEvidence);
-  const codeRabbitReviewIsStale = codeRabbitReview
+  const codeRabbitReviewIsStale = codeRabbitReview && !reviewSubjectHashIsCurrent
     ? await isReviewSourceStale(
         repoRoot,
         reviewEvidence.workItem,
@@ -169,7 +172,7 @@ async function evaluateLandingReadiness(
         readGitChangedPaths
       )
     : false;
-  const localQwenReviewIsStale = localQwenReview
+  const localQwenReviewIsStale = localQwenReview && !reviewSubjectHashIsCurrent
     ? await isReviewSourceStale(
         repoRoot,
         reviewEvidence.workItem,
@@ -181,7 +184,7 @@ async function evaluateLandingReadiness(
         readGitChangedPaths
       )
     : false;
-  const escalatedReviewIsStale = escalatedReview
+  const escalatedReviewIsStale = escalatedReview && !reviewSubjectHashIsCurrent
     ? await isReviewSourceStale(
         repoRoot,
         reviewEvidence.workItem,

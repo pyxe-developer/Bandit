@@ -28,6 +28,7 @@ Expected failures:
 - `land-check accepts evidence-only head changes when review subject hash matches`
 - `land-check fails closed when review subject hash changes after source edits`
 - `land-check fails closed when review subject hash changes after policy edits`
+- `land-check accepts reviewer evidence heads when final review subject hash matches`
 
 ## Acceptance Criteria Mapping
 
@@ -38,7 +39,14 @@ Expected failures:
 | AC3 | Policy edit test expects `Review subject hash is stale`. |
 | AC4, AC5 | Tests call `bandit review-subject-hash <work-item-id>` and record `review_subject_hash` in review evidence. |
 | AC6 | Existing historical Stage 4 tests remain in the full suite. |
-| AC7 | `BANDIT-019` closeout will use `review_subject_hash` in its own review evidence. |
+| AC7 | Reviewer-evidence-head test expects `land-check` to pass when final aggregate review evidence records a current review-subject hash even though the Local Qwen artifact records the reviewed implementation head. |
+
+## Closeout Repair Regression
+
+During BANDIT-019 self-closeout, the aggregate review evidence hash was current
+but Local Qwen evidence still carried the reviewed implementation head. The
+repair regression captures that path so individual reviewer raw heads cannot
+recreate the outdated commit/head loop when `review_subject_hash` is current.
 
 ## RED Verdict
 

@@ -1826,6 +1826,37 @@ test("land-check fails closed when review subject hash changes after policy edit
   assert.match(result.stderr, /Review subject hash is stale/);
 });
 
+test("land-check accepts reviewer evidence heads when final review subject hash matches", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeFile(path.join(repo, "CONTEXT.md"), "# Context\n\nInitial vocabulary.\n", "utf8");
+  await writeWorkBrief(repo, "BANDIT-963", "Review Subject Hash Reviewer Freshness");
+  const reviewedHead = await commitAll(repo, "Implementation accepted");
+  await writeLocalQwenReview(repo, "BANDIT-963", { sourceHead: reviewedHead });
+  await writeFile(
+    path.join(repo, "CONTEXT.md"),
+    "# Context\n\nReview subject hash vocabulary update.\n",
+    "utf8"
+  );
+  const hash = await runBandit(repo, ["review-subject-hash", "BANDIT-963"]);
+  const reviewSubjectHash = readReviewSubjectHash(hash.stdout);
+  await writeReviewEvidence(repo, "BANDIT-963", {
+    sourceHead: reviewedHead,
+    reviewSubjectHash,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-963", {
+    sourceHead: reviewedHead,
+    localQwenState: "pass"
+  });
+  await commitAll(repo, "Hash-based review evidence closeout");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-963"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
 async function createInitializedRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);

@@ -17,6 +17,10 @@ Implementation recorded after RED evidence for review-subject hash freshness.
 - Updated landing readiness to prefer review-subject hash freshness when a
   review evidence artifact records `review_subject_hash`; older artifacts still
   use existing raw-head and terminal-disposition behavior.
+- Updated individual reviewer evidence freshness so CodeRabbit, Local Qwen,
+  and escalated-review raw heads are audit metadata when the aggregate
+  `review_subject_hash` is present and current. Source, test, policy, reviewer
+  profile, and work-contract drift still fail closed through the hash.
 - Updated the review-evidence template to include `review_subject_hash`.
 
 ## Acceptance Criteria Mapping
@@ -29,7 +33,7 @@ Implementation recorded after RED evidence for review-subject hash freshness.
 | AC4 | `src/state/review-evidence.ts` parses optional `review_subject_hash`; `docs/templates/review-evidence.md` includes the field. |
 | AC5 | `bandit review-subject-hash <work-item-id>` produces a deterministic SHA-256 hash from sorted review-subject paths. |
 | AC6 | Full historical landing-gate tests pass. |
-| AC7 | `BANDIT-019` review and landing evidence will use `review_subject_hash` before closeout. |
+| AC7 | `BANDIT-019` review and landing evidence uses `review_subject_hash`; `land-check accepts reviewer evidence heads when final review subject hash matches` proves the closeout path does not repeat the raw-head loop. |
 | AC8 | `CONTEXT.md` and roadmap closeout will record the new operating vocabulary before landing. |
 
 ## Clean-Code Check
@@ -45,7 +49,8 @@ Implementation recorded after RED evidence for review-subject hash freshness.
 - **Explicit state:** `review_subject_hash` becomes visible in review evidence.
 - **Failure clarity:** Hash drift reports `Review subject hash is stale`.
 - **Testable behavior:** Focused tests prove evidence-only commits pass while
-  source and policy edits fail closed.
+  source and policy edits fail closed, and reviewer evidence raw-head drift does
+  not override a current aggregate review-subject hash.
 
 ## Verification
 
@@ -53,7 +58,15 @@ Implementation recorded after RED evidence for review-subject hash freshness.
 node --test --test-name-pattern "review subject hash" test/landing-gates.test.mjs
 ```
 
-Result: `pass` - 3 focused hash-freshness tests passed.
+Result: `pass` - 4 focused hash-freshness tests passed.
+
+Closeout repair added one focused regression:
+
+- `land-check accepts reviewer evidence heads when final review subject hash matches`
+
+This prevents the exact BANDIT-019 self-closeout loop where Local Qwen evidence
+was historically recorded at the reviewed implementation head, while final
+review evidence was refreshed at the complete review-subject hash.
 
 ```sh
 npm run typecheck
@@ -65,7 +78,7 @@ Result: `pass`.
 npm test
 ```
 
-Result: `pass` - 167 tests passed.
+Result: `pass` - 168 tests passed.
 
 ```sh
 npm run bandit -- validate
@@ -85,9 +98,10 @@ Result: `pass`.
 |---|---|
 | Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-019/red-evidence.md` records the expected failing test output. |
 | Stage 3: Implementation Clean-Code Rubric | `pass` | Focused and full verification passed; implementation is narrow and fail-closed. |
-| Stage 4: Review And Cross-Model Gates | `pending` | Record `BANDIT-019` review evidence using `review_subject_hash` before landing verdict. |
+| Stage 4: Review And Cross-Model Gates | `pass` | `BANDIT-019` review evidence records `review_subject_hash`; Local Qwen passed and reviewer raw-head drift is covered by the aggregate hash freshness test. |
 
 ## Next Step
 
-Commit the implementation, compute the `BANDIT-019` review-subject hash, and
-record review evidence using the new hash-based freshness methodology.
+Commit the reviewer-freshness repair, recompute the `BANDIT-019`
+review-subject hash, and refresh review evidence using the final hash-based
+freshness methodology.
