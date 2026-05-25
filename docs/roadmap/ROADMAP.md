@@ -33,14 +33,20 @@ recorded in `docs/work/BANDIT-026/`.
 recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
-recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at `red_recorded`.
+recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at
+`implementation_recorded`.
 RED evidence is recorded in `docs/work/BANDIT-027/red-evidence.md`, with
 focused tests in `test/coderabbit-state.test.mjs` proving the current CLI has
-no pre-PR local-diff CodeRabbit review path. The current next step is to
-implement the narrow pre-PR CodeRabbit CLI review path for `BANDIT-027`, which
-must repair the mismatch between the intended pre-PR
-`coderabbit review --agent` loop and the existing PR-context-only CodeRabbit
-command path.
+no pre-PR local-diff CodeRabbit review path. Implementation evidence is
+recorded in `docs/work/BANDIT-027/implementation-evidence.md`; the implemented
+path adds `bandit coderabbit-review pre-pr <ID> --base <revision> --fixture
+<path>`, records fixture-backed `coderabbit review --agent` evidence, fails
+closed for missing CLI/auth, provider timeout, malformed output, stale source,
+and actionable findings, and preserves the existing PR-backed
+`coderabbit-review live` path. The current next step is to run Stage 4 review
+gates for `BANDIT-027`, starting with pre-PR CodeRabbit CLI review evidence,
+then Local Qwen review and aggregate review evidence with current
+`review_subject_hash`.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
 Phase 8 web cockpit implementation, claim leases, scheduler execution,
 worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
@@ -215,8 +221,9 @@ typed-state-extensions spec, brief, RED evidence, focused tests,
 implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
 review evidence, Stage 5 landing verdict, landing action, retrospective, and
 terminal coordination-log state recorded. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`
-is currently active as `BANDIT-027`; no unrelated work should proceed until it
-lands or is explicitly blocked/dispositioned.
+is currently active as `BANDIT-027`; implementation evidence is recorded, and
+no unrelated work should proceed until it lands or is explicitly
+blocked/dispositioned.
 
 ## Phase Map
 
@@ -513,8 +520,8 @@ Current rule:
   landing action, retrospective, workflow-cockpit boundary artifact, and
   gap-ledger disposition are recorded.
 - `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`; the
-  brief and coordination-log starting state are recorded, and the next action
-  is RED evidence for pre-PR CodeRabbit CLI review.
+  brief, RED evidence, and implementation evidence are recorded, and the next
+  action is Stage 4 review evidence.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -527,9 +534,10 @@ Current rule:
 
 Current priority:
 
-1. Write RED evidence for `BANDIT-027`.
-2. Implement the pre-PR CodeRabbit CLI review path with TDD.
-3. Stop before creating unrelated work items, active-work branches, claim
+1. Run pre-PR CodeRabbit CLI review evidence for `BANDIT-027`.
+2. Run Local Qwen review for `BANDIT-027`.
+3. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
+4. Stop before creating unrelated work items, active-work branches, claim
    leases, scheduler execution, worktree lifecycle, cockpit implementation,
    product UAT approval, automatic merge/push/deploy behavior, or Phase 7
    evaluation behavior until `BANDIT-027` lands or is explicitly
