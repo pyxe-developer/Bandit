@@ -36,3 +36,11 @@ but are not the current active Bandit work queue.
 - **Follow-up question:** After bootstrap is complete, how should Bandit define remote publication, GitHub PR workflow, CI checks, merge evidence, and deployment evidence?
 - **Why later:** `.bandit/policy/landing-agent.json` currently disables push/merge/deploy behavior intentionally. Adding real GitHub CI/CD and PR-based landing needs its own policy, credentials, branch protection, review, and evidence contracts.
 - **Expected evaluation point:** After the bootstrap-gap lane is complete and before Bandit replaces local-main landing with a real PR-based GitHub workflow.
+
+### Push Bandit Updates To Installed Copies
+
+- **Origin:** Post-bootstrap parallel workstreams and global PM heartbeat skill discussion on 2026-05-25.
+- **Current decision:** The PM heartbeat protocol should be designed as a global skill so it can be reused across projects after Bandit bootstrap.
+- **Follow-up question:** How should the Bandit CLI publish or push updates to all installed Bandit skills, automation prompts, and repo integration files so global workflow protocols stay in sync across projects?
+- **Why later:** Global skill reuse depends on a reliable installation-update path, but implementing distribution now would interrupt the active bootstrap-gap lane and `BANDIT-021`/`BANDIT-022` landing work.
+- **Expected evaluation point:** After the bootstrap-gap lane is complete and before Bandit starts using the PM heartbeat protocol across multiple projects.
