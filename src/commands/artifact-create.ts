@@ -1,4 +1,4 @@
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { appendLifecycleEvent } from "../state/events.js";
 import { getBanditPaths } from "../state/paths.js";
@@ -34,11 +34,16 @@ export async function createArtifact(repoRoot: string, args: string[]) {
   await assertArtifactPathIsFree(artifactPath, artifactDisplayPath);
   await mkdir(workDir, { recursive: true });
   await writeFile(artifactPath, spec.content, { flag: "wx" });
-  await appendLifecycleEvent(getBanditPaths(repoRoot).events, {
-    type: "artifact_created",
-    work_item: spec.workItem,
-    message: `Created ${spec.kind} artifact at ${artifactDisplayPath}`
-  });
+  try {
+    await appendLifecycleEvent(getBanditPaths(repoRoot).events, {
+      type: "artifact_created",
+      work_item: spec.workItem,
+      message: `Created ${spec.kind} artifact at ${artifactDisplayPath}`
+    });
+  } catch (error) {
+    await rm(artifactPath, { force: true });
+    throw error;
+  }
 
   return {
     output: `Created artifact: ${artifactDisplayPath}\n`

@@ -353,6 +353,7 @@ function buildReviewPrompt(
     "Act as a read-only adversarial reviewer.",
     "Review the work item contract, RED evidence, implementation evidence, and source diff below.",
     "Look for blocker and non-blocking issues in spec alignment, fail-closed behavior, source-of-truth boundaries, stale evidence handling, and clean-code compliance.",
+    "This is the Stage 4 Local Qwen review gate. Do not flag missing local-qwen-review.md, review-evidence.md, landing-verdict.md, landing-action.md, or retrospective.md artifacts as findings unless the work item evidence claims those future-stage artifacts are already complete.",
     "",
     "## Work Item Brief",
     "",

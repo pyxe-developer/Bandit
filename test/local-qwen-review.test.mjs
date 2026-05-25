@@ -481,6 +481,7 @@ test("qwen-review sends work item evidence and source diff to the reviewer", asy
       "if (!prompt.includes('diff --git')) process.exit(14);",
       "if (!prompt.includes('Allowed verdict values: pass, non_blocking, blocker.')) process.exit(15);",
       "if (!prompt.includes('When verdict is pass, findings must be [].')) process.exit(16);",
+      "if (!prompt.includes('Do not flag missing local-qwen-review.md')) process.exit(17);",
       "process.stdout.write(JSON.stringify({ verdict: 'pass', findings: [], summary: 'Prompt included evidence and diff' }));"
     ].join("\n")
   );

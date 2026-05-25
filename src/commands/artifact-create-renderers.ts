@@ -30,19 +30,16 @@ export function renderArtifact(
   kind: ArtifactKind,
   spec: Record<string, unknown>
 ) {
-  if (kind === "red_evidence") {
-    return renderRedEvidence(workItem, spec);
+  switch (kind) {
+    case "red_evidence":
+      return renderRedEvidence(workItem, spec);
+    case "implementation_evidence":
+      return renderImplementationEvidence(workItem, spec);
+    case "landing_verdict":
+      return renderLandingVerdict(workItem, spec);
+    case "retrospective":
+      return renderRetrospective(workItem, spec);
   }
-
-  if (kind === "implementation_evidence") {
-    return renderImplementationEvidence(workItem, spec);
-  }
-
-  if (kind === "landing_verdict") {
-    return renderLandingVerdict(workItem, spec);
-  }
-
-  return renderRetrospective(workItem, spec);
 }
 
 function renderRedEvidence(workItem: string, spec: Record<string, unknown>) {

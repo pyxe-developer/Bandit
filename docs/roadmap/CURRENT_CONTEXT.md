@@ -62,21 +62,20 @@ recorded in
 `docs/specs/BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND.json`, its brief is
 recorded in `docs/work/BANDIT-021/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-021/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-021/implementation-evidence.md`, Stage 4 blocker evidence is
-recorded in `docs/work/BANDIT-021/review-evidence.md`, `.bandit/events.jsonl`
+`docs/work/BANDIT-021/implementation-evidence.md`, Local Qwen finding repairs
+for the artifact-create command and review prompt are committed, `.bandit/events.jsonl`
 records the CLI-owned work-item and implementation-evidence artifact creation
 events, and `.bandit/bootstrap-gaps.json` links the gap as an active chore.
 
 **Last completed milestone:** `BANDIT-020` resolved CLI-owned work-item
 creation for explicit slice, chore, and improvement-chore specs.
 
-**Current next action:** Resolve the pre-existing dirty `CONTEXT.md` vocabulary
-change so `npm run bandit -- qwen-review BANDIT-021` can run on a clean
-worktree, then rerun Stage 4 review for `BANDIT-021` with
-`review_subject_hash` evidence. Do not broaden into heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work while `BANDIT-021` is active. All Stage 4
-evidence for future work items must use `review_subject_hash`.
+**Current next action:** Rerun Stage 4 review for `BANDIT-021` with
+`review_subject_hash` evidence after the focused Local Qwen finding repairs.
+Do not broaden into heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
+Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
+while `BANDIT-021` is active. All Stage 4 evidence for future work items must
+use `review_subject_hash`.
 
 ## Active Work
 
@@ -125,9 +124,8 @@ These are expected because Bandit does not exist yet:
   Agent contract, command, review evidence, landing verdict, landing action
   evidence, retrospective, and gap-ledger disposition exist.
 - General artifact creation command gap is active as `BANDIT-021`; the brief,
-  RED evidence, implementation evidence, and Stage 4 dirty-worktree blocker
-  evidence are recorded. Stage 4 review must be rerun after the pre-existing
-  dirty `CONTEXT.md` vocabulary change is resolved.
+  RED evidence, implementation evidence, and focused Local Qwen finding repairs
+  are recorded. Stage 4 review must be rerun at the repaired source head.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
 - No heartbeat chore-agent.
@@ -225,15 +223,15 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Resolve the pre-existing dirty `CONTEXT.md` vocabulary change, then rerun
-   Stage 4 review for `BANDIT-021` with `review_subject_hash` evidence.
+1. Rerun Stage 4 review for `BANDIT-021` with `review_subject_hash` evidence
+   at the repaired source head.
 2. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 3. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-RED and implementation evidence are recorded for `BANDIT-021`; Stage 4 review
-is blocked until the pre-existing dirty `CONTEXT.md` vocabulary change is
-resolved. Future Stage 4 review evidence must use `review_subject_hash` to
-avoid raw-HEAD evidence loops.
+RED and implementation evidence are recorded for `BANDIT-021`; focused Local
+Qwen finding repairs are committed and Stage 4 review should be rerun at the
+repaired source head. Future Stage 4 review evidence must use
+`review_subject_hash` to avoid raw-HEAD evidence loops.
 
 ## Required Operator Input
 
@@ -241,9 +239,7 @@ Provided for the Stage 4 reviewer route decision: the operator approved using
 the Sourmash-style `claude -p` headless path for Sonnet and Opus and asked
 Codex PM to compare Qwen 3.6, Sonnet 4.6, and Opus 4.7 before choosing the
 escalated reviewer route. No product or reviewer-routing input is required
-before running Stage 4 review for `BANDIT-021`, but the pre-existing dirty
-`CONTEXT.md` vocabulary change must be resolved before Local Qwen can record
-source-head evidence.
+before running Stage 4 review for `BANDIT-021`.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
