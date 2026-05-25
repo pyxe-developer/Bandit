@@ -3,6 +3,7 @@
 ## Status
 
 `pass` for Stage 3 implementation evidence on 2026-05-25.
+Focused Stage 4 repair implemented on 2026-05-25T19:15:51Z.
 
 ## Summary
 
@@ -27,9 +28,37 @@ so future agents do not need chat history.
 
 ## Verification
 
-- `node --test test/heartbeat-chore-agent.test.mjs` - pass, 6 tests.
-- `npm test` - pass, 189 tests.
+- `node --test test/heartbeat-chore-agent.test.mjs` - pass, 10 tests.
+- `npm test` - pass, 193 tests.
 - `npm run typecheck` - pass.
+- `npm run bandit -- validate` - pass.
+- `npm run bandit -- gaps list` - pass; `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`
+  remains active and linked to `BANDIT-022`.
+- `git diff --check` - pass.
+
+## Focused Stage 4 Repair
+
+Codex PM re-read `CLEAN_CODE.md` before the repair. The focused repair resolves
+the Stage 4 PM disposition in `stage4-finding-disposition.md` without expanding
+heartbeat authority:
+
+- `heartbeat inspect` now checks the Git worktree after validating heartbeat
+  policy and before reading work items or bootstrap-gap candidates. It refuses
+  dirty or uninspectable worktrees and does not append lifecycle events.
+- Feature-UAT detection now reads the explicit `## UAT Status` section and
+  stops at the next Markdown section, including end-of-file cases without a
+  trailing newline.
+- Bootstrap-gap next-action normalization now maps only bounded supported
+  action phrases and falls back to `inspect` when the next action is ambiguous.
+- Focused heartbeat tests now run in Git-backed temp repos and cover the
+  dirty-worktree refusal, UAT section boundaries, EOF UAT parsing, and
+  ambiguous next-action fallback.
+
+Focused verification:
+
+- `node --test test/heartbeat-chore-agent.test.mjs` - pass, 10 tests.
+- `npm run typecheck` - pass.
+- `npm test` - pass, 193 tests.
 - `npm run bandit -- validate` - pass.
 - `npm run bandit -- gaps list` - pass; `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`
   remains active and linked to `BANDIT-022`.
@@ -37,6 +66,5 @@ so future agents do not need chat history.
 
 ## Next Action
 
-Run Stage 4 review for `BANDIT-022`, starting with
-`npm run bandit -- qwen-review BANDIT-022`, then record aggregate review
-evidence with current `review_subject_hash`.
+Refresh Local Qwen Stage 4 review for `BANDIT-022`, then record aggregate
+review evidence with the current `review_subject_hash`.

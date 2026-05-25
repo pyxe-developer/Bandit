@@ -81,19 +81,21 @@ is recorded in `docs/work/BANDIT-022/local-qwen-review.md` with a
 `non_blocking` verdict and three findings, and Codex PM disposition is recorded
 in `docs/work/BANDIT-022/stage4-finding-disposition.md`. The disposition marks
 the dirty-worktree policy/runtime mismatch as repair-required before aggregate
-review evidence. `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as
-`active_chore`, and `.bandit/events.jsonl` records the CLI-owned work-item
-creation event.
+review evidence. Focused Stage 4 repair evidence is recorded in
+`docs/work/BANDIT-022/implementation-evidence.md`: `heartbeat inspect` now
+fails closed on dirty or uninspectable Git worktrees before candidate
+inspection, the UAT section parser handles explicit Markdown boundaries and
+end-of-file cases, and bootstrap-gap next-action normalization falls back to
+inspection when ambiguous. `.bandit/bootstrap-gaps.json` links the gap to
+`BANDIT-022` as `active_chore`, and `.bandit/events.jsonl` records the
+CLI-owned work-item creation event.
 
 **Last completed milestone:** `BANDIT-021` resolved CLI-owned creation for
 selected workflow artifacts from explicit structured specs.
 
-**Current next action:** Implement the focused `BANDIT-022` Stage 4 repair from
-`docs/work/BANDIT-022/stage4-finding-disposition.md`: enforce dirty-worktree
-fail-closed behavior before heartbeat inspection, tighten the UAT-section parser
-and bounded gap next-action mapping, then refresh focused tests, full
-verification, Local Qwen Stage 4 review, and aggregate review evidence with the
-current `review_subject_hash`. Do not broaden into cockpit, Phase 6
+**Current next action:** Refresh Local Qwen Stage 4 review for `BANDIT-022`,
+then record aggregate review evidence with the current `review_subject_hash`.
+Do not broaden into cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
 Phase 9 dogfood, feature work, automatic landing, merge/push/deploy behavior,
 or product UAT approval while `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` remains the
@@ -120,10 +122,9 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command.
 
-**Expected next deliverable:** Focused `BANDIT-022` repair evidence showing the
-heartbeat inspection command now enforces the policy-declared dirty-worktree
-fail-closed behavior and has refreshed Stage 4 review evidence with
-`review_subject_hash`.
+**Expected next deliverable:** Refreshed `BANDIT-022` Stage 4 review evidence
+showing Local Qwen and aggregate review evidence apply to the focused heartbeat
+repair with current `review_subject_hash`.
 
 ## Known Bootstrap Gaps
 
@@ -248,9 +249,7 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Implement the focused `BANDIT-022` Stage 4 repair recorded in
-   `docs/work/BANDIT-022/stage4-finding-disposition.md`, then refresh focused
-   heartbeat tests, full verification, Local Qwen Stage 4 review, and aggregate
+1. Refresh Local Qwen Stage 4 review for `BANDIT-022`, then record aggregate
    review evidence with current `review_subject_hash`.
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 

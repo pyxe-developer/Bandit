@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { cp, mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
@@ -36,6 +37,7 @@ test("heartbeat inspect reports eligible active bootstrap-gap chores without mut
     path.join(repo, ".bandit/events.jsonl"),
     "utf8"
   );
+  await commitAll(repo, "Heartbeat fixture");
 
   const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
 
@@ -70,6 +72,7 @@ test("heartbeat inspect reports due retrospective-derived improvement evaluation
     evaluation_window: "due_on: 2026-05-25",
     outcome: "pending"
   });
+  await commitAll(repo, "Heartbeat fixture");
 
   const result = await runBandit(repo, [
     "heartbeat",
@@ -101,6 +104,7 @@ test("heartbeat inspect marks feature slices requiring UAT as ineligible", async
   await writeFeatureSliceBrief(repo, "BANDIT-003", {
     status: "Review Recorded"
   });
+  await commitAll(repo, "Heartbeat fixture");
 
   const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
 
@@ -132,6 +136,7 @@ test("heartbeat inspect reports operator-input blocked chores without guessing",
       next_action: "Wait for operator cost approval."
     })
   ]);
+  await commitAll(repo, "Heartbeat fixture");
 
   const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
 
@@ -150,6 +155,114 @@ test("heartbeat inspect reports operator-input blocked chores without guessing",
       ]
     }
   ]);
+});
+
+test("heartbeat inspect refuses a dirty worktree without mutating state", async () => {
+  const repo = await createInitializedRepo();
+  await writeHeartbeatPolicy(repo, validHeartbeatPolicy());
+  await writeChoreBrief(repo, "BANDIT-005", "Dirty Worktree", "Brief Created");
+  await commitAll(repo, "Heartbeat fixture");
+  const eventsBefore = await readFile(
+    path.join(repo, ".bandit/events.jsonl"),
+    "utf8"
+  );
+  await writeFile(path.join(repo, "dirty.txt"), "uncommitted\n", "utf8");
+
+  const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Heartbeat inspect blocked: worktree is dirty/);
+  assert.equal(
+    await readFile(path.join(repo, ".bandit/events.jsonl"), "utf8"),
+    eventsBefore
+  );
+});
+
+test("heartbeat inspect reads UAT status at EOF without a trailing newline", async () => {
+  const repo = await createInitializedRepo();
+  await writeHeartbeatPolicy(repo, validHeartbeatPolicy());
+  await writeBrief(
+    repo,
+    "BANDIT-006",
+    `# BANDIT-006: Feature Slice
+
+## Status
+
+Review Recorded
+
+## Goal
+
+Change product behavior that requires operator-owned acceptance.
+
+## UAT Status
+
+Not approved.`
+  );
+  await commitAll(repo, "Heartbeat fixture");
+
+  const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const output = JSON.parse(result.stdout);
+  assert.equal(output.candidates[0].work_item, "BANDIT-006");
+  assert.equal(output.candidates[0].reason, "feature slice requires operator-owned UAT");
+});
+
+test("heartbeat inspect stops UAT parsing at the next Markdown section", async () => {
+  const repo = await createInitializedRepo();
+  await writeHeartbeatPolicy(repo, validHeartbeatPolicy());
+  await writeBrief(
+    repo,
+    "BANDIT-007",
+    `# BANDIT-007: Feature Slice
+
+## Status
+
+Review Recorded
+
+## UAT Status
+
+Approved.
+
+## Notes
+
+Not approved appears here as historical context, not current UAT status.
+`
+  );
+  await commitAll(repo, "Heartbeat fixture");
+
+  const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const output = JSON.parse(result.stdout);
+  assert.deepEqual(output.candidates, []);
+});
+
+test("heartbeat inspect falls back to inspection for ambiguous gap next actions", async () => {
+  const repo = await createInitializedRepo();
+  await writeHeartbeatPolicy(repo, validHeartbeatPolicy());
+  await writeChoreBrief(
+    repo,
+    "BANDIT-008",
+    "Ambiguous Gap Action",
+    "Brief Created"
+  );
+  await writeBootstrapGapLedger(repo, [
+    bootstrapGap({
+      id: "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
+      status: "active",
+      disposition: "active_chore",
+      linked_work_item: "BANDIT-008",
+      next_action: "Create RED evidence and implement the repair."
+    })
+  ]);
+  await commitAll(repo, "Heartbeat fixture");
+
+  const result = await runBandit(repo, ["heartbeat", "inspect", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const output = JSON.parse(result.stdout);
+  assert.equal(output.candidates[0].allowed_next_action, "inspect");
 });
 
 test("heartbeat refuses unsupported automation actions before touching state", async () => {
@@ -202,6 +315,7 @@ test("heartbeat fails closed when policy would allow hidden workflow authority",
 
 async function createInitializedRepo() {
   const repo = await createTempRepo();
+  await initGitRepo(repo);
   const init = await runBandit(repo, ["init"]);
   assert.equal(init.code, 0, init.stderr);
   await cp(committedTemplateRoot, path.join(repo, "docs/templates"), {
@@ -212,6 +326,32 @@ async function createInitializedRepo() {
   });
   await writeLocalQwenProfile(repo);
   return repo;
+}
+
+async function initGitRepo(repo) {
+  await runGit(repo, ["init"]);
+  await runGit(repo, ["config", "user.email", "bandit@example.test"]);
+  await runGit(repo, ["config", "user.name", "Bandit Test"]);
+}
+
+async function commitAll(repo, message) {
+  await runGit(repo, ["add", "."]);
+  await runGit(repo, ["commit", "-m", message]);
+  const result = await runGit(repo, ["rev-parse", "HEAD"]);
+  return result.stdout.trim();
+}
+
+function runGit(cwd, args) {
+  return new Promise((resolve, reject) => {
+    execFile("git", args, { cwd }, (error, stdout, stderr) => {
+      if (error) {
+        reject(new Error(stderr || error.message));
+        return;
+      }
+
+      resolve({ stdout, stderr });
+    });
+  });
 }
 
 async function writeHeartbeatPolicy(repo, policy) {

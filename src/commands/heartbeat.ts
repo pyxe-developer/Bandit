@@ -1,4 +1,5 @@
 import { readBootstrapGaps } from "../state/bootstrap-gaps.js";
+import { readGitStatusShortIncludingUntrackedFiles } from "../state/git.js";
 import { readHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { readWorkItems, type WorkItem } from "../state/work-items.js";
 
@@ -13,6 +14,11 @@ type HeartbeatCandidate = {
 
 const POLICY_DISPLAY_PATH = ".bandit/policy/heartbeat-chore-agent.json";
 const BOOTSTRAP_GAPS_DISPLAY_PATH = ".bandit/bootstrap-gaps.json";
+const GAP_NEXT_ACTION_PATTERNS = [
+  { pattern: /\bcreate red evidence\b/, action: "create_red_evidence" },
+  { pattern: /\brecord red evidence\b/, action: "create_red_evidence" },
+  { pattern: /\bimplement\b/, action: "implement" }
+];
 
 export async function heartbeat(repoRoot: string, args: string[]) {
   const [action, ...actionArgs] = args;
@@ -26,6 +32,7 @@ export async function heartbeat(repoRoot: string, args: string[]) {
 
   const options = parseInspectOptions(actionArgs);
   await readHeartbeatPolicy(repoRoot);
+  await assertCleanWorktree(repoRoot);
 
   const workItems = await readWorkItems(repoRoot);
   const gapLedger = await readBootstrapGaps(repoRoot);
@@ -175,8 +182,7 @@ function isDueImprovementEvaluation(item: WorkItem, asOf: string) {
 }
 
 function isFeatureSliceRequiringUat(item: WorkItem) {
-  const uatSection = item.content.match(/## UAT Status\s+([\s\S]*?)(?:\n## |\s*$)/);
-  const uatStatus = uatSection?.[1]?.trim().toLowerCase();
+  const uatStatus = readMarkdownSection(item.content, "UAT Status")?.toLowerCase();
   return Boolean(
     uatStatus &&
       (uatStatus.includes("not approved") || !uatStatus.includes("approved"))
@@ -188,17 +194,56 @@ function readMetadataValue(content: string, field: string) {
 }
 
 function normalizeGapNextAction(nextAction: string) {
-  const normalized = nextAction.toLowerCase();
+  const normalized = normalizeActionText(nextAction);
+  const matches = GAP_NEXT_ACTION_PATTERNS.flatMap(({ pattern, action }) =>
+    pattern.test(normalized) ? [action] : []
+  );
 
-  if (normalized.includes("red evidence")) {
-    return "create_red_evidence";
-  }
-
-  if (normalized.includes("implementation") || normalized.includes("implement")) {
-    return "implement";
+  const uniqueMatches = new Set(matches);
+  if (uniqueMatches.size === 1) {
+    return Array.from(uniqueMatches)[0] ?? "inspect";
   }
 
   return "inspect";
+}
+
+async function assertCleanWorktree(repoRoot: string) {
+  const status = await readGitStatusShortIncludingUntrackedFiles(repoRoot);
+  if (status === null) {
+    throw new Error("Heartbeat inspect blocked: unable to inspect git worktree");
+  }
+
+  if (status.length > 0) {
+    throw new Error("Heartbeat inspect blocked: worktree is dirty");
+  }
+}
+
+function readMarkdownSection(content: string, heading: string) {
+  const lines = content.split(/\r?\n/);
+  const targetHeading = `## ${heading}`;
+  const startIndex = lines.findIndex((line) => line.trim() === targetHeading);
+  if (startIndex === -1) {
+    return null;
+  }
+
+  const sectionLines: string[] = [];
+  for (const line of lines.slice(startIndex + 1)) {
+    if (/^##\s+\S/.test(line)) {
+      break;
+    }
+    sectionLines.push(line);
+  }
+
+  return sectionLines.join("\n").trim();
+}
+
+function normalizeActionText(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[_-]+/g, " ")
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function briefDisplayPath(workItemId: string) {

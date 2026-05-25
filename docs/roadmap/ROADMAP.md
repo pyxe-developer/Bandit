@@ -16,11 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Implement the focused `BANDIT-022` Stage 4 repair from
-`docs/work/BANDIT-022/stage4-finding-disposition.md`, then refresh focused
-heartbeat tests, full verification, Local Qwen Stage 4 review, and aggregate
-review evidence with current `review_subject_hash`. All future Stage 4 review
-evidence should use `review_subject_hash`.
+**Current next step:** Refresh Local Qwen Stage 4 review for `BANDIT-022`, then
+record aggregate review evidence with current `review_subject_hash`. All future
+Stage 4 review evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -124,13 +122,17 @@ is recorded in `docs/work/BANDIT-022/local-qwen-review.md` with a
 `non_blocking` verdict and three findings, and Codex PM disposition is recorded
 in `docs/work/BANDIT-022/stage4-finding-disposition.md`. The disposition marks
 the dirty-worktree policy/runtime mismatch as repair-required before aggregate
-review evidence. `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as
-`active_chore`.
+review evidence. Focused Stage 4 repair evidence is recorded in
+`docs/work/BANDIT-022/implementation-evidence.md`: heartbeat inspection now
+fails closed on dirty or uninspectable Git worktrees before candidate
+inspection, UAT parsing uses explicit Markdown section boundaries, and
+bootstrap-gap next-action mapping falls back to inspection when ambiguous.
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as `active_chore`.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-active at Stage 4 with focused repair required before aggregate review
-evidence.
+active at Stage 4 after focused repair; refreshed Local Qwen and aggregate
+review evidence are required before landing evidence.
 
 ## Phase Map
 
@@ -426,8 +428,7 @@ Current rule:
 
 Current priority:
 
-1. Record Codex PM disposition for the three Local Qwen `non_blocking`
-   findings on active chore `BANDIT-022`
+1. Refresh Local Qwen Stage 4 review for active chore `BANDIT-022`
    (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), then record aggregate review evidence
    with current `review_subject_hash`.
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
