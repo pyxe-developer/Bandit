@@ -43,22 +43,25 @@ action, retrospective, and gap-ledger disposition are recorded in
 review evidence should record `review_subject_hash`; raw `source_head` remains
 audit metadata and historical fallback, not the primary freshness identity when
 a hash is present.
-Do not begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until the next open bootstrap gap is routed as
-a single active chore.
+
+`BANDIT-020` is active for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`. Its brief is
+recorded in `docs/work/BANDIT-020/brief.md`, and `.bandit/bootstrap-gaps.json`
+links the gap to this active chore. Do not begin production implementation,
+artifact creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
+Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
+until `BANDIT-020` has RED evidence and the current stage allows it.
 
 **Last completed milestone:** `BANDIT-019` resolved hash-based Stage 4 evidence
 freshness.
 
-**Current next action:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; all Stage 4 evidence for future work
-items must use `review_subject_hash`.
+**Current next action:** Create `docs/work/BANDIT-020/red-evidence.md` for the
+work-item creation command chore. Do not start implementation until RED
+evidence is recorded. All Stage 4 evidence for future work items must use
+`review_subject_hash`.
 
 ## Active Work
 
-**Active work item:** none. Next work item should resolve
-`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+**Active work item:** `BANDIT-020` - Work Item Create Command.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -75,14 +78,13 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
 Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness.
 
-**Expected next deliverable:** next bootstrap-gap chore brief for
-`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+**Expected next deliverable:** `docs/work/BANDIT-020/red-evidence.md`.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
-- No Bandit work-item creation command.
+- No Bandit work-item creation command. This is active as `BANDIT-020`.
 - Bootstrap-gap tracking artifact, listing command, and validation path are
   implemented and landed in `BANDIT-011`.
 - CodeRabbit state capture substrate exists, but live CodeRabbit API, GitHub
@@ -106,8 +108,11 @@ Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
-queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by
-`BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
+queued or active. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as
+`BANDIT-020`; the next required artifact is
+`docs/work/BANDIT-020/red-evidence.md`.
+`BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
+`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is resolved by
 `BANDIT-018`; landing verdict, landing action, retrospective, and gap-ledger
 disposition are recorded. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is
@@ -191,21 +196,24 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; next
+   artifact is `docs/work/BANDIT-020/red-evidence.md`.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Create exactly one next gap chore at a time. Future Stage 4 review evidence
-must use `review_subject_hash` to avoid raw-HEAD evidence loops.
+Do not create the next gap chore until `BANDIT-020` has landing action evidence,
+retrospective closeout, and a resolved, operator-blocked, or no-action
+gap-ledger disposition. Future Stage 4 review evidence must use
+`review_subject_hash` to avoid raw-HEAD evidence loops.
 
 ## Required Operator Input
 
 Provided for the Stage 4 reviewer route decision: the operator approved using
 the Sourmash-style `claude -p` headless path for Sonnet and Opus and asked
 Codex PM to compare Qwen 3.6, Sonnet 4.6, and Opus 4.7 before choosing the
-escalated reviewer route. No further operator-owned input is required for the
-current repair step.
+escalated reviewer route. No further operator-owned input is required before
+`BANDIT-020` RED evidence or implementation.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

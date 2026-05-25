@@ -4,15 +4,16 @@
     {
       "id": "BANDIT-GAP-WORK-ITEM-CREATE-COMMAND",
       "title": "No general Bandit work-item creation command",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/work/BANDIT-011/brief.md"
       ],
+      "linked_work_item": "BANDIT-020",
       "rationale": "Manual work-item creation remains acceptable during bootstrap, but the gap should be converted once the repeated artifact shape stabilizes.",
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after higher-priority landing/review gaps are resolved or explicitly dispositioned."
+      "next_action": "Complete BANDIT-020 before starting the next bootstrap-gap chore; next required artifact is docs/work/BANDIT-020/red-evidence.md."
     },
     {
       "id": "BANDIT-GAP-BOOTSTRAP-GAP-TRACKING",

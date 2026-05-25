@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; all future Stage 4 review evidence
-should use `review_subject_hash`.
+**Current next step:** Create `docs/work/BANDIT-020/red-evidence.md` for the
+active `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` chore; all future Stage 4 review
+evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -91,11 +91,13 @@ retrospective, and gap-ledger disposition are recorded for `BANDIT-018`.
 `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is resolved by `BANDIT-019`; future
 work uses hash-based evidence freshness when review evidence records
 `review_subject_hash`.
-Open bootstrap gaps remain the work queue and must be addressed one at a time
-before unrelated new work proceeds.
+`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as `BANDIT-020`; its brief is
+recorded in `docs/work/BANDIT-020/brief.md`, and RED evidence is the next
+required artifact. Open bootstrap gaps remain the work queue and must be
+addressed one at a time before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
-`BANDIT-018` and `BANDIT-019` are landed. The next queued bootstrap gap is
+`BANDIT-018` and `BANDIT-019` are landed. `BANDIT-020` is active for
 `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 
 ## Phase Map
@@ -279,7 +281,8 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- none. The next work item should resolve `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+- `BANDIT-020` - Work Item Create Command. Next artifact:
+  `docs/work/BANDIT-020/red-evidence.md`.
 
 Completed work:
 
@@ -294,8 +297,7 @@ Completed work:
 
 Queued next:
 
-- Create the next bootstrap-gap chore for
-  `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+- none until `BANDIT-020` lands and closes.
 
 Expected capabilities:
 
@@ -370,6 +372,9 @@ Current rule:
 - `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is resolved by `BANDIT-019`;
   review-subject hash evidence freshness is now the required Stage 4 method for
   future work items.
+- `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as `BANDIT-020`; its brief is
+  recorded in `docs/work/BANDIT-020/brief.md`, and the next required artifact is
+  `docs/work/BANDIT-020/red-evidence.md`.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -382,7 +387,8 @@ Current rule:
 
 Current priority:
 
-1. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`;
+   next artifact is `docs/work/BANDIT-020/red-evidence.md`.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
