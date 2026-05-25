@@ -64,8 +64,8 @@
     {
       "id": "BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING",
       "title": "Landing gate Stage 4 logic and git diagnostics need hardening",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-016",
       "source_artifacts": [
         "docs/work/BANDIT-016/local-qwen-review.md",
@@ -73,8 +73,9 @@
         "docs/work/BANDIT-016/retrospective.md"
       ],
       "linked_work_item": "BANDIT-017",
-      "rationale": "Local Qwen accepted BANDIT-016 implementation behavior but repeatedly surfaced non-blocking future-hardening findings: land-check.ts size/complexity and async shallow/promisor git state checks during changed-path error classification.",
-      "next_action": "Continue BANDIT-017: landing action evidence is recorded; retrospective and gap-ledger closeout remain required before any unrelated live escalated-reviewer, work-item creation, artifact creation, heartbeat, or cockpit work."
+      "rationale": "BANDIT-017 extracted Stage 4 stale-evaluation and PM-rationale checks from land-check.ts into src/state/landing-stage4.ts, added per-evaluation changed-path git state caching in src/state/git.ts, preserved fail-closed Stage 4 behavior, and landed with Local Qwen pass evidence.",
+      "verification_target": "docs/work/BANDIT-017/retrospective.md",
+      "next_action": "Use the BANDIT-017 Stage 4 helper boundary and cached changed-path diagnostics for future landing-readiness work."
     },
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",

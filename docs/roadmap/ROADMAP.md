@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record the `BANDIT-017` retrospective and
-bootstrap-gap disposition.
+**Current next step:** Create the next bootstrap-gap chore brief for
+`BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -26,15 +26,15 @@ accepted implementation behavior but continued surfacing non-blocking
 future-hardening findings. The operator ended that loop, authorized landing
 now, and required the remaining findings to become the next chore.
 
-`BANDIT-017` is active as
+`BANDIT-017` resolved
 `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief is recorded in
 `docs/work/BANDIT-017/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-017/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-017/implementation-evidence.md`, review evidence is recorded
 in `docs/work/BANDIT-017/review-evidence.md`, landing verdict is recorded in
 `docs/work/BANDIT-017/landing-verdict.md`, local-record landing action is
-recorded in `docs/work/BANDIT-017/landing-action.md`, and the next step is
-retrospective and bootstrap-gap closeout.
+recorded in `docs/work/BANDIT-017/landing-action.md`, and retrospective plus
+gap-ledger closeout are recorded in `docs/work/BANDIT-017/retrospective.md`.
 `BANDIT-015` landed for `BANDIT-GAP-LIVE-CODERABBIT` with RED evidence
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence recorded. Codex PM triaged and repaired the valid local Qwen
@@ -69,14 +69,13 @@ operator ended that recursive loop, required it to be captured as follow-up
 chore work after landing, and authorized landing now. `BANDIT-015` has landing
 verdict, landing action, retrospective, gap-ledger disposition, and updated
 context.
-`BANDIT-016` has landing verdict, landing action, retrospective, gap-ledger
-disposition, and updated context. `BANDIT-017` is active for the remaining
-Local Qwen hardening findings.
+`BANDIT-016` and `BANDIT-017` have landing verdicts, landing actions,
+retrospectives, gap-ledger dispositions, and updated context.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
-**Current implementation status:** `BANDIT-001` through `BANDIT-016` are landed.
-`BANDIT-017` is the active bootstrap-gap chore.
+**Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
+The next work item has not been created yet.
 
 ## Phase Map
 
@@ -259,8 +258,8 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- `BANDIT-017` - Landing Gate Complexity And Git Diagnostics Hardening, tracked
-  in the Bootstrap Gap Resolution Lane.
+- none. The next action is to create the next Bootstrap Gap Resolution Lane
+  chore brief.
 
 Completed work:
 
@@ -269,10 +268,11 @@ Completed work:
 - `BANDIT-014` - Landing Agent Bootstrap Gap Resolution.
 - `BANDIT-015` - Live CodeRabbit Pre-Landing Loop.
 - `BANDIT-016` - Stage 4 Evidence-Head Semantics.
+- `BANDIT-017` - Landing Gate Complexity And Git Diagnostics Hardening.
 
 Queued next:
 
-- Retrospective and bootstrap-gap closeout for `BANDIT-017`.
+- Bootstrap-gap chore brief for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 
 Expected capabilities:
 
@@ -326,10 +326,10 @@ Current rule:
   verdict, landing action evidence, retrospective closeout, and resolved
   gap-ledger disposition.
 - `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
-- `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is active as `BANDIT-017`; RED
-  evidence, implementation evidence, review evidence, landing verdict, and
-  local-record landing action are recorded, and retrospective plus
-  bootstrap-gap closeout are next.
+- `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by `BANDIT-017`;
+  RED evidence, implementation evidence, review evidence, landing verdict,
+  local-record landing action, retrospective, and gap-ledger closeout are
+  recorded.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -342,12 +342,11 @@ Current rule:
 
 Current priority:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; retrospective and bootstrap-gap closeout next.
-2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
-3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
-4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
-5. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
-6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
+4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+5. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 ## Phase 6: Coordination Primitive
 

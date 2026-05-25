@@ -11,28 +11,27 @@ landing action, retrospective, and gap-ledger disposition are recorded in
 future-hardening loop, directed Codex PM to land `BANDIT-016` now, and required
 the remaining Local Qwen findings to become the next chore.
 
-`BANDIT-017` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its brief, RED evidence,
-implementation evidence, review evidence, landing verdict, and local-record
-landing action are recorded in `docs/work/BANDIT-017/`, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-017` as an active
-chore. Do not begin live escalated-reviewer,
-work-item creation, artifact creation, heartbeat, cockpit, Phase 6 Coordination
-Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9
-dogfood, or feature work until `BANDIT-017` is landed or explicitly
-dispositioned.
+`BANDIT-017` resolved `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING`. Its
+brief, RED evidence, implementation evidence, review evidence, landing verdict,
+local-record landing action, retrospective, and gap-ledger disposition are
+recorded in `docs/work/BANDIT-017/` and `.bandit/bootstrap-gaps.json`.
 
-**Last completed milestone:** `BANDIT-016` resolved Stage 4 evidence-head
-semantics and landed under operator-owned loop disposition, with remaining
-Local Qwen complexity findings routed to `BANDIT-017`.
+The next queued bootstrap gap is `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`. Do not
+begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
+Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
+Phase 9 dogfood, or feature work until the live escalated-reviewer gap is
+resolved, blocked on operator-owned input, or explicitly dispositioned.
 
-**Current next action:** Record the `BANDIT-017` retrospective and
-bootstrap-gap disposition.
+**Last completed milestone:** `BANDIT-017` resolved landing-gate complexity and
+git diagnostics hardening for the Stage 4 review path.
+
+**Current next action:** Create the next bootstrap-gap chore brief for
+`BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 
 ## Active Work
 
-**Active work item:** `BANDIT-017` - Landing Gate Complexity And Git
-Diagnostics Hardening.
+**Active work item:** none. The next action is to create the next
+bootstrap-gap chore brief.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -45,10 +44,11 @@ Reliability; `BANDIT-010` - Escalated Adversarial Reviewer Placeholder;
 CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
-`BANDIT-016` - Stage 4 Evidence-Head Semantics.
+`BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
+Complexity And Git Diagnostics Hardening.
 
-**Expected next deliverable:** `BANDIT-017` retrospective and resolved
-bootstrap-gap ledger disposition.
+**Expected next deliverable:** Bootstrap-gap chore brief for
+`BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
 
 ## Known Bootstrap Gaps
 
@@ -79,7 +79,7 @@ gates ran. Open bootstrap gaps are the current work queue; do not start
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by
-`BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is active as
+`BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
@@ -158,21 +158,20 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` - active as `BANDIT-017`; retrospective and bootstrap-gap closeout are next.
-2. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
-3. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
-4. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
-5. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
-6. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
+4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+5. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Create exactly one next gap chore at a time. Do not create any gap chore after
-`BANDIT-017` until it has retrospective closeout and a resolved,
-operator-blocked, or no-action ledger disposition.
+Create exactly one next gap chore at a time. The next step is only to create
+the live escalated-reviewer bootstrap-gap chore brief; do not begin later gaps
+or unrelated feature work.
 
 ## Required Operator Input
 
 None recorded for the next routing step. Repo artifacts define the
-`BANDIT-017` retrospective and bootstrap-gap disposition as the next action.
+`BANDIT-GAP-LIVE-ESCALATED-REVIEWER` chore brief as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

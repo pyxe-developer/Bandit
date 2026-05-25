@@ -9,11 +9,8 @@ implementation evidence is recorded in
 recorded in `docs/work/BANDIT-017/review-evidence.md`. The landing verdict and
 local-record landing action are recorded in
 `docs/work/BANDIT-017/landing-verdict.md` and
-`docs/work/BANDIT-017/landing-action.md`. The next action is retrospective and
-bootstrap-gap closeout. Do not begin
-unrelated live escalated-reviewer, work-item creation, artifact creation,
-heartbeat, cockpit, Phase 6, Phase 7, Phase 8, Phase 9, or feature work until
-this chore is landed or explicitly dispositioned.
+`docs/work/BANDIT-017/landing-action.md`. Retrospective and bootstrap-gap
+closeout are recorded in `docs/work/BANDIT-017/retrospective.md`.
 
 ## Non-Product Work
 
@@ -51,8 +48,8 @@ metric: Existing landing-gate behavior remains covered by tests while Stage 4 st
 baseline: `BANDIT-016` ended with Local Qwen reporting `land-check.ts` size/complexity and async git state checks as persistent `non_blocking` findings after implementation behavior was accepted.
 expected_direction: `land-check.ts` becomes easier to review, and failed changed-path classification no longer repeats repository state probes per failure.
 evaluation_window: Evaluate during `BANDIT-017` closeout.
-status: active
-outcome: pending
+status: resolved
+outcome: keep
 
 ## Scope
 
