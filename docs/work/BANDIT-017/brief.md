@@ -6,9 +6,11 @@ Bootstrap-gap chore brief created on 2026-05-24 after `BANDIT-016` landing.
 RED evidence is recorded in `docs/work/BANDIT-017/red-evidence.md`,
 implementation evidence is recorded in
 `docs/work/BANDIT-017/implementation-evidence.md`, and review evidence is
-recorded in `docs/work/BANDIT-017/review-evidence.md`. The landing verdict is
-recorded in `docs/work/BANDIT-017/landing-verdict.md`. The next action is
-local-record landing action evidence. Do not begin
+recorded in `docs/work/BANDIT-017/review-evidence.md`. The landing verdict and
+local-record landing action are recorded in
+`docs/work/BANDIT-017/landing-verdict.md` and
+`docs/work/BANDIT-017/landing-action.md`. The next action is retrospective and
+bootstrap-gap closeout. Do not begin
 unrelated live escalated-reviewer, work-item creation, artifact creation,
 heartbeat, cockpit, Phase 6, Phase 7, Phase 8, Phase 9, or feature work until
 this chore is landed or explicitly dispositioned.
