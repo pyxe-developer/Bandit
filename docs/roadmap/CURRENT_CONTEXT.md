@@ -151,27 +151,28 @@ CodeRabbit bootstrap replacement evidence, Local Qwen `non_blocking` state,
 PM disposition, and durable `non_blocking_findings_routing` entries.
 Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-025/landing-verdict.md` with final verdict `safe-to-land`.
-The per-work-item coordination log is advanced to
-`landing_verdict_recorded`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-025/landing-action.md`. The per-work-item coordination log is
+advanced to `landed`.
 
 **Last completed milestone:** `BANDIT-024` resolved the workflow-cockpit
 boundary bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Landing Agent must perform the local-record landing
-action for `BANDIT-025` and record `docs/work/BANDIT-025/landing-action.md`.
+**Current next action:** Codex PM must record `BANDIT-025` retrospective
+closeout, improvement dispositions, and roadmap/current-context closeout.
 Do not create active-work branches, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
-execution, worktree lifecycle, automatic merge/push/deploy behavior beyond the
-local-record landing action, retrospective closeout, or product UAT approval
-during this landing action step.
+execution, worktree lifecycle, automatic merge/push/deploy behavior, product
+UAT approval, or the next work item during this retrospective closeout step.
 
 ## Active Work
 
 **Active work item:** `BANDIT-025` - Coordination Log Foundation. Current
 stage: Stage 5 landing verdict recorded, aggregate Stage 4 review evidence is
 recorded with Local Qwen `non_blocking` findings accepted and durably routed;
-local-record landing action evidence is required next.
+local-record landing action evidence is recorded, and retrospective closeout is
+required next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -192,8 +193,9 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope.
 
-**Expected next deliverable:** local-record landing action evidence at
-`docs/work/BANDIT-025/landing-action.md`.
+**Expected next deliverable:** retrospective closeout evidence at
+`docs/work/BANDIT-025/retrospective.md`, with improvement dispositions and
+roadmap/current-context closeout.
 
 ## Known Bootstrap Gaps
 
