@@ -17,8 +17,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is active at `review_recorded` for
-typed state extensions. Its structured creation spec is recorded in
+Coordination Primitive slice. `BANDIT-026` is active at
+`landing_verdict_recorded` for typed state extensions. Its structured creation
+spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
 recorded in `docs/work/BANDIT-026/coordination-log.jsonl`. RED evidence is
@@ -31,14 +32,18 @@ recorded in `docs/work/BANDIT-026/local-qwen-review.md` with
 `985d149e7105969bc775b39c9488f9b5ba7122b9`. Aggregate Stage 4 review evidence
 is recorded in `docs/work/BANDIT-026/review-evidence.md` with current
 `review_subject_hash`
-`967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`.
+`967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-026/landing-verdict.md` with
+final verdict `safe-to-land`.
 
-The current next step is to record the Stage 5 landing verdict for `BANDIT-026`.
+The current next step is to run `npm run bandit -- land-check BANDIT-026`, then
+record local-record landing action evidence for `BANDIT-026` if the gate
+passes.
 Do not create active-work branches, Phase 7 improvement engine work, Phase 8 web
 cockpit implementation, claim leases, scheduler execution, worktree lifecycle,
 product UAT approval, automatic merge/push/deploy behavior, landing action
 evidence, retrospective closeout, or unrelated feature work before the landing
-verdict is recorded.
+action is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -204,10 +209,11 @@ Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
 review, PM finding disposition, aggregate review evidence, landing verdict,
 local-record landing action evidence, retrospective closeout, and terminal
 coordination-log state recorded. No bootstrap gap is currently recorded as open
-or active. `BANDIT-026` is active at `implementation_recorded` with its
+or active. `BANDIT-026` is active at `landing_verdict_recorded` with its
 typed-state-extensions spec, brief, RED evidence, focused tests,
-implementation evidence, Local Qwen Stage 4 pass evidence, and coordination-log
-transition recorded.
+implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
+review evidence, Stage 5 landing verdict, and coordination-log transition
+recorded.
 
 ## Phase Map
 
@@ -512,12 +518,13 @@ Current rule:
 
 Current priority:
 
-1. Record the Stage 5 landing verdict for `BANDIT-026`.
-2. Stop before landing action evidence or closeout; do not create active-work
-   branches, claim leases, scheduler execution, worktree lifecycle, cockpit
-   implementation, product UAT approval, or Phase 7 evaluation behavior until
-   the landing verdict is recorded and accepted through the normal Bandit stage
-   gates.
+1. Run `npm run bandit -- land-check BANDIT-026`.
+2. If the gate passes, record local-record landing action evidence for
+   `BANDIT-026`.
+3. Stop before retrospective closeout; do not create active-work branches, claim
+   leases, scheduler execution, worktree lifecycle, cockpit implementation,
+   product UAT approval, or Phase 7 evaluation behavior until landing action
+   evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 
