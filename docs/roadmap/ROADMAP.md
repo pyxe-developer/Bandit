@@ -16,11 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Repair or explicitly disposition the non-blocking
-`BANDIT-018` Stage 4 findings recorded after the AC10 repair-head review
-refresh; do not create landing verdict, landing action, retrospective, or the
-next bootstrap-gap chore until the non-blocking findings and escalated-review
-evidence/routing alignment are resolved.
+**Current next step:** Refresh `BANDIT-018` Stage 4 review evidence at the
+committed Stage 4 finding repair head; do not create landing verdict, landing
+action, retrospective, or the next bootstrap-gap chore until refreshed review
+evidence is current and resolved.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -89,17 +88,18 @@ recorded in `docs/work/BANDIT-018/ac10-repair-evidence.md`. Repair-head Stage
 `docs/work/BANDIT-018/local-qwen-review.md`,
 `docs/work/BANDIT-018/model-comparison.md`, and
 `docs/work/BANDIT-018/review-evidence.md`. Landing verdict, landing action,
-and retrospective are blocked on repair or explicit disposition of the
-remaining non-blocking Stage 4 findings.
+and retrospective are blocked on refreshed review after the focused repair / PM
+disposition of the remaining non-blocking Stage 4 findings recorded in
+`docs/work/BANDIT-018/stage4-finding-disposition.md`.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
 `BANDIT-018` is the active bootstrap-gap chore with implementation evidence,
 AC10 repair evidence, repair-head non-blocking Stage 4 reviewer evidence,
-side-by-side model comparison, and aggregate review evidence recorded. It is
-currently awaiting PM disposition or focused repair of the remaining
-non-blocking Stage 4 findings.
+side-by-side model comparison, aggregate review evidence, and focused
+non-blocking finding repair / PM disposition recorded. It is currently awaiting
+refreshed Stage 4 review evidence at the committed repair head.
 
 ## Phase Map
 
@@ -295,8 +295,8 @@ Completed work:
 
 Queued next:
 
-- Repair or explicitly disposition `BANDIT-018` repair-head non-blocking Stage
-  4 findings before landing verdict.
+- Refresh `BANDIT-018` Stage 4 review evidence after the focused finding repair
+  before landing verdict.
 
 Expected capabilities:
 
@@ -362,9 +362,10 @@ Current rule:
   `docs/work/BANDIT-018/model-comparison.md`, aggregate review evidence is
   recorded in `docs/work/BANDIT-018/review-evidence.md`, AC10 repair evidence
   is recorded in `docs/work/BANDIT-018/ac10-repair-evidence.md`, and
-  repair-head Stage 4 review refresh evidence is recorded. The next required
-  step is PM disposition or focused repair of the remaining non-blocking Stage
-  4 findings.
+  repair-head Stage 4 review refresh evidence is recorded. Focused repair / PM
+  disposition for the remaining non-blocking Stage 4 findings is recorded in
+  `docs/work/BANDIT-018/stage4-finding-disposition.md`. The next required step
+  is refreshed Stage 4 review evidence at the committed repair head.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.

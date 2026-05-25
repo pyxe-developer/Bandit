@@ -930,8 +930,8 @@ test("escalated-review records blocker fixture evidence and fails closed", async
   });
   await initGitRepo(repo);
   const sourceHead = await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-945", "Escalated Review Blocker");
-  await writeRoutingDecision(repo, "BANDIT-945", {
+  await writeWorkBrief(repo, "BANDIT-944", "Escalated Review Blocker");
+  await writeRoutingDecision(repo, "BANDIT-944", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -960,7 +960,7 @@ test("escalated-review records blocker fixture evidence and fails closed", async
   const result = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-945",
+    "BANDIT-944",
     "--fixture",
     "fixtures/escalated-review-blocker.json"
   ]);
@@ -969,7 +969,7 @@ test("escalated-review records blocker fixture evidence and fails closed", async
   assert.match(result.stderr, /Escalated reviewer verdict blocks landing: blocker/);
 
   const evidence = await readFile(
-    path.join(repo, "docs/work/BANDIT-945/escalated-review.md"),
+    path.join(repo, "docs/work/BANDIT-944/escalated-review.md"),
     "utf8"
   );
   assert.match(evidence, new RegExp(`source_head: ${sourceHead}`));
@@ -985,8 +985,8 @@ test("escalated-review records stale fixture evidence and fails closed", async (
   const staleHead = await commitAll(repo, "Initial state");
   await writeFile(path.join(repo, "changed.txt"), "changed\n", "utf8");
   await commitAll(repo, "Change after fixture source");
-  await writeWorkBrief(repo, "BANDIT-946", "Stale Escalated Review");
-  await writeRoutingDecision(repo, "BANDIT-946", {
+  await writeWorkBrief(repo, "BANDIT-945", "Stale Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-945", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1016,7 +1016,7 @@ test("escalated-review records stale fixture evidence and fails closed", async (
   const result = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-946",
+    "BANDIT-945",
     "--fixture",
     "fixtures/escalated-review-stale.json"
   ]);
@@ -1025,7 +1025,7 @@ test("escalated-review records stale fixture evidence and fails closed", async (
   assert.match(result.stderr, /Escalated review evidence is stale/);
 
   const evidence = await readFile(
-    path.join(repo, "docs/work/BANDIT-946/escalated-review.md"),
+    path.join(repo, "docs/work/BANDIT-945/escalated-review.md"),
     "utf8"
   );
   assert.match(evidence, new RegExp(`source_head: ${staleHead}`));
@@ -1039,8 +1039,8 @@ test("escalated-review records unavailable fixture evidence and fails closed", a
   });
   await initGitRepo(repo);
   await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-947", "Unavailable Escalated Review");
-  await writeRoutingDecision(repo, "BANDIT-947", {
+  await writeWorkBrief(repo, "BANDIT-946", "Unavailable Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-946", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1055,7 +1055,7 @@ test("escalated-review records unavailable fixture evidence and fails closed", a
   const result = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-947",
+    "BANDIT-946",
     "--fixture",
     "fixtures/escalated-review-unavailable.json"
   ]);
@@ -1064,7 +1064,7 @@ test("escalated-review records unavailable fixture evidence and fails closed", a
   assert.match(result.stderr, /Escalated reviewer unavailable: fixture not found/);
 
   const evidence = await readFile(
-    path.join(repo, "docs/work/BANDIT-947/escalated-review.md"),
+    path.join(repo, "docs/work/BANDIT-946/escalated-review.md"),
     "utf8"
   );
   assert.match(evidence, /availability_status: unavailable/);
@@ -1078,8 +1078,8 @@ test("escalated-review records timed-out fixture evidence and fails closed", asy
   });
   await initGitRepo(repo);
   await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-948", "Timed Out Escalated Review");
-  await writeRoutingDecision(repo, "BANDIT-948", {
+  await writeWorkBrief(repo, "BANDIT-947", "Timed Out Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-947", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1109,7 +1109,7 @@ test("escalated-review records timed-out fixture evidence and fails closed", asy
   const result = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-948",
+    "BANDIT-947",
     "--fixture",
     "fixtures/escalated-review-timeout.json"
   ]);
@@ -1118,7 +1118,7 @@ test("escalated-review records timed-out fixture evidence and fails closed", asy
   assert.match(result.stderr, /Escalated reviewer unavailable: provider_timeout/);
 
   const evidence = await readFile(
-    path.join(repo, "docs/work/BANDIT-948/escalated-review.md"),
+    path.join(repo, "docs/work/BANDIT-947/escalated-review.md"),
     "utf8"
   );
   assert.match(evidence, /availability_status: unavailable/);
@@ -1132,8 +1132,8 @@ test("escalated-review fails closed on malformed fixture output", async () => {
   });
   await initGitRepo(repo);
   await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-949", "Malformed Escalated Review");
-  await writeRoutingDecision(repo, "BANDIT-949", {
+  await writeWorkBrief(repo, "BANDIT-948", "Malformed Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-948", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1154,7 +1154,7 @@ test("escalated-review fails closed on malformed fixture output", async () => {
   const result = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-949",
+    "BANDIT-948",
     "--fixture",
     "fixtures/escalated-review-malformed.json"
   ]);
@@ -1162,7 +1162,7 @@ test("escalated-review fails closed on malformed fixture output", async () => {
   assert.equal(result.code, 1);
   assert.match(result.stderr, /Malformed escalated reviewer output/);
   await assert.rejects(
-    readFile(path.join(repo, "docs/work/BANDIT-949/escalated-review.md"), "utf8"),
+    readFile(path.join(repo, "docs/work/BANDIT-948/escalated-review.md"), "utf8"),
     /ENOENT/
   );
 });
@@ -1173,8 +1173,8 @@ test("escalated-review live pass evidence satisfies land-check integration", asy
   });
   await initGitRepo(repo);
   const sourceHead = await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-950", "Live Escalated Review Land Check");
-  await writeRoutingDecision(repo, "BANDIT-950", {
+  await writeWorkBrief(repo, "BANDIT-949", "Live Escalated Review Land Check");
+  await writeRoutingDecision(repo, "BANDIT-949", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1199,12 +1199,12 @@ test("escalated-review live pass evidence satisfies land-check integration", asy
     ),
     "utf8"
   );
-  await writeReviewEvidence(repo, "BANDIT-950", {
+  await writeReviewEvidence(repo, "BANDIT-949", {
     sourceHead,
     escalatedReviewRequired: true,
     escalatedReviewState: "pass"
   });
-  await writeLandingVerdict(repo, "BANDIT-950", {
+  await writeLandingVerdict(repo, "BANDIT-949", {
     sourceHead,
     escalatedReviewState: "pass"
   });
@@ -1212,13 +1212,13 @@ test("escalated-review live pass evidence satisfies land-check integration", asy
   const reviewResult = await runBandit(repo, [
     "escalated-review",
     "run",
-    "BANDIT-950",
+    "BANDIT-949",
     "--fixture",
     "fixtures/escalated-review-pass.json"
   ]);
   assert.equal(reviewResult.code, 0, reviewResult.stderr);
 
-  const landCheck = await runBandit(repo, ["land-check", "BANDIT-950"]);
+  const landCheck = await runBandit(repo, ["land-check", "BANDIT-949"]);
 
   assert.equal(landCheck.code, 0, landCheck.stderr);
   assert.match(landCheck.stdout, /Escalated review: pass/);
@@ -1234,8 +1234,8 @@ test("land-check rejects placeholder escalated evidence when live routing is con
   });
   await initGitRepo(repo);
   const sourceHead = await commitAll(repo, "Initial state");
-  await writeWorkBrief(repo, "BANDIT-944", "Configured Live Escalation");
-  await writeRoutingDecision(repo, "BANDIT-944", {
+  await writeWorkBrief(repo, "BANDIT-950", "Configured Live Escalation");
+  await writeRoutingDecision(repo, "BANDIT-950", {
     selectedRoute: "security-reviewer-fixture",
     smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
     escalationOutcome: "require_escalated_review",
@@ -1246,18 +1246,18 @@ test("land-check rejects placeholder escalated evidence when live routing is con
     provider: "fixture",
     fixturePath: "fixtures/escalated-review-pass.json"
   });
-  await writeReviewEvidence(repo, "BANDIT-944", {
+  await writeReviewEvidence(repo, "BANDIT-950", {
     sourceHead,
     escalatedReviewRequired: true,
     escalatedReviewState: "bootstrap_gap"
   });
-  await writeLandingVerdict(repo, "BANDIT-944", {
+  await writeLandingVerdict(repo, "BANDIT-950", {
     sourceHead,
     escalatedReviewState: "bootstrap_gap"
   });
-  await writeEscalatedReview(repo, "BANDIT-944", { sourceHead });
+  await writeEscalatedReview(repo, "BANDIT-950", { sourceHead });
 
-  const result = await runBandit(repo, ["land-check", "BANDIT-944"]);
+  const result = await runBandit(repo, ["land-check", "BANDIT-950"]);
 
   assert.equal(result.code, 1);
   assert.match(

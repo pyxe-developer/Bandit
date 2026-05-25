@@ -17,6 +17,12 @@ type EscalatedReviewFixture = {
   summary?: string;
 };
 
+type ValidEscalatedReviewFixture = EscalatedReviewFixture & {
+  verdict: string;
+  findings_status: string;
+  summary: string;
+};
+
 type RunOptions = {
   workItemId?: string;
   fixturePath?: string;
@@ -44,9 +50,10 @@ async function runEscalatedReview(repoRoot: string, options: RunOptions) {
     workItemId,
     smellCatalog.smellIds
   );
+  const selectedRoute = requireSelectedRoute(routingDecision.selectedRoute);
   const profile = await readEscalatedReviewerProfile(
     repoRoot,
-    routingDecision.selectedRoute
+    selectedRoute
   );
   const currentHead = (await readCurrentGitHead(repoRoot)) ?? "unknown";
 
@@ -92,13 +99,13 @@ async function runEscalatedReview(repoRoot: string, options: RunOptions) {
     throw error;
   }
 
+  validateFixtureOutput(fixture);
+
   const sourceHead = fixture.source_head ?? currentHead;
   const sourceDriftStatus = sourceDrift(sourceHead, currentHead);
-  const verdict = fixture.verdict ?? "blocker";
-  const findingsStatus = fixture.findings_status ?? "inconclusive";
-  const disposition = fixture.summary ?? "Fixture escalated reviewer returned no summary.";
-
-  validateFixtureOutput(fixture);
+  const verdict = fixture.verdict;
+  const findingsStatus = fixture.findings_status;
+  const disposition = fixture.summary;
 
   if (
     fixture.provider_status === "timeout" ||
@@ -175,7 +182,17 @@ async function readFixture(repoRoot: string, fixturePath?: string) {
   return JSON.parse(content) as EscalatedReviewFixture;
 }
 
-function validateFixtureOutput(fixture: EscalatedReviewFixture) {
+function requireSelectedRoute(selectedRoute: string) {
+  if (!selectedRoute) {
+    throw new Error("Routing decision missing selected escalated reviewer route");
+  }
+
+  return selectedRoute;
+}
+
+function validateFixtureOutput(
+  fixture: EscalatedReviewFixture
+): asserts fixture is ValidEscalatedReviewFixture {
   if (!fixture.verdict || !fixture.findings_status || !fixture.summary) {
     throw new Error("Malformed escalated reviewer output");
   }
