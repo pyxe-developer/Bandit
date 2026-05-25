@@ -1,5 +1,7 @@
 import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
+import { parseMetadataFields, readScalar } from "./metadata.js";
+import { readUatApproval } from "./uat-approval.js";
 import { readWorkItem, readWorkItems, type WorkItem } from "./work-items.js";
 
 export type CoordinationStatus = {
@@ -11,6 +13,7 @@ export type CoordinationStatus = {
   accepted_block: AcceptedBlock | null;
   safe_trigger_points: string[];
   evidence: string[];
+  typed_extension?: TypedExtensionStatus;
 };
 
 type AcceptedBlock = {
@@ -19,13 +22,22 @@ type AcceptedBlock = {
   resume_condition: string;
 };
 
+type TypedExtensionStatus = {
+  name: "feature_uat" | "chore_disposition";
+  status: "required" | "satisfied";
+  required_evidence: string[];
+  evidence: string[];
+};
+
 type CoordinationState =
   | "brief_created"
   | "red_recorded"
   | "implementation_recorded"
   | "review_recorded"
+  | "feature_uat_approved"
   | "landing_verdict_recorded"
   | "landed"
+  | "chore_disposition_recorded"
   | "retrospective_recorded"
   | "closed"
   | "blocked";
@@ -71,8 +83,10 @@ const STATE_ORDER = [
   "red_recorded",
   "implementation_recorded",
   "review_recorded",
+  "feature_uat_approved",
   "landing_verdict_recorded",
   "landed",
+  "chore_disposition_recorded",
   "retrospective_recorded",
   "closed"
 ] satisfies CoordinationState[];
@@ -95,16 +109,18 @@ export async function readCoordinationStatus(
   if (!current) {
     throw new Error(`Coordination log has no step transitions: ${workItemId}`);
   }
+  const workType = readWorkType(workItem);
 
   return {
     work_item: workItem.id,
-    work_type: readWorkType(workItem),
+    work_type: workType,
     current_state: current.state,
     next_action: current.next_action,
     accountable_actor: current.accountable_actor,
     accepted_block: current.accepted_block,
     safe_trigger_points: current.safe_triggers,
-    evidence: current.evidence
+    evidence: current.evidence,
+    ...readTypedExtensionStatus(workItem.id, workType, current)
   };
 }
 
@@ -123,9 +139,110 @@ async function readCoordinationTimeline(repoRoot: string, workItemId: string) {
   const logPath = coordinationLogPath(repoRoot, workItemId);
   const content = await readRequiredLog(logPath, workItemId);
   const events = await parseCoordinationEvents(repoRoot, workItemId, content);
+  await validateTypedExtensionTransitions(repoRoot, workItem, events);
   validateStepTransitionOrder(events);
 
   return { workItem, events };
+}
+
+async function validateTypedExtensionTransitions(
+  repoRoot: string,
+  workItem: WorkItem,
+  events: CoordinationEvent[]
+) {
+  const workType = readWorkType(workItem);
+  let previousOrderedState: CoordinationState | null = null;
+
+  for (const event of events) {
+    if (!isStepTransition(event)) {
+      continue;
+    }
+
+    if (event.state === "feature_uat_approved") {
+      await validateFeatureUatTransition(
+        repoRoot,
+        workItem.id,
+        workType,
+        event,
+        previousOrderedState
+      );
+    }
+
+    if (event.state === "chore_disposition_recorded") {
+      await validateChoreDispositionTransition(
+        repoRoot,
+        workItem.id,
+        workType,
+        event,
+        previousOrderedState
+      );
+    }
+
+    if (event.state !== "blocked") {
+      previousOrderedState = event.state;
+    }
+  }
+}
+
+async function validateFeatureUatTransition(
+  repoRoot: string,
+  workItemId: string,
+  workType: string,
+  event: StepTransition,
+  previousOrderedState: CoordinationState | null
+) {
+  if (workType !== "slice") {
+    throw new Error("feature_uat_approved requires work_type slice");
+  }
+
+  if (previousOrderedState !== "review_recorded") {
+    throw new Error("feature_uat_approved must follow review_recorded");
+  }
+
+  const requiredEvidence = featureUatEvidencePath(workItemId);
+  if (!event.evidence.includes(requiredEvidence)) {
+    throw new Error(
+      `feature_uat_approved requires current UAT evidence: ${requiredEvidence}`
+    );
+  }
+
+  try {
+    const approval = await readUatApproval(repoRoot, workItemId);
+    if (approval.sourceDriftStatus !== "current") {
+      throw new Error("stale UAT approval");
+    }
+  } catch {
+    throw new Error(
+      `feature_uat_approved requires current UAT evidence: ${requiredEvidence}`
+    );
+  }
+}
+
+async function validateChoreDispositionTransition(
+  repoRoot: string,
+  workItemId: string,
+  workType: string,
+  event: StepTransition,
+  previousOrderedState: CoordinationState | null
+) {
+  if (workType !== "chore" && workType !== "improvement_chore") {
+    throw new Error(
+      "chore_disposition_recorded requires work_type chore or improvement_chore"
+    );
+  }
+
+  if (previousOrderedState !== "landed") {
+    throw new Error("chore_disposition_recorded must follow landed");
+  }
+
+  const requiredEvidence = choreDispositionEvidencePath(workItemId);
+  if (!event.evidence.includes(requiredEvidence)) {
+    throw new Error(
+      `chore_disposition_recorded requires disposition evidence: ${requiredEvidence}`
+    );
+  }
+
+  await readChoreDisposition(repoRoot, workItemId, requiredEvidence);
 }
 
 async function parseCoordinationEvents(
@@ -342,6 +459,110 @@ async function readRequiredLog(filePath: string, workItemId: string) {
 
 function coordinationLogPath(repoRoot: string, workItemId: string) {
   return path.join(repoRoot, "docs/work", workItemId, LOG_FILE_NAME);
+}
+
+function readTypedExtensionStatus(
+  workItemId: string,
+  workType: string,
+  current: StepTransition
+): { typed_extension?: TypedExtensionStatus } {
+  if (current.state === "feature_uat_approved") {
+    const evidencePath = featureUatEvidencePath(workItemId);
+    return {
+      typed_extension: {
+        name: "feature_uat",
+        status: "satisfied",
+        required_evidence: [evidencePath],
+        evidence: current.evidence.filter((reference) => reference === evidencePath)
+      }
+    };
+  }
+
+  if (current.state === "chore_disposition_recorded") {
+    const evidencePath = choreDispositionEvidencePath(workItemId);
+    return {
+      typed_extension: {
+        name: "chore_disposition",
+        status: "satisfied",
+        required_evidence: [evidencePath],
+        evidence: current.evidence.filter((reference) => reference === evidencePath)
+      }
+    };
+  }
+
+  if (workType === "slice" && current.safe_triggers.includes("feature_uat_required")) {
+    return {
+      typed_extension: {
+        name: "feature_uat",
+        status: "required",
+        required_evidence: [featureUatEvidencePath(workItemId)],
+        evidence: []
+      }
+    };
+  }
+
+  if (
+    (workType === "chore" || workType === "improvement_chore") &&
+    current.safe_triggers.includes("chore_disposition_required")
+  ) {
+    return {
+      typed_extension: {
+        name: "chore_disposition",
+        status: "required",
+        required_evidence: [choreDispositionEvidencePath(workItemId)],
+        evidence: []
+      }
+    };
+  }
+
+  return {};
+}
+
+async function readChoreDisposition(
+  repoRoot: string,
+  workItemId: string,
+  displayPath: string
+) {
+  const content = await readFile(path.join(repoRoot, displayPath), "utf8");
+  const fields = parseMetadataFields(content);
+
+  requireChoreDispositionScalar(fields, "contract_version", displayPath);
+  requireChoreDispositionScalar(fields, "work_item", displayPath);
+  requireChoreDispositionScalar(fields, "disposition_status", displayPath);
+  requireChoreDispositionScalar(fields, "disposition_kind", displayPath);
+  requireChoreDispositionScalar(fields, "rationale", displayPath);
+
+  if (readScalar(fields, "contract_version") !== "1") {
+    throw new Error(`Unsupported chore disposition contract version: ${displayPath}`);
+  }
+
+  if (readScalar(fields, "work_item") !== workItemId) {
+    throw new Error(`Malformed chore disposition: ${displayPath}; work_item mismatch`);
+  }
+
+  if (readScalar(fields, "disposition_status") !== "pass") {
+    throw new Error(
+      `chore_disposition_recorded requires passing disposition evidence: ${displayPath}`
+    );
+  }
+}
+
+function requireChoreDispositionScalar(
+  fields: ReturnType<typeof parseMetadataFields>,
+  field: string,
+  displayPath: string
+) {
+  if (!readScalar(fields, field)) {
+    throw new Error(`Malformed chore disposition: ${displayPath}; missing ${field}`);
+  }
+}
+
+function featureUatEvidencePath(workItemId: string) {
+  return `docs/work/${workItemId}/uat-approval.md`;
+}
+
+function choreDispositionEvidencePath(workItemId: string) {
+  return `docs/work/${workItemId}/chore-disposition.md`;
 }
 
 function readWorkType(workItem: WorkItem) {

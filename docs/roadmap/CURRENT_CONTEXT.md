@@ -161,31 +161,32 @@ state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
 recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at
-`red_recorded`. RED evidence is recorded in
+`implementation_recorded`. RED evidence is recorded in
 `docs/work/BANDIT-026/red-evidence.md`, with focused tests in
-`test/coordination-log.test.mjs` and `test/coordination-status.test.mjs`. The
-slice is scoped to reconcile feature UAT and chore-specific disposition states
-with the shared core coordination state machine. No implementation code,
-branch, product UAT approval, claim lease, scheduler, worktree lifecycle, Phase
-7 Improvement Engine work, or Phase 8 Workflow Cockpit implementation has
-started.
+`test/coordination-log.test.mjs` and `test/coordination-status.test.mjs`.
+Implementation evidence is recorded in
+`docs/work/BANDIT-026/implementation-evidence.md`. The implemented slice
+adds typed extension checkpoints for feature UAT and chore disposition while
+preserving the shared core coordination state machine and actor-event
+non-authority boundary. No branch, product UAT approval, claim lease,
+scheduler, worktree lifecycle, Phase 7 Improvement Engine work, or Phase 8
+Workflow Cockpit implementation has started.
 
-**Last completed milestone:** `BANDIT-026` Stage 2 RED evidence defined typed
-state extension tests for feature UAT, chore disposition, invalid extension
-use, actor-event non-authority, and core-only backward compatibility.
+**Last completed milestone:** `BANDIT-026` Stage 3 implementation made the
+typed-state extension RED tests green and recorded implementation evidence.
 
-**Current next action:** Implement the narrow typed-state extension contract for
-`BANDIT-026`. Do not create active-work branches, Phase 7
-Improvement Engine work, Phase 8 Workflow Cockpit implementation, Phase 9
-dogfood, claim leases, scheduler execution, worktree lifecycle, automatic
-merge/push/deploy behavior, or product UAT approval before the RED tests are
-made green through the normal Bandit implementation stage gates.
+**Current next action:** Run Stage 4 review gates for `BANDIT-026`: Local Qwen
+review first, then aggregate review evidence with current
+`review_subject_hash`. Do not create active-work branches, Phase 7 Improvement
+Engine work, Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, claim
+leases, scheduler execution, worktree lifecycle, automatic merge/push/deploy
+behavior, or product UAT approval before Stage 4 review evidence is recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-026` - Typed State Extensions. Current
-coordination state: `red_recorded`; accountable actor: Writer; next action:
-implement typed state extensions.
+coordination state: `implementation_recorded`; accountable actor: Reviewer;
+next action: run Stage 4 review gates.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -206,11 +207,9 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
 
-**Expected next deliverable:** Implementation evidence for `BANDIT-026`, with
-the focused RED tests passing for feature-slice UAT extension behavior,
-chore/improvement-chore disposition extension behavior, invalid ordering and
-wrong-kind refusal paths, actor-event non-authority, and core-only
-coordination-log backward compatibility.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-026`,
+starting with Local Qwen review and then aggregate review evidence with current
+`review_subject_hash`.
 
 ## Known Bootstrap Gaps
 

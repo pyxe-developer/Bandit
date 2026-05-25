@@ -17,22 +17,23 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is active at `red_recorded` for
+Coordination Primitive slice. `BANDIT-026` is active at `implementation_recorded` for
 typed state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
 recorded in `docs/work/BANDIT-026/coordination-log.jsonl`. RED evidence is
-recorded in `docs/work/BANDIT-026/red-evidence.md`, with focused tests in
-`test/coordination-log.test.mjs` and `test/coordination-status.test.mjs`.
+recorded in `docs/work/BANDIT-026/red-evidence.md`, implementation evidence is
+recorded in `docs/work/BANDIT-026/implementation-evidence.md`, and focused
+tests in `test/coordination-log.test.mjs` and
+`test/coordination-status.test.mjs` pass.
 
-The current next step is to implement exactly one narrow typed-state extension
-contract for `BANDIT-026` that reconciles feature UAT and chore-specific
-disposition states with the shared core coordination state machine. Do not
-create active-work branches, Phase 7
-improvement engine work, Phase 8 web cockpit implementation, claim leases,
-scheduler execution, worktree lifecycle, product UAT approval, automatic
-merge/push/deploy behavior, or unrelated feature work before the RED tests are
-made green through the normal Bandit implementation stage gates.
+The current next step is to run Stage 4 review gates for `BANDIT-026`: Local
+Qwen review first, then aggregate review evidence with current
+`review_subject_hash`. Do not create active-work branches, Phase 7 improvement
+engine work, Phase 8 web cockpit implementation, claim leases, scheduler
+execution, worktree lifecycle, product UAT approval, automatic
+merge/push/deploy behavior, or unrelated feature work before Stage 4 review
+evidence is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
