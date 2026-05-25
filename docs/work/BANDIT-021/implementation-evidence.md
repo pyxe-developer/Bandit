@@ -9,15 +9,19 @@ The implementation adds one CLI-owned artifact creation path for the narrow BAND
 ## Implementation Summary
 
 - Added src/commands/artifact-create.ts with explicit JSON spec parsing, supported artifact-kind validation, work-item existence checks, no-overwrite writes, and artifact_created lifecycle events.
+- Split artifact rendering into src/commands/artifact-create-renderers.ts after Local Qwen flagged command-file cohesion as a non-blocking maintainability concern.
 - Added CLI dispatch for bandit artifact create <spec-path> and updated usage text.
 - Kept the command intentionally narrow to RED evidence, implementation evidence, landing verdicts, and retrospectives; review artifacts remain governed by their existing review commands and review_subject_hash rules.
 - Preserved existing draft-work, work-item creation, review, landing, and UAT command contracts.
+- Removed the temporary docs/specs/BANDIT-021-implementation-evidence.json input after the Markdown implementation evidence artifact was created, keeping docs/specs focused on executable work-item specs.
 
 ## Verification
 
 - node --test test/artifact-create.test.mjs passed 7 focused tests.
+- node --test test/artifact-create.test.mjs passed 7 focused tests after the renderer split.
 - npm test passed 183 tests.
 - npm run typecheck passed.
+- npm run typecheck passed after the renderer split.
 - npm run bandit -- validate passed.
 - npm run bandit -- gaps list passed.
 - git diff --check passed.
@@ -27,7 +31,7 @@ The implementation adds one CLI-owned artifact creation path for the narrow BAND
 | Rubric | Verdict | Evidence |
 | --- | --- | --- |
 | Spec alignment | pass | The command implements the artifact families and refusal paths named by docs/work/BANDIT-021/red-evidence.md. |
-| Small surface area | pass | The source diff adds one command module and one CLI dispatch branch without touching unrelated workflows. |
+| Small surface area | pass | The source diff adds one command surface and one renderer helper module without touching unrelated workflows. |
 | No hidden authority | pass | Generated Markdown artifacts and .bandit/events.jsonl remain repo-native state; the JSON spec is only explicit input. |
 | Failure clarity | pass | Unsupported kinds, outside-repo spec paths, unknown work items, malformed specs, and occupied output paths fail before writes. |
 | Testable behavior | pass | Focused tests cover supported artifact creation plus fail-closed refusal paths. |
