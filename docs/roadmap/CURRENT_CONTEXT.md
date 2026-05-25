@@ -51,17 +51,18 @@ recorded in `docs/work/BANDIT-020/brief.md`, RED evidence is recorded in
 recorded in `docs/work/BANDIT-020/local-qwen-review.md`, Stage 4 review
 evidence with current `review_subject_hash` is recorded in
 `docs/work/BANDIT-020/review-evidence.md`, Stage 5 landing verdict is recorded
-in `docs/work/BANDIT-020/landing-verdict.md`, and
+in `docs/work/BANDIT-020/landing-verdict.md`, local-record landing action is
+recorded in `docs/work/BANDIT-020/landing-action.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to this active chore. Do not begin
 artifact creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
-until `BANDIT-020` has landing action, retrospective, and
-gap-ledger closeout.
+until `BANDIT-020` has retrospective and gap-ledger closeout.
 
 **Last completed milestone:** `BANDIT-019` resolved hash-based Stage 4 evidence
 freshness.
 
-**Current next action:** Run the local-record landing action for `BANDIT-020`.
+**Current next action:** Write the `BANDIT-020` retrospective and gap-ledger
+disposition.
 Do not broaden into general artifact creation, heartbeat, cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
 Phase 9 dogfood, or feature work. All Stage 4 evidence for future work items
@@ -86,16 +87,17 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
 Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness.
 
-**Expected next deliverable:** `docs/work/BANDIT-020/landing-action.md`.
+**Expected next deliverable:** `docs/work/BANDIT-020/retrospective.md` and
+resolved `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` gap-ledger disposition.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command. This is active as `BANDIT-020`; RED
-  evidence, implementation evidence, Stage 4 review evidence, and Stage 5
-  landing verdict are recorded, and the local-record landing action is the next
-  action.
+  evidence, implementation evidence, Stage 4 review evidence, Stage 5 landing
+  verdict, and local-record landing action are recorded, and retrospective plus
+  gap-ledger disposition are the next action.
 - Bootstrap-gap tracking artifact, listing command, and validation path are
   implemented and landed in `BANDIT-011`.
 - CodeRabbit state capture substrate exists, but live CodeRabbit API, GitHub
@@ -120,8 +122,8 @@ gates ran. Open bootstrap gaps are the current work queue; do not start
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as
-`BANDIT-020`; the next required artifact is
-`docs/work/BANDIT-020/landing-action.md`.
+`BANDIT-020`; the next required artifacts are
+`docs/work/BANDIT-020/retrospective.md` and resolved gap-ledger disposition.
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
 `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is resolved by
@@ -208,14 +210,15 @@ Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
 1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; next
-   artifact is `docs/work/BANDIT-020/landing-action.md`.
+   artifacts are `docs/work/BANDIT-020/retrospective.md` and resolved
+   gap-ledger disposition.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Do not create the next gap chore until `BANDIT-020` has landing action evidence,
-retrospective closeout, and a resolved, operator-blocked, or no-action
-gap-ledger disposition. Future Stage 4 review evidence must use
+Do not create the next gap chore until `BANDIT-020` has retrospective closeout
+and a resolved, operator-blocked, or no-action gap-ledger disposition. Future
+Stage 4 review evidence must use
 `review_subject_hash` to avoid raw-HEAD evidence loops.
 
 ## Required Operator Input
@@ -224,7 +227,7 @@ Provided for the Stage 4 reviewer route decision: the operator approved using
 the Sourmash-style `claude -p` headless path for Sonnet and Opus and asked
 Codex PM to compare Qwen 3.6, Sonnet 4.6, and Opus 4.7 before choosing the
 escalated reviewer route. No further operator-owned input is required before
-`BANDIT-020` implementation.
+`BANDIT-020` closeout.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

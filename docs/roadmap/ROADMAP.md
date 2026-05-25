@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Run the local-record landing action for active
-`BANDIT-020`. All future Stage 4 review evidence should use
+**Current next step:** Write the retrospective and gap-ledger disposition for
+active `BANDIT-020`. All future Stage 4 review evidence should use
 `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
@@ -98,9 +98,11 @@ recorded in `docs/work/BANDIT-020/brief.md`, RED evidence is recorded in
 recorded in `docs/work/BANDIT-020/local-qwen-review.md`, and Stage 4 review
 evidence with current `review_subject_hash` is recorded in
 `docs/work/BANDIT-020/review-evidence.md`, and the Stage 5 landing verdict is
-recorded in `docs/work/BANDIT-020/landing-verdict.md`. The local-record landing
-action is the next required artifact. Open bootstrap gaps remain the work queue
-and must be addressed one at a time before unrelated new work proceeds.
+recorded in `docs/work/BANDIT-020/landing-verdict.md`. Local-record landing
+action is recorded in `docs/work/BANDIT-020/landing-action.md`. Retrospective
+and gap-ledger disposition are the next required closeout artifacts. Open
+bootstrap gaps remain the work queue and must be addressed one at a time before
+unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
 `BANDIT-018` and `BANDIT-019` are landed. `BANDIT-020` is active for
@@ -383,8 +385,10 @@ Current rule:
   `docs/work/BANDIT-020/red-evidence.md`, implementation evidence is recorded
   in `docs/work/BANDIT-020/implementation-evidence.md`, Stage 4 review evidence
   is recorded in `docs/work/BANDIT-020/review-evidence.md`, Stage 5 landing
-  verdict is recorded in `docs/work/BANDIT-020/landing-verdict.md`, and the
-  next required artifact is `docs/work/BANDIT-020/landing-action.md`.
+  verdict is recorded in `docs/work/BANDIT-020/landing-verdict.md`, local-record
+  landing action is recorded in `docs/work/BANDIT-020/landing-action.md`, and
+  the next required artifacts are `docs/work/BANDIT-020/retrospective.md` and
+  resolved gap-ledger disposition.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -398,7 +402,8 @@ Current rule:
 Current priority:
 
 1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`;
-   next artifact is `docs/work/BANDIT-020/landing-action.md`.
+   next artifacts are `docs/work/BANDIT-020/retrospective.md` and resolved
+   gap-ledger disposition.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
