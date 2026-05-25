@@ -144,16 +144,16 @@
     {
       "id": "BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND",
       "title": "No general artifact creation command outside explicit PRD draft-work",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-021",
-      "rationale": "Work-item briefs, review evidence, landing evidence, retrospectives, and follow-up artifacts are still created manually unless a narrow command exists for that artifact family.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-021."
+      "rationale": "BANDIT-021 created a narrow CLI-owned artifact creation command for RED evidence, implementation evidence, landing verdicts, and retrospectives from explicit JSON specs, with safe path checks, no-overwrite behavior, canonical work-item validation, lifecycle event evidence, and rollback if lifecycle append fails.",
+      "verification_target": "docs/work/BANDIT-021/retrospective.md",
+      "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",

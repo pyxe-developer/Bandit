@@ -16,10 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Rerun Stage 4 review for `BANDIT-021`, the active
-bootstrap-gap chore for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`, with
-`review_subject_hash` freshness evidence after focused Local Qwen finding
-repairs. All future Stage 4 review evidence should use `review_subject_hash`.
+**Current next step:** Create the next bootstrap-gap chore for
+`BANDIT-GAP-HEARTBEAT-CHORE-AGENT` using `bandit work-item create
+<spec-path>`. All future Stage 4 review evidence should use
+`review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -103,18 +103,20 @@ in `docs/work/BANDIT-020/landing-verdict.md`, local-record landing action is
 recorded in `docs/work/BANDIT-020/landing-action.md`, and retrospective plus
 gap-ledger disposition are recorded. Open bootstrap gaps remain the work queue
 and must be addressed one at a time before unrelated new work proceeds.
-`BANDIT-021` is active for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`; its
+`BANDIT-021` resolved `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`; its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND.json`, its brief is
 recorded in `docs/work/BANDIT-021/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-021/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-021/implementation-evidence.md`, focused Local Qwen finding
-repairs are committed, and `.bandit/bootstrap-gaps.json` links the gap as an
-active chore.
+`docs/work/BANDIT-021/implementation-evidence.md`, Local Qwen pass evidence is
+recorded in `docs/work/BANDIT-021/local-qwen-review.md`, Stage 4 review
+evidence is recorded in `docs/work/BANDIT-021/review-evidence.md`, landing
+verdict and landing action are recorded, retrospective closeout is recorded,
+and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
-landed and closed out. `BANDIT-021` is active; Stage 4 review should rerun at
-the repaired source head.
+landed and closed out. `BANDIT-021` is landed and closed out. The next open
+bootstrap gap is `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 
 ## Phase Map
 
@@ -297,8 +299,8 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- `BANDIT-021` - General Artifact Create Command. Stage 4 review should rerun
-  at the repaired source head.
+- none. The next queued bootstrap gap is
+  `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 
 Completed work:
 
@@ -311,10 +313,11 @@ Completed work:
 - `BANDIT-018` - Live Escalated Reviewer Routing.
 - `BANDIT-019` - Review Subject Hash Evidence Freshness.
 - `BANDIT-020` - Work Item Create Command.
+- `BANDIT-021` - General Artifact Create Command.
 
 Queued next:
 
-- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` (next).
 - `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 Expected capabilities:
@@ -394,9 +397,9 @@ Current rule:
   RED evidence, implementation evidence, Stage 4 review evidence with
   `review_subject_hash`, Stage 5 landing verdict, local-record landing action,
   retrospective, and gap-ledger disposition are recorded.
-- `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND` is active as `BANDIT-021`; its
-  structured creation spec, brief, RED evidence, and implementation evidence
-  are recorded, and Stage 4 review is next.
+- `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND` is resolved by `BANDIT-021`;
+  landing verdict, landing action, retrospective, and gap-ledger disposition
+  are recorded.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -409,9 +412,10 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review for `BANDIT-021` with `review_subject_hash` evidence.
-2. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
-3. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. Create the next bootstrap-gap chore for
+   `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` using `bandit work-item create
+   <spec-path>`.
+2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 ## Phase 6: Coordination Primitive
 
