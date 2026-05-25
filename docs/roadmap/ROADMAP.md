@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record RED evidence for active chore `BANDIT-024` -
-Workflow Cockpit Boundary Scope. `BANDIT-024` links
+**Current next step:** Implement the narrow cockpit boundary artifact for active
+chore `BANDIT-024` - Workflow Cockpit Boundary Scope. `BANDIT-024` links
 `BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from existing
 repo artifacts; do not start Phase 8 web cockpit implementation, product UAT
 approval, automatic merge/push/deploy behavior, Phase 6 coordination
@@ -163,14 +163,15 @@ required gates accept the implementation.
 `BANDIT-024` is active for `BANDIT-GAP-WORKFLOW-COCKPIT`. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json`, its brief is recorded in
-`docs/work/BANDIT-024/brief.md`, and `.bandit/bootstrap-gaps.json` links the
-gap to active chore `BANDIT-024`. Next action is RED evidence for the missing
-durable cockpit boundary contract.
+`docs/work/BANDIT-024/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-024/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
+the gap to active chore `BANDIT-024`. Next action is implementation of the
+missing durable cockpit boundary contract.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
 landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` is
-active at Stage 2 RED evidence preparation for the workflow-cockpit boundary
+active at Stage 3 implementation preparation for the workflow-cockpit boundary
 scope.
 
 ## Phase Map
@@ -474,9 +475,9 @@ Current rule:
 Current priority:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Record RED evidence for the missing cockpit boundary contract before
-   implementation; halt for operator-owned product direction if repo artifacts
-   cannot answer a required UI or product tradeoff.
+2. Implement the narrow cockpit boundary artifact from existing repo sources;
+   halt for operator-owned product direction if repo artifacts cannot answer a
+   required UI or product tradeoff.
 
 ## Phase 6: Coordination Primitive
 
