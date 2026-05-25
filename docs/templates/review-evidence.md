@@ -3,6 +3,7 @@
 contract_version:
 work_item:
 source_head:
+review_subject_hash:
 verification_state:
 verification_evidence:
 coderabbit_state:

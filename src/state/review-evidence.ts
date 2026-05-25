@@ -18,6 +18,7 @@ export type ReviewEvidence = {
   contractVersion: string;
   workItem: string;
   sourceHead: string;
+  reviewSubjectHash: string;
   verificationState: string;
   verificationEvidence: string[];
   coderabbitState: string;
@@ -191,6 +192,7 @@ function parseReviewEvidence(
     contractVersion,
     workItem,
     sourceHead: readScalar(fields, "source_head"),
+    reviewSubjectHash: readScalar(fields, "review_subject_hash"),
     verificationState,
     verificationEvidence: readList(fields, "verification_evidence"),
     coderabbitState,

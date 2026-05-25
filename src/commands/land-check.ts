@@ -25,6 +25,7 @@ import type { SmellCatalog } from "../state/smell-triggers.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import type { Stage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 import { readStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
+import { computeReviewSubjectHash } from "../state/review-subject-hash.js";
 import type { UatApproval } from "../state/uat-approval.js";
 import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
@@ -146,14 +147,16 @@ async function evaluateLandingReadiness(
 ): Promise<LandingReadiness> {
   const problems: string[] = [];
   const readGitChangedPaths = createCachedGitChangedPathsReader();
-  const reviewEvidenceIsStale = isRecordedHeadStale(
-    reviewEvidence.sourceHead,
-    currentHead
+  const reviewSubjectIsStale = await isReviewSubjectStale(
+    repoRoot,
+    reviewEvidence
   );
-  const landingVerdictIsStale = isRecordedHeadStale(
-    landingVerdict.sourceHead,
-    currentHead
-  );
+  const reviewEvidenceIsStale = reviewSubjectIsStale
+    ? true
+    : isRawEvidenceHeadStale(reviewEvidence.sourceHead, currentHead, reviewEvidence);
+  const landingVerdictIsStale = reviewSubjectIsStale
+    ? true
+    : isRawEvidenceHeadStale(landingVerdict.sourceHead, currentHead, reviewEvidence);
   const codeRabbitReviewIsStale = codeRabbitReview
     ? await isReviewSourceStale(
         repoRoot,
@@ -203,11 +206,15 @@ async function evaluateLandingReadiness(
       ? "stale"
       : reviewEvidence.sourceDriftStatus;
 
-  if (reviewEvidenceIsStale) {
+  if (reviewSubjectIsStale) {
+    problems.push("Review subject hash is stale");
+  }
+
+  if (reviewEvidenceIsStale && !reviewSubjectIsStale) {
     problems.push("Review evidence is stale");
   }
 
-  if (landingVerdictIsStale) {
+  if (landingVerdictIsStale && !reviewSubjectIsStale) {
     problems.push("Landing verdict evidence is stale");
   }
 
@@ -260,6 +267,34 @@ async function evaluateLandingReadiness(
     uatApproval,
     problems
   };
+}
+
+async function isReviewSubjectStale(
+  repoRoot: string,
+  reviewEvidence: ReviewEvidence
+) {
+  if (!reviewEvidence.reviewSubjectHash) {
+    return false;
+  }
+
+  const currentSubject = await computeReviewSubjectHash(
+    repoRoot,
+    reviewEvidence.workItem
+  );
+
+  return currentSubject.hash !== reviewEvidence.reviewSubjectHash;
+}
+
+function isRawEvidenceHeadStale(
+  recordedHead: string,
+  currentHead: string | null,
+  reviewEvidence: ReviewEvidence
+) {
+  if (reviewEvidence.reviewSubjectHash) {
+    return false;
+  }
+
+  return isRecordedHeadStale(recordedHead, currentHead);
 }
 
 function safeToLandProblems(

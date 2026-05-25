@@ -9,6 +9,7 @@ import { listBootstrapGaps } from "./commands/gaps.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
 import { qwenReview } from "./commands/qwen-review.js";
+import { reviewSubjectHash } from "./commands/review-subject-hash.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
 import { uat } from "./commands/uat.js";
@@ -95,6 +96,12 @@ async function main() {
     return;
   }
 
+  if (command === "review-subject-hash") {
+    const result = await reviewSubjectHash(process.cwd(), args[0]);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "coderabbit-review") {
     const result = await coderabbitReview(process.cwd(), args);
     process.stdout.write(result.output);
@@ -108,7 +115,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|land|auto-land-check|qwen-review|coderabbit-review|escalated-review|uat|gaps>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|route|land-check|land|auto-land-check|qwen-review|review-subject-hash|coderabbit-review|escalated-review|uat|gaps>`);
   process.exitCode = 1;
 }
 

@@ -1737,6 +1737,95 @@ process.exit(1);
   assert.equal(shallowProbeCount, 1);
 });
 
+test("land-check accepts evidence-only head changes when review subject hash matches", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await mkdir(path.join(repo, "src"), { recursive: true });
+  await writeFile(path.join(repo, "src/review-subject.ts"), "export const value = 1;\n");
+  await writeWorkBrief(repo, "BANDIT-960", "Review Subject Hash Freshness");
+  const reviewedHead = await commitAll(repo, "Implementation accepted");
+  const hash = await runBandit(repo, ["review-subject-hash", "BANDIT-960"]);
+  const reviewSubjectHash = readReviewSubjectHash(hash.stdout);
+  await writeReviewEvidence(repo, "BANDIT-960", {
+    sourceHead: reviewedHead,
+    reviewSubjectHash,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-960", {
+    sourceHead: reviewedHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-960", { sourceHead: reviewedHead });
+  await writeFile(
+    path.join(repo, "docs/work/BANDIT-960/retrospective.md"),
+    "# Retrospective\n\nEvidence-only closeout.\n",
+    "utf8"
+  );
+  await commitAll(repo, "Evidence-only closeout");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-960"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
+test("land-check fails closed when review subject hash changes after source edits", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await mkdir(path.join(repo, "src"), { recursive: true });
+  await writeFile(path.join(repo, "src/review-subject.ts"), "export const value = 1;\n");
+  await writeWorkBrief(repo, "BANDIT-961", "Review Subject Hash Source Drift");
+  const reviewedHead = await commitAll(repo, "Implementation accepted");
+  const hash = await runBandit(repo, ["review-subject-hash", "BANDIT-961"]);
+  const reviewSubjectHash = readReviewSubjectHash(hash.stdout);
+  await writeReviewEvidence(repo, "BANDIT-961", {
+    sourceHead: reviewedHead,
+    reviewSubjectHash,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-961", {
+    sourceHead: reviewedHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-961", { sourceHead: reviewedHead });
+  await writeFile(path.join(repo, "src/review-subject.ts"), "export const value = 2;\n");
+  await commitAll(repo, "Implementation changed after review");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-961"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Review subject hash is stale/);
+  assert.match(result.stderr, /safe-to-land cannot proceed with stale source evidence/);
+});
+
+test("land-check fails closed when review subject hash changes after policy edits", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeWorkBrief(repo, "BANDIT-962", "Review Subject Hash Policy Drift");
+  const reviewedHead = await commitAll(repo, "Implementation accepted");
+  const hash = await runBandit(repo, ["review-subject-hash", "BANDIT-962"]);
+  const reviewSubjectHash = readReviewSubjectHash(hash.stdout);
+  await writeReviewEvidence(repo, "BANDIT-962", {
+    sourceHead: reviewedHead,
+    reviewSubjectHash,
+    localQwenState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-962", {
+    sourceHead: reviewedHead,
+    localQwenState: "pass"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-962", { sourceHead: reviewedHead });
+  await writeStage4EvidenceHeadPolicy(repo, {
+    terminalDispositionOnlyPathPatterns: ["docs/work/<work_item_id>/"]
+  });
+  await commitAll(repo, "Review policy changed after review");
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-962"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Review subject hash is stale/);
+});
+
 async function createInitializedRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
@@ -1746,6 +1835,12 @@ async function createInitializedRepo(options = {}) {
   await writeLandingAgentContract(repo);
 
   return repo;
+}
+
+function readReviewSubjectHash(output) {
+  const match = output.match(/^Review subject hash: ([a-f0-9]{64})$/m);
+  assert.ok(match, output);
+  return match[1];
 }
 
 async function writeTemplates(repo, options = {}) {
@@ -1831,6 +1926,9 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     "contract_version: 1",
     `work_item: ${workItemId}`,
     `source_head: ${options.sourceHead ?? "unknown"}`,
+    options.reviewSubjectHash
+      ? `review_subject_hash: ${options.reviewSubjectHash}`
+      : null,
     `verification_state: ${options.verificationState ?? "pass"}`,
     "verification_evidence:",
     "  - node --test test/landing-gates.test.mjs",
