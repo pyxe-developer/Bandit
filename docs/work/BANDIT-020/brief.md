@@ -3,7 +3,8 @@
 ## Status
 
 Bootstrap-gap chore brief created on 2026-05-25 after `BANDIT-019` closeout.
-RED evidence, implementation evidence, review evidence, landing verdict,
+RED evidence is recorded in `docs/work/BANDIT-020/red-evidence.md`.
+Implementation evidence, review evidence, landing verdict,
 landing action, retrospective, and gap-ledger closeout have not started.
 
 ## Goal
@@ -158,7 +159,7 @@ reviewers, Landing Agent, and operator-owned product or policy decisions.
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and `bandit gaps list` identify `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` as active `BANDIT-020` work. `BANDIT-019` has landing-action evidence, retrospective closeout, and a resolved gap-ledger disposition. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
-| Stage 2: Test Design And RED Evidence | `pending` | Create `docs/work/BANDIT-020/red-evidence.md` before production implementation. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-020/red-evidence.md` records focused tests in `test/work-item-create.test.mjs` failing because `bandit work-item create <spec-path>` does not exist yet. |
 | Stage 3: Implementation Clean-Code Rubric | `pending` | Implementation must be narrow, deterministic, and fail closed before writing partial output. |
 | Stage 4: Review And Cross-Model Gates | `pending` | Future review evidence must record `review_subject_hash`. |
 | Stage 5: Landing And UAT | `pending` | UAT is not required for this non-product workflow-infrastructure chore. Landing verdict and landing action evidence are required before the next gap chore can begin. |

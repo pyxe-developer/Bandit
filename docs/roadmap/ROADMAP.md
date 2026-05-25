@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create `docs/work/BANDIT-020/red-evidence.md` for the
-active `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` chore; all future Stage 4 review
+**Current next step:** Implement the narrow `bandit work-item create
+<spec-path>` command for the active `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`
+chore until `test/work-item-create.test.mjs` passes; all future Stage 4 review
 evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
@@ -92,7 +93,8 @@ retrospective, and gap-ledger disposition are recorded for `BANDIT-018`.
 work uses hash-based evidence freshness when review evidence records
 `review_subject_hash`.
 `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as `BANDIT-020`; its brief is
-recorded in `docs/work/BANDIT-020/brief.md`, and RED evidence is the next
+recorded in `docs/work/BANDIT-020/brief.md`, and RED evidence is recorded in
+`docs/work/BANDIT-020/red-evidence.md`. Implementation evidence is the next
 required artifact. Open bootstrap gaps remain the work queue and must be
 addressed one at a time before unrelated new work proceeds.
 
@@ -282,7 +284,7 @@ Goal: Separate product acceptance from code-safety judgment.
 Active work:
 
 - `BANDIT-020` - Work Item Create Command. Next artifact:
-  `docs/work/BANDIT-020/red-evidence.md`.
+  `docs/work/BANDIT-020/implementation-evidence.md`.
 
 Completed work:
 
@@ -373,8 +375,9 @@ Current rule:
   review-subject hash evidence freshness is now the required Stage 4 method for
   future work items.
 - `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as `BANDIT-020`; its brief is
-  recorded in `docs/work/BANDIT-020/brief.md`, and the next required artifact is
-  `docs/work/BANDIT-020/red-evidence.md`.
+  recorded in `docs/work/BANDIT-020/brief.md`, RED evidence is recorded in
+  `docs/work/BANDIT-020/red-evidence.md`, and the next required artifact is
+  `docs/work/BANDIT-020/implementation-evidence.md`.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -388,7 +391,7 @@ Current rule:
 Current priority:
 
 1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`;
-   next artifact is `docs/work/BANDIT-020/red-evidence.md`.
+   next artifact is `docs/work/BANDIT-020/implementation-evidence.md`.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
