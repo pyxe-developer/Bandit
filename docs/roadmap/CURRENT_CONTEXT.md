@@ -127,20 +127,29 @@ marks the gap resolved. The chore scoped the CLI-authoritative cockpit boundary
 from existing repo artifacts before any Phase 8 web cockpit implementation
 begins.
 
+`BANDIT-025` is the first Phase 6 Coordination Primitive slice. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-025-coordination-log-foundation.json`, and its brief is
+recorded in `docs/work/BANDIT-025/brief.md`. The slice is scoped to the
+per-work-item append-only coordination log foundation, shared core state
+sequence, actor-event non-authority boundary, fail-closed validation, and a
+read-only derived current-state report. RED evidence has not been created yet.
+
 **Last completed milestone:** `BANDIT-024` resolved the workflow-cockpit
 boundary bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Create the first Phase 6 Coordination Primitive work
-item brief. Do not create RED evidence, implementation code, active-work
-branches, Phase 7 Improvement Engine work, Phase 8 Workflow Cockpit
-implementation, Phase 9 dogfood, automatic merge/push/deploy behavior, or
-product UAT approval until the Phase 6 brief is recorded and accepted through
-the normal Bandit stage gates.
+**Current next action:** Write RED evidence for `BANDIT-025`. Do not create
+implementation code, active-work branches, Phase 7 Improvement Engine work,
+Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, claim leases,
+scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior,
+or product UAT approval until `BANDIT-025` RED evidence is recorded and
+accepted through the normal Bandit stage gates.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-025` - Coordination Log Foundation. Current
+stage: Stage 2 next, RED evidence required.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -161,8 +170,8 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope.
 
-**Expected next deliverable:** the first Phase 6 Coordination Primitive work
-item brief under `docs/work/<ID>/brief.md`.
+**Expected next deliverable:** RED evidence for `BANDIT-025` at
+`docs/work/BANDIT-025/red-evidence.md`.
 
 ## Known Bootstrap Gaps
 

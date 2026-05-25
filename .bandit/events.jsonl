@@ -7,3 +7,4 @@
 {"type":"artifact_created","work_item":"BANDIT-023","message":"Created retrospective artifact at docs/work/BANDIT-023/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-024","message":"Created work item BANDIT-024 from docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json"}
 {"type":"artifact_created","work_item":"BANDIT-024","message":"Created red_evidence artifact at docs/work/BANDIT-024/red-evidence.md"}
+{"type":"work_item_created","work_item":"BANDIT-025","message":"Created work item BANDIT-025 from docs/specs/BANDIT-025-coordination-log-foundation.json"}
