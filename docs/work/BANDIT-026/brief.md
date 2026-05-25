@@ -1,0 +1,125 @@
+# BANDIT-026: Typed State Extensions
+
+## Status
+
+Brief Created
+
+## Goal
+
+Extend the Phase 6 coordination primitive so the shared core state machine can represent work-type-specific requirements for feature UAT and chore disposition without forking the lifecycle or weakening CLI authority.
+
+## Scope
+
+- Define the first typed state extension contract for feature slices that require CLI-owned UAT approval before landing.
+- Define the first typed state extension contract for chores and improvement chores that require explicit disposition or no-action evidence instead of product UAT.
+- Update coordination-log validation so typed extension states are accepted only when the work item kind and required evidence make the transition valid.
+- Update derived coordination status so the report shows active typed requirements, next action, accountable actor, accepted block state, and safe trigger points without treating typed extensions as a separate lifecycle.
+- Preserve the shared core sequence from brief through closed while allowing typed extension checkpoints between existing core states where policy requires them.
+- Document how typed extensions reconcile with existing UAT, landing, retrospective, and improvement-disposition artifacts.
+
+## Out Of Scope
+
+- Do not implement work claim leases, work surface reservations, scheduler execution, heartbeat work claiming, or claim-first worktree creation.
+- Do not implement Phase 7 improvement evaluation outcomes, improvement metrics dashboards, or keep/revise/revert/double-down decision commands.
+- Do not implement Phase 8 Workflow Cockpit UI behavior, a SQLite state index, cross-repo coordination, or a repo-wide canonical ledger.
+- Do not change product UAT ownership; feature UAT remains operator-owned and CLI-recorded.
+- Do not introduce automatic merge, push, deploy, paid provider routing, or policy override behavior.
+- Do not make raw actor coordination events complete typed extension states or emit safe trigger points.
+
+## Acceptance Criteria
+
+- The coordination state contract defines typed extension checkpoints for feature-slice UAT and chore/improvement-chore disposition while retaining one shared core lifecycle.
+- Feature-slice UAT extension transitions require current CLI-owned UAT evidence before landing can be represented as ready to proceed.
+- Chore and improvement-chore disposition extension transitions require explicit disposition, no-action rationale, or improvement metadata evidence when product UAT is not applicable.
+- Validation fails closed when a typed extension is used for the wrong work item kind, lacks required evidence, appears out of order, conflicts with core state, or attempts to bypass landing and closeout requirements.
+- Derived coordination status reports the typed extension state, next action, accountable actor, accepted block, safe trigger points, and evidence references in a way future cockpit views can trace to repo artifacts.
+- Existing `BANDIT-025` coordination logs and status remain valid under the extended state machine.
+- Tests cover feature-slice UAT extension success and refusal paths, chore disposition extension success and refusal paths, invalid extension ordering, wrong-kind extension use, actor-event non-authority, and backward compatibility for existing core-only logs.
+- No claim leases, scheduler, worktree, cockpit, cross-repo, automatic merge/push/deploy, or Phase 7 improvement evaluation behavior is introduced by this slice.
+
+## Test Plan
+
+- Write RED tests for feature-slice UAT typed extension transitions, including missing UAT evidence, stale or wrong-kind UAT use, and valid progression into landing readiness.
+- Write RED tests for chore and improvement-chore disposition typed extension transitions, including missing disposition evidence, no-action rationale requirements, and valid progression toward retrospective and closed states.
+- Write RED tests proving typed extensions cannot be used for the wrong work item kind or ordered as a bypass around required core states.
+- Write RED tests proving actor coordination events cannot complete typed extension states or emit safe trigger points.
+- Write RED tests proving existing core-only coordination logs, including `BANDIT-025`, still validate and report status.
+- Run focused coordination-log and coordination-status tests after implementation.
+- Run npm test if implementation touches command routing, validators, work-item readers, UAT parsing, landing gates, review evidence, or shared state modules.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- qwen-review BANDIT-026 before Stage 4 closeout.
+- Run npm run bandit -- land-check BANDIT-026 before landing.
+- Run git diff --check.
+
+## CLEAN_CODE.md Read Evidence
+
+CLEAN_CODE.md was read on 2026-05-25 before creating this brief. The slice must keep the shared core lifecycle small, make typed extension rules explicit and testable, preserve CLI authority for UAT and disposition evidence, and fail closed with clear messages.
+
+## Stage-Rubric Checklist
+
+- Stage 0 Context Readiness: pass - CURRENT_CONTEXT.md and ROADMAP.md identify Phase 6, no active work, no open bootstrap gaps, and this typed-state extension brief as the next action; BANDIT-025 has landing action, retrospective, and closed coordination-log evidence.
+- Stage 1 Work-Item Brief And Spec: pass - this brief defines goal, scope, out of scope, acceptance criteria, test plan, CLEAN_CODE.md evidence, bootstrap gaps, expected files, implementation order, smell triggers, and operator input status.
+- Stage 2 Test Design And RED Evidence: required next - tests must express feature UAT and chore disposition typed-extension behavior before production implementation.
+- Stage 3 Implementation Clean-Code Rubric: required later - implementation must keep core-state ordering, typed-extension validation, evidence reconciliation, and status rendering as small explicit helpers.
+- Stage 4 Review And Cross-Model Gates: required later - Local Qwen and aggregate review evidence must cover state-machine, UAT, disposition, parser, validator, and safe-trigger semantics.
+- Stage 5 Landing And UAT: required later - landing verdict and landing action evidence are required; product UAT is not required for this internal coordination slice unless product behavior is introduced.
+- Stage 6 Retrospective And Improvement Capture: required later - closeout must disposition lessons and update roadmap/current context.
+
+## Bootstrap Gaps
+
+- No open bootstrap gaps are currently recorded. This slice continues Phase 6 after the bootstrap-gap lane is exhausted.
+- CodeRabbit PR-backed review remains unavailable for local-record main-branch work unless a PR-backed workflow is explicitly scoped; record replacement evidence honestly if still applicable at Stage 4.
+- Claim leases, scheduler execution, worktree lifecycle, cockpit UI, Phase 7 improvement evaluation, and cross-repo coordination remain future work outside this slice.
+
+## Expected Files
+
+- docs/work/BANDIT-026/brief.md
+- docs/work/BANDIT-026/coordination-log.jsonl
+- docs/work/BANDIT-026/red-evidence.md
+- docs/work/BANDIT-026/implementation-evidence.md
+- docs/work/BANDIT-026/local-qwen-review.md
+- docs/work/BANDIT-026/review-evidence.md
+- docs/work/BANDIT-026/landing-verdict.md
+- docs/work/BANDIT-026/landing-action.md
+- docs/work/BANDIT-026/retrospective.md
+- docs/specs/BANDIT-026-typed-state-extensions.json
+- docs/templates/coordination-log.md
+- src/state/coordination-log.ts
+- src/commands/coordination.ts
+- test/coordination-log.test.mjs
+- test/coordination-status.test.mjs
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## First Implementation Order
+
+- Write RED fixtures and tests for feature-slice UAT extension states, chore disposition extension states, invalid ordering, wrong-kind extension use, actor-event non-authority, and core-only backward compatibility.
+- Define typed extension state names and placement relative to the shared core lifecycle.
+- Implement typed extension parsing and validation as explicit helpers that reconcile work item kind and evidence artifacts.
+- Update derived status rendering to expose typed extension requirements without creating a second lifecycle.
+- Update templates or documentation only as needed to preserve the coordination-log authority boundary.
+- Update implementation evidence, Stage 4 review evidence, landing evidence, retrospective, CURRENT_CONTEXT.md, and ROADMAP.md as each stage completes.
+
+## Smell Triggers
+
+- State-machine, parser, validator, UAT, disposition, and safe-trigger work requires Local Qwen review and escalated-review routing if smell policy requires it.
+- Any logic that lets raw actor events complete typed extension states is a blocker.
+- Any logic that treats product UAT as Codex-owned or cockpit-owned is a blocker.
+- Any hidden source of truth in a cache, index, generated status file, or cockpit-facing report is a blocker.
+- Any broad claim/scheduler/worktree/cockpit/Phase 7 implementation inside this slice is scope creep.
+
+## Required Evidence
+
+- docs/work/BANDIT-026/brief.md
+- docs/work/BANDIT-026/red-evidence.md
+- docs/work/BANDIT-026/implementation-evidence.md
+- docs/work/BANDIT-026/local-qwen-review.md
+- docs/work/BANDIT-026/review-evidence.md
+- docs/work/BANDIT-026/landing-verdict.md
+- docs/work/BANDIT-026/landing-action.md
+- docs/work/BANDIT-026/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required to create this Phase 6 brief because accepted repo decisions, the founding PRD, ROADMAP.md, CURRENT_CONTEXT.md, CLEAN_CODE.md, Stage Rubrics, and the BANDIT-025 coordination-log foundation define the technical direction. Halt for operator input only if implementation requires product direction, UAT approval, policy changes, business tradeoffs, explicit cost/risk overrides, remote merge/push/deploy authority, or a genuinely ambiguous scope decision.

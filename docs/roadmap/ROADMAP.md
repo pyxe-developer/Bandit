@@ -17,31 +17,20 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. Its implementation evidence is recorded in
-`docs/work/BANDIT-025/implementation-evidence.md`; focused coordination tests,
-full test suite, typecheck, `bandit validate`, and whitespace verification
-pass. Local Qwen Stage 4 evidence is recorded in
-`docs/work/BANDIT-025/local-qwen-review.md` at source head
-`46455616e3c579ebbd05f92f8d87f80053de55bb` with a `non_blocking` verdict and
-three open hardening findings. PM disposition and durable routing for those
-findings is recorded in `docs/work/BANDIT-025/qwen-finding-disposition.md`.
-Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-025/review-evidence.md` with review-subject hash
-`747e4bbb35589b08fb042b46f911fd43f50597594c894e0a5fa9916c5704f16b`.
-Stage 5 landing verdict is recorded at
-`docs/work/BANDIT-025/landing-verdict.md`, local-record landing action evidence
-is recorded at `docs/work/BANDIT-025/landing-action.md`, retrospective closeout
-is recorded at `docs/work/BANDIT-025/retrospective.md`, and the per-work-item
-coordination log is advanced to `closed`.
+Coordination Primitive slice. `BANDIT-026` is active at `brief_created` for
+typed state extensions. Its structured creation spec is recorded in
+`docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
+`docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
+recorded in `docs/work/BANDIT-026/coordination-log.jsonl`.
 
-The current next step is to create exactly one next Phase 6 Coordination
-Primitive work item brief for typed state extensions that reconcile feature UAT
-and chore-specific disposition states with the shared core coordination state
-machine. Do not create RED evidence, implementation code, active-work branches,
-Phase 7 improvement engine work, Phase 8 web cockpit implementation, claim
-leases, scheduler execution, worktree lifecycle, product UAT approval,
-automatic merge/push/deploy behavior, or unrelated feature work before that
-brief is recorded and accepted through the normal Bandit stage gates.
+The current next step is to write exactly one RED evidence artifact for
+`BANDIT-026` typed state extensions that reconcile feature UAT and
+chore-specific disposition states with the shared core coordination state
+machine. Do not create implementation code, active-work branches, Phase 7
+improvement engine work, Phase 8 web cockpit implementation, claim leases,
+scheduler execution, worktree lifecycle, product UAT approval, automatic
+merge/push/deploy behavior, or unrelated feature work before RED evidence is
+recorded and accepted through the normal Bandit stage gates.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -207,7 +196,9 @@ Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
 review, PM finding disposition, aggregate review evidence, landing verdict,
 local-record landing action evidence, retrospective closeout, and terminal
 coordination-log state recorded. No bootstrap gap is currently recorded as open
-or active.
+or active. `BANDIT-026` is active at `brief_created` with its
+typed-state-extensions spec, brief, and initial coordination-log transition
+recorded.
 
 ## Phase Map
 

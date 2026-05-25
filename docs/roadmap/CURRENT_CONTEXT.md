@@ -156,23 +156,33 @@ Local-record landing action evidence is recorded in
 `docs/work/BANDIT-025/retrospective.md`, and the per-work-item coordination log
 is advanced through `retrospective_recorded` to `closed`.
 
+`BANDIT-026` is the active Phase 6 Coordination Primitive slice for typed
+state extensions. Its structured creation spec is recorded in
+`docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
+`docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
+recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at
+`brief_created`. The slice is scoped to reconcile feature UAT and
+chore-specific disposition states with the shared core coordination state
+machine. No RED evidence, implementation code, branch, product UAT approval,
+claim lease, scheduler, worktree lifecycle, Phase 7 Improvement Engine work,
+or Phase 8 Workflow Cockpit implementation has started.
+
 **Last completed milestone:** `BANDIT-025` established the Phase 6 coordination
 log foundation and closed out with landing action evidence, retrospective
 dispositions, and terminal coordination-log state.
 
-**Current next action:** Create exactly one next Phase 6 Coordination Primitive
-work item brief for typed state extensions that reconcile feature UAT and
-chore-specific disposition states with the shared core coordination state
-machine. Do not create RED evidence, implementation code, active-work branches,
-Phase 7 Improvement Engine work, Phase 8 Workflow Cockpit implementation,
-Phase 9 dogfood, claim leases, scheduler execution, worktree lifecycle,
-automatic merge/push/deploy behavior, or product UAT approval before that brief
-is recorded and accepted through the normal Bandit stage gates.
+**Current next action:** Write RED evidence for `BANDIT-026` typed state
+extensions. Do not create implementation code, active-work branches, Phase 7
+Improvement Engine work, Phase 8 Workflow Cockpit implementation, Phase 9
+dogfood, claim leases, scheduler execution, worktree lifecycle, automatic
+merge/push/deploy behavior, or product UAT approval before RED evidence is
+recorded and accepted through the normal Bandit stage gates.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-025` - Coordination Log Foundation is
-closed out.
+**Active work item:** `BANDIT-026` - Typed State Extensions. Current
+coordination state: `brief_created`; accountable actor: Test Writer; next
+action: write RED evidence.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -193,10 +203,11 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
 
-**Expected next deliverable:** a Phase 6 work item brief for typed state
-extensions, likely `BANDIT-026`, scoped to reconcile feature UAT and
-chore-specific disposition states with the shared core coordination state
-machine.
+**Expected next deliverable:** RED evidence for `BANDIT-026`, with tests that
+define feature-slice UAT extension behavior, chore/improvement-chore
+disposition extension behavior, invalid ordering and wrong-kind refusal paths,
+actor-event non-authority, and core-only coordination-log backward
+compatibility.
 
 ## Known Bootstrap Gaps
 
@@ -329,15 +340,14 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
 Use `bandit gaps list` as the routing source before starting new work. All
-currently recorded bootstrap gaps are resolved, and `BANDIT-025` is closed out,
-so the current priority is:
+currently recorded bootstrap gaps are resolved, `BANDIT-025` is closed out, and
+`BANDIT-026` is active at `brief_created`, so the current priority is:
 
-1. Create exactly one next Phase 6 Coordination Primitive work item brief for
-   typed state extensions that reconcile feature UAT and chore-specific
-   disposition states with the shared core coordination state machine.
-2. Stop at the brief; do not create RED evidence, implementation code, or an
-   active-work branch until the brief is recorded and accepted through the
-   normal Bandit stage gates.
+1. Write exactly one RED evidence artifact for `BANDIT-026` typed state
+   extensions.
+2. Stop at RED evidence; do not create implementation code or an active-work
+   branch until RED evidence is recorded and accepted through the normal Bandit
+   stage gates.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
