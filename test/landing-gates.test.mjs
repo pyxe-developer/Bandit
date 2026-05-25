@@ -924,6 +924,44 @@ test("escalated-review fails closed when paid provider setup is not explicitly c
   );
 });
 
+test("land-check rejects placeholder escalated evidence when live routing is configured", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-944", "Configured Live Escalation");
+  await writeRoutingDecision(repo, "BANDIT-944", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-pass.json"
+  });
+  await writeReviewEvidence(repo, "BANDIT-944", {
+    sourceHead,
+    escalatedReviewRequired: true,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeLandingVerdict(repo, "BANDIT-944", {
+    sourceHead,
+    escalatedReviewState: "bootstrap_gap"
+  });
+  await writeEscalatedReview(repo, "BANDIT-944", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-944"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /safe-to-land requires live escalated review pass for configured reviewer security-reviewer-fixture/
+  );
+});
+
 test("land-check fails closed when safe-to-land evidence is stale", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);

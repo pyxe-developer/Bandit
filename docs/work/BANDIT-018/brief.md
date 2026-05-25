@@ -3,9 +3,10 @@
 ## Status
 
 Bootstrap-gap chore brief created on 2026-05-24 after `BANDIT-017` closeout.
-RED evidence is recorded in `docs/work/BANDIT-018/red-evidence.md`. Production
-implementation, implementation evidence, review evidence, landing verdict,
-landing action, and retrospective have not started.
+RED evidence is recorded in `docs/work/BANDIT-018/red-evidence.md`.
+Implementation evidence is recorded in
+`docs/work/BANDIT-018/implementation-evidence.md`. Review evidence, landing
+verdict, landing action, and retrospective have not started.
 
 ## Goal
 
@@ -60,7 +61,7 @@ metric: A work item with escalation-required routing can record current escalate
 baseline: `BANDIT-010` enforces escalated-review placeholder artifacts, and later work items use bootstrap-limited `escalated-review.md` dispositions when smell triggers require stronger review.
 expected_direction: Future landing checks rely on live or explicitly blocked escalated-review evidence for escalation-required work, and placeholder-only evidence is no longer the normal route once configured reviewer execution is available.
 evaluation_window: Evaluate during `BANDIT-018` closeout and again on the next smell-triggered work item that requires escalated review.
-status: pending
+status: implementation_recorded
 outcome: pending
 
 ## Scope
@@ -187,8 +188,8 @@ Agent, UAT, policy, business, cost, and risk boundaries.
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and `bandit gaps list` identify `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018` work. `BANDIT-017` has landing-action evidence, retrospective closeout, and a resolved gap-ledger disposition. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
 | Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-018/red-evidence.md` records focused failing tests for missing fixture-backed live escalated-review routing and missing paid-provider setup refusal. |
-| Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
-| Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | This work item is scoped to replace the live escalated-reviewer bootstrap gap with CLI-owned routing; CodeRabbit is available only through the existing fixture-backed live path when applicable. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | `docs/work/BANDIT-018/implementation-evidence.md` records the implementation clean-code check and verification. |
+| Stage 4: Review And Cross-Model Gates | `pending` | Review evidence, Local Qwen evidence, and aggregate review evidence are the next required step for the implementation head. |
 | Stage 5: Landing And UAT | `pending` | UAT is not required for this non-product workflow-infrastructure chore. Landing verdict and landing action evidence are required before the next gap chore can begin. |
 | Stage 6: Retrospective And Improvement Capture | `pending` | Required after implementation and closeout. |
 
@@ -218,9 +219,9 @@ Agent, UAT, policy, business, cost, and risk boundaries.
 
 ## Bootstrap Gaps
 
-- Live escalated adversarial reviewer routing is unavailable until this chore
-  resolves, blocks on operator-owned setup, or explicitly records a no-action
-  policy decision.
+- Live escalated adversarial reviewer routing has implementation evidence, but
+  the bootstrap gap remains active until review evidence, landing verdict,
+  landing action, retrospective, and gap-ledger disposition are recorded.
 - No general Bandit work-item creation command exists yet.
 - No general artifact creation command exists yet.
 - Heartbeat chore-agent, workflow cockpit, and state index remain unavailable.
@@ -239,8 +240,8 @@ Agent, UAT, policy, business, cost, and risk boundaries.
 - `.bandit/bootstrap-gaps.json`
 - `.bandit/reviewers/escalated-placeholder.json` or a new configured
   escalated reviewer profile.
-- A live escalated-review routing contract or policy artifact under
-  `.bandit/policy/` or the nearest existing reviewer policy location.
+- `.bandit/reviewers/escalated-reviewers.json`
+- `.bandit/policy/escalated-review-routing.json`
 - `src/commands/` command module for escalated reviewer routing if needed.
 - `src/state/reviewer-profiles.ts`, `src/state/escalated-review.ts`,
   `src/state/routing-decisions.ts`, or the nearest existing state module.

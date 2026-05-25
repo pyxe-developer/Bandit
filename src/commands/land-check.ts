@@ -106,6 +106,7 @@ export async function readLandingReadiness(
     codeRabbitReview,
     localQwenReview,
     escalatedReviewRequired,
+    routingDecision?.selectedRoute ?? null,
     escalatedReview,
     uatApproval
   );
@@ -139,6 +140,7 @@ async function evaluateLandingReadiness(
   codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null,
   escalatedReviewRequired: boolean,
+  selectedEscalatedReviewRoute: string | null,
   escalatedReview: EscalatedReviewEvidence | null,
   uatApproval: UatApproval | null
 ): Promise<LandingReadiness> {
@@ -239,6 +241,7 @@ async function evaluateLandingReadiness(
         codeRabbitReview,
         localQwenReview,
         escalatedReviewRequired,
+        selectedEscalatedReviewRoute,
         escalatedReview,
         uatApproval
       )
@@ -266,6 +269,7 @@ function safeToLandProblems(
   codeRabbitReview: CodeRabbitReviewEvidence | null,
   localQwenReview: LocalQwenReviewEvidence | null,
   escalatedReviewRequired: boolean,
+  selectedEscalatedReviewRoute: string | null,
   escalatedReview: EscalatedReviewEvidence | null,
   uatApproval: UatApproval | null
 ) {
@@ -344,7 +348,9 @@ function safeToLandProblems(
   }
 
   if (escalatedReviewRequired) {
-    problems.push(...escalatedReviewProblems(escalatedReview));
+    problems.push(
+      ...escalatedReviewProblems(escalatedReview, selectedEscalatedReviewRoute)
+    );
   }
 
   if (reviewEvidence.uatStatus === "pass" || landingVerdict.uatStatus === "pass") {
@@ -536,13 +542,28 @@ function localQwenProblems(
 }
 
 function escalatedReviewProblems(
-  escalatedReview: EscalatedReviewEvidence | null
+  escalatedReview: EscalatedReviewEvidence | null,
+  selectedEscalatedReviewRoute: string | null
 ) {
   if (!escalatedReview) {
     return ["safe-to-land requires current escalated review placeholder evidence"];
   }
 
   const problems: string[] = [];
+  const requiresLivePass =
+    selectedEscalatedReviewRoute !== null &&
+    selectedEscalatedReviewRoute !== "escalated-adversarial-placeholder";
+
+  if (requiresLivePass) {
+    if (
+      escalatedReview.profileId !== selectedEscalatedReviewRoute ||
+      escalatedReview.reviewerVerdict !== "pass"
+    ) {
+      problems.push(
+        `safe-to-land requires live escalated review pass for configured reviewer ${selectedEscalatedReviewRoute}`
+      );
+    }
+  }
 
   if (!isPassingOrBootstrapGap(escalatedReview.reviewerVerdict)) {
     problems.push(

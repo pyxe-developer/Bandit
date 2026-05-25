@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "contract_version": 1,
+      "profile_id": "security-reviewer-paid",
+      "version": 1,
+      "provider": "openai",
+      "model": "o4-mini",
+      "role": "escalated_adversarial_reviewer",
+      "runtime": "command",
+      "require_explicit_setup": true,
+      "credential_env_var": "BANDIT_ESCALATED_REVIEWER_API_KEY",
+      "permissions": {
+        "filesystem": "read_only",
+        "network": "provider_only",
+        "can_edit_files": false,
+        "can_request_tools": false
+      },
+      "output_contract": {
+        "format": "json",
+        "required_fields": [
+          "verdict",
+          "findings_status",
+          "summary"
+        ]
+      },
+      "unavailable_runtime_behavior": "fail_closed_or_operator_blocker"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import {
   requireSharedVerdict,
@@ -25,6 +25,18 @@ export type EscalatedReviewEvidence = {
   sourceDriftStatus: string;
   bootstrapGapEvidence: string[];
   displayPath: string;
+};
+
+export type EscalatedReviewWriteInput = {
+  workItemId: string;
+  sourceHead: string;
+  profileId: string;
+  triggerRationale: string;
+  availabilityStatus: string;
+  reviewerVerdict: string;
+  disposition: string;
+  sourceDriftStatus: string;
+  bootstrapGapEvidence: string[];
 };
 
 type OptionalArtifact = {
@@ -82,6 +94,34 @@ export async function readOptionalParsedEscalatedReview(
     artifact.displayPath,
     workItemId
   );
+}
+
+export async function writeEscalatedReview(
+  repoRoot: string,
+  input: EscalatedReviewWriteInput
+) {
+  const displayPath = escalatedReviewDisplayPath(input.workItemId);
+  const workDir = path.join(repoRoot, "docs/work", input.workItemId);
+  const content = [
+    `# Escalated Review: ${input.workItemId}`,
+    "",
+    "contract_version: 1",
+    `work_item: ${input.workItemId}`,
+    `source_head: ${input.sourceHead}`,
+    `profile_id: ${input.profileId}`,
+    `trigger_rationale: ${input.triggerRationale}`,
+    `availability_status: ${input.availabilityStatus}`,
+    `reviewer_verdict: ${input.reviewerVerdict}`,
+    `disposition: ${input.disposition}`,
+    `source_drift_status: ${input.sourceDriftStatus}`,
+    "bootstrap_gap_evidence:",
+    ...formatList(input.bootstrapGapEvidence)
+  ].join("\n").concat("\n");
+
+  await mkdir(workDir, { recursive: true });
+  await writeFile(path.join(workDir, ESCALATED_REVIEW_FILE), content, "utf8");
+
+  return displayPath;
 }
 
 function parseEscalatedReview(
@@ -194,6 +234,10 @@ function requireList(fields: ParsedFields, field: string) {
 
 function escalatedReviewDisplayPath(workItemId: string) {
   return `docs/work/${workItemId}/escalated-review.md`;
+}
+
+function formatList(items: string[]) {
+  return items.length > 0 ? items.map((item) => `  - ${item}`) : ["  - none"];
 }
 
 function isMissingPathError(error: unknown) {

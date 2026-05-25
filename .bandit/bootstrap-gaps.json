@@ -88,8 +88,8 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-018",
-      "rationale": "The placeholder gate exists; BANDIT-018 is active to add CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
-      "next_action": "Run BANDIT-018 next: implement the narrow CLI-owned live escalated-reviewer routing contract from recorded RED evidence, verify, review, land, and close out before unrelated work-item creation, artifact creation, heartbeat, or cockpit work."
+      "rationale": "The placeholder gate exists; BANDIT-018 implementation evidence records CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
+      "next_action": "Run BANDIT-018 next: record review and cross-model evidence for the implementation head, then landing verdict, landing action, retrospective, and gap disposition before unrelated work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",

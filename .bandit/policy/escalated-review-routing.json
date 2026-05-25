@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "command": "bandit escalated-review run <work-item-id>",
+  "source_of_truth": "docs/work/<ID>/escalated-review.md",
+  "routing_source": "docs/work/<ID>/routing-decision.md",
+  "profile_source": ".bandit/reviewers/escalated-reviewers.json",
+  "trigger_sources": [
+    "docs/work/<ID>/review-evidence.md escalated_review_required",
+    ".bandit/policy/smell-triggers.json require_escalated_review",
+    "docs/work/<ID>/routing-decision.md selected_route"
+  ],
+  "supported_providers": [
+    "fixture",
+    "openai"
+  ],
+  "cost_safety": {
+    "default_external_provider_state": "disabled",
+    "require_explicit_setup": true,
+    "require_credential_env_var": true,
+    "operator_owned_boundaries": [
+      "provider setup",
+      "credentials",
+      "cost approval",
+      "risk approval"
+    ]
+  },
+  "fail_closed_states": [
+    "missing routing decision",
+    "missing reviewer profile",
+    "missing fixture",
+    "malformed output",
+    "stale source head",
+    "reviewer blocker verdict",
+    "provider unavailable",
+    "missing explicit provider setup",
+    "missing credentials",
+    "missing cost approval"
+  ],
+  "fixture_provider": {
+    "network": "disabled",
+    "credentials": "not_required",
+    "allowed_for_tests": true
+  }
+}

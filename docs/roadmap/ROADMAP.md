@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Implement `BANDIT-018` - Live Escalated Reviewer
-Routing.
+**Current next step:** Record `BANDIT-018` review and cross-model evidence for
+the implementation head.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -73,12 +73,15 @@ context.
 retrospectives, gap-ledger dispositions, and updated context. `BANDIT-018` is
 active for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`; its brief is recorded in
 `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-018/red-evidence.md`, and the next step is implementation.
+`docs/work/BANDIT-018/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-018/implementation-evidence.md`, and the next step is review
+and cross-model evidence.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
-`BANDIT-018` is the active bootstrap-gap chore.
+`BANDIT-018` is the active bootstrap-gap chore with implementation evidence
+recorded.
 
 ## Phase Map
 
@@ -274,7 +277,7 @@ Completed work:
 
 Queued next:
 
-- Implementation for `BANDIT-018`.
+- Review and cross-model evidence for `BANDIT-018`.
 
 Expected capabilities:
 
@@ -334,8 +337,9 @@ Current rule:
   recorded.
 - `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is active as `BANDIT-018`; the brief is
   recorded in `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
-  `docs/work/BANDIT-018/red-evidence.md`, and implementation is the next
-  required step.
+  `docs/work/BANDIT-018/red-evidence.md`, implementation evidence is recorded
+  in `docs/work/BANDIT-018/implementation-evidence.md`, and review evidence is
+  the next required step.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
