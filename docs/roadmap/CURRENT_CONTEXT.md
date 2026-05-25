@@ -152,27 +152,27 @@ PM disposition, and durable `non_blocking_findings_routing` entries.
 Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-025/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-025/landing-action.md`. The per-work-item coordination log is
-advanced to `landed`.
+`docs/work/BANDIT-025/landing-action.md`. Retrospective closeout is recorded in
+`docs/work/BANDIT-025/retrospective.md`, and the per-work-item coordination log
+is advanced through `retrospective_recorded` to `closed`.
 
-**Last completed milestone:** `BANDIT-024` resolved the workflow-cockpit
-boundary bootstrap gap and landed with local-record landing evidence,
-retrospective closeout, and gap-ledger disposition.
+**Last completed milestone:** `BANDIT-025` established the Phase 6 coordination
+log foundation and closed out with landing action evidence, retrospective
+dispositions, and terminal coordination-log state.
 
-**Current next action:** Codex PM must record `BANDIT-025` retrospective
-closeout, improvement dispositions, and roadmap/current-context closeout.
-Do not create active-work branches, Phase 7 Improvement Engine work, Phase 8
-Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
-execution, worktree lifecycle, automatic merge/push/deploy behavior, product
-UAT approval, or the next work item during this retrospective closeout step.
+**Current next action:** Create exactly one next Phase 6 Coordination Primitive
+work item brief for typed state extensions that reconcile feature UAT and
+chore-specific disposition states with the shared core coordination state
+machine. Do not create RED evidence, implementation code, active-work branches,
+Phase 7 Improvement Engine work, Phase 8 Workflow Cockpit implementation,
+Phase 9 dogfood, claim leases, scheduler execution, worktree lifecycle,
+automatic merge/push/deploy behavior, or product UAT approval before that brief
+is recorded and accepted through the normal Bandit stage gates.
 
 ## Active Work
 
-**Active work item:** `BANDIT-025` - Coordination Log Foundation. Current
-stage: Stage 5 landing verdict recorded, aggregate Stage 4 review evidence is
-recorded with Local Qwen `non_blocking` findings accepted and durably routed;
-local-record landing action evidence is recorded, and retrospective closeout is
-required next.
+**Active work item:** none. `BANDIT-025` - Coordination Log Foundation is
+closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -191,11 +191,12 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
-Boundary Scope.
+Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
 
-**Expected next deliverable:** retrospective closeout evidence at
-`docs/work/BANDIT-025/retrospective.md`, with improvement dispositions and
-roadmap/current-context closeout.
+**Expected next deliverable:** a Phase 6 work item brief for typed state
+extensions, likely `BANDIT-026`, scoped to reconcile feature UAT and
+chore-specific disposition states with the shared core coordination state
+machine.
 
 ## Known Bootstrap Gaps
 
@@ -328,9 +329,12 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
 Use `bandit gaps list` as the routing source before starting new work. All
-currently recorded bootstrap gaps are resolved, so the current priority is:
+currently recorded bootstrap gaps are resolved, and `BANDIT-025` is closed out,
+so the current priority is:
 
-1. Create the first Phase 6 Coordination Primitive work item brief.
+1. Create exactly one next Phase 6 Coordination Primitive work item brief for
+   typed state extensions that reconcile feature UAT and chore-specific
+   disposition states with the shared core coordination state machine.
 2. Stop at the brief; do not create RED evidence, implementation code, or an
    active-work branch until the brief is recorded and accepted through the
    normal Bandit stage gates.
@@ -341,11 +345,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the first Phase 6 Coordination
+No operator-owned input is required to create the next Phase 6 Coordination
 Primitive work item brief from existing repo artifacts. If the next work step
 requires product direction, UI scope tradeoffs, policy changes, explicit cost
-or risk overrides, or actual cockpit implementation decisions that the roadmap
-cannot answer, halt and ask for that input directly.
+or risk overrides, actual cockpit implementation decisions, or a typed-state
+scope decision that the roadmap cannot answer, halt and ask for that input
+directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

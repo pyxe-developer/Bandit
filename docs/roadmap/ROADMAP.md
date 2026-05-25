@@ -16,14 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 6 - Coordination Primitive.
 
-**Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-025` is complete, Stage 5 landing verdict is recorded at
-`docs/work/BANDIT-025/landing-verdict.md` with final verdict `safe-to-land`.
-Local-record landing action evidence is recorded at
-`docs/work/BANDIT-025/landing-action.md`. The current next step is to record
-`BANDIT-025` retrospective closeout, improvement dispositions, and
-roadmap/current-context closeout.
-Implementation evidence is recorded in
+**Current next step:** `BANDIT-025` is closed out as the first Phase 6
+Coordination Primitive slice. Its implementation evidence is recorded in
 `docs/work/BANDIT-025/implementation-evidence.md`; focused coordination tests,
 full test suite, typecheck, `bandit validate`, and whitespace verification
 pass. Local Qwen Stage 4 evidence is recorded in
@@ -34,11 +28,20 @@ findings is recorded in `docs/work/BANDIT-025/qwen-finding-disposition.md`.
 Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-025/review-evidence.md` with review-subject hash
 `747e4bbb35589b08fb042b46f911fd43f50597594c894e0a5fa9916c5704f16b`.
-The per-work-item coordination log is advanced to `landed`. Do not create
-active-work branches, Phase 7 improvement engine work, Phase 8 web cockpit
-implementation, claim leases, scheduler execution, worktree lifecycle, product
-UAT approval, automatic merge/push/deploy behavior, the next work item, or
-unrelated feature work during this retrospective closeout step.
+Stage 5 landing verdict is recorded at
+`docs/work/BANDIT-025/landing-verdict.md`, local-record landing action evidence
+is recorded at `docs/work/BANDIT-025/landing-action.md`, retrospective closeout
+is recorded at `docs/work/BANDIT-025/retrospective.md`, and the per-work-item
+coordination log is advanced to `closed`.
+
+The current next step is to create exactly one next Phase 6 Coordination
+Primitive work item brief for typed state extensions that reconcile feature UAT
+and chore-specific disposition states with the shared core coordination state
+machine. Do not create RED evidence, implementation code, active-work branches,
+Phase 7 improvement engine work, Phase 8 web cockpit implementation, claim
+leases, scheduler execution, worktree lifecycle, product UAT approval,
+automatic merge/push/deploy behavior, or unrelated feature work before that
+brief is recorded and accepted through the normal Bandit stage gates.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -199,18 +202,12 @@ marks the gap resolved.
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
 landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` has
 local-record landing action evidence, retrospective closeout, and gap-ledger
-disposition. `BANDIT-025` is active with its Phase 6 Coordination Primitive
-brief recorded at `docs/work/BANDIT-025/brief.md`, RED evidence recorded at
-`docs/work/BANDIT-025/red-evidence.md`, and Stage 3 implementation evidence
-recorded at `docs/work/BANDIT-025/implementation-evidence.md`; Stage 4 Local
-Qwen evidence is recorded at `docs/work/BANDIT-025/local-qwen-review.md` with
-a `non_blocking` verdict. PM disposition and durable routing are recorded in
-`docs/work/BANDIT-025/qwen-finding-disposition.md`; aggregate Stage 4 review
-evidence is recorded at `docs/work/BANDIT-025/review-evidence.md`, Stage 5
-landing verdict is recorded at `docs/work/BANDIT-025/landing-verdict.md`, and
-local-record landing action evidence is recorded at
-`docs/work/BANDIT-025/landing-action.md`. Retrospective closeout is next. No
-bootstrap gap is currently recorded as open or active.
+disposition. `BANDIT-025` is landed and closed out with its Phase 6
+Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
+review, PM finding disposition, aggregate review evidence, landing verdict,
+local-record landing action evidence, retrospective closeout, and terminal
+coordination-log state recorded. No bootstrap gap is currently recorded as open
+or active.
 
 ## Phase Map
 
@@ -515,9 +512,12 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 5 Landing Agent verdict for `BANDIT-025`.
-2. Stop before landing action evidence; local-record landing action is allowed
-   only after the landing verdict is recorded.
+1. Create exactly one next Phase 6 Coordination Primitive work item brief for
+   typed state extensions that reconcile feature UAT and chore-specific
+   disposition states with the shared core coordination state machine.
+2. Stop at the brief; do not create RED evidence, implementation code, or an
+   active-work branch until the brief is recorded and accepted through the
+   normal Bandit stage gates.
 
 ## Phase 6: Coordination Primitive
 
