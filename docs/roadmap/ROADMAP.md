@@ -16,13 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Run Stage 4 Local Qwen review for active chore
-`BANDIT-024` - Workflow Cockpit Boundary Scope. `BANDIT-024` links
-`BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from existing
-repo artifacts; do not start Phase 8 web cockpit implementation, product UAT
-approval, automatic merge/push/deploy behavior, Phase 6 coordination
-primitive, Phase 7 improvement engine, or unrelated feature work during this
-chore. `BANDIT-023` - Non-Blocking Review Finding Chore Routing is closed out:
+**Current next step:** Create aggregate Stage 4 review evidence for active
+chore `BANDIT-024` - Workflow Cockpit Boundary Scope, including current
+`review_subject_hash`, Local Qwen pass evidence, CodeRabbit bootstrap-gap
+replacement evidence, clean-code disposition, and PM disposition. `BANDIT-024`
+links `BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from
+existing repo artifacts; do not start Phase 8 web cockpit implementation,
+product UAT approval, automatic merge/push/deploy behavior, Phase 6
+coordination primitive, Phase 7 improvement engine, or unrelated feature work
+during this chore. `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
+closed out:
 RED evidence is recorded in
 `docs/work/BANDIT-023/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-023/implementation-evidence.md`, Local Qwen Stage 4 pass
@@ -166,14 +169,17 @@ creation spec is recorded in
 `docs/work/BANDIT-024/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-024/red-evidence.md`, the durable cockpit boundary contract
 is recorded in `docs/design/workflow-cockpit-boundary.md`, implementation
-evidence is recorded in `docs/work/BANDIT-024/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`. Next
-action is Stage 4 Local Qwen review.
+evidence is recorded in `docs/work/BANDIT-024/implementation-evidence.md`,
+Local Qwen Stage 4 pass evidence is recorded in
+`docs/work/BANDIT-024/local-qwen-review.md`, and `.bandit/bootstrap-gaps.json`
+links the gap to active chore `BANDIT-024`. Next action is aggregate Stage 4
+review evidence.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
 landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` is
-active at Stage 4 review preparation for the workflow-cockpit boundary scope.
+active at Stage 4 aggregate review evidence for the workflow-cockpit boundary
+scope.
 
 ## Phase Map
 
@@ -476,9 +482,9 @@ Current rule:
 Current priority:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Run Stage 4 Local Qwen review for `BANDIT-024`; halt for operator-owned
-   product direction if repo artifacts cannot answer a required UI or product
-   tradeoff.
+2. Create aggregate Stage 4 review evidence for `BANDIT-024`; halt for
+   operator-owned product direction if repo artifacts cannot answer a required
+   UI or product tradeoff.
 
 ## Phase 6: Coordination Primitive
 
