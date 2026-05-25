@@ -47,6 +47,153 @@ test("coordination status derives slice state, next action, actor, and safe trig
   });
 });
 
+test("coordination status reports satisfied feature UAT typed extension", async () => {
+  const repo = await createCoordinationRepo("slice");
+  await writeEvidence(repo, "BANDIT-001", "review-evidence.md");
+  await writeUatApproval(repo, "BANDIT-001");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      accountable_actor: "Test Writer",
+      next_action: "Write RED evidence",
+      evidence: ["docs/work/BANDIT-001/brief.md"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "review_recorded",
+      accountable_actor: "Codex PM",
+      next_action: "Record operator UAT approval",
+      evidence: ["docs/work/BANDIT-001/review-evidence.md"],
+      safe_triggers: ["feature_uat_required"]
+    }),
+    stepTransition({
+      sequence: 3,
+      state: "feature_uat_approved",
+      accountable_actor: "Landing Agent",
+      next_action: "Record landing verdict",
+      evidence: ["docs/work/BANDIT-001/uat-approval.md"],
+      safe_triggers: ["landing_verdict_allowed"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "coordination",
+    "status",
+    "BANDIT-001",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    work_item: "BANDIT-001",
+    work_type: "slice",
+    current_state: "feature_uat_approved",
+    next_action: "Record landing verdict",
+    accountable_actor: "Landing Agent",
+    accepted_block: null,
+    safe_trigger_points: ["landing_verdict_allowed"],
+    evidence: ["docs/work/BANDIT-001/uat-approval.md"],
+    typed_extension: {
+      name: "feature_uat",
+      status: "satisfied",
+      required_evidence: ["docs/work/BANDIT-001/uat-approval.md"],
+      evidence: ["docs/work/BANDIT-001/uat-approval.md"]
+    }
+  });
+});
+
+test("coordination status reports satisfied chore disposition typed extension", async () => {
+  const repo = await createCoordinationRepo("chore");
+  await writeEvidence(repo, "BANDIT-001", "landing-action.md");
+  await writeChoreDisposition(repo, "BANDIT-001");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      evidence: ["docs/work/BANDIT-001/brief.md"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "landed",
+      accountable_actor: "Codex PM",
+      next_action: "Record chore disposition",
+      evidence: ["docs/work/BANDIT-001/landing-action.md"],
+      safe_triggers: ["chore_disposition_required"]
+    }),
+    stepTransition({
+      sequence: 3,
+      state: "chore_disposition_recorded",
+      accountable_actor: "Codex PM",
+      next_action: "Record retrospective",
+      evidence: ["docs/work/BANDIT-001/chore-disposition.md"],
+      safe_triggers: ["retrospective_allowed"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "coordination",
+    "status",
+    "BANDIT-001",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    work_item: "BANDIT-001",
+    work_type: "chore",
+    current_state: "chore_disposition_recorded",
+    next_action: "Record retrospective",
+    accountable_actor: "Codex PM",
+    accepted_block: null,
+    safe_trigger_points: ["retrospective_allowed"],
+    evidence: ["docs/work/BANDIT-001/chore-disposition.md"],
+    typed_extension: {
+      name: "chore_disposition",
+      status: "satisfied",
+      required_evidence: ["docs/work/BANDIT-001/chore-disposition.md"],
+      evidence: ["docs/work/BANDIT-001/chore-disposition.md"]
+    }
+  });
+});
+
+test("actor events cannot satisfy typed extension state or emit extension safe triggers", async () => {
+  const repo = await createCoordinationRepo("slice");
+  await writeEvidence(repo, "BANDIT-001", "review-evidence.md");
+  await writeUatApproval(repo, "BANDIT-001");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      evidence: ["docs/work/BANDIT-001/brief.md"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "review_recorded",
+      accountable_actor: "operator",
+      next_action: "Record operator UAT approval",
+      evidence: ["docs/work/BANDIT-001/review-evidence.md"],
+      safe_triggers: ["feature_uat_required"]
+    }),
+    actorEvent({
+      sequence: 3,
+      actor_event_type: "complete",
+      evidence: ["docs/work/BANDIT-001/uat-approval.md"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "coordination",
+    "status",
+    "BANDIT-001",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.equal(status.current_state, "review_recorded");
+  assert.deepEqual(status.safe_trigger_points, ["feature_uat_required"]);
+  assert.equal(status.typed_extension?.status, "required");
+  assert.notDeepEqual(status.safe_trigger_points, ["landing_verdict_allowed"]);
+});
+
 test("coordination status supports chore core states through closed", async () => {
   const repo = await createCoordinationRepo("chore");
   for (const evidence of [
@@ -189,6 +336,41 @@ async function writeEvidence(repo, workItem, fileName) {
   await writeFile(
     path.join(repo, "docs/work", workItem, fileName),
     `# ${workItem} ${fileName}\n\nFixture evidence.\n`,
+    "utf8"
+  );
+}
+
+async function writeUatApproval(repo, workItem) {
+  await writeFile(
+    path.join(repo, "docs/work", workItem, "uat-approval.md"),
+    `# UAT Approval: ${workItem}
+
+contract_version: 1
+work_item: ${workItem}
+source_head: fixture-source-head
+environment: operator-cli
+approval_status: pass
+approved_by: operator
+approved_at: 2026-05-25T12:00:00.000Z
+source_drift_status: current
+notes: Fixture UAT approval.
+`,
+    "utf8"
+  );
+}
+
+async function writeChoreDisposition(repo, workItem) {
+  await writeFile(
+    path.join(repo, "docs/work", workItem, "chore-disposition.md"),
+    `# Chore Disposition: ${workItem}
+
+contract_version: 1
+work_item: ${workItem}
+disposition_status: pass
+disposition_kind: no_action
+rationale: Fixture disposition proves product UAT is not applicable.
+improvement_metadata_status: not_applicable
+`,
     "utf8"
   );
 }
