@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Run Stage 4 review for `BANDIT-021`, the active
-bootstrap-gap chore for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`, with
+**Current next step:** Resolve the pre-existing dirty `CONTEXT.md` vocabulary
+change, then rerun Stage 4 review for `BANDIT-021`, the active bootstrap-gap
+chore for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`, with
 `review_subject_hash` freshness evidence. All future Stage 4 review evidence
 should use `review_subject_hash`.
 
@@ -108,11 +109,13 @@ structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND.json`, its brief is
 recorded in `docs/work/BANDIT-021/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-021/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-021/implementation-evidence.md`, and
+`docs/work/BANDIT-021/implementation-evidence.md`, Stage 4 dirty-worktree
+blocker evidence is recorded in `docs/work/BANDIT-021/review-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap as an active chore.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
-landed and closed out. `BANDIT-021` is active; Stage 4 review is next.
+landed and closed out. `BANDIT-021` is active; Stage 4 review is blocked until
+the pre-existing dirty `CONTEXT.md` vocabulary change is resolved.
 
 ## Phase Map
 
@@ -295,7 +298,8 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- `BANDIT-021` - General Artifact Create Command. Stage 4 review is next.
+- `BANDIT-021` - General Artifact Create Command. Stage 4 review is blocked
+  until the pre-existing dirty `CONTEXT.md` vocabulary change is resolved.
 
 Completed work:
 
