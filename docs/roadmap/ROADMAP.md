@@ -16,9 +16,12 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Refresh Local Qwen Stage 4 review for `BANDIT-022`, then
-record aggregate review evidence with current `review_subject_hash`. All future
-Stage 4 review evidence should use `review_subject_hash`.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-022` with current `review_subject_hash`
+`5e2d62f14d79e9cb6a658f0b6a5554d01ccd599386be60ec66d3bca2a5862b28`,
+including Codex PM disposition of the refreshed Local Qwen `non_blocking`
+hardening findings. All future Stage 4 review evidence should use
+`review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -117,22 +120,26 @@ creation spec is recorded in
 `docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
 `docs/work/BANDIT-022/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-022/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-022/implementation-evidence.md`, Local Qwen Stage 4 evidence
-is recorded in `docs/work/BANDIT-022/local-qwen-review.md` with a
-`non_blocking` verdict and three findings, and Codex PM disposition is recorded
-in `docs/work/BANDIT-022/stage4-finding-disposition.md`. The disposition marks
+`docs/work/BANDIT-022/implementation-evidence.md`, initial Local Qwen Stage 4
+evidence and Codex PM disposition are recorded in
+`docs/work/BANDIT-022/local-qwen-review.md` and
+`docs/work/BANDIT-022/stage4-finding-disposition.md`. The disposition marked
 the dirty-worktree policy/runtime mismatch as repair-required before aggregate
 review evidence. Focused Stage 4 repair evidence is recorded in
 `docs/work/BANDIT-022/implementation-evidence.md`: heartbeat inspection now
 fails closed on dirty or uninspectable Git worktrees before candidate
 inspection, UAT parsing uses explicit Markdown section boundaries, and
 bootstrap-gap next-action mapping falls back to inspection when ambiguous.
+Refreshed Local Qwen Stage 4 evidence is recorded in
+`docs/work/BANDIT-022/local-qwen-review.md` at source head
+`16f26cc9bd5a9b680c78e4469dc56417b7f8db70` with a `non_blocking` verdict and
+two hardening findings.
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as `active_chore`.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-active at Stage 4 after focused repair; refreshed Local Qwen and aggregate
-review evidence are required before landing evidence.
+active at Stage 4 after focused repair and refreshed Local Qwen review;
+aggregate review evidence is required before landing evidence.
 
 ## Phase Map
 
@@ -428,9 +435,9 @@ Current rule:
 
 Current priority:
 
-1. Refresh Local Qwen Stage 4 review for active chore `BANDIT-022`
-   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), then record aggregate review evidence
-   with current `review_subject_hash`.
+1. Record aggregate Stage 4 review evidence for active chore `BANDIT-022`
+   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`) with current `review_subject_hash`
+   `5e2d62f14d79e9cb6a658f0b6a5554d01ccd599386be60ec66d3bca2a5862b28`.
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 ## Phase 6: Coordination Primitive
