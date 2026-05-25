@@ -16,9 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record Stage 2 RED evidence for `BANDIT-021`, the active
-bootstrap-gap chore for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`. All future
-Stage 4 review evidence should use `review_subject_hash`.
+**Current next step:** Implement `BANDIT-021`, the active bootstrap-gap chore
+for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`, so the focused
+`test/artifact-create.test.mjs` RED suite passes. All future Stage 4 review
+evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -105,11 +106,12 @@ and must be addressed one at a time before unrelated new work proceeds.
 `BANDIT-021` is active for `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`; its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND.json`, its brief is
-recorded in `docs/work/BANDIT-021/brief.md`, and `.bandit/bootstrap-gaps.json`
-links the gap as an active chore.
+recorded in `docs/work/BANDIT-021/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-021/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
+the gap as an active chore.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
-landed and closed out. `BANDIT-021` is active; RED evidence is next.
+landed and closed out. `BANDIT-021` is active; implementation is next.
 
 ## Phase Map
 
@@ -292,7 +294,7 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- `BANDIT-021` - General Artifact Create Command. RED evidence is next.
+- `BANDIT-021` - General Artifact Create Command. Implementation is next.
 
 Completed work:
 
@@ -389,7 +391,8 @@ Current rule:
   `review_subject_hash`, Stage 5 landing verdict, local-record landing action,
   retrospective, and gap-ledger disposition are recorded.
 - `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND` is active as `BANDIT-021`; its
-  structured creation spec and brief are recorded, and RED evidence is next.
+  structured creation spec, brief, and RED evidence are recorded, and
+  implementation is next.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -402,7 +405,7 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 2 RED evidence for `BANDIT-021`.
+1. Implement `BANDIT-021` and record Stage 3 implementation evidence.
 2. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 3. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
