@@ -158,16 +158,16 @@
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
       "title": "No heartbeat chore-agent exists yet",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-022",
-      "rationale": "Recurring chore automation should wait until repo-native chore and gate contracts are stronger.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-022."
+      "rationale": "BANDIT-022 created a CLI-governed heartbeat inspect command and policy contract that can inspect eligible low-risk chores and due improvement evaluations from repo-native state while preserving read-only authority, operator-owned UAT boundaries, dirty-worktree refusal, and fail-closed policy validation.",
+      "verification_target": "docs/work/BANDIT-022/landing-action.md",
+      "next_action": "Use bandit heartbeat inspect for read-only recurring chore inspection; keep preparation, landing, product UAT, merge, push, deploy, and policy overrides outside heartbeat authority."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",

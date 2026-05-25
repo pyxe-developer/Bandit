@@ -16,12 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-022` with current `review_subject_hash`
-`5e2d62f14d79e9cb6a658f0b6a5554d01ccd599386be60ec66d3bca2a5862b28`,
-including Codex PM disposition of the refreshed Local Qwen `non_blocking`
-hardening findings. All future Stage 4 review evidence should use
-`review_subject_hash`.
+**Current next step:** Create the next bootstrap-gap chore for
+`BANDIT-GAP-WORKFLOW-COCKPIT`, unless the operator explicitly reprioritizes
+the `BANDIT-022` follow-up hardening chore candidates. All future Stage 4
+review evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -115,31 +113,23 @@ recorded in `docs/work/BANDIT-021/local-qwen-review.md`, Stage 4 review
 evidence is recorded in `docs/work/BANDIT-021/review-evidence.md`, landing
 verdict and landing action are recorded, retrospective closeout is recorded,
 and `.bandit/bootstrap-gaps.json` marks the gap resolved.
-`BANDIT-022` is active for `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`; its structured
+`BANDIT-022` resolved `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`; its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
 `docs/work/BANDIT-022/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-022/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-022/implementation-evidence.md`, initial Local Qwen Stage 4
-evidence and Codex PM disposition are recorded in
-`docs/work/BANDIT-022/local-qwen-review.md` and
-`docs/work/BANDIT-022/stage4-finding-disposition.md`. The disposition marked
-the dirty-worktree policy/runtime mismatch as repair-required before aggregate
-review evidence. Focused Stage 4 repair evidence is recorded in
-`docs/work/BANDIT-022/implementation-evidence.md`: heartbeat inspection now
-fails closed on dirty or uninspectable Git worktrees before candidate
-inspection, UAT parsing uses explicit Markdown section boundaries, and
-bootstrap-gap next-action mapping falls back to inspection when ambiguous.
-Refreshed Local Qwen Stage 4 evidence is recorded in
-`docs/work/BANDIT-022/local-qwen-review.md` at source head
-`16f26cc9bd5a9b680c78e4469dc56417b7f8db70` with a `non_blocking` verdict and
-two hardening findings.
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as `active_chore`.
+`docs/work/BANDIT-022/implementation-evidence.md`, Local Qwen Stage 4 evidence
+is recorded in `docs/work/BANDIT-022/local-qwen-review.md`, aggregate Stage 4
+review evidence is recorded in `docs/work/BANDIT-022/review-evidence.md`,
+landing verdict and local-record landing action are recorded, retrospective
+closeout is recorded, follow-up hardening chore candidates are recorded in
+`docs/work/BANDIT-022/follow-up-chores.md`, and `.bandit/bootstrap-gaps.json`
+marks the gap resolved.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-active at Stage 4 after focused repair and refreshed Local Qwen review;
-aggregate review evidence is required before landing evidence.
+landed and closed out. `BANDIT-GAP-WORKFLOW-COCKPIT` is the next open
+bootstrap-gap queue item.
 
 ## Phase Map
 
@@ -323,7 +313,7 @@ Goal: Separate product acceptance from code-safety judgment.
 Active work:
 
 - none. The next queued bootstrap gap is
-  `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+  `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 Completed work:
 
@@ -337,11 +327,11 @@ Completed work:
 - `BANDIT-019` - Review Subject Hash Evidence Freshness.
 - `BANDIT-020` - Work Item Create Command.
 - `BANDIT-021` - General Artifact Create Command.
+- `BANDIT-022` - Heartbeat Chore Agent Contract.
 
 Queued next:
 
-- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` (next).
-- `BANDIT-GAP-WORKFLOW-COCKPIT`.
+- `BANDIT-GAP-WORKFLOW-COCKPIT` (next).
 
 Expected capabilities:
 
@@ -435,10 +425,8 @@ Current rule:
 
 Current priority:
 
-1. Record aggregate Stage 4 review evidence for active chore `BANDIT-022`
-   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`) with current `review_subject_hash`
-   `5e2d62f14d79e9cb6a658f0b6a5554d01ccd599386be60ec66d3bca2a5862b28`.
-2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. Create the next bootstrap-gap chore for `BANDIT-GAP-WORKFLOW-COCKPIT`, or
+   explicitly disposition it if cockpit work should no longer be next.
 
 ## Phase 6: Coordination Primitive
 
