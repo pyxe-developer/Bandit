@@ -28,9 +28,9 @@ escalated_review_rationale: BANDIT-025 is a bounded Phase 6 coordination-log fou
 pm_disposition: pass
 pm_disposition_rationale: Codex PM accepts the Stage 4 evidence because the implementation preserves CLI authority and repo-native artifacts as canonical state, keeps actor events non-authoritative, fails closed on malformed coordination events, illegal workflow regressions, unsafe or missing evidence references, and terminal contradictions, and exposes derived status only from validated step transitions. Local Qwen's timestamp-validation, work-type parsing, and evidence-integrity findings are real hardening concerns, but they do not weaken the current foundation contract and are durably routed in docs/work/BANDIT-025/qwen-finding-disposition.md.
 non_blocking_findings_routing:
-  - BANDIT-025-TIMESTAMP-VALIDATION; queued_candidate in docs/work/BANDIT-025/qwen-finding-disposition.md for future coordination-log parser or template work.
-  - BANDIT-025-WORK-TYPE-PARSING; queued_candidate in docs/work/BANDIT-025/qwen-finding-disposition.md for future work-item reader or coordination-status work.
-  - BANDIT-025-EVIDENCE-INTEGRITY; queued_candidate in docs/work/BANDIT-025/qwen-finding-disposition.md for future coordination evidence reconciliation or review-subject hash policy work.
+  - follow_up_chore_candidate: BANDIT-025-TIMESTAMP-VALIDATION is queued in docs/work/BANDIT-025/qwen-finding-disposition.md because future coordination-log parser or template work should validate timestamp metadata without reopening this foundation slice.
+  - follow_up_chore_candidate: BANDIT-025-WORK-TYPE-PARSING is queued in docs/work/BANDIT-025/qwen-finding-disposition.md because future work-item reader or coordination-status work should replace Markdown-regex work-type parsing without adding a new source of truth.
+  - follow_up_chore_candidate: BANDIT-025-EVIDENCE-INTEGRITY is queued in docs/work/BANDIT-025/qwen-finding-disposition.md because future coordination evidence reconciliation or review-subject hash policy work should scope content or hash validation deliberately.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass

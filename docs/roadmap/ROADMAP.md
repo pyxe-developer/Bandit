@@ -17,9 +17,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-025` is complete. The current next step is to record the Stage 5
-Landing Agent verdict for `BANDIT-025` using the current aggregate Stage 4
-review evidence.
+`BANDIT-025` is complete, and Stage 5 landing verdict is recorded at
+`docs/work/BANDIT-025/landing-verdict.md` with final verdict `safe-to-land`.
+The current next step is to perform the local-record landing action for
+`BANDIT-025` and record `docs/work/BANDIT-025/landing-action.md`.
 Implementation evidence is recorded in
 `docs/work/BANDIT-025/implementation-evidence.md`; focused coordination tests,
 full test suite, typecheck, `bandit validate`, and whitespace verification
@@ -31,11 +32,13 @@ findings is recorded in `docs/work/BANDIT-025/qwen-finding-disposition.md`.
 Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-025/review-evidence.md` with review-subject hash
 `747e4bbb35589b08fb042b46f911fd43f50597594c894e0a5fa9916c5704f16b`.
-Do not create active-work branches, Phase 7
+The per-work-item coordination log is advanced to
+`landing_verdict_recorded`. Do not create active-work branches, Phase 7
 improvement engine work, Phase 8 web cockpit implementation, claim leases,
 scheduler execution, worktree lifecycle, product UAT approval, automatic
-merge/push/deploy behavior, landing action evidence, retrospective closeout, or
-unrelated feature work during this Stage 5 landing verdict step.
+merge/push/deploy behavior beyond the local-record landing action,
+retrospective closeout, or unrelated feature work during this landing action
+step.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -203,9 +206,10 @@ recorded at `docs/work/BANDIT-025/implementation-evidence.md`; Stage 4 Local
 Qwen evidence is recorded at `docs/work/BANDIT-025/local-qwen-review.md` with
 a `non_blocking` verdict. PM disposition and durable routing are recorded in
 `docs/work/BANDIT-025/qwen-finding-disposition.md`; aggregate Stage 4 review
-evidence is recorded at `docs/work/BANDIT-025/review-evidence.md`, and the
-Stage 5 landing verdict is next. No bootstrap gap is currently recorded as open
-or active.
+evidence is recorded at `docs/work/BANDIT-025/review-evidence.md`, Stage 5
+landing verdict is recorded at `docs/work/BANDIT-025/landing-verdict.md`, and
+local-record landing action evidence is next. No bootstrap gap is currently
+recorded as open or active.
 
 ## Phase Map
 
