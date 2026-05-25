@@ -28,8 +28,8 @@ dispositioned.
 **Last completed milestone:** `BANDIT-017` resolved landing-gate complexity and
 git diagnostics hardening for the Stage 4 review path.
 
-**Current next action:** Create RED evidence for `BANDIT-018` - Live Escalated
-Reviewer Routing.
+**Current next action:** Implement `BANDIT-018` - Live Escalated Reviewer
+Routing.
 
 ## Active Work
 
@@ -49,7 +49,7 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
 Complexity And Git Diagnostics Hardening.
 
-**Expected next deliverable:** RED evidence for `BANDIT-018`.
+**Expected next deliverable:** Implementation evidence for `BANDIT-018`.
 
 ## Known Bootstrap Gaps
 
@@ -166,15 +166,16 @@ bootstrap-gap chore at a time. Current priority is:
 4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 5. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Create exactly one next gap chore at a time. The current step is only to create
-RED evidence for `BANDIT-018`; do not begin later gaps or unrelated feature
-work.
+Create exactly one next gap chore at a time. RED evidence for `BANDIT-018` is
+recorded in `docs/work/BANDIT-018/red-evidence.md`; the current step is only to
+implement the live escalated-reviewer routing path for `BANDIT-018`. Do not
+begin later gaps or unrelated feature work.
 
 ## Required Operator Input
 
-None recorded for the next RED-evidence step. Repo artifacts define
-`BANDIT-018` live escalated-reviewer routing as the active chore and RED
-evidence as the next action.
+None recorded for the next implementation step. Repo artifacts define
+`BANDIT-018` live escalated-reviewer routing as the active chore and
+implementation as the next action.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

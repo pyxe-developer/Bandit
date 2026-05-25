@@ -3,7 +3,8 @@
 ## Status
 
 Bootstrap-gap chore brief created on 2026-05-24 after `BANDIT-017` closeout.
-Production implementation, RED evidence, review evidence, landing verdict,
+RED evidence is recorded in `docs/work/BANDIT-018/red-evidence.md`. Production
+implementation, implementation evidence, review evidence, landing verdict,
 landing action, and retrospective have not started.
 
 ## Goal
@@ -185,7 +186,7 @@ Agent, UAT, policy, business, cost, and risk boundaries.
 |---|---|---|
 | Stage 0: Context Readiness | `pass` | `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and `bandit gaps list` identify `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018` work. `BANDIT-017` has landing-action evidence, retrospective closeout, and a resolved gap-ledger disposition. |
 | Stage 1: Work-Item Brief And Spec | `pass` | This brief records goal, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, bootstrap gaps, expected files, implementation order, smell triggers, required evidence, and operator-input status. |
-| Stage 2: Test Design And RED Evidence | `pending` | Required before production implementation. |
+| Stage 2: Test Design And RED Evidence | `pass` | `docs/work/BANDIT-018/red-evidence.md` records focused failing tests for missing fixture-backed live escalated-review routing and missing paid-provider setup refusal. |
 | Stage 3: Implementation Clean-Code Rubric | `not_applicable` | No production implementation in this step. |
 | Stage 4: Review And Cross-Model Gates | `bootstrap_gap` | This work item is scoped to replace the live escalated-reviewer bootstrap gap with CLI-owned routing; CodeRabbit is available only through the existing fixture-backed live path when applicable. |
 | Stage 5: Landing And UAT | `pending` | UAT is not required for this non-product workflow-infrastructure chore. Landing verdict and landing action evidence are required before the next gap chore can begin. |

@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create RED evidence for `BANDIT-018` - Live Escalated
-Reviewer Routing.
+**Current next step:** Implement `BANDIT-018` - Live Escalated Reviewer
+Routing.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -72,7 +72,8 @@ context.
 `BANDIT-016` and `BANDIT-017` have landing verdicts, landing actions,
 retrospectives, gap-ledger dispositions, and updated context. `BANDIT-018` is
 active for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`; its brief is recorded in
-`docs/work/BANDIT-018/brief.md`, and the next step is RED evidence.
+`docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-018/red-evidence.md`, and the next step is implementation.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
@@ -273,7 +274,7 @@ Completed work:
 
 Queued next:
 
-- RED evidence for `BANDIT-018`.
+- Implementation for `BANDIT-018`.
 
 Expected capabilities:
 
@@ -332,7 +333,8 @@ Current rule:
   local-record landing action, retrospective, and gap-ledger closeout are
   recorded.
 - `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is active as `BANDIT-018`; the brief is
-  recorded in `docs/work/BANDIT-018/brief.md`, and RED evidence is the next
+  recorded in `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
+  `docs/work/BANDIT-018/red-evidence.md`, and implementation is the next
   required step.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
