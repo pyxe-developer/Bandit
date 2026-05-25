@@ -160,9 +160,8 @@ is advanced through `retrospective_recorded` to `closed`.
 state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
-recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at
-`landing_verdict_recorded`. RED evidence is recorded in
-`docs/work/BANDIT-026/red-evidence.md`, with focused tests in
+recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at `landed`. RED
+evidence is recorded in `docs/work/BANDIT-026/red-evidence.md`, with focused tests in
 `test/coordination-log.test.mjs` and `test/coordination-status.test.mjs`.
 Implementation evidence is recorded in
 `docs/work/BANDIT-026/implementation-evidence.md`. The implemented slice
@@ -179,22 +178,25 @@ Stage 4 disposition. No branch, product UAT approval, claim lease, scheduler,
 worktree lifecycle, Phase 7 Improvement Engine work, or Phase 8 Workflow
 Cockpit implementation has started. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-026/landing-verdict.md` with final verdict `safe-to-land`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-026/landing-action.md`.
 
-**Last completed milestone:** `BANDIT-026` Stage 5 landing verdict is recorded
-with final verdict `safe-to-land`.
+**Last completed milestone:** `BANDIT-026` local-record landing action evidence
+is recorded.
 
-**Current next action:** Run `npm run bandit -- land-check BANDIT-026`, then
-record the local-record landing action for `BANDIT-026` if the gate passes.
+**Current next action:** Record `BANDIT-026` retrospective, improvement
+dispositions, and closeout context.
 Do not create active-work branches, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
-approval, or retrospective closeout before landing action evidence is recorded.
+approval, or the next work item before retrospective and closeout evidence are
+recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-026` - Typed State Extensions. Current
-coordination state: `landing_verdict_recorded`; accountable actor: Landing
-Agent; next action: run land-check and record local-record landing action.
+coordination state: `landed`; accountable actor: Codex PM; next action: record
+retrospective, improvement dispositions, and closeout context.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -215,8 +217,8 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
 
-**Expected next deliverable:** local-record landing action evidence for
-`BANDIT-026`.
+**Expected next deliverable:** retrospective and improvement disposition
+evidence for `BANDIT-026`.
 
 ## Known Bootstrap Gaps
 
@@ -350,15 +352,14 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 
 Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved, `BANDIT-025` is closed out, and
-`BANDIT-026` is active at `landing_verdict_recorded` with Stage 5 landing
-verdict recorded, so the current priority is:
+`BANDIT-026` is active at `landed` with local-record landing action evidence
+recorded, so the current priority is:
 
-1. Run `npm run bandit -- land-check BANDIT-026`.
-2. If the gate passes, record local-record landing action evidence for
-   `BANDIT-026`.
-3. Stop before retrospective closeout; do not create active-work branches, claim
-   leases, scheduler, worktree lifecycle, cockpit implementation, product UAT
-   approval, or Phase 7 evaluation behavior until landing action evidence is
+1. Record `BANDIT-026` retrospective and improvement dispositions.
+2. Update roadmap/current-context closeout and close `BANDIT-026`.
+3. Stop before creating the next work item, active-work branches, claim leases,
+   scheduler, worktree lifecycle, cockpit implementation, product UAT approval,
+   or Phase 7 evaluation behavior until retrospective and closeout evidence are
    recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
@@ -367,12 +368,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to run `land-check` or record local-record
-landing action evidence for `BANDIT-026` from existing repo artifacts. If the
-next work step requires product direction, UI scope tradeoffs, policy changes,
-explicit cost or risk overrides, actual cockpit implementation decisions,
-product UAT approval, or a typed-state scope decision that the roadmap cannot
-answer, halt and ask for that input directly.
+No operator-owned input is required to record `BANDIT-026` retrospective,
+improvement dispositions, and closeout context from existing repo artifacts. If
+the next work step requires product direction, UI scope tradeoffs, policy
+changes, explicit cost or risk overrides, actual cockpit implementation
+decisions, product UAT approval, or a typed-state scope decision that the
+roadmap cannot answer, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

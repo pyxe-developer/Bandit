@@ -17,8 +17,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is active at
-`landing_verdict_recorded` for typed state extensions. Its structured creation
+Coordination Primitive slice. `BANDIT-026` is active at `landed` for typed state
+extensions. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
@@ -34,16 +34,16 @@ is recorded in `docs/work/BANDIT-026/review-evidence.md` with current
 `review_subject_hash`
 `967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-026/landing-verdict.md` with
-final verdict `safe-to-land`.
+final verdict `safe-to-land`. Local-record landing action evidence is recorded
+in `docs/work/BANDIT-026/landing-action.md`.
 
-The current next step is to run `npm run bandit -- land-check BANDIT-026`, then
-record local-record landing action evidence for `BANDIT-026` if the gate
-passes.
+The current next step is to record `BANDIT-026` retrospective, improvement
+dispositions, and closeout context.
 Do not create active-work branches, Phase 7 improvement engine work, Phase 8 web
 cockpit implementation, claim leases, scheduler execution, worktree lifecycle,
-product UAT approval, automatic merge/push/deploy behavior, landing action
-evidence, retrospective closeout, or unrelated feature work before the landing
-action is recorded.
+product UAT approval, automatic merge/push/deploy behavior, the next work item,
+or unrelated feature work before retrospective and closeout evidence are
+recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -518,13 +518,12 @@ Current rule:
 
 Current priority:
 
-1. Run `npm run bandit -- land-check BANDIT-026`.
-2. If the gate passes, record local-record landing action evidence for
-   `BANDIT-026`.
-3. Stop before retrospective closeout; do not create active-work branches, claim
-   leases, scheduler execution, worktree lifecycle, cockpit implementation,
-   product UAT approval, or Phase 7 evaluation behavior until landing action
-   evidence is recorded.
+1. Record `BANDIT-026` retrospective and improvement dispositions.
+2. Update roadmap/current-context closeout and close `BANDIT-026`.
+3. Stop before creating the next work item, active-work branches, claim leases,
+   scheduler execution, worktree lifecycle, cockpit implementation, product UAT
+   approval, or Phase 7 evaluation behavior until retrospective and closeout
+   evidence are recorded.
 
 ## Phase 6: Coordination Primitive
 
