@@ -89,7 +89,7 @@
       ],
       "linked_work_item": "BANDIT-018",
       "rationale": "The placeholder gate exists; BANDIT-018 implementation evidence records CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
-      "next_action": "Run BANDIT-018 next: record review and cross-model evidence for the implementation head, then landing verdict, landing action, retrospective, and gap disposition before unrelated work-item creation, artifact creation, heartbeat, or cockpit work."
+      "next_action": "Repair BANDIT-018 next: add or explicitly disposition the missing AC10 focused tests identified in docs/work/BANDIT-018/review-evidence.md, then refresh review evidence before landing verdict, landing action, retrospective, and gap disposition."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",
