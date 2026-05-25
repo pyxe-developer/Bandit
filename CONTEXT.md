@@ -106,6 +106,42 @@ _Avoid_: split timeline, actor-only source of truth, workflow-only audit trail
 A rebuildable view of the latest accepted workflow state computed from the append-only transition log.
 _Avoid_: canonical state, hidden cache, dashboard truth
 
+**Authoritative In-Flight Registry**:
+A repo-native coordination artifact that agents may treat as authoritative for currently claimed or runnable work only after CLI reconciliation with the relevant work-item coordination state.
+_Avoid_: advisory dashboard, chat queue, stale status summary
+
+**Work Surface Reservation**:
+An exclusive coordination claim over the files, artifacts, or repo resources a work stage may write while it is in flight.
+_Avoid_: best-effort note, read-only interest, implied ownership
+
+**Declared Work Surface**:
+The files, path patterns, or named repo resources a work item or chore is allowed to write during a claimable stage.
+_Avoid_: inferred edit area, unlimited repo access, post-hoc collision check
+
+**Single-Claim Heartbeat**:
+A recurring automation activation that may claim and start at most one runnable work stage after reconciling coordination state and work surface reservations.
+_Avoid_: batch runner, queue drainer, multi-claim activation
+
+**Work Claim Lease**:
+A time-bound exclusive claim over one work stage and its work surface reservation, with renewal required during long-running work and recovery required before clearing expired claims with unmerged changes.
+_Avoid_: permanent lock, blind timeout cleanup, chat-owned ownership
+
+**Claim-First Worktree Start**:
+The rule that a session must record an exclusive work claim lease before creating an ephemeral worktree for that stage.
+_Avoid_: speculative worktree, claim-after-start, parallel unclaimed setup
+
+**Atomic Work Claim**:
+A CLI-owned claim operation that reconciles current work-item state and in-flight reservations, then either records one exclusive work claim lease or fails without starting work.
+_Avoid_: manual registry edit, advisory claim, best-effort lock
+
+**One Active Claim Per Work Item**:
+The v0 coordination rule that a work item may have no more than one active work claim lease at a time, even when multiple stages appear theoretically available.
+_Avoid_: same-item parallel stages, split ownership inside one work item, evidence race
+
+**Post-Bootstrap Parallel Workstreams**:
+Bandit's future ability to run multiple non-overlapping work items at the same time after the active bootstrap-gap lane is resolved, blocked, or explicitly dispositioned.
+_Avoid_: bootstrap shortcut, one-gap-at-a-time bypass, uncontrolled concurrency
+
 **Agent Coordination Contract**:
 A repo-native protocol for agents to claim, hand off, block, complete, request repair, and resume bounded work.
 _Avoid_: informal delegation, chat-only handoff, human task board
@@ -161,6 +197,10 @@ _Avoid_: generic task, chore
 **Chore**:
 A bounded non-product work unit for trust-layer maintenance, tooling, documentation, state repair, evidence refresh, cleanup, or continuous-improvement work.
 _Avoid_: slice, feature, backlog junk drawer
+
+**Tagged Chore Ledger**:
+A single repo-native queue of chores whose origin, risk, heartbeat eligibility, blocker state, and improvement metadata are represented with tags or required fields rather than separate chore queues.
+_Avoid_: separate chore logs, hidden follow-up bucket, untyped maintenance backlog
 
 **Bootstrap Gap**:
 A missing final workflow capability identified while Bandit is still bootstrapping. A gap may be recorded only to avoid pretending a gate ran, and it must become executable gap-resolution work at this stage of the project unless an operator-owned product or policy decision blocks that work. After the current active slice lands, open bootstrap gaps are addressed one at a time before unrelated new work proceeds.
