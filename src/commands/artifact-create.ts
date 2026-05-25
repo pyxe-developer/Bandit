@@ -51,7 +51,7 @@ function resolveRepoPath(repoRoot: string, inputPath: string) {
     : path.resolve(repoRoot, inputPath);
   const relativePath = path.relative(repoRoot, absolutePath);
 
-  if (relativePath.startsWith("..") || path.isAbsolute(relativePath)) {
+  if (isOutsideRepo(relativePath)) {
     throw new Error(`Artifact spec path must stay within repository: ${inputPath}`);
   }
 
@@ -134,6 +134,14 @@ function requireString(spec: Record<string, unknown>, field: string) {
 
 function normalizeDisplayPath(filePath: string) {
   return filePath.split(path.sep).join("/");
+}
+
+function isOutsideRepo(relativePath: string) {
+  return (
+    relativePath === ".." ||
+    relativePath.startsWith(`..${path.sep}`) ||
+    path.isAbsolute(relativePath)
+  );
 }
 
 async function pathExists(filePath: string) {
