@@ -16,14 +16,13 @@ brief, RED evidence, implementation evidence, review evidence, landing verdict,
 local-record landing action, retrospective, and gap-ledger disposition are
 recorded in `docs/work/BANDIT-017/` and `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-018` is active as the bootstrap-gap chore for
-`BANDIT-GAP-LIVE-ESCALATED-REVIEWER`. Its brief is recorded in
+`BANDIT-018` resolved `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`. Its brief is recorded in
 `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-018/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-018/implementation-evidence.md`, reviewer routing evidence is
 recorded in `docs/work/BANDIT-018/routing-decision.md`, Local Qwen evidence is
 recorded in `docs/work/BANDIT-018/local-qwen-review.md`, escalated reviewer
-blocker evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`,
+evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`,
 side-by-side Qwen 3.6 / Sonnet 4.6 / Opus 4.7 comparison evidence is recorded
 in `docs/work/BANDIT-018/model-comparison.md`, aggregate review evidence is
 recorded in `docs/work/BANDIT-018/review-evidence.md`, focused repair / PM
@@ -32,23 +31,30 @@ recorded in `docs/work/BANDIT-018/stage4-finding-disposition.md`, and focused
 repair-head Qwen 3.6 / Opus 4.7 refresh evidence is recorded in
 `docs/work/BANDIT-018/local-qwen-review.md`,
 `docs/work/BANDIT-018/model-comparison.md`, and
-`docs/work/BANDIT-018/review-evidence.md`.
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-018` as an active chore.
+`docs/work/BANDIT-018/review-evidence.md`. Landing verdict, local-record
+landing action, retrospective, and gap-ledger disposition are recorded in
+`docs/work/BANDIT-018/` and `.bandit/bootstrap-gaps.json`.
+
+`BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is active as `BANDIT-019`. The
+operator directed Codex PM to close `BANDIT-018` under the existing
+terminal-disposition-only policy and make `BANDIT-019` the next work item so
+all later work uses hash-based evidence freshness rather than raw git HEAD
+freshness.
 Do not begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until `BANDIT-018` is landed, blocked on
+Phase 9 dogfood, or feature work until `BANDIT-019` is landed, blocked on
 operator-owned input, or explicitly dispositioned.
 
-**Last completed milestone:** `BANDIT-017` resolved landing-gate complexity and
-git diagnostics hardening for the Stage 4 review path.
+**Last completed milestone:** `BANDIT-018` resolved live escalated reviewer
+routing for the bootstrap scope.
 
-**Current next action:** Create the `BANDIT-018` landing verdict from current
-Stage 4 review evidence; do not create landing action, retrospective, or the
-next bootstrap-gap chore until landing verdict passes.
+**Current next action:** Create the `BANDIT-019` brief for
+`BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS`; do not implement code until the
+brief and RED evidence are recorded.
 
 ## Active Work
 
-**Active work item:** `BANDIT-018` - Live Escalated Reviewer Routing.
+**Active work item:** `BANDIT-019` - Review Subject Hash Evidence Freshness.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -62,9 +68,10 @@ CLI-Owned UAT Approval Artifact And Stale-UAT Detection; `BANDIT-013` -
 Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
-Complexity And Git Diagnostics Hardening.
+Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
+Reviewer Routing.
 
-**Expected next deliverable:** `BANDIT-018` landing verdict.
+**Expected next deliverable:** `BANDIT-019` brief.
 
 ## Known Bootstrap Gaps
 
@@ -96,19 +103,10 @@ Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by
 `BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
-`BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is active as
-`BANDIT-018`; implementation evidence, reviewer routing evidence, Local Qwen
-evidence, escalated reviewer blocker evidence, model-comparison evidence, and
-aggregate review evidence are recorded. AC10 repair evidence is now recorded
-in `docs/work/BANDIT-018/ac10-repair-evidence.md`; repair-head Stage 4 refresh
-evidence is recorded in `docs/work/BANDIT-018/local-qwen-review.md`,
-`docs/work/BANDIT-018/model-comparison.md`, and
-`docs/work/BANDIT-018/review-evidence.md`. Focused repair / PM disposition for
-the remaining non-blocking Stage 4 findings is recorded in
-`docs/work/BANDIT-018/stage4-finding-disposition.md`. Focused repair-head
-Stage 4 refresh evidence is now current at
-`e80ddbe635bd68e8cdbf04d7a2dca8aff719a0c5`; the current step is to create the
-landing verdict.
+`BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is resolved by
+`BANDIT-018`; landing verdict, landing action, retrospective, and gap-ledger
+disposition are recorded. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is active
+as `BANDIT-019`; the current step is to create the brief.
 `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
@@ -187,32 +185,16 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018`; AC10 repair
-   evidence, repair-head Stage 4 review refresh evidence, focused
-   non-blocking finding repair / PM disposition, and focused repair-head
-   Stage 4 review refresh evidence are recorded. The next action is to create
-   the `BANDIT-018` landing verdict.
+1. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` as active `BANDIT-019`; the
+   next action is to create the `BANDIT-019` brief.
 2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 5. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Create exactly one next gap chore at a time. RED evidence for `BANDIT-018` is
-recorded in `docs/work/BANDIT-018/red-evidence.md`; implementation evidence is
-recorded in `docs/work/BANDIT-018/implementation-evidence.md`; reviewer routing
-evidence is recorded in `docs/work/BANDIT-018/routing-decision.md`; Local Qwen
-review evidence is recorded in `docs/work/BANDIT-018/local-qwen-review.md`;
-escalated reviewer blocker evidence is recorded in
-`docs/work/BANDIT-018/escalated-review.md`; side-by-side model comparison
-evidence is recorded in `docs/work/BANDIT-018/model-comparison.md`; and
-aggregate review evidence is recorded in `docs/work/BANDIT-018/review-evidence.md`.
-Focused repair / PM disposition for the repair-head non-blocking Stage 4
-findings is recorded in
-`docs/work/BANDIT-018/stage4-finding-disposition.md`, and focused repair-head
-Stage 4 refresh evidence is recorded in `docs/work/BANDIT-018/model-comparison.md`
-and `docs/work/BANDIT-018/review-evidence.md`. The current step is to create
-the landing verdict. Do not begin later gaps, unrelated feature work, landing
-action, or retrospective until landing verdict passes.
+Create exactly one next gap chore at a time. Do not begin later gaps, unrelated
+feature work, or cockpit work until `BANDIT-019` has landing action evidence,
+retrospective closeout, and gap-ledger disposition.
 
 ## Required Operator Input
 

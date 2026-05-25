@@ -80,16 +80,32 @@
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
       "title": "Live escalated adversarial reviewer routing unavailable",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-010",
       "source_artifacts": [
         "docs/work/BANDIT-010/landing-action.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-018",
-      "rationale": "The placeholder gate exists; BANDIT-018 implementation evidence records CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
-      "next_action": "Create the BANDIT-018 landing verdict from current Stage 4 review evidence before landing action, retrospective, and gap disposition."
+      "rationale": "BANDIT-018 created CLI-owned escalated-review routing, configured reviewer profiles, fixture-backed deterministic live-review execution, fail-closed paid-provider setup refusal, landing-gate integration for configured live routes, and operator-approved Opus 4.7 escalated review evidence for this bootstrap chore.",
+      "verification_target": "docs/work/BANDIT-018/landing-action.md",
+      "next_action": "Use bandit escalated-review run <work-item-id> for configured escalated-review routing; use operator-approved headless reviewer evidence only when explicitly recorded as bootstrap replacement evidence."
+    },
+    {
+      "id": "BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS",
+      "title": "Stage 4 freshness depends on raw git HEAD instead of review subject hash",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-018",
+      "source_artifacts": [
+        "docs/work/BANDIT-018/review-evidence.md",
+        "docs/work/BANDIT-018/landing-action.md",
+        "docs/work/BANDIT-018/retrospective.md"
+      ],
+      "linked_work_item": "BANDIT-019",
+      "rationale": "BANDIT-018 exposed that using raw git HEAD as the primary review freshness key can create a self-referential loop because writing evidence artifacts advances HEAD even when the reviewable source did not change.",
+      "next_action": "Execute BANDIT-019 to add review-subject hash freshness so evidence-only commits do not force repeated Stage 4 review loops."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",
