@@ -16,11 +16,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Repair `BANDIT-018` before landing by adding or
-explicitly dispositioning the missing AC10 focused tests identified by Sonnet
-4.6 and Opus 4.7 in `docs/work/BANDIT-018/review-evidence.md`; do not create
-landing verdict, landing action, retrospective, or the next bootstrap-gap chore
-until the repair and refreshed review evidence are recorded.
+**Current next step:** Refresh `BANDIT-018` Stage 4 review evidence at the AC10
+repair head recorded in `docs/work/BANDIT-018/ac10-repair-evidence.md`; do not
+create landing verdict, landing action, retrospective, or the next
+bootstrap-gap chore until refreshed review evidence is current and
+non-blocking.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -83,16 +83,18 @@ recorded in `docs/work/BANDIT-018/local-qwen-review.md`, and escalated reviewer
 blocker evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`.
 Side-by-side Qwen 3.6 / Sonnet 4.6 / Opus 4.7 comparison evidence is recorded
 in `docs/work/BANDIT-018/model-comparison.md`, and aggregate review evidence is
-recorded in `docs/work/BANDIT-018/review-evidence.md`. Landing verdict,
-landing action, and retrospective are blocked on repair for the AC10
-coverage/spec-alignment finding accepted in review evidence.
+recorded in `docs/work/BANDIT-018/review-evidence.md`. AC10 repair evidence is
+recorded in `docs/work/BANDIT-018/ac10-repair-evidence.md`. Landing verdict,
+landing action, and retrospective are blocked on refreshed current review
+evidence for the AC10 repair head.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
 `BANDIT-018` is the active bootstrap-gap chore with implementation evidence,
-blocked Stage 4 reviewer evidence, side-by-side model comparison, and aggregate
-review evidence recorded. It is currently `needs-repair`.
+AC10 repair evidence, blocked Stage 4 reviewer evidence, side-by-side model
+comparison, and aggregate review evidence recorded. It is currently awaiting
+refreshed Stage 4 review evidence.
 
 ## Phase Map
 
@@ -288,8 +290,8 @@ Completed work:
 
 Queued next:
 
-- Repair the `BANDIT-018` AC10 coverage/spec-alignment blocker, then refresh
-  review and cross-model evidence.
+- Refresh `BANDIT-018` review and cross-model evidence at the AC10 repair
+  head.
 
 Expected capabilities:
 

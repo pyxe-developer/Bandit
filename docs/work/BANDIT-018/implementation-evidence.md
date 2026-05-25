@@ -3,7 +3,8 @@
 ## Status
 
 Implementation recorded on 2026-05-25 after RED evidence head
-`30d03cda553d47d34e15dc03f8ba19282f06fe14`.
+`30d03cda553d47d34e15dc03f8ba19282f06fe14`. AC10 repair evidence is recorded
+in `docs/work/BANDIT-018/ac10-repair-evidence.md`.
 
 ## Implemented Behavior
 
@@ -37,7 +38,7 @@ Implementation recorded on 2026-05-25 after RED evidence head
 | AC6, AC7 | Non-fixture provider execution fails closed with blocking evidence and exact operator-owned setup/credential/cost approval blockers. |
 | AC8 | `land-check` rejects configured live routes that still present placeholder-only bootstrap evidence. |
 | AC9 | Existing Local Qwen, CodeRabbit, Stage 4, UAT, auto-landing, Landing Agent, and bootstrap-gap tests pass. |
-| AC10 | Focused tests cover fixture pass, paid-provider setup refusal, and land-check configured-route placeholder rejection. |
+| AC10 | Focused tests now cover fixture pass, paid-provider setup refusal, reviewer blocker verdicts, stale source heads, unavailable fixture/provider state, timed-out provider state, malformed reviewer output, land-check live-pass integration, and land-check configured-route placeholder rejection. |
 
 ## Clean-Code Check
 
@@ -66,13 +67,13 @@ Implementation recorded on 2026-05-25 after RED evidence head
 node --test --test-name-pattern "escalated-review" test/landing-gates.test.mjs
 ```
 
-Result: `pass` - 3 focused tests passed.
+Result: `pass` - 8 focused tests passed after AC10 repair.
 
 ```sh
 npm test
 ```
 
-Result: `pass` - 158 tests passed.
+Result: `pass` - 164 tests passed after AC10 repair.
 
 ```sh
 npm run typecheck
@@ -90,10 +91,10 @@ Result: `pass` - Bandit state is valid.
 
 | Stage | Verdict | Evidence |
 |---|---|
-| Stage 3: Implementation Clean-Code Rubric | `pass` | Focused and full tests pass; implementation uses explicit repo-native state, narrow command routing, fail-closed refusal paths, and no hidden provider authority. |
-| Stage 4: Review And Cross-Model Gates | `pending` | Review evidence, Local Qwen evidence, and aggregate review evidence still need to be recorded for this implementation head. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | Focused and full tests pass; implementation uses explicit repo-native state, narrow command routing, fail-closed refusal paths, and no hidden provider authority. AC10 repair broadened deterministic refusal-path coverage without widening scope. |
+| Stage 4: Review And Cross-Model Gates | `pending` | Review evidence must be refreshed at the AC10 repair head before landing verdict or landing action. |
 
 ## Next Step
 
-Record `BANDIT-018` review and cross-model evidence for this implementation
-head before any landing verdict or landing action.
+Refresh `BANDIT-018` review evidence at the AC10 repair head before any landing
+verdict or landing action.

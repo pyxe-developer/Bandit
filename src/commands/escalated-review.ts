@@ -11,6 +11,7 @@ import { readWorkItem } from "../state/work-items.js";
 
 type EscalatedReviewFixture = {
   source_head?: string;
+  provider_status?: string;
   verdict?: string;
   findings_status?: string;
   summary?: string;
@@ -66,10 +67,31 @@ async function runEscalatedReview(repoRoot: string, options: RunOptions) {
     );
   }
 
-  const fixture = await readFixture(
-    repoRoot,
-    options.fixturePath ?? profile.fixturePath
-  );
+  let fixture: EscalatedReviewFixture;
+  try {
+    fixture = await readFixture(
+      repoRoot,
+      options.fixturePath ?? profile.fixturePath
+    );
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      await writeUnavailableEscalatedReview(repoRoot, {
+        workItemId,
+        sourceHead: currentHead,
+        profileId: profile.profileId,
+        triggerRationale: routingDecision.finalDecision,
+        reason: "fixture not found"
+      });
+      throw new Error("Escalated reviewer unavailable: fixture not found");
+    }
+
+    if (error instanceof SyntaxError) {
+      throw new Error("Malformed escalated reviewer output");
+    }
+
+    throw error;
+  }
+
   const sourceHead = fixture.source_head ?? currentHead;
   const sourceDriftStatus = sourceDrift(sourceHead, currentHead);
   const verdict = fixture.verdict ?? "blocker";
@@ -77,6 +99,24 @@ async function runEscalatedReview(repoRoot: string, options: RunOptions) {
   const disposition = fixture.summary ?? "Fixture escalated reviewer returned no summary.";
 
   validateFixtureOutput(fixture);
+
+  if (
+    fixture.provider_status === "timeout" ||
+    fixture.provider_status === "unavailable"
+  ) {
+    const reason =
+      fixture.provider_status === "timeout"
+        ? "provider_timeout"
+        : "provider_unavailable";
+    await writeUnavailableEscalatedReview(repoRoot, {
+      workItemId,
+      sourceHead,
+      profileId: profile.profileId,
+      triggerRationale: routingDecision.finalDecision,
+      reason
+    });
+    throw new Error(`Escalated reviewer unavailable: ${reason}`);
+  }
 
   const artifactPath = await writeEscalatedReview(repoRoot, {
     workItemId,
@@ -168,6 +208,32 @@ async function writeBlockedEscalatedReview(
   });
 }
 
+async function writeUnavailableEscalatedReview(
+  repoRoot: string,
+  input: {
+    workItemId: string;
+    sourceHead: string;
+    profileId: string;
+    triggerRationale: string;
+    reason: string;
+  }
+) {
+  await writeEscalatedReview(repoRoot, {
+    workItemId: input.workItemId,
+    sourceHead: input.sourceHead,
+    profileId: input.profileId,
+    triggerRationale: input.triggerRationale,
+    availabilityStatus: "unavailable",
+    reviewerVerdict: "blocker",
+    disposition:
+      input.reason === "fixture not found"
+        ? "Fixture provider unavailable: fixture not found."
+        : `Provider unavailable: ${input.reason}.`,
+    sourceDriftStatus: sourceDrift(input.sourceHead, input.sourceHead),
+    bootstrapGapEvidence: ["none"]
+  });
+}
+
 function sourceDrift(sourceHead: string, currentHead: string) {
   if (sourceHead === "unknown" || currentHead === "unknown") {
     return "unavailable";
@@ -180,4 +246,8 @@ function isBlockingFindingsStatus(findingsStatus: string) {
   return ["open", "unresolved", "inconclusive", "unavailable"].includes(
     findingsStatus
   );
+}
+
+function isMissingPathError(error: unknown) {
+  return error instanceof Error && "code" in error && error.code === "ENOENT";
 }

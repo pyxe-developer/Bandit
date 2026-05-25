@@ -924,6 +924,310 @@ test("escalated-review fails closed when paid provider setup is not explicitly c
   );
 });
 
+test("escalated-review records blocker fixture evidence and fails closed", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-945", "Escalated Review Blocker");
+  await writeRoutingDecision(repo, "BANDIT-945", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-blocker.json"
+  });
+  await mkdir(path.join(repo, "fixtures"), { recursive: true });
+  await writeFile(
+    path.join(repo, "fixtures/escalated-review-blocker.json"),
+    JSON.stringify(
+      {
+        verdict: "blocker",
+        findings_status: "open",
+        summary: "Fixture reviewer found an unresolved trust-boundary bug."
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  const result = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-945",
+    "--fixture",
+    "fixtures/escalated-review-blocker.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Escalated reviewer verdict blocks landing: blocker/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-945/escalated-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, new RegExp(`source_head: ${sourceHead}`));
+  assert.match(evidence, /reviewer_verdict: blocker/);
+  assert.match(evidence, /source_drift_status: current/);
+});
+
+test("escalated-review records stale fixture evidence and fails closed", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const staleHead = await commitAll(repo, "Initial state");
+  await writeFile(path.join(repo, "changed.txt"), "changed\n", "utf8");
+  await commitAll(repo, "Change after fixture source");
+  await writeWorkBrief(repo, "BANDIT-946", "Stale Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-946", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-stale.json"
+  });
+  await mkdir(path.join(repo, "fixtures"), { recursive: true });
+  await writeFile(
+    path.join(repo, "fixtures/escalated-review-stale.json"),
+    JSON.stringify(
+      {
+        source_head: staleHead,
+        verdict: "pass",
+        findings_status: "none",
+        summary: "Fixture reviewer passed an older source head."
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  const result = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-946",
+    "--fixture",
+    "fixtures/escalated-review-stale.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Escalated review evidence is stale/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-946/escalated-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, new RegExp(`source_head: ${staleHead}`));
+  assert.match(evidence, /reviewer_verdict: pass/);
+  assert.match(evidence, /source_drift_status: stale/);
+});
+
+test("escalated-review records unavailable fixture evidence and fails closed", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-947", "Unavailable Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-947", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-unavailable.json"
+  });
+
+  const result = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-947",
+    "--fixture",
+    "fixtures/escalated-review-unavailable.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Escalated reviewer unavailable: fixture not found/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-947/escalated-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /availability_status: unavailable/);
+  assert.match(evidence, /reviewer_verdict: blocker/);
+  assert.match(evidence, /Fixture provider unavailable: fixture not found/);
+});
+
+test("escalated-review records timed-out fixture evidence and fails closed", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-948", "Timed Out Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-948", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-timeout.json"
+  });
+  await mkdir(path.join(repo, "fixtures"), { recursive: true });
+  await writeFile(
+    path.join(repo, "fixtures/escalated-review-timeout.json"),
+    JSON.stringify(
+      {
+        provider_status: "timeout",
+        verdict: "blocker",
+        findings_status: "unavailable",
+        summary: "Fixture provider timed out before returning a usable review."
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  const result = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-948",
+    "--fixture",
+    "fixtures/escalated-review-timeout.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Escalated reviewer unavailable: provider_timeout/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-948/escalated-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /availability_status: unavailable/);
+  assert.match(evidence, /reviewer_verdict: blocker/);
+  assert.match(evidence, /Provider unavailable: provider_timeout/);
+});
+
+test("escalated-review fails closed on malformed fixture output", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-949", "Malformed Escalated Review");
+  await writeRoutingDecision(repo, "BANDIT-949", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-malformed.json"
+  });
+  await mkdir(path.join(repo, "fixtures"), { recursive: true });
+  await writeFile(
+    path.join(repo, "fixtures/escalated-review-malformed.json"),
+    "{not-json",
+    "utf8"
+  );
+
+  const result = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-949",
+    "--fixture",
+    "fixtures/escalated-review-malformed.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Malformed escalated reviewer output/);
+  await assert.rejects(
+    readFile(path.join(repo, "docs/work/BANDIT-949/escalated-review.md"), "utf8"),
+    /ENOENT/
+  );
+});
+
+test("escalated-review live pass evidence satisfies land-check integration", async () => {
+  const repo = await createInitializedRepo({
+    smellCatalog: escalatedSmellCatalog
+  });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-950", "Live Escalated Review Land Check");
+  await writeRoutingDecision(repo, "BANDIT-950", {
+    selectedRoute: "security-reviewer-fixture",
+    smellIds: ["BANDIT-SMELL-ESCALATED-REVIEW"],
+    escalationOutcome: "require_escalated_review",
+    finalDecision: "Require configured escalated adversarial review."
+  });
+  await writeEscalatedReviewerProfile(repo, {
+    profileId: "security-reviewer-fixture",
+    provider: "fixture",
+    fixturePath: "fixtures/escalated-review-pass.json"
+  });
+  await mkdir(path.join(repo, "fixtures"), { recursive: true });
+  await writeFile(
+    path.join(repo, "fixtures/escalated-review-pass.json"),
+    JSON.stringify(
+      {
+        verdict: "pass",
+        findings_status: "none",
+        summary: "Fixture reviewer found no blockers."
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+  await writeReviewEvidence(repo, "BANDIT-950", {
+    sourceHead,
+    escalatedReviewRequired: true,
+    escalatedReviewState: "pass"
+  });
+  await writeLandingVerdict(repo, "BANDIT-950", {
+    sourceHead,
+    escalatedReviewState: "pass"
+  });
+
+  const reviewResult = await runBandit(repo, [
+    "escalated-review",
+    "run",
+    "BANDIT-950",
+    "--fixture",
+    "fixtures/escalated-review-pass.json"
+  ]);
+  assert.equal(reviewResult.code, 0, reviewResult.stderr);
+
+  const landCheck = await runBandit(repo, ["land-check", "BANDIT-950"]);
+
+  assert.equal(landCheck.code, 0, landCheck.stderr);
+  assert.match(landCheck.stdout, /Escalated review: pass/);
+  assert.match(
+    landCheck.stdout,
+    /Escalated review profile: security-reviewer-fixture/
+  );
+});
+
 test("land-check rejects placeholder escalated evidence when live routing is configured", async () => {
   const repo = await createInitializedRepo({
     smellCatalog: escalatedSmellCatalog
