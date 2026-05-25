@@ -5,6 +5,7 @@ import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js
 import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
+import { validateHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
 import { validateLandingAgentContract } from "../state/landing-agent-contract.js";
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
@@ -39,6 +40,7 @@ export async function validateBandit(repoRoot: string) {
   await validateUatApprovalArtifacts(repoRoot);
   await validateBootstrapGaps(repoRoot);
   await validateAutoLandingPolicy(repoRoot);
+  await validateHeartbeatPolicy(repoRoot);
   await validateLandingAgentContract(repoRoot);
   await validateStage4EvidenceHeadPolicy(repoRoot);
 

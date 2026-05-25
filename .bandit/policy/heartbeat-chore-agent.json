@@ -1,0 +1,27 @@
+{
+  "contract_version": 1,
+  "policy_id": "heartbeat-chore-agent",
+  "allowed_actions": [
+    "inspect",
+    "prepare_evidence"
+  ],
+  "forbidden_actions": [
+    "land",
+    "merge",
+    "push",
+    "deploy",
+    "feature_implementation",
+    "uat_approval"
+  ],
+  "eligible_work_kinds": [
+    "chore",
+    "improvement_chore"
+  ],
+  "required_state_sources": [
+    "docs/work",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/policy/heartbeat-chore-agent.json"
+  ],
+  "dirty_worktree_behavior": "fail_closed",
+  "operator_input_behavior": "report_and_halt"
+}

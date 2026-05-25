@@ -11,6 +11,7 @@ export function getBanditPaths(repoRoot: string) {
     events: path.join(stateRoot, "events.jsonl"),
     bootstrapGaps: path.join(stateRoot, "bootstrap-gaps.json"),
     autoLandingPolicy: path.join(policyRoot, "auto-landing.json"),
+    heartbeatPolicy: path.join(policyRoot, "heartbeat-chore-agent.json"),
     landingAgentContract: path.join(policyRoot, "landing-agent.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
     smellTriggers: path.join(policyRoot, "smell-triggers.json")

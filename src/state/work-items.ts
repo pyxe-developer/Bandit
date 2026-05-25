@@ -56,7 +56,12 @@ async function readWorkItemBrief(workRoot: string, directoryName: string) {
     throw new Error(`Malformed work item brief: ${briefPath}`);
   }
 
-  const [, id, title] = header;
+  const id = header[1];
+  const title = header[2];
+  if (!id || !title) {
+    throw new Error(`Malformed work item brief: ${briefPath}`);
+  }
+
   if (id !== directoryName) {
     throw new Error(
       `Malformed work item brief: header ID ${id} does not match ${directoryName}`

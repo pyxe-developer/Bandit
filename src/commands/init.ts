@@ -3,6 +3,7 @@ import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
+import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
 import { writeDefaultStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
@@ -12,6 +13,7 @@ export async function initBandit(repoRoot: string) {
   const alreadyInitialized = await pathExists(paths.config);
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
+  const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
   const stage4EvidenceHeadPolicyExists = await pathExists(
     paths.stage4EvidenceHeadPolicy
@@ -25,6 +27,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!autoLandingPolicyExists) {
     await writeDefaultAutoLandingPolicy(paths.autoLandingPolicy);
+  }
+
+  if (!heartbeatPolicyExists) {
+    await writeDefaultHeartbeatPolicy(paths.heartbeatPolicy);
   }
 
   if (!landingAgentContractExists) {
