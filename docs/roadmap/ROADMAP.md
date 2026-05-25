@@ -14,15 +14,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 5 - UAT And Auto-Landing.
+**Current phase:** Phase 6 - Coordination Primitive.
 
-**Current next step:** Record retrospective closeout and bootstrap-gap
-disposition for active chore `BANDIT-024` - Workflow Cockpit Boundary Scope.
-`BANDIT-024` links `BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow
-cockpit-boundary chore from existing repo artifacts; do not start Phase 8 web
-cockpit implementation, product UAT approval, automatic merge/push/deploy
-behavior, Phase 6 coordination primitive, Phase 7 improvement engine, or
-unrelated feature work during this chore.
+**Current next step:** Create the first Phase 6 Coordination Primitive work
+item brief. Do not create RED evidence, implementation code, active-work
+branches, Phase 7 improvement engine work, Phase 8 web cockpit implementation,
+product UAT approval, automatic merge/push/deploy behavior, or unrelated
+feature work until the Phase 6 brief is recorded and accepted through the
+normal Bandit stage gates.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -162,7 +161,7 @@ marks the gap resolved and linked to `BANDIT-023`.
 This chore exists to make
 non-blocking review findings durable without recursively delaying landing when
 required gates accept the implementation.
-`BANDIT-024` is active for `BANDIT-GAP-WORKFLOW-COCKPIT`. Its structured
+`BANDIT-024` resolved `BANDIT-GAP-WORKFLOW-COCKPIT`. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json`, its brief is recorded in
 `docs/work/BANDIT-024/brief.md`, RED evidence is recorded in
@@ -174,15 +173,16 @@ Local Qwen Stage 4 pass evidence is recorded in
 with current `review_subject_hash` is recorded in
 `docs/work/BANDIT-024/review-evidence.md`, Stage 5 landing verdict is recorded
 in `docs/work/BANDIT-024/landing-verdict.md`, local-record landing action
-evidence is recorded in `docs/work/BANDIT-024/landing-action.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`.
-Next action is retrospective closeout and bootstrap-gap disposition.
+evidence is recorded in `docs/work/BANDIT-024/landing-action.md`,
+retrospective closeout is recorded in
+`docs/work/BANDIT-024/retrospective.md`, and `.bandit/bootstrap-gaps.json`
+marks the gap resolved.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
 landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` has
-local-record landing action evidence and awaits retrospective closeout and
-bootstrap-gap disposition.
+local-record landing action evidence, retrospective closeout, and gap-ledger
+disposition. No bootstrap gap is currently recorded as open or active.
 
 ## Phase Map
 
@@ -193,8 +193,8 @@ bootstrap-gap disposition.
 | 2 | Work Artifacts | Bandit can create PRDs, slices, chores, and retrospective-derived improvement chores. | Complete |
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Complete |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Complete |
-| 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Active |
-| 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Not started |
+| 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Complete |
+| 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Active |
 | 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
 | 8 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, coordination state, and improvement health. | Not started |
 | 9 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
@@ -472,6 +472,9 @@ Current rule:
 - `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` is resolved by
   `BANDIT-023`; landing verdict, landing action, retrospective, and
   gap-ledger disposition are recorded.
+- `BANDIT-GAP-WORKFLOW-COCKPIT` is resolved by `BANDIT-024`; landing verdict,
+  landing action, retrospective, workflow-cockpit boundary artifact, and
+  gap-ledger disposition are recorded.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -484,10 +487,10 @@ Current rule:
 
 Current priority:
 
-1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Record `BANDIT-024` retrospective closeout and bootstrap-gap disposition;
-   halt for operator-owned product direction if repo artifacts cannot answer a
-   required UI or product tradeoff.
+1. Create the first Phase 6 Coordination Primitive work item brief.
+2. Stop at the brief; do not create RED evidence, implementation code, or an
+   active-work branch until the brief is recorded and accepted through the
+   normal Bandit stage gates.
 
 ## Phase 6: Coordination Primitive
 

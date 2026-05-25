@@ -190,17 +190,17 @@
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
       "title": "No workflow cockpit exists yet",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/ROADMAP.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-024",
-      "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
-      "verification_target": null,
-      "next_action": "Record BANDIT-024 retrospective closeout and bootstrap-gap disposition."
+      "rationale": "BANDIT-024 created the workflow-cockpit boundary artifact that preserves CLI Authority, keeps repo-native artifacts canonical, limits any State Index to rebuildable derived state, maps cockpit read and action surfaces to existing artifacts or approved CLI command families, and defers Phase 8 web implementation plus product/UI tradeoffs until explicit future scope exists.",
+      "verification_target": "docs/work/BANDIT-024/retrospective.md",
+      "next_action": "Use docs/design/workflow-cockpit-boundary.md as the authority boundary before any future Phase 8 cockpit implementation work."
     }
   ]
 }
