@@ -84,6 +84,7 @@ const templateContracts = [
       ["escalated review rationale", /^escalated_review_rationale:/im],
       ["PM disposition", /^pm_disposition:/im],
       ["PM disposition rationale", /^pm_disposition_rationale:/im],
+      ["non-blocking findings routing", /^non_blocking_findings_routing:/im],
       ["operator input status", /^operator_input_status:/im],
       ["UAT status", /^uat_status:/im],
       ["clean-code status", /^clean_code_status:/im],

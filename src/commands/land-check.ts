@@ -13,6 +13,7 @@ import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
 import {
   evaluateReviewSourceStaleness,
+  hasDurableNonBlockingFindingRouting,
   hasConcretePmRationaleForLocalQwenFindings,
   isRecordedHeadStale
 } from "../state/landing-stage4.js";
@@ -347,11 +348,11 @@ function safeToLandProblems(
   }
 
   if (
-    !isGateCurrentOrBootstrapGap(
+    !isLocalQwenCurrentOrBootstrapGap(
       landingVerdict.localQwenState,
       reviewEvidence.localQwenReplacementEvidence
     ) ||
-    !isGateCurrentOrBootstrapGap(
+    !isLocalQwenCurrentOrBootstrapGap(
       reviewEvidence.localQwenState,
       reviewEvidence.localQwenReplacementEvidence
     )
@@ -363,7 +364,11 @@ function safeToLandProblems(
 
   if (
     reviewEvidence.localQwenState === "pass" ||
-    landingVerdict.localQwenState === "pass"
+    reviewEvidence.localQwenState === "non_blocking" ||
+    reviewEvidence.localQwenState === "blocker" ||
+    landingVerdict.localQwenState === "pass" ||
+    landingVerdict.localQwenState === "non_blocking" ||
+    landingVerdict.localQwenState === "blocker"
   ) {
     problems.push(...localQwenProblems(localQwenReview, reviewEvidence));
   }
@@ -480,7 +485,11 @@ async function readRequiredLocalQwenReviewWhenClaimed(
 ) {
   if (
     reviewEvidence.localQwenState !== "pass" &&
-    landingVerdict.localQwenState !== "pass"
+    reviewEvidence.localQwenState !== "non_blocking" &&
+    reviewEvidence.localQwenState !== "blocker" &&
+    landingVerdict.localQwenState !== "pass" &&
+    landingVerdict.localQwenState !== "non_blocking" &&
+    landingVerdict.localQwenState !== "blocker"
   ) {
     return null;
   }
@@ -556,7 +565,10 @@ function localQwenProblems(
     problems.push("Local Qwen review is inconclusive");
   }
 
-  if (localQwenReview.reviewerVerdict !== "pass") {
+  if (
+    localQwenReview.reviewerVerdict !== "pass" &&
+    localQwenReview.reviewerVerdict !== "non_blocking"
+  ) {
     problems.push(
       `Local Qwen reviewer verdict blocks landing: ${localQwenReview.reviewerVerdict}`
     );
@@ -570,6 +582,18 @@ function localQwenProblems(
     )
   ) {
     problems.push("PM disposition rationale is required for Local Qwen findings");
+  }
+
+  if (
+    (localQwenReview.reviewerVerdict === "non_blocking" ||
+      reviewEvidence.localQwenState === "non_blocking") &&
+    !hasDurableNonBlockingFindingRouting(
+      reviewEvidence.nonBlockingFindingsRouting
+    )
+  ) {
+    problems.push(
+      "non-blocking review findings require durable follow-up routing"
+    );
   }
 
   if (localQwenReview.sourceDriftStatus !== "current") {
@@ -737,4 +761,15 @@ function isPassingOrBootstrapGap(value: string) {
 
 function isGateCurrentOrBootstrapGap(value: string, replacementEvidence: string[]) {
   return value === "pass" || (value === "bootstrap_gap" && replacementEvidence.length > 0);
+}
+
+function isLocalQwenCurrentOrBootstrapGap(
+  value: string,
+  replacementEvidence: string[]
+) {
+  return (
+    value === "pass" ||
+    value === "non_blocking" ||
+    (value === "bootstrap_gap" && replacementEvidence.length > 0)
+  );
 }

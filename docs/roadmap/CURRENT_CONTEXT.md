@@ -93,18 +93,19 @@ the active bootstrap-gap improvement chore for
 is recorded in
 `docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json`, its brief is
 recorded in `docs/work/BANDIT-023/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-023/red-evidence.md`, the artifact input is recorded in
-`docs/specs/BANDIT-023-red-evidence.json`, and `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-023` as the active chore. This chore captures the
-policy that non-blocking review findings should be routed to durable chores or
-explicit no-action decisions instead of recursively delaying landing after
-required gates accept the implementation.
+`docs/work/BANDIT-023/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-023/implementation-evidence.md`, the RED artifact input is
+recorded in `docs/specs/BANDIT-023-red-evidence.json`, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-023` as the active
+chore. This chore captures the policy that non-blocking review findings should
+be routed to durable chores or explicit no-action decisions instead of
+recursively delaying landing after required gates accept the implementation.
 
 **Last completed milestone:** `BANDIT-022` resolved the heartbeat chore-agent
 bootstrap gap and landed with local-record landing evidence.
 
-**Current next action:** Implement the `BANDIT-023` non-blocking review finding
-routing contract defined by `docs/work/BANDIT-023/red-evidence.md`. Do not
+**Current next action:** Run Stage 4 Local Qwen review for `BANDIT-023`, then
+record aggregate review evidence with the current `review_subject_hash`. Do not
 broaden into
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature work, automatic merge/push/deploy behavior,
@@ -132,8 +133,9 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract.
 
-**Expected next deliverable:** `BANDIT-023` implementation evidence showing the
-focused RED tests pass and the Stage 3 clean-code rubric has been evaluated.
+**Expected next deliverable:** `BANDIT-023` Local Qwen review evidence and
+aggregate Stage 4 review evidence showing the implementation is accepted or
+identifying the exact repair needed.
 
 ## Known Bootstrap Gaps
 
@@ -260,9 +262,9 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Implement the `BANDIT-023` non-blocking review finding routing contract,
-   then complete the `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` chore
-   through review, landing, retrospective, and gap-ledger disposition.
+1. Run Stage 4 review for `BANDIT-023`, then complete the
+   `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` chore through review,
+   landing, retrospective, and gap-ledger disposition.
 2. Return to `BANDIT-GAP-WORKFLOW-COCKPIT` only after `BANDIT-023` lands or is
    explicitly blocked/dispositioned.
 

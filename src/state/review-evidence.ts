@@ -30,6 +30,7 @@ export type ReviewEvidence = {
   escalatedReviewRationale: string;
   pmDisposition: string;
   pmDispositionRationale: string;
+  nonBlockingFindingsRouting: string[];
   operatorInputStatus: string;
   uatStatus: string;
   cleanCodeStatus: string;
@@ -204,6 +205,10 @@ function parseReviewEvidence(
     escalatedReviewRationale,
     pmDisposition,
     pmDispositionRationale: readScalar(fields, "pm_disposition_rationale"),
+    nonBlockingFindingsRouting: readList(
+      fields,
+      "non_blocking_findings_routing"
+    ),
     operatorInputStatus,
     uatStatus,
     cleanCodeStatus,

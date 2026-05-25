@@ -16,9 +16,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Implement `BANDIT-023` - Non-Blocking Review Finding
-Chore Routing. RED evidence is recorded in
-`docs/work/BANDIT-023/red-evidence.md`. The operator explicitly
+**Current next step:** Run Stage 4 Local Qwen review for `BANDIT-023` -
+Non-Blocking Review Finding Chore Routing, then record aggregate review
+evidence with the current `review_subject_hash`. RED evidence is recorded in
+`docs/work/BANDIT-023/red-evidence.md`, and implementation evidence is recorded
+in `docs/work/BANDIT-023/implementation-evidence.md`. The operator explicitly
 reprioritized the `BANDIT-022` non-blocking Local Qwen hardening findings ahead
 of `BANDIT-GAP-WORKFLOW-COCKPIT` on 2026-05-25. All future Stage 4 review
 evidence should use `review_subject_hash`.
@@ -132,16 +134,17 @@ marks the gap resolved.
 is recorded in
 `docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json`, its brief is
 recorded in `docs/work/BANDIT-023/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-023/red-evidence.md`, and `.bandit/bootstrap-gaps.json` marks
-the gap active and linked to `BANDIT-023`. This chore exists to make
-non-blocking review findings durable without recursively delaying landing when
-required gates accept the implementation.
+`docs/work/BANDIT-023/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-023/implementation-evidence.md`, and
+`.bandit/bootstrap-gaps.json` marks the gap active and linked to `BANDIT-023`.
+This chore exists to make non-blocking review findings durable without
+recursively delaying landing when required gates accept the implementation.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-landed and closed out. `BANDIT-023` is active with brief and RED evidence
-recorded; implementation is next. `BANDIT-GAP-WORKFLOW-COCKPIT` remains queued
-behind `BANDIT-023`.
+landed and closed out. `BANDIT-023` is active with brief, RED evidence, and
+implementation evidence recorded; Stage 4 review is next.
+`BANDIT-GAP-WORKFLOW-COCKPIT` remains queued behind `BANDIT-023`.
 
 ## Phase Map
 

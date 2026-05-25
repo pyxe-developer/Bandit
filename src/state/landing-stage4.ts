@@ -78,6 +78,13 @@ export function hasConcretePmRationaleForLocalQwenFindings(
   return hasConcretePmRationale(legacyDisposition);
 }
 
+export function hasDurableNonBlockingFindingRouting(routing: string[]) {
+  return routing.some((entry) => {
+    const route = parseNonBlockingFindingRoute(entry);
+    return Boolean(route && hasSpecificPmReasonText(route.detail));
+  });
+}
+
 function isTerminalDispositionOnlyPath(
   changedPath: string,
   workItemId: string,
@@ -167,6 +174,20 @@ function hasConcreteReasonAfterMarker(disposition: string, marker: RegExp) {
 
   const reason = disposition.slice(match.index + match[0].length).trim();
   return hasSpecificPmReasonText(reason);
+}
+
+function parseNonBlockingFindingRoute(entry: string) {
+  const match = entry.match(
+    /^(follow_up_chore_candidate|improvement_chore|no_action):\s*(.+)$/i
+  );
+  if (!match) {
+    return null;
+  }
+
+  return {
+    kind: match[1],
+    detail: match[2]?.trim() ?? ""
+  };
 }
 
 function hasSpecificPmReasonText(reason: string) {

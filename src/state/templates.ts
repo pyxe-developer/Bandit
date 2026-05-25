@@ -102,6 +102,10 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("escalated review rationale", /^escalated_review_rationale:/im),
       metadata("PM disposition", /^pm_disposition:/im),
       metadata("PM disposition rationale", /^pm_disposition_rationale:/im),
+      metadata(
+        "non-blocking findings routing",
+        /^non_blocking_findings_routing:/im
+      ),
       metadata("operator input status", /^operator_input_status:/im),
       metadata("UAT status", /^uat_status:/im),
       metadata("clean-code status", /^clean_code_status:/im),
