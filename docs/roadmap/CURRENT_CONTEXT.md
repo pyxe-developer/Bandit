@@ -141,25 +141,30 @@ read-only derived `bandit coordination validate/status` report.
 Local Qwen Stage 4 evidence is recorded in
 `docs/work/BANDIT-025/local-qwen-review.md` at source head
 `46455616e3c579ebbd05f92f8d87f80053de55bb` with a `non_blocking` verdict and
-three open hardening findings.
+three open hardening findings. Codex PM disposition and durable routing for
+those findings is recorded in
+`docs/work/BANDIT-025/qwen-finding-disposition.md`.
 
 **Last completed milestone:** `BANDIT-024` resolved the workflow-cockpit
 boundary bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Codex PM must disposition and durably route the
-`BANDIT-025` non-blocking Local Qwen findings before aggregate Stage 4 review
-evidence is recorded with the current `review_subject_hash`. Do not create
+**Current next action:** Codex PM must record aggregate Stage 4 review evidence
+for `BANDIT-025` with the current `review_subject_hash`, CodeRabbit bootstrap
+replacement evidence, Local Qwen `non_blocking` state, PM disposition from
+`docs/work/BANDIT-025/qwen-finding-disposition.md`, and durable
+`non_blocking_findings_routing` entries. Do not create
 active-work branches, Phase 7 Improvement Engine work, Phase 8 Workflow
 Cockpit implementation, Phase 9 dogfood, claim leases, scheduler execution,
 worktree lifecycle, automatic merge/push/deploy behavior, landing evidence, or
-product UAT approval during this Stage 4 disposition step.
+product UAT approval during this Stage 4 aggregate review evidence step.
 
 ## Active Work
 
 **Active work item:** `BANDIT-025` - Coordination Log Foundation. Current
 stage: Stage 4 in progress, Local Qwen returned `non_blocking`; PM disposition
-and durable routing are required before aggregate review evidence.
+and durable routing are recorded, and aggregate review evidence is required
+next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -180,9 +185,8 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope.
 
-**Expected next deliverable:** PM disposition and durable routing for the
-`BANDIT-025` non-blocking Local Qwen findings, followed by aggregate review
-evidence at `docs/work/BANDIT-025/review-evidence.md`.
+**Expected next deliverable:** aggregate Stage 4 review evidence at
+`docs/work/BANDIT-025/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 

@@ -16,19 +16,24 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 6 - Coordination Primitive.
 
-**Current next step:** Disposition and durably route the `BANDIT-025`
-non-blocking Local Qwen findings before aggregate Stage 4 review evidence.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-025` with the current `review_subject_hash`, CodeRabbit bootstrap
+replacement evidence, Local Qwen `non_blocking` state, PM disposition from
+`docs/work/BANDIT-025/qwen-finding-disposition.md`, and durable
+`non_blocking_findings_routing` entries.
 Implementation evidence is recorded in
 `docs/work/BANDIT-025/implementation-evidence.md`; focused coordination tests,
 full test suite, typecheck, `bandit validate`, and whitespace verification
 pass. Local Qwen Stage 4 evidence is recorded in
 `docs/work/BANDIT-025/local-qwen-review.md` at source head
 `46455616e3c579ebbd05f92f8d87f80053de55bb` with a `non_blocking` verdict and
-three open hardening findings. Do not create active-work branches, Phase 7
+three open hardening findings. PM disposition and durable routing for those
+findings is recorded in `docs/work/BANDIT-025/qwen-finding-disposition.md`.
+Do not create active-work branches, Phase 7
 improvement engine work, Phase 8 web cockpit implementation, claim leases,
 scheduler execution, worktree lifecycle, product UAT approval, automatic
 merge/push/deploy behavior, landing evidence, or unrelated feature work during
-this Stage 4 disposition step.
+this Stage 4 aggregate review evidence step.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -194,9 +199,9 @@ brief recorded at `docs/work/BANDIT-025/brief.md`, RED evidence recorded at
 `docs/work/BANDIT-025/red-evidence.md`, and Stage 3 implementation evidence
 recorded at `docs/work/BANDIT-025/implementation-evidence.md`; Stage 4 Local
 Qwen evidence is recorded at `docs/work/BANDIT-025/local-qwen-review.md` with
-a `non_blocking` verdict. PM disposition and durable routing are next before
-aggregate review evidence. No bootstrap gap is currently recorded as open or
-active.
+a `non_blocking` verdict. PM disposition and durable routing are recorded in
+`docs/work/BANDIT-025/qwen-finding-disposition.md`; aggregate review evidence
+is next. No bootstrap gap is currently recorded as open or active.
 
 ## Phase Map
 
@@ -501,10 +506,11 @@ Current rule:
 
 Current priority:
 
-1. Disposition and durably route the `BANDIT-025` non-blocking Local Qwen
-   findings.
-2. Stop before landing evidence; aggregate Stage 4 review evidence with current
-   `review_subject_hash` is the next review artifact after PM disposition.
+1. Record aggregate Stage 4 review evidence for `BANDIT-025` with current
+   `review_subject_hash`, PM disposition, and durable non-blocking finding
+   routing.
+2. Stop before landing evidence; Stage 5 landing verdict is the next review
+   artifact only after aggregate Stage 4 review evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 
