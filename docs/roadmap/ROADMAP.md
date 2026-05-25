@@ -17,7 +17,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is active at `implementation_recorded` for
+Coordination Primitive slice. `BANDIT-026` is active at `review_recorded` for
 typed state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
@@ -28,16 +28,17 @@ tests in `test/coordination-log.test.mjs` and
 `test/coordination-status.test.mjs` pass. Local Qwen Stage 4 review evidence is
 recorded in `docs/work/BANDIT-026/local-qwen-review.md` with
 `reviewer_verdict: pass` at source head
-`985d149e7105969bc775b39c9488f9b5ba7122b9`.
+`985d149e7105969bc775b39c9488f9b5ba7122b9`. Aggregate Stage 4 review evidence
+is recorded in `docs/work/BANDIT-026/review-evidence.md` with current
+`review_subject_hash`
+`967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`.
 
-The current next step is to record aggregate Stage 4 review evidence for
-`BANDIT-026` with current `review_subject_hash`, honest CodeRabbit bootstrap
-replacement status for local-record main-branch work, and the recorded Local
-Qwen pass. Do not create active-work branches, Phase 7 improvement engine work,
-Phase 8 web cockpit implementation, claim leases, scheduler execution, worktree
-lifecycle, product UAT approval, automatic merge/push/deploy behavior, landing
-evidence, or unrelated feature work before aggregate Stage 4 review evidence is
-recorded.
+The current next step is to record the Stage 5 landing verdict for `BANDIT-026`.
+Do not create active-work branches, Phase 7 improvement engine work, Phase 8 web
+cockpit implementation, claim leases, scheduler execution, worktree lifecycle,
+product UAT approval, automatic merge/push/deploy behavior, landing action
+evidence, retrospective closeout, or unrelated feature work before the landing
+verdict is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -511,14 +512,12 @@ Current rule:
 
 Current priority:
 
-1. Record aggregate Stage 4 review evidence for `BANDIT-026` with current
-   `review_subject_hash`, honest CodeRabbit bootstrap replacement status, and
-   the recorded Local Qwen pass.
-2. Stop before landing evidence; do not create landing evidence, active-work
+1. Record the Stage 5 landing verdict for `BANDIT-026`.
+2. Stop before landing action evidence or closeout; do not create active-work
    branches, claim leases, scheduler execution, worktree lifecycle, cockpit
    implementation, product UAT approval, or Phase 7 evaluation behavior until
-   aggregate Stage 4 review evidence is recorded and accepted
-   through the normal Bandit stage gates.
+   the landing verdict is recorded and accepted through the normal Bandit stage
+   gates.
 
 ## Phase 6: Coordination Primitive
 
