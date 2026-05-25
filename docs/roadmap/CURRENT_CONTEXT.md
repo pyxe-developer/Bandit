@@ -46,22 +46,25 @@ a hash is present.
 
 `BANDIT-020` is active for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`. Its brief is
 recorded in `docs/work/BANDIT-020/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-020/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
-the gap to this active chore. Do not begin artifact creation, heartbeat,
-cockpit, Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8
-Workflow Cockpit, Phase 9 dogfood, or feature work until `BANDIT-020` has
-implementation evidence, review evidence, landing verdict, landing action,
+`docs/work/BANDIT-020/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-020/implementation-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to this active chore. Do not begin
+artifact creation, heartbeat, cockpit, Phase 6 Coordination Primitive, Phase 7
+Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or feature work
+until `BANDIT-020` has review evidence, landing verdict, landing action,
 retrospective, and gap-ledger closeout.
 
 **Last completed milestone:** `BANDIT-019` resolved hash-based Stage 4 evidence
 freshness.
 
-**Current next action:** Implement the narrow `bandit work-item create
-<spec-path>` command until `test/work-item-create.test.mjs` passes. Do not
-broaden into general artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work. All Stage 4 evidence for future work items
-must use `review_subject_hash`.
+**Current next action:** Record Stage 4 review evidence for `BANDIT-020`,
+including current `review_subject_hash`, Local Qwen evidence, CodeRabbit or
+explicit bootstrap replacement evidence if no PR-backed live CodeRabbit route
+is available, and PM disposition of any actionable findings. Do not broaden into
+general artifact creation, heartbeat, cockpit, Phase 6 Coordination Primitive,
+Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9 dogfood, or
+feature work. All Stage 4 evidence for future work items must use
+`review_subject_hash`.
 
 ## Active Work
 
@@ -82,14 +85,15 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
 Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness.
 
-**Expected next deliverable:** `docs/work/BANDIT-020/implementation-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-020/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
 - No Bandit work-item creation command. This is active as `BANDIT-020`; RED
-  evidence is recorded and implementation is the next action.
+  evidence and implementation evidence are recorded, and Stage 4 review
+  evidence is the next action.
 - Bootstrap-gap tracking artifact, listing command, and validation path are
   implemented and landed in `BANDIT-011`.
 - CodeRabbit state capture substrate exists, but live CodeRabbit API, GitHub
@@ -115,7 +119,7 @@ Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as
 `BANDIT-020`; the next required artifact is
-`docs/work/BANDIT-020/implementation-evidence.md`.
+`docs/work/BANDIT-020/review-evidence.md`.
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by `BANDIT-016`.
 `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is resolved by
@@ -202,7 +206,7 @@ Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
 1. Complete active `BANDIT-020` for `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; next
-   artifact is `docs/work/BANDIT-020/implementation-evidence.md`.
+   artifact is `docs/work/BANDIT-020/review-evidence.md`.
 2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 4. `BANDIT-GAP-WORKFLOW-COCKPIT`.

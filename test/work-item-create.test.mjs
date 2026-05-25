@@ -408,7 +408,11 @@ async function pathExists(filePath) {
     await stat(filePath);
     return true;
   } catch (error) {
-    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+    if (
+      error instanceof Error &&
+      "code" in error &&
+      (error.code === "ENOENT" || error.code === "ENOTDIR")
+    ) {
       return false;
     }
     throw error;
