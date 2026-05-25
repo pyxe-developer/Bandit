@@ -20,7 +20,10 @@ recorded in `docs/work/BANDIT-017/` and `.bandit/bootstrap-gaps.json`.
 `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`. Its brief is recorded in
 `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-018/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-018/implementation-evidence.md`, and
+`docs/work/BANDIT-018/implementation-evidence.md`, reviewer routing evidence is
+recorded in `docs/work/BANDIT-018/routing-decision.md`, Local Qwen evidence is
+recorded in `docs/work/BANDIT-018/local-qwen-review.md`, and escalated reviewer
+blocker evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`.
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-018` as an active chore.
 Do not begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
@@ -30,8 +33,10 @@ operator-owned input, or explicitly dispositioned.
 **Last completed milestone:** `BANDIT-017` resolved landing-gate complexity and
 git diagnostics hardening for the Stage 4 review path.
 
-**Current next action:** Record `BANDIT-018` review and cross-model evidence for
-the implementation head.
+**Current next action:** Halt `BANDIT-018` Stage 4 closeout until the operator
+provides explicit escalated reviewer provider setup, the
+`BANDIT_ESCALATED_REVIEWER_API_KEY` credential, and cost approval for the
+configured paid reviewer route, or gives policy direction to change that route.
 
 ## Active Work
 
@@ -51,7 +56,9 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
 Complexity And Git Diagnostics Hardening.
 
-**Expected next deliverable:** Review evidence for `BANDIT-018`.
+**Expected next deliverable:** Operator-owned escalated reviewer setup decision
+for `BANDIT-018`; aggregate review evidence, landing verdict, landing action,
+and retrospective remain blocked.
 
 ## Known Bootstrap Gaps
 
@@ -84,8 +91,11 @@ Cockpit, Phase 9 dogfood, feature, or cockpit work while any open gap remains
 queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by
 `BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is active as
-`BANDIT-018`; implementation evidence is recorded and the current step is
-review and cross-model evidence. `BANDIT-GAP-LIVE-CODERABBIT` is resolved by
+`BANDIT-018`; implementation evidence, reviewer routing evidence, Local Qwen
+evidence, and escalated reviewer blocker evidence are recorded. The current
+step is blocked on operator-owned provider setup, credential, and cost approval
+for the configured paid escalated reviewer route. `BANDIT-GAP-LIVE-CODERABBIT`
+is resolved by
 `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
@@ -164,7 +174,9 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018`.
+1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018`; blocked on
+   operator-owned escalated reviewer provider setup, credential, and cost
+   approval.
 2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
@@ -172,15 +184,23 @@ bootstrap-gap chore at a time. Current priority is:
 
 Create exactly one next gap chore at a time. RED evidence for `BANDIT-018` is
 recorded in `docs/work/BANDIT-018/red-evidence.md`; implementation evidence is
-recorded in `docs/work/BANDIT-018/implementation-evidence.md`. The current step
-is only to record review and cross-model evidence for `BANDIT-018`. Do not
-begin later gaps or unrelated feature work.
+recorded in `docs/work/BANDIT-018/implementation-evidence.md`; reviewer routing
+evidence is recorded in `docs/work/BANDIT-018/routing-decision.md`; Local Qwen
+review evidence is recorded in `docs/work/BANDIT-018/local-qwen-review.md`; and
+escalated reviewer blocker evidence is recorded in
+`docs/work/BANDIT-018/escalated-review.md`. The current step is blocked on
+operator-owned provider setup, credential, and cost approval for the configured
+paid escalated reviewer route. Do not begin later gaps, unrelated feature work,
+aggregate landing evidence, or repair work until that input is provided or the
+operator gives policy direction to change the route.
 
 ## Required Operator Input
 
-None recorded for the next review-evidence step. Repo artifacts define
-`BANDIT-018` live escalated-reviewer routing as the active chore and review
-evidence as the next action.
+Required for the current blocked Stage 4 closeout step: explicit escalated
+reviewer provider setup, the `BANDIT_ESCALATED_REVIEWER_API_KEY` credential,
+and cost approval for the configured paid reviewer route, or operator policy
+direction to change that route. Repo artifacts cannot supply this because
+provider setup, credentials, and cost approval are operator-owned boundaries.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

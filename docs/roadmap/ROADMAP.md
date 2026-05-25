@@ -16,8 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record `BANDIT-018` review and cross-model evidence for
-the implementation head.
+**Current next step:** Halt `BANDIT-018` Stage 4 closeout until the operator
+provides explicit escalated reviewer provider setup, the
+`BANDIT_ESCALATED_REVIEWER_API_KEY` credential, and cost approval for the
+configured paid reviewer route, or gives policy direction to change that route.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -74,14 +76,19 @@ retrospectives, gap-ledger dispositions, and updated context. `BANDIT-018` is
 active for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`; its brief is recorded in
 `docs/work/BANDIT-018/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-018/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-018/implementation-evidence.md`, and the next step is review
-and cross-model evidence.
+`docs/work/BANDIT-018/implementation-evidence.md`, reviewer routing evidence is
+recorded in `docs/work/BANDIT-018/routing-decision.md`, Local Qwen evidence is
+recorded in `docs/work/BANDIT-018/local-qwen-review.md`, and escalated reviewer
+blocker evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`.
+Aggregate review evidence, landing verdict, landing action, and retrospective
+are blocked on operator-owned paid reviewer setup, credential, and cost
+approval or policy direction to change the route.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
-`BANDIT-018` is the active bootstrap-gap chore with implementation evidence
-recorded.
+`BANDIT-018` is the active bootstrap-gap chore with implementation evidence and
+blocked Stage 4 reviewer evidence recorded.
 
 ## Phase Map
 
