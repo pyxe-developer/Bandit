@@ -94,8 +94,9 @@ is recorded in
 `docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json`, its brief is
 recorded in `docs/work/BANDIT-023/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-023/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-023/implementation-evidence.md`, the RED artifact input is
-recorded in `docs/specs/BANDIT-023-red-evidence.json`, and
+`docs/work/BANDIT-023/implementation-evidence.md`, Local Qwen Stage 4 pass
+evidence is recorded in `docs/work/BANDIT-023/local-qwen-review.md`, the RED
+artifact input is recorded in `docs/specs/BANDIT-023-red-evidence.json`, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-023` as the active
 chore. This chore captures the policy that non-blocking review findings should
 be routed to durable chores or explicit no-action decisions instead of
@@ -104,9 +105,9 @@ recursively delaying landing after required gates accept the implementation.
 **Last completed milestone:** `BANDIT-022` resolved the heartbeat chore-agent
 bootstrap gap and landed with local-record landing evidence.
 
-**Current next action:** Run Stage 4 Local Qwen review for `BANDIT-023`, then
-record aggregate review evidence with the current `review_subject_hash`. Do not
-broaden into
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-023` with the current `review_subject_hash`, incorporating the Local
+Qwen pass from `docs/work/BANDIT-023/local-qwen-review.md`. Do not broaden into
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature work, automatic merge/push/deploy behavior,
 or product UAT approval before `BANDIT-023` lands and the workflow-cockpit gap
@@ -133,8 +134,8 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract.
 
-**Expected next deliverable:** `BANDIT-023` Local Qwen review evidence and
-aggregate Stage 4 review evidence showing the implementation is accepted or
+**Expected next deliverable:** `BANDIT-023` aggregate Stage 4 review evidence
+showing the implementation is accepted with current review-subject freshness or
 identifying the exact repair needed.
 
 ## Known Bootstrap Gaps
@@ -167,7 +168,8 @@ These are expected because Bandit does not exist yet:
   verdict, landing action, retrospective, and gap-ledger disposition are
   recorded.
 - `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` is active in `BANDIT-023`;
-  its brief and RED evidence are recorded, and implementation is next.
+  its brief, RED evidence, implementation evidence, and Local Qwen Stage 4 pass
+  evidence are recorded, and aggregate Stage 4 review evidence is next.
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
