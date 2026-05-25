@@ -112,22 +112,22 @@ the implementation.
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json`, its brief is recorded in
 `docs/work/BANDIT-024/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-024/red-evidence.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to active chore `BANDIT-024`. The chore is scoped to defining
-the CLI-authoritative cockpit boundary from existing repo artifacts before any
-Phase 8 web cockpit implementation begins.
+`docs/work/BANDIT-024/red-evidence.md`, the workflow-cockpit boundary artifact
+is recorded in `docs/design/workflow-cockpit-boundary.md`, implementation
+evidence is recorded in `docs/work/BANDIT-024/implementation-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`. The
+chore is scoped to defining the CLI-authoritative cockpit boundary from
+existing repo artifacts before any Phase 8 web cockpit implementation begins.
 
 **Last completed milestone:** `BANDIT-023` resolved the non-blocking review
 finding routing bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Implement the narrow cockpit boundary artifact at
-`docs/design/workflow-cockpit-boundary.md` from existing repo sources. Keep the
-implementation to artifact contract and any minimal validation/reporting
-support needed by the brief. Do not broaden into Phase 6 Coordination
-Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit
-implementation, Phase 9 dogfood, feature work, automatic merge/push/deploy
-behavior, or product UAT approval during `BANDIT-024`.
+**Current next action:** Run Stage 4 Local Qwen review for `BANDIT-024`. Do
+not broaden into Phase 6 Coordination Primitive, Phase 7 Improvement Engine,
+Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, feature work,
+automatic merge/push/deploy behavior, or product UAT approval during
+`BANDIT-024`.
 
 ## Active Work
 
@@ -151,7 +151,7 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing.
 
-**Expected next deliverable:** `docs/design/workflow-cockpit-boundary.md`.
+**Expected next deliverable:** `docs/work/BANDIT-024/local-qwen-review.md`.
 
 ## Known Bootstrap Gaps
 
@@ -188,8 +188,9 @@ These are expected because Bandit does not exist yet:
   verdict, local-record landing action evidence, retrospective closeout, and
   gap-ledger disposition are recorded.
 - `BANDIT-GAP-WORKFLOW-COCKPIT` is active as `BANDIT-024`; the cockpit
-  boundary scoping brief and RED evidence exist. Implementation of the narrow
-  boundary artifact is next. No Phase 8 web cockpit implementation exists yet.
+  boundary scoping brief, RED evidence, workflow-cockpit boundary artifact, and
+  implementation evidence exist. Stage 4 Local Qwen review is next. No Phase 8
+  web cockpit implementation exists yet.
 
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
@@ -284,9 +285,9 @@ Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Implement the narrow cockpit boundary artifact from existing repo sources;
-   halt for operator-owned product direction if repo artifacts cannot answer a
-   required UI or product tradeoff.
+2. Run Stage 4 Local Qwen review for `BANDIT-024`; halt for operator-owned
+   product direction if repo artifacts cannot answer a required UI or product
+   tradeoff.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

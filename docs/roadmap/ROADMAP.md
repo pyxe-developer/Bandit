@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Implement the narrow cockpit boundary artifact for active
-chore `BANDIT-024` - Workflow Cockpit Boundary Scope. `BANDIT-024` links
+**Current next step:** Run Stage 4 Local Qwen review for active chore
+`BANDIT-024` - Workflow Cockpit Boundary Scope. `BANDIT-024` links
 `BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from existing
 repo artifacts; do not start Phase 8 web cockpit implementation, product UAT
 approval, automatic merge/push/deploy behavior, Phase 6 coordination
@@ -164,15 +164,16 @@ required gates accept the implementation.
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json`, its brief is recorded in
 `docs/work/BANDIT-024/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-024/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
-the gap to active chore `BANDIT-024`. Next action is implementation of the
-missing durable cockpit boundary contract.
+`docs/work/BANDIT-024/red-evidence.md`, the durable cockpit boundary contract
+is recorded in `docs/design/workflow-cockpit-boundary.md`, implementation
+evidence is recorded in `docs/work/BANDIT-024/implementation-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`. Next
+action is Stage 4 Local Qwen review.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
 landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` is
-active at Stage 3 implementation preparation for the workflow-cockpit boundary
-scope.
+active at Stage 4 review preparation for the workflow-cockpit boundary scope.
 
 ## Phase Map
 
@@ -475,9 +476,9 @@ Current rule:
 Current priority:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Implement the narrow cockpit boundary artifact from existing repo sources;
-   halt for operator-owned product direction if repo artifacts cannot answer a
-   required UI or product tradeoff.
+2. Run Stage 4 Local Qwen review for `BANDIT-024`; halt for operator-owned
+   product direction if repo artifacts cannot answer a required UI or product
+   tradeoff.
 
 ## Phase 6: Coordination Primitive
 
