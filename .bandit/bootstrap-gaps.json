@@ -4,16 +4,17 @@
     {
       "id": "BANDIT-GAP-WORK-ITEM-CREATE-COMMAND",
       "title": "No general Bandit work-item creation command",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/work/BANDIT-011/brief.md"
       ],
       "linked_work_item": "BANDIT-020",
-      "rationale": "Manual work-item creation remains acceptable during bootstrap, but the gap should be converted once the repeated artifact shape stabilizes.",
-      "next_action": "Complete BANDIT-020 before starting the next bootstrap-gap chore; next required artifacts are docs/work/BANDIT-020/retrospective.md and resolved gap-ledger disposition."
+      "rationale": "BANDIT-020 created a CLI-owned work-item creation command that validates explicit slice, chore, and improvement-chore specs before writes, allocates deterministic IDs, appends lifecycle evidence, and links eligible bootstrap gaps as active chores.",
+      "verification_target": "docs/work/BANDIT-020/retrospective.md",
+      "next_action": "Use bandit work-item create <spec-path> for one-off work-item starts outside Feature PRD draft-work decomposition."
     },
     {
       "id": "BANDIT-GAP-BOOTSTRAP-GAP-TRACKING",
@@ -150,7 +151,7 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "rationale": "Work-item briefs, review evidence, landing evidence, retrospectives, and follow-up artifacts are still created manually unless a narrow command exists for that artifact family.",
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after the general work-item creation command gap is resolved or explicitly dispositioned."
+      "next_action": "Create the next bootstrap-gap chore for this gap with bandit work-item create <spec-path>; do not start RED evidence until the brief is created and context is updated."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
