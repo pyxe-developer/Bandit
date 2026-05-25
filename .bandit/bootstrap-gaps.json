@@ -80,15 +80,16 @@
     {
       "id": "BANDIT-GAP-LIVE-ESCALATED-REVIEWER",
       "title": "Live escalated adversarial reviewer routing unavailable",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-010",
       "source_artifacts": [
         "docs/work/BANDIT-010/landing-action.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
-      "rationale": "The placeholder gate exists; live stronger-reviewer routing needs a later reviewer integration chore with cost and credential boundaries.",
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after live CodeRabbit integration is resolved or explicitly dispositioned."
+      "linked_work_item": "BANDIT-018",
+      "rationale": "The placeholder gate exists; BANDIT-018 is active to add CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
+      "next_action": "Run BANDIT-018 next: create RED evidence for live escalated-reviewer routing, implement the narrow CLI-owned routing contract, verify, review, land, and close out before unrelated work-item creation, artifact creation, heartbeat, or cockpit work."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",

@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create the next bootstrap-gap chore brief for
-`BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+**Current next step:** Create RED evidence for `BANDIT-018` - Live Escalated
+Reviewer Routing.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -70,12 +70,14 @@ chore work after landing, and authorized landing now. `BANDIT-015` has landing
 verdict, landing action, retrospective, gap-ledger disposition, and updated
 context.
 `BANDIT-016` and `BANDIT-017` have landing verdicts, landing actions,
-retrospectives, gap-ledger dispositions, and updated context.
+retrospectives, gap-ledger dispositions, and updated context. `BANDIT-018` is
+active for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`; its brief is recorded in
+`docs/work/BANDIT-018/brief.md`, and the next step is RED evidence.
 Open bootstrap gaps remain the work queue and must be addressed one at a time
 before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
-The next work item has not been created yet.
+`BANDIT-018` is the active bootstrap-gap chore.
 
 ## Phase Map
 
@@ -258,8 +260,7 @@ Goal: Separate product acceptance from code-safety judgment.
 
 Active work:
 
-- none. The next action is to create the next Bootstrap Gap Resolution Lane
-  chore brief.
+- `BANDIT-018` - Live Escalated Reviewer Routing.
 
 Completed work:
 
@@ -272,7 +273,7 @@ Completed work:
 
 Queued next:
 
-- Bootstrap-gap chore brief for `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+- RED evidence for `BANDIT-018`.
 
 Expected capabilities:
 
@@ -330,6 +331,9 @@ Current rule:
   RED evidence, implementation evidence, review evidence, landing verdict,
   local-record landing action, retrospective, and gap-ledger closeout are
   recorded.
+- `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is active as `BANDIT-018`; the brief is
+  recorded in `docs/work/BANDIT-018/brief.md`, and RED evidence is the next
+  required step.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -342,7 +346,7 @@ Current rule:
 
 Current priority:
 
-1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER`.
+1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018`.
 2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
