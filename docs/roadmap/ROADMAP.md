@@ -25,15 +25,19 @@ recorded in `docs/work/BANDIT-026/coordination-log.jsonl`. RED evidence is
 recorded in `docs/work/BANDIT-026/red-evidence.md`, implementation evidence is
 recorded in `docs/work/BANDIT-026/implementation-evidence.md`, and focused
 tests in `test/coordination-log.test.mjs` and
-`test/coordination-status.test.mjs` pass.
+`test/coordination-status.test.mjs` pass. Local Qwen Stage 4 review evidence is
+recorded in `docs/work/BANDIT-026/local-qwen-review.md` with
+`reviewer_verdict: pass` at source head
+`985d149e7105969bc775b39c9488f9b5ba7122b9`.
 
-The current next step is to run Stage 4 review gates for `BANDIT-026`: Local
-Qwen review first, then aggregate review evidence with current
-`review_subject_hash`. Do not create active-work branches, Phase 7 improvement
-engine work, Phase 8 web cockpit implementation, claim leases, scheduler
-execution, worktree lifecycle, product UAT approval, automatic
-merge/push/deploy behavior, or unrelated feature work before Stage 4 review
-evidence is recorded.
+The current next step is to record aggregate Stage 4 review evidence for
+`BANDIT-026` with current `review_subject_hash`, honest CodeRabbit bootstrap
+replacement status for local-record main-branch work, and the recorded Local
+Qwen pass. Do not create active-work branches, Phase 7 improvement engine work,
+Phase 8 web cockpit implementation, claim leases, scheduler execution, worktree
+lifecycle, product UAT approval, automatic merge/push/deploy behavior, landing
+evidence, or unrelated feature work before aggregate Stage 4 review evidence is
+recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -199,9 +203,10 @@ Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
 review, PM finding disposition, aggregate review evidence, landing verdict,
 local-record landing action evidence, retrospective closeout, and terminal
 coordination-log state recorded. No bootstrap gap is currently recorded as open
-or active. `BANDIT-026` is active at `red_recorded` with its
-typed-state-extensions spec, brief, RED evidence, focused tests, and
-coordination-log transition recorded.
+or active. `BANDIT-026` is active at `implementation_recorded` with its
+typed-state-extensions spec, brief, RED evidence, focused tests,
+implementation evidence, Local Qwen Stage 4 pass evidence, and coordination-log
+transition recorded.
 
 ## Phase Map
 
@@ -506,13 +511,13 @@ Current rule:
 
 Current priority:
 
-1. Implement exactly one narrow typed-state extension contract for `BANDIT-026`
-   that reconciles feature UAT and chore-specific disposition states with the
-   shared core coordination state machine.
-2. Stop at implementation evidence; do not create Stage 4 review evidence,
-   landing evidence, active-work branches, claim leases, scheduler execution,
-   worktree lifecycle, cockpit implementation, product UAT approval, or Phase 7
-   evaluation behavior until implementation evidence is recorded and accepted
+1. Record aggregate Stage 4 review evidence for `BANDIT-026` with current
+   `review_subject_hash`, honest CodeRabbit bootstrap replacement status, and
+   the recorded Local Qwen pass.
+2. Stop before landing evidence; do not create landing evidence, active-work
+   branches, claim leases, scheduler execution, worktree lifecycle, cockpit
+   implementation, product UAT approval, or Phase 7 evaluation behavior until
+   aggregate Stage 4 review evidence is recorded and accepted
    through the normal Bandit stage gates.
 
 ## Phase 6: Coordination Primitive

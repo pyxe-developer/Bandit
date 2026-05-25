@@ -168,25 +168,29 @@ Implementation evidence is recorded in
 `docs/work/BANDIT-026/implementation-evidence.md`. The implemented slice
 adds typed extension checkpoints for feature UAT and chore disposition while
 preserving the shared core coordination state machine and actor-event
-non-authority boundary. No branch, product UAT approval, claim lease,
-scheduler, worktree lifecycle, Phase 7 Improvement Engine work, or Phase 8
-Workflow Cockpit implementation has started.
+non-authority boundary. Local Qwen Stage 4 evidence is recorded in
+`docs/work/BANDIT-026/local-qwen-review.md` with `reviewer_verdict: pass` at
+source head `985d149e7105969bc775b39c9488f9b5ba7122b9`. No branch, product
+UAT approval, claim lease, scheduler, worktree lifecycle, Phase 7 Improvement
+Engine work, or Phase 8 Workflow Cockpit implementation has started.
 
-**Last completed milestone:** `BANDIT-026` Stage 3 implementation made the
-typed-state extension RED tests green and recorded implementation evidence.
+**Last completed milestone:** `BANDIT-026` Local Qwen Stage 4 review passed
+and recorded current evidence.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-026`: Local Qwen
-review first, then aggregate review evidence with current
-`review_subject_hash`. Do not create active-work branches, Phase 7 Improvement
-Engine work, Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, claim
-leases, scheduler execution, worktree lifecycle, automatic merge/push/deploy
-behavior, or product UAT approval before Stage 4 review evidence is recorded.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-026` with current `review_subject_hash`, honest CodeRabbit bootstrap
+replacement status for local-record main-branch work, and the Local Qwen pass
+from `docs/work/BANDIT-026/local-qwen-review.md`. Do not create active-work
+branches, Phase 7 Improvement Engine work, Phase 8 Workflow Cockpit
+implementation, Phase 9 dogfood, claim leases, scheduler execution, worktree
+lifecycle, automatic merge/push/deploy behavior, or product UAT approval before
+aggregate Stage 4 review evidence is recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-026` - Typed State Extensions. Current
 coordination state: `implementation_recorded`; accountable actor: Reviewer;
-next action: run Stage 4 review gates.
+next action: record aggregate Stage 4 review evidence.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -207,9 +211,8 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-026`,
-starting with Local Qwen review and then aggregate review evidence with current
-`review_subject_hash`.
+**Expected next deliverable:** Aggregate Stage 4 review evidence for
+`BANDIT-026` with current `review_subject_hash`.
 
 ## Known Bootstrap Gaps
 
@@ -343,15 +346,17 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 
 Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved, `BANDIT-025` is closed out, and
-`BANDIT-026` is active at `red_recorded`, so the current priority is:
+`BANDIT-026` is active at `implementation_recorded` with Local Qwen Stage 4
+evidence recorded, so the current priority is:
 
-1. Implement exactly one narrow typed-state extension contract for
-   `BANDIT-026`.
-2. Stop at implementation evidence; do not create active-work branches,
-   Stage 4 review evidence, landing evidence, claim leases, scheduler,
-   worktree lifecycle, cockpit implementation, product UAT approval, or Phase 7
-   evaluation behavior until implementation evidence is recorded and accepted
-   through the normal Bandit stage gates.
+1. Record aggregate Stage 4 review evidence for `BANDIT-026` with current
+   `review_subject_hash`, honest CodeRabbit bootstrap replacement status, and
+   the recorded Local Qwen pass.
+2. Stop before landing evidence; do not create active-work branches, landing
+   evidence, claim leases, scheduler, worktree lifecycle, cockpit
+   implementation, product UAT approval, or Phase 7 evaluation behavior until
+   aggregate Stage 4 review evidence is recorded and accepted through the
+   normal Bandit stage gates.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -359,12 +364,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to implement the next narrow
-`BANDIT-026` typed-state extension contract from existing repo artifacts. If
-the next work step requires product direction, UI scope tradeoffs, policy
-changes, explicit cost or risk overrides, actual cockpit implementation
-decisions, product UAT approval, or a typed-state scope decision that the
-roadmap cannot answer, halt and ask for that input directly.
+No operator-owned input is required to record aggregate Stage 4 review evidence
+for `BANDIT-026` from existing repo artifacts. If the next work step requires
+product direction, UI scope tradeoffs, policy changes, explicit cost or risk
+overrides, actual cockpit implementation decisions, product UAT approval, or a
+typed-state scope decision that the roadmap cannot answer, halt and ask for
+that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
