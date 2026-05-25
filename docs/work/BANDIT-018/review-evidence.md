@@ -2,32 +2,33 @@
 
 contract_version: 1
 work_item: BANDIT-018
-source_head: 1f65ec047371c861134b04d6bf4035d06c532d2b
-verification_state: blocker
+source_head: 53c7cdb470604191f0764c17409e828ee2c7aa39
+verification_state: non_blocking
 verification_evidence:
-  - node --test --test-name-pattern "escalated-review" test/landing-gates.test.mjs previously passed 3 focused tests at implementation head 211b3c4201e905050c196b7cc729341db8e2089d.
-  - npm test previously passed 158 tests at implementation head 211b3c4201e905050c196b7cc729341db8e2089d.
-  - npm run typecheck previously passed at implementation head 211b3c4201e905050c196b7cc729341db8e2089d.
-  - npm run bandit -- validate previously passed after implementation evidence.
-  - Side-by-side reviewer comparison on 2026-05-25 used the same packet for Qwen 3.6, Sonnet 4.6, and Opus 4.7; docs/work/BANDIT-018/model-comparison.md records commands, verdicts, cost/latency evidence, and PM disposition.
-  - Sonnet 4.6 and Opus 4.7 independently found a blocker-level AC10 coverage/spec-alignment gap: the brief requires more focused refusal-path tests than the implementation evidence records.
+  - node --test --test-name-pattern "escalated-review" test/landing-gates.test.mjs passed 8 focused tests at AC10 repair head 53c7cdb470604191f0764c17409e828ee2c7aa39.
+  - npm test passed 164 tests at AC10 repair head 53c7cdb470604191f0764c17409e828ee2c7aa39.
+  - npm run typecheck passed at AC10 repair head 53c7cdb470604191f0764c17409e828ee2c7aa39.
+  - npm run bandit -- validate passed after the Local Qwen refresh artifact was written.
+  - npm run bandit -- land-check BANDIT-018 failed closed on the expected missing landing verdict artifact; no landing verdict has been created.
+  - docs/work/BANDIT-018/model-comparison.md records the original Qwen 3.6 / Sonnet 4.6 / Opus 4.7 comparison and the AC10 repair-head Qwen 3.6 / Opus 4.7 refresh.
+  - Opus 4.7 accepted the AC10 repair as resolving the prior blocker and returned non_blocking findings only.
 coderabbit_state: bootstrap_gap
 coderabbit_replacement_evidence:
   - No PR-backed CodeRabbit review exists for BANDIT-018 because the active bootstrap work is on main and prior repo evidence showed no associated pull request.
-  - Replacement evidence is deterministic local verification plus the side-by-side Qwen/Sonnet/Opus comparison recorded in docs/work/BANDIT-018/model-comparison.md.
+  - Replacement evidence is deterministic local verification plus the side-by-side and repair-head Qwen/Opus review evidence recorded in docs/work/BANDIT-018/model-comparison.md.
 local_qwen_state: non_blocking
 local_qwen_replacement_evidence:
-  - docs/work/BANDIT-018/local-qwen-review.md records Local Qwen non_blocking evidence at implementation source head 211b3c4201e905050c196b7cc729341db8e2089d.
-  - The 2026-05-25 same-packet Qwen run also returned non_blocking and did not identify the AC10 blocker found by Sonnet and Opus.
+  - docs/work/BANDIT-018/local-qwen-review.md records Local Qwen non_blocking evidence at repair source head 53c7cdb470604191f0764c17409e828ee2c7aa39.
+  - Qwen accepted the AC10 repair and surfaced only non-blocking clean-code, traceability, write-before-throw hygiene, and stale-aggregate-evidence findings.
 escalated_review_required: true
-escalated_review_state: blocker
-escalated_review_rationale: The operator approved using the Sourmash-style claude -p headless path for Sonnet and Opus and asked for Qwen 3.6, Sonnet 4.6, and Opus 4.7 comparison before choosing the escalated reviewer. Opus 4.7 is selected as the default escalated reviewer based on this run, and the escalated review blocks landing on the AC10 coverage/spec-alignment gap.
-pm_disposition: blocker
-pm_disposition_rationale: Codex PM accepts the shared Sonnet/Opus AC10 blocker. The implementation evidence claims AC10 with only three focused tests, while the brief requires coverage for reviewer blocker verdicts, stale source heads, missing credentials/setup, unavailable or timed-out providers, malformed output, configured pass evidence, and land-check integration. Repair is required before landing. Codex PM rejects Sonnet's stale-artifact fail-open claim as a blocker because land-check checks escalated-review source_drift_status and source-head freshness, but the stale-artifact write-before-throw path remains useful repair context.
+escalated_review_state: non_blocking
+escalated_review_rationale: The operator approved using the Sourmash-style claude -p headless path for Sonnet and Opus and asked for Qwen 3.6, Sonnet 4.6, and Opus 4.7 comparison before choosing the escalated reviewer. Opus 4.7 was selected as the default escalated reviewer based on the side-by-side run. The AC10 repair-head Opus 4.7 refresh accepted the AC10 repair and returned non_blocking findings only.
+pm_disposition: non_blocking
+pm_disposition_rationale: Codex PM accepts the Opus 4.7 finding that the prior AC10 blocker is resolved. The remaining Local Qwen and Opus findings are real but non-blocking: unreachable fixture fallback code, routing-decision null-guard clarity, test ID traceability, write-before-throw evidence hygiene, and the stale aggregate review-evidence state that this artifact refresh resolves. Do not create landing verdict yet; next repair or explicitly disposition these non-blocking Stage 4 findings and align the escalated-review evidence/routing story.
 operator_input_status: provided
 uat_status: not_applicable
-clean_code_status: blocker
+clean_code_status: non_blocking
 source_drift_status: current
 bootstrap_gaps:
   - CodeRabbit PR-backed review is not available for this local-record bootstrap chore because no pull request exists for main; no CodeRabbit pass is claimed.
-  - The prior paid-provider credential/setup blocker is superseded for this review step by the operator-approved claude -p comparison path. Future durable provider integration still needs a repo-native Claude headless adapter or explicit no-action disposition.
+  - The prior paid-provider credential/setup blocker is superseded for this review step by the operator-approved claude -p comparison path. Future durable provider integration still needs a repo-native Claude headless adapter, profile alignment, or explicit no-action disposition.

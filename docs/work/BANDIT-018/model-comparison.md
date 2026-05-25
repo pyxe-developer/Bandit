@@ -101,3 +101,34 @@ fail-open blocker that repo code did not support.
 
 `BANDIT-018` next state is `needs-repair`: add or explicitly disposition the
 missing AC10 tests, then rerun the review/landing gate path.
+
+## AC10 Repair-Head Refresh
+
+refresh_time_utc: 2026-05-25T16:45:00Z
+repair_source_head: 53c7cdb470604191f0764c17409e828ee2c7aa39
+operator_input_status: provided
+
+After the AC10 repair, Codex PM refreshed Stage 4 review evidence at
+`53c7cdb470604191f0764c17409e828ee2c7aa39`.
+
+| Reviewer | Invocation | Result | Cost/Latency Evidence |
+|---|---|---|---|
+| Qwen 3.6 | `npm run bandit -- qwen-review BANDIT-018` | `non_blocking` | Local oMLX run completed through the repo-native qwen-review command; no paid-provider cost. |
+| Opus 4.7 | `claude -p --model claude-opus-4-7 --effort xhigh --output-format json --json-schema ... --tools "" --disable-slash-commands --strict-mcp-config --max-budget-usd 0.50 --no-session-persistence` | `non_blocking` | Claude reported 84333 ms and `$0.47568875`. |
+
+### Repair-Head Findings
+
+- Opus 4.7 accepted the AC10 repair: the prior AC10 coverage/spec-alignment
+  blocker is resolved by the added focused tests and current verification.
+- Qwen 3.6 and Opus 4.7 both left non-blocking clean-code/evidence hygiene
+  findings around unreachable fixture fallback code, routing-decision null
+  guard clarity, test ID traceability, and write-before-throw evidence hygiene.
+- Local Qwen also reported that aggregate review evidence was stale. This
+  refresh updates `docs/work/BANDIT-018/review-evidence.md` to current-head
+  Stage 4 state.
+
+Codex PM disposition: Stage 4 is no longer blocked on AC10 coverage, but it is
+not ready for landing verdict. The next step is to repair or explicitly
+disposition the non-blocking Stage 4 findings and align the escalated-review
+evidence/routing story before creating landing verdict or landing action
+evidence.
