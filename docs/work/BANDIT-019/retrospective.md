@@ -18,6 +18,9 @@ instead of treating every raw git `HEAD` mismatch as stale.
   at `b85d6f3ed339c43f7d45ed6d86b089112c421930`, `land-check BANDIT-019` still
   passed even though review evidence records source head
   `2e760f68964466c1a7be9c4d8b2e2eb7d459a7e3`.
+- The closeout repair proved the second half of the loop: individual reviewer
+  evidence can remain at the reviewed implementation head when the final
+  aggregate `review_subject_hash` is current.
 
 ## Lessons And Dispositions
 
@@ -25,6 +28,7 @@ instead of treating every raw git `HEAD` mismatch as stale.
 |---|---|---|
 | Raw git `HEAD` is useful audit metadata but too broad as the primary Stage 4 freshness identity. | Durable artifact | `src/state/review-subject-hash.ts` and `src/commands/review-subject-hash.ts` now define and expose the review-subject hash. |
 | Terminal evidence commits must not force rerunning model review when reviewable source is unchanged. | Durable artifact | `src/commands/land-check.ts` now uses `review_subject_hash` when present. |
+| Individual reviewer evidence heads must not override a current aggregate review-subject hash. | Durable artifact | `land-check accepts reviewer evidence heads when final review subject hash matches` covers this closeout path. |
 | Historical artifacts need compatibility. | Durable artifact | Review evidence without `review_subject_hash` keeps the existing raw-head fallback behavior. |
 
 ## Improvement Chore
@@ -40,8 +44,9 @@ status: resolved
 outcome: keep
 outcome_evidence:
   - `node --test --test-name-pattern "review subject hash" test/landing-gates.test.mjs` passed.
-  - `npm test` passed 167 tests.
+  - `npm test` passed 168 tests.
   - `npm run bandit -- land-check BANDIT-019` passed after landing evidence was committed and raw `HEAD` advanced to `b85d6f3ed339c43f7d45ed6d86b089112c421930`.
+  - `npm run bandit -- land-check BANDIT-019` passed after the reviewer-head repair recorded final review-subject hash `d53b7f2875127190832131397d8b217ab7623610b9c9e2da5cf6ac4d53f71661`.
 
 ## Cross-Model Tension
 
