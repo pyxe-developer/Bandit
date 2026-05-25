@@ -16,13 +16,13 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Perform the local-record landing action for active chore
-`BANDIT-024` - Workflow Cockpit Boundary Scope and record
-`docs/work/BANDIT-024/landing-action.md`. `BANDIT-024` links
-`BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from existing
-repo artifacts; do not start Phase 8 web cockpit implementation, product UAT
-approval, automatic merge/push/deploy behavior, Phase 6 coordination primitive,
-Phase 7 improvement engine, or unrelated feature work during this chore.
+**Current next step:** Record retrospective closeout and bootstrap-gap
+disposition for active chore `BANDIT-024` - Workflow Cockpit Boundary Scope.
+`BANDIT-024` links `BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow
+cockpit-boundary chore from existing repo artifacts; do not start Phase 8 web
+cockpit implementation, product UAT approval, automatic merge/push/deploy
+behavior, Phase 6 coordination primitive, Phase 7 improvement engine, or
+unrelated feature work during this chore.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -173,15 +173,16 @@ Local Qwen Stage 4 pass evidence is recorded in
 `docs/work/BANDIT-024/local-qwen-review.md`, aggregate Stage 4 review evidence
 with current `review_subject_hash` is recorded in
 `docs/work/BANDIT-024/review-evidence.md`, Stage 5 landing verdict is recorded
-in `docs/work/BANDIT-024/landing-verdict.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to active chore `BANDIT-024`. Next action is local-record landing
-action.
+in `docs/work/BANDIT-024/landing-verdict.md`, local-record landing action
+evidence is recorded in `docs/work/BANDIT-024/landing-action.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`.
+Next action is retrospective closeout and bootstrap-gap disposition.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` is
-safe-to-land and awaiting local-record landing action for the workflow-cockpit
-boundary scope.
+landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` has
+local-record landing action evidence and awaits retrospective closeout and
+bootstrap-gap disposition.
 
 ## Phase Map
 
@@ -484,9 +485,9 @@ Current rule:
 Current priority:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Perform local-record landing action for `BANDIT-024`; halt for
-   operator-owned product direction if repo artifacts cannot answer a required
-   UI or product tradeoff.
+2. Record `BANDIT-024` retrospective closeout and bootstrap-gap disposition;
+   halt for operator-owned product direction if repo artifacts cannot answer a
+   required UI or product tradeoff.
 
 ## Phase 6: Coordination Primitive
 

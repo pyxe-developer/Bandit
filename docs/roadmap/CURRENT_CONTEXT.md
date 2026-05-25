@@ -119,22 +119,23 @@ Local Qwen Stage 4 pass evidence is recorded in
 `docs/work/BANDIT-024/local-qwen-review.md`, aggregate Stage 4 review
 evidence with current `review_subject_hash` is recorded in
 `docs/work/BANDIT-024/review-evidence.md`, Stage 5 landing verdict is recorded
-in `docs/work/BANDIT-024/landing-verdict.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to active chore `BANDIT-024`. The chore is scoped to defining the
-CLI-authoritative cockpit boundary from existing repo artifacts before any
-Phase 8 web cockpit implementation begins. `BANDIT-024` is safe-to-land but is
-not landed until local-record landing action evidence exists.
+in `docs/work/BANDIT-024/landing-verdict.md`, local-record landing action
+evidence is recorded in `docs/work/BANDIT-024/landing-action.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-024`. The
+chore is scoped to defining the CLI-authoritative cockpit boundary from
+existing repo artifacts before any Phase 8 web cockpit implementation begins.
+`BANDIT-024` has local-record landing action evidence but is not closed out
+until retrospective and bootstrap-gap disposition are recorded.
 
 **Last completed milestone:** `BANDIT-023` resolved the non-blocking review
 finding routing bootstrap gap and landed with local-record landing evidence,
 retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Perform the local-record landing action for
-`BANDIT-024` and record `docs/work/BANDIT-024/landing-action.md`. Do not
-broaden into Phase 6 Coordination Primitive, Phase 7 Improvement Engine,
-Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, feature work,
-automatic merge/push/deploy behavior, or product UAT approval during
-`BANDIT-024`.
+**Current next action:** Record `BANDIT-024` retrospective closeout and
+bootstrap-gap disposition. Do not broaden into Phase 6 Coordination Primitive,
+Phase 7 Improvement Engine, Phase 8 Workflow Cockpit implementation,
+Phase 9 dogfood, feature work, automatic merge/push/deploy behavior, or
+product UAT approval during `BANDIT-024`.
 
 ## Active Work
 
@@ -158,7 +159,8 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing.
 
-**Expected next deliverable:** `docs/work/BANDIT-024/landing-action.md`.
+**Expected next deliverable:** `docs/work/BANDIT-024/retrospective.md` and
+`.bandit/bootstrap-gaps.json` disposition for `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 ## Known Bootstrap Gaps
 
@@ -197,8 +199,9 @@ These are expected because Bandit does not exist yet:
 - `BANDIT-GAP-WORKFLOW-COCKPIT` is active as `BANDIT-024`; the cockpit
   boundary scoping brief, RED evidence, workflow-cockpit boundary artifact,
   implementation evidence, Local Qwen Stage 4 pass evidence, aggregate
-  Stage 4 review evidence, and Stage 5 landing verdict exist. Local-record
-  landing action is next. No Phase 8 web cockpit implementation exists yet.
+  Stage 4 review evidence, Stage 5 landing verdict, and local-record landing
+  action evidence exist. Retrospective and gap-ledger disposition are next. No
+  Phase 8 web cockpit implementation exists yet.
 
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
@@ -293,9 +296,9 @@ Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
 1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
-2. Perform local-record landing action for `BANDIT-024`; halt for
-   operator-owned product direction if repo artifacts cannot answer a required
-   UI or product tradeoff.
+2. Record `BANDIT-024` retrospective closeout and bootstrap-gap disposition;
+   halt for operator-owned product direction if repo artifacts cannot answer a
+   required UI or product tradeoff.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

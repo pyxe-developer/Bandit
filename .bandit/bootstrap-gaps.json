@@ -200,7 +200,7 @@
       "linked_work_item": "BANDIT-024",
       "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
       "verification_target": null,
-      "next_action": "Complete active chore BANDIT-024."
+      "next_action": "Record BANDIT-024 retrospective closeout and bootstrap-gap disposition."
     }
   ]
 }
