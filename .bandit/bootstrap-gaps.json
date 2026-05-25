@@ -89,7 +89,7 @@
       ],
       "linked_work_item": "BANDIT-018",
       "rationale": "The placeholder gate exists; BANDIT-018 implementation evidence records CLI-owned live stronger-reviewer routing with explicit credential, cost, provider-setup, and fail-closed evidence boundaries.",
-      "next_action": "Refresh BANDIT-018 Stage 4 review evidence at the focused Stage 4 finding repair head recorded in docs/work/BANDIT-018/stage4-finding-disposition.md before landing verdict, landing action, retrospective, and gap disposition."
+      "next_action": "Create the BANDIT-018 landing verdict from current Stage 4 review evidence before landing action, retrospective, and gap disposition."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",

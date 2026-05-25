@@ -132,3 +132,43 @@ not ready for landing verdict. The next step is to repair or explicitly
 disposition the non-blocking Stage 4 findings and align the escalated-review
 evidence/routing story before creating landing verdict or landing action
 evidence.
+
+## Focused Stage 4 Finding Repair-Head Refresh
+
+refresh_time_utc: 2026-05-25T16:17:13Z
+repair_source_head: e80ddbe635bd68e8cdbf04d7a2dca8aff719a0c5
+operator_input_status: provided
+
+After the focused Stage 4 finding repair and disposition, Codex PM refreshed
+Stage 4 review evidence at `e80ddbe635bd68e8cdbf04d7a2dca8aff719a0c5`.
+
+| Reviewer | Invocation | Result | Cost/Latency Evidence |
+|---|---|---|---|
+| Qwen 3.6 | `npm run bandit -- qwen-review BANDIT-018` | `non_blocking` | Local oMLX run completed through the repo-native qwen-review command; no paid-provider cost. |
+| Opus 4.7 | `claude -p --model claude-opus-4-7 --effort xhigh --output-format json --json-schema ... --tools "" --disable-slash-commands --strict-mcp-config --max-budget-usd 0.50 --no-session-persistence` | `non_blocking` | The first full-packet attempt hit the local `$0.50` budget cap before returning a usable verdict. A focused current-head packet completed in 106597 ms and reported `$0.3421505`. |
+
+### Focused Repair-Head Findings
+
+- Opus 4.7 accepted the focused repair as sound: unreachable fallback code was
+  removed, fixture validation now happens before field reads, selected-route
+  validation is explicit, and the test ID sequence was improved.
+- Opus 4.7 found no Stage 3 blocker and no fail-open Stage 4 blocker. Its
+  actionable findings were evidence-refresh mechanics that this artifact and
+  `docs/work/BANDIT-018/review-evidence.md` now address.
+- Local Qwen continued to report the routing-decision null-guard concern, but
+  `readRoutingDecision` is a required-artifact parser that throws on missing or
+  malformed routing evidence and does not return `null`; the caller therefore
+  remains fail-closed.
+- Local Qwen also repeated the write-before-throw evidence-hygiene concern.
+  Codex PM accepts the current behavior as intentional audit evidence because
+  the command exits nonzero and `land-check` rejects stale or non-pass
+  escalated-review evidence.
+- Local Qwen's test-ID traceability concern is accepted as resolved by the
+  current focused repair: the AC10 extension cases now progress sequentially
+  from the original RED evidence IDs.
+
+Codex PM disposition: Stage 4 review evidence is current at the focused repair
+head and no blocker remains. The remaining findings are non-blocking and have
+concrete PM disposition here and in aggregate review evidence. The next step is
+to create the `BANDIT-018` landing verdict; do not create landing action,
+retrospective, or the next bootstrap-gap chore until the landing verdict passes.

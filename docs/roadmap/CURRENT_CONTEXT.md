@@ -26,9 +26,13 @@ recorded in `docs/work/BANDIT-018/local-qwen-review.md`, escalated reviewer
 blocker evidence is recorded in `docs/work/BANDIT-018/escalated-review.md`,
 side-by-side Qwen 3.6 / Sonnet 4.6 / Opus 4.7 comparison evidence is recorded
 in `docs/work/BANDIT-018/model-comparison.md`, aggregate review evidence is
-recorded in `docs/work/BANDIT-018/review-evidence.md`, and focused repair /
-PM disposition evidence for the repair-head non-blocking Stage 4 findings is
-recorded in `docs/work/BANDIT-018/stage4-finding-disposition.md`.
+recorded in `docs/work/BANDIT-018/review-evidence.md`, focused repair / PM
+disposition evidence for the repair-head non-blocking Stage 4 findings is
+recorded in `docs/work/BANDIT-018/stage4-finding-disposition.md`, and focused
+repair-head Qwen 3.6 / Opus 4.7 refresh evidence is recorded in
+`docs/work/BANDIT-018/local-qwen-review.md`,
+`docs/work/BANDIT-018/model-comparison.md`, and
+`docs/work/BANDIT-018/review-evidence.md`.
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-018` as an active chore.
 Do not begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
@@ -38,10 +42,9 @@ operator-owned input, or explicitly dispositioned.
 **Last completed milestone:** `BANDIT-017` resolved landing-gate complexity and
 git diagnostics hardening for the Stage 4 review path.
 
-**Current next action:** Refresh `BANDIT-018` Stage 4 review evidence at the
-committed Stage 4 finding repair head; do not create landing verdict, landing
-action, retrospective, or the next bootstrap-gap chore until refreshed review
-evidence is current and resolved.
+**Current next action:** Create the `BANDIT-018` landing verdict from current
+Stage 4 review evidence; do not create landing action, retrospective, or the
+next bootstrap-gap chore until landing verdict passes.
 
 ## Active Work
 
@@ -61,8 +64,7 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
 Complexity And Git Diagnostics Hardening.
 
-**Expected next deliverable:** Refreshed `BANDIT-018` Stage 4 review evidence
-after the focused non-blocking finding repair.
+**Expected next deliverable:** `BANDIT-018` landing verdict.
 
 ## Known Bootstrap Gaps
 
@@ -103,9 +105,10 @@ evidence is recorded in `docs/work/BANDIT-018/local-qwen-review.md`,
 `docs/work/BANDIT-018/model-comparison.md`, and
 `docs/work/BANDIT-018/review-evidence.md`. Focused repair / PM disposition for
 the remaining non-blocking Stage 4 findings is recorded in
-`docs/work/BANDIT-018/stage4-finding-disposition.md`. The current step is to
-refresh Stage 4 review evidence at the committed repair head before landing
-verdict.
+`docs/work/BANDIT-018/stage4-finding-disposition.md`. Focused repair-head
+Stage 4 refresh evidence is now current at
+`e80ddbe635bd68e8cdbf04d7a2dca8aff719a0c5`; the current step is to create the
+landing verdict.
 `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
@@ -185,9 +188,10 @@ Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
 1. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` as active `BANDIT-018`; AC10 repair
-   evidence, repair-head Stage 4 review refresh evidence, and focused
-   non-blocking finding repair / PM disposition are recorded. The next action
-   is to refresh Stage 4 review evidence at the committed repair head.
+   evidence, repair-head Stage 4 review refresh evidence, focused
+   non-blocking finding repair / PM disposition, and focused repair-head
+   Stage 4 review refresh evidence are recorded. The next action is to create
+   the `BANDIT-018` landing verdict.
 2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
 4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
@@ -204,10 +208,11 @@ evidence is recorded in `docs/work/BANDIT-018/model-comparison.md`; and
 aggregate review evidence is recorded in `docs/work/BANDIT-018/review-evidence.md`.
 Focused repair / PM disposition for the repair-head non-blocking Stage 4
 findings is recorded in
-`docs/work/BANDIT-018/stage4-finding-disposition.md`. The current step is to
-refresh Stage 4 review evidence at the committed repair head. Do not begin
-later gaps, unrelated feature work, landing verdict, landing action, or
-retrospective until refreshed review evidence is current and resolved.
+`docs/work/BANDIT-018/stage4-finding-disposition.md`, and focused repair-head
+Stage 4 refresh evidence is recorded in `docs/work/BANDIT-018/model-comparison.md`
+and `docs/work/BANDIT-018/review-evidence.md`. The current step is to create
+the landing verdict. Do not begin later gaps, unrelated feature work, landing
+action, or retrospective until landing verdict passes.
 
 ## Required Operator Input
 
