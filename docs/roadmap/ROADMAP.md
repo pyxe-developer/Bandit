@@ -16,10 +16,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Run Stage 4 review for active chore `BANDIT-022`
-(`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), starting with
-`npm run bandit -- qwen-review BANDIT-022`. All future Stage 4 review evidence
-should use `review_subject_hash`.
+**Current next step:** Record Codex PM disposition for the three Local Qwen
+`non_blocking` findings on active chore `BANDIT-022`
+(`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), then record aggregate review evidence
+with current `review_subject_hash`. All future Stage 4 review evidence should
+use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -118,12 +119,14 @@ creation spec is recorded in
 `docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
 `docs/work/BANDIT-022/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-022/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-022/implementation-evidence.md`, and
+`docs/work/BANDIT-022/implementation-evidence.md`, Local Qwen Stage 4 evidence
+is recorded in `docs/work/BANDIT-022/local-qwen-review.md` with a
+`non_blocking` verdict and three open hardening findings, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as `active_chore`.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-active at Stage 4 with review next.
+active at Stage 4 with PM disposition and aggregate review evidence next.
 
 ## Phase Map
 
@@ -419,9 +422,10 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review for active chore `BANDIT-022`
-   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), starting with
-   `npm run bandit -- qwen-review BANDIT-022`.
+1. Record Codex PM disposition for the three Local Qwen `non_blocking`
+   findings on active chore `BANDIT-022`
+   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), then record aggregate review evidence
+   with current `review_subject_hash`.
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 ## Phase 6: Coordination Primitive

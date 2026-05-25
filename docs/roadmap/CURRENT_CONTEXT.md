@@ -76,15 +76,18 @@ recorded in `docs/work/BANDIT-021/retrospective.md`, and
 `docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json`, its brief is recorded in
 `docs/work/BANDIT-022/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-022/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-022/implementation-evidence.md`, `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-022` as `active_chore`, and `.bandit/events.jsonl`
-records the CLI-owned work-item creation event.
+`docs/work/BANDIT-022/implementation-evidence.md`, Local Qwen Stage 4 evidence
+is recorded in `docs/work/BANDIT-022/local-qwen-review.md` with a
+`non_blocking` verdict and three open hardening findings,
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-022` as
+`active_chore`, and `.bandit/events.jsonl` records the CLI-owned work-item
+creation event.
 
 **Last completed milestone:** `BANDIT-021` resolved CLI-owned creation for
 selected workflow artifacts from explicit structured specs.
 
-**Current next action:** Run Stage 4 review for `BANDIT-022`, starting with
-`npm run bandit -- qwen-review BANDIT-022`, then record aggregate review
+**Current next action:** Record Codex PM disposition for the three Local Qwen
+`non_blocking` Stage 4 findings in `BANDIT-022`, then record aggregate review
 evidence with current `review_subject_hash`. Do not broaden into cockpit,
 Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
 Cockpit, Phase 9 dogfood, feature work, automatic landing, merge/push/deploy
@@ -112,9 +115,10 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-022` showing
-the heartbeat policy parser and bounded inspection command have current
-adversarial review and aggregate review evidence with `review_subject_hash`.
+**Expected next deliverable:** Stage 4 PM disposition and aggregate review
+evidence for `BANDIT-022` showing the heartbeat policy parser and bounded
+inspection command have current adversarial review and aggregate review
+evidence with `review_subject_hash`.
 
 ## Known Bootstrap Gaps
 
@@ -142,8 +146,9 @@ These are expected because Bandit does not exist yet:
   recorded.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
-- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` is active in `BANDIT-022`; RED evidence
-  and implementation evidence exist, with Stage 4 review pending.
+- `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` is active in `BANDIT-022`; RED evidence,
+  implementation evidence, and Local Qwen Stage 4 evidence exist, with PM
+  disposition and aggregate review evidence pending.
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
@@ -238,9 +243,10 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Run Stage 4 review for active chore `BANDIT-022`
-   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), starting with
-   `npm run bandit -- qwen-review BANDIT-022`.
+1. Record Codex PM disposition for the three Local Qwen `non_blocking`
+   findings on active chore `BANDIT-022`
+   (`BANDIT-GAP-HEARTBEAT-CHORE-AGENT`), then record aggregate review evidence
+   with current `review_subject_hash`.
 2. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
@@ -253,7 +259,7 @@ Provided for the Stage 4 reviewer route decision: the operator approved using
 the Sourmash-style `claude -p` headless path for Sonnet and Opus and asked
 Codex PM to compare Qwen 3.6, Sonnet 4.6, and Opus 4.7 before choosing the
 escalated reviewer route. No product or reviewer-routing input is required
-before running Stage 4 review for `BANDIT-021`.
+before recording PM disposition for `BANDIT-022` Local Qwen findings.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
