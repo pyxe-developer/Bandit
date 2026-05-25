@@ -4,3 +4,4 @@
 {"type":"work_item_created","work_item":"BANDIT-022","message":"Created work item BANDIT-022 from docs/specs/BANDIT-GAP-HEARTBEAT-CHORE-AGENT.json"}
 {"type":"work_item_created","work_item":"BANDIT-023","message":"Created work item BANDIT-023 from docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json"}
 {"type":"artifact_created","work_item":"BANDIT-023","message":"Created red_evidence artifact at docs/work/BANDIT-023/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-023","message":"Created retrospective artifact at docs/work/BANDIT-023/retrospective.md"}

@@ -172,8 +172,8 @@
     {
       "id": "BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING",
       "title": "Non-blocking review findings need durable chore routing",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-022",
       "source_artifacts": [
         "docs/work/BANDIT-022/local-qwen-review.md",
@@ -183,9 +183,9 @@
         "docs/roadmap/ROADMAP.md"
       ],
       "linked_work_item": "BANDIT-023",
-      "rationale": "BANDIT-015 and BANDIT-022 exposed review-loop pressure where Local Qwen accepted implementation behavior but continued surfacing future-hardening concerns. Operator policy direction is to move non-blocking hardening findings to chores or explicit no-action dispositions and proceed with landing instead of recursively reopening Stage 4.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-023."
+      "rationale": "BANDIT-023 added the Stage 4 and Stage 5 contract for Non-Blocking Review Findings: accepted non_blocking reviewer findings require concrete PM disposition and durable follow-up routing, while blocker findings, stale review-subject hashes, CodeRabbit request-changes, unresolved actionable findings, and missing disposition remain fail-closed.",
+      "verification_target": "docs/work/BANDIT-023/retrospective.md",
+      "next_action": "Use non_blocking_findings_routing in review evidence when real but safe-to-defer reviewer findings are accepted; evaluate the outcome after the recorded Stage 4 churn window."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
@@ -200,7 +200,7 @@
       "linked_work_item": null,
       "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
       "verification_target": null,
-      "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after automation-agent gaps are resolved or explicitly dispositioned; do not start broader cockpit work while earlier open gaps remain."
+      "next_action": "Resolve next as its own bootstrap-gap chore or record an explicit no-action disposition; first scope the cockpit boundary from existing roadmap artifacts before implementation."
     }
   ]
 }

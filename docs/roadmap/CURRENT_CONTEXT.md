@@ -87,8 +87,8 @@ candidates are recorded in `docs/work/BANDIT-022/follow-up-chores.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
 The operator reprioritized the `BANDIT-022` non-blocking Local Qwen hardening
-findings ahead of the workflow-cockpit gap on 2026-05-25. `BANDIT-023` is now
-the active bootstrap-gap improvement chore for
+findings ahead of the workflow-cockpit gap on 2026-05-25. `BANDIT-023`
+resolved the bootstrap-gap improvement chore for
 `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING`. Its structured creation spec
 is recorded in
 `docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json`, its brief is
@@ -100,27 +100,31 @@ artifact input is recorded in `docs/specs/BANDIT-023-red-evidence.json`,
 aggregate Stage 4 review evidence with current `review_subject_hash` is
 recorded in `docs/work/BANDIT-023/review-evidence.md`, Stage 5 landing verdict
 is recorded in `docs/work/BANDIT-023/landing-verdict.md`, local-record landing
-action evidence is recorded in `docs/work/BANDIT-023/landing-action.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-023` as the active
-chore. This chore captures the policy that non-blocking review findings should
-be routed to durable chores or explicit no-action decisions instead of
-recursively delaying landing after required gates accept the implementation.
+action evidence is recorded in `docs/work/BANDIT-023/landing-action.md`,
+retrospective closeout is recorded in
+`docs/work/BANDIT-023/retrospective.md`, and `.bandit/bootstrap-gaps.json`
+marks the gap resolved. This chore captures the policy that non-blocking
+review findings should be routed to durable chores or explicit no-action
+decisions instead of recursively delaying landing after required gates accept
+the implementation.
 
-**Last completed milestone:** `BANDIT-022` resolved the heartbeat chore-agent
-bootstrap gap and landed with local-record landing evidence.
+**Last completed milestone:** `BANDIT-023` resolved the non-blocking review
+finding routing bootstrap gap and landed with local-record landing evidence,
+retrospective closeout, and gap-ledger disposition.
 
-**Current next action:** Record retrospective closeout for `BANDIT-023` and
-resolve
-`BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` in the bootstrap-gap ledger.
-Do not broaden into Phase 6 Coordination Primitive, Phase 7 Improvement Engine,
-Phase 8 Workflow Cockpit, Phase 9 dogfood, feature work, automatic
-merge/push/deploy behavior, or product UAT approval before `BANDIT-023`
-retrospective closeout is recorded and the workflow-cockpit gap is explicitly
-scoped or dispositioned.
+**Current next action:** Resolve `BANDIT-GAP-WORKFLOW-COCKPIT` as the next
+bootstrap-gap chore or record an explicit no-action disposition. The next
+work step should first scope the cockpit boundary from existing roadmap and
+context artifacts; halt for operator-owned product direction if the scope
+requires UI/product tradeoffs the repo cannot answer. Do not broaden into
+Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow
+Cockpit implementation, Phase 9 dogfood, feature work, automatic
+merge/push/deploy behavior, or product UAT approval before the cockpit gap is
+explicitly scoped.
 
 ## Active Work
 
-**Active work item:** `BANDIT-023` - Non-Blocking Review Finding Chore Routing.
+**Active work item:** none.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -137,12 +141,12 @@ Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
 Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
-Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract.
+Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
+Non-Blocking Review Finding Chore Routing.
 
-**Expected next deliverable:** `BANDIT-023` retrospective closeout in
-`docs/work/BANDIT-023/retrospective.md`, plus
-`BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` resolved in
-`.bandit/bootstrap-gaps.json`.
+**Expected next deliverable:** A scoped `BANDIT-GAP-WORKFLOW-COCKPIT`
+bootstrap-gap chore or explicit no-action disposition, recorded from existing
+roadmap/context evidence before any cockpit implementation begins.
 
 ## Known Bootstrap Gaps
 
@@ -173,11 +177,11 @@ These are expected because Bandit does not exist yet:
 - `BANDIT-GAP-HEARTBEAT-CHORE-AGENT` is resolved by `BANDIT-022`; landing
   verdict, landing action, retrospective, and gap-ledger disposition are
   recorded.
-- `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` is active in `BANDIT-023`;
-  its brief, RED evidence, implementation evidence, Local Qwen Stage 4 pass
-  evidence, aggregate Stage 4 review evidence, and Stage 5 landing verdict are
-  recorded, local-record landing action evidence is recorded, and retrospective
-  closeout plus bootstrap-gap disposition are next.
+- `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` is resolved by
+  `BANDIT-023`; its brief, RED evidence, implementation evidence, Local Qwen
+  Stage 4 pass evidence, aggregate Stage 4 review evidence, Stage 5 landing
+  verdict, local-record landing action evidence, retrospective closeout, and
+  gap-ledger disposition are recorded.
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
@@ -272,10 +276,11 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Complete the `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` chore through
-   `BANDIT-023` retrospective and gap-ledger disposition.
-2. Return to `BANDIT-GAP-WORKFLOW-COCKPIT` only after `BANDIT-023` is closed
-   out or explicitly blocked/dispositioned.
+1. Resolve `BANDIT-GAP-WORKFLOW-COCKPIT` as the next bootstrap-gap chore or
+   record an explicit no-action disposition.
+2. Scope the cockpit boundary from existing roadmap/context artifacts before
+   creating any implementation plan; halt for operator-owned product direction
+   if repo artifacts cannot answer a required UI or product tradeoff.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -283,12 +288,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before implementing `BANDIT-023`. The
-operator policy direction is provided: non-blocking future-hardening findings
-should move to chores or no-action dispositions and landing should proceed
-when required gates accept the implementation. If a future implementation
-would change which findings count as blockers, halt and ask for explicit
-policy input.
+No operator-owned input is required to inspect and scope
+`BANDIT-GAP-WORKFLOW-COCKPIT` from existing repo artifacts. If the next work
+step requires product direction, UI scope tradeoffs, policy changes, explicit
+cost or risk overrides, or actual cockpit implementation decisions that the
+roadmap cannot answer, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
