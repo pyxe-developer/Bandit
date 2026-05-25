@@ -1,0 +1,75 @@
+# BANDIT-024: Workflow Cockpit Boundary Scope
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the workflow-cockpit bootstrap gap far enough to define the CLI-authoritative cockpit boundary from existing repo artifacts before any UI implementation begins.
+
+## Origin
+
+Bootstrap gap BANDIT-GAP-WORKFLOW-COCKPIT is the next queued open gap after BANDIT-023 resolved non-blocking review finding routing. CURRENT_CONTEXT.md and ROADMAP.md require scoping the cockpit boundary from existing roadmap and context artifacts before implementation work.
+
+## Scope
+
+- Create a repo-native cockpit boundary artifact that states what the cockpit may read, display, and invoke without becoming canonical workflow authority.
+- Derive the minimum cockpit information architecture from README.md, docs/architecture/founding-architecture.md, docs/plans/V0_PLAN.md, docs/roadmap/CURRENT_CONTEXT.md, docs/roadmap/ROADMAP.md, and docs/prds/BANDIT-PRD-001-founding-product.md.
+- Define the initial data-source boundary for current context, work items, bootstrap gaps, landing verdicts, UAT status, improvement health, coordination state, safe trigger points, and next action, including which surfaces are available now and which depend on later Phase 6 or Phase 7 work.
+- Define the action boundary for approved CLI command invocation without allowing the cockpit to own canonical state, infer product UAT, merge, push, deploy, bypass gates, or make operator-owned policy and business decisions.
+- Record explicit no-action or defer decisions for UI/product tradeoffs the repo cannot answer yet, and halt for operator input if the boundary requires those decisions before RED evidence can be written.
+- Keep this chore to scoping, artifact contract, validation, and optional read-only/reporting command support; do not implement the Phase 8 web app in this chore.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-024/brief.md and links to BANDIT-GAP-WORKFLOW-COCKPIT.
+- A cockpit boundary artifact defines CLI Authority, repo-native source of truth, rebuildable index limits, and the rule that cockpit storage is never canonical.
+- The boundary artifact maps each planned cockpit view to repo-native source artifacts or records a defer/no-action decision when the source does not exist yet.
+- The boundary artifact maps each allowed cockpit action to an approved CLI command family or records it as out of scope until a later policy artifact exists.
+- The scope distinguishes boundary scoping from Phase 8 web implementation and blocks any UI implementation until the boundary artifact is reviewed through Bandit gates.
+- RED evidence demonstrates the current repository lacks a durable cockpit boundary contract and would otherwise force future agents to infer UI authority from scattered roadmap prose.
+- Verification covers bootstrap-gap ledger linkage, context/roadmap consistency, and any validator or reporting code touched by the implementation.
+- No product UAT approval, automatic merge/push/deploy behavior, cross-repo coordination, full coordination primitive, improvement evaluation engine, or web cockpit implementation is introduced by this chore.
+
+## Verification Plan
+
+- Run focused checks for the cockpit boundary artifact, or focused tests if implementation adds a validator/reporting command.
+- Run npm test if implementation touches shared command routing, validators, bootstrap gaps, work-item parsing, policy loading, or state readers.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run npm run bandit -- qwen-review BANDIT-024 before Stage 4 closeout.
+- Run npm run bandit -- land-check BANDIT-024 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/work/BANDIT-024/brief.md
+- docs/work/BANDIT-024/red-evidence.md
+- docs/work/BANDIT-024/implementation-evidence.md
+- docs/work/BANDIT-024/local-qwen-review.md
+- docs/work/BANDIT-024/review-evidence.md
+- docs/work/BANDIT-024/landing-verdict.md
+- docs/work/BANDIT-024/landing-action.md
+- docs/work/BANDIT-024/retrospective.md
+- docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json
+- docs/design/workflow-cockpit-boundary.md
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-024/brief.md
+- docs/work/BANDIT-024/red-evidence.md
+- docs/work/BANDIT-024/implementation-evidence.md
+- docs/work/BANDIT-024/local-qwen-review.md
+- docs/work/BANDIT-024/review-evidence.md
+- docs/work/BANDIT-024/landing-verdict.md
+- docs/work/BANDIT-024/landing-action.md
+- docs/work/BANDIT-024/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this cockpit-boundary chore brief or RED evidence because existing repo artifacts define the scoping boundary. If later implementation requires UI/product tradeoffs, product UAT approval, policy changes, business tradeoffs, or merge/push/deploy authority that the repo cannot answer, halt and ask for that exact input.

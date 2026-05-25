@@ -16,12 +16,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Resolve `BANDIT-GAP-WORKFLOW-COCKPIT` as the next
-bootstrap-gap chore or record an explicit no-action disposition. First scope
-the cockpit boundary from existing roadmap and context artifacts; halt for
-operator-owned product direction if the repo cannot answer a required UI or
-product tradeoff. `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
-closed out: RED evidence is recorded in
+**Current next step:** Record RED evidence for active chore `BANDIT-024` -
+Workflow Cockpit Boundary Scope. `BANDIT-024` links
+`BANDIT-GAP-WORKFLOW-COCKPIT` to a narrow cockpit-boundary chore from existing
+repo artifacts; do not start Phase 8 web cockpit implementation, product UAT
+approval, automatic merge/push/deploy behavior, Phase 6 coordination
+primitive, Phase 7 improvement engine, or unrelated feature work during this
+chore. `BANDIT-023` - Non-Blocking Review Finding Chore Routing is closed out:
+RED evidence is recorded in
 `docs/work/BANDIT-023/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-023/implementation-evidence.md`, Local Qwen Stage 4 pass
 evidence is recorded in `docs/work/BANDIT-023/local-qwen-review.md`, aggregate
@@ -158,11 +160,18 @@ marks the gap resolved and linked to `BANDIT-023`.
 This chore exists to make
 non-blocking review findings durable without recursively delaying landing when
 required gates accept the implementation.
+`BANDIT-024` is active for `BANDIT-GAP-WORKFLOW-COCKPIT`. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-GAP-WORKFLOW-COCKPIT.json`, its brief is recorded in
+`docs/work/BANDIT-024/brief.md`, and `.bandit/bootstrap-gaps.json` links the
+gap to active chore `BANDIT-024`. Next action is RED evidence for the missing
+durable cockpit boundary contract.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-landed and closed out. `BANDIT-023` is landed and closed out.
-`BANDIT-GAP-WORKFLOW-COCKPIT` remains the next open bootstrap gap.
+landed and closed out. `BANDIT-023` is landed and closed out. `BANDIT-024` is
+active at Stage 2 RED evidence preparation for the workflow-cockpit boundary
+scope.
 
 ## Phase Map
 
@@ -362,9 +371,9 @@ Completed work:
 - `BANDIT-022` - Heartbeat Chore Agent Contract.
 - `BANDIT-023` - Non-Blocking Review Finding Chore Routing.
 
-Queued next:
+Active work:
 
-- `BANDIT-GAP-WORKFLOW-COCKPIT` (next).
+- `BANDIT-024` - Workflow Cockpit Boundary Scope.
 
 Expected capabilities:
 
@@ -464,11 +473,10 @@ Current rule:
 
 Current priority:
 
-1. Resolve `BANDIT-GAP-WORKFLOW-COCKPIT` as the next bootstrap-gap chore or
-   record an explicit no-action disposition.
-2. Scope the cockpit boundary from existing roadmap/context artifacts before
-   creating implementation work; halt for operator-owned product direction if
-   repo artifacts cannot answer a required UI or product tradeoff.
+1. Complete active chore `BANDIT-024` for `BANDIT-GAP-WORKFLOW-COCKPIT`.
+2. Record RED evidence for the missing cockpit boundary contract before
+   implementation; halt for operator-owned product direction if repo artifacts
+   cannot answer a required UI or product tradeoff.
 
 ## Phase 6: Coordination Primitive
 

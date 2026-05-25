@@ -190,17 +190,17 @@
     {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
       "title": "No workflow cockpit exists yet",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/ROADMAP.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-024",
       "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
       "verification_target": null,
-      "next_action": "Resolve next as its own bootstrap-gap chore or record an explicit no-action disposition; first scope the cockpit boundary from existing roadmap artifacts before implementation."
+      "next_action": "Complete active chore BANDIT-024."
     }
   ]
 }
