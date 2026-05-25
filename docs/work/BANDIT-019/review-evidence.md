@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-019
 source_head: 2e760f68964466c1a7be9c4d8b2e2eb7d459a7e3
-review_subject_hash: daff108f2fea9aa7771cf6e57943e364fe9322282d28bee158c9e4318e0640f3
+review_subject_hash: 4471d41a8d6f693da1dfdda1523f8f2b283fd4ae169ea66fc24c53266278a0f8
 verification_state: pass
 verification_evidence:
   - node --test --test-name-pattern "review subject hash" test/landing-gates.test.mjs passed 3 focused tests.
@@ -11,7 +11,8 @@ verification_evidence:
   - npm test passed 167 tests.
   - npm run bandit -- validate passed.
   - git diff --check passed.
-  - npm run bandit -- review-subject-hash BANDIT-019 produced daff108f2fea9aa7771cf6e57943e364fe9322282d28bee158c9e4318e0640f3 from review-subject policy v1.
+  - npm run bandit -- review-subject-hash BANDIT-019 produced daff108f2fea9aa7771cf6e57943e364fe9322282d28bee158c9e4318e0640f3 from review-subject policy v1 at the implementation head.
+  - After recording hash-based freshness vocabulary in CONTEXT.md, npm run bandit -- review-subject-hash BANDIT-019 produced 4471d41a8d6f693da1dfdda1523f8f2b283fd4ae169ea66fc24c53266278a0f8; review evidence now records that final review-subject hash.
 coderabbit_state: bootstrap_gap
 coderabbit_replacement_evidence:
   - No PR-backed CodeRabbit review exists for BANDIT-019 because the active bootstrap work is on main and has no associated pull request.

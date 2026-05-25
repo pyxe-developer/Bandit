@@ -95,8 +95,8 @@
     {
       "id": "BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS",
       "title": "Stage 4 freshness depends on raw git HEAD instead of review subject hash",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-018",
       "source_artifacts": [
         "docs/work/BANDIT-018/review-evidence.md",
@@ -104,8 +104,9 @@
         "docs/work/BANDIT-018/retrospective.md"
       ],
       "linked_work_item": "BANDIT-019",
-      "rationale": "BANDIT-018 exposed that using raw git HEAD as the primary review freshness key can create a self-referential loop because writing evidence artifacts advances HEAD even when the reviewable source did not change.",
-      "next_action": "Execute BANDIT-019 to add review-subject hash freshness so evidence-only commits do not force repeated Stage 4 review loops."
+      "rationale": "BANDIT-019 added review-subject hash computation, review evidence parsing/template support, a CLI hash command, and landing-readiness behavior that uses review_subject_hash to keep evidence-only commits from forcing repeated Stage 4 review loops while preserving fail-closed source and policy drift behavior.",
+      "verification_target": "docs/work/BANDIT-019/landing-action.md",
+      "next_action": "Use review_subject_hash in Stage 4 review evidence for all future work items; raw source_head remains audit metadata, not the primary freshness identity when a hash is present."
     },
     {
       "id": "BANDIT-GAP-LANDING-AGENT",

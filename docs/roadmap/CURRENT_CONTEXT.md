@@ -35,26 +35,30 @@ repair-head Qwen 3.6 / Opus 4.7 refresh evidence is recorded in
 landing action, retrospective, and gap-ledger disposition are recorded in
 `docs/work/BANDIT-018/` and `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is active as `BANDIT-019`. The
-operator directed Codex PM to close `BANDIT-018` under the existing
-terminal-disposition-only policy and make `BANDIT-019` the next work item so
-all later work uses hash-based evidence freshness rather than raw git HEAD
-freshness.
+`BANDIT-019` resolved `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS`. Its brief,
+RED evidence, implementation evidence, Local Qwen pass evidence, review
+evidence with `review_subject_hash`, landing verdict, local-record landing
+action, retrospective, and gap-ledger disposition are recorded in
+`docs/work/BANDIT-019/` and `.bandit/bootstrap-gaps.json`. Future Stage 4
+review evidence should record `review_subject_hash`; raw `source_head` remains
+audit metadata and historical fallback, not the primary freshness identity when
+a hash is present.
 Do not begin work-item creation, artifact creation, heartbeat, cockpit, Phase 6
 Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work until `BANDIT-019` is landed, blocked on
-operator-owned input, or explicitly dispositioned.
+Phase 9 dogfood, or feature work until the next open bootstrap gap is routed as
+a single active chore.
 
-**Last completed milestone:** `BANDIT-018` resolved live escalated reviewer
-routing for the bootstrap scope.
+**Last completed milestone:** `BANDIT-019` resolved hash-based Stage 4 evidence
+freshness.
 
-**Current next action:** Create the `BANDIT-019` brief for
-`BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS`; do not implement code until the
-brief and RED evidence are recorded.
+**Current next action:** Create the next bootstrap-gap chore for
+`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`; all Stage 4 evidence for future work
+items must use `review_subject_hash`.
 
 ## Active Work
 
-**Active work item:** `BANDIT-019` - Review Subject Hash Evidence Freshness.
+**Active work item:** none. Next work item should resolve
+`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -69,9 +73,10 @@ Auto-Landing Eligibility Policy And Check; `BANDIT-014` - Landing Agent
 Bootstrap Gap Resolution; `BANDIT-015` - Live CodeRabbit Pre-Landing Loop;
 `BANDIT-016` - Stage 4 Evidence-Head Semantics; `BANDIT-017` - Landing Gate
 Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
-Reviewer Routing.
+Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness.
 
-**Expected next deliverable:** `BANDIT-019` brief.
+**Expected next deliverable:** next bootstrap-gap chore brief for
+`BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
 
 ## Known Bootstrap Gaps
 
@@ -105,8 +110,9 @@ queued or active. `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS` is resolved by
 `BANDIT-016`. `BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING` is resolved by
 `BANDIT-017`. `BANDIT-GAP-LIVE-ESCALATED-REVIEWER` is resolved by
 `BANDIT-018`; landing verdict, landing action, retrospective, and gap-ledger
-disposition are recorded. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is active
-as `BANDIT-019`; the current step is to create the brief.
+disposition are recorded. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` is
+resolved by `BANDIT-019`; landing verdict, landing action, retrospective, and
+gap-ledger disposition are recorded.
 `BANDIT-GAP-LIVE-CODERABBIT` is resolved by `BANDIT-015`;
 implementation evidence, CodeRabbit evidence, review evidence, and local Qwen
 evidence are recorded. The local Qwen finding repair is recorded in
@@ -185,16 +191,13 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. `BANDIT-GAP-REVIEW-SUBJECT-HASH-FRESHNESS` as active `BANDIT-019`; the
-   next action is to create the `BANDIT-019` brief.
-2. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
-3. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
-4. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
-5. `BANDIT-GAP-WORKFLOW-COCKPIT`.
+1. `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND`.
+2. `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
+3. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
+4. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Create exactly one next gap chore at a time. Do not begin later gaps, unrelated
-feature work, or cockpit work until `BANDIT-019` has landing action evidence,
-retrospective closeout, and gap-ledger disposition.
+Create exactly one next gap chore at a time. Future Stage 4 review evidence
+must use `review_subject_hash` to avoid raw-HEAD evidence loops.
 
 ## Required Operator Input
 

@@ -190,6 +190,14 @@ _Avoid_: post-merge cleanup, optional advisory scan
 The contract that distinguishes historical review artifacts from current landing-gate evidence during iterative review and disposition loops. The contract must keep actual source-code drift fail-closed without requiring every historical review artifact to share one final source head.
 _Avoid_: recursive rerun loop, stale-evidence waiver, reviewer-by-inertia
 
+**Review Subject Hash**:
+A deterministic hash of the review-relevant subject for a work item: implementation source, tests, policy, reviewer profiles, governance files, and selected work-item contract artifacts. It separates "what was reviewed" from "which commit contains terminal evidence," so evidence-only commits do not force repeated Stage 4 review loops while source, test, policy, and reviewer-input changes still fail closed.
+_Avoid_: raw HEAD as review identity, evidence artifact commit as source freshness
+
+**Hash-Based Evidence Freshness**:
+The Stage 4 freshness method introduced by `BANDIT-019`: when review evidence records `review_subject_hash`, landing readiness compares the current review-subject hash instead of treating every raw git HEAD mismatch as stale. Historical artifacts without `review_subject_hash` keep the previous Stage 4 fallback behavior.
+_Avoid_: current-head refresh loop, self-invalidating evidence write
+
 **CodeRabbit Pre-Landing Loop**:
 A CLI-driven CodeRabbit cycle that requests or reads review, repairs actionable findings, waits for reruns when needed, and records the final CodeRabbit state before landing.
 _Avoid_: GitHub-only waiting, after-merge review, unchecked queue delay
