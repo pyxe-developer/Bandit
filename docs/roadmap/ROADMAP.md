@@ -16,10 +16,11 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-WORKFLOW-COCKPIT`, unless the operator explicitly reprioritizes
-the `BANDIT-022` follow-up hardening chore candidates. All future Stage 4
-review evidence should use `review_subject_hash`.
+**Current next step:** Create RED evidence for `BANDIT-023` -
+Non-Blocking Review Finding Chore Routing. The operator explicitly
+reprioritized the `BANDIT-022` non-blocking Local Qwen hardening findings ahead
+of `BANDIT-GAP-WORKFLOW-COCKPIT` on 2026-05-25. All future Stage 4 review
+evidence should use `review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -125,11 +126,19 @@ landing verdict and local-record landing action are recorded, retrospective
 closeout is recorded, follow-up hardening chore candidates are recorded in
 `docs/work/BANDIT-022/follow-up-chores.md`, and `.bandit/bootstrap-gaps.json`
 marks the gap resolved.
+`BANDIT-023` is active for
+`BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING`; its structured creation spec
+is recorded in
+`docs/specs/BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING.json`, its brief is
+recorded in `docs/work/BANDIT-023/brief.md`, and `.bandit/bootstrap-gaps.json`
+marks the gap active and linked to `BANDIT-023`. This chore exists to make
+non-blocking review findings durable without recursively delaying landing when
+required gates accept the implementation.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-020` are
 landed and closed out. `BANDIT-021` is landed and closed out. `BANDIT-022` is
-landed and closed out. `BANDIT-GAP-WORKFLOW-COCKPIT` is the next open
-bootstrap-gap queue item.
+landed and closed out. `BANDIT-023` is active with brief created; RED evidence
+is next. `BANDIT-GAP-WORKFLOW-COCKPIT` remains queued behind `BANDIT-023`.
 
 ## Phase Map
 

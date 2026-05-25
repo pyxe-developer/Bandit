@@ -4,6 +4,8 @@
 
 Queued as non-blocking hardening chore candidates during `BANDIT-022` landing
 closeout. These are not current-slice blockers and do not reopen Stage 4.
+They are linked to `BANDIT-023` as source examples for the non-blocking review
+finding routing contract.
 
 ## Source
 
@@ -26,6 +28,7 @@ baseline: `BANDIT-022` lands with safe ambiguous fallback behavior, but Local Qw
 expected_direction: Review noise decreases without expanding heartbeat authority.
 evaluation_window: Evaluate when heartbeat policy or bootstrap-gap next-action parsing is next touched.
 status: queued_candidate
+linked_work_item: BANDIT-023
 outcome: pending
 
 ## Chore Candidate: Explicit UAT Approval Tokens
@@ -42,4 +45,5 @@ baseline: `BANDIT-022` lands with fail-closed UAT behavior, but Local Qwen still
 expected_direction: Review noise decreases without approving feature work from ambiguous UAT text.
 evaluation_window: Evaluate when heartbeat feature-slice eligibility or UAT status parsing is next touched.
 status: queued_candidate
+linked_work_item: BANDIT-023
 outcome: pending

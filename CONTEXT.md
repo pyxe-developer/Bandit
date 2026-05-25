@@ -226,6 +226,10 @@ _Avoid_: warning dump, looks-good summary, user gut check
 A CLI-driven quality loop that runs required external and cross-model review gates before the Landing Agent can produce a safe-to-land verdict.
 _Avoid_: post-merge cleanup, optional advisory scan
 
+**Non-Blocking Review Finding**:
+A real reviewer finding that is safe to defer only after Codex PM records rationale and routes it to a tagged chore, improvement chore, or explicit no-action decision. It must not be treated as a landing blocker, and it must not weaken blocker-level review, stale-evidence, or request-changes gates.
+_Avoid_: nitpick blocker, recursive review churn, ignored warning
+
 **Stage 4 Evidence-Head Semantics**:
 The contract that distinguishes historical review artifacts from current landing-gate evidence during iterative review and disposition loops. The contract must keep actual source-code drift fail-closed without requiring every historical review artifact to share one final source head.
 _Avoid_: recursive rerun loop, stale-evidence waiver, reviewer-by-inertia

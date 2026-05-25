@@ -170,6 +170,24 @@
       "next_action": "Use bandit heartbeat inspect for read-only recurring chore inspection; keep preparation, landing, product UAT, merge, push, deploy, and policy overrides outside heartbeat authority."
     },
     {
+      "id": "BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING",
+      "title": "Non-blocking review findings need durable chore routing",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-022",
+      "source_artifacts": [
+        "docs/work/BANDIT-022/local-qwen-review.md",
+        "docs/work/BANDIT-022/review-evidence.md",
+        "docs/work/BANDIT-022/follow-up-chores.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md"
+      ],
+      "linked_work_item": "BANDIT-023",
+      "rationale": "BANDIT-015 and BANDIT-022 exposed review-loop pressure where Local Qwen accepted implementation behavior but continued surfacing future-hardening concerns. Operator policy direction is to move non-blocking hardening findings to chores or explicit no-action dispositions and proceed with landing instead of recursively reopening Stage 4.",
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-023."
+    },
+    {
       "id": "BANDIT-GAP-WORKFLOW-COCKPIT",
       "title": "No workflow cockpit exists yet",
       "status": "open",
