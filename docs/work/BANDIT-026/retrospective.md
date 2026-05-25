@@ -6,56 +6,55 @@
 slice for typed state extensions.
 
 The slice added typed extension checkpoints for feature UAT and chore
-disposition while preserving one shared core coordination lifecycle. The
-coordination log for `BANDIT-026` is advanced through
-`retrospective_recorded` and `closed`, with Markdown evidence artifacts
-remaining the proof for each accepted transition.
+disposition while preserving one shared core coordination lifecycle. Product
+UAT remains operator-owned and CLI-recorded, chore disposition is explicit when
+UAT is not applicable, actor events remain non-authoritative, and derived
+status is still computed from repo-native evidence.
 
 ## What Worked
 
-- The typed extension design stayed narrow: no claim leases, scheduler
-  execution, worktree lifecycle, cockpit UI, cross-repo coordination,
-  automatic merge/push/deploy behavior, paid-provider routing, product UAT
-  ownership changes, or Phase 7 improvement evaluation behavior was introduced.
-- Focused RED tests covered feature UAT extension success/refusal paths, chore
-  disposition extension success/refusal paths, wrong-kind use, invalid ordering,
-  actor-event non-authority, and backward compatibility for existing core-only
-  logs.
-- Stage 4 review was clean: Local Qwen returned `pass` with no findings, and
-  aggregate review evidence recorded the current `review_subject_hash`.
-- Stage 5 kept the slice boundary explicit: landing action evidence exists, and
-  this closeout records retrospective and context before any next work item.
+- Focused RED tests kept typed extension behavior narrow: feature UAT, chore
+  disposition, wrong-kind refusal, invalid ordering, actor-event
+  non-authority, and core-only compatibility were all specified before
+  implementation.
+- The shared core lifecycle did not fork. Typed checkpoints extend the
+  coordination contract without creating separate slice and chore workflows.
+- `review_subject_hash` kept Stage 4 review evidence current while Stage 5
+  landing evidence advanced repository history.
+- Local Qwen passed with no findings, which let the slice close without a
+  recursive non-blocking review loop.
 
 ## Lessons And Dispositions
 
 | Lesson | Disposition | Rationale |
 |---|---|---|
-| Typed state extensions can remain part of the shared core lifecycle when validation reconciles work type, ordering, and evidence paths explicitly. | Durable artifact | `src/state/coordination-log.ts`, `test/coordination-log.test.mjs`, `test/coordination-status.test.mjs`, and `docs/work/BANDIT-026/coordination-log.jsonl` establish the first typed extension contract. |
-| Feature UAT remains operator-owned even when the coordination state machine needs to represent UAT readiness. | Durable artifact | `feature_uat_approved` requires current CLI-owned `docs/work/<ID>/uat-approval.md` evidence and applies only to slice work items. |
-| Chores and improvement chores need explicit disposition evidence where product UAT is not applicable. | Durable artifact | `chore_disposition_recorded` requires passing `docs/work/<ID>/chore-disposition.md` evidence and applies only after `landed` for chore-like work. |
-| The `BANDIT-025` Local Qwen hardening candidates should not be silently treated as resolved by this slice. | Explicit defer decision | `BANDIT-026` changed coordination validation for typed extensions only. Local Qwen did not repeat the earlier timestamp, Markdown work-type parsing, or deeper evidence-integrity concerns, but those candidates remain scoped to their existing follow-up evidence rather than being closed without an explicit improvement-evaluation step. |
-| The next post-bootstrap workstream work should not begin from a draft PRD without clear execution authority. | Operator-input blocker for next work | `docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is marked `Draft. Ready for post-bootstrap agent decomposition after the active bootstrap-gap lane is resolved, blocked, or explicitly dispositioned.` Codex PM needs operator confirmation that this draft is approved for execution before creating the next post-bootstrap work item. |
+| Typed state extensions should be evidence reconciliation points, not hidden workflow authority. | Durable artifact | `src/state/coordination-log.ts`, `test/coordination-log.test.mjs`, and `test/coordination-status.test.mjs` now enforce typed UAT and chore-disposition checkpoints while preserving shared core ordering. |
+| Chore closeout needs explicit disposition evidence when product UAT is not applicable. | Durable artifact | The chore disposition extension records this as a first-class state, so future coordination status can distinguish "not a feature" from "accepted without evidence." |
+| The current CodeRabbit workflow implemented PR-context live review but missed the faster pre-PR `coderabbit review --agent` CLI path discussed for reducing GitHub CodeRabbit queue waste. | Bootstrap-gap improvement chore | This is a real workflow gap exposed by `BANDIT-026` review evidence: `coderabbit_state` was recorded as a no-PR bootstrap gap even though a pre-PR CLI review path should be available before opening a PR. It is queued as `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` and should become the next work item. |
+| Phase 6 should continue after the CodeRabbit workflow correction rather than letting known review-gate debt trail future coordination slices. | Next-step decision | The operator directed the CodeRabbit fix to become the next work item after `BANDIT-026` landed. |
 
 ## Improvement Chores
 
-No new `BANDIT-026` improvement chore is required.
-
-The slice produced a durable typed-extension contract and Local Qwen returned
-no findings. Existing `BANDIT-025` follow-up candidates remain queued in
-`docs/work/BANDIT-025/qwen-finding-disposition.md`; this retrospective records
-an explicit no-action decision for closing them during `BANDIT-026`.
+`BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is recorded as the next bootstrap-gap
+improvement chore. It should repair the CodeRabbit pre-landing loop so Stage 4
+can run CodeRabbit CLI against local diffs before PR creation, record real
+CodeRabbit evidence, and reserve GitHub CodeRabbit for later confirmation
+rather than first-pass discovery.
 
 ## Cross-Model Tension
 
-No unresolved cross-model tension remains for `BANDIT-026`.
+No unresolved cross-model tension remains for the typed state extension
+implementation.
 
-Local Qwen returned `pass` with no findings. CodeRabbit remains a recorded
-bootstrap replacement for this local-record main-branch slice because no
-PR-backed CodeRabbit review exists; aggregate review evidence records
-deterministic tests, `review_subject_hash`, Local Qwen evidence, and PM
-disposition without claiming a CodeRabbit pass.
+There is workflow tension between the existing `BANDIT-015` implementation and
+the intended CodeRabbit policy: the repo says CodeRabbit should be a
+CLI-driven pre-landing loop that avoids GitHub-only queue delay, but the
+implemented live path requires PR context. That tension is accepted as a
+bootstrap-gap improvement chore rather than treated as a blocker on the already
+landed `BANDIT-026` slice.
 
 ## Bootstrap Gaps Remaining
 
-- None currently recorded as open or active.
-
+- `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is open and should be linked to the
+  next work item before unrelated Phase 6, Phase 7, Phase 8, or dogfood work
+  proceeds.

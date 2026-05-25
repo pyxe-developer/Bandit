@@ -17,37 +17,31 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 6 - Coordination Primitive.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is closed out as the typed state
-extensions slice. Its structured creation
+Coordination Primitive slice. `BANDIT-026` is landed and closed out for typed
+state extensions. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
-recorded in `docs/work/BANDIT-026/coordination-log.jsonl`. RED evidence is
-recorded in `docs/work/BANDIT-026/red-evidence.md`, implementation evidence is
-recorded in `docs/work/BANDIT-026/implementation-evidence.md`, and focused
-tests in `test/coordination-log.test.mjs` and
-`test/coordination-status.test.mjs` pass. Local Qwen Stage 4 review evidence is
-recorded in `docs/work/BANDIT-026/local-qwen-review.md` with
-`reviewer_verdict: pass` at source head
-`985d149e7105969bc775b39c9488f9b5ba7122b9`. Aggregate Stage 4 review evidence
-is recorded in `docs/work/BANDIT-026/review-evidence.md` with current
-`review_subject_hash`
-`967ffc2c61bffa0dcf4b7ef1d843dc827769c17055576178c94adde4359612f4`. Stage 5
-landing verdict is recorded in `docs/work/BANDIT-026/landing-verdict.md` with
-final verdict `safe-to-land`. Local-record landing action evidence is recorded
-in `docs/work/BANDIT-026/landing-action.md`. Retrospective closeout is recorded
-in `docs/work/BANDIT-026/retrospective.md`, and the per-work-item coordination
-log is advanced through `retrospective_recorded` to `closed`.
+recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at `closed`.
+RED evidence, implementation evidence, Local Qwen Stage 4 pass evidence,
+aggregate Stage 4 review evidence with current `review_subject_hash`, Stage 5
+landing verdict, local-record landing action, and retrospective closeout are
+recorded in `docs/work/BANDIT-026/`.
 
-The current next step is operator confirmation that
-`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is approved as
-execution authority for post-bootstrap decomposition before Codex PM creates the
-next work item.
-Do not create active-work branches, Phase 7 improvement engine work, Phase 8 web
-cockpit implementation, claim leases, scheduler execution, worktree lifecycle,
-product UAT approval, automatic merge/push/deploy behavior, the next work item,
-or unrelated feature work until that operator-owned product/workflow direction
-is recorded.
+`BANDIT-027` is active as the bootstrap-gap improvement chore for
+`BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`. Its structured creation spec is
+recorded in
+`docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
+recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
+recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at `brief_created`.
+The current next step is to write RED evidence for `BANDIT-027`, which must
+repair the mismatch between the intended pre-PR `coderabbit review --agent`
+loop and the existing PR-context-only CodeRabbit command path.
+Do not create unrelated active-work branches, Phase 7 improvement engine work,
+Phase 8 web cockpit implementation, claim leases, scheduler execution,
+worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
+the next work item, or unrelated feature work before `BANDIT-027` lands or is
+explicitly blocked/dispositioned.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -212,12 +206,13 @@ disposition. `BANDIT-025` is landed and closed out with its Phase 6
 Coordination Primitive brief, RED evidence, implementation evidence, Local Qwen
 review, PM finding disposition, aggregate review evidence, landing verdict,
 local-record landing action evidence, retrospective closeout, and terminal
-coordination-log state recorded. `BANDIT-026` is landed and closed out with its
-typed-state-extensions spec, brief, RED evidence, focused tests, implementation
-evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4 review evidence,
-Stage 5 landing verdict, local-record landing action evidence, retrospective
-closeout, and terminal coordination-log state recorded. No bootstrap gap is
-currently recorded as open or active.
+coordination-log state recorded. `BANDIT-026` is landed and closed out with
+typed-state-extensions spec, brief, RED evidence, focused tests,
+implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
+review evidence, Stage 5 landing verdict, landing action, retrospective, and
+terminal coordination-log state recorded. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`
+is currently active as `BANDIT-027`; no unrelated work should proceed until it
+lands or is explicitly blocked/dispositioned.
 
 ## Phase Map
 
@@ -359,15 +354,17 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- none. The live CodeRabbit gap is active in the Bootstrap Gap Resolution Lane
-  as `BANDIT-015`.
+- none. The pre-PR CodeRabbit CLI review gap is active in the Bootstrap Gap
+  Resolution Lane as `BANDIT-027`.
 
 Expected capabilities:
 
 - Pre-landing review loop artifact. Complete in `BANDIT-005`.
 - Landing Verdict. Complete in `BANDIT-005`.
 - stale review/source-drift checks. Complete in `BANDIT-005`.
-- CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate substrate; live CodeRabbit polling remains an explicit bootstrap gap.
+- CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate
+  substrate; `BANDIT-015` added the PR-context live evidence path, and
+  `BANDIT-027` is active to add the missing pre-PR CLI review path.
 - Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; `BANDIT-008` repaired runtime drift and `BANDIT-009` repaired full-packet reliability through direct local oMLX.
 - Escalation reviewer placeholder. Complete in `BANDIT-010` as a bootstrap
   placeholder contract; live escalated reviewer routing remains a later gap.
@@ -416,10 +413,11 @@ Completed work:
 - `BANDIT-021` - General Artifact Create Command.
 - `BANDIT-022` - Heartbeat Chore Agent Contract.
 - `BANDIT-023` - Non-Blocking Review Finding Chore Routing.
+- `BANDIT-024` - Workflow Cockpit Boundary Scope.
 
 Active work:
 
-- none.
+- `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
 
 Expected capabilities:
 
@@ -510,6 +508,9 @@ Current rule:
 - `BANDIT-GAP-WORKFLOW-COCKPIT` is resolved by `BANDIT-024`; landing verdict,
   landing action, retrospective, workflow-cockpit boundary artifact, and
   gap-ledger disposition are recorded.
+- `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`; the
+  brief and coordination-log starting state are recorded, and the next action
+  is RED evidence for pre-PR CodeRabbit CLI review.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -522,11 +523,13 @@ Current rule:
 
 Current priority:
 
-1. Ask the operator to confirm whether `BANDIT-PRD-002` is approved as
-   execution authority for post-bootstrap work.
-2. If approved, create exactly one next work item from the approved PRD.
-3. If not approved, record the requested revision or no-action disposition
-   before creating any post-bootstrap work item.
+1. Write RED evidence for `BANDIT-027`.
+2. Implement the pre-PR CodeRabbit CLI review path with TDD.
+3. Stop before creating unrelated work items, active-work branches, claim
+   leases, scheduler execution, worktree lifecycle, cockpit implementation,
+   product UAT approval, automatic merge/push/deploy behavior, or Phase 7
+   evaluation behavior until `BANDIT-027` lands or is explicitly
+   blocked/dispositioned.
 
 ## Phase 6: Coordination Primitive
 

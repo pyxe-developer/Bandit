@@ -156,8 +156,8 @@ Local-record landing action evidence is recorded in
 `docs/work/BANDIT-025/retrospective.md`, and the per-work-item coordination log
 is advanced through `retrospective_recorded` to `closed`.
 
-`BANDIT-026` is closed out as the Phase 6 Coordination Primitive slice for
-typed state extensions. Its structured creation spec is recorded in
+`BANDIT-026` is landed and closed out as the Phase 6 Coordination Primitive
+slice for typed state extensions. Its structured creation spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
 recorded in `docs/work/BANDIT-026/coordination-log.jsonl` at `closed`. RED
@@ -179,28 +179,37 @@ worktree lifecycle, Phase 7 Improvement Engine work, or Phase 8 Workflow
 Cockpit implementation has started. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-026/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-026/landing-action.md`. Retrospective closeout is recorded in
-`docs/work/BANDIT-026/retrospective.md`, and the per-work-item coordination log
-is advanced through `retrospective_recorded` to `closed`.
+`docs/work/BANDIT-026/landing-action.md`, retrospective closeout is recorded in
+`docs/work/BANDIT-026/retrospective.md`, and the coordination log is advanced
+through `retrospective_recorded` to `closed`.
 
-**Last completed milestone:** `BANDIT-026` retrospective closeout and terminal
-coordination-log state are recorded.
+`BANDIT-027` is the active bootstrap-gap improvement chore for
+`BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`. Its structured creation spec is
+recorded in
+`docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
+recorded in `docs/work/BANDIT-027/brief.md`, and its per-work-item
+coordination log is recorded in `docs/work/BANDIT-027/coordination-log.jsonl`
+at `brief_created`. The chore exists to repair the CodeRabbit pre-landing loop
+so Stage 4 can run `coderabbit review --agent` against local diffs before PR
+creation, record real CodeRabbit evidence, and avoid treating no PR as an
+automatic bootstrap gap when pre-PR CLI review should be available.
 
-**Current next action:** Operator must confirm whether
-`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is approved as
-execution authority for post-bootstrap decomposition before Codex PM creates the
-next work item.
-Do not create active-work branches, Phase 7 Improvement Engine work, Phase 8
+**Last completed milestone:** `BANDIT-026` retrospective closeout and
+coordination-log closed state are recorded; `BANDIT-027` is created as the
+active CodeRabbit pre-PR CLI review chore.
+
+**Current next action:** Write RED evidence for `BANDIT-027`.
+Do not start unrelated Phase 6 work, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
-approval, or the next work item until that operator-owned product/workflow
-direction is recorded.
+approval, or the next work item before `BANDIT-027` lands or is explicitly
+blocked/dispositioned.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-026` - Typed State Extensions is closed.
-Current next action: operator confirmation that `BANDIT-PRD-002` is approved for
-post-bootstrap execution before Codex PM creates the next work item.
+**Active work item:** `BANDIT-027` - Pre-PR CodeRabbit CLI Review. Current
+coordination state: `brief_created`; accountable actor: Test Writer; next
+action: write RED evidence for pre-PR CodeRabbit CLI review.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -222,8 +231,7 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions.
 
-**Expected next deliverable:** operator approval, revision, or no-action
-direction for `BANDIT-PRD-002` before post-bootstrap work item creation.
+**Expected next deliverable:** RED evidence for `BANDIT-027`.
 
 ## Known Bootstrap Gaps
 
@@ -235,9 +243,9 @@ These are expected because Bandit does not exist yet:
   through `draft-work`.
 - Bootstrap-gap tracking artifact, listing command, and validation path are
   implemented and landed in `BANDIT-011`.
-- CodeRabbit state capture substrate exists, but live CodeRabbit API, GitHub
-  API, PR comment polling, repair orchestration, and rerun automation remain
-  unavailable.
+- CodeRabbit state capture substrate exists, and `BANDIT-015` added a
+  PR-context live review path, but `BANDIT-027` is now active to correct the
+  missing pre-PR CodeRabbit CLI review path for local diffs before PR creation.
 - Local Qwen gate substrate exists, and `BANDIT-009` repaired full-packet
   reliability by routing through direct local oMLX while preserving structured
   findings.
@@ -265,11 +273,15 @@ These are expected because Bandit does not exist yet:
   Stage 4 review evidence, Stage 5 landing verdict, and local-record landing
   action evidence, retrospective, and gap-ledger disposition are recorded. No
   Phase 8 web cockpit implementation exists yet.
+- `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`. This
+  gap corrects the mismatch between the intended CodeRabbit pre-landing loop
+  and the current PR-context-only CodeRabbit command path.
 
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
 unrelated feature, cockpit, or dogfood work while any open gap remains queued
-or active. No bootstrap gap is currently recorded as open or active.
+or active. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is currently active and
+linked to `BANDIT-027`.
 `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is resolved by
 `BANDIT-020`; landing verdict, landing action, retrospective, and gap-ledger
 disposition are recorded.
@@ -356,18 +368,16 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
 Use `bandit gaps list` as the routing source before starting new work. All
-currently recorded bootstrap gaps are resolved, `BANDIT-025` and `BANDIT-026`
-are closed out, and
-`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` is marked
-`Draft. Ready for post-bootstrap agent decomposition after the active
-bootstrap-gap lane is resolved, blocked, or explicitly dispositioned.` The
+previously recorded bootstrap gaps are resolved through `BANDIT-026`, and
+`BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`, so the
 current priority is:
 
-1. Ask the operator to confirm whether `BANDIT-PRD-002` is approved as
-   execution authority for post-bootstrap work.
-2. If approved, create exactly one next work item from the approved PRD.
-3. If not approved, record the requested revision or no-action disposition
-   before creating any post-bootstrap work item.
+1. Write RED evidence for `BANDIT-027`.
+2. Implement the pre-PR CodeRabbit CLI review path with TDD.
+3. Stop before unrelated Phase 6, Phase 7, Phase 8, Phase 9, claim lease,
+   scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
+   next-work-item behavior until `BANDIT-027` lands or is explicitly
+   blocked/dispositioned.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -375,12 +385,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-Operator confirmation is required before creating the next post-bootstrap work
-item: approve, revise, or reject
-`docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md` as execution
-authority. Repo artifacts show the PRD is a draft and ready for agent
-decomposition after the bootstrap-gap lane is resolved, but they do not record
-operator approval to start post-bootstrap parallel-workstream execution work.
+No operator-owned input is required to write RED evidence for `BANDIT-027`
+because the operator directed the CodeRabbit workflow correction to be next and
+repo artifacts define the intended pre-PR CLI review direction. If
+implementation requires live CodeRabbit authentication, external service
+access, cost/risk override, policy change beyond pre-PR CLI review, PR/merge/
+push/deploy authority, product direction, or product UAT approval, halt and ask
+for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

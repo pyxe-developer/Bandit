@@ -201,6 +201,23 @@
       "rationale": "BANDIT-024 created the workflow-cockpit boundary artifact that preserves CLI Authority, keeps repo-native artifacts canonical, limits any State Index to rebuildable derived state, maps cockpit read and action surfaces to existing artifacts or approved CLI command families, and defers Phase 8 web implementation plus product/UI tradeoffs until explicit future scope exists.",
       "verification_target": "docs/work/BANDIT-024/retrospective.md",
       "next_action": "Use docs/design/workflow-cockpit-boundary.md as the authority boundary before any future Phase 8 cockpit implementation work."
+    },
+    {
+      "id": "BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW",
+      "title": "CodeRabbit pre-landing loop lacks pre-PR CLI review",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-026",
+      "source_artifacts": [
+        "docs/work/BANDIT-026/retrospective.md",
+        "docs/work/BANDIT-026/review-evidence.md",
+        "docs/decisions/2026-05-24-required-prelanding-review-gates.md",
+        "CONTEXT.md"
+      ],
+      "linked_work_item": "BANDIT-027",
+      "rationale": "BANDIT-026 exposed that Bandit's implemented CodeRabbit path requires PR context and records local-record work as a no-PR bootstrap gap, while the intended workflow is to run CodeRabbit CLI before opening a PR to reduce GitHub CodeRabbit queue waste and repair churn.",
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-027."
     }
   ]
 }
