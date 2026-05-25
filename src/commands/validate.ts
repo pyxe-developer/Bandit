@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { validateAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { validateBootstrapGaps } from "../state/bootstrap-gaps.js";
 import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
+import { validateCoordinationLogs } from "../state/coordination-log.js";
 import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
@@ -43,6 +44,7 @@ export async function validateBandit(repoRoot: string) {
   await validateHeartbeatPolicy(repoRoot);
   await validateLandingAgentContract(repoRoot);
   await validateStage4EvidenceHeadPolicy(repoRoot);
+  await validateCoordinationLogs(repoRoot);
 
   return { message: "Bandit state is valid." };
 }
