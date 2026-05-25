@@ -144,14 +144,16 @@
     {
       "id": "BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND",
       "title": "No general artifact creation command outside explicit PRD draft-work",
-      "status": "open",
-      "disposition": "queued_chore_candidate",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-011",
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
+      "linked_work_item": "BANDIT-021",
       "rationale": "Work-item briefs, review evidence, landing evidence, retrospectives, and follow-up artifacts are still created manually unless a narrow command exists for that artifact family.",
-      "next_action": "Create the next bootstrap-gap chore for this gap with bandit work-item create <spec-path>; do not start RED evidence until the brief is created and context is updated."
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-021."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
@@ -162,7 +164,9 @@
       "source_artifacts": [
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
+      "linked_work_item": null,
       "rationale": "Recurring chore automation should wait until repo-native chore and gate contracts are stronger.",
+      "verification_target": null,
       "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after artifact creation gaps are resolved or explicitly dispositioned."
     },
     {
@@ -175,7 +179,9 @@
         "docs/roadmap/ROADMAP.md",
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
+      "linked_work_item": null,
       "rationale": "The cockpit should derive from CLI-owned state after core workflow state and validation paths exist.",
+      "verification_target": null,
       "next_action": "Resolve as its own chore in the post-BANDIT-013 bootstrap-gap lane after automation-agent gaps are resolved or explicitly dispositioned; do not start broader cockpit work while earlier open gaps remain."
     }
   ]

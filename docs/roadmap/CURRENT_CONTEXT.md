@@ -56,22 +56,26 @@ recorded in `docs/work/BANDIT-020/landing-action.md`, retrospective closeout is
 recorded in `docs/work/BANDIT-020/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
+`BANDIT-021` is active for
+`BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`. Its structured creation spec is
+recorded in
+`docs/specs/BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND.json`, its brief is
+recorded in `docs/work/BANDIT-021/brief.md`, `.bandit/events.jsonl` records
+the CLI-owned work-item creation event, and `.bandit/bootstrap-gaps.json` links
+the gap as an active chore.
+
 **Last completed milestone:** `BANDIT-020` resolved CLI-owned work-item
 creation for explicit slice, chore, and improvement-chore specs.
 
-**Current next action:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND` using
-`bandit work-item create <spec-path>`.
-Do not broaden into general artifact creation, heartbeat, cockpit, Phase 6
-Coordination Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit,
-Phase 9 dogfood, or feature work before that brief exists and the new work item
-becomes active. All Stage 4 evidence for future work items must use
-`review_subject_hash`.
+**Current next action:** Record Stage 2 RED evidence for `BANDIT-021` before
+implementation. Do not broaden into heartbeat, cockpit, Phase 6 Coordination
+Primitive, Phase 7 Improvement Engine, Phase 8 Workflow Cockpit, Phase 9
+dogfood, or feature work while `BANDIT-021` is active. All Stage 4 evidence for
+future work items must use `review_subject_hash`.
 
 ## Active Work
 
-**Active work item:** none. The next work item must be created for
-`BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`.
+**Active work item:** `BANDIT-021` - General Artifact Create Command.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -89,9 +93,8 @@ Complexity And Git Diagnostics Hardening; `BANDIT-018` - Live Escalated
 Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command.
 
-**Expected next deliverable:** A new bootstrap-gap chore brief for
-`BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND`, created through
-`bandit work-item create <spec-path>`.
+**Expected next deliverable:** `docs/work/BANDIT-021/red-evidence.md` with
+Stage 2 RED evidence mapped to the `BANDIT-021` brief.
 
 ## Known Bootstrap Gaps
 
@@ -114,7 +117,8 @@ These are expected because Bandit does not exist yet:
 - Landing Agent gap is resolved by `BANDIT-014`; a durable local-record Landing
   Agent contract, command, review evidence, landing verdict, landing action
   evidence, retrospective, and gap-ledger disposition exist.
-- No general artifact creation command outside explicit PRD draft-work.
+- General artifact creation command gap is active as `BANDIT-021`; the brief is
+  recorded and RED evidence is next.
 - CLI-owned UAT approval artifacts and stale-UAT detection are implemented and
   landed in `BANDIT-012`.
 - No heartbeat chore-agent.
@@ -212,23 +216,20 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Create the next bootstrap-gap chore for
-   `BANDIT-GAP-GENERAL-ARTIFACT-CREATE-COMMAND` using
-   `bandit work-item create <spec-path>`.
+1. Record Stage 2 RED evidence for `BANDIT-021`.
 2. `BANDIT-GAP-HEARTBEAT-CHORE-AGENT`.
 3. `BANDIT-GAP-WORKFLOW-COCKPIT`.
 
-Do not start RED evidence for the next gap until its brief is created and
-current context is updated. Future Stage 4 review evidence must use
-`review_subject_hash` to avoid raw-HEAD evidence loops.
+Do not implement `BANDIT-021` until RED evidence is recorded. Future Stage 4
+review evidence must use `review_subject_hash` to avoid raw-HEAD evidence loops.
 
 ## Required Operator Input
 
 Provided for the Stage 4 reviewer route decision: the operator approved using
 the Sourmash-style `claude -p` headless path for Sonnet and Opus and asked
 Codex PM to compare Qwen 3.6, Sonnet 4.6, and Opus 4.7 before choosing the
-escalated reviewer route. No operator-owned input is required before creating
-the next bootstrap-gap chore brief.
+escalated reviewer route. No operator-owned input is required before recording
+`BANDIT-021` RED evidence.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
