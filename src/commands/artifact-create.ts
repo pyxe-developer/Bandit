@@ -2,6 +2,7 @@ import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { appendLifecycleEvent } from "../state/events.js";
 import { getBanditPaths } from "../state/paths.js";
+import { readWorkItem } from "../state/work-items.js";
 import {
   OUTPUT_FILES,
   renderArtifact,
@@ -30,7 +31,7 @@ export async function createArtifact(repoRoot: string, args: string[]) {
     path.relative(repoRoot, artifactPath)
   );
 
-  await assertWorkItemExists(workDir, spec.workItem);
+  await assertWorkItemExists(repoRoot, spec.workItem);
   await assertArtifactPathIsFree(artifactPath, artifactDisplayPath);
   await mkdir(workDir, { recursive: true });
   await writeFile(artifactPath, spec.content, { flag: "wx" });
@@ -110,9 +111,17 @@ function requireKind(spec: Record<string, unknown>) {
   return kind as ArtifactKind;
 }
 
-async function assertWorkItemExists(workDir: string, workItem: string) {
-  if (!(await pathExists(path.join(workDir, "brief.md")))) {
-    throw new Error(`Unknown work item: ${workItem}`);
+async function assertWorkItemExists(repoRoot: string, workItem: string) {
+  try {
+    await readWorkItem(repoRoot, workItem);
+  } catch (error) {
+    if (error instanceof Error && error.message.includes("Unknown work item")) {
+      throw new Error(`Unknown work item: ${workItem}`);
+    }
+    if (error instanceof Error && error.message.includes("Missing work item brief")) {
+      throw new Error(`Unknown work item: ${workItem}`);
+    }
+    throw error;
   }
 }
 

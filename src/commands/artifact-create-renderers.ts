@@ -25,6 +25,24 @@ const ARTIFACT_LABELS: Record<ArtifactKind, string> = {
   retrospective: "Retrospective"
 };
 
+const LANDING_VERDICT_FIELDS = [
+  "contract_version",
+  "source_head",
+  "review_evidence",
+  "tests_status",
+  "clean_code_status",
+  "coderabbit_state",
+  "local_qwen_state",
+  "escalated_review_state",
+  "uat_status",
+  "source_drift_status",
+  "operator_input_status",
+  "landing_agent_state",
+  "landing_agent_replacement_evidence",
+  "final_verdict",
+  "rationale"
+];
+
 export function renderArtifact(
   workItem: string,
   kind: ArtifactKind,
@@ -122,25 +140,9 @@ ${nextAction}
 }
 
 function renderLandingVerdict(workItem: string, spec: Record<string, unknown>) {
-  const fields = [
-    "contract_version",
-    "source_head",
-    "review_evidence",
-    "tests_status",
-    "clean_code_status",
-    "coderabbit_state",
-    "local_qwen_state",
-    "escalated_review_state",
-    "uat_status",
-    "source_drift_status",
-    "operator_input_status",
-    "landing_agent_state",
-    "landing_agent_replacement_evidence",
-    "final_verdict",
-    "rationale"
-  ];
-
-  const lines = fields.map((field) => `${field}: ${requireScalar(spec, field)}`);
+  const lines = LANDING_VERDICT_FIELDS.map(
+    (field) => `${field}: ${requireString(spec, field)}`
+  );
 
   return `# ${workItem} ${ARTIFACT_LABELS.landing_verdict}
 
@@ -254,20 +256,6 @@ function requireString(spec: Record<string, unknown>, field: string) {
   }
 
   return value;
-}
-
-function requireScalar(spec: Record<string, unknown>, field: string) {
-  const value = spec[field];
-
-  if (
-    (typeof value !== "string" || value.trim().length === 0) &&
-    typeof value !== "number" &&
-    typeof value !== "boolean"
-  ) {
-    throw new Error(`Artifact spec missing required field: ${field}`);
-  }
-
-  return String(value);
 }
 
 function renderList(items: string[]) {

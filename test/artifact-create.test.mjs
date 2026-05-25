@@ -121,7 +121,7 @@ test("artifact create creates a landing verdict from explicit structured input",
   await writeSpec(repo, "docs/specs/landing-verdict.json", {
     kind: "landing_verdict",
     work_item: "BANDIT-001",
-    contract_version: 1,
+    contract_version: "1",
     source_head: "abc123",
     review_evidence: "docs/work/BANDIT-001/review-evidence.md",
     tests_status: "pass",
