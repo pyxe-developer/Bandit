@@ -98,7 +98,8 @@ recorded in `docs/work/BANDIT-023/brief.md`, RED evidence is recorded in
 evidence is recorded in `docs/work/BANDIT-023/local-qwen-review.md`, the RED
 artifact input is recorded in `docs/specs/BANDIT-023-red-evidence.json`,
 aggregate Stage 4 review evidence with current `review_subject_hash` is
-recorded in `docs/work/BANDIT-023/review-evidence.md`, and
+recorded in `docs/work/BANDIT-023/review-evidence.md`, Stage 5 landing verdict
+is recorded in `docs/work/BANDIT-023/landing-verdict.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-023` as the active
 chore. This chore captures the policy that non-blocking review findings should
 be routed to durable chores or explicit no-action decisions instead of
@@ -107,11 +108,12 @@ recursively delaying landing after required gates accept the implementation.
 **Last completed milestone:** `BANDIT-022` resolved the heartbeat chore-agent
 bootstrap gap and landed with local-record landing evidence.
 
-**Current next action:** Record the Stage 5 landing verdict for `BANDIT-023`,
-using `docs/work/BANDIT-023/review-evidence.md`, the current
-`review_subject_hash`, and required landing-readiness verification. Do not
-broaden into Phase 6 Coordination Primitive, Phase 7 Improvement Engine, Phase
-8 Workflow Cockpit, Phase 9 dogfood, feature work, automatic
+**Current next action:** Run the local-record landing action for `BANDIT-023`
+with `npm run bandit -- land BANDIT-023 --action local-record`, then record
+retrospective closeout and resolve
+`BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` in the bootstrap-gap ledger.
+Do not broaden into Phase 6 Coordination Primitive, Phase 7 Improvement Engine,
+Phase 8 Workflow Cockpit, Phase 9 dogfood, feature work, automatic
 merge/push/deploy behavior, or product UAT approval before `BANDIT-023` lands
 and the workflow-cockpit gap is explicitly scoped or dispositioned.
 
@@ -136,9 +138,8 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 `BANDIT-020` - Work Item Create Command; `BANDIT-021` - General Artifact
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract.
 
-**Expected next deliverable:** `BANDIT-023` Stage 5 landing verdict showing
-whether the chore is safe-to-land, needs repair, blocked, or requires operator
-approval under the current landing policy.
+**Expected next deliverable:** `BANDIT-023` local-record landing action evidence
+in `docs/work/BANDIT-023/landing-action.md`.
 
 ## Known Bootstrap Gaps
 
@@ -171,8 +172,8 @@ These are expected because Bandit does not exist yet:
   recorded.
 - `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` is active in `BANDIT-023`;
   its brief, RED evidence, implementation evidence, Local Qwen Stage 4 pass
-  evidence, and aggregate Stage 4 review evidence are recorded, and the Stage
-  5 landing verdict is next.
+  evidence, aggregate Stage 4 review evidence, and Stage 5 landing verdict are
+  recorded, and the local-record landing action is next.
 - No cockpit.
 
 Bootstrap work must record these gaps honestly instead of pretending final
@@ -267,9 +268,9 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source and complete exactly one
 bootstrap-gap chore at a time. Current priority is:
 
-1. Record the Stage 5 landing verdict for `BANDIT-023`, then complete the
-   `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` chore through landing,
-   retrospective, and gap-ledger disposition.
+1. Run the local-record landing action for `BANDIT-023`, then complete the
+   `BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING` chore through retrospective
+   and gap-ledger disposition.
 2. Return to `BANDIT-GAP-WORKFLOW-COCKPIT` only after `BANDIT-023` lands or is
    explicitly blocked/dispositioned.
 
