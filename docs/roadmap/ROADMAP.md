@@ -16,11 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 5 - UAT And Auto-Landing.
 
-**Current next step:** Record Stage 4 review evidence for active
-`BANDIT-020`, including current `review_subject_hash`, Local Qwen evidence,
-CodeRabbit or explicit bootstrap replacement evidence if no PR-backed live
-CodeRabbit route is available, and PM disposition of any actionable findings.
-All future Stage 4 review evidence should use `review_subject_hash`.
+**Current next step:** Record the Stage 5 landing verdict for active
+`BANDIT-020`. All future Stage 4 review evidence should use
+`review_subject_hash`.
 
 `BANDIT-016` landed for `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. It added
 the Stage 4 evidence-head policy, structured PM disposition rationale,
@@ -95,10 +93,13 @@ work uses hash-based evidence freshness when review evidence records
 `review_subject_hash`.
 `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is active as `BANDIT-020`; its brief is
 recorded in `docs/work/BANDIT-020/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-020/red-evidence.md`, and implementation evidence is recorded
-in `docs/work/BANDIT-020/implementation-evidence.md`. Stage 4 review evidence
-is the next required artifact. Open bootstrap gaps remain the work queue and
-must be addressed one at a time before unrelated new work proceeds.
+`docs/work/BANDIT-020/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-020/implementation-evidence.md`, Local Qwen pass evidence is
+recorded in `docs/work/BANDIT-020/local-qwen-review.md`, and Stage 4 review
+evidence with current `review_subject_hash` is recorded in
+`docs/work/BANDIT-020/review-evidence.md`. The Stage 5 landing verdict is the
+next required artifact. Open bootstrap gaps remain the work queue and must be
+addressed one at a time before unrelated new work proceeds.
 
 **Current implementation status:** `BANDIT-001` through `BANDIT-017` are landed.
 `BANDIT-018` and `BANDIT-019` are landed. `BANDIT-020` is active for
@@ -286,7 +287,7 @@ Goal: Separate product acceptance from code-safety judgment.
 Active work:
 
 - `BANDIT-020` - Work Item Create Command. Next artifact:
-  `docs/work/BANDIT-020/review-evidence.md`.
+  `docs/work/BANDIT-020/landing-verdict.md`.
 
 Completed work:
 
