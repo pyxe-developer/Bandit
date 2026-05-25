@@ -2,7 +2,7 @@
 
 ## Status
 
-Brief Created
+RED Recorded
 
 ## Non-Product Work
 

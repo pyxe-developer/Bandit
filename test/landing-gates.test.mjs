@@ -1566,6 +1566,103 @@ test("land-check accepts structured PM rationale for Local Qwen findings", async
   assert.match(result.stdout, /Final verdict: safe-to-land/);
 });
 
+test("land-check accepts non-blocking Local Qwen findings with durable routing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-940", "Non-Blocking Routed Finding");
+  await writeReviewEvidence(repo, "BANDIT-940", {
+    sourceHead,
+    localQwenState: "non_blocking",
+    pmDispositionRationale:
+      "Codex PM accepted the Local Qwen hardening finding as safe to defer because implementation behavior is accepted and the finding is routed to a durable follow-up.",
+    nonBlockingFindingsRouting: [
+      "follow_up_chore_candidate: docs/work/BANDIT-022/follow-up-chores.md#heartbeat-gap-next-action-token-mapping"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-940", {
+    sourceHead,
+    localQwenState: "non_blocking"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-940", {
+    sourceHead,
+    reviewerVerdict: "non_blocking",
+    findingsStatus: "open",
+    findingsDisposition:
+      "Accepted because this is future hardening with durable follow-up routing."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-940"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Local Qwen: non_blocking/);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
+test("land-check blocks non-blocking Local Qwen findings without durable routing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-941", "Unrouted Non-Blocking Finding");
+  await writeReviewEvidence(repo, "BANDIT-941", {
+    sourceHead,
+    localQwenState: "non_blocking",
+    pmDispositionRationale:
+      "Codex PM accepted the Local Qwen hardening finding as safe to defer."
+  });
+  await writeLandingVerdict(repo, "BANDIT-941", {
+    sourceHead,
+    localQwenState: "non_blocking"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-941", {
+    sourceHead,
+    reviewerVerdict: "non_blocking",
+    findingsStatus: "open",
+    findingsDisposition:
+      "Accepted because this is future hardening, but no follow-up routing is recorded."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-941"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /non-blocking review findings require durable follow-up routing/
+  );
+});
+
+test("land-check keeps blocker Local Qwen findings blocked even with routing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Implementation accepted");
+  await writeWorkBrief(repo, "BANDIT-942", "Blocking Finding");
+  await writeReviewEvidence(repo, "BANDIT-942", {
+    sourceHead,
+    localQwenState: "blocker",
+    pmDispositionRationale:
+      "Codex PM cannot route a blocker-level Local Qwen finding as safe to defer.",
+    nonBlockingFindingsRouting: [
+      "follow_up_chore_candidate: docs/work/BANDIT-022/follow-up-chores.md#heartbeat-gap-next-action-token-mapping"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-942", {
+    sourceHead,
+    localQwenState: "blocker"
+  });
+  await writeLocalQwenReview(repo, "BANDIT-942", {
+    sourceHead,
+    reviewerVerdict: "blocker",
+    findingsStatus: "open",
+    findingsDisposition:
+      "Blocking behavior risk cannot be deferred to a follow-up chore."
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-942"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Local Qwen reviewer verdict blocks landing: blocker/);
+});
+
 test("land-check fails closed when review changed paths cannot be resolved", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
@@ -1951,6 +2048,8 @@ async function writeLandingAgentContract(repo, overrides = {}) {
 }
 
 async function writeReviewEvidence(repo, workItemId, options = {}) {
+  const nonBlockingFindingsRouting =
+    options.nonBlockingFindingsRouting?.map((entry) => `  - ${entry}`) ?? [];
   const contentLines = [
     `# Review Evidence: ${workItemId}`,
     "",
@@ -1976,6 +2075,10 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     options.pmDispositionRationale
       ? `pm_disposition_rationale: ${options.pmDispositionRationale}`
       : null,
+    nonBlockingFindingsRouting.length > 0
+      ? "non_blocking_findings_routing:"
+      : null,
+    ...nonBlockingFindingsRouting,
     "operator_input_status: none_required",
     `uat_status: ${options.uatStatus ?? "not_applicable"}`,
     "clean_code_status: pass",
