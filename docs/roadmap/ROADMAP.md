@@ -26,10 +26,11 @@ evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`. Local Qwen
 adversarial Stage 4 review now passes at source head
 `ac2492502373bb1400230ad55422a41acc686874` with no findings, recorded in
 `docs/work/BANDIT-034/local-qwen-review.md`. The next required action is to
-refresh the `BANDIT-034` review-subject hash and aggregate Stage 4 review
-evidence with PM disposition. Do not proceed toward landing until aggregate
-Stage 4 evidence is current and records the CodeRabbit and Local Qwen pass
-states.
+record the `BANDIT-034` Stage 5 landing verdict and run `npm run bandit --
+land-check BANDIT-034`. Aggregate Stage 4 review evidence is now current in
+`docs/work/BANDIT-034/review-evidence.md` with review-subject hash
+`3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`,
+CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -136,8 +137,10 @@ CodeRabbit evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`.
 Local Qwen adversarial Stage 4 review now passes at source head
 `ac2492502373bb1400230ad55422a41acc686874` with no findings, recorded in
 `docs/work/BANDIT-034/local-qwen-review.md`. The next required action is to
-refresh the review-subject hash and aggregate Stage 4 review evidence with PM
-disposition.
+record the Stage 5 landing verdict and run `npm run bandit -- land-check
+BANDIT-034`. Aggregate Stage 4 review evidence is current in
+`docs/work/BANDIT-034/review-evidence.md` with review-subject hash
+`3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
@@ -296,8 +299,11 @@ recorded in `docs/work/BANDIT-034/implementation-evidence.md`, current scoped
 CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-034/coderabbit-review.md` and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`, and Local Qwen pass
-evidence is recorded in `docs/work/BANDIT-034/local-qwen-review.md`; the next
-required action is to refresh aggregate Stage 4 review evidence.
+evidence is recorded in `docs/work/BANDIT-034/local-qwen-review.md`; current
+aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-034/review-evidence.md`; the next required action is to
+record the Stage 5 landing verdict and run `npm run bandit -- land-check
+BANDIT-034`.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
@@ -835,10 +841,10 @@ Current rule:
 
 Current priority:
 
-1. Refresh the `BANDIT-034` review-subject hash and aggregate Stage 4 review
-   evidence with CodeRabbit pass evidence, Local Qwen pass evidence, and Codex
-   PM disposition. Do not begin landing until aggregate Stage 4 evidence is
-   current.
+1. Record the `BANDIT-034` Stage 5 landing verdict and run
+   `npm run bandit -- land-check BANDIT-034`. Do not perform the landing action
+   or retrospective closeout until the landing verdict is recorded and
+   `land-check` passes.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -425,10 +425,13 @@ evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`. Local Qwen
 adversarial Stage 4 review for `BANDIT-034` now passes at source head
 `ac2492502373bb1400230ad55422a41acc686874` with no findings, recorded in
 `docs/work/BANDIT-034/local-qwen-review.md`. The next required action is to
-refresh the `BANDIT-034` review-subject hash and aggregate Stage 4 review
-evidence with PM disposition. Do not proceed toward landing until aggregate
-Stage 4 evidence is current and records the CodeRabbit and Local Qwen pass
-states.
+record the `BANDIT-034` Stage 5 landing verdict. Aggregate Stage 4 review
+evidence is now current in `docs/work/BANDIT-034/review-evidence.md` with
+review-subject hash
+`3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`,
+CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition.
+Do not perform the landing action or retrospective closeout until the landing
+verdict is recorded and `land-check` passes.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -439,11 +442,11 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is active at
-Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
-current scoped CodeRabbit pass evidence recorded. Local Qwen adversarial review
-passes with no findings in `docs/work/BANDIT-034/local-qwen-review.md`; the work
-item now awaits review-subject hash refresh and aggregate Stage 4 review
-evidence with PM disposition before landing can begin.
+Stage 5 landing-verdict preparation. Structured spec, brief, RED evidence,
+implementation evidence, current scoped CodeRabbit pass evidence, Local Qwen
+pass evidence, and current aggregate Stage 4 review evidence are recorded; the
+work item now awaits Stage 5 landing verdict and `land-check` before landing
+can begin.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -471,10 +474,10 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** Current aggregate Stage 4 review evidence for
-`BANDIT-034`, including refreshed review-subject hash, CodeRabbit pass evidence,
-Local Qwen pass evidence, and Codex PM disposition. Landing verdict and
-readiness checks must wait until aggregate Stage 4 evidence is current.
+**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-034` using
+the current aggregate Stage 4 review evidence, followed by `npm run bandit --
+land-check BANDIT-034`. Landing action and retrospective closeout must wait
+until the landing verdict and readiness check pass.
 
 ## Known Bootstrap Gaps
 
@@ -638,14 +641,17 @@ repair / PM disposition evidence, and current scoped CodeRabbit pass evidence
 recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Local Qwen adversarial
 review now passes with no findings in
-`docs/work/BANDIT-034/local-qwen-review.md`. The source candidate is linked to
-`BANDIT-034` in `docs/work/BANDIT-033/qwen-finding-disposition.md`.
+`docs/work/BANDIT-034/local-qwen-review.md`. Aggregate Stage 4 review evidence
+is current in `docs/work/BANDIT-034/review-evidence.md` with review-subject hash
+`3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`. The source
+candidate is linked to `BANDIT-034` in
+`docs/work/BANDIT-033/qwen-finding-disposition.md`.
 The current priority is:
 
-1. Refresh the `BANDIT-034` review-subject hash and aggregate Stage 4 review
-   evidence with CodeRabbit pass evidence, Local Qwen pass evidence, and Codex
-   PM disposition. Do not begin landing until aggregate Stage 4 evidence is
-   current.
+1. Record the `BANDIT-034` Stage 5 landing verdict and run
+   `npm run bandit -- land-check BANDIT-034`. Do not perform the landing action
+   or retrospective closeout until the landing verdict is recorded and
+   `land-check` passes.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

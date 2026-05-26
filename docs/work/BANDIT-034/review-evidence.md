@@ -2,67 +2,39 @@
 
 contract_version: 1
 work_item: BANDIT-034
-source_head: df55118889d3472e947b395c581eb978c2e45240
-review_subject_hash: 7932c57117ba0dce448160def5ed1aed1860d5819a035f61591b28e94f5ce536
-review_subject_hash_status: stale
-verification_state: blocker
+source_head: 4df8a7f2b37995caf59bc8cca55e2aec1465a5d9
+review_subject_hash: 3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb
+review_subject_hash_status: current
+verification_state: pass
 verification_evidence:
   - node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs passed during Stage 3 implementation evidence.
   - npm test passed during Stage 3 implementation evidence.
   - npm run typecheck passed during Stage 3 implementation evidence.
   - npm run bandit -- validate passed during Stage 3 implementation evidence.
-  - npm run bandit -- cockpit status --json passed during Stage 3 implementation evidence and again after CodeRabbit blocker evidence was recorded.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color completed at the then-current source head with 8 findings.
-  - docs/specs/BANDIT-034-coderabbit-review-output.json records the completed CodeRabbit provider output normalized for repo evidence.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-review-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker and findings_status unresolved.
-  - npm run bandit -- review-subject-hash BANDIT-034 produced 7932c57117ba0dce448160def5ed1aed1860d5819a035f61591b28e94f5ce536 from review-subject policy v1.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md records focused repairs for seven findings and no-action SRI verification for the script-integrity finding.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 1355a9462299247496000d1f00d22482a524fa89 and timed out after the 10-minute Stage 4 wait window while the provider was still in analyzing/reviewing status.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json records the normalized timeout output from the real provider rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unavailable, source_drift_status current, and review_state timeout.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was retried against source head 9786d177c65f65f6983d704eb841c62a19845f8f and completed with 2 unresolved findings.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the retry.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the two completed-retry findings; CodeRabbit provider evidence must be rerun against the repaired source before Stage 4 can proceed.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 00978d3585fecc3475f2480052e69b1847698be0 and completed with 3 unresolved findings.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the repaired-source rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair / PM disposition evidence for the 3 repaired-source retry findings; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 77b668c436ce0027783ac57a67dbe61af11df475 and completed with 1 unresolved minor finding.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the current repaired-source rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the current CSS font-feature finding; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 43776fe84c7ba316f14fb3ff985ce6f97bbeac5b and completed with 2 unresolved findings.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the latest rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the latest four findings in screens.jsx, app.jsx, and design-canvas.jsx; CodeRabbit provider evidence is stale after source repair and must be rerun with the scoped base-commit command before Stage 4 can proceed.
-  - Latest four-finding repair verification passed: node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs, npm test, npm run typecheck, npm run bandit -- validate, npm run bandit -- cockpit status --json, npm run bandit -- gaps list, git diff --check, and a static prototype smoke at http://127.0.0.1:4178/index.html with only optional favicon/sidecar 404s.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the latest ActionButton ARIA string and design-canvas keyboard-handler stability findings; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
-  - Focused and repo verification passed: node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs, npm test, npm run typecheck, npm run bandit -- validate, npm run bandit -- cockpit status --json, and git diff --check.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head df55118889d3472e947b395c581eb978c2e45240 and completed with 1 unresolved major finding.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the current repaired-source rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the current Babel standalone version / script-integrity finding; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
-  - Current repair verification passed: recomputed pinned CDN SHA-384 SRI hashes, node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs, npm test, npm run typecheck, npm run bandit -- validate, npm run bandit -- cockpit status --json, and git diff --check.
-  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head c871b6251c8cd20176efcf9d33cac4e9b318ffb8 and completed with 4 unresolved findings.
-  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the latest rerun.
-  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
-coderabbit_state: blocker
+  - npm run bandit -- cockpit status --json passed during Stage 3 implementation evidence and throughout the CodeRabbit repair loop.
+  - git diff --check passed during Stage 3 implementation evidence and after the latest CodeRabbit finding repair.
+  - docs/work/BANDIT-034/coderabbit-finding-disposition.md records focused repair and PM disposition evidence for the iterative CodeRabbit finding loop.
+  - coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx completed at source head 97cb00be50023842dc900782c63cbb70fd374bfd with no findings.
+  - docs/specs/BANDIT-034-coderabbit-rerun-output.json records the normalized completed scoped provider output with verdict pass and no findings.
+  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base base-commit:08c3ef803bd9bb78b85c6fd376815dad99676677 --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict pass, findings_status none, and source_drift_status current.
+  - npm run bandit -- qwen-review BANDIT-034 recorded docs/work/BANDIT-034/local-qwen-review.md with reviewer_verdict pass, findings_status none, and operator_input_status none_required.
+  - npm run bandit -- review-subject-hash BANDIT-034 produced 3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb from review-subject policy v1.
+coderabbit_state: pass
 coderabbit_replacement_evidence:
-  - Real pre-PR CodeRabbit provider evidence was rerun against the repaired source and completed with 4 unresolved findings: stale hardcoded next-action UI copy in screens.jsx, missing malformed-global guards in app.jsx, missing queue-band row guards in screens.jsx, and missing trusted sender/origin validation in design-canvas.jsx. The four findings are repaired in source and disposition evidence; Stage 4 remains blocked until CodeRabbit is rerun against the repaired source with the scoped command `coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`.
-local_qwen_state: not_applicable
+  - not_applicable
+local_qwen_state: pass
 local_qwen_replacement_evidence:
-  - Local Qwen was not run because CodeRabbit pre-PR review still blocks Stage 4; no aggregate pass can be claimed until CodeRabbit completes without blocker evidence.
+  - not_applicable
 escalated_review_required: false
 escalated_review_state: not_applicable
-escalated_review_rationale: BANDIT-034 is a bounded internal cockpit-shell hardening chore over presentation-only view-model and render surfaces. It introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, or external service integration. No smell trigger requires escalated reviewer routing before the blocking CodeRabbit findings are repaired or dispositioned.
-pm_disposition: blocker
-pm_disposition_rationale: The latest CodeRabbit rerun produced four unresolved actionable findings, and the current source repairs them. Stage 4 remains blocked until CodeRabbit is rerun against the repaired source with the scoped command `coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`. Do not run Local Qwen, refresh aggregate review-subject evidence, or claim aggregate PM disposition until CodeRabbit no longer blocks.
+escalated_review_rationale: BANDIT-034 is a bounded internal cockpit-shell hardening improvement chore over presentation-only view-model, render, and prototype-source repair surfaces. It introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, external service integration, or policy change. CodeRabbit and Local Qwen both passed with no findings after the focused repair loop, and no smell trigger requires escalated reviewer routing.
+pm_disposition: pass
+pm_disposition_rationale: Codex PM accepts Stage 4 because the latest scoped CodeRabbit pre-PR provider review passed with no findings, Local Qwen passed with no findings, the review-subject hash is current, and the implementation evidence records focused and full verification passing. The work satisfies the routed BANDIT-033-COCKPIT-SHELL-HARDENING improvement chore by deriving guarded action affordances from one presentation source and making light queue/context mapping explicit and source-linked while preserving CLI authority, repo-native source-of-truth boundaries, read-only cockpit output, and the out-of-scope boundaries for server/API, state index, scheduler, claim, worktree, UAT, PR/CI, merge, push, and deploy behavior.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
-source_drift_status: stale
+source_drift_status: current
 bootstrap_gaps:
   - none
