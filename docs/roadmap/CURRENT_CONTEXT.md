@@ -370,26 +370,29 @@ at source head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings.
 Local Qwen Stage 4 pass evidence is recorded in
 `docs/work/BANDIT-032/local-qwen-review.md` at source head
 `4991a0f8c0885119499fdf42016dc4543dfd3e3e` with no findings. Aggregate
-review evidence, landing, and retrospective evidence have not started.
+Stage 4 review evidence is recorded in
+`docs/work/BANDIT-032/review-evidence.md` with current `review_subject_hash`
+`97bb34c9926713b0228c9971a4ef44fd08fe2af722b15fec81ee3c2e22951861`,
+CodeRabbit pass evidence, Local Qwen pass evidence, Codex PM Stage 4
+disposition, and no open bootstrap gaps. Landing and retrospective evidence
+have not started.
 
-**Last completed milestone:** `BANDIT-032` Stage 4 Local Qwen pass evidence is
+**Last completed milestone:** `BANDIT-032` aggregate Stage 4 review evidence is
 recorded.
 
-**Current next action:** Run `npm run bandit -- review-subject-hash
-BANDIT-032`, then create aggregate Stage 4 review evidence for `BANDIT-032`
-from current CodeRabbit and Local Qwen pass evidence.
+**Current next action:** Create the Stage 5 landing verdict for `BANDIT-032`,
+then run the required landing-readiness verification before any landing action.
 
 Do not start visual UI, server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
 automatic merge/push/deploy, product UAT approval, actor identity policy,
-PR/CI workflow, landing, retrospective closeout, or unrelated work before
-current `BANDIT-032` Stage 4 review evidence exists.
+PR/CI workflow, retrospective closeout, or unrelated work before the
+`BANDIT-032` Stage 5 landing verdict exists.
 
 ## Active Work
 
 **Active work item:** `BANDIT-032` - Cockpit Status Coverage Hardening is in
-Stage 4 review with CodeRabbit and Local Qwen pass evidence recorded. Aggregate
-review evidence remains pending.
+Stage 5 landing with current aggregate Stage 4 review evidence recorded.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -414,9 +417,9 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-032/review-evidence.md` with
-current `review_subject_hash`, CodeRabbit pass evidence, Local Qwen pass
-evidence, and Codex PM Stage 4 disposition.
+**Expected next deliverable:** `docs/work/BANDIT-032/landing-verdict.md` with
+current tests, clean-code, CodeRabbit, Local Qwen, aggregate review, UAT,
+source-drift, operator-input, and landing-agent disposition.
 
 ## Known Bootstrap Gaps
 
@@ -568,17 +571,17 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition. `BANDIT-031` is landed and closed out as the first
 Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec,
 Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
-CodeRabbit pass evidence, and Stage 4 Local Qwen pass evidence for cockpit
-status coverage hardening. The current priority is:
+CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, and aggregate Stage
+4 review evidence with current review subject hash for cockpit status coverage
+hardening. The current priority is:
 
-1. Run `npm run bandit -- review-subject-hash BANDIT-032`.
-2. Create aggregate Stage 4 review evidence from current CodeRabbit and Local
-   Qwen pass evidence.
+1. Create the Stage 5 landing verdict for `BANDIT-032`.
+2. Run the required landing-readiness verification before any landing action.
 3. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, landing, retrospective
-   closeout, or unrelated work until current `BANDIT-032` Stage 4 review
-   evidence exists.
+   closeout, or unrelated work until the `BANDIT-032` Stage 5 landing verdict
+   exists.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

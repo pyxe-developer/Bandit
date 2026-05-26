@@ -16,9 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run `npm run bandit -- review-subject-hash BANDIT-032`,
-then create aggregate Stage 4 review evidence from current CodeRabbit and Local
-Qwen pass evidence.
+**Current next step:** Create the Stage 5 landing verdict for `BANDIT-032`,
+then run the required landing-readiness verification before any landing action.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -55,12 +54,16 @@ evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md` at source
 head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings. Local Qwen
 pass evidence is recorded in `docs/work/BANDIT-032/local-qwen-review.md` at
 source head `4991a0f8c0885119499fdf42016dc4543dfd3e3e` with no findings. The
-next step is review-subject hash and aggregate Stage 4 review evidence. Do not
+aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-032/review-evidence.md` with current `review_subject_hash`
+`97bb34c9926713b0228c9971a4ef44fd08fe2af722b15fec81ee3c2e22951861`,
+CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM Stage 4
+disposition. The next step is the Stage 5 landing verdict. Do not
 start landing, retrospective closeout, visual UI, local server/API mode,
 state-index persistence, scheduler execution, worktree lifecycle, automatic
 merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
 work surface reservation, PR/CI workflow, or unrelated feature work before
-current aggregate Stage 4 review evidence exists.
+the `BANDIT-032` Stage 5 landing verdict exists.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -419,8 +422,8 @@ Stage 5 landing verdict/readiness evidence, and local-record landing action
 evidence. Retrospective closeout is recorded, and the `BANDIT-023`
 improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
 closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is active
-with Stage 3 implementation evidence recorded; the next action is Stage 4
-review for `BANDIT-032`.
+with current aggregate Stage 4 review evidence recorded; the next action is the
+Stage 5 landing verdict for `BANDIT-032`.
 
 ## Phase Map
 
@@ -733,15 +736,14 @@ Current rule:
 
 Current priority:
 
-1. Run `npm run bandit -- review-subject-hash BANDIT-032`.
-2. Create aggregate Stage 4 review evidence from current CodeRabbit and Local
-   Qwen pass evidence.
+1. Create the Stage 5 landing verdict for `BANDIT-032`.
+2. Run the required landing-readiness verification before any landing action.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, landing, retrospective
-   closeout, or unrelated work until current `BANDIT-032` Stage 4 review
-   evidence exists.
+   closeout, or unrelated work until the `BANDIT-032` Stage 5 landing verdict
+   exists.
 
 ## Phase 6: Coordination Primitive
 
