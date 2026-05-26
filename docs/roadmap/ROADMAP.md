@@ -16,9 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement `BANDIT-032` cockpit status coverage hardening
-so the focused RED tests pass while preserving read-only, source-linked,
-non-canonical cockpit status output.
+**Current next step:** Run Stage 4 review and cross-model gates for
+`BANDIT-032`, including pre-PR CodeRabbit review when available, Local Qwen
+adversarial review, review-subject hash, PM disposition, and aggregate review
+evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -39,19 +40,23 @@ policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
 feature work before the focused `BANDIT-032` implementation satisfies the
 narrow CLI-authoritative cockpit-status contract.
 
-`BANDIT-032` - Cockpit Status Coverage Hardening is active at Stage 2 RED evidence
-recorded: the structured creation spec is recorded in
+`BANDIT-032` - Cockpit Status Coverage Hardening is active at Stage 3
+implementation evidence recorded: the structured creation spec is recorded in
 `docs/specs/BANDIT-032-cockpit-status-coverage-hardening.json`, the brief is
 recorded in `docs/work/BANDIT-032/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-032/red-evidence.md`, and the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is linked to
-`BANDIT-032` in `docs/work/BANDIT-031/qwen-finding-disposition.md`. The next
-step is Stage 3 implementation. Do not start implementation evidence, Stage 4
-review, landing, retrospective closeout, visual UI, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, automatic
-merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
-work surface reservation, PR/CI workflow, or unrelated feature work before the
-focused implementation makes the cockpit-status hardening RED tests pass.
+`BANDIT-032` in `docs/work/BANDIT-031/qwen-finding-disposition.md`.
+Implementation evidence is recorded in
+`docs/work/BANDIT-032/implementation-evidence.md`; the implementation keeps
+cockpit status read-only and source-linked while adding blocker summaries,
+Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
+agreement, and stale review/landing evidence reporting. The next step is Stage
+4 review. Do not start landing, retrospective closeout, visual UI, local
+server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
+policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
+feature work before current Stage 4 review evidence exists.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -722,15 +727,15 @@ Current rule:
 
 Current priority:
 
-1. Implement `BANDIT-032` cockpit status coverage hardening so the focused RED
-   tests pass for blocker breadth, gate breadth, next-action agreement
-   hardening, and stale-evidence reporting.
+1. Run Stage 4 review and cross-model gates for `BANDIT-032`, including
+   pre-PR CodeRabbit review when available, Local Qwen adversarial review,
+   review-subject hash, PM disposition, and aggregate review evidence.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   the focused `BANDIT-032` implementation satisfies the narrow
-   CLI-authoritative cockpit-status contract.
+   reservations, actor identity policy, PR/CI workflow, landing, retrospective
+   closeout, or unrelated work until current `BANDIT-032` Stage 4 review
+   evidence exists.
 
 ## Phase 6: Coordination Primitive
 

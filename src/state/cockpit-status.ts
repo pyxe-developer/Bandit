@@ -17,6 +17,26 @@ type BootstrapGapSummary = {
   }>;
 };
 
+type CockpitBlocker = {
+  kind: "operator_input_required" | "bootstrap_gap";
+  status: "blocked";
+  summary: string;
+  source: string;
+  source_artifacts?: string[];
+};
+
+type GateStatus = {
+  status: "pass" | "missing";
+  source: string;
+};
+
+type StaleEvidence = {
+  kind: "review_evidence" | "review_subject_hash" | "landing_verdict";
+  status: "stale";
+  source: string;
+  basis: "source_drift_status" | "review_subject_hash_status";
+};
+
 type CockpitStatus = {
   kind: "workflow_cockpit_status";
   authority: "derived_non_canonical";
@@ -25,15 +45,27 @@ type CockpitStatus = {
     id: string;
     source: string;
   };
-  next_action: SourceValue<string>;
+  next_action: SourceValue<string> & {
+    agreement: {
+      status: "pass";
+      compared_with: string;
+      basis: "normalized_text" | "work_item_and_stage" | "topic_match";
+    };
+  };
   required_operator_input: SourceValue<"none_required" | "required">;
-  blockers: string[];
+  blockers: CockpitBlocker[];
   bootstrap_gaps: BootstrapGapSummary;
   gates: {
-    stage_2_red_evidence: {
-      status: "pass" | "missing";
-      source: string;
+    stage_0_context_readiness: {
+      status: "pass";
+      sources: string[];
     };
+    stage_1_brief: GateStatus;
+    stage_2_red_evidence: GateStatus;
+    stage_3_implementation: GateStatus;
+    stage_4_review: GateStatus;
+    stage_5_landing: GateStatus;
+    stage_6_retrospective: GateStatus;
   };
   landing_readiness: {
     status: "ready" | "not_ready";
@@ -55,6 +87,7 @@ type CockpitStatus = {
     next_action: string | null;
     source: string;
   } | null;
+  stale_evidence: StaleEvidence[];
 };
 
 const CURRENT_CONTEXT_PATH = "docs/roadmap/CURRENT_CONTEXT.md";
@@ -77,7 +110,12 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     ROADMAP_PATH
   );
 
-  if (!nextActionsAgree(nextAction, roadmapNextAction, activeWorkItemId)) {
+  const nextActionAgreement = nextActionsAgree(
+    nextAction,
+    roadmapNextAction,
+    activeWorkItemId
+  );
+  if (!nextActionAgreement) {
     throw new Error(
       "Cockpit status blocked: CURRENT_CONTEXT.md and ROADMAP.md disagree on next action"
     );
@@ -90,6 +128,10 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   const redEvidencePath = `docs/work/${activeWorkItemId}/red-evidence.md`;
   const implementationEvidencePath =
     `docs/work/${activeWorkItemId}/implementation-evidence.md`;
+  const reviewEvidencePath = `docs/work/${activeWorkItemId}/review-evidence.md`;
+  const landingVerdictPath = `docs/work/${activeWorkItemId}/landing-verdict.md`;
+  const retrospectivePath = `docs/work/${activeWorkItemId}/retrospective.md`;
+  const bootstrapGaps = await readBootstrapGapSummary(repoRoot);
 
   return {
     kind: "workflow_cockpit_status",
@@ -104,20 +146,27 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     },
     next_action: {
       value: nextAction,
-      source: CURRENT_CONTEXT_PATH
+      source: CURRENT_CONTEXT_PATH,
+      agreement: {
+        status: "pass",
+        compared_with: ROADMAP_PATH,
+        basis: nextActionAgreement
+      }
     },
     required_operator_input: {
       value: readRequiredOperatorInput(currentContext.content),
       source: CURRENT_CONTEXT_PATH
     },
-    blockers: [],
-    bootstrap_gaps: await readBootstrapGapSummary(repoRoot),
-    gates: {
-      stage_2_red_evidence: {
-        status: (await pathExists(repoRoot, redEvidencePath)) ? "pass" : "missing",
-        source: redEvidencePath
-      }
-    },
+    blockers: readBlockers(currentContext.content, bootstrapGaps),
+    bootstrap_gaps: bootstrapGaps,
+    gates: await readGateMatrix(repoRoot, {
+      briefPath,
+      redEvidencePath,
+      implementationEvidencePath,
+      reviewEvidencePath,
+      landingVerdictPath,
+      retrospectivePath
+    }),
     landing_readiness: await readLandingReadiness(
       repoRoot,
       implementationEvidencePath
@@ -127,7 +176,11 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
       source: briefPath
     },
     improvement_health: await readImprovementHealth(repoRoot),
-    coordination: await readCoordinationSummary(repoRoot, activeWorkItemId)
+    coordination: await readCoordinationSummary(repoRoot, activeWorkItemId),
+    stale_evidence: await readStaleEvidence(repoRoot, {
+      reviewEvidencePath,
+      landingVerdictPath
+    })
   };
 }
 
@@ -211,14 +264,26 @@ function nextActionsAgree(first: string, second: string, workItemId: string) {
     normalizedFirst.includes(normalizedSecond) ||
     normalizedSecond.includes(normalizedFirst)
   ) {
-    return true;
+    return "normalized_text";
   }
 
-  return (
+  if (
+    normalizedFirst.includes(workItem) &&
+    normalizedSecond.includes(workItem) &&
+    matchingStage(normalizedFirst, normalizedSecond)
+  ) {
+    return "work_item_and_stage";
+  }
+
+  if (
     normalizedFirst.includes(workItem) &&
     normalizedSecond.includes(workItem) &&
     matchingActionTopic(normalizedFirst, normalizedSecond)
-  );
+  ) {
+    return "topic_match";
+  }
+
+  return null;
 }
 
 function matchingActionTopic(first: string, second: string) {
@@ -227,6 +292,18 @@ function matchingActionTopic(first: string, second: string) {
     ["stage 4 review", "review"]
   ].some((terms) =>
     terms.every((term) => first.includes(term) && second.includes(term))
+  );
+}
+
+function matchingStage(first: string, second: string) {
+  const firstStages = extractStageNumbers(first);
+  const secondStages = extractStageNumbers(second);
+  return firstStages.some((stage) => secondStages.includes(stage));
+}
+
+function extractStageNumbers(value: string) {
+  return Array.from(value.matchAll(/\bstage\s+(\d+)\b/g)).map((match) =>
+    String(match[1])
   );
 }
 
@@ -253,6 +330,45 @@ function readRequiredOperatorInput(content: string) {
   return /No operator-owned input is required/i.test(section)
     ? "none_required"
     : "required";
+}
+
+function readOperatorInputSummary(content: string) {
+  const section = content.match(
+    /## Required Operator Input\s+([\s\S]*?)(?:\n## |\s*$)/
+  )?.[1] ?? "";
+
+  return section
+    .split(/\r?\n/)
+    .map((line) => normalizeText(line))
+    .find((line) => line.length > 0) ?? "Operator input is required.";
+}
+
+function readBlockers(
+  currentContext: string,
+  bootstrapGaps: BootstrapGapSummary
+): CockpitBlocker[] {
+  const blockers: CockpitBlocker[] = [];
+
+  if (readRequiredOperatorInput(currentContext) === "required") {
+    blockers.push({
+      kind: "operator_input_required",
+      status: "blocked",
+      summary: readOperatorInputSummary(currentContext),
+      source: CURRENT_CONTEXT_PATH
+    });
+  }
+
+  for (const gap of bootstrapGaps.gaps) {
+    blockers.push({
+      kind: "bootstrap_gap",
+      status: "blocked",
+      summary: `${gap.id}: ${gap.next_action}`,
+      source: BOOTSTRAP_GAPS_PATH,
+      source_artifacts: gap.source_artifacts
+    });
+  }
+
+  return blockers;
 }
 
 async function readBootstrapGapSummary(
@@ -300,6 +416,98 @@ async function readLandingReadiness(repoRoot: string, source: string) {
     reason: "implementation evidence is not recorded",
     source
   };
+}
+
+async function readGateMatrix(
+  repoRoot: string,
+  paths: {
+    briefPath: string;
+    redEvidencePath: string;
+    implementationEvidencePath: string;
+    reviewEvidencePath: string;
+    landingVerdictPath: string;
+    retrospectivePath: string;
+  }
+) {
+  return {
+    stage_0_context_readiness: {
+      status: "pass" as const,
+      sources: [CURRENT_CONTEXT_PATH, ROADMAP_PATH]
+    },
+    stage_1_brief: await readGate(repoRoot, paths.briefPath),
+    stage_2_red_evidence: await readGate(repoRoot, paths.redEvidencePath),
+    stage_3_implementation: await readGate(
+      repoRoot,
+      paths.implementationEvidencePath
+    ),
+    stage_4_review: await readGate(repoRoot, paths.reviewEvidencePath),
+    stage_5_landing: await readGate(repoRoot, paths.landingVerdictPath),
+    stage_6_retrospective: await readGate(repoRoot, paths.retrospectivePath)
+  };
+}
+
+async function readGate(repoRoot: string, source: string): Promise<GateStatus> {
+  return {
+    status: (await pathExists(repoRoot, source)) ? "pass" : "missing",
+    source
+  };
+}
+
+async function readStaleEvidence(
+  repoRoot: string,
+  paths: {
+    reviewEvidencePath: string;
+    landingVerdictPath: string;
+  }
+): Promise<StaleEvidence[]> {
+  const staleEvidence: StaleEvidence[] = [];
+
+  if (await pathExists(repoRoot, paths.reviewEvidencePath)) {
+    const reviewEvidence = await readRequiredArtifact(
+      repoRoot,
+      paths.reviewEvidencePath
+    );
+    if (readScalarStatus(reviewEvidence.content, "source_drift_status") === "stale") {
+      staleEvidence.push({
+        kind: "review_evidence",
+        status: "stale",
+        source: paths.reviewEvidencePath,
+        basis: "source_drift_status"
+      });
+    }
+    if (
+      readScalarStatus(reviewEvidence.content, "review_subject_hash_status") ===
+      "stale"
+    ) {
+      staleEvidence.push({
+        kind: "review_subject_hash",
+        status: "stale",
+        source: paths.reviewEvidencePath,
+        basis: "review_subject_hash_status"
+      });
+    }
+  }
+
+  if (await pathExists(repoRoot, paths.landingVerdictPath)) {
+    const landingVerdict = await readRequiredArtifact(
+      repoRoot,
+      paths.landingVerdictPath
+    );
+    if (readScalarStatus(landingVerdict.content, "source_drift_status") === "stale") {
+      staleEvidence.push({
+        kind: "landing_verdict",
+        status: "stale",
+        source: paths.landingVerdictPath,
+        basis: "source_drift_status"
+      });
+    }
+  }
+
+  return staleEvidence;
+}
+
+function readScalarStatus(content: string, field: string) {
+  return content.match(new RegExp(`^${field}:\\s*(\\S+)`, "m"))?.[1] ?? null;
 }
 
 async function readImprovementHealth(repoRoot: string) {
