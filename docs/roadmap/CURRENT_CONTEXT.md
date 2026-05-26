@@ -356,28 +356,30 @@ Hardening. Its structured creation spec is recorded in
 `docs/specs/BANDIT-032-cockpit-status-coverage-hardening.json`, and its Stage 1
 brief is recorded in `docs/work/BANDIT-032/brief.md`. The source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is linked to
-`BANDIT-032` in `docs/work/BANDIT-031/qwen-finding-disposition.md`.
-Implementation, Stage 4 review, landing, and retrospective evidence have not
-started.
+`BANDIT-032` in `docs/work/BANDIT-031/qwen-finding-disposition.md`. Stage 2
+RED evidence is recorded in `docs/work/BANDIT-032/red-evidence.md`, with
+focused failing tests in `test/cockpit-status.test.mjs` for blocker breadth,
+Stage 0 through Stage 6 gate breadth, next-action agreement hardening, and
+stale-evidence reporting. Implementation, Stage 4 review, landing, and
+retrospective evidence have not started.
 
-**Last completed milestone:** `BANDIT-032` structured work-item spec and Stage 1
-brief are recorded.
+**Last completed milestone:** `BANDIT-032` Stage 2 RED evidence is recorded.
 
-**Current next action:** Record Stage 2 RED evidence for `BANDIT-032` focused on
-cockpit status blocker breadth, gate breadth, next-action agreement hardening,
-and stale-evidence reporting before production implementation starts.
+**Current next action:** Implement `BANDIT-032` cockpit status coverage
+hardening so the focused RED tests pass while preserving read-only,
+source-linked, non-canonical cockpit status output.
 
 Do not start visual UI, server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
 automatic merge/push/deploy, product UAT approval, actor identity policy,
-PR/CI workflow, or unrelated work before `BANDIT-032` RED evidence defines the
-next narrow CLI-authoritative cockpit-status contract.
+PR/CI workflow, or unrelated work before the focused `BANDIT-032` implementation
+passes the RED contract.
 
 ## Active Work
 
 **Active work item:** `BANDIT-032` - Cockpit Status Coverage Hardening is at
-Stage 1 brief created. Stage 2 RED evidence is the next required action before
-production implementation.
+Stage 2 RED evidence recorded. Stage 3 implementation is the next required
+action.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -402,10 +404,11 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-032/red-evidence.md` with
-focused failing tests for cockpit status blocker breadth, gate breadth,
-next-action agreement hardening, stale-evidence reporting, source links, and no
-hidden write authority.
+**Expected next deliverable:** `docs/work/BANDIT-032/implementation-evidence.md`
+after focused implementation makes `node --test test/cockpit-status.test.mjs`
+pass for cockpit status blocker breadth, gate breadth, next-action agreement
+hardening, stale-evidence reporting, source links, and no hidden write
+authority.
 
 ## Known Bootstrap Gaps
 
@@ -555,18 +558,18 @@ evidence, Stage 7 improvement-evaluation evidence, Stage 4 review evidence,
 Stage 5 landing verdict/readiness evidence, local-record landing action
 evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition. `BANDIT-031` is landed and closed out as the first
-Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec
-and Stage 1 brief for cockpit status coverage hardening.
+Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec,
+Stage 1 brief, and Stage 2 RED evidence for cockpit status coverage hardening.
 The current priority is:
 
-1. Record Stage 2 RED evidence for `BANDIT-032`, focused on cockpit status
-   blocker breadth, gate breadth, next-action agreement hardening, and
-   stale-evidence reporting.
+1. Implement `BANDIT-032` cockpit status coverage hardening so the focused RED
+   tests pass for blocker breadth, gate breadth, next-action agreement
+   hardening, and stale-evidence reporting.
 2. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   `BANDIT-032` RED evidence defines the next narrow CLI-authoritative
-   cockpit-status contract.
+   the focused `BANDIT-032` implementation satisfies the narrow
+   CLI-authoritative cockpit-status contract.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -574,12 +577,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record Stage 2 RED evidence for
-`BANDIT-032`. The candidate's source artifacts, lesson, hypothesis, metric,
-baseline, expected direction, evaluation window, and status are recorded in
+No operator-owned input is required to implement `BANDIT-032` cockpit status
+coverage hardening. The candidate's source artifacts, lesson, hypothesis,
+metric, baseline, expected direction, evaluation window, and status are recorded in
 `docs/work/BANDIT-031/qwen-finding-disposition.md`,
 `docs/work/BANDIT-031/retrospective.md`, and
-`docs/work/BANDIT-032/brief.md`.
+`docs/work/BANDIT-032/brief.md`, and the focused RED contract is recorded in
+`docs/work/BANDIT-032/red-evidence.md`.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require

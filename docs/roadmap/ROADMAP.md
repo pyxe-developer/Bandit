@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 2 RED evidence for `BANDIT-032` focused on
-cockpit status blocker breadth, gate breadth, next-action agreement hardening,
-and stale-evidence reporting before production implementation starts.
+**Current next step:** Implement `BANDIT-032` cockpit status coverage hardening
+so the focused RED tests pass while preserving read-only, source-linked,
+non-canonical cockpit status output.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -36,22 +36,22 @@ in `docs/work/BANDIT-031/retrospective.md`. Do not start visual UI, local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
-feature work before `BANDIT-032` RED evidence defines the next narrow
-CLI-authoritative cockpit-status contract.
+feature work before the focused `BANDIT-032` implementation satisfies the
+narrow CLI-authoritative cockpit-status contract.
 
-`BANDIT-032` - Cockpit Status Coverage Hardening is active at Stage 1 brief
-created: the structured creation spec is recorded in
+`BANDIT-032` - Cockpit Status Coverage Hardening is active at Stage 2 RED evidence
+recorded: the structured creation spec is recorded in
 `docs/specs/BANDIT-032-cockpit-status-coverage-hardening.json`, the brief is
-recorded in `docs/work/BANDIT-032/brief.md`, and the source
+recorded in `docs/work/BANDIT-032/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-032/red-evidence.md`, and the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is linked to
 `BANDIT-032` in `docs/work/BANDIT-031/qwen-finding-disposition.md`. The next
-step is Stage 2 RED evidence. Do not start production implementation,
-implementation evidence, Stage 4 review, landing, retrospective closeout,
-visual UI, local server/API mode, state-index persistence, scheduler execution,
-worktree lifecycle, automatic merge/push/deploy behavior, product UAT, actor
-identity policy, claim lease, work surface reservation, PR/CI workflow, or
-unrelated feature work before RED evidence defines the focused cockpit-status
-coverage contract.
+step is Stage 3 implementation. Do not start implementation evidence, Stage 4
+review, landing, retrospective closeout, visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, automatic
+merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
+work surface reservation, PR/CI workflow, or unrelated feature work before the
+focused implementation makes the cockpit-status hardening RED tests pass.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -194,13 +194,14 @@ local-record landing action evidence is recorded in
 improvement disposition are recorded in
 `docs/work/BANDIT-031/retrospective.md`. The routed
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` follow-up is now materialized as
-`BANDIT-032`; the next step is Stage 2 RED evidence for the focused
-cockpit-status coverage hardening contract. Do not create unrelated active-work
-branches, Phase 8 visual UI, local server/API mode, state-index persistence,
-scheduler execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, PR/CI workflow, or unrelated feature work before `BANDIT-032`
-RED evidence defines the next narrow CLI-authoritative cockpit-status contract.
+`BANDIT-032`; Stage 2 RED evidence is now recorded, and the next step is the
+focused cockpit-status coverage hardening implementation. Do not create
+unrelated active-work branches, Phase 8 visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, exclusive
+claim leases, work surface reservations, product UAT approval, automatic
+merge/push/deploy behavior, actor identity policy, PR/CI workflow, or unrelated
+feature work before the focused `BANDIT-032` implementation satisfies the
+narrow CLI-authoritative cockpit-status contract.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -721,15 +722,15 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 2 RED evidence for `BANDIT-032`, focused on cockpit status
-   blocker breadth, gate breadth, next-action agreement hardening, and
-   stale-evidence reporting.
+1. Implement `BANDIT-032` cockpit status coverage hardening so the focused RED
+   tests pass for blocker breadth, gate breadth, next-action agreement
+   hardening, and stale-evidence reporting.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   `BANDIT-032` RED evidence defines the next narrow CLI-authoritative
-   cockpit-status contract.
+   the focused `BANDIT-032` implementation satisfies the narrow
+   CLI-authoritative cockpit-status contract.
 
 ## Phase 6: Coordination Primitive
 
