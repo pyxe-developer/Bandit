@@ -124,13 +124,15 @@ is recorded in `docs/work/BANDIT-030/improvement-evaluation.md` with result
 `de76b40fe2344fe697ccfe92f0f8daa050eb12997bd2a1f7f3d09758d3712e45`.
 CodeRabbit pass evidence is recorded with its remaining minor EOF-newline
 finding dispositioned as resolved/no-action, and Local Qwen passed with no
-findings. The next step is to create the Stage 5 landing verdict for
-`BANDIT-030` and run `npm run bandit -- land-check BANDIT-030`. Do not create
+findings. Stage 5 landing verdict is recorded in
+`docs/work/BANDIT-030/landing-verdict.md` with final verdict `safe-to-land`,
+and `npm run bandit -- land-check BANDIT-030` passes. The next step is to
+record the local-record landing action for `BANDIT-030`. Do not create
 unrelated active-work branches, Phase 8 web cockpit implementation, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, landing action, or unrelated feature work before Stage 5
-landing verdict and landing readiness are recorded.
+identity policy, retrospective, or unrelated feature work before landing action
+evidence is recorded.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -333,9 +335,10 @@ evidence recorded in
 verification are recorded. Local-record landing action evidence and Stage 6
 retrospective/improvement disposition are recorded. `BANDIT-030` has a
 structured spec, Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3
-implementation evidence, and Stage 7 improvement-evaluation evidence for
-`BANDIT-023` improvement outcome evaluation. The next action is running Stage 4
-review gates for `BANDIT-030`.
+implementation evidence, Stage 7 improvement-evaluation evidence for
+`BANDIT-023` improvement outcome evaluation, Stage 4 review evidence, and
+Stage 5 landing verdict/readiness evidence. The next action is recording the
+local-record landing action for `BANDIT-030`.
 
 ## Phase Map
 
@@ -648,13 +651,12 @@ Current rule:
 
 Current priority:
 
-1. Create the Stage 5 landing verdict for `BANDIT-030` and run
-   `npm run bandit -- land-check BANDIT-030`.
+1. Record the local-record landing action for `BANDIT-030`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, landing action, or Phase 8 work until
-   Stage 5 landing verdict and landing readiness are recorded.
+   reservations, actor identity policy, retrospective, or Phase 8 work until
+   landing action evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 
