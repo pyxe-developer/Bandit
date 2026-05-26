@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record `BANDIT-033` Stage 6 retrospective closeout and
-improvement disposition.
+**Current next step:** Create the next Phase 8 improvement chore work item for
+`BANDIT-033-COCKPIT-SHELL-HARDENING`, starting with a structured spec and
+Stage 1 brief.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -74,8 +75,8 @@ merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
 work surface reservation, PR/CI workflow, or unrelated feature work unless a
 future work item explicitly scopes that authority.
 
-`BANDIT-033` - Attention-First Cockpit Visual Shell is the active Phase 8
-visual UI slice. Its structured creation spec is recorded in
+`BANDIT-033` - Attention-First Cockpit Visual Shell is landed and closed out as
+the first Phase 8 visual UI slice. Its structured creation spec is recorded in
 `docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, its Stage 1
 brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
@@ -94,7 +95,10 @@ prototype-source findings dispositioned as no-action, Local Qwen returned a
 and `uat_status: not_applicable` because this slice records a
 presentation/render contract, not a browser-clickable operator surface.
 `npm run bandit -- land-check BANDIT-033` passes. Local-record landing action
-evidence is recorded in `docs/work/BANDIT-033/landing-action.md`. Local
+evidence is recorded in `docs/work/BANDIT-033/landing-action.md`. Stage 6
+retrospective closeout and improvement disposition are recorded in
+`docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
+`BANDIT-033-COCKPIT-SHELL-HARDENING`. Local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, and unrelated
@@ -242,16 +246,18 @@ local-record landing action evidence is recorded in
 improvement disposition are recorded in
 `docs/work/BANDIT-031/retrospective.md`. The routed
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` follow-up is evaluated through
-`BANDIT-032`, which is landed and closed out. `BANDIT-033` is now the active
-Phase 8 visual UI slice with Stage 2 RED evidence, Stage 3 implementation
-evidence, and Stage 4 review evidence recorded, and the next required artifact
-is CLI-owned product UAT approval.
+`BANDIT-032`, which is landed and closed out. `BANDIT-033` is landed and
+closed out as the first Phase 8 visual UI slice with Stage 2 RED evidence,
+Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
+landing-action evidence, and Stage 6 retrospective/improvement disposition
+recorded. The next required artifact is a structured spec and Stage 1 brief for
+`BANDIT-033-COCKPIT-SHELL-HARDENING`.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, PR/CI workflow, or unrelated feature work before `BANDIT-033`
-records CLI-owned product UAT approval and Stage 5 landing evidence.
+identity policy, PR/CI workflow, or unrelated feature work before the next work
+item explicitly scopes that authority.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -462,12 +468,12 @@ improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
 closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is landed
 and closed out as the cockpit status coverage hardening improvement chore. The
 operator-provided attention-first cockpit direction and design review are now
-recorded. `BANDIT-033` is the active Phase 8 Workflow Cockpit visual UI slice
-with Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
-evidence recorded. Stage 5 landing verdict is recorded with UAT not applicable
-for this non-runnable presentation/render contract, `land-check` passes, and
-local-record landing action evidence is recorded. The next required action is
-Stage 6 retrospective closeout and improvement disposition for `BANDIT-033`.
+recorded. `BANDIT-033` is landed and closed out as the first Phase 8 Workflow
+Cockpit visual UI slice with Stage 2 RED evidence, Stage 3 implementation
+evidence, Stage 4 review evidence, Stage 5 landing verdict/readiness evidence,
+local-record landing action evidence, and Stage 6 retrospective/improvement
+disposition recorded. The next required action is to create the
+`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore work item.
 
 ## Phase Map
 
@@ -780,8 +786,9 @@ Current rule:
 
 Current priority:
 
-1. Record `BANDIT-033` Stage 6 retrospective closeout and improvement
-   disposition.
+1. Create the next Phase 8 improvement chore work item for
+   `BANDIT-033-COCKPIT-SHELL-HARDENING`, starting with a structured spec and
+   Stage 1 brief.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

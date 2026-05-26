@@ -382,10 +382,10 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-032` retrospective closeout and
+**Last completed milestone:** `BANDIT-033` retrospective closeout and
 improvement disposition are recorded. The Phase 8 attention-first cockpit PRD
-and design review are now recorded as the accepted visual UI starting point.
-`BANDIT-033` has been created as the next Phase 8 visual UI slice; its
+and design review are recorded as the accepted visual UI starting point.
+`BANDIT-033` was created as the next Phase 8 visual UI slice; its
 structured spec is recorded in
 `docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, its Stage 1
 brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
@@ -410,11 +410,15 @@ presentation/render contract, not a browser-clickable operator surface, so
 browser UAT is deferred to the future slice that serves an actual cockpit page.
 `npm run bandit -- land-check BANDIT-033` passes with `UAT: not_applicable`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-033/landing-action.md`.
+`docs/work/BANDIT-033/landing-action.md`. Stage 6 retrospective closeout and
+improvement disposition are recorded in
+`docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
+`BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Record `BANDIT-033` Stage 6 retrospective closeout and
-improvement disposition. Do not begin the next work item until that closeout is
-recorded and roadmap/current-context state is updated.
+**Current next action:** Create the next Phase 8 improvement chore work item for
+`BANDIT-033-COCKPIT-SHELL-HARDENING`, starting with a structured spec and
+Stage 1 brief. Do not begin RED evidence or implementation until that work item
+is created and context is updated.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -424,7 +428,9 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-033` - Attention-First Cockpit Visual Shell.
+**Active work item:** `BANDIT-033` - Attention-First Cockpit Visual Shell is
+landed and closed out; no new work item is active until the next structured
+spec and Stage 1 brief are created.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -449,10 +455,11 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
-Cockpit Status Coverage Hardening.
+Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
+Visual Shell.
 
-**Expected next deliverable:** Local-record landing action evidence for
-`BANDIT-033`.
+**Expected next deliverable:** Structured spec and Stage 1 brief for the
+`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore.
 
 ## Known Bootstrap Gaps
 
@@ -608,12 +615,14 @@ CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
 review evidence with current review subject hash, Stage 5 landing verdict,
 passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
-`BANDIT-033` has Stage 5 landing verdict/readiness evidence and local-record
-landing action evidence recorded.
+`BANDIT-033` has Stage 5 landing verdict/readiness evidence, local-record
+landing action evidence, and Stage 6 retrospective/improvement disposition
+recorded.
 The current priority is:
 
-1. Record `BANDIT-033` Stage 6 retrospective closeout and improvement
-   disposition.
+1. Create the next Phase 8 improvement chore work item for
+   `BANDIT-033-COCKPIT-SHELL-HARDENING`, starting with a structured spec and
+   Stage 1 brief.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -626,9 +635,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-033` Stage 6
-closeout step.
-The Stage 5 landing verdict records `uat_status: not_applicable` because this
+No operator-owned input is required to create the next
+`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore from recorded Stage 4
+and Stage 6 evidence.
+The `BANDIT-033` Stage 5 landing verdict records `uat_status: not_applicable`
+because this
 slice produced a presentation/render contract, not a browser-clickable
 operator surface.
 
