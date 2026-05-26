@@ -66,8 +66,13 @@ expected_direction: Visual shell changes remain easier to audit as cockpit
   surfaces expand.
 evaluation_window: Evaluate when the next cockpit visual shell, guarded action,
   queue/context, or evidence-drilldown slice changes these surfaces.
-status: queued_candidate
-outcome: pending
+status: evaluated
+linked_work_item: BANDIT-034
+evaluating_work_item: BANDIT-034
+evaluation_evidence: docs/work/BANDIT-034/retrospective.md
+result: effective
+decision: keep
+outcome: keep
 
 No additional improvement chore is created by this retrospective.
 
