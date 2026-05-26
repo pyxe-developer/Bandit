@@ -31,3 +31,4 @@
 {"type":"artifact_created","work_item":"BANDIT-032","message":"Created red_evidence artifact at docs/work/BANDIT-032/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-032","message":"Created implementation_evidence artifact at docs/work/BANDIT-032/implementation-evidence.md"}
 {"type":"work_item_created","work_item":"BANDIT-033","message":"Created work item BANDIT-033 from docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json"}
+{"type":"work_item_created","work_item":"BANDIT-034","message":"Created work item BANDIT-034 from docs/specs/BANDIT-034-cockpit-shell-hardening.json"}
