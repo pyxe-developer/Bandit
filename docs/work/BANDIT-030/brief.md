@@ -1,0 +1,92 @@
+# BANDIT-030: Evaluate Non-Blocking Review Finding Routing
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Evaluate the now-due BANDIT-023 non-blocking review-finding routing hypothesis against the Stage 4 outcomes from BANDIT-025, BANDIT-028, and BANDIT-029, and record a Stage 7 keep, revise, revert, or double-down decision from repo evidence.
+
+## Origin
+
+BANDIT-023 retrospective improvement evaluation window is now satisfied by three later work items with Local Qwen Stage 4 findings: BANDIT-025, BANDIT-028, and BANDIT-029.
+
+origin: retrospective
+source_work_item: BANDIT-023
+source_artifacts:
+  - docs/work/BANDIT-023/retrospective.md
+  - docs/work/BANDIT-023/review-evidence.md
+  - docs/work/BANDIT-025/review-evidence.md
+  - docs/work/BANDIT-025/qwen-finding-disposition.md
+  - docs/work/BANDIT-028/review-evidence.md
+  - docs/work/BANDIT-028/qwen-finding-disposition.md
+  - docs/work/BANDIT-029/review-evidence.md
+  - docs/work/BANDIT-029/qwen-finding-disposition.md
+lesson: Non-blocking review findings should be routed to durable chores or explicit no-action decisions instead of recursively delaying landing after required gates accept the implementation.
+hypothesis: Explicit non-blocking review-finding routing will reduce adversarial-review churn while preserving fail-closed behavior for real blockers.
+metric: adversarial_repair_count
+baseline: BANDIT-015 required multiple Local Qwen reruns before the operator ended a recursive Stage 4 loop; BANDIT-022 landed with two Local Qwen non_blocking hardening findings queued as chore candidates.
+expected_direction: decrease repeated review loops caused only by future-hardening findings while keeping blocker finding acceptance unchanged.
+evaluation_window: Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first. BANDIT-025, BANDIT-028, and BANDIT-029 now satisfy this window.
+status: planned
+outcome: pending
+
+## Scope
+
+- Use repo-native evidence from BANDIT-023, BANDIT-025, BANDIT-028, and BANDIT-029 to evaluate whether explicit non-blocking review-finding routing reduced adversarial-review churn while preserving fail-closed behavior for real blockers.
+- Create one Stage 7 evaluation evidence artifact for the BANDIT-023 improvement hypothesis with metric observation, baseline comparison, outcome, decision, rationale, source artifacts, and next routing action.
+- Use the existing improvement candidate discovery and evaluation command surface where it fits the evidence contract.
+- Keep the decision limited to the non-blocking review-finding routing policy and any directly required documentation or routing update.
+- Record whether the outcome is effective, ineffective, inconclusive, reverted, or double_down and map that result to keep, revise, revert, or double_down explicitly.
+
+## Acceptance Criteria
+
+- The work item evaluates the BANDIT-023 hypothesis using source artifacts from BANDIT-023, BANDIT-025, BANDIT-028, and BANDIT-029 rather than chat memory.
+- The evaluation evidence records the metric adversarial_repair_count, the BANDIT-015/BANDIT-022 baseline, observed Stage 4 outcomes for BANDIT-025, BANDIT-028, and BANDIT-029, a result value, a routing decision, rationale, and next routing action.
+- The evaluation distinguishes real blocker preservation from safe-to-defer hardening findings and does not weaken CodeRabbit request-changes, stale review-subject hash, missing PM disposition, or blocker Local Qwen behavior.
+- The work item records a clear keep, revise, revert, or double_down decision for the BANDIT-023 routing policy.
+- Any policy or documentation update required by the decision is explicitly scoped and evidence-backed; unrelated Phase 8 cockpit, scheduler, claim lease, worktree lifecycle, product UAT, merge, push, deploy, actor identity policy, or coordination hardening work remains out of scope.
+- Verification includes the relevant improvement command checks, Bandit validation, and whitespace validation before closeout.
+
+## Verification Plan
+
+- Run npm run bandit -- improvements candidates --json to confirm the improvement candidate report is current.
+- Create or validate the BANDIT-023 evaluation evidence artifact with npm run bandit -- improvements evaluate when the evidence file exists.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run git diff --check.
+- Before landing any implementation or policy update, run Stage 4 review gates required by the current Bandit policy and npm run bandit -- land-check BANDIT-030.
+
+## Expected Files
+
+- docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json
+- docs/work/BANDIT-030/brief.md
+- docs/work/BANDIT-030/red-evidence.md
+- docs/work/BANDIT-030/implementation-evidence.md
+- docs/work/BANDIT-030/improvement-evaluation.md
+- docs/work/BANDIT-030/coderabbit-review.md
+- docs/work/BANDIT-030/local-qwen-review.md
+- docs/work/BANDIT-030/review-evidence.md
+- docs/work/BANDIT-030/landing-verdict.md
+- docs/work/BANDIT-030/landing-action.md
+- docs/work/BANDIT-030/retrospective.md
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-030/brief.md
+- docs/work/BANDIT-030/red-evidence.md
+- docs/work/BANDIT-030/implementation-evidence.md
+- docs/work/BANDIT-030/improvement-evaluation.md
+- docs/work/BANDIT-030/coderabbit-review.md
+- docs/work/BANDIT-030/local-qwen-review.md
+- docs/work/BANDIT-030/review-evidence.md
+- docs/work/BANDIT-030/landing-verdict.md
+- docs/work/BANDIT-030/landing-action.md
+- docs/work/BANDIT-030/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required to create this Phase 7 improvement evaluation work item because repo artifacts define the hypothesis, metric, baseline, evaluation window, source artifacts, and due evidence set. Halt for operator input only if evaluation would require product direction, product UAT approval, policy changes beyond the evidence-backed routing decision, business tradeoffs, explicit cost/risk overrides, remote merge/push/deploy authority, or paid external reviewer approval.

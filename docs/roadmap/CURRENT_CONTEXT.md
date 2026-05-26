@@ -283,22 +283,29 @@ lifecycle, exclusive claim leases, work surface reservations, automatic
 merge/push/deploy behavior, product UAT approval, actor identity policy, or
 unrelated coordination work.
 
-**Last completed milestone:** `BANDIT-029` retrospective, improvement
-disposition, and context closeout are recorded after local-record landing
-action evidence.
-
-**Current next action:** Create the next Phase 7 work item for evaluation of the
-now-due `BANDIT-023` non-blocking review-finding routing improvement outcome.
-Use `bandit work-item create <spec-path>` with a narrow spec that evaluates the
-`BANDIT-023` hypothesis against the Stage 4 outcomes from `BANDIT-025`,
-`BANDIT-028`, and `BANDIT-029`. Do not start Phase 8, scheduler, worktree
+`BANDIT-030` is the active Phase 7 improvement evaluation work item for the
+now-due `BANDIT-023` non-blocking review-finding routing outcome. Its
+structured creation spec is recorded in
+`docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json`, and its
+brief is recorded in `docs/work/BANDIT-030/brief.md`. The work item evaluates
+the `BANDIT-023` hypothesis against Stage 4 outcomes from `BANDIT-025`,
+`BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit, scheduler, worktree
 lifecycle, automatic merge/push/deploy, product UAT, actor identity policy,
-claim leases, work surface reservations, or unrelated work first.
+claim lease, work surface reservation, or unrelated work starts.
+
+**Last completed milestone:** `BANDIT-030` brief creation is recorded by
+`bandit work-item create` with lifecycle evidence in `.bandit/events.jsonl`.
+
+**Current next action:** Record Stage 2 RED/evaluation-design evidence for
+`BANDIT-030` before implementation or evaluation closeout. The evidence should
+map the `BANDIT-023` hypothesis, metric, baseline, source artifacts, and the
+observed Stage 4 outcomes from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` to
+the required Stage 7 evaluation artifact.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-029` - Improvement Evaluation Foundation is
-landed and closed out.
+**Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
+Routing. Status: Brief Created.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -322,9 +329,8 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/brief.md` for the next
-Phase 7 improvement evaluation work item, after a structured creation spec is
-prepared.
+**Expected next deliverable:** `docs/work/BANDIT-030/red-evidence.md` for the
+Stage 2 evaluation-design evidence.
 
 ## Known Bootstrap Gaps
 
@@ -468,15 +474,16 @@ currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-029` has a structured spec, Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
 verdict/readiness evidence, local-record landing action evidence, and Stage 6
-retrospective/improvement disposition. The current priority is:
+retrospective/improvement disposition. `BANDIT-030` has a structured spec and
+Stage 1 brief. The current priority is:
 
-1. Create the next Phase 7 work item to evaluate the now-due `BANDIT-023`
-   non-blocking review-finding routing improvement outcome against
-   `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` Stage 4 outcomes.
+1. Record Stage 2 RED/evaluation-design evidence for `BANDIT-030`, mapping the
+   due `BANDIT-023` improvement hypothesis to the Stage 4 outcomes from
+   `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, or unrelated work until that Phase 7
-   evaluation step is explicitly scoped.
+   evaluation work item is closed out.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

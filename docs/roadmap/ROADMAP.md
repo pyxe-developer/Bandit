@@ -104,13 +104,19 @@ Stage 5 landing verdict is recorded in
 and `npm run bandit -- land-check BANDIT-029` passes. Local-record landing
 action evidence is recorded in `docs/work/BANDIT-029/landing-action.md`.
 Retrospective and improvement disposition are recorded in
-`docs/work/BANDIT-029/retrospective.md`. The next step is to create the next
-Phase 7 work item for evaluating the now-due `BANDIT-023` non-blocking
-review-finding routing improvement outcome. Do not create unrelated active-work
-branches, Phase 8 web cockpit implementation, scheduler execution, worktree
-lifecycle, exclusive claim leases, work surface reservations, product UAT
-approval, automatic merge/push/deploy behavior, actor identity policy, or
-unrelated feature work before that Phase 7 evaluation step is explicitly scoped.
+`docs/work/BANDIT-029/retrospective.md`.
+
+`BANDIT-030` is active as the Phase 7 improvement evaluation work item for the
+now-due `BANDIT-023` non-blocking review-finding routing outcome. Its
+structured creation spec is recorded in
+`docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json`, and its
+brief is recorded in `docs/work/BANDIT-030/brief.md`. The next step is to
+record Stage 2 RED/evaluation-design evidence for `BANDIT-030`. Do not create
+unrelated active-work branches, Phase 8 web cockpit implementation, scheduler
+execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, actor
+identity policy, or unrelated feature work before that Phase 7 evaluation work
+item is closed out.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -311,8 +317,10 @@ evidence recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
 `docs/work/BANDIT-029/`. Stage 5 landing verdict and landing readiness
 verification are recorded. Local-record landing action evidence and Stage 6
-retrospective/improvement disposition are recorded. The next action is creating
-the next Phase 7 work item for `BANDIT-023` improvement outcome evaluation.
+retrospective/improvement disposition are recorded. `BANDIT-030` has a
+structured spec and Stage 1 brief for `BANDIT-023` improvement outcome
+evaluation. The next action is recording Stage 2 RED/evaluation-design evidence
+for `BANDIT-030`.
 
 ## Phase Map
 
@@ -625,9 +633,9 @@ Current rule:
 
 Current priority:
 
-1. Create the next Phase 7 work item to evaluate the now-due `BANDIT-023`
-   non-blocking review-finding routing improvement outcome against the Stage 4
-   outcomes from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
+1. Record Stage 2 RED/evaluation-design evidence for `BANDIT-030`, evaluating
+   the due `BANDIT-023` non-blocking review-finding routing hypothesis against
+   the Stage 4 outcomes from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
