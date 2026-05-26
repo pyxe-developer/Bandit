@@ -34,7 +34,7 @@ recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
 recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at
-`landing_verdict_recorded`.
+`landed`.
 RED evidence is recorded in `docs/work/BANDIT-027/red-evidence.md`, with
 focused tests in `test/coderabbit-state.test.mjs` proving the current CLI has
 no pre-PR local-diff CodeRabbit review path. Implementation evidence is
@@ -56,13 +56,15 @@ findings. Aggregate Stage 4 review evidence is recorded in
 CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, Codex PM Stage 4
 disposition, and no open bootstrap gaps. Stage 5 landing verdict is recorded
 in `docs/work/BANDIT-027/landing-verdict.md` with final verdict
-`safe-to-land`. The current next step is to record the local-record landing
-action for `BANDIT-027`.
+`safe-to-land`. Local-record landing action evidence is recorded in
+`docs/work/BANDIT-027/landing-action.md`. The current next step is to record
+retrospective, improvement dispositions, gap-ledger disposition, and closeout
+context for `BANDIT-027`.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
 Phase 8 web cockpit implementation, claim leases, scheduler execution,
 worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
-the next work item, or unrelated feature work before `BANDIT-027` lands or is
-explicitly blocked/dispositioned.
+the next work item, or unrelated feature work before `BANDIT-027` closeout is
+recorded or explicitly blocked/dispositioned.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -236,8 +238,9 @@ is currently active as `BANDIT-027`; implementation evidence and pre-PR
 CodeRabbit Stage 4 pass evidence and Local Qwen Stage 4 pass evidence are
 recorded. Aggregate Stage 4 review evidence with current `review_subject_hash`
 is recorded. Stage 5 landing verdict is recorded with final verdict
-`safe-to-land`, and no unrelated work should proceed until it lands or is
-explicitly blocked/dispositioned.
+`safe-to-land`, local-record landing action evidence is recorded, and no
+unrelated work should proceed until retrospective, gap-ledger disposition, and
+closeout context are recorded or the work is explicitly blocked/dispositioned.
 
 ## Phase Map
 
