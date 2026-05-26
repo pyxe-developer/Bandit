@@ -31,12 +31,14 @@ is now current in
 `3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`,
 CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition.
 Stage 5 landing verdict is recorded in
-`docs/work/BANDIT-034/landing-verdict.md`, and `npm run bandit -- land-check
-BANDIT-034` passes. The next required action is the local-record landing action
-for `BANDIT-034`; do not perform retrospective closeout until landing action
-evidence exists. `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is
-queued from the Stage 5 artifact-create renderer failure and must become the
-next bootstrap-gap chore after `BANDIT-034` lands and closes out.
+`docs/work/BANDIT-034/landing-verdict.md`, `npm run bandit -- land-check
+BANDIT-034` passes, and local-record landing action evidence is recorded in
+`docs/work/BANDIT-034/landing-action.md`. The next required action is Stage 6
+retrospective closeout and improvement/bootstrap-gap disposition for
+`BANDIT-034`; do not create the queued bootstrap-gap chore until closeout is
+recorded. `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is queued from
+the Stage 5 artifact-create renderer failure and must become the next
+bootstrap-gap chore after `BANDIT-034` closes out.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -146,9 +148,11 @@ Local Qwen adversarial Stage 4 review now passes at source head
 is current in
 `docs/work/BANDIT-034/review-evidence.md` with review-subject hash
 `3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`. Stage 5
-landing verdict is recorded in `docs/work/BANDIT-034/landing-verdict.md`, and
-`npm run bandit -- land-check BANDIT-034` passes. The next required action is
-the local-record landing action.
+landing verdict is recorded in `docs/work/BANDIT-034/landing-verdict.md`,
+`npm run bandit -- land-check BANDIT-034` passes, and local-record landing
+action evidence is recorded in `docs/work/BANDIT-034/landing-action.md`. The
+next required action is Stage 6 retrospective closeout and
+improvement/bootstrap-gap disposition.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
@@ -850,8 +854,9 @@ Current rule:
 
 Current priority:
 
-1. Perform the `BANDIT-034` local-record landing action. Do not perform
-   retrospective closeout until landing action evidence exists.
+1. Record `BANDIT-034` Stage 6 retrospective closeout and
+   improvement/bootstrap-gap disposition. Do not create the queued
+   bootstrap-gap chore until closeout evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

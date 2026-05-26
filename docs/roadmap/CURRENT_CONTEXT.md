@@ -430,10 +430,12 @@ review-subject hash
 `3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`,
 CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition.
 Stage 5 landing verdict is recorded in
-`docs/work/BANDIT-034/landing-verdict.md`, and `npm run bandit -- land-check
-BANDIT-034` passes. The next required action is the local-record landing action
-for `BANDIT-034`; do not perform retrospective closeout until landing action
-evidence exists.
+`docs/work/BANDIT-034/landing-verdict.md`, `npm run bandit -- land-check
+BANDIT-034` passes, and local-record landing action evidence is recorded in
+`docs/work/BANDIT-034/landing-action.md`. The next required action is Stage 6
+retrospective closeout and improvement/bootstrap-gap disposition for
+`BANDIT-034`; do not create the queued bootstrap-gap chore until closeout is
+recorded.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -444,12 +446,12 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is active at
-Stage 5 landing-action preparation. Structured spec, brief, RED evidence,
+Stage 6 retrospective closeout preparation. Structured spec, brief, RED evidence,
 implementation evidence, current scoped CodeRabbit pass evidence, Local Qwen
 pass evidence, current aggregate Stage 4 review evidence, Stage 5 landing
-verdict, and passing `land-check` evidence are recorded; the work item now
-awaits local-record landing action evidence before retrospective closeout can
-begin.
+verdict, passing `land-check` evidence, and local-record landing action
+evidence are recorded; the work item now awaits retrospective closeout and
+improvement/bootstrap-gap disposition.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -477,10 +479,11 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** local-record landing action evidence for
-`BANDIT-034`, using the recorded safe-to-land verdict and passing `npm run
-bandit -- land-check BANDIT-034` output. Retrospective closeout must wait until
-landing action evidence exists.
+**Expected next deliverable:** retrospective closeout for `BANDIT-034`, using
+the recorded safe-to-land verdict, passing `npm run bandit -- land-check
+BANDIT-034` output, and local-record landing action evidence. The queued
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` chore must wait until this
+closeout is recorded.
 
 ## Known Bootstrap Gaps
 
@@ -655,12 +658,14 @@ is current in `docs/work/BANDIT-034/review-evidence.md` with review-subject hash
 `3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb`. The source
 candidate is linked to `BANDIT-034` in
 `docs/work/BANDIT-033/qwen-finding-disposition.md`. Stage 5 landing verdict is
-recorded in `docs/work/BANDIT-034/landing-verdict.md`, and `npm run bandit --
-land-check BANDIT-034` passes.
+recorded in `docs/work/BANDIT-034/landing-verdict.md`, `npm run bandit --
+land-check BANDIT-034` passes, and local-record landing action evidence is
+recorded in `docs/work/BANDIT-034/landing-action.md`.
 The current priority is:
 
-1. Perform the `BANDIT-034` local-record landing action. Do not perform
-   retrospective closeout until landing action evidence exists.
+1. Record `BANDIT-034` Stage 6 retrospective closeout and
+   improvement/bootstrap-gap disposition. Do not create the queued
+   bootstrap-gap chore until closeout evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
