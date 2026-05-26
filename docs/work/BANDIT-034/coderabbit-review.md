@@ -2,13 +2,13 @@
 
 contract_version: 1
 work_item: BANDIT-034
-source_head: 43776fe84c7ba316f14fb3ff985ce6f97bbeac5b
+source_head: df55118889d3472e947b395c581eb978c2e45240
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:origin/main
 review_state: completed
 coderabbit_verdict: blocker
 findings_status: unresolved
-findings_disposition: In docs/design/workflow-cockpit/prototype-source/ui.jsx at line 208, update aria-disabled={disabled} to pass an ARIA string value such as aria-disabled={disabled ? "true" : "false"}, so disabled null or undefined values are handled explicitly.; In docs/design/workflow-cockpit/prototype-source/design-canvas.jsx around lines 842-851, add an appropriate dependency array to the keyboard-handler useEffect and stabilize the go and goSection callbacks with useCallback so the document keydown listener is not removed and re-added on every render.
+findings_disposition: In docs/design/workflow-cockpit/prototype-source/index.html around lines 67-69, update the Babel standalone script src from @7.29.4 to @7.29.7 and refresh the integrity attributes for the react, react-dom, and Babel script tags to current CDN-published SRI hashes while preserving crossorigin="anonymous".
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:

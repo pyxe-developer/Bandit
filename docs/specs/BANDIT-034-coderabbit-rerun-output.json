@@ -1,18 +1,13 @@
 {
-  "sourceHead": "43776fe84c7ba316f14fb3ff985ce6f97bbeac5b",
+  "sourceHead": "df55118889d3472e947b395c581eb978c2e45240",
   "baseRevision": "origin/main",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
-      "severity": "minor",
-      "status": "unresolved",
-      "body": "In docs/design/workflow-cockpit/prototype-source/ui.jsx at line 208, update aria-disabled={disabled} to pass an ARIA string value such as aria-disabled={disabled ? \"true\" : \"false\"}, so disabled null or undefined values are handled explicitly."
-    },
-    {
       "severity": "major",
       "status": "unresolved",
-      "body": "In docs/design/workflow-cockpit/prototype-source/design-canvas.jsx around lines 842-851, add an appropriate dependency array to the keyboard-handler useEffect and stabilize the go and goSection callbacks with useCallback so the document keydown listener is not removed and re-added on every render."
+      "body": "In docs/design/workflow-cockpit/prototype-source/index.html around lines 67-69, update the Babel standalone script src from @7.29.4 to @7.29.7 and refresh the integrity attributes for the react, react-dom, and Babel script tags to current CDN-published SRI hashes while preserving crossorigin=\"anonymous\"."
     }
   ]
 }
