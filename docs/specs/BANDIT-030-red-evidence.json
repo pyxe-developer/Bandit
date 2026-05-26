@@ -1,0 +1,44 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-030",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Stage 2 evaluation-design evidence is recorded for the due BANDIT-023 improvement outcome before any implementation evidence, Stage 7 evaluation artifact, policy update, review loop, landing verdict, or closeout. This step does not add production code or tests because BANDIT-030 first has to map the already-implemented routing policy to a Stage 7 evaluation contract from repo evidence. The executable check confirms the current improvement candidate report is derived from repo-native artifacts, exposes later Stage 4 non-blocking finding candidates without creating hidden index state, and also surfaces that the original BANDIT-023 improvement metadata is not yet listed as an evaluable candidate by the current command surface.",
+  "test_command": "npm run bandit -- improvements candidates --json",
+  "observed_output": [
+    "command exited 0",
+    "candidate report includes BANDIT-025-EVIDENCE-INTEGRITY, BANDIT-025-TIMESTAMP-VALIDATION, BANDIT-025-WORK-TYPE-PARSING, BANDIT-028-ACTOR-IDENTITY-VALIDATION, and BANDIT-029-IMPROVEMENT-SCALING-AND-PARSER-HARDENING",
+    "candidate report does not list the original BANDIT-023 improvement metadata because it is recorded under the retrospective Improvement Chores section rather than a later Chore Candidate section",
+    "BANDIT-025 review evidence records Local Qwen non_blocking with three durable routing entries and PM disposition pass",
+    "BANDIT-028 review evidence records CodeRabbit pass, Local Qwen non_blocking with one durable routing entry, and PM disposition pass",
+    "BANDIT-029 review evidence records CodeRabbit pass, Local Qwen non_blocking with one durable follow-up candidate plus one no-action decision, and PM disposition pass",
+    "No implementation file, policy file, hidden .bandit improvement index, cockpit, scheduler, worktree lifecycle, claim lease, work surface reservation, product UAT, merge, push, deploy, or actor identity policy change is part of this Stage 2 step"
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "The work item evaluates the BANDIT-023 hypothesis using source artifacts from BANDIT-023, BANDIT-025, BANDIT-028, and BANDIT-029 rather than chat memory.",
+      "evidence": "Stage 2 design names docs/work/BANDIT-023/retrospective.md, docs/work/BANDIT-023/review-evidence.md, docs/work/BANDIT-025/review-evidence.md, docs/work/BANDIT-025/qwen-finding-disposition.md, docs/work/BANDIT-028/review-evidence.md, docs/work/BANDIT-028/qwen-finding-disposition.md, docs/work/BANDIT-029/review-evidence.md, and docs/work/BANDIT-029/qwen-finding-disposition.md as the Stage 7 source packet."
+    },
+    {
+      "criterion": "The evaluation evidence records adversarial_repair_count, the BANDIT-015/BANDIT-022 baseline, observed Stage 4 outcomes for BANDIT-025, BANDIT-028, and BANDIT-029, a result value, routing decision, rationale, and next routing action.",
+      "evidence": "The planned evaluation artifact must compare the BANDIT-015 repeated Local Qwen rerun loop and BANDIT-022 queued non_blocking findings baseline to the later BANDIT-025, BANDIT-028, and BANDIT-029 Stage 4 outcomes where non_blocking findings were durably routed without extra non-blocking-only review loops."
+    },
+    {
+      "criterion": "The evaluation distinguishes real blocker preservation from safe-to-defer hardening findings and does not weaken CodeRabbit request-changes, stale review-subject hash, missing PM disposition, or blocker Local Qwen behavior.",
+      "evidence": "Stage 2 design requires the Stage 7 artifact to treat non_blocking routing as safe only with PM disposition and durable routing, while preserving fail-closed behavior for blocker findings, CodeRabbit request-changes, stale review_subject_hash evidence, and missing PM disposition."
+    },
+    {
+      "criterion": "The work item records a clear keep, revise, revert, or double_down decision for the BANDIT-023 routing policy.",
+      "evidence": "The next artifact is docs/work/BANDIT-030/improvement-evaluation.md with supported decision values keep, revise, revert, or double_down. The next stage must either extend the existing evaluator to recognize the repo-native BANDIT-023 retrospective improvement metadata or record an explicit manual-evidence path before claiming command validation."
+    },
+    {
+      "criterion": "Any policy or documentation update required by the decision is explicitly scoped and evidence-backed; unrelated Phase 8 cockpit, scheduler, claim lease, worktree lifecycle, product UAT, merge, push, deploy, actor identity policy, or coordination hardening work remains out of scope.",
+      "evidence": "This Stage 2 artifact scopes the next action to the evaluation artifact and its directly required routing action only; it explicitly excludes Phase 8, scheduler, worktree lifecycle, product UAT, merge, push, deploy, actor identity policy, and unrelated coordination hardening."
+    },
+    {
+      "criterion": "Verification includes the relevant improvement command checks, Bandit validation, and whitespace validation before closeout.",
+      "evidence": "The Stage 2 verification path starts with npm run bandit -- improvements candidates --json and requires npm run bandit -- validate, npm run bandit -- gaps list, and git diff --check after this artifact is recorded."
+    }
+  ],
+  "next_action": "Implement or record the minimal Stage 3 evaluation path that makes the BANDIT-023 retrospective improvement metadata evaluable, then create docs/work/BANDIT-030/improvement-evaluation.md with observed metric evidence from BANDIT-025/BANDIT-028/BANDIT-029, baseline comparison to BANDIT-015/BANDIT-022, result, keep/revise/revert/double_down decision, rationale, and routing action. Validate with npm run bandit -- improvements evaluate when the candidate identity is command-supported; otherwise record the explicit bootstrap/manual validation rationale before moving to review or closeout evidence."
+}

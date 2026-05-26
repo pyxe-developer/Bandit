@@ -287,25 +287,37 @@ unrelated coordination work.
 now-due `BANDIT-023` non-blocking review-finding routing outcome. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json`, and its
-brief is recorded in `docs/work/BANDIT-030/brief.md`. The work item evaluates
-the `BANDIT-023` hypothesis against Stage 4 outcomes from `BANDIT-025`,
+brief is recorded in `docs/work/BANDIT-030/brief.md`. Stage 2
+RED/evaluation-design evidence is recorded in
+`docs/specs/BANDIT-030-red-evidence.json` and
+`docs/work/BANDIT-030/red-evidence.md`. The work item evaluates the
+`BANDIT-023` hypothesis against Stage 4 outcomes from `BANDIT-025`,
 `BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit, scheduler, worktree
 lifecycle, automatic merge/push/deploy, product UAT, actor identity policy,
 claim lease, work surface reservation, or unrelated work starts.
 
-**Last completed milestone:** `BANDIT-030` brief creation is recorded by
-`bandit work-item create` with lifecycle evidence in `.bandit/events.jsonl`.
+**Last completed milestone:** `BANDIT-030` Stage 2 RED/evaluation-design
+evidence is recorded by `bandit artifact create` with lifecycle evidence in
+`.bandit/events.jsonl`.
 
-**Current next action:** Record Stage 2 RED/evaluation-design evidence for
-`BANDIT-030` before implementation or evaluation closeout. The evidence should
-map the `BANDIT-023` hypothesis, metric, baseline, source artifacts, and the
-observed Stage 4 outcomes from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` to
-the required Stage 7 evaluation artifact.
+**Current next action:** Implement or record the minimal Stage 3 evaluation
+path that makes the `BANDIT-023` retrospective improvement metadata evaluable,
+then create `docs/work/BANDIT-030/improvement-evaluation.md` with observed
+metric evidence from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`, baseline
+comparison to `BANDIT-015`/`BANDIT-022`, result, keep/revise/revert/double_down
+decision, rationale, and routing action. Validate with
+`npm run bandit -- improvements evaluate` when the candidate identity is
+command-supported; otherwise record the explicit bootstrap/manual validation
+rationale before review or closeout evidence. Stage 2 found that
+`npm run bandit -- improvements candidates --json` currently reports later
+queued candidates but does not list the original `BANDIT-023` improvement
+metadata because it is recorded under the retrospective Improvement Chores
+section rather than a later Chore Candidate section.
 
 ## Active Work
 
 **Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
-Routing. Status: Brief Created.
+Routing. Status: RED/evaluation-design recorded.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -329,8 +341,9 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/red-evidence.md` for the
-Stage 2 evaluation-design evidence.
+**Expected next deliverable:** `docs/work/BANDIT-030/improvement-evaluation.md`
+and, if needed, `docs/work/BANDIT-030/implementation-evidence.md` for the
+minimal evaluator compatibility or explicit manual-validation path.
 
 ## Known Bootstrap Gaps
 
@@ -474,12 +487,14 @@ currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-029` has a structured spec, Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
 verdict/readiness evidence, local-record landing action evidence, and Stage 6
-retrospective/improvement disposition. `BANDIT-030` has a structured spec and
-Stage 1 brief. The current priority is:
+retrospective/improvement disposition. `BANDIT-030` has a structured spec,
+Stage 1 brief, and Stage 2 RED/evaluation-design evidence. The current priority
+is:
 
-1. Record Stage 2 RED/evaluation-design evidence for `BANDIT-030`, mapping the
-   due `BANDIT-023` improvement hypothesis to the Stage 4 outcomes from
-   `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
+1. Implement or record the minimal Stage 3 evaluation path that makes the
+   `BANDIT-023` retrospective improvement metadata evaluable, then create
+   `docs/work/BANDIT-030/improvement-evaluation.md` from the Stage 4 outcomes
+   in `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, or unrelated work until that Phase 7
