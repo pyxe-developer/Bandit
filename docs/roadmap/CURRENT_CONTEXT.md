@@ -189,7 +189,7 @@ recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its per-work-item
 coordination log is recorded in `docs/work/BANDIT-027/coordination-log.jsonl`
-at `implementation_recorded`. RED evidence is recorded in
+at `review_recorded`. RED evidence is recorded in
 `docs/work/BANDIT-027/red-evidence.md`, with focused tests in
 `test/coderabbit-state.test.mjs`. The tests define the missing pre-PR
 CodeRabbit command surface, deterministic fixture-backed provider behavior,
@@ -210,13 +210,17 @@ source head `e4b2c0010832fb49d26889a8694beb471645a402`, verdict `pass`, and
 no findings. Local Qwen Stage 4 evidence is recorded in
 `docs/work/BANDIT-027/local-qwen-review.md` with source head
 `9bee51b8bf5978b8dee98bf1a829cc449f3d2686`, reviewer verdict `pass`, and no
-findings.
+findings. Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-027/review-evidence.md` with current
+`review_subject_hash`
+`a06a265a7319fd5f6b39440c201e0fd4a87dfa1c3fb578abdcc138efb10c7d7a`,
+CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, Codex PM Stage 4
+disposition, and no open bootstrap gaps.
 
-**Last completed milestone:** `BANDIT-027` Local Qwen Stage 4 evidence is
-recorded with verdict `pass`.
+**Last completed milestone:** `BANDIT-027` aggregate Stage 4 review evidence
+is recorded with current `review_subject_hash`.
 
-**Current next action:** Record aggregate Stage 4 review evidence for
-`BANDIT-027` with current `review_subject_hash`.
+**Current next action:** Record Stage 5 landing verdict for `BANDIT-027`.
 Do not start unrelated Phase 6 work, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
@@ -226,9 +230,8 @@ blocked/dispositioned.
 ## Active Work
 
 **Active work item:** `BANDIT-027` - Pre-PR CodeRabbit CLI Review. Current
-coordination state: `implementation_recorded`; accountable actor: Reviewer;
-next action: record aggregate Stage 4 review evidence with current
-`review_subject_hash`.
+coordination state: `review_recorded`; accountable actor: Landing Agent;
+next action: record Stage 5 landing verdict.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -250,8 +253,7 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions.
 
-**Expected next deliverable:** Aggregate Stage 4 review evidence for
-`BANDIT-027` with current `review_subject_hash`.
+**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-027`.
 
 ## Known Bootstrap Gaps
 
