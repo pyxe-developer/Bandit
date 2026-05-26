@@ -205,8 +205,8 @@
     {
       "id": "BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW",
       "title": "CodeRabbit pre-landing loop lacks pre-PR CLI review",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-026",
       "source_artifacts": [
         "docs/work/BANDIT-026/retrospective.md",
@@ -215,9 +215,9 @@
         "CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-027",
-      "rationale": "BANDIT-026 exposed that Bandit's implemented CodeRabbit path requires PR context and records local-record work as a no-PR bootstrap gap, while the intended workflow is to run CodeRabbit CLI before opening a PR to reduce GitHub CodeRabbit queue waste and repair churn.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-027."
+      "rationale": "BANDIT-027 added a CLI-owned pre-PR CodeRabbit review path for local diffs, fixture-backed provider behavior for deterministic tests, fail-closed refusal evidence for missing CLI/auth, provider timeout, malformed output, stale source, and actionable findings, Stage 4 aggregate review consumption of current pre-PR CodeRabbit pass evidence, and preservation of the existing PR-backed live review path.",
+      "verification_target": "docs/work/BANDIT-027/retrospective.md",
+      "next_action": "Use bandit coderabbit-review pre-pr <work-item-id> --base <revision> before PR creation when local diffs are the Stage 4 CodeRabbit review subject; evaluate the improvement outcome over the next three Stage 4 Bandit work items and the first later PR-backed landing."
     }
   ]
 }
