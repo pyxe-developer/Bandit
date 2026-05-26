@@ -85,9 +85,12 @@ non-blocking actor identity validation concern is durably routed in
 `BANDIT-029` is the first Phase 7 Improvement Engine slice. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
-is recorded in `docs/work/BANDIT-029/brief.md`. The next step is to create RED
-evidence for improvement candidate discovery and evaluation evidence behavior.
-Do not create unrelated active-work branches, Phase 8 web cockpit
+is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
+`docs/work/BANDIT-029/red-evidence.md`, with focused tests in
+`test/improvements.test.mjs`. The next step is to implement the narrow
+improvement candidate discovery and evaluation evidence validation behavior so
+the focused RED tests pass. Do not create unrelated active-work branches,
+Phase 8 web cockpit
 implementation, scheduler execution, worktree lifecycle, exclusive claim
 leases, work surface reservations, product UAT approval, automatic
 merge/push/deploy behavior, actor identity policy, or unrelated feature work
@@ -285,10 +288,12 @@ landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
 final verdict `safe-to-land`. Local-record landing action evidence is recorded
 in `docs/work/BANDIT-028/landing-action.md`; retrospective closeout is recorded
 in `docs/work/BANDIT-028/retrospective.md`; and the coordination log is closed.
-`BANDIT-029` has its Phase 7 Improvement Engine structured spec and Stage 1
-brief recorded in
+`BANDIT-029` has its Phase 7 Improvement Engine structured spec, Stage 1 brief,
+and Stage 2 RED evidence recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
-`docs/work/BANDIT-029/brief.md`. The next action is `BANDIT-029` RED evidence.
+`docs/work/BANDIT-029/brief.md`, with RED evidence recorded in
+`docs/work/BANDIT-029/red-evidence.md`. The next action is `BANDIT-029`
+implementation.
 
 ## Phase Map
 
@@ -601,10 +606,9 @@ Current rule:
 
 Current priority:
 
-1. Create `BANDIT-029` RED evidence for improvement candidate discovery and
-   evaluation evidence behavior.
-2. Stop before production implementation until RED evidence exists and maps to
-   `BANDIT-029` acceptance criteria.
+1. Implement the narrow `BANDIT-029` improvement candidate discovery and
+   evaluation evidence validation behavior so the focused RED tests pass.
+2. Record Stage 3 implementation evidence after focused tests pass.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
