@@ -34,7 +34,7 @@ recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
 recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at
-`review_recorded`.
+`landing_verdict_recorded`.
 RED evidence is recorded in `docs/work/BANDIT-027/red-evidence.md`, with
 focused tests in `test/coderabbit-state.test.mjs` proving the current CLI has
 no pre-PR local-diff CodeRabbit review path. Implementation evidence is
@@ -54,8 +54,10 @@ findings. Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-027/review-evidence.md` with current `review_subject_hash`
 `a06a265a7319fd5f6b39440c201e0fd4a87dfa1c3fb578abdcc138efb10c7d7a`,
 CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, Codex PM Stage 4
-disposition, and no open bootstrap gaps. The current next step is the Stage 5
-landing verdict for `BANDIT-027`.
+disposition, and no open bootstrap gaps. Stage 5 landing verdict is recorded
+in `docs/work/BANDIT-027/landing-verdict.md` with final verdict
+`safe-to-land`. The current next step is to record the local-record landing
+action for `BANDIT-027`.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
 Phase 8 web cockpit implementation, claim leases, scheduler execution,
 worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
@@ -233,7 +235,8 @@ terminal coordination-log state recorded. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVI
 is currently active as `BANDIT-027`; implementation evidence and pre-PR
 CodeRabbit Stage 4 pass evidence and Local Qwen Stage 4 pass evidence are
 recorded. Aggregate Stage 4 review evidence with current `review_subject_hash`
-is recorded, and no unrelated work should proceed until it lands or is
+is recorded. Stage 5 landing verdict is recorded with final verdict
+`safe-to-land`, and no unrelated work should proceed until it lands or is
 explicitly blocked/dispositioned.
 
 ## Phase Map
@@ -533,7 +536,8 @@ Current rule:
 - `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`; the
   brief, RED evidence, implementation evidence, pre-PR CodeRabbit Stage 4 pass
   evidence, Local Qwen Stage 4 pass evidence, and aggregate Stage 4 review
-  evidence are recorded, and the next action is Stage 5 landing verdict.
+  evidence are recorded. Stage 5 landing verdict is recorded, and the next
+  action is local-record landing action.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -546,7 +550,7 @@ Current rule:
 
 Current priority:
 
-1. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
+1. Record local-record landing action for `BANDIT-027`.
 2. Stop before creating unrelated work items, active-work branches, claim
    leases, scheduler execution, worktree lifecycle, cockpit implementation,
    product UAT approval, automatic merge/push/deploy behavior, or Phase 7

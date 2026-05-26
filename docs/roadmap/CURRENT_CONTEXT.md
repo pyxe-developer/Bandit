@@ -189,7 +189,7 @@ recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its per-work-item
 coordination log is recorded in `docs/work/BANDIT-027/coordination-log.jsonl`
-at `review_recorded`. RED evidence is recorded in
+at `landing_verdict_recorded`. RED evidence is recorded in
 `docs/work/BANDIT-027/red-evidence.md`, with focused tests in
 `test/coderabbit-state.test.mjs`. The tests define the missing pre-PR
 CodeRabbit command surface, deterministic fixture-backed provider behavior,
@@ -215,12 +215,14 @@ findings. Aggregate Stage 4 review evidence is recorded in
 `review_subject_hash`
 `a06a265a7319fd5f6b39440c201e0fd4a87dfa1c3fb578abdcc138efb10c7d7a`,
 CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, Codex PM Stage 4
-disposition, and no open bootstrap gaps.
+disposition, and no open bootstrap gaps. Stage 5 landing verdict is recorded
+in `docs/work/BANDIT-027/landing-verdict.md` with final verdict
+`safe-to-land`.
 
-**Last completed milestone:** `BANDIT-027` aggregate Stage 4 review evidence
-is recorded with current `review_subject_hash`.
+**Last completed milestone:** `BANDIT-027` Stage 5 landing verdict is recorded
+with final verdict `safe-to-land`.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-027`.
+**Current next action:** Record local-record landing action for `BANDIT-027`.
 Do not start unrelated Phase 6 work, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
@@ -230,8 +232,8 @@ blocked/dispositioned.
 ## Active Work
 
 **Active work item:** `BANDIT-027` - Pre-PR CodeRabbit CLI Review. Current
-coordination state: `review_recorded`; accountable actor: Landing Agent;
-next action: record Stage 5 landing verdict.
+coordination state: `landing_verdict_recorded`; accountable actor: Landing
+Agent; next action: record local-record landing action.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -253,7 +255,7 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions.
 
-**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-027`.
+**Expected next deliverable:** local-record landing action for `BANDIT-027`.
 
 ## Known Bootstrap Gaps
 
@@ -298,7 +300,8 @@ These are expected because Bandit does not exist yet:
 - `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`. This
   gap corrects the mismatch between the intended CodeRabbit pre-landing loop
   and the prior PR-context-only CodeRabbit command path. Stage 3 implementation
-  evidence is recorded; Stage 4 review evidence is next.
+  evidence, Stage 4 review evidence, and Stage 5 landing verdict are recorded;
+  local-record landing action is next.
 
 Bootstrap work must record these gaps honestly instead of pretending final
 gates ran. Open bootstrap gaps are the current work queue; do not start
@@ -395,7 +398,7 @@ previously recorded bootstrap gaps are resolved through `BANDIT-026`, and
 `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`, so the
 current priority is:
 
-1. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
+1. Record local-record landing action for `BANDIT-027`.
 2. Stop before unrelated Phase 6, Phase 7, Phase 8, Phase 9, claim lease,
    scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
    next-work-item behavior until `BANDIT-027` lands or is explicitly
@@ -407,11 +410,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to run fixture-backed Stage 4 evidence for
-`BANDIT-027` from repo artifacts. If live CodeRabbit authentication, external
-service access, cost/risk override, policy change beyond pre-PR CLI review,
-PR/merge/push/deploy authority, product direction, or product UAT approval is
-required, halt and ask for that input directly.
+No operator-owned input is required to record the supported local-record
+landing action for `BANDIT-027` from repo artifacts. If live CodeRabbit
+authentication, external service access, cost/risk override, policy change
+beyond pre-PR CLI review, PR/merge/push/deploy authority, product direction,
+or product UAT approval is required, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
