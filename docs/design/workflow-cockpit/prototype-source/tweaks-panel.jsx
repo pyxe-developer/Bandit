@@ -156,6 +156,21 @@ const __TWEAKS_STYLE = `
     filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
 `;
 
+let trustedEditModeHostOrigin = null;
+
+function rememberEditModeHost(event) {
+  if (!event || event.source !== window.parent) return;
+  if (typeof event.origin !== 'string' || !event.origin || event.origin === 'null') return;
+  trustedEditModeHostOrigin = event.origin;
+}
+
+function postHostMessage(message, { requireTrustedOrigin = false } = {}) {
+  if (window.parent === window) return false;
+  if (requireTrustedOrigin && !trustedEditModeHostOrigin) return false;
+  window.parent.postMessage(message, trustedEditModeHostOrigin || '*');
+  return true;
+}
+
 // ── useTweaks ───────────────────────────────────────────────────────────────
 // Single source of truth for tweak values. setTweak persists via the host
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
@@ -168,7 +183,7 @@ function useTweaks(defaults) {
     const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
       ? keyOrEdits : { [keyOrEdits]: val };
     setValues((prev) => ({ ...prev, ...edits }));
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    postHostMessage({ type: '__edit_mode_set_keys', edits }, { requireTrustedOrigin: true });
     // Same-window signal so in-page listeners (deck-stage rail thumbnails)
     // can react — the parent message only reaches the host, not peers.
     window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
@@ -218,12 +233,13 @@ function TweaksPanel({ title = 'Tweaks', children }) {
 
   React.useEffect(() => {
     const onMsg = (e) => {
+      rememberEditModeHost(e);
       const t = e?.data?.type;
       if (t === '__activate_edit_mode') setOpen(true);
       else if (t === '__deactivate_edit_mode') setOpen(false);
     };
     window.addEventListener('message', onMsg);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    postHostMessage({ type: '__edit_mode_available' });
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
@@ -233,7 +249,7 @@ function TweaksPanel({ title = 'Tweaks', children }) {
 
   const dismiss = () => {
     setOpen(false);
-    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+    postHostMessage({ type: '__edit_mode_dismissed' });
   };
 
   const onDragStart = (e) => {
@@ -361,19 +377,23 @@ function TweakRadio({ label, value, options, onChange }) {
   }, []);
 
   const segAt = (clientX) => {
-    const r = trackRef.current.getBoundingClientRect();
-    const inner = r.width - 4;
+    const track = trackRef.current;
+    if (!track) return null;
+    const r = track.getBoundingClientRect();
+    const inner = Math.max(1, r.width - 4);
     const i = Math.floor(((clientX - r.left - 2) / inner) * n);
     return opts[Math.max(0, Math.min(n - 1, i))].value;
   };
 
   const onPointerDown = (e) => {
-    setDragging(true);
+    if (!trackRef.current) return;
     const v0 = segAt(e.clientX);
+    if (v0 === null) return;
+    setDragging(true);
     if (v0 !== valueRef.current) onChange(v0);
     const move = (ev) => {
-      if (!trackRef.current) return;
       const v = segAt(ev.clientX);
+      if (v === null) return;
       if (v !== valueRef.current) onChange(v);
     };
     const cleanup = () => {

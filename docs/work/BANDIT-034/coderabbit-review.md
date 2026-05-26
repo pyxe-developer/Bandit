@@ -7,10 +7,10 @@ provider: coderabbit-agent-pre-pr
 review_target: local-diff:origin/main
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: unresolved
-findings_disposition: Replace the stale normalized CodeRabbit evidence entry that still describes the obsolete @babel/standalone@7.29.0-to-7.29.4 finding so the fixture records the current provider output.; Restrict TweaksPanel window.parent.postMessage for __edit_mode_set_keys to a trusted parent origin or handshake instead of dispatching tweak edits to '*'.; Guard TweaksPanel segAt before calling trackRef.current.getBoundingClientRect() so pointer handlers do not throw if the track ref has been cleared.
+findings_status: resolved
+findings_disposition: The stale normalized provider-fixture concern is dispositioned as historical evidence and superseded by focused repair evidence pending provider rerun.; TweaksPanel __edit_mode_set_keys now posts only after an edit-mode host origin is captured by handshake.; TweaksPanel segAt now guards missing track refs before getBoundingClientRect().
 operator_input_status: none_required
-source_drift_status: current
+source_drift_status: stale
 executable_evidence:
   - coderabbit review --agent --base origin/main
 bootstrap_gaps:

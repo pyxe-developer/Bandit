@@ -415,17 +415,15 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or disposition the 3 unresolved findings from
-the repaired-source `BANDIT-034` Stage 4 CodeRabbit pre-PR rerun. Current
-blocker evidence is recorded in
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`,
-`docs/work/BANDIT-034/coderabbit-review.md`, and
-`docs/work/BANDIT-034/review-evidence.md`. The current findings are: replace
-stale normalized CodeRabbit evidence text in the rerun fixture, restrict
-`TweaksPanel` `postMessage` to a trusted parent origin or handshake instead of
-`*`, and guard `TweaksPanel` `segAt` before dereferencing `trackRef.current`.
-Do not continue Local Qwen or claim aggregate Stage 4 review evidence until the
-CodeRabbit pre-PR rerun no longer blocks Stage 4.
+**Current next action:** Rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR
+provider against the repaired source. Focused repair / PM disposition evidence
+for the 3 repaired-source retry findings is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; current CodeRabbit
+and aggregate review evidence are stale pending provider rerun in
+`docs/work/BANDIT-034/coderabbit-review.md` and
+`docs/work/BANDIT-034/review-evidence.md`. Do not continue Local Qwen or claim
+aggregate Stage 4 review evidence until the CodeRabbit pre-PR rerun no longer
+blocks Stage 4.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -438,14 +436,14 @@ that authority.
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is active at
 Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
 completed CodeRabbit blocker evidence recorded. Focused repair / PM disposition
-evidence for the original CodeRabbit findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; the repaired-source
-CodeRabbit retry completed with 3 unresolved findings and is recorded in
+evidence for the original CodeRabbit findings and the 3 repaired-source retry
+findings is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; current CodeRabbit
+and aggregate review evidence are stale pending provider rerun in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The retry findings must
-be repaired or dispositioned before the CodeRabbit pre-PR provider is rerun and
-Stage 4 can continue.
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The CodeRabbit pre-PR
+provider must be rerun before Stage 4 can continue.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -473,8 +471,8 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** focused repair / PM disposition evidence for the
-3 unresolved `BANDIT-034` CodeRabbit retry findings. Local Qwen, any needed
+**Expected next deliverable:** refreshed CodeRabbit pre-PR provider evidence for
+`BANDIT-034` against the current repaired source. Local Qwen, any needed
 review-subject hash refresh, and aggregate PM disposition must wait until
 CodeRabbit no longer blocks Stage 4.
 
@@ -638,8 +636,8 @@ recorded. `BANDIT-034` has a structured creation spec, Stage 1 brief, Stage 2
 RED evidence, Stage 3 implementation evidence, completed Stage 4 CodeRabbit
 blocker evidence for the `BANDIT-033-COCKPIT-SHELL-HARDENING` improvement
 chore, focused repair / PM disposition evidence for the original CodeRabbit
-findings, and a repaired-source CodeRabbit retry with 3 unresolved findings
-recorded in
+findings, focused repair / PM disposition evidence for the repaired-source retry
+findings, and stale CodeRabbit retry evidence recorded in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The source candidate is
@@ -647,9 +645,9 @@ linked to `BANDIT-034` in
 `docs/work/BANDIT-033/qwen-finding-disposition.md`.
 The current priority is:
 
-1. Repair or disposition the 3 unresolved `BANDIT-034` CodeRabbit retry
-   findings. Do not run Local Qwen or claim aggregate Stage 4 pass evidence
-   until CodeRabbit no longer blocks Stage 4.
+1. Rerun the `BANDIT-034` CodeRabbit pre-PR provider against the repaired
+   source. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
+   CodeRabbit no longer blocks Stage 4.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

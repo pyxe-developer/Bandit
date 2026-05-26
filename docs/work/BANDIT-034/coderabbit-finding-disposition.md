@@ -149,3 +149,53 @@ computed from the pinned unpkg URL on 2026-05-26.
 
 Rerun the CodeRabbit pre-PR provider against the repaired source before running
 Local Qwen or claiming aggregate Stage 4 review evidence.
+
+## Repaired-Source Retry Finding Repair
+
+The repaired-source CodeRabbit retry completed at source head
+`00978d3585fecc3475f2480052e69b1847698be0` with three unresolved findings.
+
+### Stale normalized provider fixture text
+
+**Finding:** Replace the stale normalized CodeRabbit evidence entry in
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`.
+
+**Disposition:** no-action for historical evidence; superseded by current repair
+evidence pending provider rerun.
+
+**Evidence:** The fixture records the repaired-source provider output that
+blocked Stage 4. Codex PM did not rewrite that historical provider result into
+pass evidence. The fixture finding body was normalized to avoid carrying the
+obsolete package-version text forward, and the next CodeRabbit provider rerun
+must replace the fixture with current output before Stage 4 can proceed.
+
+### TweaksPanel edit-mode persistence target origin
+
+**Finding:** Restrict `TweaksPanel` `window.parent.postMessage` for
+`__edit_mode_set_keys` to a trusted parent origin or handshake instead of
+dispatching tweak edits to `*`.
+
+**Disposition:** repaired.
+
+**Evidence:** `tweaks-panel.jsx` now records the edit-mode host origin from the
+parent activation/deactivation handshake and only posts `__edit_mode_set_keys`
+when a trusted host origin has been captured. The availability/dismissal
+handshake remains non-sensitive and uses the captured origin once known.
+
+### TweaksPanel segment track-ref guard
+
+**Finding:** Guard `TweaksPanel` `segAt` before calling
+`trackRef.current.getBoundingClientRect()` so pointer handlers do not throw if
+the track ref has been cleared.
+
+**Disposition:** repaired.
+
+**Evidence:** `tweaks-panel.jsx` now returns `null` when the segment track ref
+is absent, exits pointer handling for that case, and clamps zero-width segment
+math with a minimum inner width of `1`.
+
+## Current Next Action
+
+Rerun the CodeRabbit pre-PR provider against the repaired source before running
+Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
+pass evidence.

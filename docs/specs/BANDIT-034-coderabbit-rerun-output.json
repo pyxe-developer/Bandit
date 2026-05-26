@@ -6,8 +6,8 @@
   "findings": [
     {
       "severity": "critical",
-      "status": "unresolved",
-      "body": "Replace the stale normalized CodeRabbit evidence entry that still describes the obsolete @babel/standalone@7.29.0-to-7.29.4 finding so the fixture records the current provider output."
+      "status": "resolved",
+      "body": "The repaired-source rerun reported a stale normalized evidence-entry concern. Codex PM dispositioned the provider fixture as historical evidence and recorded source repairs separately; the next provider rerun must replace this fixture with current output."
     },
     {
       "severity": "major",
