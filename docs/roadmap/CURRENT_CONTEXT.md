@@ -351,8 +351,8 @@ state-index persistence, scheduler execution, worktree lifecycle, claim leases,
 work surface reservations, automatic merge/push/deploy, product UAT approval,
 actor identity policy, PR/CI workflow, or unrelated work has started.
 
-`BANDIT-032` is the active Phase 8 improvement chore for Cockpit Status Coverage
-Hardening. Its structured creation spec is recorded in
+`BANDIT-032` is landed and closed out as the Phase 8 improvement chore for
+Cockpit Status Coverage Hardening. Its structured creation spec is recorded in
 `docs/specs/BANDIT-032-cockpit-status-coverage-hardening.json`, and its Stage 1
 brief is recorded in `docs/work/BANDIT-032/brief.md`. The source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is linked to
@@ -377,25 +377,27 @@ CodeRabbit pass evidence, Local Qwen pass evidence, Codex PM Stage 4
 disposition, and no open bootstrap gaps. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-032/landing-verdict.md`, and `npm run bandit -- land-check
 BANDIT-032` passes. Local-record landing action evidence is recorded in
-`docs/work/BANDIT-032/landing-action.md`. Retrospective evidence has not
-started.
+`docs/work/BANDIT-032/landing-action.md`. Retrospective closeout and improvement
+disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
+`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
+`effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-032` local-record landing action evidence
-is recorded.
+**Last completed milestone:** `BANDIT-032` retrospective closeout and
+improvement disposition are recorded.
 
-**Current next action:** Record `BANDIT-032` retrospective closeout and
-improvement disposition before starting any next work item.
+**Current next action:** Operator product/UI direction is required before
+creating the next Phase 8 Workflow Cockpit work item.
 
 Do not start visual UI, server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
 automatic merge/push/deploy, product UAT approval, actor identity policy,
-PR/CI workflow, the next work item, or unrelated work before `BANDIT-032`
-retrospective closeout and context updates are recorded.
+PR/CI workflow, the next work item, or unrelated work until the operator chooses
+the next Phase 8 cockpit direction.
 
 ## Active Work
 
-**Active work item:** `BANDIT-032` - Cockpit Status Coverage Hardening is landed
-and awaiting Stage 6 retrospective closeout.
+**Active work item:** None. `BANDIT-032` - Cockpit Status Coverage Hardening is
+landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -418,10 +420,14 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
-Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
+Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
+Cockpit Status Coverage Hardening.
 
-**Expected next deliverable:** `docs/work/BANDIT-032/retrospective.md` with
-retrospective closeout and improvement disposition evidence.
+**Expected next deliverable:** Operator answer for the next Phase 8 cockpit
+direction. Repo artifacts cannot choose exact cockpit screens, UI stack,
+packaging, direct file reads versus local API, or state-index timing because
+`docs/design/workflow-cockpit-boundary.md` explicitly defers those product/UI
+tradeoffs to Phase 8.
 
 ## Known Bootstrap Gaps
 
@@ -575,17 +581,16 @@ Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec,
 Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
 CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
 review evidence with current review subject hash, Stage 5 landing verdict,
-passing `land-check`, and local-record landing action evidence for cockpit
-status coverage hardening. The current priority is:
+passing `land-check`, local-record landing action evidence, and Stage 6
+retrospective/improvement disposition for cockpit status coverage hardening.
+The current priority is:
 
-1. Record `docs/work/BANDIT-032/retrospective.md` with closeout lessons and
-   improvement disposition evidence.
-2. Update roadmap/current-context state for the next legal work item after
-   retrospective closeout is complete.
-3. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
-   automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, PR/CI workflow, the next work item, or
-   unrelated work until `BANDIT-032` retrospective closeout exists.
+1. Halt before creating the next Phase 8 work item.
+2. Ask the operator to choose the next cockpit direction because repo artifacts
+   defer exact cockpit screens, UI stack/packaging, direct file reads versus
+   local API, and state-index timing.
+3. After operator direction is recorded, create exactly one next work item from
+   the approved scope and continue the standard Bandit stage sequence.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -593,11 +598,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record `BANDIT-032` retrospective
-closeout because product UAT is not applicable for this non-product improvement
-chore, the landing action is already recorded, and no policy, business,
-cost/risk, external service, merge, push, or deploy approval is required for
-retrospective closeout.
+Operator-owned input is required before the next Phase 8 cockpit work item.
+The exact input needed is the next cockpit product/UI direction: whether to
+proceed with a visual cockpit UI, local server/API mode, direct file-read
+status surface, state-index-backed surface, or another bounded cockpit step.
+Repo artifacts cannot answer this because `docs/design/workflow-cockpit-boundary.md`
+explicitly defers exact cockpit screens, stack/packaging, direct file reads
+versus local API, and state-index timing as Phase 8 product/UI tradeoffs.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require

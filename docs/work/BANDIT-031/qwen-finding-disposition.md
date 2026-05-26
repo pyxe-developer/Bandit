@@ -94,6 +94,10 @@ expected_direction: Cockpit status remains repo-native and fail-closed while
   decrease.
 evaluation_window: Evaluate when the next cockpit status, gate matrix, blocker
   summary, claimability, or structured current-context slice is changed.
-status: planned
+status: evaluated
 linked_work_item: BANDIT-032
-outcome: pending
+evaluating_work_item: BANDIT-032
+evaluation_evidence: docs/work/BANDIT-032/retrospective.md
+result: effective
+decision: keep
+outcome: keep

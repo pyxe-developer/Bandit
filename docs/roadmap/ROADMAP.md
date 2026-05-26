@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record `BANDIT-032` retrospective closeout and
-improvement disposition before starting any next work item.
+**Current next step:** Operator product/UI direction is required before
+creating the next Phase 8 Workflow Cockpit work item.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -31,14 +31,14 @@ recorded in `docs/work/BANDIT-031/coderabbit-review.md`,
 in `docs/work/BANDIT-031/landing-verdict.md`, `land-check` passes,
 local-record landing action evidence is recorded in
 `docs/work/BANDIT-031/landing-action.md`, and retrospective closeout is recorded
-in `docs/work/BANDIT-031/retrospective.md`. Do not start visual UI, local
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
-policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
-feature work before the focused `BANDIT-032` implementation satisfies the
-narrow CLI-authoritative cockpit-status contract.
+in `docs/work/BANDIT-031/retrospective.md`. Its routed follow-up candidate is
+now evaluated through `BANDIT-032`; visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, automatic
+merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
+work surface reservation, PR/CI workflow, and unrelated feature work remain
+blocked until the operator chooses the next Phase 8 cockpit direction.
 
-`BANDIT-032` - Cockpit Status Coverage Hardening is active in Stage 5 landing:
+`BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out:
 the structured creation spec is recorded in
 `docs/specs/BANDIT-032-cockpit-status-coverage-hardening.json`, the brief is
 recorded in `docs/work/BANDIT-032/brief.md`, RED evidence is recorded in
@@ -61,12 +61,14 @@ CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM Stage 4
 disposition. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-032/landing-verdict.md`, and `npm run bandit -- land-check
 BANDIT-032` passes. Local-record landing action evidence is recorded in
-`docs/work/BANDIT-032/landing-action.md`. The next step is retrospective
-closeout. Do not start visual UI, local server/API mode, state-index
-persistence, scheduler execution, worktree lifecycle, automatic
+`docs/work/BANDIT-032/landing-action.md`. Retrospective closeout and improvement
+disposition are recorded in `docs/work/BANDIT-032/retrospective.md`, and the
+source `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
+`effective` with decision `keep`. Do not start visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, automatic
 merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
 work surface reservation, PR/CI workflow, the next work item, or unrelated
-feature work before `BANDIT-032` retrospective closeout exists.
+feature work until the operator chooses the next Phase 8 cockpit direction.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -425,8 +427,9 @@ Stage 5 landing verdict/readiness evidence, and local-record landing action
 evidence. Retrospective closeout is recorded, and the `BANDIT-023`
 improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
 closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is landed
-with local-record landing action evidence recorded; the next action is
-retrospective closeout for `BANDIT-032`.
+and closed out as the cockpit status coverage hardening improvement chore. The
+next required action is operator product/UI direction for the next Phase 8
+cockpit work item.
 
 ## Phase Map
 
@@ -739,15 +742,12 @@ Current rule:
 
 Current priority:
 
-1. Record `docs/work/BANDIT-032/retrospective.md` with closeout lessons and
-   improvement disposition evidence.
-2. Update roadmap/current-context state for the next legal work item after
-   retrospective closeout is complete.
-3. Stop before unrelated active-work branches, scheduler execution, worktree
-   lifecycle, visual cockpit UI, product UAT approval, automatic
-   merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, PR/CI workflow, the next work item, or
-   unrelated work until `BANDIT-032` retrospective closeout exists.
+1. Halt before creating the next Phase 8 work item.
+2. Ask the operator to choose the next cockpit direction because repo artifacts
+   defer exact cockpit screens, UI stack/packaging, direct file reads versus
+   local API, and state-index timing.
+3. After operator direction is recorded, create exactly one next work item from
+   the approved scope and continue the standard Bandit stage sequence.
 
 ## Phase 6: Coordination Primitive
 

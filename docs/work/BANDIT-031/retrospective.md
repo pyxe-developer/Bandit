@@ -34,8 +34,12 @@ metric: Future Stage 4 reviews of cockpit status work do not repeat blocker brea
 baseline: BANDIT-031 provides the first read-only status payload with source links, fail-closed missing/contradictory source checks, and dynamic improvement-candidate source discovery, but keeps full gate and blocker breadth out of scope.
 expected_direction: Cockpit status remains repo-native and fail-closed while reviewer findings about status breadth and brittle Markdown heuristics decrease.
 evaluation_window: Evaluate when the next cockpit status, gate matrix, blocker summary, claimability, or structured current-context slice is changed.
-status: queued_candidate
-outcome: pending
+status: evaluated
+evaluating_work_item: BANDIT-032
+evaluation_evidence: docs/work/BANDIT-032/retrospective.md
+result: effective
+decision: keep
+outcome: keep
 
 ## Cross-Model Tension
 
