@@ -59,14 +59,31 @@ in `docs/work/BANDIT-027/landing-verdict.md` with final verdict
 `docs/work/BANDIT-027/landing-action.md`, chore-disposition evidence is
 recorded in `docs/work/BANDIT-027/chore-disposition.md`, retrospective
 closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
-`.bandit/bootstrap-gaps.json` marks the gap resolved. The current next step is
-to create the next Phase 6 Coordination Primitive work-item brief for
-runtime-agnostic coordination actions: claim, handoff, block, complete,
-repair-request, and resume.
-Do not create unrelated active-work branches, Phase 7 improvement engine work,
-Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
-product UAT approval, automatic merge/push/deploy behavior, or unrelated
-feature work before the next Phase 6 brief is recorded.
+`.bandit/bootstrap-gaps.json` marks the gap resolved.
+
+`BANDIT-028` is active as the next Phase 6 Coordination Primitive slice. Its
+structured creation spec is recorded in
+`docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
+recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-028/implementation-evidence.md`, and its coordination log is
+recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
+`landed`. The implemented command surface appends
+runtime-agnostic actor coordination events for claim, handoff, block, complete,
+repair-request, and resume without turning actor events into workflow-state
+authority. Stage 4 review evidence is recorded in
+`docs/work/BANDIT-028/review-evidence.md` with pre-PR CodeRabbit, Local Qwen,
+and aggregate review evidence at current `review_subject_hash`. Stage 5 landing
+verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final
+verdict `safe-to-land`; local-record landing action evidence is recorded in
+`docs/work/BANDIT-028/landing-action.md`. The next step is retrospective,
+improvement dispositions, and closeout context. Do
+not create unrelated active-work branches,
+Phase 7 improvement engine work, Phase 8 web cockpit implementation, scheduler
+execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, or
+unrelated feature work before `BANDIT-028` closeout is recorded or explicitly
+blocked.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -241,6 +258,24 @@ is resolved by `BANDIT-027`; implementation evidence, pre-PR CodeRabbit Stage
 evidence with current `review_subject_hash`, Stage 5 landing verdict,
 local-record landing action evidence, chore-disposition evidence,
 retrospective closeout, and gap-ledger disposition are recorded.
+`BANDIT-028` has its Phase 6 agent coordination event command spec, brief,
+Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 aggregate
+review evidence recorded. Pre-PR CodeRabbit evidence is recorded in
+`docs/work/BANDIT-028/coderabbit-review.md` with
+verdict `pass` and no findings after the focused repair recorded in
+`docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
+evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
+`reviewer_verdict: non_blocking`, one open finding about actor and evidence
+reference validation, and no required operator input. Codex PM disposition and
+durable routing for the Local Qwen finding is recorded in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`. Aggregate review evidence
+is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
+`review_subject_hash`
+`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
+final verdict `safe-to-land`. Local-record landing action evidence is recorded
+in `docs/work/BANDIT-028/landing-action.md`; the next action is retrospective,
+improvement dispositions, and closeout context.
 
 ## Phase Map
 
@@ -553,11 +588,13 @@ Current rule:
 
 Current priority:
 
-1. Create the next Phase 6 Coordination Primitive work-item brief.
-2. Stop before creating unrelated active-work branches, scheduler execution,
-   worktree lifecycle, cockpit implementation, product UAT approval, automatic
-   merge/push/deploy behavior, or Phase 7 evaluation behavior until that brief
-   is recorded.
+1. Record retrospective, improvement dispositions, and closeout context for
+   `BANDIT-028`.
+2. Stop before unrelated active-work branches, scheduler execution, worktree
+   lifecycle, cockpit implementation, product UAT approval, automatic
+   merge/push/deploy behavior, exclusive claim leases, work surface
+   reservations, or Phase 7 evaluation behavior until `BANDIT-028` is closed
+   out or explicitly blocked.
 
 ## Phase 6: Coordination Primitive
 

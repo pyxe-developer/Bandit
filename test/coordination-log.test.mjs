@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -304,6 +304,286 @@ test("coordination validate fails closed when step transition evidence is missin
   assert.match(result.stderr, /Missing coordination evidence reference: docs\/work\/BANDIT-001\/missing-brief\.md/);
 });
 
+test("coordination event appends one validated actor event for each supported action", async () => {
+  const repo = await createCoordinationRepo();
+  await writeEvidence(repo, "BANDIT-001", "red-evidence.md");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      accountable_actor: "Test Writer",
+      next_action: "Write RED evidence"
+    })
+  ]);
+
+  const commands = [
+    [
+      "claim",
+      "--actor",
+      "codex_pm",
+      "--source",
+      "codex automation",
+      "--summary",
+      "Claim Stage 2 RED evidence"
+    ],
+    [
+      "handoff",
+      "--actor",
+      "codex_pm",
+      "--source",
+      "codex automation",
+      "--summary",
+      "RED tests are ready for Writer",
+      "--target-actor",
+      "Writer"
+    ],
+    [
+      "block",
+      "--actor",
+      "codex_pm",
+      "--source",
+      "codex automation",
+      "--summary",
+      "Waiting for operator budget approval",
+      "--blocked-owner",
+      "operator",
+      "--resume-condition",
+      "Budget approval recorded in work item evidence"
+    ],
+    [
+      "complete",
+      "--actor",
+      "Writer",
+      "--source",
+      "codex automation",
+      "--summary",
+      "RED evidence recorded",
+      "--evidence",
+      "docs/work/BANDIT-001/red-evidence.md"
+    ],
+    [
+      "repair-request",
+      "--actor",
+      "Reviewer",
+      "--source",
+      "codex automation",
+      "--summary",
+      "Repair missing refusal path",
+      "--repair-scope",
+      "coordination event validation"
+    ],
+    [
+      "resume",
+      "--actor",
+      "codex_pm",
+      "--source",
+      "codex automation",
+      "--summary",
+      "Operator budget approval recorded"
+    ]
+  ];
+
+  for (const [eventType, ...options] of commands) {
+    const result = await runBandit(repo, [
+      "coordination",
+      "event",
+      "BANDIT-001",
+      eventType,
+      ...options
+    ]);
+    assert.equal(result.code, 0, result.stderr);
+    assert.match(
+      result.stdout,
+      new RegExp(`Recorded actor coordination event: ${eventType} for BANDIT-001`)
+    );
+  }
+
+  const events = await readCoordinationEvents(repo, "BANDIT-001");
+  assert.equal(events.length, 7);
+  assert.deepEqual(events.map((event) => event.sequence), [1, 2, 3, 4, 5, 6, 7]);
+  assert.deepEqual(
+    events.slice(1).map((event) => event.actor_event_type),
+    ["claim", "handoff", "block", "complete", "repair-request", "resume"]
+  );
+  assert.equal(events[2].target_actor, "Writer");
+  assert.equal(events[3].blocked_owner, "operator");
+  assert.equal(
+    events[3].resume_condition,
+    "Budget approval recorded in work item evidence"
+  );
+  assert.deepEqual(events[4].evidence, ["docs/work/BANDIT-001/red-evidence.md"]);
+  assert.equal(events[5].repair_scope, "coordination event validation");
+});
+
+test("coordination event fails closed for action-specific missing fields before writing", async () => {
+  const cases = [
+    {
+      command: [
+        "handoff",
+        "--actor",
+        "codex_pm",
+        "--source",
+        "test",
+        "--summary",
+        "handoff"
+      ],
+      message: /handoff actor event requires --target-actor/
+    },
+    {
+      command: [
+        "block",
+        "--actor",
+        "codex_pm",
+        "--source",
+        "test",
+        "--summary",
+        "blocked",
+        "--blocked-owner",
+        "operator"
+      ],
+      message: /block actor event requires --blocked-owner and --resume-condition/
+    },
+    {
+      command: [
+        "complete",
+        "--actor",
+        "Writer",
+        "--source",
+        "test",
+        "--summary",
+        "complete"
+      ],
+      message: /complete actor event requires at least one --evidence reference/
+    },
+    {
+      command: [
+        "repair-request",
+        "--actor",
+        "Reviewer",
+        "--source",
+        "test",
+        "--summary",
+        "repair"
+      ],
+      message: /repair-request actor event requires --repair-scope/
+    }
+  ];
+
+  for (const { command, message } of cases) {
+    const repo = await createCoordinationRepo();
+    await writeCoordinationLog(repo, "BANDIT-001", [stepTransition()]);
+    const before = await readFile(
+      path.join(repo, "docs/work/BANDIT-001/coordination-log.jsonl"),
+      "utf8"
+    );
+
+    const result = await runBandit(repo, [
+      "coordination",
+      "event",
+      "BANDIT-001",
+      ...command
+    ]);
+
+    assert.equal(result.code, 1);
+    assert.match(result.stderr, message);
+    assert.equal(
+      await readFile(
+        path.join(repo, "docs/work/BANDIT-001/coordination-log.jsonl"),
+        "utf8"
+      ),
+      before
+    );
+  }
+});
+
+test("coordination event refuses missing work items, missing logs, malformed logs, and missing evidence before writing", async () => {
+  const unknownRepo = await createCoordinationRepo();
+  const unknownResult = await runBandit(unknownRepo, [
+    "coordination",
+    "event",
+    "BANDIT-999",
+    "claim",
+    "--actor",
+    "codex_pm",
+    "--source",
+    "test",
+    "--summary",
+    "claim"
+  ]);
+  assert.equal(unknownResult.code, 1);
+  assert.match(unknownResult.stderr, /Unknown work item: BANDIT-999/);
+
+  const missingLogRepo = await createCoordinationRepo();
+  const missingLogResult = await runBandit(missingLogRepo, [
+    "coordination",
+    "event",
+    "BANDIT-001",
+    "claim",
+    "--actor",
+    "codex_pm",
+    "--source",
+    "test",
+    "--summary",
+    "claim"
+  ]);
+  assert.equal(missingLogResult.code, 1);
+  assert.match(
+    missingLogResult.stderr,
+    /Missing coordination log: docs\/work\/BANDIT-001\/coordination-log\.jsonl/
+  );
+
+  const malformedRepo = await createCoordinationRepo();
+  await writeRawCoordinationLog(malformedRepo, "BANDIT-001", "{not-json}\n");
+  const malformedBefore = await readFile(
+    path.join(malformedRepo, "docs/work/BANDIT-001/coordination-log.jsonl"),
+    "utf8"
+  );
+  const malformedResult = await runBandit(malformedRepo, [
+    "coordination",
+    "event",
+    "BANDIT-001",
+    "claim",
+    "--actor",
+    "codex_pm",
+    "--source",
+    "test",
+    "--summary",
+    "claim"
+  ]);
+  assert.equal(malformedResult.code, 1);
+  assert.match(malformedResult.stderr, /Malformed coordination log at line 1/);
+  assert.equal(
+    await readFile(
+      path.join(malformedRepo, "docs/work/BANDIT-001/coordination-log.jsonl"),
+      "utf8"
+    ),
+    malformedBefore
+  );
+
+  const missingEvidenceRepo = await createCoordinationRepo();
+  await writeCoordinationLog(missingEvidenceRepo, "BANDIT-001", [stepTransition()]);
+  const evidenceResult = await runBandit(missingEvidenceRepo, [
+    "coordination",
+    "event",
+    "BANDIT-001",
+    "complete",
+    "--actor",
+    "Writer",
+    "--source",
+    "test",
+    "--summary",
+    "complete",
+    "--evidence",
+    "docs/work/BANDIT-001/missing-red-evidence.md"
+  ]);
+  assert.equal(evidenceResult.code, 1);
+  assert.match(
+    evidenceResult.stderr,
+    /Missing coordination evidence reference: docs\/work\/BANDIT-001\/missing-red-evidence\.md/
+  );
+  const events = await readCoordinationEvents(missingEvidenceRepo, "BANDIT-001");
+  assert.equal(events.length, 1);
+});
+
 async function createCoordinationRepo(workType = "slice") {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
@@ -392,6 +672,14 @@ async function writeRawCoordinationLog(repo, workItem, contents) {
   const logDir = path.join(repo, "docs/work", workItem);
   await mkdir(logDir, { recursive: true });
   await writeFile(path.join(logDir, "coordination-log.jsonl"), contents, "utf8");
+}
+
+async function readCoordinationEvents(repo, workItem) {
+  const content = await readFile(
+    path.join(repo, "docs/work", workItem, "coordination-log.jsonl"),
+    "utf8"
+  );
+  return content.trim().split("\n").map((line) => JSON.parse(line));
 }
 
 function stepTransition(overrides = {}) {

@@ -224,20 +224,53 @@ closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` resolved.
 
-**Last completed milestone:** `BANDIT-027` is landed and closed out.
+`BANDIT-028` is the active Phase 6 Coordination Primitive slice for agent
+coordination event commands. Its structured creation spec is recorded in
+`docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
+recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-028/implementation-evidence.md`, and its per-work-item
+coordination log is recorded in
+`docs/work/BANDIT-028/coordination-log.jsonl` at
+`landed`. The implemented slice adds a CLI-owned way to append
+runtime-agnostic actor events for claim, handoff, block, complete,
+repair-request, and resume while preserving the rule that actor events do not
+advance workflow state, emit safe triggers, or satisfy landing/review/UAT
+gates without accepted step transitions. Pre-PR CodeRabbit Stage 4 evidence is
+recorded in `docs/work/BANDIT-028/coderabbit-review.md` with verdict `pass` and
+no findings after the focused context repair recorded in
+`docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
+evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
+`reviewer_verdict: non_blocking`, one open finding about actor and evidence
+reference validation, `operator_input_status: none_required`, and current
+source head `65af75cd5cf4397ad66afe05285452e8dd5ec915`. Codex PM disposition
+and durable routing for the Local Qwen finding is recorded in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
+`review_subject_hash`
+`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`,
+CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, Codex PM
+disposition, and durable non-blocking finding routing. Stage 5 landing verdict
+is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final verdict
+`safe-to-land`. Local-record landing action evidence is recorded in
+`docs/work/BANDIT-028/landing-action.md`.
 
-**Current next action:** Create the next Phase 6 Coordination Primitive
-work-item brief. The next brief should continue Phase 6 from the roadmap's
-runtime-agnostic coordination actions: claim, handoff, block, complete,
-repair-request, and resume. Do not start Phase 7 Improvement Engine work,
-Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, scheduler execution,
-worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval,
-or unrelated work before the next Phase 6 brief is recorded.
+**Last completed milestone:** `BANDIT-028` local-record landing action is
+recorded.
+
+**Current next action:** Record `BANDIT-028` retrospective, improvement
+dispositions, and closeout context. Do not start Phase 7
+Improvement Engine work, Phase 8 Workflow Cockpit
+implementation, Phase 9 dogfood, scheduler execution, worktree lifecycle,
+exclusive claim leases, work surface reservations, automatic merge/push/deploy
+behavior, product UAT approval, or unrelated work before retrospective,
+improvement dispositions, and closeout context are recorded.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-027` is closed out; the next action is to
-create the next Phase 6 Coordination Primitive work-item brief.
+**Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
+Current state is `landed`; the next action is retrospective, improvement
+dispositions, and closeout context.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -259,8 +292,8 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
 
-**Expected next deliverable:** the next Phase 6 Coordination Primitive
-work-item brief.
+**Expected next deliverable:** Retrospective, improvement dispositions, and
+closeout context for `BANDIT-028`.
 
 ## Known Bootstrap Gaps
 
@@ -402,11 +435,11 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, so the
 current priority is:
 
-1. Create the next Phase 6 Coordination Primitive work-item brief for
-   runtime-agnostic coordination actions.
-2. Stop before Phase 7, Phase 8, Phase 9, scheduler, worktree lifecycle,
-   product UAT, automatic merge/push/deploy, or unrelated work until that brief
-   is recorded.
+1. Record retrospective, improvement dispositions, and closeout context for
+   `BANDIT-028`.
+2. Stop before Phase 7, Phase 8, Phase 9,
+   scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
+   unrelated work until `BANDIT-028` is closed out or explicitly blocked.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -414,11 +447,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the next Phase 6 Coordination
-Primitive work-item brief from the roadmap. If live external service access,
-cost/risk override, policy change, PR/merge/push/deploy authority, product
-direction, or product UAT approval is required, halt and ask for that input
-directly.
+No operator-owned input is required to record `BANDIT-028` retrospective,
+improvement dispositions, and closeout context from repo artifacts. If live
+external service access, cost/risk override, policy change,
+PR/merge/push/deploy authority, product direction, or product UAT approval is
+required, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

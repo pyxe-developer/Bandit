@@ -1,4 +1,4 @@
-import { access, readFile, readdir } from "node:fs/promises";
+import { access, appendFile, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { parseMetadataFields, readScalar } from "./metadata.js";
 import { readUatApproval } from "./uat-approval.js";
@@ -13,6 +13,7 @@ export type CoordinationStatus = {
   accepted_block: AcceptedBlock | null;
   safe_trigger_points: string[];
   evidence: string[];
+  actor_context?: ActorContext;
   typed_extension?: TypedExtensionStatus;
 };
 
@@ -63,10 +64,42 @@ type ActorEvent = {
   actor: string;
   source: string;
   evidence: string[];
-  actor_event_type: string;
+  actor_event_type: ActorEventType;
+  summary?: string;
+  target_actor?: string;
+  blocked_owner?: string;
+  resume_condition?: string;
+  repair_scope?: string;
 };
 
 type CoordinationEvent = StepTransition | ActorEvent;
+type ActorEventType = "claim" | "handoff" | "block" | "complete" | "repair-request" | "resume";
+type ActorContextEntry = {
+  actor: string;
+  summary: string;
+  sequence: number;
+};
+type ActorContext = {
+  latest_advisory_claim?: ActorContextEntry;
+  latest_handoff?: ActorContextEntry & { target_actor: string };
+  latest_block_event?: ActorContextEntry & {
+    blocked_owner: string;
+    resume_condition: string;
+  };
+  pending_repair_request?: ActorContextEntry & { repair_scope: string };
+  latest_resume?: ActorContextEntry;
+};
+export type NewActorEventInput = {
+  actor_event_type: ActorEventType;
+  actor: string;
+  source: string;
+  summary: string;
+  evidence: string[];
+  target_actor?: string;
+  blocked_owner?: string;
+  resume_condition?: string;
+  repair_scope?: string;
+};
 
 const LOG_FILE_NAME = "coordination-log.jsonl";
 const VALID_EVENT_TYPES = new Set(["step_transition", "actor_event"]);
@@ -98,6 +131,33 @@ export async function validateCoordinationLog(repoRoot: string, workItemId: stri
   await readCoordinationTimeline(repoRoot, workItemId);
 }
 
+export async function appendActorCoordinationEvent(
+  repoRoot: string,
+  workItemId: string,
+  input: NewActorEventInput
+) {
+  try {
+    await readWorkItem(repoRoot, workItemId);
+  } catch (error) {
+    if (error instanceof Error && error.message === `Work item not found: ${workItemId}`) {
+      throw new Error(`Unknown work item: ${workItemId}`);
+    }
+    throw error;
+  }
+
+  const logPath = coordinationLogPath(repoRoot, workItemId);
+  const content = await readRequiredLog(logPath, workItemId);
+  const existingEvents = await parseCoordinationEvents(repoRoot, workItemId, content);
+  validateStepTransitionOrder(existingEvents);
+
+  const event = createActorEvent(workItemId, existingEvents.at(-1)?.sequence ?? 0, input);
+  const nextContent = appendJsonLine(content, event);
+  const nextEvents = await parseCoordinationEvents(repoRoot, workItemId, nextContent);
+  validateStepTransitionOrder(nextEvents);
+
+  await appendFile(logPath, `${JSON.stringify(event)}\n`, "utf8");
+}
+
 export async function readCoordinationStatus(
   repoRoot: string,
   workItemId: string
@@ -120,6 +180,7 @@ export async function readCoordinationStatus(
     accepted_block: current.accepted_block,
     safe_trigger_points: current.safe_triggers,
     evidence: current.evidence,
+    ...readActorContext(events),
     ...readTypedExtensionStatus(workItem.id, workType, current)
   };
 }
@@ -364,7 +425,8 @@ function parseActorEvent(
   return {
     event_type: "actor_event",
     ...envelope,
-    actor_event_type: actorEventType
+    actor_event_type: actorEventType as ActorEventType,
+    ...readOptionalActorEventFields(rawEvent, lineNumber)
   };
 }
 
@@ -459,6 +521,104 @@ async function readRequiredLog(filePath: string, workItemId: string) {
 
 function coordinationLogPath(repoRoot: string, workItemId: string) {
   return path.join(repoRoot, "docs/work", workItemId, LOG_FILE_NAME);
+}
+
+function createActorEvent(
+  workItemId: string,
+  previousSequence: number,
+  input: NewActorEventInput
+): ActorEvent & { version: 1; timestamp: string } {
+  const event = {
+    version: 1 as const,
+    event_type: "actor_event" as const,
+    work_item: workItemId,
+    sequence: previousSequence + 1,
+    timestamp: new Date().toISOString(),
+    actor: input.actor,
+    source: input.source,
+    evidence: input.evidence,
+    actor_event_type: input.actor_event_type,
+    summary: input.summary
+  };
+
+  return {
+    ...event,
+    ...readActionSpecificFields(input)
+  };
+}
+
+function readActionSpecificFields(input: NewActorEventInput) {
+  if (input.actor_event_type === "handoff") {
+    return { target_actor: input.target_actor };
+  }
+
+  if (input.actor_event_type === "block") {
+    return {
+      blocked_owner: input.blocked_owner,
+      resume_condition: input.resume_condition
+    };
+  }
+
+  if (input.actor_event_type === "repair-request") {
+    return { repair_scope: input.repair_scope };
+  }
+
+  return {};
+}
+
+function appendJsonLine(content: string, event: unknown) {
+  const separator = content.endsWith("\n") || content.length === 0 ? "" : "\n";
+  return `${content}${separator}${JSON.stringify(event)}\n`;
+}
+
+function readActorContext(events: CoordinationEvent[]): { actor_context?: ActorContext } {
+  const context: ActorContext = {};
+
+  for (const event of events) {
+    if (!isActorEvent(event) || !event.summary) {
+      continue;
+    }
+
+    const base = {
+      actor: event.actor,
+      summary: event.summary,
+      sequence: event.sequence
+    };
+
+    if (event.actor_event_type === "claim") {
+      context.latest_advisory_claim = base;
+    }
+
+    if (event.actor_event_type === "handoff" && event.target_actor) {
+      context.latest_handoff = { ...base, target_actor: event.target_actor };
+    }
+
+    if (
+      event.actor_event_type === "block" &&
+      event.blocked_owner &&
+      event.resume_condition
+    ) {
+      context.latest_block_event = {
+        ...base,
+        blocked_owner: event.blocked_owner,
+        resume_condition: event.resume_condition
+      };
+    }
+
+    if (event.actor_event_type === "repair-request" && event.repair_scope) {
+      context.pending_repair_request = { ...base, repair_scope: event.repair_scope };
+    }
+
+    if (event.actor_event_type === "resume") {
+      context.latest_resume = base;
+    }
+  }
+
+  if (Object.keys(context).length === 0) {
+    return {};
+  }
+
+  return { actor_context: context };
 }
 
 function readTypedExtensionStatus(
@@ -603,6 +763,31 @@ function readAcceptedBlock(value: unknown, lineNumber: number) {
   };
 }
 
+function readOptionalActorEventFields(
+  rawEvent: Record<string, unknown>,
+  lineNumber: number
+) {
+  return {
+    ...readOptionalStringField(rawEvent, "summary", lineNumber),
+    ...readOptionalStringField(rawEvent, "target_actor", lineNumber),
+    ...readOptionalStringField(rawEvent, "blocked_owner", lineNumber),
+    ...readOptionalStringField(rawEvent, "resume_condition", lineNumber),
+    ...readOptionalStringField(rawEvent, "repair_scope", lineNumber)
+  };
+}
+
+function readOptionalStringField(
+  record: Record<string, unknown>,
+  field: string,
+  lineNumber: number
+) {
+  if (record[field] === undefined) {
+    return {};
+  }
+
+  return { [field]: requireString(record, field, lineNumber) };
+}
+
 function requireString(
   record: Record<string, unknown>,
   field: string,
@@ -664,6 +849,10 @@ function readStringList(value: unknown, field: string, lineNumber: number) {
 
 function isStepTransition(event: CoordinationEvent): event is StepTransition {
   return event.event_type === "step_transition";
+}
+
+function isActorEvent(event: CoordinationEvent): event is ActorEvent {
+  return event.event_type === "actor_event";
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

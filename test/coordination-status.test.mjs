@@ -308,6 +308,97 @@ test("coordination status reports accepted block state and resume condition", as
   assert.deepEqual(status.safe_trigger_points, []);
 });
 
+test("coordination status reports recent actor context without granting workflow authority", async () => {
+  const repo = await createCoordinationRepo("slice");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      accountable_actor: "Test Writer",
+      next_action: "Write RED evidence",
+      evidence: ["docs/work/BANDIT-001/brief.md"],
+      safe_triggers: ["red_evidence_required"]
+    }),
+    actorEvent({
+      sequence: 2,
+      actor_event_type: "claim",
+      actor: "codex_pm",
+      summary: "Claim Stage 2 RED evidence"
+    }),
+    actorEvent({
+      sequence: 3,
+      actor_event_type: "handoff",
+      actor: "codex_pm",
+      target_actor: "Writer",
+      summary: "RED tests are ready for Writer"
+    }),
+    actorEvent({
+      sequence: 4,
+      actor_event_type: "block",
+      actor: "codex_pm",
+      blocked_owner: "operator",
+      resume_condition: "Budget approval recorded in work item evidence",
+      summary: "Waiting for operator budget approval"
+    }),
+    actorEvent({
+      sequence: 5,
+      actor_event_type: "repair-request",
+      actor: "Reviewer",
+      repair_scope: "coordination event validation",
+      summary: "Repair missing refusal path"
+    }),
+    actorEvent({
+      sequence: 6,
+      actor_event_type: "resume",
+      actor: "codex_pm",
+      summary: "Operator budget approval recorded"
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "coordination",
+    "status",
+    "BANDIT-001",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.equal(status.current_state, "brief_created");
+  assert.deepEqual(status.safe_trigger_points, ["red_evidence_required"]);
+  assert.deepEqual(status.accepted_block, null);
+  assert.deepEqual(status.actor_context, {
+    latest_advisory_claim: {
+      actor: "codex_pm",
+      summary: "Claim Stage 2 RED evidence",
+      sequence: 2
+    },
+    latest_handoff: {
+      actor: "codex_pm",
+      target_actor: "Writer",
+      summary: "RED tests are ready for Writer",
+      sequence: 3
+    },
+    latest_block_event: {
+      actor: "codex_pm",
+      blocked_owner: "operator",
+      resume_condition: "Budget approval recorded in work item evidence",
+      summary: "Waiting for operator budget approval",
+      sequence: 4
+    },
+    pending_repair_request: {
+      actor: "Reviewer",
+      repair_scope: "coordination event validation",
+      summary: "Repair missing refusal path",
+      sequence: 5
+    },
+    latest_resume: {
+      actor: "codex_pm",
+      summary: "Operator budget approval recorded",
+      sequence: 6
+    }
+  });
+});
+
 async function createCoordinationRepo(workType) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);

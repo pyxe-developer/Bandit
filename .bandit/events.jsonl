@@ -11,3 +11,4 @@
 {"type":"work_item_created","work_item":"BANDIT-026","message":"Created work item BANDIT-026 from docs/specs/BANDIT-026-typed-state-extensions.json"}
 {"type":"work_item_created","work_item":"BANDIT-027","message":"Created work item BANDIT-027 from docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json"}
 {"type":"artifact_created","work_item":"BANDIT-027","message":"Created landing_verdict artifact at docs/work/BANDIT-027/landing-verdict.md"}
+{"type":"work_item_created","work_item":"BANDIT-028","message":"Created work item BANDIT-028 from docs/specs/BANDIT-028-agent-coordination-event-commands.json"}

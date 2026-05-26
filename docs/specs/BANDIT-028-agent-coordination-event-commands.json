@@ -1,0 +1,107 @@
+{
+  "kind": "slice",
+  "title": "Agent Coordination Event Commands",
+  "status": "Brief Created",
+  "goal": "Add the next Phase 6 coordination primitive slice by giving agents a CLI-owned way to record runtime-agnostic coordination events for claim, handoff, block, complete, repair-request, and resume without turning those events into workflow-state authority.",
+  "scope": [
+    "Define a narrow CLI command surface for appending one actor coordination event to a work item's existing per-work-item coordination log.",
+    "Support the runtime-agnostic actor event types already introduced by the coordination-log foundation: claim, handoff, block, complete, repair-request, and resume.",
+    "Validate action-specific required fields before writing, including actor, source, summary, target actor when handing off, blocked owner and resume condition when blocking, repair scope when requesting repair, and evidence references when an event claims work was completed.",
+    "Preserve the existing distinction between actor coordination events and accepted workflow step transitions: coordination events may provide context but may not advance current state, emit safe triggers, satisfy typed extension checkpoints, or bypass required evidence.",
+    "Update derived coordination status so recent actor events, accepted block context, repair requests, handoff target, and latest advisory claim context are visible without becoming canonical stage transitions.",
+    "Keep the command runtime-agnostic and repo-native by appending JSONL events only after validation against existing work item, coordination-log, and evidence-reference contracts."
+  ],
+  "out_of_scope": [
+    "Do not implement exclusive work claim leases, work surface reservations, lease expiry, claim renewal, claim-first worktree creation, or atomic multi-agent locking.",
+    "Do not implement scheduler execution, heartbeat claiming, parallel workstream selection, automatic repair dispatch, or runtime-owned agent orchestration.",
+    "Do not make actor claim, complete, repair-request, handoff, block, or resume events advance workflow state without an accepted step_transition event.",
+    "Do not implement Phase 7 improvement evaluation, Phase 8 Workflow Cockpit UI behavior, cross-repo coordination, SQLite state indexing, automatic merge, push, deploy, product UAT approval, or paid-provider routing.",
+    "Do not change the existing landing, review, UAT, chore disposition, or retrospective evidence contracts."
+  ],
+  "acceptance_criteria": [
+    "A CLI-owned command path can append exactly one validated actor coordination event to docs/work/<ID>/coordination-log.jsonl for claim, handoff, block, complete, repair-request, and resume.",
+    "The command refuses unknown work items, missing coordination logs, malformed existing logs, unknown event types, invalid actors, missing required fields, unsafe evidence paths, and evidence paths that do not exist.",
+    "Action-specific validation requires a clear target and resume condition for block events, a target actor for handoff events, a repair scope for repair-request events, and evidence references for complete events that cite existing repo artifacts.",
+    "Actor coordination events remain non-authoritative: appending them does not change the derived workflow current_state, does not emit safe triggers, and does not satisfy landing, review, UAT, chore-disposition, or closeout gates.",
+    "Derived coordination status reports recent actor coordination context, including latest advisory claim, handoff target, accepted block or block-event context, pending repair request, and latest resume event, while still deriving workflow position only from step_transition events.",
+    "The command appends JSONL atomically enough for the current local bootstrap workflow, preserves prior sequence ordering, and validates the full log after append so a bad event cannot silently corrupt canonical coordination state.",
+    "Tests cover one successful event for each supported action, required-field refusal for each action family, malformed existing log refusal, missing evidence refusal, actor-event non-authority, status reporting of recent actor context, and preservation of existing BANDIT-025 and BANDIT-026 coordination behavior.",
+    "No lease exclusivity, scheduler, worktree lifecycle, cockpit UI, cross-repo coordination, automatic merge/push/deploy, product UAT approval, or Phase 7 improvement evaluation behavior is introduced by this slice."
+  ],
+  "test_plan": [
+    "Write RED tests for the selected coordination-event command path covering claim, handoff, block, complete, repair-request, and resume success cases.",
+    "Write RED tests proving action-specific missing fields fail closed before writes.",
+    "Write RED tests proving unknown work items, missing coordination logs, malformed existing logs, invalid event types, and missing evidence references fail closed.",
+    "Write RED tests proving actor coordination events do not advance current_state, do not emit safe triggers, and do not satisfy typed extension checkpoints or landing gates.",
+    "Write RED tests proving derived coordination status exposes recent actor context while preserving step_transition authority.",
+    "Run focused coordination-log and coordination-status tests after implementation.",
+    "Run npm test if implementation touches command routing, validators, work-item readers, status derivation, evidence parsing, landing gates, review gates, UAT parsing, or shared state modules.",
+    "Run npm run typecheck.",
+    "Run npm run bandit -- validate.",
+    "Run npm run bandit -- coderabbit-review pre-pr BANDIT-028 --base origin/main before aggregate Stage 4 evidence when live CLI/auth are available; otherwise record fail-closed operator-input or bootstrap replacement evidence honestly.",
+    "Run npm run bandit -- qwen-review BANDIT-028 before Stage 4 closeout.",
+    "Run npm run bandit -- land-check BANDIT-028 before landing.",
+    "Run git diff --check."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-05-26 before creating this brief. The slice must keep actor-event command parsing, validation, append behavior, and status projection small and explicit; preserve step-transition authority; and fail closed with clear messages.",
+  "stage_rubric_checklist": [
+    "Stage 0 Context Readiness: pass - CURRENT_CONTEXT.md and ROADMAP.md identify Phase 6, no active work, no open bootstrap gaps, and this actor coordination event brief as the next action; BANDIT-027 has landing action, chore disposition, retrospective, and closed coordination-log evidence.",
+    "Stage 1 Work-Item Brief And Spec: pass - this brief defines goal, scope, out of scope, acceptance criteria, test plan, CLEAN_CODE.md evidence, bootstrap gaps, expected files, implementation order, smell triggers, and operator input status.",
+    "Stage 2 Test Design And RED Evidence: required next - tests must express coordination-event command behavior before production implementation.",
+    "Stage 3 Implementation Clean-Code Rubric: required later - implementation must keep command parsing, action validation, append planning, full-log validation, and status projection as explicit helpers.",
+    "Stage 4 Review And Cross-Model Gates: required later - CodeRabbit pre-PR review when available, Local Qwen, and aggregate review evidence must cover actor-event non-authority, parser, validator, evidence-reference, and status semantics.",
+    "Stage 5 Landing And UAT: required later - landing verdict and landing action evidence are required; product UAT is not required for this internal coordination slice unless product behavior is introduced.",
+    "Stage 6 Retrospective And Improvement Capture: required later - closeout must disposition lessons and update roadmap/current context."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gaps are currently recorded. This slice continues Phase 6 after the bootstrap-gap lane is exhausted and after BANDIT-027 repaired pre-PR CodeRabbit review.",
+    "Live pre-PR CodeRabbit CLI review may require local CodeRabbit CLI installation and authentication; if unavailable at Stage 4, record fail-closed operator-input evidence or honest replacement evidence rather than claiming a pass.",
+    "Exclusive claim leases, work surface reservations, scheduler execution, worktree lifecycle, cockpit UI, Phase 7 improvement evaluation, and cross-repo coordination remain future work outside this slice."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-028-agent-coordination-event-commands.json",
+    "docs/work/BANDIT-028/brief.md",
+    "docs/work/BANDIT-028/coordination-log.jsonl",
+    "docs/work/BANDIT-028/red-evidence.md",
+    "docs/work/BANDIT-028/implementation-evidence.md",
+    "docs/work/BANDIT-028/coderabbit-review.md",
+    "docs/work/BANDIT-028/local-qwen-review.md",
+    "docs/work/BANDIT-028/review-evidence.md",
+    "docs/work/BANDIT-028/landing-verdict.md",
+    "docs/work/BANDIT-028/landing-action.md",
+    "docs/work/BANDIT-028/retrospective.md",
+    "src/commands/coordination.ts",
+    "src/state/coordination-log.ts",
+    "test/coordination-log.test.mjs",
+    "test/coordination-status.test.mjs",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md"
+  ],
+  "first_implementation_order": [
+    "Write RED tests for event-command success and refusal paths before production code changes.",
+    "Select the narrow CLI command syntax and parse exactly one event append request per invocation.",
+    "Implement action-specific actor-event validation as small helpers that reuse existing coordination-log and evidence-reference validation.",
+    "Append the event to the work-item coordination log only after validation and validate the resulting log before reporting success.",
+    "Update derived status reporting to expose recent actor context while preserving step_transition authority.",
+    "Update implementation evidence, Stage 4 review evidence, landing evidence, retrospective, CURRENT_CONTEXT.md, and ROADMAP.md as each stage completes."
+  ],
+  "smell_triggers": [
+    "State-machine, parser, validator, JSONL append, evidence-reference, and safe-trigger work requires Local Qwen review and escalated-review routing if smell policy requires it.",
+    "Any logic that lets raw actor coordination events complete workflow stages, satisfy typed extension checkpoints, or emit safe triggers is a blocker.",
+    "Any command shape that creates hidden lease authority, worktree authority, scheduler authority, or cockpit-owned state inside this slice is scope creep.",
+    "Any hidden source of truth in a cache, generated status file, state index, or cockpit-facing report is a blocker.",
+    "Any broad claim/scheduler/worktree/cockpit/Phase 7 implementation inside this slice is scope creep."
+  ],
+  "required_evidence": [
+    "docs/work/BANDIT-028/brief.md",
+    "docs/work/BANDIT-028/red-evidence.md",
+    "docs/work/BANDIT-028/implementation-evidence.md",
+    "docs/work/BANDIT-028/coderabbit-review.md",
+    "docs/work/BANDIT-028/local-qwen-review.md",
+    "docs/work/BANDIT-028/review-evidence.md",
+    "docs/work/BANDIT-028/landing-verdict.md",
+    "docs/work/BANDIT-028/landing-action.md",
+    "docs/work/BANDIT-028/retrospective.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create this Phase 6 brief because ROADMAP.md, CURRENT_CONTEXT.md, CONTEXT.md, CLEAN_CODE.md, Stage Rubrics, and the BANDIT-025/BANDIT-026 coordination slices define the technical direction. Halt for operator input only if implementation requires product direction, UAT approval, policy changes, business tradeoffs, explicit cost/risk overrides, remote merge/push/deploy authority, paid external reviewer approval, or a genuinely ambiguous scope decision."
+}
