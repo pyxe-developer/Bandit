@@ -16,9 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run the local-record landing action for `BANDIT-032`
-with the existing Bandit landing command, then record landing-action evidence
-before any retrospective closeout.
+**Current next step:** Record `BANDIT-032` retrospective closeout and
+improvement disposition before starting any next work item.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -61,12 +60,13 @@ aggregate Stage 4 review evidence is recorded in
 CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM Stage 4
 disposition. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-032/landing-verdict.md`, and `npm run bandit -- land-check
-BANDIT-032` passes. The next step is the local-record landing action. Do not
-start retrospective closeout, visual UI, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, automatic
+BANDIT-032` passes. Local-record landing action evidence is recorded in
+`docs/work/BANDIT-032/landing-action.md`. The next step is retrospective
+closeout. Do not start visual UI, local server/API mode, state-index
+persistence, scheduler execution, worktree lifecycle, automatic
 merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
-work surface reservation, PR/CI workflow, or unrelated feature work before
-the `BANDIT-032` local-record landing action evidence exists.
+work surface reservation, PR/CI workflow, the next work item, or unrelated
+feature work before `BANDIT-032` retrospective closeout exists.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -424,9 +424,9 @@ implementation evidence, Stage 7 improvement-evaluation evidence for
 Stage 5 landing verdict/readiness evidence, and local-record landing action
 evidence. Retrospective closeout is recorded, and the `BANDIT-023`
 improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
-closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is active
-with current aggregate Stage 4 review evidence recorded; the next action is the
-Stage 5 landing verdict for `BANDIT-032`.
+closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is landed
+with local-record landing action evidence recorded; the next action is
+retrospective closeout for `BANDIT-032`.
 
 ## Phase Map
 
@@ -739,14 +739,15 @@ Current rule:
 
 Current priority:
 
-1. Run the local-record landing action for `BANDIT-032`.
-2. Record `docs/work/BANDIT-032/landing-action.md` with the landing commit SHA
-   and verification evidence.
+1. Record `docs/work/BANDIT-032/retrospective.md` with closeout lessons and
+   improvement disposition evidence.
+2. Update roadmap/current-context state for the next legal work item after
+   retrospective closeout is complete.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, PR/CI workflow, retrospective closeout,
-   or unrelated work until the `BANDIT-032` landing action evidence exists.
+   reservations, actor identity policy, PR/CI workflow, the next work item, or
+   unrelated work until `BANDIT-032` retrospective closeout exists.
 
 ## Phase 6: Coordination Primitive
 
