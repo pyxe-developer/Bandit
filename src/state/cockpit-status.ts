@@ -507,7 +507,9 @@ async function readStaleEvidence(
 }
 
 function readScalarStatus(content: string, field: string) {
-  return content.match(new RegExp(`^${field}:\\s*(\\S+)`, "m"))?.[1] ?? null;
+  const match = content.match(new RegExp(`^${field}:\\s*(.*?)\\s*$`, "m"));
+  const value = match?.[1]?.trim();
+  return value ? value : null;
 }
 
 async function readImprovementHealth(repoRoot: string) {

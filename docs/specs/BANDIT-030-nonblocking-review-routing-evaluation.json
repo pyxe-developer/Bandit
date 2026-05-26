@@ -75,7 +75,7 @@
     "baseline": "BANDIT-015 required multiple Local Qwen reruns before the operator ended a recursive Stage 4 loop; BANDIT-022 landed with two Local Qwen non_blocking hardening findings queued as chore candidates.",
     "expected_direction": "decrease repeated review loops caused only by future-hardening findings while keeping blocker finding acceptance unchanged.",
     "evaluation_window": "Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first. BANDIT-025, BANDIT-028, and BANDIT-029 now satisfy this window.",
-    "status": "planned",
-    "outcome": "pending"
+    "status": "evaluated",
+    "outcome": "keep"
   }
 }

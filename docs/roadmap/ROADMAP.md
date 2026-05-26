@@ -413,8 +413,10 @@ implementation evidence, Stage 7 improvement-evaluation evidence for
 `BANDIT-023` improvement outcome evaluation, Stage 4 review evidence, and
 Stage 5 landing verdict/readiness evidence, and local-record landing action
 evidence. Retrospective closeout is recorded, and the `BANDIT-023`
-improvement metadata is updated to `outcome: keep`. The next action is creating
-the first Phase 8 Workflow Cockpit work-item brief.
+improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
+closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is active
+with Stage 3 implementation evidence recorded; the next action is Stage 4
+review for `BANDIT-032`.
 
 ## Phase Map
 

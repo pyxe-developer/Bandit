@@ -308,6 +308,25 @@ test("cockpit status reports stale review and landing evidence without inventing
   await assertNoHiddenCockpitState(repo);
 });
 
+test("cockpit status reads full scalar status values before stale comparison", async () => {
+  const repo = await createCockpitRepo();
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-031/review-evidence.md",
+    [
+      "# Review Evidence",
+      "source_drift_status: stale marker unavailable",
+      "review_subject_hash_status: not current"
+    ].join("\n")
+  );
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.deepEqual(status.stale_evidence, []);
+});
+
 async function createCockpitRepo(options = {}) {
   const repo = await createTempRepo();
   await runBandit(repo, ["init"]);
