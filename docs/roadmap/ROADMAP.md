@@ -68,16 +68,17 @@ recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-028/implementation-evidence.md`, and its coordination log is
 recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
-`implementation_recorded`. The implemented command surface appends
+`review_recorded`. The implemented command surface appends
 runtime-agnostic actor coordination events for claim, handoff, block, complete,
 repair-request, and resume without turning actor events into workflow-state
-authority. The current next step is Stage 4 review evidence: pre-PR CodeRabbit,
-Local Qwen, and aggregate review evidence with current `review_subject_hash`.
-Do not create unrelated active-work branches, Phase 7 improvement engine work,
-Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
-exclusive claim leases, work surface reservations, product UAT approval,
-automatic merge/push/deploy behavior, or unrelated feature work before review
-evidence is recorded.
+authority. Stage 4 review evidence is recorded in
+`docs/work/BANDIT-028/review-evidence.md` with pre-PR CodeRabbit, Local Qwen,
+and aggregate review evidence at current `review_subject_hash`; the next step
+is the Stage 5 landing verdict. Do not create unrelated active-work branches,
+Phase 7 improvement engine work, Phase 8 web cockpit implementation, scheduler
+execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, or
+unrelated feature work before the landing verdict is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -253,17 +254,20 @@ evidence with current `review_subject_hash`, Stage 5 landing verdict,
 local-record landing action evidence, chore-disposition evidence,
 retrospective closeout, and gap-ledger disposition are recorded.
 `BANDIT-028` has its Phase 6 agent coordination event command spec, brief,
-Stage 2 RED evidence, and Stage 3 implementation evidence recorded. Review
-evidence is the next required stage before landing begins. Pre-PR CodeRabbit
-evidence is recorded in `docs/work/BANDIT-028/coderabbit-review.md` with
+Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 aggregate
+review evidence recorded. Pre-PR CodeRabbit evidence is recorded in
+`docs/work/BANDIT-028/coderabbit-review.md` with
 verdict `pass` and no findings after the focused repair recorded in
 `docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
 evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
 `reviewer_verdict: non_blocking`, one open finding about actor and evidence
 reference validation, and no required operator input. Codex PM disposition and
 durable routing for the Local Qwen finding is recorded in
-`docs/work/BANDIT-028/qwen-finding-disposition.md`. The next action is
-aggregate Stage 4 review evidence with current `review_subject_hash`.
+`docs/work/BANDIT-028/qwen-finding-disposition.md`. Aggregate review evidence
+is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
+`review_subject_hash`
+`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. The next
+action is the Stage 5 landing verdict.
 
 ## Phase Map
 
@@ -576,14 +580,12 @@ Current rule:
 
 Current priority:
 
-1. Record aggregate Stage 4 review evidence with current `review_subject_hash`,
-   CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, PM
-   disposition, and durable non-blocking finding routing.
+1. Record Stage 5 landing verdict for `BANDIT-028`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until Stage 4 review evidence
-   is current and recorded.
+   reservations, or Phase 7 evaluation behavior until the landing verdict is
+   recorded.
 
 ## Phase 6: Coordination Primitive
 
