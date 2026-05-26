@@ -415,8 +415,9 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run Stage 4 review and cross-model gates for
-`BANDIT-034` - Cockpit Shell Hardening.
+**Current next action:** Resolve or rerun the `BANDIT-034` Stage 4 CodeRabbit
+pre-PR review blocker before continuing Local Qwen and aggregate Stage 4 review
+evidence.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -427,8 +428,8 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is active at
-Stage 3 with structured spec, brief, RED evidence, and implementation evidence
-recorded.
+Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
+fail-closed CodeRabbit blocker evidence recorded.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -456,10 +457,11 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-034`,
-including pre-PR CodeRabbit review when available, Local Qwen adversarial
-review, review-subject hash, Codex PM disposition, and aggregate review
-evidence.
+**Expected next deliverable:** resolve the `BANDIT-034` Stage 4 CodeRabbit
+pre-PR review blocker by rerunning or repairing the provider gate until
+completed CodeRabbit evidence is recorded. Local Qwen, any needed
+review-subject hash refresh, and aggregate PM disposition must wait until the
+CodeRabbit gate is no longer blocking.
 
 ## Known Bootstrap Gaps
 
@@ -618,14 +620,16 @@ retrospective/improvement disposition for cockpit status coverage hardening.
 `BANDIT-033` has Stage 5 landing verdict/readiness evidence, local-record
 landing action evidence, and Stage 6 retrospective/improvement disposition
 recorded. `BANDIT-034` has a structured creation spec, Stage 1 brief, Stage 2
-RED evidence, and Stage 3 implementation evidence for the
-`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore. The source candidate is
-linked to `BANDIT-034` in `docs/work/BANDIT-033/qwen-finding-disposition.md`.
+RED evidence, Stage 3 implementation evidence, and fail-closed Stage 4
+CodeRabbit blocker evidence for the `BANDIT-033-COCKPIT-SHELL-HARDENING`
+improvement chore. The source candidate is linked to `BANDIT-034` in
+`docs/work/BANDIT-033/qwen-finding-disposition.md`.
 The current priority is:
 
-1. Run Stage 4 review and cross-model gates for `BANDIT-034` - Cockpit Shell
-   Hardening, including pre-PR CodeRabbit review when available, Local Qwen
-   adversarial review, review-subject hash, Codex PM disposition, and aggregate
+1. Resolve or rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR review blocker
+   recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
+   `docs/work/BANDIT-034/review-evidence.md`. Do not run Local Qwen or claim
+   aggregate Stage 4 pass evidence until CodeRabbit returns completed current
    review evidence.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,

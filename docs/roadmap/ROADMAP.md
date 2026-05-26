@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review and cross-model gates for
-`BANDIT-034` - Cockpit Shell Hardening.
+**Current next step:** Resolve or rerun the `BANDIT-034` Stage 4 CodeRabbit
+pre-PR review blocker before continuing Local Qwen and aggregate Stage 4 review
+evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -116,7 +117,11 @@ mapping. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-034/implementation-evidence.md`; the implementation derives
 guarded action affordances in the view model, makes light queue/context mapping
 explicit and source-linked, and keeps the render layer presentation-only. The
-next required artifact is Stage 4 review evidence. Do not start local
+Stage 4 CodeRabbit pre-PR review gate is currently blocked because the real
+provider run timed out before returning completed review evidence; fail-closed
+evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
+`docs/work/BANDIT-034/review-evidence.md`. The next required artifact is
+completed current CodeRabbit review evidence. Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
@@ -806,9 +811,10 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review and cross-model gates for `BANDIT-034` - Cockpit Shell
-   Hardening, including pre-PR CodeRabbit review when available, Local Qwen
-   adversarial review, review-subject hash, Codex PM disposition, and aggregate
+1. Resolve or rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR review blocker
+   recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
+   `docs/work/BANDIT-034/review-evidence.md`. Do not run Local Qwen or claim
+   aggregate Stage 4 pass evidence until CodeRabbit returns completed current
    review evidence.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
