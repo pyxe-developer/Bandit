@@ -2,7 +2,7 @@
 
 ## Status
 
-**Phase:** 6 - Coordination Primitive.
+**Phase:** 7 - Improvement Engine.
 
 **State:** `BANDIT-016` landed as the bootstrap-gap chore for
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its landing verdict, local-record
@@ -224,53 +224,48 @@ closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` resolved.
 
-`BANDIT-028` is the active Phase 6 Coordination Primitive slice for agent
-coordination event commands. Its structured creation spec is recorded in
+`BANDIT-028` is landed and closed out as the Phase 6 Coordination Primitive
+slice for agent coordination event commands. Its structured creation spec is
+recorded in
 `docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
 recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-028/implementation-evidence.md`, and its per-work-item
-coordination log is recorded in
-`docs/work/BANDIT-028/coordination-log.jsonl` at
-`landed`. The implemented slice adds a CLI-owned way to append
-runtime-agnostic actor events for claim, handoff, block, complete,
-repair-request, and resume while preserving the rule that actor events do not
-advance workflow state, emit safe triggers, or satisfy landing/review/UAT
-gates without accepted step transitions. Pre-PR CodeRabbit Stage 4 evidence is
-recorded in `docs/work/BANDIT-028/coderabbit-review.md` with verdict `pass` and
-no findings after the focused context repair recorded in
-`docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
-evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
-`reviewer_verdict: non_blocking`, one open finding about actor and evidence
-reference validation, `operator_input_status: none_required`, and current
-source head `65af75cd5cf4397ad66afe05285452e8dd5ec915`. Codex PM disposition
-and durable routing for the Local Qwen finding is recorded in
-`docs/work/BANDIT-028/qwen-finding-disposition.md`. Aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
-`review_subject_hash`
-`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`,
-CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, Codex PM
-disposition, and durable non-blocking finding routing. Stage 5 landing verdict
-is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final verdict
-`safe-to-land`. Local-record landing action evidence is recorded in
-`docs/work/BANDIT-028/landing-action.md`.
+`docs/work/BANDIT-028/implementation-evidence.md`, pre-PR CodeRabbit Stage 4
+evidence is recorded in `docs/work/BANDIT-028/coderabbit-review.md`, Local
+Qwen Stage 4 evidence and PM disposition are recorded in
+`docs/work/BANDIT-028/local-qwen-review.md` and
+`docs/work/BANDIT-028/qwen-finding-disposition.md`, aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-028/review-evidence.md`, Stage 5
+landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md`,
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-028/landing-action.md`, retrospective closeout is recorded in
+`docs/work/BANDIT-028/retrospective.md`, and its per-work-item coordination log
+is advanced through `retrospective_recorded` to `closed`. The implemented
+slice adds a CLI-owned way to append runtime-agnostic actor events for claim,
+handoff, block, complete, repair-request, and resume while preserving the rule
+that actor events do not advance workflow state, emit safe triggers, or satisfy
+landing/review/UAT gates without accepted step transitions. The accepted Local
+Qwen non-blocking actor identity validation concern is durably routed as
+`BANDIT-028-ACTOR-IDENTITY-VALIDATION` in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`; it is a queued candidate
+for the next actor identity policy, coordination validation, claim lease, or
+work surface reservation slice, not an active work item.
 
-**Last completed milestone:** `BANDIT-028` local-record landing action is
+**Last completed milestone:** `BANDIT-028` retrospective, improvement
+disposition, context closeout, and terminal coordination-log state are
 recorded.
 
-**Current next action:** Record `BANDIT-028` retrospective, improvement
-dispositions, and closeout context. Do not start Phase 7
-Improvement Engine work, Phase 8 Workflow Cockpit
-implementation, Phase 9 dogfood, scheduler execution, worktree lifecycle,
-exclusive claim leases, work surface reservations, automatic merge/push/deploy
-behavior, product UAT approval, or unrelated work before retrospective,
-improvement dispositions, and closeout context are recorded.
+**Current next action:** Create `BANDIT-029` as the first Phase 7 Improvement
+Engine work-item brief. The brief should define the smallest repo-native
+improvement evaluation foundation from existing retrospective-derived
+improvement metadata, without starting Phase 8 Workflow Cockpit implementation,
+Phase 9 dogfood, scheduler execution, worktree lifecycle, exclusive claim
+leases, work surface reservations, automatic merge/push/deploy behavior,
+product UAT approval, or unrelated work.
 
 ## Active Work
 
-**Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
-Current state is `landed`; the next action is retrospective, improvement
-dispositions, and closeout context.
+**Active work item:** none. `BANDIT-028` is closed.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -290,10 +285,10 @@ Reviewer Routing; `BANDIT-019` - Review Subject Hash Evidence Freshness;
 Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
-Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
+Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
+`BANDIT-028` - Agent Coordination Event Commands.
 
-**Expected next deliverable:** Retrospective, improvement dispositions, and
-closeout context for `BANDIT-028`.
+**Expected next deliverable:** `BANDIT-029` Phase 7 Improvement Engine brief.
 
 ## Known Bootstrap Gaps
 
@@ -397,7 +392,7 @@ evidence and retrospective closeout.
 
 ## Next Step Details
 
-Phase 6 Coordination Primitive.
+Phase 7 Improvement Engine.
 
 BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing
 verdict contracts, source-drift checks, validation, and
@@ -432,14 +427,17 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 -- gaps list`, and `git diff --check`.
 
 Use `bandit gaps list` as the routing source before starting new work. All
-currently recorded bootstrap gaps are resolved through `BANDIT-027`, so the
-current priority is:
+currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
+`BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
+The current priority is:
 
-1. Record retrospective, improvement dispositions, and closeout context for
-   `BANDIT-028`.
-2. Stop before Phase 7, Phase 8, Phase 9,
-   scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
-   unrelated work until `BANDIT-028` is closed out or explicitly blocked.
+1. Create `BANDIT-029` as the first Phase 7 Improvement Engine work-item brief.
+2. Scope `BANDIT-029` to the smallest repo-native improvement evaluation
+   foundation from existing retrospective-derived improvement metadata.
+3. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
+   automatic merge/push/deploy, exclusive claim leases, work surface
+   reservations, or unrelated work until `BANDIT-029` is created and executed
+   through the normal slice boundary.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -447,11 +445,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record `BANDIT-028` retrospective,
-improvement dispositions, and closeout context from repo artifacts. If live
-external service access, cost/risk override, policy change,
-PR/merge/push/deploy authority, product direction, or product UAT approval is
-required, halt and ask for that input directly.
+No operator-owned input is required to create the `BANDIT-029` Phase 7
+Improvement Engine brief from repo artifacts. If live external service access,
+cost/risk override, policy change, PR/merge/push/deploy authority, product
+direction, or product UAT approval is required, halt and ask for that input
+directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

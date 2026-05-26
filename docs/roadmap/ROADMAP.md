@@ -14,7 +14,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 6 - Coordination Primitive.
+**Current phase:** Phase 7 - Improvement Engine.
 
 **Current next step:** `BANDIT-025` is closed out as the first Phase 6
 Coordination Primitive slice. `BANDIT-026` is landed and closed out for typed
@@ -61,14 +61,15 @@ recorded in `docs/work/BANDIT-027/chore-disposition.md`, retrospective
 closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
-`BANDIT-028` is active as the next Phase 6 Coordination Primitive slice. Its
+`BANDIT-028` is landed and closed out as the final Phase 6 Coordination
+Primitive slice. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
 recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-028/implementation-evidence.md`, and its coordination log is
 recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
-`landed`. The implemented command surface appends
+`closed`. The implemented command surface appends
 runtime-agnostic actor coordination events for claim, handoff, block, complete,
 repair-request, and resume without turning actor events into workflow-state
 authority. Stage 4 review evidence is recorded in
@@ -76,14 +77,16 @@ authority. Stage 4 review evidence is recorded in
 and aggregate review evidence at current `review_subject_hash`. Stage 5 landing
 verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final
 verdict `safe-to-land`; local-record landing action evidence is recorded in
-`docs/work/BANDIT-028/landing-action.md`. The next step is retrospective,
-improvement dispositions, and closeout context. Do
-not create unrelated active-work branches,
-Phase 7 improvement engine work, Phase 8 web cockpit implementation, scheduler
-execution, worktree lifecycle, exclusive claim leases, work surface
+`docs/work/BANDIT-028/landing-action.md`, retrospective closeout is recorded in
+`docs/work/BANDIT-028/retrospective.md`, and the accepted Local Qwen
+non-blocking actor identity validation concern is durably routed in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`. The next step is to create
+`BANDIT-029` as the first Phase 7 Improvement Engine work-item brief. Do not
+create unrelated active-work branches, Phase 8 web cockpit implementation,
+scheduler execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, or
-unrelated feature work before `BANDIT-028` closeout is recorded or explicitly
-blocked.
+unrelated feature work before `BANDIT-029` is created and executed through the
+normal slice boundary.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -274,8 +277,9 @@ is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
 `ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
 final verdict `safe-to-land`. Local-record landing action evidence is recorded
-in `docs/work/BANDIT-028/landing-action.md`; the next action is retrospective,
-improvement dispositions, and closeout context.
+in `docs/work/BANDIT-028/landing-action.md`; retrospective closeout is recorded
+in `docs/work/BANDIT-028/retrospective.md`; and the coordination log is closed.
+The next action is `BANDIT-029`, the first Phase 7 Improvement Engine brief.
 
 ## Phase Map
 
@@ -287,8 +291,8 @@ improvement dispositions, and closeout context.
 | 3 | Routing And Smell Detection | Codex PM can record manager-owned routing decisions and escalate review from a smell catalog. | Complete |
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Complete |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Complete |
-| 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Active |
-| 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Not started |
+| 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Complete |
+| 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Active |
 | 8 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, coordination state, and improvement health. | Not started |
 | 9 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
 
@@ -588,13 +592,14 @@ Current rule:
 
 Current priority:
 
-1. Record retrospective, improvement dispositions, and closeout context for
-   `BANDIT-028`.
-2. Stop before unrelated active-work branches, scheduler execution, worktree
+1. Create `BANDIT-029` as the first Phase 7 Improvement Engine work-item brief.
+2. Scope `BANDIT-029` to the smallest repo-native improvement evaluation
+   foundation from existing retrospective-derived improvement metadata.
+3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until `BANDIT-028` is closed
-   out or explicitly blocked.
+   reservations, or Phase 8 work until `BANDIT-029` is created and executed
+   through the normal slice boundary.
 
 ## Phase 6: Coordination Primitive
 
