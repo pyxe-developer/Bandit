@@ -415,22 +415,17 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** The latest four `BANDIT-034` CodeRabbit findings are
-repaired in source and disposition evidence: stale hardcoded next-action UI copy
-in `screens.jsx`, malformed/missing cockpit globals in `app.jsx`, missing
-queue-band rows in `screens.jsx`, and `design-canvas.jsx` host-message
-source/origin validation. The next required action is a scoped CodeRabbit
-provider rerun against only that repair delta, not the full `origin/main` local
-diff. Use baseline commit `08c3ef803bd9bb78b85c6fd376815dad99676677`, which
-recorded the current four-finding blocker state. Required provider command:
-`coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`.
-After normalizing the provider output, record Bandit evidence with
-`npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base base-commit:08c3ef803bd9bb78b85c6fd376815dad99676677 --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json`.
-Do not run `coderabbit review --agent --base origin/main` for this repair loop
-unless the scoped rerun is unavailable and the failure is recorded explicitly.
-
-Do not continue Local Qwen or claim aggregate Stage 4 review evidence until
-CodeRabbit is rerun after repair and no longer blocks Stage 4.
+**Current next action:** `BANDIT-034` scoped CodeRabbit provider evidence has
+been rerun for the latest repair delta from baseline
+`08c3ef803bd9bb78b85c6fd376815dad99676677` and now passes at source head
+`97cb00be50023842dc900782c63cbb70fd374bfd` with no findings. Normalized
+provider evidence is recorded in
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`; repo-native CodeRabbit
+evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`. The next
+required action is the Local Qwen adversarial Stage 4 review for `BANDIT-034` at
+the current source head. Do not refresh aggregate review-subject evidence, claim
+aggregate Stage 4 PM disposition, or proceed toward landing until Local Qwen
+evidence is recorded and dispositioned.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -442,11 +437,11 @@ that authority.
 
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is active at
 Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
-completed CodeRabbit blocker evidence recorded. The latest four CodeRabbit
+current scoped CodeRabbit pass evidence recorded. The latest four CodeRabbit
 findings are repaired in source and
 `docs/work/BANDIT-034/coderabbit-finding-disposition.md`; the work item now
-awaits the scoped CodeRabbit provider rerun from baseline
-`08c3ef803bd9bb78b85c6fd376815dad99676677`.
+awaits Local Qwen adversarial review before aggregate Stage 4 evidence can be
+refreshed.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -474,12 +469,10 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** Scoped CodeRabbit pre-PR provider rerun for the
-latest `BANDIT-034` repair delta from baseline
-`08c3ef803bd9bb78b85c6fd376815dad99676677`, followed by normalized provider
-fixture evidence and `bandit coderabbit-review pre-pr` evidence. Local Qwen, any
-needed review-subject hash refresh, and aggregate PM disposition must wait until
-CodeRabbit no longer blocks Stage 4.
+**Expected next deliverable:** Local Qwen adversarial review evidence for
+`BANDIT-034` at current source head, followed by PM disposition of any findings.
+Any needed review-subject hash refresh and aggregate Stage 4 PM disposition must
+wait until Local Qwen evidence is recorded and no longer blocks Stage 4.
 
 ## Known Bootstrap Gaps
 
@@ -638,20 +631,17 @@ retrospective/improvement disposition for cockpit status coverage hardening.
 `BANDIT-033` has Stage 5 landing verdict/readiness evidence, local-record
 landing action evidence, and Stage 6 retrospective/improvement disposition
 recorded. `BANDIT-034` has a structured creation spec, Stage 1 brief, Stage 2
-RED evidence, Stage 3 implementation evidence, completed Stage 4 CodeRabbit
-blocker evidence for the `BANDIT-033-COCKPIT-SHELL-HARDENING` improvement
-chore, focused repair / PM disposition evidence for earlier CodeRabbit
-findings, and stale CodeRabbit blocker evidence for the repaired Babel/SRI
-finding recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
+RED evidence, Stage 3 implementation evidence, focused CodeRabbit finding
+repair / PM disposition evidence, and current scoped CodeRabbit pass evidence
+recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The source candidate is
 linked to `BANDIT-034` in
 `docs/work/BANDIT-033/qwen-finding-disposition.md`.
 The current priority is:
 
-1. Rerun the CodeRabbit pre-PR provider against the repaired `BANDIT-034`
-   source. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
-   CodeRabbit no longer blocks Stage 4.
+1. Run Local Qwen adversarial review for `BANDIT-034` at the current source
+   head. Do not claim aggregate Stage 4 pass evidence until Local Qwen evidence
+   is recorded and dispositioned.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
