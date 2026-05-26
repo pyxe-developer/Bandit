@@ -1,0 +1,48 @@
+{
+  "sourceHead": "49f91f5d573430b5f6536d9f8fa39b0aa8aa49ed",
+  "baseRevision": "origin/main",
+  "reviewState": "completed",
+  "verdict": "blocker",
+  "findings": [
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Extract duplicated cockpitStatusFixture object declarations in test/cockpit-ui.test.mjs into a shared fixture helper."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Update stale ROADMAP.md next-action text that still instructs creating BANDIT-033-COCKPIT-SHELL-HARDENING instead of reflecting active BANDIT-034 Stage 4 work."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Ensure TweaksPanel scrub pointermove/pointerup listeners are removed if the component unmounts mid-drag."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "Set reduced-motion animation and transition durations to 0s and pause animations in colors_and_type.css."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Add the native disabled attribute to disabled ActionButton elements in prototype-source/ui.jsx."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Ensure TweakRadio pointermove/pointerup listeners are removed if the component unmounts mid-drag."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "Replace global :focus outline suppression with focus-visible keyboard focus styling in colors_and_type.css."
+    },
+    {
+      "severity": "critical",
+      "status": "unresolved",
+      "body": "Update index.html script integrity hashes for React, ReactDOM, and Babel to match the loaded package versions."
+    }
+  ]
+}
