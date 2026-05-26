@@ -317,20 +317,30 @@ scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
 identity policy, claim lease, work surface reservation, or unrelated work
 starts.
 
-**Last completed milestone:** `BANDIT-030` retrospective and improvement
-disposition closeout are recorded.
+`BANDIT-031` is the active first Phase 8 Workflow Cockpit slice for a
+read-only Workflow Cockpit Status Foundation. Its structured creation spec is
+recorded in
+`docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, and its Stage
+1 brief is recorded in `docs/work/BANDIT-031/brief.md`. The slice is scoped to
+a CLI-authoritative, derived cockpit status payload or report that reads
+repo-native artifacts and exposes source paths, validation state, current
+phase, active work item, next action, blockers, gate summaries, improvement
+health, and coordination state where available. It must not start visual UI,
+server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, claim leases, work surface reservations, automatic merge/push/deploy,
+product UAT approval, actor identity policy, PR/CI workflow, or unrelated work.
 
-**Current next action:** Create the first Phase 8 Workflow Cockpit work-item
-brief from `docs/design/workflow-cockpit-boundary.md`, `docs/plans/V0_PLAN.md`,
-and the current Phase 6/Phase 7 evidence. Keep the next step to the brief and
-Stage 1 acceptance criteria; do not start cockpit implementation, scheduler
-execution, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
-identity policy, claim lease, work surface reservation, PR/CI workflow, or
-unrelated work before the brief exists.
+**Last completed milestone:** `BANDIT-031` Stage 1 brief is recorded.
+
+**Current next action:** Record Stage 2 RED evidence for `BANDIT-031` by writing
+tests or an explicit verification plan for read-only cockpit status derivation,
+source artifact links, fail-closed missing or contradictory repo state, and the
+no-hidden-authority cockpit boundary before production implementation starts.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-030` is landed and closed out.
+**Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation.
+Current stage: Stage 2 RED evidence. `BANDIT-030` is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -356,7 +366,8 @@ Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing.
 
 **Expected next deliverable:** `docs/work/BANDIT-031/brief.md` for the first
-Phase 8 Workflow Cockpit slice.
+Phase 8 Workflow Cockpit slice is recorded. The next deliverable is
+`docs/work/BANDIT-031/red-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -508,12 +519,12 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition.
 The current priority is:
 
-1. Create the first Phase 8 Workflow Cockpit work-item brief from existing
-   boundary and roadmap artifacts.
+1. Record Stage 2 RED evidence for `BANDIT-031` from the brief and existing
+   boundary artifacts.
 2. Stop before Phase 8 implementation, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   the Phase 8 brief is recorded.
+   the RED evidence is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -521,14 +532,15 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the first Phase 8 Workflow Cockpit
-brief from existing repo artifacts. The brief must stay within the approved
-CLI-authoritative cockpit boundary.
+No operator-owned input is required to record Stage 2 RED evidence for
+`BANDIT-031` from existing repo artifacts. The RED evidence must stay within the
+approved CLI-authoritative cockpit boundary and the active brief.
 
 If the next step would choose product/UI direction beyond the evidence-backed
-surfaces in `docs/design/workflow-cockpit-boundary.md`, require product UAT,
-change policy, approve cost/risk, enable PR/merge/push/deploy authority, or
-select an external service, halt and ask for that input directly.
+read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require
+product UAT, change policy, approve cost/risk, enable PR/merge/push/deploy
+authority, select an external service, or resolve genuinely ambiguous scope,
+halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

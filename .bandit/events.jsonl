@@ -17,3 +17,4 @@
 {"type":"artifact_created","work_item":"BANDIT-030","message":"Created red_evidence artifact at docs/work/BANDIT-030/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-030","message":"Created implementation_evidence artifact at docs/work/BANDIT-030/implementation-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-030","message":"Created landing_verdict artifact at docs/work/BANDIT-030/landing-verdict.md"}
+{"type":"work_item_created","work_item":"BANDIT-031","message":"Created work item BANDIT-031 from docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json"}
