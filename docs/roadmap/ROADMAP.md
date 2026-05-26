@@ -47,8 +47,11 @@ and actionable findings, and preserves the existing PR-backed
 `docs/work/BANDIT-027/coderabbit-review.md` with provider
 `coderabbit-agent-pre-pr`, review target `local-diff:origin/main`, source head
 `e4b2c0010832fb49d26889a8694beb471645a402`, verdict `pass`, and no findings.
-The current next step is Local Qwen review, followed by aggregate review
-evidence with current `review_subject_hash`.
+Local Qwen evidence is recorded in
+`docs/work/BANDIT-027/local-qwen-review.md` with source head
+`9bee51b8bf5978b8dee98bf1a829cc449f3d2686`, reviewer verdict `pass`, and no
+findings. The current next step is aggregate review evidence with current
+`review_subject_hash`.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
 Phase 8 web cockpit implementation, claim leases, scheduler execution,
 worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
@@ -224,8 +227,9 @@ implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
 review evidence, Stage 5 landing verdict, landing action, retrospective, and
 terminal coordination-log state recorded. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`
 is currently active as `BANDIT-027`; implementation evidence and pre-PR
-CodeRabbit Stage 4 pass evidence are recorded, and no unrelated work should
-proceed until it lands or is explicitly blocked/dispositioned.
+CodeRabbit Stage 4 pass evidence and Local Qwen Stage 4 pass evidence are
+recorded, and no unrelated work should proceed until it lands or is explicitly
+blocked/dispositioned.
 
 ## Phase Map
 
@@ -522,8 +526,9 @@ Current rule:
   landing action, retrospective, workflow-cockpit boundary artifact, and
   gap-ledger disposition are recorded.
 - `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`; the
-  brief, RED evidence, implementation evidence, and pre-PR CodeRabbit Stage 4
-  pass evidence are recorded, and the next action is Local Qwen review.
+  brief, RED evidence, implementation evidence, pre-PR CodeRabbit Stage 4 pass
+  evidence, and Local Qwen Stage 4 pass evidence are recorded, and the next
+  action is aggregate Stage 4 review evidence.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -536,9 +541,8 @@ Current rule:
 
 Current priority:
 
-1. Run Local Qwen review for `BANDIT-027`.
-2. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
-3. Stop before creating unrelated work items, active-work branches, claim
+1. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
+2. Stop before creating unrelated work items, active-work branches, claim
    leases, scheduler execution, worktree lifecycle, cockpit implementation,
    product UAT approval, automatic merge/push/deploy behavior, or Phase 7
    evaluation behavior until `BANDIT-027` lands or is explicitly

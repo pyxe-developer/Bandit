@@ -207,13 +207,16 @@ existing PR-backed `coderabbit-review live` path. Pre-PR CodeRabbit Stage 4
 evidence is recorded in `docs/work/BANDIT-027/coderabbit-review.md` with
 provider `coderabbit-agent-pre-pr`, review target `local-diff:origin/main`,
 source head `e4b2c0010832fb49d26889a8694beb471645a402`, verdict `pass`, and
-no findings.
+no findings. Local Qwen Stage 4 evidence is recorded in
+`docs/work/BANDIT-027/local-qwen-review.md` with source head
+`9bee51b8bf5978b8dee98bf1a829cc449f3d2686`, reviewer verdict `pass`, and no
+findings.
 
-**Last completed milestone:** `BANDIT-027` pre-PR CodeRabbit Stage 4 evidence
-is recorded with verdict `pass`.
+**Last completed milestone:** `BANDIT-027` Local Qwen Stage 4 evidence is
+recorded with verdict `pass`.
 
-**Current next action:** Run Local Qwen review for `BANDIT-027`, then record
-aggregate Stage 4 review evidence with current `review_subject_hash`.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-027` with current `review_subject_hash`.
 Do not start unrelated Phase 6 work, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
@@ -224,7 +227,8 @@ blocked/dispositioned.
 
 **Active work item:** `BANDIT-027` - Pre-PR CodeRabbit CLI Review. Current
 coordination state: `implementation_recorded`; accountable actor: Reviewer;
-next action: run Local Qwen review for `BANDIT-027`.
+next action: record aggregate Stage 4 review evidence with current
+`review_subject_hash`.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -246,8 +250,8 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions.
 
-**Expected next deliverable:** Local Qwen review evidence for `BANDIT-027`,
-followed by aggregate Stage 4 review evidence.
+**Expected next deliverable:** Aggregate Stage 4 review evidence for
+`BANDIT-027` with current `review_subject_hash`.
 
 ## Known Bootstrap Gaps
 
@@ -389,9 +393,8 @@ previously recorded bootstrap gaps are resolved through `BANDIT-026`, and
 `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`, so the
 current priority is:
 
-1. Run Local Qwen review for `BANDIT-027`.
-2. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
-3. Stop before unrelated Phase 6, Phase 7, Phase 8, Phase 9, claim lease,
+1. Record aggregate Stage 4 review evidence with current `review_subject_hash`.
+2. Stop before unrelated Phase 6, Phase 7, Phase 8, Phase 9, claim lease,
    scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
    next-work-item behavior until `BANDIT-027` lands or is explicitly
    blocked/dispositioned.
