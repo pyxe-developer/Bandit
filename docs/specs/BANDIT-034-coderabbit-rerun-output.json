@@ -1,0 +1,8 @@
+{
+  "sourceHead": "1355a9462299247496000d1f00d22482a524fa89",
+  "baseRevision": "origin/main",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "findings": [],
+  "providerError": "CodeRabbit provider rerun started at 2026-05-26T18:58:17Z and did not complete within the 10-minute Stage 4 wait window. Partial provider output reached status phase analyzing/reviewing before Codex PM terminated the still-running process."
+}
