@@ -1,4 +1,8 @@
 import type { CockpitStatus } from "./cockpit-status.js";
+import {
+  deriveCockpitActionAffordances,
+  type CockpitActionAffordance
+} from "./cockpit-actions.ts";
 
 type AttentionCategoryId =
   | "operator_input_required"
@@ -24,6 +28,14 @@ type StatusCue = {
   status: string;
   source?: string;
   sources?: string[];
+};
+
+type LightQueueContext = {
+  kind: "light_queue_context";
+  status: "clear" | "needs_attention";
+  summary: string;
+  sources: string[];
+  excluded_authority: string[];
 };
 
 export type CockpitViewModel = {
@@ -59,6 +71,8 @@ export type CockpitViewModel = {
     shows_hash_state: boolean;
     shows_gate_basis: boolean;
   };
+  action_affordances: CockpitActionAffordance[];
+  queue_context: LightQueueContext;
   status_cues: StatusCue[];
   canonical_state_owner: "repo_native_artifacts_via_bandit_cli";
   prohibited_authority: string[];
@@ -85,10 +99,18 @@ const ATTENTION_LABELS: Record<AttentionCategoryId, string> = {
   queue_context: "Queue context"
 };
 
+const QUEUE_CONTEXT_EXCLUDED_AUTHORITY = [
+  "intake_ledger_management",
+  "scheduler_execution",
+  "claimability_decision",
+  "workstream_queue_management"
+];
+
 export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
   const activeStage = readActiveStage(status);
+  const queueContext = buildLightQueueContext(status);
   const attentionCategories = ATTENTION_CATEGORY_ORDER.map((categoryId) =>
-    buildAttentionCategory(categoryId, status)
+    buildAttentionCategory(categoryId, status, queueContext)
   );
 
   return {
@@ -108,6 +130,8 @@ export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
       shows_hash_state: true,
       shows_gate_basis: true
     },
+    action_affordances: deriveCockpitActionAffordances(status),
+    queue_context: queueContext,
     status_cues: buildStatusCues(status),
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: [
@@ -124,7 +148,11 @@ export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
   };
 }
 
-function buildAttentionCategory(categoryId: AttentionCategoryId, status: CockpitStatus) {
+function buildAttentionCategory(
+  categoryId: AttentionCategoryId,
+  status: CockpitStatus,
+  queueContext: LightQueueContext
+) {
   if (categoryId === "operator_input_required") {
     return {
       id: categoryId,
@@ -178,9 +206,40 @@ function buildAttentionCategory(categoryId: AttentionCategoryId, status: Cockpit
   return {
     id: categoryId,
     label: ATTENTION_LABELS[categoryId],
-    status: status.bootstrap_gaps.status,
-    source: status.bootstrap_gaps.source
+    status: queueContext.status,
+    sources: queueContext.sources
   };
+}
+
+function buildLightQueueContext(status: CockpitStatus): LightQueueContext {
+  const bootstrapGapCount = status.bootstrap_gaps.gaps.length;
+  const improvementCandidateCount = status.improvement_health.candidates.length;
+
+  return {
+    kind: "light_queue_context",
+    status: status.bootstrap_gaps.status === "open" ? "needs_attention" : "clear",
+    summary: `${formatBootstrapGapSummary(bootstrapGapCount)}; ${formatImprovementCandidateSummary(
+      improvementCandidateCount
+    )}.`,
+    sources: uniqueStrings([
+      status.bootstrap_gaps.source,
+      ...status.improvement_health.sources,
+      status.next_action.source
+    ]),
+    excluded_authority: QUEUE_CONTEXT_EXCLUDED_AUTHORITY
+  };
+}
+
+function formatBootstrapGapSummary(count: number) {
+  if (count === 0) {
+    return "No open bootstrap gaps";
+  }
+
+  return `${count} open bootstrap ${count === 1 ? "gap" : "gaps"}`;
+}
+
+function formatImprovementCandidateSummary(count: number) {
+  return `${count} improvement ${count === 1 ? "candidate is" : "candidates are"} visible`;
 }
 
 function buildPrimaryAttention(status: CockpitStatus) {

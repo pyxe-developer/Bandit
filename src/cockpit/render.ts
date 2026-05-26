@@ -23,7 +23,7 @@ export function renderCockpitShell(
   viewModel: CockpitViewModel,
   viewport: Viewport
 ) {
-  const controls = deriveCockpitActionAffordancesFromViewModel(viewModel);
+  const controls = renderControls(viewModel.action_affordances);
 
   return {
     title: "Bandit Workflow Cockpit",
@@ -59,63 +59,21 @@ export function renderCockpitShell(
       shows_gate_basis: viewModel.evidence_drilldown.shows_gate_basis,
       mutation_forms: [],
       canonical_state_owner: viewModel.canonical_state_owner
+    },
+    queue_context: {
+      heading: "Queue context",
+      status: viewModel.queue_context.status,
+      summary: viewModel.queue_context.summary,
+      sources: viewModel.queue_context.sources,
+      mutation_forms: [],
+      excluded_authority: viewModel.queue_context.excluded_authority
     }
   };
 }
 
-function deriveCockpitActionAffordancesFromViewModel(
-  viewModel: CockpitViewModel
+function renderControls(
+  actions: CockpitViewModel["action_affordances"]
 ): RenderedControl[] {
-  const redEvidenceGate = viewModel.gate_strip.find(
-    (gate) => gate.id === "stage_2_red_evidence"
-  );
-  const landingReadiness = viewModel.status_cues.find(
-    (cue) => cue.id === "landing_readiness"
-  );
-  const reviewGateEnabled = redEvidenceGate?.status === "pass";
-  const landingCheckEnabled = landingReadiness?.status === "ready";
-  const actions = [
-    {
-      id: "validate_repo",
-      label: "Validate",
-      command_family: "bandit validate",
-      enabled: true,
-      reason: "Read-only validation is available through CLI Authority."
-    },
-    {
-      id: "inspect_evidence",
-      label: "Evidence",
-      command_family: "bandit show",
-      enabled: true,
-      reason: "Evidence inspection is read-only and source-linked."
-    },
-    {
-      id: "run_review_gate",
-      label: "Review Gate",
-      command_family: "bandit qwen-review",
-      enabled: reviewGateEnabled,
-      reason: reviewGateEnabled
-        ? "Stage 4 review can be requested through CLI Authority."
-        : "Stage 2 RED evidence is missing."
-    },
-    {
-      id: "check_landing_readiness",
-      label: "Landing Check",
-      command_family: "bandit land-check",
-      enabled: landingCheckEnabled,
-      reason: landingCheckEnabled
-        ? "Landing readiness can be checked through CLI Authority."
-        : "implementation evidence is not recorded"
-    },
-    {
-      id: "record_uat",
-      label: "Record UAT",
-      command_family: "bandit uat",
-      enabled: false,
-      reason: "UAT is unavailable until an operator-facing implementation exists."
-    }
-  ];
-
   return actions.map((action) => ({
     id: action.id,
     role: "button" as const,
