@@ -267,26 +267,34 @@ canonical state. Stage 4 review evidence is recorded in
 `docs/work/BANDIT-029/review-evidence.md` with current review subject hash
 `588217e3f8df9bef06076ceec28815cb41ccc9dcb35ff80e5d7635af897f876c`.
 CodeRabbit completed with findings 0, Local Qwen returned a `non_blocking`
-verdict, and Codex PM accepted/routed the non-blocking hardening findings. The
-slice is scoped to the smallest repo-native improvement evaluation foundation
+verdict, and Codex PM accepted/routed the non-blocking hardening findings.
+Stage 5 landing verdict is recorded in
+`docs/work/BANDIT-029/landing-verdict.md` with final verdict `safe-to-land`;
+`npm run bandit -- land-check BANDIT-029` passes at current head
+`fe731df7814725382cedbd77704b3cab36b66b6b`. The slice is scoped to the
+smallest repo-native improvement evaluation foundation
 from existing retrospective-derived improvement metadata. It must not start
 Phase 8 Workflow Cockpit implementation, scheduler execution, worktree
 lifecycle, exclusive claim leases, work surface reservations, automatic
 merge/push/deploy behavior, product UAT approval, actor identity policy, or
 unrelated coordination work.
 
-**Last completed milestone:** `BANDIT-029` Stage 4 review evidence is recorded
-and accepted with non-blocking Local Qwen findings durably dispositioned.
+**Last completed milestone:** `BANDIT-029` Stage 5 landing verdict is recorded
+and landing readiness verification passes with final verdict `safe-to-land`.
 
-**Current next action:** Create the Stage 5 landing verdict for `BANDIT-029`
-and run landing readiness verification. Do not perform landing action or start
-the next slice before the landing verdict gate is recorded.
+**Current next action:** Run the local-record landing action for `BANDIT-029`
+with `npm run bandit -- land BANDIT-029 --action local-record`. Do not start
+the next slice, Phase 8, scheduler, worktree lifecycle, automatic
+merge/push/deploy, product UAT, actor identity policy, or unrelated work before
+landing action evidence, retrospective/improvement disposition, and context
+closeout are recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-029` - Improvement Evaluation Foundation. Stage 1
 brief, Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4
-review evidence are recorded; Stage 5 landing verdict is next.
+review evidence are recorded. Stage 5 landing verdict and landing readiness
+verification are recorded; local-record landing action is next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -309,7 +317,7 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands.
 
-**Expected next deliverable:** `docs/work/BANDIT-029/landing-verdict.md`.
+**Expected next deliverable:** `docs/work/BANDIT-029/landing-action.md`.
 
 ## Known Bootstrap Gaps
 
@@ -451,15 +459,16 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
 `BANDIT-029` now has a structured spec, Stage 1 brief, Stage 2 RED evidence,
-Stage 3 implementation evidence, and Stage 4 review evidence. The current
-priority is:
+Stage 3 implementation evidence, Stage 4 review evidence, and Stage 5 landing
+verdict/readiness evidence. The current priority is:
 
-1. Create the Stage 5 landing verdict for `BANDIT-029`.
-2. Run landing readiness verification for `BANDIT-029`.
-3. Stop before landing action, Phase 8, Phase 9, scheduler, worktree lifecycle,
-   product UAT, automatic merge/push/deploy, exclusive claim leases, work
-   surface reservations, actor identity policy, or unrelated work until the
-   Stage 5 gate is recorded.
+1. Run the local-record landing action for `BANDIT-029`.
+2. Record landing action evidence, then complete retrospective/improvement
+   disposition and context closeout.
+3. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
+   automatic merge/push/deploy, exclusive claim leases, work surface
+   reservations, actor identity policy, or unrelated work until `BANDIT-029`
+   is landed and closed out.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -467,10 +476,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for routine `BANDIT-029` Stage 4 review
-routing from repo artifacts. If live external service access, cost/risk
-override, policy change, PR/merge/push/deploy authority, product direction, or
-product UAT approval is required, halt and ask for that input directly.
+No operator-owned input is required for routine `BANDIT-029` local-record
+landing action from repo artifacts. If live external service access,
+cost/risk override, policy change, PR/merge/push/deploy authority, product
+direction, or product UAT approval is required, halt and ask for that input
+directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
