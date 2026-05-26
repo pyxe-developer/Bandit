@@ -120,6 +120,274 @@ test("coderabbit-review fails closed when the work item is unknown", async () =>
   assert.match(result.stderr, /Work item not found: BANDIT-404/);
 });
 
+test("coderabbit-review pre-pr captures clean current local-diff evidence without PR context", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-982", "Pre-PR CodeRabbit Clean Review");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "clean", {
+    sourceHead,
+    baseRevision: "main",
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-982",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /CodeRabbit pre-PR review: pass/);
+  assert.match(
+    result.stdout,
+    /Evidence: docs\/work\/BANDIT-982\/coderabbit-review\.md/
+  );
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-982/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /provider: coderabbit-agent-pre-pr/);
+  assert.match(evidence, /review_target: local-diff:main/);
+  assert.match(evidence, new RegExp(`source_head: ${sourceHead}`));
+  assert.match(evidence, /coderabbit_verdict: pass/);
+  assert.match(evidence, /findings_status: none/);
+  assert.match(evidence, /coderabbit review --agent --base main/);
+});
+
+test("coderabbit-review pre-pr records missing CodeRabbit CLI as operator-input blocked evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-983", "Pre-PR CodeRabbit Missing CLI");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "missing-cli", {
+    sourceHead,
+    baseRevision: "main",
+    availabilityStatus: "missing_cli",
+    providerError: "coderabbit executable not found"
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-983",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /CodeRabbit pre-PR review unavailable: CodeRabbit CLI missing/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-983/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /review_state: blocked/);
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /findings_status: unavailable/);
+  assert.match(evidence, /operator_input_status: operator_input_blocked/);
+  assert.match(evidence, /CodeRabbit CLI missing/);
+});
+
+test("coderabbit-review pre-pr records missing authentication as operator-input blocked evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-984", "Pre-PR CodeRabbit Missing Auth");
+  const secret = "cr_secret_should_not_leak";
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "missing-auth", {
+    sourceHead,
+    baseRevision: "main",
+    availabilityStatus: "missing_auth",
+    providerError: `CodeRabbit rejected token ${secret}`
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-984",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Missing required operator input: CodeRabbit authentication/);
+  assert.doesNotMatch(result.stderr, new RegExp(secret));
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-984/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /operator_input_status: operator_input_blocked/);
+  assert.match(evidence, /CodeRabbit authentication/);
+  assert.doesNotMatch(evidence, new RegExp(secret));
+});
+
+test("coderabbit-review pre-pr records provider timeout as blocking evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-985", "Pre-PR CodeRabbit Timeout");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "timeout", {
+    sourceHead,
+    baseRevision: "main",
+    reviewState: "timeout",
+    verdict: "blocker",
+    providerError: "review timed out after 300 seconds"
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-985",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /CodeRabbit pre-PR review unavailable: review timed out/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-985/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /review_state: timeout/);
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /findings_status: unavailable/);
+});
+
+test("coderabbit-review pre-pr blocks unresolved actionable findings", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-986", "Pre-PR CodeRabbit Actionable Finding");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "actionable", {
+    sourceHead,
+    baseRevision: "main",
+    reviewState: "completed",
+    verdict: "blocker",
+    findings: [
+      {
+        severity: "warning",
+        status: "unresolved",
+        body: "CodeRabbit found an actionable Stage 4 gap."
+      }
+    ]
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-986",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /CodeRabbit pre-PR review has unresolved actionable findings/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-986/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /coderabbit_verdict: blocker/);
+  assert.match(evidence, /findings_status: unresolved/);
+  assert.match(evidence, /CodeRabbit found an actionable Stage 4 gap/);
+});
+
+test("coderabbit-review pre-pr records info-only findings as non-blocking with disposition", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-987", "Pre-PR CodeRabbit Info Only Finding");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "info-only", {
+    sourceHead,
+    baseRevision: "main",
+    reviewState: "completed",
+    verdict: "non_blocking",
+    findings: [
+      {
+        severity: "info",
+        status: "resolved",
+        body: "CodeRabbit suggested optional wording cleanup.",
+        disposition: "No-action: wording suggestion does not affect the Stage 4 contract."
+      }
+    ]
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-987",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /CodeRabbit pre-PR review: non_blocking/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-987/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /coderabbit_verdict: non_blocking/);
+  assert.match(evidence, /findings_status: resolved/);
+  assert.match(evidence, /No-action: wording suggestion does not affect the Stage 4 contract/);
+});
+
+test("coderabbit-review pre-pr fails closed when evidence is stale after source drift", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const oldHead = await commitAll(repo, "Initial state");
+  await writeFile(path.join(repo, "changed-after-review.txt"), "changed\n", "utf8");
+  await commitAll(repo, "Change after CodeRabbit review");
+  await writeWorkBrief(repo, "BANDIT-988", "Pre-PR CodeRabbit Stale Source");
+  const fixturePath = await writePrePrCodeRabbitFixture(repo, "stale", {
+    sourceHead: oldHead,
+    baseRevision: "main",
+    reviewState: "completed",
+    verdict: "pass",
+    findings: []
+  });
+
+  const result = await runBanditWithEnv(repo, [
+    "coderabbit-review",
+    "pre-pr",
+    "BANDIT-988",
+    "--base",
+    "main",
+    "--fixture",
+    fixturePath
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /CodeRabbit pre-PR review evidence is stale/);
+
+  const evidence = await readFile(
+    path.join(repo, "docs/work/BANDIT-988/coderabbit-review.md"),
+    "utf8"
+  );
+  assert.match(evidence, /source_drift_status: stale/);
+});
+
 test("land-check fails closed when CodeRabbit pass lacks current CodeRabbit evidence", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-973", "Missing CodeRabbit Evidence");
@@ -598,6 +866,17 @@ function runGit(cwd, args) {
 
 async function writeLiveCodeRabbitFixture(repo, fixture) {
   const destination = path.join(repo, ".bandit/fixtures/coderabbit-live.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(fixture, null, 2)}\n`, "utf8");
+  return destination;
+}
+
+async function writePrePrCodeRabbitFixture(repo, name, fixture) {
+  const destination = path.join(
+    repo,
+    ".bandit/fixtures",
+    `coderabbit-pre-pr-${name}.json`
+  );
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(fixture, null, 2)}\n`, "utf8");
   return destination;

@@ -189,16 +189,24 @@ recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its per-work-item
 coordination log is recorded in `docs/work/BANDIT-027/coordination-log.jsonl`
-at `brief_created`. The chore exists to repair the CodeRabbit pre-landing loop
-so Stage 4 can run `coderabbit review --agent` against local diffs before PR
-creation, record real CodeRabbit evidence, and avoid treating no PR as an
-automatic bootstrap gap when pre-PR CLI review should be available.
+at `red_recorded`. RED evidence is recorded in
+`docs/work/BANDIT-027/red-evidence.md`, with focused tests in
+`test/coderabbit-state.test.mjs`. The tests define the missing pre-PR
+CodeRabbit command surface, deterministic fixture-backed provider behavior,
+missing CLI/auth refusal paths, timeout refusal, actionable finding refusal,
+info-only non-blocking disposition, stale-source refusal, and preservation of
+the existing PR-backed `coderabbit-review live` path. The chore exists to
+repair the CodeRabbit pre-landing loop so Stage 4 can run
+`coderabbit review --agent` against local diffs before PR creation, record real
+CodeRabbit evidence, and avoid treating no PR as an automatic bootstrap gap
+when pre-PR CLI review should be available.
 
 **Last completed milestone:** `BANDIT-026` retrospective closeout and
 coordination-log closed state are recorded; `BANDIT-027` is created as the
-active CodeRabbit pre-PR CLI review chore.
+active CodeRabbit pre-PR CLI review chore, and RED evidence is recorded.
 
-**Current next action:** Write RED evidence for `BANDIT-027`.
+**Current next action:** Implement the narrow pre-PR CodeRabbit CLI review path
+for `BANDIT-027`.
 Do not start unrelated Phase 6 work, Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, claim leases, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT
@@ -208,8 +216,8 @@ blocked/dispositioned.
 ## Active Work
 
 **Active work item:** `BANDIT-027` - Pre-PR CodeRabbit CLI Review. Current
-coordination state: `brief_created`; accountable actor: Test Writer; next
-action: write RED evidence for pre-PR CodeRabbit CLI review.
+coordination state: `red_recorded`; accountable actor: Writer; next action:
+implement pre-PR CodeRabbit CLI review.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -231,7 +239,7 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions.
 
-**Expected next deliverable:** RED evidence for `BANDIT-027`.
+**Expected next deliverable:** Implementation evidence for `BANDIT-027`.
 
 ## Known Bootstrap Gaps
 

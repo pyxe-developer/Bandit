@@ -33,10 +33,14 @@ recorded in `docs/work/BANDIT-026/`.
 recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
-recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at `brief_created`.
-The current next step is to write RED evidence for `BANDIT-027`, which must
-repair the mismatch between the intended pre-PR `coderabbit review --agent`
-loop and the existing PR-context-only CodeRabbit command path.
+recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at `red_recorded`.
+RED evidence is recorded in `docs/work/BANDIT-027/red-evidence.md`, with
+focused tests in `test/coderabbit-state.test.mjs` proving the current CLI has
+no pre-PR local-diff CodeRabbit review path. The current next step is to
+implement the narrow pre-PR CodeRabbit CLI review path for `BANDIT-027`, which
+must repair the mismatch between the intended pre-PR
+`coderabbit review --agent` loop and the existing PR-context-only CodeRabbit
+command path.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
 Phase 8 web cockpit implementation, claim leases, scheduler execution,
 worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
