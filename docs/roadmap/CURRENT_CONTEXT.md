@@ -295,29 +295,37 @@ recorded in `docs/specs/BANDIT-030-implementation-evidence.json` and
 `docs/work/BANDIT-030/implementation-evidence.md`. The Stage 7 improvement
 evaluation is recorded in `docs/work/BANDIT-030/improvement-evaluation.md` with
 result `effective` and decision `keep` for the `BANDIT-023` routing policy.
+Stage 4 review evidence is recorded in
+`docs/work/BANDIT-030/coderabbit-review.md`,
+`docs/work/BANDIT-030/local-qwen-review.md`, and
+`docs/work/BANDIT-030/review-evidence.md` with current review subject hash
+`de76b40fe2344fe697ccfe92f0f8daa050eb12997bd2a1f7f3d09758d3712e45`.
+CodeRabbit pass evidence is recorded with the only remaining minor finding
+dispositioned as resolved/no-action after `git diff --check` and EOF-newline
+inspection; Local Qwen passed with no findings.
 The work item evaluates the `BANDIT-023` hypothesis against Stage 4 outcomes
 from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit,
 scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
 identity policy, claim lease, work surface reservation, or unrelated work
 starts.
 
-**Last completed milestone:** `BANDIT-030` Stage 3 evaluator compatibility and
-Stage 7 improvement-evaluation evidence are recorded, with lifecycle evidence
-for implementation evidence in `.bandit/events.jsonl`.
+**Last completed milestone:** `BANDIT-030` Stage 4 review gates are current and
+dispositioned with pre-PR CodeRabbit evidence, Local Qwen pass evidence,
+aggregate review evidence, and review-subject-hash freshness recorded.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-030`, including
-pre-PR CodeRabbit review, Local Qwen adversarial review, aggregate review
-evidence, and review-subject-hash freshness. Do not create landing verdict,
-landing action, retrospective, Phase 8 cockpit, scheduler, worktree lifecycle,
+**Current next action:** Create the Stage 5 landing verdict for `BANDIT-030`
+and run `npm run bandit -- land-check BANDIT-030`. Do not perform landing
+action, retrospective, Phase 8 cockpit, scheduler, worktree lifecycle,
 automatic merge/push/deploy, product UAT, actor identity policy, claim lease,
-work surface reservation, or unrelated work before Stage 4 evidence is current
-and dispositioned.
+work surface reservation, or unrelated work before Stage 5 landing verdict and
+landing readiness are recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing. Status: Stage 3 implementation and Stage 7 evaluation evidence
-recorded; Stage 4 review is next.
+recorded; Stage 4 review evidence is current and dispositioned; Stage 5
+landing verdict and land-check are next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -341,9 +349,8 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/coderabbit-review.md`,
-`docs/work/BANDIT-030/local-qwen-review.md`, and
-`docs/work/BANDIT-030/review-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-030/landing-verdict.md` and
+`npm run bandit -- land-check BANDIT-030` evidence.
 
 ## Known Bootstrap Gaps
 
@@ -489,15 +496,15 @@ Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
 verdict/readiness evidence, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition. `BANDIT-030` has a structured spec,
 Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3 implementation
-evidence, and Stage 7 improvement-evaluation evidence. The current priority is:
+evidence, Stage 7 improvement-evaluation evidence, and Stage 4 review evidence.
+The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-030`, including pre-PR CodeRabbit
-   review, Local Qwen adversarial review, aggregate review evidence, and
-   review-subject-hash freshness.
+1. Create the Stage 5 landing verdict for `BANDIT-030` and run
+   `npm run bandit -- land-check BANDIT-030`.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, landing verdict, landing action, or
-   unrelated work until Stage 4 is current and dispositioned.
+   reservations, actor identity policy, landing action, or unrelated work until
+   Stage 5 landing verdict and landing readiness are recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
