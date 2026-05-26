@@ -20,6 +20,10 @@
       "evidence": "Stage 2 design names docs/work/BANDIT-023/retrospective.md, docs/work/BANDIT-023/review-evidence.md, docs/work/BANDIT-025/review-evidence.md, docs/work/BANDIT-025/qwen-finding-disposition.md, docs/work/BANDIT-028/review-evidence.md, docs/work/BANDIT-028/qwen-finding-disposition.md, docs/work/BANDIT-029/review-evidence.md, and docs/work/BANDIT-029/qwen-finding-disposition.md as the Stage 7 source packet."
     },
     {
+      "criterion": "The work item applies docs/verification/STAGE_RUBRICS.md definitions for Stage 2, Stage 3, Stage 4, Stage 7, and clean-code compliance verification.",
+      "evidence": "Stage 2 evidence is evaluated against docs/verification/STAGE_RUBRICS.md and requires docs/work/BANDIT-030/improvement-evaluation.md plus the relevant npm run bandit verification commands before Stage 4 and closeout."
+    },
+    {
       "criterion": "The evaluation evidence records adversarial_repair_count, the BANDIT-015/BANDIT-022 baseline, observed Stage 4 outcomes for BANDIT-025, BANDIT-028, and BANDIT-029, a result value, routing decision, rationale, and next routing action.",
       "evidence": "The planned evaluation artifact must compare the BANDIT-015 repeated Local Qwen rerun loop and BANDIT-022 queued non_blocking findings baseline to the later BANDIT-025, BANDIT-028, and BANDIT-029 Stage 4 outcomes where non_blocking findings were durably routed without extra non-blocking-only review loops."
     },

@@ -13,6 +13,7 @@
   ],
   "acceptance_criteria": [
     "The work item evaluates the BANDIT-023 hypothesis using source artifacts from BANDIT-023, BANDIT-025, BANDIT-028, and BANDIT-029 rather than chat memory.",
+    "The work item applies docs/verification/STAGE_RUBRICS.md definitions for Stage 2, Stage 3, Stage 4, Stage 7, and clean-code compliance verification.",
     "The evaluation evidence records the metric adversarial_repair_count, the BANDIT-015/BANDIT-022 baseline, observed Stage 4 outcomes for BANDIT-025, BANDIT-028, and BANDIT-029, a result value, a routing decision, rationale, and next routing action.",
     "The evaluation distinguishes real blocker preservation from safe-to-defer hardening findings and does not weaken CodeRabbit request-changes, stale review-subject hash, missing PM disposition, or blocker Local Qwen behavior.",
     "The work item records a clear keep, revise, revert, or double_down decision for the BANDIT-023 routing policy.",
