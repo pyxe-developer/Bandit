@@ -1,18 +1,23 @@
 {
-  "sourceHead": "9786d177c65f65f6983d704eb841c62a19845f8f",
+  "sourceHead": "00978d3585fecc3475f2480052e69b1847698be0",
   "baseRevision": "origin/main",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
-      "severity": "minor",
+      "severity": "critical",
       "status": "unresolved",
-      "body": "Guard the design-canvas grip scale calculation against zero-width elements so pointer movement cannot produce Infinity."
+      "body": "Replace the stale normalized CodeRabbit evidence entry that still describes the obsolete @babel/standalone@7.29.0-to-7.29.4 finding so the fixture records the current provider output."
     },
     {
       "severity": "major",
       "status": "unresolved",
-      "body": "Update the prototype Babel standalone script from @babel/standalone@7.29.0 to 7.29.4 and replace the integrity hash for that pinned version."
+      "body": "Restrict TweaksPanel window.parent.postMessage for __edit_mode_set_keys to a trusted parent origin or handshake instead of dispatching tweak edits to '*'."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "Guard TweaksPanel segAt before calling trackRef.current.getBoundingClientRect() so pointer handlers do not throw if the track ref has been cleared."
     }
   ]
 }

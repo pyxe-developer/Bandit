@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-034
-source_head: 9786d177c65f65f6983d704eb841c62a19845f8f
+source_head: 00978d3585fecc3475f2480052e69b1847698be0
 review_subject_hash: 7932c57117ba0dce448160def5ed1aed1860d5819a035f61591b28e94f5ce536
 review_subject_hash_status: stale
 verification_state: blocker
@@ -24,9 +24,12 @@ verification_evidence:
   - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the retry.
   - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
   - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the two completed-retry findings; CodeRabbit provider evidence must be rerun against the repaired source before Stage 4 can proceed.
+  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 00978d3585fecc3475f2480052e69b1847698be0 and completed with 3 unresolved findings.
+  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the repaired-source rerun.
+  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
 coderabbit_state: blocker
 coderabbit_replacement_evidence:
-  - Real pre-PR CodeRabbit provider evidence was retried against the earlier repaired source and completed with 2 unresolved findings. Those findings are now repaired, but no replacement pass is claimed until the pre-PR provider is rerun against the current repaired source.
+  - Real pre-PR CodeRabbit provider evidence was rerun against the current repaired source and completed with 3 unresolved findings. No CodeRabbit pass is claimed; Stage 4 remains blocked until the current findings are repaired or dispositioned and the provider rerun no longer blocks.
 local_qwen_state: not_applicable
 local_qwen_replacement_evidence:
   - Local Qwen was not run because CodeRabbit pre-PR review still blocks Stage 4; no aggregate pass can be claimed until CodeRabbit completes without blocker evidence.
@@ -34,12 +37,12 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: BANDIT-034 is a bounded internal cockpit-shell hardening chore over presentation-only view-model and render surfaces. It introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, or external service integration. No smell trigger requires escalated reviewer routing before the blocking CodeRabbit findings are repaired or dispositioned.
 pm_disposition: blocker
-pm_disposition_rationale: Stage 4 remains blocked because the completed CodeRabbit pre-PR retry predates the focused repair for its 2 unresolved findings. The design-canvas scale guard and Babel standalone version/integrity findings now have repair evidence, but CodeRabbit must be rerun against the repaired source before Local Qwen, review-subject hash refresh if needed, and aggregate PM disposition can proceed.
+pm_disposition_rationale: Stage 4 remains blocked because the repaired-source CodeRabbit pre-PR rerun completed with 3 unresolved findings: stale normalized CodeRabbit evidence text in docs/specs/BANDIT-034-coderabbit-rerun-output.json, unsafe TweaksPanel postMessage target origin, and missing TweaksPanel track-ref guard. Repair or disposition those findings before Local Qwen, review-subject hash refresh if needed, and aggregate PM disposition can proceed.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
-source_drift_status: stale
+source_drift_status: current
 bootstrap_gaps:
   - none
