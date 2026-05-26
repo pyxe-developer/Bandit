@@ -367,8 +367,9 @@ Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
 agreement, and stale review/landing evidence reporting. A Stage 4 CodeRabbit
 pre-PR review attempt is recorded in
 `docs/work/BANDIT-032/coderabbit-review.md` at source head
-`283d65fa887e3dab3dd495ae126b5ae0cca729e8`; CodeRabbit returned a recoverable
-rate-limit blocker after Codex PM repaired its earlier findings. Local Qwen,
+`1e6050ca655c1151417784745369c5a474328253`; CodeRabbit returned a recoverable
+rate-limit blocker after Codex PM repaired its earlier findings, with the
+latest provider wait time recorded as 5 minutes and 10 seconds. Local Qwen,
 aggregate review evidence, landing, and retrospective evidence have not
 started.
 

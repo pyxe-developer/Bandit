@@ -53,8 +53,9 @@ cockpit status read-only and source-linked while adding blocker summaries,
 Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
 agreement, and stale review/landing evidence reporting. CodeRabbit blocker
 evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md` at source
-head `283d65fa887e3dab3dd495ae126b5ae0cca729e8` because the provider returned
-a recoverable rate limit after focused Stage 4 repairs. The next step is to
+head `1e6050ca655c1151417784745369c5a474328253` because the provider returned
+a recoverable rate limit after focused Stage 4 repairs, with the latest
+provider wait time recorded as 5 minutes and 10 seconds. The next step is to
 rerun pre-PR CodeRabbit after the rate limit clears. Do not start Local Qwen,
 aggregate review evidence, landing, retrospective closeout, visual UI, local
 server/API mode, state-index persistence, scheduler execution, worktree
