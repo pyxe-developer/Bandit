@@ -251,21 +251,27 @@ Qwen non-blocking actor identity validation concern is durably routed as
 for the next actor identity policy, coordination validation, claim lease, or
 work surface reservation slice, not an active work item.
 
-**Last completed milestone:** `BANDIT-028` retrospective, improvement
-disposition, context closeout, and terminal coordination-log state are
-recorded.
+`BANDIT-029` is the first Phase 7 Improvement Engine slice. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
+is recorded in `docs/work/BANDIT-029/brief.md`. The slice is scoped to the
+smallest repo-native improvement evaluation foundation from existing
+retrospective-derived improvement metadata. It must not start Phase 8 Workflow
+Cockpit implementation, scheduler execution, worktree lifecycle, exclusive
+claim leases, work surface reservations, automatic merge/push/deploy behavior,
+product UAT approval, actor identity policy, or unrelated coordination work.
 
-**Current next action:** Create `BANDIT-029` as the first Phase 7 Improvement
-Engine work-item brief. The brief should define the smallest repo-native
-improvement evaluation foundation from existing retrospective-derived
-improvement metadata, without starting Phase 8 Workflow Cockpit implementation,
-Phase 9 dogfood, scheduler execution, worktree lifecycle, exclusive claim
-leases, work surface reservations, automatic merge/push/deploy behavior,
-product UAT approval, or unrelated work.
+**Last completed milestone:** `BANDIT-029` structured spec and Stage 1 brief
+are recorded.
+
+**Current next action:** Create `BANDIT-029` RED evidence. The RED evidence
+should define the missing improvement candidate discovery and evaluation
+evidence foundation before production implementation starts.
 
 ## Active Work
 
-**Active work item:** none. `BANDIT-028` is closed.
+**Active work item:** `BANDIT-029` - Improvement Evaluation Foundation. Stage 1
+brief is recorded; Stage 2 RED evidence is next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -288,7 +294,7 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands.
 
-**Expected next deliverable:** `BANDIT-029` Phase 7 Improvement Engine brief.
+**Expected next deliverable:** `docs/work/BANDIT-029/red-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -429,15 +435,17 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
-The current priority is:
+`BANDIT-029` now has a structured spec and Stage 1 brief. The current priority
+is:
 
-1. Create `BANDIT-029` as the first Phase 7 Improvement Engine work-item brief.
-2. Scope `BANDIT-029` to the smallest repo-native improvement evaluation
-   foundation from existing retrospective-derived improvement metadata.
+1. Create `BANDIT-029` RED evidence for improvement candidate discovery and
+   evaluation evidence behavior.
+2. Stop before production implementation until RED evidence exists and maps to
+   `BANDIT-029` acceptance criteria.
 3. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, or unrelated work until `BANDIT-029` is created and executed
-   through the normal slice boundary.
+   reservations, actor identity policy, or unrelated work until `BANDIT-029`
+   is executed through the normal slice boundary.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -445,11 +453,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the `BANDIT-029` Phase 7
-Improvement Engine brief from repo artifacts. If live external service access,
-cost/risk override, policy change, PR/merge/push/deploy authority, product
-direction, or product UAT approval is required, halt and ask for that input
-directly.
+No operator-owned input is required to create `BANDIT-029` RED evidence from
+repo artifacts. If live external service access, cost/risk override, policy
+change, PR/merge/push/deploy authority, product direction, or product UAT
+approval is required, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

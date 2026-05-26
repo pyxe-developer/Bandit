@@ -1,0 +1,108 @@
+{
+  "kind": "slice",
+  "title": "Improvement Evaluation Foundation",
+  "status": "Brief Created",
+  "goal": "Create the first Phase 7 improvement engine slice by defining a repo-native foundation for finding retrospective-derived improvement candidates, recording evaluation evidence, and routing keep, revise, revert, or double-down decisions without starting cockpit, scheduler, or automation work.",
+  "scope": [
+    "Define the narrow Phase 7 improvement evaluation foundation around existing repo-native improvement metadata in work-item briefs, retrospectives, review-finding dispositions, and follow-up chore artifacts.",
+    "Add or update CLI-owned behavior that can discover improvement candidates with source artifacts, hypothesis, metric, baseline, expected direction, evaluation window, status, and outcome metadata.",
+    "Define a repo-native evaluation evidence artifact for one improvement candidate that records observed metric evidence, comparison to baseline, evaluation result, decision, rationale, and any required routing update.",
+    "Support the initial decision vocabulary of keep, revise, revert, and double_down while preserving the Stage 7 evidence result values of effective, ineffective, inconclusive, reverted, and double_down.",
+    "Fail closed when an evaluation target lacks required metadata, cites missing source artifacts, records an outcome without evidence, or tries to evaluate a candidate before its evaluation window is satisfiable without an explicit rationale.",
+    "Keep the foundation local, deterministic, and repo-native so future improvement chores and cockpit views can build on derived state without owning canonical truth."
+  ],
+  "out_of_scope": [
+    "Do not implement Phase 8 Workflow Cockpit UI, state-index storage, dashboards, charts, or web actions.",
+    "Do not implement scheduler execution, heartbeat claiming, automatic evaluation, claim leases, work surface reservations, worktree lifecycle, cross-repo coordination, automatic merge, push, or deploy behavior.",
+    "Do not create or execute unrelated improvement chores, actor identity hardening, claim policy, or coordination validation work inside this slice.",
+    "Do not change Stage 4 review gates, Stage 5 landing gates, product UAT ownership, CodeRabbit provider behavior, Local Qwen routing, or escalated-review routing.",
+    "Do not treat derived reports, caches, or cockpit-facing summaries as canonical improvement state."
+  ],
+  "acceptance_criteria": [
+    "The brief identifies existing retrospective-derived improvement metadata as the source material for the Phase 7 foundation and does not require operator-owned product direction.",
+    "RED evidence defines the missing improvement evaluation foundation before production implementation starts.",
+    "The implementation can discover pending improvement candidates from existing repo-native artifacts that include source metadata, hypothesis, metric, baseline, expected direction, evaluation window, status, and outcome.",
+    "The implementation can record or validate one evaluation evidence artifact for a selected candidate with observed metric evidence, baseline comparison, result, decision, rationale, source artifacts, and next routing action.",
+    "Evaluation refuses candidates with missing required metadata, missing source artifacts, unsupported result or decision values, missing metric evidence, or outcome decisions that do not cite sufficient evidence.",
+    "The implementation distinguishes Stage 7 result values from improvement-routing decisions and maps them explicitly instead of conflating evidence status with policy action.",
+    "Derived reports may summarize due, pending, evaluated, inconclusive, and routed candidates, but canonical state remains in repo-native artifacts.",
+    "Tests cover candidate discovery from existing fixture artifacts, metadata refusal paths, evaluation evidence validation or creation, result/decision vocabulary validation, missing-source refusal, and no hidden cockpit/index authority.",
+    "No Phase 8 cockpit, scheduler execution, automatic evaluation, claim lease, worktree lifecycle, cross-repo coordination, automatic merge/push/deploy, product UAT, actor identity policy, or unrelated coordination behavior is introduced by this slice."
+  ],
+  "test_plan": [
+    "Write RED tests for discovering improvement candidates from fixture work-item artifacts with complete metadata.",
+    "Write RED tests proving candidates with missing source artifacts, missing metric, missing baseline, missing evaluation window, missing outcome, or unsupported status fail closed.",
+    "Write RED tests for recording or validating a single evaluation evidence artifact with result, decision, rationale, metric observation, baseline comparison, and routing action.",
+    "Write RED tests proving unsupported Stage 7 result values and unsupported keep/revise/revert/double_down decisions are refused.",
+    "Write RED tests proving derived reports do not create canonical state or require cockpit, scheduler, claim, worktree, merge, push, deploy, or UAT behavior.",
+    "Run focused improvement-evaluation tests after implementation.",
+    "Run npm test if implementation touches command routing, artifact parsing, validators, work-item readers, coordination status, review gates, landing gates, or shared state modules.",
+    "Run npm run typecheck.",
+    "Run npm run bandit -- validate.",
+    "Run npm run bandit -- coderabbit-review pre-pr BANDIT-029 --base origin/main before aggregate Stage 4 evidence when local CLI/auth support it; otherwise record fail-closed operator-input or honest replacement evidence.",
+    "Run npm run bandit -- qwen-review BANDIT-029 before Stage 4 closeout.",
+    "Run npm run bandit -- land-check BANDIT-029 before landing.",
+    "Run git diff --check."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-05-26 before creating this brief. The slice must keep improvement metadata parsing, evaluation evidence validation, result/decision mapping, and derived reporting small, explicit, testable, and repo-native.",
+  "stage_rubric_checklist": [
+    "Stage 0 Context Readiness: pass - CURRENT_CONTEXT.md and ROADMAP.md identify Phase 7, BANDIT-029 as the active work after brief creation, no open bootstrap gaps, and RED evidence as the next action; BANDIT-028 has landing action, retrospective, and closed coordination-log evidence.",
+    "Stage 1 Work-Item Brief And Spec: pass - this brief defines goal, scope, out of scope, acceptance criteria, test plan, CLEAN_CODE.md evidence, bootstrap gaps, expected files, implementation order, smell triggers, and operator input status.",
+    "Stage 2 Test Design And RED Evidence: required next - tests must express improvement candidate discovery, evaluation evidence, refusal paths, and result/decision vocabulary before production implementation.",
+    "Stage 3 Implementation Clean-Code Rubric: required later - implementation must keep parsers, validators, artifact writers, and reports separated with explicit source-of-truth boundaries.",
+    "Stage 4 Review And Cross-Model Gates: required later - CodeRabbit pre-PR review when available, Local Qwen, and aggregate review evidence must cover improvement-evaluation semantics and hidden-authority risks.",
+    "Stage 5 Landing And UAT: required later - landing verdict and landing action evidence are required; product UAT is not required unless product behavior is introduced.",
+    "Stage 6 Retrospective And Improvement Capture: required later - closeout must disposition lessons and update roadmap/current context.",
+    "Stage 7 Improvement Evaluation: required later - this slice should make future Stage 7 evidence possible but does not need to evaluate every historical candidate during brief creation."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gaps are currently recorded. This slice begins Phase 7 after the bootstrap-gap lane and Phase 6 coordination primitive are closed.",
+    "Live pre-PR CodeRabbit CLI review may require local CodeRabbit CLI installation and authentication; if unavailable at Stage 4, record fail-closed operator-input evidence or honest replacement evidence rather than claiming a pass.",
+    "Phase 8 cockpit UI, scheduler execution, claim leases, work surface reservations, worktree lifecycle, cross-repo coordination, automatic merge/push/deploy, actor identity policy, and unattended automation remain future work outside this slice."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-029-improvement-evaluation-foundation.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/templates/improvement-evaluation.md",
+    "src/commands/improvements.ts",
+    "src/state/improvements.ts",
+    "test/improvements.test.mjs",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md"
+  ],
+  "first_implementation_order": [
+    "Write RED fixture artifacts and tests for improvement candidate discovery and required metadata refusal paths.",
+    "Write RED tests for one evaluation evidence artifact with result, decision, rationale, metric observation, baseline comparison, and routing action.",
+    "Select the narrow CLI command syntax for read-only discovery and single-candidate evaluation evidence handling.",
+    "Implement improvement metadata parsing and validation as focused helpers that read repo-native artifacts without inventing a hidden index.",
+    "Implement evaluation evidence rendering or validation with explicit result and decision vocabulary checks.",
+    "Update implementation evidence, Stage 4 review evidence, landing evidence, retrospective, CURRENT_CONTEXT.md, and ROADMAP.md as each stage completes."
+  ],
+  "smell_triggers": [
+    "Improvement metadata parsing, outcome validation, artifact writing, derived reporting, and policy-routing decisions require Local Qwen review and escalated-review routing if smell policy requires it.",
+    "Any logic that lets a derived report, cache, cockpit view, or state index own canonical improvement status is a blocker.",
+    "Any outcome decision without metric evidence, baseline comparison, or source artifact links is a blocker.",
+    "Any broad scheduler, cockpit, claim lease, worktree lifecycle, automatic merge/push/deploy, cross-repo, or unrelated actor identity implementation inside this slice is scope creep.",
+    "Any attempt to evaluate product success, UAT acceptance, business tradeoffs, or cost/risk policy without operator-owned input is a blocker."
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create this Phase 7 brief because CURRENT_CONTEXT.md, ROADMAP.md, CONTEXT.md, CLEAN_CODE.md, Stage Rubrics, existing retrospective-derived improvement metadata, and the founding product intent define the technical direction. Halt for operator input only if implementation requires product direction, product UAT approval, policy changes, business tradeoffs, explicit cost/risk overrides, remote merge/push/deploy authority, paid external reviewer approval, or a genuinely ambiguous scope decision."
+}

@@ -80,13 +80,19 @@ verdict `safe-to-land`; local-record landing action evidence is recorded in
 `docs/work/BANDIT-028/landing-action.md`, retrospective closeout is recorded in
 `docs/work/BANDIT-028/retrospective.md`, and the accepted Local Qwen
 non-blocking actor identity validation concern is durably routed in
-`docs/work/BANDIT-028/qwen-finding-disposition.md`. The next step is to create
-`BANDIT-029` as the first Phase 7 Improvement Engine work-item brief. Do not
-create unrelated active-work branches, Phase 8 web cockpit implementation,
-scheduler execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, or
-unrelated feature work before `BANDIT-029` is created and executed through the
-normal slice boundary.
+`docs/work/BANDIT-028/qwen-finding-disposition.md`.
+
+`BANDIT-029` is the first Phase 7 Improvement Engine slice. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
+is recorded in `docs/work/BANDIT-029/brief.md`. The next step is to create RED
+evidence for improvement candidate discovery and evaluation evidence behavior.
+Do not create unrelated active-work branches, Phase 8 web cockpit
+implementation, scheduler execution, worktree lifecycle, exclusive claim
+leases, work surface reservations, product UAT approval, automatic
+merge/push/deploy behavior, actor identity policy, or unrelated feature work
+before `BANDIT-029` is executed through the normal slice boundary.
+
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -279,7 +285,10 @@ landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
 final verdict `safe-to-land`. Local-record landing action evidence is recorded
 in `docs/work/BANDIT-028/landing-action.md`; retrospective closeout is recorded
 in `docs/work/BANDIT-028/retrospective.md`; and the coordination log is closed.
-The next action is `BANDIT-029`, the first Phase 7 Improvement Engine brief.
+`BANDIT-029` has its Phase 7 Improvement Engine structured spec and Stage 1
+brief recorded in
+`docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
+`docs/work/BANDIT-029/brief.md`. The next action is `BANDIT-029` RED evidence.
 
 ## Phase Map
 
@@ -592,14 +601,15 @@ Current rule:
 
 Current priority:
 
-1. Create `BANDIT-029` as the first Phase 7 Improvement Engine work-item brief.
-2. Scope `BANDIT-029` to the smallest repo-native improvement evaluation
-   foundation from existing retrospective-derived improvement metadata.
+1. Create `BANDIT-029` RED evidence for improvement candidate discovery and
+   evaluation evidence behavior.
+2. Stop before production implementation until RED evidence exists and maps to
+   `BANDIT-029` acceptance criteria.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 8 work until `BANDIT-029` is created and executed
-   through the normal slice boundary.
+   reservations, actor identity policy, or Phase 8 work until `BANDIT-029` is
+   executed through the normal slice boundary.
 
 ## Phase 6: Coordination Primitive
 
