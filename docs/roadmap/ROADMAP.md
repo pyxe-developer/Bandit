@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-033` - Attention-First
-Cockpit Visual Shell.
+**Current next step:** Obtain CLI-owned product UAT approval for `BANDIT-033` -
+Attention-First Cockpit Visual Shell before Stage 5 landing verdict.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -82,8 +82,15 @@ evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
 tests in `test/cockpit-view-model.test.mjs` and `test/cockpit-ui.test.mjs`.
 Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-033/implementation-evidence.md`; the implementation adds the
-focused view-model, guarded-action, and render-contract modules. The next
-required artifact is Stage 4 review evidence. Local
+focused view-model, guarded-action, and render-contract modules. Stage 4 review
+evidence is recorded in `docs/work/BANDIT-033/coderabbit-review.md`,
+`docs/work/BANDIT-033/local-qwen-review.md`,
+`docs/work/BANDIT-033/qwen-finding-disposition.md`, and
+`docs/work/BANDIT-033/review-evidence.md`. CodeRabbit completed with minor
+prototype-source findings dispositioned as no-action, Local Qwen returned a
+`non_blocking` verdict, and the remaining hardening candidate is routed as
+`BANDIT-033-COCKPIT-SHELL-HARDENING`. The next required artifact is CLI-owned
+product UAT approval before Stage 5 landing verdict. Local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, and unrelated
@@ -232,14 +239,15 @@ improvement disposition are recorded in
 `docs/work/BANDIT-031/retrospective.md`. The routed
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` follow-up is evaluated through
 `BANDIT-032`, which is landed and closed out. `BANDIT-033` is now the active
-Phase 8 visual UI slice with Stage 2 RED evidence and Stage 3 implementation
-evidence recorded, and the next required artifact is Stage 4 review evidence.
+Phase 8 visual UI slice with Stage 2 RED evidence, Stage 3 implementation
+evidence, and Stage 4 review evidence recorded, and the next required artifact
+is CLI-owned product UAT approval.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, actor
 identity policy, PR/CI workflow, or unrelated feature work before `BANDIT-033`
-records the next required review evidence.
+records CLI-owned product UAT approval and Stage 5 landing evidence.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -451,8 +459,9 @@ closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is landed
 and closed out as the cockpit status coverage hardening improvement chore. The
 operator-provided attention-first cockpit direction and design review are now
 recorded. `BANDIT-033` is the active Phase 8 Workflow Cockpit visual UI slice
-with Stage 2 RED evidence and Stage 3 implementation evidence recorded. The
-next required action is Stage 4 review for `BANDIT-033`.
+with Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
+evidence recorded. The next required action is CLI-owned product UAT approval
+for `BANDIT-033`.
 
 ## Phase Map
 
@@ -765,9 +774,8 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-033`: pre-PR CodeRabbit review when
-   available, Local Qwen adversarial review, review-subject hash, Codex PM
-   disposition, and aggregate review evidence.
+1. Obtain CLI-owned product UAT approval for `BANDIT-033`, then record Stage 5
+   landing verdict if UAT is approved and evidence remains current.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
