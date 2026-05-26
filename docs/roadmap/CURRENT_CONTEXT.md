@@ -317,8 +317,8 @@ scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
 identity policy, claim lease, work surface reservation, or unrelated work
 starts.
 
-`BANDIT-031` is the active first Phase 8 Workflow Cockpit slice for a
-read-only Workflow Cockpit Status Foundation. Its structured creation spec is
+`BANDIT-031` is landed and closed out as the first Phase 8 Workflow Cockpit
+slice for a read-only Workflow Cockpit Status Foundation. Its structured creation spec is
 recorded in
 `docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-031/brief.md`, and Stage 2 RED
@@ -343,24 +343,34 @@ as safe to defer and routed them to
 recorded in `docs/work/BANDIT-031/landing-verdict.md` with final verdict
 `safe-to-land`; `npm run bandit -- land-check BANDIT-031` passes. Local-record
 landing action evidence is recorded in
-`docs/work/BANDIT-031/landing-action.md`. It must not
-start visual UI, server/API mode, state-index persistence, scheduler execution,
-worktree lifecycle, claim leases, work surface reservations, automatic
-merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
-or unrelated work before Stage 6 retrospective and improvement disposition are
-recorded.
+`docs/work/BANDIT-031/landing-action.md`. Retrospective closeout and improvement
+disposition are recorded in `docs/work/BANDIT-031/retrospective.md`; the routed
+follow-up candidate is
+`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`. No visual UI, server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, claim leases,
+work surface reservations, automatic merge/push/deploy, product UAT approval,
+actor identity policy, PR/CI workflow, or unrelated work has started.
 
-**Last completed milestone:** `BANDIT-031` local-record landing action evidence
-is recorded.
+**Last completed milestone:** `BANDIT-031` retrospective and improvement
+disposition are recorded.
 
-**Current next action:** Record Stage 6 retrospective and improvement
-disposition for `BANDIT-031`.
+**Current next action:** Create the next Phase 8 work item from queued
+improvement candidate `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`, focused
+on cockpit status coverage hardening.
+
+Do not start visual UI, server/API mode, state-index persistence, scheduler
+execution, worktree lifecycle, claim leases, work surface reservations,
+automatic merge/push/deploy, product UAT approval, actor identity policy,
+PR/CI workflow, or unrelated work before the work-item brief and RED evidence
+define the next narrow CLI-authoritative cockpit-status contract.
 
 ## Active Work
 
-**Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation.
-Current stage: Stage 6 retrospective and improvement capture. `BANDIT-030` is
-landed and closed out.
+**Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation is
+landed and closed out. No implementation, review, landing, or retrospective
+stage remains active for it; this field intentionally preserves the latest
+work-item anchor until the next work item is created. `BANDIT-030` is landed
+and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -383,11 +393,11 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
-Routing.
+Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-031/landing-action.md` is
-recorded. The next deliverable is `docs/work/BANDIT-031/retrospective.md` with
-durable disposition for material lessons and routed follow-up candidates.
+**Expected next deliverable:** A structured work-item creation spec and brief
+for the next Phase 8 cockpit-status coverage hardening work item derived from
+`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`.
 
 ## Known Bootstrap Gaps
 
@@ -539,11 +549,14 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition.
 The current priority is:
 
-1. Record Stage 6 retrospective and improvement disposition for `BANDIT-031`.
+1. Create the next Phase 8 work item from queued improvement candidate
+   `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`, focused on cockpit status
+   coverage hardening.
 2. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   retrospective and improvement disposition evidence is recorded.
+   the next work-item brief and RED evidence define the next narrow
+   CLI-authoritative cockpit-status contract.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -551,14 +564,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record Stage 6 retrospective and
-improvement disposition for `BANDIT-031` from existing repo artifacts. The
-implementation stayed within the approved CLI-authoritative cockpit boundary,
-the Stage 2 RED tests, and the active brief. CodeRabbit passed at the repair
-head, the remaining Local Qwen findings are recorded as non-blocking with
-durable follow-up routing, Stage 5 landing verdict is recorded, `npm run bandit
--- land-check BANDIT-031` passes, and local-record landing action evidence is
-recorded.
+No operator-owned input is required to create the next Phase 8 work item from
+queued improvement candidate `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`.
+The candidate's source artifacts, lesson, hypothesis, metric, baseline,
+expected direction, evaluation window, and status are recorded in
+`docs/work/BANDIT-031/qwen-finding-disposition.md` and
+`docs/work/BANDIT-031/retrospective.md`.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require

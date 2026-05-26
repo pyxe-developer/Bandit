@@ -16,23 +16,28 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective and improvement
-disposition for `BANDIT-031` - Workflow Cockpit Status Foundation. The brief is
-recorded in `docs/work/BANDIT-031/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-031/red-evidence.md`, implementation evidence is recorded in
-`docs/work/BANDIT-031/implementation-evidence.md`, and Stage 4 review evidence
-is recorded in `docs/work/BANDIT-031/coderabbit-review.md`,
+**Current next step:** Create the next Phase 8 work item from queued improvement
+candidate `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`, focused on cockpit
+status coverage hardening.
+
+`BANDIT-031` - Workflow Cockpit Status Foundation is
+landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
+RED evidence is recorded in `docs/work/BANDIT-031/red-evidence.md`,
+implementation evidence is recorded in
+`docs/work/BANDIT-031/implementation-evidence.md`, Stage 4 review evidence is
+recorded in `docs/work/BANDIT-031/coderabbit-review.md`,
 `docs/work/BANDIT-031/local-qwen-review.md`,
 `docs/work/BANDIT-031/qwen-finding-disposition.md`, and
-`docs/work/BANDIT-031/review-evidence.md`. Stage 5 landing verdict is recorded
-in `docs/work/BANDIT-031/landing-verdict.md`, `land-check` passes, and
+`docs/work/BANDIT-031/review-evidence.md`, Stage 5 landing verdict is recorded
+in `docs/work/BANDIT-031/landing-verdict.md`, `land-check` passes,
 local-record landing action evidence is recorded in
-`docs/work/BANDIT-031/landing-action.md`; do not
-start visual UI, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, automatic
-merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
-work surface reservation, PR/CI workflow, or unrelated feature work before
-Stage 6 retrospective and improvement disposition are recorded.
+`docs/work/BANDIT-031/landing-action.md`, and retrospective closeout is recorded
+in `docs/work/BANDIT-031/retrospective.md`. Do not start visual UI, local
+server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
+policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
+feature work before the next work-item brief and RED evidence define the next
+narrow CLI-authoritative cockpit-status contract.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -150,8 +155,8 @@ Retrospective closeout is recorded in `docs/work/BANDIT-030/retrospective.md`,
 and the evaluated `BANDIT-023` retrospective metadata now records
 `status: evaluated` and `outcome: keep`.
 
-`BANDIT-031` is the active first Phase 8 Workflow Cockpit slice. Its structured
-creation spec is recorded in
+`BANDIT-031` is landed and closed out as the first Phase 8 Workflow Cockpit
+slice. Its structured creation spec is recorded in
 `docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-031/brief.md`, and Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-031/red-evidence.md` with focused
@@ -171,13 +176,17 @@ findings are durably routed as
 recorded in `docs/work/BANDIT-031/landing-verdict.md` with final verdict
 `safe-to-land`, `npm run bandit -- land-check BANDIT-031` passes, and
 local-record landing action evidence is recorded in
-`docs/work/BANDIT-031/landing-action.md`. The next step is Stage 6
-retrospective and improvement disposition. Do not create unrelated active-work
-branches, Phase 8 visual UI, local server/API mode, state-index persistence,
-scheduler execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, PR/CI workflow, or unrelated feature work before retrospective
-and improvement disposition evidence is recorded.
+`docs/work/BANDIT-031/landing-action.md`. Retrospective closeout and
+improvement disposition are recorded in
+`docs/work/BANDIT-031/retrospective.md`. The next step is creating the next
+Phase 8 cockpit-status coverage hardening work item from
+`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`. Do not create unrelated
+active-work branches, Phase 8 visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, exclusive
+claim leases, work surface reservations, product UAT approval, automatic
+merge/push/deploy behavior, actor identity policy, PR/CI workflow, or unrelated
+feature work before the next work-item brief and RED evidence define the next
+narrow CLI-authoritative cockpit-status contract.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -698,12 +707,14 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 6 retrospective and improvement disposition for `BANDIT-031`.
+1. Create the next Phase 8 work item from queued improvement candidate
+   `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   retrospective and improvement disposition evidence is recorded.
+   the next work-item brief and RED evidence define the next narrow
+   CLI-authoritative cockpit-status contract.
 
 ## Phase 6: Coordination Primitive
 
