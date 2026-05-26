@@ -228,9 +228,11 @@ closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 coordination event commands. Its structured creation spec is recorded in
 `docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
 recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
-`docs/work/BANDIT-028/red-evidence.md`, and its per-work-item coordination log
-is recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
-`red_recorded`. This slice is scoped to a CLI-owned way to append
+`docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-028/implementation-evidence.md`, and its per-work-item
+coordination log is recorded in
+`docs/work/BANDIT-028/coordination-log.jsonl` at
+`implementation_recorded`. The implemented slice adds a CLI-owned way to append
 runtime-agnostic actor events for claim, handoff, block, complete,
 repair-request, and resume while preserving the rule that actor events do not
 advance workflow state, emit safe triggers, or satisfy landing/review/UAT
@@ -238,22 +240,19 @@ gates without accepted step transitions.
 
 **Last completed milestone:** `BANDIT-027` is landed and closed out.
 
-**Current next action:** Implement `BANDIT-028` agent coordination event
-commands so the focused RED tests pass. Implementation should add the selected
-`bandit coordination event <ID> <type>` command path, action-specific refusal
-cases, malformed existing log refusal, missing evidence refusal, actor-event
-non-authority preservation, derived status actor context, and preservation of
-existing `BANDIT-025` / `BANDIT-026` coordination behavior. Do not start Phase 7
-Improvement Engine work, Phase 8 Workflow Cockpit implementation, Phase 9
-dogfood, scheduler execution, worktree lifecycle, exclusive claim leases, work
-surface reservations, automatic merge/push/deploy behavior, product UAT
-approval, or unrelated work before implementation evidence is recorded.
+**Current next action:** Run Stage 4 review gates for `BANDIT-028`, starting
+with pre-PR CodeRabbit CLI review evidence, then Local Qwen review and
+aggregate review evidence with current `review_subject_hash`. Do not start
+Phase 7 Improvement Engine work, Phase 8 Workflow Cockpit implementation, Phase
+9 dogfood, scheduler execution, worktree lifecycle, exclusive claim leases,
+work surface reservations, automatic merge/push/deploy behavior, product UAT
+approval, or unrelated work before review evidence is recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
-Current state is `red_recorded`; the next action is to implement the narrow
-actor coordination event command path before Stage 3 implementation evidence.
+Current state is `implementation_recorded`; the next action is to run Stage 4
+review gates before landing verdict evidence.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
