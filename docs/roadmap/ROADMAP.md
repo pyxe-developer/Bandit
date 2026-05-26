@@ -254,7 +254,11 @@ local-record landing action evidence, chore-disposition evidence,
 retrospective closeout, and gap-ledger disposition are recorded.
 `BANDIT-028` has its Phase 6 agent coordination event command spec, brief,
 Stage 2 RED evidence, and Stage 3 implementation evidence recorded. Review
-evidence is the next required stage before landing begins.
+evidence is the next required stage before landing begins. Pre-PR CodeRabbit
+evidence is recorded in `docs/work/BANDIT-028/coderabbit-review.md` with
+verdict `pass` and no findings after the focused repair recorded in
+`docs/work/BANDIT-028/coderabbit-finding-repair.md`. The next action is Local
+Qwen review before aggregate Stage 4 evidence.
 
 ## Phase Map
 
@@ -567,13 +571,14 @@ Current rule:
 
 Current priority:
 
-1. Implement the narrow `BANDIT-028` agent coordination event command path from
-   the recorded RED evidence.
-2. Stop before unrelated active-work branches, scheduler execution, worktree
+1. Run Local Qwen review for `BANDIT-028`.
+2. Record aggregate Stage 4 review evidence with current `review_subject_hash`
+   only after Local Qwen is non-blocking or pass.
+3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until implementation evidence is
-   recorded.
+   reservations, or Phase 7 evaluation behavior until Stage 4 review evidence
+   is current and recorded.
 
 ## Phase 6: Coordination Primitive
 
