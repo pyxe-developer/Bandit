@@ -16,18 +16,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Rerun the CodeRabbit pre-PR provider against the
-repaired `BANDIT-034` source. The latest CodeRabbit finding in
-`docs/design/workflow-cockpit/prototype-source/index.html` was repaired by
-updating Babel standalone from `@7.29.4` to `@7.29.7` and refreshing the Babel
-script integrity attribute to the current CDN-published SRI hash while
-preserving `crossorigin="anonymous"`. React `18.3.1` and ReactDOM `18.3.1`
-integrity hashes were recomputed from the pinned unpkg payloads and already
-matched the current file attributes. Repair evidence is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; prior CodeRabbit
-provider evidence is now stale after source repair. Local Qwen and aggregate
-Stage 4 review evidence must wait until CodeRabbit is rerun and no longer
-blocks Stage 4.
+**Current next step:** CodeRabbit was rerun against the repaired `BANDIT-034` source at
+head `c871b6251c8cd20176efcf9d33cac4e9b318ffb8` and returned four
+unresolved actionable findings: replace stale hardcoded next-action UI copy in
+`screens.jsx`, guard malformed/missing cockpit globals in `app.jsx`, guard
+missing queue-band rows in `screens.jsx`, and validate `design-canvas.jsx`
+message sender origin/source before processing host messages. Current provider
+evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The next required
+action is focused repair or explicit PM disposition of those findings; do not
+continue Local Qwen or claim aggregate Stage 4 review evidence until CodeRabbit
+is rerun after repair and no longer blocks Stage 4.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -126,15 +125,15 @@ mapping. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-034/implementation-evidence.md`; the implementation derives
 guarded action affordances in the view model, makes light queue/context mapping
 explicit and source-linked, and keeps the render layer presentation-only. The
-latest Stage 4 CodeRabbit pre-PR review finding in
-`docs/design/workflow-cockpit/prototype-source/index.html` is repaired, and
-prior CodeRabbit provider evidence is stale after source repair. Current
-repair / PM disposition evidence is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`, with prior blocker
-evidence in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
+latest Stage 4 CodeRabbit pre-PR review rerun is complete. It returned four
+unresolved actionable findings: stale hardcoded next-action UI copy in
+`screens.jsx`, missing malformed-global guards in `app.jsx`, missing queue-band
+row guards in `screens.jsx`, and missing trusted sender/origin validation in
+`design-canvas.jsx`. Current provider evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-review.md` and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The next required action
-is to rerun CodeRabbit against the repaired source.
+is focused repair or explicit PM disposition of those findings before
+CodeRabbit can be rerun again.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity

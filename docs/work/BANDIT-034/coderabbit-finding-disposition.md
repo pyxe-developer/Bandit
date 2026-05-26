@@ -301,3 +301,44 @@ integrity attributes, and `crossorigin="anonymous"` settings remain unchanged.
 Rerun the CodeRabbit pre-PR provider against the repaired source before running
 Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
 pass evidence.
+
+## Latest Provider Rerun Result
+
+The latest CodeRabbit rerun completed at source head
+`c871b6251c8cd20176efcf9d33cac4e9b318ffb8` with four unresolved actionable
+findings.
+
+### Stale next-action UI copy
+
+**Finding:** Replace the hardcoded `Create the next Phase 8 visual UI work item`
+text in `screens.jsx` with dynamic content derived from app context or a prop,
+with a fallback such as `Create the next work item`.
+
+**Disposition:** pending repair or explicit PM disposition.
+
+### Malformed cockpit globals
+
+**Finding:** Guard missing or malformed `window.COCKPIT_TWEAK_DEFAULTS` and
+`COCKPIT_DATA` in `app.jsx` before calling `useTweaks` or `Object.keys`.
+
+**Disposition:** pending repair or explicit PM disposition.
+
+### Missing queue-band guard
+
+**Finding:** Guard `queueBand` before mapping `queueBand.rows` in
+`screens.jsx` so the queue screen does not throw when the band is absent.
+
+**Disposition:** pending repair or explicit PM disposition.
+
+### Design-canvas trusted sender validation
+
+**Finding:** Validate message sender source and origin in `design-canvas.jsx`
+before handling `__dc_set_zoom` or `__dc_probe` messages.
+
+**Disposition:** pending repair or explicit PM disposition.
+
+## Next Action
+
+Repair or explicitly disposition the latest four CodeRabbit findings before
+running Local Qwen, refreshing aggregate review-subject evidence, or claiming
+Stage 4 pass evidence.
