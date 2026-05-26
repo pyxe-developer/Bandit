@@ -73,12 +73,14 @@ runtime-agnostic actor coordination events for claim, handoff, block, complete,
 repair-request, and resume without turning actor events into workflow-state
 authority. Stage 4 review evidence is recorded in
 `docs/work/BANDIT-028/review-evidence.md` with pre-PR CodeRabbit, Local Qwen,
-and aggregate review evidence at current `review_subject_hash`; the next step
-is the Stage 5 landing verdict. Do not create unrelated active-work branches,
+and aggregate review evidence at current `review_subject_hash`. Stage 5 landing
+verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final
+verdict `safe-to-land`; the next step is the local-record landing action. Do
+not create unrelated active-work branches,
 Phase 7 improvement engine work, Phase 8 web cockpit implementation, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, or
-unrelated feature work before the landing verdict is recorded.
+unrelated feature work before the local-record landing action is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -266,8 +268,10 @@ durable routing for the Local Qwen finding is recorded in
 `docs/work/BANDIT-028/qwen-finding-disposition.md`. Aggregate review evidence
 is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
 `review_subject_hash`
-`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. The next
-action is the Stage 5 landing verdict.
+`ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
+final verdict `safe-to-land`. The next action is the local-record landing
+action.
 
 ## Phase Map
 
@@ -580,12 +584,13 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 5 landing verdict for `BANDIT-028`.
+1. Run `npm run bandit -- land-check BANDIT-028` and record the local-record
+   landing action for `BANDIT-028`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until the landing verdict is
-   recorded.
+   reservations, or Phase 7 evaluation behavior until the local-record landing
+   action is recorded.
 
 ## Phase 6: Coordination Primitive
 
