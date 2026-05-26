@@ -227,9 +227,10 @@ closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 `BANDIT-028` is the active Phase 6 Coordination Primitive slice for agent
 coordination event commands. Its structured creation spec is recorded in
 `docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
-recorded in `docs/work/BANDIT-028/brief.md`, and its per-work-item
-coordination log is recorded in `docs/work/BANDIT-028/coordination-log.jsonl`
-at `brief_created`. This slice is scoped to a CLI-owned way to append
+recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-028/red-evidence.md`, and its per-work-item coordination log
+is recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
+`red_recorded`. This slice is scoped to a CLI-owned way to append
 runtime-agnostic actor events for claim, handoff, block, complete,
 repair-request, and resume while preserving the rule that actor events do not
 advance workflow state, emit safe triggers, or satisfy landing/review/UAT
@@ -237,22 +238,22 @@ gates without accepted step transitions.
 
 **Last completed milestone:** `BANDIT-027` is landed and closed out.
 
-**Current next action:** Write RED evidence for `BANDIT-028` before production
-implementation. RED evidence should define tests for the selected coordination
-event command path, action-specific refusal cases, malformed existing log
-refusal, missing evidence refusal, actor-event non-authority, derived status
-actor context, and preservation of existing `BANDIT-025` / `BANDIT-026`
-coordination behavior. Do not start implementation, Phase 7 Improvement Engine
-work, Phase 8 Workflow Cockpit implementation, Phase 9 dogfood, scheduler
-execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, automatic merge/push/deploy behavior, product UAT approval, or
-unrelated work before RED evidence is recorded.
+**Current next action:** Implement `BANDIT-028` agent coordination event
+commands so the focused RED tests pass. Implementation should add the selected
+`bandit coordination event <ID> <type>` command path, action-specific refusal
+cases, malformed existing log refusal, missing evidence refusal, actor-event
+non-authority preservation, derived status actor context, and preservation of
+existing `BANDIT-025` / `BANDIT-026` coordination behavior. Do not start Phase 7
+Improvement Engine work, Phase 8 Workflow Cockpit implementation, Phase 9
+dogfood, scheduler execution, worktree lifecycle, exclusive claim leases, work
+surface reservations, automatic merge/push/deploy behavior, product UAT
+approval, or unrelated work before implementation evidence is recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
-Current state is `brief_created`; the next action is to write RED evidence
-before production implementation.
+Current state is `red_recorded`; the next action is to implement the narrow
+actor coordination event command path before Stage 3 implementation evidence.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -274,7 +275,7 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
 
-**Expected next deliverable:** RED evidence for `BANDIT-028`.
+**Expected next deliverable:** Implementation evidence for `BANDIT-028`.
 
 ## Known Bootstrap Gaps
 
@@ -416,11 +417,11 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, so the
 current priority is:
 
-1. Create the next Phase 6 Coordination Primitive work-item brief for
-   runtime-agnostic coordination actions.
+1. Implement the narrow `BANDIT-028` agent coordination event command path from
+   the recorded RED evidence.
 2. Stop before Phase 7, Phase 8, Phase 9, scheduler, worktree lifecycle,
-   product UAT, automatic merge/push/deploy, or unrelated work until that brief
-   is recorded.
+   product UAT, automatic merge/push/deploy, or unrelated work until
+   implementation evidence is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

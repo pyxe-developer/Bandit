@@ -64,17 +64,17 @@ closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
 `BANDIT-028` is active as the next Phase 6 Coordination Primitive slice. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-028-agent-coordination-event-commands.json`, its brief is
-recorded in `docs/work/BANDIT-028/brief.md`, and its coordination log is
-recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
-`brief_created`. The current next step is to write RED evidence for a
-CLI-owned command surface that appends runtime-agnostic actor coordination
-events for claim, handoff, block, complete, repair-request, and resume without
-turning actor events into workflow-state authority. Do not create unrelated
-active-work branches, implementation code, Phase 7 improvement engine work,
-Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
-exclusive claim leases, work surface reservations, product UAT approval,
-automatic merge/push/deploy behavior, or unrelated feature work before RED
-evidence is recorded.
+recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-028/red-evidence.md`, and its coordination log is recorded in
+`docs/work/BANDIT-028/coordination-log.jsonl` at `red_recorded`. The current
+next step is to implement the CLI-owned command surface that appends
+runtime-agnostic actor coordination events for claim, handoff, block, complete,
+repair-request, and resume without turning actor events into workflow-state
+authority. Do not create unrelated active-work branches, Phase 7 improvement
+engine work, Phase 8 web cockpit implementation, scheduler execution, worktree
+lifecycle, exclusive claim leases, work surface reservations, product UAT
+approval, automatic merge/push/deploy behavior, or unrelated feature work before
+implementation evidence is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -250,8 +250,8 @@ evidence with current `review_subject_hash`, Stage 5 landing verdict,
 local-record landing action evidence, chore-disposition evidence,
 retrospective closeout, and gap-ledger disposition are recorded.
 `BANDIT-028` has its Phase 6 agent coordination event command spec, brief, and
-initial `brief_created` coordination-log transition recorded. RED evidence is
-the next required stage before implementation begins.
+Stage 2 RED evidence recorded. Implementation evidence is the next required
+stage before review begins.
 
 ## Phase Map
 
@@ -564,11 +564,13 @@ Current rule:
 
 Current priority:
 
-1. Write RED evidence for `BANDIT-028`.
-2. Stop before implementation, unrelated active-work branches, scheduler
-   execution, worktree lifecycle, cockpit implementation, product UAT approval,
-   automatic merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until RED evidence is recorded.
+1. Implement the narrow `BANDIT-028` agent coordination event command path from
+   the recorded RED evidence.
+2. Stop before unrelated active-work branches, scheduler execution, worktree
+   lifecycle, cockpit implementation, product UAT approval, automatic
+   merge/push/deploy behavior, exclusive claim leases, work surface
+   reservations, or Phase 7 evaluation behavior until implementation evidence is
+   recorded.
 
 ## Phase 6: Coordination Primitive
 
