@@ -28,13 +28,12 @@ aggregate Stage 4 review evidence with current `review_subject_hash`, Stage 5
 landing verdict, local-record landing action, and retrospective closeout are
 recorded in `docs/work/BANDIT-026/`.
 
-`BANDIT-027` is active as the bootstrap-gap improvement chore for
+`BANDIT-027` is landed and closed out as the bootstrap-gap improvement chore for
 `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`. Its structured creation spec is
 recorded in
 `docs/specs/BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW.json`, its brief is
 recorded in `docs/work/BANDIT-027/brief.md`, and its coordination log is
-recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at
-`landed`.
+recorded in `docs/work/BANDIT-027/coordination-log.jsonl` at `closed`.
 RED evidence is recorded in `docs/work/BANDIT-027/red-evidence.md`, with
 focused tests in `test/coderabbit-state.test.mjs` proving the current CLI has
 no pre-PR local-diff CodeRabbit review path. Implementation evidence is
@@ -57,14 +56,17 @@ CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, Codex PM Stage 4
 disposition, and no open bootstrap gaps. Stage 5 landing verdict is recorded
 in `docs/work/BANDIT-027/landing-verdict.md` with final verdict
 `safe-to-land`. Local-record landing action evidence is recorded in
-`docs/work/BANDIT-027/landing-action.md`. The current next step is to record
-retrospective, improvement dispositions, gap-ledger disposition, and closeout
-context for `BANDIT-027`.
+`docs/work/BANDIT-027/landing-action.md`, chore-disposition evidence is
+recorded in `docs/work/BANDIT-027/chore-disposition.md`, retrospective
+closeout is recorded in `docs/work/BANDIT-027/retrospective.md`, and
+`.bandit/bootstrap-gaps.json` marks the gap resolved. The current next step is
+to create the next Phase 6 Coordination Primitive work-item brief for
+runtime-agnostic coordination actions: claim, handoff, block, complete,
+repair-request, and resume.
 Do not create unrelated active-work branches, Phase 7 improvement engine work,
-Phase 8 web cockpit implementation, claim leases, scheduler execution,
-worktree lifecycle, product UAT approval, automatic merge/push/deploy behavior,
-the next work item, or unrelated feature work before `BANDIT-027` closeout is
-recorded or explicitly blocked/dispositioned.
+Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
+product UAT approval, automatic merge/push/deploy behavior, or unrelated
+feature work before the next Phase 6 brief is recorded.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -234,13 +236,11 @@ typed-state-extensions spec, brief, RED evidence, focused tests,
 implementation evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4
 review evidence, Stage 5 landing verdict, landing action, retrospective, and
 terminal coordination-log state recorded. `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW`
-is currently active as `BANDIT-027`; implementation evidence and pre-PR
-CodeRabbit Stage 4 pass evidence and Local Qwen Stage 4 pass evidence are
-recorded. Aggregate Stage 4 review evidence with current `review_subject_hash`
-is recorded. Stage 5 landing verdict is recorded with final verdict
-`safe-to-land`, local-record landing action evidence is recorded, and no
-unrelated work should proceed until retrospective, gap-ledger disposition, and
-closeout context are recorded or the work is explicitly blocked/dispositioned.
+is resolved by `BANDIT-027`; implementation evidence, pre-PR CodeRabbit Stage
+4 pass evidence, Local Qwen Stage 4 pass evidence, aggregate Stage 4 review
+evidence with current `review_subject_hash`, Stage 5 landing verdict,
+local-record landing action evidence, chore-disposition evidence,
+retrospective closeout, and gap-ledger disposition are recorded.
 
 ## Phase Map
 
@@ -382,8 +382,7 @@ Goal: Make safe landing evidence-driven.
 
 Active work:
 
-- none. The pre-PR CodeRabbit CLI review gap is active in the Bootstrap Gap
-  Resolution Lane as `BANDIT-027`.
+- none.
 
 Expected capabilities:
 
@@ -392,7 +391,7 @@ Expected capabilities:
 - stale review/source-drift checks. Complete in `BANDIT-005`.
 - CodeRabbit state capture. Complete in `BANDIT-007` as a repo-native gate
   substrate; `BANDIT-015` added the PR-context live evidence path, and
-  `BANDIT-027` is active to add the missing pre-PR CLI review path.
+  `BANDIT-027` added the missing pre-PR CLI review path.
 - Local Qwen adversarial review artifact. Complete in `BANDIT-006` as a repo-native gate substrate; `BANDIT-008` repaired runtime drift and `BANDIT-009` repaired full-packet reliability through direct local oMLX.
 - Escalation reviewer placeholder. Complete in `BANDIT-010` as a bootstrap
   placeholder contract; live escalated reviewer routing remains a later gap.
@@ -445,7 +444,7 @@ Completed work:
 
 Active work:
 
-- `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
+- none.
 
 Expected capabilities:
 
@@ -536,11 +535,12 @@ Current rule:
 - `BANDIT-GAP-WORKFLOW-COCKPIT` is resolved by `BANDIT-024`; landing verdict,
   landing action, retrospective, workflow-cockpit boundary artifact, and
   gap-ledger disposition are recorded.
-- `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is active as `BANDIT-027`; the
+- `BANDIT-GAP-CODERABBIT-PRE-PR-CLI-REVIEW` is resolved by `BANDIT-027`; the
   brief, RED evidence, implementation evidence, pre-PR CodeRabbit Stage 4 pass
   evidence, Local Qwen Stage 4 pass evidence, and aggregate Stage 4 review
-  evidence are recorded. Stage 5 landing verdict is recorded, and the next
-  action is local-record landing action.
+  evidence are recorded. Stage 5 landing verdict, local-record landing action,
+  chore-disposition evidence, retrospective, and gap-ledger disposition are
+  recorded.
 - Use `bandit gaps list` and `.bandit/bootstrap-gaps.json` as the routing
   source.
 - Create exactly one gap chore at a time.
@@ -553,12 +553,11 @@ Current rule:
 
 Current priority:
 
-1. Record local-record landing action for `BANDIT-027`.
-2. Stop before creating unrelated work items, active-work branches, claim
-   leases, scheduler execution, worktree lifecycle, cockpit implementation,
-   product UAT approval, automatic merge/push/deploy behavior, or Phase 7
-   evaluation behavior until `BANDIT-027` lands or is explicitly
-   blocked/dispositioned.
+1. Create the next Phase 6 Coordination Primitive work-item brief.
+2. Stop before creating unrelated active-work branches, scheduler execution,
+   worktree lifecycle, cockpit implementation, product UAT approval, automatic
+   merge/push/deploy behavior, or Phase 7 evaluation behavior until that brief
+   is recorded.
 
 ## Phase 6: Coordination Primitive
 
