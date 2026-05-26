@@ -403,11 +403,14 @@ unrelated feature behavior. Stage 4 review evidence is recorded in
 `docs/work/BANDIT-033/review-evidence.md`; CodeRabbit completed with minor
 prototype-source findings dispositioned as no-action, Local Qwen returned a
 `non_blocking` verdict, and the remaining cockpit-shell hardening candidate is
-routed as `BANDIT-033-COCKPIT-SHELL-HARDENING`.
+routed as `BANDIT-033-COCKPIT-SHELL-HARDENING`. Stage 5 landing verdict is
+recorded in `docs/work/BANDIT-033/landing-verdict.md` with final verdict
+`safe-to-land` and `uat_status: not_applicable`; this slice records a
+presentation/render contract, not a browser-clickable operator surface, so
+browser UAT is deferred to the future slice that serves an actual cockpit page.
+`npm run bandit -- land-check BANDIT-033` passes with `UAT: not_applicable`.
 
-**Current next action:** Obtain CLI-owned product UAT approval for
-`BANDIT-033` before Stage 5 landing verdict, because this visual shell is an
-operator-facing cockpit UI slice.
+**Current next action:** Perform local-record landing for `BANDIT-033`.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -444,8 +447,8 @@ Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening.
 
-**Expected next deliverable:** CLI-owned product UAT approval evidence for
-`BANDIT-033`, then Stage 5 landing verdict after UAT is recorded.
+**Expected next deliverable:** Local-record landing action evidence for
+`BANDIT-033`.
 
 ## Known Bootstrap Gaps
 
@@ -603,8 +606,7 @@ passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
 The current priority is:
 
-1. Obtain CLI-owned product UAT approval for `BANDIT-033`, then record Stage 5
-   landing verdict if UAT is approved and evidence remains current.
+1. Perform local-record landing for `BANDIT-033`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -617,10 +619,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-Product UAT approval is required before `BANDIT-033` can proceed to Stage 5
-landing verdict because the current slice is an operator-facing cockpit visual
-UI slice. Repo artifacts can prove implementation, review, and source evidence,
-but they cannot approve operator product acceptance.
+No operator-owned input is required for the current `BANDIT-033` landing step.
+The Stage 5 landing verdict records `uat_status: not_applicable` because this
+slice produced a presentation/render contract, not a browser-clickable
+operator surface.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

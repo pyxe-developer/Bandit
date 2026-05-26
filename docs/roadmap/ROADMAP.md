@@ -16,8 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Obtain CLI-owned product UAT approval for `BANDIT-033` -
-Attention-First Cockpit Visual Shell before Stage 5 landing verdict.
+**Current next step:** Perform local-record landing for `BANDIT-033`.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -89,8 +88,11 @@ evidence is recorded in `docs/work/BANDIT-033/coderabbit-review.md`,
 `docs/work/BANDIT-033/review-evidence.md`. CodeRabbit completed with minor
 prototype-source findings dispositioned as no-action, Local Qwen returned a
 `non_blocking` verdict, and the remaining hardening candidate is routed as
-`BANDIT-033-COCKPIT-SHELL-HARDENING`. The next required artifact is CLI-owned
-product UAT approval before Stage 5 landing verdict. Local
+`BANDIT-033-COCKPIT-SHELL-HARDENING`. Stage 5 landing verdict is recorded in
+`docs/work/BANDIT-033/landing-verdict.md` with final verdict `safe-to-land`
+and `uat_status: not_applicable` because this slice records a
+presentation/render contract, not a browser-clickable operator surface.
+`npm run bandit -- land-check BANDIT-033` passes. Local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, and unrelated
@@ -460,8 +462,9 @@ and closed out as the cockpit status coverage hardening improvement chore. The
 operator-provided attention-first cockpit direction and design review are now
 recorded. `BANDIT-033` is the active Phase 8 Workflow Cockpit visual UI slice
 with Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
-evidence recorded. The next required action is CLI-owned product UAT approval
-for `BANDIT-033`.
+evidence recorded. Stage 5 landing verdict is recorded with UAT not applicable
+for this non-runnable presentation/render contract, and `land-check` passes.
+The next required action is local-record landing for `BANDIT-033`.
 
 ## Phase Map
 
@@ -774,8 +777,7 @@ Current rule:
 
 Current priority:
 
-1. Obtain CLI-owned product UAT approval for `BANDIT-033`, then record Stage 5
-   landing verdict if UAT is approved and evidence remains current.
+1. Perform local-record landing for `BANDIT-033`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
