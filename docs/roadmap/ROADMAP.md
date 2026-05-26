@@ -257,8 +257,12 @@ Stage 2 RED evidence, and Stage 3 implementation evidence recorded. Review
 evidence is the next required stage before landing begins. Pre-PR CodeRabbit
 evidence is recorded in `docs/work/BANDIT-028/coderabbit-review.md` with
 verdict `pass` and no findings after the focused repair recorded in
-`docs/work/BANDIT-028/coderabbit-finding-repair.md`. The next action is Local
-Qwen review before aggregate Stage 4 evidence.
+`docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
+evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
+`reviewer_verdict: non_blocking`, one open finding about actor and evidence
+reference validation, and no required operator input. The next action is Codex
+PM disposition and durable routing for the Local Qwen finding before aggregate
+Stage 4 evidence.
 
 ## Phase Map
 
@@ -571,9 +575,10 @@ Current rule:
 
 Current priority:
 
-1. Run Local Qwen review for `BANDIT-028`.
+1. Record Codex PM disposition and durable routing for the `BANDIT-028` Local
+   Qwen non-blocking finding.
 2. Record aggregate Stage 4 review evidence with current `review_subject_hash`
-   only after Local Qwen is non-blocking or pass.
+   only if the PM disposition accepts the finding as non-blocking.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
