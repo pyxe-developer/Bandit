@@ -14,11 +14,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 ## Current Position
 
-**Current phase:** Phase 7 - Improvement Engine.
+**Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** `BANDIT-025` is closed out as the first Phase 6
-Coordination Primitive slice. `BANDIT-026` is landed and closed out for typed
-state extensions. Its structured creation
+**Current next step:** Create the first Phase 8 Workflow Cockpit work-item
+brief from `docs/design/workflow-cockpit-boundary.md`, `docs/plans/V0_PLAN.md`,
+and current Phase 6/Phase 7 evidence. Do not start cockpit implementation,
+scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior,
+product UAT, actor identity policy, claim lease, work surface reservation,
+PR/CI workflow, or unrelated feature work before the Phase 8 brief is recorded.
+
+`BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
+`BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-026-typed-state-extensions.json`, its brief is recorded in
 `docs/work/BANDIT-026/brief.md`, and its per-work-item coordination log is
@@ -106,8 +112,9 @@ action evidence is recorded in `docs/work/BANDIT-029/landing-action.md`.
 Retrospective and improvement disposition are recorded in
 `docs/work/BANDIT-029/retrospective.md`.
 
-`BANDIT-030` is active as the Phase 7 improvement evaluation work item for the
-now-due `BANDIT-023` non-blocking review-finding routing outcome. Its
+`BANDIT-030` is landed and closed out as the Phase 7 improvement evaluation work
+item for the now-due `BANDIT-023` non-blocking review-finding routing outcome.
+Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json`, and its
 brief is recorded in `docs/work/BANDIT-030/brief.md`. Stage 2
@@ -128,12 +135,16 @@ findings. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-030/landing-verdict.md` with final verdict `safe-to-land`,
 and `npm run bandit -- land-check BANDIT-030` passes. Local-record landing
 action evidence is recorded in `docs/work/BANDIT-030/landing-action.md`.
-The next step is to record retrospective, improvement disposition, and closeout
-context for `BANDIT-030`. Do not create unrelated active-work branches, Phase 8
-web cockpit implementation, scheduler execution, worktree lifecycle, exclusive
-claim leases, work surface reservations, product UAT approval, automatic
-merge/push/deploy behavior, actor identity policy, the next work item, or
-unrelated feature work before retrospective and closeout evidence is recorded.
+Retrospective closeout is recorded in `docs/work/BANDIT-030/retrospective.md`,
+and the evaluated `BANDIT-023` retrospective metadata now records
+`status: evaluated` and `outcome: keep`.
+The next step is to create the first Phase 8 Workflow Cockpit work-item brief
+from `docs/design/workflow-cockpit-boundary.md`, `docs/plans/V0_PLAN.md`, and
+current Phase 6/Phase 7 evidence. Do not create unrelated active-work branches,
+Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
+exclusive claim leases, work surface reservations, product UAT approval,
+automatic merge/push/deploy behavior, actor identity policy, PR/CI workflow, or
+unrelated feature work before the Phase 8 brief is recorded.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -339,8 +350,9 @@ structured spec, Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3
 implementation evidence, Stage 7 improvement-evaluation evidence for
 `BANDIT-023` improvement outcome evaluation, Stage 4 review evidence, and
 Stage 5 landing verdict/readiness evidence, and local-record landing action
-evidence. The next action is recording retrospective, improvement disposition,
-and closeout context for `BANDIT-030`.
+evidence. Retrospective closeout is recorded, and the `BANDIT-023`
+improvement metadata is updated to `outcome: keep`. The next action is creating
+the first Phase 8 Workflow Cockpit work-item brief.
 
 ## Phase Map
 
@@ -353,8 +365,8 @@ and closeout context for `BANDIT-030`.
 | 4 | Review And Landing Gates | Bandit can produce pre-landing evidence, CodeRabbit state, Qwen review state, and Landing Verdicts. | Complete |
 | 5 | UAT And Auto-Landing | Bandit can record UAT approval, detect stale UAT, and auto-land eligible PRs under policy. | Complete |
 | 6 | Coordination Primitive | Bandit can expose explicit per-work-item coordination state, actor events, next actions, and safe trigger points. | Complete |
-| 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Active |
-| 8 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, coordination state, and improvement health. | Not started |
+| 7 | Improvement Engine | Bandit can evaluate improvement chores and produce keep/revise/revert/double-down decisions. | Complete |
+| 8 | Workflow Cockpit | Bandit has a lean UI for status, next actions, gates, UAT, coordination state, and improvement health. | Next |
 | 9 | Dogfood And Hardening | Bandit uses its own workflow to build and improve itself reliably. | Not started |
 
 ## Phase 0: Foundation
@@ -653,13 +665,13 @@ Current rule:
 
 Current priority:
 
-1. Record `BANDIT-030` retrospective, improvement disposition, and closeout
-   context updates.
+1. Create the first Phase 8 Workflow Cockpit work-item brief from existing
+   boundary and roadmap artifacts.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, the next work item, or Phase 8 work
-   until retrospective and closeout evidence is recorded.
+   reservations, actor identity policy, PR/CI workflow, or implementation work
+   until the Phase 8 brief is recorded.
 
 ## Phase 6: Coordination Primitive
 

@@ -39,8 +39,8 @@ metric: adversarial_repair_count
 baseline: BANDIT-015 required multiple Local Qwen reruns before the operator ended a recursive Stage 4 loop; BANDIT-022 landed with two Local Qwen non_blocking hardening findings queued as chore candidates.
 expected_direction: decrease repeated review loops caused only by future-hardening findings while keeping blocker finding acceptance unchanged.
 evaluation_window: Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first.
-status: resolved
-outcome: pending
+status: evaluated
+outcome: keep
 outcome_evidence:
   - `node --test --test-name-pattern "non-blocking Local Qwen findings|blocker Local Qwen findings" test/landing-gates.test.mjs` passed 3 focused tests.
   - `npm test` passed 196 tests during Stage 3 verification.
@@ -51,6 +51,8 @@ outcome_evidence:
   - `npm run bandit -- land-check BANDIT-023` passed.
   - `npm run bandit -- auto-land-check BANDIT-023` passed.
   - `npm run bandit -- land BANDIT-023 --action local-record` recorded landing action evidence.
+  - `docs/work/BANDIT-030/improvement-evaluation.md` evaluated the policy after the planned Stage 4 evidence window and recorded result `effective`, decision `keep`.
+  - `npm run bandit -- improvements evaluate BANDIT-023 --evidence docs/work/BANDIT-030/improvement-evaluation.md --json` passed.
 
 ## Cross-Model Tension
 

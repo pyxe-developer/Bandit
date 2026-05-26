@@ -2,7 +2,7 @@
 
 ## Status
 
-**Phase:** 7 - Improvement Engine.
+**Phase:** 8 - Workflow Cockpit kickoff.
 
 **State:** `BANDIT-016` landed as the bootstrap-gap chore for
 `BANDIT-GAP-STAGE4-EVIDENCE-HEAD-SEMANTICS`. Its landing verdict, local-record
@@ -283,8 +283,9 @@ lifecycle, exclusive claim leases, work surface reservations, automatic
 merge/push/deploy behavior, product UAT approval, actor identity policy, or
 unrelated coordination work.
 
-`BANDIT-030` is the active Phase 7 improvement evaluation work item for the
-now-due `BANDIT-023` non-blocking review-finding routing outcome. Its
+`BANDIT-030` is landed and closed out as the Phase 7 improvement evaluation work
+item for the now-due `BANDIT-023` non-blocking review-finding routing outcome.
+Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json`, and its
 brief is recorded in `docs/work/BANDIT-030/brief.md`. Stage 2
@@ -307,29 +308,29 @@ recorded in `docs/work/BANDIT-030/landing-verdict.md` with final verdict
 `safe-to-land`, and `npm run bandit -- land-check BANDIT-030` passes.
 Local-record landing action evidence is recorded in
 `docs/work/BANDIT-030/landing-action.md`.
+Retrospective closeout is recorded in
+`docs/work/BANDIT-030/retrospective.md`, and the evaluated `BANDIT-023`
+retrospective metadata now records `status: evaluated` and `outcome: keep`.
 The work item evaluates the `BANDIT-023` hypothesis against Stage 4 outcomes
 from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit,
 scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
 identity policy, claim lease, work surface reservation, or unrelated work
 starts.
 
-**Last completed milestone:** `BANDIT-030` local-record landing action evidence
-is recorded.
+**Last completed milestone:** `BANDIT-030` retrospective and improvement
+disposition closeout are recorded.
 
-**Current next action:** Record `BANDIT-030` retrospective, improvement
-disposition, coordination closeout if applicable, and roadmap/current-context
-closeout. Do not begin Phase 8 cockpit, scheduler, worktree lifecycle,
-automatic merge/push/deploy, product UAT, actor identity policy, claim lease,
-work surface reservation, the next work item, or unrelated work before
-retrospective and closeout evidence are recorded.
+**Current next action:** Create the first Phase 8 Workflow Cockpit work-item
+brief from `docs/design/workflow-cockpit-boundary.md`, `docs/plans/V0_PLAN.md`,
+and the current Phase 6/Phase 7 evidence. Keep the next step to the brief and
+Stage 1 acceptance criteria; do not start cockpit implementation, scheduler
+execution, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
+identity policy, claim lease, work surface reservation, PR/CI workflow, or
+unrelated work before the brief exists.
 
 ## Active Work
 
-**Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
-Routing. Status: Stage 3 implementation and Stage 7 evaluation evidence
-recorded; Stage 4 review evidence is current and dispositioned; Stage 5
-landing verdict and land-check pass; local-record landing action evidence is
-recorded; retrospective and closeout are next.
+**Active work item:** none. `BANDIT-030` is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -351,10 +352,11 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
-Evaluation Foundation.
+Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
+Routing.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/retrospective.md` with
-improvement disposition and closeout evidence.
+**Expected next deliverable:** `docs/work/BANDIT-031/brief.md` for the first
+Phase 8 Workflow Cockpit slice.
 
 ## Known Bootstrap Gaps
 
@@ -458,7 +460,7 @@ evidence and retrospective closeout.
 
 ## Next Step Details
 
-Phase 7 Improvement Engine.
+Phase 8 Workflow Cockpit kickoff.
 
 BANDIT-005 started Phase 4 by adding pre-landing review evidence, landing
 verdict contracts, source-drift checks, validation, and
@@ -501,16 +503,17 @@ verdict/readiness evidence, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition. `BANDIT-030` has a structured spec,
 Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3 implementation
 evidence, Stage 7 improvement-evaluation evidence, Stage 4 review evidence,
-Stage 5 landing verdict/readiness evidence, and local-record landing action
-evidence.
+Stage 5 landing verdict/readiness evidence, local-record landing action
+evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
+improvement disposition.
 The current priority is:
 
-1. Record `BANDIT-030` retrospective, improvement disposition, and closeout
-   context updates.
-2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
+1. Create the first Phase 8 Workflow Cockpit work-item brief from existing
+   boundary and roadmap artifacts.
+2. Stop before Phase 8 implementation, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, the next work item, or unrelated work
-   until retrospective and closeout evidence are recorded.
+   reservations, actor identity policy, PR/CI workflow, or unrelated work until
+   the Phase 8 brief is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -518,11 +521,14 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record the `BANDIT-030` retrospective
-and closeout from repo artifacts.
-If live external service access, cost/risk override, policy change,
-PR/merge/push/deploy authority, product direction, or product UAT approval is
-required, halt and ask for that input directly.
+No operator-owned input is required to create the first Phase 8 Workflow Cockpit
+brief from existing repo artifacts. The brief must stay within the approved
+CLI-authoritative cockpit boundary.
+
+If the next step would choose product/UI direction beyond the evidence-backed
+surfaces in `docs/design/workflow-cockpit-boundary.md`, require product UAT,
+change policy, approve cost/risk, enable PR/merge/push/deploy authority, or
+select an external service, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
