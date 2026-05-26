@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-034` - Cockpit
-Shell Hardening.
+**Current next step:** Implement Stage 3 for `BANDIT-034` - Cockpit Shell
+Hardening.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -109,13 +109,14 @@ improvement chore for `BANDIT-033-COCKPIT-SHELL-HARDENING`. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-034-cockpit-shell-hardening.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-034/brief.md`, and the source candidate is linked
-to `BANDIT-034` in `docs/work/BANDIT-033/qwen-finding-disposition.md`. The next
-required artifact is Stage 2 RED evidence for guarded action affordance
-derivation and explicit light queue/context mapping. Do not start production
-implementation, local server/API mode, state-index persistence, scheduler
+to `BANDIT-034` in `docs/work/BANDIT-033/qwen-finding-disposition.md`. Stage 2
+RED evidence is recorded in `docs/work/BANDIT-034/red-evidence.md` with focused
+tests for guarded action affordance derivation and explicit light queue/context
+mapping. The next required artifact is Stage 3 implementation evidence. Do not
+start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, automatic merge/push/deploy behavior, product
 UAT, actor identity policy, claim lease, work surface reservation, PR/CI
-workflow, or unrelated feature work before RED evidence is recorded.
+workflow, or unrelated feature work before implementation evidence is recorded.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -263,8 +264,9 @@ closed out as the first Phase 8 visual UI slice with Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
 landing-action evidence, and Stage 6 retrospective/improvement disposition
 recorded. `BANDIT-034` has a structured spec and Stage 1 brief for
-`BANDIT-033-COCKPIT-SHELL-HARDENING`; the next required artifact is Stage 2 RED
-evidence.
+`BANDIT-033-COCKPIT-SHELL-HARDENING`, and Stage 2 RED evidence is recorded in
+`docs/work/BANDIT-034/red-evidence.md`; the next required artifact is Stage 3
+implementation evidence.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
@@ -799,9 +801,9 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-034` - Cockpit Shell Hardening,
-   covering guarded action affordance derivation and explicit light
-   queue/context mapping before production implementation starts.
+1. Implement Stage 3 for `BANDIT-034` - Cockpit Shell Hardening, covering
+   guarded action affordance derivation and explicit light queue/context
+   mapping so the focused RED tests pass.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

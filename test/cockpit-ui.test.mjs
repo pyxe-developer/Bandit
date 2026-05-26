@@ -118,6 +118,91 @@ test("cockpit evidence drilldown shows source paths without mutation forms or hi
   });
 });
 
+test("cockpit shell renders guarded controls from pre-derived action affordances", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderCockpitShell } = await loadRenderModule();
+
+  const viewModel = buildCockpitViewModel(cockpitStatusFixture());
+  const shell = renderCockpitShell(
+    {
+      ...viewModel,
+      action_affordances: [
+        {
+          id: "validate_repo",
+          label: "Validate",
+          command_family: "bandit validate",
+          enabled: true,
+          reason: "Read-only validation is available through CLI Authority."
+        },
+        {
+          id: "inspect_evidence",
+          label: "Evidence",
+          command_family: "bandit show",
+          enabled: true,
+          reason: "Evidence inspection is read-only and source-linked."
+        },
+        {
+          id: "run_review_gate",
+          label: "Review Gate",
+          command_family: "bandit qwen-review",
+          enabled: true,
+          reason: "Pre-derived action affordance controls render state."
+        },
+        {
+          id: "check_landing_readiness",
+          label: "Landing Check",
+          command_family: "bandit land-check",
+          enabled: false,
+          reason: "implementation evidence is not recorded"
+        },
+        {
+          id: "record_uat",
+          label: "Record UAT",
+          command_family: "bandit uat",
+          enabled: false,
+          reason: "UAT is unavailable until an operator-facing implementation exists."
+        }
+      ]
+    },
+    desktopViewport()
+  );
+
+  assert.deepEqual(shell.controls.find((control) => control.id === "run_review_gate"), {
+    id: "run_review_gate",
+    role: "button",
+    label: "Review Gate",
+    command_family: "bandit qwen-review",
+    disabled: false,
+    "aria-disabled": "false",
+    reason: "Pre-derived action affordance controls render state."
+  });
+});
+
+test("cockpit shell renders explicit light queue context without mutation controls", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderCockpitShell } = await loadRenderModule();
+
+  const shell = renderCockpitShell(buildCockpitViewModel(cockpitStatusFixture()), desktopViewport());
+
+  assert.deepEqual(shell.queue_context, {
+    heading: "Queue context",
+    status: "clear",
+    summary: "No open bootstrap gaps; 1 improvement candidate is visible.",
+    sources: [
+      ".bandit/bootstrap-gaps.json",
+      "docs/work/BANDIT-032/retrospective.md",
+      "docs/roadmap/CURRENT_CONTEXT.md"
+    ],
+    mutation_forms: [],
+    excluded_authority: [
+      "intake_ledger_management",
+      "scheduler_execution",
+      "claimability_decision",
+      "workstream_queue_management"
+    ]
+  });
+});
+
 function desktopViewport() {
   return { width: 1440, height: 900 };
 }

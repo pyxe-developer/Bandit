@@ -150,6 +150,60 @@ test("cockpit presentation data cannot become canonical workflow authority", asy
   assert.equal(viewModel.decides_landing_safety, false);
 });
 
+test("cockpit view model exposes derived guarded action affordances as one presentation source", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { deriveCockpitActionAffordances } = await loadActionModule();
+
+  const status = cockpitStatusFixture();
+  const viewModel = buildCockpitViewModel(status);
+
+  assert.deepEqual(viewModel.action_affordances, deriveCockpitActionAffordances(status));
+  assert.equal(viewModel.action_affordances.some((action) => action.enabled), true);
+  assert.deepEqual(viewModel.action_affordances.find((action) => action.id === "run_review_gate"), {
+    id: "run_review_gate",
+    label: "Review Gate",
+    command_family: "bandit qwen-review",
+    enabled: false,
+    reason: "Stage 2 RED evidence is missing."
+  });
+});
+
+test("cockpit view model maps light queue context explicitly without becoming a backlog manager", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+
+  const viewModel = buildCockpitViewModel(cockpitStatusFixture());
+
+  assert.deepEqual(viewModel.queue_context, {
+    kind: "light_queue_context",
+    status: "clear",
+    summary: "No open bootstrap gaps; 1 improvement candidate is visible.",
+    sources: [
+      ".bandit/bootstrap-gaps.json",
+      "docs/work/BANDIT-032/retrospective.md",
+      "docs/roadmap/CURRENT_CONTEXT.md"
+    ],
+    excluded_authority: [
+      "intake_ledger_management",
+      "scheduler_execution",
+      "claimability_decision",
+      "workstream_queue_management"
+    ]
+  });
+  assert.deepEqual(
+    viewModel.attention_categories.find((category) => category.id === "queue_context"),
+    {
+      id: "queue_context",
+      label: "Queue context",
+      status: "clear",
+      sources: [
+        ".bandit/bootstrap-gaps.json",
+        "docs/work/BANDIT-032/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ]
+    }
+  );
+});
+
 function cockpitStatusFixture() {
   return {
     kind: "workflow_cockpit_status",
