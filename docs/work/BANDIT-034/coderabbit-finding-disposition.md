@@ -109,7 +109,17 @@ match the existing `index.html` values:
 - `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
   passed with 12 tests.
 
+## Retry Result
+
+The 2026-05-26 CodeRabbit retry completed at source head
+`9786d177c65f65f6983d704eb841c62a19845f8f` with two unresolved findings:
+
+- Guard the `design-canvas.jsx` grip scale calculation against zero-width
+  elements so pointer movement cannot produce `Infinity`.
+- Update the prototype Babel standalone script from `@babel/standalone@7.29.0`
+  to `7.29.4` and replace the integrity hash for that pinned version.
+
 ## Next Action
 
-Rerun the `BANDIT-034` pre-PR CodeRabbit gate against the repaired source before
+Repair or disposition the two unresolved CodeRabbit retry findings before
 running Local Qwen or claiming aggregate Stage 4 review evidence.
