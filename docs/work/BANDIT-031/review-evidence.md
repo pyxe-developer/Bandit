@@ -28,7 +28,7 @@ escalated_review_rationale: BANDIT-031 is a bounded internal Workflow Cockpit st
 pm_disposition: pass
 pm_disposition_rationale: Codex PM accepts Stage 4 because the valid CodeRabbit hardcoded-source finding was repaired with focused TDD coverage, the repair-head CodeRabbit run returned zero findings, Local Qwen classified the remaining blocker-summary, gate-summary, next-action heuristic, and stale-marker concerns as non_blocking, and those concerns are safely outside the smallest read-only foundation slice. Current repo artifacts record no active operator-input blocker or bootstrap-gap blocker; the status payload already exposes source paths, fail-closed missing/contradictory source checks, bootstrap gaps, landing readiness, UAT status, improvement health, and coordination state without hidden authority. The remaining Qwen findings are durably routed to BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING in docs/work/BANDIT-031/qwen-finding-disposition.md.
 non_blocking_findings_routing:
-  - follow_up_candidate: BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING routes Local Qwen blocker breadth, gate breadth, next-action heuristic, and stale-marker hardening findings for future cockpit status expansion.
+  - follow_up_chore_candidate: BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING is queued in docs/work/BANDIT-031/qwen-finding-disposition.md to route Local Qwen blocker breadth, gate breadth, next-action heuristic, and stale-marker hardening findings for future cockpit status expansion.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass

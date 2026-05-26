@@ -16,19 +16,21 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 5 landing verdict for `BANDIT-031` -
-Workflow Cockpit Status Foundation. The brief is recorded in
+**Current next step:** Perform the local-record landing action for
+`BANDIT-031` - Workflow Cockpit Status Foundation. The brief is recorded in
 `docs/work/BANDIT-031/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-031/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-031/implementation-evidence.md`, and Stage 4 review evidence
 is recorded in `docs/work/BANDIT-031/coderabbit-review.md`,
 `docs/work/BANDIT-031/local-qwen-review.md`,
 `docs/work/BANDIT-031/qwen-finding-disposition.md`, and
-`docs/work/BANDIT-031/review-evidence.md`; do not start visual UI, local
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
-policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
-feature work before Stage 5 landing verdict evidence is recorded.
+`docs/work/BANDIT-031/review-evidence.md`. Stage 5 landing verdict is recorded
+in `docs/work/BANDIT-031/landing-verdict.md`, and `land-check` passes; do not
+start visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, automatic
+merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
+work surface reservation, PR/CI workflow, or unrelated feature work before
+local-record landing action evidence is recorded.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -163,13 +165,15 @@ recorded in `docs/work/BANDIT-031/coderabbit-review.md`,
 `docs/work/BANDIT-031/review-evidence.md`; CodeRabbit passed after the focused
 dynamic improvement-candidate source repair, and Local Qwen non-blocking
 findings are durably routed as
-`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`. The next step is Stage 5
-landing verdict. Do not create unrelated active-work branches, Phase 8 visual UI,
-local server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, exclusive claim leases, work surface reservations, product UAT
-approval, automatic merge/push/deploy behavior, actor identity policy, PR/CI
-workflow, or unrelated feature work before Stage 5 landing verdict evidence is
-recorded.
+`BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING`. Stage 5 landing verdict is
+recorded in `docs/work/BANDIT-031/landing-verdict.md` with final verdict
+`safe-to-land`, and `npm run bandit -- land-check BANDIT-031` passes. The next
+step is local-record landing action. Do not create unrelated active-work
+branches, Phase 8 visual UI, local server/API mode, state-index persistence,
+scheduler execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, actor
+identity policy, PR/CI workflow, or unrelated feature work before local-record
+landing action evidence is recorded.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -690,12 +694,12 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 5 landing verdict for `BANDIT-031`.
+1. Perform the local-record landing action for `BANDIT-031`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   Stage 5 landing verdict evidence is recorded.
+   local-record landing action evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 

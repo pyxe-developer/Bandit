@@ -339,19 +339,25 @@ Local Qwen returned a `non_blocking` verdict; Codex PM accepted the remaining
 blocker-summary, gate-summary, next-action heuristic, and stale-marker findings
 as safe to defer and routed them to
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` in
-`docs/work/BANDIT-031/qwen-finding-disposition.md`. It must not start visual UI,
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, claim leases, work surface reservations, automatic merge/push/deploy,
-product UAT approval, actor identity policy, PR/CI workflow, or unrelated work.
+`docs/work/BANDIT-031/qwen-finding-disposition.md`. Stage 5 landing verdict is
+recorded in `docs/work/BANDIT-031/landing-verdict.md` with final verdict
+`safe-to-land`; `npm run bandit -- land-check BANDIT-031` passes. It must not
+start visual UI, server/API mode, state-index persistence, scheduler execution,
+worktree lifecycle, claim leases, work surface reservations, automatic
+merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
+or unrelated work before local-record landing action evidence is recorded.
 
-**Last completed milestone:** `BANDIT-031` Stage 4 review evidence is recorded.
+**Last completed milestone:** `BANDIT-031` Stage 5 landing verdict is recorded
+and `land-check` passes.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-031`.
+**Current next action:** Perform the local-record landing action for
+`BANDIT-031`.
 
 ## Active Work
 
 **Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation.
-Current stage: Stage 5 landing verdict. `BANDIT-030` is landed and closed out.
+Current stage: Stage 5 local-record landing action. `BANDIT-030` is landed and
+closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -376,8 +382,8 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing.
 
-**Expected next deliverable:** `docs/work/BANDIT-031/review-evidence.md` is
-recorded. The next deliverable is `docs/work/BANDIT-031/landing-verdict.md`.
+**Expected next deliverable:** `docs/work/BANDIT-031/landing-verdict.md` is
+recorded. The next deliverable is `docs/work/BANDIT-031/landing-action.md`.
 
 ## Known Bootstrap Gaps
 
@@ -529,11 +535,11 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition.
 The current priority is:
 
-1. Record Stage 5 landing verdict for `BANDIT-031`.
+1. Perform the local-record landing action for `BANDIT-031`.
 2. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   Stage 5 landing verdict evidence is recorded.
+   local-record landing action evidence is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -541,11 +547,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record the Stage 5 landing verdict for
-`BANDIT-031` from existing repo artifacts. The implementation stayed within the
-approved CLI-authoritative cockpit boundary, the Stage 2 RED tests, and the
-active brief. CodeRabbit passed at the repair head, and the remaining Local Qwen
-findings are recorded as non-blocking with durable follow-up routing.
+No operator-owned input is required to perform the local-record landing action
+for `BANDIT-031` from existing repo artifacts. The implementation stayed within
+the approved CLI-authoritative cockpit boundary, the Stage 2 RED tests, and the
+active brief. CodeRabbit passed at the repair head, the remaining Local Qwen
+findings are recorded as non-blocking with durable follow-up routing, Stage 5
+landing verdict is recorded, and `npm run bandit -- land-check BANDIT-031`
+passes.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require
