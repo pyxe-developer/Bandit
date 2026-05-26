@@ -320,8 +320,10 @@ starts.
 `BANDIT-031` is the active first Phase 8 Workflow Cockpit slice for a
 read-only Workflow Cockpit Status Foundation. Its structured creation spec is
 recorded in
-`docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, and its Stage
-1 brief is recorded in `docs/work/BANDIT-031/brief.md`. The slice is scoped to
+`docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, its Stage
+1 brief is recorded in `docs/work/BANDIT-031/brief.md`, and Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-031/red-evidence.md` with focused
+tests in `test/cockpit-status.test.mjs`. The slice is scoped to
 a CLI-authoritative, derived cockpit status payload or report that reads
 repo-native artifacts and exposes source paths, validation state, current
 phase, active work item, next action, blockers, gate summaries, improvement
@@ -330,17 +332,17 @@ server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, claim leases, work surface reservations, automatic merge/push/deploy,
 product UAT approval, actor identity policy, PR/CI workflow, or unrelated work.
 
-**Last completed milestone:** `BANDIT-031` Stage 1 brief is recorded.
+**Last completed milestone:** `BANDIT-031` Stage 2 RED evidence is recorded.
 
-**Current next action:** Record Stage 2 RED evidence for `BANDIT-031` by writing
-tests or an explicit verification plan for read-only cockpit status derivation,
-source artifact links, fail-closed missing or contradictory repo state, and the
-no-hidden-authority cockpit boundary before production implementation starts.
+**Current next action:** Implement the narrow read-only cockpit status
+foundation for `BANDIT-031` so `test/cockpit-status.test.mjs` passes, preserving
+repo-native source authority, source artifact links, fail-closed missing or
+contradictory repo state, and the no-hidden-authority cockpit boundary.
 
 ## Active Work
 
 **Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation.
-Current stage: Stage 2 RED evidence. `BANDIT-030` is landed and closed out.
+Current stage: Stage 3 implementation. `BANDIT-030` is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -365,9 +367,9 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing.
 
-**Expected next deliverable:** `docs/work/BANDIT-031/brief.md` for the first
-Phase 8 Workflow Cockpit slice is recorded. The next deliverable is
-`docs/work/BANDIT-031/red-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-031/red-evidence.md` for the
+first Phase 8 Workflow Cockpit slice is recorded. The next deliverable is
+`docs/work/BANDIT-031/implementation-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -519,12 +521,12 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition.
 The current priority is:
 
-1. Record Stage 2 RED evidence for `BANDIT-031` from the brief and existing
-   boundary artifacts.
-2. Stop before Phase 8 implementation, Phase 9, scheduler, worktree lifecycle, product UAT,
+1. Implement the narrow read-only cockpit status foundation for `BANDIT-031`
+   from the Stage 2 RED tests and existing boundary artifacts.
+2. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   the RED evidence is recorded.
+   the implementation evidence is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -532,9 +534,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to record Stage 2 RED evidence for
-`BANDIT-031` from existing repo artifacts. The RED evidence must stay within the
-approved CLI-authoritative cockpit boundary and the active brief.
+No operator-owned input is required to implement the narrow read-only cockpit
+status foundation for `BANDIT-031` from existing repo artifacts. The
+implementation must stay within the approved CLI-authoritative cockpit boundary,
+the Stage 2 RED tests, and the active brief.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require
