@@ -1,7 +1,7 @@
 {
   "kind": "slice",
   "title": "Improvement Evaluation Foundation",
-  "status": "Brief Created",
+  "status": "Closed",
   "goal": "Create the first Phase 7 improvement engine slice by defining a repo-native foundation for finding retrospective-derived improvement candidates, recording evaluation evidence, and routing keep, revise, revert, or double-down decisions without starting cockpit, scheduler, or automation work.",
   "scope": [
     "Define the narrow Phase 7 improvement evaluation foundation around existing repo-native improvement metadata in work-item briefs, retrospectives, review-finding dispositions, and follow-up chore artifacts.",

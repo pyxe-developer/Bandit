@@ -251,7 +251,8 @@ Qwen non-blocking actor identity validation concern is durably routed as
 for the next actor identity policy, coordination validation, claim lease, or
 work surface reservation slice, not an active work item.
 
-`BANDIT-029` is the first Phase 7 Improvement Engine slice. Its structured
+`BANDIT-029` is landed and closed out as the first Phase 7 Improvement Engine
+slice. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
 is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
@@ -272,7 +273,9 @@ Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-029/landing-verdict.md` with final verdict `safe-to-land`;
 `npm run bandit -- land-check BANDIT-029` passes at current head
 `bbcfa90c91a8c92588835e410be17f1935601c11`. Local-record landing action
-evidence is recorded in `docs/work/BANDIT-029/landing-action.md`. The slice is scoped to the
+evidence is recorded in `docs/work/BANDIT-029/landing-action.md`.
+Retrospective and improvement disposition are recorded in
+`docs/work/BANDIT-029/retrospective.md`. The slice is scoped to the
 smallest repo-native improvement evaluation foundation
 from existing retrospective-derived improvement metadata. It must not start
 Phase 8 Workflow Cockpit implementation, scheduler execution, worktree
@@ -280,23 +283,22 @@ lifecycle, exclusive claim leases, work surface reservations, automatic
 merge/push/deploy behavior, product UAT approval, actor identity policy, or
 unrelated coordination work.
 
-**Last completed milestone:** `BANDIT-029` local-record landing action evidence
-is recorded after Stage 5 landing readiness passed with final verdict
-`safe-to-land`.
+**Last completed milestone:** `BANDIT-029` retrospective, improvement
+disposition, and context closeout are recorded after local-record landing
+action evidence.
 
-**Current next action:** Complete `BANDIT-029` retrospective, improvement
-disposition, and context closeout. Do not start the next slice, Phase 8,
-scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
-identity policy, or unrelated work before retrospective/improvement disposition
-and context closeout are recorded.
+**Current next action:** Create the next Phase 7 work item for evaluation of the
+now-due `BANDIT-023` non-blocking review-finding routing improvement outcome.
+Use `bandit work-item create <spec-path>` with a narrow spec that evaluates the
+`BANDIT-023` hypothesis against the Stage 4 outcomes from `BANDIT-025`,
+`BANDIT-028`, and `BANDIT-029`. Do not start Phase 8, scheduler, worktree
+lifecycle, automatic merge/push/deploy, product UAT, actor identity policy,
+claim leases, work surface reservations, or unrelated work first.
 
 ## Active Work
 
-**Active work item:** `BANDIT-029` - Improvement Evaluation Foundation. Stage 1
-brief, Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4
-review evidence are recorded. Stage 5 landing verdict and landing readiness
-verification are recorded; local-record landing action evidence is recorded.
-Retrospective/improvement disposition and context closeout are next.
+**Active work item:** none. `BANDIT-029` - Improvement Evaluation Foundation is
+landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -317,9 +319,12 @@ Create Command; `BANDIT-022` - Heartbeat Chore Agent Contract; `BANDIT-023` -
 Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
-`BANDIT-028` - Agent Coordination Event Commands.
+`BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
+Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-029/retrospective.md`.
+**Expected next deliverable:** `docs/work/BANDIT-030/brief.md` for the next
+Phase 7 improvement evaluation work item, after a structured creation spec is
+prepared.
 
 ## Known Bootstrap Gaps
 
@@ -460,17 +465,18 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
-`BANDIT-029` now has a structured spec, Stage 1 brief, Stage 2 RED evidence,
+`BANDIT-029` has a structured spec, Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
-verdict/readiness evidence, and local-record landing action evidence. The
-current priority is:
+verdict/readiness evidence, local-record landing action evidence, and Stage 6
+retrospective/improvement disposition. The current priority is:
 
-1. Complete retrospective/improvement disposition and context closeout for
-   `BANDIT-029`.
+1. Create the next Phase 7 work item to evaluate the now-due `BANDIT-023`
+   non-blocking review-finding routing improvement outcome against
+   `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` Stage 4 outcomes.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, or unrelated work until `BANDIT-029`
-   is landed and closed out.
+   reservations, actor identity policy, or unrelated work until that Phase 7
+   evaluation step is explicitly scoped.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -478,8 +484,8 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for routine `BANDIT-029`
-retrospective/improvement disposition and context closeout from repo artifacts.
+No operator-owned input is required to create the next narrow Phase 7 work item
+for `BANDIT-023` improvement outcome evaluation from repo artifacts.
 If live external service access, cost/risk override, policy change,
 PR/merge/push/deploy authority, product direction, or product UAT approval is
 required, halt and ask for that input directly.

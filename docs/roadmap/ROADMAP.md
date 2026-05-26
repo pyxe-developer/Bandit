@@ -82,7 +82,8 @@ verdict `safe-to-land`; local-record landing action evidence is recorded in
 non-blocking actor identity validation concern is durably routed in
 `docs/work/BANDIT-028/qwen-finding-disposition.md`.
 
-`BANDIT-029` is the first Phase 7 Improvement Engine slice. Its structured
+`BANDIT-029` is landed and closed out as the first Phase 7 Improvement Engine
+slice. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
 is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
@@ -101,13 +102,15 @@ verdict, and Codex PM accepted/routed the non-blocking hardening findings.
 Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-029/landing-verdict.md` with final verdict `safe-to-land`,
 and `npm run bandit -- land-check BANDIT-029` passes. Local-record landing
-action evidence is recorded in `docs/work/BANDIT-029/landing-action.md`. The
-next step is retrospective/improvement disposition and context closeout. Do not
-create unrelated active-work branches, Phase 8 web cockpit implementation,
-scheduler execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, or unrelated feature work before `BANDIT-029` is closed out
-through the normal slice boundary.
+action evidence is recorded in `docs/work/BANDIT-029/landing-action.md`.
+Retrospective and improvement disposition are recorded in
+`docs/work/BANDIT-029/retrospective.md`. The next step is to create the next
+Phase 7 work item for evaluating the now-due `BANDIT-023` non-blocking
+review-finding routing improvement outcome. Do not create unrelated active-work
+branches, Phase 8 web cockpit implementation, scheduler execution, worktree
+lifecycle, exclusive claim leases, work surface reservations, product UAT
+approval, automatic merge/push/deploy behavior, actor identity policy, or
+unrelated feature work before that Phase 7 evaluation step is explicitly scoped.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -301,14 +304,15 @@ landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
 final verdict `safe-to-land`. Local-record landing action evidence is recorded
 in `docs/work/BANDIT-028/landing-action.md`; retrospective closeout is recorded
 in `docs/work/BANDIT-028/retrospective.md`; and the coordination log is closed.
-`BANDIT-029` has its Phase 7 Improvement Engine structured spec, Stage 1 brief,
+`BANDIT-029` is landed and closed out with its Phase 7 Improvement Engine
+structured spec, Stage 1 brief,
 Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
 evidence recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
 `docs/work/BANDIT-029/`. Stage 5 landing verdict and landing readiness
-verification are recorded. Local-record landing action evidence is recorded.
-The next action is `BANDIT-029` retrospective/improvement disposition and
-context closeout.
+verification are recorded. Local-record landing action evidence and Stage 6
+retrospective/improvement disposition are recorded. The next action is creating
+the next Phase 7 work item for `BANDIT-023` improvement outcome evaluation.
 
 ## Phase Map
 
@@ -621,13 +625,14 @@ Current rule:
 
 Current priority:
 
-1. Complete retrospective/improvement disposition and context closeout for
-   `BANDIT-029`.
+1. Create the next Phase 7 work item to evaluate the now-due `BANDIT-023`
+   non-blocking review-finding routing improvement outcome against the Stage 4
+   outcomes from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, or Phase 8 work until `BANDIT-029` is
-   landed and closed through the normal slice boundary.
+   reservations, actor identity policy, or Phase 8 work until that Phase 7
+   evaluation step is explicitly scoped.
 
 ## Phase 6: Coordination Primitive
 
