@@ -364,22 +364,19 @@ stale-evidence reporting. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-032/implementation-evidence.md`; the implementation keeps
 cockpit status read-only and source-linked while adding blocker summaries,
 Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
-agreement, and stale review/landing evidence reporting. A Stage 4 CodeRabbit
-pre-PR review attempt is recorded in
-`docs/work/BANDIT-032/coderabbit-review.md` at source head
-`bbbad286cb9c330e88142bb5bc62f4da883e4986`; CodeRabbit returned a recoverable
-rate-limit blocker after Codex PM repaired its earlier findings, with the
-latest provider wait time recorded as 1 minute and 16 seconds. Local Qwen,
-aggregate review evidence, landing, and retrospective evidence have not
-started.
+agreement, and stale review/landing evidence reporting. Stage 4 CodeRabbit
+pre-PR pass evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md`
+at source head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings.
+Local Qwen, aggregate review evidence, landing, and retrospective evidence have
+not started.
 
-**Last completed milestone:** `BANDIT-032` Stage 4 CodeRabbit blocker evidence
-is recorded after focused Stage 4 repairs.
+**Last completed milestone:** `BANDIT-032` Stage 4 CodeRabbit pass evidence is
+recorded after the recoverable provider rate limit cleared.
 
-**Current next action:** Rerun pre-PR CodeRabbit review for `BANDIT-032` after
-the recoverable CodeRabbit rate limit clears. If it passes, continue Stage 4
-with Local Qwen adversarial review, review-subject hash, PM disposition, and
-aggregate review evidence.
+**Current next action:** Run Local Qwen adversarial review for `BANDIT-032`.
+If it passes or returns non-blocking findings that Codex PM can disposition,
+continue Stage 4 with review-subject hash, PM disposition, and aggregate review
+evidence.
 
 Do not start visual UI, server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -390,8 +387,8 @@ current `BANDIT-032` Stage 4 review evidence exists.
 ## Active Work
 
 **Active work item:** `BANDIT-032` - Cockpit Status Coverage Hardening is in
-Stage 4 review with CodeRabbit currently blocked by a recoverable provider rate
-limit. Local Qwen and aggregate review evidence remain pending.
+Stage 4 review with CodeRabbit pass evidence recorded. Local Qwen and aggregate
+review evidence remain pending.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -416,12 +413,10 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
 
-**Expected next deliverable:** refreshed
-`docs/work/BANDIT-032/coderabbit-review.md` with completed CodeRabbit pass
-evidence after the provider rate limit clears, followed by
-`docs/work/BANDIT-032/local-qwen-review.md` and
-`docs/work/BANDIT-032/review-evidence.md` if the CodeRabbit gate passes at the
-current review subject.
+**Expected next deliverable:** `docs/work/BANDIT-032/local-qwen-review.md`,
+followed by `docs/work/BANDIT-032/review-evidence.md` if Local Qwen accepts the
+current review subject or returns non-blocking findings that Codex PM can
+disposition.
 
 ## Known Bootstrap Gaps
 
@@ -575,12 +570,10 @@ Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec,
 Stage 1 brief, Stage 2 RED evidence, and Stage 3 implementation evidence for
 cockpit status coverage hardening. The current priority is:
 
-1. Rerun pre-PR CodeRabbit review for `BANDIT-032` after the recoverable
-   provider rate limit clears, replacing the current blocker evidence in
-   `docs/work/BANDIT-032/coderabbit-review.md` only with current completed
-   evidence.
-2. If CodeRabbit passes, continue Stage 4 with Local Qwen adversarial review,
-   review-subject hash, PM disposition, and aggregate review evidence.
+1. Run Local Qwen adversarial review for `BANDIT-032`.
+2. If Local Qwen passes or returns non-blocking findings that Codex PM can
+   disposition, continue Stage 4 with review-subject hash, PM disposition, and
+   aggregate review evidence.
 3. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, landing, retrospective

@@ -16,10 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Rerun pre-PR CodeRabbit review for `BANDIT-032` after
-the recoverable CodeRabbit rate limit clears. If it passes, continue Stage 4
-with Local Qwen adversarial review, review-subject hash, PM disposition, and
-aggregate review evidence.
+**Current next step:** Run Local Qwen adversarial review for `BANDIT-032`. If
+it passes or returns non-blocking findings that Codex PM can disposition,
+continue Stage 4 with review-subject hash, PM disposition, and aggregate review
+evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -51,17 +51,15 @@ Implementation evidence is recorded in
 `docs/work/BANDIT-032/implementation-evidence.md`; the implementation keeps
 cockpit status read-only and source-linked while adding blocker summaries,
 Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
-agreement, and stale review/landing evidence reporting. CodeRabbit blocker
+agreement, and stale review/landing evidence reporting. CodeRabbit pass
 evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md` at source
-head `bbbad286cb9c330e88142bb5bc62f4da883e4986` because the provider returned
-a recoverable rate limit after focused Stage 4 repairs, with the latest
-provider wait time recorded as 1 minute and 16 seconds. The next step is to
-rerun pre-PR CodeRabbit after the rate limit clears. Do not start Local Qwen,
-aggregate review evidence, landing, retrospective closeout, visual UI, local
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
-policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
-feature work before current CodeRabbit pass evidence exists.
+head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings. The next step
+is Local Qwen adversarial review. Do not start aggregate review evidence,
+landing, retrospective closeout, visual UI, local server/API mode, state-index
+persistence, scheduler execution, worktree lifecycle, automatic
+merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
+work surface reservation, PR/CI workflow, or unrelated feature work before
+current Local Qwen evidence exists.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -734,12 +732,10 @@ Current rule:
 
 Current priority:
 
-1. Rerun pre-PR CodeRabbit review for `BANDIT-032` after the recoverable
-   provider rate limit clears, replacing the current blocker evidence in
-   `docs/work/BANDIT-032/coderabbit-review.md` only with current completed
-   evidence.
-2. If CodeRabbit passes, continue Stage 4 with Local Qwen adversarial review,
-   review-subject hash, PM disposition, and aggregate review evidence.
+1. Run Local Qwen adversarial review for `BANDIT-032`.
+2. If Local Qwen passes or returns non-blocking findings that Codex PM can
+   disposition, continue Stage 4 with review-subject hash, PM disposition, and
+   aggregate review evidence.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
