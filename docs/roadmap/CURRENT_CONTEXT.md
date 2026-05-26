@@ -387,11 +387,13 @@ improvement disposition are recorded. The Phase 8 attention-first cockpit PRD
 and design review are now recorded as the accepted visual UI starting point.
 `BANDIT-033` has been created as the next Phase 8 visual UI slice; its
 structured spec is recorded in
-`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, and its
-Stage 1 brief is recorded in `docs/work/BANDIT-033/brief.md`.
+`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, its Stage 1
+brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
+tests in `test/cockpit-view-model.test.mjs` and `test/cockpit-ui.test.mjs`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-033` -
-Attention-First Cockpit Visual Shell.
+**Current next action:** Implement Stage 3 for `BANDIT-033` - Attention-First
+Cockpit Visual Shell.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -428,11 +430,9 @@ Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-033`, covering
-attention-category mapping, cockpit shell rendering, evidence confidence cues,
-disabled guarded actions, source traceability, responsive behavior,
-accessibility states, and no-hidden-authority guarantees before production
-implementation starts.
+**Expected next deliverable:** Stage 3 implementation evidence for
+`BANDIT-033`, after implementing the focused view-model, guarded-action, and
+render-contract modules defined by `docs/work/BANDIT-033/red-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -590,11 +590,12 @@ passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-033` from
-   `docs/work/BANDIT-033/brief.md`.
-2. Cover attention-first view-model behavior, guarded action eligibility,
-   evidence detail normalization, responsive render constraints, accessibility
-   states, and no hidden UI authority before production implementation.
+1. Implement the focused `BANDIT-033` presentation boundary from
+   `docs/work/BANDIT-033/red-evidence.md`.
+2. Make `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
+   pass without broadening into server/API, persistence, scheduler, worktree,
+   deployment, product UAT, actor identity, claim lease, work surface
+   reservation, PR/CI, or unrelated feature behavior.
 3. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -607,9 +608,9 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to write Stage 2 RED evidence for
-`BANDIT-033` from the accepted attention-first design artifacts and Stage 1
-brief.
+No operator-owned input is required to implement the focused Stage 3
+presentation boundary for `BANDIT-033` from the accepted attention-first design
+artifacts, Stage 1 brief, and Stage 2 RED evidence.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

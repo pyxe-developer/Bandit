@@ -16,8 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-033` -
-Attention-First Cockpit Visual Shell.
+**Current next step:** Implement Stage 3 for `BANDIT-033` - Attention-First
+Cockpit Visual Shell.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -76,15 +76,16 @@ future work item explicitly scopes that authority.
 
 `BANDIT-033` - Attention-First Cockpit Visual Shell is the active Phase 8
 visual UI slice. Its structured creation spec is recorded in
-`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, and its
-Stage 1 brief is recorded in `docs/work/BANDIT-033/brief.md`. The next required
-artifact is Stage 2 RED evidence for attention-category mapping, cockpit shell
-rendering, evidence confidence cues, disabled guarded actions, source
-traceability, responsive behavior, accessibility states, and no hidden UI
-authority. Local server/API mode, state-index persistence, scheduler execution,
-worktree lifecycle, automatic merge/push/deploy behavior, product UAT, actor
-identity policy, claim lease, work surface reservation, PR/CI workflow, and
-unrelated feature work remain out of scope unless a future work item explicitly
+`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, its Stage 1
+brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
+tests in `test/cockpit-view-model.test.mjs` and `test/cockpit-ui.test.mjs`.
+The next required artifact is Stage 3 implementation evidence after the
+focused view-model, guarded-action, and render-contract tests pass. Local
+server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
+policy, claim lease, work surface reservation, PR/CI workflow, and unrelated
+feature work remain out of scope unless a future work item explicitly
 authorizes them.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
@@ -229,12 +230,13 @@ improvement disposition are recorded in
 `docs/work/BANDIT-031/retrospective.md`. The routed
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` follow-up is evaluated through
 `BANDIT-032`, which is landed and closed out. `BANDIT-033` is now the active
-Phase 8 visual UI slice, and the next required artifact is Stage 2 RED
-evidence. Do not create unrelated active-work branches, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, exclusive
-claim leases, work surface reservations, product UAT approval, automatic
-merge/push/deploy behavior, actor identity policy, PR/CI workflow, or unrelated
-feature work before `BANDIT-033` records the next required evidence.
+Phase 8 visual UI slice with Stage 2 RED evidence recorded, and the next
+required artifact is Stage 3 implementation evidence. Do not create unrelated
+active-work branches, local server/API mode, state-index persistence, scheduler
+execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, actor
+identity policy, PR/CI workflow, or unrelated feature work before `BANDIT-033`
+records the next required evidence.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -445,9 +447,9 @@ improvement metadata is updated to `outcome: keep`. `BANDIT-031` is landed and
 closed out as the first Phase 8 Workflow Cockpit slice. `BANDIT-032` is landed
 and closed out as the cockpit status coverage hardening improvement chore. The
 operator-provided attention-first cockpit direction and design review are now
-recorded. `BANDIT-033` is created as the next Phase 8 Workflow Cockpit visual
-UI slice. The next required action is Stage 2 RED evidence for
-`BANDIT-033`.
+recorded. `BANDIT-033` is the active Phase 8 Workflow Cockpit visual UI slice
+with Stage 2 RED evidence recorded. The next required action is Stage 3
+implementation for `BANDIT-033`.
 
 ## Phase Map
 
@@ -760,11 +762,12 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-033` from
-   `docs/work/BANDIT-033/brief.md`.
-2. Cover attention-first view-model behavior, guarded action eligibility,
-   evidence detail normalization, responsive render constraints, accessibility
-   states, and no hidden UI authority before production implementation.
+1. Implement the focused `BANDIT-033` presentation boundary from
+   `docs/work/BANDIT-033/red-evidence.md`.
+2. Make `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
+   pass without broadening into server/API, persistence, scheduler, worktree,
+   deployment, product UAT, actor identity, claim lease, work surface
+   reservation, PR/CI, or unrelated feature behavior.
 3. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
