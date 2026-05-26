@@ -217,3 +217,49 @@ Sans `font-feature-settings` declaration and leave only `"ss01"`.
 Rerun the CodeRabbit pre-PR provider against the repaired source before running
 Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
 pass evidence.
+
+## Latest Current-Source Finding Repair
+
+The latest CodeRabbit rerun completed at source head
+`43776fe84c7ba316f14fb3ff985ce6f97bbeac5b` with two unresolved findings.
+
+### ActionButton ARIA disabled value
+
+**Finding:** Update `aria-disabled={disabled}` in
+`docs/design/workflow-cockpit/prototype-source/ui.jsx` to pass an explicit ARIA
+string value.
+
+**Disposition:** repaired.
+
+**Evidence:** `ui.jsx` now renders
+`aria-disabled={disabled ? "true" : "false"}` while preserving the native
+`disabled` attribute and visual `data-disabled` state.
+
+### Design-canvas keyboard handler stability
+
+**Finding:** Stabilize the focus-overlay keyboard handler by adding an
+appropriate `useEffect` dependency array and memoizing the `go` and `goSection`
+callbacks.
+
+**Disposition:** repaired.
+
+**Evidence:** `design-canvas.jsx` now memoizes `go` and `goSection` with
+`React.useCallback` and scopes the document `keydown` listener effect to those
+callbacks, avoiding listener teardown/re-add on unrelated focus-overlay renders.
+
+## Latest Repair Verification
+
+- `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
+  passed with 12 tests.
+- `npm test` passed with 255 tests.
+- `npm run typecheck` passed.
+- `npm run bandit -- validate` passed.
+- `npm run bandit -- cockpit status --json` passed and reported the next action
+  agreement as `pass` with stale review evidence surfaced.
+- `git diff --check` passed.
+
+## Current Next Action
+
+Rerun the CodeRabbit pre-PR provider against the repaired source before running
+Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
+pass evidence.

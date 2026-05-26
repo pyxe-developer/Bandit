@@ -827,8 +827,11 @@ function DCFocusOverlay({ entry, sectionMeta, sectionOrder }) {
   const idx = peers.indexOf(aid);
   const secIdx = sectionOrder.indexOf(sectionId);
 
-  const go = (d) => { const n = peers[(idx + d + peers.length) % peers.length]; if (n) ctx.setFocus(`${sectionId}/${n}`); };
-  const goSection = (d) => {
+  const go = React.useCallback((d) => {
+    const n = peers[(idx + d + peers.length) % peers.length];
+    if (n) ctx.setFocus(`${sectionId}/${n}`);
+  }, [ctx, idx, peers, sectionId]);
+  const goSection = React.useCallback((d) => {
     // Sections whose artboards are all deleted have slotIds:[] — step past
     // them to the next non-empty section so ↑/↓ doesn't dead-end.
     const n = sectionOrder.length;
@@ -837,7 +840,7 @@ function DCFocusOverlay({ entry, sectionMeta, sectionOrder }) {
       const first = sectionMeta[ns] && sectionMeta[ns].slotIds[0];
       if (first) { ctx.setFocus(`${ns}/${first}`); return; }
     }
-  };
+  }, [ctx, secIdx, sectionMeta, sectionOrder]);
 
   React.useEffect(() => {
     const k = (e) => {
@@ -848,7 +851,7 @@ function DCFocusOverlay({ entry, sectionMeta, sectionOrder }) {
     };
     document.addEventListener('keydown', k);
     return () => document.removeEventListener('keydown', k);
-  });
+  }, [go, goSection]);
 
   const { width = 260, height = 480, children } = artboard.props;
   const [vp, setVp] = React.useState({ w: window.innerWidth, h: window.innerHeight });

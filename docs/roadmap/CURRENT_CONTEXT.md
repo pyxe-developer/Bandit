@@ -415,20 +415,16 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or disposition the latest `BANDIT-034` Stage 4
-CodeRabbit findings before rerunning CodeRabbit. The current-source provider
-rerun completed at source head `43776fe84c7ba316f14fb3ff985ce6f97bbeac5b`
-with two unresolved findings: update `aria-disabled` in
-`docs/design/workflow-cockpit/prototype-source/ui.jsx` to pass an ARIA string
-value, and stabilize the keyboard-handler `useEffect` / `go` / `goSection`
-dependencies in
-`docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`. Current
-blocker evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Do not continue Local
-Qwen or claim aggregate Stage 4 review evidence until these findings are
-repaired or dispositioned and the CodeRabbit pre-PR gate no longer blocks Stage
-4.
+**Current next action:** Rerun the `BANDIT-034` CodeRabbit pre-PR provider
+against the repaired source. The latest blocker findings from source head
+`43776fe84c7ba316f14fb3ff985ce6f97bbeac5b` were repaired in
+`docs/design/workflow-cockpit/prototype-source/ui.jsx` and
+`docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`, and focused
+repair evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`. Current CodeRabbit
+provider evidence is stale after source repair. Do not continue Local Qwen or
+claim aggregate Stage 4 review evidence until CodeRabbit is rerun and no longer
+blocks Stage 4.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -442,10 +438,10 @@ that authority.
 Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
 completed CodeRabbit blocker evidence recorded. Focused repair / PM disposition
 evidence for earlier CodeRabbit findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; current CodeRabbit
-evidence records two unresolved actionable findings in `ui.jsx` and
-`design-canvas.jsx`. Those findings must be repaired or dispositioned before
-the CodeRabbit provider is rerun again and before Stage 4 can continue.
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; the latest
+`ui.jsx` ARIA disabled value and `design-canvas.jsx` keyboard-handler findings
+are repaired in source. CodeRabbit evidence is now stale and must be rerun
+before Stage 4 can continue.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -473,11 +469,10 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell.
 
-**Expected next deliverable:** focused repair / PM disposition evidence for the
-latest `BANDIT-034` CodeRabbit findings, followed by a CodeRabbit pre-PR rerun
-against repaired source. Local Qwen, any needed review-subject hash refresh,
-and aggregate PM disposition must wait until CodeRabbit no longer blocks Stage
-4.
+**Expected next deliverable:** CodeRabbit pre-PR rerun evidence for
+`BANDIT-034` against the repaired source. Local Qwen, any needed review-subject
+hash refresh, and aggregate PM disposition must wait until CodeRabbit no longer
+blocks Stage 4.
 
 ## Known Bootstrap Gaps
 

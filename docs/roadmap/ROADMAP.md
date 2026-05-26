@@ -16,19 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Repair or disposition the latest `BANDIT-034` Stage 4
-CodeRabbit findings before rerunning CodeRabbit. The current-source provider
-rerun completed at source head `43776fe84c7ba316f14fb3ff985ce6f97bbeac5b`
-with two unresolved findings: update `aria-disabled` in
-`docs/design/workflow-cockpit/prototype-source/ui.jsx` to pass an ARIA string
-value, and stabilize the keyboard-handler `useEffect` / `go` / `goSection`
-dependencies in
-`docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`. Current
-blocker evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Local Qwen and aggregate
-Stage 4 review evidence must wait until those findings are repaired or
-dispositioned and CodeRabbit no longer blocks Stage 4.
+**Current next step:** Rerun the `BANDIT-034` CodeRabbit pre-PR provider
+against the repaired source. The latest blocker findings from source head
+`43776fe84c7ba316f14fb3ff985ce6f97bbeac5b` were repaired in
+`docs/design/workflow-cockpit/prototype-source/ui.jsx` and
+`docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`, and focused
+repair evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`. Current CodeRabbit
+provider evidence is stale after source repair. Local Qwen and aggregate Stage
+4 review evidence must wait until CodeRabbit is rerun and no longer blocks
+Stage 4.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -127,15 +124,15 @@ mapping. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-034/implementation-evidence.md`; the implementation derives
 guarded action affordances in the view model, makes light queue/context mapping
 explicit and source-linked, and keeps the render layer presentation-only. The
-Stage 4 CodeRabbit pre-PR review gate is currently blocked by two current-source
-findings in `ui.jsx` and `design-canvas.jsx`. Current CodeRabbit blocker
-evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
+Stage 4 CodeRabbit pre-PR review gate was blocked by two current-source
+findings in `ui.jsx` and `design-canvas.jsx`; those findings have now been
+repaired in source. Current CodeRabbit blocker evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Focused repair / PM
-disposition evidence for earlier findings is recorded in
+disposition evidence for all current findings is recorded in
 `docs/work/BANDIT-034/coderabbit-finding-disposition.md`. The next required
-action is to repair or disposition the latest CodeRabbit findings before
-rerunning CodeRabbit.
+action is to rerun CodeRabbit against the repaired source.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
