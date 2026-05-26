@@ -90,7 +90,15 @@ is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
 `test/improvements.test.mjs`. Implementation evidence is recorded in
 `docs/work/BANDIT-029/implementation-evidence.md`; the implemented command
 surface adds read-only improvement candidate discovery and single-candidate
-evaluation evidence validation. The next step is Stage 4 review evidence. Do
+evaluation evidence validation. Stage 4 review evidence is recorded in
+`docs/work/BANDIT-029/coderabbit-review.md`,
+`docs/work/BANDIT-029/local-qwen-review.md`,
+`docs/work/BANDIT-029/qwen-finding-disposition.md`, and
+`docs/work/BANDIT-029/review-evidence.md` with current review subject hash
+`588217e3f8df9bef06076ceec28815cb41ccc9dcb35ff80e5d7635af897f876c`.
+CodeRabbit completed with findings 0, Local Qwen returned a `non_blocking`
+verdict, and Codex PM accepted/routed the non-blocking hardening findings. The
+next step is Stage 5 landing verdict and landing readiness verification. Do
 not create unrelated active-work branches, Phase 8 web cockpit implementation,
 scheduler execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior,
@@ -290,12 +298,11 @@ final verdict `safe-to-land`. Local-record landing action evidence is recorded
 in `docs/work/BANDIT-028/landing-action.md`; retrospective closeout is recorded
 in `docs/work/BANDIT-028/retrospective.md`; and the coordination log is closed.
 `BANDIT-029` has its Phase 7 Improvement Engine structured spec, Stage 1 brief,
-Stage 2 RED evidence, and Stage 3 implementation evidence recorded in
+Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
+evidence recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
-`docs/work/BANDIT-029/brief.md`, with RED evidence recorded in
-`docs/work/BANDIT-029/red-evidence.md` and implementation evidence recorded in
-`docs/work/BANDIT-029/implementation-evidence.md`. The next action is
-`BANDIT-029` Stage 4 review.
+`docs/work/BANDIT-029/`. The next action is `BANDIT-029` Stage 5 landing
+verdict and landing readiness verification.
 
 ## Phase Map
 

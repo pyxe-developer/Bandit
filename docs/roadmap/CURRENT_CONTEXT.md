@@ -260,26 +260,33 @@ is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
 `docs/work/BANDIT-029/implementation-evidence.md`; the implemented command
 surface adds read-only improvement candidate discovery and single-candidate
 evaluation evidence validation while preserving repo-native artifacts as
-canonical state. The slice is scoped to the smallest repo-native improvement
-evaluation foundation from existing retrospective-derived improvement metadata.
-It must not start Phase 8 Workflow Cockpit implementation, scheduler execution,
-worktree lifecycle, exclusive claim leases, work surface reservations,
-automatic merge/push/deploy behavior, product UAT approval, actor identity
-policy, or unrelated coordination work.
+canonical state. Stage 4 review evidence is recorded in
+`docs/work/BANDIT-029/coderabbit-review.md`,
+`docs/work/BANDIT-029/local-qwen-review.md`,
+`docs/work/BANDIT-029/qwen-finding-disposition.md`, and
+`docs/work/BANDIT-029/review-evidence.md` with current review subject hash
+`588217e3f8df9bef06076ceec28815cb41ccc9dcb35ff80e5d7635af897f876c`.
+CodeRabbit completed with findings 0, Local Qwen returned a `non_blocking`
+verdict, and Codex PM accepted/routed the non-blocking hardening findings. The
+slice is scoped to the smallest repo-native improvement evaluation foundation
+from existing retrospective-derived improvement metadata. It must not start
+Phase 8 Workflow Cockpit implementation, scheduler execution, worktree
+lifecycle, exclusive claim leases, work surface reservations, automatic
+merge/push/deploy behavior, product UAT approval, actor identity policy, or
+unrelated coordination work.
 
-**Last completed milestone:** `BANDIT-029` Stage 3 implementation evidence is
-recorded and verification passed.
+**Last completed milestone:** `BANDIT-029` Stage 4 review evidence is recorded
+and accepted with non-blocking Local Qwen findings durably dispositioned.
 
-**Current next action:** Run Stage 4 review for `BANDIT-029`: pre-PR
-CodeRabbit review when available, Local Qwen adversarial review, any required
-escalated-review routing, and aggregate review evidence with the current review
-subject hash.
+**Current next action:** Create the Stage 5 landing verdict for `BANDIT-029`
+and run landing readiness verification. Do not perform landing action or start
+the next slice before the landing verdict gate is recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-029` - Improvement Evaluation Foundation. Stage 1
-brief, Stage 2 RED evidence, and Stage 3 implementation evidence are recorded;
-Stage 4 review evidence is next.
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4
+review evidence are recorded; Stage 5 landing verdict is next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -302,7 +309,7 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands.
 
-**Expected next deliverable:** `docs/work/BANDIT-029/review-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-029/landing-verdict.md`.
 
 ## Known Bootstrap Gaps
 
@@ -444,16 +451,15 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
 `BANDIT-029` now has a structured spec, Stage 1 brief, Stage 2 RED evidence,
-and Stage 3 implementation evidence. The current priority is:
+Stage 3 implementation evidence, and Stage 4 review evidence. The current
+priority is:
 
-1. Run pre-PR CodeRabbit review for `BANDIT-029` when available.
-2. Run Local Qwen adversarial review and any smell-triggered escalated review.
-3. Record aggregate Stage 4 review evidence with the current review subject
-   hash.
-4. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
-   automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, or unrelated work until `BANDIT-029`
-   is executed through the normal slice boundary.
+1. Create the Stage 5 landing verdict for `BANDIT-029`.
+2. Run landing readiness verification for `BANDIT-029`.
+3. Stop before landing action, Phase 8, Phase 9, scheduler, worktree lifecycle,
+   product UAT, automatic merge/push/deploy, exclusive claim leases, work
+   surface reservations, actor identity policy, or unrelated work until the
+   Stage 5 gate is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
