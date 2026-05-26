@@ -1,0 +1,813 @@
+/* =========================================================================
+   Bandit Attention-First Cockpit — surface styles
+   Layered on top of Bandit design-system tokens.
+   Bandit-specific patterns: Attention Bands, Gate Strip, Reason Chips,
+   Source Trace lines, Action Affordance states.
+   ========================================================================= */
+
+/* ===== Canvas overrides for the cockpit when shown inside an artboard ==== */
+.cp {
+  /* Cockpit artboards paint their own canvas inside DesignCanvas. */
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  line-height: var(--lh-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.cp::before {
+  /* Faint dotted grid, matches Bandit ambient grid token */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-dotgrid);
+  background-size: var(--bg-dotgrid-size);
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cp > * { position: relative; z-index: 1; }
+
+/* ===== Accent override (Tweaks: accent palette swap) =================== */
+.cp[data-accent="amber"]   { --accent: #f4b740; --accent-hover: #ffd072; --accent-glow: rgba(244,183,64,0.22); --focus-ring: rgba(244,183,64,0.5); --state-progress: #f4b740; }
+.cp[data-accent="beam"]    { --accent: #6ea8ff; --accent-hover: #9cc0ff; --accent-glow: rgba(110,168,255,0.22); --focus-ring: rgba(110,168,255,0.5); --state-progress: #6ea8ff; }
+.cp[data-accent="coral"]   { --accent: var(--coral-400); --accent-hover: var(--coral-300); --accent-glow: var(--coral-glow-18); --focus-ring: var(--coral-glow-50); --state-progress: var(--coral-400); }
+
+/* ===== Density (Tweaks: calm vs dense) ================================= */
+.cp[data-density="dense"] {
+  font-size: 12px;
+  --cp-pad: 12px;
+  --cp-pad-tight: 8px;
+  --cp-row-h: 36px;
+  --cp-band-pad: 14px 18px;
+  --cp-gap: 10px;
+}
+.cp[data-density="calm"] {
+  font-size: 13px;
+  --cp-pad: 18px;
+  --cp-pad-tight: 12px;
+  --cp-row-h: 44px;
+  --cp-band-pad: 20px 24px;
+  --cp-gap: 14px;
+}
+
+/* ===== Header bar (top of cockpit) ===================================== */
+.cp-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--border-1);
+  background: linear-gradient(180deg, rgba(10,10,12,0.7), rgba(5,5,6,0));
+}
+.cp-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-15);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-snug);
+  color: var(--text-primary);
+}
+.cp-brand-mark {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(140deg, var(--accent), var(--coral-600));
+  box-shadow: 0 0 0 1px var(--coral-glow-32), 0 0 12px var(--accent-glow);
+  display: grid; place-items: center;
+}
+.cp-brand-mark::after {
+  content: "";
+  width: 8px; height: 8px;
+  border-right: 1.5px solid #fff;
+  border-bottom: 1.5px solid #fff;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+.cp-brand-sub {
+  color: var(--text-tertiary);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-12);
+  margin-left: 8px;
+  padding-left: 10px;
+  border-left: 1px solid var(--border-2);
+}
+.cp-topbar-meta {
+  margin-left: auto;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+}
+.cp-repo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--r-1);
+  color: var(--code-fg);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ===== Attention Bands ================================================ */
+/*  Each band = one Attention Category. A 4px colored left edge tells
+    you the urgency rank at a glance without painting the whole row.    */
+.cp-band {
+  position: relative;
+  padding: var(--cp-band-pad);
+  border-bottom: 1px solid var(--border-1);
+}
+.cp-band[data-urgency]::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--band-edge, var(--fg-3));
+}
+.cp-band[data-urgency="operator"]  { --band-edge: var(--accent); }
+.cp-band[data-urgency="blocked"]   { --band-edge: var(--state-fail); }
+.cp-band[data-urgency="active"]    { --band-edge: var(--accent); }
+.cp-band[data-urgency="landing"]   { --band-edge: var(--state-pass); }
+.cp-band[data-urgency="improve"]   { --band-edge: var(--state-info); }
+.cp-band[data-urgency="queue"]     { --band-edge: var(--fg-4); }
+
+.cp-band-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.cp-band-title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  letter-spacing: var(--ls-snug);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.cp-band-title-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+}
+.cp-band-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--r-1);
+  font-variant-numeric: tabular-nums;
+}
+.cp-band-meta {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-tertiary);
+  letter-spacing: var(--ls-uppercase);
+  text-transform: uppercase;
+}
+
+/* ===== Work Item Rows ================================================= */
+.cp-row {
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--r-2);
+  border: 1px solid transparent;
+  transition: background var(--d-micro) var(--ease-default), border-color var(--d-micro) var(--ease-default);
+}
+.cp-row + .cp-row { margin-top: 4px; }
+.cp-row:hover { background: var(--surface-1); border-color: var(--border-2); }
+
+.cp-row-id {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  letter-spacing: 0;
+}
+.cp-row-title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  color: var(--text-primary);
+  font-weight: var(--fw-medium);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.cp-row-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cp-row-sub {
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  line-height: var(--lh-snug);
+}
+
+/* ===== Type pill (Slice / Chore / Gap / Improvement) =================== */
+.cp-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-radius: var(--r-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-uppercase);
+  text-transform: uppercase;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  color: var(--text-secondary);
+}
+.cp-type[data-type="slice"]   { color: var(--coral-200); border-color: var(--coral-glow-32); background: var(--coral-glow-08); }
+.cp-type[data-type="chore"]   { color: #cfdcfa; border-color: rgba(110,168,255,0.22); background: rgba(110,168,255,0.06); }
+.cp-type[data-type="gap"]     { color: #ffd5b0; border-color: rgba(244,183,64,0.32); background: rgba(244,183,64,0.06); }
+.cp-type[data-type="improve"] { color: var(--green-300); border-color: rgba(127,229,177,0.30); background: rgba(127,229,177,0.06); }
+
+/* ===== Evidence / Status chip ========================================= */
+/*  Compact confidence cue. Always carries dot + text + optional source.  */
+.cp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: var(--r-1);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+.cp-chip[data-state="pass"]      { color: var(--green-300); border-color: rgba(127,229,177,0.25); background: rgba(127,229,177,0.06); }
+.cp-chip[data-state="progress"]  { color: var(--coral-200); border-color: var(--coral-glow-32); background: var(--coral-glow-08); }
+.cp-chip[data-state="fail"]      { color: var(--red-300); border-color: rgba(255,77,77,0.30); background: rgba(255,77,77,0.06); }
+.cp-chip[data-state="stale"]     { color: #ffd5b0; border-color: rgba(244,183,64,0.28); background: rgba(244,183,64,0.06); }
+.cp-chip[data-state="missing"]   { color: var(--text-tertiary); border-color: var(--border-2); background: transparent; border-style: dashed; }
+.cp-chip[data-state="blocked"]   { color: var(--red-300); border-color: rgba(255,77,77,0.30); background: rgba(255,77,77,0.06); }
+.cp-chip[data-state="info"]      { color: var(--blue-300); border-color: rgba(110,168,255,0.30); background: rgba(110,168,255,0.06); }
+.cp-chip[data-state="cli"]       { color: var(--text-secondary); border-color: var(--border-3); background: var(--surface-2); }
+
+/* Dot in chip */
+.cp-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--state-neutral);
+  flex: 0 0 auto;
+}
+.cp-chip[data-state="pass"]     .cp-dot { background: var(--state-pass); box-shadow: 0 0 6px var(--green-glow); }
+.cp-chip[data-state="progress"] .cp-dot { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+.cp-chip[data-state="fail"]     .cp-dot { background: var(--state-fail); box-shadow: 0 0 6px var(--red-glow); }
+.cp-chip[data-state="stale"]    .cp-dot { background: #f4b740; }
+.cp-chip[data-state="missing"]  .cp-dot { background: transparent; border: 1px dashed var(--fg-3); }
+.cp-chip[data-state="blocked"]  .cp-dot { background: var(--state-fail); }
+.cp-chip[data-state="info"]     .cp-dot { background: var(--blue-400); }
+.cp-chip[data-state="cli"]      .cp-dot { background: var(--fg-2); }
+
+/* ===== Reason text on a fail-closed chip ============================== */
+/*  Per design tone: firm but contained. Inline reason, no full-card red.  */
+.cp-reason {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  line-height: var(--lh-snug);
+}
+.cp-reason b {
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+/* ===== Mono source path =============================================== */
+.cp-path {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-tertiary);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--r-1);
+  padding: 2px 6px;
+  white-space: nowrap;
+  display: inline-block;
+}
+.cp-path:hover { color: var(--text-secondary); border-color: var(--border-3); }
+
+/* ===== Cards ========================================================== */
+.cp-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-3);
+  box-shadow: var(--shadow-1);
+  padding: var(--cp-pad, 18px);
+}
+.cp-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.cp-card-title-text {
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  letter-spacing: var(--ls-snug);
+}
+.cp-card-title-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+}
+
+/* ===== Gate Strip (Bandit-specific stage evidence) ===================== */
+/*  Horizontal stage gates: Stage 0 Brief → 2 RED → 3 Impl → 4 Review →
+    5 Landing → 6 Retro. For feature slices, UAT appears as a parallel
+    track below Stage 5. Each gate is a labeled cell with state + source. */
+.cp-gates {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+.cp-gate {
+  position: relative;
+  padding: 10px 12px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-2);
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cp-gate-stage {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+  font-weight: var(--fw-medium);
+}
+.cp-gate-name {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  line-height: var(--lh-tight);
+}
+.cp-gate-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.cp-gate[data-state="pass"] {
+  background: linear-gradient(180deg, rgba(127,229,177,0.05), rgba(127,229,177,0.01));
+  border-color: rgba(127,229,177,0.22);
+}
+.cp-gate[data-state="progress"] {
+  background: linear-gradient(180deg, var(--coral-glow-08), rgba(255,122,89,0.01));
+  border-color: var(--coral-glow-32);
+  box-shadow: 0 0 0 0.5px var(--coral-glow-18), 0 0 18px var(--coral-glow-08);
+}
+.cp-gate[data-state="fail"] {
+  background: linear-gradient(180deg, rgba(255,77,77,0.05), rgba(255,77,77,0.01));
+  border-color: rgba(255,77,77,0.30);
+}
+.cp-gate[data-state="stale"] {
+  background: linear-gradient(180deg, rgba(244,183,64,0.05), rgba(244,183,64,0.01));
+  border-color: rgba(244,183,64,0.28);
+}
+.cp-gate[data-state="missing"] {
+  background: transparent;
+  border-style: dashed;
+  color: var(--text-tertiary);
+}
+.cp-gate[data-state="missing"] .cp-gate-name { color: var(--text-tertiary); }
+.cp-gate[data-state="blocked"] {
+  background: linear-gradient(180deg, rgba(255,77,77,0.06), rgba(255,77,77,0.01));
+  border-color: rgba(255,77,77,0.30);
+}
+
+/* ===== Action Affordance (guided CLI-backed buttons) =================== */
+.cp-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--r-2);
+  border: 1px solid var(--border-3);
+  background: var(--surface-2);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: background var(--d-micro) var(--ease-default),
+              border-color var(--d-micro) var(--ease-default),
+              transform var(--d-micro) var(--ease-default),
+              box-shadow var(--d-micro) var(--ease-default);
+  text-align: left;
+  position: relative;
+  min-height: 36px;
+}
+.cp-action:hover {
+  background: var(--surface-3);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.cp-action[data-variant="primary"] {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-1), inset 0 1px 0 0 rgba(255,255,255,0.18);
+}
+.cp-action[data-variant="primary"]:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: var(--shadow-2), 0 0 24px var(--accent-glow);
+}
+.cp-action[data-disabled="true"] {
+  background: transparent;
+  color: var(--text-tertiary);
+  border-color: var(--border-2);
+  border-style: dashed;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.cp-action[data-disabled="true"]:hover { background: transparent; border-color: var(--border-2); transform: none; }
+.cp-action-glyph {
+  width: 18px; height: 18px;
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border-radius: var(--r-1);
+  flex: 0 0 auto;
+}
+.cp-action[data-variant="primary"] .cp-action-glyph { background: rgba(0,0,0,0.18); }
+.cp-action[data-variant="default"] .cp-action-glyph { background: var(--code-bg); color: var(--text-secondary); }
+.cp-action[data-disabled="true"]   .cp-action-glyph { background: var(--code-bg); color: var(--text-disabled); }
+
+.cp-action-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.cp-action-cmd {
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-regular);
+  text-transform: none;
+  letter-spacing: 0;
+  color: currentColor;
+  opacity: 0.62;
+}
+.cp-action-reason {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-11);
+  color: var(--red-300);
+  margin-top: 6px;
+}
+.cp-action-reason[data-kind="info"] { color: var(--text-tertiary); }
+
+/* ===== Source-Trace footer (every status carries a path) ============== */
+.cp-trace {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+  flex-wrap: wrap;
+}
+.cp-trace-arrow { opacity: 0.5; }
+
+/* ===== UAT badge / dual-track for slices ============================== */
+.cp-uat {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-left: 3px solid var(--state-info);
+  border-radius: var(--r-2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  color: var(--text-secondary);
+}
+.cp-uat[data-state="approved"] { border-left-color: var(--state-pass); }
+.cp-uat[data-state="stale"]    { border-left-color: #f4b740; }
+.cp-uat[data-state="missing"]  { border-left-color: var(--state-fail); border-style: solid; }
+
+/* ===== Annotations (for the implementation-agent audience) ============ */
+.cp-anno {
+  position: absolute;
+  bottom: -8px;
+  left: 8px;
+  transform: translateY(100%);
+  max-width: 280px;
+  background: rgba(255, 234, 211, 0.94);
+  color: #4a3a22;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 8px 11px 9px;
+  border-radius: 4px;
+  border: 1px solid rgba(199, 165, 110, 0.45);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+  z-index: 5;
+}
+.cp-anno::before {
+  content: attr(data-kind);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8a6a2a;
+  margin-bottom: 2px;
+}
+
+/* Inline annotation rail (within an artboard, not floating outside) */
+.cp-note {
+  margin: 0;
+  padding: 10px 12px;
+  background: rgba(244, 183, 64, 0.05);
+  border: 1px dashed rgba(244, 183, 64, 0.30);
+  border-radius: var(--r-2);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.45;
+  color: #d8c79b;
+}
+.cp-note b {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #f4b740;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ===== Two-column layouts in detail screens =========================== */
+.cp-split {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+}
+.cp-split-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+/* ===== Improvement ledger row ========================================= */
+.cp-imp-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 90px 90px 100px;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--r-2);
+  border: 1px solid var(--border-1);
+  background: var(--surface-1);
+  font-size: var(--fs-12);
+}
+.cp-imp-row + .cp-imp-row { margin-top: 4px; }
+.cp-imp-decision {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  padding: 3px 7px;
+  border-radius: var(--r-1);
+  border: 1px solid var(--code-border);
+}
+.cp-imp-decision[data-d="keep"]        { color: var(--green-300); border-color: rgba(127,229,177,0.30); background: rgba(127,229,177,0.06); }
+.cp-imp-decision[data-d="revise"]      { color: #ffd5b0; border-color: rgba(244,183,64,0.30); background: rgba(244,183,64,0.06); }
+.cp-imp-decision[data-d="revert"]      { color: var(--red-300); border-color: rgba(255,77,77,0.30); background: rgba(255,77,77,0.06); }
+.cp-imp-decision[data-d="double-down"] { color: var(--coral-200); border-color: var(--coral-glow-32); background: var(--coral-glow-08); }
+.cp-imp-decision[data-d="due"]         { color: var(--blue-300); border-color: rgba(110,168,255,0.28); background: rgba(110,168,255,0.06); }
+.cp-imp-decision[data-d="pending"]     { color: var(--text-tertiary); border-color: var(--border-2); }
+
+/* ===== Operator Inbox card ============================================ */
+.cp-inbox-item {
+  padding: 12px 14px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-1);
+  border-radius: 0 var(--r-2) var(--r-2) 0;
+  margin-bottom: 8px;
+  position: relative;
+}
+.cp-inbox-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+.cp-inbox-q {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  color: var(--text-primary);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-medium);
+}
+
+/* ===== Stream (recent step transitions) =============================== */
+.cp-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cp-stream-row {
+  display: grid;
+  grid-template-columns: 56px 110px 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-1);
+  font-size: var(--fs-12);
+  color: var(--text-secondary);
+}
+.cp-stream-row:last-child { border-bottom: 0; }
+.cp-stream-row time {
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  color: var(--text-tertiary);
+  letter-spacing: 0;
+}
+
+/* ===== Sidebar (Active Work Item detail) ============================== */
+.cp-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cp-side h4 {
+  margin: 0 0 6px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+}
+.cp-kv {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 6px 10px;
+  font-size: var(--fs-12);
+}
+.cp-kv dt { color: var(--text-tertiary); font-family: var(--font-mono); font-size: var(--fs-11); }
+.cp-kv dd { margin: 0; color: var(--text-primary); }
+.cp-kv dd code { font-family: var(--font-mono); font-size: var(--fs-11); color: var(--code-fg); }
+
+/* ===== Section heading (within screen, between bands) ================= */
+.cp-section-h {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 16px 22px 8px;
+  border-bottom: 1px solid var(--border-1);
+}
+.cp-section-h h2 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-uppercase);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.cp-section-h .cp-sub {
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  color: var(--text-tertiary);
+}
+
+/* ===== Evidence drill-down rows ======================================= */
+.cp-evi-row {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 14px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-1);
+}
+.cp-evi-row:last-child { border: 0; }
+.cp-evi-row dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+}
+.cp-evi-row dd {
+  margin: 0;
+  font-size: var(--fs-13);
+  color: var(--text-primary);
+  line-height: var(--lh-snug);
+}
+
+/* ===== Pattern grid for action-affordance + fail-closed catalog ======= */
+.cp-pgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.cp-pcell {
+  padding: 18px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cp-pcell h5 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+.cp-pcell p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  color: var(--text-tertiary);
+  line-height: var(--lh-normal);
+}
+
+/* ===== Confidence-tinged tweak override (global) ====================== */
+/*  When confidence=stale, dim some pass chips to stale; when fail-closed,
+    swap them to fail. This lets one prototype demonstrate the three
+    confidence cues without forking screens.                              */
+.cp[data-confidence="stale"]      [data-tweakable="evidence"][data-state="pass"]      { /* visual swap handled in JSX */ }
+.cp[data-confidence="failclosed"] [data-tweakable="evidence"][data-state="pass"]      { /* visual swap handled in JSX */ }
+
+/* ===== Scrollbar discipline (artboards are static, no scroll) ========= */
+.cp { scrollbar-width: none; }
+.cp::-webkit-scrollbar { display: none; }

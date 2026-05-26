@@ -58,6 +58,14 @@ _Avoid_: UI-owned enforcement, dashboard-as-source-of-truth
 A lean web application that visualizes repo-backed workflow and coordination state and triggers approved CLI commands without becoming the enforcement layer.
 _Avoid_: full agent IDE, autonomous factory, separate project tracker
 
+**Attention-First Workflow Cockpit**:
+A Workflow Cockpit UX framing that leads with operator-owned attention, blocked or stale workflow state, active work, and safe next actions, while keeping gate, evidence, coordination, and source-path detail available one level down.
+_Avoid_: generic dashboard, attention inbox artifact, internal agent console
+
+**Attention Category**:
+A cockpit grouping based on why the operator or Codex PM should look at work now, such as required input, blocked state, active work, review readiness, landing readiness, or improvement follow-up.
+_Avoid_: workflow phase, generic status label, priority guess
+
 **Repo-Native Workflow State**:
 Versioned project files that are the canonical record for PRDs, slices, chores, runs, reviews, lessons, follow-ups, approvals, UAT, bootstrap gaps, and improvement decisions.
 _Avoid_: dashboard database truth, hidden app state

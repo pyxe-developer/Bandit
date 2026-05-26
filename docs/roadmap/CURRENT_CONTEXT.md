@@ -383,21 +383,26 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `effective` with decision `keep`.
 
 **Last completed milestone:** `BANDIT-032` retrospective closeout and
-improvement disposition are recorded.
+improvement disposition are recorded. The Phase 8 attention-first cockpit PRD
+and design review are now recorded as the accepted visual UI starting point.
+`BANDIT-033` has been created as the next Phase 8 visual UI slice; its
+structured spec is recorded in
+`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, and its
+Stage 1 brief is recorded in `docs/work/BANDIT-033/brief.md`.
 
-**Current next action:** Operator product/UI direction is required before
-creating the next Phase 8 Workflow Cockpit work item.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-033` -
+Attention-First Cockpit Visual Shell.
 
-Do not start visual UI, server/API mode, state-index persistence, scheduler
+Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
 automatic merge/push/deploy, product UAT approval, actor identity policy,
-PR/CI workflow, the next work item, or unrelated work until the operator chooses
-the next Phase 8 cockpit direction.
+PR/CI workflow, or unrelated work unless a future work item explicitly scopes
+that authority.
 
 ## Active Work
 
-**Active work item:** None. `BANDIT-032` - Cockpit Status Coverage Hardening is
-landed and closed out.
+**Active work item:** `BANDIT-033` - Attention-First Cockpit Visual Shell.
+`BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -423,11 +428,11 @@ Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening.
 
-**Expected next deliverable:** Operator answer for the next Phase 8 cockpit
-direction. Repo artifacts cannot choose exact cockpit screens, UI stack,
-packaging, direct file reads versus local API, or state-index timing because
-`docs/design/workflow-cockpit-boundary.md` explicitly defers those product/UI
-tradeoffs to Phase 8.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-033`, covering
+attention-category mapping, cockpit shell rendering, evidence confidence cues,
+disabled guarded actions, source traceability, responsive behavior,
+accessibility states, and no-hidden-authority guarantees before production
+implementation starts.
 
 ## Known Bootstrap Gaps
 
@@ -585,12 +590,16 @@ passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
 The current priority is:
 
-1. Halt before creating the next Phase 8 work item.
-2. Ask the operator to choose the next cockpit direction because repo artifacts
-   defer exact cockpit screens, UI stack/packaging, direct file reads versus
-   local API, and state-index timing.
-3. After operator direction is recorded, create exactly one next work item from
-   the approved scope and continue the standard Bandit stage sequence.
+1. Write Stage 2 RED evidence for `BANDIT-033` from
+   `docs/work/BANDIT-033/brief.md`.
+2. Cover attention-first view-model behavior, guarded action eligibility,
+   evidence detail normalization, responsive render constraints, accessibility
+   states, and no hidden UI authority before production implementation.
+3. Keep local server/API mode, state-index persistence, scheduler execution,
+   worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
+   actor identity policy, claim leases, work surface reservations, PR/CI
+   workflow, and unrelated feature work out of scope unless explicitly
+   authorized by a future work item.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -598,16 +607,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-Operator-owned input is required before the next Phase 8 cockpit work item.
-The exact input needed is the next cockpit product/UI direction: whether to
-proceed with a visual cockpit UI, local server/API mode, direct file-read
-status surface, state-index-backed surface, or another bounded cockpit step.
-Repo artifacts cannot answer this because `docs/design/workflow-cockpit-boundary.md`
-explicitly defers exact cockpit screens, stack/packaging, direct file reads
-versus local API, and state-index timing as Phase 8 product/UI tradeoffs.
+No operator-owned input is required to write Stage 2 RED evidence for
+`BANDIT-033` from the accepted attention-first design artifacts and Stage 1
+brief.
 
-If the next step would choose product/UI direction beyond the evidence-backed
-read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require
+If the next step would expand beyond the recorded PRD/design-review scope,
+choose local server/API mode, choose state-index persistence timing, require
 product UAT, change policy, approve cost/risk, enable PR/merge/push/deploy
 authority, select an external service, or resolve genuinely ambiguous scope,
 halt and ask for that input directly.

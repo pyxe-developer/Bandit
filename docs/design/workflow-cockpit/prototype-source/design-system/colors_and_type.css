@@ -1,0 +1,493 @@
+/* =========================================================================
+   Bandit Workflow Cockpit Design System — Foundation tokens
+   colors_and_type.css
+
+   Single source of truth for color, type, spacing, shadow, radius, motion.
+   Import this file once at the top of any HTML/JSX entry point.
+
+   FAMILIES
+     Sans  — Instrument Sans   (Google Fonts, OFL)
+     Mono  — IBM Plex Mono     (Google Fonts, OFL — slab-humanist mono,
+                                deliberately NOT JetBrains Mono / SF Mono /
+                                Geist Mono / Berkeley Mono)
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   WEBFONTS — both families load from Google Fonts via <link> in the HTML
+   <head>. Nothing is bundled in fonts/; the OFL-licensed pair downloads
+   from a CDN, keeping deployment simple.
+   ------------------------------------------------------------------------- */
+
+/* =========================================================================
+   ROOT TOKENS
+   ========================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------
+     COLOR — base canvas (deep near-blacks, never pure #000)
+     --------------------------------------------------------------------- */
+  --bg-0:        #050506;          /* canonical canvas, "the void" */
+  --bg-1:        #0a0a0c;          /* surface-1 — cards */
+  --bg-2:        #101015;          /* surface-2 — elevated cards, inputs */
+  --bg-3:        #16161c;          /* surface-3 — panels, sidebars */
+  --bg-4:        #1d1d24;          /* surface-4 — popovers, command palette */
+  --bg-5:        #25252e;          /* surface-5 — selected rows */
+
+  /* ---------------------------------------------------------------------
+     COLOR — foreground (warm-tinted whites stepping down)
+     --------------------------------------------------------------------- */
+  --fg-1:        #f5f5f7;          /* primary text, headlines */
+  --fg-2:        #a8a8b3;          /* secondary text, labels */
+  --fg-3:        #5d5d68;          /* tertiary text, metadata */
+  --fg-4:        #36363e;          /* quaternary, disabled */
+  --fg-5:        #2a2a32;          /* near-disabled */
+
+  /* ---------------------------------------------------------------------
+     COLOR — borders (white at controlled alpha)
+     --------------------------------------------------------------------- */
+  --border-1:      rgba(255, 255, 255, 0.06);   /* hairline separator */
+  --border-2:      rgba(255, 255, 255, 0.10);   /* card, input default */
+  --border-3:      rgba(255, 255, 255, 0.16);   /* active/focused */
+  --border-strong: rgba(255, 255, 255, 0.24);   /* hover-emphasis only */
+
+  /* ---------------------------------------------------------------------
+     COLOR — Beacon coral (the only warm hue; brand signature)
+     --------------------------------------------------------------------- */
+  --coral-100:   #ffe7df;
+  --coral-200:   #ffc5b3;
+  --coral-300:   #ffa389;
+  --coral-400:   #ff7a59;          /* PRIMARY — Beacon coral */
+  --coral-500:   #e85a37;
+  --coral-600:   #b3401f;
+  --coral-700:   #7a2a13;
+  --coral-800:   #401508;
+  --coral-900:   #200a04;
+
+  --coral-glow-08: rgba(255, 122, 89, 0.08);
+  --coral-glow-12: rgba(255, 122, 89, 0.12);
+  --coral-glow-18: rgba(255, 122, 89, 0.18);
+  --coral-glow-32: rgba(255, 122, 89, 0.32);
+  --coral-glow-50: rgba(255, 122, 89, 0.50);
+
+  /* ---------------------------------------------------------------------
+     COLOR — Verdict triplet (pass / attention / fail)
+     --------------------------------------------------------------------- */
+  --green-300:   #b6f0d3;
+  --green-400:   #7fe5b1;          /* PASS — verdict green */
+  --green-500:   #3dba7d;
+  --green-glow:  rgba(127, 229, 177, 0.16);
+
+  --red-300:     #ff9090;
+  --red-400:     #ff4d4d;          /* FAIL — halt red */
+  --red-500:     #c83030;
+  --red-glow:    rgba(255, 77, 77, 0.16);
+
+  /* Beam blue — informational/link only, used sparingly */
+  --blue-300:    #9cc0ff;
+  --blue-400:    #6ea8ff;
+  --blue-500:    #3a78d6;
+  --blue-glow:   rgba(110, 168, 255, 0.10);
+
+  /* ---------------------------------------------------------------------
+     SEMANTIC COLOR ALIASES — prefer these in components
+     --------------------------------------------------------------------- */
+  --canvas:               var(--bg-0);
+  --surface-1:            var(--bg-1);
+  --surface-2:            var(--bg-2);
+  --surface-3:            var(--bg-3);
+  --surface-popover:      var(--bg-4);
+  --surface-selected:     var(--bg-5);
+
+  --text-primary:         var(--fg-1);
+  --text-secondary:       var(--fg-2);
+  --text-tertiary:        var(--fg-3);
+  --text-disabled:        var(--fg-4);
+
+  --accent:               var(--coral-400);
+  --accent-hover:         var(--coral-300);
+  --accent-glow:          var(--coral-glow-18);
+  --accent-fg:            #1a0a05;             /* on-coral text */
+
+  --state-pass:           var(--green-400);
+  --state-fail:           var(--red-400);
+  --state-progress:       var(--coral-400);
+  --state-info:           var(--blue-400);
+  --state-neutral:        var(--fg-3);
+
+  --link:                 var(--blue-400);
+  --link-hover:           var(--blue-300);
+
+  --border-default:       var(--border-2);
+  --border-subtle:        var(--border-1);
+  --border-emphasis:      var(--border-3);
+
+  --focus-ring:           var(--coral-glow-50);
+
+  /* Code surface (mono tokens, SHAs, inline code) */
+  --code-bg:              rgba(255, 255, 255, 0.04);
+  --code-fg:              #d6d6e1;
+  --code-border:          var(--border-1);
+
+  /* ---------------------------------------------------------------------
+     AMBIENT GLOW BACKGROUNDS — large radial pools of light
+     --------------------------------------------------------------------- */
+  --bg-glow-coral: radial-gradient(
+      ellipse 800px 500px at 20% 0%,
+      rgba(255, 122, 89, 0.10) 0%,
+      rgba(255, 122, 89, 0.04) 30%,
+      transparent 60%
+  );
+  --bg-glow-cool: radial-gradient(
+      ellipse 600px 400px at 90% 100%,
+      rgba(110, 168, 255, 0.06) 0%,
+      transparent 50%
+  );
+  --bg-glow-hero: radial-gradient(
+      ellipse 1200px 700px at 50% 0%,
+      rgba(255, 122, 89, 0.16) 0%,
+      rgba(255, 122, 89, 0.05) 25%,
+      transparent 55%
+  ),
+  radial-gradient(
+      ellipse 900px 500px at 80% 100%,
+      rgba(110, 168, 255, 0.09) 0%,
+      transparent 50%
+  );
+
+  /* Faint dotted grid — 32px cells, 1px dots at ~3% */
+  --bg-dotgrid:
+      radial-gradient(circle at 1px 1px,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px);
+  --bg-dotgrid-size: 32px 32px;
+
+  /* =====================================================================
+     TYPE — families
+     ===================================================================== */
+  --font-sans: "Instrument Sans",
+               -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono",
+               ui-monospace, Menlo, Consolas, monospace;
+
+  /* =====================================================================
+     TYPE — scale (compact; this is a dense product UI)
+     ===================================================================== */
+  --fs-10:   10px;
+  --fs-11:   11px;
+  --fs-12:   12px;
+  --fs-13:   13px;
+  --fs-14:   14px;
+  --fs-15:   15px;
+  --fs-16:   16px;
+  --fs-18:   18px;
+  --fs-20:   20px;
+  --fs-24:   24px;
+  --fs-30:   30px;
+  --fs-40:   40px;
+  --fs-56:   56px;
+  --fs-72:   72px;
+
+  --lh-tight:   1.10;
+  --lh-snug:    1.25;
+  --lh-normal:  1.45;
+  --lh-relaxed: 1.65;
+
+  --ls-tight:     -0.025em;
+  --ls-snug:      -0.012em;
+  --ls-normal:    0;
+  --ls-wide:      0.02em;
+  --ls-uppercase: 0.08em;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  /* =====================================================================
+     SPACING — 4px base grid
+     ===================================================================== */
+  --s-0:    0;
+  --s-1:    4px;
+  --s-2:    8px;
+  --s-3:    12px;
+  --s-4:    16px;
+  --s-5:    20px;
+  --s-6:    24px;
+  --s-7:    32px;
+  --s-8:    40px;
+  --s-9:    48px;
+  --s-10:   64px;
+  --s-11:   80px;
+  --s-12:   96px;
+
+  /* =====================================================================
+     RADIUS
+     ===================================================================== */
+  --r-1:     4px;
+  --r-2:     8px;
+  --r-3:     12px;
+  --r-4:     16px;
+  --r-full:  9999px;
+
+  /* =====================================================================
+     SHADOWS — three-layer system (ambient + key + contact)
+     ===================================================================== */
+  --shadow-1:
+      0 1px 2px rgba(0, 0, 0, 0.40),
+      0 4px 12px rgba(0, 0, 0, 0.30),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+
+  --shadow-2:
+      0 2px 4px rgba(0, 0, 0, 0.45),
+      0 12px 28px rgba(0, 0, 0, 0.40),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+
+  --shadow-3:
+      0 4px 8px rgba(0, 0, 0, 0.50),
+      0 24px 56px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+
+  --shadow-glow-coral:
+      0 0 0 1px var(--coral-glow-32),
+      0 0 24px var(--coral-glow-18),
+      0 0 48px var(--coral-glow-08);
+
+  --shadow-glow-green:
+      0 0 0 1px rgba(127, 229, 177, 0.30),
+      0 0 16px var(--green-glow);
+
+  --shadow-glow-red:
+      0 0 0 1px rgba(255, 77, 77, 0.30),
+      0 0 16px var(--red-glow);
+
+  --shadow-inner-highlight: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
+
+  /* =====================================================================
+     MOTION — refined expo-out, no bounce
+     ===================================================================== */
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);   /* expo-out */
+  --ease-snap:    cubic-bezier(0.4, 0, 0.2, 1);    /* tightened press */
+  --ease-linear:  linear;
+
+  --d-micro:   120ms;     /* hover */
+  --d-small:   200ms;     /* state change */
+  --d-medium:  320ms;     /* panel slide, gate-fill */
+  --d-large:   480ms;     /* page transition, glow pulse */
+  --d-hero:    800ms;     /* large-surface reveal */
+
+  /* =====================================================================
+     LAYOUT
+     ===================================================================== */
+  --layout-sidebar:           240px;
+  --layout-sidebar-collapsed: 56px;
+  --layout-toolbar-h:         52px;
+  --layout-row-h:             44px;
+  --layout-content-max:       1200px;
+
+  /* =====================================================================
+     Z-INDEX
+     ===================================================================== */
+  --z-base:      0;
+  --z-sticky:    20;
+  --z-toolbar:   30;
+  --z-dropdown:  40;
+  --z-modal:     60;
+  --z-toast:     70;
+  --z-palette:   80;
+}
+
+/* =========================================================================
+   GLOBAL RESET + BODY
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  line-height: var(--lh-normal);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--coral-glow-32);
+  color: var(--text-primary);
+}
+
+/* =========================================================================
+   SEMANTIC TYPOGRAPHY CLASSES
+   ========================================================================= */
+
+.t-display-hero {
+  font-family: var(--font-sans);
+  font-size: var(--fs-72);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-display {
+  font-family: var(--font-sans);
+  font-size: var(--fs-56);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-h1 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-40);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-h2 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-30);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-snug);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-24);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-snug);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-20);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-snug);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-h5 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  line-height: var(--lh-normal);
+  font-weight: var(--fw-regular);
+  color: var(--text-primary);
+}
+
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  line-height: var(--lh-relaxed);
+  font-weight: var(--fw-regular);
+  color: var(--text-secondary);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  line-height: var(--lh-normal);
+  font-weight: var(--fw-regular);
+  color: var(--text-secondary);
+}
+
+.t-meta {
+  font-family: var(--font-sans);
+  font-size: var(--fs-12);
+  line-height: var(--lh-normal);
+  font-weight: var(--fw-regular);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  line-height: 1;
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-uppercase);
+  color: var(--text-tertiary);
+}
+
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  line-height: var(--lh-snug);
+  font-weight: var(--fw-regular);
+  color: var(--code-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-mono-sm {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  line-height: 1.3;
+  font-weight: var(--fw-medium);
+  color: var(--code-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.t-code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: var(--r-1);
+  padding: 2px 6px;
+  color: var(--code-fg);
+}
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* =========================================================================
+   FOCUS RING
+   ========================================================================= */
+
+:focus { outline: none; }
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--r-2);
+}
+
+/* =========================================================================
+   REDUCED MOTION
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

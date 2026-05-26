@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bandit — Attention-First Workflow Cockpit</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="design-system/colors_and_type.css" />
+  <link rel="stylesheet" href="cockpit.css" />
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#050506">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <!-- ambient coral glow -->
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="0%" r="60%">
+          <stop offset="0%"  stop-color="#ff7a59" stop-opacity="0.22"/>
+          <stop offset="60%" stop-color="#ff7a59" stop-opacity="0.04"/>
+          <stop offset="100%" stop-color="#ff7a59" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="800" fill="#050506"/>
+      <rect width="1200" height="800" fill="url(#glow)"/>
+      <!-- six stacked attention bands -->
+      <g transform="translate(360,180)" font-family="'Instrument Sans', system-ui, sans-serif">
+        <g fill="none" stroke="rgba(255,255,255,0.10)" stroke-width="1">
+          <rect x="0"   y="0"   width="480" height="62" rx="6"/>
+          <rect x="0"   y="72"  width="480" height="62" rx="6"/>
+          <rect x="0"   y="144" width="480" height="62" rx="6"/>
+          <rect x="0"   y="216" width="480" height="62" rx="6"/>
+          <rect x="0"   y="288" width="480" height="62" rx="6"/>
+          <rect x="0"   y="360" width="480" height="62" rx="6"/>
+        </g>
+        <!-- urgency edges -->
+        <rect x="0"   y="0"   width="3" height="62" fill="#ff7a59"/>
+        <rect x="0"   y="72"  width="3" height="62" fill="#ff4d4d"/>
+        <rect x="0"   y="144" width="3" height="62" fill="#ff7a59"/>
+        <rect x="0"   y="216" width="3" height="62" fill="#7fe5b1"/>
+        <rect x="0"   y="288" width="3" height="62" fill="#6ea8ff"/>
+        <rect x="0"   y="360" width="3" height="62" fill="#5d5d68"/>
+        <!-- band labels (mono kicker numbers + name) -->
+        <g font-family="'IBM Plex Mono', ui-monospace, monospace" fill="#a8a8b3" font-size="14">
+          <text x="22" y="36">01  OPERATOR INPUT</text>
+          <text x="22" y="108">02  BLOCKED / STALE</text>
+          <text x="22" y="180">03  ACTIVE</text>
+          <text x="22" y="252">04  LANDING</text>
+          <text x="22" y="324">05  IMPROVE</text>
+          <text x="22" y="396">06  QUEUE</text>
+        </g>
+      </g>
+      <!-- brand mark + wordmark -->
+      <g transform="translate(540,560)">
+        <rect width="48" height="48" rx="10" fill="#ff7a59"/>
+        <path d="M12 24 L22 34 L38 16" fill="none" stroke="#1a0a05" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="62" y="34" font-family="'Instrument Sans', system-ui, sans-serif" font-size="28" font-weight="600" fill="#f5f5f7">Bandit</text>
+      </g>
+      <text x="600" y="660" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="11" letter-spacing="2.5" fill="#5d5d68">ATTENTION-FIRST WORKFLOW COCKPIT</text>
+    </svg>
+  </template>
+  <div id="root"></div>
+
+  <!-- React + Babel pinned per system requirements -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Tweak defaults wrapped for host persistence -->
+  <script>
+    window.COCKPIT_TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "activeItem": "BANDIT-035",
+      "confidence": "clean",
+      "density": "dense",
+      "accent": "coral"
+    }/*EDITMODE-END*/;
+  </script>
+
+  <script type="text/babel" src="design-canvas.jsx"></script>
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="data.jsx"></script>
+  <script type="text/babel" src="ui.jsx"></script>
+  <script type="text/babel" src="screens.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
