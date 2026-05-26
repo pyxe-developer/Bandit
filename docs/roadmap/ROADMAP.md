@@ -16,7 +16,8 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Perform local-record landing for `BANDIT-033`.
+**Current next step:** Record `BANDIT-033` Stage 6 retrospective closeout and
+improvement disposition.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -92,7 +93,8 @@ prototype-source findings dispositioned as no-action, Local Qwen returned a
 `docs/work/BANDIT-033/landing-verdict.md` with final verdict `safe-to-land`
 and `uat_status: not_applicable` because this slice records a
 presentation/render contract, not a browser-clickable operator surface.
-`npm run bandit -- land-check BANDIT-033` passes. Local
+`npm run bandit -- land-check BANDIT-033` passes. Local-record landing action
+evidence is recorded in `docs/work/BANDIT-033/landing-action.md`. Local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, and unrelated
@@ -463,8 +465,9 @@ operator-provided attention-first cockpit direction and design review are now
 recorded. `BANDIT-033` is the active Phase 8 Workflow Cockpit visual UI slice
 with Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
 evidence recorded. Stage 5 landing verdict is recorded with UAT not applicable
-for this non-runnable presentation/render contract, and `land-check` passes.
-The next required action is local-record landing for `BANDIT-033`.
+for this non-runnable presentation/render contract, `land-check` passes, and
+local-record landing action evidence is recorded. The next required action is
+Stage 6 retrospective closeout and improvement disposition for `BANDIT-033`.
 
 ## Phase Map
 
@@ -777,7 +780,8 @@ Current rule:
 
 Current priority:
 
-1. Perform local-record landing for `BANDIT-033`.
+1. Record `BANDIT-033` Stage 6 retrospective closeout and improvement
+   disposition.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

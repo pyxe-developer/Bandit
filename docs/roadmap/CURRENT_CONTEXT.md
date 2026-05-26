@@ -409,8 +409,12 @@ recorded in `docs/work/BANDIT-033/landing-verdict.md` with final verdict
 presentation/render contract, not a browser-clickable operator surface, so
 browser UAT is deferred to the future slice that serves an actual cockpit page.
 `npm run bandit -- land-check BANDIT-033` passes with `UAT: not_applicable`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-033/landing-action.md`.
 
-**Current next action:** Perform local-record landing for `BANDIT-033`.
+**Current next action:** Record `BANDIT-033` Stage 6 retrospective closeout and
+improvement disposition. Do not begin the next work item until that closeout is
+recorded and roadmap/current-context state is updated.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -604,9 +608,12 @@ CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
 review evidence with current review subject hash, Stage 5 landing verdict,
 passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
+`BANDIT-033` has Stage 5 landing verdict/readiness evidence and local-record
+landing action evidence recorded.
 The current priority is:
 
-1. Perform local-record landing for `BANDIT-033`.
+1. Record `BANDIT-033` Stage 6 retrospective closeout and improvement
+   disposition.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -619,7 +626,8 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-033` landing step.
+No operator-owned input is required for the current `BANDIT-033` Stage 6
+closeout step.
 The Stage 5 landing verdict records `uat_status: not_applicable` because this
 slice produced a presentation/render contract, not a browser-clickable
 operator surface.
