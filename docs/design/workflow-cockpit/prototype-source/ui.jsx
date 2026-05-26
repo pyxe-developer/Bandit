@@ -206,6 +206,7 @@ function ActionButton({ label, command, variant = "default", glyph = "›", disa
         data-variant={variant}
         data-disabled={disabled ? "true" : "false"}
         aria-disabled={disabled}
+        disabled={disabled}
       >
         <span className="cp-action-glyph">{glyph}</span>
         <span className="cp-action-body">

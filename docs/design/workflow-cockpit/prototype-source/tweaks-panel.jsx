@@ -186,6 +186,7 @@ function useTweaks(defaults) {
 function TweaksPanel({ title = 'Tweaks', children }) {
   const [open, setOpen] = React.useState(false);
   const dragRef = React.useRef(null);
+  const dragCleanupRef = React.useRef(null);
   const offsetRef = React.useRef({ x: 16, y: 16 });
   const PAD = 16;
 
@@ -226,6 +227,10 @@ function TweaksPanel({ title = 'Tweaks', children }) {
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
+  React.useEffect(() => () => {
+    if (dragCleanupRef.current) dragCleanupRef.current();
+  }, []);
+
   const dismiss = () => {
     setOpen(false);
     window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
@@ -245,12 +250,14 @@ function TweaksPanel({ title = 'Tweaks', children }) {
       };
       clampToViewport();
     };
-    const up = () => {
+    const cleanup = () => {
       window.removeEventListener('mousemove', move);
-      window.removeEventListener('mouseup', up);
+      window.removeEventListener('mouseup', cleanup);
+      dragCleanupRef.current = null;
     };
+    dragCleanupRef.current = cleanup;
     window.addEventListener('mousemove', move);
-    window.addEventListener('mouseup', up);
+    window.addEventListener('mouseup', cleanup);
   };
 
   if (!open) return null;
@@ -320,6 +327,7 @@ function TweakToggle({ label, value, onChange }) {
 
 function TweakRadio({ label, value, options, onChange }) {
   const trackRef = React.useRef(null);
+  const cleanupRef = React.useRef(null);
   const [dragging, setDragging] = React.useState(false);
   // The active value is read by pointer-move handlers attached for the lifetime
   // of a drag — ref it so a stale closure doesn't fire onChange for every move.
@@ -348,6 +356,10 @@ function TweakRadio({ label, value, options, onChange }) {
   const idx = Math.max(0, opts.findIndex((o) => o.value === value));
   const n = opts.length;
 
+  React.useEffect(() => () => {
+    if (cleanupRef.current) cleanupRef.current();
+  }, []);
+
   const segAt = (clientX) => {
     const r = trackRef.current.getBoundingClientRect();
     const inner = r.width - 4;
@@ -364,13 +376,15 @@ function TweakRadio({ label, value, options, onChange }) {
       const v = segAt(ev.clientX);
       if (v !== valueRef.current) onChange(v);
     };
-    const up = () => {
+    const cleanup = () => {
       setDragging(false);
       window.removeEventListener('pointermove', move);
-      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointerup', cleanup);
+      cleanupRef.current = null;
     };
+    cleanupRef.current = cleanup;
     window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
+    window.addEventListener('pointerup', cleanup);
   };
 
   return (
@@ -420,6 +434,10 @@ function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) 
     return n;
   };
   const startRef = React.useRef({ x: 0, val: 0 });
+  const scrubCleanupRef = React.useRef(null);
+  React.useEffect(() => () => {
+    if (scrubCleanupRef.current) scrubCleanupRef.current();
+  }, []);
   const onScrubStart = (e) => {
     e.preventDefault();
     startRef.current = { x: e.clientX, val: value };
@@ -430,12 +448,14 @@ function TweakNumber({ label, value, min, max, step = 1, unit = '', onChange }) 
       const snapped = Math.round(raw / step) * step;
       onChange(clamp(Number(snapped.toFixed(decimals))));
     };
-    const up = () => {
+    const cleanup = () => {
       window.removeEventListener('pointermove', move);
-      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointerup', cleanup);
+      scrubCleanupRef.current = null;
     };
+    scrubCleanupRef.current = cleanup;
     window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
+    window.addEventListener('pointerup', cleanup);
   };
   return (
     <div className="twk-num">

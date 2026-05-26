@@ -469,7 +469,7 @@ html, body {
    FOCUS RING
    ========================================================================= */
 
-:focus { outline: none; }
+:focus:not(:focus-visible) { outline: none; }
 
 :focus-visible {
   outline: 2px solid var(--focus-ring);
@@ -485,9 +485,10 @@ html, body {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-play-state: paused !important;
+    transition-duration: 0s !important;
     scroll-behavior: auto !important;
   }
 }
