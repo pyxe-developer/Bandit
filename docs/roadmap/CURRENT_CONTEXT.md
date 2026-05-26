@@ -256,26 +256,30 @@ creation spec is recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json`, and its brief
 is recorded in `docs/work/BANDIT-029/brief.md`. RED evidence is recorded in
 `docs/work/BANDIT-029/red-evidence.md`, with focused tests in
-`test/improvements.test.mjs`. The slice is scoped to the smallest repo-native
-improvement evaluation foundation from existing retrospective-derived
-improvement metadata. It must not start Phase 8 Workflow Cockpit
-implementation, scheduler execution, worktree lifecycle, exclusive claim
-leases, work surface reservations, automatic merge/push/deploy behavior,
-product UAT approval, actor identity policy, or unrelated coordination work.
+`test/improvements.test.mjs`. Implementation evidence is recorded in
+`docs/work/BANDIT-029/implementation-evidence.md`; the implemented command
+surface adds read-only improvement candidate discovery and single-candidate
+evaluation evidence validation while preserving repo-native artifacts as
+canonical state. The slice is scoped to the smallest repo-native improvement
+evaluation foundation from existing retrospective-derived improvement metadata.
+It must not start Phase 8 Workflow Cockpit implementation, scheduler execution,
+worktree lifecycle, exclusive claim leases, work surface reservations,
+automatic merge/push/deploy behavior, product UAT approval, actor identity
+policy, or unrelated coordination work.
 
-**Last completed milestone:** `BANDIT-029` Stage 2 RED evidence is recorded.
+**Last completed milestone:** `BANDIT-029` Stage 3 implementation evidence is
+recorded and verification passed.
 
-**Current next action:** Implement the narrow `BANDIT-029` improvement
-evaluation foundation so the focused RED tests pass. The implementation should
-add CLI-owned candidate discovery and single-candidate evaluation evidence
-validation without introducing cockpit, scheduler, claim, worktree, merge,
-push, deploy, product UAT, actor identity policy, or unrelated coordination
-behavior.
+**Current next action:** Run Stage 4 review for `BANDIT-029`: pre-PR
+CodeRabbit review when available, Local Qwen adversarial review, any required
+escalated-review routing, and aggregate review evidence with the current review
+subject hash.
 
 ## Active Work
 
 **Active work item:** `BANDIT-029` - Improvement Evaluation Foundation. Stage 1
-brief and Stage 2 RED evidence are recorded; Stage 3 implementation is next.
+brief, Stage 2 RED evidence, and Stage 3 implementation evidence are recorded;
+Stage 4 review evidence is next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -298,7 +302,7 @@ Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands.
 
-**Expected next deliverable:** `docs/work/BANDIT-029/implementation-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-029/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -439,13 +443,14 @@ BANDIT-014`, `npm run bandit -- auto-land-check BANDIT-014`, `npm run bandit
 Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 `BANDIT-028` is closed out as the final Phase 6 Coordination Primitive slice.
-`BANDIT-029` now has a structured spec, Stage 1 brief, and Stage 2 RED
-evidence. The current priority is:
+`BANDIT-029` now has a structured spec, Stage 1 brief, Stage 2 RED evidence,
+and Stage 3 implementation evidence. The current priority is:
 
-1. Implement the narrow `BANDIT-029` improvement candidate discovery and
-   evaluation evidence validation behavior so the focused RED tests pass.
-2. Record Stage 3 implementation evidence after focused tests pass.
-3. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
+1. Run pre-PR CodeRabbit review for `BANDIT-029` when available.
+2. Run Local Qwen adversarial review and any smell-triggered escalated review.
+3. Record aggregate Stage 4 review evidence with the current review subject
+   hash.
+4. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, or unrelated work until `BANDIT-029`
    is executed through the normal slice boundary.
@@ -456,11 +461,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to implement the narrow `BANDIT-029`
-improvement evaluation foundation from repo artifacts. If live external service
-access, cost/risk override, policy change, PR/merge/push/deploy authority,
-product direction, or product UAT approval is required, halt and ask for that
-input directly.
+No operator-owned input is required for routine `BANDIT-029` Stage 4 review
+routing from repo artifacts. If live external service access, cost/risk
+override, policy change, PR/merge/push/deploy authority, product direction, or
+product UAT approval is required, halt and ask for that input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.

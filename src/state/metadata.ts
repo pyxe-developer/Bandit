@@ -8,6 +8,7 @@ export type ParsedField = {
 export function parseMetadataFields(content: string): ParsedFields {
   const fields: ParsedFields = new Map();
   let currentListField: string | null = null;
+  let currentScalarField: string | null = null;
 
   for (const line of content.split(/\r?\n/)) {
     const scalarMatch = line.match(/^([a-z_]+):\s*(.*)$/);
@@ -21,12 +22,29 @@ export function parseMetadataFields(content: string): ParsedFields {
 
       fields.set(field, { scalar, list: [] });
       currentListField = scalar.length === 0 ? field : null;
+      currentScalarField = scalar.length > 0 ? field : null;
       continue;
     }
 
     const listMatch = line.match(/^\s*-\s+(.+)$/);
     if (listMatch && currentListField) {
       fields.get(currentListField)?.list.push(listMatch[1]?.trim() ?? "");
+      currentScalarField = null;
+      continue;
+    }
+
+    const continuationMatch = line.match(/^\s{2,}(\S.*)$/);
+    if (continuationMatch && currentScalarField) {
+      const field = fields.get(currentScalarField);
+      if (field) {
+        field.scalar = `${field.scalar} ${continuationMatch[1]?.trim() ?? ""}`.trim();
+      }
+      continue;
+    }
+
+    if (line.trim().length === 0 || !line.startsWith(" ")) {
+      currentListField = null;
+      currentScalarField = null;
     }
   }
 

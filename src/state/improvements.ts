@@ -1,0 +1,338 @@
+import { access, readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+import { parseMetadataFields, readList, readScalar } from "./metadata.js";
+
+export type ImprovementCandidate = {
+  id: string;
+  source_work_item: string;
+  status: string;
+  outcome: string;
+  metric: string;
+  baseline: string;
+  expected_direction: string;
+  evaluation_window: string;
+  source_artifacts: string[];
+};
+
+export type ImprovementEvaluation = {
+  candidate_id: string;
+  result: ImprovementResult;
+  decision: ImprovementDecision;
+  routing_action: string;
+};
+
+type CandidateRecord = ImprovementCandidate & {
+  displayPath: string;
+};
+
+type Artifact = {
+  displayPath: string;
+  content: string;
+};
+
+type ValidationIssue = {
+  field: string;
+  message: string;
+};
+
+export type ImprovementResult =
+  | "effective"
+  | "ineffective"
+  | "inconclusive"
+  | "reverted"
+  | "double_down";
+
+export type ImprovementDecision = "keep" | "revise" | "revert" | "double_down";
+
+const REQUIRED_CANDIDATE_FIELDS = [
+  "source_work_item",
+  "source_artifacts",
+  "hypothesis",
+  "metric",
+  "baseline",
+  "expected_direction",
+  "evaluation_window",
+  "status",
+  "outcome"
+] as const;
+const REQUIRED_EVALUATION_FIELDS = [
+  "candidate_id",
+  "source_artifacts",
+  "metric",
+  "baseline",
+  "observed_metric_evidence",
+  "comparison_to_baseline",
+  "result",
+  "decision",
+  "rationale",
+  "routing_action"
+] as const;
+const SUPPORTED_RESULTS = new Set([
+  "effective",
+  "ineffective",
+  "inconclusive",
+  "reverted",
+  "double_down"
+]);
+const SUPPORTED_DECISIONS = new Set(["keep", "revise", "revert", "double_down"]);
+
+export async function readImprovementCandidates(repoRoot: string) {
+  const artifacts = await readWorkMarkdownArtifacts(repoRoot);
+  const candidates = artifacts.flatMap(readCandidatesFromArtifact);
+
+  for (const candidate of candidates) {
+    await validateCandidateSourceArtifacts(repoRoot, candidate);
+  }
+
+  return candidates
+    .map(({ displayPath: _displayPath, ...candidate }) => candidate)
+    .sort((first, second) => first.id.localeCompare(second.id));
+}
+
+export async function validateImprovementEvaluation(
+  repoRoot: string,
+  candidateId: string,
+  evidencePath: string
+): Promise<ImprovementEvaluation> {
+  const candidate = await findImprovementCandidate(repoRoot, candidateId);
+  const artifact = await readRepoArtifact(repoRoot, evidencePath);
+  const fields = parseMetadataFields(artifact);
+  const issues = collectRequiredFieldIssues(fields, REQUIRED_EVALUATION_FIELDS);
+  const evidenceCandidateId = readScalar(fields, "candidate_id");
+
+  if (evidenceCandidateId && evidenceCandidateId !== candidate.id) {
+    issues.push({
+      field: "candidate_id",
+      message: `Improvement evidence candidate mismatch: ${evidenceCandidateId}`
+    });
+  }
+
+  const result = readScalar(fields, "result");
+  if (result && !SUPPORTED_RESULTS.has(result)) {
+    issues.push({
+      field: "result",
+      message: `Unsupported improvement result: ${result}`
+    });
+  }
+
+  const decision = readScalar(fields, "decision");
+  if (decision && !SUPPORTED_DECISIONS.has(decision)) {
+    issues.push({
+      field: "decision",
+      message: `Unsupported improvement decision: ${decision}`
+    });
+  }
+
+  const sourceArtifacts = readList(fields, "source_artifacts");
+  for (const sourceArtifact of sourceArtifacts) {
+    await assertRepoPathExists(
+      repoRoot,
+      sourceArtifact,
+      `Missing improvement source artifact: ${sourceArtifact}`
+    );
+  }
+
+  if (issues.length > 0) {
+    throw new Error(issues.map((issue) => issue.message).join("\n"));
+  }
+
+  return {
+    candidate_id: candidate.id,
+    result: result as ImprovementResult,
+    decision: decision as ImprovementDecision,
+    routing_action: readScalar(fields, "routing_action")
+  };
+}
+
+async function findImprovementCandidate(repoRoot: string, candidateId: string) {
+  const artifacts = await readWorkMarkdownArtifacts(repoRoot);
+  const candidates = artifacts.flatMap(readCandidatesFromArtifact);
+  const candidate = candidates.find((item) => item.id === candidateId);
+
+  if (!candidate) {
+    throw new Error(`Improvement candidate not found: ${candidateId}`);
+  }
+
+  await validateCandidateSourceArtifacts(repoRoot, candidate);
+  return candidate;
+}
+
+async function readWorkMarkdownArtifacts(repoRoot: string) {
+  const workRoot = path.join(repoRoot, "docs/work");
+  const artifacts: Artifact[] = [];
+  const workItemDirs = await readDirectoryEntries(workRoot);
+
+  for (const workItemDir of workItemDirs) {
+    if (!workItemDir.isDirectory()) {
+      continue;
+    }
+
+    const artifactRoot = path.join(workRoot, workItemDir.name);
+    const artifactEntries = await readDirectoryEntries(artifactRoot);
+    for (const artifactEntry of artifactEntries) {
+      if (!artifactEntry.isFile() || !artifactEntry.name.endsWith(".md")) {
+        continue;
+      }
+
+      const absolutePath = path.join(artifactRoot, artifactEntry.name);
+      const displayPath = normalizeDisplayPath(path.relative(repoRoot, absolutePath));
+      artifacts.push({
+        displayPath,
+        content: await readFile(absolutePath, "utf8")
+      });
+    }
+  }
+
+  return artifacts.sort((first, second) =>
+    first.displayPath.localeCompare(second.displayPath)
+  );
+}
+
+function readCandidatesFromArtifact(artifact: Artifact): CandidateRecord[] {
+  return splitCandidateSections(artifact.content).map(({ id, content }) => {
+    const fields = parseMetadataFields(content);
+    const issues = collectRequiredFieldIssues(fields, REQUIRED_CANDIDATE_FIELDS);
+    if (issues.length > 0) {
+      throw new Error(
+        `${artifact.displayPath} missing required improvement metadata: ${issues
+          .map((issue) => issue.field)
+          .join(", ")}`
+      );
+    }
+
+    return {
+      id,
+      source_work_item: readScalar(fields, "source_work_item"),
+      status: readScalar(fields, "status"),
+      outcome: readScalar(fields, "outcome"),
+      metric: readScalar(fields, "metric"),
+      baseline: readScalar(fields, "baseline"),
+      expected_direction: readScalar(fields, "expected_direction"),
+      evaluation_window: readScalar(fields, "evaluation_window"),
+      source_artifacts: readList(fields, "source_artifacts"),
+      displayPath: artifact.displayPath
+    };
+  });
+}
+
+function splitCandidateSections(content: string) {
+  const matches = Array.from(content.matchAll(/^### Chore Candidate:\s+`([^`]+)`\s*$/gm));
+  return matches.flatMap((match, index) => {
+    const id = match[1]?.trim();
+    if (!id || match.index === undefined) {
+      return [];
+    }
+
+    const nextMatch = matches[index + 1];
+    const endIndex = nextMatch?.index ?? content.length;
+    return [
+      {
+        id,
+        content: content.slice(match.index, endIndex)
+      }
+    ];
+  });
+}
+
+function collectRequiredFieldIssues(
+  fields: ReturnType<typeof parseMetadataFields>,
+  requiredFields: readonly string[]
+) {
+  const issues: ValidationIssue[] = [];
+
+  for (const field of requiredFields) {
+    const hasValue =
+      field === "source_artifacts"
+        ? readList(fields, field).length > 0
+        : readScalar(fields, field).length > 0;
+
+    if (!hasValue) {
+      issues.push({
+        field,
+        message: `missing required improvement metadata: ${field}`
+      });
+    }
+  }
+
+  return issues;
+}
+
+async function validateCandidateSourceArtifacts(
+  repoRoot: string,
+  candidate: CandidateRecord
+) {
+  for (const sourceArtifact of candidate.source_artifacts) {
+    await assertRepoPathExists(
+      repoRoot,
+      sourceArtifact,
+      `Missing improvement source artifact: ${sourceArtifact}`
+    );
+  }
+}
+
+async function readRepoArtifact(repoRoot: string, inputPath: string) {
+  const artifactPath = resolveRepoPath(repoRoot, inputPath);
+  try {
+    return await readFile(artifactPath.absolutePath, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      throw new Error(`Improvement evaluation evidence not found: ${artifactPath.displayPath}`);
+    }
+    throw error;
+  }
+}
+
+async function assertRepoPathExists(
+  repoRoot: string,
+  inputPath: string,
+  errorMessage: string
+) {
+  const resolved = resolveRepoPath(repoRoot, inputPath);
+  try {
+    await access(resolved.absolutePath);
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      throw new Error(errorMessage);
+    }
+    throw error;
+  }
+}
+
+function resolveRepoPath(repoRoot: string, inputPath: string) {
+  const absolutePath = path.isAbsolute(inputPath)
+    ? path.normalize(inputPath)
+    : path.resolve(repoRoot, inputPath);
+  const relativePath = path.relative(repoRoot, absolutePath);
+
+  if (
+    relativePath === ".." ||
+    relativePath.startsWith(`..${path.sep}`) ||
+    path.isAbsolute(relativePath)
+  ) {
+    throw new Error(`Improvement artifact path must stay within repository: ${inputPath}`);
+  }
+
+  return {
+    absolutePath,
+    displayPath: normalizeDisplayPath(relativePath)
+  };
+}
+
+async function readDirectoryEntries(directoryPath: string) {
+  try {
+    return await readdir(directoryPath, { withFileTypes: true });
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return [];
+    }
+    throw error;
+  }
+}
+
+function normalizeDisplayPath(filePath: string) {
+  return filePath.split(path.sep).join("/");
+}
+
+function isMissingPathError(error: unknown) {
+  return error instanceof Error && "code" in error && error.code === "ENOENT";
+}
