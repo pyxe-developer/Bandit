@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-034
-source_head: 77b668c436ce0027783ac57a67dbe61af11df475
+source_head: 43776fe84c7ba316f14fb3ff985ce6f97bbeac5b
 review_subject_hash: 7932c57117ba0dce448160def5ed1aed1860d5819a035f61591b28e94f5ce536
 review_subject_hash_status: stale
 verification_state: blocker
@@ -32,9 +32,12 @@ verification_evidence:
   - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the current repaired-source rerun.
   - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
   - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the current CSS font-feature finding; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
+  - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head 43776fe84c7ba316f14fb3ff985ce6f97bbeac5b and completed with 2 unresolved findings.
+  - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the latest rerun.
+  - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
 coderabbit_state: blocker
 coderabbit_replacement_evidence:
-  - Real pre-PR CodeRabbit provider evidence was rerun against the previous repaired source and completed with 1 unresolved minor finding in docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css. That finding has now been repaired, but no CodeRabbit pass is claimed; Stage 4 remains blocked until provider evidence is rerun against the repaired source and no longer blocks.
+  - Real pre-PR CodeRabbit provider evidence was rerun against the current repaired source and completed with 2 unresolved findings: update aria-disabled string semantics in docs/design/workflow-cockpit/prototype-source/ui.jsx, and stabilize the keyboard-handler useEffect/callback dependencies in docs/design/workflow-cockpit/prototype-source/design-canvas.jsx. No CodeRabbit pass is claimed; Stage 4 remains blocked until these findings are repaired or dispositioned and provider evidence is rerun.
 local_qwen_state: not_applicable
 local_qwen_replacement_evidence:
   - Local Qwen was not run because CodeRabbit pre-PR review still blocks Stage 4; no aggregate pass can be claimed until CodeRabbit completes without blocker evidence.
@@ -42,12 +45,12 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: BANDIT-034 is a bounded internal cockpit-shell hardening chore over presentation-only view-model and render surfaces. It introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, or external service integration. No smell trigger requires escalated reviewer routing before the blocking CodeRabbit findings are repaired or dispositioned.
 pm_disposition: blocker
-pm_disposition_rationale: Stage 4 remains blocked because the current CSS font-feature finding has been repaired in source, making the previous CodeRabbit provider evidence stale. Rerun CodeRabbit before Local Qwen, review-subject hash refresh if needed, and aggregate PM disposition can proceed.
+pm_disposition_rationale: Stage 4 remains blocked because the latest current-source CodeRabbit rerun found 2 unresolved actionable findings. Repair or disposition those findings before rerunning CodeRabbit, running Local Qwen, refreshing review-subject hash if needed, or claiming aggregate PM disposition.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
-source_drift_status: stale
+source_drift_status: current
 bootstrap_gaps:
   - none

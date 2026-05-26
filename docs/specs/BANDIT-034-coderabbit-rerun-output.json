@@ -1,5 +1,5 @@
 {
-  "sourceHead": "77b668c436ce0027783ac57a67dbe61af11df475",
+  "sourceHead": "43776fe84c7ba316f14fb3ff985ce6f97bbeac5b",
   "baseRevision": "origin/main",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -7,7 +7,12 @@
     {
       "severity": "minor",
       "status": "unresolved",
-      "body": "In docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css at line 318, remove unsupported OpenType feature \"cv11\" from the font-feature-settings declaration and leave only \"ss01\"."
+      "body": "In docs/design/workflow-cockpit/prototype-source/ui.jsx at line 208, update aria-disabled={disabled} to pass an ARIA string value such as aria-disabled={disabled ? \"true\" : \"false\"}, so disabled null or undefined values are handled explicitly."
+    },
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "In docs/design/workflow-cockpit/prototype-source/design-canvas.jsx around lines 842-851, add an appropriate dependency array to the keyboard-handler useEffect and stabilize the go and goSection callbacks with useCallback so the document keydown listener is not removed and re-added on every render."
     }
   ]
 }
