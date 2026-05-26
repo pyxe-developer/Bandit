@@ -100,13 +100,14 @@ CodeRabbit completed with findings 0, Local Qwen returned a `non_blocking`
 verdict, and Codex PM accepted/routed the non-blocking hardening findings.
 Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-029/landing-verdict.md` with final verdict `safe-to-land`,
-and `npm run bandit -- land-check BANDIT-029` passes. The next step is
-local-record landing action. Do not create unrelated active-work branches,
-Phase 8 web cockpit implementation, scheduler execution, worktree lifecycle,
-exclusive claim leases, work surface reservations, product UAT approval,
-automatic merge/push/deploy behavior, actor identity policy, or unrelated
-feature work before `BANDIT-029` is landed and closed out through the normal
-slice boundary.
+and `npm run bandit -- land-check BANDIT-029` passes. Local-record landing
+action evidence is recorded in `docs/work/BANDIT-029/landing-action.md`. The
+next step is retrospective/improvement disposition and context closeout. Do not
+create unrelated active-work branches, Phase 8 web cockpit implementation,
+scheduler execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, actor
+identity policy, or unrelated feature work before `BANDIT-029` is closed out
+through the normal slice boundary.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -305,8 +306,9 @@ Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 review
 evidence recorded in
 `docs/specs/BANDIT-029-improvement-evaluation-foundation.json` and
 `docs/work/BANDIT-029/`. Stage 5 landing verdict and landing readiness
-verification are recorded. The next action is `BANDIT-029` local-record landing
-action.
+verification are recorded. Local-record landing action evidence is recorded.
+The next action is `BANDIT-029` retrospective/improvement disposition and
+context closeout.
 
 ## Phase Map
 
@@ -619,10 +621,9 @@ Current rule:
 
 Current priority:
 
-1. Run `npm run bandit -- land BANDIT-029 --action local-record`.
-2. Record landing action evidence, retrospective/improvement disposition, and
-   context closeout for `BANDIT-029`.
-3. Stop before unrelated active-work branches, scheduler execution, worktree
+1. Complete retrospective/improvement disposition and context closeout for
+   `BANDIT-029`.
+2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, actor identity policy, or Phase 8 work until `BANDIT-029` is
