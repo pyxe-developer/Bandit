@@ -415,13 +415,16 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or disposition the two unresolved findings from
-the completed `BANDIT-034` Stage 4 CodeRabbit pre-PR retry: guard
-`design-canvas.jsx` grip-scale calculation against zero-width elements, and
-update the prototype Babel standalone script from `@babel/standalone@7.29.0`
-to `7.29.4` with the matching integrity hash. Do not continue Local Qwen or
-claim aggregate Stage 4 review evidence until these findings are repaired or
-durably dispositioned and CodeRabbit no longer blocks Stage 4.
+**Current next action:** Rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR
+provider against the repaired source. The two completed-retry findings are
+repaired in `docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`,
+`docs/design/workflow-cockpit/prototype-source/index.html`, and
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`: the design-canvas
+grip scale now falls back unless the computed scale is finite and positive, and
+the prototype Babel standalone script is pinned to `@babel/standalone@7.29.4`
+with matching SHA-384 integrity. Do not continue Local Qwen or claim aggregate
+Stage 4 review evidence until the CodeRabbit pre-PR rerun no longer blocks
+Stage 4.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -439,8 +442,9 @@ evidence for the original CodeRabbit findings is recorded in
 CodeRabbit retry completed with two unresolved findings and is recorded in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The retry findings must
-be repaired or dispositioned before Stage 4 can continue.
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The retry findings are
+repaired in focused source and disposition artifacts; the CodeRabbit pre-PR
+provider must be rerun before Stage 4 can continue.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;

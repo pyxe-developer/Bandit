@@ -16,12 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Repair or disposition the two unresolved findings from
-the completed `BANDIT-034` Stage 4 CodeRabbit pre-PR retry: guard
-`design-canvas.jsx` grip-scale calculation against zero-width elements, and
-update the prototype Babel standalone script from `@babel/standalone@7.29.0`
-to `7.29.4` with the matching integrity hash. Local Qwen and aggregate Stage 4
-review evidence must wait until CodeRabbit no longer blocks Stage 4.
+**Current next step:** Rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR
+provider against the repaired source. The two completed-retry findings are
+repaired in `docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`,
+`docs/design/workflow-cockpit/prototype-source/index.html`, and
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`: the design-canvas
+grip scale now falls back unless the computed scale is finite and positive, and
+the prototype Babel standalone script is pinned to `@babel/standalone@7.29.4`
+with matching SHA-384 integrity. Local Qwen and aggregate Stage 4 review
+evidence must wait until CodeRabbit no longer blocks Stage 4.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -127,8 +130,10 @@ in `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Focused repair / PM
 disposition evidence for the original findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`. The next required
-action is to repair or disposition the retry findings. Do not start local
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`. The retry findings
+are repaired in focused source and disposition artifacts; the next required
+action is to rerun the CodeRabbit pre-PR provider against the repaired source.
+Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
 policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
@@ -287,8 +292,9 @@ CodeRabbit blocker evidence and repair/disposition evidence are recorded, and
 the repaired-source CodeRabbit retry with two unresolved findings is recorded in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`; the next required action
-is to repair or disposition the retry findings before continuing Stage 4.
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`; the retry findings are
+repaired in focused source and disposition artifacts, and the next required
+action is to rerun the CodeRabbit pre-PR provider before continuing Stage 4.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface

@@ -119,7 +119,33 @@ The 2026-05-26 CodeRabbit retry completed at source head
 - Update the prototype Babel standalone script from `@babel/standalone@7.29.0`
   to `7.29.4` and replace the integrity hash for that pinned version.
 
+## Retry Finding Repair
+
+### Design-canvas grip scale guard
+
+**Finding:** Guard the `design-canvas.jsx` grip-scale calculation against
+zero-width elements so pointer movement cannot produce `Infinity`.
+
+**Disposition:** repaired.
+
+**Evidence:** `design-canvas.jsx` now computes `rawScale` only when
+`offsetWidth` is non-zero and falls back to scale `1` unless the computed value
+is finite and positive.
+
+### Babel standalone version and integrity
+
+**Finding:** Update the prototype Babel standalone script from
+`@babel/standalone@7.29.0` to `7.29.4` and replace the integrity hash for that
+pinned version.
+
+**Disposition:** repaired.
+
+**Evidence:** `index.html` now pins
+`https://unpkg.com/@babel/standalone@7.29.4/babel.min.js` with SHA-384 SRI
+hash `qVgGRi0TCdh+xrBD9+4kG0YlkbOkWu2J3CB46EekpYQmtM96n9v+uaKIS5ipaqKb`,
+computed from the pinned unpkg URL on 2026-05-26.
+
 ## Next Action
 
-Repair or disposition the two unresolved CodeRabbit retry findings before
-running Local Qwen or claiming aggregate Stage 4 review evidence.
+Rerun the CodeRabbit pre-PR provider against the repaired source before running
+Local Qwen or claiming aggregate Stage 4 review evidence.

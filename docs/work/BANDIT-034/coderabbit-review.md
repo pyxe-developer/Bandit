@@ -8,9 +8,9 @@ review_target: local-diff:origin/main
 review_state: completed
 coderabbit_verdict: blocker
 findings_status: unresolved
-findings_disposition: Guard the design-canvas grip scale calculation against zero-width elements so pointer movement cannot produce Infinity.; Update the prototype Babel standalone script from @babel/standalone@7.29.0 to 7.29.4 and replace the integrity hash for that pinned version.
+findings_disposition: The completed retry findings are repaired in docs/design/workflow-cockpit/prototype-source/design-canvas.jsx, docs/design/workflow-cockpit/prototype-source/index.html, and docs/work/BANDIT-034/coderabbit-finding-disposition.md; rerun the pre-PR provider against the repaired source before claiming CodeRabbit pass evidence.
 operator_input_status: none_required
-source_drift_status: current
+source_drift_status: stale
 executable_evidence:
   - coderabbit review --agent --base origin/main
 bootstrap_gaps:

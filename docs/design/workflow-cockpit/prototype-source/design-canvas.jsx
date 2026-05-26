@@ -704,7 +704,8 @@ function DCArtboardFrame({ sectionId, artboard, label, order, onRename, onReorde
     // translateX is applied in local (pre-scale) space but pointer deltas and
     // getBoundingClientRect().left are screen-space — divide by the viewport's
     // current scale so the dragged card tracks the cursor at any zoom level.
-    const scale = me.getBoundingClientRect().width / me.offsetWidth || 1;
+    const rawScale = me.offsetWidth ? me.getBoundingClientRect().width / me.offsetWidth : 1;
+    const scale = Number.isFinite(rawScale) && rawScale > 0 ? rawScale : 1;
     const peers = Array.from(document.querySelectorAll(`[data-dc-section="${sectionId}"] [data-dc-slot]`));
     const homes = peers.map((el) => ({ el, id: el.dataset.dcSlot, x: el.getBoundingClientRect().left }));
     const slotXs = homes.map((h) => h.x);
@@ -963,4 +964,3 @@ function DCPostIt({ children, top, left, right, bottom, rotate = -2, width = 180
 }
 
 Object.assign(window, { DesignCanvas, DCSection, DCArtboard, DCPostIt });
-
