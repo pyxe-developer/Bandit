@@ -1,4 +1,4 @@
-import { readFile, stat } from "node:fs/promises";
+import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
 type SourceValue<T> = {
@@ -47,6 +47,7 @@ type CockpitStatus = {
   improvement_health: {
     status: "pending_candidates" | "no_pending_candidates";
     source: string;
+    sources: string[];
     candidates: string[];
   };
   coordination: {
@@ -302,27 +303,69 @@ async function readLandingReadiness(repoRoot: string, source: string) {
 }
 
 async function readImprovementHealth(repoRoot: string) {
-  const knownCandidateSource = "docs/work/BANDIT-028/qwen-finding-disposition.md";
-  if (!(await pathExists(repoRoot, knownCandidateSource))) {
+  const candidateSources = await findImprovementCandidateSources(repoRoot);
+  if (candidateSources.length === 0) {
     return {
       status: "no_pending_candidates" as const,
-      source: knownCandidateSource,
+      source: "docs/work/*/*-finding-disposition.md",
+      sources: [],
       candidates: []
     };
   }
 
-  const artifact = await readRequiredArtifact(repoRoot, knownCandidateSource);
-  const candidates = Array.from(
-    artifact.content.matchAll(/^### Chore Candidate:\s+`([^`]+)`/gm)
-  ).map((match) => String(match[1]));
+  const candidateGroups = await Promise.all(
+    candidateSources.map(async (source) => {
+      const artifact = await readRequiredArtifact(repoRoot, source);
+      return Array.from(
+        artifact.content.matchAll(/^### Chore Candidate:\s+`([^`]+)`/gm)
+      ).map((match) => String(match[1]));
+    })
+  );
+  const candidates = candidateGroups.flat();
 
   return {
     status: candidates.length > 0
       ? ("pending_candidates" as const)
       : ("no_pending_candidates" as const),
-    source: knownCandidateSource,
+    source: candidateSources.join(", "),
+    sources: candidateSources,
     candidates
   };
+}
+
+async function findImprovementCandidateSources(repoRoot: string) {
+  const workRoot = path.join(repoRoot, "docs/work");
+  let workItems: string[];
+  try {
+    workItems = await readdir(workRoot);
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return [];
+    }
+    throw error;
+  }
+
+  const sources: string[] = [];
+  for (const workItem of workItems.sort()) {
+    const workItemPath = path.join(workRoot, workItem);
+    let entries: string[];
+    try {
+      entries = await readdir(workItemPath);
+    } catch (error) {
+      if (isMissingPathError(error)) {
+        continue;
+      }
+      throw error;
+    }
+
+    for (const entry of entries.sort()) {
+      if (entry.endsWith("-finding-disposition.md")) {
+        sources.push(`docs/work/${workItem}/${entry}`);
+      }
+    }
+  }
+
+  return sources;
 }
 
 async function readCoordinationSummary(repoRoot: string, workItemId: string) {

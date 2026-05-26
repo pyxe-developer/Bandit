@@ -75,12 +75,42 @@ test("cockpit status reports bootstrap gaps, gates, improvements, and coordinati
   assert.deepEqual(status.improvement_health, {
     status: "pending_candidates",
     source: "docs/work/BANDIT-028/qwen-finding-disposition.md",
+    sources: ["docs/work/BANDIT-028/qwen-finding-disposition.md"],
     candidates: ["BANDIT-028-ACTOR-IDENTITY-VALIDATION"]
   });
   assert.deepEqual(status.coordination, {
     current_state: "red_evidence_recorded",
     next_action: "Implement the read-only cockpit status foundation",
     source: "docs/work/BANDIT-031/coordination-log.jsonl"
+  });
+});
+
+test("cockpit status aggregates improvement candidates from disposition artifacts", async () => {
+  const repo = await createCockpitRepo();
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-029/qwen-finding-disposition.md",
+    improvementFixture({
+      title: "BANDIT-029 Local Qwen Finding Disposition",
+      candidate: "BANDIT-029-IMPROVEMENT-SCALING-AND-PARSER-HARDENING"
+    })
+  );
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.deepEqual(status.improvement_health, {
+    status: "pending_candidates",
+    source: "docs/work/BANDIT-028/qwen-finding-disposition.md, docs/work/BANDIT-029/qwen-finding-disposition.md",
+    sources: [
+      "docs/work/BANDIT-028/qwen-finding-disposition.md",
+      "docs/work/BANDIT-029/qwen-finding-disposition.md"
+    ],
+    candidates: [
+      "BANDIT-028-ACTOR-IDENTITY-VALIDATION",
+      "BANDIT-029-IMPROVEMENT-SCALING-AND-PARSER-HARDENING"
+    ]
   });
 });
 
@@ -212,12 +242,15 @@ function roadmapFixture({ nextAction }) {
 `;
 }
 
-function improvementFixture() {
-  return `# BANDIT-028 Local Qwen Finding Disposition
+function improvementFixture({
+  title = "BANDIT-028 Local Qwen Finding Disposition",
+  candidate = "BANDIT-028-ACTOR-IDENTITY-VALIDATION"
+} = {}) {
+  return `# ${title}
 
 ## Durable Chore Candidate
 
-### Chore Candidate: \`BANDIT-028-ACTOR-IDENTITY-VALIDATION\`
+### Chore Candidate: \`${candidate}\`
 
 source_work_item: BANDIT-028
 source_artifacts:
