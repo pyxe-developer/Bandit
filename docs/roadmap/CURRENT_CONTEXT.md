@@ -305,27 +305,31 @@ dispositioned as resolved/no-action after `git diff --check` and EOF-newline
 inspection; Local Qwen passed with no findings. Stage 5 landing verdict is
 recorded in `docs/work/BANDIT-030/landing-verdict.md` with final verdict
 `safe-to-land`, and `npm run bandit -- land-check BANDIT-030` passes.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-030/landing-action.md`.
 The work item evaluates the `BANDIT-023` hypothesis against Stage 4 outcomes
 from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit,
 scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
 identity policy, claim lease, work surface reservation, or unrelated work
 starts.
 
-**Last completed milestone:** `BANDIT-030` Stage 5 landing verdict and landing
-readiness are recorded with `safe-to-land` and passing `land-check` evidence.
+**Last completed milestone:** `BANDIT-030` local-record landing action evidence
+is recorded.
 
-**Current next action:** Record the local-record landing action for
-`BANDIT-030`. Do not perform retrospective, Phase 8 cockpit, scheduler,
-worktree lifecycle, automatic merge/push/deploy, product UAT, actor identity
-policy, claim lease, work surface reservation, or unrelated work before
-landing action evidence is recorded.
+**Current next action:** Record `BANDIT-030` retrospective, improvement
+disposition, coordination closeout if applicable, and roadmap/current-context
+closeout. Do not begin Phase 8 cockpit, scheduler, worktree lifecycle,
+automatic merge/push/deploy, product UAT, actor identity policy, claim lease,
+work surface reservation, the next work item, or unrelated work before
+retrospective and closeout evidence are recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing. Status: Stage 3 implementation and Stage 7 evaluation evidence
 recorded; Stage 4 review evidence is current and dispositioned; Stage 5
-landing verdict and land-check pass; local-record landing action is next.
+landing verdict and land-check pass; local-record landing action evidence is
+recorded; retrospective and closeout are next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -349,8 +353,8 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/landing-action.md` with
-local-record landing evidence.
+**Expected next deliverable:** `docs/work/BANDIT-030/retrospective.md` with
+improvement disposition and closeout evidence.
 
 ## Known Bootstrap Gaps
 
@@ -497,14 +501,16 @@ verdict/readiness evidence, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition. `BANDIT-030` has a structured spec,
 Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3 implementation
 evidence, Stage 7 improvement-evaluation evidence, Stage 4 review evidence,
-and Stage 5 landing verdict/readiness evidence.
+Stage 5 landing verdict/readiness evidence, and local-record landing action
+evidence.
 The current priority is:
 
-1. Record the local-record landing action for `BANDIT-030`.
+1. Record `BANDIT-030` retrospective, improvement disposition, and closeout
+   context updates.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, retrospective, or unrelated work until
-   landing action evidence is recorded.
+   reservations, actor identity policy, the next work item, or unrelated work
+   until retrospective and closeout evidence are recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -512,8 +518,8 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the next narrow Phase 7 work item
-for `BANDIT-023` improvement outcome evaluation from repo artifacts.
+No operator-owned input is required to record the `BANDIT-030` retrospective
+and closeout from repo artifacts.
 If live external service access, cost/risk override, policy change,
 PR/merge/push/deploy authority, product direction, or product UAT approval is
 required, halt and ask for that input directly.

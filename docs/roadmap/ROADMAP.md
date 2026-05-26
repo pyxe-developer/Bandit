@@ -126,13 +126,14 @@ CodeRabbit pass evidence is recorded with its remaining minor EOF-newline
 finding dispositioned as resolved/no-action, and Local Qwen passed with no
 findings. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-030/landing-verdict.md` with final verdict `safe-to-land`,
-and `npm run bandit -- land-check BANDIT-030` passes. The next step is to
-record the local-record landing action for `BANDIT-030`. Do not create
-unrelated active-work branches, Phase 8 web cockpit implementation, scheduler
-execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, retrospective, or unrelated feature work before landing action
-evidence is recorded.
+and `npm run bandit -- land-check BANDIT-030` passes. Local-record landing
+action evidence is recorded in `docs/work/BANDIT-030/landing-action.md`.
+The next step is to record retrospective, improvement disposition, and closeout
+context for `BANDIT-030`. Do not create unrelated active-work branches, Phase 8
+web cockpit implementation, scheduler execution, worktree lifecycle, exclusive
+claim leases, work surface reservations, product UAT approval, automatic
+merge/push/deploy behavior, actor identity policy, the next work item, or
+unrelated feature work before retrospective and closeout evidence is recorded.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -337,8 +338,9 @@ retrospective/improvement disposition are recorded. `BANDIT-030` has a
 structured spec, Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3
 implementation evidence, Stage 7 improvement-evaluation evidence for
 `BANDIT-023` improvement outcome evaluation, Stage 4 review evidence, and
-Stage 5 landing verdict/readiness evidence. The next action is recording the
-local-record landing action for `BANDIT-030`.
+Stage 5 landing verdict/readiness evidence, and local-record landing action
+evidence. The next action is recording retrospective, improvement disposition,
+and closeout context for `BANDIT-030`.
 
 ## Phase Map
 
@@ -651,12 +653,13 @@ Current rule:
 
 Current priority:
 
-1. Record the local-record landing action for `BANDIT-030`.
+1. Record `BANDIT-030` retrospective, improvement disposition, and closeout
+   context updates.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, retrospective, or Phase 8 work until
-   landing action evidence is recorded.
+   reservations, actor identity policy, the next work item, or Phase 8 work
+   until retrospective and closeout evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 
