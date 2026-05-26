@@ -1,12 +1,12 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 
-type SourceValue<T> = {
+export type SourceValue<T> = {
   value: T;
   source: string;
 };
 
-type BootstrapGapSummary = {
+export type BootstrapGapSummary = {
   status: "none" | "open";
   source: string;
   gaps: Array<{
@@ -17,7 +17,7 @@ type BootstrapGapSummary = {
   }>;
 };
 
-type CockpitBlocker = {
+export type CockpitBlocker = {
   kind: "operator_input_required" | "bootstrap_gap";
   status: "blocked";
   summary: string;
@@ -25,19 +25,19 @@ type CockpitBlocker = {
   source_artifacts?: string[];
 };
 
-type GateStatus = {
+export type GateStatus = {
   status: "pass" | "missing";
   source: string;
 };
 
-type StaleEvidence = {
+export type StaleEvidence = {
   kind: "review_evidence" | "review_subject_hash" | "landing_verdict";
   status: "stale";
   source: string;
   basis: "source_drift_status" | "review_subject_hash_status";
 };
 
-type CockpitStatus = {
+export type CockpitStatus = {
   kind: "workflow_cockpit_status";
   authority: "derived_non_canonical";
   current_phase: SourceValue<string>;

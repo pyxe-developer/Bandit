@@ -391,8 +391,14 @@ structured spec is recorded in
 brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
 tests in `test/cockpit-view-model.test.mjs` and `test/cockpit-ui.test.mjs`.
+Stage 3 implementation evidence is recorded in
+`docs/work/BANDIT-033/implementation-evidence.md`; the implementation adds the
+focused attention-first view-model, guarded action, and render-contract modules
+without adding local server/API mode, state-index persistence, scheduler,
+worktree, claim, work surface, deploy, UAT approval, actor identity, PR/CI, or
+unrelated feature behavior.
 
-**Current next action:** Implement Stage 3 for `BANDIT-033` - Attention-First
+**Current next action:** Run Stage 4 review gates for `BANDIT-033` - Attention-First
 Cockpit Visual Shell.
 
 Do not start local server/API mode, state-index persistence, scheduler
@@ -430,9 +436,10 @@ Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening.
 
-**Expected next deliverable:** Stage 3 implementation evidence for
-`BANDIT-033`, after implementing the focused view-model, guarded-action, and
-render-contract modules defined by `docs/work/BANDIT-033/red-evidence.md`.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-033`,
+including pre-PR CodeRabbit review when available, Local Qwen adversarial
+review, review-subject hash, Codex PM disposition, and aggregate review
+evidence.
 
 ## Known Bootstrap Gaps
 
@@ -590,13 +597,10 @@ passing `land-check`, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition for cockpit status coverage hardening.
 The current priority is:
 
-1. Implement the focused `BANDIT-033` presentation boundary from
-   `docs/work/BANDIT-033/red-evidence.md`.
-2. Make `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
-   pass without broadening into server/API, persistence, scheduler, worktree,
-   deployment, product UAT, actor identity, claim lease, work surface
-   reservation, PR/CI, or unrelated feature behavior.
-3. Keep local server/API mode, state-index persistence, scheduler execution,
+1. Run Stage 4 review gates for `BANDIT-033`: pre-PR CodeRabbit review when
+   available, Local Qwen adversarial review, review-subject hash, Codex PM
+   disposition, and aggregate review evidence.
+2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
@@ -608,9 +612,9 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to implement the focused Stage 3
-presentation boundary for `BANDIT-033` from the accepted attention-first design
-artifacts, Stage 1 brief, and Stage 2 RED evidence.
+No operator-owned input is required to run Stage 4 review gates for
+`BANDIT-033` from the accepted attention-first design artifacts, Stage 1 brief,
+Stage 2 RED evidence, and Stage 3 implementation evidence.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
