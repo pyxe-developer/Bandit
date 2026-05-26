@@ -68,19 +68,22 @@ recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-028/red-evidence.md`, implementation evidence is recorded in
 `docs/work/BANDIT-028/implementation-evidence.md`, and its coordination log is
 recorded in `docs/work/BANDIT-028/coordination-log.jsonl` at
-`review_recorded`. The implemented command surface appends
+`landed`. The implemented command surface appends
 runtime-agnostic actor coordination events for claim, handoff, block, complete,
 repair-request, and resume without turning actor events into workflow-state
 authority. Stage 4 review evidence is recorded in
 `docs/work/BANDIT-028/review-evidence.md` with pre-PR CodeRabbit, Local Qwen,
 and aggregate review evidence at current `review_subject_hash`. Stage 5 landing
 verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final
-verdict `safe-to-land`; the next step is the local-record landing action. Do
+verdict `safe-to-land`; local-record landing action evidence is recorded in
+`docs/work/BANDIT-028/landing-action.md`. The next step is retrospective,
+improvement dispositions, and closeout context. Do
 not create unrelated active-work branches,
 Phase 7 improvement engine work, Phase 8 web cockpit implementation, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
 reservations, product UAT approval, automatic merge/push/deploy behavior, or
-unrelated feature work before the local-record landing action is recorded.
+unrelated feature work before `BANDIT-028` closeout is recorded or explicitly
+blocked.
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
 RED evidence is recorded in
@@ -270,8 +273,9 @@ is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
 `review_subject_hash`
 `ca580771b305a102cac661b4049766587c0729cf4fe7352a113c66ed881a4627`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-028/landing-verdict.md` with
-final verdict `safe-to-land`. The next action is the local-record landing
-action.
+final verdict `safe-to-land`. Local-record landing action evidence is recorded
+in `docs/work/BANDIT-028/landing-action.md`; the next action is retrospective,
+improvement dispositions, and closeout context.
 
 ## Phase Map
 
@@ -584,13 +588,13 @@ Current rule:
 
 Current priority:
 
-1. Run `npm run bandit -- land-check BANDIT-028` and record the local-record
-   landing action for `BANDIT-028`.
+1. Record retrospective, improvement dispositions, and closeout context for
+   `BANDIT-028`.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, or Phase 7 evaluation behavior until the local-record landing
-   action is recorded.
+   reservations, or Phase 7 evaluation behavior until `BANDIT-028` is closed
+   out or explicitly blocked.
 
 ## Phase 6: Coordination Primitive
 

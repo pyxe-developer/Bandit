@@ -232,7 +232,7 @@ recorded in `docs/work/BANDIT-028/brief.md`, RED evidence is recorded in
 `docs/work/BANDIT-028/implementation-evidence.md`, and its per-work-item
 coordination log is recorded in
 `docs/work/BANDIT-028/coordination-log.jsonl` at
-`implementation_recorded`. The implemented slice adds a CLI-owned way to append
+`landed`. The implemented slice adds a CLI-owned way to append
 runtime-agnostic actor events for claim, handoff, block, complete,
 repair-request, and resume while preserving the rule that actor events do not
 advance workflow state, emit safe triggers, or satisfy landing/review/UAT
@@ -252,23 +252,25 @@ evidence is recorded in `docs/work/BANDIT-028/review-evidence.md` with current
 CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, Codex PM
 disposition, and durable non-blocking finding routing. Stage 5 landing verdict
 is recorded in `docs/work/BANDIT-028/landing-verdict.md` with final verdict
-`safe-to-land`.
+`safe-to-land`. Local-record landing action evidence is recorded in
+`docs/work/BANDIT-028/landing-action.md`.
 
-**Last completed milestone:** `BANDIT-027` is landed and closed out.
+**Last completed milestone:** `BANDIT-028` local-record landing action is
+recorded.
 
-**Current next action:** Run `npm run bandit -- land-check BANDIT-028` and
-record the local-record landing action for `BANDIT-028`. Do not start Phase 7
+**Current next action:** Record `BANDIT-028` retrospective, improvement
+dispositions, and closeout context. Do not start Phase 7
 Improvement Engine work, Phase 8 Workflow Cockpit
 implementation, Phase 9 dogfood, scheduler execution, worktree lifecycle,
 exclusive claim leases, work surface reservations, automatic merge/push/deploy
-behavior, product UAT approval, or unrelated work before the landing verdict is
-landed and recorded.
+behavior, product UAT approval, or unrelated work before retrospective,
+improvement dispositions, and closeout context are recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
-Current state is `landing_verdict_recorded`; the next action is the
-local-record landing action.
+Current state is `landed`; the next action is retrospective, improvement
+dispositions, and closeout context.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -290,7 +292,8 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
 
-**Expected next deliverable:** Local-record landing action for `BANDIT-028`.
+**Expected next deliverable:** Retrospective, improvement dispositions, and
+closeout context for `BANDIT-028`.
 
 ## Known Bootstrap Gaps
 
@@ -432,11 +435,11 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, so the
 current priority is:
 
-1. Run `npm run bandit -- land-check BANDIT-028` and record the local-record
-   landing action for `BANDIT-028`.
+1. Record retrospective, improvement dispositions, and closeout context for
+   `BANDIT-028`.
 2. Stop before Phase 7, Phase 8, Phase 9,
    scheduler, worktree lifecycle, product UAT, automatic merge/push/deploy, or
-   unrelated work until the local-record landing action is recorded.
+   unrelated work until `BANDIT-028` is closed out or explicitly blocked.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -444,10 +447,9 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-028` local-record
-landing-action step because repo artifacts, review evidence, reviewer outputs,
-PM disposition, and the landing verdict define Codex PM-owned technical
-routing. If live external service access, cost/risk override, policy change,
+No operator-owned input is required to record `BANDIT-028` retrospective,
+improvement dispositions, and closeout context from repo artifacts. If live
+external service access, cost/risk override, policy change,
 PR/merge/push/deploy authority, product direction, or product UAT approval is
 required, halt and ask for that input directly.
 
