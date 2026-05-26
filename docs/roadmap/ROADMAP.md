@@ -260,9 +260,10 @@ verdict `pass` and no findings after the focused repair recorded in
 `docs/work/BANDIT-028/coderabbit-finding-repair.md`. Local Qwen Stage 4
 evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
 `reviewer_verdict: non_blocking`, one open finding about actor and evidence
-reference validation, and no required operator input. The next action is Codex
-PM disposition and durable routing for the Local Qwen finding before aggregate
-Stage 4 evidence.
+reference validation, and no required operator input. Codex PM disposition and
+durable routing for the Local Qwen finding is recorded in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`. The next action is
+aggregate Stage 4 review evidence with current `review_subject_hash`.
 
 ## Phase Map
 
@@ -575,11 +576,10 @@ Current rule:
 
 Current priority:
 
-1. Record Codex PM disposition and durable routing for the `BANDIT-028` Local
-   Qwen non-blocking finding.
-2. Record aggregate Stage 4 review evidence with current `review_subject_hash`
-   only if the PM disposition accepts the finding as non-blocking.
-3. Stop before unrelated active-work branches, scheduler execution, worktree
+1. Record aggregate Stage 4 review evidence with current `review_subject_hash`,
+   CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, PM
+   disposition, and durable non-blocking finding routing.
+2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
    reservations, or Phase 7 evaluation behavior until Stage 4 review evidence

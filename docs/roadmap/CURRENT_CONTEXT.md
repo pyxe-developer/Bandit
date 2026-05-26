@@ -243,14 +243,16 @@ no findings after the focused context repair recorded in
 evidence is recorded in `docs/work/BANDIT-028/local-qwen-review.md` with
 `reviewer_verdict: non_blocking`, one open finding about actor and evidence
 reference validation, `operator_input_status: none_required`, and current
-source head `65af75cd5cf4397ad66afe05285452e8dd5ec915`.
+source head `65af75cd5cf4397ad66afe05285452e8dd5ec915`. Codex PM disposition
+and durable routing for the Local Qwen finding is recorded in
+`docs/work/BANDIT-028/qwen-finding-disposition.md`.
 
 **Last completed milestone:** `BANDIT-027` is landed and closed out.
 
-**Current next action:** Record Codex PM disposition and durable routing for
-the `BANDIT-028` Local Qwen non-blocking finding, then aggregate Stage 4 review
-evidence with current `review_subject_hash` only if the disposition accepts the
-finding as non-blocking. Do not start Phase 7 Improvement Engine work, Phase 8
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-028` with current `review_subject_hash`, CodeRabbit pre-PR pass
+evidence, Local Qwen `non_blocking` state, Codex PM disposition, and durable
+non-blocking finding routing. Do not start Phase 7 Improvement Engine work, Phase 8
 Workflow Cockpit implementation, Phase 9 dogfood, scheduler execution,
 worktree lifecycle, exclusive claim leases, work surface reservations,
 automatic merge/push/deploy behavior, product UAT approval, or unrelated work
@@ -259,8 +261,8 @@ before review evidence is current and recorded.
 ## Active Work
 
 **Active work item:** `BANDIT-028` - Agent Coordination Event Commands.
-Current state is `implementation_recorded`; the next action is Codex PM
-disposition and durable routing for the Stage 4 Local Qwen non-blocking finding.
+Current state is `implementation_recorded`; the next action is aggregate Stage 4
+review evidence with current `review_subject_hash`.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -282,9 +284,8 @@ Non-Blocking Review Finding Chore Routing; `BANDIT-024` - Workflow Cockpit
 Boundary Scope; `BANDIT-025` - Coordination Log Foundation; `BANDIT-026` -
 Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review.
 
-**Expected next deliverable:** Codex PM disposition for the `BANDIT-028` Local
-Qwen non-blocking finding and aggregate Stage 4 review evidence with current
-`review_subject_hash`.
+**Expected next deliverable:** Aggregate Stage 4 review evidence for
+`BANDIT-028` with current `review_subject_hash`.
 
 ## Known Bootstrap Gaps
 
@@ -426,11 +427,10 @@ Use `bandit gaps list` as the routing source before starting new work. All
 currently recorded bootstrap gaps are resolved through `BANDIT-027`, so the
 current priority is:
 
-1. Record Codex PM disposition and durable routing for the `BANDIT-028` Local
-   Qwen non-blocking finding.
-2. Record aggregate Stage 4 review evidence with current `review_subject_hash`
-   only if the PM disposition accepts the finding as non-blocking.
-3. Stop before Phase 7, Phase 8, Phase 9, scheduler, worktree lifecycle,
+1. Record aggregate Stage 4 review evidence with current `review_subject_hash`,
+   CodeRabbit pre-PR pass evidence, Local Qwen `non_blocking` state, PM
+   disposition, and durable non-blocking finding routing.
+2. Stop before Phase 7, Phase 8, Phase 9, scheduler, worktree lifecycle,
    product UAT, automatic merge/push/deploy, or unrelated work until Stage 4
    review evidence is current and recorded.
 
@@ -440,11 +440,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-028` Local Qwen
-finding disposition because repo artifacts and reviewer policy define Codex
-PM-owned technical routing. If live external service access, cost/risk
-override, policy change, PR/merge/push/deploy authority, product direction, or
-product UAT approval is required, halt and ask for that input directly.
+No operator-owned input is required for the current `BANDIT-028` aggregate
+Stage 4 review evidence step because repo artifacts, reviewer outputs, and PM
+disposition define Codex PM-owned technical routing. If live external service
+access, cost/risk override, policy change, PR/merge/push/deploy authority,
+product direction, or product UAT approval is required, halt and ask for that
+input directly.
 
 Actual product UAT approval for future feature slices remains operator-owned
 and must not be inferred by Codex PM or implementation agents.
