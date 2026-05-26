@@ -16,14 +16,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Rerun the `BANDIT-034` Stage 4 CodeRabbit pre-PR
-provider against the repaired source. Focused repair / PM disposition evidence
-for the 3 repaired-source retry findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; current CodeRabbit
-and aggregate review evidence are stale pending provider rerun in
-`docs/work/BANDIT-034/coderabbit-review.md` and
-`docs/work/BANDIT-034/review-evidence.md`. Local Qwen and aggregate Stage 4
-review evidence must wait until CodeRabbit no longer blocks Stage 4.
+**Current next step:** Repair or disposition the current `BANDIT-034` Stage 4
+CodeRabbit pre-PR finding. The repaired-source provider rerun completed at
+source head `77b668c436ce0027783ac57a67dbe61af11df475` with one unresolved
+minor finding in
+`docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css`:
+remove unsupported OpenType feature `"cv11"` from the Instrument Sans
+`font-feature-settings` declaration. Current CodeRabbit blocker evidence is
+recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
+`docs/work/BANDIT-034/review-evidence.md`, and
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Local Qwen and aggregate
+Stage 4 review evidence must wait until CodeRabbit no longer blocks Stage 4.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -122,15 +125,14 @@ mapping. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-034/implementation-evidence.md`; the implementation derives
 guarded action affordances in the view model, makes light queue/context mapping
 explicit and source-linked, and keeps the render layer presentation-only. The
-Stage 4 CodeRabbit pre-PR review gate is currently blocked pending provider
-rerun against repaired source. Stale CodeRabbit evidence is recorded in
-`docs/work/BANDIT-034/coderabbit-review.md`,
+Stage 4 CodeRabbit pre-PR review gate is currently blocked by one unresolved
+minor CSS font-feature finding. Current CodeRabbit blocker evidence is recorded
+in `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Focused repair / PM
-disposition evidence for the original findings and the 3 repaired-source retry
-findings is recorded in
+disposition evidence for earlier findings is recorded in
 `docs/work/BANDIT-034/coderabbit-finding-disposition.md`. The next required
-action is to rerun the CodeRabbit pre-PR provider.
+action is to repair or disposition the current CodeRabbit finding.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
@@ -287,11 +289,12 @@ recorded. `BANDIT-034` has a structured spec and Stage 1 brief for
 `docs/work/BANDIT-034/red-evidence.md`, Stage 3 implementation evidence is
 recorded in `docs/work/BANDIT-034/implementation-evidence.md`, original
 CodeRabbit blocker evidence and repair/disposition evidence are recorded, and
-the stale repaired-source CodeRabbit retry evidence is recorded in
+current CodeRabbit blocker evidence with one unresolved minor CSS font-feature
+finding is recorded in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`; the next required action
-is to rerun the CodeRabbit pre-PR provider before continuing Stage 4.
+is to repair or disposition that CodeRabbit finding before continuing Stage 4.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
@@ -827,8 +830,8 @@ Current rule:
 
 Current priority:
 
-1. Rerun the `BANDIT-034` CodeRabbit pre-PR provider against the repaired
-   source. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
+1. Repair or disposition the current `BANDIT-034` CodeRabbit CSS font-feature
+   finding. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
    CodeRabbit no longer blocks Stage 4.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,

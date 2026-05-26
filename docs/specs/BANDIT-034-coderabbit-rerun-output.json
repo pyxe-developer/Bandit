@@ -1,23 +1,13 @@
 {
-  "sourceHead": "00978d3585fecc3475f2480052e69b1847698be0",
+  "sourceHead": "77b668c436ce0027783ac57a67dbe61af11df475",
   "baseRevision": "origin/main",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
-      "severity": "critical",
-      "status": "resolved",
-      "body": "The repaired-source rerun reported a stale normalized evidence-entry concern. Codex PM dispositioned the provider fixture as historical evidence and recorded source repairs separately; the next provider rerun must replace this fixture with current output."
-    },
-    {
-      "severity": "major",
-      "status": "unresolved",
-      "body": "Restrict TweaksPanel window.parent.postMessage for __edit_mode_set_keys to a trusted parent origin or handshake instead of dispatching tweak edits to '*'."
-    },
-    {
       "severity": "minor",
       "status": "unresolved",
-      "body": "Guard TweaksPanel segAt before calling trackRef.current.getBoundingClientRect() so pointer handlers do not throw if the track ref has been cleared."
+      "body": "In docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css at line 318, remove unsupported OpenType feature \"cv11\" from the font-feature-settings declaration and leave only \"ss01\"."
     }
   ]
 }

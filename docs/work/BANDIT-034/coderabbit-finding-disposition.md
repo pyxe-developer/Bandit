@@ -196,6 +196,11 @@ math with a minimum inner width of `1`.
 
 ## Current Next Action
 
-Rerun the CodeRabbit pre-PR provider against the repaired source before running
-Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
-pass evidence.
+The current repaired-source CodeRabbit retry completed at source head
+`77b668c436ce0027783ac57a67dbe61af11df475` with one unresolved minor finding:
+remove unsupported OpenType feature `"cv11"` from the Instrument Sans
+`font-feature-settings` declaration in
+`docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css`.
+
+Repair or disposition that CodeRabbit finding before running Local Qwen,
+refreshing aggregate review subject evidence, or claiming Stage 4 pass evidence.
