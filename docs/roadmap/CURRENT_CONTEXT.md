@@ -415,19 +415,18 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or disposition the latest `BANDIT-034`
-CodeRabbit pre-PR finding in
-`docs/design/workflow-cockpit/prototype-source/index.html`. The repaired-source
-CodeRabbit rerun completed at source head
-`df55118889d3472e947b395c581eb978c2e45240` with 1 unresolved major finding:
-update Babel standalone from `@7.29.4` to `@7.29.7` and refresh the React,
-ReactDOM, and Babel script integrity attributes to current CDN-published SRI
-hashes while preserving `crossorigin="anonymous"`. Current CodeRabbit blocker
-evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Do not continue Local
-Qwen or claim aggregate Stage 4 review evidence until this finding is repaired
-or dispositioned and CodeRabbit is rerun.
+**Current next action:** Rerun the CodeRabbit pre-PR provider against the
+repaired `BANDIT-034` source. The latest CodeRabbit finding in
+`docs/design/workflow-cockpit/prototype-source/index.html` was repaired by
+updating Babel standalone from `@7.29.4` to `@7.29.7` and refreshing the Babel
+script integrity attribute to the current CDN-published SRI hash while
+preserving `crossorigin="anonymous"`. React `18.3.1` and ReactDOM `18.3.1`
+integrity hashes were recomputed from the pinned unpkg payloads and already
+matched the current file attributes. Repair evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; prior CodeRabbit
+provider evidence is now stale after source repair. Do not continue Local Qwen
+or claim aggregate Stage 4 review evidence until CodeRabbit is rerun and no
+longer blocks Stage 4.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -441,9 +440,10 @@ that authority.
 Stage 4 with structured spec, brief, RED evidence, implementation evidence, and
 completed CodeRabbit blocker evidence recorded. Focused repair / PM disposition
 evidence for earlier CodeRabbit findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; the latest current
-blocker is the CodeRabbit Babel version / script-integrity finding in
-`docs/design/workflow-cockpit/prototype-source/index.html`.
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; the latest Babel
+version / script-integrity finding in
+`docs/design/workflow-cockpit/prototype-source/index.html` is repaired and
+awaits a CodeRabbit rerun.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -636,19 +636,17 @@ recorded. `BANDIT-034` has a structured creation spec, Stage 1 brief, Stage 2
 RED evidence, Stage 3 implementation evidence, completed Stage 4 CodeRabbit
 blocker evidence for the `BANDIT-033-COCKPIT-SHELL-HARDENING` improvement
 chore, focused repair / PM disposition evidence for earlier CodeRabbit
-findings, and current CodeRabbit blocker evidence with two unresolved findings
-recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
+findings, and stale CodeRabbit blocker evidence for the repaired Babel/SRI
+finding recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The source candidate is
 linked to `BANDIT-034` in
 `docs/work/BANDIT-033/qwen-finding-disposition.md`.
 The current priority is:
 
-1. Repair or disposition the latest `BANDIT-034` CodeRabbit finding in
-   `docs/design/workflow-cockpit/prototype-source/index.html`, then rerun the
-   CodeRabbit pre-PR provider against the repaired source. Do not run Local
-   Qwen or claim aggregate Stage 4 pass evidence until CodeRabbit no longer
-   blocks Stage 4.
+1. Rerun the CodeRabbit pre-PR provider against the repaired `BANDIT-034`
+   source. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
+   CodeRabbit no longer blocks Stage 4.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

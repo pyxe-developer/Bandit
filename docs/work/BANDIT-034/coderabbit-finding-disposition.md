@@ -258,6 +258,44 @@ callbacks, avoiding listener teardown/re-add on unrelated focus-overlay renders.
   agreement as `pass` with stale review evidence surfaced.
 - `git diff --check` passed.
 
+## Babel/SRI Finding Repair
+
+The latest CodeRabbit rerun completed at source head
+`df55118889d3472e947b395c581eb978c2e45240` with one unresolved major finding.
+
+### Babel standalone version and script integrity
+
+**Finding:** Update `docs/design/workflow-cockpit/prototype-source/index.html`
+to use Babel standalone `@7.29.7` and refresh the React, ReactDOM, and Babel
+script integrity attributes to current CDN-published SRI hashes while
+preserving `crossorigin="anonymous"`.
+
+**Disposition:** repaired.
+
+**Evidence:** `index.html` now loads
+`https://unpkg.com/@babel/standalone@7.29.7/babel.min.js` with the current
+CDN-published SHA-384 integrity hash
+`sha384-ezQ6HS3FLspd9te19o2McUV6FAK091+GG7KO54f/R8DKgCDi7fULhapNrd5LY+vG`.
+React `18.3.1` and ReactDOM `18.3.1` were recomputed from their pinned unpkg
+payloads and already matched the current file attributes, so their script URLs,
+integrity attributes, and `crossorigin="anonymous"` settings remain unchanged.
+
+## Current Repair Verification
+
+- Recomputed SHA-384 SRI hashes from the pinned unpkg payloads for React
+  `18.3.1`, ReactDOM `18.3.1`, and Babel standalone `7.29.7`; React and
+  ReactDOM matched the existing attributes, and Babel matched the repaired
+  attribute.
+- `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
+  passed with 12 tests.
+- `npm test` passed with 255 tests.
+- `npm run typecheck` passed.
+- `npm run bandit -- validate` passed.
+- `npm run bandit -- cockpit status --json` passed and reported the next action
+  agreement as `pass` with stale review evidence surfaced for the repaired
+  Stage 4 evidence.
+- `git diff --check` passed.
+
 ## Current Next Action
 
 Rerun the CodeRabbit pre-PR provider against the repaired source before running

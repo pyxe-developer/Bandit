@@ -16,19 +16,18 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Repair or disposition the latest `BANDIT-034`
-CodeRabbit pre-PR finding in
-`docs/design/workflow-cockpit/prototype-source/index.html`. The repaired-source
-CodeRabbit rerun completed at source head
-`df55118889d3472e947b395c581eb978c2e45240` with 1 unresolved major finding:
-update Babel standalone from `@7.29.4` to `@7.29.7` and refresh the React,
-ReactDOM, and Babel script integrity attributes to current CDN-published SRI
-hashes while preserving `crossorigin="anonymous"`. Current CodeRabbit blocker
-evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
-`docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Local Qwen and aggregate
-Stage 4 review evidence must wait until this finding is repaired or
-dispositioned and CodeRabbit is rerun.
+**Current next step:** Rerun the CodeRabbit pre-PR provider against the
+repaired `BANDIT-034` source. The latest CodeRabbit finding in
+`docs/design/workflow-cockpit/prototype-source/index.html` was repaired by
+updating Babel standalone from `@7.29.4` to `@7.29.7` and refreshing the Babel
+script integrity attribute to the current CDN-published SRI hash while
+preserving `crossorigin="anonymous"`. React `18.3.1` and ReactDOM `18.3.1`
+integrity hashes were recomputed from the pinned unpkg payloads and already
+matched the current file attributes. Repair evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`; prior CodeRabbit
+provider evidence is now stale after source repair. Local Qwen and aggregate
+Stage 4 review evidence must wait until CodeRabbit is rerun and no longer
+blocks Stage 4.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -127,18 +126,15 @@ mapping. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-034/implementation-evidence.md`; the implementation derives
 guarded action affordances in the view model, makes light queue/context mapping
 explicit and source-linked, and keeps the render layer presentation-only. The
-Stage 4 CodeRabbit pre-PR review gate is blocked by one current-source finding
-in `docs/design/workflow-cockpit/prototype-source/index.html`: update Babel
-standalone from `@7.29.4` to `@7.29.7` and refresh the React, ReactDOM, and
-Babel script integrity attributes to current CDN-published SRI hashes while
-preserving `crossorigin="anonymous"`. Current CodeRabbit blocker evidence is
-recorded in `docs/work/BANDIT-034/coderabbit-review.md`,
+latest Stage 4 CodeRabbit pre-PR review finding in
+`docs/design/workflow-cockpit/prototype-source/index.html` is repaired, and
+prior CodeRabbit provider evidence is stale after source repair. Current
+repair / PM disposition evidence is recorded in
+`docs/work/BANDIT-034/coderabbit-finding-disposition.md`, with prior blocker
+evidence in `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
-`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Focused repair / PM
-disposition evidence for prior findings is recorded in
-`docs/work/BANDIT-034/coderabbit-finding-disposition.md`. The next required
-action is to repair or disposition the current CodeRabbit finding before
-rerunning CodeRabbit.
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The next required action
+is to rerun CodeRabbit against the repaired source.
 Do not start local
 server/API mode, state-index persistence, scheduler execution, worktree
 lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
@@ -295,11 +291,12 @@ recorded. `BANDIT-034` has a structured spec and Stage 1 brief for
 `docs/work/BANDIT-034/red-evidence.md`, Stage 3 implementation evidence is
 recorded in `docs/work/BANDIT-034/implementation-evidence.md`, original
 CodeRabbit blocker evidence and repair/disposition evidence are recorded, and
-current CodeRabbit blocker evidence with two unresolved findings is recorded in
+stale CodeRabbit blocker evidence for the repaired Babel/SRI finding is
+recorded in
 `docs/work/BANDIT-034/coderabbit-review.md`,
 `docs/work/BANDIT-034/review-evidence.md`, and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`; the next required action
-is to repair or disposition those CodeRabbit findings before continuing Stage 4.
+is to rerun CodeRabbit before continuing Stage 4.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
@@ -835,11 +832,9 @@ Current rule:
 
 Current priority:
 
-1. Repair or disposition the latest `BANDIT-034` CodeRabbit finding in
-   `docs/design/workflow-cockpit/prototype-source/index.html`, then rerun the
-   CodeRabbit pre-PR provider against the repaired source. Do not run Local
-   Qwen or claim aggregate Stage 4 pass evidence until CodeRabbit no longer
-   blocks Stage 4.
+1. Rerun the CodeRabbit pre-PR provider against the repaired `BANDIT-034`
+   source. Do not run Local Qwen or claim aggregate Stage 4 pass evidence until
+   CodeRabbit no longer blocks Stage 4.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

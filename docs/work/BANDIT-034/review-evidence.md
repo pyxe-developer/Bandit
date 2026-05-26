@@ -40,9 +40,11 @@ verification_evidence:
   - coderabbit review --agent --base origin/main -c AGENTS.md --no-color was rerun against repaired source head df55118889d3472e947b395c581eb978c2e45240 and completed with 1 unresolved major finding.
   - docs/specs/BANDIT-034-coderabbit-rerun-output.json now records the normalized completed provider output from the current repaired-source rerun.
   - npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base origin/main --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json recorded docs/work/BANDIT-034/coderabbit-review.md with coderabbit_verdict blocker, findings_status unresolved, source_drift_status current, and review_state completed.
+  - docs/work/BANDIT-034/coderabbit-finding-disposition.md now records focused repair evidence for the current Babel standalone version / script-integrity finding; CodeRabbit provider evidence is stale after source repair and must be rerun before Stage 4 can proceed.
+  - Current repair verification passed: recomputed pinned CDN SHA-384 SRI hashes, node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs, npm test, npm run typecheck, npm run bandit -- validate, npm run bandit -- cockpit status --json, and git diff --check.
 coderabbit_state: blocker
 coderabbit_replacement_evidence:
-  - Real pre-PR CodeRabbit provider evidence was rerun against the repaired source and completed with 1 unresolved major finding: update docs/design/workflow-cockpit/prototype-source/index.html to use Babel standalone @7.29.7 and refresh the React, ReactDOM, and Babel script integrity attributes to current CDN-published SRI hashes while preserving crossorigin="anonymous". No CodeRabbit pass is claimed; Stage 4 remains blocked until this finding is repaired or dispositioned and CodeRabbit is rerun.
+  - Real pre-PR CodeRabbit provider evidence was rerun against the repaired source and completed with 1 unresolved major finding: update docs/design/workflow-cockpit/prototype-source/index.html to use Babel standalone @7.29.7 and refresh the React, ReactDOM, and Babel script integrity attributes to current CDN-published SRI hashes while preserving crossorigin="anonymous". The finding has been repaired; no CodeRabbit pass is claimed because provider evidence is stale after the source repair. Stage 4 remains blocked until CodeRabbit is rerun against the repaired source.
 local_qwen_state: not_applicable
 local_qwen_replacement_evidence:
   - Local Qwen was not run because CodeRabbit pre-PR review still blocks Stage 4; no aggregate pass can be claimed until CodeRabbit completes without blocker evidence.
@@ -50,12 +52,12 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: BANDIT-034 is a bounded internal cockpit-shell hardening chore over presentation-only view-model and render surfaces. It introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, or external service integration. No smell trigger requires escalated reviewer routing before the blocking CodeRabbit findings are repaired or dispositioned.
 pm_disposition: blocker
-pm_disposition_rationale: Stage 4 remains blocked by the latest CodeRabbit major finding in docs/design/workflow-cockpit/prototype-source/index.html. Repair or disposition the Babel version / script-integrity finding before running Local Qwen, refreshing review-subject hash if needed, or claiming aggregate PM disposition.
+pm_disposition_rationale: The latest CodeRabbit major finding in docs/design/workflow-cockpit/prototype-source/index.html has been repaired, but Stage 4 remains blocked until CodeRabbit is rerun against the repaired source. Do not run Local Qwen, refresh aggregate review-subject evidence, or claim aggregate PM disposition until CodeRabbit no longer blocks.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
-source_drift_status: current
+source_drift_status: stale
 bootstrap_gaps:
   - none
