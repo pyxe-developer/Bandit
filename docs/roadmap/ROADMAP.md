@@ -113,15 +113,18 @@ structured creation spec is recorded in
 brief is recorded in `docs/work/BANDIT-030/brief.md`. Stage 2
 RED/evaluation-design evidence is recorded in
 `docs/specs/BANDIT-030-red-evidence.json` and
-`docs/work/BANDIT-030/red-evidence.md`. The next step is to implement or record
-the minimal Stage 3 evaluation path that makes the `BANDIT-023` retrospective
-improvement metadata evaluable, then create
-`docs/work/BANDIT-030/improvement-evaluation.md` from the Stage 4 outcomes in
-`BANDIT-025`, `BANDIT-028`, and `BANDIT-029`. Do not create unrelated
-active-work branches, Phase 8 web cockpit implementation, scheduler execution,
-worktree lifecycle, exclusive claim leases, work surface reservations, product
-UAT approval, automatic merge/push/deploy behavior, actor identity policy, or
-unrelated feature work before that Phase 7 evaluation work item is closed out.
+`docs/work/BANDIT-030/red-evidence.md`. Stage 3 implementation evidence is
+recorded in `docs/specs/BANDIT-030-implementation-evidence.json` and
+`docs/work/BANDIT-030/implementation-evidence.md`. Stage 7 evaluation evidence
+is recorded in `docs/work/BANDIT-030/improvement-evaluation.md` with result
+`effective` and decision `keep`. The next step is to run Stage 4 review gates
+for `BANDIT-030`, including pre-PR CodeRabbit review, Local Qwen adversarial
+review, aggregate review evidence, and review-subject-hash freshness. Do not
+create unrelated active-work branches, Phase 8 web cockpit implementation,
+scheduler execution, worktree lifecycle, exclusive claim leases, work surface
+reservations, product UAT approval, automatic merge/push/deploy behavior, actor
+identity policy, landing verdict, landing action, or unrelated feature work
+before Stage 4 is current and dispositioned.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -323,11 +326,10 @@ evidence recorded in
 `docs/work/BANDIT-029/`. Stage 5 landing verdict and landing readiness
 verification are recorded. Local-record landing action evidence and Stage 6
 retrospective/improvement disposition are recorded. `BANDIT-030` has a
-structured spec, Stage 1 brief, and Stage 2 RED/evaluation-design evidence for
-`BANDIT-023` improvement outcome evaluation. The next action is implementing or
-recording the minimal Stage 3 evaluation path that makes the `BANDIT-023`
-retrospective improvement metadata evaluable, then creating
-`docs/work/BANDIT-030/improvement-evaluation.md`.
+structured spec, Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3
+implementation evidence, and Stage 7 improvement-evaluation evidence for
+`BANDIT-023` improvement outcome evaluation. The next action is running Stage 4
+review gates for `BANDIT-030`.
 
 ## Phase Map
 
@@ -640,15 +642,14 @@ Current rule:
 
 Current priority:
 
-1. Implement or record the minimal Stage 3 evaluation path for `BANDIT-030`,
-   making the due `BANDIT-023` non-blocking review-finding routing hypothesis
-   evaluable against the Stage 4 outcomes from `BANDIT-025`, `BANDIT-028`, and
-   `BANDIT-029`, then create `docs/work/BANDIT-030/improvement-evaluation.md`.
+1. Run Stage 4 review gates for `BANDIT-030`, including pre-PR CodeRabbit
+   review, Local Qwen adversarial review, aggregate review evidence, and
+   review-subject-hash freshness.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, cockpit implementation, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, or Phase 8 work until that Phase 7
-   evaluation step is explicitly scoped.
+   reservations, actor identity policy, landing verdict, landing action, or
+   Phase 8 work until Stage 4 is current and dispositioned.
 
 ## Phase 6: Coordination Primitive
 

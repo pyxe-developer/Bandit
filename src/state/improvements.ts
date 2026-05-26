@@ -217,7 +217,7 @@ function readCandidatesFromArtifact(artifact: Artifact): CandidateRecord[] {
 
 function splitCandidateSections(content: string) {
   const matches = Array.from(content.matchAll(/^### Chore Candidate:\s+`([^`]+)`\s*$/gm));
-  return matches.flatMap((match, index) => {
+  const explicitCandidates = matches.flatMap((match, index) => {
     const id = match[1]?.trim();
     if (!id || match.index === undefined) {
       return [];
@@ -229,6 +229,42 @@ function splitCandidateSections(content: string) {
       {
         id,
         content: content.slice(match.index, endIndex)
+      }
+    ];
+  });
+
+  return explicitCandidates.concat(splitLegacyImprovementSections(content));
+}
+
+function splitLegacyImprovementSections(content: string) {
+  const matches = Array.from(content.matchAll(/^## Improvement Chores\s*$/gm));
+  return matches.flatMap((match, index) => {
+    if (match.index === undefined) {
+      return [];
+    }
+
+    const sectionBodyStart = match.index + match[0].length;
+    const nextImprovementSectionStart = matches[index + 1]?.index ?? content.length;
+    const nextHeadingOffset = content.slice(sectionBodyStart).search(/^## /m);
+    const nextHeadingStart =
+      nextHeadingOffset === -1 ? content.length : sectionBodyStart + nextHeadingOffset;
+    const sectionEnd = Math.min(nextImprovementSectionStart, nextHeadingStart);
+    const section = content.slice(match.index, sectionEnd);
+
+    if (/^### Chore Candidate:/m.test(section)) {
+      return [];
+    }
+
+    const fields = parseMetadataFields(section);
+    const id = readScalar(fields, "linked_work_item");
+    if (!id || readScalar(fields, "outcome") !== "pending") {
+      return [];
+    }
+
+    return [
+      {
+        id,
+        content: section
       }
     ];
   });

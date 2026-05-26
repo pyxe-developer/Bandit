@@ -290,34 +290,34 @@ structured creation spec is recorded in
 brief is recorded in `docs/work/BANDIT-030/brief.md`. Stage 2
 RED/evaluation-design evidence is recorded in
 `docs/specs/BANDIT-030-red-evidence.json` and
-`docs/work/BANDIT-030/red-evidence.md`. The work item evaluates the
-`BANDIT-023` hypothesis against Stage 4 outcomes from `BANDIT-025`,
-`BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit, scheduler, worktree
-lifecycle, automatic merge/push/deploy, product UAT, actor identity policy,
-claim lease, work surface reservation, or unrelated work starts.
+`docs/work/BANDIT-030/red-evidence.md`. Stage 3 implementation evidence is
+recorded in `docs/specs/BANDIT-030-implementation-evidence.json` and
+`docs/work/BANDIT-030/implementation-evidence.md`. The Stage 7 improvement
+evaluation is recorded in `docs/work/BANDIT-030/improvement-evaluation.md` with
+result `effective` and decision `keep` for the `BANDIT-023` routing policy.
+The work item evaluates the `BANDIT-023` hypothesis against Stage 4 outcomes
+from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029` before Phase 8 cockpit,
+scheduler, worktree lifecycle, automatic merge/push/deploy, product UAT, actor
+identity policy, claim lease, work surface reservation, or unrelated work
+starts.
 
-**Last completed milestone:** `BANDIT-030` Stage 2 RED/evaluation-design
-evidence is recorded by `bandit artifact create` with lifecycle evidence in
-`.bandit/events.jsonl`.
+**Last completed milestone:** `BANDIT-030` Stage 3 evaluator compatibility and
+Stage 7 improvement-evaluation evidence are recorded, with lifecycle evidence
+for implementation evidence in `.bandit/events.jsonl`.
 
-**Current next action:** Implement or record the minimal Stage 3 evaluation
-path that makes the `BANDIT-023` retrospective improvement metadata evaluable,
-then create `docs/work/BANDIT-030/improvement-evaluation.md` with observed
-metric evidence from `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`, baseline
-comparison to `BANDIT-015`/`BANDIT-022`, result, keep/revise/revert/double_down
-decision, rationale, and routing action. Validate with
-`npm run bandit -- improvements evaluate` when the candidate identity is
-command-supported; otherwise record the explicit bootstrap/manual validation
-rationale before review or closeout evidence. Stage 2 found that
-`npm run bandit -- improvements candidates --json` currently reports later
-queued candidates but does not list the original `BANDIT-023` improvement
-metadata because it is recorded under the retrospective Improvement Chores
-section rather than a later Chore Candidate section.
+**Current next action:** Run Stage 4 review gates for `BANDIT-030`, including
+pre-PR CodeRabbit review, Local Qwen adversarial review, aggregate review
+evidence, and review-subject-hash freshness. Do not create landing verdict,
+landing action, retrospective, Phase 8 cockpit, scheduler, worktree lifecycle,
+automatic merge/push/deploy, product UAT, actor identity policy, claim lease,
+work surface reservation, or unrelated work before Stage 4 evidence is current
+and dispositioned.
 
 ## Active Work
 
 **Active work item:** `BANDIT-030` - Evaluate Non-Blocking Review Finding
-Routing. Status: RED/evaluation-design recorded.
+Routing. Status: Stage 3 implementation and Stage 7 evaluation evidence
+recorded; Stage 4 review is next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -341,9 +341,9 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 `BANDIT-028` - Agent Coordination Event Commands; `BANDIT-029` - Improvement
 Evaluation Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-030/improvement-evaluation.md`
-and, if needed, `docs/work/BANDIT-030/implementation-evidence.md` for the
-minimal evaluator compatibility or explicit manual-validation path.
+**Expected next deliverable:** `docs/work/BANDIT-030/coderabbit-review.md`,
+`docs/work/BANDIT-030/local-qwen-review.md`, and
+`docs/work/BANDIT-030/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -488,17 +488,16 @@ currently recorded bootstrap gaps are resolved through `BANDIT-027`, and
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
 verdict/readiness evidence, local-record landing action evidence, and Stage 6
 retrospective/improvement disposition. `BANDIT-030` has a structured spec,
-Stage 1 brief, and Stage 2 RED/evaluation-design evidence. The current priority
-is:
+Stage 1 brief, Stage 2 RED/evaluation-design evidence, Stage 3 implementation
+evidence, and Stage 7 improvement-evaluation evidence. The current priority is:
 
-1. Implement or record the minimal Stage 3 evaluation path that makes the
-   `BANDIT-023` retrospective improvement metadata evaluable, then create
-   `docs/work/BANDIT-030/improvement-evaluation.md` from the Stage 4 outcomes
-   in `BANDIT-025`, `BANDIT-028`, and `BANDIT-029`.
+1. Run Stage 4 review gates for `BANDIT-030`, including pre-PR CodeRabbit
+   review, Local Qwen adversarial review, aggregate review evidence, and
+   review-subject-hash freshness.
 2. Stop before Phase 8, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
-   reservations, actor identity policy, or unrelated work until that Phase 7
-   evaluation work item is closed out.
+   reservations, actor identity policy, landing verdict, landing action, or
+   unrelated work until Stage 4 is current and dispositioned.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

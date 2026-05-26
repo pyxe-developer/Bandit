@@ -15,3 +15,4 @@
 {"type":"work_item_created","work_item":"BANDIT-029","message":"Created work item BANDIT-029 from docs/specs/BANDIT-029-improvement-evaluation-foundation.json"}
 {"type":"work_item_created","work_item":"BANDIT-030","message":"Created work item BANDIT-030 from docs/specs/BANDIT-030-nonblocking-review-routing-evaluation.json"}
 {"type":"artifact_created","work_item":"BANDIT-030","message":"Created red_evidence artifact at docs/work/BANDIT-030/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-030","message":"Created implementation_evidence artifact at docs/work/BANDIT-030/implementation-evidence.md"}

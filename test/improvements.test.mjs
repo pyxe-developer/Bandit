@@ -40,6 +40,54 @@ test("improvements candidates discovers complete repo-native improvement metadat
   ]);
 });
 
+test("improvements candidates discovers retrospective improvement metadata", async () => {
+  const repo = await createImprovementRepo();
+  await writeRetrospectiveImprovementMetadata(repo);
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.deepEqual(report.candidates, [
+    {
+      id: "BANDIT-023",
+      source_work_item: "BANDIT-022",
+      status: "resolved",
+      outcome: "pending",
+      metric: "adversarial_repair_count",
+      baseline: "BANDIT-015 required multiple Local Qwen reruns before the operator ended a recursive Stage 4 loop; BANDIT-022 landed with two Local Qwen non_blocking hardening findings queued as chore candidates.",
+      expected_direction: "decrease repeated review loops caused only by future-hardening findings while keeping blocker finding acceptance unchanged.",
+      evaluation_window: "Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first.",
+      source_artifacts: [
+        "docs/work/BANDIT-022/local-qwen-review.md",
+        "docs/work/BANDIT-022/review-evidence.md",
+        "docs/work/BANDIT-022/follow-up-chores.md",
+        "docs/work/BANDIT-023/brief.md",
+        "docs/work/BANDIT-023/review-evidence.md"
+      ]
+    }
+  ]);
+});
+
+test("improvements candidates ignores completed retrospective outcomes", async () => {
+  const repo = await createImprovementRepo();
+  await writeCompletedRetrospectiveOutcome(repo);
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.deepEqual(report.candidates, []);
+});
+
 test("improvements candidates fails closed for missing required metadata", async () => {
   const repo = await createImprovementRepo();
   await writeCandidateDisposition(repo, {
@@ -191,6 +239,63 @@ expected_direction: decrease
 evaluation_window: when actor identity policy, coordination event validation, claim leases, or work surface reservation work is next touched
 status: queued_candidate
 linked_work_item: none_yet
+outcome: pending
+`,
+    "utf8"
+  );
+}
+
+async function writeCompletedRetrospectiveOutcome(repo) {
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-017/retrospective.md",
+    `# BANDIT-017 Retrospective
+
+## Improvement Chores
+
+source_work_item: BANDIT-016
+source_gap: BANDIT-GAP-LANDING-GATE-COMPLEXITY-HARDENING
+linked_work_item: BANDIT-017
+hypothesis: Extracting Stage 4 logic will reduce landing-gate complexity.
+metric: Existing landing-gate behavior remains covered while complexity decreases.
+baseline: BANDIT-016 had persistent non_blocking complexity findings.
+evaluation_window: BANDIT-017 closeout.
+status: resolved
+outcome: keep
+`
+  );
+}
+
+async function writeRetrospectiveImprovementMetadata(repo) {
+  await writeWorkBrief(repo, "BANDIT-022", "Heartbeat Chore Agent Contract", "Closed");
+  await writeWorkBrief(repo, "BANDIT-023", "Non-Blocking Review Finding Chore Routing", "Closed");
+  await writeArtifact(repo, "docs/work/BANDIT-022/local-qwen-review.md", "# Local Qwen\n");
+  await writeArtifact(repo, "docs/work/BANDIT-022/review-evidence.md", "# Review Evidence\n");
+  await writeArtifact(repo, "docs/work/BANDIT-022/follow-up-chores.md", "# Follow-Up Chores\n");
+  await writeArtifact(repo, "docs/work/BANDIT-023/review-evidence.md", "# Review Evidence\n");
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-023/retrospective.md",
+    `# BANDIT-023 Retrospective
+
+## Improvement Chores
+
+source_work_item: BANDIT-022
+source_gap: BANDIT-GAP-NONBLOCKING-REVIEW-FINDING-ROUTING
+linked_work_item: BANDIT-023
+origin: operator_observation
+source_artifacts:
+  - docs/work/BANDIT-022/local-qwen-review.md
+  - docs/work/BANDIT-022/review-evidence.md
+  - docs/work/BANDIT-022/follow-up-chores.md
+  - docs/work/BANDIT-023/brief.md
+  - docs/work/BANDIT-023/review-evidence.md
+hypothesis: Explicit non-blocking review-finding routing will reduce adversarial-review churn while preserving fail-closed behavior for real blockers.
+metric: adversarial_repair_count
+baseline: BANDIT-015 required multiple Local Qwen reruns before the operator ended a recursive Stage 4 loop; BANDIT-022 landed with two Local Qwen non_blocking hardening findings queued as chore candidates.
+expected_direction: decrease repeated review loops caused only by future-hardening findings while keeping blocker finding acceptance unchanged.
+evaluation_window: Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first.
+status: resolved
 outcome: pending
 `,
     "utf8"
