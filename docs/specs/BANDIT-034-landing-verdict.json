@@ -1,0 +1,19 @@
+{
+  "kind": "landing_verdict",
+  "work_item": "BANDIT-034",
+  "contract_version": "1",
+  "source_head": "d0d95eb9b75aa89492b787a4b1172d09777653cc",
+  "review_evidence": "docs/work/BANDIT-034/review-evidence.md",
+  "tests_status": "pass",
+  "clean_code_status": "pass",
+  "coderabbit_state": "pass",
+  "local_qwen_state": "pass",
+  "escalated_review_state": "not_applicable",
+  "uat_status": "not_applicable",
+  "source_drift_status": "current",
+  "operator_input_status": "none_required",
+  "landing_agent_state": "pass",
+  "landing_agent_replacement_evidence": "not_applicable",
+  "final_verdict": "safe-to-land",
+  "rationale": "BANDIT-034 is safe to land as a bounded Phase 8 improvement chore because it implements the routed BANDIT-033 cockpit-shell hardening follow-up while preserving CLI authority, repo-native source links, read-only cockpit output, and the presentation-only/non-canonical boundary. Focused cockpit view-model and UI tests, the full test suite, typecheck, Bandit validation, cockpit status JSON, CodeRabbit pre-PR review, Local Qwen review, aggregate Stage 4 review evidence, review-subject hash 3d7ef63535be9918eb0257c00e4a5a8f638527a66ae37ee4c8d320c6ceb2e0fb, and git diff --check are current and passing or already recorded. Clean-code compliance is pass because guarded action affordances now have one derived presentation source, light queue/context mapping is explicit and source-linked, render code consumes pre-derived state, failure and refusal semantics remain explicit, and no unrelated refactors or hidden state authority were introduced. Product UAT is not applicable for this non-product improvement chore because it does not ship a browser-clickable operator surface, local server, API mode, or served web application. No escalated reviewer is required because the work introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, security-sensitive data flow, external service integration, policy change, business tradeoff, cost/risk override, or unrelated feature behavior."
+}

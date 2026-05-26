@@ -218,6 +218,21 @@
       "rationale": "BANDIT-027 added a CLI-owned pre-PR CodeRabbit review path for local diffs, fixture-backed provider behavior for deterministic tests, fail-closed refusal evidence for missing CLI/auth, provider timeout, malformed output, stale source, and actionable findings, Stage 4 aggregate review consumption of current pre-PR CodeRabbit pass evidence, and preservation of the existing PR-backed live review path.",
       "verification_target": "docs/work/BANDIT-027/retrospective.md",
       "next_action": "Use bandit coderabbit-review pre-pr <work-item-id> --base <revision> before PR creation when local diffs are the Stage 4 CodeRabbit review subject; evaluate the improvement outcome over the next three Stage 4 Bandit work items and the first later PR-backed landing."
+    },
+    {
+      "id": "BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD",
+      "title": "Artifact create landing verdict omits work item field",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-034",
+      "source_artifacts": [
+        "docs/specs/BANDIT-034-landing-verdict.json",
+        "docs/work/BANDIT-034/landing-verdict.md"
+      ],
+      "linked_work_item": null,
+      "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
+      "verification_target": null,
+      "next_action": "After BANDIT-034 lands and closes out, create the next bootstrap-gap chore to make artifact-create landing verdict rendering include the required work_item field and cover it with a validation test."
     }
   ]
 }
