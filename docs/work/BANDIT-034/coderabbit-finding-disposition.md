@@ -314,32 +314,65 @@ findings.
 text in `screens.jsx` with dynamic content derived from app context or a prop,
 with a fallback such as `Create the next work item`.
 
-**Disposition:** pending repair or explicit PM disposition.
+**Disposition:** repaired.
+
+**Evidence:** `screens.jsx` now derives the home-screen next-action title,
+summary, and command from `data.context.currentNextAction` /
+`data.context.nextAction`, falls back to item-level next-action data, and uses a
+generic `Create the next work item` fallback when no dynamic value is available.
 
 ### Malformed cockpit globals
 
 **Finding:** Guard missing or malformed `window.COCKPIT_TWEAK_DEFAULTS` and
 `COCKPIT_DATA` in `app.jsx` before calling `useTweaks` or `Object.keys`.
 
-**Disposition:** pending repair or explicit PM disposition.
+**Disposition:** repaired.
+
+**Evidence:** `app.jsx` now normalizes `COCKPIT_DATA` and tweak defaults before
+calling `useTweaks` or deriving item options. `screens.jsx` also supplies a
+fallback work-item shape so missing item entries render a fail-closed missing
+state instead of throwing.
 
 ### Missing queue-band guard
 
 **Finding:** Guard `queueBand` before mapping `queueBand.rows` in
 `screens.jsx` so the queue screen does not throw when the band is absent.
 
-**Disposition:** pending repair or explicit PM disposition.
+**Disposition:** repaired.
+
+**Evidence:** `screens.jsx` now derives `queueRows` only when the queue band has
+an array of rows and renders an explicit missing-queue empty state when the
+payload has no queue rows.
 
 ### Design-canvas trusted sender validation
 
 **Finding:** Validate message sender source and origin in `design-canvas.jsx`
 before handling `__dc_set_zoom` or `__dc_probe` messages.
 
-**Disposition:** pending repair or explicit PM disposition.
+**Disposition:** repaired.
+
+**Evidence:** `design-canvas.jsx` now rejects host-control messages unless the
+message source is `window.parent` and the origin matches the trusted parent
+origin, with the existing file/sandbox `null` origin path handled explicitly.
+
+## Latest Four-Finding Repair Verification
+
+- `node --test test/cockpit-view-model.test.mjs test/cockpit-ui.test.mjs`
+  passed with 12 tests.
+- `npm test` passed with 255 tests.
+- `npm run typecheck` passed.
+- `npm run bandit -- validate` passed.
+- `npm run bandit -- cockpit status --json` passed and reported next-action
+  agreement as `pass` with stale review evidence surfaced.
+- `npm run bandit -- gaps list` passed and reported all bootstrap gaps resolved.
+- `git diff --check` passed.
+- Static prototype smoke opened at `http://127.0.0.1:4178/index.html`; runtime
+  console showed only expected optional 404s for `favicon.ico` and the
+  absent `.design-canvas.state.json` sidecar.
 
 ## Next Action
 
-Repair or explicitly disposition the latest four CodeRabbit findings before
+Rerun the scoped CodeRabbit pre-PR provider against the repaired source before
 running Local Qwen, refreshing aggregate review-subject evidence, or claiming
 Stage 4 pass evidence.
 

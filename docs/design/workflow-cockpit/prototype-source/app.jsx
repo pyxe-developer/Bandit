@@ -21,14 +21,65 @@ const {
   COCKPIT_DATA
 } = window;
 
+const FALLBACK_TWEAK_DEFAULTS = {
+  activeItem: "BANDIT-034",
+  confidence: "clean",
+  density: "calm",
+  accent: "coral"
+};
+
+const EMPTY_COCKPIT_DATA = {
+  context: {},
+  items: {},
+  bands: [],
+  smells: [],
+  improvements: [],
+  inbox: [],
+  stream: []
+};
+
+function isRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function normalizeCockpitData(value) {
+  if (!isRecord(value)) return EMPTY_COCKPIT_DATA;
+
+  return {
+    ...EMPTY_COCKPIT_DATA,
+    ...value,
+    context: isRecord(value.context) ? value.context : {},
+    items: isRecord(value.items) ? value.items : {},
+    bands: Array.isArray(value.bands) ? value.bands : [],
+    smells: Array.isArray(value.smells) ? value.smells : [],
+    improvements: Array.isArray(value.improvements) ? value.improvements : [],
+    inbox: Array.isArray(value.inbox) ? value.inbox : [],
+    stream: Array.isArray(value.stream) ? value.stream : []
+  };
+}
+
+function normalizeTweakDefaults(value, data) {
+  const firstItem = Object.keys(data.items)[0] || FALLBACK_TWEAK_DEFAULTS.activeItem;
+  const candidate = isRecord(value) ? value : {};
+  const activeItem = typeof candidate.activeItem === "string" && data.items[candidate.activeItem]
+    ? candidate.activeItem
+    : firstItem;
+
+  return {
+    ...FALLBACK_TWEAK_DEFAULTS,
+    ...candidate,
+    activeItem
+  };
+}
+
 function App() {
-  const [tweak, setTweak] = useTweaks(window.COCKPIT_TWEAK_DEFAULTS);
-  const data = COCKPIT_DATA;
+  const data = normalizeCockpitData(COCKPIT_DATA);
+  const [tweak, setTweak] = useTweaks(normalizeTweakDefaults(window.COCKPIT_TWEAK_DEFAULTS, data));
 
   // Item options for the activeItem tweak — labels come from real data.
   const itemOptions = Object.keys(data.items).map((id) => ({
     value: id,
-    label: id + " · " + (data.items[id].attention)
+    label: id + " · " + (data.items[id]?.attention || "unknown")
   }));
 
   return (

@@ -26,11 +26,65 @@ const {
   makeConfidenceTransform, shortPath
 } = window;
 
+const FALLBACK_WORK_ITEM = {
+  id: "UNKNOWN",
+  title: "Missing work item",
+  type: "chore",
+  phase: "unknown",
+  stage: "missing",
+  attention: "blocked",
+  summary: "The cockpit payload did not include this work item.",
+  nextAction: {
+    command: "bandit validate",
+    eligibility: "blocked",
+    blockedReason: "Missing cockpit work item data.",
+    ownerRole: "Codex PM"
+  },
+  assignedPm: "—",
+  created: "—",
+  sourcePaths: [],
+  gates: [],
+  uat: { state: "n/a", note: "Missing work item data." },
+  auto: { eligible: false, reasons: ["Missing cockpit work item data"] }
+};
+
+function getWorkItem(data, id, fallbackId) {
+  const items = data?.items || {};
+  const candidate = items[id] || items[fallbackId];
+  if (!candidate) return { ...FALLBACK_WORK_ITEM, id: id || FALLBACK_WORK_ITEM.id };
+
+  return {
+    ...FALLBACK_WORK_ITEM,
+    ...candidate,
+    nextAction: { ...FALLBACK_WORK_ITEM.nextAction, ...(candidate.nextAction || {}) },
+    sourcePaths: Array.isArray(candidate.sourcePaths) ? candidate.sourcePaths : [],
+    gates: Array.isArray(candidate.gates) ? candidate.gates : [],
+    auto: {
+      ...FALLBACK_WORK_ITEM.auto,
+      ...(candidate.auto || {}),
+      reasons: Array.isArray(candidate.auto?.reasons) ? candidate.auto.reasons : []
+    }
+  };
+}
+
 // ============================================================================
 // 1. ATTENTION-FIRST HOME
 // ============================================================================
+function getCurrentNextAction(data) {
+  const context = data?.context || {};
+  const nextAction = context.currentNextAction || context.nextAction || {};
+  const firstAvailableItem = Object.values(data?.items || {}).find((item) => item?.nextAction);
+
+  return {
+    title: nextAction.title || firstAvailableItem?.nextAction?.label || "Create the next work item",
+    summary: nextAction.summary || firstAvailableItem?.summary || "Use the current context artifact to choose the next governed action.",
+    command: nextAction.command || firstAvailableItem?.nextAction?.command || "bandit validate"
+  };
+}
+
 function AttentionHome({ data, tweak }) {
   const xf = makeConfidenceTransform(tweak.confidence);
+  const currentNextAction = getCurrentNextAction(data);
   return (
     <div className="cp" data-density={tweak.density} data-accent={tweak.accent} data-confidence={tweak.confidence}>
       <Topbar context={data.context} tweak={tweak} />
@@ -41,11 +95,10 @@ function AttentionHome({ data, tweak }) {
         <div style={{ flex: 1 }}>
           <div className="t-label" style={{ color: "var(--text-tertiary)", marginBottom: 8 }}>Current next action</div>
           <div className="t-h3" style={{ marginBottom: 6 }}>
-            Create the next Phase&nbsp;8 visual UI work item
+            {currentNextAction.title}
           </div>
           <div style={{ color: "var(--text-secondary)", fontSize: 13, maxWidth: 680, lineHeight: 1.45 }}>
-            The accepted PRD, design review, design system, and prototype source are sufficient to scope the first
-            attention-first cockpit UI slice.
+            {currentNextAction.summary}
           </div>
           <div className="cp-trace" style={{ marginTop: 8 }}>
             <span>derived from</span>
@@ -61,7 +114,7 @@ function AttentionHome({ data, tweak }) {
             variant="primary"
             glyph="+"
             label="Create work item"
-            command="bandit work-item create docs/prds/BANDIT-PRD-003-attention-first-workflow-cockpit.md"
+            command={currentNextAction.command}
           />
           <ActionButton
             glyph="✓"
@@ -142,7 +195,7 @@ function AttentionHome({ data, tweak }) {
 // 2. ACTIVE WORK ITEM DETAIL
 // ============================================================================
 function WorkItemDetail({ data, tweak }) {
-  const item = data.items[tweak.activeItem] || data.items["BANDIT-033"];
+  const item = getWorkItem(data, tweak.activeItem, "BANDIT-033");
   const xf = makeConfidenceTransform(tweak.confidence);
   const nextAction = item.nextAction;
   const actionDisabled = nextAction.eligibility === "blocked" || nextAction.eligibility === "operator-only";
@@ -303,8 +356,8 @@ function WorkItemDetail({ data, tweak }) {
 // 3. LANDING READINESS — dual-track
 // ============================================================================
 function LandingReadiness({ data, tweak }) {
-  const slice = data.items["BANDIT-035"];
-  const chore = data.items["BANDIT-034"];
+  const slice = getWorkItem(data, "BANDIT-035");
+  const chore = getWorkItem(data, "BANDIT-034");
   const xf = makeConfidenceTransform(tweak.confidence);
   return (
     <div className="cp" data-density={tweak.density} data-accent={tweak.accent} data-confidence={tweak.confidence}>
@@ -513,7 +566,8 @@ function OperatorInboxSurface({ data, tweak }) {
 // 6. QUEUE & CONTEXT (light)
 // ============================================================================
 function QueueContext({ data, tweak }) {
-  const queueBand = data.bands.find((b) => b.key === "queue");
+  const queueBand = Array.isArray(data?.bands) ? data.bands.find((b) => b.key === "queue") : null;
+  const queueRows = Array.isArray(queueBand?.rows) ? queueBand.rows : [];
   return (
     <div className="cp" data-density={tweak.density} data-accent={tweak.accent} data-confidence={tweak.confidence}>
       <Topbar context={data.context} tweak={tweak} />
@@ -528,9 +582,16 @@ function QueueContext({ data, tweak }) {
       {/* Upcoming */}
       <SectionH kicker="UPCOMING">Proposed &amp; deferred</SectionH>
       <div style={{ padding: "8px 22px 18px" }}>
-        {queueBand.rows.map((r) => (
+        {queueRows.map((r) => (
           <AttentionRow key={r.id} row={r} />
         ))}
+        {queueRows.length === 0 && (
+          <div className="cp-stream-row">
+            <time>—</time>
+            <Chip state="missing">queue unavailable</Chip>
+            <span style={{ color: "var(--text-tertiary)" }}>No queue band rows are present in the cockpit payload.</span>
+          </div>
+        )}
       </div>
 
       {/* Recent transitions */}
@@ -566,7 +627,7 @@ function QueueContext({ data, tweak }) {
 // 7. EVIDENCE DRILL-DOWN PANEL (one level down)
 // ============================================================================
 function EvidenceDrilldown({ data, tweak }) {
-  const item = data.items["BANDIT-034"]; // stale-state demo target
+  const item = getWorkItem(data, "BANDIT-034"); // stale-state demo target
   return (
     <div className="cp" data-density={tweak.density} data-accent={tweak.accent} data-confidence={tweak.confidence}>
       <Topbar context={data.context} tweak={tweak} />

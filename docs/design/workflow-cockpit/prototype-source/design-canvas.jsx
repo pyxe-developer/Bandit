@@ -133,6 +133,22 @@ function dcFlatten(children) {
 // ─────────────────────────────────────────────────────────────
 const DC_STATE_FILE = '.design-canvas.state.json';
 
+function dcTrustedParentOrigin() {
+  if (window.parent === window) return window.location.origin;
+  try {
+    return document.referrer ? new URL(document.referrer).origin : window.location.origin;
+  } catch {
+    return window.location.origin;
+  }
+}
+
+function dcIsTrustedHostMessage(e) {
+  if (e.source !== window.parent) return false;
+  const trustedOrigin = dcTrustedParentOrigin();
+  if (e.origin === trustedOrigin) return true;
+  return e.origin === 'null' && (window.location.protocol === 'file:' || trustedOrigin === 'null');
+}
+
 function DesignCanvas({ children, minScale, maxScale, style }) {
   const [state, setState] = React.useState({ sections: {}, focus: null });
   // Hold rendering until the sidecar read settles so the saved order/titles
@@ -405,6 +421,7 @@ function DCViewport({ children, minScale = 0.1, maxScale = 8, style = {} }) {
     // Host-driven zoom (toolbar % menu). Zooms around viewport centre so the
     // visible midpoint stays fixed — matching the host's iframe-zoom feel.
     const onHostMsg = (e) => {
+      if (!dcIsTrustedHostMessage(e)) return;
       const d = e.data;
       if (d && d.type === '__dc_set_zoom' && typeof d.scale === 'number') {
         const r = vp.getBoundingClientRect();
