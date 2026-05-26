@@ -323,26 +323,27 @@ recorded in
 `docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-031/brief.md`, and Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-031/red-evidence.md` with focused
-tests in `test/cockpit-status.test.mjs`. The slice is scoped to
-a CLI-authoritative, derived cockpit status payload or report that reads
-repo-native artifacts and exposes source paths, validation state, current
-phase, active work item, next action, blockers, gate summaries, improvement
-health, and coordination state where available. It must not start visual UI,
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, claim leases, work surface reservations, automatic merge/push/deploy,
-product UAT approval, actor identity policy, PR/CI workflow, or unrelated work.
+tests in `test/cockpit-status.test.mjs`. Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-031/implementation-evidence.md`. The implemented
+slice adds `bandit cockpit status --json` and a CLI-authoritative, derived
+cockpit status payload that reads repo-native artifacts, exposes source paths,
+fails closed for missing or contradictory evidence, and creates no hidden
+canonical cockpit state. It must not start visual UI, server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, claim leases,
+work surface reservations, automatic merge/push/deploy, product UAT approval,
+actor identity policy, PR/CI workflow, or unrelated work.
 
-**Last completed milestone:** `BANDIT-031` Stage 2 RED evidence is recorded.
+**Last completed milestone:** `BANDIT-031` Stage 3 implementation evidence is
+recorded.
 
-**Current next action:** Implement the narrow read-only cockpit status
-foundation for `BANDIT-031` so `test/cockpit-status.test.mjs` passes, preserving
-repo-native source authority, source artifact links, fail-closed missing or
-contradictory repo state, and the no-hidden-authority cockpit boundary.
+**Current next action:** Run Stage 4 review gates for `BANDIT-031`, including
+pre-PR CodeRabbit review, Local Qwen adversarial review, aggregate review
+evidence with `review_subject_hash`, and PM disposition of any findings.
 
 ## Active Work
 
 **Active work item:** `BANDIT-031` - Workflow Cockpit Status Foundation.
-Current stage: Stage 3 implementation. `BANDIT-030` is landed and closed out.
+Current stage: Stage 4 review. `BANDIT-030` is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -367,9 +368,10 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing.
 
-**Expected next deliverable:** `docs/work/BANDIT-031/red-evidence.md` for the
-first Phase 8 Workflow Cockpit slice is recorded. The next deliverable is
-`docs/work/BANDIT-031/implementation-evidence.md`.
+**Expected next deliverable:** `docs/work/BANDIT-031/implementation-evidence.md`
+is recorded. The next deliverables are `docs/work/BANDIT-031/coderabbit-review.md`,
+`docs/work/BANDIT-031/local-qwen-review.md`, and
+`docs/work/BANDIT-031/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -521,12 +523,13 @@ evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition.
 The current priority is:
 
-1. Implement the narrow read-only cockpit status foundation for `BANDIT-031`
-   from the Stage 2 RED tests and existing boundary artifacts.
+1. Run Stage 4 review gates for `BANDIT-031`, including pre-PR CodeRabbit
+   review, Local Qwen adversarial review, aggregate review evidence with
+   `review_subject_hash`, and PM disposition of any findings.
 2. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, or unrelated work until
-   the implementation evidence is recorded.
+   Stage 4 review evidence is recorded.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -534,10 +537,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to implement the narrow read-only cockpit
-status foundation for `BANDIT-031` from existing repo artifacts. The
-implementation must stay within the approved CLI-authoritative cockpit boundary,
-the Stage 2 RED tests, and the active brief.
+No operator-owned input is required to run Stage 4 review gates for
+`BANDIT-031` from existing repo artifacts. The implementation stayed within the
+approved CLI-authoritative cockpit boundary, the Stage 2 RED tests, and the
+active brief.
 
 If the next step would choose product/UI direction beyond the evidence-backed
 read-only status fields in `docs/design/workflow-cockpit-boundary.md`, require

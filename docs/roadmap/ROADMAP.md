@@ -16,15 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement the narrow read-only cockpit status foundation
-for `BANDIT-031` - Workflow Cockpit Status Foundation. The brief is recorded in
-`docs/work/BANDIT-031/brief.md`, and RED evidence is recorded in
-`docs/work/BANDIT-031/red-evidence.md` with focused tests in
-`test/cockpit-status.test.mjs`; do not start visual UI, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, automatic
-merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
-work surface reservation, PR/CI workflow, or unrelated feature work before
-implementation evidence is recorded.
+**Current next step:** Run Stage 4 review gates for `BANDIT-031` - Workflow
+Cockpit Status Foundation. The brief is recorded in
+`docs/work/BANDIT-031/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-031/red-evidence.md`, and implementation evidence is recorded
+in `docs/work/BANDIT-031/implementation-evidence.md`; do not start visual UI,
+local server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, automatic merge/push/deploy behavior, product UAT, actor identity
+policy, claim lease, work surface reservation, PR/CI workflow, or unrelated
+feature work before Stage 4 review evidence is recorded.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -147,17 +147,17 @@ creation spec is recorded in
 `docs/specs/BANDIT-031-workflow-cockpit-status-foundation.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-031/brief.md`, and Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-031/red-evidence.md` with focused
-tests in `test/cockpit-status.test.mjs`. The slice is scoped to
-a CLI-authoritative, read-only cockpit status foundation that derives status
-from repo-native artifacts and exposes source paths without creating hidden
-canonical state. The next step is Stage 3 implementation for cockpit status
-derivation, source artifact links, fail-closed missing or contradictory repo
-state, and no hidden authority. Do not create unrelated active-work branches,
-Phase 8 visual UI, local server/API mode, state-index persistence, scheduler
-execution, worktree lifecycle, exclusive claim leases, work surface
-reservations, product UAT approval, automatic merge/push/deploy behavior, actor
-identity policy, PR/CI workflow, or unrelated feature work before
-implementation evidence is recorded.
+tests in `test/cockpit-status.test.mjs`. Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-031/implementation-evidence.md`; the
+implementation adds `bandit cockpit status --json` as a CLI-authoritative,
+read-only cockpit status foundation that derives status from repo-native
+artifacts, exposes source paths, fails closed for missing or contradictory
+evidence, and creates no hidden canonical state. The next step is Stage 4
+review gates. Do not create unrelated active-work branches, Phase 8 visual UI,
+local server/API mode, state-index persistence, scheduler execution, worktree
+lifecycle, exclusive claim leases, work surface reservations, product UAT
+approval, automatic merge/push/deploy behavior, actor identity policy, PR/CI
+workflow, or unrelated feature work before Stage 4 review evidence is recorded.
 
 `BANDIT-023` - Non-Blocking Review Finding Chore Routing is
 closed out:
@@ -678,13 +678,14 @@ Current rule:
 
 Current priority:
 
-1. Create the first Phase 8 Workflow Cockpit work-item brief from existing
-   boundary and roadmap artifacts.
+1. Run Stage 4 review gates for `BANDIT-031`, including pre-PR CodeRabbit
+   review, Local Qwen adversarial review, aggregate review evidence with
+   `review_subject_hash`, and PM disposition of any findings.
 2. Stop before unrelated active-work branches, scheduler execution, worktree
-   lifecycle, cockpit implementation, product UAT approval, automatic
+   lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface
-   reservations, actor identity policy, PR/CI workflow, or implementation work
-   until the Phase 8 brief is recorded.
+   reservations, actor identity policy, PR/CI workflow, or unrelated work until
+   Stage 4 review evidence is recorded.
 
 ## Phase 6: Coordination Primitive
 
