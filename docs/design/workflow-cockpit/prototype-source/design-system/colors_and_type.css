@@ -315,7 +315,7 @@ html, body {
   font-family: var(--font-sans);
   font-size: var(--fs-14);
   line-height: var(--lh-normal);
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

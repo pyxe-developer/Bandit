@@ -8,9 +8,9 @@ review_target: local-diff:origin/main
 review_state: completed
 coderabbit_verdict: blocker
 findings_status: unresolved
-findings_disposition: In docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css at line 318, remove unsupported OpenType feature "cv11" from the font-feature-settings declaration and leave only "ss01".
+findings_disposition: Repaired in docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css by removing unsupported OpenType feature "cv11" from the Instrument Sans font-feature-settings declaration. Rerun CodeRabbit before claiming Stage 4 pass evidence.
 operator_input_status: none_required
-source_drift_status: current
+source_drift_status: stale
 executable_evidence:
   - coderabbit review --agent --base origin/main
 bootstrap_gaps:

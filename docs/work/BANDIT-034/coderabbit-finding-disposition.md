@@ -202,5 +202,18 @@ remove unsupported OpenType feature `"cv11"` from the Instrument Sans
 `font-feature-settings` declaration in
 `docs/design/workflow-cockpit/prototype-source/design-system/colors_and_type.css`.
 
-Repair or disposition that CodeRabbit finding before running Local Qwen,
-refreshing aggregate review subject evidence, or claiming Stage 4 pass evidence.
+### Instrument Sans font-feature setting
+
+**Finding:** Remove unsupported OpenType feature `"cv11"` from the Instrument
+Sans `font-feature-settings` declaration and leave only `"ss01"`.
+
+**Disposition:** repaired.
+
+**Evidence:** `colors_and_type.css` now sets global
+`font-feature-settings: "ss01";` without the unsupported `"cv11"` feature.
+
+## Next Action
+
+Rerun the CodeRabbit pre-PR provider against the repaired source before running
+Local Qwen, refreshing aggregate review subject evidence, or claiming Stage 4
+pass evidence.
