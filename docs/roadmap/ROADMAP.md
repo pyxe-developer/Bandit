@@ -16,10 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Local Qwen adversarial review for `BANDIT-032`. If
-it passes or returns non-blocking findings that Codex PM can disposition,
-continue Stage 4 with review-subject hash, PM disposition, and aggregate review
-evidence.
+**Current next step:** Run `npm run bandit -- review-subject-hash BANDIT-032`,
+then create aggregate Stage 4 review evidence from current CodeRabbit and Local
+Qwen pass evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -53,13 +52,15 @@ cockpit status read-only and source-linked while adding blocker summaries,
 Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
 agreement, and stale review/landing evidence reporting. CodeRabbit pass
 evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md` at source
-head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings. The next step
-is Local Qwen adversarial review. Do not start aggregate review evidence,
-landing, retrospective closeout, visual UI, local server/API mode, state-index
-persistence, scheduler execution, worktree lifecycle, automatic
+head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings. Local Qwen
+pass evidence is recorded in `docs/work/BANDIT-032/local-qwen-review.md` at
+source head `4991a0f8c0885119499fdf42016dc4543dfd3e3e` with no findings. The
+next step is review-subject hash and aggregate Stage 4 review evidence. Do not
+start landing, retrospective closeout, visual UI, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, automatic
 merge/push/deploy behavior, product UAT, actor identity policy, claim lease,
 work surface reservation, PR/CI workflow, or unrelated feature work before
-current Local Qwen evidence exists.
+current aggregate Stage 4 review evidence exists.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -732,10 +733,9 @@ Current rule:
 
 Current priority:
 
-1. Run Local Qwen adversarial review for `BANDIT-032`.
-2. If Local Qwen passes or returns non-blocking findings that Codex PM can
-   disposition, continue Stage 4 with review-subject hash, PM disposition, and
-   aggregate review evidence.
+1. Run `npm run bandit -- review-subject-hash BANDIT-032`.
+2. Create aggregate Stage 4 review evidence from current CodeRabbit and Local
+   Qwen pass evidence.
 3. Stop before unrelated active-work branches, scheduler execution, worktree
    lifecycle, visual cockpit UI, product UAT approval, automatic
    merge/push/deploy behavior, exclusive claim leases, work surface

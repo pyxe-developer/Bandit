@@ -367,16 +367,17 @@ Stage 0 through Stage 6 gate summaries, same-work-item/stage next-action
 agreement, and stale review/landing evidence reporting. Stage 4 CodeRabbit
 pre-PR pass evidence is recorded in `docs/work/BANDIT-032/coderabbit-review.md`
 at source head `d7e456be2df6d61c3989a6b9698335026351035a` with 0 findings.
-Local Qwen, aggregate review evidence, landing, and retrospective evidence have
-not started.
+Local Qwen Stage 4 pass evidence is recorded in
+`docs/work/BANDIT-032/local-qwen-review.md` at source head
+`4991a0f8c0885119499fdf42016dc4543dfd3e3e` with no findings. Aggregate
+review evidence, landing, and retrospective evidence have not started.
 
-**Last completed milestone:** `BANDIT-032` Stage 4 CodeRabbit pass evidence is
-recorded after the recoverable provider rate limit cleared.
+**Last completed milestone:** `BANDIT-032` Stage 4 Local Qwen pass evidence is
+recorded.
 
-**Current next action:** Run Local Qwen adversarial review for `BANDIT-032`.
-If it passes or returns non-blocking findings that Codex PM can disposition,
-continue Stage 4 with review-subject hash, PM disposition, and aggregate review
-evidence.
+**Current next action:** Run `npm run bandit -- review-subject-hash
+BANDIT-032`, then create aggregate Stage 4 review evidence for `BANDIT-032`
+from current CodeRabbit and Local Qwen pass evidence.
 
 Do not start visual UI, server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -387,8 +388,8 @@ current `BANDIT-032` Stage 4 review evidence exists.
 ## Active Work
 
 **Active work item:** `BANDIT-032` - Cockpit Status Coverage Hardening is in
-Stage 4 review with CodeRabbit pass evidence recorded. Local Qwen and aggregate
-review evidence remain pending.
+Stage 4 review with CodeRabbit and Local Qwen pass evidence recorded. Aggregate
+review evidence remains pending.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -413,10 +414,9 @@ Typed State Extensions; `BANDIT-027` - Pre-PR CodeRabbit CLI Review;
 Evaluation Foundation; `BANDIT-030` - Evaluate Non-Blocking Review Finding
 Routing; `BANDIT-031` - Workflow Cockpit Status Foundation.
 
-**Expected next deliverable:** `docs/work/BANDIT-032/local-qwen-review.md`,
-followed by `docs/work/BANDIT-032/review-evidence.md` if Local Qwen accepts the
-current review subject or returns non-blocking findings that Codex PM can
-disposition.
+**Expected next deliverable:** `docs/work/BANDIT-032/review-evidence.md` with
+current `review_subject_hash`, CodeRabbit pass evidence, Local Qwen pass
+evidence, and Codex PM Stage 4 disposition.
 
 ## Known Bootstrap Gaps
 
@@ -567,13 +567,13 @@ Stage 5 landing verdict/readiness evidence, local-record landing action
 evidence, Stage 6 retrospective closeout, and evaluated `BANDIT-023`
 improvement disposition. `BANDIT-031` is landed and closed out as the first
 Phase 8 Workflow Cockpit Status Foundation. `BANDIT-032` has a structured spec,
-Stage 1 brief, Stage 2 RED evidence, and Stage 3 implementation evidence for
-cockpit status coverage hardening. The current priority is:
+Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
+CodeRabbit pass evidence, and Stage 4 Local Qwen pass evidence for cockpit
+status coverage hardening. The current priority is:
 
-1. Run Local Qwen adversarial review for `BANDIT-032`.
-2. If Local Qwen passes or returns non-blocking findings that Codex PM can
-   disposition, continue Stage 4 with review-subject hash, PM disposition, and
-   aggregate review evidence.
+1. Run `npm run bandit -- review-subject-hash BANDIT-032`.
+2. Create aggregate Stage 4 review evidence from current CodeRabbit and Local
+   Qwen pass evidence.
 3. Stop before visual UI, Phase 9, scheduler, worktree lifecycle, product UAT,
    automatic merge/push/deploy, exclusive claim leases, work surface
    reservations, actor identity policy, PR/CI workflow, landing, retrospective
