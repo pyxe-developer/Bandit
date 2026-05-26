@@ -423,9 +423,10 @@ missing queue-band rows in `screens.jsx`, and validate `design-canvas.jsx`
 message sender origin/source before processing host messages. Current provider
 evidence is recorded in `docs/work/BANDIT-034/coderabbit-review.md` and
 `docs/specs/BANDIT-034-coderabbit-rerun-output.json`. The next required
-action is focused repair or explicit PM disposition of those findings; do not
-continue Local Qwen or claim aggregate Stage 4 review evidence until CodeRabbit
-is rerun after repair and no longer blocks Stage 4.
+action is focused repair or explicit PM disposition of those findings. The next CodeRabbit provider rerun must be scoped to the repair delta, not the full `origin/main` local diff. Use baseline commit `08c3ef803bd9bb78b85c6fd376815dad99676677`, which recorded the current four-finding blocker state. Required provider command: `coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`. After normalizing the provider output, record Bandit evidence with `npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base base-commit:08c3ef803bd9bb78b85c6fd376815dad99676677 --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json`. Do not run `coderabbit review --agent --base origin/main` for this repair loop unless the scoped rerun is unavailable and the failure is recorded explicitly.
+
+Do not continue Local Qwen or claim aggregate Stage 4 review evidence until
+CodeRabbit is rerun after repair and no longer blocks Stage 4.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -471,8 +472,9 @@ Visual Shell.
 
 **Expected next deliverable:** Focused repair or PM disposition evidence for
 the latest `BANDIT-034` CodeRabbit findings in `screens.jsx`, `app.jsx`, and
-`design-canvas.jsx`, followed by a CodeRabbit pre-PR rerun. Local Qwen, any
-needed review-subject hash refresh, and aggregate PM disposition must wait until
+`design-canvas.jsx`, followed by the scoped CodeRabbit pre-PR rerun from
+baseline `08c3ef803bd9bb78b85c6fd376815dad99676677`. Local Qwen, any needed
+review-subject hash refresh, and aggregate PM disposition must wait until
 CodeRabbit no longer blocks Stage 4.
 
 ## Known Bootstrap Gaps

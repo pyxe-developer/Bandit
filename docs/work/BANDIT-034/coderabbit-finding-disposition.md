@@ -342,3 +342,20 @@ before handling `__dc_set_zoom` or `__dc_probe` messages.
 Repair or explicitly disposition the latest four CodeRabbit findings before
 running Local Qwen, refreshing aggregate review-subject evidence, or claiming
 Stage 4 pass evidence.
+
+## Required Next CodeRabbit Scope
+
+The next CodeRabbit provider rerun must review only the repair delta for the
+four current findings. Use baseline commit `08c3ef803bd9bb78b85c6fd376815dad99676677`, the evidence commit
+that recorded the current blocker state, and run exactly:
+
+`coderabbit review --agent --base-commit 08c3ef803bd9bb78b85c6fd376815dad99676677 -c AGENTS.md --no-color --files docs/design/workflow-cockpit/prototype-source/screens.jsx docs/design/workflow-cockpit/prototype-source/app.jsx docs/design/workflow-cockpit/prototype-source/design-canvas.jsx`
+
+After normalizing provider output into
+`docs/specs/BANDIT-034-coderabbit-rerun-output.json`, record Bandit evidence
+with:
+
+`npm run bandit -- coderabbit-review pre-pr BANDIT-034 --base base-commit:08c3ef803bd9bb78b85c6fd376815dad99676677 --fixture docs/specs/BANDIT-034-coderabbit-rerun-output.json`
+
+Do not rerun the provider with `--base origin/main` for this repair loop unless
+the scoped rerun is unavailable and the failure is recorded explicitly.
