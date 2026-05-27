@@ -415,15 +415,14 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or explicitly disposition the fresh
-`BANDIT-035` pre-PR CodeRabbit blocker recorded at source head
-`d04daea065809e28df11d6375cd7ca2097356414`. The current finding is recorded in
-`docs/work/BANDIT-035/coderabbit-review.md` and targets
-`test/artifact-create.test.mjs`: the parser-compatibility test still mixes the
-`work_item` renderer assertion with `operator_input_status` and
-`landing_agent_state` enum-value changes. Do not run Local Qwen, aggregate
-review evidence, landing verdict, or unrelated Phase 8 work until the finding
-is repaired or dispositioned and the pre-PR CodeRabbit gate is rerun.
+**Current next action:** Run the `BANDIT-035` Local Qwen Stage 4 adversarial
+review at the current repair head. The pre-PR CodeRabbit gate now passes at
+source head `cb0a7ba506f6e4d9119a807915408463375c3480` with no findings,
+recorded in `docs/work/BANDIT-035/coderabbit-review.md`; CodeRabbit finding
+repair/disposition evidence is recorded in
+`docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Do not run aggregate
+review evidence, landing verdict, or unrelated Phase 8 work until Local Qwen
+evidence is recorded and dispositioned.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -439,10 +438,10 @@ Stage 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3
 implementation evidence is recorded in
 `docs/work/BANDIT-035/implementation-evidence.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to active chore `BANDIT-035`. Stage 4 CodeRabbit blocker evidence
-is recorded in `docs/work/BANDIT-035/coderabbit-review.md`; the latest blocker
-targets `test/artifact-create.test.mjs` parser-compatibility fixture scope.
-Prior CodeRabbit finding disposition is recorded in
+links the gap to active chore `BANDIT-035`. Stage 4 pre-PR CodeRabbit pass
+evidence is recorded in `docs/work/BANDIT-035/coderabbit-review.md` at source
+head `cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. CodeRabbit
+finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`; Local Qwen and
 aggregate review evidence are not yet recorded.
 
@@ -455,10 +454,9 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
-active at Stage 4 with fresh CodeRabbit blocker evidence recorded. The next
-action is to repair or explicitly disposition the latest
-`test/artifact-create.test.mjs` parser-compatibility fixture finding before
-rerunning CodeRabbit, Local Qwen, or aggregate Stage 4 review evidence.
+active at Stage 4 with pre-PR CodeRabbit pass evidence recorded. The next action
+is to run Local Qwen Stage 4 adversarial review before aggregate Stage 4 review
+evidence, landing verdict, or unrelated Phase 8 work.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 active chore.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -832,10 +830,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the fresh `BANDIT-035` CodeRabbit blocker
-   on `test/artifact-create.test.mjs`, then rerun the pre-PR CodeRabbit gate
-   before Local Qwen, aggregate review evidence, landing verdict, or unrelated
-   Phase 8 work.
+1. Run the `BANDIT-035` Local Qwen Stage 4 adversarial review now that the
+   pre-PR CodeRabbit gate passes at source head
+   `cb0a7ba506f6e4d9119a807915408463375c3480`; do not run aggregate review
+   evidence, landing verdict, or unrelated Phase 8 work before Local Qwen
+   evidence is recorded and dispositioned.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -873,10 +872,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-035` CodeRabbit
-finding repair/disposition. The latest CodeRabbit blocker is a technical
-test-fixture isolation issue, not a missing product direction, UAT, policy,
-business, cost/risk, or ambiguous-scope decision.
+No operator-owned input is required for the current `BANDIT-035` Local Qwen
+Stage 4 review. The remaining next action is a technical reviewer gate, not a
+missing product direction, UAT, policy, business, cost/risk, or ambiguous-scope
+decision.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

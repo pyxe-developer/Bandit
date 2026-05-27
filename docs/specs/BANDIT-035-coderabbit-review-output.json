@@ -1,23 +1,7 @@
 {
-  "sourceHead": "beb0d9fd924490117ca39526bf8b5022b280222b",
+  "sourceHead": "cb0a7ba506f6e4d9119a807915408463375c3480",
   "baseRevision": "origin/main",
   "reviewState": "completed",
-  "verdict": "blocker",
-  "findings": [
-    {
-      "severity": "minor",
-      "status": "unresolved",
-      "body": "docs/specs/BANDIT-035-coderabbit-review-output.json: the previous provider-output fixture mixed a blocker verdict with only a minor finding; record the current live review output so the fixture severity and verdict are internally consistent."
-    },
-    {
-      "severity": "critical",
-      "status": "unresolved",
-      "body": "test/artifact-create.test.mjs: split the landing verdict work_item assertion into a dedicated renderer test that uses the original renderer fixture values."
-    },
-    {
-      "severity": "critical",
-      "status": "unresolved",
-      "body": "test/artifact-create.test.mjs: split parser-compatible operator_input_status and landing_agent_state coverage into focused tests with explicit rendered metadata assertions."
-    }
-  ]
+  "verdict": "pass",
+  "findings": []
 }

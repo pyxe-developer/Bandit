@@ -14,6 +14,23 @@ Phase 8 work.
 
 ## Findings
 
+### Final pre-PR CodeRabbit rerun
+
+**Finding:** Prior CodeRabbit reruns blocked Stage 4 on stale provider-output
+fixture consistency and landing-verdict test isolation.
+
+**Disposition:** repaired; provider rerun passed.
+
+**Evidence:** Live `coderabbit review --agent --base origin/main -c AGENTS.md
+--no-color` completed with `findings: 0` after the fixture split. The result is
+normalized through `npm run bandit -- coderabbit-review pre-pr BANDIT-035 --base
+origin/main --fixture docs/specs/BANDIT-035-coderabbit-review-output.json`.
+
+**Verification:** `docs/work/BANDIT-035/coderabbit-review.md` records
+`coderabbit_verdict: pass`, `findings_status: none`, and
+`source_drift_status: current` at source head
+`cb0a7ba506f6e4d9119a807915408463375c3480`.
+
 ### Second rerun provider-output fixture consistency
 
 **Finding:** `docs/specs/BANDIT-035-coderabbit-review-output.json` recorded a
