@@ -232,7 +232,7 @@
       "linked_work_item": "BANDIT-035",
       "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
       "verification_target": null,
-      "next_action": "Record Stage 5 landing verdict for BANDIT-035 using the current aggregate Stage 4 review evidence; do not run landing action, retrospective closeout, or unrelated Phase 8 work before landing-verdict.md exists."
+      "next_action": "Record local-record landing action for BANDIT-035 using the current Stage 5 landing verdict and passing land-check; do not run retrospective closeout or unrelated Phase 8 work before landing-action.md exists."
     },
     {
       "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",

@@ -16,13 +16,12 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 5 landing verdict for `BANDIT-035`.
-Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-035/review-evidence.md` with current review-subject hash
-`08929c8ad39b64027b6f4f6460e09b0a8d7e1ec0e2f9f85e4108ee5fb85bac6e`, pre-PR
-CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition
-`pass`. Do not run landing action, retrospective closeout, or unrelated Phase 8
-work until `docs/work/BANDIT-035/landing-verdict.md` exists.
+**Current next step:** Record local-record landing action for `BANDIT-035`.
+Stage 5 landing verdict is recorded in
+`docs/work/BANDIT-035/landing-verdict.md`, includes the parser-required
+`work_item` field, and `npm run bandit -- land-check BANDIT-035` passes with
+final verdict `safe-to-land`. Do not run retrospective closeout or unrelated
+Phase 8 work until `docs/work/BANDIT-035/landing-action.md` exists.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -45,8 +44,10 @@ finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Local Qwen pass
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`; the next
-required action is Stage 5 landing verdict.
+evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
+`npm run bandit -- land-check BANDIT-035` passes; the next required action is
+local-record landing action.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -171,8 +172,10 @@ finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Local Qwen pass
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`; the next
-required action is Stage 5 landing verdict.
+evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
+`npm run bandit -- land-check BANDIT-035` passes; the next required action is
+local-record landing action.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -945,9 +948,9 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 5 landing verdict for `BANDIT-035` now that aggregate Stage 4
-   review evidence is recorded and current; do not run landing action or
-   unrelated Phase 8 work before `landing-verdict.md` exists.
+1. Record local-record landing action for `BANDIT-035` now that Stage 5 landing
+   verdict is recorded and `land-check` passes; do not run retrospective
+   closeout or unrelated Phase 8 work before `landing-action.md` exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

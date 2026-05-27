@@ -415,13 +415,12 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-035`.
-Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-035/review-evidence.md` with current review-subject hash
-`08929c8ad39b64027b6f4f6460e09b0a8d7e1ec0e2f9f85e4108ee5fb85bac6e`, pre-PR
-CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition
-`pass`. Do not run landing action, retrospective closeout, or unrelated Phase 8
-work until `docs/work/BANDIT-035/landing-verdict.md` exists.
+**Current next action:** Record local-record landing action for `BANDIT-035`.
+Stage 5 landing verdict is recorded in
+`docs/work/BANDIT-035/landing-verdict.md`, includes the parser-required
+`work_item` field, and `npm run bandit -- land-check BANDIT-035` passes with
+final verdict `safe-to-land`. Do not run retrospective closeout or unrelated
+Phase 8 work until `docs/work/BANDIT-035/landing-action.md` exists.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -444,8 +443,10 @@ finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Local Qwen pass
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`; the next
-required action is Stage 5 landing verdict.
+evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
+`npm run bandit -- land-check BANDIT-035` passes; the next required action is
+local-record landing action.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -456,9 +457,10 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
-active at Stage 4 with pre-PR CodeRabbit pass evidence and Local Qwen pass
-evidence recorded. The next action is to record aggregate Stage 4 review
-evidence before landing verdict, landing action, or unrelated Phase 8 work.
+active at Stage 5 with pre-PR CodeRabbit pass evidence, Local Qwen pass
+evidence, aggregate Stage 4 review evidence, Stage 5 landing verdict, and
+passing `land-check` recorded. The next action is to record local-record
+landing action before retrospective closeout or unrelated Phase 8 work.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 active chore.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -508,10 +510,9 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** Stage 5 landing verdict at
-`docs/work/BANDIT-035/landing-verdict.md` using current aggregate Stage 4 review
-evidence and current review-subject hash
-`08929c8ad39b64027b6f4f6460e09b0a8d7e1ec0e2f9f85e4108ee5fb85bac6e`.
+**Expected next deliverable:** Local-record landing action at
+`docs/work/BANDIT-035/landing-action.md` using the current Stage 5 landing
+verdict and passing `npm run bandit -- land-check BANDIT-035` result.
 
 ## Known Bootstrap Gaps
 
@@ -523,8 +524,9 @@ These are expected because Bandit does not exist yet:
   Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief,
   Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
   CodeRabbit pass evidence, CodeRabbit finding disposition evidence, Local
-  Qwen pass evidence, and aggregate Stage 4 review evidence; the next step is
-  to record Stage 5 landing verdict.
+  Qwen pass evidence, aggregate Stage 4 review evidence, Stage 5 landing
+  verdict, and passing `land-check` evidence; the next step is to record
+  local-record landing action.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
   mining for agent execution smells such as recurring CodeRabbit invocation
@@ -830,10 +832,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 5 landing verdict for `BANDIT-035` now that aggregate Stage 4
-   review evidence is recorded and current; do not run landing action,
-   retrospective closeout, or unrelated Phase 8 work before
-   `landing-verdict.md` exists.
+1. Record local-record landing action for `BANDIT-035` now that Stage 5 landing
+   verdict is recorded and `land-check` passes; do not run retrospective
+   closeout or unrelated Phase 8 work before `landing-action.md` exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -871,10 +872,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-035` Stage 5 landing
-verdict. The remaining next action is technical landing verdict evidence for a
-non-product bootstrap-gap chore, not missing product direction, UAT, policy,
-business, cost/risk, or ambiguous-scope decision.
+No operator-owned input is required for the current `BANDIT-035` local-record
+landing action. The remaining next action is technical landing action evidence
+for a non-product bootstrap-gap chore with a safe-to-land verdict, not missing
+product direction, UAT, policy, business, cost/risk, or ambiguous-scope
+decision.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
