@@ -2,10 +2,65 @@
 
 ## Status
 
-Draft. Ready for post-bootstrap agent decomposition after the active bootstrap-gap
-lane is resolved, blocked, or explicitly dispositioned.
+Draft. Blocked on claim-authority and shared Git mutation serialization
+corrections before any release-authorized parallel writable workstreams may be
+decomposed or implemented.
 
-Triage label: ready-for-agent after bootstrap.
+Triage label: blocked-by-bootstrap-gap after bootstrap.
+
+The 2026-05-26 research review found that the PRD's earlier file-backed
+"atomic CLI operation" language was not enough for concurrent writable claims.
+True parallel writable workstreams now require a CAS-backed claim authority,
+fencing tokens, idempotency keys, stale-agent rejection, and concurrency
+validation before they can leave advisory or read-only coordination mode.
+
+The same review found that default LLM polling heartbeats would create avoidable
+token spend. The operator accepted event-driven scheduling only if work still
+wakes reliably when it becomes available, so the scheduler must provide a Work
+Availability Wake Guarantee through event-driven triggers plus deterministic
+non-LLM sweeping.
+
+The operator also confirmed that OpenTelemetry-style agent traces should be a
+first-class observability surface. Traces explain runtime behavior, token spend,
+tool friction, wakeups, reviewer runs, claim operations, and failures; repo
+artifacts remain canonical workflow state.
+
+The operator also confirmed that append-only workflow/event history should be
+the only canonical coordination history. Current-state files, in-flight
+registries, state indexes, and cockpit views are projections. The exception is
+active writable claim authority: a CAS-backed claim authority primitive is the
+only surface that may grant or refuse release-authorized writable claims.
+
+On 2026-05-27, the operator accepted the first concrete Claim Authority
+Primitive backend: a repo-native Git refs transaction backend using
+`refs/bandit/*` and `git update-ref --stdin` compare-and-swap semantics.
+Human-readable `.bandit` claim files remain projections.
+
+The operator also confirmed that every state-changing claim operation and
+external side-effecting operation under a claim needs both the current fencing
+token and an idempotency key, so retries, reruns, and scheduler wakeups cannot
+duplicate effects or let stale agents mutate state.
+
+The operator also confirmed that claimability must include wait-for graph cycle
+detection for work-surface reservations. Pairwise overlap checks remain
+required, but they are not sufficient to prevent deadlocked reservations.
+
+The operator also confirmed that parallel worktrees need a repo-level Git
+Mutation Serializer before release authorization. Git refs CAS provides claim
+authority, but it does not serialize every shared `.git` plumbing mutation.
+Codex PM owns Git implementation mechanics from repo evidence; the accepted
+worktree rule is that every claim-owned worktree is `git worktree lock`ed with
+a stable claim-specific reason immediately after creation and unlocked only by
+the Repo PM Coordinator after handoff verification and cleanup.
+
+The operator later clarified that Codex PM may answer all technical questions.
+This PRD therefore treats technical routing, implementation mechanics,
+worktree bootstrap mechanics, test strategy, skill/tool scoping, and artifact
+structure as Codex PM-owned unless the decision crosses product, UAT, policy,
+business, cost/risk, irreversible operational-risk, or genuinely ambiguous
+scope boundaries. Codex PM has accepted that every Bandit-created worktree must
+validate a repo-native Worktree Bootstrap Contract before worker execution
+treats it as runnable.
 
 ## Problem
 
@@ -16,12 +71,13 @@ agent sessions to move faster by working on different non-overlapping work
 items at the same time.
 
 The present "Bandit Next Work Item" heartbeat can start a new Codex run every
-15 minutes, but the workflow does not yet have a strict, machine-enforced way
-to prove which work items are already in flight, which stage each item is in,
-which surfaces are reserved, which worktree owns the work, and whether the
-next heartbeat should start work or do nothing. Without that contract, the worst
-failure mode is duplicative work on the same item or colliding edits across
-worktrees.
+15 minutes, but periodic LLM polling is an expensive way to discover no-op
+state. The workflow also does not yet have a strict, machine-enforced way to
+prove which work items are already in flight, which stage each item is in, which
+surfaces are reserved, which worktree owns the work, and whether new work is
+available. Without that contract, the worst failure mode is duplicative work on
+the same item or colliding edits across worktrees; without a wake guarantee, the
+opposite failure mode is available work sitting idle.
 
 The operator also identified a role gap: there is no Repo PM Coordinator. Codex
 currently acts as PM, worker, triager, reviewer router, and operator liaison in
@@ -44,13 +100,57 @@ state.
 
 - Allow multiple non-overlapping workstreams to run after bootstrap without
   duplicate claims on the same work item or stage.
-- Make in-flight work independently authoritative and reconciled with each
-  work item's canonical coordination state before any work starts.
+- Keep true parallel writable workstreams disabled until claim authority has
+  compare-and-swap semantics, fencing tokens, idempotency keys, and
+  stale-agent rejection.
+- Use a Git refs transaction backend as the first concrete Claim Authority
+  Primitive, with `refs/bandit/*` as the authority namespace and `.bandit`
+  claim files as projections.
+- Require state-changing claim operations and external side effects under a
+  claim to carry both the current fencing token and a claim idempotency key.
+- Detect Work-Surface Wait-For Graph cycles during claimability checks so
+  deadlocked reservations are blocked explicitly.
+- Require a CLI-owned Git Mutation Serializer for shared `.git` plumbing
+  mutations before parallel worktrees are release-authorized.
+- Distinguish advisory or read-only coordination events from release-authorized
+  parallel writes.
+- Make in-flight work independently authoritative only through a claim authority
+  primitive that is reconciled with each work item's canonical coordination
+  state before any work starts.
+- Treat append-only per-work-item coordination history as the canonical
+  workflow history and make current-state views, registries, cockpit views, and
+  indexes rebuildable projections except for CAS claim authority over active
+  writable claims.
 - Require every write-capable workstream to claim one stage and declared work
   surface before creating an ephemeral worktree.
-- Let a heartbeat activation decide whether to recover existing work, continue
-  an open stage, claim new unblocked work, claim an eligible chore, or do
-  nothing.
+- Require every Bandit-created worktree to validate a Worktree Bootstrap
+  Contract before worker execution treats it as runnable.
+- Replace default LLM polling for no-op discovery with event-driven work
+  triggers plus a deterministic non-LLM sweeper.
+- Preserve a Work Availability Wake Guarantee so runnable work, recovery work,
+  and newly unblocked work wake the appropriate scheduler or agent path.
+- Let a woken single-claim activation decide whether to recover existing work,
+  continue an open stage, claim new unblocked work, claim an eligible chore, or
+  do nothing after deterministic reconciliation.
+- Keep improvement-evaluation wakeups and policy-routing updates bounded by the
+  Workflow Trial guardrails: predeclared decision criteria, uncertainty or
+  minimum-detectable-effect context, re-evaluation window, and explicit
+  keep/revise/revert/double-down decision evidence before policy changes.
+- Emit OTel-compatible agent traces for claims, wakeups, sweeps, tool calls,
+  reviewer runs, model calls, token spend, retries, failures, and outcomes.
+- Treat token and cost budgets as generous abnormal-run failsafes for scheduler,
+  agent, reviewer, and long-running execution rather than brittle caps that
+  force duplicate attempts.
+- Require paid scheduler, agent, reviewer, and long-running execution to carry
+  current provider-pricing evidence and spend-class approval before recurring
+  paid routing is treated as available.
+- Treat one-off paid reviewer or model calls before policy promotion as
+  benchmark/evaluation spend that requires per-run approval or active
+  spend-class approval and cannot silently create recurring routing policy.
+- Keep traces and observability projections non-canonical; repo artifacts remain
+  authoritative for workflow state, gates, decisions, UAT, landing, and closeout.
+- Mark coordination and observability projection freshness through
+  artifact-specific Evidence SLOs instead of generic confidence.
 - Introduce a Repo PM Coordinator protocol that can unblock work, create briefs,
   prioritize, triage follow-ups, maintain PM-owned context, supervise Work Item
   PM Orchestrators, escalate to the operator, and pause heartbeats when all work
@@ -58,6 +158,22 @@ state.
 - Preserve role boundaries: PM orchestrates, workstream agents implement,
   landing agents decide landing, and the operator owns product direction, UAT,
   policy changes, business tradeoffs, and explicit cost or risk overrides.
+- Reserve operator-blocking fail-closed behavior for safety, product, UAT,
+  policy, business, cost, irreversible-risk, and genuinely ambiguous scope
+  gates; route derivable operational drift to CLI-owned mechanical repair.
+- Require claimability, review-depth, and auto-landing surfaces to consume
+  layered risk-classification output rather than treating smell triggers as the
+  only safety signal.
+- Keep never-auto-landable surfaces outside auto-landing and unattended
+  workstream landing paths regardless of passing tests or reviewer agreement.
+- Keep the role taxonomy authority-based; stage-specific skills, tools,
+  reviewer depth, and prompts belong in Stage Capability Scope or Capability
+  Profiles unless governed authority differs.
+- Require claimable stages to name the required skills, allowed tools, inputs,
+  outputs, evidence, and forbidden actions before execution starts.
+- Require any load-bearing skill referenced by Stage Capability Scope to have
+  a lifecycle contract with owner, version, changelog, intended stages,
+  required tools, forbidden actions, evaluation packets, and rollback criteria.
 - Keep all coordination repo-native and CLI-authoritative. A database or cockpit
   may index or visualize state later, but it must not become hidden authority.
 - Keep worktrees ephemeral. Workstream agents mark work cleanup-ready; the Work
@@ -68,31 +184,83 @@ state.
 
 ## Solution
 
-Bandit will add a post-bootstrap coordination feature that combines an
-Authoritative In-Flight Registry, atomic work claim leases, declared work
-surface reservations, Repo PM Coordinator governance, and workstream heartbeat
-execution.
+Bandit will add a post-bootstrap coordination feature that combines a
+Git refs-backed claim authority primitive, an Authoritative In-Flight Registry,
+fenced work claim leases, idempotent claim operations, declared work surface
+reservations, a Git Mutation Serializer, event-driven work triggers, a
+deterministic work sweeper, OTel-compatible agent traces, Repo PM Coordinator
+governance, and workstream execution.
 
-The Authoritative In-Flight Registry is canonical for active claims and
-reservations. Per-work-item coordination state remains canonical for workflow
-stage and evidence. The CLI must reconcile both sources before creating,
-renewing, releasing, recovering, or completing a claim. If the registry and
-work-item state disagree, the CLI fails closed and routes the discrepancy to PM
-repair. Agents must never resolve the disagreement by editing the registry or
-work item manually.
+The Authoritative In-Flight Registry reports active claims and reservations,
+but it cannot be a plain-file canonical lock source for concurrent writable
+claims. For release-authorized parallel writes, the registry must either be a
+projection from the Git refs claim authority primitive or be protected by that
+primitive. The first authority backend uses `refs/bandit/*` and
+`git update-ref --stdin` transactions; `.bandit` claim files are
+human-readable projections and cannot grant, renew, release, or recover claims.
+Append-only per-work-item coordination history remains canonical for workflow
+stage, evidence, accepted blocks, and safe trigger points. Derived current-state
+views, cockpit status, state indexes, and registries are projections. The CLI
+must reconcile claim authority, registry projection, and append-only work-item
+history before creating, renewing, releasing, recovering, or completing a
+claim. If those sources disagree, the CLI fails closed and routes the
+discrepancy to PM repair. Agents must never resolve the disagreement by editing
+the registry, current-state view, cockpit projection, or work item manually.
+
+The Parallel Write Authorization Gate blocks true parallel writable workstreams
+until the claim primitive supports compare-and-swap claim creation or update,
+monotonic fencing tokens, stale-agent rejection for state-changing and external
+side-effecting operations, idempotency keys for retries and reruns, and
+declared Claim Safety Invariants proven through deterministic fault-injecting
+or property-style simulation, including wait-for graph cycle detection for
+work-surface reservations. Parallel worktrees are also blocked until shared
+`.git` plumbing mutations go through the Git Mutation Serializer. Advisory
+coordination, read-only inspection, and single-writer workflow improvements may
+continue before that gate exists, but they must not be represented as safe
+parallel writable execution.
+
+The Git Mutation Serializer is a CLI-owned single-writer guard for repository
+plumbing operations that mutate shared `.git` state. It covers worktree
+creation, worktree removal, pruning, worktree lock or unlock operations,
+branch/ref maintenance outside the claim CAS boundary, and packed-refs-affecting
+maintenance. It does not replace `refs/bandit/*` claim CAS semantics and cannot
+grant claim authority.
+
+Every claim-owned worktree is locked immediately after creation through the
+serializer. The `git worktree lock` reason names the Bandit claim ID, Work Item
+ID, and stage, but not the fencing token. Worktree creation is incomplete until
+that lock succeeds; if locking fails, the serializer-owned flow records failure
+evidence and releases or marks the claim failed.
+
+Worktree locking is necessary but not sufficient for worker execution. A
+Bandit-created worktree becomes runnable only after a Worktree Bootstrap
+Contract validates the allowed copied or linked files, setup commands,
+validation command, environment-variable references, secret-handling boundary,
+expected runtime dependencies, and bootstrap failure evidence. The first
+CLI-readable policy artifact should be repo-native, such as
+`.bandit/policy/worktree-bootstrap.json`, with optional `.worktreeinclude`-style
+allow-list support for projects that need it. Secret material is not copied by
+default; worktrees reference approved secret sources unless an existing
+operator-supervised policy explicitly authorizes a narrower exception.
 
 Every write-capable workstream follows claim-first worktree start:
 
-1. Reconcile work-item state, registry state, active leases, and declared work
-   surfaces.
-2. Atomically claim exactly one runnable stage and its work surface reservation.
-3. Create an ephemeral worktree only after the claim succeeds.
-4. Execute the stage, renewing the claim lease as needed.
-5. Record stage evidence and a Work Item PM Orchestrator-consumable handoff summary.
-6. Mark the claim cleanup-ready or blocked; do not delete the worktree.
-7. The Work Item PM Orchestrator verifies that work was transferred correctly;
-   the Repo PM Coordinator handles shared-resource integration routing, releases
-   the claim, and deletes the worktree.
+1. Reconcile append-only work-item history, registry projection, active leases,
+   declared work surfaces, and the Work-Surface Wait-For Graph.
+2. Claim exactly one runnable stage and its work surface reservation through the
+   CAS-backed claim authority.
+3. Create and `git worktree lock` an ephemeral worktree through the Git
+   Mutation Serializer only after the claim succeeds.
+4. Validate the Worktree Bootstrap Contract; if bootstrap fails, record failure
+   evidence and route the claim to failed, blocked, or recovery-required state.
+5. Execute the stage with the current fencing token and idempotency keys for
+   claim-gated side effects, renewing the claim lease as needed.
+6. Record stage evidence and a Work Item PM Orchestrator-consumable handoff summary.
+7. Mark the claim cleanup-ready or blocked; do not delete the worktree.
+8. The Work Item PM Orchestrator verifies that work was transferred correctly;
+   the Repo PM Coordinator handles shared-resource integration routing, unlocks
+   and deletes the worktree through the Git Mutation Serializer, then releases
+   the claim.
 
 A Repo PM Coordinator becomes the control plane. It reads required PM surfaces,
 maintains `CURRENT_CONTEXT.md`, maintains the Work Intake Ledger, creates or
@@ -124,8 +292,8 @@ agent-maintained from guided operator workflows rather than direct operator
 editing. Entries expose mutable current state for scanning and claimability
 checks, while transition history preserves who or what changed each entry, when,
 why, and the prior and next states. Future storage or database work may improve
-the representation, but this PRD preserves repo-native artifacts as the
-authoritative contract.
+the representation, but transition history remains the authoritative decision
+record and current state remains a derived scanning surface.
 
 Work Intake Ledger entries are triaged with a Work Intake Triage Skill. The
 skill ranks entries before presentation, walks the operator through selected
@@ -141,20 +309,22 @@ consensus before acting as Repo PM Coordinator for materialization.
 Materialization queues the Work Item but does not make it automatically
 claimable. Claimability still requires no `recovery_required_claim` or
 `expired_claim`, unblocked dependency graph state, declared write surfaces, valid
-scope and acceptance criteria, no conflicting active claim, and any required
-product, operator, or policy approval. A queued Work
+scope and acceptance criteria, no conflicting active claim, no work-surface
+wait-for cycle, and any required product, operator, or policy approval. A queued Work
 Item that is not claimable remains in `queued` state with a Claimability Report
 of `claimability: blocked`; the report must list all known blockers and name a
 deterministic `primary_blocker` rather than moving the Work Item into a separate
 queue. Initial blocker values are `missing_policy_approval`,
 `missing_product_or_operator_approval`, `recovery_required_claim`,
-`expired_claim`, `dependency`, `conflicting_active_claim`,
-`invalid_scope_or_acceptance`, and `missing_declared_write_surface`. Primary
+`expired_claim`, `conflicting_active_claim`, `work_surface_deadlock`,
+`dependency`, `invalid_scope_or_acceptance`, and `missing_declared_write_surface`. Primary
 blocker priority follows that order, placing claim recovery state ahead of
 ordinary dependency blockers. The Repo PM Coordinator may automatically repair
 mechanical blockers, such as missing declared write surfaces or normalized scope
 and acceptance metadata, only when the answer is derivable from already approved
-PRDs, briefs, or work artifacts. `recovery_required_claim` is not mechanically
+PRDs, briefs, or work artifacts. This fail-closed path should stop execution for
+Codex PM or CLI repair, not ask the operator, unless the blocker is an
+operator-owned gate. `recovery_required_claim` is not mechanically
 repairable and always routes through claim/recovery protocol. `expired_claim` is
 mechanically repairable only when repo evidence proves there is no unmerged work
 and policy allows release. Required evidence is the claim record, worktree path
@@ -169,7 +339,11 @@ any evidence is missing or ambiguous, `expired_claim` converts to
 `recovery_required_claim` instead of being released. It must not invent product
 scope, grant approvals, override policy, break dependencies, or force-resolve
 conflicting claims. Non-mechanical repairs become a Work Item Proposal or
-Operator Inbox entry. Every automatic mechanical repair is one atomic
+Operator Inbox entry. Ordinary operational drift such as missing derivable
+metadata, malformed supported artifacts, projection mismatch, or ledger
+bookkeeping drift should become CLI-owned mechanical repair instead of operator
+toil when approved artifacts prove the intended state. Every automatic
+mechanical repair is one atomic
 CLI-authoritative operation: it applies the state change, appends transition
 history with actor, source evidence, fields changed, before and after values,
 and the blocker cleared, assigns and returns the stable transition-history entry
@@ -201,6 +375,14 @@ cleared blocker, updated Claimability Report ID or hash, resume reason, and
 timestamp. The Work Item PM Orchestrator must not clear leases, recover
 worktrees, or claim replacement work. The Repo PM Coordinator must not run
 repeated repair-and-recompute loops in one activation.
+
+Auto-landing eligibility remains separate from claimability. Before any
+workstream or Landing Agent treats a change as auto-landable, the layered
+risk-classification gate must record hard-exclusion checks, never-auto-landable
+surface status, blast-radius signals, static-analysis signals, source-trust and
+input-quarantine state, supply-chain state, smell-trigger inputs, selected
+review depth, and operator-supervision requirements. A single high-risk signal
+can block auto-landing or raise review depth without a matching smell trigger.
 `accepted_deferred` remains in the Work Intake Ledger until a later promotion
 decision. Each triage session prioritizes low-effort/high-impact opportunities,
 handles prioritized new or untriaged entries first, then presents a list of
@@ -228,15 +410,35 @@ accepted, deferred, declined, superseded, or claimable. Read-only listing,
 validation, and reporting commands may inspect the ledger for evidence, but they
 do not satisfy a review request and must not mutate triage state.
 
-The workstream heartbeat remains a worker lane. Each activation may claim at
-most one runnable stage. If no claim is available, it records or emits a no-op
-status and exits. The operator can tune heartbeat frequency based on how much
-work is likely available without risking duplicate execution.
+The workstream activation remains a worker lane. Each activation may claim at
+most one runnable stage. It should be woken by event-driven work triggers or by
+the deterministic sweeper after work becomes available, not by default LLM
+polling for no-op discovery. If no claim is available after reconciliation, it
+records or emits a no-op status and exits. The scheduler contract must prove the
+Work Availability Wake Guarantee before removing any fallback that currently
+keeps work from sitting idle.
+
+Due improvement evaluations are runnable work only when the underlying Workflow
+Trial has the required policy-change guardrails: predeclared decision criteria,
+metric and baseline evidence, uncertainty or minimum-detectable-effect context,
+evaluation window, re-evaluation window, and a target decision vocabulary of
+keep, revise, revert, or double_down. A scheduler or worker may surface missing
+guardrail evidence as repair work, but it must not promote workflow policy from
+an evaluation that lacks those fields.
 
 ## Non-Goals
 
 - Do not interrupt the active bootstrap-gap lane or start parallel execution
   before bootstrap is complete.
+- Do not enable true parallel writable workstreams before the Parallel Write
+  Authorization Gate proves CAS-backed claim authority, fencing-token
+  enforcement, idempotency-key handling, stale-agent rejection, and concurrency
+  validation.
+- Do not treat plain-file registry writes or fail-closed-on-next-conflict logic
+  as sufficient atomic authority for concurrent writable claims.
+- Do not make LLM polling the default scheduler for no-op discovery once
+  event-driven triggers and deterministic sweeping can satisfy the Work
+  Availability Wake Guarantee.
 - Do not allow two active claims for the same work item in v0.
 - Do not implement product-scope changes without a grill-with-docs session and
   a resulting PRD, documented change, or work item.
@@ -252,7 +454,8 @@ work is likely available without risking duplicate execution.
 - Do not implement dynamic per-stage model routing in v0. The model and
   reasoning profile are set when the relevant automation is created.
 - Do not solve PR issue resolution or PR-safe landing governance in this PRD.
-  That requires a later dedicated agent and policy.
+  That requires a later dedicated agent and policy, plus the input quarantine
+  boundary for issue/PR metadata, comments, and review text.
 - Do not require every future repo to be Bandit-specific. The Repo PM
   Coordinator protocol should be global, with Bandit-specific integration
   layered on top.
@@ -262,12 +465,12 @@ work is likely available without risking duplicate execution.
 1. As the operator, I want multiple non-overlapping workstreams to run at the
    same time, so that Bandit can move faster after bootstrap without creating
    duplicate work.
-2. As the operator, I want the shared in-flight document to be authoritative for
-   active work, so that agents do not choose work from stale chat or an advisory
-   dashboard.
-3. As the operator, I want in-flight state and work-item state to confirm each
-   other before work starts, so that disagreement becomes a repair condition
-   instead of a hidden race.
+2. As the operator, I want active writable claims granted only through CAS claim
+   authority, so that agents do not choose work from stale chat, projection
+   drift, or an advisory dashboard.
+3. As the operator, I want in-flight projections, claim authority, and
+   append-only work-item history to confirm each other before work starts, so
+   that disagreement becomes a repair condition instead of a hidden race.
 4. As the operator, I want duplicate work on the same item prevented by a
    claim-first protocol, so that parallel sessions cannot waste time or corrupt
    evidence.
@@ -320,7 +523,8 @@ work is likely available without risking duplicate execution.
     does not create product direction without the operator's grill-with-docs
     process.
 24. As Codex PM, I want every runnable item to declare expected write surfaces,
-    so that the claim operation can detect collisions before work begins.
+    so that the claim operation can detect collisions and wait-for cycles before
+    work begins.
 25. As Codex PM, I want the scheduler to prefer recovery, active continuation,
     highest-priority unblocked work, then eligible chores, so that the next
     heartbeat follows a deterministic priority order.
@@ -339,8 +543,9 @@ work is likely available without risking duplicate execution.
     my scope and write authority are explicit.
 32. As a workstream agent, I want a lease renewal command, so that long-running
     stages remain visibly owned.
-33. As a workstream agent, I want collision refusal messages that name the
-    conflicting work surface and owner, so that I can stop without guessing.
+33. As a workstream agent, I want collision and deadlock refusal messages that
+    name the conflicting work surface, owner, and cycle path when applicable, so
+    that I can stop without guessing.
 34. As a workstream agent, I want to run read-only inspection without a claim, so
     that status checks do not create unnecessary locks.
 35. As a workstream agent, I want any write, mutating command, reviewer
@@ -356,7 +561,10 @@ work is likely available without risking duplicate execution.
 39. As a future PR-resolution agent, I want PR issue resolution and safe landing
     governance kept separate, so that this concurrency feature does not blur
     landing authority.
-40. As a future cockpit, I want to read derived state from CLI-reconciled
+40. As a future PR-resolution agent, I want issue titles, PR descriptions,
+    comments, reviews, and fetched references to enter as data-only external
+    input, so that contributor-controlled text cannot become my instructions.
+41. As a future cockpit, I want to read derived state from CLI-reconciled
     artifacts, so that the UI can visualize work without owning authority.
 41. As a future cross-repo operator, I want the Repo PM Coordinator protocol to
     be reusable across projects, so that Bandit practices can spread after the
@@ -369,28 +577,94 @@ work is likely available without risking duplicate execution.
 
 - The feature is not enabled until the bootstrap-gap lane is complete, blocked,
   or explicitly dispositioned.
-- An Authoritative In-Flight Registry exists for active claims and reservations.
-- Work-item coordination state and the registry are independently authoritative
-  in their domains and must confirm each other before a claim is accepted.
-- Any disagreement between registry state and work-item state fails closed into
-  PM repair or recovery workflow.
-- The CLI exposes an atomic claim operation that either records one exclusive
-  Work Claim Lease or fails without starting work.
+- True parallel writable workstreams remain disabled until the Parallel Write
+  Authorization Gate passes.
+- Default LLM polling for no-op discovery is rejected once event-driven triggers
+  and deterministic sweeping satisfy the Work Availability Wake Guarantee.
+- Runnable work, recovery-required work, and newly unblocked work wake the
+  appropriate scheduler or agent path without operator babysitting.
+- Claims, wakeups, sweeps, tool calls, reviewer runs, model calls, token spend,
+  retries, failures, and outcomes emit or record OTel-compatible trace data.
+- Paid, high-token, reviewer, scheduler, and long-running work carries a soft
+  budget band, current provider-pricing evidence when paid, spend-class
+  approval when paid, plus an abnormal-run token-cost failsafe, and any
+  continuation after a failsafe trip is explicitly recorded.
+- One-off paid reviewer or model calls before recurring policy promotion are
+  recorded as benchmark/evaluation spend with per-run approval or active
+  spend-class approval.
+- Trace records correlate to work item ID, claim ID or wake decision, reviewer
+  evidence, and relevant canonical artifact IDs where applicable.
+- Trace data and observability projections cannot satisfy workflow gates or
+  replace canonical repo artifacts.
+- Projection freshness is reported through artifact-specific Evidence SLOs with
+  source, owner, freshness state, and staleness reason.
+- Append-only coordination history is the only canonical workflow history for a
+  work item; derived current-state views, cockpit status, state indexes, and
+  registries are rebuildable projections.
+- A claim authority primitive exists for release-authorized writable claims and
+  provides compare-and-swap semantics through the Git refs claim authority
+  backend.
+- An Authoritative In-Flight Registry exists for active claims and reservations
+  as a projection from, or a CAS-protected view of, claim authority.
+- Claim authority uses a `refs/bandit/*` namespace and `git update-ref --stdin`
+  transactions for active writable claim state.
+- `.bandit` claim files, in-flight registries, cockpit views, and indexes are
+  projections and cannot grant or release claims.
+- Append-only work-item history, claim authority, and registry projection must
+  confirm each other before a claim is accepted.
+- Any disagreement between claim authority, registry state, current-state view,
+  and append-only work-item history fails closed into PM or CLI-owned mechanical
+  repair or recovery workflow, and reaches the operator only when an
+  operator-owned gate is actually missing.
+- The CLI exposes a CAS-backed claim operation that either records one exclusive
+  Work Claim Lease with a fencing token or fails without starting work.
 - A claim reserves both work item plus stage and declared write surfaces.
 - v0 allows at most one active claim per work item.
 - Every runnable work item or chore declares expected write surfaces before it
   is claimable.
 - The scheduler refuses claims with overlapping work surface reservations.
-- A heartbeat activation can claim at most one runnable stage.
+- Claimability builds a Work-Surface Wait-For Graph and refuses claims that
+  would create or continue a cycle.
+- A woken workstream activation can claim at most one runnable stage.
 - Read-only inspection can run without a claim.
 - Any write, mutation, reviewer-evidence write, handoff write, or worktree
   creation requires an active claim.
 - Worktree creation happens only after a successful claim.
+- Shared `.git` plumbing mutations for worktree and repository lifecycle go
+  through the Git Mutation Serializer.
+- Non-serialized shared `.git` plumbing mutation is refused by CLI policy.
+- Claim-owned worktrees are `git worktree lock`ed immediately with a stable
+  reason naming claim ID, Work Item ID, and stage.
+- Worktree creation is incomplete until the lock succeeds.
+- Worker execution starts only after Worktree Bootstrap Contract validation
+  succeeds; a locked but unbootstrapped worktree is not runnable.
+- The Worktree Bootstrap Contract records allowed copied or linked files, setup
+  commands, validation command, environment-variable references,
+  secret-handling boundary, expected runtime dependencies, and failure evidence.
+- Secret material is not copied into worktrees by default; bootstrap uses
+  references to approved secret sources unless existing operator-supervised
+  policy authorizes a narrower exception.
+- Only the Repo PM Coordinator unlocks claim-owned worktrees after handoff
+  verification and cleanup routing.
 - If worktree creation fails, the claim is released or marked failed with a
   PM-visible reason.
 - Work Claim Leases include owner/session, work item, stage, declared surface,
-  worktree path when created, branch, claimed timestamp, expiration timestamp,
-  renewal timestamp, status, and recovery metadata.
+  fencing token, worktree path when created, branch, claimed timestamp,
+  expiration timestamp, renewal timestamp, status, and recovery metadata.
+- State-changing claim operations require expected claim state, the current
+  fencing token when one has been issued, and a claim idempotency key.
+- External side-effecting operations performed under a claim record and verify
+  the current fencing token plus an idempotency key so stale agents are
+  rejected and retries cannot duplicate the effect.
+- A same-key same-input retry returns the existing claim-operation result or an
+  equivalent no-op result; a same-key different-input retry is refused.
+- Declared Claim Safety Invariants cover claim, release, reconcile, stale
+  expected state, stale fencing tokens, idempotency replay/conflict,
+  projection/history disagreement, work-surface cycles, and failed serializer
+  or worktree-lock cleanup under deterministic fault-injecting or
+  property-style simulation.
+- Two concurrent claim attempts for the same work item, stage, or declared write
+  surface cannot both succeed under that simulation harness.
 - Expired claims without unmerged work may be released by policy.
 - Expired claims with unmerged changes become recovery-required and are not
   auto-deleted.
@@ -404,6 +678,9 @@ work is likely available without risking duplicate execution.
 - The scheduler priority order is recovery-required claims, continuable active
   work, highest-priority unblocked queued work, deterministic tie-breakers, then
   eligible low-risk chores.
+- The deterministic sweeper can detect stale claims, missed triggers, due
+  evaluations, and blocker-state changes without waking an LLM for ordinary
+  no-op checks.
 - The project uses a single Work Intake Ledger for all proposed work, including
   chores, retrospective improvement candidates, feature ideas, reviewer
   follow-ups, operator requests, spawned work, deferred cleanup, and product
@@ -427,19 +704,23 @@ work is likely available without risking duplicate execution.
   if it records the triage decision before acting under Repo PM Coordinator
   authority.
 - Materialization queues a Work Item but does not make it automatically
-  claimable; dependency, declared-surface, scope, claim-conflict, and required
-  approval gates still apply.
+  claimable; dependency, declared-surface, scope, claim-conflict,
+  work-surface-deadlock, and required approval gates still apply.
 - A queued Work Item that is not claimable remains queued with a Claimability
   Report of `claimability: blocked` that lists all known blockers and names a
   deterministic `primary_blocker`.
 - Claimability Report blockers include `missing_policy_approval`,
   `missing_product_or_operator_approval`, `recovery_required_claim`,
-  `expired_claim`, `dependency`, `conflicting_active_claim`,
-  `invalid_scope_or_acceptance`, and `missing_declared_write_surface`.
+  `expired_claim`, `conflicting_active_claim`, `work_surface_deadlock`,
+  `dependency`, `invalid_scope_or_acceptance`, and
+  `missing_declared_write_surface`.
 - Claimability Report primary blocker priority follows that same deterministic
   order, placing claim recovery state ahead of ordinary dependency blockers.
 - Repo PM Coordinator may automatically repair mechanical claimability blockers
   only when approved artifacts already prove the answer.
+- Operator-blocking fail-closed behavior is reserved for safety, product, UAT,
+  policy, business, cost, irreversible-risk, and genuinely ambiguous scope
+  gates; derivable operational drift is a CLI-owned mechanical repair path.
 - `recovery_required_claim` is not mechanically repairable and always routes
   through claim/recovery protocol.
 - `expired_claim` is mechanically repairable only when repo evidence proves
@@ -541,6 +822,12 @@ work is likely available without risking duplicate execution.
   implement or claim, worker roles do not govern intake or landing, reviewer
   roles do not land, and landing roles do not invent missing product or policy
   approval.
+- Bandit's default authority roles are Operator, PM or Coordinator, Worker,
+  Reviewer, and Landing; capability differences are configured through
+  per-stage skill/tool scopes and capability profiles unless a different
+  authority boundary is required.
+- Claimable stages declare their Stage Capability Scope before worker or
+  reviewer execution begins.
 - Repo PM Coordinator can pause/resume Workstream Agent heartbeat through
   explicit automation control paths.
 - Repo PM Coordinator may pause its own recurring automation only when all
@@ -563,8 +850,10 @@ work is likely available without risking duplicate execution.
 - Canonical decisions affecting repo state are written to repo artifacts even
   when automation memory records the reasoning.
 - Product-scope changes require grill-with-docs before work items are created.
-- The implementation fails closed when policy, registry, work-item state,
-  automation status, declared surfaces, or worktree state cannot be reconciled.
+- The implementation fails closed when policy, registry projection, append-only
+  work-item history, claim authority, automation status, declared surfaces, or
+  worktree state cannot be reconciled, but the destination is PM/CLI repair for
+  derivable operational drift and operator input only for operator-owned gates.
 
 ## Implementation Decisions
 
@@ -573,18 +862,56 @@ work is likely available without risking duplicate execution.
 - Preserve CLI Authority. Agents, skills, automations, cockpit views, and
   indexes call or read the CLI contract; they do not manually mutate canonical
   coordination state.
-- Treat the Authoritative In-Flight Registry as canonical for active claims and
-  reservations, not as a derived status page.
-- Treat per-work-item coordination state as canonical for workflow state,
-  evidence state, accepted blocks, and safe trigger points.
-- Require claim reconciliation to confirm both authoritative sources before
-  work starts.
+- Treat append-only per-work-item coordination history as the canonical
+  workflow history and reject hidden authority in derived current-state views,
+  cockpit status, state indexes, or registries.
+- Treat the claim authority primitive as the release-authorized write path for
+  exclusive writable claims.
+- Implement the first claim authority primitive as the Git refs claim authority
+  backend described in
+  `docs/decisions/2026-05-27-git-refs-claim-authority-backend.md`.
+- Store active claim authority in `refs/bandit/*` and perform claim state
+  changes through `git update-ref --stdin` compare-and-swap transactions.
+- Treat the Authoritative In-Flight Registry as a projection from, or a
+  CAS-protected view of, claim authority for active claims and reservations.
+- Treat `.bandit` in-flight or claim files as Claim Projection Artifacts:
+  readable, rebuildable, and invalid as authority for granting claims.
+- Treat per-work-item coordination projections as derived from append-only
+  history unless the CAS claim authority primitive is actively granting or
+  refusing a writable claim.
+- Require claim reconciliation to confirm claim authority, registry projection,
+  and append-only per-work-item coordination history before work starts.
+- Require each successful writable claim to issue a monotonic fencing token.
+- Require state-changing claim operations and external side-effecting operations
+  under a claim to prove the current fencing token and provide a claim
+  idempotency key so stale agents are rejected and retries cannot duplicate
+  effects.
+- Define Claim Safety Invariants for claim, release, reconcile, worktree-lock,
+  and claim-gated side-effect correctness, and require deterministic
+  fault-injecting or property-style simulation before release authorization.
 - Use a deep claim coordination module with a small public interface for claim,
   renew, release, fail, block, complete, recover, and inspect operations.
 - Use a deep work-surface reservation module to normalize declared surfaces,
-  detect overlap, and explain collisions.
+  detect overlap, detect wait-for graph cycles, and explain collisions or
+  deadlocks.
+- Use a Git Mutation Serializer module for shared `.git` plumbing mutations
+  needed by worktree lifecycle and repository maintenance.
+- Use claim-owned worktree locks for every created claim worktree, with lock
+  failure treated as worktree creation failure.
+- Use a Worktree Bootstrap Contract module or policy adapter so a locked
+  Bandit-created worktree is not considered runnable until setup and validation
+  succeed.
 - Use a deterministic scheduler module that ranks candidates from reconciled
   state and returns at most one claimable stage.
+- Use event-driven work triggers for ordinary work availability wakeups and a
+  deterministic non-LLM sweeper for stale claims, missed triggers, due
+  evaluations, and blocker-state changes.
+- Treat LLM polling for no-op discovery as a fallback only until the Work
+  Availability Wake Guarantee is proven.
+- Emit OTel-compatible agent traces from CLI-owned claim, scheduler, reviewer,
+  tool-execution, and workstream operations.
+- Treat observability projections as analysis and debugging surfaces, not as
+  workflow authority.
 - Use a Repo PM Coordinator protocol module or skill boundary separate from worker
   execution logic.
 - Use a heartbeat automation control adapter for pause/resume/status rather than
@@ -628,14 +955,39 @@ work is likely available without risking duplicate execution.
   reconciliation results, scheduler decisions, and worktree lifecycle effects.
   They should not assert incidental parser or helper internals.
 - Test the claim coordination module with successful claims, duplicate claims,
-  stale state, conflicting registry/work-item state, lease renewal, release,
-  completion, blocking, failure, expiration, and recovery-required behavior.
+  CAS mismatch refusal, fencing-token issuance, stale-token rejection,
+  idempotent replay, idempotency-key mismatch refusal, conflicting
+  registry/history state, lease renewal, release, completion, blocking,
+  failure, expiration, and recovery-required behavior.
+- Add deterministic fault-injecting or property-style claim authority tests that
+  assert Claim Safety Invariants across concurrent claims, release, reconcile,
+  stale reads, pauses, CAS mismatch, stale fencing tokens, idempotency replay
+  and conflict, projection/history disagreement, wait-for cycles, serializer
+  contention, and worktree lock failure.
 - Test the work-surface reservation module with exact path conflicts, ancestor
   and descendant conflicts, named resource conflicts, non-overlapping claims,
-  normalized path equivalence, and readable conflict messages.
+  wait-for graph cycles, normalized path equivalence, and readable conflict or
+  deadlock messages.
+- Test the Git Mutation Serializer with contending worktree and repository
+  plumbing operations, refusal of non-serialized shared `.git` mutations, stale
+  lock or timeout behavior, and failure cleanup.
+- Test claim-owned worktree locking with reason contents, lock failure cleanup,
+  Repo PM Coordinator-only unlock, and refusal of worker-owned unlock.
+- Test Worktree Bootstrap Contract behavior for allowed copy/link entries,
+  setup command execution, validation command execution, environment-variable
+  references, secret-copy refusal, bootstrap failure evidence, and refusal to
+  execute worker mutations in a locked but unbootstrapped worktree.
 - Test scheduler behavior with recovery-first ordering, continuation ordering,
   unblocked priority ordering, deterministic tie-breakers, eligible chore
   fallback, no-op behavior, and fail-closed ambiguous state.
+- Test Work Availability Wake Guarantee behavior for newly claimable work,
+  recovery-required work, newly unblocked in-progress work, missed trigger
+  recovery, and deterministic no-op sweeps without LLM execution.
+- Test trace emission and correlation for claim operations, wake decisions,
+  deterministic sweeps, tool calls, reviewer runs, model calls, token spend,
+  failures, retries, and outcome records.
+- Test that trace data cannot replace required canonical workflow artifacts or
+  satisfy landing gates.
 - Test Repo PM Coordinator behavior through command outcomes or skill protocol
   fixtures: required reads, allowed writes, operator escalation, self-pause
   preconditions, Workstream heartbeat pause/resume, refusal to claim work, and
@@ -643,8 +995,9 @@ work is likely available without risking duplicate execution.
 - Test role authority boundaries across coordinator, worker, reviewer, and
   landing fixtures.
 - Test Workstream Agent behavior with claim-first worktree start, failed
-  worktree creation cleanup, lease renewal, Work Item PM Orchestrator handoff
-  summary, cleanup-ready marking, and refusal to land or delete worktrees.
+  worktree creation or lock cleanup, lease renewal, Work Item PM Orchestrator
+  handoff summary, cleanup-ready marking, and refusal to land, unlock, or delete
+  worktrees.
 - Test Operator Inbox contract behavior through Repo PM Coordinator protocol
   tests that consume operator responses and translate decisions into work
   artifacts.
@@ -652,10 +1005,12 @@ work is likely available without risking duplicate execution.
   canonical repo state.
 - Reuse existing Bandit command tests, validator tests, work-item tests, landing
   gate tests, auto-land policy tests, and artifact creation tests as prior art.
-- Add validation tests that detect registry/work-item disagreement, duplicate
-  active claims, undeclared work surfaces, overlapping reservations, stale
-  leases, and cleanup-ready worktrees awaiting Work Item PM Orchestrator
-  verification.
+- Add validation tests that detect claim authority/registry/history
+  disagreement, duplicate active claims, undeclared work surfaces, overlapping
+  reservations, work-surface wait-for cycles, stale leases, stale fencing
+  tokens, missing or conflicting idempotency keys, non-serialized shared `.git`
+  mutations, unlocked claim-owned worktrees, and cleanup-ready worktrees
+  awaiting Work Item PM Orchestrator verification.
 - Run focused tests for each slice, then `npm test`, `npm run typecheck`,
   `npm run bandit -- validate`, relevant claim/scheduler validation commands,
   relevant landing checks, and `git diff --check`.
@@ -692,8 +1047,10 @@ Verification should combine:
 - Protocol tests for Repo PM Coordinator and Workstream Agent boundaries.
 - Fixture-based tests for `OPERATOR.md` Operator Inbox, `CURRENT_CONTEXT.md`, automation
   `MEMORY.md`, and handoff summaries.
-- Integration tests that simulate two concurrent claim attempts and prove only
-  one can win.
+- Integration, property, or deterministic simulation tests that exercise Claim
+  Safety Invariants across concurrent claims, release, reconcile, retries,
+  pauses, stale tokens, idempotency replay/conflict, projection disagreement,
+  wait-for cycles, and worktree/serializer failure paths.
 - Manual dry runs only for automation platform pause/resume behavior until that
   path has a deterministic local test harness.
 
@@ -714,7 +1071,8 @@ Major modules to build or modify:
 - Work item declared-surface metadata.
 - Authoritative In-Flight Registry.
 - Claim reconciliation and lease operations.
-- Work surface reservation overlap detection.
+- Work surface reservation overlap and wait-for cycle detection.
+- Git Mutation Serializer.
 - Scheduler candidate selection.
 - Claim-first worktree lifecycle.
 - Workstream handoff summary contract.
@@ -735,6 +1093,9 @@ Proposed work draft:
       "scope": [
         "Create the Repo PM Coordinator authority envelope, required reads, allowed writes, pause rules, self-pause preconditions, and operator escalation workflow.",
         "Define role authority boundaries so the Repo PM Coordinator can mark work claimable and notify or trigger worker lanes but cannot acquire claims, execute work, review as reviewer, or land.",
+        "Define the small authority-role set and the rule that stage-specific skills and tools are Stage Capability Scope, not separate agent roles.",
+        "Define how Stage Capability Scope references load-bearing skills by lifecycle contract and version.",
+        "Allow Stage Capability Scope to declare soft budget bands, token-cost failsafes, provider-pricing evidence requirements, benchmark/evaluation spend approvals, spend-class approvals, and continuation paths for paid, high-token, reviewer, or long-running stages.",
         "Define OPERATOR.md as a compact Operator Inbox with operator response handling and resolution rules.",
         "Define file-era operator-visible coordination as Operator Inbox messages, with richer notification behavior deferred to future GUI or cockpit work.",
         "Define required automation MEMORY.md fields for Repo PM Coordinator and Workstream automations.",
@@ -749,6 +1110,10 @@ Proposed work draft:
         "Repo PM Coordinator protocol names required reads, allowed writes, forbidden actions, pause authority, self-pause preconditions, and escalation duties.",
         "Repo PM Coordinator is forbidden from acquiring work claims, starting execution, acting as reviewer, or landing work.",
         "Role authority boundary tests prove coordinator, worker, reviewer, and landing roles cannot perform each other's governed actions.",
+        "The protocol rejects new role names that only express skills, tools, reviewer depth, model tier, or prompt behavior.",
+        "Claimable-stage examples show skills and tools scoped through Stage Capability Scope.",
+        "Claimable-stage examples reference load-bearing skills by lifecycle contract and version.",
+        "Claimable-stage examples show budget failsafes as abnormal-run guardrails rather than tight execution caps.",
         "Operator Inbox contract is strictly operator-facing and excludes Workstream Agent context.",
         "Repo PM Coordinator writes operator-visible coordination messages to the Operator Inbox rather than a separate notification channel in v0.",
         "Resolved operator entries have a required artifact translation and archive or removal rule.",
@@ -756,7 +1121,7 @@ Proposed work draft:
         "The protocol refuses product-scope creation without grill-with-docs output."
       ],
       "test_plan": [
-        "Run focused validation tests for Repo PM Coordinator protocol required fields, forbidden actions, refusal to claim work, and role authority boundaries.",
+        "Run focused validation tests for Repo PM Coordinator protocol required fields, forbidden actions, refusal to claim work, role authority boundaries, small authority-role set, and stage capability scoping.",
         "Run fixture tests for Operator Inbox entries, file-era coordination messages, operator responses, and resolution flow.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
       ],
@@ -798,6 +1163,10 @@ Proposed work draft:
       "smell_triggers": [
         "Repo PM Coordinator must not become implementation agent.",
         "Any agent performing another role's governed action for convenience.",
+        "A new agent role introduced only to express a skill, tool, reviewer depth, model tier, or prompt behavior.",
+        "A claimable stage without scoped skills and tools.",
+        "A required load-bearing skill without lifecycle contract, version, evaluation packets, or rollback criteria.",
+        "A claimable paid or high-token stage without current provider-pricing evidence, per-run approval or active spend-class approval for benchmark/evaluation spend, or an abnormal-run token-cost failsafe.",
         "Operator Inbox must not become general agent context.",
         "Automation MEMORY.md must not become hidden canonical state."
       ],
@@ -824,6 +1193,7 @@ Proposed work draft:
         "Define the boundary where Work Intake Triage Skill records accepted_to_queue consensus and Repo PM Coordinator materializes the accepted proposal through the CLI-authoritative path.",
         "Separate Work Item materialization from claimability; materialized Work Items must still satisfy dependency, declared-surface, scope, claim-conflict, and required-approval gates before claim.",
         "Define Claimability Report output for queued Work Items that are not claimable, including claimability: blocked, all known blockers, explicit blocker values, deterministic primary_blocker, and no separate blocked queue.",
+        "Define the operator-blocking fail-closed boundary: product, UAT, policy, business, cost, irreversible-risk, and genuinely ambiguous scope gates go to the operator; derivable operational drift goes to CLI-owned mechanical repair.",
         "Allow Repo PM Coordinator to repair mechanical claimability blockers only when approved artifacts already prove the fix; route non-mechanical repairs to Work Item Proposal or Operator Inbox.",
         "Route recovery_required_claim through claim/recovery protocol; allow expired_claim mechanical repair only when repo evidence proves no unmerged work and policy allows release.",
         "Require expired_claim release evidence: claim record, worktree path and branch, clean worktree status, no untracked or staged changes, no commits ahead of integration base unless already transferred, and policy allowing release.",
@@ -865,11 +1235,12 @@ Proposed work draft:
         "Validation rejects triage-state mutations from roles other than Repo PM Coordinator or Work Intake Triage Skill.",
         "accepted_to_queue is recorded as triage consensus before the Repo PM Coordinator allocates a real Work Item ID, creates an initial artifact shell, links back to the proposal, and makes the Work Item eligible for queueing and claimability checks.",
         "If one agent session performs both triage and materialization, evidence preserves the role boundary and ordering.",
-        "A materialized Work Item is not claimable until recovery_required_claim, expired_claim, dependency graph, declared-surface, scope and acceptance criteria, active-claim conflict, and required-approval checks pass.",
+        "A materialized Work Item is not claimable until recovery_required_claim, expired_claim, dependency graph, declared-surface, scope and acceptance criteria, active-claim conflict, work-surface-deadlock, and required-approval checks pass.",
         "A materialized Work Item that fails claimability remains queued with claimability: blocked, blockers, and primary_blocker, not a separate blocked queue.",
-        "Claimability Report blockers cover missing_policy_approval, missing_product_or_operator_approval, recovery_required_claim, expired_claim, dependency, conflicting_active_claim, invalid_scope_or_acceptance, and missing_declared_write_surface.",
+        "Claimability Report blockers cover missing_policy_approval, missing_product_or_operator_approval, recovery_required_claim, expired_claim, conflicting_active_claim, work_surface_deadlock, dependency, invalid_scope_or_acceptance, and missing_declared_write_surface.",
         "Claimability Report primary_blocker is selected deterministically in that priority order, with recovery_required_claim and expired_claim ahead of ordinary dependency blockers.",
         "Repo PM Coordinator can repair missing declared write surfaces or normalize scope and acceptance metadata only when approved PRDs, briefs, or work artifacts prove the answer.",
+        "Derivable operational drift is repaired through CLI-owned mechanical repair or PM disposition, not routed to the Operator Inbox as missing operator input.",
         "Repo PM Coordinator cannot mechanically repair recovery_required_claim.",
         "Repo PM Coordinator can mechanically repair expired_claim only when repo evidence proves no unmerged work and policy allows release.",
         "expired_claim mechanical release requires claim record, worktree path and branch, clean worktree status, no untracked or staged changes, no commits ahead of integration base unless already transferred, and policy allowing release.",
@@ -894,6 +1265,7 @@ Proposed work draft:
         "Work Item PM Orchestrator cannot clear leases, recover worktrees, or claim replacement work.",
         "Validation rejects repeated repair-and-recompute loops in one Repo PM Coordinator activation.",
         "Repo PM Coordinator cannot invent product scope, grant approvals, override policy, break dependencies, or force-resolve conflicting claims to clear claimability.",
+        "Validation flags operator escalations for derivable operational drift and mechanical repairs that attempt to cross an operator-owned gate.",
         "Claimability blockers that are not mechanically repairable produce a Work Item Proposal or Operator Inbox entry.",
         "accepted_deferred remains a non-claimable Work Item Proposal until later promotion.",
         "Work Intake Triage Skill records operator consensus and clarifying-question answers before a proposal becomes claimable.",
@@ -958,46 +1330,43 @@ Proposed work draft:
     },
     {
       "kind": "slice",
-      "title": "In-Flight Registry And Atomic Claim Leases",
-      "goal": "Create the CLI-owned Authoritative In-Flight Registry and atomic Work Claim Lease operations that prevent duplicate work.",
+      "title": "Coordination Event Log Authority",
+      "goal": "Make append-only coordination history the canonical workflow history and keep current-state, registry, cockpit, and index surfaces rebuildable projections except for CAS claim authority.",
       "scope": [
-        "Define registry schema for active claims, leases, owners, stages, surfaces, timestamps, worktree path, branch, renewal, and recovery metadata.",
-        "Implement atomic claim, inspect, renew, release, fail, block, complete, and recover operations.",
-        "Reconcile registry state with per-work-item coordination state before accepting claims.",
-        "Fail closed on duplicate active claims, stale state, malformed registry, or registry/work-item disagreement."
+        "Define canonical coordination history as append-only per-work-item workflow and accepted coordination events.",
+        "Define derived current-state views, cockpit status, state indexes, and ordinary registry reads as rebuildable projections.",
+        "Define the CAS claim authority primitive as the only active writable-claim authority.",
+        "Define reconciliation rules between append-only history, projections, and claim authority.",
+        "Reject direct mutation paths that make a projection independent workflow authority."
       ],
       "out_of_scope": [
-        "Do not create worktrees.",
-        "Do not schedule candidate work.",
-        "Do not integrate or land completed work."
+        "Do not implement CAS claim operations.",
+        "Do not implement scheduler execution.",
+        "Do not introduce a database or hosted event store."
       ],
       "acceptance_criteria": [
-        "Two simultaneous claim attempts for the same work item and stage cannot both succeed.",
-        "v0 permits at most one active claim per work item.",
-        "Registry/work-item disagreement creates PM repair or recovery output.",
-        "Expired claims with unmerged work become recovery-required rather than auto-deleted.",
-        "Manual registry edits are detected by validation when they break reconciliation."
+        "A work item's workflow state can be rebuilt from append-only coordination history.",
+        "Current-state views, cockpit status, state indexes, and registry reads identify their source history or claim-authority input.",
+        "Projection-only mutation paths are rejected or routed through CLI append/reconciliation.",
+        "The registry cannot grant release-authorized writable claims unless backed by the CAS claim authority primitive.",
+        "Disagreement between append-only history, projections, and claim authority fails closed into PM or CLI-owned mechanical repair unless an operator-owned gate is missing."
       ],
       "test_plan": [
-        "Run focused claim tests for duplicate, stale, renewal, release, block, fail, complete, expiration, and recovery paths.",
-        "Run fixture tests for registry/work-item disagreement.",
+        "Run replay tests that rebuild current-state views from append-only history.",
+        "Run projection authority tests proving cockpit, index, current-state, and registry projection writes cannot become workflow authority.",
+        "Run reconciliation tests for history/projection/claim-authority disagreement.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
       ],
-      "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; claim operations must keep state explicit and failure paths clear.",
+      "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; source-of-truth boundaries must be explicit and enforced by narrow interfaces.",
       "stage_rubric_checklist": [
         {
           "stage": "Stage 2: Test Design And RED Evidence",
           "verdict": "required",
-          "evidence": "Duplicate-claim and reconciliation tests must fail before implementation."
-        },
-        {
-          "stage": "Stage 3: Implementation Clean-Code Rubric",
-          "verdict": "required",
-          "evidence": "Atomic claim logic must be a deep module with a narrow interface."
+          "evidence": "Replay, projection-authority, and reconciliation tests must fail before implementation."
         }
       ],
       "bootstrap_gaps": [
-        "True cross-process locking semantics may need platform-specific verification."
+        "Parallel writable workstreams remain disabled until projection authority and CAS claim authority are proven."
       ],
       "expected_files": [
         "docs/work/<ID>/brief.md",
@@ -1007,17 +1376,125 @@ Proposed work draft:
         "docs/work/<ID>/landing-verdict.md",
         "docs/work/<ID>/landing-action.md",
         "docs/work/<ID>/retrospective.md",
-        ".bandit/in-flight.json",
+        ".bandit/policy/coordination-authority.json"
+      ],
+      "first_implementation_order": [
+        "Write RED replay, projection-authority, and reconciliation tests.",
+        "Define source-of-truth/projection policy.",
+        "Add validation for projection-only mutation refusal.",
+        "Record evidence and update PRD-002 claim-authority inputs."
+      ],
+      "smell_triggers": [
+        "Current-state view treated as canonical.",
+        "Registry grants claims without CAS claim authority.",
+        "Cockpit or state index mutates workflow state directly.",
+        "Projection disagreement resolved by manual edit.",
+        "Projection disagreement escalated to the operator despite a derivable mechanical repair path."
+      ],
+      "required_evidence": [
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md"
+      ],
+      "operator_input_status": "No operator input is required for the source-of-truth boundary because the operator confirmed append-only workflow/event history is canonical and projections are derived."
+    },
+    {
+      "kind": "slice",
+      "title": "Claim Authority And Fenced Claim Leases",
+      "goal": "Create the CLI-owned claim authority primitive, registry projection, and fenced idempotent Work Claim Lease operations that prevent duplicate writable work and duplicate side effects.",
+      "scope": [
+        "Define Git refs claim authority semantics for active claims, leases, owners, stages, surfaces, fencing tokens, idempotency keys, timestamps, worktree path, branch, renewal, and recovery metadata.",
+        "Define the Authoritative In-Flight Registry as a projection from, or CAS-protected view of, the Git refs claim authority backend.",
+        "Implement CAS-backed claim, inspect, renew, release, fail, block, complete, and recover operations using refs/bandit/*, git update-ref --stdin transactions, fencing-token checks, and idempotency-key handling.",
+        "Require expected claim state, current fencing token, and claim idempotency key for state-changing claim operations after token issuance.",
+        "Require external side-effecting operations under a claim to carry the current fencing token and an idempotency key.",
+        "Build and validate the Work-Surface Wait-For Graph before accepting writable claims.",
+        "Reconcile claim authority, registry projection, and append-only per-work-item coordination history before accepting claims.",
+        "Define Claim Safety Invariants and the deterministic fault-injecting or property-style simulation harness required to prove them.",
+        "Fail closed on duplicate active claims, stale expected state, stale fencing tokens, missing or conflicting idempotency keys, work-surface wait-for cycles, malformed registry, or claim authority/registry/history disagreement, with operator escalation only for operator-owned gates."
+      ],
+      "out_of_scope": [
+        "Do not create worktrees.",
+        "Do not schedule candidate work.",
+        "Do not integrate or land completed work.",
+        "Do not enable true parallel writable workstreams beyond claim-authority validation."
+      ],
+      "acceptance_criteria": [
+        "Declared Claim Safety Invariants cover duplicate claims, release, reconcile, stale expected state, stale fencing tokens, idempotency replay/conflict, projection/history disagreement, work-surface cycles, and failed serializer or worktree-lock cleanup.",
+        "Deterministic fault-injecting or property-style simulation proves the Claim Safety Invariants; example-only duplicate-claim tests do not satisfy the gate.",
+        "Two simultaneous claim attempts for the same work item, stage, or declared write surface cannot both succeed under the simulation harness.",
+        "Every successful writable claim receives a monotonic fencing token.",
+        "Active claim authority is written through refs/bandit/* and git update-ref --stdin transactions, not through plain .bandit file edits.",
+        ".bandit in-flight claim state is a projection and manual edits cannot grant, renew, release, complete, or recover claims.",
+        "State-changing claim operations reject stale or missing fencing tokens after token issuance.",
+        "State-changing claim operations and external side-effecting operations under a claim require an idempotency key after token issuance.",
+        "A same-key same-input retry returns the prior result or an equivalent no-op result, while same-key different-input reuse is refused.",
+        "Claimability refuses any claim that would create or continue a Work-Surface Wait-For Graph cycle.",
+        "v0 permits at most one active claim per work item.",
+        "Claim authority/registry/history disagreement creates PM repair, CLI-owned mechanical repair, or recovery output rather than default operator escalation.",
+        "Expired claims with unmerged work become recovery-required rather than auto-deleted.",
+        "Manual registry edits are detected by validation when they break reconciliation.",
+        "The feature records that true parallel writable workstreams remain blocked until the full Parallel Write Authorization Gate passes."
+      ],
+      "test_plan": [
+        "Run focused claim tests for duplicate, CAS mismatch, fencing-token issuance, stale-token rejection, idempotent retry, idempotency-key conflict, renewal, release, block, fail, complete, expiration, and recovery paths.",
+        "Run focused claim-gated side-effect tests for current fencing token and idempotency-key requirements.",
+        "Run focused Work-Surface Wait-For Graph cycle tests.",
+        "Run deterministic fault-injecting or property-style Claim Safety Invariant simulation covering races, retries, pauses, stale expected state, stale fencing tokens, idempotency replay/conflict, projection/history disagreement, wait-for cycles, and failed serializer or worktree-lock cleanup.",
+        "Run fixture tests for claim authority/registry/history disagreement.",
+        "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
+      ],
+      "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; claim operations must keep state explicit and failure paths clear.",
+      "stage_rubric_checklist": [
+        {
+          "stage": "Stage 2: Test Design And RED Evidence",
+          "verdict": "required",
+          "evidence": "Claim Safety Invariant simulation plus duplicate-claim, CAS mismatch, fencing-token, stale-agent, idempotency-key, work-surface-cycle, and reconciliation tests must fail before implementation."
+        },
+        {
+          "stage": "Stage 3: Implementation Clean-Code Rubric",
+          "verdict": "required",
+          "evidence": "Claim authority, fencing-token, idempotency-key, and wait-for graph logic must be deep modules with narrow interfaces."
+        }
+      ],
+      "bootstrap_gaps": [
+        "Claim authority primitive must prove compare-and-swap semantics before true parallel writable workstreams are enabled.",
+        "Fencing-token rejection and idempotency-key behavior must be proven for stale agents and retries before external side effects are allowed under parallel claims.",
+        "Work-Surface Wait-For Graph cycle detection must be proven before parallel writable claims are enabled.",
+        "Claim Safety Invariants must be proven by deterministic fault-injecting or property-style simulation before release-authorized writable claims are enabled."
+      ],
+      "expected_files": [
+        "docs/work/<ID>/brief.md",
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md",
+        "docs/decisions/2026-05-27-git-refs-claim-authority-backend.md",
+        "refs/bandit/*",
+        ".bandit/in-flight.json projection",
         ".bandit/policy/work-claims.json"
       ],
       "first_implementation_order": [
-        "Write duplicate-claim and reconciliation RED tests.",
-        "Define registry schema and claim state values.",
-        "Implement atomic claim operations.",
+        "Write Claim Safety Invariant simulation plus duplicate-claim, CAS mismatch, fencing-token, stale-agent, idempotency-key, work-surface-cycle, and reconciliation RED tests.",
+        "Define refs/bandit/* claim authority semantics, registry projection schema, idempotency-key behavior, Work-Surface Wait-For Graph behavior, and claim state values.",
+        "Implement CAS-backed claim operations through git update-ref --stdin transactions.",
+        "Implement fencing-token issuance and rejection plus idempotency-key replay and mismatch refusal.",
+        "Implement Work-Surface Wait-For Graph cycle detection and refusal diagnostics.",
         "Add validation and evidence."
       ],
       "smell_triggers": [
         "Any advisory-only lock behavior.",
+        "Any file-only check-then-write claim behavior.",
+        "Any .bandit projection file treated as active claim authority.",
+        "Any state-changing operation without expected claim state, fencing-token verification, or idempotency-key handling.",
+        "Any claim-gated external side effect without current fencing-token and idempotency-key verification.",
+        "Any pairwise-only work-surface check without wait-for graph cycle detection.",
+        "Any claim, release, reconcile, or side-effect correctness claim backed only by hand-picked examples without Claim Safety Invariant simulation.",
         "Any manual registry mutation path.",
         "Any fail-open stale-state behavior."
       ],
@@ -1029,17 +1506,19 @@ Proposed work draft:
         "docs/work/<ID>/landing-action.md",
         "docs/work/<ID>/retrospective.md"
       ],
-      "operator_input_status": "No operator input is required for v0 claim semantics already captured in the PRD."
+      "operator_input_status": "No operator input is required for the CAS/fencing/idempotency/deadlock gate because the operator confirmed that true parallel writable workstreams must remain blocked until claim authority has CAS semantics, fencing tokens, idempotency keys, and Work-Surface Wait-For Graph cycle detection."
     },
     {
       "kind": "slice",
-      "title": "Declared Work Surfaces And Collision Detection",
-      "goal": "Require claimable work to declare expected write surfaces and refuse overlapping reservations before work starts.",
+      "title": "Declared Work Surfaces And Deadlock Detection",
+      "goal": "Require claimable work to declare expected write surfaces and refuse overlapping or deadlocked reservations before work starts.",
       "scope": [
         "Add declared work surface metadata for work items and chores.",
         "Normalize path patterns and named repo resources for collision checks.",
         "Detect exact, ancestor, descendant, and named-resource conflicts.",
-        "Explain collision refusals with owner, work item, stage, and reserved surface."
+        "Build a Work-Surface Wait-For Graph from active reservations and claim candidates.",
+        "Detect wait-for graph cycles that would deadlock reservations.",
+        "Explain collision and deadlock refusals with owner, work item, stage, reserved surface, and cycle path."
       ],
       "out_of_scope": [
         "Do not infer unlimited write access from missing declarations.",
@@ -1049,12 +1528,14 @@ Proposed work draft:
       "acceptance_criteria": [
         "A runnable work item without declared write surfaces is not claimable.",
         "Overlapping declared surfaces cannot be claimed concurrently.",
+        "A claim that would create or continue a Work-Surface Wait-For Graph cycle is not claimable.",
         "Non-overlapping surfaces can be claimed concurrently when work-item rules allow.",
-        "Collision refusal messages identify the conflicting reservation and owner.",
+        "Collision and deadlock refusal messages identify the conflicting reservation, owner, and cycle path where applicable.",
         "Validation reports missing or malformed declared surfaces."
       ],
       "test_plan": [
         "Run focused overlap detection tests.",
+        "Run focused wait-for graph cycle detection tests.",
         "Run claim integration tests with overlapping and non-overlapping surfaces.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
       ],
@@ -1063,7 +1544,7 @@ Proposed work draft:
         {
           "stage": "Stage 2: Test Design And RED Evidence",
           "verdict": "required",
-          "evidence": "Surface collision tests must fail before implementation."
+          "evidence": "Surface collision and wait-for graph cycle tests must fail before implementation."
         }
       ],
       "bootstrap_gaps": [
@@ -1080,15 +1561,16 @@ Proposed work draft:
         "docs/templates/work-surface.md"
       ],
       "first_implementation_order": [
-        "Write RED tests for missing, malformed, overlapping, and non-overlapping surfaces.",
-        "Implement normalization and overlap checks.",
+        "Write RED tests for missing, malformed, overlapping, non-overlapping, and wait-for-cycle surfaces.",
+        "Implement normalization, overlap checks, and wait-for graph cycle detection.",
         "Integrate surfaces into claim validation.",
         "Update validation and evidence."
       ],
       "smell_triggers": [
         "Implicit write surfaces.",
         "Collision checks implemented as ad hoc string matching.",
-        "Refusals that do not name the conflicting claim."
+        "Pairwise overlap checks without wait-for graph cycle detection.",
+        "Refusals that do not name the conflicting claim or cycle path."
       ],
       "required_evidence": [
         "docs/work/<ID>/red-evidence.md",
@@ -1102,27 +1584,35 @@ Proposed work draft:
     },
     {
       "kind": "slice",
-      "title": "Parallel Work Scheduler",
-      "goal": "Select at most one runnable claim candidate per heartbeat using deterministic post-bootstrap priority rules.",
+      "title": "Event-Driven Work Scheduler",
+      "goal": "Wake the scheduler when work is available and select at most one runnable claim candidate using deterministic post-bootstrap priority rules.",
       "scope": [
+        "Define event-driven work triggers for newly claimable work, recovery-required work, newly unblocked in-progress work, and operator-resolved blockers.",
+        "Define a deterministic non-LLM sweeper for stale claims, missed triggers, due evaluations, and blocker-state changes.",
+        "Prove the Work Availability Wake Guarantee before removing fallback polling behavior.",
         "Rank recovery-required claims first, then continuable active work, then highest-priority unblocked queued work, then eligible low-risk chores.",
         "Use roadmap or backlog order and work item ID as deterministic tie-breakers.",
-        "Return no-op output when no work is claimable.",
+        "Return no-op output from deterministic sweeps when no work is claimable.",
         "Refuse ambiguous or unreconciled state instead of guessing."
       ],
       "out_of_scope": [
         "Do not run implementation work.",
         "Do not create worktrees.",
+        "Do not wake an LLM only to discover ordinary no-op state once the wake guarantee is proven.",
         "Do not schedule across multiple repositories."
       ],
       "acceptance_criteria": [
-        "A heartbeat activation can select at most one claimable stage.",
+        "Newly claimable work, recovery-required work, newly unblocked in-progress work, and operator-resolved blockers wake the appropriate scheduler or agent path.",
+        "The deterministic sweeper can recover missed triggers and detect stale claims without LLM execution.",
+        "A woken scheduler activation can select at most one claimable stage.",
         "Scheduler output explains why selected work was chosen.",
         "Scheduler output explains why blocked, overlapping, or ineligible work was skipped.",
         "Eligible chores are selected only when no higher-priority runnable work exists.",
-        "No runnable work produces a clean no-op."
+        "No runnable work produces a clean deterministic no-op."
       ],
       "test_plan": [
+        "Run wake-guarantee tests for newly claimable work, recovery-required work, newly unblocked in-progress work, and operator-resolved blockers.",
+        "Run deterministic sweeper tests for stale claims, missed triggers, due evaluations, blocker-state changes, and no-op behavior without LLM execution.",
         "Run scheduler priority fixture tests.",
         "Run no-op and ambiguous-state refusal tests.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
@@ -1132,11 +1622,11 @@ Proposed work draft:
         {
           "stage": "Stage 2: Test Design And RED Evidence",
           "verdict": "required",
-          "evidence": "Priority ordering tests must fail before implementation."
+          "evidence": "Wake-guarantee, deterministic sweeper, and priority ordering tests must fail before implementation."
         }
       ],
       "bootstrap_gaps": [
-        "Heartbeat platform frequency controls remain outside the repo; scheduler behavior is repo-native."
+        "Fallback polling must stay available until event-driven triggers and deterministic sweeping prove that available work wakes reliably."
       ],
       "expected_files": [
         "docs/work/<ID>/brief.md",
@@ -1149,13 +1639,17 @@ Proposed work draft:
         ".bandit/policy/workstream-scheduler.json"
       ],
       "first_implementation_order": [
-        "Write RED tests for priority ranking and no-op behavior.",
+        "Write RED tests for work-availability wakeups, deterministic sweeping, priority ranking, and no-op behavior.",
+        "Implement event-driven trigger inputs.",
+        "Implement deterministic non-LLM sweeper output.",
         "Implement candidate collection from reconciled repo state.",
         "Implement one-claim scheduling output.",
         "Integrate with claim operations and validation."
       ],
       "smell_triggers": [
         "Batch queue draining.",
+        "LLM polling used for ordinary no-op discovery.",
+        "Available work not waking a scheduler or agent path.",
         "Priority derived from chat.",
         "Silent skip decisions."
       ],
@@ -1167,18 +1661,181 @@ Proposed work draft:
         "docs/work/<ID>/landing-action.md",
         "docs/work/<ID>/retrospective.md"
       ],
-      "operator_input_status": "No operator input is required for scheduler priority because this PRD records the v0 priority order."
+      "operator_input_status": "No operator input is required for scheduler priority or the wake guarantee because the operator accepted event-driven scheduling as long as work still wakes when available."
+    },
+    {
+      "kind": "slice",
+      "title": "Agent Observability Traces",
+      "goal": "Emit OTel-compatible traces for agent runtime behavior without making telemetry canonical workflow state.",
+      "scope": [
+        "Define trace and span requirements for wakeups, sweeps, claims, renewals, releases, tool calls, reviewer runs, model calls, token spend, retries, failures, and outcomes.",
+        "Correlate trace records with work item ID, claim ID or wake decision, reviewer evidence, and canonical artifact IDs where applicable.",
+        "Expose observability projections for cost, latency, tool friction, failed tool calls, reviewer runtime, and repeated wake/no-op patterns.",
+        "Define soft budget bands, provider-pricing evidence requirements, benchmark/evaluation spend approvals, spend-class approvals, and token-cost failsafe signals for paid, high-token, reviewer, scheduler, and long-running execution.",
+        "Preserve repo-native artifacts as canonical workflow state, gate evidence, UAT, landing, and closeout authority."
+      ],
+      "out_of_scope": [
+        "Do not use telemetry to satisfy landing gates.",
+        "Do not make an observability backend a workflow source of truth.",
+        "Do not require a hosted tracing service for local v0."
+      ],
+      "acceptance_criteria": [
+        "Claim, scheduler, reviewer, tool-execution, model-call, and workstream operations emit or record trace data.",
+        "Trace records include correlation IDs for work item and operation context.",
+        "Token spend, latency, failure, retry, and tool-friction signals are queryable from an observability projection.",
+        "Abnormal token, cost, latency, retry, or no-op patterns can trip a failsafe without treating ordinary deep review as failure.",
+        "Failsafe continuation records whether execution continued, rerouted, stopped, or required operator-owned cost/risk approval, and names the provider-pricing evidence plus per-run or spend-class approval when paid execution continues.",
+        "Validation or gate checks refuse to treat trace data as a substitute for canonical repo artifacts."
+      ],
+      "test_plan": [
+        "Run trace-shape tests for claim, wake, sweeper, tool, reviewer, model-call, and failure spans.",
+        "Run projection tests for token spend, latency, tool friction, failures, retries, and repeated wake/no-op patterns.",
+        "Run token-cost failsafe tests for abnormal spend, normal deep-review variance, and recorded continuation decisions.",
+        "Run authority-boundary tests proving traces cannot replace required workflow artifacts.",
+        "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
+      ],
+      "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; trace emission must keep observability concerns explicit without smearing workflow authority.",
+      "stage_rubric_checklist": [
+        {
+          "stage": "Stage 2: Test Design And RED Evidence",
+          "verdict": "required",
+          "evidence": "Trace-shape, projection, and authority-boundary tests must fail before implementation."
+        }
+      ],
+      "bootstrap_gaps": [
+        "Agent observability trace support does not exist yet; telemetry must be added without replacing repo-native workflow artifacts."
+      ],
+      "expected_files": [
+        "docs/work/<ID>/brief.md",
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md",
+        ".bandit/policy/agent-observability.json"
+      ],
+      "first_implementation_order": [
+        "Write RED tests for trace shape, correlation, projection, and authority boundaries.",
+        "Define trace schema and correlation fields.",
+        "Add trace emission to representative CLI-owned operations.",
+        "Add observability projection output.",
+        "Add validation and evidence."
+      ],
+      "smell_triggers": [
+        "Runtime behavior without traces.",
+        "Token spend hidden from observability.",
+        "Token-cost failsafe, provider-pricing evidence, or per-run/spend-class approval missing for paid or high-token execution.",
+        "Budget cap too strict and likely to force repeated failed attempts.",
+        "Telemetry used as workflow authority.",
+        "Trace records missing work item or operation correlation."
+      ],
+      "required_evidence": [
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md"
+      ],
+      "operator_input_status": "No operator input is required for the observability boundary because the operator confirmed traces should be first-class while repo artifacts remain canonical."
+    },
+    {
+      "kind": "slice",
+      "title": "Git Mutation Serializer",
+      "goal": "Serialize shared `.git` plumbing mutations before parallel worktrees are release-authorized.",
+      "scope": [
+        "Define the shared `.git` mutation allow-list that must run through the serializer.",
+        "Implement a CLI-owned single-writer guard for worktree add, remove, prune, lock or unlock, branch/ref maintenance outside the claim CAS boundary, and packed-refs-affecting maintenance.",
+        "Lock every claim-owned worktree immediately after creation with a stable claim-specific reason that names claim ID, Work Item ID, and stage.",
+        "Treat lock failure after creation as worktree creation failure that records evidence and releases or marks the claim failed.",
+        "Allow only Repo PM Coordinator cleanup to unlock claim-owned worktrees after handoff verification.",
+        "Refuse or flag shared `.git` plumbing mutations that bypass the serializer in release-authorized paths.",
+        "Record serializer evidence and operation traces for contention, timeout, failure, and cleanup behavior."
+      ],
+      "out_of_scope": [
+        "Do not replace refs/bandit/* claim authority or git update-ref CAS semantics.",
+        "Do not grant claim ownership through the serializer."
+      ],
+      "acceptance_criteria": [
+        "Parallel worktree lifecycle operations that mutate shared `.git` state run through the serializer.",
+        "Claim-owned worktrees are locked immediately after creation with a stable reason naming claim ID, Work Item ID, and stage.",
+        "Two contending shared `.git` plumbing operations cannot execute concurrently through Bandit CLI paths.",
+        "Non-serialized shared `.git` mutation paths are refused or fail validation for release-authorized work.",
+        "A created worktree whose lock fails is cleaned up through serializer-owned failure handling and does not leave a false active claim.",
+        "Worker-owned unlock of a claim-owned worktree is refused.",
+        "Serializer timeout, stale-lock, and failure cleanup behavior is explicit and tested.",
+        "Claim authority remains owned by refs/bandit/* CAS semantics, not by the serializer."
+      ],
+      "test_plan": [
+        "Run focused serializer contention tests.",
+        "Run claim-owned worktree lock reason, lock failure, and unlock authority tests.",
+        "Run non-serialized mutation refusal tests.",
+        "Run stale-lock, timeout, and failure cleanup tests.",
+        "Run claim-authority separation tests proving the serializer cannot grant claims.",
+        "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
+      ],
+      "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; shared git mutation side effects must be explicit and tightly isolated.",
+      "stage_rubric_checklist": [
+        {
+          "stage": "Stage 2: Test Design And RED Evidence",
+          "verdict": "required",
+          "evidence": "Serializer contention, worktree-lock, bypass-refusal, timeout, and claim-authority separation tests must fail before implementation."
+        }
+      ],
+      "bootstrap_gaps": [
+        "Release-authorized parallel worktrees remain blocked until shared .git mutation serialization is proven."
+      ],
+      "expected_files": [
+        "docs/work/<ID>/brief.md",
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md",
+        "docs/decisions/2026-05-27-git-mutation-serializer.md",
+        ".bandit/policy/git-mutations.json"
+      ],
+      "first_implementation_order": [
+        "Write serializer contention, worktree-lock, bypass-refusal, timeout, stale-lock, and authority-separation RED tests.",
+        "Define the shared .git mutation allow-list and serializer state.",
+        "Implement the CLI-owned single-writer guard.",
+        "Integrate worktree lifecycle plumbing and claim-owned worktree locking with the serializer.",
+        "Add validation and evidence."
+      ],
+      "smell_triggers": [
+        "Parallel worktree lifecycle calls git plumbing directly.",
+        "Claim-owned worktree is created without git worktree lock.",
+        "Worker unlocks a claim-owned worktree.",
+        "Serializer grants claim authority.",
+        "Shared .git mutation bypass has no refusal or validation.",
+        "Timeout or stale-lock behavior is implicit."
+      ],
+      "required_evidence": [
+        "docs/work/<ID>/red-evidence.md",
+        "docs/work/<ID>/implementation-evidence.md",
+        "docs/work/<ID>/review-evidence.md",
+        "docs/work/<ID>/landing-verdict.md",
+        "docs/work/<ID>/landing-action.md",
+        "docs/work/<ID>/retrospective.md"
+      ],
+      "operator_input_status": "No operator input is required for the Git mutation serializer because the operator confirmed it is required before parallel worktrees are release-authorized."
     },
     {
       "kind": "slice",
       "title": "Claim-First Worktree Lifecycle",
-      "goal": "Create ephemeral worktrees only after successful claims, require Work Item PM Orchestrator handoff verification, and reserve shared-resource cleanup for the Repo PM Coordinator.",
+      "goal": "Create, lock, and bootstrap ephemeral worktrees through governed CLI paths only after successful claims, require Work Item PM Orchestrator handoff verification, and reserve shared-resource cleanup for the Repo PM Coordinator.",
       "scope": [
-        "Add worktree creation after successful claim and record worktree path and branch in the lease.",
-        "Handle worktree creation failure by releasing or marking the claim failed.",
+        "Add worktree creation and immediate git worktree lock through the Git Mutation Serializer after successful claim and record worktree path and branch in the lease.",
+        "Use a stable worktree lock reason naming claim ID, Work Item ID, and stage.",
+        "Handle worktree creation or lock failure by releasing or marking the claim failed.",
+        "Define a Worktree Bootstrap Contract policy artifact such as .bandit/policy/worktree-bootstrap.json with optional .worktreeinclude-style allow-list support.",
+        "Require allowed copy/link entries, setup command, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence before worker execution.",
+        "Refuse copying secret material into worktrees unless existing operator-supervised policy explicitly authorizes a narrower exception.",
         "Add workstream handoff summary requirements for completion, verification, blockers, next stage, and cleanup readiness.",
         "Add Work Item PM Orchestrator handoff verification before cleanup.",
-        "Add Repo PM Coordinator claim release, integration routing, and deletion flow."
+        "Add Repo PM Coordinator claim release, integration routing, unlock, and serializer-backed deletion flow."
       ],
       "out_of_scope": [
         "Do not give workstream agents landing authority.",
@@ -1187,15 +1844,22 @@ Proposed work draft:
       ],
       "acceptance_criteria": [
         "Worktree creation is refused without an active claim.",
-        "A failed worktree creation does not leave an active false claim.",
+        "Worktree creation, lock, unlock, and deletion use the Git Mutation Serializer.",
+        "A failed worktree creation or lock does not leave an active false claim.",
+        "A locked worktree is not runnable until Worktree Bootstrap Contract validation passes.",
+        "Bootstrap failure records PM-visible evidence and routes the claim to failed, blocked, or recovery-required state.",
+        "Secret material is not copied into worktrees by default.",
+        "Worker-owned unlock is refused.",
         "Completed work includes a Work Item PM Orchestrator-consumable handoff summary before claim release.",
         "Work Item PM Orchestrator verifies handoff and evidence transfer before cleanup.",
-        "Only Repo PM Coordinator cleanup flow releases claims and deletes worktrees after verification.",
+        "Only Repo PM Coordinator cleanup flow releases claims, unlocks, and deletes worktrees through the serializer after verification.",
         "Recovery-required worktrees are never auto-deleted."
       ],
       "test_plan": [
-        "Run worktree lifecycle tests with successful creation, failed creation, handoff, cleanup-ready, and recovery paths.",
-        "Run command tests proving workstream cannot land or delete worktrees.",
+        "Run worktree lifecycle tests with successful serializer-backed creation and lock, failed creation, failed lock, handoff, cleanup-ready, and recovery paths.",
+        "Run Worktree Bootstrap Contract tests for allowed copy/link entries, setup command, validation command, environment references, secret-copy refusal, bootstrap failure evidence, and worker execution refusal before bootstrap passes.",
+        "Run serializer-integration tests for worktree creation, lock, unlock, and deletion.",
+        "Run command tests proving workstream cannot land, unlock, or delete worktrees.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
       ],
       "clean_code_read_evidence": "CLEAN_CODE.md must be read before this slice; lifecycle side effects must be explicit and reversible where possible.",
@@ -1203,7 +1867,7 @@ Proposed work draft:
         {
           "stage": "Stage 2: Test Design And RED Evidence",
           "verdict": "required",
-          "evidence": "Claim-first worktree tests must fail before implementation."
+          "evidence": "Claim-first worktree creation, lock, bootstrap contract, and cleanup tests must fail before implementation."
         }
       ],
       "bootstrap_gaps": [
@@ -1217,17 +1881,26 @@ Proposed work draft:
         "docs/work/<ID>/landing-verdict.md",
         "docs/work/<ID>/landing-action.md",
         "docs/work/<ID>/retrospective.md",
+        "docs/decisions/2026-05-27-worktree-bootstrap-contract.md",
+        ".bandit/policy/worktree-bootstrap.json",
         "docs/templates/workstream-handoff.md"
       ],
       "first_implementation_order": [
-        "Write RED tests for claim-first worktree behavior.",
-        "Implement worktree creation and failure handling.",
+        "Write RED tests for claim-first serializer-backed worktree creation, lock, unlock authority, and failure behavior.",
+        "Write RED tests for Worktree Bootstrap Contract validation and worker-execution refusal before bootstrap passes.",
+        "Implement serializer-backed worktree creation, locking, and failure handling.",
+        "Implement Worktree Bootstrap Contract setup, validation, secret-copy refusal, and failure evidence.",
         "Implement handoff summary and cleanup-ready state.",
         "Implement Work Item PM Orchestrator handoff verification.",
         "Implement Repo PM Coordinator claim release and cleanup."
       ],
       "smell_triggers": [
         "Speculative worktree creation.",
+        "Worktree lifecycle bypasses the Git Mutation Serializer.",
+        "Claim-owned worktree is left unlocked.",
+        "Worker execution starts in a locked but unbootstrapped worktree.",
+        "Worktree bootstrap copies secret material without existing operator-supervised policy approval.",
+        "Worker unlocks a claim-owned worktree.",
         "Worker cleanup of unverified work.",
         "Landing behavior embedded in worker lifecycle."
       ],
@@ -1239,14 +1912,14 @@ Proposed work draft:
         "docs/work/<ID>/landing-action.md",
         "docs/work/<ID>/retrospective.md"
       ],
-      "operator_input_status": "No operator input is required for v0 worktree lifecycle boundaries."
+      "operator_input_status": "No operator input is required for v0 worktree lifecycle or bootstrap mechanics because the operator delegated technical questions to Codex PM. Any future secret-copy exception or policy change remains operator-owned."
     },
     {
       "kind": "slice",
-      "title": "Workstream Heartbeat Execution Contract",
-      "goal": "Connect single-claim scheduling to worker heartbeat execution while preserving no-op behavior and role boundaries.",
+      "title": "Workstream Wake Execution Contract",
+      "goal": "Connect event-driven single-claim scheduling to worker execution while preserving no-op behavior and role boundaries.",
       "scope": [
-        "Define Workstream Agent required reads, claim attempt flow, allowed actions, forbidden actions, and no-op behavior.",
+        "Define Workstream Agent required reads, wake inputs, claim attempt flow, allowed actions, forbidden actions, and no-op behavior.",
         "Connect scheduler output to claim acquisition and claim-first worktree start.",
         "Require lease renewal for long-running work.",
         "Require completion, block, failure, and cleanup-ready outputs that Work Item PM Orchestrator can consume."
@@ -1257,14 +1930,14 @@ Proposed work draft:
         "Do not delete worktrees from workstream execution."
       ],
       "acceptance_criteria": [
-        "Each Workstream heartbeat activation claims at most one stage.",
-        "No available claim produces a clean no-op.",
+        "Each Workstream wake activation claims at most one stage.",
+        "No available claim after reconciliation produces a clean no-op.",
         "Worker actions without a claim are refused when they mutate state.",
         "Lease renewal and stale lease behavior are visible in registry state.",
         "Worker output is sufficient for PM to continue without chat context."
       ],
       "test_plan": [
-        "Run worker protocol tests for no-op, claim success, claim refusal, renewal, block, failure, and completion.",
+        "Run worker protocol tests for event-driven wake input, no-op, claim success, claim refusal, renewal, block, failure, and completion.",
         "Run integration tests with scheduler and claim registry fixtures.",
         "Run npm test, npm run typecheck, npm run bandit -- validate, and git diff --check."
       ],
@@ -1290,7 +1963,7 @@ Proposed work draft:
         ".bandit/policy/workstream-agent.json"
       ],
       "first_implementation_order": [
-        "Write RED tests for Workstream heartbeat single-claim behavior.",
+        "Write RED tests for Workstream wake single-claim behavior.",
         "Implement protocol checks and no-op output.",
         "Integrate scheduler, claim, and worktree lifecycle.",
         "Record evidence and validation."
@@ -1298,7 +1971,8 @@ Proposed work draft:
       "smell_triggers": [
         "Worker takes PM decisions.",
         "Worker lands or deletes worktrees.",
-        "Heartbeat drains multiple items."
+        "Wake activation drains multiple items.",
+        "Worker wakes repeatedly without claimable work."
       ],
       "required_evidence": [
         "docs/work/<ID>/red-evidence.md",
@@ -1366,4 +2040,5 @@ they need more worker lanes.
 
 Once Bandit moves to PR-based workflows, PR issue resolution and safe landing
 should become a separate governed agent capability with its own PRD, policy,
-and skill. This PRD only preserves that boundary.
+skill, and input quarantine/trusted-source gates. This PRD only preserves that
+boundary.

@@ -233,6 +233,315 @@
       "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
       "verification_target": null,
       "next_action": "After BANDIT-034 lands and closes out, create the next bootstrap-gap chore to make artifact-create landing verdict rendering include the required work_item field and cover it with a validation test."
+    },
+    {
+      "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",
+      "title": "Stage 6 retrospective artifacts do not require structured improvement mining",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/improvement/retrospective-chore-schema.md"
+      ],
+      "linked_work_item": null,
+      "rationale": "The operator identified recurring agent confusion about how to invoke CodeRabbit as a workflow-improvement signal that retrospectives have not surfaced. Stage 6 now requires structured improvement mining, but bandit artifact create can still render retrospectives without the mining checklist, so the artifact contract and tests need a dedicated repair.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD is resolved, create a bootstrap-gap chore to make retrospective artifact creation require the structured improvement-mining checklist and cover recurring CodeRabbit/tool invocation friction with tests."
+    },
+    {
+      "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",
+      "title": "Workflow trials can change policy without predeclared decision guardrails",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/improvement/retrospective-chore-schema.md",
+        "docs/templates/improvement-chore.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD research review warned that Bandit's improvement loop could reward proxy metrics, overstate causality at single-operator volume, and create in-context reward-hacking pressure. The operator confirmed that every Workflow Trial or workflow-policy change needs predeclared decision criteria, explicit uncertainty or minimum-detectable-effect context, and a later re-evaluation window before a keep, revise, revert, or double_down decision can change policy. Current improvement metadata and CLI validation do not enforce those fields, so a bootstrap-gap chore is required.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING is resolved, create a bootstrap-gap chore to add Workflow Trial decision guardrails to improvement metadata, templates, validators, evaluation evidence, cockpit/reporting surfaces, and policy-change routing."
+    },
+    {
+      "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",
+      "title": "No first-class lifecycle contract exists for load-bearing skills",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The operator confirmed that load-bearing skills need a first-class lifecycle contract because they shape context, reasoning, tool use, review behavior, cost, and model performance. Without owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria, Bandit cannot reliably explain whether a benchmark result changed because of the model, the skill, or the task packet.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS is resolved, create a bootstrap-gap chore to define the Skill Lifecycle Contract, validation rules, templates, stage binding requirements, installed-skill drift checks, and rollback criteria for load-bearing skills."
+    },
+    {
+      "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",
+      "title": "No agent evaluation harness exists for model, skill, reviewer, or component benchmarks",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The research review identified missing agent evals as a P0 omission, and the operator confirmed that Bandit needs comparable Qwen, paid-reviewer, skill, and load-bearing component evidence before reviewer-routing or agent-routing policy changes. Current improvement evaluation tooling interprets workflow trials but does not replay fixed packets against agents or reviewer profiles. The first harness must be benchmark-only and offline/replay-based, with no automatic policy, model-routing, reviewer-routing, skill-policy, or cost-policy changes. Benchmark packets must separate visible calibration sets from versioned locked holdout sets so skills, reviewer prompts, and routing policy are not overfit to the visible suite; policy promotion needs holdout evidence. Reviewer benchmark packets must be repo-derived and failure-mode stratified before generic coding tasks are used, covering evidence freshness loops, malformed artifacts, CodeRabbit invocation friction, stage capability or skill scope mistakes, supply-chain-sensitive changes, stale UAT or landing evidence, and false-positive review churn. Reviewer benchmark packets must be gold-labeled with seeded blockers and seeded non-issues, and scoring must prioritize blocker recall over raw finding count while also tracking actionable precision, useful finding yield, false-positive rate, tool friction, latency, and provider-pricing-backed expected cost. One-off paid reviewer calls before threshold promotion are benchmark/evaluation spend, require current provider-pricing evidence plus per-run approval or active spend-class approval, and cannot become recurring reviewer routing policy. Recurring paid reviewer routing must meet a predeclared promotion threshold scoped by risk class or stage capability profile, with locked-holdout blocker-recall improvement over Qwen, false-positive ceiling, Provider Pricing Evidence-backed expected-cost ceiling, and operator-supervised spend-class approval; promotion for one scope does not authorize unrelated paid-reviewer routes. Provider Pricing Evidence must name the pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner so stale billing assumptions cannot authorize recurring paid review. It depends on stable skill identity and versions from BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT is resolved, create a bootstrap-gap chore for a narrow repo-native replay-only agent evaluation harness that can run fixed repo-derived, failure-mode stratified, gold-labeled review/task packets for Qwen, Claude or paid reviewers, skill variants, reviewer profiles, and component variants; separate visible calibration packets from versioned locked holdout packets; classify one-off paid reviewer calls as benchmark/evaluation spend with per-run approval or active spend-class approval; define scoped paid reviewer promotion thresholds per risk class or stage capability profile; and record holdout-backed blocker recall, missed blockers, actionable precision, useful finding yield, false-positive rate, tool friction, latency, provider-pricing-backed expected cost, pricing freshness or expiry, and spend-class approval without changing live routing or policy automatically."
+    },
+    {
+      "id": "BANDIT-GAP-INPUT-QUARANTINE-GATE",
+      "title": "No structural input quarantine gate exists for external or third-party text",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The research review identified prompt-injection posture as a P0 omission, and the operator confirmed that external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, and fetched prompts must be treated as data-only by default. Bandit needs a structural input quarantine boundary before release-authorized agents can inspect those inputs, and a trusted-source gate before any such content can affect agent instructions, tool permissions, routing, or landing authority. Reviewer escalation alone is not sufficient because hostile text must be prevented from entering instruction-bearing context.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-AGENT-EVALUATION-HARNESS is resolved, create a bootstrap-gap chore to define data-only external input handling, input source classification, input quarantine boundaries, trusted-source gates, instruction-bearing-use refusals, and validation for release-authorized agent paths that process external contributor or fetched third-party content."
+    },
+    {
+      "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",
+      "title": "Auto-landing and review depth rely too heavily on smell triggers",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/prds/BANDIT-PRD-003-attention-first-workflow-cockpit.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The operator confirmed that a smell-list-only safety posture is too brittle for review-depth, operator-supervision, and auto-landing decisions. Bandit needs a layered risk-classification gate with hard never-auto-landable exclusions, blast-radius signals, static-analysis signals, source trust and input quarantine state, supply-chain state, and smell triggers as one input. Any high-risk signal can block auto-landing or raise review depth without requiring smell-list concurrence.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-INPUT-QUARANTINE-GATE is resolved, create a bootstrap-gap chore to define layered risk classification, never-auto-landable surfaces, blast-radius/static-analysis/source-trust/input-quarantine/supply-chain signals, review-depth selection, operator-supervision routing, and auto-landing eligibility validation."
+    },
+    {
+      "id": "BANDIT-GAP-SUPPLY-CHAIN-GATE",
+      "title": "No supply-chain gate exists for dependency, workflow, agent-skill, or external tool surfaces",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The research review identified supply-chain risk as unaddressed, and the operator confirmed that Bandit needs a dedicated gate before supply-chain-sensitive changes can enter auto-landing scope. Current policy can flag the smell, but no CLI-owned gate records dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, or external tool-install evidence. It depends on the input quarantine boundary so fetched prompts, dependency documentation, and third-party content cannot become release-authorized instructions by default, and on layered risk classification so supply-chain state is one independent auto-landing blocker rather than a smell-list-only keyword match.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-LAYERED-RISK-CLASSIFICATION is resolved, create a bootstrap-gap chore for a narrow supply-chain gate that blocks auto-landing for supply-chain-sensitive changes unless explicit gate evidence and any required operator-supervised approval are recorded."
+    },
+    {
+      "id": "BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY",
+      "title": "Coordination projections can become hidden workflow authority",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review flagged dual-source coordination risk, and the operator confirmed that append-only workflow/event history should be the only canonical coordination history. Current-state views, registries, state indexes, and cockpit status must be rebuildable projections, with CAS claim authority as the only active writable-claim authority exception.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-SUPPLY-CHAIN-GATE is resolved, create a bootstrap-gap chore to define append-only coordination history authority, projection rebuild/refusal tests, registry/cockpit/current-state boundaries, and the CAS claim-authority exception."
+    },
+    {
+      "id": "BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY",
+      "title": "Fail-closed routing can escalate derivable operational drift to the operator",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review warned that pervasive fail-closed behavior can manufacture operator toil when ordinary registry, ledger, optional-field, projection, or workflow bookkeeping drift is escalated instead of repaired mechanically. The operator confirmed that operator-blocking fail-closed behavior should be reserved for safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely ambiguous scope gates. Derivable operational drift should route to CLI-owned mechanical repair with approved source artifacts, expected-current-state checks, immutable transition history, and no authority to invent scope, grant approvals, override policy, resolve ambiguous cost/risk, perform irreversible operational actions, or force-resolve unsafe claim recovery.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY is resolved, create a bootstrap-gap chore to define operator-blocking fail-closed boundaries, CLI-owned mechanical operational repair, operator-escalation-overuse smells, repair-overreach refusals, and validation that derivable operational drift does not become operator toil."
+    },
+    {
+      "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",
+      "title": "Parallel writable workstreams lack Git refs CAS claim authority, fencing tokens, idempotency keys, and deadlock detection",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/decisions/2026-05-27-git-refs-claim-authority-backend.md",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review found that file-backed atomic claim operations are not a real compare-and-swap primitive, leases without fencing tokens cannot reject stale agents after pauses, and pairwise work-surface overlap checks do not catch wait-for deadlocks. The operator confirmed that true parallel writable workstreams must remain blocked until claim authority has real CAS semantics, fencing tokens, stale-agent rejection, idempotency keys for state-changing claim operations and external side effects, and Work-Surface Wait-For Graph cycle detection. On 2026-05-27, the operator accepted the first concrete backend: a repo-native Git refs claim authority using refs/bandit/* and git update-ref --stdin transactions, while .bandit claim files remain human-readable projections. The operator also confirmed that claim, release, and reconcile correctness must be proven through explicit Claim Safety Invariants and deterministic fault-injecting or property-style simulation, not only hand-picked duplicate-claim examples.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY is resolved, create a bootstrap-gap chore to define the Git refs claim authority primitive with refs/bandit/*, git update-ref --stdin compare-and-swap transactions, .bandit projection regeneration, fencing tokens, idempotency keys, Work-Surface Wait-For Graph cycle detection, stale-agent rejection, duplicate side-effect prevention, declared Claim Safety Invariants, and deterministic fault-injecting or property-style simulation that covers races, pauses, stale expected state, stale fencing tokens, idempotency replay/conflict, projection/history disagreement, work-surface cycles, and failed serializer or worktree-lock cleanup."
+    },
+    {
+      "id": "BANDIT-GAP-GIT-MUTATION-SERIALIZER",
+      "title": "Parallel worktrees lack a shared Git mutation serializer",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/decisions/2026-05-27-git-mutation-serializer.md",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review found that git worktree concurrency on a single .git directory has contention surfaces around worktree creation, worktree lifecycle operations, shared refs, and packed-refs-affecting maintenance. The operator confirmed that Bandit needs a repo-level Git Mutation Serializer for shared .git mutations before parallel worktrees are release-authorized, and delegated Git mechanics to Codex PM when repo evidence is sufficient. Codex PM accepted the technical rule that every claim-owned worktree is git worktree locked immediately after creation with a stable claim-specific reason naming claim ID, Work Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after handoff verification. Git refs CAS remains the claim authority boundary, but it does not make all shared Git plumbing safe under parallel execution.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY is resolved, create a bootstrap-gap chore to define the Git Mutation Serializer, shared .git mutation allow-list, CLI-owned single-writer guard, claim-owned worktree locking with stable claim-specific reason, Repo PM Coordinator-only unlock, contention tests, stale-lock or timeout behavior, non-serialized mutation refusals, and trace/evidence output for worktree and repository plumbing mutations."
+    },
+    {
+      "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
+      "title": "Bandit-created worktrees lack a runnable environment bootstrap contract",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/decisions/2026-05-27-worktree-bootstrap-contract.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review raised worktree lifecycle risk, and the operator delegated all technical questions to Codex PM when repo evidence and policy are sufficient. Codex PM decided that every Bandit-created worktree needs an explicit repo-native Worktree Bootstrap Contract before it can be considered runnable. The contract must cover allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence. Without this, a claim-owned worktree can be correctly claimed and locked but still fail after worker execution begins because the runtime environment was never proven.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-GIT-MUTATION-SERIALIZER is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
+    },
+    {
+      "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",
+      "title": "Parallel work scheduler depends on LLM polling and lacks a wake guarantee",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review found that default LLM polling heartbeats would waste tokens on no-op discovery. The operator accepted event-driven scheduling only if work still wakes reliably when available. Bandit needs event-driven triggers, a deterministic non-LLM sweeper, and a Work Availability Wake Guarantee before removing polling fallback behavior.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT is resolved, create a bootstrap-gap chore to define event-driven work triggers, deterministic sweeper behavior, wake-guarantee tests, and token-cost failsafes for scheduler execution."
+    },
+    {
+      "id": "BANDIT-GAP-AGENT-OBSERVABILITY-TRACES",
+      "title": "Agent runtime behavior lacks first-class observability traces",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD-002 research review identified OpenTelemetry-style agent spans as missing observability, and the operator confirmed traces should be first-class for claims, tool calls, reviewer runs, token spend, wakeups, and failures while repo artifacts remain canonical workflow state.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER is resolved, create a bootstrap-gap chore to define OTel-compatible trace shape, operation spans, correlation IDs, observability projections, and authority-boundary validation."
+    },
+    {
+      "id": "BANDIT-GAP-STAGE-CAPABILITY-SCOPE",
+      "title": "Work-item stages lack enforced skill and tool scoping",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD research review challenged Bandit's over-decomposed role taxonomy, and the operator confirmed that stage-specific skills and tools are more important than many named agent roles. Bandit now prefers a small authority-based role set with Stage Capability Scope, but work-item brief creation and validation do not yet enforce stage-scoped skills, skill lifecycle contract references, allowed tools, inputs, outputs, evidence, and forbidden actions.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-AGENT-OBSERVABILITY-TRACES is resolved, create a bootstrap-gap chore to add Stage Capability Scope to work-item specs, templates, validation, skill lifecycle contract references, and routing evidence."
+    },
+    {
+      "id": "BANDIT-GAP-TOKEN-COST-FAILSAFE",
+      "title": "Agent execution lacks abnormal-run token and cost failsafes",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review",
+        "docs/prds/reviews/prd-002-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The PRD research reviews identified token economics and multi-agent scheduler cost as unresolved risks, and the operator confirmed budgets should act as failsafes for abnormal runs rather than overly strict caps. Tight caps can force repeated failed attempts and cost more than letting a normal deep review finish. Paid reviewer, paid model, and paid/high-token recurring routes also need current provider-pricing evidence with pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner before they can be treated as available routing. One-off paid reviewer or model calls before policy promotion must be classified as benchmark/evaluation spend with per-run approval or active spend-class approval, not recurring routing policy.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-STAGE-CAPABILITY-SCOPE is resolved, create a bootstrap-gap chore to define provider-pricing evidence, benchmark/evaluation spend approvals, spend-class approvals, soft budget bands, abnormal-run token-cost failsafes, trace-backed cost signals, and continuation decisions for paid, high-token, reviewer, scheduler, and long-running execution."
+    },
+    {
+      "id": "BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS",
+      "title": "Cockpit trust signals lack artifact-specific evidence freshness SLOs",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
+      "source_artifacts": [
+        "CONTEXT.md",
+        "docs/prds/BANDIT-PRD-001-founding-product.md",
+        "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
+        "docs/prds/BANDIT-PRD-003-attention-first-workflow-cockpit.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        ".bandit/policy/smell-triggers.json",
+        "docs/prds/reviews/prd-001-003-research-review"
+      ],
+      "linked_work_item": null,
+      "rationale": "The operator confirmed that cockpit trust signals should use explicit Evidence SLOs and artifact-specific freshness budgets rather than generic confidence badges. CI/tests, CodeRabbit, Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and derived projections need different freshness rules, source links, owners, and staleness reasons.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-TOKEN-COST-FAILSAFE is resolved, create a bootstrap-gap chore to define artifact-specific Evidence SLOs, freshness budgets, Evidence Trust Signals, staleness reasons, and cockpit/view-model validation for tests, review, UAT, landing, retrospective, and projection evidence."
     }
   ]
 }

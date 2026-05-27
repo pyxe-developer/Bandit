@@ -436,6 +436,28 @@ that authority.
 **Active work item:** `BANDIT-034` - Cockpit Shell Hardening is closed. The next
 work item to create is the queued bootstrap-gap chore for
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
+renderer repair.
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
+retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
+the workflow-trial decision guardrails.
+`BANDIT-GAP-AGENT-EVALUATION-HARNESS`,
+`BANDIT-GAP-INPUT-QUARANTINE-GATE`,
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`,
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`,
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`,
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`, and
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` are queued behind the skill-lifecycle
+lane in that order. `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind the
+CAS/fenced-claim authority gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is
+queued behind the Git mutation serializer gap.
+`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree bootstrap
+contract gap.
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
+scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind the agent
+observability traces gap. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind
+the stage capability scope gap. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued
+behind the token-cost failsafe gap.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
@@ -477,6 +499,151 @@ These are expected because Bandit does not exist yet:
   Codex PM manually repaired the artifact. `BANDIT-034` is now landed and closed
   out, so the next bootstrap-gap chore should repair the renderer and add
   coverage.
+- `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
+  2026-05-26 strategic review: Stage 6 now requires structured improvement
+  mining for agent execution smells such as recurring CodeRabbit invocation
+  friction, but `bandit artifact create` can still render retrospectives without
+  the required mining checklist. It is queued behind
+  `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+- `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is open and queued from the
+  2026-05-26 strategic review: Workflow Trials and workflow-policy changes now
+  require predeclared decision criteria, explicit uncertainty or
+  minimum-detectable-effect context, proxy-risk disposition, and a later
+  re-evaluation window before keep, revise, revert, or double_down decisions can
+  change policy. It is queued behind
+  `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`.
+- `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
+  strategic review: load-bearing skills now need a first-class lifecycle
+  contract with owner, version, changelog, intended stages, required tools,
+  forbidden actions, evaluation packets, and rollback criteria before they
+  become required stage policy or benchmark variants. It is queued behind
+  `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`.
+- `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is open and queued from the 2026-05-26
+  strategic review: Bandit has improvement-evaluation tooling, but no harness
+  that replays fixed packets against agents, reviewer profiles, skills, models,
+  or load-bearing component variants. The first harness must be benchmark-only
+  and offline/replay-based: fixed packets for Qwen, Claude or paid reviewers,
+  skill variants, reviewer profiles, and component variants, with repo-derived
+  failure-mode stratification, visible calibration packets, versioned locked
+  holdout packets for policy promotion, gold-labeled reviewer packets, seeded
+  blockers, seeded non-issues, blocker-recall scoring priority, actionable
+  precision, useful finding yield, false-positive rate, tool friction, latency,
+  provider-pricing-backed expected cost, pricing freshness or expiry,
+  spend-class approval, scoped paid reviewer promotion thresholds per risk class
+  or stage capability profile, and no automatic live-routing or policy changes.
+  Provider Pricing Evidence for paid reviewers must include pricing source,
+  captured date, effective date, freshness or expiry rule, expected per-run
+  cost, spend class, and approval owner. One-off paid reviewer calls before
+  threshold promotion are benchmark/evaluation spend that require per-run
+  approval or active spend-class approval and cannot count as recurring
+  reviewer routing policy. It is queued behind
+  `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`.
+- `BANDIT-GAP-INPUT-QUARANTINE-GATE` is open and queued from the 2026-05-26
+  strategic review: Bandit now treats external contributor text, issue or PR
+  metadata, review comments, dependency documentation, fetched third-party
+  content, generated instructions, and fetched prompts as data-only input by
+  default. Release-authorized agents need an input quarantine boundary and a
+  trusted-source gate before any such content can affect instructions, tool
+  permissions, routing, or landing authority. It is queued behind
+  `BANDIT-GAP-AGENT-EVALUATION-HARNESS`.
+- `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is open and queued from the
+  2026-05-26 strategic review: Bandit now treats smell-list-only review-depth
+  and auto-landing decisions as too brittle. Auto-landing and review depth need
+  a layered gate with hard never-auto-landable exclusions, blast-radius signals,
+  static-analysis signals, source trust and input-quarantine state,
+  supply-chain state, smell-trigger inputs, selected review depth,
+  operator-supervision routing, and validation that any single high-risk signal
+  can block auto-landing without smell-list concurrence. It is queued behind
+  `BANDIT-GAP-INPUT-QUARANTINE-GATE`.
+- `BANDIT-GAP-SUPPLY-CHAIN-GATE` is open and queued from the 2026-05-26
+  strategic review: Bandit now treats supply-chain-sensitive changes as a
+  blocker-level smell, but no CLI-owned gate records dependency, lockfile,
+  package-manager script, CI/release workflow, agent-skill, fetched-prompt, or
+  external tool-install evidence. It is queued behind
+  `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`.
+- `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is open and queued from the
+  2026-05-26 strategic review: PRD-002 now treats append-only workflow/event
+  history as the only canonical coordination history, while current-state
+  views, registries, state indexes, and cockpit status remain rebuildable
+  projections except for CAS claim authority over active writable claims. It is
+  queued behind `BANDIT-GAP-SUPPLY-CHAIN-GATE`.
+- `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is open and queued from the
+  2026-05-26 strategic review: PRD-002 now reserves operator-blocking
+  fail-closed behavior for safety, product, UAT, policy, business, cost,
+  irreversible-risk, and genuinely ambiguous scope gates. Derivable operational
+  drift such as missing metadata, malformed supported artifacts, projection
+  mismatch, ledger drift, or workflow bookkeeping drift should route to
+  CLI-owned mechanical repair with approved source artifacts,
+  expected-current-state checks, and immutable transition history. It is queued
+  behind `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`.
+- `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is open and queued from the
+  2026-05-26 strategic review: PRD-002 now blocks true parallel writable
+  workstreams until Bandit has CAS-backed claim authority, fencing-token
+  enforcement, stale-agent rejection, idempotency keys for claim operations and
+  external side effects, Work-Surface Wait-For Graph cycle detection, and
+  declared Claim Safety Invariants backed by deterministic fault-injecting or
+  property-style simulation, not example-only duplicate-claim tests. The
+  2026-05-27 accepted backend decision requires the first Claim Authority
+  Primitive to use `refs/bandit/*` and `git update-ref --stdin` compare-and-swap
+  transactions, with `.bandit` claim files as projections rather than lock
+  authority. It is queued behind
+  `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`.
+- `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is open and queued from the
+  2026-05-26 strategic review plus 2026-05-27 operator decision: Git refs CAS
+  provides claim authority, but shared `.git` worktree and repository plumbing
+  mutations still require a CLI-owned Git Mutation Serializer before parallel
+  worktrees are release-authorized. Codex PM owns Git mechanics when repo
+  evidence is sufficient; claim-owned worktrees are now required to be
+  `git worktree lock`ed immediately with a stable reason naming claim ID, Work
+  Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after
+  handoff verification. It is queued behind
+  `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`.
+- `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is open and queued from the
+  2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
+  Codex PM owns routine technical questions, and every Bandit-created worktree
+  now requires a repo-native Worktree Bootstrap Contract before worker execution
+  treats it as runnable. The contract must cover allowed copied or linked files,
+  setup commands, validation command, environment-variable references,
+  secret-handling boundary, expected runtime dependencies, and bootstrap failure
+  evidence. Secret material is not copied by default unless existing
+  operator-supervised policy explicitly authorizes a narrower exception. It is
+  queued behind `BANDIT-GAP-GIT-MUTATION-SERIALIZER`.
+- `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is open and queued from the
+  2026-05-26 strategic review: PRD-002 now rejects default LLM polling for
+  ordinary no-op discovery, but the operator required work to still wake when
+  available. Bandit needs event-driven triggers, a deterministic non-LLM
+  sweeper, wake-guarantee tests, and token-cost failsafes before scheduler
+  execution can rely on this path. It is queued behind
+  `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
+- `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is open and queued from the
+  2026-05-26 strategic review: Bandit now treats OTel-compatible agent traces
+  as first-class observability for claims, tool calls, reviewer runs, token
+  spend, wakeups, retries, failures, and outcomes while repo artifacts remain
+  canonical workflow state. It is queued behind
+  `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`.
+- `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is open and queued from the 2026-05-26
+  strategic review: Bandit now keeps roles authority-based and treats
+  stage-specific skills, tools, reviewer depth, prompts, inputs, outputs,
+  evidence, forbidden actions, and skill lifecycle contract references as Stage
+  Capability Scope, but work-item specs and validation do not yet enforce that
+  scope. It is queued behind
+  `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`.
+- `BANDIT-GAP-TOKEN-COST-FAILSAFE` is open and queued from the 2026-05-26
+  strategic review: Bandit now treats token and cost budgets as abnormal-run
+  failsafes for paid, high-token, reviewer, scheduler, or long-running work,
+  not tight caps that can force repeated failed attempts. Paid routes also need
+  provider-pricing evidence, pricing freshness or expiry, expected per-run cost,
+  and spend-class approval before they are treated as available recurring
+  routing; one-off paid reviewer or model calls before promotion are
+  benchmark/evaluation spend that require per-run approval or active
+  spend-class approval. It is queued behind
+  `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`.
+- `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
+  strategic review: cockpit trust signals now need artifact-specific Evidence
+  SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
+  review, UAT, landing verdicts, retrospectives, and projections instead of
+  generic confidence badges. It is queued behind
+  `BANDIT-GAP-TOKEN-COST-FAILSAFE`.
 
 - The missing Bandit work-item creation command is resolved by `BANDIT-020`.
   Future one-off work-item starts should use
@@ -522,9 +689,8 @@ These are expected because Bandit does not exist yet:
   gap-ledger disposition are recorded.
 
 Bootstrap work must record these gaps honestly instead of pretending final
-gates ran. All currently recorded bootstrap gaps are resolved. If a new
-bootstrap gap appears, it becomes the work queue before unrelated feature,
-cockpit, or dogfood work proceeds.
+gates ran. Currently recorded open bootstrap gaps are the work queue before
+unrelated feature, cockpit, or dogfood work proceeds.
 `BANDIT-GAP-WORK-ITEM-CREATE-COMMAND` is resolved by
 `BANDIT-020`; landing verdict, landing action, retrospective, and gap-ledger
 disposition are recorded.
@@ -645,9 +811,31 @@ The current priority is:
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. Keep unrelated Phase 8 work blocked until
-   `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is resolved, blocked on
-   operator-owned input, or explicitly dispositioned as no-action.
+3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
+   queued or active. `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is queued
+   behind the artifact-create landing-field repair, and
+   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
+   retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
+   the workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
+   is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
+   behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
+   is queued behind the input quarantine gate. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is
+   queued behind the layered risk-classification gap. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
+   is queued behind the supply-chain gate. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
+   is queued behind the coordination event-log authority gap.
+   `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
+   operator fail-closed boundary gap.
+   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind CAS/fenced claim
+   authority.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind Git mutation
+   serialization.
+   `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
+   bootstrap contract.
+   `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
+   wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
+   agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued
+   behind stage capability scope. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is
+   queued behind token-cost failsafe.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid

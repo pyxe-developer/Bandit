@@ -286,7 +286,85 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
 `docs/work/BANDIT-034/retrospective.md`. The next required action is to create
 the bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that repair.
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
+retrospective mining and requires predeclared decision criteria, uncertainty or
+minimum-detectable-effect context, proxy-risk disposition, and re-evaluation
+windows before Workflow Trial outcomes can change policy.
+`BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind workflow-trial decision
+guardrails and requires owner, version, changelog, intended stages, required
+tools, forbidden actions, evaluation packets, and rollback criteria for
+load-bearing skills. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
+offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
+reviewer-profile, and component packets, repo-derived failure-mode
+stratification before generic coding tasks, visible calibration packets,
+versioned locked holdout packets for policy promotion, gold-labeled reviewer
+packets with seeded blockers and seeded non-issues, blocker-recall-first
+scoring, precision, useful-yield, false-positive, tool-friction, latency, and
+provider-pricing-backed expected-cost metrics, pricing freshness or expiry,
+spend-class approval, scoped paid reviewer promotion thresholds per risk class
+or stage capability profile, and no automatic live-routing or policy mutation.
+Provider Pricing Evidence for paid reviewer routes must name pricing source,
+captured date, effective date, freshness or expiry rule, expected per-run cost,
+spend class, and approval owner. One-off paid reviewer calls before threshold
+promotion are benchmark/evaluation spend requiring per-run approval or active
+spend-class approval, and cannot count as recurring reviewer routing policy.
+`BANDIT-GAP-INPUT-QUARANTINE-GATE` requires external contributor text, issue or
+PR metadata, review comments, dependency documentation, fetched third-party
+content, generated instructions, and fetched prompts to remain data-only unless
+a trusted-source gate upgrades them for a bounded release-authorized purpose.
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` requires Workflow Trial and
+workflow-policy changes to carry predeclared criteria, uncertainty or
+minimum-detectable-effect context, proxy-risk disposition, and re-evaluation
+windows before keep/revise/revert/double_down decisions can become policy.
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` requires auto-landing and review-depth
+decisions to use hard never-auto-landable exclusions, blast-radius signals,
+static-analysis signals, source trust and input-quarantine state, supply-chain
+state, and smell-trigger inputs rather than smell-list-only safety.
+`BANDIT-GAP-INPUT-QUARANTINE-GATE`,
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`,
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`,
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`,
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`,
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`,
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER`,
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`,
+`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`,
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
+`BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` are queued behind the skill lifecycle
+lane in that order.
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
+2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
+`refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
+`.bandit` claim files remain projections rather than writable claim authority.
+State-changing claim operations and external side effects under claims also
+require the current fencing token and an idempotency key. Work-surface
+claimability must detect wait-for graph cycles, not just pairwise overlap.
+Claim, release, reconcile, worktree-lock, and claim-gated side-effect
+correctness must be backed by declared Claim Safety Invariants plus
+deterministic fault-injecting or property-style simulation; example-only
+duplicate-claim tests do not satisfy the gate.
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER` is constrained by the accepted
+2026-05-27 Git mutation serializer decision: shared `.git` worktree and
+repository plumbing mutations require a CLI-owned single-writer guard, while
+claim CAS remains separate authority. Claim-owned worktrees must be
+`git worktree lock`ed immediately with a stable reason naming claim ID, Work
+Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after
+handoff verification.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is constrained by the 2026-05-27
+technical delegation decision: Codex PM owns routine technical questions, and a
+Bandit-created worktree is not runnable until a repo-native Worktree Bootstrap
+Contract validates allowed copied or linked files, setup commands, validation
+command, environment references, secret-handling boundary, runtime dependencies,
+and failure evidence. Secret material is not copied by default; any exception
+requires existing operator-supervised policy authorization.
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` reserves operator-blocking
+fail-closed behavior for safety, product, UAT, policy, business, cost,
+irreversible-risk, and genuinely ambiguous scope gates, while routing derivable
+operational drift to CLI-owned mechanical repair.
 Do not create unrelated
 active-work branches, local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, exclusive claim leases, work surface
@@ -614,7 +692,9 @@ Expected capabilities:
 Exit criteria:
 
 - A PRD can be decomposed into slices and chores.
-- Chores can carry origin, hypothesis, metric, baseline, and evaluation window.
+- Chores can carry origin, hypothesis, metric, baseline, decision criteria,
+  uncertainty or minimum-detectable-effect context, evaluation window, and
+  re-evaluation window.
 
 Status:
 
@@ -831,9 +911,32 @@ Current priority:
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. Keep unrelated Phase 8 work blocked until
-   `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is resolved, blocked on
-   operator-owned input, or explicitly dispositioned as no-action.
+3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
+   queued or active. `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is queued
+   behind the artifact-create landing-field repair, and
+   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
+   retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
+   the workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
+   is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
+   behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
+   is queued behind the input quarantine gate. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is
+   queued behind the layered risk-classification gap. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
+   is queued behind the supply-chain gate. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
+   is queued behind the coordination event-log authority gap.
+   `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
+   operator fail-closed boundary gap and must use the accepted Git refs claim
+   authority backend.
+   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind CAS/fenced claim
+   authority.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind Git mutation
+   serialization.
+   `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
+   bootstrap contract.
+   `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
+   wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
+   agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued
+   behind stage capability scope. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is
+   queued behind token-cost failsafe.
 
 ## Phase 6: Coordination Primitive
 
@@ -879,12 +982,16 @@ Expected capabilities:
 - Improvement chore ledger.
 - Improvement analytics report.
 - Evaluation command for due improvement chores.
+- Workflow Trial guardrails: predeclared decision criteria, uncertainty or
+  minimum-detectable-effect context, proxy-risk disposition, and re-evaluation
+  windows.
 - Outcomes: `keep`, `revise`, `revert`, `double_down`.
 
 Exit criteria:
 
 - A retrospective lesson becomes a tagged improvement chore.
-- That chore can later be evaluated against a metric and outcome.
+- That chore can later be evaluated against a metric, baseline, predeclared
+  criteria, uncertainty context, re-evaluation window, and outcome.
 
 ## Phase 8: Workflow Cockpit
 

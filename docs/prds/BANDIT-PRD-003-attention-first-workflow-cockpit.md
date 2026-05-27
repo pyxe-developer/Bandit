@@ -16,6 +16,7 @@ That works for Codex PM and implementation agents, but it is not the right opera
 - What is blocked, stale, or waiting on me?
 - What work is active and what happens next?
 - Which gates are green, missing, blocked, or stale?
+- Which risk signals explain review depth, operator supervision, or auto-landing refusal?
 - Which safe CLI-backed actions can I request?
 - Are Bandit's workflow improvements actually improving the system?
 
@@ -25,9 +26,9 @@ The design must not turn Bandit into a generic dashboard, full agent IDE, projec
 
 Design an Attention-First Workflow Cockpit for a single Bandit-governed repository.
 
-The cockpit should feel like an attention-first control surface with mission-control depth. The first screen leads with operator-owned attention and workflow risk, not with Bandit's internal phase model. It should be calm and guided at the top level, with dense evidence, source paths, gate matrices, coordination logs, review evidence, and hashes available one level down.
+The cockpit should feel like an attention-first control surface with mission-control depth. The first screen leads with operator-owned attention and workflow risk, not with Bandit's internal phase model. It should be calm and guided at the top level, with dense evidence, source paths, gate matrices, coordination logs, review evidence, hashes, and artifact-specific freshness detail available one level down.
 
-The primary user is the operator. Agent-facing details remain inspectable, but the top-level UI should organize around Work Items, Attention Categories, blockers, next actions, and trust signals. Agent names and roles should appear when useful, but they are secondary to work state.
+The primary user is the operator. Agent-facing details remain inspectable, but the top-level UI should organize around Work Items, Attention Categories, blockers, next actions, and Evidence Trust Signals. Agent names and roles should appear when useful, but they are secondary to work state.
 
 The cockpit is a guided action surface, not just a read-only report. It may expose approved actions such as validation, evidence inspection, review requests, UAT recording, and landing readiness checks only when those actions map to CLI Authority. The UI never owns canonical workflow state. It requests CLI-backed actions, then displays the resulting repo-native artifacts and derived status.
 
@@ -54,7 +55,7 @@ The first design should include:
 7. As the operator, I want safe next actions presented as guided buttons, so that I can request approved CLI-backed actions without memorizing commands.
 8. As the operator, I want unavailable actions shown as blocked with reasons, so that I understand what evidence or input is missing.
 9. As the operator, I want dangerous or unsupported actions excluded or disabled, so that the cockpit cannot imply authority it does not have.
-10. As the operator, I want every displayed status to have a confidence or evidence cue, so that I know whether the state is source-linked, stale, missing, or derived.
+10. As the operator, I want every displayed status to have an Evidence Trust Signal, so that I know the source, owner, freshness state, and staleness reason instead of relying on a generic confidence badge.
 11. As the operator, I want full source paths and evidence details available on drill-down, so that trust is auditable without crowding the main view.
 12. As the operator, I want work grouped by Attention Category, so that I can scan by required attention rather than by internal workflow phase.
 13. As the operator, I want workflow phase and stage shown inside item details, so that rigor remains available when I need it.
@@ -63,43 +64,50 @@ The first design should include:
 16. As the operator, I want improvement health to be first-class but compact, so that Bandit's workflow-learning loop remains visible.
 17. As the operator, I want to see open improvement chores, due evaluations, and keep/revise/revert/double-down decisions, so that I can tell whether workflow changes are paying off.
 18. As the operator, I want repeated smells and cross-model tension patterns summarized, so that process problems are surfaced before they become repeated failures.
-19. As the operator, I want the cockpit to feel calm and guided, so that I can use it without becoming a release engineer.
-20. As the operator, I want dense mission-control detail one click down, so that I can inspect evidence when a decision needs rigor.
-21. As the operator, I want agent and reviewer names to be secondary to work state, so that the UI does not become an agent roster.
-22. As the operator, I want to know which role owns the next governed action when it matters, so that role boundaries stay understandable.
-23. As the operator, I want the Operator Inbox to remain distinct from the cockpit's attention-first framing, so that repo-native operator messages are not confused with UI navigation.
-24. As Codex PM, I want the cockpit to preserve CLI Authority, so that UI affordances never become hidden workflow enforcement.
-25. As Codex PM, I want cockpit state derived from repo-native artifacts, so that deleting browser state or a local cache cannot lose canonical workflow state.
-26. As Codex PM, I want the cockpit to display fail-closed states, so that missing or contradictory evidence becomes visible repair work.
-27. As Codex PM, I want the cockpit to expose source artifact links, so that future agents and reviewers can trace every displayed state.
-28. As Codex PM, I want action buttons to invoke approved CLI command families, so that mutations remain validated and evidence-recorded.
-29. As Codex PM, I want the UI to avoid product UAT inference, so that only operator-recorded UAT artifacts authorize feature acceptance.
-30. As Codex PM, I want the cockpit to avoid independent merge, push, deploy, or policy override authority, so that release governance remains agent-owned and CLI-bound.
-31. As a Work Item PM Orchestrator, I want the cockpit to show my Work Item state and blockers without making my internal context the main UI model, so that operator attention stays focused.
-32. As a reviewer, I want gate status to link to review evidence, so that review outcomes are not reduced to unexplained green or red badges.
-33. As a landing agent, I want landing readiness to show missing gate blockers, stale evidence, and final verdict state separately, so that landing decisions remain explicit.
-34. As a future implementation agent, I want the UI design to define a stable view model boundary, so that web components do not re-implement workflow rules.
-35. As a future implementation agent, I want the design to separate action eligibility from action execution, so that the UI cannot bypass CLI validation.
-36. As a future implementation agent, I want visual screens to use the existing cockpit status foundation where possible, so that the first implementation does not invent a separate state model.
+19. As the operator, I want workflow trials to show predeclared criteria, uncertainty, minimum-detectable-effect context, and re-evaluation windows, so that improvement decisions do not look more certain than they are.
+20. As the operator, I want the cockpit to feel calm and guided, so that I can use it without becoming a release engineer.
+21. As the operator, I want dense mission-control detail one click down, so that I can inspect evidence when a decision needs rigor.
+22. As the operator, I want agent and reviewer names to be secondary to work state, so that the UI does not become an agent roster.
+23. As the operator, I want to know which role owns the next governed action when it matters, so that role boundaries stay understandable.
+24. As the operator, I want the Operator Inbox to remain distinct from the cockpit's attention-first framing, so that repo-native operator messages are not confused with UI navigation.
+25. As Codex PM, I want the cockpit to preserve CLI Authority, so that UI affordances never become hidden workflow enforcement.
+26. As Codex PM, I want cockpit state derived from repo-native artifacts, so that deleting browser state or a local cache cannot lose canonical workflow state.
+27. As Codex PM, I want the cockpit to display fail-closed states, so that missing or contradictory evidence becomes visible repair work.
+28. As Codex PM, I want the cockpit to expose source artifact links, so that future agents and reviewers can trace every displayed state.
+29. As Codex PM, I want action buttons to invoke approved CLI command families, so that mutations remain validated and evidence-recorded.
+30. As Codex PM, I want the UI to avoid product UAT inference, so that only operator-recorded UAT artifacts authorize feature acceptance.
+31. As Codex PM, I want the cockpit to avoid independent merge, push, deploy, or policy override authority, so that release governance remains agent-owned and CLI-bound.
+32. As a Work Item PM Orchestrator, I want the cockpit to show my Work Item state and blockers without making my internal context the main UI model, so that operator attention stays focused.
+33. As a reviewer, I want gate status to link to review evidence and artifact-specific freshness rules, so that review outcomes are not reduced to unexplained green or red badges.
+34. As a landing agent, I want landing readiness to show missing gate blockers, stale evidence, and final verdict state separately, so that landing decisions remain explicit.
+35. As a landing agent, I want landing readiness to show layered risk classification, never-auto-landable surfaces, blast-radius signals, static-analysis signals, source-trust state, input-quarantine state, supply-chain state, and smell-trigger inputs separately, so that a green review cannot hide auto-landing ineligibility.
+36. As a future implementation agent, I want the UI design to define a stable view model boundary, so that web components do not re-implement workflow rules.
+37. As a future implementation agent, I want the design to separate action eligibility from action execution, so that the UI cannot bypass CLI validation.
+38. As a future implementation agent, I want visual screens to use the existing cockpit status foundation where possible, so that the first implementation does not invent a separate state model.
 
 ## Implementation Decisions
 
 - The canonical UX framing is Attention-First Workflow Cockpit.
 - The top-level information architecture uses Attention Categories first and workflow phase second.
-- The default attention priority order is operator input required, blocked or stale state, active work and next action, landing/readiness gates, improvement health and follow-ups, then broader queue/context.
+- The default attention priority order is operator input required for operator-owned gates, blocked or stale state, CLI-repairable operational drift, active work and next action, landing/readiness gates, improvement health and follow-ups, then broader queue/context.
 - The primary design target is a single-repo local cockpit for the operator.
 - The cockpit should be a guided action surface, not a passive dashboard.
 - The cockpit may request approved CLI-backed actions, but the CLI validates and performs all canonical state changes.
 - The UI must never store approvals, verdicts, work-item state, policy exceptions, or landing readiness as canonical browser or app state.
 - Agent identity is secondary to Work Item state. Role names appear where they clarify ownership or evidence.
 - The Operator Inbox remains the repo-native artifact for operator-owned messages. The cockpit may display or link to those messages, but the UI concept is not called an inbox.
-- Cards show evidence confidence inline through compact cues such as source-linked, stale, missing evidence, blocked by operator input, derived from CLI, or unavailable.
+- Cards show Evidence Trust Signals inline through compact cues such as source-linked, stale, missing evidence, blocked by operator input, derived from CLI, expired, or unavailable.
+- Evidence Trust Signals are backed by artifact-specific Evidence SLOs rather than generic confidence. CI/test output, CodeRabbit, Local Qwen, escalated review, input quarantine state, trusted-source gates, provider-pricing evidence, benchmark/evaluation spend approval, UAT approval, landing verdicts, retrospectives, and projection freshness may have different freshness budgets.
+- Evidence Trust Signals expose source artifact, owner, freshness state, staleness reason, and whether the next action is operator input, Codex PM disposition, or CLI-owned mechanical repair in the detail view.
+- Landing readiness surfaces must show layered risk classification and auto-landing eligibility separately from review pass/fail state, including never-auto-landable surfaces, blast-radius signals, static-analysis signals, source-trust state, input-quarantine state, supply-chain state, smell-trigger inputs, selected review depth, and operator-supervision requirements.
+- Cockpit action affordances must not present landing or auto-landing actions as available when the layered risk-classification gate marks the work never auto-landable or elevated-risk pending supervision.
 - Full artifact paths, hashes, review records, coordination logs, and detailed gate evidence live in detail views.
 - The first design includes a compact workflow improvement health surface, because Bandit's differentiator is measurable workflow improvement.
+- Improvement health surfaces show predeclared trial criteria, uncertainty or minimum-detectable-effect context, re-evaluation windows, keep/revise/revert/double-down decisions, and proxy-risk notes instead of presenting metric movement as causal proof.
 - The queue/context area is lightweight and secondary. It should show trajectory and upcoming work, not become the main backlog management surface.
 - The visual style should be calm and guided with dense operational detail one click down.
 - The design should favor predictable controls: clear buttons for approved commands, disabled states with reasons, tabs or segmented controls for major views, status chips for evidence confidence, and drill-down panels for dense artifacts.
-- A deep view-model module should translate CLI-derived cockpit status into presentation-ready Attention Categories, priority ordering, evidence confidence, and action affordance state.
+- A deep view-model module should translate CLI-derived cockpit status into presentation-ready Attention Categories, priority ordering, Evidence Trust Signals, and action affordance state.
 - A deep action-eligibility module should expose what the UI may request, why an action is available or blocked, and which CLI command family owns execution.
 - A deep evidence-detail module should normalize source links, gate evidence, review evidence, landing evidence, UAT evidence, and coordination evidence for drill-down views.
 - UI components should stay shallow: they render view models and request actions; they do not parse repo artifacts or decide workflow authority.
@@ -108,12 +116,14 @@ The first design should include:
 ## Testing Decisions
 
 - Tests should verify user-visible behavior and authority boundaries, not incidental component internals.
-- View-model tests should cover Attention Category assignment, priority ordering, source confidence cues, blocked states, stale states, and missing-evidence states.
+- View-model tests should cover Attention Category assignment, priority ordering, Evidence Trust Signals, blocked states, stale states, and missing-evidence states.
 - Action-eligibility tests should cover allowed actions, disabled actions, unavailable command families, operator-owned input requirements, product UAT boundaries, and refusal to expose unsupported authority.
-- Evidence-detail tests should cover source traceability, gate evidence summaries, review and landing evidence links, UAT artifact display, and coordination evidence display.
+- Evidence-detail tests should cover source traceability, artifact-specific Evidence SLOs, gate evidence summaries, review and landing evidence links, UAT artifact display, projection freshness, and coordination evidence display.
+- Evidence-detail and action-eligibility tests should cover layered risk-classification states, never-auto-landable refusal, blast-radius and static-analysis risk signals, source-trust/input-quarantine/supply-chain state, smell-trigger inputs, review-depth selection, and operator-supervision requirements.
+- Improvement-health tests should cover workflow-trial guardrails: predeclared criteria, uncertainty or minimum-detectable-effect context, re-evaluation windows, keep/revise/revert/double-down decisions, and missing-guardrail fail-closed states.
 - UI tests should cover the main operator flows: identify required attention, inspect an active Work Item, inspect a blocked item, inspect landing readiness, inspect improvement health, and request an allowed CLI-backed action.
 - Regression tests should prove browser state, cache state, local API state, or a State Index cannot become canonical workflow authority.
-- Existing cockpit status tests provide prior art for source-linked derived status, fail-closed missing-source behavior, contradictory-state refusal, gate summaries, stale evidence, and no hidden write authority.
+- Existing cockpit status tests provide prior art for source-linked derived status, fail-closed missing-source behavior, contradictory-state refusal, gate summaries, stale evidence, and no hidden write authority. Future cockpit tests should add artifact-specific freshness budgets and staleness reasons.
 - Tests should include accessible states for disabled actions, status cues, keyboard navigation, and dense detail panels.
 - If a prototype is built, visual QA should verify that cards, controls, and dense detail panels do not overlap or truncate text at desktop and mobile widths.
 

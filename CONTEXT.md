@@ -1,6 +1,6 @@
 # Bandit
 
-Bandit defines a trust and improvement layer for AI-authored development workflows. This glossary keeps the product language precise while preserving the decisions and context that led from Sourmash to this fresh repository.
+Bandit defines a repo-native trust layer for AI-authored development workflows, with a learning loop for operator-reviewed workflow trials. This glossary keeps the product language precise while preserving the decisions and context that led from Sourmash to this fresh repository.
 
 Sourmash is source material, evidence archive, terminology history, and prior-art context. It is not Bandit's planning authority. Bandit owns the current implementation direction.
 
@@ -10,9 +10,69 @@ Sourmash is source material, evidence archive, terminology history, and prior-ar
 A project-portable contract that constrains, observes, and verifies AI development work.
 _Avoid_: task tracker, generic agent runner
 
-**Workflow Improvement Engine**:
-The closed loop that turns retrospectives, cross-model tension, review outcomes, incidents, and smell triggers into tagged improvement chores, measurable trials, analytics, and keep/revise/revert/double-down decisions.
-_Avoid_: retrospective theater, buried lessons, generic analytics dashboard
+**Untrusted Input Posture**:
+The required Trust Layer stance that release-authorized agents must treat external contributor text, issue text, PR text, review text, dependency documentation, and generated instructions as untrusted unless policy marks the source trusted.
+_Avoid_: cooperative-only security, prompt text as authority, hostile-repo security blanket
+
+**Data-Only External Input**:
+External contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or similar untrusted content admitted only as quoted data for extraction, summarization, or evidence, not as instructions an agent may follow.
+_Avoid_: prompt text as command, hidden system instruction, contributor-controlled agent behavior
+
+**Input Quarantine Boundary**:
+The structural boundary that keeps Data-Only External Input separated from release-authorized agent instructions, tool permissions, routing decisions, and landing authority until a Trusted Source Gate explicitly upgrades the source.
+_Avoid_: reviewer-only mitigation, raw issue context dump, trusted-by-default PR text
+
+**Trusted Source Gate**:
+A policy and evidence gate that marks a source, artifact, or content class as trusted for a specific release-authorized purpose, with scope, owner, source identity, allowed uses, expiry or freshness rule, and revocation path.
+_Avoid_: blanket trust, source reputation by vibes, permanent content upgrade
+
+**Trusted Local Repo Mode**:
+A scoped operating mode for self-owned repositories where Bandit may assume repo-local content is trusted until external contributor input or fetched third-party content enters a release-authorized path.
+_Avoid_: universal trust, public-repo mode, security waiver
+
+**Supply-Chain Sensitive Surface**:
+A change surface that can alter what code, tools, prompts, actions, or executable dependencies enter the repo or agent runtime.
+_Avoid_: normal implementation file, harmless package churn, broad malicious-repo claim
+
+**Supply-Chain Gate**:
+A pre-landing trust-layer gate for Supply-Chain Sensitive Surfaces that requires explicit evidence before the Landing Agent may treat the change as landable.
+_Avoid_: broad security proof, optional dependency note, auto-land waiver
+
+**Layered Risk Classification Gate**:
+A pre-landing gate that classifies work using hard exclusions, blast-radius signals, static-analysis signals, source trust, supply-chain state, and smell triggers before deciding review depth, operator supervision, or auto-landing eligibility.
+_Avoid_: smell-list-only safety, keyword-only escalation, optimistic auto-land
+
+**Never Auto-Landable Surface**:
+A change surface that cannot enter Auto-Landing Scope regardless of passing local tests or reviewer agreement. Initial examples include authentication, sessions, authorization, payment, billing, refunds, production data or schema migrations, secrets, credentials, CI or release workflow, dependency or fetched-prompt execution paths, privacy, telemetry, export, destructive operations, and external side-effecting automation.
+_Avoid_: reviewer-waived auto-land, small-change exception, hidden material-risk landing
+
+**Blast-Radius Signal**:
+A structured risk input based on files touched, code ownership, import graph or dependency reach, runtime path, data access, external side effects, migration or deploy scope, and user or product impact.
+_Avoid_: line-count-only risk, keyword-only smell, human intuition only
+
+**Static Analysis Risk Signal**:
+A machine-produced risk input from SAST, SCA, secrets scanning, IaC scanning, lint, type, or security tools that can raise review depth or block auto-landing without requiring smell-list concurrence.
+_Avoid_: optional warning, reviewer substitute, greenwashed auto-land
+
+**Workflow Learning Loop**:
+The evidence-backed process that turns retrospectives, cross-model tension, review outcomes, incidents, and smell triggers into operator-reviewed workflow trials or explicit no-action decisions.
+_Avoid_: statistical proof engine, retrospective theater, generic analytics dashboard
+
+**Workflow Trial**:
+A bounded change to Bandit's delivery workflow that records its rationale, expected effect, predeclared decision criteria, metric, baseline, uncertainty, Minimum Detectable Effect Context, evaluation window, Trial Re-Evaluation Window, and later keep, revise, revert, or double-down decision.
+_Avoid_: causal experiment, permanent policy by inertia, dashboard metric target
+
+**Predeclared Trial Decision Criteria**:
+The before-the-run criteria that state what evidence would support keep, revise, revert, or double-down for a Workflow Trial.
+_Avoid_: post-hoc threshold, HARKing, metric-shopping
+
+**Minimum Detectable Effect Context**:
+The explicit uncertainty note for a Workflow Trial that states the smallest effect the current sample, evidence window, or observation method can plausibly distinguish from noise.
+_Avoid_: false precision, single-operator statistical proof, confident weak-signal claim
+
+**Trial Re-Evaluation Window**:
+The later check required after an Improvement Decision to confirm the workflow change did not create proxy gaming, hidden regressions, or reward-hacking side effects before it becomes or remains policy.
+_Avoid_: one-and-done adoption, policy by inertia, unchecked proxy optimization
 
 **True Agent**:
 A harness-managed actor with bidirectional agent-to-agent communication, scoped permissions, controlled context, and observable lifecycle.
@@ -110,12 +170,20 @@ _Avoid_: repo-wide canonical ledger, shared hot file, global mutable queue
 A unified append-only work-item log containing typed workflow transitions and actor coordination events.
 _Avoid_: split timeline, actor-only source of truth, workflow-only audit trail
 
+**Canonical Coordination History**:
+The append-only coordination history that records accepted workflow transitions and accepted coordination events for a work item.
+_Avoid_: current-state cache, in-flight registry, cockpit status, overwriteable summary
+
 **Derived Current State View**:
 A rebuildable view of the latest accepted workflow state computed from the append-only transition log.
 _Avoid_: canonical state, hidden cache, dashboard truth
 
+**Coordination Projection**:
+A rebuildable read model derived from Canonical Coordination History, the Claim Authority Primitive, or both.
+_Avoid_: source of truth, direct mutation surface, independent workflow state
+
 **Authoritative In-Flight Registry**:
-A repo-native coordination artifact that agents may treat as authoritative for currently claimed or runnable work only after CLI reconciliation with the relevant work-item coordination state.
+A repo-native coordination artifact that reports currently claimed or runnable work. For release-authorized parallel writes, it is authoritative only when derived from or protected by the Claim Authority Primitive and reconciled with the relevant Canonical Coordination History.
 _Avoid_: advisory dashboard, chat queue, stale status summary
 
 **Work Surface Reservation**:
@@ -126,21 +194,105 @@ _Avoid_: best-effort note, read-only interest, implied ownership
 The files, path patterns, or named repo resources a work item or chore is allowed to write during a claimable stage.
 _Avoid_: inferred edit area, unlimited repo access, post-hoc collision check
 
+**Work-Surface Wait-For Graph**:
+A repo-native graph of active reservations and claim candidates where an edge means one work item or stage is waiting for a work surface currently held or required by another.
+_Avoid_: pairwise-only overlap list, informal dependency guess, chat-level blocked note
+
+**Work-Surface Deadlock**:
+A cycle in the Work-Surface Wait-For Graph that would allow two or more claims to wait on each other without a deterministic release, recovery, or rescheduling decision.
+_Avoid_: harmless conflict, operator puzzle, retry-until-clear loop
+
 **Single-Claim Heartbeat**:
 A recurring automation activation that may claim and start at most one runnable work stage after reconciling coordination state and work surface reservations.
 _Avoid_: batch runner, queue drainer, multi-claim activation
 
+**LLM Polling Heartbeat**:
+A recurring activation that wakes an LLM primarily to ask whether work exists.
+_Avoid_: default scheduler, cheap sweeper, event-driven wake
+
+**Event-Driven Work Trigger**:
+A trigger that wakes scheduling or agent work because repo state, CI state, review state, or operator action made work available or changed a blocker.
+_Avoid_: polling interval, arbitrary wake, trigger as authority
+
+**Deterministic Work Sweeper**:
+A non-LLM process that periodically inspects repo-native coordination state for stale claims, missed triggers, due evaluations, or blocked/unblocked transitions.
+_Avoid_: agent judgment, model heartbeat, hidden scheduler authority
+
+**Work Availability Wake Guarantee**:
+The scheduling contract that Bandit must wake the appropriate scheduler or agent path when runnable work, recovery work, or newly unblocked work becomes available.
+_Avoid_: silent available work, manual babysitting, cost-only no-op suppression
+
 **Work Claim Lease**:
-A time-bound exclusive claim over one work stage and its work surface reservation, with renewal required during long-running work and recovery required before clearing expired claims with unmerged changes.
-_Avoid_: permanent lock, blind timeout cleanup, chat-owned ownership
+A time-bound exclusive claim over one work stage and its work surface reservation, with renewal required during long-running work, a Fencing Token and Claim Idempotency Key required for release-authorized mutation, and recovery required before clearing expired claims with unmerged changes.
+_Avoid_: permanent lock, blind timeout cleanup, chat-owned ownership, permission without fencing
 
 **Claim-First Worktree Start**:
 The rule that a session must record an exclusive work claim lease before creating an ephemeral worktree for that stage.
 _Avoid_: speculative worktree, claim-after-start, parallel unclaimed setup
 
+**Worktree Bootstrap Contract**:
+A repo-native contract that defines how a Bandit-created worktree becomes runnable: allowed copied or linked files, required setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and failure evidence.
+_Avoid_: assume main worktree environment, copy secrets by convention, runnable because worktree exists
+
+**Runnable Worktree**:
+A claim-owned worktree whose Claim-Owned Worktree Lock and Worktree Bootstrap Contract validation have both succeeded.
+_Avoid_: locked but unbootstrapped worktree, shell happens to work locally, hidden setup debt
+
+**Git Mutation Serializer**:
+A CLI-owned single-writer guard for shared `.git` plumbing mutations that can contend across parallel worktrees, such as worktree add, worktree remove, worktree prune, worktree lock or unlock, branch/ref maintenance outside the claim CAS boundary, and packed-refs-affecting operations.
+_Avoid_: every agent runs git plumbing directly, best-effort retry, hidden daemon authority
+
+**Claim-Owned Worktree Lock**:
+A `git worktree lock` state applied through the Git Mutation Serializer immediately after a claim-owned worktree is created, with a stable reason that names the Bandit claim ID, Work Item ID, and stage. It is removed only by the Repo PM Coordinator after Work Item PM Orchestrator handoff verification and cleanup.
+_Avoid_: unlocked claimed worktree, lock reason without claim identity, worker-owned unlock, fencing token in lock reason
+
+**Claim Safety Invariant**:
+A property that must always hold across claim authority, projections, append-only coordination history, work-surface reservations, and claim-gated side-effect envelopes. Examples include at most one active claim for a declared work surface, stale fencing tokens cannot mutate state, same-key same-input retries cannot duplicate side effects, same-key different-input retries are refused, work-surface wait-for cycles cannot be claimable, and failed worktree locking cannot leave a false active claim.
+_Avoid_: example-only race proof, informal concurrency confidence, hand-picked duplicate-claim case
+
+**Fault-Injecting Claim Simulation**:
+A deterministic or property-style test harness that explores Claim Operation interleavings and injected failures such as pauses, stale reads, CAS mismatch, stale fencing tokens, idempotency replay or conflict, projection drift, history disagreement, wait-for cycles, serializer contention, and worktree lock failure.
+_Avoid_: one duplicate-claim unit test, happy-path retry test, manual race demonstration
+
 **Atomic Work Claim**:
-A CLI-owned claim operation that reconciles current work-item state and in-flight reservations, then either records one exclusive work claim lease or fails without starting work.
-_Avoid_: manual registry edit, advisory claim, best-effort lock
+A CLI-owned claim operation that reconciles current work-item state and in-flight reservations, then either records one exclusive work claim lease through a Compare-And-Swap Claim or fails without starting work.
+_Avoid_: manual registry edit, advisory claim, best-effort lock, file-only check-then-write
+
+**Claim Authority Primitive**:
+The mechanism that grants or refuses exclusive writable claim authority. It must provide compare-and-swap semantics before any Parallel Writable Workstream can be release-authorized. The first approved backend is the Git Refs Claim Authority Backend.
+_Avoid_: convention, plain status file, after-the-fact conflict detector
+
+**Git Refs Claim Authority Backend**:
+The repo-native backend for the first Claim Authority Primitive: active claim records live in a `refs/bandit/*` namespace and state changes use `git update-ref --stdin` compare-and-swap transactions as the writer authority boundary.
+_Avoid_: file-only lock, JSON registry authority, hidden database lock, check-then-write claim
+
+**Claim Projection Artifact**:
+A human-readable `.bandit` file or cockpit/read-model artifact derived from the Git Refs Claim Authority Backend, Canonical Coordination History, or both. It can explain active claims, but it cannot grant, renew, release, or recover claims.
+_Avoid_: lock source, manual claim edit, projection-as-authority
+
+**Compare-And-Swap Claim**:
+A claim operation that succeeds only when the observed claim state still matches the expected claim state at the authority boundary.
+_Avoid_: check-then-write claim, optimistic prose, next-operation conflict detection
+
+**Fencing Token**:
+A monotonic token issued with a work claim lease and required on state-changing or external side-effecting operations so stale leaseholders can be rejected.
+_Avoid_: lease timestamp, best-effort renewal, stale-agent honor system
+
+**Claim Idempotency Key**:
+A stable operation identity supplied with a Claim Operation or Claim-Gated Side Effect so a retry or rerun can be recognized as the same intended action instead of duplicated.
+_Avoid_: random retry token, timestamp-only uniqueness, best-effort duplicate check
+
+**Idempotent Claim Operation**:
+A Claim Operation that requires the current Fencing Token after token issuance plus a Claim Idempotency Key, treats a same-key same-input retry as the same intended operation, and refuses same-key conflicting input.
+_Avoid_: duplicate claim mutation, replay without identity, key reuse with changed payload
+
+**Claim Operation**:
+A CLI-authorized action that creates, renews, releases, blocks, completes, or recovers a Work Claim Lease.
+_Avoid_: manual claim edit, chat approval, tool call without authority
+
+**Claim-Gated Side Effect**:
+An external side effect performed under a Work Claim Lease. It requires the current Fencing Token and Claim Idempotency Key so stale leaseholders are rejected and retries cannot duplicate the effect.
+_Avoid_: side effect by convention, unfenced tool mutation, retryable external write without idempotency
 
 **One Active Claim Per Work Item**:
 The v0 coordination rule that a work item may have no more than one active work claim lease at a time, even when multiple stages appear theoretically available.
@@ -149,6 +301,14 @@ _Avoid_: same-item parallel stages, split ownership inside one work item, eviden
 **Post-Bootstrap Parallel Workstreams**:
 Bandit's future ability to run multiple non-overlapping work items at the same time after the active bootstrap-gap lane is resolved, blocked, or explicitly dispositioned.
 _Avoid_: bootstrap shortcut, one-gap-at-a-time bypass, uncontrolled concurrency
+
+**Parallel Writable Workstream**:
+A workstream that can mutate repo state, worktrees, workflow artifacts, or external side effects while another workstream is active.
+_Avoid_: read-only inspection, advisory planning lane, status-only heartbeat
+
+**Parallel Write Authorization Gate**:
+The release gate that keeps Parallel Writable Workstreams disabled until claim authority, fencing-token enforcement, claim idempotency, stale-agent rejection, work-surface deadlock refusal, Git mutation serialization, and Claim Safety Invariants are proven through focused tests plus Fault-Injecting Claim Simulation.
+_Avoid_: scheduler preference, operator reminder, non-binding warning, example-only validation
 
 **Agent Coordination Contract**:
 A repo-native protocol for agents to claim, hand off, block, complete, request repair, and resume bounded work.
@@ -211,7 +371,7 @@ A Work Item with an existing Work Item PM Orchestrator context and prior non-ter
 _Avoid_: newly queued work, priority hint, claimable item
 
 **Claimability Report**:
-A repo-native explanation for whether a queued Work Item can be claimed now. When claimability is blocked, it lists all known blockers and names a deterministic primary blocker. Initial blocker values include `missing_policy_approval`, `missing_product_or_operator_approval`, `recovery_required_claim`, `expired_claim`, `dependency`, `conflicting_active_claim`, `invalid_scope_or_acceptance`, and `missing_declared_write_surface`. Primary blocker priority follows that order. The Repo PM Coordinator may mechanically repair blockers only when the fix is derivable from already approved artifacts, every automatic repair must be one atomic CLI operation that applies the repair, appends the immutable transition-history entry, assigns and returns the entry ID, and recomputes claimability once, or applies nothing. A repair request must include the observed current state so the CLI can fail closed if repo state changed before apply. `recovery_required_claim` is not mechanically repairable.
+A repo-native explanation for whether a queued Work Item can be claimed now. When claimability is blocked, it lists all known blockers and names a deterministic primary blocker. Initial blocker values include `missing_policy_approval`, `missing_product_or_operator_approval`, `recovery_required_claim`, `expired_claim`, `conflicting_active_claim`, `work_surface_deadlock`, `dependency`, `invalid_scope_or_acceptance`, and `missing_declared_write_surface`. Primary blocker priority follows that order. The Repo PM Coordinator may mechanically repair blockers only when the fix is derivable from already approved artifacts, every automatic repair must be one atomic CLI operation that applies the repair, appends the immutable transition-history entry, assigns and returns the entry ID, and recomputes claimability once, or applies nothing. A repair request must include the observed current state so the CLI can fail closed if repo state changed before apply. `recovery_required_claim` is not mechanically repairable.
 _Avoid_: separate queue, hidden scheduler judgment, informal blocker note
 
 **Expired Claim Release Evidence**:
@@ -275,8 +435,8 @@ A recurring automation that can inspect eligible chores and run approved low-ris
 _Avoid_: autonomous product implementer, unattended feature builder
 
 **Landing Agent**:
-A CLI-authorized release worker that evaluates PR readiness, interprets mechanical gates, repairs safe issues, and lands approved low-risk work without requiring the operator to make code-safety judgments.
-_Avoid_: human rubber-stamp, direct-main chore runner, deploy bot
+A CLI-authorized release worker that evaluates PR readiness, interprets mechanical gates, repairs safe release issues, and performs approved landing mechanics without requiring the operator to make code-safety or release-mechanics judgments.
+_Avoid_: human rubber-stamp, direct-main chore runner, operator-as-release-engineer
 
 **Landing Verdict**:
 A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair, or requires operator approval, backed by CI, tests, CodeRabbit, adversarial review, review freshness, PR accuracy, and policy evidence.
@@ -314,21 +474,225 @@ _Avoid_: same-model self-review, optional critique, compliments
 The configured model, prompt, tools, cost budget, timeout, and blocking policy for the Adversarial Review Gate.
 _Avoid_: hard-coded model choice, hidden prompt, permanent default
 
+**Load-Bearing Agent Component**:
+A core agent-architecture surface whose quality materially affects task performance, reviewer quality, cost, and workflow safety.
+_Avoid_: implementation detail, incidental prompt, optional optimization
+
+**Goal Definition Component**:
+The load-bearing agent component that states the intended outcome, success boundary, and stopping condition for a task.
+_Avoid_: vague task, motivational prompt, hidden objective
+
+**Perception And Input Component**:
+The load-bearing agent component that determines which evidence, files, and external signals are admitted for agent use.
+_Avoid_: raw context dump, accidental input, untrusted text as instruction
+
+**Context Component**:
+The load-bearing agent component that shapes the active working packet, framing, constraints, and source hierarchy an agent uses for a task.
+_Avoid_: long-term memory, raw input set, chat transcript
+
+**Memory Component**:
+The load-bearing agent component that preserves relevant prior state, decisions, and evidence across tasks without overriding current repo authority.
+_Avoid_: chat history as truth, stale recollection, hidden state
+
+**Reasoning And Planning Component**:
+The load-bearing agent component that decomposes work, chooses approach, evaluates tradeoffs, and decides when to ask for input.
+_Avoid_: chain-of-thought artifact, vibes, unbounded planning
+
+**Tool Execution Component**:
+The load-bearing agent component that governs which actions an agent may take, with what permissions, preconditions, and evidence.
+_Avoid_: unrestricted tool use, manual button pushing, implicit authority
+
+**Orchestration And Coordination Component**:
+The load-bearing agent component that governs role boundaries, handoffs, claims, sequencing, and conflict avoidance across agents.
+_Avoid_: chat-only coordination, role blur, hidden scheduler
+
+**Feedback And Observability Component**:
+The load-bearing agent component that captures outcomes, traces, costs, failures, reviewer disagreement, and learning signals.
+_Avoid_: retrospective theater, invisible costs, untraceable agent behavior
+
+**OTel-Compatible Agent Trace**:
+A structured, vendor-portable runtime trace for one agent session or workflow activation, covering wakeups, claims, tool calls, reviewer runs, model calls, token spend, failures, retries, and outcomes.
+_Avoid_: canonical workflow state, chat transcript, retrospective replacement
+
+**Agent Operation Span**:
+A bounded observability record for one operation inside an agent trace, such as a claim operation, tool call, reviewer run, wake decision, or model call.
+_Avoid_: work-item artifact, workflow verdict, hidden log line
+
+**Observability Projection**:
+A queryable non-canonical view built from agent traces to explain cost, latency, failure patterns, tool friction, and runtime behavior.
+_Avoid_: source of truth, approval artifact, hidden authority
+
+**Canonical Workflow Artifact**:
+A repo-native artifact that records workflow state, gate evidence, PM disposition, landing verdict, UAT status, or retrospective decisions.
+_Avoid_: telemetry span, dashboard cache, memory note
+
+**Evidence SLO**:
+An artifact-type-specific freshness contract that defines when evidence is current, stale, missing, expired, derived, or blocked.
+_Avoid_: generic confidence badge, vague green status, one freshness rule for all artifacts
+
+**Artifact Freshness Budget**:
+The allowed age, source drift, hash drift, provider-state drift, or projection lag for one evidence artifact type before it must be refreshed or marked stale.
+_Avoid_: arbitrary timeout, hidden cache age, source-agnostic freshness
+
+**Evidence Trust Signal**:
+A cockpit or CLI cue backed by an Evidence SLO that shows artifact type, source, owner, freshness state, and staleness or refresh reason.
+_Avoid_: unexplained status chip, confidence theater, decorative badge
+
+**Staleness Reason**:
+The explicit reason an Evidence Trust Signal cannot be treated as current, such as source drift, missing hash, expired provider state, stale UAT, outdated landing verdict, missing artifact, or projection lag.
+_Avoid_: red badge only, unknown failure, hidden freshness rule
+
+**Structured Improvement Mining**:
+A continuous, evidence-backed practice that inspects each work item for workflow improvement signals during execution and retrospective closeout.
+_Avoid_: waiting for agents to volunteer suggestions, freeform lesson dump, after-the-fact vibes
+
+**Retrospective Mining Checklist**:
+The required Stage 6 checklist that records whether specific agent and workflow signals occurred, their evidence, disposition, and follow-up or no-action decision.
+_Avoid_: unstructured retrospective prompt, optional suggestions, checklist without dispositions
+
+**Agent Execution Smell**:
+An evidence-backed sign that a Load-Bearing Agent Component made work less safe, clear, cheap, or effective, such as failed tool calls, overreasoning, poor work breakdown, wrong agent scope, tool-use rule pressure, or recurring inefficiency.
+_Avoid_: personality critique, vague frustration, isolated harmless typo
+
+**Tool Invocation Friction**:
+An Agent Execution Smell where an agent repeatedly struggles to choose, call, or interpret an approved tool or review path, even if the final work eventually succeeds.
+_Avoid_: one-off typo, unsupported tool request, private operator workaround
+
+**Load-Bearing Skill**:
+A maintained instruction artifact that shapes one or more Load-Bearing Agent Components and must be governed by a Skill Lifecycle Contract before it becomes required stage policy.
+_Avoid_: prompt afterthought, optional wrapper, generic checklist
+
+**Skill Lifecycle Contract**:
+The first-class governance record for a Load-Bearing Skill: owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria.
+_Avoid_: loose prompt snippet, hidden local skill drift, undocumented skill variant
+
+**Agent Component Benchmark**:
+An evidence set comparing Load-Bearing Agent Component variants on the same task packets before adopting them as workflow policy.
+_Avoid_: vibes-based prompt tuning, one-off instruction tweak, unmeasured architecture change
+
+**Agent Evaluation Harness**:
+A repo-native evaluation capability that replays fixed task or review packets against agent profiles, reviewer profiles, skills, models, and load-bearing component variants to produce comparable capability, cost, latency, and failure evidence. Its first supported mode is a Replay-Only Agent Benchmark.
+_Avoid_: improvement-chore evaluation, one-off anecdote, self-approval loop
+
+**Replay-Only Agent Benchmark**:
+A benchmark-only Agent Evaluation Harness run that uses fixed packets in offline or replay mode and records comparable observations without touching live work, reviewer routing, model routing, skill policy, or cost policy.
+_Avoid_: live A/B routing, automatic reviewer policy, production paid-reviewer trial
+
+**Agent Evaluation Packet**:
+A fixed input-and-expected-observation bundle used by the Agent Evaluation Harness to compare agents or reviewer profiles on the same work.
+_Avoid_: live work item, chat transcript, vague benchmark prompt
+
+**Calibration Packet Set**:
+A visible Agent Evaluation Packet set used while developing skills, reviewer prompts, scoring logic, and harness behavior.
+_Avoid_: policy-promotion proof, hidden test, final benchmark
+
+**Locked Holdout Packet Set**:
+A versioned Agent Evaluation Packet set withheld from skill or reviewer-prompt tuning and used to decide policy promotion, rollback, or reviewer-routing changes.
+_Avoid_: visible calibration sample, mutable benchmark, post-hoc pass set
+
+**Gold-Labeled Reviewer Packet**:
+An Agent Evaluation Packet for reviewer benchmarking that contains seeded blockers, seeded non-issues, expected observations, and scoring labels known before the reviewer run.
+_Avoid_: unlabeled review sample, live PR, raw historical transcript
+
+**Failure-Mode Stratified Packet Set**:
+A repo-derived benchmark packet set organized around Bandit's observed workflow failure modes, such as evidence freshness loops, malformed artifacts, CodeRabbit invocation friction, stage capability or skill scope mistakes, supply-chain-sensitive changes, stale UAT or landing evidence, and false-positive review churn.
+_Avoid_: generic coding benchmark, random historical sample, unbalanced review set
+
+**Seeded Blocker**:
+A deliberately embedded issue that should block landing if a reviewer is performing well.
+_Avoid_: nitpick, stylistic preference, ambiguous concern
+
+**Seeded Non-Issue**:
+A deliberately safe or acceptable construct used to measure whether a reviewer over-reports false positives.
+_Avoid_: hidden blocker, trick prompt, undefined expectation
+
+**Reviewer Benchmark Scorecard**:
+The scoring surface for a Reviewer Capability Benchmark. It prioritizes blocker recall over raw finding count and also records actionable precision, useful finding yield, false-positive rate, tool friction, latency, and cost.
+_Avoid_: comment volume, model preference, unweighted finding list
+
+**Paid Reviewer Promotion Threshold**:
+A predeclared policy threshold that a recurring paid reviewer route must satisfy within a specific Reviewer Promotion Scope before becoming automatic: locked-holdout blocker-recall improvement over Local Qwen, false-positive ceiling, Provider Pricing Evidence-backed expected-cost ceiling, and operator-supervised Spend Class Approval.
+_Avoid_: one good comparison run, model prestige, unbounded paid default
+
+**Reviewer Promotion Scope**:
+The risk class or Stage Capability Profile a Paid Reviewer Promotion Threshold applies to, such as supply-chain-sensitive changes, architecture changes, evidence-freshness logic, or low-risk chores.
+_Avoid_: global model preference, all-PR reviewer default, one-size-fits-all escalation
+
+**Reviewer Capability Benchmark**:
+An evidence set comparing Local Qwen, Claude or paid reviewer profiles, and Load-Bearing Agent Component variants on Gold-Labeled Reviewer Packets before reviewer-routing policy changes.
+_Avoid_: anecdotal model preference, single-reviewer assumption, architecture-blind escalation
+
+**Provider Pricing Evidence**:
+A versioned pricing record for a paid model, reviewer provider, or paid execution path: provider, model or profile, source URL or source artifact, captured date, effective date, freshness or expiry rule, unit prices, expected per-run cost, spend class, and approval owner.
+_Avoid_: stale pricing memory, hidden API spend, plan entitlement assumption
+
+**Spend Class Approval**:
+Operator-supervised approval for a bounded class of paid execution tied to Provider Pricing Evidence, Reviewer Promotion Scope, expected per-run cost, freshness or expiry, and approval owner.
+_Avoid_: blanket paid approval, per-run surprise billing, open-ended spend
+
+**Benchmark/Evaluation Spend**:
+Paid execution used to collect benchmark or evaluation evidence before a route, model, reviewer profile, skill, or component variant is promoted to recurring policy. It requires current Provider Pricing Evidence plus either per-run approval or an active Spend Class Approval, and it does not authorize recurring routing.
+_Avoid_: stealth recurring spend, policy by experiment, approval-free trial
+
+**Paid Reviewer Evaluation Run**:
+A one-off paid reviewer call used to gather Reviewer Capability Benchmark evidence before a Paid Reviewer Promotion Threshold is satisfied for a Reviewer Promotion Scope.
+_Avoid_: recurring reviewer route, emergency default, hidden paid escalation
+
+**Reviewer Cost Confidence**:
+The operator-supervised confidence that paid reviewer use is justified for the relevant Reviewer Promotion Scope by capability evidence, current Provider Pricing Evidence, expected per-run cost, freshness or expiry, Spend Class Approval, and a satisfied Paid Reviewer Promotion Threshold before becoming automatic policy.
+_Avoid_: default paid escalation, hidden token spend, model prestige
+
+**Soft Budget Band**:
+A planning and observability range for expected token, cost, latency, or retry behavior during agent or reviewer execution.
+_Avoid_: hard spending cap, landing verdict, brittle estimate
+
+**Token-Cost Failsafe**:
+A generous guardrail that pauses or escalates abnormal agent or reviewer execution when token spend, monetary cost, latency, retry behavior, or no-op work patterns exceed expected bounds.
+_Avoid_: tight budget, cheapest possible run, repeated failed rerun
+
+**Abnormal Run**:
+An agent, reviewer, or scheduler activation whose cost, token usage, latency, retries, failed tool calls, or no-op pattern indicates likely mis-scoping, misrouting, runaway execution, or provider/tool failure.
+_Avoid_: normal variance, useful deep review, one-off slow command
+
+**Budget Continuation Decision**:
+A recorded decision to continue, reroute, stop, or seek operator approval after a Token-Cost Failsafe trips.
+_Avoid_: silent overrun, automatic retry loop, unrecorded cost override
+
+**Operator-Blocking Gate**:
+A fail-closed stop that requires operator input because product direction, UAT, policy change, business tradeoff, explicit cost or risk approval, irreversible operational risk, or genuinely ambiguous scope cannot be resolved from approved repo artifacts.
+_Avoid_: routine metadata repair, ordinary workflow drift, operator-as-release-engineer
+
+**Codex-Owned Technical Decision**:
+A routine technical routing, implementation-mechanics, agent/tool selection, skill-scoping, review-depth, test-design, or artifact-structure decision that Codex PM answers from repo evidence and accepted policy without asking the operator.
+_Avoid_: operator-as-engineering-manager, technical polling question, routine model-routing vote
+
+**Operational Drift**:
+A workflow, metadata, projection, optional-field, malformed-artifact, or bookkeeping mismatch where approved repo artifacts already determine the intended state and no product, UAT, policy, business, cost, or irreversible-risk decision is required.
+_Avoid_: product ambiguity, policy exception, unsafe claim recovery
+
+**CLI-Owned Mechanical Repair**:
+An atomic CLI-authorized repair of Operational Drift using approved source artifacts and expected-current-state checks, with immutable transition history for the fields changed and blocker cleared.
+_Avoid_: manual file patch, approval grant, policy override, invented scope
+
 **Local Qwen Baseline Reviewer**:
 The default no-paid-key adversarial reviewer that runs on every PR before landing. The bootstrap runtime routes through the repo-local oMLX OpenAI-compatible endpoint and must not silently fall back to Qwen Code CLI, Ollama, global Mastra Code settings, or paid-key sidecars.
 _Avoid_: best reviewer forever, optional local check, hidden provider drift
 
 **Adversarial Escalation**:
-The policy path that adds or replaces the baseline reviewer with a stronger or second reviewer for complex or high-risk PRs.
-_Avoid_: manual panic review, permanent expensive default
+The policy path that adds or replaces the baseline reviewer with a stronger or second reviewer when risk, Reviewer Capability Benchmark evidence, and Reviewer Cost Confidence justify it.
+_Avoid_: manual panic review, permanent expensive default, unbenchmarked paid reviewer
 
 **Manager-Owned Routing**:
 The rule that Codex PM selects the right workflow, skill, agent, reviewer, and escalation path from recorded policy and repo evidence instead of asking the operator to make technical routing decisions.
 _Avoid_: operator-as-engineering-manager, every-choice questionnaire
 
 **Operator Input Boundary**:
-The rule that Codex PM must call out missing operator-owned input when repo artifacts cannot answer a product, UAT, policy, business tradeoff, explicit cost/risk override, or genuinely ambiguous scope question.
+The rule that Codex PM must call out missing operator-owned input only when repo artifacts cannot answer an Operator-Blocking Gate.
 _Avoid_: guessing user intent, burying uncertainty, asking the operator routine technical routing questions
+
+**Operator Supervision**:
+The operator-owned oversight of product direction, UAT, policy, business tradeoffs, explicit cost or risk approvals, and irreversible operational-risk decisions without owning routine code-safety, release-mechanics, git-recovery, or Operational Drift repair work.
+_Avoid_: human button-pusher, release engineer, code-safety judge
 
 **Operator Inbox**:
 The compact repo-native communication surface where the Repo PM Coordinator records operator-owned questions, blocked decisions, required inputs, operator responses, and resolution status. In the file-based era, operator-visible coordination messages are written here rather than delivered through proactive notifications. It is not general worker context.
@@ -338,25 +702,37 @@ _Avoid_: agent scratchpad, general chat, hidden approval store, GUI notification
 A repo-native policy list of risk signals that require stronger review, narrower slice planning, mechanical enforcement, or halt-and-surface behavior.
 _Avoid_: gut feel, buried retrospective lesson, ad hoc escalation
 
+**Authority-Based Agent Role**:
+A small governed role category defined by authority, permitted actions, forbidden actions, required inputs, and required outputs.
+_Avoid_: capability label, model tier, skill name, one-role-per-task pattern
+
+**Stage Capability Scope**:
+The per-stage declaration of required skills, allowed tools, authority role, inputs, outputs, evidence, and forbidden actions for a Work Item stage.
+_Avoid_: generic agent prompt, implicit tool access, role proliferation, unscoped skill use
+
+**Capability Profile**:
+A reusable bundle of skills, tools, prompts, model settings, reviewer settings, or runtime constraints applied inside an Authority-Based Agent Role.
+_Avoid_: separate role, permanent agent identity, hidden routing preference
+
 **Specialized Agent Role**:
-A narrowly scoped agent or skill with explicit inputs, permissions, outputs, unavailable protocol, and evidence contract for one kind of work.
-_Avoid_: generalist prompt, vague helper
+A legacy shorthand for repeated capability specialization. Prefer Authority-Based Agent Role plus Stage Capability Scope unless the specialization requires different governed authority.
+_Avoid_: broad role taxonomy, capability as authority, one-off agent title
 
 **Cross-Model Tension Log**:
 A repo-native record of substantive disagreements between implementation, review, CodeRabbit, and adversarial models, including the decision made and whether later evidence validated it.
 _Avoid_: forgotten chat disagreement, untracked model preference
 
 **Retrospective-Derived Chore**:
-An improvement chore created from a retrospective lesson, tagged with source slice, lesson, hypothesis, expected impact, metric, baseline, trial window, and evaluation status.
+A Chore proposed from Structured Improvement Mining, a retrospective lesson, or another learning signal and handled as a Workflow Trial or explicit no-action decision.
 _Avoid_: untracked follow-up, vague process note
 
 **Improvement Analytics**:
-Metrics that show whether workflow changes improved delivery, review quality, repair-loop count, false-positive rate, landing safety, cost, latency, or operator burden.
-_Avoid_: vanity charts, activity counts without outcome signal
+Contextual indicators that help interpret a Workflow Trial without claiming statistical causality, including metric observations, baselines, uncertainty, proxy-risk notes, and Minimum Detectable Effect Context.
+_Avoid_: causal proof, vanity charts, activity counts without outcome signal
 
 **Improvement Decision**:
-An explicit keep, revert, revise, or double-down decision made after evaluating an improvement chore or cross-model tension decision against outcome data.
-_Avoid_: permanent default by inertia, forgotten experiment
+An operator-reviewed keep, revise, revert, or double-down decision made after interpreting a Workflow Trial or cross-model tension decision against Predeclared Trial Decision Criteria, uncertainty, and Trial Re-Evaluation Window evidence.
+_Avoid_: causal verdict, permanent default by inertia, forgotten experiment
 
 **Approved UAT**:
 An operator-recorded acceptance that a feature slice satisfies its product and user-facing contract in the relevant test environment.
@@ -371,8 +747,8 @@ A previously recorded UAT approval that no longer authorizes landing because bra
 _Avoid_: assumed-valid acceptance, agent-classified product impact
 
 **Auto-Landing Scope**:
-The policy boundary allowing the Landing Agent to merge both chores and feature slices after the required non-code approvals and all mechanical gates are green.
-_Avoid_: direct-to-main automation, product acceptance by agent
+The narrow policy boundary allowing the Landing Agent to complete bounded low-risk landing actions only after the Layered Risk Classification Gate, required approvals, and mechanical gates are green.
+_Avoid_: broad direct-to-main automation, product acceptance by agent, operator-as-release-engineer
 
 **Mini SeekWins Delivery Loop**:
 A spike proof that starts or observes a governed run from a control plane, keeps PM context alive, separates Test Writer, Writer, and Reviewer agent profiles, records agent-to-agent evidence, mechanically blocks a forbidden action, and leaves Mastra-readable or Mastra-reconfigurable state.
@@ -401,6 +777,16 @@ _Avoid_: planner, architect
 ## Relationships
 
 - A **Trust Layer** can run on one or more **Harnesses**.
+- **Untrusted Input Posture** is required before **Landing Agent** authority can process external contributor input, fetched third-party content, or generated instructions.
+- **Data-Only External Input** must cross an **Input Quarantine Boundary** before release-authorized agents may inspect it; it remains quoted evidence, not executable instruction, unless a **Trusted Source Gate** explicitly upgrades the source for a bounded purpose.
+- **Trusted Local Repo Mode** is narrower than a security waiver; it ends at the boundary where untrusted input enters a release-authorized path.
+- A **Trusted Source Gate** does not make an entire repository, contributor, dependency, or future content stream trusted; it records source identity, scope, allowed uses, freshness or expiry, owner, and revocation.
+- A **Supply-Chain Sensitive Surface** includes dependency manifests, lockfiles, package-manager scripts, CI or release workflows, agent skills, fetched prompts, external tool install paths, and similar inputs to executable or agent behavior.
+- A **Layered Risk Classification Gate** is required before **Auto-Landing Scope**, reviewer depth, or operator-supervision decisions are finalized.
+- **Smell Trigger Catalog** entries are one input to the **Layered Risk Classification Gate**; they are not the only authority for review depth or auto-landing eligibility.
+- **Never Auto-Landable Surfaces** cannot enter **Auto-Landing Scope** even when tests, CodeRabbit, Qwen, or escalated reviewers pass.
+- **Blast-Radius Signals**, **Static Analysis Risk Signals**, source-trust state, input-quarantine state, and supply-chain state can independently raise review depth, require operator supervision, or block auto-landing without requiring a matching smell trigger.
+- A **Supply-Chain Gate** is required before **Auto-Landing Scope** can include any **Supply-Chain Sensitive Surface**; until then those changes require blocker disposition, operator supervision, or an explicit bootstrap gap.
 - A **Harness** manages one or more **True Agents**.
 - A **Harness Candidate** must pass the **Runtime Portability Gate**.
 - A **Provider-Agnostic Harness** satisfies one part of the **Runtime Portability Gate**.
@@ -414,6 +800,7 @@ _Avoid_: planner, architect
 - A **Shared Core State Machine** governs both **Slices** and **Chores**, with **Typed State Extensions** for work-type-specific requirements.
 - A **Retrospective Recorded State** is not the same as a **Closed Work Item**.
 - A **Step Transition Ledger** lives inside a **Per-Work-Item Coordination Log** as typed workflow transition events.
+- **Canonical Coordination History** is the authoritative workflow history for a work item; current-state files, cockpit status, state indexes, and registries are **Coordination Projections** unless the **Claim Authority Primitive** is actively granting or refusing a writable claim.
 - A **Derived Current State View** may summarize a **Step Transition Ledger**, but it is not canonical.
 - An **Agent Coordination Contract** uses **Runtime-Agnostic Coordination** so Codex, Claude, Qwen, CI jobs, Owner VMs, or future harnesses can execute bounded steps without becoming Bandit's planning authority.
 - An **Agent Coordination Event** lives inside a **Per-Work-Item Coordination Log** without becoming workflow state itself.
@@ -433,10 +820,26 @@ _Avoid_: planner, architect
 - Only the **Repo PM Coordinator** and **Work Intake Triage Skill** may mutate **Work Intake Ledger** triage state. **Work Item PM Orchestrators**, workers, reviewers, retrospectives, and other agents may propose entries or transitions, but cannot mark proposals accepted, deferred, declined, superseded, or claimable.
 - The **Work Intake Triage Skill** may record `accepted_to_queue` consensus, but the **Repo PM Coordinator** materializes the accepted proposal by allocating a real Work Item ID, creating the initial artifact shell, linking it back to the proposal, and making it eligible for queueing and claimability checks.
 - A **Work Item Proposal** is not a **Work Item** until the **Repo PM Coordinator** completes materialization of an `accepted_to_queue` decision.
-- A materialized **Work Item** is queued, not automatically claimable; claimability still requires no `recovery_required_claim` or `expired_claim`, unblocked dependencies, declared write surfaces, valid scope and acceptance criteria, no conflicting active claim, and any required product, operator, or policy approval.
+- A materialized **Work Item** is queued, not automatically claimable; claimability still requires no `recovery_required_claim` or `expired_claim`, unblocked dependencies, declared write surfaces, valid scope and acceptance criteria, no conflicting active claim, no **Work-Surface Deadlock**, and any required product, operator, or policy approval.
 - A queued **Work Item** that is not claimable stays queued with a **Claimability Report** of `claimability: blocked`; it does not move to a separate blocked-work queue.
 - A **Claimability Report** lists all known blockers so the **Repo PM Coordinator** can batch repairs and names a deterministic `primary_blocker` so scheduler and future cockpit surfaces can explain why queued work cannot run.
+- An **Authoritative In-Flight Registry** may support advisory or read-only coordination without full write authority, but release-authorized parallel writes require it to be a **Coordination Projection** derived from, or a CAS-protected view of, the **Claim Authority Primitive**.
+- The **Claim Authority Primitive** is the only authority that may grant or refuse an active release-authorized writable claim; **Canonical Coordination History** records and reconciles claim lifecycle events but does not replace compare-and-swap claim authority.
+- The first **Claim Authority Primitive** backend is the **Git Refs Claim Authority Backend**; `refs/bandit/*` plus `git update-ref --stdin` transactions provide the claim writer boundary, while `.bandit` claim files remain **Claim Projection Artifacts**.
+- The **Git Refs Claim Authority Backend** does not replace the **Git Mutation Serializer**; claim refs use compare-and-swap authority, while shared `.git` worktree and maintenance mutations require serialized CLI execution before parallel worktrees are release-authorized.
+- A claim-owned worktree is not fully created until the **Claim-Owned Worktree Lock** succeeds; lock failure routes through serializer cleanup and claim failure or release evidence.
+- A Bandit-created worktree is not a **Runnable Worktree** until the **Worktree Bootstrap Contract** is validated; bootstrap failure routes to claim failure, block, or recovery evidence rather than silent worker retry.
+- An **Atomic Work Claim** is only atomic for **Parallel Writable Workstreams** when backed by a **Compare-And-Swap Claim** at the **Claim Authority Primitive**.
+- A **Claim Projection Artifact** may be rebuilt from **Canonical Coordination History** and the **Git Refs Claim Authority Backend**, but manual edits to that projection cannot grant or release claim authority.
+- A **Work Claim Lease** is not sufficient authority for release-authorized mutation unless state-changing **Claim Operations** and **Claim-Gated Side Effects** require the current **Fencing Token** and a **Claim Idempotency Key**.
+- An **Idempotent Claim Operation** treats same-key same-input retry as the same intended operation, but same-key conflicting input is refused as unsafe replay.
+- Pairwise **Work Surface Reservation** overlap checks are necessary but not sufficient; claimability must also detect **Work-Surface Deadlocks** through the **Work-Surface Wait-For Graph**.
+- **Post-Bootstrap Parallel Workstreams** may start as advisory, read-only, or single-writer coordination, but **Parallel Writable Workstreams** remain blocked until the **Parallel Write Authorization Gate** passes.
+- **LLM Polling Heartbeat** is not the default scheduler for **Post-Bootstrap Parallel Workstreams**.
+- **Event-Driven Work Triggers** and a **Deterministic Work Sweeper** must satisfy the **Work Availability Wake Guarantee** before LLM polling can be removed from a workflow.
+- A **Single-Claim Heartbeat** may remain as a worker activation shape, but it should be woken by available work rather than by default model polling for no-op discovery.
 - The **Repo PM Coordinator** may automatically repair mechanical **Claimability Report** blockers such as missing declared write surfaces or normalized scope and acceptance metadata only when approved PRDs, briefs, or work artifacts already prove the answer.
+- Fail-closed behavior routes to an **Operator-Blocking Gate** only for product, UAT, policy, business, cost, irreversible-risk, or genuinely ambiguous scope decisions; ordinary **Operational Drift** should route to **CLI-Owned Mechanical Repair** when the fix is derivable from approved artifacts.
 - The **Repo PM Coordinator** may mechanically repair `expired_claim` only when **Expired Claim Release Evidence** proves there is no unmerged work and policy allows release.
 - Missing or ambiguous **Expired Claim Release Evidence** converts `expired_claim` to `recovery_required_claim` instead of releasing it.
 - An `expired_claim` mechanical release rationale is generated from evidence, briefly states why release is safe, and lives in the mechanical-repair transition-history entry.
@@ -455,7 +858,10 @@ _Avoid_: planner, architect
 - A **Work Item PM Orchestrator** must not clear leases, recover worktrees, or claim replacement work.
 - The **Repo PM Coordinator** must not run repeated repair-and-recompute loops in one activation.
 - The **Repo PM Coordinator** must not repair claimability by inventing product scope, granting approvals, overriding policy, breaking dependencies, or force-resolving conflicting claims; non-mechanical repairs become a **Work Item Proposal** or **Operator Inbox** entry.
+- A missing field, projection mismatch, malformed artifact, ledger drift, or bookkeeping issue must not become an **Operator Inbox** entry when a **CLI-Owned Mechanical Repair** can derive the intended state from approved repo artifacts.
 - A **Role Authority Boundary** applies to every agent role: coordination roles do not implement or claim, worker roles do not govern intake or landing, reviewer roles do not land, and landing roles do not invent missing product or policy approval.
+- Bandit's default **Authority-Based Agent Roles** are Operator, PM or Coordinator, Worker, Reviewer, and Landing; capability differences belong in **Capability Profiles** or **Stage Capability Scope** unless they require different governed authority.
+- Every claimable Work Item stage should declare a **Stage Capability Scope** so the assigned role has the right skills and tools without expanding the agent-role taxonomy.
 - A **Work Item Proposal** with `accepted_deferred` remains in the **Work Intake Ledger** until later promotion; it is approved scope but not active queue work.
 - A **Work Intake Triage Skill** ranks entries before presentation; low-effort/high-impact proposals float to the top unless stronger risk, dependency, or operator-boundary evidence says otherwise.
 - A **Work Intake Triage Skill** may challenge an operator override with brief rationale, but must honor an explicit operator choice to address a different intake item.
@@ -473,18 +879,51 @@ _Avoid_: planner, architect
 - A **Bootstrap Gap** discovered at this stage becomes the next **Bootstrap-Gap Chore** before unrelated feature or slice work proceeds.
 - A **Heartbeat Chore Agent** may run selected **Chores**, but it does not get the same authority as a feature implementation workflow.
 - A **Heartbeat Chore Agent** prepares eligible work; a **Landing Agent** decides whether a PR can land under policy.
-- A **Landing Verdict** replaces asking the operator to judge routine code-safety warnings.
+- A **Landing Verdict** replaces asking the operator to judge routine code-safety warnings or perform routine release mechanics.
 - A **Landing Verdict** requires a completed **Pre-Landing Review Loop**.
 - **Stage 4 Evidence-Head Semantics** keeps iterative review closeout from becoming recursive while preserving fail-closed behavior for actual source drift.
 - A **CodeRabbit Pre-Landing Loop** runs before landing so review queues and repair loops do not happen after merge.
 - An **Adversarial Review Gate** is required for every PR and is configured by an **Adversarial Reviewer Profile**.
-- The **Local Qwen Baseline Reviewer** runs on every PR; **Adversarial Escalation** adds a stronger or second reviewer when policy says complexity or risk requires it.
-- **Manager-Owned Routing** means Codex PM applies the **Smell Trigger Catalog** to choose skills, agents, review depth, and model escalation without asking the operator to make routine technical calls.
-- **Specialized Agent Roles** are preferred over broad generalists when a repeated workflow has stable inputs, permissions, outputs, and evidence.
+- The **Local Qwen Baseline Reviewer** remains the no-paid-key default until **Reviewer Capability Benchmark** evidence and **Reviewer Cost Confidence** justify automatic paid escalation.
+- **Adversarial Escalation** may add a stronger or second reviewer when policy risk requires it, but recurring paid use needs benchmark evidence, current **Provider Pricing Evidence**, and **Spend Class Approval**.
+- **Load-Bearing Agent Components** include **Goal Definition Component**, **Perception And Input Component**, **Context Component**, **Memory Component**, **Reasoning And Planning Component**, **Tool Execution Component**, **Orchestration And Coordination Component**, and **Feedback And Observability Component**.
+- The **Feedback And Observability Component** uses **OTel-Compatible Agent Traces** and **Agent Operation Spans** to explain runtime behavior, cost, latency, failures, reviewer runs, wakeups, claims, and tool friction.
+- **OTel-Compatible Agent Traces** and **Observability Projections** are evidence for analysis; **Canonical Workflow Artifacts** remain authoritative for workflow state, gates, decisions, UAT, landing, and closeout.
+- **Evidence SLOs** are artifact-type-specific: CI/test output, CodeRabbit evidence, Local Qwen evidence, escalated review, UAT approval, landing verdicts, retrospectives, and **Coordination Projections** can have different **Artifact Freshness Budgets**.
+- The **Workflow Cockpit** should display **Evidence Trust Signals** with source, owner, freshness state, and **Staleness Reason** instead of generic confidence badges.
+- A **Landing Verdict** depends on the upstream **Evidence SLOs** for tests, review, UAT when applicable, policy gates, and source-drift checks.
+- A **Soft Budget Band** helps detect cost and token drift, but it is not a hard landing gate by itself.
+- A **Token-Cost Failsafe** should stop **Abnormal Runs** without making normal deep review brittle or forcing duplicate failed attempts that cost more than the original work.
+- A tripped **Token-Cost Failsafe** requires a **Budget Continuation Decision** before further paid, high-token, or repeated reviewer execution continues.
+- **Load-Bearing Skills** shape one or more **Load-Bearing Agent Components**; each required skill needs a **Skill Lifecycle Contract** before it can become stage policy.
+- A **Skill Lifecycle Contract** supplies stable skill identity, version, intended-stage fit, required tools, forbidden actions, benchmark packets, and rollback criteria for **Stage Capability Scope** and **Replay-Only Agent Benchmarks**.
+- **Agent Component Benchmark** evidence can change model-routing, reviewer-routing, skill policy, and cost decisions only through the approved policy path.
+- An **Agent Evaluation Harness** runs **Agent Evaluation Packets** so **Reviewer Capability Benchmark** and **Agent Component Benchmark** evidence is comparable across models, skills, reviewer profiles, and component variants.
+- The first **Agent Evaluation Harness** implementation runs **Replay-Only Agent Benchmarks** with fixed packets for Local Qwen, Claude or paid reviewers, skill variants, reviewer profiles, and load-bearing component variants.
+- **Replay-Only Agent Benchmarks** separate visible **Calibration Packet Sets** from versioned **Locked Holdout Packet Sets** so skills, prompts, and reviewer profiles are not promoted solely because they overfit the visible benchmark.
+- Policy promotion from an **Agent Evaluation Harness** requires **Locked Holdout Packet Set** evidence; **Calibration Packet Set** evidence is development feedback, not sufficient proof.
+- **Reviewer Capability Benchmarks** use **Gold-Labeled Reviewer Packets** with **Seeded Blockers** and **Seeded Non-Issues** so the **Reviewer Benchmark Scorecard** can measure blocker recall and false positives instead of raw finding count.
+- The first reviewer benchmark packet set should be a **Failure-Mode Stratified Packet Set** derived from Bandit's actual workflow risks before generic coding benchmarks are used as supplemental coverage.
+- A **Reviewer Benchmark Scorecard** prioritizes blocker recall, then actionable precision, useful finding yield, false-positive rate, tool friction, latency, and Provider Pricing Evidence-backed expected cost when comparing Local Qwen against Claude or another paid reviewer.
+- A **Paid Reviewer Evaluation Run** before threshold promotion is **Benchmark/Evaluation Spend**: it requires current **Provider Pricing Evidence** plus per-run approval or active **Spend Class Approval**, and it never counts as recurring reviewer routing policy.
+- A recurring paid reviewer route requires a **Paid Reviewer Promotion Threshold** for its **Reviewer Promotion Scope** before it becomes automatic policy.
+- A **Paid Reviewer Promotion Threshold** must include locked-holdout blocker-recall improvement over **Local Qwen Baseline Reviewer**, false-positive ceiling, Provider Pricing Evidence-backed expected-cost ceiling, and operator-supervised **Spend Class Approval**.
+- **Reviewer Cost Confidence** expires when **Provider Pricing Evidence** is missing, stale, past its freshness or expiry rule, no longer matches provider billing terms, or no longer supports the approved spend class for the **Reviewer Promotion Scope**.
+- A paid reviewer route promoted for one **Reviewer Promotion Scope** does not authorize recurring paid routing for unrelated risk classes, stages, or **Capability Profiles**.
+- An **Agent Evaluation Harness** informs policy decisions, but it does not automatically change model routing, reviewer routing, skill policy, or cost policy without Codex PM and operator-supervised approval where required.
+- **Structured Improvement Mining** runs in parallel with normal work and is reconciled in **Stage 6**, rather than waiting for an agent to volunteer lessons at closeout.
+- A **Retrospective Mining Checklist** examines **Load-Bearing Agent Components** for **Agent Execution Smells** including failed tool calls, overreasoning, work-breakdown fit, agent-scope fit, tool-use rule pressure, reviewer/model routing issues, **Tool Invocation Friction**, recurring inefficiency, and cost or latency signals.
+- Repeated confusion about how to invoke CodeRabbit, Local Qwen, or another required gate is **Tool Invocation Friction** and must be routed to a skill, command, documentation, policy repair, Workflow Trial, or explicit no-action decision.
+- **Manager-Owned Routing** means Codex PM applies the **Smell Trigger Catalog** to choose skills, agents, review depth, model escalation, test strategy, implementation mechanics, and artifact structure without asking the operator to make routine technical calls.
+- All technical questions are **Codex-Owned Technical Decisions** unless they require product direction, UAT, policy change, business tradeoff, explicit cost/risk approval, irreversible operational risk approval, or genuinely ambiguous scope.
+- **Capability Profiles** and **Stage Capability Scope** are preferred over new **Specialized Agent Roles** when the difference is skill, tool, model, reviewer depth, or prompt behavior rather than governed authority.
+- **Stage Capability Scope** may include the **Soft Budget Band**, **Token-Cost Failsafe**, and **Budget Continuation Decision** required for paid, high-token, reviewer, or long-running work.
 - **Cross-Model Tension Log** entries keep disputed model judgments visible for later evaluation.
-- The **Workflow Improvement Engine** is the harness's differentiator: it converts **Retrospective-Derived Chores** and cross-model tension decisions into measurable **Improvement Analytics** and later **Improvement Decisions**.
-- **Retrospective-Derived Chores** and cross-model tension follow-ups must be tagged so the cockpit and CLI can track whether they were effective, ineffective, reverted, or worth doubling down on.
-- **Auto-Landing Scope** includes **Chores** and **Slices**, but feature **Slices** require **Approved UAT** before the Landing Agent can merge them.
+- The **Trust Layer** is Bandit's primary product category; its **Workflow Learning Loop** preserves lessons as **Workflow Trials**, no-action decisions, or later **Improvement Decisions**.
+- **Workflow Trials** cannot change workflow policy from metric observation alone; they require **Predeclared Trial Decision Criteria**, **Minimum Detectable Effect Context**, a **Trial Re-Evaluation Window**, and a keep, revise, revert, or double-down **Improvement Decision**.
+- **Retrospective-Derived Chores** and cross-model tension follow-ups must come from structured mining, review outcomes, incidents, smell triggers, or explicit operator/reviewer evidence and be tagged so the cockpit and CLI can track whether they were kept, revised, reverted, doubled down, or left as no-action decisions.
+- **Auto-Landing Scope** is limited to bounded low-risk work; feature **Slices** and material-risk changes require **Operator Supervision** before the **Landing Agent** performs landing mechanics.
+- **Auto-Landing Scope** depends on the **Layered Risk Classification Gate**; hard exclusions and any single high-risk signal can block auto-landing even when the smell catalog does not match.
 - **Approved UAT** is represented by a **UAT Approval Artifact** written by **CLI Authority**; the **Workflow Cockpit** may trigger that command, but does not store acceptance as canonical state.
 - Any branch code change after a **UAT Approval Artifact** creates **Stale UAT** for v0; feature **Slices** require renewed **Approved UAT** before auto-landing.
 - A **Harness Candidate** must pass the **SeekWins Transferability Gate** by demonstrating a **Mini SeekWins Delivery Loop**.
@@ -502,7 +941,42 @@ _Avoid_: planner, architect
 - "subagent" was used to mean both **True Agent** and **Process Adapter**; resolved: Bandit requires bidirectional agent-to-agent communication for true agents.
 - "Claude" was used as both planner and worker; resolved: model workers are not Bandit planning authority by default.
 - "Mastra" was used as shorthand for multiple related surfaces; resolved: **Mastra** and **Mastra Code** are distinct harness candidates and must be evaluated separately.
-- "software factory" overlaps Bandit's coordination problem but is not the primary product category; resolved: Bandit is a **Workflow Improvement Engine** whose **Coordination Primitive** can support software-factory use cases.
+- "software factory" overlaps Bandit's coordination problem but is not the primary product category; resolved: Bandit is a **Trust Layer** whose **Coordination Primitive** can support software-factory use cases.
+- "measurable improvement engine" overstated Bandit's ability to prove causal workflow improvement at single-operator scale; resolved: use **Workflow Learning Loop** and **Workflow Trial** for evidence-backed, operator-reviewed changes.
+- "workflow metric improved" could become reward-hacking pressure or post-hoc justification; resolved: **Workflow Trials** need **Predeclared Trial Decision Criteria**, **Minimum Detectable Effect Context**, and a **Trial Re-Evaluation Window** before keep, revise, revert, or double-down decisions can change policy.
+- "adversarial-grade security" was too broad; resolved: Bandit does not claim malicious-repository-owner security, but **Untrusted Input Posture** is required before release-authorized agent paths handle external or third-party content.
+- "cooperative-only security" was unsafe for landing agents; resolved: external contributor text and fetched third-party content enter as **Data-Only External Input** behind an **Input Quarantine Boundary** and cannot become instructions without a **Trusted Source Gate**.
+- "security" was too broad for dependency and tool-install risk; resolved: use **Supply-Chain Gate** for supply-chain-sensitive changes without claiming broad malicious-repository-owner security.
+- "smell list" was too brittle as a safety mechanism; resolved: use a **Layered Risk Classification Gate** with hard **Never Auto-Landable Surface** exclusions, **Blast-Radius Signals**, **Static Analysis Risk Signals**, source trust, input quarantine, supply-chain state, and smell triggers as one input.
+- "paid reviewer escalation" was used as if stronger automatically meant worth the spend; resolved: paid reviewer policy needs **Reviewer Capability Benchmark** evidence and **Reviewer Cost Confidence** before it becomes automatic.
+- "skills" were treated as incidental prompts; resolved: **Load-Bearing Skills** are product-critical artifacts because they shape **Load-Bearing Agent Components** and can materially change Qwen, Claude, and reviewer-routing performance. Required skills need a **Skill Lifecycle Contract** with owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria.
+- "context" and "memory" were used too loosely; resolved: **Context Component** is the active task packet and framing, while **Memory Component** is durable prior state.
+- "agent capability" was used as if it were only model choice; resolved: Bandit evaluates goal definition, perception/input, context, memory, reasoning/planning, tool execution/action, orchestration/coordination, and feedback/observability as load-bearing architecture components.
+- "evaluation" was used for both workflow-trial interpretation and agent capability testing; resolved: **Improvement Evaluation** interprets workflow trials, while an **Agent Evaluation Harness** compares agents, skills, models, reviewer profiles, and component variants on fixed packets.
+- "benchmark" could imply live A/B routing or automatic policy mutation; resolved: the first agent benchmark mode is a **Replay-Only Agent Benchmark** that records evidence without changing live routing or policy.
+- "fixed packet" could still be overfit; resolved: use visible **Calibration Packet Sets** for development and versioned **Locked Holdout Packet Sets** for policy promotion.
+- "better reviewer" could mean more comments; resolved: use **Gold-Labeled Reviewer Packets** and a **Reviewer Benchmark Scorecard** that prioritizes blocker recall over raw finding count.
+- "paid reviewer worked once" could become permanent spend by inertia; resolved: recurring paid routing requires a predeclared **Paid Reviewer Promotion Threshold**, current **Provider Pricing Evidence**, and operator-supervised **Spend Class Approval**.
+- "one-off paid reviewer call" could become stealth recurring spend; resolved: classify it as **Benchmark/Evaluation Spend** with per-run approval or active **Spend Class Approval**, and forbid treating it as recurring reviewer routing policy until the scoped promotion threshold is satisfied.
+- "Claude is better than Qwen" could be mistaken for a global paid-routing policy; resolved: paid reviewer promotion is scoped by **Reviewer Promotion Scope**, not by model identity alone.
+- "current provider billing terms" was too vague for paid-reviewer policy; resolved: use **Provider Pricing Evidence** with source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and **Spend Class Approval**.
+- "reviewer benchmark packet" could mean generic code-review tasks; resolved: the first reviewer benchmark set is a **Failure-Mode Stratified Packet Set** derived from Bandit's real workflow failure modes.
+- "retrospective" was treated as a freeform lesson surface; resolved: **Structured Improvement Mining** and the **Retrospective Mining Checklist** must actively mine each work item for **Agent Execution Smells** instead of waiting for voluntary suggestions.
+- "fencing token" could still allow duplicate effects during retries; resolved: state-changing **Claim Operations** and **Claim-Gated Side Effects** also require a **Claim Idempotency Key**.
+- "work-surface collision" was too narrow; resolved: claimability requires pairwise overlap checks plus **Work-Surface Wait-For Graph** cycle detection so deadlocked reservations are blocked explicitly.
+- "Git refs CAS" could be mistaken for complete git-concurrency safety; resolved: a **Git Mutation Serializer** is required for shared `.git` plumbing mutations before parallel worktrees are release-authorized.
+- "worktree lock reason" is Codex PM-owned Git mechanics; resolved: **Claim-Owned Worktree Locks** use a stable claim-specific reason and do not include renewing fencing tokens.
+- "observability" was treated as if repo artifacts, automation memory, and runtime telemetry were interchangeable; resolved: **OTel-Compatible Agent Traces** explain runtime behavior, while **Canonical Workflow Artifacts** remain workflow authority.
+- "confidence badge" was too vague for cockpit trust; resolved: cockpit trust uses **Evidence SLOs** and **Evidence Trust Signals** that expose source, owner, freshness state, and **Staleness Reason** per artifact type.
+- "registry" and "current state" were used as if derived coordination views could become independent authority; resolved: **Canonical Coordination History** is the workflow source of truth, **Coordination Projections** are rebuildable views, and only the **Claim Authority Primitive** may grant active writable claims.
+- "fail closed" was used as if every operational mismatch should halt on the operator; resolved: reserve **Operator-Blocking Gates** for real operator-owned decisions and route derivable **Operational Drift** through **CLI-Owned Mechanical Repair**.
+- "technical question" was used as if the operator should decide implementation mechanics; resolved: all routine technical questions are **Codex-Owned Technical Decisions** unless they cross an **Operator-Blocking Gate**.
+- "agent role" was used for both authority boundaries and capability specialization; resolved: keep a small **Authority-Based Agent Role** set and put stage-specific skills, tools, model settings, reviewer depth, and prompts in **Stage Capability Scope** or **Capability Profiles**.
+- "budget" was used as if every agent or reviewer execution needed a tight refusal cap; resolved: use **Soft Budget Band** for planning and observability, and **Token-Cost Failsafe** for abnormal-run protection without creating costly duplicate attempts.
+- "atomic" was used for fail-closed multi-file operations; resolved: release-authorized **Parallel Writable Workstreams** require a **Claim Authority Primitive** with **Compare-And-Swap Claim** semantics and **Fencing Token** enforcement.
+- "CAS-backed claim authority" was still too abstract; resolved: the first **Claim Authority Primitive** backend uses the **Git Refs Claim Authority Backend** with `refs/bandit/*` and `git update-ref --stdin` transactions, while `.bandit` files are projections.
+- "worktree exists" could be mistaken for "worktree is runnable"; resolved: Bandit-created worktrees require a **Worktree Bootstrap Contract** and must validate as **Runnable Worktrees** before worker execution starts.
+- "heartbeat" was used as if periodic LLM polling were the default way to discover work; resolved: **Event-Driven Work Triggers** plus a **Deterministic Work Sweeper** should provide a **Work Availability Wake Guarantee** before default LLM no-op polling is removed.
 - "swarm" and "fleet" describe runtime scaling patterns; resolved: Bandit adopts **Runtime-Agnostic Coordination**, not a VM, fleet, or swarm architecture.
 
 ## Imported Decision Context

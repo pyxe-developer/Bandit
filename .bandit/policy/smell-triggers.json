@@ -15,11 +15,41 @@
       "id": "BANDIT-SMELL-OPERATOR-INPUT-BOUNDARY",
       "name": "Operator Input Boundary",
       "category": "operator_boundary",
-      "trigger": "Required product direction, UAT, policy, business, or explicit cost/risk input is missing.",
+      "trigger": "Required product direction, UAT, policy, business, explicit cost/risk, irreversible operational-risk, or genuinely ambiguous scope input is missing.",
       "severity": "blocker",
       "default_action": "halt_for_operator_input",
       "escalation_target": "operator",
       "required_evidence": ["operator-input-status"]
+    },
+    {
+      "id": "BANDIT-SMELL-OPERATOR-ESCALATION-OVERUSE",
+      "name": "Operator Escalation Overuse",
+      "category": "operator_boundary",
+      "trigger": "Operational drift, missing derivable metadata, malformed supported artifacts, projection mismatch, ledger drift, or workflow bookkeeping drift is escalated to the operator even though approved repo artifacts determine the intended state and no operator-owned gate is missing.",
+      "severity": "blocker",
+      "default_action": "require_pm_disposition",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["operational-drift-evidence", "approved-source-artifacts", "operator-gate-not-required", "mechanical-repair-path"]
+    },
+    {
+      "id": "BANDIT-SMELL-TECHNICAL-QUESTION-ESCALATION",
+      "name": "Technical Question Escalation",
+      "category": "operator_boundary",
+      "trigger": "A workflow asks the operator to decide routine technical routing, implementation mechanics, agent/tool selection, skill scoping, review depth, test strategy, artifact structure, or Git plumbing when repo evidence and accepted policy are sufficient for Codex PM to decide.",
+      "severity": "blocker",
+      "default_action": "require_pm_disposition",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["codex-owned-technical-decision", "repo-evidence", "accepted-policy", "operator-gate-not-required"]
+    },
+    {
+      "id": "BANDIT-SMELL-MECHANICAL-REPAIR-OVERREACH",
+      "name": "Mechanical Repair Overreach",
+      "category": "operator_boundary",
+      "trigger": "A mechanical repair path invents product scope, grants approvals, overrides policy, resolves ambiguous cost/risk, performs irreversible operational action, or force-resolves unsafe claim recovery.",
+      "severity": "blocker",
+      "default_action": "halt_for_operator_input",
+      "escalation_target": "operator",
+      "required_evidence": ["operator-owned-gate", "repair-overreach-evidence", "halted-action"]
     },
     {
       "id": "BANDIT-SMELL-UAT-APPROVAL",
@@ -35,11 +65,21 @@
       "id": "BANDIT-SMELL-EVIDENCE-FRESHNESS",
       "name": "Evidence Freshness",
       "category": "evidence_freshness",
-      "trigger": "Tests, review evidence, UAT, landing verdicts, or source-drift checks no longer apply to the current source.",
+      "trigger": "Tests, review evidence, UAT, landing verdicts, projections, or source-drift checks no longer satisfy the artifact-specific Evidence SLO for the current source.",
       "severity": "blocker",
       "default_action": "refresh_evidence",
       "escalation_target": "codex-pm",
-      "required_evidence": ["current-head", "verification-output"]
+      "required_evidence": ["evidence-slo", "current-head", "verification-output", "staleness-reason"]
+    },
+    {
+      "id": "BANDIT-SMELL-EVIDENCE-SLO-MISSING",
+      "name": "Evidence SLO Missing",
+      "category": "evidence_freshness",
+      "trigger": "A cockpit, gate, review, landing, UAT, retrospective, or projection status is shown as trusted without an artifact-specific freshness rule, source artifact, owner, freshness state, or staleness reason.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["artifact-type", "evidence-slo", "source-artifact", "owner", "freshness-state", "staleness-reason-if-stale"]
     },
     {
       "id": "BANDIT-SMELL-CODERABBIT-WAIVER",
@@ -102,6 +142,56 @@
       "required_evidence": ["release-risk-notes", "operator-override-if-required"]
     },
     {
+      "id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "name": "Supply-Chain Boundary",
+      "category": "supply_chain",
+      "trigger": "Work touches dependency manifests, lockfiles, package-manager scripts, CI or release workflows, agent skills, fetched prompts, external tool install paths, or other executable supply-chain surfaces.",
+      "severity": "blocker",
+      "default_action": "require_release_review",
+      "escalation_target": "release-manager",
+      "required_evidence": ["supply-chain-gate-state", "operator-supervised-approval-if-required"]
+    },
+    {
+      "id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "name": "Layered Risk Classification Missing",
+      "category": "risk_classification",
+      "trigger": "Review depth, operator supervision, or auto-landing eligibility is decided from smell triggers alone, or without hard never-auto-landable exclusions, blast-radius signals, static-analysis signals, source trust or input quarantine state, and supply-chain state.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["risk-classification-gate", "never-auto-landable-check", "blast-radius-signals", "static-analysis-signals", "source-trust-state", "input-quarantine-state", "supply-chain-state", "smell-trigger-inputs"]
+    },
+    {
+      "id": "BANDIT-SMELL-NEVER-AUTO-LANDABLE-SURFACE",
+      "name": "Never Auto-Landable Surface",
+      "category": "risk_classification",
+      "trigger": "A change touches authentication, sessions, authorization, payment, billing, refunds, production data or schema migrations, secrets or credentials, CI or release workflow, dependency or fetched-prompt execution path, privacy, telemetry, export, destructive operations, or external side-effecting automation while still being considered auto-landable.",
+      "severity": "blocker",
+      "default_action": "halt_for_operator_input",
+      "escalation_target": "operator",
+      "required_evidence": ["never-auto-landable-surface", "operator-supervision-required", "auto-land-refusal"]
+    },
+    {
+      "id": "BANDIT-SMELL-HIGH-RISK-SIGNAL-IGNORED",
+      "name": "High-Risk Signal Ignored",
+      "category": "risk_classification",
+      "trigger": "A blast-radius, static-analysis, source-trust, input-quarantine, or supply-chain signal indicates elevated risk but review depth or landing eligibility is not changed because the smell list did not match.",
+      "severity": "blocker",
+      "default_action": "require_pm_disposition",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["high-risk-signal", "risk-classification-disposition", "review-depth-or-auto-land-decision"]
+    },
+    {
+      "id": "BANDIT-SMELL-UNTRUSTED-INPUT-QUARANTINE",
+      "name": "Untrusted Input Quarantine Missing",
+      "category": "input_security",
+      "trigger": "A release-authorized agent path ingests external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or fetched prompts without data-only handling, an input quarantine boundary, source trust classification, and a trusted-source gate for any instruction-bearing use.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["input-source-classification", "data-only-input-boundary", "input-quarantine-boundary", "trusted-source-gate-if-upgraded", "instruction-bearing-use-refusal"]
+    },
+    {
       "id": "BANDIT-SMELL-PARSER-VALIDATOR",
       "name": "Parser Validator Boundary",
       "category": "parser_validator",
@@ -125,11 +215,171 @@
       "id": "BANDIT-SMELL-REGISTRY-INDEX-AUTHORITY",
       "name": "Registry Index Authority Boundary",
       "category": "registry_index",
-      "trigger": "Work adds registries, caches, indexes, or UI state that might become hidden authority over repo-native artifacts.",
+      "trigger": "Work adds registries, current-state views, caches, indexes, cockpit state, or UI state that might become hidden authority over append-only coordination history or repo-native artifacts.",
       "severity": "blocker",
       "default_action": "reject_hidden_authority",
       "escalation_target": "codex-pm",
-      "required_evidence": ["source-of-truth-check", "rebuildability-notes"]
+      "required_evidence": ["source-of-truth-check", "append-only-history-boundary", "rebuildability-notes"]
+    },
+    {
+      "id": "BANDIT-SMELL-COORDINATION-PROJECTION-AUTHORITY",
+      "name": "Coordination Projection Authority Boundary",
+      "category": "coordination_authority",
+      "trigger": "Work treats current-state views, in-flight registries, state indexes, cockpit status, or other projections as canonical workflow history, or allows them to grant active writable claims without CAS claim authority.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["append-only-coordination-history", "projection-rebuild-proof", "cas-claim-authority-exception", "projection-mutation-refusal"]
+    },
+    {
+      "id": "BANDIT-SMELL-PARALLEL-WRITE-AUTHORITY",
+      "name": "Parallel Write Authority Boundary",
+      "category": "claim_authority",
+      "trigger": "Work enables parallel writable workstreams, claim leases, work surface reservations, worktree lifecycle, or external side effects without CAS-backed claim authority, fencing-token enforcement, idempotency-key handling, work-surface wait-for graph cycle detection, and Git Mutation Serializer coverage for shared .git mutations.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["cas-claim-authority", "fencing-token-check", "stale-agent-rejection", "idempotency-key-check", "duplicate-side-effect-prevention", "work-surface-wait-for-cycle-check", "git-mutation-serializer", "claim-safety-invariants", "fault-injecting-claim-simulation"]
+    },
+    {
+      "id": "BANDIT-SMELL-EXAMPLE-ONLY-CLAIM-SAFETY-TESTS",
+      "name": "Example-Only Claim Safety Tests",
+      "category": "claim_authority",
+      "trigger": "Release-authorized claim, release, reconcile, worktree-lock, or claim-gated side-effect correctness is proven only through hand-picked examples instead of declared Claim Safety Invariants plus fault-injecting or property-style claim simulation.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["claim-safety-invariants", "fault-injecting-claim-simulation", "race-pause-retry-fixtures", "stale-token-rejection", "idempotency-replay-and-conflict", "projection-history-disagreement", "work-surface-cycle-refusal"]
+    },
+    {
+      "id": "BANDIT-SMELL-FILE-ONLY-CLAIM-AUTHORITY",
+      "name": "File-Only Claim Authority",
+      "category": "claim_authority",
+      "trigger": "A release-authorized writable claim is granted, renewed, released, completed, recovered, or treated as current through .bandit JSON, Markdown, JSONL, filesystem locks, worktree markers, or fail-closed reconciliation instead of the Git refs claim authority backend.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["refs-bandit-namespace", "git-update-ref-transaction", "compare-and-swap-claim", "claim-projection-boundary", "fencing-token-check"]
+    },
+    {
+      "id": "BANDIT-SMELL-CLAIM-IDEMPOTENCY-BYPASS",
+      "name": "Claim Idempotency Bypass",
+      "category": "claim_authority",
+      "trigger": "A state-changing claim operation or claim-gated external side effect can run without an idempotency key, can reuse a key with different inputs, or can duplicate effects on retry or rerun.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["claim-idempotency-key", "same-key-replay-proof", "same-key-mismatch-refusal", "duplicate-side-effect-prevention", "fencing-token-check"]
+    },
+    {
+      "id": "BANDIT-SMELL-WORK-SURFACE-DEADLOCK-BYPASS",
+      "name": "Work-Surface Deadlock Bypass",
+      "category": "claim_authority",
+      "trigger": "Claimability or reservation logic only checks pairwise surface overlap and can miss a wait-for graph cycle between active reservations or claim candidates.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["work-surface-wait-for-graph", "cycle-detection-proof", "deadlock-refusal", "cycle-path-diagnostics"]
+    },
+    {
+      "id": "BANDIT-SMELL-GIT-MUTATION-SERIALIZER-BYPASS",
+      "name": "Git Mutation Serializer Bypass",
+      "category": "claim_authority",
+      "trigger": "A release-authorized parallel worktree path mutates shared .git plumbing through worktree add, remove, prune, lock or unlock, branch/ref maintenance outside claim CAS, or packed-refs-affecting maintenance without the CLI-owned Git Mutation Serializer, or creates a claim-owned worktree without an immediate claim-specific git worktree lock.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["git-mutation-serializer", "shared-git-mutation-allow-list", "single-writer-guard", "claim-worktree-lock", "repo-pm-only-unlock", "contention-test", "bypass-refusal"]
+    },
+    {
+      "id": "BANDIT-SMELL-CLAIM-WORKTREE-UNLOCKED",
+      "name": "Claim Worktree Unlocked",
+      "category": "claim_authority",
+      "trigger": "A claim-owned worktree is created without git worktree lock, has a lock reason that does not name the Bandit claim ID, Work Item ID, and stage, includes a renewing fencing token in the lock reason, or can be unlocked by a worker path.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["claim-worktree-lock", "stable-lock-reason", "no-fencing-token-in-lock-reason", "repo-pm-only-unlock", "lock-failure-cleanup"]
+    },
+    {
+      "id": "BANDIT-SMELL-WORKTREE-BOOTSTRAP-CONTRACT-MISSING",
+      "name": "Worktree Bootstrap Contract Missing",
+      "category": "worktree_lifecycle",
+      "trigger": "A Bandit-created worktree is treated as runnable without a repo-native Worktree Bootstrap Contract covering allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["worktree-bootstrap-contract", "allowed-copy-link-list", "setup-command", "validation-command", "secret-handling-boundary", "bootstrap-failure-evidence"]
+    },
+    {
+      "id": "BANDIT-SMELL-LLM-POLLING-SCHEDULER",
+      "name": "LLM Polling Scheduler Boundary",
+      "category": "orchestration_cost",
+      "trigger": "Work uses LLM polling for ordinary no-op discovery or removes polling fallback without proving that available work still wakes the scheduler or agent path.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["event-driven-work-trigger", "deterministic-work-sweeper", "work-availability-wake-guarantee", "token-cost-failsafe"]
+    },
+    {
+      "id": "BANDIT-SMELL-MISSING-AGENT-OBSERVABILITY",
+      "name": "Missing Agent Observability",
+      "category": "feedback_observability",
+      "trigger": "Work adds or changes agent execution, scheduler wakeups, claim operations, reviewer runs, tool calls, model calls, token spend, or retry/failure behavior without first-class trace evidence and canonical-artifact authority boundaries.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["agent-trace-shape", "operation-span-correlation", "observability-projection", "canonical-artifact-boundary"]
+    },
+    {
+      "id": "BANDIT-SMELL-TOKEN-COST-FAILSAFE",
+      "name": "Token Cost Failsafe Missing Or Too Strict",
+      "category": "orchestration_cost",
+      "trigger": "Paid, high-token, reviewer, scheduler, or long-running agent execution lacks a soft budget band, provider-pricing evidence when paid, spend-class approval when paid, abnormal-run token-cost failsafe, trace-backed cost signal, or continuation path; or the budget cap is tight enough to force repeated failed attempts.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["soft-budget-band", "provider-pricing-evidence-if-paid", "spend-class-approval-if-paid", "token-cost-failsafe", "agent-trace-cost-signal", "budget-continuation-decision"]
+    },
+    {
+      "id": "BANDIT-SMELL-PROVIDER-PRICING-EVIDENCE-MISSING",
+      "name": "Provider Pricing Evidence Missing",
+      "category": "cost_policy",
+      "trigger": "Paid reviewer routing, paid model use, or paid/high-token execution relies on stale, missing, expired, or unversioned provider-pricing evidence, or lacks spend-class approval tied to current expected per-run cost.",
+      "severity": "blocker",
+      "default_action": "halt_for_operator_input",
+      "escalation_target": "operator",
+      "required_evidence": ["provider-pricing-evidence", "pricing-source", "captured-date", "effective-date", "freshness-expiry", "expected-per-run-cost", "spend-class-approval"]
+    },
+    {
+      "id": "BANDIT-SMELL-PAID-EVALUATION-SPEND-BOUNDARY",
+      "name": "Paid Evaluation Spend Boundary",
+      "category": "cost_policy",
+      "trigger": "A one-off paid reviewer or paid model call before policy promotion lacks benchmark/evaluation spend classification, per-run approval or active spend-class approval, or is used as recurring reviewer or model routing policy before the scoped promotion threshold is satisfied.",
+      "severity": "blocker",
+      "default_action": "halt_for_operator_input",
+      "escalation_target": "operator",
+      "required_evidence": ["benchmark-evaluation-spend-classification", "provider-pricing-evidence", "per-run-approval-or-active-spend-class-approval", "reviewer-promotion-scope-if-reviewer", "non-recurring-routing-disposition"]
+    },
+    {
+      "id": "BANDIT-SMELL-STAGE-CAPABILITY-SCOPE",
+      "name": "Stage Capability Scope Missing",
+      "category": "stage_scoping",
+      "trigger": "A claimable stage starts without scoped skills and tools, references load-bearing skills without lifecycle contracts, or work introduces a new agent role only to express capability, model tier, reviewer depth, prompt behavior, or tool access rather than governed authority.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["authority-role", "stage-skills", "skill-lifecycle-contracts", "allowed-tools", "forbidden-actions", "capability-profile-if-used"]
+    },
+    {
+      "id": "BANDIT-SMELL-SKILL-LIFECYCLE-MISSING",
+      "name": "Skill Lifecycle Contract Missing",
+      "category": "skill_governance",
+      "trigger": "A load-bearing skill is required by stage policy, reviewer policy, model routing, or workflow automation without owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["skill-id", "owner", "version", "changelog", "intended-stages", "required-tools", "forbidden-actions", "evaluation-packets", "rollback-criteria"]
     },
     {
       "id": "BANDIT-SMELL-GENERATED-SCHEMA",
@@ -192,6 +442,16 @@
       "required_evidence": ["repair-loop-count", "retrospective.md"]
     },
     {
+      "id": "BANDIT-SMELL-WORKFLOW-TRIAL-GUARDRAILS-MISSING",
+      "name": "Workflow Trial Guardrails Missing",
+      "category": "improvement",
+      "trigger": "A workflow trial, improvement evaluation, or workflow-policy change can become keep, revise, revert, or double_down policy without predeclared decision criteria, uncertainty or minimum-detectable-effect context, a re-evaluation window, and proxy-risk disposition.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["predeclared-decision-criteria", "metric-and-baseline", "minimum-detectable-effect-or-uncertainty", "reevaluation-window", "proxy-risk-disposition", "policy-change-decision"]
+    },
+    {
       "id": "BANDIT-SMELL-CONTEXT-PRESSURE",
       "name": "Context Pressure",
       "category": "context",
@@ -220,6 +480,46 @@
       "default_action": "repair_artifact",
       "escalation_target": "codex-pm",
       "required_evidence": ["validation-error", "repaired-artifact"]
+    },
+    {
+      "id": "BANDIT-SMELL-EVAL-POLICY-CREEP",
+      "name": "Evaluation Policy Creep",
+      "category": "policy",
+      "trigger": "Agent evaluation or reviewer benchmarking changes live work routing, reviewer routing, model routing, skill policy, or cost policy without a separate approved policy decision.",
+      "severity": "blocker",
+      "default_action": "update_policy",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["evaluation-output", "affected-policy", "approved-policy-decision-or-gap"]
+    },
+    {
+      "id": "BANDIT-SMELL-REVIEWER-BENCHMARK-SCORING-MISSING",
+      "name": "Reviewer Benchmark Scoring Missing",
+      "category": "agent_evaluation",
+      "trigger": "Reviewer benchmark or paid-reviewer routing evidence lacks repo-derived failure-mode stratification, gold-labeled reviewer packets, seeded blockers, seeded non-issues, blocker-recall priority, actionable precision, useful finding yield, false-positive rate, tool friction, latency, or cost.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["repo-derived-failure-modes", "gold-labeled-reviewer-packets", "seeded-blockers", "seeded-non-issues", "blocker-recall", "actionable-precision", "useful-finding-yield", "false-positive-rate", "tool-friction", "latency", "cost"]
+    },
+    {
+      "id": "BANDIT-SMELL-BENCHMARK-HOLDOUT-MISSING",
+      "name": "Benchmark Holdout Missing",
+      "category": "agent_evaluation",
+      "trigger": "Agent evaluation, reviewer routing, model routing, skill policy, or cost policy promotion relies on visible calibration packets without versioned locked holdout evidence.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["calibration-packet-set", "locked-holdout-packet-set", "holdout-version", "policy-promotion-evidence"]
+    },
+    {
+      "id": "BANDIT-SMELL-PAID-REVIEWER-PROMOTION-THRESHOLD-MISSING",
+      "name": "Paid Reviewer Promotion Threshold Missing",
+      "category": "agent_evaluation",
+      "trigger": "Recurring paid reviewer routing is proposed or promoted without a risk-class or stage-capability-profile scope, predeclared threshold, locked-holdout blocker-recall improvement over Qwen, false-positive ceiling, provider-pricing-backed expected-cost ceiling, and operator-supervised spend-class approval.",
+      "severity": "blocker",
+      "default_action": "record_bootstrap_gap",
+      "escalation_target": "codex-pm",
+      "required_evidence": ["reviewer-promotion-scope", "paid-reviewer-promotion-threshold", "locked-holdout-blocker-recall-improvement", "false-positive-ceiling", "provider-pricing-evidence", "expected-cost-ceiling", "spend-class-approval"]
     },
     {
       "id": "BANDIT-SMELL-POLICY-DRIFT",
