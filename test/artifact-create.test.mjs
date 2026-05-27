@@ -117,85 +117,44 @@ test("artifact create creates implementation evidence without taking hidden auth
 
 test("artifact create creates a landing verdict from explicit structured input", async () => {
   const repo = await createInitializedRepo();
-  await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Review Recorded");
-  await writeSpec(repo, "docs/specs/landing-verdict.json", {
-    kind: "landing_verdict",
-    work_item: "BANDIT-001",
-    contract_version: "1",
-    source_head: "abc123",
-    review_evidence: "docs/work/BANDIT-001/review-evidence.md",
-    tests_status: "pass",
-    clean_code_status: "pass",
-    coderabbit_state: "pass",
-    local_qwen_state: "pass",
-    escalated_review_state: "not_applicable",
-    uat_status: "not_applicable",
-    source_drift_status: "current",
-    operator_input_status: "No operator input required.",
-    landing_agent_state: "local_record_supported",
-    landing_agent_replacement_evidence: "not_applicable",
-    final_verdict: "safe-to-land",
-    rationale: "All required gates passed for workflow infrastructure."
-  });
+  const artifact = await createLandingVerdictArtifact(repo);
 
-  const result = await runBandit(repo, [
-    "artifact",
-    "create",
-    "docs/specs/landing-verdict.json"
-  ]);
-
-  assert.equal(result.code, 0, result.stderr);
-  assert.match(
-    result.stdout,
-    /Created artifact: docs\/work\/BANDIT-001\/landing-verdict\.md/
-  );
-
-  const artifact = await readFile(
-    path.join(repo, "docs/work/BANDIT-001/landing-verdict.md"),
-    "utf8"
-  );
   assert.match(artifact, /^# BANDIT-001 Landing Verdict$/m);
   assert.match(artifact, /^contract_version: 1$/m);
-  assert.match(artifact, /^work_item: BANDIT-001$/m);
   assert.match(artifact, /^final_verdict: safe-to-land$/m);
   assert.match(artifact, /^rationale: All required gates passed/m);
 });
 
-test("artifact create renders parser-compatible landing verdict metadata values", async () => {
+test("artifact create renders landing verdict work_item metadata", async () => {
   const repo = await createInitializedRepo();
-  await writeWorkBrief(
-    repo,
-    "BANDIT-001",
-    "Artifact Creation",
-    "Review Recorded"
-  );
-  await writeSpec(repo, "docs/specs/landing-verdict.json", {
-    kind: "landing_verdict",
-    work_item: "BANDIT-001",
-    contract_version: "1",
-    source_head: "abc123",
-    review_evidence: "docs/work/BANDIT-001/review-evidence.md",
-    tests_status: "pass",
-    clean_code_status: "pass",
-    coderabbit_state: "pass",
-    local_qwen_state: "pass",
-    escalated_review_state: "not_applicable",
-    uat_status: "not_applicable",
-    source_drift_status: "current",
+  const artifact = await createLandingVerdictArtifact(repo);
+
+  assert.match(artifact, /^work_item: BANDIT-001$/m);
+});
+
+test("artifact create renders parser-compatible operator input status", async () => {
+  const repo = await createInitializedRepo();
+  const artifact = await createLandingVerdictArtifact(repo, {
     operator_input_status: "none_required",
     landing_agent_state: "pass",
-    landing_agent_replacement_evidence: "not_applicable",
-    final_verdict: "safe-to-land",
-    rationale: "All required gates passed for workflow infrastructure."
   });
 
-  const createResult = await runBandit(repo, [
-    "artifact",
-    "create",
-    "docs/specs/landing-verdict.json"
-  ]);
+  assert.match(artifact, /^operator_input_status: none_required$/m);
 
-  assert.equal(createResult.code, 0, createResult.stderr);
+  const validateResult = await runBandit(repo, ["validate"]);
+  assert.equal(validateResult.code, 0, validateResult.stderr);
+});
+
+test("artifact create renders parser-compatible landing agent state", async () => {
+  const repo = await createInitializedRepo();
+  const artifact = await createLandingVerdictArtifact(repo, {
+    operator_input_status: "none_required",
+    landing_agent_state: "pass"
+  });
+
+  assert.match(artifact, /^landing_agent_state: pass$/m);
+  assert.match(artifact, /^landing_agent_replacement_evidence: not_applicable$/m);
+  assert.match(artifact, /^final_verdict: safe-to-land$/m);
 
   const validateResult = await runBandit(repo, ["validate"]);
   assert.equal(validateResult.code, 0, validateResult.stderr);
@@ -349,6 +308,47 @@ async function createInitializedRepo() {
   });
   await writeLocalQwenProfile(repo);
   return repo;
+}
+
+async function createLandingVerdictArtifact(repo, overrides = {}) {
+  await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Review Recorded");
+  await writeSpec(repo, "docs/specs/landing-verdict.json", {
+    kind: "landing_verdict",
+    work_item: "BANDIT-001",
+    contract_version: "1",
+    source_head: "abc123",
+    review_evidence: "docs/work/BANDIT-001/review-evidence.md",
+    tests_status: "pass",
+    clean_code_status: "pass",
+    coderabbit_state: "pass",
+    local_qwen_state: "pass",
+    escalated_review_state: "not_applicable",
+    uat_status: "not_applicable",
+    source_drift_status: "current",
+    operator_input_status: "No operator input required.",
+    landing_agent_state: "local_record_supported",
+    landing_agent_replacement_evidence: "not_applicable",
+    final_verdict: "safe-to-land",
+    rationale: "All required gates passed for workflow infrastructure.",
+    ...overrides
+  });
+
+  const result = await runBandit(repo, [
+    "artifact",
+    "create",
+    "docs/specs/landing-verdict.json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(
+    result.stdout,
+    /Created artifact: docs\/work\/BANDIT-001\/landing-verdict\.md/
+  );
+
+  return readFile(
+    path.join(repo, "docs/work/BANDIT-001/landing-verdict.md"),
+    "utf8"
+  );
 }
 
 async function writeSpec(repo, relativePath, spec) {

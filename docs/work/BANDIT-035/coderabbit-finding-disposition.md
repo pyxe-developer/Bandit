@@ -14,6 +14,34 @@ Phase 8 work.
 
 ## Findings
 
+### Second rerun provider-output fixture consistency
+
+**Finding:** `docs/specs/BANDIT-035-coderabbit-review-output.json` recorded a
+top-level `blocker` verdict while its only finding had `severity: minor`,
+leaving the fixture internally inconsistent.
+
+**Disposition:** repaired.
+
+**Evidence:** `docs/specs/BANDIT-035-coderabbit-review-output.json` now records
+the current live CodeRabbit rerun output at source head
+`beb0d9fd924490117ca39526bf8b5022b280222b`, including the critical test-scope
+findings that justify the blocker verdict.
+
+### Second rerun landing-verdict test isolation
+
+**Finding:** The landing-verdict tests still mixed the `work_item` assertion,
+legacy renderer fixture values, and parser-compatible `operator_input_status`
+and `landing_agent_state` values.
+
+**Disposition:** repaired.
+
+**Evidence:** `test/artifact-create.test.mjs` now keeps the generic landing
+verdict renderer shape test separate from a dedicated `work_item` metadata test
+and dedicated parser-compatible `operator_input_status` and `landing_agent_state`
+metadata tests.
+
+**Verification:** `node --test test/artifact-create.test.mjs`.
+
 ### Fresh parser-compatibility fixture scope
 
 **Finding:** The parser-compatibility test still mixes the `work_item` renderer

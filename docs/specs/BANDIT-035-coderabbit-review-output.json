@@ -1,5 +1,5 @@
 {
-  "sourceHead": "d04daea065809e28df11d6375cd7ca2097356414",
+  "sourceHead": "beb0d9fd924490117ca39526bf8b5022b280222b",
   "baseRevision": "origin/main",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -7,7 +7,17 @@
     {
       "severity": "minor",
       "status": "unresolved",
-      "body": "test/artifact-create.test.mjs: the parser-compatibility test still mixes the work_item renderer assertion with operator_input_status and landing_agent_state enum-value changes; restore the existing fixture values in that test or split enum normalization into a separate focused test before Stage 4 can proceed."
+      "body": "docs/specs/BANDIT-035-coderabbit-review-output.json: the previous provider-output fixture mixed a blocker verdict with only a minor finding; record the current live review output so the fixture severity and verdict are internally consistent."
+    },
+    {
+      "severity": "critical",
+      "status": "unresolved",
+      "body": "test/artifact-create.test.mjs: split the landing verdict work_item assertion into a dedicated renderer test that uses the original renderer fixture values."
+    },
+    {
+      "severity": "critical",
+      "status": "unresolved",
+      "body": "test/artifact-create.test.mjs: split parser-compatible operator_input_status and landing_agent_state coverage into focused tests with explicit rendered metadata assertions."
     }
   ]
 }
