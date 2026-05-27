@@ -16,15 +16,18 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-AGENT-EVALUATION-HARNESS`. Do not start unrelated Phase 8 work
-first. `BANDIT-038` - Skill Lifecycle Contract is landed and closed out: Stage
-1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
-pre-PR CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate
-Stage 4 review evidence with review subject hash
+**Current next step:** Create Stage 2 RED evidence for `BANDIT-039` - Agent
+Evaluation Harness. Do not start unrelated Phase 8 work first. `BANDIT-038` -
+Skill Lifecycle Contract is landed and closed out: Stage 1 brief, Stage 2 RED
+evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
+evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4 review evidence
+with review subject hash
 `965a8a584764d699b2cf625ec1b4349592af14b15d18557182e08d45d3ed34de`, Stage 5
 landing verdict, local-record landing action, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-038/` and
+`.bandit/bootstrap-gaps.json`. `BANDIT-039` now has a structured creation spec
+at `docs/specs/BANDIT-GAP-AGENT-EVALUATION-HARNESS.json`, Stage 1 brief at
+`docs/work/BANDIT-039/brief.md`, and active gap-ledger link in
 `.bandit/bootstrap-gaps.json`.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
@@ -396,8 +399,10 @@ evaluation packets, and rollback criteria for load-bearing skills. Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
 landing verdict, local-record landing action, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-038/` and
-`.bandit/bootstrap-gaps.json`. The next required action is to create the
-bootstrap-gap chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`.
+`.bandit/bootstrap-gaps.json`. `BANDIT-039` is created as the bootstrap-gap
+chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`; its structured creation spec
+and Stage 1 brief are recorded. The next required action is Stage 2 RED evidence
+for `BANDIT-039`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -437,8 +442,8 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` are queued behind the skill lifecycle
-lane in that order.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` are queued behind the active
+agent-evaluation harness chore in that order.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
 2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
 `refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
@@ -696,8 +701,9 @@ bootstrap-gap chore. `BANDIT-036` is landed and closed out as the
 is landed and closed out as the
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` bootstrap-gap chore.
 `BANDIT-038` is landed and closed out as the
-`BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` bootstrap-gap chore. The next target is
-the bootstrap-gap chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`.
+`BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` bootstrap-gap chore. `BANDIT-039` is the
+active bootstrap-gap chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`; the next
+target is Stage 2 RED evidence.
 
 ## Phase Map
 
@@ -1012,10 +1018,9 @@ Current rule:
 
 Current priority:
 
-1. Create the next bootstrap-gap chore for
-   `BANDIT-GAP-AGENT-EVALUATION-HARNESS` now that `BANDIT-038` has landing
-   action evidence, Stage 6 retrospective closeout, and gap-ledger disposition.
-   Do not start unrelated Phase 8 work first.
+1. Create Stage 2 RED evidence for `BANDIT-039` - Agent Evaluation Harness now
+   that the bootstrap-gap chore has a structured spec, Stage 1 brief, and active
+   gap-ledger link. Do not start unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1024,8 +1029,8 @@ Current priority:
 3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
-   by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is now the next
-   queued bootstrap-gap chore. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
+   by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is active and linked
+   to `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
    behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
    is queued behind the input quarantine gate. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is
    queued behind the layered risk-classification gap. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`

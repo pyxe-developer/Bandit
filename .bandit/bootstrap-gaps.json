@@ -293,8 +293,8 @@
     {
       "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",
       "title": "No agent evaluation harness exists for model, skill, reviewer, or component benchmarks",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -303,10 +303,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-039",
       "rationale": "The research review identified missing agent evals as a P0 omission, and the operator confirmed that Bandit needs comparable Qwen, paid-reviewer, skill, and load-bearing component evidence before reviewer-routing or agent-routing policy changes. Current improvement evaluation tooling interprets workflow trials but does not replay fixed packets against agents or reviewer profiles. The first harness must be benchmark-only and offline/replay-based, with no automatic policy, model-routing, reviewer-routing, skill-policy, or cost-policy changes. Benchmark packets must separate visible calibration sets from versioned locked holdout sets so skills, reviewer prompts, and routing policy are not overfit to the visible suite; policy promotion needs holdout evidence. Reviewer benchmark packets must be repo-derived and failure-mode stratified before generic coding tasks are used, covering evidence freshness loops, malformed artifacts, CodeRabbit invocation friction, stage capability or skill scope mistakes, supply-chain-sensitive changes, stale UAT or landing evidence, and false-positive review churn. Reviewer benchmark packets must be gold-labeled with seeded blockers and seeded non-issues, and scoring must prioritize blocker recall over raw finding count while also tracking actionable precision, useful finding yield, false-positive rate, tool friction, latency, and provider-pricing-backed expected cost. One-off paid reviewer calls before threshold promotion are benchmark/evaluation spend, require current provider-pricing evidence plus per-run approval or active spend-class approval, and cannot become recurring reviewer routing policy. Recurring paid reviewer routing must meet a predeclared promotion threshold scoped by risk class or stage capability profile, with locked-holdout blocker-recall improvement over Qwen, false-positive ceiling, Provider Pricing Evidence-backed expected-cost ceiling, and operator-supervised spend-class approval; promotion for one scope does not authorize unrelated paid-reviewer routes. Provider Pricing Evidence must name the pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner so stale billing assumptions cannot authorize recurring paid review. It depends on stable skill identity and versions from BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT is resolved, create a bootstrap-gap chore for a narrow repo-native replay-only agent evaluation harness that can run fixed repo-derived, failure-mode stratified, gold-labeled review/task packets for Qwen, Claude or paid reviewers, skill variants, reviewer profiles, and component variants; separate visible calibration packets from versioned locked holdout packets; classify one-off paid reviewer calls as benchmark/evaluation spend with per-run approval or active spend-class approval; define scoped paid reviewer promotion thresholds per risk class or stage capability profile; and record holdout-backed blocker recall, missed blockers, actionable precision, useful finding yield, false-positive rate, tool friction, latency, provider-pricing-backed expected cost, pricing freshness or expiry, and spend-class approval without changing live routing or policy automatically."
+      "next_action": "Complete active chore BANDIT-039."
     },
     {
       "id": "BANDIT-GAP-INPUT-QUARANTINE-GATE",
