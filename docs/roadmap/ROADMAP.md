@@ -16,12 +16,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Resolve the `BANDIT-035` Stage 4 pre-PR CodeRabbit
-timeout. The latest 2026-05-27 rerun recorded fail-closed CodeRabbit timeout evidence in
+**Current next step:** Triage and repair or disposition the `BANDIT-035`
+Stage 4 pre-PR CodeRabbit blocker findings. The 2026-05-27 rerun completed
+against `origin/main` and is recorded in
 `docs/work/BANDIT-035/coderabbit-review.md` at source head
-`573e446b85331de5a12c8f9eff8d0033881fa7db`; rerun or repair the pre-PR
-CodeRabbit gate before Local Qwen, aggregate review evidence, PM disposition,
-landing verdict, or unrelated Phase 8 work.
+`888af023376eee945e7a117281921e89bd5a85a6` with verdict `blocker` and
+`findings_status: unresolved`. Do not run Local Qwen, aggregate review
+evidence, landing verdict, or unrelated Phase 8 work until the CodeRabbit
+findings are repaired or PM-dispositioned.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -37,10 +39,10 @@ spec is recorded in
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
-Fail-closed Stage 4 CodeRabbit timeout evidence is recorded in
+Stage 4 CodeRabbit blocker evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-review.md`; the next required action is to
-rerun or repair the pre-PR CodeRabbit gate before the remaining Stage 4 review
-evidence.
+triage and repair or PM-disposition the unresolved CodeRabbit findings before
+the remaining Stage 4 review evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -158,10 +160,10 @@ Its structured creation spec is recorded in
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
-Fail-closed Stage 4 CodeRabbit timeout evidence is recorded in
+Stage 4 CodeRabbit blocker evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-review.md`; the next required action is to
-rerun or repair the pre-PR CodeRabbit gate before the remaining Stage 4 review
-evidence.
+triage and repair or PM-disposition the unresolved CodeRabbit findings before
+the remaining Stage 4 review evidence.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -314,7 +316,7 @@ Stage 6 evidence recorded in `docs/work/BANDIT-034/` and source-candidate
 evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
 `docs/work/BANDIT-034/retrospective.md`. The next required action is Stage 4
-review for `BANDIT-035`, the bootstrap-gap chore for
+CodeRabbit finding disposition for `BANDIT-035`, the bootstrap-gap chore for
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that active
 chore.
@@ -934,9 +936,9 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-035` - Artifact Create Landing Work
-   Item Field: pre-PR CodeRabbit, Local Qwen, aggregate review evidence, and PM
-   disposition at the current review subject hash.
+1. Triage and repair or PM-disposition the `BANDIT-035` pre-PR CodeRabbit
+   blocker findings before Local Qwen, aggregate review evidence, landing, or
+   unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
