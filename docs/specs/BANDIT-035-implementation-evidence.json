@@ -5,7 +5,7 @@
   "summary": "The focused Stage 3 renderer repair is implemented for the artifact-create landing verdict work_item metadata gap.",
   "implementation_summary": [
     "Added work_item to the landing_verdict renderer metadata sequence so generated landing verdict artifacts include the parser-required work item field.",
-    "Aligned the focused artifact-create landing verdict fixtures with current landing verdict parser values for operator_input_status and landing_agent_state, preserving the parser-compatibility check without changing landing policy.",
+    "Kept the existing renderer fixture focused on rendering while using current landing verdict parser values only in the new validation-backed parser-compatibility test.",
     "Kept the repair limited to src/commands/artifact-create-renderers.ts and focused artifact-create test data; no hidden authority, landing policy, UAT policy, cockpit, scheduler, claim, worktree, PR/CI, dependency, lockfile, or supply-chain-sensitive surface was introduced."
   ],
   "verification": [
