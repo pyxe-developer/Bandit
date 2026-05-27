@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-037
-source_head: abbf44bfe329ca982c3c1f7296c1be997d33ff02
+source_head: f84a7c793a151295428c251ca74b1a8d8dc309bd
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:origin/main
 review_state: completed
