@@ -1,0 +1,87 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-038",
+  "outcome": "`BANDIT-038` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`. The work adds a repo-native Skill Lifecycle Contract template, policy artifact, evaluation packets, installed-skill drift evidence, fail-closed lifecycle validation, `bandit skill-lifecycle validate [--json]`, and `bandit validate` integration without making installed global skill files canonical Bandit state. Stage 4 pre-PR CodeRabbit and Local Qwen evidence both pass with no findings, Stage 5 landing verdict and local-record landing action evidence are recorded, and no product, UAT, policy override, cost, supply-chain, server, scheduler, claim, worktree, PR/CI, external-service, paid-reviewer, live-routing, installed-global-skill edit, dependency, lockfile, or unrelated Phase 8 scope was introduced.",
+  "what_worked": [
+    "The strategic-review source artifact and operator direction identified the load-bearing skill governance gap before skill policy became required stage authority.",
+    "Focused lifecycle tests captured missing policy/template surfaces, malformed contracts, missing lifecycle fields, missing evaluation packets, and complete contract acceptance.",
+    "The implementation kept canonical state repo-native while treating installed global skills as external evidence checked through explicit drift metadata.",
+    "CodeRabbit and Local Qwen both accepted the bounded implementation with pass verdicts and no unresolved findings."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Load-bearing skills need explicit lifecycle contracts before they become required stage policy or benchmark variants.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-038` adds the Skill Lifecycle Contract template, policy, validation command, evaluation packet references, rollback criteria, and installed-skill drift evidence, and `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` resolved during closeout."
+    },
+    {
+      "lesson": "Installed global skill files should be evidence inputs, not canonical Bandit workflow state.",
+      "disposition": "explicit no-action decision",
+      "rationale": "The lifecycle policy records `installed_skills_are_canonical: false`, keeps the contract in `.bandit/policy/skill-lifecycle-contracts.json`, and uses drift evidence to detect unreviewed installed-skill changes without moving source-of-truth authority out of the repo."
+    },
+    {
+      "lesson": "Stable skill identity and version evidence are prerequisites for meaningful agent, reviewer, model, skill, and component benchmarks.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-GAP-AGENT-EVALUATION-HARNESS` remains queued behind this closeout and can now depend on stable skill lifecycle identity instead of benchmarking against unversioned skill behavior."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "No failed tool calls remained in the final `BANDIT-038` closeout evidence. CodeRabbit, Local Qwen, landing, validation, gap listing, and cockpit status commands completed successfully in the recorded evidence.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to lifecycle contract docs/templates, repo-native policy, evaluation/drift evidence, validation, focused tests, and required evidence updates.",
+      "disposition": "explicit no-action decision - no unrelated cockpit, scheduler, claim, worktree, live-routing, installed-skill edit, dependency, or external-service work started"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore: write RED tests, implement the lifecycle contract surfaces and validator, run Stage 4 review, record Stage 5 landing, then close out Stage 6.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "Codex PM owned technical routing, Test Writer evidence was focused in lifecycle tests, CodeRabbit and Local Qwen owned Stage 4 review, and Landing Agent evidence owned Stage 5.",
+      "disposition": "explicit no-action decision - no operator-owned routing question or agent-boundary follow-up remains"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "The closeout used the established artifact-create retrospective path plus manual ledger and context synchronization; no new tool pressure appeared beyond the current supported Stage 6 boundary.",
+      "disposition": "explicit no-action decision - existing context, gap-ledger, and cockpit status validation remain sufficient for this closeout"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit passed with no findings, Local Qwen passed with no findings, and the recorded smell/risk rationale did not require escalated reviewer routing.",
+      "disposition": "explicit no-action decision - no unresolved cross-model tension or reviewer-routing follow-up remains"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "The pre-PR CodeRabbit path, Local Qwen review command, review-subject hash command, skill-lifecycle validation command, land-check, land command, and retrospective artifact-create path all had established invocation patterns for this chore.",
+      "disposition": "explicit no-action decision - no new invocation-friction bootstrap gap required"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "Roadmap, current-context, and bootstrap-gap ledger closeout still require repeated prose edits, but this instance is expected Stage 6 synchronization and cockpit status validation covers the resulting state.",
+      "disposition": "explicit no-action decision - existing context and cockpit status validation remain sufficient for this closeout"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer, recurring paid model route, provider-pricing evidence, spend-class approval, high-token reviewer policy, or benchmark/evaluation spend was introduced.",
+      "disposition": "explicit no-action decision - no cost or latency follow-up required"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for the skill lifecycle contract gap after tests, review evidence, landing verdict, landing action, validation evidence, and closeout. The next known benchmark uncertainty is already queued as `BANDIT-GAP-AGENT-EVALUATION-HARNESS`.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-AGENT-EVALUATION-HARNESS"
+    }
+  ],
+  "improvement_chores": "No new retrospective-derived improvement chore is created by this closeout.\n\n`BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`. The next queued bootstrap gap is `BANDIT-GAP-AGENT-EVALUATION-HARNESS`, which should become the next work item before unrelated Phase 8 work.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-038`. CodeRabbit pre-PR review passed with no findings, Local Qwen passed with no findings, both reviewers accepted the repo-native lifecycle contract boundary, and no escalated reviewer route was required by the recorded risk and smell-trigger rationale.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-AGENT-EVALUATION-HARNESS` is open and queued as the next bootstrap-gap chore.",
+    "`BANDIT-GAP-INPUT-QUARANTINE-GATE` remains queued behind the agent evaluation harness.",
+    "The remaining strategic-review bootstrap gaps remain queued in the order recorded in `.bandit/bootstrap-gaps.json`."
+  ]
+}

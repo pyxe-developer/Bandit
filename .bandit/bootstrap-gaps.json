@@ -269,13 +269,13 @@
       "linked_work_item": "BANDIT-037",
       "rationale": "BANDIT-037 makes Workflow Trial and workflow-policy improvement candidates fail closed without predeclared decision criteria, uncertainty or minimum-detectable-effect context, re-evaluation windows, and proxy-risk notes. It also makes policy-changing evaluation decisions require criteria comparison, re-evaluation window evidence, and proxy-risk disposition, exposes guardrail completeness through improvements candidates --json, and records Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
       "verification_target": "docs/work/BANDIT-037/retrospective.md",
-      "next_action": "Use Workflow Trial guardrail metadata and policy-changing evaluation validation for future improvement work. Create the next bootstrap-gap chore for BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT before unrelated Phase 8 work."
+      "next_action": "Use Workflow Trial guardrail metadata and policy-changing evaluation validation for future improvement work."
     },
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",
       "title": "No first-class lifecycle contract exists for load-bearing skills",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -286,9 +286,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-038",
-      "rationale": "The operator confirmed that load-bearing skills need a first-class lifecycle contract because they shape context, reasoning, tool use, review behavior, cost, and model performance. Without owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria, Bandit cannot reliably explain whether a benchmark result changed because of the model, the skill, or the task packet.",
-      "verification_target": null,
-      "next_action": "Record Stage 6 retrospective closeout and bootstrap-gap disposition for BANDIT-038 now that docs/work/BANDIT-038/landing-action.md exists; do not create the next bootstrap-gap chore or unrelated Phase 8 work until retrospective and gap-ledger closeout are recorded."
+      "rationale": "BANDIT-038 adds a repo-native Skill Lifecycle Contract template, policy artifact, evaluation packets, installed-skill drift evidence, fail-closed lifecycle validation, bandit skill-lifecycle validate [--json], and bandit validate integration without making installed global skill files canonical Bandit state. It records Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
+      "verification_target": "docs/work/BANDIT-038/retrospective.md",
+      "next_action": "Use Skill Lifecycle Contract metadata and installed-skill drift evidence before treating load-bearing skills as required stage policy or benchmark variants. Create the next bootstrap-gap chore for BANDIT-GAP-AGENT-EVALUATION-HARNESS before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",

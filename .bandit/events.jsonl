@@ -48,3 +48,4 @@
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created red_evidence artifact at docs/work/BANDIT-038/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created implementation_evidence artifact at docs/work/BANDIT-038/implementation-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created landing_verdict artifact at docs/work/BANDIT-038/landing-verdict.md"}
+{"type":"artifact_created","work_item":"BANDIT-038","message":"Created retrospective artifact at docs/work/BANDIT-038/retrospective.md"}
