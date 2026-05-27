@@ -237,8 +237,8 @@
     {
       "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",
       "title": "Stage 6 retrospective artifacts do not require structured improvement mining",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -246,10 +246,10 @@
         "docs/verification/STAGE_RUBRICS.md",
         "docs/improvement/retrospective-chore-schema.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-036",
       "rationale": "The operator identified recurring agent confusion about how to invoke CodeRabbit as a workflow-improvement signal that retrospectives have not surfaced. Stage 6 now requires structured improvement mining, but bandit artifact create can still render retrospectives without the mining checklist, so the artifact contract and tests need a dedicated repair.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to make retrospective artifact creation require the structured improvement-mining checklist and cover recurring CodeRabbit/tool invocation friction with tests."
+      "next_action": "Complete active chore BANDIT-036."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",

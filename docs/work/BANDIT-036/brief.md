@@ -1,0 +1,91 @@
+# BANDIT-036: Structured Retrospective Mining
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where bandit artifact create can render retrospective evidence without the required structured improvement-mining checklist.
+
+## Origin
+
+The 2026-05-26 strategic review and BANDIT-035 retrospective identified that Stage 6 now requires structured improvement mining for execution smells such as recurring CodeRabbit/tool invocation friction, but the current retrospective artifact contract does not enforce that checklist.
+
+## Scope
+
+- Make retrospective artifact creation require structured improvement-mining evidence before a retrospective artifact can be generated.
+- Add focused artifact-create tests proving retrospective specs without the structured mining checklist fail closed before writes.
+- Add focused artifact-create tests proving valid retrospective specs render the checklist with required signals and dispositions.
+- Cover recurring tool invocation friction, including CodeRabbit invocation uncertainty, as a first-class structured mining signal.
+- Require material structured mining findings to carry a durable disposition such as improvement chore, bootstrap gap, cross-model tension entry, smell catalog update, or explicit no-action decision.
+- Preserve repo-native Markdown as the canonical retrospective evidence; artifact-create remains a renderer from explicit structured input and must not become hidden workflow authority.
+- Keep the repair limited to retrospective artifact creation, parsing/rendering, focused tests, and necessary roadmap/context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1 and perform clean-code evaluation before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit artifact-create retrospective validation/rendering and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond the already recorded Stage 6 requirement, business tradeoffs, cost/risk posture, external service setup, or broader workflow scope.
+- Layered risk and supply-chain scope: this chore touches local workflow artifact validation/rendering and tests only; it must not change dependencies, lockfiles, CI/release workflow, external tool installation, auto-landing policy, paid reviewer policy, or supply-chain-sensitive surfaces.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-036/brief.md and links to BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.
+- artifact create refuses retrospective specs that omit structured improvement-mining checklist evidence.
+- artifact create refuses retrospective checklist entries that omit the signal, finding, or disposition needed for durable mining evidence.
+- artifact create renders retrospective structured mining evidence with the required signals: failed tool calls, overreasoning, work-breakdown fit, agent-scope fit, tool-use rule pressure, reviewer/model routing, tool invocation friction, recurring inefficiency, cost or latency signals, and unresolved uncertainty.
+- The recurring tool invocation friction signal explicitly covers CodeRabbit or other required gate invocation uncertainty.
+- The rendered retrospective makes every material mining finding disposition visible as a durable follow-up route or explicit no-action decision.
+- Existing retrospective creation behavior remains compatible for valid specs, including lifecycle event append, safe path checks, no-overwrite behavior, unknown work-item refusal, unsupported kind refusal, and out-of-repo spec refusal.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow, policy change, paid reviewer route, external service integration, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run node --test test/artifact-create.test.mjs for focused RED/GREEN coverage.
+- Run npm test if implementation touches shared command routing, validators, review evidence, landing gates, bootstrap gaps, roadmap/cockpit status parsing, or retrospective parsing beyond artifact-create tests.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-036 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-036 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-036 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-036 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json
+- docs/work/BANDIT-036/brief.md
+- docs/work/BANDIT-036/red-evidence.md
+- docs/work/BANDIT-036/implementation-evidence.md
+- docs/work/BANDIT-036/coderabbit-review.md
+- docs/work/BANDIT-036/local-qwen-review.md
+- docs/work/BANDIT-036/review-evidence.md
+- docs/work/BANDIT-036/landing-verdict.md
+- docs/work/BANDIT-036/landing-action.md
+- docs/work/BANDIT-036/retrospective.md
+- src/commands/artifact-create.ts
+- src/commands/artifact-create-renderers.ts
+- test/artifact-create.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-036/brief.md
+- docs/work/BANDIT-036/red-evidence.md
+- docs/work/BANDIT-036/implementation-evidence.md
+- docs/work/BANDIT-036/coderabbit-review.md
+- docs/work/BANDIT-036/local-qwen-review.md
+- docs/work/BANDIT-036/review-evidence.md
+- docs/work/BANDIT-036/landing-verdict.md
+- docs/work/BANDIT-036/landing-action.md
+- docs/work/BANDIT-036/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, implementation boundary, and verification target. Halt only if implementation would change product direction, UAT policy, workflow policy beyond the already recorded Stage 6 structured mining requirement, business tradeoffs, explicit cost/risk posture, external service setup, or broader workflow scope.
