@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record the Stage 5 landing verdict for `BANDIT-036` -
+**Current next step:** Perform local-record landing for `BANDIT-036` -
 Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
 `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
 `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation evidence at
@@ -25,13 +25,15 @@ pass evidence at `docs/work/BANDIT-036/coderabbit-review.md`, Stage 4 Local
 Qwen pass evidence at `docs/work/BANDIT-036/local-qwen-review.md`, and
 aggregate Stage 4 review evidence at `docs/work/BANDIT-036/review-evidence.md`
 with review subject hash
-`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. It was
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
+landing verdict evidence is recorded in
+`docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
+It was
 created from `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and
 is linked as the active chore for
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in `.bandit/bootstrap-gaps.json`.
-Do not start local-record landing, retrospective closeout, the next
-bootstrap-gap chore, or unrelated Phase 8 work until the Stage 5 landing
-verdict is recorded.
+Do not start retrospective closeout, the next bootstrap-gap chore, or unrelated
+Phase 8 work until local-record landing action evidence is recorded.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -78,8 +80,10 @@ Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
 at source head `346f7306c983b9ef290b1c2fe736a7a1fbdb514c` with no findings.
 Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-036/review-evidence.md` with current review subject hash
-`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. The next
-required action is the Stage 5 landing verdict.
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
+landing verdict evidence is recorded in
+`docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
+The next required action is local-record landing.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -228,9 +232,11 @@ Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
 at source head `346f7306c983b9ef290b1c2fe736a7a1fbdb514c` with no findings.
 Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-036/review-evidence.md` with current review subject hash
-`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. The next
-required action is the Stage 5 landing verdict; do not start local-record
-landing, the next bootstrap-gap chore, or unrelated Phase 8 work first.
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
+landing verdict evidence is recorded in
+`docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
+The next required action is local-record landing; do not start retrospective
+closeout, the next bootstrap-gap chore, or unrelated Phase 8 work first.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -1002,12 +1008,11 @@ Current rule:
 
 Current priority:
 
-1. Record the Stage 5 landing verdict for `BANDIT-036` - Structured
-   Retrospective Mining, now that Stage 4 pre-PR CodeRabbit pass evidence,
-   Local Qwen pass evidence, and aggregate Stage 4 review evidence exist and
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start
-   local-record landing, the next bootstrap-gap chore, or unrelated Phase 8
-   work first.
+1. Perform local-record landing for `BANDIT-036` - Structured Retrospective
+   Mining, now that Stage 5 landing verdict evidence is recorded with final
+   verdict `safe-to-land` and `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is
+   active. Do not start retrospective closeout, the next bootstrap-gap chore,
+   or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

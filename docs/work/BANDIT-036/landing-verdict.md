@@ -1,0 +1,18 @@
+# BANDIT-036 Landing Verdict
+
+contract_version: 1
+work_item: BANDIT-036
+source_head: afc15d7d45b82604ac1c3861cadef5a770bdac7d
+review_evidence: docs/work/BANDIT-036/review-evidence.md
+tests_status: pass
+clean_code_status: pass
+coderabbit_state: pass
+local_qwen_state: pass
+escalated_review_state: not_applicable
+uat_status: not_applicable
+source_drift_status: current
+operator_input_status: none_required
+landing_agent_state: pass
+landing_agent_replacement_evidence: not_applicable
+final_verdict: safe-to-land
+rationale: BANDIT-036 is safe to land as a bounded bootstrap-gap improvement chore because it resolves BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING by making retrospective artifact creation fail closed unless structured improvement-mining evidence is present, complete, and durably dispositioned, while preserving artifact-create as an explicit structured-input renderer over repo-native Markdown evidence. Current verification passes include node --test test/artifact-create.test.mjs with 13 tests, npm test with 261 tests, npm run typecheck, node ./bin/bandit.mjs review-subject-hash BANDIT-036 with current review-subject hash 863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0, and aggregate Stage 4 review evidence at docs/work/BANDIT-036/review-evidence.md. Stage 4 evidence records CodeRabbit pre-PR pass evidence, Local Qwen pass evidence, escalated review not_applicable rationale, clean-code pass, no open findings, no required operator input, and no source drift. Product UAT is not applicable because this non-product chore changes local workflow retrospective artifact validation, rendering, and focused tests only; it does not ship a browser-clickable operator surface. No escalated reviewer, supply-chain gate, operator approval, product direction, business tradeoff, cost/risk override, or policy override is required because the work introduces no local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, claim lease, work surface reservation, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow, authentication, billing, privacy boundary, external service integration, dependency or lockfile change, fetched-prompt path, supply-chain-sensitive surface, paid reviewer route, landing policy change, or unrelated Phase 8 feature behavior.

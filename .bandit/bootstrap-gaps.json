@@ -249,7 +249,7 @@
       "linked_work_item": "BANDIT-036",
       "rationale": "The operator identified recurring agent confusion about how to invoke CodeRabbit as a workflow-improvement signal that retrospectives have not surfaced. Stage 6 now requires structured improvement mining, but bandit artifact create can still render retrospectives without the mining checklist, so the artifact contract and tests need a dedicated repair.",
       "verification_target": null,
-      "next_action": "Continue active chore BANDIT-036 by recording the Stage 5 landing verdict from the current aggregate Stage 4 review evidence, then proceed to local-record landing only if the landing verdict is safe-to-land."
+      "next_action": "Continue active chore BANDIT-036 by running local-record landing now that the Stage 5 landing verdict is safe-to-land; do not start retrospective closeout, the next bootstrap-gap chore, or unrelated Phase 8 work until landing-action evidence is recorded."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",
