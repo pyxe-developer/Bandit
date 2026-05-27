@@ -16,15 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement Stage 3 for `BANDIT-036` - Structured
-Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
+**Current next step:** Run Stage 4 pre-PR CodeRabbit review for `BANDIT-036` -
+Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
 `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
-`docs/work/BANDIT-036/red-evidence.md`, was created from
-`docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, and is linked as
+`docs/work/BANDIT-036/red-evidence.md`, and Stage 3 implementation evidence at
+`docs/work/BANDIT-036/implementation-evidence.md`. It was created from
+`docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and is linked as
 the active chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in
-`.bandit/bootstrap-gaps.json`. Do not start Stage 4 review, landing, the next
-bootstrap-gap chore, or unrelated Phase 8 work until focused implementation
-evidence exists and the artifact-create tests pass.
+`.bandit/bootstrap-gaps.json`. Do not start landing, retrospective closeout,
+the next bootstrap-gap chore, or unrelated Phase 8 work until Stage 4
+CodeRabbit, Local Qwen, and aggregate review evidence are recorded.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -59,12 +60,13 @@ and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 recorded in
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, its Stage 1 brief
 is recorded in `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence is
-recorded in `docs/work/BANDIT-036/red-evidence.md`, `.bandit/events.jsonl`
-records the work-item creation and RED artifact creation events, and
+recorded in `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation
+evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
+`.bandit/events.jsonl` records the work-item creation, RED artifact creation,
+and implementation-evidence artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
-`BANDIT-036`. The next required action is Stage 3 implementation for
-retrospective artifact creation requiring structured improvement-mining
-checklist evidence.
+`BANDIT-036`. The next required action is Stage 4 pre-PR CodeRabbit review,
+followed by Local Qwen and aggregate Stage 4 review evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -201,12 +203,14 @@ bootstrap-gap chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, its Stage 1 brief
 is recorded in `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence is
-recorded in `docs/work/BANDIT-036/red-evidence.md`, `.bandit/events.jsonl`
-records the work-item creation and RED artifact creation events, and
+recorded in `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation
+evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
+`.bandit/events.jsonl` records the work-item creation, RED artifact creation,
+and implementation-evidence artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
-`BANDIT-036`. The next required action is Stage 3 implementation; do not start
-Stage 4 review, landing, the next bootstrap-gap chore, or unrelated Phase 8
-work first.
+`BANDIT-036`. The next required action is Stage 4 pre-PR CodeRabbit review,
+followed by Local Qwen and aggregate Stage 4 review evidence; do not start
+landing, the next bootstrap-gap chore, or unrelated Phase 8 work first.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -978,11 +982,12 @@ Current rule:
 
 Current priority:
 
-1. Implement Stage 3 for `BANDIT-036` - Structured Retrospective Mining, now
-   that Stage 2 RED evidence exists and
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start Stage 4
-   review, landing, the next bootstrap-gap chore, or unrelated Phase 8 work
-   first.
+1. Run Stage 4 pre-PR CodeRabbit review for `BANDIT-036` - Structured
+   Retrospective Mining, now that Stage 3 implementation evidence exists and
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. After CodeRabbit is
+   resolved or honestly blocked, run Local Qwen and aggregate Stage 4 review
+   evidence before landing, the next bootstrap-gap chore, or unrelated Phase 8
+   work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

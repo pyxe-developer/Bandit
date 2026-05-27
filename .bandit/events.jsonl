@@ -38,3 +38,4 @@
 {"type":"artifact_created","work_item":"BANDIT-035","message":"Created landing_verdict artifact at docs/work/BANDIT-035/landing-verdict.md"}
 {"type":"work_item_created","work_item":"BANDIT-036","message":"Created work item BANDIT-036 from docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json"}
 {"type":"artifact_created","work_item":"BANDIT-036","message":"Created red_evidence artifact at docs/work/BANDIT-036/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-036","message":"Created implementation_evidence artifact at docs/work/BANDIT-036/implementation-evidence.md"}

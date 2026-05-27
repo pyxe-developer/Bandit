@@ -44,6 +44,19 @@ const LANDING_VERDICT_FIELDS = [
   "rationale"
 ];
 
+const REQUIRED_RETROSPECTIVE_MINING_SIGNALS = [
+  "failed tool calls",
+  "overreasoning",
+  "work-breakdown fit",
+  "agent-scope fit",
+  "tool-use rule pressure",
+  "reviewer/model routing",
+  "tool invocation friction",
+  "recurring inefficiency",
+  "cost or latency signals",
+  "unresolved uncertainty"
+];
+
 export function renderArtifact(
   workItem: string,
   kind: ArtifactKind,
@@ -158,6 +171,10 @@ function renderRetrospective(workItem: string, spec: Record<string, unknown>) {
     spec,
     "lessons_and_dispositions"
   );
+  const structuredImprovementMining = requireRetrospectiveMiningRows(
+    spec,
+    "structured_improvement_mining"
+  );
   const improvementChores = requireString(spec, "improvement_chores");
   const crossModelTension = requireString(spec, "cross_model_tension");
   const bootstrapGapsRemaining = requireStringList(
@@ -178,6 +195,10 @@ ${renderList(whatWorked)}
 ## Lessons And Dispositions
 
 ${renderTable(["Lesson", "Disposition", "Rationale"], lessonsAndDispositions)}
+
+## Structured Improvement Mining
+
+${renderTable(["Signal", "Finding", "Disposition"], structuredImprovementMining)}
 
 ## Improvement Chores
 
@@ -223,6 +244,30 @@ function requireRetrospectiveRows(
     requireString(row, "disposition"),
     requireString(row, "rationale")
   ]);
+}
+
+function requireRetrospectiveMiningRows(
+  spec: Record<string, unknown>,
+  field: string
+) {
+  const rows = requireRecordList(spec, field);
+  const miningRows = rows.map((row) => [
+    requireString(row, "signal"),
+    requireString(row, "finding"),
+    requireString(row, "disposition")
+  ]);
+  const signals = new Set(miningRows.map(([signal]) => signal));
+  const missingSignals = REQUIRED_RETROSPECTIVE_MINING_SIGNALS.filter(
+    (signal) => !signals.has(signal)
+  );
+
+  if (missingSignals.length > 0) {
+    throw new Error(
+      `Artifact spec missing structured improvement mining signal: ${missingSignals[0]}`
+    );
+  }
+
+  return miningRows;
 }
 
 function requireRecordList(spec: Record<string, unknown>, field: string) {
