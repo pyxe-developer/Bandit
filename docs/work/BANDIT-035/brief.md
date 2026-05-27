@@ -1,0 +1,85 @@
+# BANDIT-035: Artifact Create Landing Work Item Field
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where bandit artifact create can render landing verdict evidence without the required work_item field.
+
+## Origin
+
+BANDIT-034 Stage 5 exposed that docs/specs/BANDIT-034-landing-verdict.json included work_item, but bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without that field. land-check failed closed until Codex PM manually repaired the artifact.
+
+## Scope
+
+- Repair the landing_verdict artifact renderer so generated landing verdict Markdown includes work_item metadata for the target work item.
+- Add focused artifact-create test coverage proving generated landing verdict artifacts include work_item and remain parseable by the landing gate.
+- Preserve existing explicit structured input, safe path checks, no-overwrite behavior, lifecycle append behavior, and repo-native Markdown authority.
+- Keep the repair limited to artifact-create landing verdict rendering, parser compatibility only if required, and focused tests.
+- Record Stage 1 through Stage 6 evidence for this bootstrap-gap chore before returning to unrelated Phase 8 cockpit work.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit src/commands/artifact-create-renderers.ts and focused tests; reviewers own Stage 4 evidence; Landing Agent owns landing verdict/action evidence.
+- Source-of-truth boundary: docs/work/BANDIT-035/landing-verdict.md remains canonical landing evidence; artifact-create is a renderer from explicit structured input and must not become hidden workflow authority.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change landing policy, UAT policy, cost/risk posture, or broader workflow scope.
+- Layered risk and supply-chain scope: this chore touches local workflow evidence rendering and tests only; it must not change dependencies, lockfiles, CI/release workflow, external tool installation, auto-landing policy, or supply-chain-sensitive surfaces.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-035/brief.md and links to BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.
+- artifact create renders landing_verdict artifacts with a work_item field whose value matches the spec target work item.
+- Focused tests fail before implementation and pass after implementation for the missing work_item field.
+- Focused tests cover that the generated landing verdict remains compatible with landing-verdict parsing or land-check validation.
+- The implementation does not weaken required landing verdict fields, stale evidence checks, review gates, clean-code checks, UAT handling, or final verdict semantics.
+- The implementation preserves artifact-create refusal behavior for malformed specs, unsupported kinds, unknown work items, occupied paths, and out-of-repo paths.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless an honest bootstrap gap or explicit provider refusal evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern is routed to a durable chore or explicit no-action decision.
+- BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run node --test test/artifact-create.test.mjs for focused RED/GREEN coverage.
+- Run node --test test/landing-gates.test.mjs if parser or land-check behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, review evidence, landing gates, bootstrap gaps, or roadmap/cockpit status parsing.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-035 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-035 before Stage 4 closeout.
+- Run npm run bandit -- land-check BANDIT-035 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json
+- docs/work/BANDIT-035/brief.md
+- docs/work/BANDIT-035/red-evidence.md
+- docs/work/BANDIT-035/implementation-evidence.md
+- docs/work/BANDIT-035/coderabbit-review.md
+- docs/work/BANDIT-035/local-qwen-review.md
+- docs/work/BANDIT-035/review-evidence.md
+- docs/work/BANDIT-035/landing-verdict.md
+- docs/work/BANDIT-035/landing-action.md
+- docs/work/BANDIT-035/retrospective.md
+- src/commands/artifact-create-renderers.ts
+- test/artifact-create.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-035/brief.md
+- docs/work/BANDIT-035/red-evidence.md
+- docs/work/BANDIT-035/implementation-evidence.md
+- docs/work/BANDIT-035/coderabbit-review.md
+- docs/work/BANDIT-035/local-qwen-review.md
+- docs/work/BANDIT-035/review-evidence.md
+- docs/work/BANDIT-035/landing-verdict.md
+- docs/work/BANDIT-035/landing-action.md
+- docs/work/BANDIT-035/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, implementation boundary, and verification target. Halt only if the repair would change landing policy, UAT policy, cost/risk posture, or broader workflow scope.

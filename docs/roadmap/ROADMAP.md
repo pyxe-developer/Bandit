@@ -16,15 +16,23 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` before unrelated Phase 8
-work.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-035` - Artifact
+Create Landing Work Item Field before implementation or unrelated Phase 8 work.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
 review evidence is current, Stage 5 landing verdict and local-record landing
 action evidence are recorded, and Stage 6 retrospective closeout evaluates
 `BANDIT-033-COCKPIT-SHELL-HARDENING` as `effective` with decision `keep`.
+
+`BANDIT-035` is active as the bootstrap-gap chore for
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. Its structured creation
+spec is recorded in
+`docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its Stage
+1 brief is recorded in `docs/work/BANDIT-035/brief.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`. The
+next required action is Stage 2 RED evidence proving the missing `work_item`
+field and defining focused repair coverage.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -131,8 +139,17 @@ recorded in `docs/work/BANDIT-034/retrospective.md`. The source
 decision `keep`. Do not start local server/API mode, state-index persistence,
 scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior,
 product UAT, actor identity policy, claim lease, work surface reservation,
-PR/CI workflow, or unrelated feature work before the queued bootstrap-gap chore
-is created and resolved or dispositioned.
+PR/CI workflow, or unrelated feature work before `BANDIT-035` is resolved or
+explicitly dispositioned.
+
+`BANDIT-035` - Artifact Create Landing Work Item Field is active as the
+bootstrap-gap chore for `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its Stage
+1 brief is recorded in `docs/work/BANDIT-035/brief.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`. The
+next required action is Stage 2 RED evidence proving the missing `work_item`
+field and defining focused repair coverage.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -284,8 +301,8 @@ recorded. `BANDIT-034` is landed and closed out as the
 Stage 6 evidence recorded in `docs/work/BANDIT-034/` and source-candidate
 evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
-`docs/work/BANDIT-034/retrospective.md`. The next required action is to create
-the bootstrap-gap chore for
+`docs/work/BANDIT-034/retrospective.md`. The next required action is to write
+Stage 2 RED evidence for `BANDIT-035`, the bootstrap-gap chore for
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that repair.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -904,8 +921,8 @@ Current rule:
 
 Current priority:
 
-1. Create the queued bootstrap-gap chore for
-   `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+1. Write Stage 2 RED evidence for `BANDIT-035` - Artifact Create Landing Work
+   Item Field.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

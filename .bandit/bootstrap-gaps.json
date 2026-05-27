@@ -222,17 +222,17 @@
     {
       "id": "BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD",
       "title": "Artifact create landing verdict omits work item field",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-034",
       "source_artifacts": [
         "docs/specs/BANDIT-034-landing-verdict.json",
         "docs/work/BANDIT-034/landing-verdict.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-035",
       "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
       "verification_target": null,
-      "next_action": "After BANDIT-034 lands and closes out, create the next bootstrap-gap chore to make artifact-create landing verdict rendering include the required work_item field and cover it with a validation test."
+      "next_action": "Complete active chore BANDIT-035."
     },
     {
       "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",

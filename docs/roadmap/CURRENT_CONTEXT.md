@@ -415,15 +415,23 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Create the bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` before unrelated Phase 8
-work.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-035` - Artifact
+Create Landing Work Item Field. The RED evidence should prove
+`bandit artifact create` currently renders a landing verdict without the
+required `work_item` field and define focused coverage for the repair.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
 and local-record landing action evidence are recorded, and Stage 6
 retrospective closeout evaluates `BANDIT-033-COCKPIT-SHELL-HARDENING` as
 `effective` with decision `keep`.
+
+`BANDIT-035` is the active bootstrap-gap chore for
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. Its structured creation
+spec is recorded in
+`docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its
+Stage 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, and
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -433,9 +441,8 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-034` - Cockpit Shell Hardening is closed. The next
-work item to create is the queued bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+**Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
+active at Stage 1 brief created. The next action is Stage 2 RED evidence.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 renderer repair.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -485,19 +492,18 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** a bootstrap-gap work item for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`, created from repo-native
-gap evidence before unrelated Phase 8 work.
+**Expected next deliverable:** `docs/work/BANDIT-035/red-evidence.md`, created
+before implementation and mapped to the `BANDIT-035` acceptance criteria.
 
 ## Known Bootstrap Gaps
 
 These are expected because Bandit does not exist yet:
 
-- `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is open and queued from
-  `BANDIT-034`: `bandit artifact create` rendered a landing verdict without the
+- `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is active as
+  `BANDIT-035`: `bandit artifact create` rendered a landing verdict without the
   required `work_item` metadata field, causing `land-check` to fail closed until
-  Codex PM manually repaired the artifact. `BANDIT-034` is now landed and closed
-  out, so the next bootstrap-gap chore should repair the renderer and add
+  Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief;
+  the next step is Stage 2 RED evidence for the renderer repair and validation
   coverage.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
@@ -804,8 +810,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create the queued bootstrap-gap chore for
-   `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
+1. Write Stage 2 RED evidence for `BANDIT-035` - Artifact Create Landing Work
+   Item Field.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -843,9 +849,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the next bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`; the gap source artifacts,
-rationale, and next action are recorded in `.bandit/bootstrap-gaps.json`.
+No operator-owned input is required to write Stage 2 RED evidence for
+`BANDIT-035`; the gap source artifacts, rationale, acceptance criteria,
+implementation boundary, and verification plan are recorded in
+`.bandit/bootstrap-gaps.json`, `docs/work/BANDIT-035/brief.md`, and
+`docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

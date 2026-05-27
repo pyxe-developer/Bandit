@@ -33,3 +33,4 @@
 {"type":"work_item_created","work_item":"BANDIT-033","message":"Created work item BANDIT-033 from docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json"}
 {"type":"work_item_created","work_item":"BANDIT-034","message":"Created work item BANDIT-034 from docs/specs/BANDIT-034-cockpit-shell-hardening.json"}
 {"type":"artifact_created","work_item":"BANDIT-034","message":"Created landing_verdict artifact at docs/work/BANDIT-034/landing-verdict.md"}
+{"type":"work_item_created","work_item":"BANDIT-035","message":"Created work item BANDIT-035 from docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json"}
