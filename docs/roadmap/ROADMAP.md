@@ -16,12 +16,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record local-record landing action for `BANDIT-035`.
-Stage 5 landing verdict is recorded in
+**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-035`. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-035/landing-verdict.md`, includes the parser-required
-`work_item` field, and `npm run bandit -- land-check BANDIT-035` passes with
-final verdict `safe-to-land`. Do not run retrospective closeout or unrelated
-Phase 8 work until `docs/work/BANDIT-035/landing-action.md` exists.
+`work_item` field, `npm run bandit -- land-check BANDIT-035` passes with final
+verdict `safe-to-land`, and local-record landing action evidence is recorded in
+`docs/work/BANDIT-035/landing-action.md`. Do not start unrelated Phase 8 work or
+the next bootstrap-gap chore until retrospective closeout and gap-ledger
+disposition are recorded.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -45,9 +47,11 @@ finding repair/disposition evidence is recorded in
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
-landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
-`npm run bandit -- land-check BANDIT-035` passes; the next required action is
-local-record landing action.
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`,
+`npm run bandit -- land-check BANDIT-035` passes, and local-record landing
+action evidence is recorded in `docs/work/BANDIT-035/landing-action.md`; the
+next required action is Stage 6 retrospective closeout and bootstrap-gap
+disposition.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,

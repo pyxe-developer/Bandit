@@ -415,12 +415,14 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Record local-record landing action for `BANDIT-035`.
-Stage 5 landing verdict is recorded in
+**Current next action:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-035`. Stage 5 landing verdict is recorded in
 `docs/work/BANDIT-035/landing-verdict.md`, includes the parser-required
-`work_item` field, and `npm run bandit -- land-check BANDIT-035` passes with
-final verdict `safe-to-land`. Do not run retrospective closeout or unrelated
-Phase 8 work until `docs/work/BANDIT-035/landing-action.md` exists.
+`work_item` field, `npm run bandit -- land-check BANDIT-035` passes with final
+verdict `safe-to-land`, and local-record landing action evidence is recorded in
+`docs/work/BANDIT-035/landing-action.md`. Do not start unrelated Phase 8 work or
+the next bootstrap-gap chore until retrospective closeout and gap-ledger
+disposition are recorded.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -444,9 +446,11 @@ finding repair/disposition evidence is recorded in
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
-landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
-`npm run bandit -- land-check BANDIT-035` passes; the next required action is
-local-record landing action.
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`,
+`npm run bandit -- land-check BANDIT-035` passes, and local-record landing
+action evidence is recorded in `docs/work/BANDIT-035/landing-action.md`; the
+next required action is Stage 6 retrospective closeout and bootstrap-gap
+disposition.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -457,10 +461,11 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
-active at Stage 5 with pre-PR CodeRabbit pass evidence, Local Qwen pass
-evidence, aggregate Stage 4 review evidence, Stage 5 landing verdict, and
-passing `land-check` recorded. The next action is to record local-record
-landing action before retrospective closeout or unrelated Phase 8 work.
+active at Stage 6 with pre-PR CodeRabbit pass evidence, Local Qwen pass
+evidence, aggregate Stage 4 review evidence, Stage 5 landing verdict, passing
+`land-check`, and local-record landing action evidence recorded. The next action
+is to record retrospective closeout and bootstrap-gap disposition before
+unrelated Phase 8 work or the next bootstrap-gap chore.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 active chore.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -510,9 +515,10 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** Local-record landing action at
-`docs/work/BANDIT-035/landing-action.md` using the current Stage 5 landing
-verdict and passing `npm run bandit -- land-check BANDIT-035` result.
+**Expected next deliverable:** Stage 6 retrospective closeout at
+`docs/work/BANDIT-035/retrospective.md` with structured improvement-mining
+answers and gap-ledger disposition for
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
 
 ## Known Bootstrap Gaps
 
@@ -525,8 +531,9 @@ These are expected because Bandit does not exist yet:
   Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
   CodeRabbit pass evidence, CodeRabbit finding disposition evidence, Local
   Qwen pass evidence, aggregate Stage 4 review evidence, Stage 5 landing
-  verdict, and passing `land-check` evidence; the next step is to record
-  local-record landing action.
+  verdict, passing `land-check` evidence, and local-record landing action
+  evidence; the next step is to record Stage 6 retrospective closeout and
+  gap-ledger disposition.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
   mining for agent execution smells such as recurring CodeRabbit invocation
@@ -832,9 +839,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record local-record landing action for `BANDIT-035` now that Stage 5 landing
-   verdict is recorded and `land-check` passes; do not run retrospective
-   closeout or unrelated Phase 8 work before `landing-action.md` exists.
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-035` now that Stage 5 landing verdict, passing `land-check`, and
+   local-record landing action evidence are recorded; do not start unrelated
+   Phase 8 work or the next bootstrap-gap chore before `retrospective.md` and
+   gap-ledger disposition exist.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -872,11 +881,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current `BANDIT-035` local-record
-landing action. The remaining next action is technical landing action evidence
-for a non-product bootstrap-gap chore with a safe-to-land verdict, not missing
-product direction, UAT, policy, business, cost/risk, or ambiguous-scope
-decision.
+No operator-owned input is required for the current `BANDIT-035` Stage 6
+retrospective closeout and bootstrap-gap disposition. The remaining next action
+is technical closeout evidence for a non-product bootstrap-gap chore with a
+safe-to-land verdict and local-record landing action, not missing product
+direction, UAT, policy, business, cost/risk, or ambiguous-scope decision.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
