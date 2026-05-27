@@ -162,13 +162,12 @@ Its structured creation spec is recorded in
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
-Stage 4 CodeRabbit blocker evidence is recorded in
-`docs/work/BANDIT-035/coderabbit-review.md`; the latest blocker targets
-`test/artifact-create.test.mjs` parser-compatibility fixture scope. Prior
-CodeRabbit finding disposition is recorded in
+Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-035/coderabbit-review.md` at source head
+`cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. CodeRabbit
+finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`; the next required
-action is to repair or explicitly disposition the fresh CodeRabbit finding
-before the remaining Stage 4 review evidence.
+action is to run Local Qwen before aggregate Stage 4 review evidence.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -320,10 +319,9 @@ recorded. `BANDIT-034` is landed and closed out as the
 Stage 6 evidence recorded in `docs/work/BANDIT-034/` and source-candidate
 evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
-`docs/work/BANDIT-034/retrospective.md`. The next required action is repair or
-explicit disposition of the fresh Stage 4 CodeRabbit blocker for `BANDIT-035`,
-the bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
+`docs/work/BANDIT-034/retrospective.md`. The next required action is the
+`BANDIT-035` Local Qwen Stage 4 adversarial review for the bootstrap-gap chore
+for `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that active
 chore.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured

@@ -506,11 +506,9 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** Focused repair or explicit PM disposition for
-the fresh `test/artifact-create.test.mjs` CodeRabbit finding; then rerun
-pre-PR CodeRabbit evidence at `docs/work/BANDIT-035/coderabbit-review.md`
-before `docs/work/BANDIT-035/local-qwen-review.md` and
-`docs/work/BANDIT-035/review-evidence.md`.
+**Expected next deliverable:** Local Qwen Stage 4 adversarial review evidence at
+`docs/work/BANDIT-035/local-qwen-review.md`, followed by PM disposition before
+aggregate Stage 4 review evidence at `docs/work/BANDIT-035/review-evidence.md`.
 
 ## Known Bootstrap Gaps
 
@@ -520,11 +518,10 @@ These are expected because Bandit does not exist yet:
   `BANDIT-035`: `bandit artifact create` rendered a landing verdict without the
   required `work_item` metadata field, causing `land-check` to fail closed until
   Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief,
-  Stage 2 RED evidence, Stage 3 implementation evidence, completed Stage 4
-  CodeRabbit blocker evidence, prior finding disposition, and a fresh
-  CodeRabbit blocker on the `test/artifact-create.test.mjs`
-  parser-compatibility fixture scope; the next step is to repair or explicitly
-  disposition that finding.
+  Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+  CodeRabbit pass evidence, and CodeRabbit finding disposition evidence; the
+  next step is to run Local Qwen Stage 4 adversarial review before aggregate
+  Stage 4 evidence.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
   mining for agent execution smells such as recurring CodeRabbit invocation

@@ -2,15 +2,16 @@
 
 ## Summary
 
-CodeRabbit completed the pre-PR Stage 4 review for `BANDIT-035` at source head
-`888af023376eee945e7a117281921e89bd5a85a6` and returned four unresolved
-findings.
+CodeRabbit completed the initial pre-PR Stage 4 review for `BANDIT-035` at
+source head `888af023376eee945e7a117281921e89bd5a85a6` and returned four
+unresolved findings.
 
-Codex PM repaired the actionable fixture-isolation finding and dispositioned the
-three workflow-state findings against current repo evidence. The next Stage 4
-action is to rerun the CodeRabbit pre-PR provider against the repaired source
-before Local Qwen, aggregate review evidence, landing verdict, or unrelated
-Phase 8 work.
+Codex PM repaired the actionable fixture-isolation findings, dispositioned the
+workflow-state findings against current repo evidence, and reran the provider
+until the pre-PR CodeRabbit gate passed at source head
+`cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. The next Stage 4
+action is to run Local Qwen before aggregate review evidence, landing verdict,
+or unrelated Phase 8 work.
 
 ## Findings
 
@@ -39,10 +40,11 @@ leaving the fixture internally inconsistent.
 
 **Disposition:** repaired.
 
-**Evidence:** `docs/specs/BANDIT-035-coderabbit-review-output.json` now records
-the current live CodeRabbit rerun output at source head
-`beb0d9fd924490117ca39526bf8b5022b280222b`, including the critical test-scope
-findings that justify the blocker verdict.
+**Evidence:** The intermediate live CodeRabbit rerun output at source head
+`beb0d9fd924490117ca39526bf8b5022b280222b` recorded critical test-scope
+findings that justified the blocker verdict. The final rerun output now records
+the passing provider result at source head
+`cb0a7ba506f6e4d9119a807915408463375c3480`.
 
 ### Second rerun landing-verdict test isolation
 
@@ -83,7 +85,7 @@ and missing Stage 4+ evidence before landing.
 
 **Evidence:** `docs/roadmap/CURRENT_CONTEXT.md` and
 `docs/roadmap/ROADMAP.md` now identify `BANDIT-035` as active at Stage 4 with
-CodeRabbit blocker evidence recorded, no Local Qwen or aggregate Stage 4
+pre-PR CodeRabbit pass evidence recorded, no Local Qwen or aggregate Stage 4
 evidence recorded yet, and no landing verdict or closeout authority.
 
 ### Bootstrap-gap closeout timing
@@ -102,15 +104,14 @@ closeout evidence exist.
 
 ### Bootstrap-gap next-action specificity
 
-**Finding:** Make the active gap next action explicitly reference the
-`BANDIT-035` Stage 4 CodeRabbit blocker.
+**Finding:** Make the active gap next action explicitly reference the current
+`BANDIT-035` Stage 4 gate.
 
 **Disposition:** repaired.
 
 **Evidence:** `.bandit/bootstrap-gaps.json`, `docs/roadmap/CURRENT_CONTEXT.md`,
-and `docs/roadmap/ROADMAP.md` now route the gap to CodeRabbit finding
-disposition and then to a fresh pre-PR CodeRabbit rerun before later Stage 4
-gates.
+and `docs/roadmap/ROADMAP.md` now route the gap to Local Qwen Stage 4 review
+before aggregate Stage 4 evidence.
 
 ### Landing-verdict fixture scope
 
@@ -130,6 +131,5 @@ that runs `bandit validate`.
 
 ## Next Action
 
-Rerun the CodeRabbit pre-PR provider for `BANDIT-035` against the repaired source
-before running Local Qwen, aggregate Stage 4 review evidence, landing verdict, or
-unrelated Phase 8 work.
+Run Local Qwen Stage 4 adversarial review for `BANDIT-035` before aggregate
+Stage 4 review evidence, landing verdict, or unrelated Phase 8 work.
