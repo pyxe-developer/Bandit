@@ -1,4 +1,5 @@
 import { mkdir, stat } from "node:fs/promises";
+import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
@@ -13,6 +14,9 @@ export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
   const alreadyInitialized = await pathExists(paths.config);
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
+  const agentEvaluationPolicyExists = await pathExists(
+    paths.agentEvaluationPolicy
+  );
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
   const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
@@ -27,6 +31,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!bootstrapGapsExist) {
     await writeDefaultBootstrapGapLedger(paths.bootstrapGaps);
+  }
+
+  if (!agentEvaluationPolicyExists) {
+    await writeDefaultAgentEvaluationPolicy(paths.agentEvaluationPolicy);
   }
 
   if (!autoLandingPolicyExists) {

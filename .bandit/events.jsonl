@@ -51,3 +51,4 @@
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created retrospective artifact at docs/work/BANDIT-038/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-039","message":"Created work item BANDIT-039 from docs/specs/BANDIT-GAP-AGENT-EVALUATION-HARNESS.json"}
 {"type":"artifact_created","work_item":"BANDIT-039","message":"Created red_evidence artifact at docs/work/BANDIT-039/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-039","message":"Created implementation_evidence artifact at docs/work/BANDIT-039/implementation-evidence.md"}

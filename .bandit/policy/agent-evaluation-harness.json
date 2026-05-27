@@ -1,0 +1,145 @@
+{
+  "contract_version": 1,
+  "policy_id": "agent-evaluation-harness",
+  "replay_only": true,
+  "automatic_policy_changes": false,
+  "benchmark_registry": {
+    "packet_sets": [
+      {
+        "packet_set_id": "bandit-reviewer-calibration-v1",
+        "evidence_class": "calibration",
+        "version": "2026-05-27",
+        "visibility": "visible",
+        "packet_paths": [
+          "docs/evaluation/agents/calibration/reviewer-packet-001.md"
+        ]
+      },
+      {
+        "packet_set_id": "bandit-reviewer-holdout-v1",
+        "evidence_class": "locked_holdout",
+        "version": "2026-05-27",
+        "visibility": "locked",
+        "packet_paths": [
+          "docs/evaluation/agents/holdout/reviewer-packet-001.md"
+        ]
+      }
+    ],
+    "benchmark_subjects": [
+      {
+        "subject_id": "local-qwen-baseline",
+        "subject_type": "reviewer_profile",
+        "profile_path": ".bandit/reviewers/local-qwen.json"
+      },
+      {
+        "subject_id": "bandit-skill-v1",
+        "subject_type": "skill_variant",
+        "skill_id": "bandit",
+        "version": "1.0.0",
+        "lifecycle_contract_path": ".bandit/policy/skill-lifecycle-contracts.json"
+      }
+    ],
+    "run_definitions": [
+      {
+        "run_id": "reviewer-calibration-qwen",
+        "mode": "replay_only",
+        "subject_id": "local-qwen-baseline",
+        "packet_set_ids": [
+          "bandit-reviewer-calibration-v1"
+        ],
+        "result_path": "docs/evaluation/agents/results/reviewer-calibration-qwen.md",
+        "allowed_effects": [
+          "write_result_artifact"
+        ],
+        "forbidden_effects": [
+          "live_work",
+          "reviewer_routing",
+          "model_routing",
+          "skill_policy",
+          "cost_policy",
+          "paid_reviewer_policy",
+          "workflow_policy"
+        ]
+      }
+    ],
+    "reviewer_packets": [
+      {
+        "packet_id": "BANDIT-039-reviewer-packet-001",
+        "source_work_item": "BANDIT-038",
+        "source_artifacts": [
+          "docs/work/BANDIT-038/review-evidence.md"
+        ],
+        "derivation": "repo_derived",
+        "failure_mode": "skill_lifecycle_contract_drift",
+        "packet_path": "docs/evaluation/agents/calibration/reviewer-packet-001.md",
+        "gold_labels": [
+          "blocker:missing_skill_version"
+        ],
+        "seeded_blockers": [
+          "missing stable skill lifecycle version"
+        ],
+        "seeded_non_issues": [
+          "template wording preference"
+        ],
+        "expected_observations": [
+          "Reviewer flags missing skill lifecycle version evidence."
+        ],
+        "scoring_labels": [
+          "blocker_recall",
+          "false_positive_rate"
+        ]
+      }
+    ]
+  },
+  "scorecard": {
+    "primary_metric": "blocker_recall",
+    "required_metrics": [
+      "blocker_recall",
+      "missed_blockers",
+      "actionable_precision",
+      "useful_finding_yield",
+      "false_positive_rate",
+      "tool_friction",
+      "latency",
+      "provider_pricing_backed_expected_cost",
+      "pricing_freshness_or_expiry",
+      "spend_approval_state"
+    ]
+  },
+  "paid_reviewer_policy": {
+    "one_off_benchmark_calls": [
+      {
+        "subject_id": "paid-opus-reviewer",
+        "spend_class": "benchmark_evaluation",
+        "provider_pricing_evidence_id": "opus-reviewer-2026-05-27",
+        "approval": "per_run_approval_required"
+      }
+    ],
+    "recurring_promotion_thresholds": [
+      {
+        "threshold_id": "paid-reviewer-high-risk-stage4",
+        "applies_to_risk_class": "high_risk_review",
+        "applies_to_stage_capability_profile": "stage4_review",
+        "evidence_class": "locked_holdout",
+        "minimum_blocker_recall_improvement_over_qwen": 0.15,
+        "false_positive_rate_ceiling": 0.2,
+        "expected_cost_ceiling": "5.00 USD",
+        "provider_pricing_evidence_id": "opus-reviewer-2026-05-27",
+        "spend_class_approval": "operator_supervised_required"
+      }
+    ],
+    "provider_pricing_evidence": [
+      {
+        "pricing_evidence_id": "opus-reviewer-2026-05-27",
+        "provider": "anthropic",
+        "model_or_profile": "opus-reviewer",
+        "pricing_source": "operator-provided benchmark fixture",
+        "captured_date": "2026-05-27",
+        "effective_date": "2026-05-27",
+        "freshness_rule": "expires_after_30_days",
+        "expected_per_run_cost": "3.00 USD",
+        "spend_class": "benchmark_evaluation",
+        "approval_owner": "operator"
+      }
+    ]
+  }
+}

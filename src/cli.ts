@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { agentEvaluation } from "./commands/agent-evaluation.js";
 import { initBandit } from "./commands/init.js";
 import { createArtifact } from "./commands/artifact-create.js";
 import { autoLandCheck } from "./commands/auto-land-check.js";
@@ -115,6 +116,12 @@ async function main() {
     return;
   }
 
+  if (command === "agent-evaluation") {
+    const result = await agentEvaluation(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "uat") {
     const result = await uat(process.cwd(), args);
     process.stdout.write(result.output);
@@ -164,7 +171,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|uat|gaps|coordination|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|uat|gaps|coordination|cockpit>`);
   process.exitCode = 1;
 }
 

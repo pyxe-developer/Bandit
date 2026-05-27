@@ -10,6 +10,10 @@ export function getBanditPaths(repoRoot: string) {
     config: path.join(stateRoot, "config.toml"),
     events: path.join(stateRoot, "events.jsonl"),
     bootstrapGaps: path.join(stateRoot, "bootstrap-gaps.json"),
+    agentEvaluationPolicy: path.join(
+      policyRoot,
+      "agent-evaluation-harness.json"
+    ),
     autoLandingPolicy: path.join(policyRoot, "auto-landing.json"),
     heartbeatPolicy: path.join(policyRoot, "heartbeat-chore-agent.json"),
     landingAgentContract: path.join(policyRoot, "landing-agent.json"),

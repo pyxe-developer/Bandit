@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { validateAgentEvaluationHarness } from "../state/agent-evaluation-harness.js";
 import { validateAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { validateBootstrapGaps } from "../state/bootstrap-gaps.js";
 import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
@@ -32,6 +33,7 @@ export async function validateBandit(repoRoot: string) {
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
+  await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);
