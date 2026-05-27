@@ -415,9 +415,9 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run local-record landing for `BANDIT-037` - Workflow
-Trial Decision Guardrails because Stage 5 landing verdict evidence is recorded
-with final verdict `safe-to-land`.
+**Current next action:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-037` - Workflow Trial Decision Guardrails now that
+local-record landing action evidence exists.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
 `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
@@ -433,9 +433,10 @@ evidence is recorded in `docs/work/BANDIT-037/review-evidence.md` with current
 review subject hash
 `9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-037/landing-verdict.md` with
-final verdict `safe-to-land`. Do not start retrospective, gap-ledger
-disposition, the next bootstrap-gap chore, or unrelated Phase 8 work before
-local-record landing action evidence exists.
+final verdict `safe-to-land`. Local-record landing action evidence is recorded
+in `docs/work/BANDIT-037/landing-action.md`. Do not start the next
+bootstrap-gap chore or unrelated Phase 8 work before Stage 6 retrospective
+closeout and gap-ledger disposition are recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -535,9 +536,11 @@ review subject hash
 `9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-037/landing-verdict.md` with final verdict `safe-to-land`.
-The next action is local-record landing; do not create retrospective,
-gap-ledger disposition, the next bootstrap-gap chore, or unrelated Phase 8 work
-before landing action evidence is recorded.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-037/landing-action.md`. The next action is Stage 6
+retrospective closeout and bootstrap-gap disposition; do not create the next
+bootstrap-gap chore or unrelated Phase 8 work before those closeout artifacts
+are recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -589,9 +592,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** local-record landing action evidence for
-`BANDIT-037`, before retrospective, gap-ledger disposition, the next
-bootstrap-gap chore, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 6 retrospective closeout and gap-ledger
+disposition for `BANDIT-037`, before the next bootstrap-gap chore or unrelated
+Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -628,7 +631,9 @@ These are expected because Bandit does not exist yet:
   `docs/work/BANDIT-037/qwen-finding-disposition.md`. Aggregate Stage 4 review
   evidence is recorded in `docs/work/BANDIT-037/review-evidence.md`; Stage 5
   landing verdict is recorded in `docs/work/BANDIT-037/landing-verdict.md` with
-  final verdict `safe-to-land`; local-record landing action is the next action.
+  final verdict `safe-to-land`; local-record landing action is recorded in
+  `docs/work/BANDIT-037/landing-action.md`; Stage 6 retrospective closeout and
+  gap-ledger disposition are the next action.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -921,10 +926,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run local-record landing for `BANDIT-037` - Workflow Trial Decision
-   Guardrails because `docs/work/BANDIT-037/landing-verdict.md` records
-   `safe-to-land`. Do not create retrospective, gap-ledger disposition, the next
-   bootstrap-gap chore, or unrelated Phase 8 work first.
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-037` - Workflow Trial Decision Guardrails now that
+   `docs/work/BANDIT-037/landing-action.md` exists. Do not create the next
+   bootstrap-gap chore or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -960,11 +965,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before local-record landing for
-`BANDIT-037` - Workflow Trial Decision Guardrails. Repo artifacts identify the
-active work item, review target, source artifacts, queue order, implementation
-evidence, CodeRabbit evidence, Local Qwen findings, PM disposition, Stage 5
-landing verdict, and verification target. Halt only if the next step
+No operator-owned input is required before Stage 6 retrospective closeout and
+bootstrap-gap disposition for `BANDIT-037` - Workflow Trial Decision
+Guardrails. Repo artifacts identify the active work item, review target, source
+artifacts, queue order, implementation evidence, CodeRabbit evidence, Local
+Qwen findings, PM disposition, Stage 5 landing verdict, local-record landing
+action, and verification target. Halt only if the next step
 would change product direction, UAT policy, workflow policy beyond enforcing the
 already recorded Workflow Trial guardrail requirement, business tradeoffs,
 cost/risk posture, external service setup, paid reviewer routing, live routing,

@@ -269,7 +269,7 @@
       "linked_work_item": "BANDIT-037",
       "rationale": "The PRD research review warned that Bandit's improvement loop could reward proxy metrics, overstate causality at single-operator volume, and create in-context reward-hacking pressure. The operator confirmed that every Workflow Trial or workflow-policy change needs predeclared decision criteria, explicit uncertainty or minimum-detectable-effect context, and a later re-evaluation window before a keep, revise, revert, or double_down decision can change policy. Current improvement metadata and CLI validation do not enforce those fields, so a bootstrap-gap chore is required.",
       "verification_target": null,
-      "next_action": "Run local-record landing for BANDIT-037 because docs/work/BANDIT-037/landing-verdict.md records safe-to-land; do not start retrospective or unrelated Phase 8 work until landing action evidence exists."
+      "next_action": "Record Stage 6 retrospective closeout and bootstrap-gap disposition for BANDIT-037 now that docs/work/BANDIT-037/landing-action.md exists; do not create the next bootstrap-gap chore or unrelated Phase 8 work until retrospective and gap-ledger closeout are recorded."
     },
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",
