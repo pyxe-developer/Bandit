@@ -13,6 +13,7 @@ export function getBanditPaths(repoRoot: string) {
     autoLandingPolicy: path.join(policyRoot, "auto-landing.json"),
     heartbeatPolicy: path.join(policyRoot, "heartbeat-chore-agent.json"),
     landingAgentContract: path.join(policyRoot, "landing-agent.json"),
+    skillLifecyclePolicy: path.join(policyRoot, "skill-lifecycle-contracts.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
     smellTriggers: path.join(policyRoot, "smell-triggers.json")
   };

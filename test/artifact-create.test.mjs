@@ -14,6 +14,7 @@ const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
 const committedTemplateRoot = path.join(repoRoot, "docs/templates");
 const committedPolicyRoot = path.join(repoRoot, ".bandit/policy");
+const committedEvaluationRoot = path.join(repoRoot, "docs/evaluation");
 const retrospectiveMiningSignals = [
   "failed tool calls",
   "overreasoning",
@@ -439,6 +440,9 @@ async function createInitializedRepo() {
     recursive: true
   });
   await cp(committedPolicyRoot, path.join(repo, ".bandit/policy"), {
+    recursive: true
+  });
+  await cp(committedEvaluationRoot, path.join(repo, "docs/evaluation"), {
     recursive: true
   });
   await writeLocalQwenProfile(repo);

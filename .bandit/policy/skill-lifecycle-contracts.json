@@ -1,0 +1,72 @@
+{
+  "contract_version": 1,
+  "policy_id": "skill-lifecycle-contracts",
+  "installed_skills_are_canonical": false,
+  "contracts": [
+    {
+      "skill_id": "bandit",
+      "owner": "Codex PM",
+      "version": "1.0.0",
+      "changelog": [
+        {
+          "date": "2026-05-27",
+          "summary": "Initial repo-native lifecycle contract for the installed Bandit cold-start skill."
+        }
+      ],
+      "intended_stages": [
+        "stage0_context_readiness",
+        "stage1_work_item_brief",
+        "stage2_red_evidence",
+        "stage3_implementation"
+      ],
+      "required_tools": [
+        "shell",
+        "apply_patch",
+        "git"
+      ],
+      "forbidden_actions": [
+        "edit_installed_global_skill",
+        "fetch_external_prompts",
+        "approve_uat",
+        "merge",
+        "push",
+        "deploy"
+      ],
+      "evaluation_packets": [
+        "docs/evaluation/skills/bandit-cold-start.md"
+      ],
+      "rollback_criteria": [
+        "Installed skill drift evidence does not match the repo contract.",
+        "Cold-start evaluation produces a blocker-level regression.",
+        "The skill asks the operator for Codex-owned technical routing decisions."
+      ],
+      "stage_bindings": [
+        {
+          "stage": "stage0_context_readiness",
+          "capability": "restore_bandit_repo_context",
+          "authority": "stage_scoped_capability"
+        },
+        {
+          "stage": "stage1_work_item_brief",
+          "capability": "shape_bandit_work_item_contract",
+          "authority": "stage_scoped_capability"
+        },
+        {
+          "stage": "stage2_red_evidence",
+          "capability": "route_next_bandit_stage",
+          "authority": "stage_scoped_capability"
+        },
+        {
+          "stage": "stage3_implementation",
+          "capability": "route_next_bandit_stage",
+          "authority": "stage_scoped_capability"
+        }
+      ],
+      "installed_skill_drift": {
+        "evidence_path": "docs/evaluation/skills/bandit-installed-skill-drift.md",
+        "expected_sha256": "275f633467ca4831a1bce91744fdc3c62326d66f489bcd294a92485f285be158",
+        "required_before_policy_use": true
+      }
+    }
+  ]
+}

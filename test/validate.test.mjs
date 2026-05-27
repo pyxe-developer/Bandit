@@ -25,7 +25,8 @@ const requiredTemplateFiles = [
   "docs/templates/review-evidence.md",
   "docs/templates/landing-verdict.md",
   "docs/templates/local-qwen-review.md",
-  "docs/templates/coderabbit-review.md"
+  "docs/templates/coderabbit-review.md",
+  "docs/templates/skill-lifecycle-contract.md"
 ];
 
 const validTemplates = {
@@ -159,7 +160,21 @@ final_verdict:
 rationale:
 `,
   "docs/templates/local-qwen-review.md": localQwenTemplate,
-  "docs/templates/coderabbit-review.md": coderabbitTemplate
+  "docs/templates/coderabbit-review.md": coderabbitTemplate,
+  "docs/templates/skill-lifecycle-contract.md": `# Skill Lifecycle Contract Template
+
+skill_id:
+owner:
+version:
+changelog:
+intended_stages:
+required_tools:
+forbidden_actions:
+evaluation_packets:
+rollback_criteria:
+stage_bindings:
+installed_skill_drift:
+`
 };
 
 const validSmellCatalog = {

@@ -16,6 +16,7 @@ import { validateLocalQwenProfile } from "../state/reviewer-profiles.js";
 import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
+import { validateSkillLifecycleContracts } from "../state/skill-lifecycle-contracts.js";
 import { validateTemplates } from "../state/templates.js";
 import { validateUatApprovalArtifacts } from "../state/uat-approval.js";
 import { validateWorkItems } from "../state/work-items.js";
@@ -30,6 +31,7 @@ export async function validateBandit(repoRoot: string) {
 
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
+  await validateSkillLifecycleContracts(repoRoot);
   await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);
   await validateRoutingDecisions(repoRoot, smellCatalog.smellIds);

@@ -194,6 +194,22 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("executable evidence", /^executable_evidence:/im),
       metadata("bootstrap gaps", /^bootstrap_gaps:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/skill-lifecycle-contract.md",
+    requirements: [
+      metadata("skill_id", /^skill_id:/im),
+      metadata("owner", /^owner:/im),
+      metadata("version", /^version:/im),
+      metadata("changelog", /^changelog:/im),
+      metadata("intended_stages", /^intended_stages:/im),
+      metadata("required_tools", /^required_tools:/im),
+      metadata("forbidden_actions", /^forbidden_actions:/im),
+      metadata("evaluation_packets", /^evaluation_packets:/im),
+      metadata("rollback_criteria", /^rollback_criteria:/im),
+      metadata("stage_bindings", /^stage_bindings:/im),
+      metadata("installed_skill_drift", /^installed_skill_drift:/im)
+    ]
   }
 ];
 

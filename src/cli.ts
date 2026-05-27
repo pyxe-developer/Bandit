@@ -17,6 +17,7 @@ import { qwenReview } from "./commands/qwen-review.js";
 import { reviewSubjectHash } from "./commands/review-subject-hash.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
+import { skillLifecycle } from "./commands/skill-lifecycle.js";
 import { uat } from "./commands/uat.js";
 import { validateBandit } from "./commands/validate.js";
 import { createWorkItem } from "./commands/work-item-create.js";
@@ -144,6 +145,12 @@ async function main() {
     return;
   }
 
+  if (command === "skill-lifecycle") {
+    const result = await skillLifecycle(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "coordination") {
     const result = await coordination(process.cwd(), args);
     process.stdout.write(result.output);
@@ -157,7 +164,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|qwen-review|review-subject-hash|coderabbit-review|escalated-review|heartbeat|improvements|uat|gaps|coordination|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|uat|gaps|coordination|cockpit>`);
   process.exitCode = 1;
 }
 

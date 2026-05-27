@@ -145,6 +145,9 @@ async function createValidRepo() {
   await cp(path.join(repoRoot, ".bandit/policy"), path.join(repo, ".bandit/policy"), {
     recursive: true
   });
+  await cp(path.join(repoRoot, "docs/evaluation"), path.join(repo, "docs/evaluation"), {
+    recursive: true
+  });
   await cp(path.join(repoRoot, ".bandit/reviewers"), path.join(repo, ".bandit/reviewers"), {
     recursive: true
   });

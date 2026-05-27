@@ -6,6 +6,7 @@ import { appendLifecycleEvent } from "../state/events.js";
 import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
+import { writeDefaultSkillLifecyclePolicy } from "../state/skill-lifecycle-contracts.js";
 import { writeDefaultStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 
 export async function initBandit(repoRoot: string) {
@@ -15,6 +16,9 @@ export async function initBandit(repoRoot: string) {
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
   const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
+  const skillLifecyclePolicyExists = await pathExists(
+    paths.skillLifecyclePolicy
+  );
   const stage4EvidenceHeadPolicyExists = await pathExists(
     paths.stage4EvidenceHeadPolicy
   );
@@ -35,6 +39,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!landingAgentContractExists) {
     await writeDefaultLandingAgentContract(paths.landingAgentContract);
+  }
+
+  if (!skillLifecyclePolicyExists) {
+    await writeDefaultSkillLifecyclePolicy(paths.skillLifecyclePolicy);
   }
 
   if (!stage4EvidenceHeadPolicyExists) {
