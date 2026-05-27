@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Perform local-record landing for `BANDIT-036` -
-Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
+**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-036` - Structured Retrospective Mining. `BANDIT-036`
+has a Stage 1 brief at
 `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
 `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation evidence at
 `docs/work/BANDIT-036/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
@@ -28,12 +29,14 @@ with review subject hash
 `863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-036/landing-action.md`.
 It was
 created from `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and
 is linked as the active chore for
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in `.bandit/bootstrap-gaps.json`.
-Do not start retrospective closeout, the next bootstrap-gap chore, or unrelated
-Phase 8 work until local-record landing action evidence is recorded.
+Do not start the next bootstrap-gap chore or unrelated Phase 8 work until
+retrospective closeout and bootstrap-gap disposition are recorded.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -83,7 +86,9 @@ Aggregate Stage 4 review evidence is recorded in
 `863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
-The next required action is local-record landing.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-036/landing-action.md`. The next required action is Stage 6
+retrospective closeout and bootstrap-gap disposition.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -235,8 +240,10 @@ Aggregate Stage 4 review evidence is recorded in
 `863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
-The next required action is local-record landing; do not start retrospective
-closeout, the next bootstrap-gap chore, or unrelated Phase 8 work first.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-036/landing-action.md`. The next required action is Stage 6
+retrospective closeout and bootstrap-gap disposition; do not start the next
+bootstrap-gap chore or unrelated Phase 8 work first.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -1008,11 +1015,11 @@ Current rule:
 
 Current priority:
 
-1. Perform local-record landing for `BANDIT-036` - Structured Retrospective
-   Mining, now that Stage 5 landing verdict evidence is recorded with final
-   verdict `safe-to-land` and `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is
-   active. Do not start retrospective closeout, the next bootstrap-gap chore,
-   or unrelated Phase 8 work first.
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-036` - Structured Retrospective Mining, now that local-record
+   landing action evidence is recorded and
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start the
+   next bootstrap-gap chore or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
