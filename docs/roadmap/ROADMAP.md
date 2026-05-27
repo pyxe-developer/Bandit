@@ -16,17 +16,25 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-038` - Skill
-Lifecycle Contract. `BANDIT-038` was created as the bootstrap-gap chore for
+**Current next step:** Record the Stage 5 landing verdict for `BANDIT-038` -
+Skill Lifecycle Contract using the current aggregate Stage 4 review evidence.
+`BANDIT-038` was created as the bootstrap-gap chore for
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`: the structured creation spec is recorded
 in `docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json`, the Stage 1 brief is
 recorded in `docs/work/BANDIT-038/brief.md`, Stage 2 RED evidence is recorded
 in `docs/work/BANDIT-038/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-038/implementation-evidence.md`,
+recorded in `docs/work/BANDIT-038/implementation-evidence.md`, Stage 4
+pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-038/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
+is recorded in `docs/work/BANDIT-038/local-qwen-review.md`, and aggregate Stage
+4 review evidence is recorded in `docs/work/BANDIT-038/review-evidence.md`
+with current review subject hash
+`965a8a584764d699b2cf625ec1b4349592af14b15d18557182e08d45d3ed34de`.
 `.bandit/events.jsonl` records the work-item and artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks the gap active and linked to `BANDIT-038`.
-Do not create landing evidence, retrospective evidence, the next bootstrap-gap
-chore, or unrelated Phase 8 work before Stage 4 review evidence exists.
+Do not create local-record landing, retrospective evidence, the next
+bootstrap-gap chore, or unrelated Phase 8 work before the Stage 5 landing
+verdict is recorded.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -396,8 +404,9 @@ owner, version, changelog, intended stages, required tools, forbidden actions,
 evaluation packets, and rollback criteria for load-bearing skills. Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-038/red-evidence.md`, Stage 3
 implementation evidence is recorded in
-`docs/work/BANDIT-038/implementation-evidence.md`, and the next required action
-is Stage 4 review for `BANDIT-038`.
+`docs/work/BANDIT-038/implementation-evidence.md`, Stage 4 review evidence is
+recorded in `docs/work/BANDIT-038/review-evidence.md`, and the next required
+action is the Stage 5 landing verdict for `BANDIT-038`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -696,8 +705,9 @@ bootstrap-gap chore. `BANDIT-036` is landed and closed out as the
 is landed and closed out as the
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` bootstrap-gap chore.
 `BANDIT-038` is active as the `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`
-bootstrap-gap chore. Stage 2 RED evidence and Stage 3 implementation evidence
-are recorded, and the next target is Stage 4 review for `BANDIT-038`.
+bootstrap-gap chore. Stage 2 RED evidence, Stage 3 implementation evidence,
+and Stage 4 review evidence are recorded, and the next target is the Stage 5
+landing verdict for `BANDIT-038`.
 
 ## Phase Map
 
@@ -1012,11 +1022,10 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-038` - Skill Lifecycle Contract now
-   that implementation evidence exists for
-   `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`. Do not start landing,
-   retrospective, the next bootstrap-gap chore, or unrelated Phase 8 work
-   first.
+1. Record the Stage 5 landing verdict for `BANDIT-038` - Skill Lifecycle
+   Contract using the current aggregate Stage 4 review evidence. Do not start
+   local-record landing, retrospective, the next bootstrap-gap chore, or
+   unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
