@@ -9,9 +9,10 @@ unresolved findings.
 Codex PM repaired the actionable fixture-isolation findings, dispositioned the
 workflow-state findings against current repo evidence, and reran the provider
 until the pre-PR CodeRabbit gate passed at source head
-`cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. The next Stage 4
-action is to run Local Qwen before aggregate review evidence, landing verdict,
-or unrelated Phase 8 work.
+`cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. Local Qwen later
+passed at source head `d432c8d7397292a6d8af09a51e0e08e69eaedc64` with no
+findings. The next Stage 4 action is aggregate review evidence before landing
+verdict or unrelated Phase 8 work.
 
 ## Findings
 
@@ -110,8 +111,8 @@ closeout evidence exist.
 **Disposition:** repaired.
 
 **Evidence:** `.bandit/bootstrap-gaps.json`, `docs/roadmap/CURRENT_CONTEXT.md`,
-and `docs/roadmap/ROADMAP.md` now route the gap to Local Qwen Stage 4 review
-before aggregate Stage 4 evidence.
+and `docs/roadmap/ROADMAP.md` now route the gap to aggregate Stage 4 review
+evidence before landing.
 
 ### Landing-verdict fixture scope
 
@@ -131,5 +132,5 @@ that runs `bandit validate`.
 
 ## Next Action
 
-Run Local Qwen Stage 4 adversarial review for `BANDIT-035` before aggregate
-Stage 4 review evidence, landing verdict, or unrelated Phase 8 work.
+Record aggregate Stage 4 review evidence for `BANDIT-035` before landing verdict
+or unrelated Phase 8 work.
