@@ -415,10 +415,10 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-035` - Artifact
-Create Landing Work Item Field. The RED evidence should prove
-`bandit artifact create` currently renders a landing verdict without the
-required `work_item` field and define focused coverage for the repair.
+**Current next action:** Implement the focused Stage 3 renderer repair for
+`BANDIT-035` - Artifact Create Landing Work Item Field. Stage 2 RED evidence
+now proves `bandit artifact create` renders a landing verdict without the
+required `work_item` field and defines focused coverage for the repair.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -430,7 +430,8 @@ retrospective closeout evaluates `BANDIT-033-COCKPIT-SHELL-HARDENING` as
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its
-Stage 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, and
+Stage 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-035/red-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
 
 Do not start local server/API mode, state-index persistence, scheduler
@@ -442,7 +443,8 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
-active at Stage 1 brief created. The next action is Stage 2 RED evidence.
+active at Stage 2 RED evidence recorded. The next action is Stage 3
+implementation.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 renderer repair.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -492,8 +494,8 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** `docs/work/BANDIT-035/red-evidence.md`, created
-before implementation and mapped to the `BANDIT-035` acceptance criteria.
+**Expected next deliverable:** `docs/work/BANDIT-035/implementation-evidence.md`,
+created after the focused renderer repair and GREEN verification are complete.
 
 ## Known Bootstrap Gaps
 
@@ -502,9 +504,9 @@ These are expected because Bandit does not exist yet:
 - `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD` is active as
   `BANDIT-035`: `bandit artifact create` rendered a landing verdict without the
   required `work_item` metadata field, causing `land-check` to fail closed until
-  Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief;
-  the next step is Stage 2 RED evidence for the renderer repair and validation
-  coverage.
+  Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief
+  and Stage 2 RED evidence; the next step is the focused Stage 3 renderer
+  repair and validation coverage.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
   mining for agent execution smells such as recurring CodeRabbit invocation
@@ -810,8 +812,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-035` - Artifact Create Landing Work
-   Item Field.
+1. Implement the focused Stage 3 renderer repair for `BANDIT-035` - Artifact
+   Create Landing Work Item Field.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
