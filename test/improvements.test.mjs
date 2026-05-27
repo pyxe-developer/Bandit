@@ -125,6 +125,76 @@ test("improvements candidates fails closed for missing source artifacts", async 
   assert.match(result.stderr, /Missing improvement source artifact: docs\/work\/BANDIT-028\/missing-disposition\.md/);
 });
 
+test("improvements candidates fails closed for workflow trials without decision criteria", async () => {
+  const repo = await createImprovementRepo();
+  await writePolicyChangingCandidateDisposition(repo, {
+    decision_criteria: ""
+  });
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /missing required workflow trial guardrail metadata: decision_criteria/);
+});
+
+test("improvements candidates fails closed for workflow trials without uncertainty context", async () => {
+  const repo = await createImprovementRepo();
+  await writePolicyChangingCandidateDisposition(repo, {
+    minimum_detectable_effect: "",
+    uncertainty: ""
+  });
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /missing required workflow trial guardrail metadata: minimum_detectable_effect.*uncertainty/);
+});
+
+test("improvements candidates fails closed for workflow trials without re-evaluation window", async () => {
+  const repo = await createImprovementRepo();
+  await writePolicyChangingCandidateDisposition(repo, {
+    reevaluation_window: ""
+  });
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /missing required workflow trial guardrail metadata: reevaluation_window/);
+});
+
+test("improvements candidates exposes workflow trial guardrail completeness", async () => {
+  const repo = await createImprovementRepo();
+  await writePolicyChangingCandidateDisposition(repo);
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "candidates",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.deepEqual(report.candidates[0].workflow_trial_guardrails, {
+    decision_criteria: "keep if repeated non-blocking review loops decrease without missed blockers; revise if evidence is ambiguous; revert if blocker recall drops; double_down if review friction and blocker recall both improve.",
+    minimum_detectable_effect: "At this project volume, effects smaller than one avoided repeated review loop cannot be distinguished from noise.",
+    uncertainty: "Single-repo workflow evidence is contextual and must not be treated as causal proof.",
+    reevaluation_window: "Re-check after the next five applicable Stage 4 review loops.",
+    proxy_risk: "Do not reward lower review-loop count if blocker recall, actionable precision, or operator trust degrade."
+  });
+});
+
 test("improvements evaluate validates one evidence artifact with explicit result and decision", async () => {
   const repo = await createImprovementRepo();
   await writeCandidateDisposition(repo, {
@@ -176,6 +246,25 @@ test("improvements evaluate refuses unsupported result and routing decision valu
   assert.equal(result.code, 1);
   assert.match(result.stderr, /Unsupported improvement result: helpful/);
   assert.match(result.stderr, /Unsupported improvement decision: accept/);
+});
+
+test("improvements evaluate refuses policy-changing decisions without proxy-risk disposition", async () => {
+  const repo = await createImprovementRepo();
+  await writePolicyChangingCandidateDisposition(repo);
+  await writePolicyChangingEvaluationEvidence(repo, {
+    proxy_risk_disposition: ""
+  });
+
+  const result = await runBandit(repo, [
+    "improvements",
+    "evaluate",
+    "BANDIT-037-WORKFLOW-TRIAL-GUARDRAILS",
+    "--evidence",
+    "docs/work/BANDIT-037/improvement-evaluation.md"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /missing required workflow trial guardrail metadata: proxy_risk_disposition/);
 });
 
 test("improvements candidates report stays derived and does not create canonical cache state", async () => {
@@ -245,6 +334,58 @@ outcome: pending
   );
 }
 
+async function writePolicyChangingCandidateDisposition(repo, overrides = {}) {
+  const sourceArtifacts = [
+    "docs/work/BANDIT-028/local-qwen-review.md",
+    "docs/work/BANDIT-028/qwen-finding-disposition.md"
+  ];
+  const fields = {
+    decision_criteria:
+      "keep if repeated non-blocking review loops decrease without missed blockers; revise if evidence is ambiguous; revert if blocker recall drops; double_down if review friction and blocker recall both improve.",
+    minimum_detectable_effect:
+      "At this project volume, effects smaller than one avoided repeated review loop cannot be distinguished from noise.",
+    uncertainty:
+      "Single-repo workflow evidence is contextual and must not be treated as causal proof.",
+    reevaluation_window: "Re-check after the next five applicable Stage 4 review loops.",
+    proxy_risk:
+      "Do not reward lower review-loop count if blocker recall, actionable precision, or operator trust degrade.",
+    ...overrides
+  };
+
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-028/qwen-finding-disposition.md",
+    `# BANDIT-028 Local Qwen Finding Disposition
+
+## Durable Chore Candidate
+
+### Chore Candidate: \`BANDIT-037-WORKFLOW-TRIAL-GUARDRAILS\`
+
+origin: workflow_trial
+workflow_trial: true
+policy_change: true
+source_work_item: BANDIT-028
+source_artifacts:
+${sourceArtifacts.map((artifact) => `  - ${artifact}`).join("\n")}
+lesson: Workflow trial decisions need predeclared guardrails before changing policy.
+hypothesis: Guardrail metadata will reduce post-hoc policy decisions from noisy workflow evidence.
+metric: repeated_review_loop_count
+baseline: BANDIT-015 required repeated Local Qwen review loops before operator disposition.
+expected_direction: decrease without reducing blocker recall
+decision_criteria: ${fields.decision_criteria}
+minimum_detectable_effect: ${fields.minimum_detectable_effect}
+uncertainty: ${fields.uncertainty}
+evaluation_window: next five applicable Stage 4 review loops
+reevaluation_window: ${fields.reevaluation_window}
+proxy_risk: ${fields.proxy_risk}
+status: queued_candidate
+linked_work_item: BANDIT-037
+outcome: pending
+`,
+    "utf8"
+  );
+}
+
 async function writeCompletedRetrospectiveOutcome(repo) {
   await writeArtifact(
     repo,
@@ -297,6 +438,32 @@ expected_direction: decrease repeated review loops caused only by future-hardeni
 evaluation_window: Evaluate after the next three work items that reach Stage 4 with Local Qwen findings or after one additional repeated non-blocking review loop, whichever comes first.
 status: resolved
 outcome: pending
+`,
+    "utf8"
+  );
+}
+
+async function writePolicyChangingEvaluationEvidence(repo, options) {
+  await writeArtifact(
+    repo,
+    "docs/work/BANDIT-037/improvement-evaluation.md",
+    `# Improvement Evaluation Evidence
+
+candidate_id: BANDIT-037-WORKFLOW-TRIAL-GUARDRAILS
+source_artifacts:
+  - docs/work/BANDIT-028/qwen-finding-disposition.md
+metric: repeated_review_loop_count
+baseline: BANDIT-015 required repeated Local Qwen review loops before operator disposition.
+observed_metric_evidence: One later Stage 4 path avoided a repeated non-blocking review loop.
+comparison_to_baseline: The signal improved, but sample size remains too small for causal proof.
+result: effective
+decision: keep
+policy_change: true
+decision_criteria_comparison: keep criterion appears satisfied while blocker recall is unchanged.
+reevaluation_window: Re-check after the next five applicable Stage 4 review loops.
+proxy_risk_disposition: ${options.proxy_risk_disposition}
+rationale: Evidence supports keeping the guardrail policy with scheduled re-evaluation.
+routing_action: keep workflow-trial guardrails and schedule the re-evaluation window
 `,
     "utf8"
   );

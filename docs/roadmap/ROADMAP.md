@@ -16,11 +16,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-037` - Workflow
-Trial Decision Guardrails. Do not start unrelated Phase 8 work first.
+**Current next step:** Implement Stage 3 for `BANDIT-037` - Workflow Trial
+Decision Guardrails. Stage 2 RED evidence is recorded in
+`docs/work/BANDIT-037/red-evidence.md`; do not start unrelated Phase 8 work
+first.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
-its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, and
+its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` to `BANDIT-037` as an active
 chore.
@@ -1005,10 +1008,10 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-037` - Workflow Trial Decision
-   Guardrails, now that `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
-   active and linked to `BANDIT-037`. Do not start implementation or unrelated
-   Phase 8 work first.
+1. Implement Stage 3 for `BANDIT-037` - Workflow Trial Decision Guardrails,
+   now that Stage 2 RED evidence is recorded in
+   `docs/work/BANDIT-037/red-evidence.md`. Do not start review, landing,
+   retrospective, or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
