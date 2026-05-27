@@ -27,6 +27,7 @@ const ARTIFACT_LABELS: Record<ArtifactKind, string> = {
 
 const LANDING_VERDICT_FIELDS = [
   "contract_version",
+  "work_item",
   "source_head",
   "review_evidence",
   "tests_status",
