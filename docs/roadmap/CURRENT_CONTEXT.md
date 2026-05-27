@@ -415,21 +415,20 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Repair or disposition the Stage 4 Local Qwen
-`non_blocking` findings for `BANDIT-037` - Workflow Trial Decision Guardrails
-before aggregate review evidence. Stage 4 pre-PR CodeRabbit pass evidence is
-recorded in `docs/work/BANDIT-037/coderabbit-review.md` at source head
+**Current next action:** Refresh Stage 4 review evidence for `BANDIT-037` -
+Workflow Trial Decision Guardrails at the repair/disposition head, starting with
+pre-PR CodeRabbit evidence before Local Qwen and aggregate review evidence.
+Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-037/coderabbit-review.md` at source head
 `abbf44bfe329ca982c3c1f7296c1be997d33ff02` with no findings. Stage 4 Local
 Qwen evidence is recorded in `docs/work/BANDIT-037/local-qwen-review.md` at
 source head `229b09405249f932388adaab8af601c75cae03db` with
-`reviewer_verdict: non_blocking` and open findings. The next focused action is
-to remove or explicitly disposition the dead `origin === "workflow_trial"`
-branch in `src/state/improvements.ts`, disposition whether
-`improvements candidates --json` satisfies the reporting-surface acceptance
-criterion or add a narrow cockpit/reporting update if needed, and refresh any
-Stage 4 evidence made stale by repair. Do not run aggregate review evidence,
-landing, retrospective, or unrelated Phase 8 work before the Local Qwen
-findings are repaired or durably routed.
+`reviewer_verdict: non_blocking` and open findings. Focused Local Qwen finding
+repair/disposition is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`; source code and evidence
+changed afterward, so the prior CodeRabbit and Local Qwen evidence must be
+refreshed before aggregate review evidence, landing, retrospective, or
+unrelated Phase 8 work.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -521,9 +520,12 @@ source head `abbf44bfe329ca982c3c1f7296c1be997d33ff02` with no findings. Stage
 4 Local Qwen evidence is recorded in
 `docs/work/BANDIT-037/local-qwen-review.md` at source head
 `229b09405249f932388adaab8af601c75cae03db` with `reviewer_verdict:
-non_blocking` and open findings. The next action is focused repair or durable
-PM disposition of the Local Qwen findings before aggregate review evidence,
-landing, retrospective, or unrelated Phase 8 work.
+non_blocking` and open findings. Focused repair and PM disposition of those
+findings is recorded in `docs/work/BANDIT-037/qwen-finding-disposition.md`.
+The next action is Stage 4 review refresh at the repair/disposition head,
+starting with pre-PR CodeRabbit evidence before Local Qwen and aggregate review
+evidence. Do not create landing, retrospective, or unrelated Phase 8 work before
+current Stage 4 evidence is recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -575,9 +577,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** Focused Stage 4 Local Qwen finding repair or
-durable PM disposition for `BANDIT-037`, before aggregate review evidence,
-landing, retrospective, or unrelated Phase 8 work.
+**Expected next deliverable:** Refreshed Stage 4 pre-PR CodeRabbit evidence for
+`BANDIT-037` at the repair/disposition head, before Local Qwen refresh,
+aggregate review evidence, landing, retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -608,9 +610,11 @@ These are expected because Bandit does not exist yet:
   pre-PR CodeRabbit pass evidence is recorded in
   `docs/work/BANDIT-037/coderabbit-review.md`, and Stage 4 Local Qwen
   `non_blocking` evidence is recorded in
-  `docs/work/BANDIT-037/local-qwen-review.md`; the next action is focused
-  repair or durable PM disposition of the Local Qwen findings before aggregate
-  review evidence.
+  `docs/work/BANDIT-037/local-qwen-review.md`. Focused repair and PM
+  disposition of the Local Qwen findings is recorded in
+  `docs/work/BANDIT-037/qwen-finding-disposition.md`; the next action is to
+  refresh Stage 4 review evidence at the repair/disposition head, starting with
+  pre-PR CodeRabbit evidence.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -942,16 +946,15 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before repairing or durably dispositioning
-the Stage 4 Local Qwen `non_blocking` findings for `BANDIT-037` - Workflow
-Trial Decision Guardrails. Repo artifacts identify the active work item, review
-target, source artifacts, queue order, implementation evidence, CodeRabbit
-evidence, Local Qwen findings, and verification target. Halt only if the next
-step would change product direction, UAT policy, workflow policy beyond
-enforcing the already recorded Workflow Trial guardrail requirement, business
-tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
-live routing, scheduler authority, claim/worktree authority, or broader
-workflow scope.
+No operator-owned input is required before refreshing Stage 4 pre-PR CodeRabbit
+and Local Qwen review evidence for `BANDIT-037` - Workflow Trial Decision
+Guardrails. Repo artifacts identify the active work item, review target, source
+artifacts, queue order, implementation evidence, CodeRabbit evidence, Local Qwen
+findings, PM disposition, and verification target. Halt only if the next step
+would change product direction, UAT policy, workflow policy beyond enforcing the
+already recorded Workflow Trial guardrail requirement, business tradeoffs,
+cost/risk posture, external service setup, paid reviewer routing, live routing,
+scheduler authority, claim/worktree authority, or broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

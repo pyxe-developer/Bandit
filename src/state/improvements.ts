@@ -388,9 +388,7 @@ function readWorkflowTrialGuardrails(
 function isPolicyChangingWorkflowTrial(
   fields: ReturnType<typeof parseMetadataFields>
 ) {
-  const origin = readScalar(fields, "origin").toLowerCase();
   return (
-    origin === "workflow_trial" ||
     isTruthyMetadata(fields, "workflow_trial") ||
     isTruthyMetadata(fields, "policy_change") ||
     isTruthyMetadata(fields, "policy_changing")
