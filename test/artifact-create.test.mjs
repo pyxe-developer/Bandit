@@ -156,11 +156,12 @@ test("artifact create creates a landing verdict from explicit structured input",
   );
   assert.match(artifact, /^# BANDIT-001 Landing Verdict$/m);
   assert.match(artifact, /^contract_version: 1$/m);
+  assert.match(artifact, /^work_item: BANDIT-001$/m);
   assert.match(artifact, /^final_verdict: safe-to-land$/m);
   assert.match(artifact, /^rationale: All required gates passed/m);
 });
 
-test("artifact create renders landing verdict work_item metadata for parser compatibility", async () => {
+test("artifact create renders parser-compatible landing verdict metadata values", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(
     repo,
@@ -195,12 +196,6 @@ test("artifact create renders landing verdict work_item metadata for parser comp
   ]);
 
   assert.equal(createResult.code, 0, createResult.stderr);
-
-  const artifact = await readFile(
-    path.join(repo, "docs/work/BANDIT-001/landing-verdict.md"),
-    "utf8"
-  );
-  assert.match(artifact, /^work_item: BANDIT-001$/m);
 
   const validateResult = await runBandit(repo, ["validate"]);
   assert.equal(validateResult.code, 0, validateResult.stderr);

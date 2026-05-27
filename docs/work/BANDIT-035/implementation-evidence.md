@@ -9,7 +9,7 @@ The focused Stage 3 renderer repair is implemented for the artifact-create landi
 ## Implementation Summary
 
 - Added work_item to the landing_verdict renderer metadata sequence so generated landing verdict artifacts include the parser-required work item field.
-- Kept the existing renderer fixture focused on rendering while using current landing verdict parser values only in the new validation-backed parser-compatibility test.
+- Kept the existing renderer fixture focused on rendering by asserting the `work_item` field there, while the validation-backed test now covers only parser-compatible landing verdict metadata values.
 - Kept the repair limited to src/commands/artifact-create-renderers.ts and focused artifact-create test data; no hidden authority, landing policy, UAT policy, cockpit, scheduler, claim, worktree, PR/CI, dependency, lockfile, or supply-chain-sensitive surface was introduced.
 
 ## Verification
@@ -26,7 +26,7 @@ The focused Stage 3 renderer repair is implemented for the artifact-create landi
 | Rubric | Verdict | Evidence |
 | --- | --- | --- |
 | Spec alignment | pass | The renderer now emits work_item metadata for landing_verdict artifacts, matching the active BANDIT-035 acceptance criteria and existing landing-verdict parser contract. |
-| Small surface area | pass | The production diff adds one metadata field to the existing landing verdict field list; test changes add focused parser-compatibility coverage without broadening the existing renderer fixture. |
+| Small surface area | pass | The production diff adds one metadata field to the existing landing verdict field list; test changes keep renderer coverage and parser-compatible metadata validation separated. |
 | No hidden authority | pass | artifact-create remains a renderer from explicit structured input into repo-native Markdown evidence and does not advance workflow state beyond the existing lifecycle event. |
 | Testable behavior | pass | The focused artifact-create test now proves the generated landing verdict includes work_item and remains accepted by bandit validate. |
 | Failure clarity | pass | Existing artifact-create refusal-path tests for unsupported kinds, occupied outputs, unknown work items, and out-of-repo specs continue to pass. |

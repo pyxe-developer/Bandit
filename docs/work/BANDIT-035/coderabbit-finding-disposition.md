@@ -14,6 +14,21 @@ Phase 8 work.
 
 ## Findings
 
+### Fresh parser-compatibility fixture scope
+
+**Finding:** The parser-compatibility test still mixes the `work_item` renderer
+assertion with `operator_input_status` and `landing_agent_state` enum-value
+changes.
+
+**Disposition:** repaired.
+
+**Evidence:** `test/artifact-create.test.mjs` now asserts the generated
+`work_item` metadata in the existing landing-verdict renderer fixture that keeps
+the original renderer-only values, and renames/narrows the validation-backed test
+to cover only parser-compatible landing verdict metadata values.
+
+**Verification:** `node --test test/artifact-create.test.mjs`.
+
 ### Current-context and stage-evidence consistency
 
 **Finding:** Reconcile `BANDIT-035` current-context state with the implementation
