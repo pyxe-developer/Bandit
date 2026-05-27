@@ -249,13 +249,13 @@
       "linked_work_item": "BANDIT-036",
       "rationale": "BANDIT-036 repaired retrospective artifact creation so generated retrospectives require structured_improvement_mining rows with signal, finding, and durable disposition fields, require all ten Stage 6 mining signals, render the mining checklist in repo-native Markdown, and record Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
       "verification_target": "docs/work/BANDIT-036/retrospective.md",
-      "next_action": "Use generated retrospective artifacts with structured improvement-mining evidence for future Stage 6 closeout. Create the next bootstrap-gap chore for BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS before unrelated Phase 8 work."
+      "next_action": "Use generated retrospective artifacts with structured improvement-mining evidence for future Stage 6 closeout."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",
       "title": "Workflow trials can change policy without predeclared decision guardrails",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -267,9 +267,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-037",
-      "rationale": "The PRD research review warned that Bandit's improvement loop could reward proxy metrics, overstate causality at single-operator volume, and create in-context reward-hacking pressure. The operator confirmed that every Workflow Trial or workflow-policy change needs predeclared decision criteria, explicit uncertainty or minimum-detectable-effect context, and a later re-evaluation window before a keep, revise, revert, or double_down decision can change policy. Current improvement metadata and CLI validation do not enforce those fields, so a bootstrap-gap chore is required.",
-      "verification_target": null,
-      "next_action": "Record Stage 6 retrospective closeout and bootstrap-gap disposition for BANDIT-037 now that docs/work/BANDIT-037/landing-action.md exists; do not create the next bootstrap-gap chore or unrelated Phase 8 work until retrospective and gap-ledger closeout are recorded."
+      "rationale": "BANDIT-037 makes Workflow Trial and workflow-policy improvement candidates fail closed without predeclared decision criteria, uncertainty or minimum-detectable-effect context, re-evaluation windows, and proxy-risk notes. It also makes policy-changing evaluation decisions require criteria comparison, re-evaluation window evidence, and proxy-risk disposition, exposes guardrail completeness through improvements candidates --json, and records Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
+      "verification_target": "docs/work/BANDIT-037/retrospective.md",
+      "next_action": "Use Workflow Trial guardrail metadata and policy-changing evaluation validation for future improvement work. Create the next bootstrap-gap chore for BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",
