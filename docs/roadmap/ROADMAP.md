@@ -16,21 +16,22 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Aggregate Stage 4 review evidence for `BANDIT-036` -
+**Current next step:** Record the Stage 5 landing verdict for `BANDIT-036` -
 Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
 `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
 `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation evidence at
-`docs/work/BANDIT-036/implementation-evidence.md`, and Stage 4 pre-PR
-CodeRabbit pass evidence at `docs/work/BANDIT-036/coderabbit-review.md`.
-Stage 4 Local Qwen pass evidence is recorded in
-`docs/work/BANDIT-036/local-qwen-review.md` at source head
-`346f7306c983b9ef290b1c2fe736a7a1fbdb514c`. It
-was created from
-`docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and is linked as
-the active chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in
-`.bandit/bootstrap-gaps.json`. Do not start landing, retrospective closeout,
-the next bootstrap-gap chore, or unrelated Phase 8 work until aggregate Stage 4
-review evidence is recorded.
+`docs/work/BANDIT-036/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
+pass evidence at `docs/work/BANDIT-036/coderabbit-review.md`, Stage 4 Local
+Qwen pass evidence at `docs/work/BANDIT-036/local-qwen-review.md`, and
+aggregate Stage 4 review evidence at `docs/work/BANDIT-036/review-evidence.md`
+with review subject hash
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. It was
+created from `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and
+is linked as the active chore for
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in `.bandit/bootstrap-gaps.json`.
+Do not start local-record landing, retrospective closeout, the next
+bootstrap-gap chore, or unrelated Phase 8 work until the Stage 5 landing
+verdict is recorded.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -75,7 +76,10 @@ and implementation-evidence artifact creation events, and
 `8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. Stage 4 Local
 Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
 at source head `346f7306c983b9ef290b1c2fe736a7a1fbdb514c` with no findings.
-The next required action is aggregate Stage 4 review evidence.
+Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-036/review-evidence.md` with current review subject hash
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. The next
+required action is the Stage 5 landing verdict.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -219,10 +223,14 @@ and implementation-evidence artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
 `BANDIT-036`. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-036/coderabbit-review.md` at source head
-`8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. The next
-required action is Stage 4 Local Qwen review, followed by aggregate Stage 4
-review evidence; do not start landing, the next bootstrap-gap chore, or
-unrelated Phase 8 work first.
+`8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. Stage 4 Local
+Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
+at source head `346f7306c983b9ef290b1c2fe736a7a1fbdb514c` with no findings.
+Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-036/review-evidence.md` with current review subject hash
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. The next
+required action is the Stage 5 landing verdict; do not start local-record
+landing, the next bootstrap-gap chore, or unrelated Phase 8 work first.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -994,11 +1002,12 @@ Current rule:
 
 Current priority:
 
-1. Aggregate Stage 4 review evidence for `BANDIT-036` - Structured
-   Retrospective Mining, now that Stage 4 pre-PR CodeRabbit pass evidence and
-   Local Qwen pass evidence exist and
+1. Record the Stage 5 landing verdict for `BANDIT-036` - Structured
+   Retrospective Mining, now that Stage 4 pre-PR CodeRabbit pass evidence,
+   Local Qwen pass evidence, and aggregate Stage 4 review evidence exist and
    `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start
-   landing, the next bootstrap-gap chore, or unrelated Phase 8 work first.
+   local-record landing, the next bootstrap-gap chore, or unrelated Phase 8
+   work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
