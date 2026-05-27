@@ -16,27 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-036` - Structured Retrospective Mining. `BANDIT-036`
-has a Stage 1 brief at
-`docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
-`docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation evidence at
-`docs/work/BANDIT-036/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
-pass evidence at `docs/work/BANDIT-036/coderabbit-review.md`, Stage 4 Local
-Qwen pass evidence at `docs/work/BANDIT-036/local-qwen-review.md`, and
-aggregate Stage 4 review evidence at `docs/work/BANDIT-036/review-evidence.md`
-with review subject hash
-`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
-landing verdict evidence is recorded in
-`docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-036/landing-action.md`.
-It was
-created from `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and
-is linked as the active chore for
-`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in `.bandit/bootstrap-gaps.json`.
-Do not start the next bootstrap-gap chore or unrelated Phase 8 work until
-retrospective closeout and bootstrap-gap disposition are recorded.
+**Current next step:** Create the next bootstrap-gap chore for
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`. Do not start unrelated Phase 8
+work first. `BANDIT-036` - Structured Retrospective Mining is landed and closed
+out: Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence,
+Stage 4 pre-PR CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence,
+aggregate Stage 4 review evidence with review subject hash
+`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`, Stage 5
+landing verdict, local-record landing action, Stage 6 retrospective closeout,
+and bootstrap-gap disposition are recorded in `docs/work/BANDIT-036/` and
+`.bandit/bootstrap-gaps.json`.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -66,17 +55,16 @@ evidence is recorded in `docs/work/BANDIT-035/landing-action.md`, Stage 6
 retrospective closeout is recorded in `docs/work/BANDIT-035/retrospective.md`,
 and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
-`BANDIT-036` is active as the bootstrap-gap chore for
+`BANDIT-036` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. Its structured creation spec is
 recorded in
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, its Stage 1 brief
 is recorded in `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
-`.bandit/events.jsonl` records the work-item creation, RED artifact creation,
-and implementation-evidence artifact creation events, and
-`.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
-`BANDIT-036`. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`.bandit/events.jsonl` records the work-item and artifact creation events, and
+`.bandit/bootstrap-gaps.json` marks the gap resolved by `BANDIT-036`. Stage 4
+pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-036/coderabbit-review.md` at source head
 `8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. Stage 4 Local
 Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
@@ -87,8 +75,9 @@ Aggregate Stage 4 review evidence is recorded in
 landing verdict evidence is recorded in
 `docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-036/landing-action.md`. The next required action is Stage 6
-retrospective closeout and bootstrap-gap disposition.
+`docs/work/BANDIT-036/landing-action.md`. Stage 6 retrospective closeout and
+bootstrap-gap disposition are recorded in
+`docs/work/BANDIT-036/retrospective.md` and `.bandit/bootstrap-gaps.json`.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -220,30 +209,22 @@ evidence is recorded in `docs/work/BANDIT-035/landing-action.md`, Stage 6
 retrospective closeout is recorded in `docs/work/BANDIT-035/retrospective.md`,
 and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
-`BANDIT-036` - Structured Retrospective Mining is active as the
+`BANDIT-036` - Structured Retrospective Mining is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, its Stage 1 brief
 is recorded in `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
-`.bandit/events.jsonl` records the work-item creation, RED artifact creation,
-and implementation-evidence artifact creation events, and
-`.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
-`BANDIT-036`. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-036/coderabbit-review.md` at source head
-`8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. Stage 4 Local
-Qwen pass evidence is recorded in `docs/work/BANDIT-036/local-qwen-review.md`
-at source head `346f7306c983b9ef290b1c2fe736a7a1fbdb514c` with no findings.
-Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-036/review-evidence.md` with current review subject hash
-`863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`. Stage 5
-landing verdict evidence is recorded in
-`docs/work/BANDIT-036/landing-verdict.md` with final verdict `safe-to-land`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-036/landing-action.md`. The next required action is Stage 6
-retrospective closeout and bootstrap-gap disposition; do not start the next
-bootstrap-gap chore or unrelated Phase 8 work first.
+Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-036/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
+is recorded in `docs/work/BANDIT-036/local-qwen-review.md`, aggregate Stage 4
+review evidence is recorded in `docs/work/BANDIT-036/review-evidence.md`,
+Stage 5 landing verdict evidence is recorded in
+`docs/work/BANDIT-036/landing-verdict.md`, local-record landing action evidence
+is recorded in `docs/work/BANDIT-036/landing-action.md`, Stage 6 retrospective
+closeout is recorded in `docs/work/BANDIT-036/retrospective.md`, and
+`.bandit/bootstrap-gaps.json` marks the gap resolved.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -696,11 +677,13 @@ recorded. `BANDIT-033` is landed and closed out as the first Phase 8 Workflow
 Cockpit visual UI slice with Stage 2 RED evidence, Stage 3 implementation
 evidence, Stage 4 review evidence, Stage 5 landing verdict/readiness evidence,
 local-record landing action evidence, and Stage 6 retrospective/improvement
-disposition recorded. `BANDIT-034` has been created as the
-`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore work item and is active
-at Stage 4 with scoped CodeRabbit pass evidence and Local Qwen pass evidence
-recorded; aggregate Stage 4 review evidence still needs a current
-review-subject hash and PM disposition.
+disposition recorded. `BANDIT-034` is landed and closed out as the
+`BANDIT-033-COCKPIT-SHELL-HARDENING` improvement chore. `BANDIT-035` is landed
+and closed out as the `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`
+bootstrap-gap chore. `BANDIT-036` is landed and closed out as the
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` bootstrap-gap chore. The next
+implementation target is the bootstrap-gap chore for
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`.
 
 ## Phase Map
 
@@ -1015,21 +998,19 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-036` - Structured Retrospective Mining, now that local-record
-   landing action evidence is recorded and
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start the
-   next bootstrap-gap chore or unrelated Phase 8 work first.
+1. Create the bootstrap-gap chore for
+   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`, now that
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
+   Do not start unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
 3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
-   queued or active. `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active in
-   `BANDIT-036`, and `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued
-   behind structured retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
-   the workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
+   queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is now the
+   next queued gap. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
+   workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
    is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
    behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
    is queued behind the input quarantine gate. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is

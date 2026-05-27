@@ -1,0 +1,87 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-036",
+  "outcome": "`BANDIT-036` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. The work made `bandit artifact create` fail closed for retrospective specs that omit structured improvement-mining evidence, validates each mining row for signal, finding, and disposition, requires all ten Stage 6 mining signals, and renders the checklist in repo-native Markdown. Stage 4 pre-PR CodeRabbit and Local Qwen evidence both pass with no findings, Stage 5 landing verdict and local-record landing action evidence are recorded, and no product, UAT, policy, cost, supply-chain, server, scheduler, claim, worktree, PR/CI, external-service, or unrelated Phase 8 scope was introduced.",
+  "what_worked": [
+    "The bootstrap-gap source artifact identified a concrete Stage 6 evidence contract problem before the next retrospective was created.",
+    "Focused artifact-create tests captured missing-checklist refusal, incomplete-row refusal, required signal rendering, and existing no-overwrite behavior.",
+    "The renderer stayed narrow: explicit structured input becomes repo-native Markdown evidence, while workflow stage authority remains outside artifact create.",
+    "CodeRabbit and Local Qwen both accepted the focused implementation without new findings or model disagreement."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Stage 6 retrospectives need active mining for execution smells instead of relying on voluntary prose lessons.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-036` adds mandatory `structured_improvement_mining` validation and rendering for retrospectives, and `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` resolved during closeout."
+    },
+    {
+      "lesson": "Tool invocation friction is a workflow signal even when the final run succeeds.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "The required mining checklist includes tool invocation friction and forces a durable disposition for recurring uncertainty such as CodeRabbit invocation confusion."
+    },
+    {
+      "lesson": "The next policy-risk gap is Workflow Trial decision guardrails, not additional retrospective renderer work.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` remains queued with source artifacts and should become the next bootstrap-gap chore after this closeout."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "No failed tool calls remained in the final `BANDIT-036` closeout evidence. Stage 4 CodeRabbit and Local Qwen completed successfully with pass verdicts.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to the retrospective artifact contract and did not branch into unrelated cockpit, scheduler, claim, worktree, policy, or external-service work.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore: define RED tests, repair one renderer contract, run review and landing gates, then record Stage 6 closeout.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "Codex PM owned technical routing, Test Writer evidence was focused in artifact-create tests, CodeRabbit and Local Qwen owned Stage 4 review, and the Landing Agent owned Stage 5 landing evidence.",
+      "disposition": "explicit no-action decision - no follow-up required"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "The closeout used the newly repaired artifact-create retrospective path but still required Codex PM to update the bootstrap-gap ledger and roadmap context manually.",
+      "disposition": "explicit no-action decision - manual ledger and context closeout remains the current supported Stage 6 boundary"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit passed with no findings, Local Qwen passed with no findings, and no smell trigger required escalated review.",
+      "disposition": "explicit no-action decision - no cross-model tension or reviewer-routing follow-up remains"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "The original friction signal was recurring uncertainty about surfacing CodeRabbit and required-gate invocation issues in retrospectives. `BANDIT-036` makes that signal mandatory in generated retrospective evidence.",
+      "disposition": "bootstrap gap resolved - BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "Roadmap and current-context closeout still requires several repeated prose updates, but this instance is context synchronization rather than a new workflow gap.",
+      "disposition": "explicit no-action decision - existing context and cockpit status validation remain sufficient for this closeout"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer, recurring paid model route, provider-pricing assumption, or high-token reviewer policy was introduced.",
+      "disposition": "explicit no-action decision - no cost or latency follow-up required"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for the structured retrospective mining gap after tests, review evidence, landing verdict, landing action, and closeout disposition. The next known policy uncertainty is already queued as `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS"
+    }
+  ],
+  "improvement_chores": "No new retrospective-derived improvement chore is created by this closeout.\n\n`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`. The next queued bootstrap gap is `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`, which should become the next work item before unrelated Phase 8 work.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-036`. CodeRabbit pre-PR review passed with no findings, Local Qwen passed with no findings, and both reviewers accepted the bounded retrospective artifact-create repair.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is open and queued as the next bootstrap-gap chore.",
+    "`BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` remains queued behind workflow-trial decision guardrails.",
+    "The remaining strategic-review bootstrap gaps remain queued behind the skill-lifecycle lane in the order recorded in `.bandit/bootstrap-gaps.json`."
+  ]
+}
