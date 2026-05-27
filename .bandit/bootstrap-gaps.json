@@ -288,7 +288,7 @@
       "linked_work_item": "BANDIT-038",
       "rationale": "The operator confirmed that load-bearing skills need a first-class lifecycle contract because they shape context, reasoning, tool use, review behavior, cost, and model performance. Without owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria, Bandit cannot reliably explain whether a benchmark result changed because of the model, the skill, or the task packet.",
       "verification_target": null,
-      "next_action": "Record local-record landing action evidence for BANDIT-038 now that the Stage 5 landing verdict is safe-to-land; do not start retrospective closeout or the next bootstrap-gap chore before landing action evidence exists."
+      "next_action": "Record Stage 6 retrospective closeout and bootstrap-gap disposition for BANDIT-038 now that docs/work/BANDIT-038/landing-action.md exists; do not create the next bootstrap-gap chore or unrelated Phase 8 work until retrospective and gap-ledger closeout are recorded."
     },
     {
       "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",
