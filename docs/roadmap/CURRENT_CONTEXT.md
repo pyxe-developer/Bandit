@@ -416,9 +416,9 @@ improvement disposition are recorded in
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
 **Current next action:** Resolve the `BANDIT-035` Stage 4 pre-PR CodeRabbit
-timeout. The 2026-05-27 run recorded fail-closed CodeRabbit timeout evidence in
+timeout. The latest 2026-05-27 rerun recorded fail-closed CodeRabbit timeout evidence in
 `docs/work/BANDIT-035/coderabbit-review.md` at source head
-`6c56432cc473331539b9a9b67b5fb3e6cac6ddff`; rerun or repair the pre-PR
+`573e446b85331de5a12c8f9eff8d0033881fa7db`; rerun or repair the pre-PR
 CodeRabbit gate before Local Qwen, aggregate review evidence, PM disposition,
 landing verdict, or unrelated Phase 8 work.
 
