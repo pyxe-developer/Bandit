@@ -415,10 +415,9 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Record aggregate Stage 4 review evidence for
-`BANDIT-037` - Workflow Trial Decision Guardrails using the refreshed
-CodeRabbit pass, refreshed Local Qwen `non_blocking` evidence, PM disposition,
-and current review-subject hash.
+**Current next action:** Record the Stage 5 landing verdict for `BANDIT-037` -
+Workflow Trial Decision Guardrails using the current aggregate Stage 4 review
+evidence.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
 `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
@@ -429,9 +428,12 @@ Local Qwen evidence is recorded in
 stale-evidence observation about the prior Local Qwen artifact and the already
 dispositioned cockpit/reporting-surface scope question. PM disposition for both
 the earlier and refreshed Local Qwen findings is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`. Do not create landing
-verdict, landing action, retrospective, or unrelated Phase 8 work before
-aggregate Stage 4 review evidence is recorded.
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-037/review-evidence.md` with current
+review subject hash
+`9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. Do not
+start local-record landing, retrospective, or unrelated Phase 8 work before the
+Stage 5 landing verdict is recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -524,12 +526,14 @@ Refreshed Stage 4 Local Qwen evidence is recorded in
 `docs/work/BANDIT-037/local-qwen-review.md` at source head
 `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with `reviewer_verdict:
 non_blocking` and open findings. Focused repair and PM disposition of the
-earlier findings is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`. The next action is
-aggregate Stage 4 review evidence using the refreshed CodeRabbit pass,
-refreshed Local Qwen `non_blocking` evidence, PM disposition, and current
-review-subject hash. Do not create landing, retrospective, or unrelated Phase
-8 work before aggregate review evidence is recorded.
+earlier and refreshed findings is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-037/review-evidence.md` with current
+review subject hash
+`9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. The next
+action is the Stage 5 landing verdict; do not create local-record landing,
+retrospective, or unrelated Phase 8 work before the landing verdict is
+recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -581,8 +585,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** Aggregate Stage 4 review evidence for
-`BANDIT-037`, before landing, retrospective, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-037` using
+the recorded aggregate Stage 4 review evidence, before local-record landing,
+retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -616,8 +621,9 @@ These are expected because Bandit does not exist yet:
   `docs/work/BANDIT-037/local-qwen-review.md` at source head
   `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983`. Focused repair and PM
   disposition of the earlier and refreshed Local Qwen findings is recorded in
-  `docs/work/BANDIT-037/qwen-finding-disposition.md`; the next action is to
-  record aggregate Stage 4 review evidence.
+  `docs/work/BANDIT-037/qwen-finding-disposition.md`. Aggregate Stage 4 review
+  evidence is recorded in `docs/work/BANDIT-037/review-evidence.md`; Stage 5
+  landing verdict is the next action.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -910,11 +916,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record aggregate Stage 4 review evidence for `BANDIT-037` -
-   Workflow Trial Decision Guardrails using refreshed CodeRabbit pass evidence,
-   refreshed Local Qwen `non_blocking` evidence, PM disposition, and current
-   review-subject hash. Do not create landing, retrospective, or unrelated
-   Phase 8 work first.
+1. Record the Stage 5 landing verdict for `BANDIT-037` - Workflow Trial
+   Decision Guardrails using the current aggregate Stage 4 review evidence.
+   Do not create local-record landing, retrospective, or unrelated Phase 8 work
+   first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
