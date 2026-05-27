@@ -415,7 +415,7 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-039` - Agent
+**Current next action:** Record the Stage 5 landing verdict for `BANDIT-039` - Agent
 Evaluation Harness. Do not start unrelated Phase 8 work first. `BANDIT-038` -
 Skill Lifecycle Contract is landed and closed out: Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
@@ -431,6 +431,12 @@ at `docs/specs/BANDIT-GAP-AGENT-EVALUATION-HARNESS.json`, Stage 1 brief at
 `docs/work/BANDIT-039/red-evidence.md`, Stage 3 implementation evidence spec
 at `docs/specs/BANDIT-039-implementation-evidence.json`, and Stage 3
 implementation evidence at `docs/work/BANDIT-039/implementation-evidence.md`.
+Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-039/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
+is recorded in `docs/work/BANDIT-039/local-qwen-review.md`, and aggregate Stage
+4 review evidence with current review subject hash
+`d74ec2b37161cc3fe5a497d07fd27f4f721205f6fd1d7f6bbef6ff1c70fa6511` is
+recorded in `docs/work/BANDIT-039/review-evidence.md`.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -504,9 +510,10 @@ that authority.
 **Active work item:** `BANDIT-039` - Agent Evaluation Harness. Stage 1 brief is
 recorded in `docs/work/BANDIT-039/brief.md`, Stage 2 RED evidence is recorded
 in `docs/work/BANDIT-039/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-039/implementation-evidence.md`, and
+recorded in `docs/work/BANDIT-039/implementation-evidence.md`, Stage 4 review
+evidence is recorded in `docs/work/BANDIT-039/review-evidence.md`, and
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is active in `.bandit/bootstrap-gaps.json`.
-The next action is Stage 4 review gates for `BANDIT-039`; do not start
+The next action is Stage 5 landing verdict for `BANDIT-039`; do not start
 unrelated Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
@@ -563,11 +570,11 @@ Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails; `BANDIT-038` - Skill
 Lifecycle Contract.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-039` - Agent
-Evaluation Harness, including pre-PR CodeRabbit, Local Qwen, aggregate review
-evidence, and Codex PM disposition at the current review subject hash before
-any landing verdict, landing action, retrospective closeout, next bootstrap-gap
-chore, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-039` - Agent
+Evaluation Harness, based on current pre-PR CodeRabbit pass evidence, Local
+Qwen pass evidence, aggregate review evidence, and clean-code self-check before
+any landing action, retrospective closeout, next bootstrap-gap chore, or
+unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -628,7 +635,9 @@ These are expected because Bandit does not exist yet:
   evidence is recorded in `docs/work/BANDIT-039/brief.md`, and Stage 2 RED
   evidence is recorded in `docs/work/BANDIT-039/red-evidence.md`. Stage 3
   implementation evidence is recorded in
-  `docs/work/BANDIT-039/implementation-evidence.md`. The first harness
+  `docs/work/BANDIT-039/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
+  pass evidence, Local Qwen pass evidence, and aggregate review evidence are
+  recorded in `docs/work/BANDIT-039/`. The first harness
   must be benchmark-only and offline/replay-based: fixed packets for Qwen,
   Claude or paid reviewers, skill variants, reviewer profiles, and component
   variants, with repo-derived failure-mode stratification, visible calibration
@@ -643,8 +652,8 @@ These are expected because Bandit does not exist yet:
   expiry rule, expected per-run cost, spend class, and approval owner. One-off
   paid reviewer calls before threshold promotion are benchmark/evaluation spend
   that require per-run approval or active spend-class approval and cannot count
-  as recurring reviewer routing policy. The next action is Stage 4 review gates
-  for `BANDIT-039`.
+  as recurring reviewer routing policy. The next action is Stage 5 landing
+  verdict for `BANDIT-039`.
 - `BANDIT-GAP-INPUT-QUARANTINE-GATE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats external contributor text, issue or PR
   metadata, review comments, dependency documentation, fetched third-party
