@@ -12,6 +12,7 @@ export type ImprovementCandidate = {
   expected_direction: string;
   evaluation_window: string;
   source_artifacts: string[];
+  workflow_trial_guardrails?: WorkflowTrialGuardrails;
 };
 
 export type ImprovementEvaluation = {
@@ -21,8 +22,17 @@ export type ImprovementEvaluation = {
   routing_action: string;
 };
 
+export type WorkflowTrialGuardrails = {
+  decision_criteria: string;
+  minimum_detectable_effect?: string;
+  uncertainty?: string;
+  reevaluation_window: string;
+  proxy_risk: string;
+};
+
 type CandidateRecord = ImprovementCandidate & {
   displayPath: string;
+  policyChanging: boolean;
 };
 
 type Artifact = {
@@ -75,6 +85,7 @@ const SUPPORTED_RESULTS = new Set([
   "double_down"
 ]);
 const SUPPORTED_DECISIONS = new Set(["keep", "revise", "revert", "double_down"]);
+const POLICY_CHANGE_TRUE_VALUES = new Set(["true", "yes", "required"]);
 
 export async function readImprovementCandidates(repoRoot: string) {
   const artifacts = await readWorkMarkdownArtifacts(repoRoot);
@@ -85,7 +96,13 @@ export async function readImprovementCandidates(repoRoot: string) {
   }
 
   return candidates
-    .map(({ displayPath: _displayPath, ...candidate }) => candidate)
+    .map(
+      ({
+        displayPath: _displayPath,
+        policyChanging: _policyChanging,
+        ...candidate
+      }) => candidate
+    )
     .sort((first, second) => first.id.localeCompare(second.id));
 }
 
@@ -121,6 +138,10 @@ export async function validateImprovementEvaluation(
       field: "decision",
       message: `Unsupported improvement decision: ${decision}`
     });
+  }
+
+  if (candidate.policyChanging || isPolicyChangingWorkflowTrial(fields)) {
+    issues.push(...collectPolicyEvaluationGuardrailIssues(fields));
   }
 
   const sourceArtifacts = readList(fields, "source_artifacts");
@@ -192,11 +213,18 @@ function readCandidatesFromArtifact(artifact: Artifact): CandidateRecord[] {
   return splitCandidateSections(artifact.content).map(({ id, content }) => {
     const fields = parseMetadataFields(content);
     const issues = collectRequiredFieldIssues(fields, REQUIRED_CANDIDATE_FIELDS);
+    const policyChanging = isPolicyChangingWorkflowTrial(fields);
+    const workflowTrialGuardrails = policyChanging
+      ? readWorkflowTrialGuardrails(fields)
+      : undefined;
+
+    if (policyChanging) {
+      issues.push(...collectWorkflowTrialGuardrailIssues(fields));
+    }
+
     if (issues.length > 0) {
       throw new Error(
-        `${artifact.displayPath} missing required improvement metadata: ${issues
-          .map((issue) => issue.field)
-          .join(", ")}`
+        formatValidationIssues(artifact.displayPath, issues)
       );
     }
 
@@ -210,6 +238,10 @@ function readCandidatesFromArtifact(artifact: Artifact): CandidateRecord[] {
       expected_direction: readScalar(fields, "expected_direction"),
       evaluation_window: readScalar(fields, "evaluation_window"),
       source_artifacts: readList(fields, "source_artifacts"),
+      ...(workflowTrialGuardrails
+        ? { workflow_trial_guardrails: workflowTrialGuardrails }
+        : {}),
+      policyChanging,
       displayPath: artifact.displayPath
     };
   });
@@ -291,6 +323,107 @@ function collectRequiredFieldIssues(
   }
 
   return issues;
+}
+
+function collectWorkflowTrialGuardrailIssues(
+  fields: ReturnType<typeof parseMetadataFields>
+) {
+  const issues = collectRequiredFieldIssues(fields, [
+    "decision_criteria",
+    "reevaluation_window",
+    "proxy_risk"
+  ]);
+
+  if (
+    readScalar(fields, "minimum_detectable_effect").length === 0 &&
+    readScalar(fields, "uncertainty").length === 0
+  ) {
+    issues.push({
+      field: "minimum_detectable_effect, uncertainty",
+      message:
+        "missing required workflow trial guardrail metadata: minimum_detectable_effect, uncertainty"
+    });
+  }
+
+  return issues.map((issue) =>
+    issue.message.startsWith("missing required improvement metadata")
+      ? {
+          ...issue,
+          message: `missing required workflow trial guardrail metadata: ${issue.field}`
+        }
+      : issue
+  );
+}
+
+function collectPolicyEvaluationGuardrailIssues(
+  fields: ReturnType<typeof parseMetadataFields>
+) {
+  return collectRequiredFieldIssues(fields, [
+    "decision_criteria_comparison",
+    "reevaluation_window",
+    "proxy_risk_disposition"
+  ]).map((issue) => ({
+    ...issue,
+    message: `missing required workflow trial guardrail metadata: ${issue.field}`
+  }));
+}
+
+function readWorkflowTrialGuardrails(
+  fields: ReturnType<typeof parseMetadataFields>
+): WorkflowTrialGuardrails {
+  const minimumDetectableEffect = readScalar(fields, "minimum_detectable_effect");
+  const uncertainty = readScalar(fields, "uncertainty");
+
+  return {
+    decision_criteria: readScalar(fields, "decision_criteria"),
+    ...(minimumDetectableEffect
+      ? { minimum_detectable_effect: minimumDetectableEffect }
+      : {}),
+    ...(uncertainty ? { uncertainty } : {}),
+    reevaluation_window: readScalar(fields, "reevaluation_window"),
+    proxy_risk: readScalar(fields, "proxy_risk")
+  };
+}
+
+function isPolicyChangingWorkflowTrial(
+  fields: ReturnType<typeof parseMetadataFields>
+) {
+  const origin = readScalar(fields, "origin").toLowerCase();
+  return (
+    origin === "workflow_trial" ||
+    isTruthyMetadata(fields, "workflow_trial") ||
+    isTruthyMetadata(fields, "policy_change") ||
+    isTruthyMetadata(fields, "policy_changing")
+  );
+}
+
+function isTruthyMetadata(
+  fields: ReturnType<typeof parseMetadataFields>,
+  field: string
+) {
+  return POLICY_CHANGE_TRUE_VALUES.has(readScalar(fields, field).toLowerCase());
+}
+
+function formatValidationIssues(displayPath: string, issues: ValidationIssue[]) {
+  const requiredImprovementFields = issues
+    .filter((issue) =>
+      issue.message.startsWith("missing required improvement metadata")
+    )
+    .map((issue) => issue.field);
+  const otherMessages = issues
+    .filter(
+      (issue) => !issue.message.startsWith("missing required improvement metadata")
+    )
+    .map((issue) => issue.message);
+
+  return [
+    ...(requiredImprovementFields.length > 0
+      ? [
+          `${displayPath} missing required improvement metadata: ${requiredImprovementFields.join(", ")}`
+        ]
+      : []),
+    ...otherMessages
+  ].join("\n");
 }
 
 async function validateCandidateSourceArtifacts(

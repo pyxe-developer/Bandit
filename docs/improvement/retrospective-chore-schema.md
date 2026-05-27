@@ -9,6 +9,8 @@ Initial schema direction for improvement chores created from structured improvem
   "id": "BANDIT-CHORE-001",
   "title": "Short chore title",
   "origin": "retrospective",
+  "workflow_trial": false,
+  "policy_change": false,
   "source_work_item": "BANDIT-001",
   "source_artifacts": [
     "docs/work/BANDIT-001/retrospective.md"
@@ -31,6 +33,7 @@ Initial schema direction for improvement chores created from structured improvem
   "uncertainty": "Single-repo observations are contextual evidence, not causal proof.",
   "evaluation_window": "next_5_applicable_work_items",
   "reevaluation_window": "next_5_applicable_work_items_after_decision",
+  "proxy_risk": "Do not optimize repair_loop_count if blocker recall, actionable precision, or operator trust degrade.",
   "status": "pending",
   "evaluation_result": "pending",
   "outcome": "pending"
@@ -98,6 +101,12 @@ workflow trial, policy/doc/skill repair, or explicit no-action decision.
 
 Every improvement chore needs an evaluation date or applicability window, predeclared decision criteria, uncertainty or minimum-detectable-effect context, and a re-evaluation window. A due chore should be evaluated by the heartbeat chore-agent or an explicit CLI command, then routed to Codex PM for interpretation. A policy-changing keep, revise, revert, or double_down decision should not be recorded until the evidence is compared to the predeclared criteria and the re-evaluation window is scheduled or satisfied.
 
+Policy-changing Workflow Trials and workflow-policy decisions also need
+`proxy_risk` on the candidate metadata and `proxy_risk_disposition` on the
+evaluation evidence. The disposition must explicitly check for proxy gaming,
+hidden regressions, reward-hacking side effects, and degraded blocker recall or
+operator trust.
+
 ## Product Rule
 
-An improvement chore without a hypothesis, metric, decision criteria, uncertainty or minimum-detectable-effect context, evaluation window, and re-evaluation window is only a note. Bandit should either complete the missing fields or record an explicit no-action decision. Metric movement alone must not become workflow policy because it may represent noise, proxy gaming, or reward-hacking side effects.
+An improvement chore without a hypothesis, metric, decision criteria, uncertainty or minimum-detectable-effect context, evaluation window, re-evaluation window, and proxy-risk notes is only a note. Bandit should either complete the missing fields or record an explicit no-action decision. Metric movement alone must not become workflow policy because it may represent noise, proxy gaming, or reward-hacking side effects.

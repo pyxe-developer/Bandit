@@ -66,9 +66,33 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("metric", /^metric:/im),
       metadata("baseline", /^baseline:/im),
       metadata("expected_direction", /^expected_direction:/im),
+      metadata("decision_criteria", /^decision_criteria:/im),
+      metadata("minimum_detectable_effect", /^minimum_detectable_effect:/im),
+      metadata("uncertainty", /^uncertainty:/im),
       metadata("evaluation_window", /^evaluation_window:/im),
+      metadata("reevaluation_window", /^reevaluation_window:/im),
+      metadata("proxy_risk", /^proxy_risk:/im),
       metadata("status", /^status:/im),
+      metadata("evaluation_result", /^evaluation_result:/im),
       metadata("outcome", /^outcome:/im)
+    ]
+  },
+  {
+    displayPath: "docs/templates/improvement-evaluation.md",
+    requirements: [
+      metadata("candidate ID", /^candidate_id:/im),
+      metadata("source artifacts", /^source_artifacts:/im),
+      metadata("metric", /^metric:/im),
+      metadata("baseline", /^baseline:/im),
+      metadata("observed metric evidence", /^observed_metric_evidence:/im),
+      metadata("comparison to baseline", /^comparison_to_baseline:/im),
+      metadata("result", /^result:/im),
+      metadata("decision", /^decision:/im),
+      metadata("decision criteria comparison", /^decision_criteria_comparison:/im),
+      metadata("re-evaluation window", /^reevaluation_window:/im),
+      metadata("proxy-risk disposition", /^proxy_risk_disposition:/im),
+      metadata("rationale", /^rationale:/im),
+      metadata("routing action", /^routing_action:/im)
     ]
   },
   {

@@ -62,9 +62,33 @@ const templateContracts = [
       ["metric", /^metric:/im],
       ["baseline", /^baseline:/im],
       ["expected direction", /^expected_direction:/im],
+      ["decision criteria", /^decision_criteria:/im],
+      ["minimum detectable effect", /^minimum_detectable_effect:/im],
+      ["uncertainty", /^uncertainty:/im],
       ["evaluation window", /^evaluation_window:/im],
+      ["re-evaluation window", /^reevaluation_window:/im],
+      ["proxy risk", /^proxy_risk:/im],
       ["status", /^status:/im],
+      ["evaluation result", /^evaluation_result:/im],
       ["outcome", /^outcome:/im]
+    ]
+  },
+  {
+    path: "docs/templates/improvement-evaluation.md",
+    requirements: [
+      ["candidate ID", /^candidate_id:/im],
+      ["source artifacts", /^source_artifacts:/im],
+      ["metric", /^metric:/im],
+      ["baseline", /^baseline:/im],
+      ["observed metric evidence", /^observed_metric_evidence:/im],
+      ["comparison to baseline", /^comparison_to_baseline:/im],
+      ["result", /^result:/im],
+      ["decision", /^decision:/im],
+      ["decision criteria comparison", /^decision_criteria_comparison:/im],
+      ["re-evaluation window", /^reevaluation_window:/im],
+      ["proxy-risk disposition", /^proxy_risk_disposition:/im],
+      ["rationale", /^rationale:/im],
+      ["routing action", /^routing_action:/im]
     ]
   },
   {

@@ -49,6 +49,8 @@ type DraftItem = SliceDraftItem | ChoreDraftItem;
 
 type ImprovementMetadata = {
   origin: string;
+  workflowTrial?: string;
+  policyChange?: string;
   sourceWorkItem: string;
   sourceArtifacts: string[];
   lesson: string;
@@ -56,8 +58,14 @@ type ImprovementMetadata = {
   metric: string;
   baseline: string;
   expectedDirection: string;
+  decisionCriteria?: string;
+  minimumDetectableEffect?: string;
+  uncertainty?: string;
   evaluationWindow: string;
+  reevaluationWindow?: string;
+  proxyRisk?: string;
   status: string;
+  evaluationResult?: string;
   outcome: string;
 };
 
@@ -383,6 +391,8 @@ function requireImprovementMetadata(
 
   return {
     origin: improvement.origin as string,
+    workflowTrial: readOptionalImprovementString(improvement, "workflow_trial"),
+    policyChange: readOptionalImprovementString(improvement, "policy_change"),
     sourceWorkItem: improvement.source_work_item as string,
     sourceArtifacts: improvement.source_artifacts as string[],
     lesson: improvement.lesson as string,
@@ -390,10 +400,38 @@ function requireImprovementMetadata(
     metric: improvement.metric as string,
     baseline: improvement.baseline as string,
     expectedDirection: improvement.expected_direction as string,
+    decisionCriteria: readOptionalImprovementString(
+      improvement,
+      "decision_criteria"
+    ),
+    minimumDetectableEffect: readOptionalImprovementString(
+      improvement,
+      "minimum_detectable_effect"
+    ),
+    uncertainty: readOptionalImprovementString(improvement, "uncertainty"),
     evaluationWindow: improvement.evaluation_window as string,
+    reevaluationWindow: readOptionalImprovementString(
+      improvement,
+      "reevaluation_window"
+    ),
+    proxyRisk: readOptionalImprovementString(improvement, "proxy_risk"),
     status: improvement.status as string,
+    evaluationResult: readOptionalImprovementString(
+      improvement,
+      "evaluation_result"
+    ),
     outcome: improvement.outcome as string
   };
+}
+
+function readOptionalImprovementString(
+  improvement: Record<string, unknown>,
+  field: string
+) {
+  const value = improvement[field];
+  return typeof value === "string" && value.trim().length > 0
+    ? value
+    : undefined;
 }
 
 async function allocateWorkItemIds(
@@ -613,6 +651,8 @@ ${item.operatorInputStatus}
 function renderImprovementMetadata(improvement: ImprovementMetadata) {
   return `
 origin: ${improvement.origin}
+${renderOptionalImprovementField("workflow_trial", improvement.workflowTrial)}
+${renderOptionalImprovementField("policy_change", improvement.policyChange)}
 source_work_item: ${improvement.sourceWorkItem}
 source_artifacts:
 ${improvement.sourceArtifacts.map((artifact) => `  - ${artifact}`).join("\n")}
@@ -621,9 +661,19 @@ hypothesis: ${improvement.hypothesis}
 metric: ${improvement.metric}
 baseline: ${improvement.baseline}
 expected_direction: ${improvement.expectedDirection}
+${renderOptionalImprovementField("decision_criteria", improvement.decisionCriteria)}
+${renderOptionalImprovementField("minimum_detectable_effect", improvement.minimumDetectableEffect)}
+${renderOptionalImprovementField("uncertainty", improvement.uncertainty)}
 evaluation_window: ${improvement.evaluationWindow}
+${renderOptionalImprovementField("reevaluation_window", improvement.reevaluationWindow)}
+${renderOptionalImprovementField("proxy_risk", improvement.proxyRisk)}
 status: ${improvement.status}
+${renderOptionalImprovementField("evaluation_result", improvement.evaluationResult)}
 outcome: ${improvement.outcome}`;
+}
+
+function renderOptionalImprovementField(field: string, value?: string) {
+  return value ? `${field}: ${value}` : "";
 }
 
 function requireString(

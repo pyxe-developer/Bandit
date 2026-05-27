@@ -20,6 +20,7 @@ const requiredTemplateFiles = [
   "docs/templates/slice.md",
   "docs/templates/chore.md",
   "docs/templates/improvement-chore.md",
+  "docs/templates/improvement-evaluation.md",
   "docs/templates/routing-decision.md",
   "docs/templates/review-evidence.md",
   "docs/templates/landing-verdict.md",
@@ -77,9 +78,31 @@ hypothesis:
 metric:
 baseline:
 expected_direction:
+decision_criteria:
+minimum_detectable_effect:
+uncertainty:
 evaluation_window:
+reevaluation_window:
+proxy_risk:
 status:
+evaluation_result:
 outcome:
+`,
+  "docs/templates/improvement-evaluation.md": `# Improvement Evaluation Template
+
+candidate_id:
+source_artifacts:
+metric:
+baseline:
+observed_metric_evidence:
+comparison_to_baseline:
+result:
+decision:
+decision_criteria_comparison:
+reevaluation_window:
+proxy_risk_disposition:
+rationale:
+routing_action:
 `,
   "docs/templates/routing-decision.md": `# Routing Decision Template
 

@@ -415,14 +415,18 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Implement Stage 3 for `BANDIT-037` - Workflow Trial
-Decision Guardrails. Stage 2 RED evidence is recorded in
-`docs/work/BANDIT-037/red-evidence.md`; do not start unrelated Phase 8 work
-first.
+**Current next action:** Run Stage 4 pre-PR CodeRabbit review for
+`BANDIT-037` - Workflow Trial Decision Guardrails at the current review
+subject. Stage 3 implementation evidence is recorded in
+`docs/work/BANDIT-037/implementation-evidence.md`; do not run Local Qwen,
+aggregate review evidence, landing, retrospective, or unrelated Phase 8 work
+before CodeRabbit evidence is recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
-evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, and
+evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, Stage 3
+implementation evidence is recorded in
+`docs/work/BANDIT-037/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` to `BANDIT-037` as an active
 chore.
@@ -500,9 +504,12 @@ that authority.
 1 brief evidence is recorded in `docs/work/BANDIT-037/brief.md`, and the
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`. Stage 2 RED
-evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`. The next
-action is Stage 3 implementation for `BANDIT-037`; do not start review,
-landing, retrospective, or unrelated Phase 8 work first.
+evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, and Stage 3
+implementation evidence is recorded in
+`docs/work/BANDIT-037/implementation-evidence.md`. The next action is Stage 4
+pre-PR CodeRabbit review for `BANDIT-037`; do not run Local Qwen, aggregate
+review evidence, landing, retrospective, or unrelated Phase 8 work before
+CodeRabbit evidence is recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -554,10 +561,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** Stage 3 implementation evidence at
-`docs/work/BANDIT-037/implementation-evidence.md`, after the focused
-improvement guardrail tests pass and before review, landing, retrospective, or
-unrelated Phase 8 work.
+**Expected next deliverable:** Stage 4 pre-PR CodeRabbit evidence at
+`docs/work/BANDIT-037/coderabbit-review.md`, before Local Qwen, aggregate
+review evidence, landing, retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -583,8 +589,9 @@ These are expected because Bandit does not exist yet:
   uncertainty or minimum-detectable-effect context, proxy-risk disposition, and
   a later re-evaluation window before keep, revise, revert, or double_down
   decisions can change policy. Stage 2 RED evidence is recorded in
-  `docs/work/BANDIT-037/red-evidence.md`; the next action is Stage 3
-  implementation for `BANDIT-037`.
+  `docs/work/BANDIT-037/red-evidence.md`, and Stage 3 implementation evidence
+  is recorded in `docs/work/BANDIT-037/implementation-evidence.md`; the next
+  action is Stage 4 pre-PR CodeRabbit review for `BANDIT-037`.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -916,14 +923,15 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to implement Stage 3 for `BANDIT-037` -
-Workflow Trial Decision Guardrails. Repo artifacts identify the gap, source
-artifacts, rationale, queue order, implementation boundary, RED tests, and
-verification target. Halt only if the next step would change product direction,
-UAT policy, workflow policy beyond enforcing the already recorded Workflow
-Trial guardrail requirement, business tradeoffs, cost/risk posture, external
-service setup, paid reviewer routing, live routing, scheduler authority,
-claim/worktree authority, or broader workflow scope.
+No operator-owned input is required before attempting Stage 4 pre-PR
+CodeRabbit review for `BANDIT-037` - Workflow Trial Decision Guardrails. Repo
+artifacts identify the active work item, review target, source artifacts,
+queue order, implementation evidence, and verification target. Halt only if the
+next step would change product direction, UAT policy, workflow policy beyond
+enforcing the already recorded Workflow Trial guardrail requirement, business
+tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
+live routing, scheduler authority, claim/worktree authority, or broader
+workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
