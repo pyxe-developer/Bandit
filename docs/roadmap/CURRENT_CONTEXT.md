@@ -415,9 +415,12 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-035` - Artifact
-Create Landing Work Item Field: pre-PR CodeRabbit, Local Qwen, aggregate review
-evidence, and PM disposition at the current review subject hash.
+**Current next action:** Resolve the `BANDIT-035` Stage 4 pre-PR CodeRabbit
+timeout. The 2026-05-27 run recorded fail-closed CodeRabbit timeout evidence in
+`docs/work/BANDIT-035/coderabbit-review.md` at source head
+`6c56432cc473331539b9a9b67b5fb3e6cac6ddff`; rerun or repair the pre-PR
+CodeRabbit gate before Local Qwen, aggregate review evidence, PM disposition,
+landing verdict, or unrelated Phase 8 work.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -433,7 +436,9 @@ Stage 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3
 implementation evidence is recorded in
 `docs/work/BANDIT-035/implementation-evidence.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to active chore `BANDIT-035`.
+links the gap to active chore `BANDIT-035`. Stage 4 CodeRabbit timeout evidence
+is recorded in `docs/work/BANDIT-035/coderabbit-review.md`; Local Qwen and
+aggregate review evidence are not yet recorded.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -444,8 +449,9 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-035` - Artifact Create Landing Work Item Field is
-active at Stage 3 implementation evidence recorded. The next action is Stage 4
-review.
+active at Stage 4 CodeRabbit timeout evidence recorded. The next action is to
+rerun or repair the pre-PR CodeRabbit gate before Local Qwen and aggregate Stage
+4 review evidence.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is also open and queued behind that
 active chore.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -495,10 +501,11 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** `docs/work/BANDIT-035/coderabbit-review.md`,
-`docs/work/BANDIT-035/local-qwen-review.md`, and
-`docs/work/BANDIT-035/review-evidence.md`, created after Stage 4 review gates
-run on the current review subject hash.
+**Expected next deliverable:** current, passing pre-PR CodeRabbit evidence for
+`BANDIT-035` at `docs/work/BANDIT-035/coderabbit-review.md`, followed by
+`docs/work/BANDIT-035/local-qwen-review.md` and
+`docs/work/BANDIT-035/review-evidence.md` once the CodeRabbit blocker is
+resolved.
 
 ## Known Bootstrap Gaps
 
@@ -508,8 +515,9 @@ These are expected because Bandit does not exist yet:
   `BANDIT-035`: `bandit artifact create` rendered a landing verdict without the
   required `work_item` metadata field, causing `land-check` to fail closed until
   Codex PM manually repaired the artifact. `BANDIT-035` has its Stage 1 brief,
-  Stage 2 RED evidence, and Stage 3 implementation evidence; the next step is
-  Stage 4 review.
+  Stage 2 RED evidence, Stage 3 implementation evidence, and fail-closed Stage
+  4 CodeRabbit timeout evidence; the next step is to rerun or repair the
+  pre-PR CodeRabbit gate.
 - `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is open and queued from the
   2026-05-26 strategic review: Stage 6 now requires structured improvement
   mining for agent execution smells such as recurring CodeRabbit invocation
@@ -815,9 +823,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-035` - Artifact Create Landing Work
-   Item Field: pre-PR CodeRabbit, Local Qwen, aggregate review evidence, and PM
-   disposition at the current review subject hash.
+1. Resolve the `BANDIT-035` Stage 4 pre-PR CodeRabbit timeout: rerun or repair
+   the pre-PR CodeRabbit gate at the current review subject hash before Local
+   Qwen, aggregate review evidence, PM disposition, landing verdict, or
+   unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -855,12 +864,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to run Stage 4 review gates for
-`BANDIT-035`; the gap source artifacts, rationale, acceptance criteria,
-implementation boundary, Stage 3 evidence, and verification plan are recorded
-in `.bandit/bootstrap-gaps.json`, `docs/work/BANDIT-035/brief.md`,
-`docs/work/BANDIT-035/implementation-evidence.md`, and
-`docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`.
+No operator-owned input is required for the current `BANDIT-035` blocker. The
+CodeRabbit provider timed out after connecting, and repo artifacts now record a
+fail-closed technical Stage 4 blocker rather than a missing product direction,
+UAT, policy, business, cost/risk, or ambiguous-scope decision.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

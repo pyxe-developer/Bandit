@@ -1,0 +1,8 @@
+{
+  "sourceHead": "6c56432cc473331539b9a9b67b5fb3e6cac6ddff",
+  "baseRevision": "origin/main",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "findings": [],
+  "providerError": "coderabbit review --agent --base origin/main did not return a final provider verdict during the bounded Stage 4 automation run; the hung provider process was stopped without claiming a pass."
+}

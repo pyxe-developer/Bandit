@@ -16,10 +16,12 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-035` - Artifact
-Create Landing Work Item Field: pre-PR CodeRabbit, Local Qwen, aggregate review
-evidence, and PM disposition at the current review subject hash before
-unrelated Phase 8 work.
+**Current next step:** Resolve the `BANDIT-035` Stage 4 pre-PR CodeRabbit
+timeout. The 2026-05-27 run recorded fail-closed CodeRabbit timeout evidence in
+`docs/work/BANDIT-035/coderabbit-review.md` at source head
+`6c56432cc473331539b9a9b67b5fb3e6cac6ddff`; rerun or repair the pre-PR
+CodeRabbit gate before Local Qwen, aggregate review evidence, PM disposition,
+landing verdict, or unrelated Phase 8 work.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -34,8 +36,11 @@ spec is recorded in
 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`. The
-next required action is Stage 4 review.
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
+Fail-closed Stage 4 CodeRabbit timeout evidence is recorded in
+`docs/work/BANDIT-035/coderabbit-review.md`; the next required action is to
+rerun or repair the pre-PR CodeRabbit gate before the remaining Stage 4 review
+evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -152,8 +157,11 @@ Its structured creation spec is recorded in
 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`. The
-next required action is Stage 4 review.
+`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
+Fail-closed Stage 4 CodeRabbit timeout evidence is recorded in
+`docs/work/BANDIT-035/coderabbit-review.md`; the next required action is to
+rerun or repair the pre-PR CodeRabbit gate before the remaining Stage 4 review
+evidence.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
