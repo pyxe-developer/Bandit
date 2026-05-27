@@ -269,7 +269,7 @@
       "linked_work_item": "BANDIT-037",
       "rationale": "The PRD research review warned that Bandit's improvement loop could reward proxy metrics, overstate causality at single-operator volume, and create in-context reward-hacking pressure. The operator confirmed that every Workflow Trial or workflow-policy change needs predeclared decision criteria, explicit uncertainty or minimum-detectable-effect context, and a later re-evaluation window before a keep, revise, revert, or double_down decision can change policy. Current improvement metadata and CLI validation do not enforce those fields, so a bootstrap-gap chore is required.",
       "verification_target": null,
-      "next_action": "Refresh BANDIT-037 Stage 4 Local Qwen review evidence at the repair/disposition head before aggregate review evidence."
+      "next_action": "Record PM disposition or focused repair for refreshed BANDIT-037 Stage 4 Local Qwen findings before aggregate review evidence."
     },
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",

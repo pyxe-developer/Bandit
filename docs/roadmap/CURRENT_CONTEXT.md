@@ -415,19 +415,22 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Refresh Stage 4 Local Qwen review evidence for
-`BANDIT-037` - Workflow Trial Decision Guardrails at the repair/disposition
-head before aggregate review evidence.
+**Current next action:** Record PM disposition or focused repair for refreshed
+Stage 4 Local Qwen findings on `BANDIT-037` - Workflow Trial Decision
+Guardrails before aggregate review evidence.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
-`f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Stage 4 Local
-Qwen evidence is recorded in `docs/work/BANDIT-037/local-qwen-review.md` at
-source head `229b09405249f932388adaab8af601c75cae03db` with
-`reviewer_verdict: non_blocking` and open findings. Focused Local Qwen finding
-repair/disposition is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`; source code and evidence
-changed afterward, so Local Qwen evidence must be refreshed before aggregate
-review evidence, landing, retrospective, or unrelated Phase 8 work.
+`f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
+Local Qwen evidence is recorded in
+`docs/work/BANDIT-037/local-qwen-review.md` at source head
+`355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with
+`reviewer_verdict: non_blocking` and open findings. The refreshed findings are a
+stale-evidence observation about the prior Local Qwen artifact and the already
+dispositioned cockpit/reporting-surface scope question. Focused Local Qwen
+finding repair/disposition for the earlier review is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`; that artifact now needs an
+update for the refreshed findings before aggregate review evidence, landing,
+retrospective, or unrelated Phase 8 work.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -515,15 +518,16 @@ evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, and Stage 3
 implementation evidence is recorded in
 `docs/work/BANDIT-037/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
 pass evidence is recorded in `docs/work/BANDIT-037/coderabbit-review.md` at
-source head `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Stage
-4 Local Qwen evidence is recorded in
+source head `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings.
+Refreshed Stage 4 Local Qwen evidence is recorded in
 `docs/work/BANDIT-037/local-qwen-review.md` at source head
-`229b09405249f932388adaab8af601c75cae03db` with `reviewer_verdict:
-non_blocking` and open findings. Focused repair and PM disposition of those
-findings is recorded in `docs/work/BANDIT-037/qwen-finding-disposition.md`.
-The next action is Stage 4 Local Qwen review refresh at the repair/disposition
-head before aggregate review evidence. Do not create landing, retrospective, or
-unrelated Phase 8 work before current Stage 4 evidence is recorded.
+`355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with `reviewer_verdict:
+non_blocking` and open findings. Focused repair and PM disposition of the
+earlier findings is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. The next action is PM
+disposition or focused repair of the refreshed Local Qwen findings before
+aggregate review evidence. Do not create landing, retrospective, or unrelated
+Phase 8 work before the refreshed findings are dispositioned.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -575,9 +579,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** Refreshed Stage 4 Local Qwen evidence for
-`BANDIT-037` at the repair/disposition head, before aggregate review evidence,
-landing, retrospective, or unrelated Phase 8 work.
+**Expected next deliverable:** PM disposition or focused repair evidence for
+the refreshed Stage 4 Local Qwen findings on `BANDIT-037`, before aggregate
+review evidence, landing, retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -608,10 +612,12 @@ These are expected because Bandit does not exist yet:
   pre-PR CodeRabbit pass evidence is recorded in
   `docs/work/BANDIT-037/coderabbit-review.md`, and Stage 4 Local Qwen
   `non_blocking` evidence is recorded in
-  `docs/work/BANDIT-037/local-qwen-review.md`. Focused repair and PM
-  disposition of the Local Qwen findings is recorded in
+  `docs/work/BANDIT-037/local-qwen-review.md` at source head
+  `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983`. Focused repair and PM
+  disposition of the earlier Local Qwen findings is recorded in
   `docs/work/BANDIT-037/qwen-finding-disposition.md`; the next action is to
-  refresh Stage 4 Local Qwen evidence at the repair/disposition head.
+  record PM disposition or focused repair for the refreshed Stage 4 Local Qwen
+  findings.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
