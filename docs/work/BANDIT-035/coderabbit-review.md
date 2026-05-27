@@ -2,13 +2,13 @@
 
 contract_version: 1
 work_item: BANDIT-035
-source_head: 888af023376eee945e7a117281921e89bd5a85a6
+source_head: d04daea065809e28df11d6375cd7ca2097356414
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:origin/main
 review_state: completed
 coderabbit_verdict: blocker
 findings_status: unresolved
-findings_disposition: docs/roadmap/CURRENT_CONTEXT.md: reconcile BANDIT-035 current-context state with the implementation and missing Stage 4+ evidence before landing.; docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json: avoid prematurely resolving the gap; add required review and closeout artifacts or keep the gap blocked until they exist.; .bandit/bootstrap-gaps.json: make the active gap next_action explicitly reference the BANDIT-035 Stage 4 CodeRabbit blocker.; test/artifact-create.test.mjs: isolate the work_item fixture change from unrelated enum-like fixture updates or justify those values with focused evidence.
+findings_disposition: test/artifact-create.test.mjs: the parser-compatibility test still mixes the work_item renderer assertion with operator_input_status and landing_agent_state enum-value changes; restore the existing fixture values in that test or split enum normalization into a separate focused test before Stage 4 can proceed.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:

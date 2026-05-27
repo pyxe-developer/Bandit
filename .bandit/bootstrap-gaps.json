@@ -232,7 +232,7 @@
       "linked_work_item": "BANDIT-035",
       "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
       "verification_target": null,
-      "next_action": "Rerun the BANDIT-035 pre-PR CodeRabbit gate against the repaired/dispositioned source before Local Qwen, aggregate review evidence, landing, or unrelated Phase 8 work."
+      "next_action": "Repair or explicitly disposition the fresh BANDIT-035 CodeRabbit blocker on test/artifact-create.test.mjs, then rerun the pre-PR CodeRabbit gate before Local Qwen, aggregate review evidence, landing, or unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",

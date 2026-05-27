@@ -16,13 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Rerun the `BANDIT-035` pre-PR CodeRabbit gate against
-the repaired/dispositioned source. The CodeRabbit blocker findings are triaged
-in `docs/work/BANDIT-035/coderabbit-finding-disposition.md`, and
-`test/artifact-create.test.mjs` now isolates the validation-backed parser
-fixture from the existing renderer-only fixture. Do not run Local Qwen,
-aggregate review evidence, landing verdict, or unrelated Phase 8 work until
-current pre-PR CodeRabbit evidence passes or records a fresh blocker.
+**Current next step:** Repair or explicitly disposition the fresh
+`BANDIT-035` pre-PR CodeRabbit blocker recorded at source head
+`d04daea065809e28df11d6375cd7ca2097356414`. The current finding is recorded in
+`docs/work/BANDIT-035/coderabbit-review.md` and targets
+`test/artifact-create.test.mjs`: the parser-compatibility test still mixes the
+`work_item` renderer assertion with `operator_input_status` and
+`landing_agent_state` enum-value changes. Do not run Local Qwen, aggregate
+review evidence, landing verdict, or unrelated Phase 8 work until the finding
+is repaired or dispositioned and the pre-PR CodeRabbit gate is rerun.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -39,10 +41,12 @@ recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
 Stage 4 CodeRabbit blocker evidence is recorded in
-`docs/work/BANDIT-035/coderabbit-review.md`, and CodeRabbit finding disposition
-is recorded in `docs/work/BANDIT-035/coderabbit-finding-disposition.md`; the
-next required action is to rerun the pre-PR CodeRabbit gate against the
-repaired/dispositioned source before the remaining Stage 4 review evidence.
+`docs/work/BANDIT-035/coderabbit-review.md`; the latest blocker targets
+`test/artifact-create.test.mjs` parser-compatibility fixture scope. Prior
+CodeRabbit finding disposition is recorded in
+`docs/work/BANDIT-035/coderabbit-finding-disposition.md`; the next required
+action is to repair or explicitly disposition the fresh CodeRabbit finding
+before the remaining Stage 4 review evidence.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -161,10 +165,12 @@ recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
 `.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
 Stage 4 CodeRabbit blocker evidence is recorded in
-`docs/work/BANDIT-035/coderabbit-review.md`, and CodeRabbit finding disposition
-is recorded in `docs/work/BANDIT-035/coderabbit-finding-disposition.md`; the
-next required action is to rerun the pre-PR CodeRabbit gate against the
-repaired/dispositioned source before the remaining Stage 4 review evidence.
+`docs/work/BANDIT-035/coderabbit-review.md`; the latest blocker targets
+`test/artifact-create.test.mjs` parser-compatibility fixture scope. Prior
+CodeRabbit finding disposition is recorded in
+`docs/work/BANDIT-035/coderabbit-finding-disposition.md`; the next required
+action is to repair or explicitly disposition the fresh CodeRabbit finding
+before the remaining Stage 4 review evidence.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -316,8 +322,9 @@ recorded. `BANDIT-034` is landed and closed out as the
 Stage 6 evidence recorded in `docs/work/BANDIT-034/` and source-candidate
 evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
-`docs/work/BANDIT-034/retrospective.md`. The next required action is Stage 4
-CodeRabbit finding disposition for `BANDIT-035`, the bootstrap-gap chore for
+`docs/work/BANDIT-034/retrospective.md`. The next required action is repair or
+explicit disposition of the fresh Stage 4 CodeRabbit blocker for `BANDIT-035`,
+the bootstrap-gap chore for
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that active
 chore.
@@ -937,9 +944,10 @@ Current rule:
 
 Current priority:
 
-1. Rerun the `BANDIT-035` pre-PR CodeRabbit gate against the
-   repaired/dispositioned source before Local Qwen, aggregate review evidence,
-   landing, or unrelated Phase 8 work.
+1. Repair or explicitly disposition the fresh `BANDIT-035` CodeRabbit blocker
+   on `test/artifact-create.test.mjs`, then rerun the pre-PR CodeRabbit gate
+   before Local Qwen, aggregate review evidence, landing, or unrelated Phase 8
+   work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
