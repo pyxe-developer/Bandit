@@ -16,13 +16,13 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record aggregate `BANDIT-035` Stage 4 review evidence.
-The pre-PR CodeRabbit gate passes at source head
-`cb0a7ba506f6e4d9119a807915408463375c3480` with no findings, and Local Qwen
-passes at source head `d432c8d7397292a6d8af09a51e0e08e69eaedc64` with no
-findings. Do not run landing verdict, landing action, or unrelated Phase 8 work
-until `docs/work/BANDIT-035/review-evidence.md` records the current review
-subject hash and PM disposition.
+**Current next step:** Record Stage 5 landing verdict for `BANDIT-035`.
+Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-035/review-evidence.md` with current review-subject hash
+`08929c8ad39b64027b6f4f6460e09b0a8d7e1ec0e2f9f85e4108ee5fb85bac6e`, pre-PR
+CodeRabbit pass evidence, Local Qwen pass evidence, and Codex PM disposition
+`pass`. Do not run landing action, retrospective closeout, or unrelated Phase 8
+work until `docs/work/BANDIT-035/landing-verdict.md` exists.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -44,8 +44,9 @@ Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Local Qwen pass
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
-head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`; the next required action is
-to record aggregate Stage 4 review evidence.
+head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`; the next
+required action is Stage 5 landing verdict.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -169,8 +170,9 @@ Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 finding repair/disposition evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-finding-disposition.md`. Local Qwen pass
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
-head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`; the next required action is
-to record aggregate Stage 4 review evidence.
+head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`; the next
+required action is Stage 5 landing verdict.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -943,10 +945,9 @@ Current rule:
 
 Current priority:
 
-1. Record aggregate `BANDIT-035` Stage 4 review evidence now that pre-PR
-   CodeRabbit and Local Qwen both pass; do not run landing or unrelated Phase 8
-   work before `review-evidence.md` records the current review subject hash and
-   PM disposition.
+1. Record Stage 5 landing verdict for `BANDIT-035` now that aggregate Stage 4
+   review evidence is recorded and current; do not run landing action or
+   unrelated Phase 8 work before `landing-verdict.md` exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
