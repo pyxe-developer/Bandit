@@ -415,12 +415,19 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`. Do not start unrelated Phase 8
-work first. `BANDIT-036` - Structured Retrospective Mining is landed and closed
-out: Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence,
-Stage 4 pre-PR CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence,
-aggregate Stage 4 review evidence with review subject hash
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-037` -
+Workflow Trial Decision Guardrails. Do not start unrelated Phase 8 work first.
+`BANDIT-037` was created with
+`bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
+its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, and
+`.bandit/bootstrap-gaps.json` links
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` to `BANDIT-037` as an active
+chore.
+
+`BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
+1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
+review evidence with review subject hash
 `863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`, Stage 5
 landing verdict, local-record landing action, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-036/` and
@@ -486,15 +493,15 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-036` - Structured Retrospective Mining is landed
-and closed out. It remains the recorded active work item until the next
-bootstrap-gap chore is created, so cockpit status can read the completed Stage
-1 through Stage 6 evidence. The next action is to create the bootstrap-gap
-chore for `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`; do not start
-unrelated Phase 8 work first.
+**Active work item:** `BANDIT-037` - Workflow Trial Decision Guardrails. Stage
+1 brief evidence is recorded in `docs/work/BANDIT-037/brief.md`, and the
+structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`. The next
+action is to write Stage 2 RED evidence for `BANDIT-037`; do not start
+implementation, review, landing, retrospective, or unrelated Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
-`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is now the next queued
-bootstrap-gap chore. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
+`BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
 workflow-trial decision guardrails.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS`,
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`,
@@ -543,9 +550,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** A bootstrap-gap chore for
-`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`, before any unrelated Phase 8
-work.
+**Expected next deliverable:** Stage 2 RED evidence at
+`docs/work/BANDIT-037/red-evidence.md`, before implementation or unrelated
+Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -565,12 +572,13 @@ These are expected because Bandit does not exist yet:
   renders the checklist in repo-native Markdown. Stage 1 through Stage 6
   evidence is recorded in `docs/work/BANDIT-036/`, and
   `.bandit/bootstrap-gaps.json` marks the gap resolved.
-- `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is open and queued from the
-  2026-05-26 strategic review: Workflow Trials and workflow-policy changes now
-  require predeclared decision criteria, explicit uncertainty or
-  minimum-detectable-effect context, proxy-risk disposition, and a later
-  re-evaluation window before keep, revise, revert, or double_down decisions can
-  change policy. It is the next bootstrap-gap chore to create.
+- `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
+  `BANDIT-037` from the 2026-05-26 strategic review: Workflow Trials and
+  workflow-policy changes now require predeclared decision criteria, explicit
+  uncertainty or minimum-detectable-effect context, proxy-risk disposition, and
+  a later re-evaluation window before keep, revise, revert, or double_down
+  decisions can change policy. The next action is Stage 2 RED evidence for
+  `BANDIT-037`.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -902,13 +910,14 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to create the next bootstrap-gap chore for
-`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`. Repo artifacts identify the
+No operator-owned input is required to write Stage 2 RED evidence for
+`BANDIT-037` - Workflow Trial Decision Guardrails. Repo artifacts identify the
 gap, source artifacts, rationale, queue order, implementation boundary, and
-verification target. Halt only if the next chore would change product
-direction, UAT policy, workflow policy beyond the already recorded Workflow
+verification target. Halt only if the next step would change product direction,
+UAT policy, workflow policy beyond enforcing the already recorded Workflow
 Trial guardrail requirement, business tradeoffs, cost/risk posture, external
-service setup, or broader workflow scope.
+service setup, paid reviewer routing, live routing, scheduler authority,
+claim/worktree authority, or broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

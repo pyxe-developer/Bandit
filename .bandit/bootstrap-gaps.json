@@ -254,8 +254,8 @@
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",
       "title": "Workflow trials can change policy without predeclared decision guardrails",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -266,10 +266,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-037",
       "rationale": "The PRD research review warned that Bandit's improvement loop could reward proxy metrics, overstate causality at single-operator volume, and create in-context reward-hacking pressure. The operator confirmed that every Workflow Trial or workflow-policy change needs predeclared decision criteria, explicit uncertainty or minimum-detectable-effect context, and a later re-evaluation window before a keep, revise, revert, or double_down decision can change policy. Current improvement metadata and CLI validation do not enforce those fields, so a bootstrap-gap chore is required.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to add Workflow Trial decision guardrails to improvement metadata, templates, validators, evaluation evidence, cockpit/reporting surfaces, and policy-change routing before unrelated Phase 8 work."
+      "next_action": "Complete active chore BANDIT-037."
     },
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",

@@ -16,12 +16,19 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the next bootstrap-gap chore for
-`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`. Do not start unrelated Phase 8
-work first. `BANDIT-036` - Structured Retrospective Mining is landed and closed
-out: Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence,
-Stage 4 pre-PR CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence,
-aggregate Stage 4 review evidence with review subject hash
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-037` - Workflow
+Trial Decision Guardrails. Do not start unrelated Phase 8 work first.
+`BANDIT-037` was created with
+`bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
+its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, and
+`.bandit/bootstrap-gaps.json` links
+`BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` to `BANDIT-037` as an active
+chore.
+
+`BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
+1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
+review evidence with review subject hash
 `863ae9550ee31285c8ae09ec1623b0a0ea7b6366b6b1729e0b3ca09d93c37cb0`, Stage 5
 landing verdict, local-record landing action, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-036/` and
@@ -998,18 +1005,18 @@ Current rule:
 
 Current priority:
 
-1. Create the bootstrap-gap chore for
-   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`, now that
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
-   Do not start unrelated Phase 8 work first.
+1. Write Stage 2 RED evidence for `BANDIT-037` - Workflow Trial Decision
+   Guardrails, now that `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
+   active and linked to `BANDIT-037`. Do not start implementation or unrelated
+   Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
 3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
-   queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is now the
-   next queued gap. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
+   queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active
+   as `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
    workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
    is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
    behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
