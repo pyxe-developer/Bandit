@@ -274,8 +274,8 @@
     {
       "id": "BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT",
       "title": "No first-class lifecycle contract exists for load-bearing skills",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -285,10 +285,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-038",
       "rationale": "The operator confirmed that load-bearing skills need a first-class lifecycle contract because they shape context, reasoning, tool use, review behavior, cost, and model performance. Without owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria, Bandit cannot reliably explain whether a benchmark result changed because of the model, the skill, or the task packet.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS is resolved, create a bootstrap-gap chore to define the Skill Lifecycle Contract, validation rules, templates, stage binding requirements, installed-skill drift checks, and rollback criteria for load-bearing skills."
+      "next_action": "Complete active chore BANDIT-038."
     },
     {
       "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",

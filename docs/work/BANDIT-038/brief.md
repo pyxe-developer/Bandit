@@ -1,0 +1,97 @@
+# BANDIT-038: Skill Lifecycle Contract
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where load-bearing skills can become required workflow policy without a first-class lifecycle contract.
+
+## Origin
+
+The 2026-05-26 strategic review and accepted Bandit PRDs classify skills as load-bearing agent artifacts because they shape context, reasoning, tool use, review behavior, safety, cost, and model performance. The queued bootstrap gap requires owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, rollback criteria, installed-skill drift checks, templates, and validation before skills can become required stage policy or benchmark variants.
+
+## Scope
+
+- Define a repo-native Skill Lifecycle Contract for load-bearing skills with stable skill identity, owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria.
+- Add a contract template and CLI-readable policy or registry surface for load-bearing skill contracts without making installed global skill files canonical Bandit state.
+- Add validation rules that fail closed when a load-bearing skill contract omits required lifecycle fields, has malformed stage bindings, lacks rollback criteria, or references missing evaluation packets.
+- Define installed-skill drift checks that compare the repo-recorded lifecycle contract against the installed skill artifact evidence needed to detect unreviewed skill changes before a skill is treated as required policy.
+- Define stage binding requirements for required skills without implementing the later Stage Capability Scope gap or expanding Bandit's role taxonomy.
+- Add focused tests for missing owner, missing version or changelog, missing intended stages, missing required or forbidden tool boundaries, missing evaluation packets, missing rollback criteria, malformed drift evidence, and valid complete contracts.
+- Preserve repo-native Markdown and JSON policy artifacts as canonical evidence; installed skills, generated projections, benchmarks, and cockpit views remain derived or external evidence surfaces.
+- Keep the repair limited to skill lifecycle contract docs/templates, policy or registry validation, focused tests, and necessary roadmap/context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1 and perform clean-code evaluation before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit skill lifecycle contract templates, validation, CLI-readable policy or registry parsing, and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond defining the already queued skill lifecycle contract, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, or broader workflow scope.
+- Layered risk and supply-chain scope: this chore may define drift checks for skill artifacts but must not install, fetch, rewrite, or execute external skills, dependencies, prompts, package scripts, lockfiles, CI/release workflow, paid reviewer routes, live model routing, scheduler execution, claim authority, worktree lifecycle, or unrelated Phase 8 cockpit work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-038/brief.md and links to BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.
+- A Skill Lifecycle Contract template or policy artifact names required fields for skill identity, owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, and rollback criteria.
+- Validation fails closed for load-bearing skill contracts that omit owner, version, changelog, intended stages, required tools, forbidden actions, evaluation packets, or rollback criteria.
+- Validation fails closed for malformed stage bindings or contracts that imply new agent authority rather than stage-scoped capability.
+- Validation fails closed when evaluation packet references are missing, empty, or not repo-addressable.
+- Installed-skill drift evidence is defined so future stages can detect unreviewed changes between the repo contract and installed skill artifact before treating the skill as required policy.
+- Focused tests prove invalid lifecycle contracts are rejected before writes or trusted status, and prove a complete contract is accepted.
+- The implementation does not implement the later Agent Evaluation Harness, Stage Capability Scope, provider-pricing, paid reviewer promotion, supply-chain gate, worktree, scheduler, claim authority, or cockpit UI gaps.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow, live reviewer routing change, paid reviewer route, external service integration, dependency or lockfile change, installed global skill edit, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run focused skill lifecycle contract tests for RED/GREEN coverage.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, policy parsing, review evidence, landing gates, bootstrap gaps, roadmap/cockpit status parsing, or template validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-038 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-038 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-038 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-038 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json
+- docs/work/BANDIT-038/brief.md
+- docs/work/BANDIT-038/red-evidence.md
+- docs/work/BANDIT-038/implementation-evidence.md
+- docs/work/BANDIT-038/coderabbit-review.md
+- docs/work/BANDIT-038/local-qwen-review.md
+- docs/work/BANDIT-038/review-evidence.md
+- docs/work/BANDIT-038/landing-verdict.md
+- docs/work/BANDIT-038/landing-action.md
+- docs/work/BANDIT-038/retrospective.md
+- docs/templates/skill-lifecycle-contract.md
+- .bandit/policy/skill-lifecycle-contracts.json
+- src/state/skill-lifecycle-contracts.ts
+- src/commands/skill-lifecycle.ts
+- test/skill-lifecycle-contracts.test.mjs
+- test/validate.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-038/brief.md
+- docs/work/BANDIT-038/red-evidence.md
+- docs/work/BANDIT-038/implementation-evidence.md
+- docs/work/BANDIT-038/coderabbit-review.md
+- docs/work/BANDIT-038/local-qwen-review.md
+- docs/work/BANDIT-038/review-evidence.md
+- docs/work/BANDIT-038/landing-verdict.md
+- docs/work/BANDIT-038/landing-action.md
+- docs/work/BANDIT-038/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, implementation boundary, and verification target. Halt only if implementation would change product direction, UAT policy, workflow policy beyond defining the already recorded Skill Lifecycle Contract requirement, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, dependency or lockfile policy, or broader workflow scope.
