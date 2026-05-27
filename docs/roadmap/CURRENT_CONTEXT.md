@@ -415,9 +415,10 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Record PM disposition or focused repair for refreshed
-Stage 4 Local Qwen findings on `BANDIT-037` - Workflow Trial Decision
-Guardrails before aggregate review evidence.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-037` - Workflow Trial Decision Guardrails using the refreshed
+CodeRabbit pass, refreshed Local Qwen `non_blocking` evidence, PM disposition,
+and current review-subject hash.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
 `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
@@ -426,11 +427,11 @@ Local Qwen evidence is recorded in
 `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with
 `reviewer_verdict: non_blocking` and open findings. The refreshed findings are a
 stale-evidence observation about the prior Local Qwen artifact and the already
-dispositioned cockpit/reporting-surface scope question. Focused Local Qwen
-finding repair/disposition for the earlier review is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`; that artifact now needs an
-update for the refreshed findings before aggregate review evidence, landing,
-retrospective, or unrelated Phase 8 work.
+dispositioned cockpit/reporting-surface scope question. PM disposition for both
+the earlier and refreshed Local Qwen findings is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. Do not create landing
+verdict, landing action, retrospective, or unrelated Phase 8 work before
+aggregate Stage 4 review evidence is recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -524,10 +525,11 @@ Refreshed Stage 4 Local Qwen evidence is recorded in
 `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with `reviewer_verdict:
 non_blocking` and open findings. Focused repair and PM disposition of the
 earlier findings is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`. The next action is PM
-disposition or focused repair of the refreshed Local Qwen findings before
-aggregate review evidence. Do not create landing, retrospective, or unrelated
-Phase 8 work before the refreshed findings are dispositioned.
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. The next action is
+aggregate Stage 4 review evidence using the refreshed CodeRabbit pass,
+refreshed Local Qwen `non_blocking` evidence, PM disposition, and current
+review-subject hash. Do not create landing, retrospective, or unrelated Phase
+8 work before aggregate review evidence is recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -579,9 +581,8 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** PM disposition or focused repair evidence for
-the refreshed Stage 4 Local Qwen findings on `BANDIT-037`, before aggregate
-review evidence, landing, retrospective, or unrelated Phase 8 work.
+**Expected next deliverable:** Aggregate Stage 4 review evidence for
+`BANDIT-037`, before landing, retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -614,10 +615,9 @@ These are expected because Bandit does not exist yet:
   `non_blocking` evidence is recorded in
   `docs/work/BANDIT-037/local-qwen-review.md` at source head
   `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983`. Focused repair and PM
-  disposition of the earlier Local Qwen findings is recorded in
+  disposition of the earlier and refreshed Local Qwen findings is recorded in
   `docs/work/BANDIT-037/qwen-finding-disposition.md`; the next action is to
-  record PM disposition or focused repair for the refreshed Stage 4 Local Qwen
-  findings.
+  record aggregate Stage 4 review evidence.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -910,18 +910,19 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create the bootstrap-gap chore for
-   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS`, now that
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
-   Do not start unrelated Phase 8 work first.
+1. Record aggregate Stage 4 review evidence for `BANDIT-037` -
+   Workflow Trial Decision Guardrails using refreshed CodeRabbit pass evidence,
+   refreshed Local Qwen `non_blocking` evidence, PM disposition, and current
+   review-subject hash. Do not create landing, retrospective, or unrelated
+   Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
 3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
-   queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is now the
-   next queued gap. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
+   queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active
+   as `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
    workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
    is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
    behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`

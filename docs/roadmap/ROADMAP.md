@@ -16,9 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record PM disposition or focused repair for refreshed
-Stage 4 Local Qwen findings on `BANDIT-037` - Workflow Trial Decision
-Guardrails before aggregate review evidence.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-037` - Workflow Trial Decision Guardrails using the refreshed
+CodeRabbit pass, refreshed Local Qwen `non_blocking` evidence, PM disposition,
+and current review-subject hash.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
 `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
@@ -27,11 +28,11 @@ Local Qwen evidence is recorded in
 `355dea8cadf2ec4a28cfd5e24cebc6dc2280e983` with
 `reviewer_verdict: non_blocking` and open findings. The refreshed findings are a
 stale-evidence observation about the prior Local Qwen artifact and the already
-dispositioned cockpit/reporting-surface scope question. Focused Local Qwen
-finding repair/disposition for the earlier review is recorded in
-`docs/work/BANDIT-037/qwen-finding-disposition.md`; that artifact now needs an
-update for the refreshed findings before aggregate review evidence, landing,
-retrospective, or unrelated Phase 8 work.
+dispositioned cockpit/reporting-surface scope question. PM disposition for both
+the earlier and refreshed Local Qwen findings is recorded in
+`docs/work/BANDIT-037/qwen-finding-disposition.md`. Do not create landing
+verdict, landing action, retrospective, or unrelated Phase 8 work before
+aggregate Stage 4 review evidence is recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -1022,11 +1023,11 @@ Current rule:
 
 Current priority:
 
-1. Record PM disposition or focused repair for refreshed Stage 4 Local Qwen
-   findings on `BANDIT-037` - Workflow Trial Decision Guardrails before
-   aggregate review evidence. Do not create aggregate review evidence, landing,
-   retrospective, or unrelated Phase 8 work before the refreshed findings are
-   dispositioned.
+1. Record aggregate Stage 4 review evidence for `BANDIT-037` -
+   Workflow Trial Decision Guardrails using refreshed CodeRabbit pass evidence,
+   refreshed Local Qwen `non_blocking` evidence, PM disposition, and current
+   review-subject hash. Do not create landing, retrospective, or unrelated
+   Phase 8 work before aggregate review evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
