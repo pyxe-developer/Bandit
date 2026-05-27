@@ -14,6 +14,18 @@ const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
 const committedTemplateRoot = path.join(repoRoot, "docs/templates");
 const committedPolicyRoot = path.join(repoRoot, ".bandit/policy");
+const retrospectiveMiningSignals = [
+  "failed tool calls",
+  "overreasoning",
+  "work-breakdown fit",
+  "agent-scope fit",
+  "tool-use rule pressure",
+  "reviewer/model routing",
+  "tool invocation friction",
+  "recurring inefficiency",
+  "cost or latency signals",
+  "unresolved uncertainty"
+];
 
 test("artifact create creates RED evidence from explicit structured input", async () => {
   const repo = await createInitializedRepo();
@@ -177,6 +189,7 @@ test("artifact create creates a retrospective with durable dispositions", async 
         rationale: "The command writes artifacts but does not advance stages."
       }
     ],
+    structured_improvement_mining: createRetrospectiveMiningChecklist(),
     improvement_chores: "None.",
     cross_model_tension: "None.",
     bootstrap_gaps_remaining: [
@@ -205,6 +218,128 @@ test("artifact create creates a retrospective with durable dispositions", async 
   assert.match(artifact, /^## Lessons And Dispositions$/m);
   assert.match(artifact, /Artifact creation must stay narrower than workflow authority/);
   assert.match(artifact, /^## Bootstrap Gaps Remaining$/m);
+});
+
+test("artifact create refuses retrospective specs without structured improvement mining", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
+  await writeSpec(repo, "docs/specs/retrospective.json", {
+    kind: "retrospective",
+    work_item: "BANDIT-001",
+    outcome: "Artifact creation landed as a workflow-infrastructure chore.",
+    what_worked: [
+      "Explicit structured input kept artifact authorship auditable."
+    ],
+    lessons_and_dispositions: [
+      {
+        lesson: "Artifact creation must stay narrower than workflow authority.",
+        disposition: "No-action decision",
+        rationale: "The command writes artifacts but does not advance stages."
+      }
+    ],
+    improvement_chores: "None.",
+    cross_model_tension: "None.",
+    bootstrap_gaps_remaining: ["None."]
+  });
+
+  const result = await runBandit(repo, [
+    "artifact",
+    "create",
+    "docs/specs/retrospective.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Artifact spec missing required field: structured_improvement_mining/
+  );
+  assert.equal(
+    await pathExists(path.join(repo, "docs/work/BANDIT-001/retrospective.md")),
+    false
+  );
+});
+
+test("artifact create refuses retrospective mining entries without durable disposition", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
+  await writeSpec(repo, "docs/specs/retrospective.json", {
+    kind: "retrospective",
+    work_item: "BANDIT-001",
+    outcome: "Artifact creation landed as a workflow-infrastructure chore.",
+    what_worked: [
+      "Explicit structured input kept artifact authorship auditable."
+    ],
+    lessons_and_dispositions: [
+      {
+        lesson: "Artifact creation must stay narrower than workflow authority.",
+        disposition: "No-action decision",
+        rationale: "The command writes artifacts but does not advance stages."
+      }
+    ],
+    structured_improvement_mining: [
+      {
+        signal: "tool invocation friction",
+        finding: "CodeRabbit invocation uncertainty repeated during Stage 4."
+      }
+    ],
+    improvement_chores: "None.",
+    cross_model_tension: "None.",
+    bootstrap_gaps_remaining: ["None."]
+  });
+
+  const result = await runBandit(repo, [
+    "artifact",
+    "create",
+    "docs/specs/retrospective.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Artifact spec missing required field: disposition/);
+});
+
+test("artifact create renders retrospective structured mining evidence", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
+  await writeSpec(repo, "docs/specs/retrospective.json", {
+    kind: "retrospective",
+    work_item: "BANDIT-001",
+    outcome: "Artifact creation landed as a workflow-infrastructure chore.",
+    what_worked: [
+      "Explicit structured input kept artifact authorship auditable."
+    ],
+    lessons_and_dispositions: [
+      {
+        lesson: "Artifact creation must stay narrower than workflow authority.",
+        disposition: "No-action decision",
+        rationale: "The command writes artifacts but does not advance stages."
+      }
+    ],
+    structured_improvement_mining: createRetrospectiveMiningChecklist(),
+    improvement_chores: "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.",
+    cross_model_tension: "None.",
+    bootstrap_gaps_remaining: [
+      "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING"
+    ]
+  });
+
+  const result = await runBandit(repo, [
+    "artifact",
+    "create",
+    "docs/specs/retrospective.json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+
+  const artifact = await readFile(
+    path.join(repo, "docs/work/BANDIT-001/retrospective.md"),
+    "utf8"
+  );
+  assert.match(artifact, /^## Structured Improvement Mining$/m);
+  for (const signal of retrospectiveMiningSignals) {
+    assert.match(artifact, new RegExp(`\\| ${escapeRegExp(signal)} \\|`));
+  }
+  assert.match(artifact, /CodeRabbit invocation uncertainty/);
+  assert.match(artifact, /bootstrap gap - BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING/);
 });
 
 test("artifact create fails closed for unsupported kinds before writing files", async () => {
@@ -349,6 +484,24 @@ async function createLandingVerdictArtifact(repo, overrides = {}) {
     path.join(repo, "docs/work/BANDIT-001/landing-verdict.md"),
     "utf8"
   );
+}
+
+function createRetrospectiveMiningChecklist() {
+  return retrospectiveMiningSignals.map((signal) => ({
+    signal,
+    finding:
+      signal === "tool invocation friction"
+        ? "CodeRabbit invocation uncertainty repeated during Stage 4."
+        : `No material ${signal} finding for this work item.`,
+    disposition:
+      signal === "tool invocation friction"
+        ? "bootstrap gap - BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING"
+        : "explicit no-action decision - no follow-up required"
+  }));
+}
+
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 async function writeSpec(repo, relativePath, spec) {

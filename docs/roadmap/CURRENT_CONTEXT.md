@@ -415,14 +415,15 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-036` -
-Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
-`docs/work/BANDIT-036/brief.md`, was created from
+**Current next action:** Implement Stage 3 for `BANDIT-036` - Structured
+Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
+`docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
+`docs/work/BANDIT-036/red-evidence.md`, was created from
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, and is linked as
 the active chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in
-`.bandit/bootstrap-gaps.json`. Do not start implementation, Stage 4 review,
-landing, the next bootstrap-gap chore, or unrelated Phase 8 work until Stage 2
-RED evidence exists and passes its rubric.
+`.bandit/bootstrap-gaps.json`. Do not start Stage 4 review, landing, the next
+bootstrap-gap chore, or unrelated Phase 8 work until the focused Stage 3
+implementation evidence exists and the artifact-create tests pass.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -456,11 +457,13 @@ and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. Its structured creation spec is
 recorded in
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json`, its Stage 1 brief
-is recorded in `docs/work/BANDIT-036/brief.md`, `.bandit/events.jsonl` records
-the work-item creation event, and `.bandit/bootstrap-gaps.json` marks the gap
-`active_chore` linked to `BANDIT-036`. The next required action is Stage 2 RED
-evidence for retrospective artifact creation requiring structured
-improvement-mining checklist evidence.
+is recorded in `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence is
+recorded in `docs/work/BANDIT-036/red-evidence.md`, `.bandit/events.jsonl`
+records the work-item creation and RED artifact creation events, and
+`.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
+`BANDIT-036`. The next required action is Stage 3 implementation for
+retrospective artifact creation requiring structured improvement-mining
+checklist evidence.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -471,10 +474,10 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-036` - Structured Retrospective Mining is active
-at Stage 1 with brief/spec evidence recorded. The next action is to write Stage
-2 RED evidence for retrospective artifact creation requiring structured
-improvement-mining checklist evidence; do not start implementation or unrelated
-Phase 8 work first.
+at Stage 2 with brief/spec and RED evidence recorded. The next action is Stage
+3 implementation for retrospective artifact creation requiring structured
+improvement-mining checklist evidence; do not start review, landing, the next
+bootstrap-gap chore, or unrelated Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active and linked to
 `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
@@ -525,10 +528,11 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-036` that
-proves retrospective artifact creation currently accepts missing structured
-improvement-mining checklist evidence and defines failing tests for recurring
-CodeRabbit/tool invocation friction coverage.
+**Expected next deliverable:** Stage 3 implementation evidence for
+`BANDIT-036` that repairs retrospective artifact creation so it refuses missing
+or incomplete structured improvement-mining checklist evidence, renders the
+required signals including CodeRabbit/tool invocation friction, and makes the
+focused artifact-create tests pass.
 
 ## Known Bootstrap Gaps
 
@@ -546,6 +550,7 @@ These are expected because Bandit does not exist yet:
   structured improvement mining for agent execution smells such as recurring
   CodeRabbit invocation friction, but `bandit artifact create` can still render
   retrospectives without the required mining checklist. Stage 2 RED evidence is
+  recorded in `docs/work/BANDIT-036/red-evidence.md`; Stage 3 implementation is
   the next action.
 - `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is open and queued from the
   2026-05-26 strategic review: Workflow Trials and workflow-policy changes now
@@ -846,10 +851,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-036` -
-   Structured Retrospective Mining, now that the bootstrap-gap chore exists and
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start
-   implementation or unrelated Phase 8 work first.
+1. Implement Stage 3 for `BANDIT-036` - Structured Retrospective Mining, now
+   that Stage 2 RED evidence exists and
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. Do not start Stage 4
+   review, landing, the next bootstrap-gap chore, or unrelated Phase 8 work
+   first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -886,12 +892,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to write Stage 2 RED evidence for
-`BANDIT-036`. Repo artifacts identify the gap, source artifacts, rationale,
-implementation boundary, and verification target. Halt only if the repair would
-change product direction, UAT policy, workflow policy beyond the already
-recorded Stage 6 structured mining requirement, business tradeoffs, cost/risk
-posture, external service setup, or broader workflow scope.
+No operator-owned input is required to implement Stage 3 for `BANDIT-036`.
+Repo artifacts identify the gap, source artifacts, rationale, implementation
+boundary, and verification target. Halt only if the repair would change product
+direction, UAT policy, workflow policy beyond the already recorded Stage 6
+structured mining requirement, business tradeoffs, cost/risk posture, external
+service setup, or broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
