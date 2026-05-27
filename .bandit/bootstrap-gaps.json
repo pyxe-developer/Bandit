@@ -249,7 +249,7 @@
       "linked_work_item": "BANDIT-036",
       "rationale": "The operator identified recurring agent confusion about how to invoke CodeRabbit as a workflow-improvement signal that retrospectives have not surfaced. Stage 6 now requires structured improvement mining, but bandit artifact create can still render retrospectives without the mining checklist, so the artifact contract and tests need a dedicated repair.",
       "verification_target": null,
-      "next_action": "Complete active chore BANDIT-036."
+      "next_action": "Continue active chore BANDIT-036 with Stage 4 Local Qwen review, then aggregate Stage 4 evidence."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",

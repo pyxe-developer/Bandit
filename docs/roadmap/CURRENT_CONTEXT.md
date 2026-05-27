@@ -415,16 +415,18 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run Stage 4 pre-PR CodeRabbit review for `BANDIT-036` -
+**Current next action:** Run Stage 4 Local Qwen review for `BANDIT-036` -
 Structured Retrospective Mining. `BANDIT-036` has a Stage 1 brief at
 `docs/work/BANDIT-036/brief.md`, Stage 2 RED evidence at
-`docs/work/BANDIT-036/red-evidence.md`, and Stage 3 implementation evidence at
-`docs/work/BANDIT-036/implementation-evidence.md`. It was created from
+`docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation evidence at
+`docs/work/BANDIT-036/implementation-evidence.md`, and Stage 4 pre-PR
+CodeRabbit pass evidence at `docs/work/BANDIT-036/coderabbit-review.md`. It
+was created from
 `docs/specs/BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING.json` and is linked as
 the active chore for `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` in
 `.bandit/bootstrap-gaps.json`. Do not start landing, retrospective closeout,
-the next bootstrap-gap chore, or unrelated Phase 8 work until Stage 4
-CodeRabbit, Local Qwen, and aggregate review evidence are recorded.
+the next bootstrap-gap chore, or unrelated Phase 8 work until Local Qwen and
+aggregate Stage 4 review evidence are recorded.
 
 `BANDIT-034` is landed and closed out. Its Stage 4 CodeRabbit and Local Qwen
 evidence pass, aggregate review evidence is current, Stage 5 landing verdict
@@ -464,8 +466,11 @@ evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
 `.bandit/events.jsonl` records the work-item creation, RED artifact creation,
 and implementation-evidence artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore` linked to
-`BANDIT-036`. The next required action is Stage 4 pre-PR CodeRabbit review,
-followed by Local Qwen and aggregate Stage 4 review evidence.
+`BANDIT-036`. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-036/coderabbit-review.md` at source head
+`8e3c7d8b6b64bb8800fc68e289147defb094aade` with no findings. The next
+required action is Stage 4 Local Qwen review, followed by aggregate Stage 4
+review evidence.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -477,8 +482,9 @@ that authority.
 
 **Active work item:** `BANDIT-036` - Structured Retrospective Mining is active
 with Stage 1 brief/spec, Stage 2 RED evidence, and Stage 3 implementation
-evidence recorded. The next action is Stage 4 pre-PR CodeRabbit review,
-followed by Local Qwen and aggregate Stage 4 review evidence; do not start
+evidence recorded. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-036/coderabbit-review.md`. The next action is Stage 4 Local
+Qwen review, followed by aggregate Stage 4 review evidence; do not start
 landing, retrospective closeout, the next bootstrap-gap chore, or unrelated
 Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active and linked to
@@ -531,10 +537,10 @@ Routing; `BANDIT-031` - Workflow Cockpit Status Foundation; `BANDIT-032` -
 Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening.
 
-**Expected next deliverable:** Stage 4 pre-PR CodeRabbit review evidence for
-`BANDIT-036` at the current review subject. After CodeRabbit is resolved or
-honestly blocked, run Local Qwen and aggregate Stage 4 review evidence before
-any landing or unrelated bootstrap work.
+**Expected next deliverable:** Stage 4 Local Qwen review evidence for
+`BANDIT-036` at the current review subject. After Local Qwen is resolved or
+honestly blocked, aggregate Stage 4 review evidence before any landing or
+unrelated bootstrap work.
 
 ## Known Bootstrap Gaps
 
@@ -552,8 +558,11 @@ These are expected because Bandit does not exist yet:
   structured improvement mining for agent execution smells such as recurring
   CodeRabbit invocation friction, but `bandit artifact create` can still render
   retrospectives without the required mining checklist. Stage 2 RED evidence is
-  recorded in `docs/work/BANDIT-036/red-evidence.md`; Stage 3 implementation is
-  the next action.
+  recorded in `docs/work/BANDIT-036/red-evidence.md`, Stage 3 implementation
+  evidence is recorded in `docs/work/BANDIT-036/implementation-evidence.md`,
+  and Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+  `docs/work/BANDIT-036/coderabbit-review.md`; Stage 4 Local Qwen review is the
+  next action.
 - `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is open and queued from the
   2026-05-26 strategic review: Workflow Trials and workflow-policy changes now
   require predeclared decision criteria, explicit uncertainty or
@@ -853,12 +862,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 pre-PR CodeRabbit review for `BANDIT-036` - Structured
-   Retrospective Mining, now that Stage 3 implementation evidence exists and
-   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. After CodeRabbit is
-   resolved or honestly blocked, run Local Qwen and aggregate Stage 4 review
-   evidence before landing, the next bootstrap-gap chore, or unrelated Phase 8
-   work.
+1. Run Stage 4 Local Qwen review for `BANDIT-036` - Structured Retrospective
+   Mining, now that Stage 4 pre-PR CodeRabbit pass evidence exists and
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is active. After Local Qwen is
+   resolved or honestly blocked, aggregate Stage 4 review evidence before
+   landing, the next bootstrap-gap chore, or unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -895,7 +903,7 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required to start Stage 4 review for `BANDIT-036`.
+No operator-owned input is required to continue Stage 4 review for `BANDIT-036`.
 Repo artifacts identify the gap, source artifacts, rationale, implementation
 boundary, and verification target. Halt only if the review or repair path would
 change product direction, UAT policy, workflow policy beyond the already
