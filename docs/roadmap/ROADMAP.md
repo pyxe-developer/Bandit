@@ -16,14 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-035`. Stage 5 landing verdict is recorded in
-`docs/work/BANDIT-035/landing-verdict.md`, includes the parser-required
-`work_item` field, `npm run bandit -- land-check BANDIT-035` passes with final
-verdict `safe-to-land`, and local-record landing action evidence is recorded in
-`docs/work/BANDIT-035/landing-action.md`. Do not start unrelated Phase 8 work or
-the next bootstrap-gap chore until retrospective closeout and gap-ledger
-disposition are recorded.
+**Current next step:** Create exactly one bootstrap-gap chore for
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`. `BANDIT-035` now has Stage 1
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
+CodeRabbit and Local Qwen review evidence, aggregate review evidence, Stage 5
+landing verdict, passing `land-check`, local-record landing action evidence,
+Stage 6 retrospective closeout, and resolved gap-ledger disposition for
+`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. Do not start unrelated
+Phase 8 work until the structured-retrospective-mining bootstrap gap is
+resolved, blocked on operator-owned input, or explicitly dispositioned.
 
 `BANDIT-034` is landed and closed out. Its scoped CodeRabbit provider rerun
 passes with no findings, Local Qwen passes with no findings, aggregate Stage 4
@@ -31,14 +32,14 @@ review evidence is current, Stage 5 landing verdict and local-record landing
 action evidence are recorded, and Stage 6 retrospective closeout evaluates
 `BANDIT-033-COCKPIT-SHELL-HARDENING` as `effective` with decision `keep`.
 
-`BANDIT-035` is active as the bootstrap-gap chore for
+`BANDIT-035` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. Its structured creation
 spec is recorded in
 `docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
+`.bandit/bootstrap-gaps.json` marks the gap resolved by `BANDIT-035`.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-review.md` at source head
 `cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. CodeRabbit
@@ -48,10 +49,12 @@ evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
 landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`,
-`npm run bandit -- land-check BANDIT-035` passes, and local-record landing
-action evidence is recorded in `docs/work/BANDIT-035/landing-action.md`; the
-next required action is Stage 6 retrospective closeout and bootstrap-gap
-disposition.
+`npm run bandit -- land-check BANDIT-035` passes, local-record landing action
+evidence is recorded in `docs/work/BANDIT-035/landing-action.md`, Stage 6
+retrospective closeout is recorded in `docs/work/BANDIT-035/retrospective.md`,
+and `.bandit/bootstrap-gaps.json` marks the gap resolved. The next required
+action is to create the bootstrap-gap chore for
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`.
 
 `BANDIT-031` - Workflow Cockpit Status Foundation is
 landed and closed out: the brief is recorded in `docs/work/BANDIT-031/brief.md`,
@@ -158,17 +161,17 @@ recorded in `docs/work/BANDIT-034/retrospective.md`. The source
 decision `keep`. Do not start local server/API mode, state-index persistence,
 scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior,
 product UAT, actor identity policy, claim lease, work surface reservation,
-PR/CI workflow, or unrelated feature work before `BANDIT-035` is resolved or
-explicitly dispositioned.
+PR/CI workflow, or unrelated feature work before the current bootstrap-gap queue
+is resolved, blocked on operator-owned input, or explicitly dispositioned.
 
-`BANDIT-035` - Artifact Create Landing Work Item Field is active as the
+`BANDIT-035` - Artifact Create Landing Work Item Field is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`.
 Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-035/brief.md`, Stage 2 RED evidence is
 recorded in `docs/work/BANDIT-035/red-evidence.md`, Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-035/implementation-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the gap to active chore `BANDIT-035`.
+`.bandit/bootstrap-gaps.json` marks the gap resolved by `BANDIT-035`.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-035/coderabbit-review.md` at source head
 `cb0a7ba506f6e4d9119a807915408463375c3480` with no findings. CodeRabbit
@@ -177,9 +180,11 @@ finding repair/disposition evidence is recorded in
 evidence is recorded in `docs/work/BANDIT-035/local-qwen-review.md` at source
 head `d432c8d7397292a6d8af09a51e0e08e69eaedc64`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-035/review-evidence.md`. Stage 5
-landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`, and
-`npm run bandit -- land-check BANDIT-035` passes; the next required action is
-local-record landing action.
+landing verdict is recorded in `docs/work/BANDIT-035/landing-verdict.md`,
+`npm run bandit -- land-check BANDIT-035` passes, local-record landing action
+evidence is recorded in `docs/work/BANDIT-035/landing-action.md`, Stage 6
+retrospective closeout is recorded in `docs/work/BANDIT-035/retrospective.md`,
+and `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
 `BANDIT-025` is closed out as the first Phase 6 Coordination Primitive slice.
 `BANDIT-026` is landed and closed out for typed state extensions. Its structured creation
@@ -331,11 +336,10 @@ recorded. `BANDIT-034` is landed and closed out as the
 Stage 6 evidence recorded in `docs/work/BANDIT-034/` and source-candidate
 evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-033/retrospective.md`, and
-`docs/work/BANDIT-034/retrospective.md`. The next required action is aggregate
-Stage 4 review evidence for `BANDIT-035`, the bootstrap-gap chore for
-`BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The newly recorded
-`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` remains queued behind that active
-chore.
+`docs/work/BANDIT-034/retrospective.md`. `BANDIT-035` is landed and closed out
+for `BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD`. The next required
+action is to create the bootstrap-gap chore for
+`BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
 retrospective mining and requires predeclared decision criteria, uncertainty or
 minimum-detectable-effect context, proxy-risk disposition, and re-evaluation
@@ -952,19 +956,19 @@ Current rule:
 
 Current priority:
 
-1. Record local-record landing action for `BANDIT-035` now that Stage 5 landing
-   verdict is recorded and `land-check` passes; do not run retrospective
-   closeout or unrelated Phase 8 work before `landing-action.md` exists.
+1. Create exactly one bootstrap-gap chore for
+   `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING`, now that `BANDIT-035` has
+   Stage 6 retrospective closeout and resolved gap-ledger disposition. Do not
+   start unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
 3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
-   queued or active. `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is queued
-   behind active `BANDIT-035` closeout, and
-   `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued behind structured
-   retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
+   queued or active. `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is the next
+   queued gap, and `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is queued
+   behind structured retrospective mining. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind
    the workflow-trial decision guardrails. `BANDIT-GAP-AGENT-EVALUATION-HARNESS`
    is queued behind the skill lifecycle contract. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is queued
    behind the agent evaluation harness. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`

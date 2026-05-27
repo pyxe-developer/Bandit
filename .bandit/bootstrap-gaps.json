@@ -222,17 +222,17 @@
     {
       "id": "BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD",
       "title": "Artifact create landing verdict omits work item field",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-034",
       "source_artifacts": [
         "docs/specs/BANDIT-034-landing-verdict.json",
         "docs/work/BANDIT-034/landing-verdict.md"
       ],
       "linked_work_item": "BANDIT-035",
-      "rationale": "During BANDIT-034 Stage 5, bandit artifact create rendered docs/work/BANDIT-034/landing-verdict.md without the required work_item field even though the landing verdict parser and template require it. land-check failed closed until Codex PM repaired the artifact manually.",
+      "rationale": "BANDIT-035 repaired the landing_verdict artifact renderer so generated landing verdict Markdown includes the parser-required work_item field, added focused artifact-create tests for parser-compatible landing verdict output, preserved fail-closed landing gate behavior, and recorded Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
       "verification_target": "docs/work/BANDIT-035/retrospective.md",
-      "next_action": "Record Stage 6 retrospective closeout and gap-ledger disposition for BANDIT-035 now that the Stage 5 landing verdict, passing land-check, and local-record landing action evidence exist; do not start unrelated Phase 8 work or the next bootstrap-gap chore before retrospective.md and gap-ledger disposition are recorded."
+      "next_action": "Use generated landing_verdict artifacts with parser-required work_item metadata for future Landing Agent evidence; keep land-check fail-closed if required landing verdict fields are missing."
     },
     {
       "id": "BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING",
@@ -249,7 +249,7 @@
       "linked_work_item": null,
       "rationale": "The operator identified recurring agent confusion about how to invoke CodeRabbit as a workflow-improvement signal that retrospectives have not surfaced. Stage 6 now requires structured improvement mining, but bandit artifact create can still render retrospectives without the mining checklist, so the artifact contract and tests need a dedicated repair.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-ARTIFACT-CREATE-LANDING-WORK-ITEM-FIELD is resolved, create a bootstrap-gap chore to make retrospective artifact creation require the structured improvement-mining checklist and cover recurring CodeRabbit/tool invocation friction with tests."
+      "next_action": "Create a bootstrap-gap chore to make retrospective artifact creation require the structured improvement-mining checklist and cover recurring CodeRabbit/tool invocation friction with tests."
     },
     {
       "id": "BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS",
