@@ -415,15 +415,16 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-038` - Skill
-Lifecycle Contract. `BANDIT-038` was created as the bootstrap-gap chore for
+**Current next action:** Implement Stage 3 for `BANDIT-038` - Skill Lifecycle
+Contract. `BANDIT-038` was created as the bootstrap-gap chore for
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`: the structured creation spec is recorded
 in `docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json`, the Stage 1 brief is
-recorded in `docs/work/BANDIT-038/brief.md`, `.bandit/events.jsonl` records the
-work-item creation event, and `.bandit/bootstrap-gaps.json` marks the gap active
-and linked to `BANDIT-038`. Do not create implementation evidence, review
-evidence, landing evidence, retrospective evidence, or unrelated Phase 8 work
-before Stage 2 RED evidence exists.
+recorded in `docs/work/BANDIT-038/brief.md`, Stage 2 RED evidence is recorded
+in `docs/work/BANDIT-038/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item and artifact creation events, and `.bandit/bootstrap-gaps.json` marks
+the gap active and linked to `BANDIT-038`. Do not create review evidence,
+landing evidence, retrospective evidence, or unrelated Phase 8 work before
+Stage 3 implementation evidence exists.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -494,13 +495,14 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-038` - Skill Lifecycle Contract. Stage 1 is
+**Active work item:** `BANDIT-038` - Skill Lifecycle Contract. Stage 2 is
 complete: the structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json`, the brief is recorded in
-`docs/work/BANDIT-038/brief.md`, and `.bandit/bootstrap-gaps.json` links
+`docs/work/BANDIT-038/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-038/red-evidence.md`, and `.bandit/bootstrap-gaps.json` links
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` to the active chore. The next action is to
-write Stage 2 RED evidence for `BANDIT-038`; do not start implementation or
-unrelated Phase 8 work first.
+implement the narrow Skill Lifecycle Contract repair for `BANDIT-038`; do not
+start review, landing, retrospective, or unrelated Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is active and linked to `BANDIT-038`.
@@ -525,7 +527,8 @@ behind the token-cost failsafe gap.
 `BANDIT-035` - Artifact Create Landing Work Item Field is landed and closed out.
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out.
 `BANDIT-037` - Workflow Trial Decision Guardrails is landed and closed out.
-`BANDIT-038` - Skill Lifecycle Contract is active at Stage 1.
+`BANDIT-038` - Skill Lifecycle Contract is active at Stage 2, with RED
+evidence recorded and Stage 3 implementation next.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -554,8 +557,9 @@ Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-038` -
-Skill Lifecycle Contract, before implementation or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 3 implementation evidence for
+`BANDIT-038` - Skill Lifecycle Contract, before review, landing, retrospective,
+or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -601,8 +605,9 @@ These are expected because Bandit does not exist yet:
   first-class lifecycle contract with owner, version, changelog, intended
   stages, required tools, forbidden actions, evaluation packets, and rollback
   criteria before they become required stage policy or benchmark variants.
-  Stage 1 brief evidence is recorded in `docs/work/BANDIT-038/brief.md`; the
-  next step is Stage 2 RED evidence.
+  Stage 1 brief evidence is recorded in `docs/work/BANDIT-038/brief.md`, and
+  Stage 2 RED evidence is recorded in `docs/work/BANDIT-038/red-evidence.md`;
+  the next step is Stage 3 implementation.
 - `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is open and queued from the 2026-05-26
   strategic review: Bandit has improvement-evaluation tooling, but no harness
   that replays fixed packets against agents, reviewer profiles, skills, models,
@@ -889,10 +894,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-038` - Skill Lifecycle Contract now
-   that the bootstrap-gap chore has been created and linked to
-   `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`. Do not start implementation or
-   unrelated Phase 8 work first.
+1. Implement Stage 3 for `BANDIT-038` - Skill Lifecycle Contract now that RED
+   evidence exists for `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT`. Do not start
+   review, landing, retrospective, or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

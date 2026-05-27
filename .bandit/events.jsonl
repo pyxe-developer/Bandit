@@ -45,3 +45,4 @@
 {"type":"artifact_created","work_item":"BANDIT-037","message":"Created landing_verdict artifact at docs/work/BANDIT-037/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-037","message":"Created retrospective artifact at docs/work/BANDIT-037/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-038","message":"Created work item BANDIT-038 from docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json"}
+{"type":"artifact_created","work_item":"BANDIT-038","message":"Created red_evidence artifact at docs/work/BANDIT-038/red-evidence.md"}
