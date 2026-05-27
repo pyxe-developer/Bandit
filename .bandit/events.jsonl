@@ -47,3 +47,4 @@
 {"type":"work_item_created","work_item":"BANDIT-038","message":"Created work item BANDIT-038 from docs/specs/BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.json"}
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created red_evidence artifact at docs/work/BANDIT-038/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-038","message":"Created implementation_evidence artifact at docs/work/BANDIT-038/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-038","message":"Created landing_verdict artifact at docs/work/BANDIT-038/landing-verdict.md"}

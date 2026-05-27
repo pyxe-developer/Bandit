@@ -1,0 +1,18 @@
+# BANDIT-038 Landing Verdict
+
+contract_version: 1
+work_item: BANDIT-038
+source_head: a04ea78f05db6ba67c11a22cd85395ecc89d745a
+review_evidence: docs/work/BANDIT-038/review-evidence.md
+tests_status: pass
+clean_code_status: pass
+coderabbit_state: pass
+local_qwen_state: pass
+escalated_review_state: not_applicable
+uat_status: not_applicable
+source_drift_status: current
+operator_input_status: none_required
+landing_agent_state: pass
+landing_agent_replacement_evidence: not_applicable
+final_verdict: safe-to-land
+rationale: BANDIT-038 is safe to land as a bounded bootstrap-gap improvement chore because it resolves BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT by adding a repo-native Skill Lifecycle Contract template, policy artifact, validation command, fail-closed validation integration, installed-skill drift evidence, and focused tests without treating installed global skills as canonical Bandit state. Current verification passes include node --test test/skill-lifecycle-contracts.test.mjs with 6 tests, npm test with 274 tests, npm run typecheck, npm run bandit -- skill-lifecycle validate --json, npm run bandit -- validate, npm run bandit -- gaps list, node ./bin/bandit.mjs cockpit status --json, node ./bin/bandit.mjs review-subject-hash BANDIT-038 with current review subject hash 965a8a584764d699b2cf625ec1b4349592af14b15d18557182e08d45d3ed34de, and aggregate Stage 4 review evidence at docs/work/BANDIT-038/review-evidence.md. Stage 4 evidence records pre-PR CodeRabbit pass evidence, Local Qwen pass evidence, escalated review not_applicable rationale, clean-code pass, no open findings, no required operator input, and current source-drift status. Product UAT is not applicable because this non-product chore changes local workflow skill lifecycle contract policy, validation, templates, drift evidence, and focused tests only; it does not ship a browser-clickable operator surface. No escalated reviewer, supply-chain gate, operator approval, product direction, business tradeoff, cost/risk override, policy override, installed global skill edit, dependency or lockfile change, fetched-prompt path, paid reviewer route, live reviewer-routing change, scheduler execution, claim authority, worktree lifecycle, local server/API mode, state-index persistence, PR/CI workflow, automatic merge/push/deploy behavior, or unrelated Phase 8 feature behavior is introduced.
