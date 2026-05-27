@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record the Stage 5 landing verdict for `BANDIT-037` -
-Workflow Trial Decision Guardrails using the current aggregate Stage 4 review
-evidence.
+**Current next step:** Run local-record landing for `BANDIT-037` - Workflow
+Trial Decision Guardrails because Stage 5 landing verdict evidence is recorded
+with final verdict `safe-to-land`.
 Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-037/coderabbit-review.md` at source head
 `f84a7c793a151295428c251ca74b1a8d8dc309bd` with no findings. Refreshed Stage 4
@@ -32,9 +32,11 @@ the earlier and refreshed Local Qwen findings is recorded in
 `docs/work/BANDIT-037/qwen-finding-disposition.md`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-037/review-evidence.md` with current
 review subject hash
-`9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. Do not
-start local-record landing, retrospective, or unrelated Phase 8 work before the
-Stage 5 landing verdict is recorded.
+`9368bd4c1e0b17f6df0adebf9a6f55a5f38bac3f05e07d2825bcbd546048f51f`. Stage 5
+landing verdict is recorded in `docs/work/BANDIT-037/landing-verdict.md` with
+final verdict `safe-to-land`. Do not start retrospective, gap-ledger
+disposition, the next bootstrap-gap chore, or unrelated Phase 8 work before
+local-record landing action evidence exists.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -1025,10 +1027,11 @@ Current rule:
 
 Current priority:
 
-1. Record the Stage 5 landing verdict for `BANDIT-037` - Workflow Trial
-   Decision Guardrails using the current aggregate Stage 4 review evidence.
-   Do not create local-record landing, retrospective, or unrelated Phase 8 work
-   before the landing verdict is recorded.
+1. Run local-record landing for `BANDIT-037` - Workflow Trial Decision
+   Guardrails because `docs/work/BANDIT-037/landing-verdict.md` records
+   `safe-to-land`. Do not create retrospective, gap-ledger disposition, the next
+   bootstrap-gap chore, or unrelated Phase 8 work before landing action evidence
+   is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
