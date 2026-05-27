@@ -415,12 +415,13 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run Stage 4 pre-PR CodeRabbit review for
-`BANDIT-037` - Workflow Trial Decision Guardrails at the current review
-subject. Stage 3 implementation evidence is recorded in
-`docs/work/BANDIT-037/implementation-evidence.md`; do not run Local Qwen,
+**Current next action:** Run Stage 4 Local Qwen review for `BANDIT-037` -
+Workflow Trial Decision Guardrails at the current review subject. Stage 4
+pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-037/coderabbit-review.md` at source head
+`abbf44bfe329ca982c3c1f7296c1be997d33ff02` with no findings; do not run
 aggregate review evidence, landing, retrospective, or unrelated Phase 8 work
-before CodeRabbit evidence is recorded.
+before Local Qwen evidence is recorded.
 `BANDIT-037` was created with
 `bandit work-item create docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`;
 its Stage 1 brief is recorded in `docs/work/BANDIT-037/brief.md`, Stage 2 RED
@@ -506,10 +507,12 @@ structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS.json`. Stage 2 RED
 evidence is recorded in `docs/work/BANDIT-037/red-evidence.md`, and Stage 3
 implementation evidence is recorded in
-`docs/work/BANDIT-037/implementation-evidence.md`. The next action is Stage 4
-pre-PR CodeRabbit review for `BANDIT-037`; do not run Local Qwen, aggregate
-review evidence, landing, retrospective, or unrelated Phase 8 work before
-CodeRabbit evidence is recorded.
+`docs/work/BANDIT-037/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
+pass evidence is recorded in `docs/work/BANDIT-037/coderabbit-review.md` at
+source head `abbf44bfe329ca982c3c1f7296c1be997d33ff02` with no findings. The
+next action is Stage 4 Local Qwen review for `BANDIT-037`; do not run
+aggregate review evidence, landing, retrospective, or unrelated Phase 8 work
+before Local Qwen evidence is recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is active and linked to
 `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is queued behind the
@@ -561,9 +564,9 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining.
 
-**Expected next deliverable:** Stage 4 pre-PR CodeRabbit evidence at
-`docs/work/BANDIT-037/coderabbit-review.md`, before Local Qwen, aggregate
-review evidence, landing, retrospective, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 4 Local Qwen evidence at
+`docs/work/BANDIT-037/local-qwen-review.md`, before aggregate review evidence,
+landing, retrospective, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -589,9 +592,11 @@ These are expected because Bandit does not exist yet:
   uncertainty or minimum-detectable-effect context, proxy-risk disposition, and
   a later re-evaluation window before keep, revise, revert, or double_down
   decisions can change policy. Stage 2 RED evidence is recorded in
-  `docs/work/BANDIT-037/red-evidence.md`, and Stage 3 implementation evidence
-  is recorded in `docs/work/BANDIT-037/implementation-evidence.md`; the next
-  action is Stage 4 pre-PR CodeRabbit review for `BANDIT-037`.
+  `docs/work/BANDIT-037/red-evidence.md`, Stage 3 implementation evidence is
+  recorded in `docs/work/BANDIT-037/implementation-evidence.md`, and Stage 4
+  pre-PR CodeRabbit pass evidence is recorded in
+  `docs/work/BANDIT-037/coderabbit-review.md`; the next action is Stage 4
+  Local Qwen review for `BANDIT-037`.
 - `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is open and queued from the 2026-05-26
   strategic review: load-bearing skills now need a first-class lifecycle
   contract with owner, version, changelog, intended stages, required tools,
@@ -923,15 +928,15 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before attempting Stage 4 pre-PR
-CodeRabbit review for `BANDIT-037` - Workflow Trial Decision Guardrails. Repo
-artifacts identify the active work item, review target, source artifacts,
-queue order, implementation evidence, and verification target. Halt only if the
-next step would change product direction, UAT policy, workflow policy beyond
-enforcing the already recorded Workflow Trial guardrail requirement, business
-tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
-live routing, scheduler authority, claim/worktree authority, or broader
-workflow scope.
+No operator-owned input is required before attempting Stage 4 Local Qwen review
+for `BANDIT-037` - Workflow Trial Decision Guardrails. Repo artifacts identify
+the active work item, review target, source artifacts, queue order,
+implementation evidence, CodeRabbit evidence, and verification target. Halt
+only if the next step would change product direction, UAT policy, workflow
+policy beyond enforcing the already recorded Workflow Trial guardrail
+requirement, business tradeoffs, cost/risk posture, external service setup,
+paid reviewer routing, live routing, scheduler authority, claim/worktree
+authority, or broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
