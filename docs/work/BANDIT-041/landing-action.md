@@ -9,8 +9,8 @@
 | Field | Value |
 |---|---|
 | Action type | local_record |
-| Source head | `cb78d0b60db1fcc438fc9592d39d6a856feaeddd` |
-| Current head | `8dde7476bc0f72bcf5a4f0a2e83ea4a383620101` |
+| Source head | `b597af17aa70469d40bb748ad69247595ebc173a` |
+| Current head | `b3b614d4aa86f1cfa0613af19b643c74a2b5b4dc` |
 | Final verdict | safe-to-land |
 
 ## Landing Agent Evidence

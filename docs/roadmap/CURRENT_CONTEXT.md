@@ -394,7 +394,7 @@ recorded in `docs/work/BANDIT-040/` and `.bandit/bootstrap-gaps.json`.
 **Current next action:** Record Stage 6 retrospective closeout and
 bootstrap-gap disposition for `BANDIT-041` after local-record landing.
 `docs/work/BANDIT-041/landing-action.md` records local-record landing at
-current head `8dde7476bc0f72bcf5a4f0a2e83ea4a383620101`; Stage 4 and Stage 5
+current head `b3b614d4aa86f1cfa0613af19b643c74a2b5b4dc`; Stage 4 and Stage 5
 evidence were refreshed after registering explicit layered risk-classification
 evidence at `.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`. Create the
 `BANDIT-041` retrospective, capture any improvement dispositions, update
