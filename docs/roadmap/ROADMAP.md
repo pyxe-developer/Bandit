@@ -16,21 +16,22 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-045` -
-CAS Fenced Claim Authority. Its structured creation spec is recorded in
+**Current next step:** Implement Stage 3 for `BANDIT-045` - CAS Fenced Claim
+Authority. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-045/brief.md`, `.bandit/events.jsonl` records the
-work-item creation event, and `.bandit/bootstrap-gaps.json` marks
+recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence is recorded
+in `docs/work/BANDIT-045/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item creation and RED artifact creation events, and
+`.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` active with linked work item
-`BANDIT-045`. The next step is RED evidence only: define failing focused tests
-and deterministic fault-injecting or property-style Claim Safety Invariant
-simulation for Git refs CAS claim authority, fencing tokens, idempotency keys,
-claim projection reconciliation, stale-agent rejection, and Work-Surface
-Wait-For Graph cycle refusal. Do not start implementation, Git Mutation
-Serializer, Worktree Bootstrap Contract, scheduler, worktree lifecycle,
-cockpit UI/server/API work, automatic merge/push/deploy, product UAT approval,
-actor identity policy, PR/CI workflow, or any later bootstrap gap before Stage 2
-RED evidence is recorded and verified.
+`BANDIT-045`. The next step is implementation only: make the focused RED tests
+pass for Git refs CAS claim authority, fencing tokens, idempotency keys, claim
+projection reconciliation, stale-agent rejection, deterministic Claim Safety
+Invariant simulation, and Work-Surface Wait-For Graph cycle refusal. Do not
+start Git Mutation Serializer, Worktree Bootstrap Contract, scheduler,
+worktree lifecycle, cockpit UI/server/API work, automatic merge/push/deploy,
+product UAT approval, actor identity policy, PR/CI workflow, or any later
+bootstrap gap before Stage 3 implementation evidence is recorded and verified.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -570,8 +571,9 @@ claimability must detect wait-for graph cycles, not just pairwise overlap.
 Claim, release, reconcile, worktree-lock, and claim-gated side-effect
 correctness must be backed by declared Claim Safety Invariants plus
 deterministic fault-injecting or property-style simulation; example-only
-duplicate-claim tests do not satisfy the gate. `BANDIT-045` Stage 1 spec and
-brief evidence is recorded; the next action is Stage 2 RED evidence.
+duplicate-claim tests do not satisfy the gate. `BANDIT-045` Stage 1 spec,
+brief evidence, and Stage 2 RED evidence are recorded; the next action is
+Stage 3 implementation.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is constrained by the accepted
 2026-05-27 Git mutation serializer decision: shared `.git` worktree and
 repository plumbing mutations require a CLI-owned single-writer guard, while
@@ -838,8 +840,8 @@ Stage 1 through Stage 6 evidence and gap-ledger disposition are recorded.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`; Stage 1 through Stage 6 evidence
 and gap-ledger disposition are recorded. `BANDIT-045` is active as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`; Stage 1
-spec/brief evidence is recorded. The current target is Stage 2 RED evidence for
-`BANDIT-045`.
+spec/brief evidence and Stage 2 RED evidence are recorded. The current target
+is Stage 3 implementation for `BANDIT-045`.
 
 ## Phase Map
 
@@ -1154,14 +1156,14 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-045` -
-   CAS Fenced Claim Authority. The RED evidence must define failing tests and
-   deterministic fault-injecting or property-style Claim Safety Invariant
-   simulation for refs/bandit/* Git refs CAS claim authority, git update-ref
-   --stdin compare-and-swap transactions, `.bandit` projection regeneration,
-   fencing tokens, idempotency keys, Work-Surface Wait-For Graph cycle
-   detection, stale-agent rejection, duplicate side-effect prevention, claim
-   authority/projection/history disagreement, and recovery-required behavior.
+1. Implement Stage 3 for `BANDIT-045` - CAS Fenced Claim Authority. The
+   implementation must make the focused RED tests pass for refs/bandit/* Git
+   refs CAS claim authority, git update-ref --stdin compare-and-swap
+   transactions, `.bandit` projection regeneration, fencing tokens,
+   idempotency keys, Work-Surface Wait-For Graph cycle detection, stale-agent
+   rejection, duplicate side-effect prevention, claim authority/projection/
+   history disagreement, deterministic Claim Safety Invariant simulation, and
+   recovery-required behavior.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
