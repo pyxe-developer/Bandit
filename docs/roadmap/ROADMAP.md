@@ -16,31 +16,23 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 5 landing verdict evidence for
-`BANDIT-044` - Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
-`docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
-evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
-`test/operator-boundary.test.mjs`, Stage 3 implementation evidence in
-`docs/work/BANDIT-044/implementation-evidence.md`, lifecycle event evidence in
-`.bandit/events.jsonl`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. `docs/work/BANDIT-044/coderabbit-review.md`
-records Stage 4 pre-PR CodeRabbit pass evidence at source head
-`9dff2b66ee95286c764433a78134a173f2baaee5`; the scoped CodeRabbit CLI review
-completed with findings 0. `docs/work/BANDIT-044/local-qwen-review.md` records
-Stage 4 Local Qwen pass evidence at source head
-`1e3e02e6e6a7368f789d52b1d9aa7aae4fbf8923` with no findings. Aggregate Stage
-4 review evidence is recorded in `docs/work/BANDIT-044/review-evidence.md`
-with current `review_subject_hash`
-`8ddd34768c54b009e6955f59660c2109cba383febdf7d9a84cca9b6c27b5e871`,
-CodeRabbit pass evidence, Local Qwen pass evidence, Codex PM Stage 4
-disposition, no open findings, and no required operator input. Do not run
-local-record landing, retrospective closeout, unrelated Phase 8 work, local
-server/API mode, state-index persistence, scheduler execution, worktree
-lifecycle, claim leases, work surface reservations, automatic merge/push/deploy
-behavior, product UAT approval, actor identity policy, PR/CI workflow, or
-another unrelated work item before Stage 5 landing verdict evidence is
-recorded.
+**Current next step:** Repair the `BANDIT-044` Stage 5 auto-landing blocker
+before local-record landing. Stage 5 landing verdict evidence is recorded in
+`docs/work/BANDIT-044/landing-verdict.md` with final verdict `safe-to-land`,
+and `npm run bandit -- land-check BANDIT-044` passes. The auto-land check
+blocks on missing layered risk-classification and supply-chain gate evidence
+for `BANDIT-044`; blocker evidence is recorded in
+`docs/work/BANDIT-044/landing-blocker.md`. Register explicit
+`.bandit/policy/risk-classifications/BANDIT-044-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json` evidence,
+refresh Stage 4 and Stage 5 evidence if the review-subject hash changes, then
+rerun `npm run bandit -- auto-land-check BANDIT-044` before local-record
+landing. Do not run local-record landing, retrospective closeout, unrelated
+Phase 8 work, local server/API mode, state-index persistence, scheduler
+execution, worktree lifecycle, claim leases, work surface reservations,
+automatic merge/push/deploy behavior, product UAT approval, actor identity
+policy, PR/CI workflow, or another unrelated work item before this Stage 5
+repair is complete.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its structured creation spec
@@ -62,7 +54,11 @@ review evidence is recorded in `docs/work/BANDIT-044/review-evidence.md` with
 current `review_subject_hash`
 `8ddd34768c54b009e6955f59660c2109cba383febdf7d9a84cca9b6c27b5e871`,
 CodeRabbit pass evidence, Local Qwen pass evidence, Codex PM Stage 4
-disposition, no open findings, and no required operator input.
+disposition, no open findings, and no required operator input. Stage 5 landing
+verdict evidence is recorded in `docs/work/BANDIT-044/landing-verdict.md`, and
+`docs/work/BANDIT-044/landing-blocker.md` records that auto-landing is blocked
+until explicit layered risk-classification and supply-chain gate evidence is
+registered for `BANDIT-044`.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its
@@ -850,9 +846,11 @@ is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-SUPPLY-CHAIN-GATE`; Stage 1 through Stage 6 evidence and
 gap-ledger disposition are recorded. `BANDIT-043` is landed and closed out as
 the bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`;
-Stage 1 through Stage 6 evidence and gap-ledger disposition are recorded. The
-next target is creating the bootstrap-gap chore for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`.
+Stage 1 through Stage 6 evidence and gap-ledger disposition are recorded.
+`BANDIT-044` has Stage 1 through Stage 5 landing verdict evidence recorded, and
+the current target is repairing the Stage 5 auto-landing blocker by registering
+explicit layered risk-classification and supply-chain gate evidence before
+local-record landing.
 
 ## Phase Map
 
@@ -1167,19 +1165,20 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 5 landing verdict evidence for `BANDIT-044` -
+1. Repair the Stage 5 auto-landing blocker for `BANDIT-044` -
    Operator Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log
    Authority is landed and closed out, and `BANDIT-044` now has Stage 1 brief
    evidence, Stage 2 RED evidence, Stage 3 implementation evidence, focused
-   tests, active bootstrap-gap linkage, and Stage 4 pre-PR CodeRabbit pass
-   evidence recorded in `docs/work/BANDIT-044/coderabbit-review.md` after the
-   scoped provider run completed with findings 0. Stage 4 Local Qwen pass
-   evidence is recorded in `docs/work/BANDIT-044/local-qwen-review.md`.
-   Aggregate Stage 4 review evidence is recorded in
-   `docs/work/BANDIT-044/review-evidence.md` with current
-   `review_subject_hash`. Do not run local-record landing, retrospective
-   closeout, or unrelated Phase 8 work before Stage 5 landing verdict evidence
-   is recorded.
+   tests, active bootstrap-gap linkage, Stage 4 pre-PR CodeRabbit pass
+   evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4 review
+   evidence with current `review_subject_hash`, Stage 5 landing verdict
+   evidence, and Stage 5 landing blocker evidence. The land-check passes, but
+   `npm run bandit -- auto-land-check BANDIT-044` blocks on missing layered
+   risk-classification and supply-chain gate evidence. Register those policy
+   evidence artifacts, refresh Stage 4 and
+   Stage 5 evidence if the review-subject hash changes, and rerun
+   `auto-land-check` before local-record landing, retrospective closeout, or
+   unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

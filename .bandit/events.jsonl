@@ -77,3 +77,4 @@
 {"type":"work_item_created","work_item":"BANDIT-044","message":"Created work item BANDIT-044 from docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json"}
 {"type":"artifact_created","work_item":"BANDIT-044","message":"Created red_evidence artifact at docs/work/BANDIT-044/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-044","message":"Created implementation_evidence artifact at docs/work/BANDIT-044/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-044","message":"Created landing_verdict artifact at docs/work/BANDIT-044/landing-verdict.md"}
