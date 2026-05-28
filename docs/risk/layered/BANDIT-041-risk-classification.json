@@ -1,0 +1,126 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-041",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/risk-classification.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/layered-risk-classification.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/risk-classification.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/risk-classification.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/auto-land-check.ts",
+      "surface": "landing_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/risk-classification.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/landing-gates.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "repo_native_workflow_gate",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-041/implementation-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-041/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/risk-classification.test.mjs test/landing-gates.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-041/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-041/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-041/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-041/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-041/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "not_touched",
+    "evidence_path": "docs/work/BANDIT-041/qwen-finding-disposition.md"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-ADVERSARIAL-REVIEW",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-041/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-041 is a non-product bootstrap-gap chore that implements the already queued layered risk classification gate. It needs CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-041 changes a repo-native workflow gate, policy/template validation, CLI command wiring, auto-land-check consumption, and focused tests. It has no never-auto-landable surface, no dependency or lockfile change, no CI or release workflow change, no external side-effecting automation, no product UAT surface, and no unresolved source-trust, input-quarantine, or supply-chain state. Existing Stage 4 evidence records CodeRabbit pass, Local Qwen non_blocking with PM disposition, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/work/BANDIT-041/brief.md",
+    "docs/work/BANDIT-041/implementation-evidence.md",
+    "docs/work/BANDIT-041/review-evidence.md",
+    "docs/work/BANDIT-041/qwen-finding-disposition.md",
+    "docs/work/BANDIT-041/landing-verdict.md"
+  ]
+}
