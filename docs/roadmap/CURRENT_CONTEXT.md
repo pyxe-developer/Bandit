@@ -393,27 +393,30 @@ landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
 disposition are recorded in `docs/work/BANDIT-044/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-045` - CAS
-Fenced Claim Authority. Its structured creation spec, Stage 1 brief, Stage 2 RED
-evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
-evidence, Stage 4 Local Qwen `non_blocking` evidence, Codex PM finding
-disposition, explicit layered risk-classification evidence, explicit
-supply-chain gate evidence, and aggregate Stage 4 review evidence are recorded
-in `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
-`docs/work/BANDIT-045/`, and `.bandit/policy/`. Aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-045/review-evidence.md` with current
-review subject hash
-`8909bcf05f22489693876232412561b360af9b6aeb8c516b1b4d2833d9ca0051`,
-CodeRabbit `pass`, Local Qwen `non_blocking`, PM disposition `pass`,
-clean-code `pass`, UAT `not_applicable`, and no operator-owned input required.
-The next step is Stage 5 landing verdict only: write landing-verdict evidence
-from the current tests, Stage 4 review evidence, risk/supply-chain evidence,
-source-drift state, clean-code state, UAT state, and landing-agent state. Do not
-start landing action, retrospective closeout, Git Mutation Serializer, Worktree
-Bootstrap Contract, scheduler, worktree lifecycle, cockpit UI/server/API work,
-automatic merge/push/deploy, product UAT approval, actor identity policy, PR/CI
-workflow, or any later bootstrap gap before Stage 5 landing verdict evidence is
-recorded and verified.
+**Current next action:** Record local-record landing action evidence for
+`BANDIT-045` - CAS Fenced Claim Authority. Its structured creation spec, Stage
+1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+CodeRabbit pass evidence, Stage 4 Local Qwen `non_blocking` evidence, Codex PM
+finding disposition, explicit layered risk-classification evidence, explicit
+supply-chain gate evidence, aggregate Stage 4 review evidence, and Stage 5
+landing verdict evidence are recorded in
+`docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
+`docs/specs/BANDIT-045-landing-verdict.json`, `docs/work/BANDIT-045/`, and
+`.bandit/policy/`. Stage 5 landing verdict evidence is recorded in
+`docs/work/BANDIT-045/landing-verdict.md` with final verdict `safe-to-land`;
+`npm run bandit -- land-check BANDIT-045` and
+`npm run bandit -- auto-land-check BANDIT-045` pass; source drift is current;
+CodeRabbit is `pass`; Local Qwen is `non_blocking` with PM disposition and
+durable follow-up routing; clean-code status is `pass`; UAT is
+`not_applicable`; and no operator-owned input is required. The next step is
+Stage 5 landing action only: run the supported local-record Landing Agent path
+with `npm run bandit -- land BANDIT-045 --action local-record` after confirming
+the committed landing-verdict/context handoff is clean. Do not start
+retrospective closeout, Git Mutation Serializer, Worktree Bootstrap Contract,
+scheduler, worktree lifecycle, cockpit UI/server/API work, automatic
+merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
+or any later bootstrap gap before landing action evidence is recorded and
+verified.
 
 `BANDIT-045` - CAS Fenced Claim Authority is active as the bootstrap-gap chore
 for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured creation spec and
@@ -601,7 +604,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (aggregate Stage 4 review evidence recorded; next action is Stage 5 landing verdict).
+**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 5 landing verdict recorded; next action is local-record landing action).
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -619,12 +622,15 @@ CodeRabbit pass evidence is recorded in
 Local Qwen findings is recorded in
 `docs/work/BANDIT-045/qwen-finding-disposition.md`. Explicit layered
 risk-classification and supply-chain gate evidence is recorded in
-`.bandit/policy/`, and aggregate Stage 4 review evidence is recorded in
+`.bandit/policy/`, aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-045/review-evidence.md` with current review subject hash
-`8909bcf05f22489693876232412561b360af9b6aeb8c516b1b4d2833d9ca0051`. The next
-required evidence is Stage 5 landing verdict evidence; landing action and
-retrospective evidence must not be created before the landing verdict is
-recorded and verified.
+`8909bcf05f22489693876232412561b360af9b6aeb8c516b1b4d2833d9ca0051`, and Stage
+5 landing verdict evidence is recorded in
+`docs/work/BANDIT-045/landing-verdict.md` with final verdict `safe-to-land`.
+`npm run bandit -- land-check BANDIT-045` and
+`npm run bandit -- auto-land-check BANDIT-045` pass. The next required evidence
+is local-record landing action evidence; retrospective evidence must not be
+created before the landing action is recorded and verified.
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -770,10 +776,11 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary.
 
-**Expected next deliverable:** Stage 5 landing verdict evidence for
-`BANDIT-045`, using current tests, aggregate Stage 4 review evidence, explicit
-risk/supply-chain evidence, clean-code status, UAT `not_applicable` status, and
-landing-agent state.
+**Expected next deliverable:** Local-record landing action evidence for
+`BANDIT-045`, using the recorded `safe-to-land` verdict, current
+`land-check`/`auto-land-check` readiness, aggregate Stage 4 review evidence,
+explicit risk/supply-chain evidence, clean-code status, UAT `not_applicable`
+status, and Landing Agent state.
 
 ## Known Bootstrap Gaps
 
@@ -1134,10 +1141,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 5 landing verdict evidence for `BANDIT-045` - CAS Fenced Claim
-   Authority using current tests, aggregate Stage 4 review evidence, explicit
-   risk/supply-chain evidence, clean-code status, UAT `not_applicable` status,
-   source-drift status, and landing-agent state.
+1. Record local-record landing action evidence for `BANDIT-045` - CAS Fenced
+   Claim Authority using the recorded `safe-to-land` verdict, current
+   `land-check`/`auto-land-check` readiness, aggregate Stage 4 review evidence,
+   explicit risk/supply-chain evidence, clean-code status, UAT
+   `not_applicable` status, source-drift status, and Landing Agent state.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1172,12 +1180,12 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next `BANDIT-045` Stage 5
-landing-verdict step. Repo artifacts identify the active gap, source artifacts,
+landing-action step. Repo artifacts identify the active gap, source artifacts,
 accepted Git refs backend decision, Stage 1 brief, Stage 2 RED evidence, Stage
 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
 Local Qwen `non_blocking` evidence, Codex PM disposition, explicit
-risk/supply-chain evidence, aggregate Stage 4 review evidence, and landing
-verdict requirements.
+risk/supply-chain evidence, aggregate Stage 4 review evidence, Stage 5 landing
+verdict evidence, and passing `land-check`/`auto-land-check` readiness.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
