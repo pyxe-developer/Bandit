@@ -396,7 +396,7 @@ bootstrap-gap disposition for `BANDIT-041` after local-record landing.
 `docs/work/BANDIT-041/landing-action.md` records local-record landing at
 current head `8dde7476bc0f72bcf5a4f0a2e83ea4a383620101`; Stage 4 and Stage 5
 evidence were refreshed after registering explicit layered risk-classification
-evidence at `docs/risk/layered/BANDIT-041-risk-classification.json`. Create the
+evidence at `.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`. Create the
 `BANDIT-041` retrospective, capture any improvement dispositions, update
 `.bandit/bootstrap-gaps.json` for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`,
 and then update roadmap context. Do not create the
@@ -417,13 +417,13 @@ Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-041/local-qwen-review.md` and
 `docs/work/BANDIT-041/qwen-finding-disposition.md`, aggregate Stage 4 review
 evidence with current review subject hash
-`65a9409837736f2756972e10bd5a2049b84da528b959804a544108145be4e824` is
+`f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994` is
 recorded in `docs/work/BANDIT-041/review-evidence.md`, Stage 5 landing verdict
 evidence is recorded in `docs/work/BANDIT-041/landing-verdict.md` with final
 verdict `safe-to-land`, Stage 5 landing blocker evidence is recorded in
 `docs/work/BANDIT-041/landing-blocker.md`, explicit layered risk-classification
 landing repair evidence is recorded in
-`docs/risk/layered/BANDIT-041-risk-classification.json`, and local-record
+`.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`, and local-record
 landing action evidence is recorded in `docs/work/BANDIT-041/landing-action.md`.
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 implementation-evidence artifact, and landing-verdict artifact events, and
@@ -523,13 +523,13 @@ non-blocking Qwen findings is recorded in
 `docs/work/BANDIT-041/qwen-finding-disposition.md`, aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-041/review-evidence.md` with current
 review subject hash
-`65a9409837736f2756972e10bd5a2049b84da528b959804a544108145be4e824`,
+`f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994`,
 Stage 5 landing verdict evidence is recorded in
 `docs/work/BANDIT-041/landing-verdict.md` with final verdict `safe-to-land`,
 Stage 5 landing blocker evidence is recorded in
 `docs/work/BANDIT-041/landing-blocker.md`, explicit layered risk-classification
 landing repair evidence is recorded in
-`docs/risk/layered/BANDIT-041-risk-classification.json`, and local-record
+`.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`, and local-record
 landing action evidence is recorded in `docs/work/BANDIT-041/landing-action.md`.
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 implementation-evidence artifact, and landing-verdict artifact events, and

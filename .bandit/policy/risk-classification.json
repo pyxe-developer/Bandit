@@ -39,7 +39,7 @@
     {
       "work_item": "BANDIT-041",
       "decision_kind": "auto_landing",
-      "evidence_path": "docs/risk/layered/BANDIT-041-risk-classification.json"
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-041-risk-classification.json"
     }
   ]
 }

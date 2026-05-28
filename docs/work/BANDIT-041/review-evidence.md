@@ -2,14 +2,14 @@
 
 contract_version: 1
 work_item: BANDIT-041
-source_head: cb78d0b60db1fcc438fc9592d39d6a856feaeddd
-review_subject_hash: 65a9409837736f2756972e10bd5a2049b84da528b959804a544108145be4e824
+source_head: b597af17aa70469d40bb748ad69247595ebc173a
+review_subject_hash: f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
-  - Stage 4 refresh repaired the Stage 5 landing blocker by registering explicit layered risk-classification evidence for BANDIT-041 in .bandit/policy/risk-classification.json and docs/risk/layered/BANDIT-041-risk-classification.json.
+  - Stage 4 refresh repaired the Stage 5 landing blocker by registering explicit layered risk-classification evidence for BANDIT-041 in .bandit/policy/risk-classification.json and .bandit/policy/risk-classifications/BANDIT-041-risk-classification.json.
   - npm run bandit -- risk-classification validate --json passed with BANDIT-041 selected_review_depth pre_pr_coderabbit_plus_qwen, operator_supervision not_required, and auto_landing_eligibility eligible.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-041 produced 65a9409837736f2756972e10bd5a2049b84da528b959804a544108145be4e824 from review-subject policy v1 after the risk-classification policy update.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-041 produced f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994 from review-subject policy v1 after the risk-classification policy update.
   - node --test test/risk-classification.test.mjs test/landing-gates.test.mjs passed with 75 tests during Stage 4 verification refresh.
   - npm test passed with 304 tests during Stage 4 verification refresh.
   - npm run typecheck passed during Stage 4 verification refresh.
