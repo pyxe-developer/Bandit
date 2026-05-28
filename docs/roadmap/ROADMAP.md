@@ -16,44 +16,25 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-043` /
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Stage 5 auto-landing repair
-evidence is recorded in
-`.bandit/policy/risk-classifications/BANDIT-043-risk-classification.json` and
-`.bandit/policy/supply-chain-gates/BANDIT-043-supply-chain-gate.json`, the
-refreshed Stage 4/Stage 5 evidence is current, `npm run bandit -- land-check
-BANDIT-043` passes, `npm run bandit -- auto-land-check BANDIT-043` passes, and
-local-record landing action evidence is recorded in
-`docs/work/BANDIT-043/landing-action.md`. Next, write the retrospective, classify
-lessons and improvement dispositions, resolve or otherwise disposition
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` in `.bandit/bootstrap-gaps.json`,
-and update roadmap/current-context closeout state. Do not create the next
-bootstrap-gap chore or start unrelated Phase 8 work before retrospective and
-gap disposition are recorded.
+**Current next step:** Create exactly one bootstrap-gap chore for
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` has required
+verification, landing verdict, landing-action evidence, retrospective closeout,
+gap-ledger disposition, and roadmap/current-context closeout. Do not start
+unrelated Phase 8 work, local server/API mode, state-index persistence,
+scheduler execution, worktree lifecycle, claim leases, work surface
+reservations, automatic merge/push/deploy behavior, product UAT approval, actor
+identity policy, PR/CI workflow, or another unrelated work item before the next
+queued bootstrap gap is created and executed.
 
-`BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
-chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
-creation spec is recorded in
-`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, its Stage 1
-brief is recorded in `docs/work/BANDIT-043/brief.md`, Stage 2 RED evidence is
-recorded in `docs/work/BANDIT-043/red-evidence.md`, with focused tests in
-`test/coordination-authority.test.mjs`, `.bandit/bootstrap-gaps.json` marks
-the gap active with linked work item `BANDIT-043`, and `.bandit/events.jsonl`
-records the work-item-created and artifact-created events. Stage 3
-implementation evidence is recorded in
-`docs/work/BANDIT-043/implementation-evidence.md`; Stage 4 pre-PR CodeRabbit
-pass evidence is recorded in `docs/work/BANDIT-043/coderabbit-review.md`, Local
-Qwen pass evidence is recorded in
-`docs/work/BANDIT-043/local-qwen-review.md`, aggregate Stage 4 review evidence
-is recorded in `docs/work/BANDIT-043/review-evidence.md`, Stage 5 landing
-verdict evidence is recorded in `docs/work/BANDIT-043/landing-verdict.md`,
-Stage 5 auto-landing blocker evidence is recorded in
-`docs/work/BANDIT-043/landing-blocker.md`, explicit risk-classification and
-supply-chain landing repair evidence is recorded in `.bandit/policy/`, and
-local-record landing action evidence is recorded in
-`docs/work/BANDIT-043/landing-action.md`. Record Stage 6 retrospective closeout
-and bootstrap-gap disposition next.
+`BANDIT-043` - Coordination Event Log Authority is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its
+structured creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3
+implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4 Local
+Qwen pass evidence, aggregate Stage 4 review evidence, Stage 5 landing verdict
+evidence, Stage 5 auto-landing blocker evidence, explicit risk-classification
+and supply-chain landing repair evidence, local-record landing action evidence,
+Stage 6 retrospective closeout, and gap-ledger disposition are recorded in
+`docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -547,8 +528,8 @@ decisions to use hard never-auto-landable exclusions, blast-radius signals,
 static-analysis signals, source trust and input-quarantine state, supply-chain
 state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041`.
-`BANDIT-GAP-SUPPLY-CHAIN-GATE`,
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`,
+`BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`,
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`,
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER`,
@@ -558,7 +539,7 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order, with the
-layered risk-classification gate next.
+operator fail-closed boundary gap next.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
 2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
 `refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
@@ -829,8 +810,11 @@ the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; Stage 1
 through Stage 6 evidence and gap-ledger disposition are recorded. `BANDIT-042`
 is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-SUPPLY-CHAIN-GATE`; Stage 1 through Stage 6 evidence and
-gap-ledger disposition are recorded. The next target is creating the
-bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`.
+gap-ledger disposition are recorded. `BANDIT-043` is landed and closed out as
+the bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`;
+Stage 1 through Stage 6 evidence and gap-ledger disposition are recorded. The
+next target is creating the bootstrap-gap chore for
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`.
 
 ## Phase Map
 
@@ -1145,25 +1129,12 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`.
-   `BANDIT-043` - Coordination Event Log Authority has Stage 1 brief evidence in
-   `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
-   evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
-   `test/coordination-authority.test.mjs`, Stage 3 implementation evidence in
-   `docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
-   pass evidence in `docs/work/BANDIT-043/coderabbit-review.md`, Stage 4 Local
-   Qwen pass evidence in `docs/work/BANDIT-043/local-qwen-review.md`,
-   aggregate Stage 4 review evidence with current `review_subject_hash` in
-   `docs/work/BANDIT-043/review-evidence.md`, Stage 5 landing verdict evidence
-   in `docs/work/BANDIT-043/landing-verdict.md`, Stage 5 blocker evidence in
-   `docs/work/BANDIT-043/landing-blocker.md`, explicit
-   risk-classification and supply-chain landing repair evidence in
-   `.bandit/policy/`, and local-record landing action evidence in
-   `docs/work/BANDIT-043/landing-action.md`. Do not create another
-   bootstrap-gap chore or start unrelated Phase 8 work before retrospective and
-   gap disposition evidence is recorded.
+1. Create exactly one bootstrap-gap chore for
+   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` - Coordination
+   Event Log Authority is landed and closed out with Stage 1 through Stage 6
+   evidence, local-record landing action, and gap-ledger disposition recorded.
+   Do not start unrelated Phase 8 work before the operator fail-closed boundary
+   gap is created and executed.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1176,9 +1147,8 @@ Current priority:
    `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
    `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
-   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
-   is active as `BANDIT-043`. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
-   is queued behind the coordination event-log authority gap.
+   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
+   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is the next queued bootstrap gap.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
    operator fail-closed boundary gap and must use the accepted Git refs claim
    authority backend.

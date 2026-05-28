@@ -367,8 +367,8 @@
     {
       "id": "BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY",
       "title": "Coordination projections can become hidden workflow authority",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -378,9 +378,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-043",
-      "rationale": "The PRD-002 research review flagged dual-source coordination risk, and the operator confirmed that append-only workflow/event history should be the only canonical coordination history. Current-state views, registries, state indexes, and cockpit status must be rebuildable projections, with CAS claim authority as the only active writable-claim authority exception.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-043."
+      "rationale": "BANDIT-043 created a repo-native Coordination Event Log Authority policy, template, validator, CLI command, init/validate wiring, focused tests, review evidence, landing verdict, local-record landing action, and retrospective closeout. Append-only coordination history is now the canonical coordination history for workflow position and accepted coordination context; current-state views, cockpit status, state indexes, SQLite caches, in-flight registries, and derived reports are rebuildable non-authoritative projections, with CAS claim authority preserved as the only future active writable-claim authority exception.",
+      "verification_target": "docs/work/BANDIT-043/retrospective.md",
+      "next_action": "Use bandit coordination-authority validate and bandit validate to enforce projection non-authority; create the next queued bootstrap-gap chore for BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY",
@@ -399,7 +399,7 @@
       "linked_work_item": null,
       "rationale": "The PRD-002 research review warned that pervasive fail-closed behavior can manufacture operator toil when ordinary registry, ledger, optional-field, projection, or workflow bookkeeping drift is escalated instead of repaired mechanically. The operator confirmed that operator-blocking fail-closed behavior should be reserved for safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely ambiguous scope gates. Derivable operational drift should route to CLI-owned mechanical repair with approved source artifacts, expected-current-state checks, immutable transition history, and no authority to invent scope, grant approvals, override policy, resolve ambiguous cost/risk, perform irreversible operational actions, or force-resolve unsafe claim recovery.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY is resolved, create a bootstrap-gap chore to define operator-blocking fail-closed boundaries, CLI-owned mechanical operational repair, operator-escalation-overuse smells, repair-overreach refusals, and validation that derivable operational drift does not become operator toil."
+      "next_action": "Create a bootstrap-gap chore to define operator-blocking fail-closed boundaries, CLI-owned mechanical operational repair, operator-escalation-overuse smells, repair-overreach refusals, and validation that derivable operational drift does not become operator toil."
     },
     {
       "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",
