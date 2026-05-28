@@ -391,10 +391,16 @@ review evidence, Stage 5 landing verdict evidence, local-record landing action
 evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-040/` and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record local landing action evidence for `BANDIT-041`
-- Layered Risk Classification. Do not start retrospective closeout, resolve the
-bootstrap gap, create the next bootstrap-gap chore, or unrelated Phase 8 work
-before landing action evidence is recorded.
+**Current next action:** Repair the `BANDIT-041` Stage 5 landing blocker before
+retrying local-record landing. `npm run bandit -- land BANDIT-041 --action
+local-record` is blocked by missing layered risk-classification evidence while
+`.bandit/policy/landing-agent.json` requires auto-land eligibility. Register
+explicit layered risk-classification evidence for `BANDIT-041`, refresh Stage 4
+and Stage 5 evidence if the risk-classification policy update changes the
+review-subject hash, and then rerun the local-record landing command. Do not
+start retrospective closeout, resolve the bootstrap gap, create the next
+bootstrap-gap chore, or unrelated Phase 8 work before landing action evidence
+is recorded.
 
 `BANDIT-041` - Layered Risk Classification is active after Stage 5 landing
 verdict evidence as the bootstrap-gap chore for
@@ -513,11 +519,14 @@ non-blocking Qwen findings is recorded in
 evidence is recorded in `docs/work/BANDIT-041/review-evidence.md`,
 Stage 5 landing verdict evidence is recorded in
 `docs/work/BANDIT-041/landing-verdict.md` with final verdict `safe-to-land`,
+Stage 5 landing blocker evidence is recorded in
+`docs/work/BANDIT-041/landing-blocker.md`,
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 implementation-evidence artifact, and landing-verdict artifact events, and
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
 to `BANDIT-041` with disposition `active_chore`. The next action is to
-record local landing action evidence for `BANDIT-041`; do not start
+repair the missing layered risk-classification evidence blocker before retrying
+local landing for `BANDIT-041`; do not start
 retrospective closeout, resolve the bootstrap gap, create the next
 bootstrap-gap chore, or unrelated Phase 8 work before landing action evidence
 is recorded.
@@ -970,18 +979,18 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before recording local landing action
-evidence for `BANDIT-041`. Repo artifacts identify the active work item,
-implemented layered risk-classification gate, current Stage 4 review evidence,
-current review-subject hash, Stage 5 landing verdict, UAT not-applicable
-status, clean-code compliance evidence, and dependency on the resolved Input
-Quarantine Gate gap. Halt only if the next step would change
-product direction, UAT policy, workflow policy beyond defining the already
-queued layered risk-classification gate, business tradeoffs, cost/risk posture,
-external service setup, paid reviewer routing, live routing, scheduler
-authority, claim/worktree authority, installed global skill contents,
-dependency or lockfile policy, supply-chain gate policy, or broader workflow
-scope.
+No operator-owned input is required before repairing the `BANDIT-041` Stage 5
+landing blocker. Repo artifacts identify the active work item, implemented
+layered risk-classification gate, Stage 4 review evidence, review-subject hash,
+Stage 5 landing verdict, UAT not-applicable status, clean-code compliance
+evidence, and the failed `bandit land` result in
+`docs/work/BANDIT-041/landing-blocker.md`. Halt only if the next repair would
+change product direction, UAT policy, workflow policy beyond applying the
+already queued layered risk-classification gate to `BANDIT-041`, business
+tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
+live routing, scheduler authority, claim/worktree authority, installed global
+skill contents, dependency or lockfile policy, supply-chain gate policy, or
+broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

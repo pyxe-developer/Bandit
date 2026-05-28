@@ -16,10 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record local landing action evidence for `BANDIT-041`
-- Layered Risk Classification. Do not start retrospective closeout, resolve the
-bootstrap gap, create the next bootstrap-gap chore, or unrelated Phase 8 work
-before landing action evidence is recorded.
+**Current next step:** Repair the `BANDIT-041` Stage 5 landing blocker before
+retrying local-record landing. `npm run bandit -- land BANDIT-041 --action
+local-record` is blocked by missing layered risk-classification evidence while
+`.bandit/policy/landing-agent.json` requires auto-land eligibility. Register
+explicit layered risk-classification evidence for `BANDIT-041`, refresh Stage 4
+and Stage 5 evidence if the risk-classification policy update changes the
+review-subject hash, and then rerun the local-record landing command. Do not
+start retrospective closeout, resolve the bootstrap gap, create the next
+bootstrap-gap chore, or unrelated Phase 8 work before landing action evidence
+is recorded.
 
 `BANDIT-041` - Layered Risk Classification is active after Stage 5 landing
 verdict evidence as the bootstrap-gap chore for
@@ -38,7 +44,8 @@ evidence with current review subject hash
 `c2d61935bb796bbb0ba779f7cbcd7c6497a5473ce11a6b3b34fa1f0fa7ea242c` is
 recorded in `docs/work/BANDIT-041/review-evidence.md`, Stage 5 landing verdict
 evidence is recorded in `docs/work/BANDIT-041/landing-verdict.md` with final
-verdict `safe-to-land`,
+verdict `safe-to-land`, Stage 5 landing blocker evidence is recorded in
+`docs/work/BANDIT-041/landing-blocker.md`,
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 implementation-evidence artifact, and landing-verdict artifact events, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-041` with disposition
