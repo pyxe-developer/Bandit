@@ -16,18 +16,20 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create Stage 2 RED evidence for `BANDIT-041` -
-Layered Risk Classification. Do not create implementation, review, landing,
-retrospective, or the next bootstrap-gap chore until RED evidence is recorded
-and the Stage 2 gate is satisfied.
+**Current next step:** Implement Stage 3 for `BANDIT-041` - Layered Risk
+Classification. Do not create review, landing, retrospective, or the next
+bootstrap-gap chore until the focused RED tests pass and implementation
+evidence is recorded.
 
-`BANDIT-041` - Layered Risk Classification is active at Stage 1 brief as the
-bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
+`BANDIT-041` - Layered Risk Classification is active at Stage 2 RED evidence
+as the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-041/brief.md`, `.bandit/events.jsonl` records
-the work-item-created event, and `.bandit/bootstrap-gaps.json` links the gap
-to `BANDIT-041` with disposition `active_chore`.
+recorded in `docs/work/BANDIT-041/brief.md`, Stage 2 RED evidence is recorded
+in `docs/work/BANDIT-041/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact events, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-041` with disposition
+`active_chore`.
 
 `BANDIT-040` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec, Stage 1
@@ -429,10 +431,11 @@ as the bootstrap-gap chore for `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its
 structured creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 review evidence, Stage 5 landing verdict
 evidence, local-record landing action evidence, Stage 6 retrospective closeout,
-and bootstrap-gap disposition are recorded. `BANDIT-041` is active at Stage 1
-brief as the bootstrap-gap chore for
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; its structured creation spec and
-brief are recorded, and the next required action is Stage 2 RED evidence.
+and bootstrap-gap disposition are recorded. `BANDIT-041` is active at Stage 2
+RED evidence as the bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; its structured creation spec, brief,
+and RED evidence are recorded, and the next required action is Stage 3
+implementation.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -739,9 +742,10 @@ evidence, local-record landing action evidence, Stage 6 retrospective
 closeout, and bootstrap-gap disposition are recorded. `BANDIT-040` is landed
 and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; Stage 1 through Stage 6 evidence and
-gap-ledger disposition are recorded. `BANDIT-041` is active at Stage 1 brief
-as the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`, and
-the next target is Stage 2 RED evidence.
+gap-ledger disposition are recorded. `BANDIT-041` is active at Stage 2 RED
+evidence as the bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`, and the next target is Stage 3
+implementation.
 
 ## Phase Map
 
@@ -1056,11 +1060,14 @@ Current rule:
 
 Current priority:
 
-1. Create Stage 2 RED evidence for `BANDIT-041` - Layered Risk Classification.
-   The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, and
+1. Implement Stage 3 for `BANDIT-041` - Layered Risk Classification.
+   The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, Stage 2
+   RED evidence is recorded in `docs/work/BANDIT-041/red-evidence.md`, and
    `.bandit/bootstrap-gaps.json` links
    `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` to `BANDIT-041` with disposition
-   `active_chore`. Do not start implementation or unrelated Phase 8 work first.
+   `active_chore`. Do not create review, landing, retrospective, the next
+   bootstrap-gap chore, or unrelated Phase 8 work before the focused RED tests
+   pass and implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

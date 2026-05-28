@@ -1,0 +1,49 @@
+# BANDIT-041 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused tests define the Layered Risk Classification Gate before production implementation. They fail because Bandit does not yet require risk-classification policy or templates during validation, no risk-classification validation command exists, and auto-land-check does not yet consume layered risk-classification evidence.
+
+## Test Command
+
+```sh
+node --test test/risk-classification.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 10
+pass 0
+fail 10
+validate fails closed when the layered risk-classification policy is missing failed: expected exit code 1, received 0
+validate fails closed when the layered risk-classification template is missing failed: expected exit code 1, received 0
+risk classification rejects smell-trigger-only decisions failed: Unknown command: risk-classification
+risk classification rejects never-auto-landable surfaces marked auto-landable failed: Unknown command: risk-classification
+risk classification escalates high-risk signals without smell-list concurrence failed: Unknown command: risk-classification
+risk classification rejects unknown source-trust and input-quarantine states failed: Unknown command: risk-classification
+risk classification rejects missing supply-chain-state disposition failed: Unknown command: risk-classification
+risk classification rejects malformed selected review depth failed: Unknown command: risk-classification
+risk classification accepts a complete low-risk classification failed: Unknown command: risk-classification
+auto-land-check refuses safe-to-land evidence without layered risk classification failed: expected exit code 1, received 0
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| A Layered Risk Classification Gate template or policy artifact names required inputs for work item, changed surfaces, hard exclusions, never-auto-landable surfaces, blast-radius signals, static-analysis signals, source-trust state, input-quarantine state, supply-chain state, smell-trigger inputs, selected review depth, operator-supervision routing, auto-landing eligibility, rationale, and evidence paths. | The new tests expect docs/templates/layered-risk-classification.md, .bandit/policy/risk-classification.json, and per-work-item docs/risk/layered/<ID>-risk-classification.json decision evidence to become required repo-native surfaces. |
+| Validation fails closed when review depth, operator supervision, landing readiness, or auto-landing eligibility is decided without current layered risk-classification evidence. | The missing policy, missing template, and auto-land-check tests expect validate and auto-land-check to reject otherwise green state when layered risk-classification evidence is absent. |
+| Validation fails closed when a never-auto-landable surface is marked auto-landable, even when tests, CodeRabbit, Local Qwen, escalated review, landing verdict, or smell triggers otherwise pass. | The never-auto-landable test marks an authentication surface auto-landable and expects fail-closed rejection independent of other gate state. |
+| Validation raises review depth, requires operator supervision, or blocks auto-landing when any high-risk blast-radius, static-analysis, source-trust, input-quarantine, supply-chain, or smell-trigger signal is present. | The high-risk blast-radius test provides production-data access with no smell trigger and expects validation to reject baseline review depth, no supervision, and auto-land eligibility. |
+| Validation fails closed when high-risk blast-radius, static-analysis, source-trust, input-quarantine, or supply-chain signals are ignored because no smell trigger matched. | The smell-list-only and high-risk-without-smell tests assert smell triggers are only one risk input, not the authority for review depth or auto-landing. |
+| Validation treats unknown, unavailable, stale, or missing source-trust, input-quarantine, static-analysis, or supply-chain state as explicit risk states, not green defaults. | The unknown source-trust/input-quarantine and missing supply-chain tests expect fail-closed validation for unknown, unavailable, or omitted layered signals. |
+| Auto-land or landing-readiness checks consume layered risk-classification output and refuse auto-landing when the gate records never-auto-landable, elevated-risk pending supervision, missing evidence, or stale evidence. | The auto-land-check test creates otherwise safe-to-land chore evidence and expects auto-landing refusal until layered risk-classification evidence exists for that work item. |
+| Focused tests prove invalid layered risk-classification contracts are rejected before trusted status or auto-landing eligibility, and prove a complete low-risk classification is accepted. | The focused test file covers missing gate surfaces, smell-list-only decisions, never-auto-landable auto-land attempts, high-risk escalation, unknown trust/quarantine state, missing supply-chain disposition, malformed review depth, missing auto-land evidence, and complete low-risk acceptance output. |
+| The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied. | This RED step adds only focused tests, a Stage 2 red-evidence spec/artifact, lifecycle event evidence, and roadmap/current-context routing. It adds no production implementation, review evidence, landing evidence, retrospective, next-gap work, live routing, paid reviewer route, dependency or lockfile change, supply-chain gate, scheduler, claim/worktree authority, or cockpit UI surface. |
+
+## Next Action
+
+Implement the narrow Layered Risk Classification Gate repair: add the repo-native risk classification template and policy, per-work-item layered classification evidence parsing, risk-classification validate --json command wiring, validate integration, auto-land-check or landing-readiness consumption, and focused acceptance behavior needed to make the RED tests pass without broadening into the later Supply-Chain Gate, dependency or lockfile policy, scheduler, claim/worktree authority, live routing, paid reviewer routing, external service integration, installed global skill edits, or cockpit UI scope.

@@ -391,18 +391,20 @@ review evidence, Stage 5 landing verdict evidence, local-record landing action
 evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-040/` and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create Stage 2 RED evidence for `BANDIT-041` -
-Layered Risk Classification. Do not create implementation, review, landing,
-retrospective, or the next bootstrap-gap chore until RED evidence is recorded
-and the Stage 2 gate is satisfied.
+**Current next action:** Implement Stage 3 for `BANDIT-041` - Layered Risk
+Classification. Do not create review, landing, retrospective, or the next
+bootstrap-gap chore until the focused RED tests pass and implementation
+evidence is recorded.
 
-`BANDIT-041` - Layered Risk Classification is active at Stage 1 brief as the
-bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
+`BANDIT-041` - Layered Risk Classification is active at Stage 2 RED evidence
+as the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-041/brief.md`, `.bandit/events.jsonl` records
-the work-item-created event, and `.bandit/bootstrap-gaps.json` links the gap
-to `BANDIT-041` with disposition `active_chore`.
+recorded in `docs/work/BANDIT-041/brief.md`, Stage 2 RED evidence is recorded
+in `docs/work/BANDIT-041/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact events, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-041` with disposition
+`active_chore`.
 
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
@@ -484,16 +486,17 @@ that authority.
 ## Active Work
 
 **Active work item:** `BANDIT-041` - Layered Risk Classification is active at
-Stage 1 brief as the bootstrap-gap chore for
+Stage 2 RED evidence as the bootstrap-gap chore for
 `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its structured creation spec is
 recorded in `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its
-brief is recorded in `docs/work/BANDIT-041/brief.md`, `.bandit/events.jsonl`
-records the work-item-created event, and `.bandit/bootstrap-gaps.json` links
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` to `BANDIT-041` with disposition
-`active_chore`. The next action is to create Stage 2 RED evidence for
-`BANDIT-041`; do not create implementation, review, landing, retrospective, or
-the next bootstrap-gap chore until RED evidence is recorded and the Stage 2
-gate is satisfied.
+brief is recorded in `docs/work/BANDIT-041/brief.md`, RED evidence is recorded
+in `docs/work/BANDIT-041/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact events, and
+`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
+to `BANDIT-041` with disposition `active_chore`. The next action is to
+implement Stage 3 for `BANDIT-041`; do not create review, landing,
+retrospective, or the next bootstrap-gap chore until the focused RED tests pass
+and implementation evidence is recorded.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`.
@@ -641,8 +644,9 @@ These are expected because Bandit does not exist yet:
   supply-chain state, smell-trigger inputs, selected review depth,
   operator-supervision routing, and validation that any single high-risk signal
   can block auto-landing without smell-list concurrence. Stage 1 brief evidence
-  is recorded in `docs/work/BANDIT-041/brief.md`, and the next action is Stage
-  2 RED evidence.
+  is recorded in `docs/work/BANDIT-041/brief.md`, Stage 2 RED evidence is
+  recorded in `docs/work/BANDIT-041/red-evidence.md`, and the next action is
+  Stage 3 implementation.
 - `BANDIT-GAP-SUPPLY-CHAIN-GATE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats supply-chain-sensitive changes as a
   blocker-level smell, but no CLI-owned gate records dependency, lockfile,
@@ -892,11 +896,14 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create Stage 2 RED evidence for `BANDIT-041` - Layered Risk Classification.
-   The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, and
+1. Implement Stage 3 for `BANDIT-041` - Layered Risk Classification.
+   The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, Stage 2
+   RED evidence is recorded in `docs/work/BANDIT-041/red-evidence.md`, and
    `.bandit/bootstrap-gaps.json` links
    `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` to `BANDIT-041` with disposition
-   `active_chore`. Do not start implementation or unrelated Phase 8 work first.
+   `active_chore`. Do not create review, landing, retrospective, the next
+   bootstrap-gap chore, or unrelated Phase 8 work before the focused RED tests
+   pass and implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -932,12 +939,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before creating Stage 2 RED evidence for
+No operator-owned input is required before implementing Stage 3 for
 `BANDIT-041`. Repo artifacts identify the source gap, queue order, review-depth
 and auto-landing policy concern, hard never-auto-landable exclusions,
 blast-radius and static-analysis signal need, source trust and input-quarantine
-signal need, supply-chain signal need, source artifacts, and dependency on the
-resolved Input Quarantine Gate gap. Halt only if the next step would change
+signal need, supply-chain signal need, source artifacts, RED test contract, and
+dependency on the resolved Input Quarantine Gate gap. Halt only if the next
+step would change
 product direction, UAT policy, workflow policy beyond defining the already
 queued layered risk-classification gate, business tradeoffs, cost/risk posture,
 external service setup, paid reviewer routing, live routing, scheduler
