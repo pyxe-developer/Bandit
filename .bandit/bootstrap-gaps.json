@@ -421,8 +421,8 @@
     {
       "id": "BANDIT-GAP-GIT-MUTATION-SERIALIZER",
       "title": "Parallel worktrees lack a shared Git mutation serializer",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -431,9 +431,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-046",
-      "rationale": "The PRD-002 research review found that git worktree concurrency on a single .git directory has contention surfaces around worktree creation, worktree lifecycle operations, shared refs, and packed-refs-affecting maintenance. The operator confirmed that Bandit needs a repo-level Git Mutation Serializer for shared .git mutations before parallel worktrees are release-authorized, and delegated Git mechanics to Codex PM when repo evidence is sufficient. Codex PM accepted the technical rule that every claim-owned worktree is git worktree locked immediately after creation with a stable claim-specific reason naming claim ID, Work Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after handoff verification. Git refs CAS remains the claim authority boundary, but it does not make all shared Git plumbing safe under parallel execution.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-046."
+      "rationale": "BANDIT-046 created a repo-native Git Mutation Serializer contract for release-authorized shared .git plumbing mutations, including .bandit/policy/git-mutations.json, docs/templates/git-mutation-serializer.md, docs/git-mutations/BANDIT-046-git-mutation-serializer.json, bandit git-mutation validate --json, init and validate wiring, focused serializer validation tests, immediate claim-owned worktree lock requirements, Repo PM Coordinator-only unlock requirements, timeout and stale-lock fail-closed behavior, serializer/claim-authority separation, and Claim Safety Invariant serializer-failure cleanup handling. Stage 4 pre-PR CodeRabbit and Local Qwen evidence passed with no findings, explicit layered risk-classification and supply-chain gate evidence passed, Stage 5 landing verdict and local-record landing action are recorded, and Stage 6 retrospective closeout is recorded. True parallel writable workstreams remain blocked until later Worktree Bootstrap Contract and scheduler gates pass.",
+      "verification_target": "docs/work/BANDIT-046/retrospective.md",
+      "next_action": "Use bandit git-mutation validate --json and the Git Mutation Serializer evidence contract for release-authorized shared .git plumbing changes; create the next queued bootstrap-gap chore for BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",

@@ -16,14 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-046`. Do not start Worktree Bootstrap Contract,
-scheduler, full worktree lifecycle enablement, cockpit, PR/CI workflow, or
-unrelated Phase 8 work before retrospective, improvement dispositions,
-gap-ledger disposition, and roadmap context closeout are recorded.
+**Current next step:** Create exactly one bootstrap-gap work item for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Do not start scheduler execution,
+full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
+work before the Worktree Bootstrap Contract gap is created, executed, landed,
+closed out, and dispositioned.
 
-`BANDIT-046` - Git Mutation Serializer is active as the bootstrap-gap chore for
-`BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured creation spec is recorded
+`BANDIT-046` - Git Mutation Serializer is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
+creation spec is recorded
 in `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-046/brief.md`, Stage 2 RED evidence is recorded
 in `docs/specs/BANDIT-046-red-evidence.json`,
@@ -38,21 +40,24 @@ recorded in `docs/specs/BANDIT-046-implementation-evidence.json`,
 `docs/templates/git-mutation-serializer.md`,
 `docs/git-mutations/BANDIT-046-git-mutation-serializer.json`, and the
 focused implementation diff, `.bandit/events.jsonl` records the
-work-item-created, red-evidence artifact-created, and implementation-evidence
-artifact-created events, and `.bandit/bootstrap-gaps.json` links the gap to
-`BANDIT-046` with status `active`. Stage 4 pre-PR CodeRabbit pass evidence is
-recorded in `docs/work/BANDIT-046/coderabbit-review.md`, Stage 4 Local Qwen
-pass evidence is recorded in `docs/work/BANDIT-046/local-qwen-review.md`,
-explicit risk-classification and supply-chain gate evidence is recorded in
+work-item-created, red-evidence artifact-created, implementation-evidence
+artifact-created, and retrospective artifact-created events, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-046` with status
+`resolved`. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-046/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
+is recorded in `docs/work/BANDIT-046/local-qwen-review.md`, explicit
+risk-classification and supply-chain gate evidence is recorded in
 `.bandit/policy/`, aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-046/review-evidence.md` with current review subject hash
-`d8ac9ba628f36a2bc4e80703eb09bb52416b1e5aa7e66dc0b83727b8edf043d3`, and Stage
-5 landing verdict evidence is recorded in
+`d8ac9ba628f36a2bc4e80703eb09bb52416b1e5aa7e66dc0b83727b8edf043d3`, Stage 5
+landing verdict evidence is recorded in
 `docs/specs/BANDIT-046-landing-verdict.json` and
 `docs/work/BANDIT-046/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-046/landing-action.md`. Stage 6 retrospective closeout and
-bootstrap-gap disposition are the next required artifacts.
+`docs/work/BANDIT-046/landing-action.md`, Stage 6 retrospective closeout is
+recorded in `docs/work/BANDIT-046/retrospective.md`, and
+`.bandit/bootstrap-gaps.json` marks the gap resolved. The next required work is
+the queued Worktree Bootstrap Contract gap.
 
 `BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
@@ -66,10 +71,8 @@ disposition are recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
 `docs/specs/BANDIT-045-landing-verdict.json`, `docs/work/BANDIT-045/`,
 `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`. Git Mutation Serializer
-is now active as `BANDIT-046`; do not start Worktree Bootstrap Contract,
-scheduler, worktree lifecycle, cockpit UI/server/API work, automatic
-merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
-or unrelated Phase 8 work before `BANDIT-046` lands and closes out.
+is resolved by `BANDIT-046`; `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is now
+the next queued bootstrap gap.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -591,7 +594,7 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`;
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
-`BANDIT-GAP-GIT-MUTATION-SERIALIZER` is active as `BANDIT-046`.
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`,
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`,
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
@@ -891,9 +894,10 @@ recorded in `docs/work/BANDIT-045/landing-verdict.md`, local-record landing
 action evidence is recorded in `docs/work/BANDIT-045/landing-action.md`, and
 Stage 6 retrospective closeout and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
-`BANDIT-046` is now active for Git Mutation Serializer, Stage 5 landing verdict
-and local-record landing action evidence are recorded, and the current target is
-Stage 6 retrospective closeout and bootstrap-gap disposition.
+`BANDIT-046` is landed and closed out for Git Mutation Serializer; Stage 1
+through Stage 6 evidence and gap-ledger disposition are recorded. The current
+target is to create exactly one work item for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
 
 ## Phase Map
 
@@ -1208,8 +1212,8 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-046`.
+1. Create exactly one bootstrap-gap work item for
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1225,9 +1229,8 @@ Current priority:
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
    `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
-   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is active as `BANDIT-046`.
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind Git mutation
-   serialization.
+   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is now the next queued gap.
    `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
    bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
