@@ -16,16 +16,16 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement Stage 3 for `BANDIT-042` -
+**Current next step:** Run Stage 4 review gates for `BANDIT-042` -
 Supply-Chain Gate. `BANDIT-042` has Stage 1 brief evidence recorded in
 `docs/work/BANDIT-042/brief.md`, Stage 2 RED evidence recorded in
-`docs/work/BANDIT-042/red-evidence.md`, focused RED tests in
-`test/supply-chain-gate.test.mjs`, its structured creation spec recorded in
-`docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and
+`docs/work/BANDIT-042/red-evidence.md`, focused tests in
+`test/supply-chain-gate.test.mjs`, Stage 3 implementation evidence recorded in
+`docs/work/BANDIT-042/implementation-evidence.md`, its structured creation
+spec recorded in `docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-SUPPLY-CHAIN-GATE` as the
-active chore. Do not start review, landing, retrospective, the next
-bootstrap-gap chore, or unrelated Phase 8 work before implementation evidence
-is recorded.
+active chore. Do not start landing, retrospective, the next bootstrap-gap
+chore, or unrelated Phase 8 work before Stage 4 review evidence is recorded.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -62,7 +62,9 @@ in `docs/work/BANDIT-042/brief.md`, `.bandit/bootstrap-gaps.json` marks the gap
 active and links it to `BANDIT-042`, and `.bandit/events.jsonl` records the
 work-item-created event. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-042/red-evidence.md`, with focused tests in
-`test/supply-chain-gate.test.mjs`. Stage 3 implementation has not started.
+`test/supply-chain-gate.test.mjs`. Stage 3 implementation evidence is recorded
+in `docs/work/BANDIT-042/implementation-evidence.md`; Stage 4 review gates have
+not started.
 
 `BANDIT-040` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec, Stage 1
@@ -781,8 +783,8 @@ gap-ledger disposition are recorded. `BANDIT-041` is landed and closed out as
 the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; Stage 1
 through Stage 6 evidence and gap-ledger disposition are recorded. `BANDIT-042`
 is active as the bootstrap-gap chore for `BANDIT-GAP-SUPPLY-CHAIN-GATE`; Stage
-1 brief evidence and Stage 2 RED evidence are recorded, and the next target is
-Stage 3 implementation.
+1 brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence
+are recorded, and the next target is Stage 4 review gates.
 
 ## Phase Map
 
@@ -1097,17 +1099,18 @@ Current rule:
 
 Current priority:
 
-1. Implement Stage 3 for `BANDIT-042` -
+1. Run Stage 4 review gates for `BANDIT-042` -
    `BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` - Layered Risk Classification
    is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
    implementation evidence, Stage 4 review evidence, Stage 5 landing verdict,
    local-record landing action, Stage 6 retrospective closeout, and
    bootstrap-gap disposition are recorded, and `.bandit/bootstrap-gaps.json`
    marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. `BANDIT-042` has
-   Stage 1 brief evidence and Stage 2 RED evidence recorded, and
-   `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SUPPLY-CHAIN-GATE` active.
-   Do not start review, landing, retrospective, the next bootstrap-gap chore,
-   or unrelated Phase 8 work before implementation evidence is recorded.
+   Stage 1 brief evidence, Stage 2 RED evidence, and Stage 3 implementation
+   evidence recorded, and `.bandit/bootstrap-gaps.json` marks
+   `BANDIT-GAP-SUPPLY-CHAIN-GATE` active. Do not start landing, retrospective,
+   the next bootstrap-gap chore, or unrelated Phase 8 work before Stage 4
+   review evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

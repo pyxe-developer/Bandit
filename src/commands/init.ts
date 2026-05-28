@@ -14,6 +14,10 @@ import {
 } from "../state/risk-classification.js";
 import { writeDefaultSkillLifecyclePolicy } from "../state/skill-lifecycle-contracts.js";
 import { writeDefaultStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
+import {
+  writeDefaultSupplyChainGatePolicy,
+  writeDefaultSupplyChainGateTemplate
+} from "../state/supply-chain-gate.js";
 
 export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
@@ -39,6 +43,10 @@ export async function initBandit(repoRoot: string) {
   );
   const stage4EvidenceHeadPolicyExists = await pathExists(
     paths.stage4EvidenceHeadPolicy
+  );
+  const supplyChainPolicyExists = await pathExists(paths.supplyChainPolicy);
+  const supplyChainTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/supply-chain-gate.md`
   );
 
   await mkdir(paths.stateRoot, { recursive: true });
@@ -81,6 +89,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!stage4EvidenceHeadPolicyExists) {
     await writeDefaultStage4EvidenceHeadPolicy(paths.stage4EvidenceHeadPolicy);
+  }
+
+  if (!supplyChainPolicyExists) {
+    await writeDefaultSupplyChainGatePolicy(paths.supplyChainPolicy);
+  }
+
+  if (!supplyChainTemplateExists) {
+    await writeDefaultSupplyChainGateTemplate(repoRoot);
   }
 
   if (alreadyInitialized) {

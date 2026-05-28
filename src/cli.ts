@@ -21,6 +21,7 @@ import { riskClassification } from "./commands/risk-classification.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
+import { supplyChainGate } from "./commands/supply-chain-gate.js";
 import { uat } from "./commands/uat.js";
 import { validateBandit } from "./commands/validate.js";
 import { createWorkItem } from "./commands/work-item-create.js";
@@ -78,6 +79,12 @@ async function main() {
 
   if (command === "risk-classification") {
     const result = await riskClassification(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "supply-chain-gate") {
+    const result = await supplyChainGate(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }
@@ -185,7 +192,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|uat|gaps|coordination|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|supply-chain-gate|uat|gaps|coordination|cockpit>`);
   process.exitCode = 1;
 }
 

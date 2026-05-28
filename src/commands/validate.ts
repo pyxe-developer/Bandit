@@ -20,6 +20,7 @@ import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 import { validateSkillLifecycleContracts } from "../state/skill-lifecycle-contracts.js";
+import { validateSupplyChainGate } from "../state/supply-chain-gate.js";
 import { validateTemplates } from "../state/templates.js";
 import { validateUatApprovalArtifacts } from "../state/uat-approval.js";
 import { validateWorkItems } from "../state/work-items.js";
@@ -36,6 +37,7 @@ export async function validateBandit(repoRoot: string) {
   await validateTemplates(repoRoot);
   await validateInputQuarantineGate(repoRoot);
   await validateRiskClassificationGate(repoRoot);
+  await validateSupplyChainGate(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);

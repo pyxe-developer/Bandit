@@ -1,5 +1,6 @@
 import { readAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { autoLandingRiskClassificationProblems } from "../state/risk-classification.js";
+import { autoLandingSupplyChainGateProblems } from "../state/supply-chain-gate.js";
 import { readLandingReadiness } from "./land-check.js";
 
 export async function autoLandCheck(repoRoot: string, workItemId?: string) {
@@ -25,6 +26,9 @@ export async function autoLandCheck(repoRoot: string, workItemId?: string) {
   );
   problems.push(
     ...(await autoLandingRiskClassificationProblems(repoRoot, workItemId))
+  );
+  problems.push(
+    ...(await autoLandingSupplyChainGateProblems(repoRoot, workItemId))
   );
 
   if (classification.autoLandingClass === "chore" && !policy.allowChores) {

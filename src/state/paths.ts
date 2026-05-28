@@ -21,6 +21,7 @@ export function getBanditPaths(repoRoot: string) {
     riskClassificationPolicy: path.join(policyRoot, "risk-classification.json"),
     skillLifecyclePolicy: path.join(policyRoot, "skill-lifecycle-contracts.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
+    supplyChainPolicy: path.join(policyRoot, "supply-chain-gate.json"),
     smellTriggers: path.join(policyRoot, "smell-triggers.json")
   };
 }

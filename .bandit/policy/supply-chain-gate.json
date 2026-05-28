@@ -1,0 +1,24 @@
+{
+  "contract_version": 1,
+  "policy_id": "supply-chain-gate",
+  "sensitive_surfaces": [
+    "dependency_manifest",
+    "lockfile",
+    "package_manager_script",
+    "ci_release_workflow",
+    "agent_skill",
+    "fetched_prompt",
+    "external_tool_install",
+    "executable_generated_content",
+    "unknown"
+  ],
+  "operator_supervised_surfaces": [
+    "package_manager_script",
+    "ci_release_workflow",
+    "fetched_prompt",
+    "external_tool_install",
+    "executable_generated_content",
+    "unknown"
+  ],
+  "release_authorized_decisions": []
+}

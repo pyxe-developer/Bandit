@@ -2173,6 +2173,7 @@ rationale: Evidence is explicit and unavailable final gates are recorded as boot
 
 async function writeRiskClassificationEvidence(repo, workItemId) {
   const evidencePath = `docs/risk/layered/${workItemId}-risk-classification.json`;
+  const supplyChainEvidencePath = `docs/supply-chain/${workItemId}-supply-chain-gate.json`;
   const classification = {
     contract_version: 1,
     work_item: workItemId,
@@ -2210,7 +2211,7 @@ async function writeRiskClassificationEvidence(repo, workItemId) {
     },
     supply_chain_state: {
       state: "not_touched",
-      evidence_path: "package-lock.json"
+      evidence_path: supplyChainEvidencePath
     },
     smell_trigger_inputs: [],
     selected_review_depth: "pre_pr_coderabbit_plus_qwen",
@@ -2228,12 +2229,117 @@ async function writeRiskClassificationEvidence(repo, workItemId) {
     evidence_paths: [
       ".bandit/policy/risk-classification.json",
       "docs/templates/layered-risk-classification.md",
+      supplyChainEvidencePath,
       `docs/work/${workItemId}/brief.md`
     ]
   };
 
   await writeJsonFile(repo, evidencePath, classification);
   await upsertRiskClassificationPolicyDecision(repo, workItemId, evidencePath);
+  await writeSupplyChainGateEvidence(repo, workItemId, supplyChainEvidencePath);
+}
+
+async function writeSupplyChainGateEvidence(repo, workItemId, evidencePath) {
+  const gate = {
+    contract_version: 1,
+    work_item: workItemId,
+    changed_supply_chain_surfaces: [
+      {
+        path: `docs/work/${workItemId}/brief.md`,
+        surface: "dependency_manifest",
+        change_type: "not_touched",
+        execution_path: false,
+        risk: "low",
+        operator_supervision_required: false
+      }
+    ],
+    dependency_manifest_state: {
+      state: "not_touched",
+      package_manager: "npm",
+      manifests: ["package.json"],
+      direct_dependency_changes: [],
+      version_or_pin_changes: [],
+      sca_or_equivalent: {
+        state: "unavailable_with_disposition",
+        evidence_path: `docs/work/${workItemId}/brief.md`,
+        unavailable_tool_disposition:
+          "No dependency manifest change is present in this landing-gate fixture."
+      },
+      rationale: "No dependency manifest change is present."
+    },
+    lockfile_state: {
+      state: "not_touched",
+      lockfiles: ["package-lock.json"],
+      manifest_rationale: "No lockfile-only drift.",
+      drift_rationale: "Not applicable."
+    },
+    package_manager_scripts: {
+      state: "not_touched",
+      scripts: [],
+      review_evidence_path: `docs/work/${workItemId}/brief.md`
+    },
+    ci_release_workflows: {
+      state: "not_touched",
+      workflows: []
+    },
+    agent_skills: {
+      state: "not_touched",
+      skills: [],
+      owner: "Codex PM",
+      freshness_rule: "not_applicable",
+      revocation_path: "not_applicable"
+    },
+    fetched_prompts: {
+      state: "not_touched",
+      prompt_sources: [],
+      input_quarantine_refs: [],
+      trusted_source_gate_refs: []
+    },
+    external_tool_installs: {
+      state: "not_touched",
+      install_paths: [],
+      input_quarantine_refs: [],
+      trusted_source_gate_refs: []
+    },
+    input_quarantine_refs: [".bandit/policy/input-quarantine.json"],
+    trusted_source_gate_refs: [],
+    operator_supervised_approval: {
+      required: false,
+      state: "not_required",
+      evidence_path: ""
+    },
+    auto_landing: {
+      eligible: true,
+      refusal_rationale: "none"
+    },
+    rationale:
+      "Landing-gate fixture records independent supply-chain gate evidence before auto-landing eligibility.",
+    evidence_paths: [
+      ".bandit/policy/supply-chain-gate.json",
+      "docs/templates/supply-chain-gate.md",
+      `docs/work/${workItemId}/brief.md`
+    ]
+  };
+
+  await writeJsonFile(repo, evidencePath, gate);
+  await upsertSupplyChainPolicyDecision(repo, workItemId, evidencePath);
+}
+
+async function upsertSupplyChainPolicyDecision(repo, workItemId, evidencePath) {
+  const policyPath = path.join(repo, ".bandit/policy/supply-chain-gate.json");
+  const policy = JSON.parse(await readFile(policyPath, "utf8"));
+  policy.release_authorized_decisions =
+    policy.release_authorized_decisions?.filter(
+      (decision) =>
+        decision.work_item !== workItemId ||
+        decision.decision_kind !== "auto_landing"
+    ) ?? [];
+  policy.release_authorized_decisions.push({
+    work_item: workItemId,
+    decision_kind: "auto_landing",
+    evidence_path: evidencePath
+  });
+  await writeFile(policyPath, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
 }
 
 async function upsertRiskClassificationPolicyDecision(repo, workItemId, evidencePath) {
