@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Disposition Local Qwen `non_blocking` findings for
+**Current next step:** Record aggregate Stage 4 review evidence for
 `BANDIT-045` - CAS Fenced Claim Authority. Its structured creation spec is
 recorded in `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage
 1 brief is recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence
@@ -28,15 +28,16 @@ CodeRabbit pass evidence is recorded in
 `c276979c5032e73e131fbaff78b1f9aa92d537b3`, Stage 4 Local Qwen evidence is
 recorded in `docs/work/BANDIT-045/local-qwen-review.md` at source head
 `146f36d970f5a7e40a7b06f1d4aae365d985207b` with reviewer verdict
-`non_blocking`, findings status `open`, and no operator-owned input required.
+`non_blocking`, findings status `open`, and no operator-owned input required,
+and Codex PM disposition is recorded in
+`docs/work/BANDIT-045/qwen-finding-disposition.md`.
 `.bandit/events.jsonl` records the work-item and artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` active with linked work item
-`BANDIT-045`. The next step is Stage 4 disposition only: record Codex PM
-disposition for the Local Qwen validation-helper duplication and
-scenario-routing findings, choosing repair or durable follow-up/no-action
-before aggregate review evidence, required risk/supply-chain evidence, and
-Codex PM Stage 4 acceptance at review subject hash
+`BANDIT-045`. The next step is Stage 4 aggregate review evidence only: combine
+the pre-PR CodeRabbit pass, Local Qwen `non_blocking` evidence, Codex PM
+disposition, required risk/supply-chain evidence, and Codex PM Stage 4
+acceptance at review subject hash
 `b72f2c8ef205d82d94226df8a124583239a9414e40a003917ee7c46edd5d4ab4`. Do not
 start Git
 Mutation Serializer, Worktree Bootstrap Contract, scheduler, worktree
@@ -586,8 +587,10 @@ deterministic fault-injecting or property-style simulation; example-only
 duplicate-claim tests do not satisfy the gate. `BANDIT-045` Stage 1 spec,
 brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence are
 recorded, Stage 4 pre-PR CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-045/coderabbit-review.md`, and the next action is Local Qwen
-review.
+`docs/work/BANDIT-045/coderabbit-review.md`, Stage 4 Local Qwen `non_blocking`
+evidence is recorded in `docs/work/BANDIT-045/local-qwen-review.md`, Codex PM
+disposition is recorded in `docs/work/BANDIT-045/qwen-finding-disposition.md`,
+and the next action is aggregate Stage 4 review evidence.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is constrained by the accepted
 2026-05-27 Git mutation serializer decision: shared `.git` worktree and
 repository plumbing mutations require a CLI-owned single-writer guard, while
@@ -858,8 +861,9 @@ spec/brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence
 are recorded. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-045/coderabbit-review.md`, and Stage 4 Local Qwen
 `non_blocking` evidence is recorded in
-`docs/work/BANDIT-045/local-qwen-review.md`. The current target is Codex PM
-disposition for the Local Qwen findings in `BANDIT-045`.
+`docs/work/BANDIT-045/local-qwen-review.md`. Codex PM disposition is recorded
+in `docs/work/BANDIT-045/qwen-finding-disposition.md`. The current target is
+aggregate Stage 4 review evidence for `BANDIT-045`.
 
 ## Phase Map
 
@@ -1174,10 +1178,10 @@ Current rule:
 
 Current priority:
 
-1. Record Codex PM disposition for the Local Qwen `non_blocking` findings in
-   `BANDIT-045` - CAS Fenced Claim Authority, then record aggregate review
-   evidence, required risk/supply-chain evidence, and Codex PM Stage 4
-   acceptance at the current review subject hash.
+1. Record aggregate Stage 4 review evidence for `BANDIT-045` - CAS Fenced Claim
+   Authority using the pre-PR CodeRabbit pass, Local Qwen `non_blocking`
+   evidence, Codex PM disposition, required risk/supply-chain evidence, and
+   Codex PM Stage 4 acceptance at the current review subject hash.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
