@@ -1,0 +1,255 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-045",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/claim-authority.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/claims/README.md",
+      "surface": "workflow_projection",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/claim-authority.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/claim-authority.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/claim-projections.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/claim-safety-simulation.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/work-surface-graph.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/claim.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/templates.ts",
+      "surface": "template_validation",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/claim-authority.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/claim-safety-simulation.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/work-surface-graph.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "cas_fenced_claim_authority_policy",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-045/implementation-evidence.md"
+    },
+    {
+      "signal_id": "git_refs_claim_authority_backend",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    },
+    {
+      "signal_id": "parallel_write_authorization_remains_blocked",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/claim-authority.test.mjs test/claim-safety-simulation.test.mjs test/work-surface-graph.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- claim validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- operator-boundary validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- coordination-authority validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-045/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-045/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-045-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-CLAIM-AUTHORITY-CAS",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-FENCING-TOKEN",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-IDEMPOTENCY-KEY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-WORK-SURFACE-DEADLOCK",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CLAIM-SAFETY-INVARIANTS",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-045/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-045 is a non-product bootstrap-gap chore implementing the already accepted Git refs CAS claim-authority backend while keeping true parallel writable workstreams blocked until later gates pass. It needs pre-PR CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-045 changes local claim-authority policy, projection documentation, template validation, CLI validation, command wiring, deterministic simulation, Work-Surface Wait-For Graph checks, and focused tests. It introduces no dependency or lockfile change, package-manager script change, CI or release workflow change, installed agent skill edit, fetched-prompt or external tool-install path, external side-effecting automation, product UAT surface, live scheduler execution, worktree lifecycle, merge/push/deploy behavior, paid reviewer routing, or cockpit UI behavior. Stage 4 evidence records CodeRabbit pass, Local Qwen non_blocking with durable PM routing, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-045-supply-chain-gate.json",
+    ".bandit/policy/claim-authority.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/templates/supply-chain-gate.md",
+    "docs/templates/claim-authority.md",
+    "docs/work/BANDIT-045/brief.md",
+    "docs/work/BANDIT-045/implementation-evidence.md",
+    "docs/work/BANDIT-045/review-evidence.md"
+  ]
+}
