@@ -16,8 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record the Stage 5 landing verdict for `BANDIT-039` - Agent
-Evaluation Harness. Do not start unrelated Phase 8 work first. `BANDIT-038` -
+**Current next step:** Run the local-record landing action for `BANDIT-039` -
+Agent Evaluation Harness. Do not start Stage 6 retrospective closeout or
+unrelated Phase 8 work first. `BANDIT-038` -
 Skill Lifecycle Contract is landed and closed out: Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
 evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4 review evidence
@@ -37,7 +38,11 @@ Stage 4 pre-PR CodeRabbit pass evidence at
 at `docs/work/BANDIT-039/local-qwen-review.md`, aggregate Stage 4 review
 evidence at `docs/work/BANDIT-039/review-evidence.md` with current review
 subject hash `d74ec2b37161cc3fe5a497d07fd27f4f721205f6fd1d7f6bbef6ff1c70fa6511`,
-and active gap-ledger link in `.bandit/bootstrap-gaps.json`.
+Stage 5 landing verdict evidence at `docs/work/BANDIT-039/landing-verdict.md`
+with final verdict `safe-to-land`, and active gap-ledger link in
+`.bandit/bootstrap-gaps.json`. The slice is `ready-to-land`, not landed, until
+`docs/work/BANDIT-039/landing-action.md` records local-record landing action
+evidence.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -411,9 +416,9 @@ and bootstrap-gap disposition are recorded in `docs/work/BANDIT-038/` and
 `.bandit/bootstrap-gaps.json`. `BANDIT-039` is created as the bootstrap-gap
 chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`; its structured creation spec,
 Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
-CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, and aggregate Stage
-4 review evidence are recorded. The next required action is Stage 5 landing
-verdict for `BANDIT-039`.
+CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage
+4 review evidence, and Stage 5 landing verdict evidence are recorded. The next
+required action is local-record landing action evidence for `BANDIT-039`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -1030,12 +1035,12 @@ Current rule:
 
 Current priority:
 
-1. Record the Stage 5 landing verdict for `BANDIT-039` - Agent Evaluation Harness now
+1. Run the local-record landing action for `BANDIT-039` - Agent Evaluation Harness now
    that the bootstrap-gap chore has a structured spec, Stage 1 brief, Stage 2
    RED evidence, Stage 3 implementation evidence, Stage 4 CodeRabbit pass
-   evidence, Stage 4 Local Qwen pass evidence, aggregate review evidence, and
-   active gap-ledger link.
-   Do not start unrelated Phase 8 work first.
+   evidence, Stage 4 Local Qwen pass evidence, aggregate review evidence, Stage
+   5 landing verdict evidence, and active gap-ledger link.
+   Do not start Stage 6 retrospective closeout or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
