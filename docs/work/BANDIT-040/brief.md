@@ -1,0 +1,105 @@
+# BANDIT-040: Input Quarantine Gate
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where Bandit has no structural input quarantine gate for external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or fetched prompts.
+
+## Origin
+
+The 2026-05-26 strategic review and accepted Bandit PRDs identify untrusted-input posture as a P0 trust-layer requirement. Bandit currently names Data-Only External Input, Input Quarantine Boundary, Trusted Source Gate, and Trusted Local Repo Mode in repo vocabulary, but no CLI-readable policy, template, validation path, or focused tests prevent release-authorized agents from treating external or third-party content as instruction-bearing context. The first repair must make external and third-party content data-only by default, require source classification and quarantine evidence, and fail closed unless a bounded trusted-source gate upgrades content for a specific allowed use.
+
+## Scope
+
+- Define a repo-native Input Quarantine Gate contract for release-authorized paths that process external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or fetched prompts.
+- Define source classification fields for repo-local trusted content, external contributor content, fetched third-party content, dependency documentation, generated instructions, fetched prompts, and any unknown source class.
+- Define Data-Only External Input handling so untrusted content can be quoted, summarized, extracted, or used as evidence without becoming instructions, tool permissions, routing authority, landing authority, or policy authority.
+- Define an Input Quarantine Boundary artifact or policy surface that records source identity, source class, data-only handling, admitted fields, stripped or ignored fields, allowed extraction uses, forbidden instruction-bearing uses, owning stage, and evidence path.
+- Define a Trusted Source Gate artifact or policy surface that can upgrade a specific source for a bounded instruction-bearing purpose only when it records source identity, scope, allowed uses, owner, freshness or expiry rule, revocation path, trust rationale, and evidence artifact.
+- Define Trusted Local Repo Mode limits so repo-local content remains trusted only until external contributor input, fetched third-party content, generated instructions, or fetched prompts enter a release-authorized path.
+- Add validation that fails closed when release-authorized agent paths process external or third-party content without source classification, data-only handling, input quarantine evidence, and trusted-source gate evidence for any instruction-bearing use.
+- Add validation that rejects blanket trust, permanent trust upgrades, source-reputation-only trust, trusted-by-default PR or issue text, raw context dumps, and any trusted-source gate that lacks scope, owner, freshness or expiry, allowed uses, or revocation.
+- Add focused tests for missing source classification, missing data-only boundary, missing quarantine artifact, instruction-bearing use without a trusted-source gate, malformed trusted-source gate metadata, Trusted Local Repo Mode overreach, unknown source class refusal, and a complete accepted gate.
+- Keep the repair limited to input quarantine contracts, templates, CLI-readable policy or registry validation, focused tests, and necessary roadmap/context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1 and perform clean-code evaluation before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit input quarantine templates, policy or registry parsing, validation, CLI surfaces, and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond defining the already queued input quarantine gate, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, dependency or lockfile policy, or broader workflow scope.
+- Layered risk and supply-chain scope: this chore may expose source-trust and input-quarantine state for later risk classification, but it must not implement the Layered Risk Classification Gate, Supply-Chain Gate, dependency or lockfile validation, CI/release workflow policy, paid reviewer routing, live model routing, scheduler execution, claim authority, worktree lifecycle, or unrelated Phase 8 cockpit work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-040/brief.md and links to BANDIT-GAP-INPUT-QUARANTINE-GATE.
+- An Input Quarantine Gate template or policy artifact names required fields for source identity, source class, data-only handling, quarantine boundary evidence, admitted fields, stripped or ignored fields, allowed extraction uses, forbidden instruction-bearing uses, owning stage, trusted-source gate references, freshness or expiry, owner, and revocation path.
+- Validation fails closed when a release-authorized agent path processes external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or fetched prompts without source classification.
+- Validation fails closed when external or third-party content is not explicitly handled as data-only before it enters release-authorized agent context.
+- Validation fails closed when untrusted content can affect agent instructions, tool permissions, routing decisions, landing authority, auto-landing eligibility, policy authority, or gate satisfaction without a bounded Trusted Source Gate.
+- Validation fails closed when a Trusted Source Gate omits source identity, scope, allowed uses, owner, freshness or expiry rule, revocation path, trust rationale, or evidence artifact.
+- Validation fails closed for blanket trust, permanent trust upgrades, source-reputation-only trust, trusted-by-default PR or issue text, raw context dumps, hidden instruction-bearing fields, and unknown source classes without explicit refusal.
+- Trusted Local Repo Mode is represented as a scoped local-repo posture that ends at the boundary where external contributor input, fetched third-party content, generated instructions, or fetched prompts enter a release-authorized path.
+- Focused tests prove invalid quarantine contracts are rejected before writes or trusted status, and prove a complete bounded input quarantine contract is accepted.
+- The implementation does not implement the later Layered Risk Classification Gate, Supply-Chain Gate, coordination authority, operator fail-closed boundary, claim authority, Git mutation serializer, worktree bootstrap contract, scheduler, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, or cockpit UI gaps.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-INPUT-QUARANTINE-GATE is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow, live reviewer routing change, paid reviewer route, external service integration, dependency or lockfile change, installed global skill edit, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run focused input quarantine gate tests for RED/GREEN coverage.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, policy parsing, review evidence, landing gates, bootstrap gaps, roadmap/cockpit status parsing, skill lifecycle validation, agent evaluation validation, or template validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- input-quarantine validate --json if the implementation adds the expected command surface.
+- Run npm run bandit -- agent-evaluation validate --json.
+- Run npm run bandit -- skill-lifecycle validate --json.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-040 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-040 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-040 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-040 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json
+- docs/work/BANDIT-040/brief.md
+- docs/work/BANDIT-040/red-evidence.md
+- docs/work/BANDIT-040/implementation-evidence.md
+- docs/work/BANDIT-040/coderabbit-review.md
+- docs/work/BANDIT-040/local-qwen-review.md
+- docs/work/BANDIT-040/review-evidence.md
+- docs/work/BANDIT-040/landing-verdict.md
+- docs/work/BANDIT-040/landing-action.md
+- docs/work/BANDIT-040/retrospective.md
+- docs/templates/input-quarantine-gate.md
+- docs/templates/trusted-source-gate.md
+- .bandit/policy/input-quarantine.json
+- src/state/input-quarantine.ts
+- src/commands/input-quarantine.ts
+- test/input-quarantine-gate.test.mjs
+- test/validate.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-040/brief.md
+- docs/work/BANDIT-040/red-evidence.md
+- docs/work/BANDIT-040/implementation-evidence.md
+- docs/work/BANDIT-040/coderabbit-review.md
+- docs/work/BANDIT-040/local-qwen-review.md
+- docs/work/BANDIT-040/review-evidence.md
+- docs/work/BANDIT-040/landing-verdict.md
+- docs/work/BANDIT-040/landing-action.md
+- docs/work/BANDIT-040/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, data-only external input posture, input source classification need, input quarantine boundary, Trusted Source Gate metadata, Trusted Local Repo Mode limit, and dependency on the resolved Agent Evaluation Harness gap. Halt only if implementation would change product direction, UAT policy, workflow policy beyond defining the already queued input quarantine gate, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer spend approval, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, dependency or lockfile policy, or broader workflow scope.

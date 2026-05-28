@@ -311,8 +311,8 @@
     {
       "id": "BANDIT-GAP-INPUT-QUARANTINE-GATE",
       "title": "No structural input quarantine gate exists for external or third-party text",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -321,10 +321,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-040",
       "rationale": "The research review identified prompt-injection posture as a P0 omission, and the operator confirmed that external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, and fetched prompts must be treated as data-only by default. Bandit needs a structural input quarantine boundary before release-authorized agents can inspect those inputs, and a trusted-source gate before any such content can affect agent instructions, tool permissions, routing, or landing authority. Reviewer escalation alone is not sufficient because hostile text must be prevented from entering instruction-bearing context.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to define data-only external input handling, input source classification, input quarantine boundaries, trusted-source gates, instruction-bearing-use refusals, and validation for release-authorized agent paths that process external contributor or fetched third-party content."
+      "next_action": "Complete active chore BANDIT-040."
     },
     {
       "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",
