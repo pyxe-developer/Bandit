@@ -16,19 +16,29 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-041` - Layered
-Risk Classification. Do not create landing, retrospective, or the next
-bootstrap-gap chore until pre-PR CodeRabbit, Local Qwen, aggregate review
-evidence, and Codex PM disposition are recorded at the current review subject
-hash.
+**Current next step:** Run Stage 5 landing verdict for `BANDIT-041` -
+Layered Risk Classification. Do not create local-record landing action,
+retrospective, or the next bootstrap-gap chore until the Landing Agent verdict
+is recorded from current tests, current Stage 4 review evidence, current
+review-subject hash, clean-code compliance, and `BANDIT-041` UAT
+not-applicable status.
 
-`BANDIT-041` - Layered Risk Classification is active at Stage 3 implementation
-as the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
+`BANDIT-041` - Layered Risk Classification is active at Stage 4 review
+evidence recorded as the bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-041/brief.md`, Stage 2 RED evidence is recorded
 in `docs/work/BANDIT-041/red-evidence.md`, Stage 3 implementation evidence is
 recorded in `docs/work/BANDIT-041/implementation-evidence.md`,
+Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-041/coderabbit-review.md`, Stage 4 Local Qwen
+`non_blocking` evidence and PM disposition are recorded in
+`docs/work/BANDIT-041/local-qwen-review.md` and
+`docs/work/BANDIT-041/qwen-finding-disposition.md`, aggregate Stage 4 review
+evidence with current review subject hash
+`c2d61935bb796bbb0ba779f7cbcd7c6497a5473ce11a6b3b34fa1f0fa7ea242c` is
+recorded in `docs/work/BANDIT-041/review-evidence.md`,
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 and implementation-evidence artifact events, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-041` with disposition
@@ -1063,17 +1073,17 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-041` - Layered Risk Classification.
+1. Run Stage 5 landing verdict for `BANDIT-041` - Layered Risk Classification.
    The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, Stage 2
    RED evidence is recorded in `docs/work/BANDIT-041/red-evidence.md`, Stage 3
    implementation evidence is recorded in
-   `docs/work/BANDIT-041/implementation-evidence.md`, and
+   `docs/work/BANDIT-041/implementation-evidence.md`, Stage 4 review evidence
+   is recorded in `docs/work/BANDIT-041/review-evidence.md`, and
    `.bandit/bootstrap-gaps.json` links
    `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` to `BANDIT-041` with disposition
-   `active_chore`. Do not create landing, retrospective, the next
-   bootstrap-gap chore, or unrelated Phase 8 work before pre-PR CodeRabbit,
-   Local Qwen, aggregate review evidence, and Codex PM disposition are
-   recorded at the current review subject hash.
+   `active_chore`. Do not create local-record landing action, retrospective,
+   the next bootstrap-gap chore, or unrelated Phase 8 work before the Landing
+   Agent verdict is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
