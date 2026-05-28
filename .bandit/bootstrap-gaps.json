@@ -385,8 +385,8 @@
     {
       "id": "BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY",
       "title": "Fail-closed routing can escalate derivable operational drift to the operator",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -397,9 +397,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-044",
-      "rationale": "The PRD-002 research review warned that pervasive fail-closed behavior can manufacture operator toil when ordinary registry, ledger, optional-field, projection, or workflow bookkeeping drift is escalated instead of repaired mechanically. The operator confirmed that operator-blocking fail-closed behavior should be reserved for safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely ambiguous scope gates. Derivable operational drift should route to CLI-owned mechanical repair with approved source artifacts, expected-current-state checks, immutable transition history, and no authority to invent scope, grant approvals, override policy, resolve ambiguous cost/risk, perform irreversible operational actions, or force-resolve unsafe claim recovery.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-044."
+      "rationale": "BANDIT-044 created a repo-native Operator Fail-Closed Boundary policy, required operator-boundary template, focused validator, bandit operator-boundary validate [--json], init/validate wiring, smell-trigger alignment checks, mechanical-repair evidence requirements, repair-overreach refusals, focused tests, Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout. Operator-blocking fail-closed behavior is now reserved for product direction, UAT, policy, business, explicit cost or risk, irreversible operational-risk, safety-critical release authorization, and genuinely ambiguous scope gates, while derivable operational drift routes to Codex PM or CLI-owned mechanical repair with approved source artifacts, expected-current-state checks, immutable evidence, and post-repair validation.",
+      "verification_target": "docs/work/BANDIT-044/retrospective.md",
+      "next_action": "Use bandit operator-boundary validate and bandit validate to enforce operator-owned input boundaries; create the next queued bootstrap-gap chore for BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",
