@@ -106,7 +106,21 @@ function evaluateScenario(name: string, scenario: RawRecord, workItem: string) {
   }
 
   if (name === "worktree lock failure cleanup") {
-    return evaluateWorktreeLockFailureScenario(scenario, workItem);
+    return evaluateRecoveryRequiredFailureScenario(
+      scenario,
+      workItem,
+      "worktree_lock_failed",
+      "failed_worktree_lock_cleanup_preserves_recovery_state"
+    );
+  }
+
+  if (name === "serializer failure cleanup") {
+    return evaluateRecoveryRequiredFailureScenario(
+      scenario,
+      workItem,
+      "git_mutation_serializer_failed",
+      "failed_serializer_cleanup_preserves_recovery_state"
+    );
   }
 
   return {
@@ -232,9 +246,11 @@ function evaluateIdempotencyScenario(scenario: RawRecord, workItem: string) {
   };
 }
 
-function evaluateWorktreeLockFailureScenario(
+function evaluateRecoveryRequiredFailureScenario(
   scenario: RawRecord,
-  workItem: string
+  workItem: string,
+  failureOperation: string,
+  invariant: string
 ) {
   const operations = readScenarioOperations(scenario, workItem);
   let status = "claimable";
@@ -250,7 +266,7 @@ function evaluateWorktreeLockFailureScenario(
       status = "active";
     }
 
-    if (operationName === "worktree_lock_failed" && status === "active") {
+    if (operationName === failureOperation && status === "active") {
       status = "recovery_required";
     }
   }
@@ -258,7 +274,7 @@ function evaluateWorktreeLockFailureScenario(
   return {
     final_status: status,
     false_active_claim: status === "active",
-    invariant: "failed_worktree_lock_cleanup_preserves_recovery_state"
+    invariant
   };
 }
 

@@ -1,0 +1,34 @@
+{
+  "contract_version": 1,
+  "policy_id": "git-mutation-serializer",
+  "serializer_boundary": {
+    "authority": "cli_single_writer_guard",
+    "lock_scope": "shared_git_plumbing",
+    "claim_authority": "separate_refs_bandit_cas"
+  },
+  "shared_git_mutation_allow_list": [
+    "worktree_add",
+    "worktree_remove",
+    "worktree_prune",
+    "worktree_lock",
+    "worktree_unlock",
+    "branch_ref_maintenance_outside_claim_cas",
+    "packed_refs_maintenance"
+  ],
+  "required_evidence_fields": [
+    "operation_id",
+    "operation",
+    "work_item",
+    "stage",
+    "claim_id",
+    "writer_owner",
+    "started_at",
+    "completed_at",
+    "result",
+    "contention_status",
+    "stale_lock_status",
+    "diagnostics",
+    "source_artifacts"
+  ],
+  "release_authorized_decisions": []
+}

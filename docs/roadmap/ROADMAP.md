@@ -16,13 +16,13 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement the narrow Stage 3 Git Mutation Serializer
-repair for `BANDIT-046`. Use `docs/work/BANDIT-046/red-evidence.md`,
-`docs/specs/BANDIT-046-red-evidence.json`, and the focused RED tests in
-`test/git-mutation-serializer.test.mjs` and
-`test/claim-safety-simulation.test.mjs`; make those tests pass without
-starting review, landing, Worktree Bootstrap Contract, scheduler, full worktree
-lifecycle enablement, cockpit, PR/CI workflow, or unrelated Phase 8 work.
+**Current next step:** Run Stage 4 review gates for `BANDIT-046`: pre-PR
+CodeRabbit, Local Qwen, aggregate review evidence, risk/supply-chain evidence
+as required, and Codex PM disposition at the current review subject hash. Do
+not start landing verdict, local-record landing, retrospective closeout,
+Worktree Bootstrap Contract, scheduler, full worktree lifecycle enablement,
+cockpit, PR/CI workflow, or unrelated Phase 8 work before Stage 4 evidence is
+recorded.
 
 `BANDIT-046` - Git Mutation Serializer is active as the bootstrap-gap chore for
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured creation spec is recorded
@@ -32,12 +32,20 @@ in `docs/specs/BANDIT-046-red-evidence.json`,
 `docs/work/BANDIT-046/red-evidence.md`,
 `test/git-mutation-serializer.test.mjs`,
 `test/helpers/git-mutation-fixture.mjs`, and
-`test/claim-safety-simulation.test.mjs`, `.bandit/events.jsonl` records the
-work-item-created and red-evidence artifact-created events, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-046` with status
-`active`. Stage 3 implementation evidence is the next required artifact; do
-not start review, landing, retrospective, or later gap work before the RED
-tests pass and implementation evidence is recorded.
+`test/claim-safety-simulation.test.mjs`, Stage 3 implementation evidence is
+recorded in `docs/specs/BANDIT-046-implementation-evidence.json`,
+`docs/work/BANDIT-046/implementation-evidence.md`,
+`src/state/git-mutations.ts`, `src/commands/git-mutation.ts`,
+`.bandit/policy/git-mutations.json`,
+`docs/templates/git-mutation-serializer.md`,
+`docs/git-mutations/BANDIT-046-git-mutation-serializer.json`, and the
+focused implementation diff, `.bandit/events.jsonl` records the
+work-item-created, red-evidence artifact-created, and implementation-evidence
+artifact-created events, and `.bandit/bootstrap-gaps.json` links the gap to
+`BANDIT-046` with status `active`. Stage 4 review evidence is the next
+required artifact; do not start landing, retrospective, or later gap work
+before pre-PR CodeRabbit, Local Qwen, aggregate review evidence, and Codex PM
+disposition are recorded.
 
 `BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
@@ -876,8 +884,8 @@ recorded in `docs/work/BANDIT-045/landing-verdict.md`, local-record landing
 action evidence is recorded in `docs/work/BANDIT-045/landing-action.md`, and
 Stage 6 retrospective closeout and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
-`BANDIT-046` is now active for Git Mutation Serializer, Stage 2 RED evidence is
-recorded, and the current target is Stage 3 implementation.
+`BANDIT-046` is now active for Git Mutation Serializer, Stage 3 implementation
+evidence is recorded, and the current target is Stage 4 review.
 
 ## Phase Map
 
@@ -1192,11 +1200,10 @@ Current rule:
 
 Current priority:
 
-1. Implement the narrow Stage 3 Git Mutation Serializer repair for
-   `BANDIT-046`, using `docs/work/BANDIT-046/red-evidence.md`,
-   `docs/specs/BANDIT-046-red-evidence.json`, the focused RED tests, PRD-002
-   source artifacts, the accepted Git Mutation Serializer decision, the
-   now-resolved `BANDIT-045` closeout, and `CLEAN_CODE.md`.
+1. Run Stage 4 review gates for `BANDIT-046`, using
+   `docs/work/BANDIT-046/implementation-evidence.md`, the current review
+   subject hash, pre-PR CodeRabbit, Local Qwen, Codex PM disposition, and
+   risk/supply-chain evidence as required by the stage.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

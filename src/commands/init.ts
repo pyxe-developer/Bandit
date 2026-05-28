@@ -8,6 +8,10 @@ import {
 } from "../state/claim-authority.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
+import {
+  writeDefaultGitMutationPolicy,
+  writeDefaultGitMutationTemplate
+} from "../state/git-mutations.js";
 import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import {
   writeDefaultCoordinationAuthorityPolicy,
@@ -48,6 +52,10 @@ export async function initBandit(repoRoot: string) {
   );
   const coordinationAuthorityTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/coordination-authority.md`
+  );
+  const gitMutationPolicyExists = await pathExists(paths.gitMutationPolicy);
+  const gitMutationTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/git-mutation-serializer.md`
   );
   const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
   const inputQuarantinePolicyExists = await pathExists(
@@ -107,6 +115,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!coordinationAuthorityTemplateExists) {
     await writeDefaultCoordinationAuthorityTemplate(repoRoot);
+  }
+
+  if (!gitMutationPolicyExists) {
+    await writeDefaultGitMutationPolicy(paths.gitMutationPolicy);
+  }
+
+  if (!gitMutationTemplateExists) {
+    await writeDefaultGitMutationTemplate(repoRoot);
   }
 
   if (!heartbeatPolicyExists) {

@@ -9,6 +9,7 @@ import { validateCoordinationLogs } from "../state/coordination-log.js";
 import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
+import { validateGitMutations } from "../state/git-mutations.js";
 import { validateHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { validateInputQuarantineGate } from "../state/input-quarantine.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
@@ -44,6 +45,7 @@ export async function validateBandit(repoRoot: string) {
   await validateSupplyChainGate(repoRoot);
   await validateCoordinationAuthority(repoRoot);
   await validateClaimAuthority(repoRoot);
+  await validateGitMutations(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);

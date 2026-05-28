@@ -251,6 +251,27 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
     ]
   },
   {
+    displayPath: "docs/templates/git-mutation-serializer.md",
+    requirements: [
+      metadata("work item", /^work_item:/im),
+      metadata("source artifacts", /^source_artifacts:/im),
+      metadata("serializer boundary", /^serializer_boundary:/im),
+      metadata("shared git mutation allow-list", /^shared_git_mutation_allow_list:/im),
+      metadata("single writer guard", /^single_writer_guard:/im),
+      metadata("contention scenarios", /^contention_scenarios:/im),
+      metadata(
+        "release-authorized path checks",
+        /^release_authorized_path_checks:/im
+      ),
+      metadata("claim-owned worktree locks", /^claim_owned_worktree_locks:/im),
+      metadata("failure cleanup", /^failure_cleanup:/im),
+      metadata("timeout and stale lock", /^timeout_and_stale_lock:/im),
+      metadata("trace fields", /^trace_fields:/im),
+      metadata("parallel write authorization", /^parallel_write_authorization:/im),
+      metadata("evidence paths", /^evidence_paths:/im)
+    ]
+  },
+  {
     displayPath: "docs/templates/operator-boundary.md",
     requirements: [
       metadata("work item", /^work_item:/im),
