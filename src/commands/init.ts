@@ -8,6 +8,10 @@ import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { writeDefaultInputQuarantinePolicy } from "../state/input-quarantine.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
+import {
+  writeDefaultRiskClassificationPolicy,
+  writeDefaultRiskClassificationTemplate
+} from "../state/risk-classification.js";
 import { writeDefaultSkillLifecyclePolicy } from "../state/skill-lifecycle-contracts.js";
 import { writeDefaultStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 
@@ -24,6 +28,12 @@ export async function initBandit(repoRoot: string) {
     paths.inputQuarantinePolicy
   );
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
+  const riskClassificationPolicyExists = await pathExists(
+    paths.riskClassificationPolicy
+  );
+  const riskClassificationTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/layered-risk-classification.md`
+  );
   const skillLifecyclePolicyExists = await pathExists(
     paths.skillLifecyclePolicy
   );
@@ -55,6 +65,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!landingAgentContractExists) {
     await writeDefaultLandingAgentContract(paths.landingAgentContract);
+  }
+
+  if (!riskClassificationPolicyExists) {
+    await writeDefaultRiskClassificationPolicy(paths.riskClassificationPolicy);
+  }
+
+  if (!riskClassificationTemplateExists) {
+    await writeDefaultRiskClassificationTemplate(repoRoot);
   }
 
   if (!skillLifecyclePolicyExists) {

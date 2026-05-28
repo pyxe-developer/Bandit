@@ -1,0 +1,39 @@
+{
+  "contract_version": 1,
+  "policy_id": "layered-risk-classification",
+  "required_signal_groups": [
+    "changed_surfaces",
+    "hard_exclusions",
+    "blast_radius_signals",
+    "static_analysis_signals",
+    "source_trust_state",
+    "input_quarantine_state",
+    "supply_chain_state",
+    "smell_trigger_inputs"
+  ],
+  "allowed_review_depths": [
+    "baseline_qwen",
+    "pre_pr_coderabbit_plus_qwen",
+    "escalated_adversarial"
+  ],
+  "never_auto_landable_surfaces": [
+    "authentication",
+    "sessions",
+    "authorization",
+    "payment",
+    "billing",
+    "refunds",
+    "production_data",
+    "schema_migrations",
+    "secrets",
+    "credentials",
+    "ci_or_release_workflow",
+    "dependency_or_fetched_prompt_execution",
+    "privacy",
+    "telemetry",
+    "export",
+    "destructive_operations",
+    "external_side_effecting_automation"
+  ],
+  "release_authorized_decisions": []
+}

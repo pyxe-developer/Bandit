@@ -15,6 +15,7 @@ import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js"
 import { getBanditPaths } from "../state/paths.js";
 import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
 import { validateLocalQwenProfile } from "../state/reviewer-profiles.js";
+import { validateRiskClassificationGate } from "../state/risk-classification.js";
 import { validateRoutingDecisions } from "../state/routing-decisions.js";
 import { readSmellCatalog } from "../state/smell-triggers.js";
 import { validateStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
@@ -34,6 +35,7 @@ export async function validateBandit(repoRoot: string) {
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
   await validateInputQuarantineGate(repoRoot);
+  await validateRiskClassificationGate(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);

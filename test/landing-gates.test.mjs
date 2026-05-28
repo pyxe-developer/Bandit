@@ -421,6 +421,7 @@ test("auto-land-check reports a safe chore as eligible without UAT", async () =>
   await writeWorkBrief(repo, "BANDIT-921", "Eligible Chore");
   await writeReviewEvidence(repo, "BANDIT-921", { sourceHead });
   await writeLandingVerdict(repo, "BANDIT-921", { sourceHead });
+  await writeRiskClassificationEvidence(repo, "BANDIT-921");
 
   const result = await runBandit(repo, ["auto-land-check", "BANDIT-921"]);
 
@@ -445,6 +446,7 @@ test("auto-land-check reports a UAT-approved feature slice as eligible", async (
     uatStatus: "pass"
   });
   await writeUatApproval(repo, "BANDIT-922", { sourceHead });
+  await writeRiskClassificationEvidence(repo, "BANDIT-922");
 
   const result = await runBandit(repo, ["auto-land-check", "BANDIT-922"]);
 
@@ -503,6 +505,7 @@ test("auto-land-check does not mutate git state or repo artifacts", async () => 
   await writeWorkBrief(repo, "BANDIT-925", "Read Only Eligibility");
   await writeReviewEvidence(repo, "BANDIT-925", { sourceHead });
   await writeLandingVerdict(repo, "BANDIT-925", { sourceHead });
+  await writeRiskClassificationEvidence(repo, "BANDIT-925");
   const beforeStatus = await runGit(repo, ["status", "--short"]);
   const beforeHead = await runGit(repo, ["rev-parse", "HEAD"]);
 
@@ -528,8 +531,9 @@ test("validate fails closed when the Landing Agent contract is missing", async (
 test("land records landing action evidence for an eligible chore", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
-  const sourceHead = await commitAll(repo, "Initial state");
   await writeWorkBrief(repo, "BANDIT-926", "Landing Agent Eligible Chore");
+  await writeRiskClassificationEvidence(repo, "BANDIT-926");
+  const sourceHead = await commitAll(repo, "Initial state");
   await writeReviewEvidence(repo, "BANDIT-926", { sourceHead });
   await writeLandingVerdict(repo, "BANDIT-926", { sourceHead });
 
@@ -560,8 +564,9 @@ test("land records landing action evidence for an eligible chore", async () => {
 test("land blocks feature slices without current UAT approval", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
-  const sourceHead = await commitAll(repo, "Initial state");
   await writeWorkBrief(repo, "BANDIT-927", "Landing Agent Missing UAT");
+  await writeRiskClassificationEvidence(repo, "BANDIT-927");
+  const sourceHead = await commitAll(repo, "Initial state");
   await writeReviewEvidence(repo, "BANDIT-927", {
     sourceHead,
     uatStatus: "pass"
@@ -2164,6 +2169,94 @@ rationale: Evidence is explicit and unavailable final gates are recorded as boot
 `,
     "utf8"
   );
+}
+
+async function writeRiskClassificationEvidence(repo, workItemId) {
+  const evidencePath = `docs/risk/layered/${workItemId}-risk-classification.json`;
+  const classification = {
+    contract_version: 1,
+    work_item: workItemId,
+    changed_surfaces: [
+      {
+        path: `docs/work/${workItemId}/brief.md`,
+        surface: "documentation",
+        risk: "low",
+        never_auto_landable: false
+      }
+    ],
+    hard_exclusions: [],
+    blast_radius_signals: [
+      {
+        signal_id: "docs_only",
+        risk: "low",
+        evidence_path: `docs/work/${workItemId}/brief.md`
+      }
+    ],
+    static_analysis_signals: [
+      {
+        tool: "typecheck",
+        state: "pass",
+        risk: "low",
+        evidence_path: "npm run typecheck"
+      }
+    ],
+    source_trust_state: {
+      state: "trusted_local_repo",
+      evidence_path: ".bandit/policy/input-quarantine.json"
+    },
+    input_quarantine_state: {
+      state: "not_applicable",
+      evidence_path: ".bandit/policy/input-quarantine.json"
+    },
+    supply_chain_state: {
+      state: "not_touched",
+      evidence_path: "package-lock.json"
+    },
+    smell_trigger_inputs: [],
+    selected_review_depth: "pre_pr_coderabbit_plus_qwen",
+    operator_supervision: {
+      required: false,
+      route: "none",
+      rationale: "Low-risk test fixture classification."
+    },
+    auto_landing: {
+      eligible: true,
+      refusal_rationale: "none"
+    },
+    rationale:
+      "Fixture classification includes all layered signals before auto-landing eligibility.",
+    evidence_paths: [
+      ".bandit/policy/risk-classification.json",
+      "docs/templates/layered-risk-classification.md",
+      `docs/work/${workItemId}/brief.md`
+    ]
+  };
+
+  await writeJsonFile(repo, evidencePath, classification);
+  await upsertRiskClassificationPolicyDecision(repo, workItemId, evidencePath);
+}
+
+async function upsertRiskClassificationPolicyDecision(repo, workItemId, evidencePath) {
+  const policyPath = path.join(repo, ".bandit/policy/risk-classification.json");
+  const policy = JSON.parse(await readFile(policyPath, "utf8"));
+  policy.release_authorized_decisions =
+    policy.release_authorized_decisions?.filter(
+      (decision) =>
+        decision.work_item !== workItemId ||
+        decision.decision_kind !== "auto_landing"
+    ) ?? [];
+  policy.release_authorized_decisions.push({
+    work_item: workItemId,
+    decision_kind: "auto_landing",
+    evidence_path: evidencePath
+  });
+  await writeFile(policyPath, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
+}
+
+async function writeJsonFile(repo, relativePath, value) {
+  const destination = path.join(repo, relativePath);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
 async function writeCodeRabbitReview(repo, workItemId, options = {}) {

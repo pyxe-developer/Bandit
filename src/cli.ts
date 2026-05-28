@@ -17,6 +17,7 @@ import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
 import { qwenReview } from "./commands/qwen-review.js";
 import { reviewSubjectHash } from "./commands/review-subject-hash.js";
+import { riskClassification } from "./commands/risk-classification.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
@@ -71,6 +72,12 @@ async function main() {
 
   if (command === "input-quarantine") {
     const result = await inputQuarantine(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "risk-classification") {
+    const result = await riskClassification(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }
@@ -178,7 +185,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|uat|gaps|coordination|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|uat|gaps|coordination|cockpit>`);
   process.exitCode = 1;
 }
 
