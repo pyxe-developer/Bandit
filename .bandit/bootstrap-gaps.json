@@ -367,8 +367,8 @@
     {
       "id": "BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY",
       "title": "Coordination projections can become hidden workflow authority",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -377,10 +377,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-043",
       "rationale": "The PRD-002 research review flagged dual-source coordination risk, and the operator confirmed that append-only workflow/event history should be the only canonical coordination history. Current-state views, registries, state indexes, and cockpit status must be rebuildable projections, with CAS claim authority as the only active writable-claim authority exception.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-SUPPLY-CHAIN-GATE is resolved, create a bootstrap-gap chore to define append-only coordination history authority, projection rebuild/refusal tests, registry/cockpit/current-state boundaries, and the CAS claim-authority exception."
+      "next_action": "Complete active chore BANDIT-043."
     },
     {
       "id": "BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY",

@@ -393,17 +393,24 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-042/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create the bootstrap-gap chore for
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-042` - Supply-Chain Gate
-is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
-implementation evidence, Stage 4 review evidence, Stage 5 landing verdict,
-explicit layered risk-classification and supply-chain gate repair evidence,
-local-record landing action, Stage 6 retrospective closeout, and
-bootstrap-gap disposition are recorded, and `.bandit/bootstrap-gaps.json` marks
-`BANDIT-GAP-SUPPLY-CHAIN-GATE` resolved. Do not start unrelated Phase 8 work,
-implementation, review, landing, retrospective, or another bootstrap-gap chore
-before creating exactly one work item for
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-043` /
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
+Event Log Authority has Stage 1 brief evidence in
+`docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
+routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+`.bandit/events.jsonl`. Do not start implementation, review, landing,
+retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
+Stage 2 RED evidence is recorded.
+
+`BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
+chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, its Stage 1
+brief is recorded in `docs/work/BANDIT-043/brief.md`,
+`.bandit/bootstrap-gaps.json` marks the gap active with linked work item
+`BANDIT-043`, and `.bandit/events.jsonl` records the work-item-created event.
+Stage 2 RED evidence is required next.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -540,7 +547,16 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-042` - Supply-Chain Gate (closed; last completed work item).
+**Active work item:** `BANDIT-043` - Coordination Event Log Authority.
+
+`BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
+structured spec evidence in
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
+routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+`.bandit/events.jsonl`. The next action is to write Stage 2 RED evidence for
+`BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Do not start
+implementation, review, landing, retrospective, another bootstrap-gap chore, or
+unrelated Phase 8 work before Stage 2 RED evidence is recorded.
 
 `BANDIT-042` has Stage 1 brief evidence in `docs/work/BANDIT-042/brief.md`,
 Stage 2 RED evidence in `docs/work/BANDIT-042/red-evidence.md`, focused RED
@@ -559,10 +575,6 @@ local-record landing action evidence is recorded in
 `docs/work/BANDIT-042/landing-action.md`. Stage 6 retrospective closeout is
 recorded in `docs/work/BANDIT-042/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SUPPLY-CHAIN-GATE` resolved.
-The next action is to create exactly one bootstrap-gap chore for
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Do not start unrelated Phase 8
-work, implementation, review, landing, retrospective, or another bootstrap-gap
-chore before that work item is created.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -754,12 +766,13 @@ These are expected because Bandit does not exist yet:
   dependency, lockfile, package-manager script, CI/release workflow,
   agent-skill, fetched-prompt, external tool-install, executable generated
   content, and unknown supply-chain surface evidence before auto-landing.
-- `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is open and queued from the
-  2026-05-26 strategic review: PRD-002 now treats append-only workflow/event
-  history as the only canonical coordination history, while current-state
-  views, registries, state indexes, and cockpit status remain rebuildable
-  projections except for CAS claim authority over active writable claims. It is
-  the next bootstrap-gap chore before unrelated Phase 8 work.
+- `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is active as `BANDIT-043` from
+  the 2026-05-26 strategic review: PRD-002 now treats append-only
+  workflow/event history as the only canonical coordination history, while
+  current-state views, registries, state indexes, and cockpit status remain
+  rebuildable projections except for CAS claim authority over active writable
+  claims. Stage 1 brief evidence is recorded in
+  `docs/work/BANDIT-043/brief.md`, and Stage 2 RED evidence is required next.
 - `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is open and queued from the
   2026-05-26 strategic review: PRD-002 now reserves operator-blocking
   fail-closed behavior for safety, product, UAT, policy, business, cost,
@@ -997,17 +1010,15 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap chore for
-   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-042` -
-   Supply-Chain Gate is landed and closed out: Stage 1 brief, Stage 2 RED
-   evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
-   landing verdict, explicit layered risk-classification and supply-chain gate
-   repair evidence, local-record landing action, Stage 6 retrospective
-   closeout, and bootstrap-gap disposition are recorded, and
-   `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SUPPLY-CHAIN-GATE`
-   resolved. Do not start unrelated Phase 8 work, implementation, review,
-   landing, retrospective, or another bootstrap-gap chore before the
-   coordination event-log authority work item is created.
+1. Write Stage 2 RED evidence for `BANDIT-043` /
+   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` -
+   Coordination Event Log Authority has Stage 1 brief evidence in
+   `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
+   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
+   routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+   `.bandit/events.jsonl`. Do not start implementation, review, landing,
+   retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
+   Stage 2 RED evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1021,7 +1032,7 @@ The current priority is:
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
    `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
-   is the next queued bootstrap gap. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
+   is active as `BANDIT-043`. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
    is queued behind the coordination event-log authority gap.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
    operator fail-closed boundary gap.
@@ -1043,15 +1054,17 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before creating the bootstrap-gap chore for
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Repo artifacts identify the next
-open queued gap, source artifacts, rationale, and dependency on the resolved
-Supply-Chain Gate. Halt only if chore creation would change product direction,
-UAT policy, workflow policy beyond defining the already queued coordination
-event-log authority gap, business tradeoffs, cost/risk posture, external
-service setup, paid reviewer routing, live routing, scheduler authority,
-claim/worktree authority beyond the recorded CAS exception boundary, installed
-global skill contents, merge/push/deploy authority, or broader workflow scope.
+No operator-owned input is required before writing Stage 2 RED evidence for
+`BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Repo artifacts
+identify the active work item, source artifacts, rationale, operator-confirmed
+append-only workflow/event history authority, projection rebuildability
+requirement, and the CAS claim-authority exception boundary. Halt only if RED
+evidence would change product direction, UAT policy, workflow policy beyond
+defining the active coordination event-log authority gap, business tradeoffs,
+cost/risk posture, external service setup, paid reviewer routing, live routing,
+scheduler authority, claim/worktree authority beyond the recorded CAS exception
+boundary, installed global skill contents, merge/push/deploy authority, or
+broader workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

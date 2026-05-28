@@ -1,0 +1,117 @@
+# BANDIT-043: Coordination Event Log Authority
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where current-state views, registries, state indexes, cockpit status, or other projections can become hidden workflow authority instead of rebuildable views of append-only coordination history.
+
+## Origin
+
+The 2026-05-26 PRD-002 research review flagged dual-source coordination risk, and the operator confirmed that append-only workflow/event history should be the only canonical coordination history. Bandit already has per-work-item coordination logs and actor coordination events, but no dedicated policy, template, validation path, or focused tests enforce that current-state views, in-flight registries, state indexes, cockpit status, SQLite caches, and other projections remain rebuildable and non-authoritative. The first repair must define the append-only coordination history authority boundary, projection rebuild/refusal rules, reconciliation behavior, and the CAS claim-authority exception without implementing claim authority itself.
+
+## Scope
+
+- Define a repo-native Coordination Event Log Authority contract that names append-only per-work-item coordination history as the canonical coordination history for workflow position and accepted coordination context.
+- Define which event families are authoritative for workflow state, including accepted step-transition events, and preserve the existing rule that actor coordination events provide context but cannot advance workflow stages, satisfy gates, or emit safe triggers without an accepted step transition.
+- Define current-state views, cockpit status, state indexes, SQLite caches, in-flight registries, derived status reports, and similar read models as rebuildable projections that must cite their source append-only history or claim-authority input.
+- Define direct projection mutation as invalid for release-authorized workflow state; projection repairs must be derived from append-only history, routed through CLI append/reconciliation, or fail closed with mechanical repair evidence.
+- Define the CAS Claim Authority Primitive as the only active writable-claim authority exception while keeping claim authority implementation, fencing tokens, idempotency keys, work-surface reservations, worktree lifecycle, and Git refs transactions out of this chore.
+- Define reconciliation rules between append-only coordination history, projection surfaces, and the future CAS claim authority exception, including fail-closed disagreement reporting and PM or CLI-owned mechanical repair routing for derivable projection drift.
+- Add validation that rejects projection-only workflow authority, current-state or cockpit state without source-history references, registries that grant release-authorized writable claims without CAS claim-authority backing, and .bandit claim or registry files treated as independent claim authority.
+- Add focused tests for replaying current-state views from append-only coordination history, refusing direct projection mutation, refusing projection/history disagreement, refusing registry-granted writable claims without CAS authority, preserving actor-event non-authority, and accepting a complete low-risk projection-boundary record.
+- Consume the existing coordination-log, cockpit-status, bootstrap-gap, layered risk-classification, supply-chain gate, and smell-trigger vocabulary without redefining those gates.
+- Keep the repair limited to coordination authority contracts, templates, CLI-readable policy or validation, projection/refusal tests, and necessary roadmap/context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1 and perform clean-code evaluation before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit coordination authority templates, policy or registry parsing, validation, derived-status or cockpit-status source-boundary integration, and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond defining the already queued coordination authority gap, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority beyond the documented CAS exception boundary, installed global skill contents, merge/push/deploy authority, or broader workflow scope.
+- Future-work scope: this chore must not implement CAS claim operations, claim leases, fencing tokens, idempotency-key enforcement, work-surface reservations, Git Mutation Serializer behavior, worktree lifecycle, scheduler execution, event-driven wakeups, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, state-index persistence beyond projection-boundary validation, local server/API mode, cockpit UI implementation, PR/CI workflow execution, automatic merge/push/deploy behavior, or unrelated Phase 8 work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-043/brief.md and links to BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.
+- A Coordination Event Log Authority template or policy artifact names canonical append-only coordination history, accepted workflow-state event families, actor-event non-authority, projection surfaces, allowed mutation paths, source-history references, projection rebuild rules, reconciliation behavior, CAS claim-authority exception, rationale, and evidence paths.
+- Validation fails closed when current-state views, cockpit status, state indexes, SQLite caches, in-flight registries, derived status reports, or other projections claim canonical workflow authority without source-history or claim-authority backing.
+- Validation fails closed when projection-only mutation paths can change release-authorized workflow state without an accepted append-only coordination-history event or explicit future CAS claim-authority operation.
+- Validation fails closed when an in-flight registry, .bandit claim file, state index, cockpit view, or derived projection grants release-authorized writable claims without the documented CAS claim-authority primitive.
+- Validation distinguishes append-only coordination history from the CAS claim-authority exception: workflow position and accepted coordination context rebuild from history, while active writable claims are future-scoped to CAS authority and not granted by projections.
+- Validation fails closed on disagreement between append-only history, projections, and claim-authority references, and routes derivable projection drift to PM or CLI-owned mechanical repair rather than operator toil unless an operator-owned gate is missing.
+- Focused tests prove current-state and cockpit/status projection outputs can be rebuilt from append-only coordination history, and prove malformed or source-less projections are rejected before trusted status or release-authorized claims.
+- Focused tests preserve actor coordination event non-authority: actor events may appear in canonical coordination history as context, but they do not advance workflow state, satisfy review/landing/UAT/chore-disposition gates, or emit safe triggers without accepted step transitions.
+- The implementation does not implement CAS claim operations, claim leases, fencing tokens, idempotency-key enforcement, work-surface reservations, Git Mutation Serializer behavior, worktree bootstrap contracts, scheduler execution, event-driven wakeups, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, local server/API mode, state-index persistence beyond projection-boundary validation, cockpit UI work, PR/CI execution, automatic merge/push/deploy behavior, or another bootstrap-gap chore.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, cockpit UI implementation, state-index persistence beyond projection-boundary validation, scheduler execution, claim leases, work surface reservations, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow execution, live reviewer routing change, paid reviewer route, external service integration, installed global skill edit, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run focused coordination authority tests for RED/GREEN coverage.
+- Run node --test test/coordination-log.test.mjs test/coordination-status.test.mjs if coordination log parsing, status derivation, safe-trigger, or actor-event behavior is touched.
+- Run node --test test/cockpit-status.test.mjs and node --test test/cockpit-view-model.test.mjs if cockpit status, action affordances, or projection trust signals are touched.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run node --test test/bootstrap-gaps.test.mjs if bootstrap-gap ledger behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, policy parsing, coordination log readers, cockpit status parsing, bootstrap gaps, review evidence, landing gates, auto-landing policy, or template validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- coordination-authority validate --json if the implementation adds the expected command surface.
+- Run npm run bandit -- supply-chain-gate validate --json.
+- Run npm run bandit -- risk-classification validate --json.
+- Run npm run bandit -- input-quarantine validate --json.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- auto-land-check BANDIT-043 before Stage 5 closeout if auto-landing eligibility behavior is touched.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-043 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-043 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-043 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-043 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json
+- docs/work/BANDIT-043/brief.md
+- docs/work/BANDIT-043/red-evidence.md
+- docs/work/BANDIT-043/implementation-evidence.md
+- docs/work/BANDIT-043/coderabbit-review.md
+- docs/work/BANDIT-043/local-qwen-review.md
+- docs/work/BANDIT-043/review-evidence.md
+- docs/work/BANDIT-043/landing-verdict.md
+- docs/work/BANDIT-043/landing-action.md
+- docs/work/BANDIT-043/retrospective.md
+- docs/templates/coordination-authority.md
+- .bandit/policy/coordination-authority.json
+- src/state/coordination-authority.ts
+- src/commands/coordination-authority.ts
+- src/state/coordination-log.ts
+- src/commands/coordination.ts
+- src/commands/validate.ts
+- src/commands/cockpit-status.ts
+- test/coordination-authority.test.mjs
+- test/coordination-log.test.mjs
+- test/coordination-status.test.mjs
+- test/cockpit-status.test.mjs
+- test/cockpit-view-model.test.mjs
+- test/validate.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-043/brief.md
+- docs/work/BANDIT-043/red-evidence.md
+- docs/work/BANDIT-043/implementation-evidence.md
+- docs/work/BANDIT-043/coderabbit-review.md
+- docs/work/BANDIT-043/local-qwen-review.md
+- docs/work/BANDIT-043/review-evidence.md
+- docs/work/BANDIT-043/landing-verdict.md
+- docs/work/BANDIT-043/landing-action.md
+- docs/work/BANDIT-043/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, operator-confirmed append-only workflow/event history authority, projection rebuildability requirement, current-state/registry/cockpit/index hidden-authority risk, and the CAS claim-authority exception boundary. Halt only if implementation would change product direction, UAT policy, workflow policy beyond defining the already queued coordination event-log authority gap, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer spend approval, paid reviewer routing, live routing, scheduler authority, claim/worktree authority beyond the recorded CAS exception boundary, installed global skill contents, merge/push/deploy authority, or broader workflow scope.
