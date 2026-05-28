@@ -293,8 +293,8 @@
     {
       "id": "BANDIT-GAP-AGENT-EVALUATION-HARNESS",
       "title": "No agent evaluation harness exists for model, skill, reviewer, or component benchmarks",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -304,9 +304,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-039",
-      "rationale": "The research review identified missing agent evals as a P0 omission, and the operator confirmed that Bandit needs comparable Qwen, paid-reviewer, skill, and load-bearing component evidence before reviewer-routing or agent-routing policy changes. Current improvement evaluation tooling interprets workflow trials but does not replay fixed packets against agents or reviewer profiles. The first harness must be benchmark-only and offline/replay-based, with no automatic policy, model-routing, reviewer-routing, skill-policy, or cost-policy changes. Benchmark packets must separate visible calibration sets from versioned locked holdout sets so skills, reviewer prompts, and routing policy are not overfit to the visible suite; policy promotion needs holdout evidence. Reviewer benchmark packets must be repo-derived and failure-mode stratified before generic coding tasks are used, covering evidence freshness loops, malformed artifacts, CodeRabbit invocation friction, stage capability or skill scope mistakes, supply-chain-sensitive changes, stale UAT or landing evidence, and false-positive review churn. Reviewer benchmark packets must be gold-labeled with seeded blockers and seeded non-issues, and scoring must prioritize blocker recall over raw finding count while also tracking actionable precision, useful finding yield, false-positive rate, tool friction, latency, and provider-pricing-backed expected cost. One-off paid reviewer calls before threshold promotion are benchmark/evaluation spend, require current provider-pricing evidence plus per-run approval or active spend-class approval, and cannot become recurring reviewer routing policy. Recurring paid reviewer routing must meet a predeclared promotion threshold scoped by risk class or stage capability profile, with locked-holdout blocker-recall improvement over Qwen, false-positive ceiling, Provider Pricing Evidence-backed expected-cost ceiling, and operator-supervised spend-class approval; promotion for one scope does not authorize unrelated paid-reviewer routes. Provider Pricing Evidence must name the pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner so stale billing assumptions cannot authorize recurring paid review. It depends on stable skill identity and versions from BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-039."
+      "rationale": "BANDIT-039 adds a replay-only Agent Evaluation Harness policy, packet and result templates, visible calibration and versioned locked-holdout packet evidence, repo-derived gold-labeled reviewer packet metadata, scorecard metrics, provider-pricing-backed benchmark spend metadata, recurring paid-reviewer promotion thresholds, Skill Lifecycle Contract benchmark-subject identity, fail-closed validation, bandit agent-evaluation validate [--json], and bandit validate integration without changing live work, reviewer routing, model routing, skill policy, cost policy, paid reviewer policy, scheduler behavior, claim or worktree authority, or cockpit UI scope. It records Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
+      "verification_target": "docs/work/BANDIT-039/retrospective.md",
+      "next_action": "Use replay-only Agent Evaluation Harness contracts and holdout-backed evidence before treating model, reviewer, skill, or load-bearing component comparisons as policy inputs. Create the next bootstrap-gap chore for BANDIT-GAP-INPUT-QUARANTINE-GATE before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-INPUT-QUARANTINE-GATE",
@@ -324,7 +324,7 @@
       "linked_work_item": null,
       "rationale": "The research review identified prompt-injection posture as a P0 omission, and the operator confirmed that external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, and fetched prompts must be treated as data-only by default. Bandit needs a structural input quarantine boundary before release-authorized agents can inspect those inputs, and a trusted-source gate before any such content can affect agent instructions, tool permissions, routing, or landing authority. Reviewer escalation alone is not sufficient because hostile text must be prevented from entering instruction-bearing context.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-AGENT-EVALUATION-HARNESS is resolved, create a bootstrap-gap chore to define data-only external input handling, input source classification, input quarantine boundaries, trusted-source gates, instruction-bearing-use refusals, and validation for release-authorized agent paths that process external contributor or fetched third-party content."
+      "next_action": "Create a bootstrap-gap chore to define data-only external input handling, input source classification, input quarantine boundaries, trusted-source gates, instruction-bearing-use refusals, and validation for release-authorized agent paths that process external contributor or fetched third-party content."
     },
     {
       "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",
