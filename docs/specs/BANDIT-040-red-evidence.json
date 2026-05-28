@@ -1,0 +1,62 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-040",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Focused tests define the Input Quarantine Gate before production implementation. They fail because Bandit does not yet require input-quarantine policy or templates during validation, and the input-quarantine validation command does not exist.",
+  "test_command": "node --test test/input-quarantine-gate.test.mjs",
+  "observed_output": [
+    "tests 10",
+    "pass 0",
+    "fail 10",
+    "validate fails closed when the input quarantine policy is missing failed: expected exit code 1, received 0",
+    "validate fails closed when the input quarantine template is missing failed: expected exit code 1, received 0",
+    "input quarantine validation rejects release paths without source classification failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects external input without data-only handling failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects paths without quarantine boundary evidence failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects instruction-bearing use without a trusted-source gate failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects malformed trusted-source gate metadata failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects Trusted Local Repo Mode overreach failed: Unknown command: input-quarantine",
+    "input quarantine validation rejects unknown source classes failed: Unknown command: input-quarantine",
+    "input quarantine validation accepts a complete bounded contract failed: Unknown command: input-quarantine"
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "An Input Quarantine Gate template or policy artifact names required fields for source identity, source class, data-only handling, quarantine boundary evidence, admitted fields, stripped or ignored fields, allowed extraction uses, forbidden instruction-bearing uses, owning stage, trusted-source gate references, freshness or expiry, owner, and revocation path.",
+      "evidence": "The new tests expect docs/templates/input-quarantine-gate.md, docs/templates/trusted-source-gate.md, .bandit/policy/input-quarantine.json, and named quarantine/trusted-source evidence artifacts to become required repo-native surfaces."
+    },
+    {
+      "criterion": "Validation fails closed when a release-authorized agent path processes external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, or fetched prompts without source classification.",
+      "evidence": "The source-classification rejection test deletes source_class from the Stage 4 review-comment ingest path and expects input-quarantine validation to fail before trusted status."
+    },
+    {
+      "criterion": "Validation fails closed when external or third-party content is not explicitly handled as data-only before it enters release-authorized agent context.",
+      "evidence": "The data-only rejection test changes review-comment handling to instruction_bearing and expects validation to reject the path before release-authorized context."
+    },
+    {
+      "criterion": "Validation fails closed when untrusted content can affect agent instructions, tool permissions, routing decisions, landing authority, auto-landing eligibility, policy authority, or gate satisfaction without a bounded Trusted Source Gate.",
+      "evidence": "The instruction-bearing-use rejection test marks untrusted review-comment input as instruction bearing with no trusted-source gate and expects fail-closed validation."
+    },
+    {
+      "criterion": "Validation fails closed when a Trusted Source Gate omits source identity, scope, allowed uses, owner, freshness or expiry rule, revocation path, trust rationale, or evidence artifact.",
+      "evidence": "The malformed trusted-source gate test removes owner metadata and expects validation to reject the gate before it can upgrade any source."
+    },
+    {
+      "criterion": "Validation fails closed for blanket trust, permanent trust upgrades, source-reputation-only trust, trusted-by-default PR or issue text, raw context dumps, hidden instruction-bearing fields, and unknown source classes without explicit refusal.",
+      "evidence": "The Trusted Local Repo Mode overreach and unknown-source-class tests reject external contributor trust in local-repo mode and refuse an unsupported chat_transcript source class."
+    },
+    {
+      "criterion": "Trusted Local Repo Mode is represented as a scoped local-repo posture that ends at the boundary where external contributor input, fetched third-party content, generated instructions, or fetched prompts enter a release-authorized path.",
+      "evidence": "The complete policy fixture scopes Trusted Local Repo Mode to trusted_local_repo only and records terminators for external contributor, PR metadata, review comment, dependency documentation, fetched third-party, generated instruction, and fetched prompt sources."
+    },
+    {
+      "criterion": "Focused tests prove invalid quarantine contracts are rejected before writes or trusted status, and prove a complete bounded input quarantine contract is accepted.",
+      "evidence": "The focused test file covers missing policy, missing template, missing source classification, missing data-only handling, missing quarantine boundary evidence, missing trusted-source gate, malformed gate metadata, local-repo overreach, unknown source class refusal, and complete bounded acceptance output."
+    },
+    {
+      "criterion": "The implementation does not implement the later Layered Risk Classification Gate, Supply-Chain Gate, coordination authority, operator fail-closed boundary, claim authority, Git mutation serializer, worktree bootstrap contract, scheduler, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, or cockpit UI gaps.",
+      "evidence": "This RED step adds only focused tests, the Stage 2 evidence spec/artifact, lifecycle event evidence, and roadmap/current-context routing. It adds no production implementation, live routing, paid reviewer route, dependency, lockfile, scheduler, claim, worktree, supply-chain, risk-classification, or cockpit UI surface."
+    }
+  ],
+  "next_action": "Implement the narrow Input Quarantine Gate repair: add repo-native input quarantine and trusted-source gate templates, .bandit/policy/input-quarantine.json, quarantine/trusted-source validation, input-quarantine validate --json command wiring, validate/init integration, source-classification checks, data-only handling checks, quarantine boundary evidence checks, bounded Trusted Source Gate checks, Trusted Local Repo Mode limit checks, and focused acceptance output needed to make the RED tests pass without broadening into layered risk classification, supply-chain policy, scheduler, claim/worktree authority, live routing, paid reviewer routing, dependency or lockfile changes, external service integration, or cockpit UI scope."
+}

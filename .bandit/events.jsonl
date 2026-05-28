@@ -55,3 +55,4 @@
 {"type":"artifact_created","work_item":"BANDIT-039","message":"Created landing_verdict artifact at docs/work/BANDIT-039/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-039","message":"Created retrospective artifact at docs/work/BANDIT-039/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-040","message":"Created work item BANDIT-040 from docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json"}
+{"type":"artifact_created","work_item":"BANDIT-040","message":"Created red_evidence artifact at docs/work/BANDIT-040/red-evidence.md"}

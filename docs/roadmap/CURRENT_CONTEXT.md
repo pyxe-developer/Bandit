@@ -415,13 +415,16 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-040` - Input
+**Current next action:** Implement Stage 3 for `BANDIT-040` - Input
 Quarantine Gate. Do not start unrelated Phase 8 work first.
 `BANDIT-040` is active as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-040/brief.md`, and `.bandit/bootstrap-gaps.json`
-links the active gap to `BANDIT-040`. `BANDIT-039` - Agent Evaluation Harness
+recorded in `docs/work/BANDIT-040/brief.md`, its Stage 2 RED evidence spec is
+recorded in `docs/specs/BANDIT-040-red-evidence.json`, its Stage 2 RED
+evidence is recorded in `docs/work/BANDIT-040/red-evidence.md`, and
+`.bandit/bootstrap-gaps.json` links the active gap to `BANDIT-040`.
+`BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
 Local Qwen pass evidence, aggregate Stage 4 review evidence with current
@@ -500,14 +503,16 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-040` - Input Quarantine Gate is active at Stage 1
-brief. The structured creation spec is recorded in
+**Active work item:** `BANDIT-040` - Input Quarantine Gate is active after
+Stage 2 RED evidence. The structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, the brief is recorded in
-`docs/work/BANDIT-040/brief.md`, `.bandit/events.jsonl` records the
-work-item-created event, and `.bandit/bootstrap-gaps.json` links
-`BANDIT-GAP-INPUT-QUARANTINE-GATE` to `BANDIT-040` as the active chore. The next
-action is Stage 2 RED evidence for `BANDIT-040`; do not start unrelated Phase 8
-work first.
+`docs/work/BANDIT-040/brief.md`, the Stage 2 RED evidence spec is recorded in
+`docs/specs/BANDIT-040-red-evidence.json`, Stage 2 RED evidence is recorded in
+`docs/work/BANDIT-040/red-evidence.md`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact-created events, and
+`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-INPUT-QUARANTINE-GATE` to
+`BANDIT-040` as the active chore. The next action is Stage 3 implementation for
+`BANDIT-040`; do not start unrelated Phase 8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`.
@@ -534,7 +539,7 @@ behind the token-cost failsafe gap.
 `BANDIT-037` - Workflow Trial Decision Guardrails is landed and closed out.
 `BANDIT-038` - Skill Lifecycle Contract is landed and closed out.
 `BANDIT-039` - Agent Evaluation Harness is landed and closed out.
-`BANDIT-040` - Input Quarantine Gate is active at Stage 1 brief.
+`BANDIT-040` - Input Quarantine Gate has Stage 2 RED evidence recorded.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -564,8 +569,8 @@ Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails; `BANDIT-038` - Skill
 Lifecycle Contract; `BANDIT-039` - Agent Evaluation Harness.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-040` - Input
-Quarantine Gate, before any unrelated Phase 8 work.
+**Expected next deliverable:** Stage 3 implementation evidence for
+`BANDIT-040` - Input Quarantine Gate, before any unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -644,8 +649,9 @@ These are expected because Bandit does not exist yet:
   input by default. Release-authorized agents need an input quarantine boundary
   and a trusted-source gate before any such content can affect instructions,
   tool permissions, routing, or landing authority. Its Stage 1 brief is
-  recorded in `docs/work/BANDIT-040/brief.md`; Stage 2 RED evidence is the next
-  action.
+  recorded in `docs/work/BANDIT-040/brief.md`, and Stage 2 RED evidence is
+  recorded in `docs/work/BANDIT-040/red-evidence.md`; Stage 3 implementation is
+  the next action.
 - `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is open and queued from the
   2026-05-26 strategic review: Bandit now treats smell-list-only review-depth
   and auto-landing decisions as too brittle. Auto-landing and review depth need
@@ -904,8 +910,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-040` - Input Quarantine Gate now
-   that the Stage 1 brief exists and `.bandit/bootstrap-gaps.json` links
+1. Implement Stage 3 for `BANDIT-040` - Input Quarantine Gate now that the
+   Stage 2 RED evidence exists and `.bandit/bootstrap-gaps.json` links
    `BANDIT-GAP-INPUT-QUARANTINE-GATE` to active chore `BANDIT-040`. Do not
    start unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
@@ -943,12 +949,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before writing Stage 2 RED evidence for
+No operator-owned input is required before implementing Stage 3 for
 `BANDIT-040` - Input Quarantine Gate. Repo artifacts identify the source gap,
 queue order, data-only external input posture, input quarantine boundary,
-trusted-source-gate need, source artifacts, and dependency on the resolved
-Agent Evaluation Harness gap. Halt only if the next step would change product
-direction, UAT policy, workflow policy beyond defining the already queued input
+trusted-source-gate need, source artifacts, RED tests, and dependency on the
+resolved Agent Evaluation Harness gap. Halt only if the next step would change
+product direction, UAT policy, workflow policy beyond defining the already queued input
 quarantine gate, business tradeoffs, cost/risk posture, external service setup,
 paid reviewer routing, live routing, scheduler authority, claim/worktree
 authority, installed global skill contents, dependency or lockfile policy, or
