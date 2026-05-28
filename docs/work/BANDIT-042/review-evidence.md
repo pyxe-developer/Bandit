@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-042
-source_head: a2b477088c587b2dfe39505f414a885d386dccad
-review_subject_hash: b4c185379c68743d76ec8c66b077584609286fa1f8a77826e2a8d0456dcd1da5
+source_head: a1b3a36838a98a845fe7dc5f252ff28a5e45f154
+review_subject_hash: 459f24448eccddd5682a424fff4b76c3adf23a562dc709027dc7fdf44e35ecf6
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -11,7 +11,8 @@ verification_evidence:
   - npm run bandit -- coderabbit-review pre-pr BANDIT-042 --base 8cf3708 --fixture docs/specs/BANDIT-042-coderabbit-review-output.json recorded docs/work/BANDIT-042/coderabbit-review.md with coderabbit_verdict pass, findings_status none, and source_drift_status current.
   - npm run bandit -- qwen-review BANDIT-042 recorded docs/work/BANDIT-042/local-qwen-review.md with reviewer_verdict non_blocking, findings_status open, operator_input_status none_required, and source_drift_status current.
   - docs/work/BANDIT-042/qwen-finding-disposition.md records Codex PM disposition: evidence freshness semantics route into existing queued BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS, and validator splitting is routed as BANDIT-042-SUPPLY-CHAIN-VALIDATOR-SPLIT.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-042 produced b4c185379c68743d76ec8c66b077584609286fa1f8a77826e2a8d0456dcd1da5 from review-subject policy v1.
+  - a1b3a36 registered explicit layered risk-classification and supply-chain gate auto-landing evidence for BANDIT-042 in .bandit/policy/risk-classification.json, .bandit/policy/risk-classifications/BANDIT-042-risk-classification.json, .bandit/policy/supply-chain-gate.json, and .bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-042 produced 459f24448eccddd5682a424fff4b76c3adf23a562dc709027dc7fdf44e35ecf6 from review-subject policy v1 after the landing-gate evidence repair.
   - node --test test/supply-chain-gate.test.mjs test/landing-gates.test.mjs passed with 79 tests during Stage 4 verification.
   - npm test passed with 318 tests during Stage 4 verification.
   - npm run typecheck passed during Stage 4 verification.
@@ -32,10 +33,10 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: BANDIT-042 is a bounded bootstrap-gap improvement chore over supply-chain gate contracts, template validation, policy validation, CLI command wiring, auto-land-check consumption, and focused tests. It changes no dependency manifest, lockfile, package-manager script, CI or release workflow, agent skill, fetched-prompt execution path, external tool-install path, paid reviewer route, live routing, scheduler authority, claim/worktree authority, installed global skill, external service integration, product UAT surface, or cockpit UI behavior. CodeRabbit passed with no findings, Local Qwen returned only non_blocking freshness-scope and maintainability observations with PM disposition, and no configured smell trigger requires escalated reviewer routing before Stage 5.
 pm_disposition: pass
-pm_disposition_rationale: Codex PM accepts Stage 4 because pre-PR CodeRabbit provider evidence passes with no findings, Local Qwen accepts the implementation with non_blocking findings, those findings are dispositioned in docs/work/BANDIT-042/qwen-finding-disposition.md, the review-subject hash is current, and Stage 4 verification records focused supply-chain and landing-gate tests, the full test suite, typecheck, supply-chain gate validation, risk-classification validation, input-quarantine validation, Bandit validation, gaps list, cockpit status, and diff hygiene passing. The implementation resolves the Supply-Chain Gate bootstrap gap by making dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, external tool-install, unknown surface, operator-supervision, and auto-landing state explicit while preserving repo-native artifacts as canonical state and avoiding broad dependency automation, live SCA provider setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, external service integration, installed global skill edits, PR/CI execution, merge/push/deploy behavior, or cockpit UI scope.
+pm_disposition_rationale: Codex PM accepts Stage 4 because pre-PR CodeRabbit provider evidence passes with no findings, Local Qwen accepts the implementation with non_blocking findings, those findings are dispositioned in docs/work/BANDIT-042/qwen-finding-disposition.md, the review-subject hash is current after the Stage 5 landing-gate evidence repair, and Stage 4 verification records focused supply-chain and landing-gate tests, the full test suite, typecheck, supply-chain gate validation, risk-classification validation, input-quarantine validation, Bandit validation, gaps list, cockpit status, and diff hygiene passing. The implementation resolves the Supply-Chain Gate bootstrap gap by making dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, external tool-install, unknown surface, operator-supervision, and auto-landing state explicit while preserving repo-native artifacts as canonical state and avoiding broad dependency automation, live SCA provider setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, external service integration, installed global skill edits, PR/CI execution, merge/push/deploy behavior, or cockpit UI scope.
 non_blocking_findings_routing:
-  - queued_bootstrap_gap: Supply-chain gate evidence staleness and artifact-specific freshness semantics are routed into existing queued BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS; BANDIT-042 explicitly excludes Evidence Freshness SLOs while still failing closed for missing, invalid, elevated, and pending operator-supervision supply-chain state.
-  - queued_follow_up_candidate: Supply-chain validator file-size hardening is routed as BANDIT-042-SUPPLY-CHAIN-VALIDATOR-SPLIT in docs/work/BANDIT-042/qwen-finding-disposition.md for a future maintenance or clean-code hardening slice if this file changes again.
+  - improvement_chore: Supply-chain gate evidence staleness and artifact-specific freshness semantics are routed into existing queued BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS because BANDIT-042 explicitly excludes Evidence Freshness SLOs while still failing closed for missing, invalid, elevated, and pending operator-supervision supply-chain state.
+  - follow_up_chore_candidate: Supply-chain validator file-size hardening is routed as BANDIT-042-SUPPLY-CHAIN-VALIDATOR-SPLIT in docs/work/BANDIT-042/qwen-finding-disposition.md because current validator behavior is accepted and covered by focused supply-chain tests, while future file-size hardening can be handled if the validator changes again.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
