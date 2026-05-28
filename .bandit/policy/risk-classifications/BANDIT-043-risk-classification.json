@@ -1,0 +1,199 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-043",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/coordination-authority.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/coordination-authority.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/coordination-authority.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/coordination-authority.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/templates.ts",
+      "surface": "template_validation",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/coordination-authority.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/validate.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "coordination_event_log_authority_policy",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-043/implementation-evidence.md"
+    },
+    {
+      "signal_id": "projection_authority_refusal",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/coordination-authority.test.mjs test/validate.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- coordination-authority validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-043/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-043/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-043-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-COORDINATION-PROJECTION-AUTHORITY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-043/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-REGISTRY-INDEX-AUTHORITY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-043/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-043/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-043 is a non-product bootstrap-gap chore that implements the already queued Coordination Event Log Authority boundary. It needs CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-043 changes a repo-native coordination-authority policy, template, CLI validation, init/validate wiring, and focused tests. It has no never-auto-landable surface, no dependency or lockfile change, no package-manager script change, no CI or release workflow change, no agent skill edit, no fetched-prompt or external tool-install path, no external side-effecting automation, no product UAT surface, and no unresolved source-trust, input-quarantine, or supply-chain state. Stage 4 evidence records CodeRabbit pass, Local Qwen pass, no required escalated review, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-043-supply-chain-gate.json",
+    ".bandit/policy/coordination-authority.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/templates/supply-chain-gate.md",
+    "docs/templates/coordination-authority.md",
+    "docs/work/BANDIT-043/brief.md",
+    "docs/work/BANDIT-043/implementation-evidence.md",
+    "docs/work/BANDIT-043/review-evidence.md",
+    "docs/work/BANDIT-043/landing-verdict.md"
+  ]
+}
