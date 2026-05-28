@@ -329,8 +329,8 @@
     {
       "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",
       "title": "Auto-landing and review depth rely too heavily on smell triggers",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -342,9 +342,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-041",
-      "rationale": "The operator confirmed that a smell-list-only safety posture is too brittle for review-depth, operator-supervision, and auto-landing decisions. Bandit needs a layered risk-classification gate with hard never-auto-landable exclusions, blast-radius signals, static-analysis signals, source trust and input quarantine state, supply-chain state, and smell triggers as one input. Any high-risk signal can block auto-landing or raise review depth without requiring smell-list concurrence.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-041."
+      "rationale": "BANDIT-041 adds a repo-native Layered Risk Classification Gate policy, layered risk template, focused validation, bandit risk-classification validate [--json], bandit validate integration, auto-land-check consumption, explicit release-authorized classification evidence for BANDIT-041, focused tests, Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition. Review-depth, operator-supervision, and auto-landing decisions now consume hard exclusions, never-auto-landable surfaces, blast-radius signals, static-analysis signals, source trust, input quarantine, supply-chain state, and smell-trigger inputs together instead of smell triggers alone.",
+      "verification_target": "docs/work/BANDIT-041/retrospective.md",
+      "next_action": "Use Layered Risk Classification Gate contracts before treating review-depth, operator-supervision, or auto-landing decisions as release-authorized. Create the next bootstrap-gap chore for BANDIT-GAP-SUPPLY-CHAIN-GATE before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-SUPPLY-CHAIN-GATE",
@@ -362,7 +362,7 @@
       "linked_work_item": null,
       "rationale": "The research review identified supply-chain risk as unaddressed, and the operator confirmed that Bandit needs a dedicated gate before supply-chain-sensitive changes can enter auto-landing scope. Current policy can flag the smell, but no CLI-owned gate records dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, or external tool-install evidence. It depends on the input quarantine boundary so fetched prompts, dependency documentation, and third-party content cannot become release-authorized instructions by default, and on layered risk classification so supply-chain state is one independent auto-landing blocker rather than a smell-list-only keyword match.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-LAYERED-RISK-CLASSIFICATION is resolved, create a bootstrap-gap chore for a narrow supply-chain gate that blocks auto-landing for supply-chain-sensitive changes unless explicit gate evidence and any required operator-supervised approval are recorded."
+      "next_action": "Create a bootstrap-gap chore for a narrow supply-chain gate that blocks auto-landing for supply-chain-sensitive changes unless explicit gate evidence and any required operator-supervised approval are recorded."
     },
     {
       "id": "BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY",

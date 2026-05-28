@@ -1,0 +1,92 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-041",
+  "outcome": "`BANDIT-041` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. The work adds a repo-native Layered Risk Classification Gate policy, layered risk template, focused validation, `bandit risk-classification validate [--json]`, `bandit validate` integration, and auto-land-check consumption so review-depth, operator-supervision, and auto-landing decisions use hard exclusions, never-auto-landable surfaces, blast-radius signals, static-analysis signals, source trust, input quarantine, supply-chain state, and smell-trigger inputs together rather than smell triggers alone. Stage 4 pre-PR CodeRabbit evidence passed with no findings, Local Qwen returned non_blocking findings with PM disposition, Stage 5 landing verdict and local-record landing action evidence are recorded, the risk-classification landing blocker was repaired with explicit release-authorized evidence, and no product, UAT, policy override, business tradeoff, explicit cost/risk override, supply-chain gate implementation, dependency or lockfile policy, live reviewer routing, paid reviewer routing, scheduler authority, claim/worktree authority, installed global skill edit, external service integration, PR/CI workflow, or cockpit UI scope was introduced.",
+  "what_worked": [
+    "The strategic-review source artifacts and resolved Input Quarantine Gate gave this chore the right dependency order before layered risk became an auto-landing input.",
+    "Focused RED tests captured missing classification evidence, smell-trigger-only decisions, never-auto-landable auto-land attempts, high-risk signal escalation, unknown trust or quarantine state, missing supply-chain disposition, malformed review depth, operator-supervision routing, refusal output, and complete low-risk acceptance.",
+    "The implementation kept risk classification explicit in repo-native policy, template, evidence files, validation, and auto-land-check consumption rather than moving authority into reviewers, generated context, cockpit state, scheduler behavior, or model routing.",
+    "The Stage 5 landing blocker proved the new gate fails closed: local-record landing refused until explicit layered risk-classification evidence was registered for `BANDIT-041`, then passed after the evidence and review subject hash were refreshed."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Review-depth, operator-supervision, and auto-landing decisions need layered risk classification, not smell-list-only safety.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-041` adds the Layered Risk Classification Gate policy, template, validator, CLI command, validation wiring, auto-land-check consumption, focused tests, review evidence, landing verdict, landing action, and retrospective closeout; `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved during closeout."
+    },
+    {
+      "lesson": "Auto-landing eligibility must require an explicit release-authorized classification decision, not just the existence of passing tests and reviewer agreement.",
+      "disposition": "explicit no-action decision",
+      "rationale": "The Stage 5 blocker and repair validate the intended fail-closed contract: landing refused until `.bandit/policy/risk-classification.json` registered current `BANDIT-041` evidence, and the repaired evidence then made auto-land-check pass."
+    },
+    {
+      "lesson": "Smell triggers are useful risk inputs, but missing or unknown source-trust, input-quarantine, supply-chain, static-analysis, or blast-radius signals must not become green defaults.",
+      "disposition": "explicit no-action decision",
+      "rationale": "The risk-classification validator now rejects smell-trigger-only authority, missing required signal groups, unknown source-trust or input-quarantine state, and missing supply-chain state instead of letting absence of a smell match lower review depth."
+    },
+    {
+      "lesson": "The dedicated Supply-Chain Gate still needs its own convention for supply-chain-sensitive surfaces and not-applicable evidence.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "Local Qwen's accepted non-blocking supply-chain-state convention finding is routed into `BANDIT-GAP-SUPPLY-CHAIN-GATE`, which is already the next queued bootstrap gap and must define dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, and external tool-install evidence."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "The local-record landing command initially failed closed because explicit layered risk-classification evidence was not registered for `BANDIT-041`; that blocker was recorded in `docs/work/BANDIT-041/landing-blocker.md`, repaired with policy evidence, and rerun successfully. Final CodeRabbit, Local Qwen, landing, validation, gap listing, risk-classification validation, input-quarantine validation, auto-land-check, land-check, and cockpit status evidence passed.",
+      "disposition": "explicit no-action decision - the failure was the intended fail-closed gate behavior and no new invocation-friction gap is required"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to layered risk-classification policy, template, validation, command wiring, auto-land-check consumption, focused tests, review evidence, landing evidence, and closeout artifacts.",
+      "disposition": "explicit no-action decision - no unrelated supply-chain gate implementation, dependency or lockfile policy, scheduler, claim, worktree, cockpit UI, live-routing, paid-reviewer route, external-service, or PR/CI work started"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore: write RED tests, implement the layered risk-classification contract and validator, run Stage 4 review, repair the Stage 5 evidence registration blocker, land locally, then close out Stage 6.",
+      "disposition": "explicit no-action decision - no follow-up required for slice size"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "Codex PM owned technical routing, Test Writer evidence was focused in risk-classification and landing-gate tests, Writer work stayed within policy/template/validator/command and auto-land-check surfaces, CodeRabbit and Local Qwen owned Stage 4 review, and Landing Agent evidence owned Stage 5.",
+      "disposition": "explicit no-action decision - no operator-owned routing question or agent-boundary follow-up remains"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "The closeout used the established artifact-create retrospective path plus manual gap-ledger and roadmap synchronization; the only pressure was the expected Stage 6 need to update all canonical routing surfaces together.",
+      "disposition": "explicit no-action decision - existing context, gap-ledger, and cockpit status validation remain sufficient for this closeout"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit passed with no findings, Local Qwen returned non_blocking findings with PM disposition, and the recorded risk rationale did not require escalated reviewer routing after the accepted supply-chain convention note was queued to the dedicated supply-chain gap.",
+      "disposition": "explicit no-action decision - no unresolved cross-model tension or reviewer-routing follow-up remains"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "The focused pre-PR CodeRabbit invocation, Local Qwen review command, review-subject hash command, risk-classification validation command, input-quarantine validation command, land-check, auto-land-check, land command, and retrospective artifact-create path all had established invocation patterns by closeout.",
+      "disposition": "explicit no-action decision - no new invocation-friction bootstrap gap required"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "Roadmap, current-context, and bootstrap-gap ledger closeout still require repeated prose edits, but this instance is expected Stage 6 synchronization and cockpit status validation covers the resulting state.",
+      "disposition": "explicit no-action decision - existing context and cockpit status validation remain sufficient for this closeout"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer call, recurring paid model route, spend-class approval, high-token reviewer policy, benchmark spend, or live provider route was introduced. CodeRabbit and Local Qwen evidence used existing Stage 4 reviewer paths.",
+      "disposition": "explicit no-action decision - no cost or latency follow-up required"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for the Layered Risk Classification Gate gap after tests, review evidence, landing verdict, local-record landing action, explicit risk-classification evidence registration, validation evidence, and closeout. The next known trust-layer policy gap is already queued as `BANDIT-GAP-SUPPLY-CHAIN-GATE`.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-SUPPLY-CHAIN-GATE"
+    }
+  ],
+  "improvement_chores": "No new retrospective-derived improvement chore is created by this closeout.\n\n`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041`. The next queued bootstrap gap is `BANDIT-GAP-SUPPLY-CHAIN-GATE`, which should become the next work item before unrelated Phase 8 work.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-041`. Focused pre-PR CodeRabbit review passed with no findings, Local Qwen returned non_blocking findings with concrete PM disposition, the two strictness findings preserve intentional fail-closed behavior, the supply-chain convention finding is routed to `BANDIT-GAP-SUPPLY-CHAIN-GATE`, and no escalated reviewer route was required by the recorded risk and smell-trigger rationale.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-SUPPLY-CHAIN-GATE` is open and queued as the next bootstrap-gap chore.",
+    "`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` remains queued behind the supply-chain gate.",
+    "The remaining strategic-review bootstrap gaps remain queued in the order recorded in `.bandit/bootstrap-gaps.json`."
+  ]
+}

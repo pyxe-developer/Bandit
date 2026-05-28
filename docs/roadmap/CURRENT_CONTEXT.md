@@ -382,30 +382,25 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-040` - Input Quarantine Gate is landed
-and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-INPUT-QUARANTINE-GATE`. Its structured creation spec, Stage 1
+**Last completed milestone:** `BANDIT-041` - Layered Risk Classification is
+landed and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its structured creation spec, Stage 1
 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
-CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
-review evidence, Stage 5 landing verdict evidence, local-record landing action
-evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
-recorded in `docs/work/BANDIT-040/` and `.bandit/bootstrap-gaps.json`.
+CodeRabbit pass evidence, Stage 4 Local Qwen `non_blocking` evidence and PM
+disposition, aggregate Stage 4 review evidence, Stage 5 landing verdict
+evidence, risk-classification landing repair evidence, local-record landing
+action evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition
+are recorded in `docs/work/BANDIT-041/` and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-041` after local-record landing.
-`docs/work/BANDIT-041/landing-action.md` records local-record landing at
-current head `b3b614d4aa86f1cfa0613af19b643c74a2b5b4dc`; Stage 4 and Stage 5
-evidence were refreshed after registering explicit layered risk-classification
-evidence at `.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`. Create the
-`BANDIT-041` retrospective, capture any improvement dispositions, update
-`.bandit/bootstrap-gaps.json` for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`,
-and then update roadmap context. Do not create the
-`BANDIT-GAP-SUPPLY-CHAIN-GATE` chore or unrelated Phase 8 work before Stage 6
-closeout and gap disposition are recorded.
+**Current next action:** Create the bootstrap-gap chore for
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` has landing verdict,
+local-record landing action, retrospective closeout, and bootstrap-gap
+disposition evidence recorded, so the layered risk-classification slice
+boundary is closed. Do not start unrelated Phase 8 work before the
+Supply-Chain Gate chore is created and routed.
 
-`BANDIT-041` - Layered Risk Classification is active after local-record landing
-action evidence as the bootstrap-gap chore for
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
+`BANDIT-041` - Layered Risk Classification is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
 structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-041/brief.md`, Stage 2 RED evidence is recorded
@@ -425,10 +420,12 @@ verdict `safe-to-land`, Stage 5 landing blocker evidence is recorded in
 landing repair evidence is recorded in
 `.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`, and local-record
 landing action evidence is recorded in `docs/work/BANDIT-041/landing-action.md`.
+Stage 6 retrospective closeout is recorded in
+`docs/work/BANDIT-041/retrospective.md`, and `.bandit/bootstrap-gaps.json`
+marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved.
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
-implementation-evidence artifact, and landing-verdict artifact events, and
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-041` with disposition
-`active_chore`.
+implementation-evidence artifact, landing-verdict artifact, and retrospective
+artifact events.
 
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
@@ -509,41 +506,42 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-041` - Layered Risk Classification is active
-after local-record landing action evidence as the bootstrap-gap chore for
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its structured creation spec is
-recorded in `docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its
-brief is recorded in `docs/work/BANDIT-041/brief.md`, RED evidence is recorded
-in `docs/work/BANDIT-041/red-evidence.md`, implementation evidence is recorded
-in `docs/work/BANDIT-041/implementation-evidence.md`, CodeRabbit review
-evidence is recorded in `docs/work/BANDIT-041/coderabbit-review.md`, Local
-Qwen review evidence is recorded in
-`docs/work/BANDIT-041/local-qwen-review.md`, PM disposition for the
-non-blocking Qwen findings is recorded in
+**Active work item:** `BANDIT-041` - Layered Risk Classification is the current
+closed routing anchor. The next action is to create a bootstrap-gap chore for
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`; do not start unrelated Phase 8 work before
+that work item is created and routed.
+
+`BANDIT-041` - Layered Risk Classification is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
+structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json`, its brief is
+recorded in `docs/work/BANDIT-041/brief.md`, RED evidence is recorded in
+`docs/work/BANDIT-041/red-evidence.md`, implementation evidence is recorded in
+`docs/work/BANDIT-041/implementation-evidence.md`, CodeRabbit review evidence
+is recorded in `docs/work/BANDIT-041/coderabbit-review.md`, Local Qwen review
+evidence and PM disposition are recorded in
+`docs/work/BANDIT-041/local-qwen-review.md` and
 `docs/work/BANDIT-041/qwen-finding-disposition.md`, aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-041/review-evidence.md` with current
 review subject hash
-`f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994`,
-Stage 5 landing verdict evidence is recorded in
+`f7a152e98427226be0ff70dce9f2830ad17d8e433ce750f6ed3e5c612971a994`, Stage 5
+landing verdict evidence is recorded in
 `docs/work/BANDIT-041/landing-verdict.md` with final verdict `safe-to-land`,
 Stage 5 landing blocker evidence is recorded in
 `docs/work/BANDIT-041/landing-blocker.md`, explicit layered risk-classification
 landing repair evidence is recorded in
-`.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`, and local-record
-landing action evidence is recorded in `docs/work/BANDIT-041/landing-action.md`.
-`.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
-implementation-evidence artifact, and landing-verdict artifact events, and
-`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
-to `BANDIT-041` with disposition `active_chore`. The next action is Stage 6
-retrospective closeout and bootstrap-gap disposition for `BANDIT-041`; do not
-create the `BANDIT-GAP-SUPPLY-CHAIN-GATE` chore or unrelated Phase 8 work
-before that closeout is recorded.
+`.bandit/policy/risk-classifications/BANDIT-041-risk-classification.json`,
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-041/landing-action.md`, Stage 6 retrospective closeout is
+recorded in `docs/work/BANDIT-041/retrospective.md`, and
+`.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
+resolved.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by `BANDIT-039`.
 `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by `BANDIT-040`.
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is active as `BANDIT-041`.
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041`.
 `BANDIT-GAP-SUPPLY-CHAIN-GATE`,
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`,
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`, and
@@ -565,6 +563,7 @@ behind the token-cost failsafe gap.
 `BANDIT-038` - Skill Lifecycle Contract is landed and closed out.
 `BANDIT-039` - Agent Evaluation Harness is landed and closed out.
 `BANDIT-040` - Input Quarantine Gate is landed and closed out.
+`BANDIT-041` - Layered Risk Classification is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -593,11 +592,10 @@ Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails; `BANDIT-038` - Skill
 Lifecycle Contract; `BANDIT-039` - Agent Evaluation Harness; `BANDIT-040` -
-Input Quarantine Gate.
+Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification.
 
-**Expected next deliverable:** Stage 6 retrospective closeout and gap-ledger
-disposition for `BANDIT-041`, before any next bootstrap-gap chore or unrelated
-Phase 8 work.
+**Expected next deliverable:** Bootstrap-gap work item creation for
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`, before unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -678,7 +676,7 @@ These are expected because Bandit does not exist yet:
   `bandit validate` integration. Stage 1 through Stage 6 evidence is recorded
   in `docs/work/BANDIT-040/`, and `.bandit/bootstrap-gaps.json` marks the gap
   resolved.
-- `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is active as `BANDIT-041` from the
+- `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041` from the
   2026-05-26 strategic review: Bandit now treats smell-list-only review-depth
   and auto-landing decisions as too brittle. Auto-landing and review depth need
   a layered gate with hard never-auto-landable exclusions, blast-radius signals,
@@ -690,15 +688,16 @@ These are expected because Bandit does not exist yet:
   recorded in `docs/work/BANDIT-041/red-evidence.md`, Stage 3 implementation
   evidence is recorded in `docs/work/BANDIT-041/implementation-evidence.md`,
   Stage 4 review evidence is recorded in `docs/work/BANDIT-041/review-evidence.md`,
-  Stage 5 landing verdict and local-record landing action evidence are recorded
-  in `docs/work/BANDIT-041/`, and the next action is Stage 6 retrospective
-  closeout plus gap-ledger disposition.
+  Stage 5 landing verdict, local-record landing action, Stage 6 retrospective
+  closeout, and bootstrap-gap disposition are recorded in
+  `docs/work/BANDIT-041/` and `.bandit/bootstrap-gaps.json`.
 - `BANDIT-GAP-SUPPLY-CHAIN-GATE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats supply-chain-sensitive changes as a
   blocker-level smell, but no CLI-owned gate records dependency, lockfile,
   package-manager script, CI/release workflow, agent-skill, fetched-prompt, or
   external tool-install evidence. It is queued behind
-  `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`.
+  `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` and is the next bootstrap-gap chore
+  to create.
 - `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is open and queued from the
   2026-05-26 strategic review: PRD-002 now treats append-only workflow/event
   history as the only canonical coordination history, while current-state
@@ -942,21 +941,14 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-041` - Layered Risk Classification.
-   The Stage 1 brief is recorded in `docs/work/BANDIT-041/brief.md`, Stage 2
-   RED evidence is recorded in `docs/work/BANDIT-041/red-evidence.md`, Stage 3
-   implementation evidence is recorded in
-   `docs/work/BANDIT-041/implementation-evidence.md`, Stage 4 review evidence
-   is recorded in `docs/work/BANDIT-041/review-evidence.md`, Stage 5 landing
-   verdict evidence is recorded in `docs/work/BANDIT-041/landing-verdict.md`
-   with final verdict `safe-to-land`, local-record landing action evidence is
-   recorded in `docs/work/BANDIT-041/landing-action.md`, and
-   `.bandit/bootstrap-gaps.json` links
-   `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` to `BANDIT-041` with disposition
-   `active_chore`. Create the retrospective, record improvement dispositions,
-   and resolve the gap ledger before creating the next bootstrap-gap chore or
-   unrelated Phase 8 work.
+1. Create the bootstrap-gap chore for `BANDIT-GAP-SUPPLY-CHAIN-GATE`.
+   `BANDIT-041` - Layered Risk Classification is landed and closed out:
+   Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence,
+   Stage 4 review evidence, Stage 5 landing verdict, local-record landing
+   action, Stage 6 retrospective closeout, and bootstrap-gap disposition are
+   recorded, and `.bandit/bootstrap-gaps.json` marks
+   `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. Do not start unrelated
+   Phase 8 work before the supply-chain gate chore is created and routed.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -967,9 +959,9 @@ The current priority is:
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
    by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by
    `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by
-   `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
-   is active as `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is queued behind
-   the layered risk-classification gap. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
+   `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
+   `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is the next queued
+   bootstrap-gap chore. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
    is queued behind the supply-chain gate. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
    is queued behind the coordination event-log authority gap.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
@@ -992,17 +984,16 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before `BANDIT-041` Stage 6 retrospective
-closeout and bootstrap-gap disposition. Repo artifacts identify the active work
-item, implemented layered risk-classification gate, Stage 4 review evidence,
-review-subject hash, Stage 5 landing verdict, UAT not-applicable status,
-clean-code compliance evidence, risk-classification landing repair, and
-local-record landing action. Halt only if closeout would change product
-direction, UAT policy, workflow policy beyond dispositioning
-`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`, business tradeoffs, cost/risk
-posture, external service setup, paid reviewer routing, live routing, scheduler
-authority, claim/worktree authority, installed global skill contents,
-dependency or lockfile policy, supply-chain gate policy, or broader workflow
+No operator-owned input is required before creating the
+`BANDIT-GAP-SUPPLY-CHAIN-GATE` bootstrap-gap chore. Repo artifacts identify the
+next queued gap, source artifacts, dependency on the now-resolved Layered Risk
+Classification Gate, and the required supply-chain-sensitive surfaces. Halt
+only if the chore creation would change product direction, UAT policy,
+workflow policy beyond creating the already queued supply-chain gate chore,
+business tradeoffs, cost/risk posture, external service setup, paid reviewer
+routing, live routing, scheduler authority, claim/worktree authority, installed
+global skill contents, dependency or lockfile policy beyond scoping the future
+supply-chain gate, or broader workflow
 scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
