@@ -16,13 +16,18 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement the narrow `BANDIT-047` Bootstrap
-Model-Family Separation repair from the recorded Stage 2 RED evidence. Do not
-start the Focused Session Context gap, Worktree Bootstrap Contract gap,
-scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API
-work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
-or unrelated Phase 8 work before the Bootstrap Model-Family Separation and Test
-Ownership Boundary gap is executed, landed, closed out, and dispositioned.
+**Current next step:** Resolve the blocked `BANDIT-047` Claude Writer dispatch
+before Stage 3 implementation continues. The 2026-05-28 Claude Process Adapter
+dispatch is recorded in `docs/work/BANDIT-047/dispatch.md` and blocked in
+`docs/work/BANDIT-047/writer-dispatch-blocker.md`: the subprocess was launched
+with Sonnet 4.6, xhigh effort, verbose stream-json output, and raw audit
+capture, but it did not reach `end_turn`, produced no `writer-report.md`, and
+made no implementation changes. Do not start the Focused Session Context gap,
+Worktree Bootstrap Contract gap, scheduler execution, full worktree lifecycle
+enablement, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+the Bootstrap Model-Family Separation and Test Ownership Boundary gap is
+executed, landed, closed out, and dispositioned.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -34,10 +39,12 @@ recorded in `docs/specs/BANDIT-047-red-evidence.json`,
 `test/model-family-separation.test.mjs`, `.bandit/events.jsonl` records the
 work-item-created and red-evidence artifact-created events, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-047` with status
-`active`. The next required action is Stage 3 implementation for model-family
-separation, permanent Test Ownership Boundary enforcement, Stage 3 attempt
-invalidation after Writer test-surface edits, Claude Writer bootstrap routing,
-and Codex PM escalation routing.
+`active`. The Stage 3 dispatch artifact and blocked Writer evidence are
+recorded in `docs/work/BANDIT-047/dispatch.md` and
+`docs/work/BANDIT-047/writer-dispatch-blocker.md`. Stage 3 implementation still
+requires model-family separation, permanent Test Ownership Boundary
+enforcement, Stage 3 attempt invalidation after Writer test-surface edits,
+Claude Writer bootstrap routing, and Codex PM escalation routing.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -1241,8 +1248,9 @@ Current rule:
 
 Current priority:
 
-1. Implement the narrow Stage 3 repair for `BANDIT-047` - Bootstrap
-   Model-Family Separation.
+1. Resolve the blocked `BANDIT-047` Claude Writer dispatch by choosing whether
+   to rerun Claude Writer with a revised dispatch, continue the existing
+   Claude session if recoverable, or roll back the PM-owned dispatch artifact.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
