@@ -392,14 +392,16 @@ evidence, risk-classification landing repair evidence, local-record landing
 action evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition
 are recorded in `docs/work/BANDIT-041/` and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-042` -
+**Current next action:** Implement Stage 3 for `BANDIT-042` -
 Supply-Chain Gate. `BANDIT-042` has Stage 1 brief evidence recorded in
-`docs/work/BANDIT-042/brief.md`, its structured creation spec is recorded in
+`docs/work/BANDIT-042/brief.md`, Stage 2 RED evidence recorded in
+`docs/work/BANDIT-042/red-evidence.md`, focused RED tests in
+`test/supply-chain-gate.test.mjs`, its structured creation spec recorded in
 `docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-SUPPLY-CHAIN-GATE` as the
-active chore. Do not start implementation, review, landing, retrospective, the
-next bootstrap-gap chore, or unrelated Phase 8 work before RED evidence is
-recorded.
+active chore. Do not start review, landing, retrospective, the next
+bootstrap-gap chore, or unrelated Phase 8 work before implementation evidence
+is recorded.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -434,7 +436,9 @@ artifact events.
 `docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, its Stage 1 brief is recorded
 in `docs/work/BANDIT-042/brief.md`, `.bandit/bootstrap-gaps.json` marks the gap
 active and links it to `BANDIT-042`, and `.bandit/events.jsonl` records the
-work-item-created event. Stage 2 RED evidence has not started.
+work-item-created event. Stage 2 RED evidence is recorded in
+`docs/work/BANDIT-042/red-evidence.md`, with focused tests in
+`test/supply-chain-gate.test.mjs`. Stage 3 implementation has not started.
 
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
@@ -518,11 +522,13 @@ that authority.
 **Active work item:** `BANDIT-042` - Supply-Chain Gate.
 
 `BANDIT-042` has Stage 1 brief evidence in `docs/work/BANDIT-042/brief.md`,
-structured spec evidence in `docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and
-gap-ledger routing in `.bandit/bootstrap-gaps.json`. The next action is Stage 2
-RED evidence for the supply-chain gate. Do not start implementation, review,
-landing, retrospective, the next bootstrap-gap chore, or unrelated Phase 8 work
-before RED evidence is recorded.
+Stage 2 RED evidence in `docs/work/BANDIT-042/red-evidence.md`, focused RED
+tests in `test/supply-chain-gate.test.mjs`, structured spec evidence in
+`docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and gap-ledger routing in
+`.bandit/bootstrap-gaps.json`. The next action is Stage 3 implementation for
+the supply-chain gate. Do not start review, landing, retrospective, the next
+bootstrap-gap chore, or unrelated Phase 8 work before implementation evidence
+is recorded.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -954,17 +960,17 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-042` -
+1. Implement Stage 3 for `BANDIT-042` -
    `BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` - Layered Risk Classification
    is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
    implementation evidence, Stage 4 review evidence, Stage 5 landing verdict,
    local-record landing action, Stage 6 retrospective closeout, and
    bootstrap-gap disposition are recorded, and `.bandit/bootstrap-gaps.json`
    marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. `BANDIT-042` has
-   Stage 1 brief evidence recorded and `.bandit/bootstrap-gaps.json` marks
-   `BANDIT-GAP-SUPPLY-CHAIN-GATE` active. Do not start implementation, review,
-   landing, retrospective, the next bootstrap-gap chore, or unrelated Phase 8
-   work before RED evidence is recorded.
+   Stage 1 brief evidence and Stage 2 RED evidence recorded, and
+   `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SUPPLY-CHAIN-GATE` active.
+   Do not start review, landing, retrospective, the next bootstrap-gap chore,
+   or unrelated Phase 8 work before implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1000,11 +1006,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before writing Stage 2 RED evidence for
+No operator-owned input is required before Stage 3 implementation for
 `BANDIT-042`. Repo artifacts identify the active gap, source artifacts,
 dependency on the now-resolved Input Quarantine and Layered Risk Classification
-gates, and the required supply-chain-sensitive surfaces. Halt only if RED
-evidence or later implementation would change product direction, UAT policy,
+gates, required supply-chain-sensitive surfaces, and the RED test contract.
+Halt only if implementation would change product direction, UAT policy,
 workflow policy beyond defining the already active supply-chain gate, business
 tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
 live routing, scheduler authority, claim/worktree authority, installed global

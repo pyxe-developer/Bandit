@@ -1,0 +1,53 @@
+# BANDIT-042 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused tests define the Supply-Chain Gate before production implementation. They fail because Bandit does not yet require supply-chain policy or template validation, no supply-chain-gate validation command exists, and auto-land-check does not yet consume independent supply-chain gate evidence.
+
+## Test Command
+
+```sh
+node --test test/supply-chain-gate.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 14
+pass 0
+fail 14
+validate fails closed when the supply-chain gate policy is missing failed: expected exit code 1, received 0
+validate fails closed when the supply-chain gate template is missing failed: expected exit code 1, received 0
+supply-chain validation rejects registered decisions without evidence failed: Unknown command: supply-chain-gate
+supply-chain validation rejects dependency changes without SCA disposition failed: Unknown command: supply-chain-gate
+supply-chain validation rejects lockfile drift without manifest rationale failed: Unknown command: supply-chain-gate
+supply-chain validation rejects package-manager scripts without review evidence failed: Unknown command: supply-chain-gate
+supply-chain validation rejects CI or release workflows marked auto-landable failed: Unknown command: supply-chain-gate
+supply-chain validation rejects agent skills without lifecycle evidence failed: Unknown command: supply-chain-gate
+supply-chain validation rejects fetched prompts without quarantine and trusted-source evidence failed: Unknown command: supply-chain-gate
+supply-chain validation rejects external tool installs without trusted evidence failed: Unknown command: supply-chain-gate
+supply-chain validation rejects unknown surfaces accepted as low risk failed: Unknown command: supply-chain-gate
+supply-chain validation rejects missing operator-supervised approval failed: Unknown command: supply-chain-gate
+supply-chain validation accepts a complete low-risk classification failed: Unknown command: supply-chain-gate
+auto-land-check refuses safe-to-land evidence without supply-chain gate evidence failed: expected exit code 1, received 0
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| A Supply-Chain Gate template or policy artifact names required inputs for work item, changed supply-chain surfaces, dependency manifest state, lockfile state, package-manager scripts, CI/release workflow state, agent-skill state, fetched-prompt state, external tool-install state, input-quarantine references, trusted-source gate references, SCA or unavailable-tool disposition, operator-supervised approval state, auto-landing eligibility, rationale, and evidence paths. | The focused tests expect docs/templates/supply-chain-gate.md, .bandit/policy/supply-chain-gate.json, and per-work-item docs/supply-chain/<ID>-supply-chain-gate.json decision evidence to become required repo-native surfaces. |
+| Validation fails closed when release-authorized work touches supply-chain-sensitive surfaces without current supply-chain gate evidence. | The missing policy, missing template, missing evidence, and auto-land-check tests expect validate, supply-chain-gate validate --json, and auto-land-check to reject otherwise green state when supply-chain gate evidence is absent. |
+| Validation fails closed when dependency additions, removals, version or pin changes, or lockfile drift lack explicit manifest/lockfile rationale and SCA or unavailable-tool disposition. | The dependency-change and lockfile-drift tests assert package changes require SCA or an unavailable-tool disposition, and lockfile drift requires manifest and drift rationale. |
+| Validation fails closed when package-manager scripts, lifecycle hooks, CI/release workflows, agent skills, fetched prompts, or external tool-install paths are treated as low risk without explicit gate evidence. | The package-manager script, CI/release workflow, agent-skill, fetched prompt, and external tool-install tests require explicit review, lifecycle, quarantine, trusted-source, and approval evidence before acceptance. |
+| Validation fails closed when fetched prompts, dependency documentation, generated instructions, or external tool metadata are used as instruction-bearing content without Input Quarantine Gate and Trusted Source Gate evidence. | The fetched-prompt and external-tool tests set instruction-bearing or executable external content without quarantine/trusted-source references and expect fail-closed refusal. |
+| Validation blocks auto-landing for CI/release workflow changes, dependency or fetched-prompt execution paths, package-manager script changes, external tool-install paths, or other executable supply-chain surfaces unless policy records explicit operator-supervised approval where required. | The CI/release workflow and operator-supervised approval tests require missing approval to block auto-landing, even when the rest of the fixture is shaped as a release-authorized decision. |
+| Layered Risk Classification consumes Supply-Chain Gate state as an independent risk signal and refuses auto-landing when supply-chain state is missing, stale, elevated, or pending operator supervision. | The auto-land-check test writes otherwise safe-to-land evidence plus layered risk classification and expects auto-landing to remain blocked until independent supply-chain gate evidence exists. |
+| Focused tests prove invalid supply-chain gate contracts are rejected before trusted status or auto-landing eligibility, and prove a complete accepted low-risk supply-chain gate record is accepted. | The focused test file covers missing gate surfaces, missing decision evidence, dependency/SCA state, lockfile drift, script review evidence, CI/release approval, agent-skill lifecycle evidence, fetched prompt quarantine/trust, external tool install trust, unknown surfaces, operator approval, auto-land refusal, and complete low-risk acceptance output. |
+| The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied. | This RED step adds only focused tests, a Stage 2 red-evidence spec/artifact, lifecycle event evidence, and roadmap/current-context routing. It adds no production implementation, review evidence, landing evidence, retrospective, next-gap work, live routing, paid reviewer route, dependency or lockfile change, scheduler, claim/worktree authority, external service integration, installed global skill edit, or cockpit UI surface. |
+
+## Next Action
+
+Implement the narrow Supply-Chain Gate repair: add the repo-native supply-chain template and policy, per-work-item supply-chain gate evidence parsing, supply-chain-gate validate --json command wiring, validate integration, auto-land-check or landing-readiness consumption, and focused acceptance behavior needed to make the RED tests pass without broadening into dependency update automation, live SCA provider setup, paid reviewer routing, live routing, scheduler, claim/worktree authority, external service integration, installed global skill edits, PR/CI execution, merge/push/deploy behavior, or cockpit UI scope.
