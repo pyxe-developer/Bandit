@@ -16,18 +16,23 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-045` - CAS Fenced
+**Current next step:** Run Local Qwen for `BANDIT-045` - CAS Fenced
 Claim Authority. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence is recorded
 in `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-045/implementation-evidence.md`,
-`.bandit/events.jsonl` records the work-item and artifact creation events, and
+recorded in `docs/work/BANDIT-045/implementation-evidence.md`, Stage 4 pre-PR
+CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-045/coderabbit-review.md` at source head
+`c276979c5032e73e131fbaff78b1f9aa92d537b3`, `.bandit/events.jsonl` records
+the work-item and artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` active with linked work item
-`BANDIT-045`. The next step is Stage 4 review only: run pre-PR CodeRabbit,
-Local Qwen, aggregate review evidence, required risk/supply-chain evidence, and
-Codex PM disposition at the current review subject hash. Do not start Git
+`BANDIT-045`. The next step is Stage 4 review only: run Local Qwen, then
+aggregate review evidence, required risk/supply-chain evidence, and Codex PM
+disposition at review subject hash
+`b72f2c8ef205d82d94226df8a124583239a9414e40a003917ee7c46edd5d4ab4`. Do not
+start Git
 Mutation Serializer, Worktree Bootstrap Contract, scheduler, worktree
 lifecycle, cockpit UI/server/API work, automatic merge/push/deploy, product UAT
 approval, actor identity policy, PR/CI workflow, landing verdict, landing
@@ -574,7 +579,9 @@ correctness must be backed by declared Claim Safety Invariants plus
 deterministic fault-injecting or property-style simulation; example-only
 duplicate-claim tests do not satisfy the gate. `BANDIT-045` Stage 1 spec,
 brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence are
-recorded; the next action is Stage 4 review.
+recorded, Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-045/coderabbit-review.md`, and the next action is Local Qwen
+review.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is constrained by the accepted
 2026-05-27 Git mutation serializer decision: shared `.git` worktree and
 repository plumbing mutations require a CLI-owned single-writer guard, while
@@ -842,7 +849,9 @@ Stage 1 through Stage 6 evidence and gap-ledger disposition are recorded.
 and gap-ledger disposition are recorded. `BANDIT-045` is active as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`; Stage 1
 spec/brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence
-are recorded. The current target is Stage 4 review for `BANDIT-045`.
+are recorded. Stage 4 pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-045/coderabbit-review.md`. The current target is Local Qwen
+review for `BANDIT-045`.
 
 ## Phase Map
 
@@ -1157,10 +1166,9 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-045` - CAS Fenced Claim Authority:
-   pre-PR CodeRabbit, Local Qwen, aggregate review evidence, required
-   risk/supply-chain evidence, and Codex PM disposition at the current review
-   subject hash.
+1. Run Local Qwen for `BANDIT-045` - CAS Fenced Claim Authority, then record
+   aggregate review evidence, required risk/supply-chain evidence, and Codex PM
+   disposition at the current review subject hash.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
