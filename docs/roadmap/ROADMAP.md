@@ -17,11 +17,12 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
 **Current next step:** Create exactly one bootstrap-gap work item for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Do not start scheduler execution,
-full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before the Worktree Bootstrap Contract gap is created, executed, landed,
-closed out, and dispositioned.
+`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`. Do not start the Worktree
+Bootstrap Contract gap, scheduler execution, full worktree lifecycle enablement,
+cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy
+behavior, product UAT scope, or unrelated Phase 8 work before the Bootstrap
+Model-Family Separation and Test Ownership Boundary gap is created, executed,
+landed, closed out, and dispositioned.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -57,7 +58,7 @@ Local-record landing action evidence is recorded in
 `docs/work/BANDIT-046/landing-action.md`, Stage 6 retrospective closeout is
 recorded in `docs/work/BANDIT-046/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved. The next required work is
-the queued Worktree Bootstrap Contract gap.
+the queued Bootstrap Model-Family Separation and Test Ownership Boundary gap.
 
 `BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
@@ -71,8 +72,10 @@ disposition are recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
 `docs/specs/BANDIT-045-landing-verdict.json`, `docs/work/BANDIT-045/`,
 `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`. Git Mutation Serializer
-is resolved by `BANDIT-046`; `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is now
-the next queued bootstrap gap.
+is resolved by `BANDIT-046`; `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`
+is now the next queued bootstrap gap for model-family separation and test
+ownership enforcement. This is bootstrap artifact/diff-gate enforcement around
+Process Adapter runs, not live cross-model orchestration.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -595,13 +598,16 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`;
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
+`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is now the next queued bootstrap
+gap for model-family separation and test ownership enforcement.
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT`,
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`,
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`,
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order behind
-`BANDIT-046`.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order after
+bootstrap model-family separation.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
 2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
 `refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
@@ -622,6 +628,14 @@ claim CAS remains separate authority. Claim-owned worktrees must be
 `git worktree lock`ed immediately with a stable reason naming claim ID, Work
 Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after
 handoff verification.
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is constrained by the 2026-05-28
+context-pressure review: agents should consume a focused activation packet with
+current role rules, active Work Item or gap, current stage, exact next action,
+allowed and forbidden actions, blocker state, required evidence paths, and
+source hierarchy; full roadmap history and old closeout narrative should be
+read on demand by pointer rather than reabsorbed on every cold start. Codex PM
+owns the packet-generation technical decision; the default is CLI-derived state
+with optional Markdown rendering, not a hand-maintained packet.
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is constrained by the 2026-05-27
 technical delegation decision: Codex PM owns routine technical questions, and a
 Bandit-created worktree is not runnable until a repo-native Worktree Bootstrap
@@ -897,7 +911,7 @@ Stage 6 retrospective closeout and bootstrap-gap disposition are recorded in
 `BANDIT-046` is landed and closed out for Git Mutation Serializer; Stage 1
 through Stage 6 evidence and gap-ledger disposition are recorded. The current
 target is to create exactly one work item for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
+`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
 
 ## Phase Map
 
@@ -1213,7 +1227,7 @@ Current rule:
 Current priority:
 
 1. Create exactly one bootstrap-gap work item for
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
+   `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1230,9 +1244,13 @@ Current priority:
    `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is now the next queued gap.
-   `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
-   bootstrap contract.
+   `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is now the next queued gap for
+   model-family separation and test ownership enforcement, bounded to
+   artifact/diff-gate enforcement around Process Adapter runs.
+   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is queued behind bootstrap model-family
+   separation. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
+   session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
+   the worktree bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
    wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
    agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued

@@ -62,9 +62,9 @@ For v0, any branch code change after UAT makes UAT stale.
 
 Initial conceptual roles:
 
-- Codex PM: orchestrates, routes, plans, writes tests when needed, decides technical verdicts from policy.
+- Codex PM: orchestrates, routes, plans, owns bootstrap RED test authorship when needed, decides technical verdicts from policy, and does not implement code for work items whose tests it authored.
 - Test Writer: owns acceptance and regression test contracts.
-- Writer: implements bounded production changes.
+- Writer: implements bounded production changes and never edits tests for the work item it implements.
 - Adversarial Reviewer: required cross-model reviewer, local Qwen baseline.
 - Strong Reviewer: escalation reviewer for risk smells.
 - CodeRabbit Loop Agent: handles queueing, reading, repair prompts, and disposition evidence.

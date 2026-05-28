@@ -32,7 +32,7 @@ Use this rubric before landing:
 7. **Readable flow**: A reviewer can follow command paths, state transitions, and failure paths without reconstructing intent from chat.
 8. **Locality**: Related logic lives together; unrelated refactors are excluded.
 9. **Failure clarity**: Refusals, blocked gates, stale evidence, and unavailable agents fail closed with clear messages.
-10. **No role erosion**: Writer, reviewer, Test Writer, Landing Agent, and Codex PM boundaries are preserved.
+10. **No role erosion**: Writer, reviewer, Test Writer, Landing Agent, and Codex PM boundaries are preserved; Writers never edit tests for the work item they implement.
 11. **Improvement capture**: Any workflow lesson is converted into a tagged improvement chore or explicit no-action decision.
 
 ## General Rules

@@ -69,6 +69,12 @@ Use these verdicts consistently:
   mechanics, agent/tool selection, skill scoping, review depth, test strategy,
   artifact structure, and Git plumbing decisions are answered by Codex PM unless
   an operator-owned gate is crossed.
+- Permanent Test Ownership Boundary: the Stage 3 Writer has no authority to edit
+  tests, test helpers, fixtures, RED evidence, or acceptance mappings for the
+  Work Item it implements, regardless of harness, model family, or provider.
+- Bootstrap model-family separation: when Codex authors or materially edits
+  Stage 2 RED tests, Stage 3 implementation is assigned to a different model
+  family; during bootstrap Claude is the only allowed Stage 3 Writer path.
 - Skill lifecycle contracts for any required load-bearing skills: owner,
   version, changelog, intended stages, required tools, forbidden actions,
   evaluation packets, and rollback criteria.
@@ -220,6 +226,9 @@ Use these verdicts consistently:
 - The brief asks the operator to make technical routing, implementation
   mechanics, skill/tool scoping, test-strategy, artifact-structure, review-depth,
   or Git-plumbing decisions Codex PM should own.
+- The brief allows the same model family to author Stage 2 RED tests and Stage 3
+  implementation, or omits the bootstrap Claude Writer path after Codex-authored
+  RED tests.
 
 **Verifier focus:**
 
@@ -296,7 +305,11 @@ Use these verdicts consistently:
 - Tests or explicit bootstrap verification plan.
 - RED evidence where feasible.
 - Mapping from tests to acceptance criteria.
-- Clear distinction between Test Writer-owned tests and Writer-editable tests.
+- Clear statement that tests, test helpers, fixtures, RED evidence, and
+  acceptance mappings are Test Writer-owned and that Stage 3 has zero
+  test-edit surfaces.
+- Model-family separation evidence when Codex authored or materially edited the
+  tests.
 
 **Blockers:**
 
@@ -304,16 +317,24 @@ Use these verdicts consistently:
 - Tests assert implementation details instead of behavior.
 - Tests weaken or redefine the spec.
 - Test ownership is unclear.
+- Stage 2 evidence fails to route Stage 3 implementation to a different model
+  family after Codex-authored RED tests.
+- Stage 2 evidence grants the Stage 3 Writer any authority to edit tests, test
+  helpers, fixtures, RED evidence, or acceptance mappings.
 
 **Verifier focus:**
 
 - Confirm tests would fail against missing behavior.
 - Confirm tests cover important refusal paths and state transitions.
+- Confirm Stage 3 is routed to Claude during bootstrap when Codex authored RED
+  tests.
+- Confirm the Stage 3 Writer's test-edit authority is empty.
 
 **CodeRabbit focus:**
 
 - On tests, request changes if assertions are vague, brittle, or disconnected from acceptance criteria.
-- Request changes if production code changes alter Test Writer-owned assertions without an explicit Test Change Request or equivalent approval.
+- Request changes if Stage 3 includes any test, test helper, fixture, RED
+  evidence, or acceptance-mapping edit by the Writer.
 
 ## Stage 3: Implementation Clean-Code Rubric
 
@@ -325,6 +346,10 @@ Use these verdicts consistently:
 - Code path mapped to acceptance criteria.
 - No unexplained source-of-truth changes.
 - Clean-code self-check against `CLEAN_CODE.md`.
+- Writer identity and model-family evidence showing Stage 3 was not authored by
+  the same model family that authored the Stage 2 RED tests.
+- Evidence that the Stage 3 Writer did not edit tests, test helpers, fixtures,
+  RED evidence, or acceptance mappings.
 
 **Blockers:**
 
@@ -336,6 +361,12 @@ Use these verdicts consistently:
 - Weak refusal or fail-open behavior.
 - Unrelated refactors.
 - Important behavior lacks tests or bootstrap gap evidence.
+- Stage 3 implementation is authored by the same model family that authored the
+  Stage 2 RED tests.
+- Stage 3 includes any Writer-authored test, test helper, fixture, RED evidence,
+  or acceptance-mapping edit.
+- A Stage 3 Writer test-surface edit is repaired in place instead of invalidating
+  the Stage 3 attempt and rerunning Stage 3 from clean RED evidence.
 
 **Verifier focus:**
 
@@ -343,6 +374,11 @@ Use these verdicts consistently:
 - Check source-of-truth boundaries.
 - Check state transitions and refusal paths.
 - Check whether a future agent can safely change the code.
+- Check that bootstrap Stage 3 implementation was authored through the Claude
+  Writer path when Codex authored the RED tests.
+- Check that the Stage 3 Writer made zero test-surface changes.
+- If a Stage 3 Writer changed any test surface, require evidence that the entire
+  Stage 3 attempt was reverted before Stage 3 was rerun.
 
 **CodeRabbit focus:**
 
@@ -358,6 +394,8 @@ Use these verdicts consistently:
 - CodeRabbit state and disposition.
 - Local Qwen adversarial review state.
 - Escalated reviewer evidence when smell triggers require it.
+- Verification escalation target evidence; if Claude authored the code,
+  escalation routes to Codex rather than Claude.
 - Evidence SLO state for tests, CodeRabbit, Local Qwen, escalated review, and
   any derived aggregate review evidence.
 - Supply-chain gate state when the work touches dependency, lockfile,
@@ -383,12 +421,16 @@ Use these verdicts consistently:
   never-auto-landable or high-risk layered risk-classification signal.
 - PM accepts a reviewer disagreement without rationale.
 - Review evidence is stale after source changes.
+- Verification escalation asks Claude to adjudicate or repair Claude-authored
+  implementation without Codex PM disposition.
 
 **Verifier focus:**
 
 - Confirm review evidence applies to current source under its Evidence SLO.
 - Confirm rejected findings have concrete rationale.
 - Confirm tension is logged when models disagree materially.
+- Confirm Claude-authored implementation escalations return to Codex PM and do
+  not use Claude as independent escalation evidence.
 
 **CodeRabbit focus:**
 

@@ -118,6 +118,10 @@ _Avoid_: subprocess prompt, one-shot reviewer, structured-output command
 A compatibility bridge that invokes a model through a CLI or subprocess without making it a true agent.
 _Avoid_: agent, subagent
 
+**Bootstrap Orchestration Boundary**:
+The bootstrap constraint that Codex can coordinate cross-model work only through Process Adapters, repo-native artifacts, and after-the-fact gates; it cannot provide True Agent behavior for other model sessions.
+_Avoid_: true cross-model orchestration, live harness control plane, agent intercom
+
 **Harness**:
 The runtime that manages true agents, communication, permissions, context, and lifecycle events.
 _Avoid_: CLI wrapper, script runner
@@ -398,6 +402,14 @@ _Avoid_: operator liaison, worker heartbeat, portfolio chat
 The rule that each agent acts only within its assigned role authority for the current step. A role may hand off, request, propose, verify, or trigger another role's workflow, but it must not perform another role's governed action itself.
 _Avoid_: convenience escalation, borrowed authority, same-session role blur
 
+**Bootstrap Model-Family Separation**:
+The bootstrap rule that Codex authors Stage 2 RED tests, Claude authors Stage 3 implementation without any test-edit authority, and verification escalation returns to Codex because Claude authored the code.
+_Avoid_: same-family RED/GREEN, Claude self-escalation, Claude test edits, Codex implementation after Codex-authored tests
+
+**Test Ownership Boundary**:
+The permanent rule that a Writer must never create, edit, delete, regenerate, format, or mechanically adjust tests, test helpers, fixtures, RED evidence, or acceptance mappings for the Work Item it implements; any violation invalidates the Stage 3 attempt.
+_Avoid_: writer-editable tests, mechanical test fix, implementation-owned test update
+
 **Work Item**:
 The durable repo-native execution unit Bandit manages through coordination state, lifecycle evidence, review, landing, retrospective, and closeout. Slices and Chores are Work Item types.
 _Avoid_: tracker task, agent session, pull request
@@ -545,6 +557,10 @@ _Avoid_: raw context dump, accidental input, untrusted text as instruction
 **Context Component**:
 The load-bearing agent component that shapes the active working packet, framing, constraints, and source hierarchy an agent uses for a task.
 _Avoid_: long-term memory, raw input set, chat transcript
+
+**Focused Session Context Packet**:
+A CLI-derived task-scoped working packet that gives an agent only the role rules, current Work Item or gap, current stage, exact next action, allowed and forbidden actions, required evidence paths, blocker state, and source hierarchy needed for one activation, with pointers to deeper history instead of replaying it.
+_Avoid_: full roadmap history, whole-project replay, glossary dump, chat transcript substitute
 
 **Memory Component**:
 The load-bearing agent component that preserves relevant prior state, decisions, and evidence across tasks without overriding current repo authority.
@@ -946,6 +962,11 @@ _Avoid_: planner, architect
 - A **Role Authority Boundary** applies to every agent role: coordination roles do not implement or claim, worker roles do not govern intake or landing, reviewer roles do not land, and landing roles do not invent missing product or policy approval.
 - Bandit's default **Authority-Based Agent Roles** are Operator, PM or Coordinator, Worker, Reviewer, and Landing; capability differences belong in **Capability Profiles** or **Stage Capability Scope** unless they require different governed authority.
 - Every claimable Work Item stage should declare a **Stage Capability Scope** so the assigned role has the right skills and tools without expanding the agent-role taxonomy.
+- The **Bootstrap Orchestration Boundary** means bootstrap enforcement is artifact and diff-gate based; live worker interruption, bidirectional A2A clarification, scoped tool permissions, and persistent cross-model context require a **Harness**, not a **Process Adapter**.
+- During bootstrap, **Bootstrap Model-Family Separation** binds Codex to Stage 2 RED test authorship, Claude to Stage 3 implementation through a **Process Adapter**, and Qwen plus CodeRabbit to verification.
+- The **Test Ownership Boundary** is permanent across bootstrap, true agents, future harnesses, and future providers: the Stage 3 Writer's test-edit authority is always empty, and a test problem found during implementation routes to Codex PM for a test-change decision or blocker disposition.
+- If the Stage 3 Writer edits any test surface, the recovery path is to revert the entire Stage 3 attempt and rerun Stage 3 clean from unchanged Stage 2 RED evidence.
+- If verification of Claude-authored code needs escalation, escalation returns to Codex PM rather than Claude because Claude is not independent evidence for its own implementation.
 - A **Work Item Proposal** with `accepted_deferred` remains in the **Work Intake Ledger** until later promotion; it is approved scope but not active queue work.
 - A **Work Intake Triage Skill** ranks entries before presentation; low-effort/high-impact proposals float to the top unless stronger risk, dependency, or operator-boundary evidence says otherwise.
 - A **Work Intake Triage Skill** may challenge an operator override with brief rationale, but must honor an explicit operator choice to address a different intake item.
@@ -987,6 +1008,8 @@ _Avoid_: planner, architect
 - A **Soft Budget Band** helps detect cost and token drift, but it is not a hard landing gate by itself.
 - A **Token-Cost Failsafe** should stop **Abnormal Runs** without making normal deep review brittle or forcing duplicate failed attempts that cost more than the original work.
 - A tripped **Token-Cost Failsafe** requires a **Budget Continuation Decision** before further paid, high-token, or repeated reviewer execution continues.
+- A **Focused Session Context Packet** is the default **Context Component** for one activation; historical roadmap narrative, old closeout evidence, full glossary text, and deep source material are on-demand references unless the packet or current task requires them.
+- Choosing the **Focused Session Context Packet** generation strategy is a **Codex-Owned Technical Decision**; the default is CLI-derived state with optional Markdown rendering, not a hand-maintained packet that can drift from repo authority.
 - **Load-Bearing Skills** shape one or more **Load-Bearing Agent Components**; each required skill needs a **Skill Lifecycle Contract** before it can become stage policy.
 - A **Skill Lifecycle Contract** supplies stable skill identity, version, intended-stage fit, required tools, forbidden actions, benchmark packets, and rollback criteria for **Stage Capability Scope** and **Replay-Only Agent Benchmarks**.
 - **Agent Component Benchmark** evidence can change model-routing, reviewer-routing, skill policy, and cost decisions only through the approved policy path.
@@ -1027,11 +1050,22 @@ _Avoid_: planner, architect
 
 > **Dev:** "Can we call `claude -p` the Writer agent?"
 > **Domain expert:** "No. That is a **Process Adapter** unless the harness gives it bidirectional communication, scoped permissions, controlled context, and lifecycle visibility."
+>
+> **Dev:** "If Codex writes the RED tests during bootstrap, can Codex also write the implementation?"
+> **Domain expert:** "No. **Bootstrap Model-Family Separation** makes Claude the Stage 3 Writer path, the **Test Ownership Boundary** gives Claude zero test-edit authority, and Qwen plus CodeRabbit verify."
+>
+> **Dev:** "What if Claude edits tests during Stage 3?"
+> **Domain expert:** "Revert the Stage 3 attempt and rerun Stage 3 clean; do not repair around a contaminated diff."
 
 ## Flagged Ambiguities
 
 - "subagent" was used to mean both **True Agent** and **Process Adapter**; resolved: Bandit requires bidirectional agent-to-agent communication for true agents.
 - "Claude" was used as both planner and worker; resolved: model workers are not Bandit planning authority by default.
+- "Codex can write tests when needed" conflicted with Stage 2/Stage 3 independence; resolved: during bootstrap Codex writes RED tests, Claude writes implementation, Claude never edits tests, Qwen and CodeRabbit verify, and escalation returns to Codex.
+- "Writer-editable tests" implied a permission that does not exist; resolved: the Stage 3 Writer's test-edit authority is permanently empty, including mechanical fixture, helper, formatting, or RED evidence changes.
+- "test edit recovery" could mean accepting a partial fix; resolved: any Stage 3 Writer test edit invalidates the Stage 3 attempt, so the attempt is reverted and Stage 3 reruns clean.
+- "`CURRENT_CONTEXT.md`" was used as both current-state projection and historical ledger; resolved: an activation should consume a **Focused Session Context Packet** first, and use full roadmap or historical closeout narrative only by pointer when the current task requires it.
+- "focused context packet format" could be treated as operator preference; resolved: packet generation is a **Codex-Owned Technical Decision** and should be CLI-derived with optional Markdown rendering.
 - "Mastra" was used as shorthand for multiple related surfaces; resolved: **Mastra** and **Mastra Code** are distinct harness candidates and must be evaluated separately.
 - "software factory" overlaps Bandit's coordination problem but is not the primary product category; resolved: Bandit is a **Trust Layer** whose **Coordination Primitive** can support software-factory use cases.
 - "measurable improvement engine" overstated Bandit's ability to prove causal workflow improvement at single-operator scale; resolved: use **Workflow Learning Loop** and **Workflow Trial** for evidence-backed, operator-reviewed changes.
