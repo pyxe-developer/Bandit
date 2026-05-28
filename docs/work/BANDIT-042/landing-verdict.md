@@ -1,0 +1,18 @@
+# BANDIT-042 Landing Verdict
+
+contract_version: 1
+work_item: BANDIT-042
+source_head: 4db7958a793293a114f31909ec546e8561b32350
+review_evidence: docs/work/BANDIT-042/review-evidence.md
+tests_status: pass
+clean_code_status: pass
+coderabbit_state: pass
+local_qwen_state: non_blocking
+escalated_review_state: not_applicable
+uat_status: not_applicable
+source_drift_status: current
+operator_input_status: none_required
+landing_agent_state: blocker
+landing_agent_replacement_evidence: not_applicable
+final_verdict: needs-repair
+rationale: BANDIT-042 is not safe to land yet even though Stage 4 review and current verification pass. The Landing Agent policy requires auto-land eligibility for the supported local-record landing path, and the current repo policy has no release-authorized layered risk-classification decision or supply-chain gate decision for BANDIT-042; npm run bandit -- supply-chain-gate validate --json reports no decisions and npm run bandit -- risk-classification validate --json reports only BANDIT-041. Current verification passes: node --test test/supply-chain-gate.test.mjs test/landing-gates.test.mjs with 79 tests, npm test with 318 tests, npm run typecheck, npm run bandit -- supply-chain-gate validate --json, npm run bandit -- risk-classification validate --json, npm run bandit -- input-quarantine validate --json, npm run bandit -- validate, npm run bandit -- gaps list, node ./bin/bandit.mjs cockpit status --json, node ./bin/bandit.mjs review-subject-hash BANDIT-042 with current review subject hash b4c185379c68743d76ec8c66b077584609286fa1f8a77826e2a8d0456dcd1da5, and git diff --check. Stage 4 evidence records pre-PR CodeRabbit pass evidence, Local Qwen non_blocking evidence with PM disposition, no required escalated review, clean-code pass, no required operator input, and UAT not_applicable because this is a non-product bootstrap-gap chore. The next repair is Codex-owned: register explicit BANDIT-042 layered risk-classification evidence and supply-chain gate evidence, refresh affected Stage 4 or Stage 5 evidence if the review subject changes, then rerun local-record landing. No operator approval, product direction, policy override, business tradeoff, cost or risk override, product UAT, external service setup, live routing, dependency installation, CI or release execution, merge, push, deploy, scheduler, claim or worktree authority, or unrelated Phase 8 cockpit work is required.

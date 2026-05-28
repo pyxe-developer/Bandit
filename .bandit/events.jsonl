@@ -67,3 +67,4 @@
 {"type":"work_item_created","work_item":"BANDIT-042","message":"Created work item BANDIT-042 from docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json"}
 {"type":"artifact_created","work_item":"BANDIT-042","message":"Created red_evidence artifact at docs/work/BANDIT-042/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-042","message":"Created implementation_evidence artifact at docs/work/BANDIT-042/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-042","message":"Created landing_verdict artifact at docs/work/BANDIT-042/landing-verdict.md"}
