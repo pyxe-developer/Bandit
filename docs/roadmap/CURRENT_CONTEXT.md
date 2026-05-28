@@ -393,21 +393,27 @@ landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
 disposition are recorded in `docs/work/BANDIT-044/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Local Qwen for `BANDIT-045` - CAS Fenced
-Claim Authority. Its structured creation spec is recorded in
-`docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence is recorded
-in `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-045/implementation-evidence.md`, Stage 4 pre-PR
+**Current next action:** Disposition Local Qwen `non_blocking` findings for
+`BANDIT-045` - CAS Fenced Claim Authority. Its structured creation spec is
+recorded in `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage
+1 brief is recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence
+is recorded in `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation
+evidence is recorded in `docs/work/BANDIT-045/implementation-evidence.md`,
+Stage 4 pre-PR
 CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-045/coderabbit-review.md` at source head
-`c276979c5032e73e131fbaff78b1f9aa92d537b3`, `.bandit/events.jsonl` records
-the work-item and artifact creation events, and
+`c276979c5032e73e131fbaff78b1f9aa92d537b3`, Stage 4 Local Qwen evidence is
+recorded in `docs/work/BANDIT-045/local-qwen-review.md` at source head
+`146f36d970f5a7e40a7b06f1d4aae365d985207b` with reviewer verdict
+`non_blocking`, findings status `open`, and no operator-owned input required.
+`.bandit/events.jsonl` records the work-item and artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` active with linked work item
-`BANDIT-045`. The next step is Stage 4 review only: run Local Qwen, then
-aggregate review evidence, required risk/supply-chain evidence, and Codex PM
-disposition at review subject hash
+`BANDIT-045`. The next step is Stage 4 disposition only: record Codex PM
+disposition for the Local Qwen validation-helper duplication and
+scenario-routing findings, choosing repair or durable follow-up/no-action
+before aggregate review evidence, required risk/supply-chain evidence, and
+Codex PM Stage 4 acceptance at review subject hash
 `b72f2c8ef205d82d94226df8a124583239a9414e40a003917ee7c46edd5d4ab4`. Do not
 start Git
 Mutation Serializer, Worktree Bootstrap Contract, scheduler, worktree
@@ -422,9 +428,11 @@ Stage 1 brief are recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json` and
 `docs/work/BANDIT-045/brief.md`. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-045/implementation-evidence.md`, and Stage 4
+recorded in `docs/work/BANDIT-045/implementation-evidence.md`, Stage 4
 pre-PR CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-045/coderabbit-review.md`. The brief
+`docs/work/BANDIT-045/coderabbit-review.md`, and Stage 4 Local Qwen
+`non_blocking` evidence is recorded in
+`docs/work/BANDIT-045/local-qwen-review.md`. The brief
 records CLEAN_CODE.md read evidence from 2026-05-28, source artifacts, accepted
 Git refs backend scope, Stage capability scope, operator input boundary,
 acceptance criteria, verification plan, expected files, and the out-of-scope
@@ -594,7 +602,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 4 pre-PR CodeRabbit pass recorded; next action is Local Qwen review).
+**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 4 pre-PR CodeRabbit pass and Local Qwen `non_blocking` evidence recorded; next action is Codex PM disposition).
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -606,10 +614,13 @@ evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
 `test/work-surface-graph.test.mjs`. Stage 3 implementation evidence is
 recorded in `docs/work/BANDIT-045/implementation-evidence.md`. Stage 4 pre-PR
 CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-045/coderabbit-review.md`. The next required evidence is
-Local Qwen review evidence; aggregate review, landing, and retrospective
-evidence must not be created before the required Stage 4 gate evidence is
-recorded.
+`docs/work/BANDIT-045/coderabbit-review.md`, and Stage 4 Local Qwen
+`non_blocking` evidence is recorded in
+`docs/work/BANDIT-045/local-qwen-review.md`. The next required evidence is
+Codex PM disposition of the open Local Qwen findings; aggregate review,
+landing, and retrospective evidence must not be created before the
+non-blocking findings are repaired, routed to durable follow-up, or explicitly
+dispositioned as no-action.
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -755,10 +766,10 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary.
 
-**Expected next deliverable:** Local Qwen Stage 4 review evidence for
-`BANDIT-045`, followed by aggregate review evidence, required
-risk/supply-chain evidence, and Codex PM disposition at the current review
-subject hash.
+**Expected next deliverable:** Codex PM disposition for the Local Qwen
+`non_blocking` findings in `BANDIT-045`, followed by aggregate review evidence,
+required risk/supply-chain evidence, and Codex PM Stage 4 acceptance at the
+current review subject hash.
 
 ## Known Bootstrap Gaps
 
@@ -1116,9 +1127,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Local Qwen for `BANDIT-045` - CAS Fenced Claim Authority, then record
-   aggregate review evidence, required risk/supply-chain evidence, and Codex PM
-   disposition at the current review subject hash.
+1. Record Codex PM disposition for the Local Qwen `non_blocking` findings in
+   `BANDIT-045` - CAS Fenced Claim Authority, then record aggregate review
+   evidence, required risk/supply-chain evidence, and Codex PM Stage 4
+   acceptance at the current review subject hash.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1152,11 +1164,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next `BANDIT-045` Local Qwen Stage
-4 review step. Repo artifacts identify the active gap, source artifacts,
+No operator-owned input is required for the next `BANDIT-045` Local Qwen
+finding-disposition step. Repo artifacts identify the active gap, source
+artifacts,
 accepted Git refs backend decision, Stage 1 brief, Stage 2 RED evidence, Stage
-3 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, and
-remaining Stage 4 review requirements.
+3 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
+Local Qwen `non_blocking` evidence, and remaining Stage 4 disposition/review
+requirements.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
