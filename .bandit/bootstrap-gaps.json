@@ -404,8 +404,8 @@
     {
       "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",
       "title": "Parallel writable workstreams lack Git refs CAS claim authority, fencing tokens, idempotency keys, and deadlock detection",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -414,9 +414,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-045",
-      "rationale": "The PRD-002 research review found that file-backed atomic claim operations are not a real compare-and-swap primitive, leases without fencing tokens cannot reject stale agents after pauses, and pairwise work-surface overlap checks do not catch wait-for deadlocks. The operator confirmed that true parallel writable workstreams must remain blocked until claim authority has real CAS semantics, fencing tokens, stale-agent rejection, idempotency keys for state-changing claim operations and external side effects, and Work-Surface Wait-For Graph cycle detection. On 2026-05-27, the operator accepted the first concrete backend: a repo-native Git refs claim authority using refs/bandit/* and git update-ref --stdin transactions, while .bandit claim files remain human-readable projections. The operator also confirmed that claim, release, and reconcile correctness must be proven through explicit Claim Safety Invariants and deterministic fault-injecting or property-style simulation, not only hand-picked duplicate-claim examples.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-045."
+      "rationale": "BANDIT-045 created the first repo-native Claim Authority Primitive contract using refs/bandit/* and git update-ref --stdin compare-and-swap transaction semantics, kept .bandit claim files and cockpit/read-model surfaces as projections, added claim-authority policy and template validation, command wiring, deterministic Claim Safety Invariant simulation, fencing-token and idempotency-key requirements, Work-Surface Wait-For Graph cycle refusal, focused tests, Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout. True parallel writable workstreams remain blocked until later Git Mutation Serializer and Worktree Bootstrap Contract gates pass.",
+      "verification_target": "docs/work/BANDIT-045/retrospective.md",
+      "next_action": "Use bandit claim validate and bandit claim simulate evidence paths to enforce Git refs CAS claim-authority contracts; create the next queued bootstrap-gap chore for BANDIT-GAP-GIT-MUTATION-SERIALIZER before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-GIT-MUTATION-SERIALIZER",
@@ -433,7 +433,7 @@
       "linked_work_item": null,
       "rationale": "The PRD-002 research review found that git worktree concurrency on a single .git directory has contention surfaces around worktree creation, worktree lifecycle operations, shared refs, and packed-refs-affecting maintenance. The operator confirmed that Bandit needs a repo-level Git Mutation Serializer for shared .git mutations before parallel worktrees are release-authorized, and delegated Git mechanics to Codex PM when repo evidence is sufficient. Codex PM accepted the technical rule that every claim-owned worktree is git worktree locked immediately after creation with a stable claim-specific reason naming claim ID, Work Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after handoff verification. Git refs CAS remains the claim authority boundary, but it does not make all shared Git plumbing safe under parallel execution.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY is resolved, create a bootstrap-gap chore to define the Git Mutation Serializer, shared .git mutation allow-list, CLI-owned single-writer guard, claim-owned worktree locking with stable claim-specific reason, Repo PM Coordinator-only unlock, contention tests, stale-lock or timeout behavior, non-serialized mutation refusals, and trace/evidence output for worktree and repository plumbing mutations."
+      "next_action": "Create a bootstrap-gap chore to define the Git Mutation Serializer, shared .git mutation allow-list, CLI-owned single-writer guard, claim-owned worktree locking with stable claim-specific reason, Repo PM Coordinator-only unlock, contention tests, stale-lock or timeout behavior, non-serialized mutation refusals, and trace/evidence output for worktree and repository plumbing mutations."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",

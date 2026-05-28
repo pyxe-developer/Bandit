@@ -382,44 +382,27 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-044` - Operator Fail-Closed Boundary is
+**Last completed milestone:** `BANDIT-045` - CAS Fenced Claim Authority is
 landed and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its structured creation spec, Stage
-1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
-CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
-review evidence, Stage 5 landing verdict evidence, explicit
-risk-classification and supply-chain landing repair evidence, local-record
-landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
-disposition are recorded in `docs/work/BANDIT-044/`, `.bandit/policy/`, and
-`.bandit/bootstrap-gaps.json`.
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+CodeRabbit pass evidence, Stage 4 Local Qwen `non_blocking` evidence, Codex PM
+finding disposition, aggregate Stage 4 review evidence, Stage 5 landing verdict
+evidence, explicit risk-classification and supply-chain evidence,
+local-record landing action evidence, Stage 6 retrospective closeout, and
+bootstrap-gap disposition are recorded in `docs/work/BANDIT-045/`,
+`.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-045` - CAS Fenced Claim Authority. Its
-structured creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3
-implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
-Local Qwen `non_blocking` evidence, Codex PM finding disposition, explicit
-layered risk-classification evidence, explicit supply-chain gate evidence,
-aggregate Stage 4 review evidence, Stage 5 landing verdict evidence, and
-local-record landing action evidence are recorded in
-`docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
-`docs/specs/BANDIT-045-landing-verdict.json`, `docs/work/BANDIT-045/`, and
-`.bandit/policy/`. Stage 5 landing verdict evidence is recorded in
-`docs/work/BANDIT-045/landing-verdict.md` with final verdict `safe-to-land`;
-local-record landing action evidence is recorded in
-`docs/work/BANDIT-045/landing-action.md`; source drift is current; CodeRabbit
-is `pass`; Local Qwen is `non_blocking` with PM disposition and durable
-follow-up routing; clean-code status is `pass`; UAT is `not_applicable`; and
-no operator-owned input is required. The next step is Stage 6 closeout only:
-record the `BANDIT-045` retrospective and bootstrap-gap disposition, then
-update roadmap context. Do not start Git Mutation Serializer, Worktree
-Bootstrap Contract, scheduler, worktree lifecycle, cockpit UI/server/API work,
-automatic merge/push/deploy, product UAT approval, actor identity policy,
-PR/CI workflow, or any later bootstrap gap before retrospective closeout and
-gap disposition are recorded and verified.
+**Current next action:** Create the next bootstrap-gap chore for
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER` - shared Git mutation serialization. This
+must be exactly one Stage 1 work-item creation/brief step using the queued gap
+in `.bandit/bootstrap-gaps.json`; do not create RED evidence, implementation
+evidence, implementation branch/worktree, or later gap work before that brief
+exists and context is updated.
 
-`BANDIT-045` - CAS Fenced Claim Authority is active as the bootstrap-gap chore
-for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured creation spec and
-Stage 1 brief are recorded in
+`BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
+creation spec and Stage 1 brief are recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json` and
 `docs/work/BANDIT-045/brief.md`. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation evidence is
@@ -433,12 +416,16 @@ Local Qwen findings is recorded in
 risk-classification and supply-chain gate evidence is recorded in
 `.bandit/policy/`, and aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-045/review-evidence.md` with current review subject hash
-`8909bcf05f22489693876232412561b360af9b6aeb8c516b1b4d2833d9ca0051`. The brief
-records CLEAN_CODE.md read evidence from 2026-05-28, source artifacts, accepted
-Git refs backend scope, Stage capability scope, operator input boundary,
-acceptance criteria, verification plan, expected files, and the out-of-scope
-boundary keeping true parallel writable workstreams blocked until later gates
-pass.
+`8909bcf05f22489693876232412561b360af9b6aeb8c516b1b4d2833d9ca0051`. Stage 5
+landing verdict evidence is recorded in
+`docs/work/BANDIT-045/landing-verdict.md` with final verdict `safe-to-land`;
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-045/landing-action.md`; Stage 6 retrospective closeout and
+bootstrap-gap disposition are recorded in
+`docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
+True parallel writable workstreams remain blocked until the next queued Git
+Mutation Serializer gap and later Worktree Bootstrap Contract gap are resolved
+or explicitly dispositioned.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -603,7 +590,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 5 landing action recorded; next action is Stage 6 retrospective closeout and gap disposition).
+**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (landed and closed out; next action is to create the `BANDIT-GAP-GIT-MUTATION-SERIALIZER` bootstrap-gap chore).
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -627,9 +614,12 @@ risk-classification and supply-chain gate evidence is recorded in
 5 landing verdict evidence is recorded in
 `docs/work/BANDIT-045/landing-verdict.md` with final verdict `safe-to-land`.
 Local-record landing action evidence is recorded in
-`docs/work/BANDIT-045/landing-action.md`. The next required evidence is Stage 6
-retrospective closeout and bootstrap-gap disposition; later bootstrap-gap work
-must not begin before that closeout is recorded and verified.
+`docs/work/BANDIT-045/landing-action.md`. Stage 6 retrospective closeout and
+bootstrap-gap disposition are recorded in
+`docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
+The next required evidence is a Stage 1 work-item creation/brief for
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER`; later bootstrap-gap work must not begin
+before that brief is recorded and context is updated.
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -721,10 +711,10 @@ resolved.
 `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
-`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is active in `BANDIT-045`.
-`BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind the CAS/fenced-claim
-authority gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind the
-Git mutation serializer gap.
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER` is the next queued bootstrap gap.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind the Git mutation
+serializer gap.
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree bootstrap
 contract gap.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
@@ -773,13 +763,13 @@ Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 Lifecycle Contract; `BANDIT-039` - Agent Evaluation Harness; `BANDIT-040` -
 Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
-Authority; `BANDIT-044` - Operator Fail-Closed Boundary.
+Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
+Fenced Claim Authority.
 
-**Expected next deliverable:** Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-045`, using the recorded `safe-to-land`
-verdict, local-record landing action evidence, aggregate Stage 4 review
-evidence, explicit risk/supply-chain evidence, clean-code status, UAT
-`not_applicable` status, and Landing Agent state.
+**Expected next deliverable:** Stage 1 work-item creation and brief for
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER`, using the queued bootstrap-gap ledger
+entry, PRD-002 source artifacts, the accepted Git Mutation Serializer decision,
+the now-resolved CAS/fenced claim authority closeout, and `CLEAN_CODE.md`.
 
 ## Known Bootstrap Gaps
 
@@ -905,7 +895,7 @@ These are expected because Bandit does not exist yet:
   6 evidence is recorded in `docs/work/BANDIT-044/`, explicit layered
   risk-classification and supply-chain gate evidence is registered in
   `.bandit/policy/`, and `.bandit/bootstrap-gaps.json` marks the gap resolved.
-- `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is active in `BANDIT-045` from the
+- `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045` from the
   2026-05-26 strategic review: PRD-002 now blocks true parallel writable
   workstreams until Bandit has CAS-backed claim authority, fencing-token
   enforcement, stale-agent rejection, idempotency keys for claim operations and
@@ -921,11 +911,12 @@ These are expected because Bandit does not exist yet:
   `docs/work/BANDIT-045/implementation-evidence.md`,
   `docs/work/BANDIT-045/coderabbit-review.md`,
   `docs/work/BANDIT-045/local-qwen-review.md`,
-  `docs/work/BANDIT-045/qwen-finding-disposition.md`, and
+  `docs/work/BANDIT-045/qwen-finding-disposition.md`,
   `docs/work/BANDIT-045/review-evidence.md`,
-  `docs/work/BANDIT-045/landing-verdict.md`, and
-  `docs/work/BANDIT-045/landing-action.md`; the next action is Stage 6
-  retrospective closeout and bootstrap-gap disposition.
+  `docs/work/BANDIT-045/landing-verdict.md`,
+  `docs/work/BANDIT-045/landing-action.md`, and
+  `docs/work/BANDIT-045/retrospective.md`; `.bandit/bootstrap-gaps.json`
+  marks the gap resolved.
 - `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 operator decision: Git refs CAS
   provides claim authority, but shared `.git` worktree and repository plumbing
@@ -934,8 +925,7 @@ These are expected because Bandit does not exist yet:
   evidence is sufficient; claim-owned worktrees are now required to be
   `git worktree lock`ed immediately with a stable reason naming claim ID, Work
   Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after
-  handoff verification. It is queued behind
-  `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`.
+  handoff verification. It is now the next queued bootstrap gap.
 - `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
   Codex PM owns routine technical questions, and every Bandit-created worktree
@@ -1142,12 +1132,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-045` - CAS Fenced Claim Authority using the recorded
-   `safe-to-land` verdict, local-record landing action evidence, aggregate
-   Stage 4 review evidence, explicit risk/supply-chain evidence, clean-code
-   status, UAT `not_applicable` status, source-drift status, and Landing Agent
-   state.
+1. Create exactly one Stage 1 work item and brief for
+   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` using the queued bootstrap-gap ledger
+   entry, PRD-002 source artifacts, the accepted Git Mutation Serializer
+   decision, the now-resolved `BANDIT-045` closeout, and `CLEAN_CODE.md`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1162,9 +1150,8 @@ The current priority is:
    `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
    `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
-   `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is active in `BANDIT-045`.
-   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind CAS/fenced claim
-   authority.
+   `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
+   `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is the next queued bootstrap gap.
    `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind Git mutation
    serialization.
    `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
@@ -1181,13 +1168,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next `BANDIT-045` Stage 5
-landing-action step. Repo artifacts identify the active gap, source artifacts,
-accepted Git refs backend decision, Stage 1 brief, Stage 2 RED evidence, Stage
-3 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
-Local Qwen `non_blocking` evidence, Codex PM disposition, explicit
-risk/supply-chain evidence, aggregate Stage 4 review evidence, Stage 5 landing
-verdict evidence, and passing `land-check`/`auto-land-check` readiness.
+No operator-owned input is required for the next
+`BANDIT-GAP-GIT-MUTATION-SERIALIZER` Stage 1 work-item creation step. Repo
+artifacts identify the queued gap, source artifacts, accepted Git Mutation
+Serializer decision, resolved CAS/fenced claim authority closeout, and the
+operator-delegated boundary that Codex PM owns routine Git mechanics when repo
+evidence and policy are sufficient.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
