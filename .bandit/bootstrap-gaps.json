@@ -349,8 +349,8 @@
     {
       "id": "BANDIT-GAP-SUPPLY-CHAIN-GATE",
       "title": "No supply-chain gate exists for dependency, workflow, agent-skill, or external tool surfaces",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -360,9 +360,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-042",
-      "rationale": "The research review identified supply-chain risk as unaddressed, and the operator confirmed that Bandit needs a dedicated gate before supply-chain-sensitive changes can enter auto-landing scope. Current policy can flag the smell, but no CLI-owned gate records dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, or external tool-install evidence. It depends on the input quarantine boundary so fetched prompts, dependency documentation, and third-party content cannot become release-authorized instructions by default, and on layered risk classification so supply-chain state is one independent auto-landing blocker rather than a smell-list-only keyword match.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-042."
+      "rationale": "BANDIT-042 adds a repo-native Supply-Chain Gate policy, supply-chain evidence template, focused validation, bandit supply-chain-gate validate [--json], bandit validate integration, auto-land-check consumption, explicit release-authorized supply-chain evidence for BANDIT-042, focused tests, Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition. Supply-chain-sensitive dependency manifests, lockfiles, package-manager scripts, CI/release workflows, agent skills, fetched prompts, external tool-install paths, executable generated content, and unknown supply-chain surfaces now require explicit gate evidence before release-authorized auto-landing.",
+      "verification_target": "docs/work/BANDIT-042/retrospective.md",
+      "next_action": "Use Supply-Chain Gate contracts before treating dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, external tool-install, executable generated content, or unknown supply-chain surfaces as release-authorized. Create the next bootstrap-gap chore for BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY",
