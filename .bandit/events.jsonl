@@ -62,3 +62,4 @@
 {"type":"work_item_created","work_item":"BANDIT-041","message":"Created work item BANDIT-041 from docs/specs/BANDIT-GAP-LAYERED-RISK-CLASSIFICATION.json"}
 {"type":"artifact_created","work_item":"BANDIT-041","message":"Created red_evidence artifact at docs/work/BANDIT-041/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-041","message":"Created implementation_evidence artifact at docs/work/BANDIT-041/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-041","message":"Created landing_verdict artifact at docs/work/BANDIT-041/landing-verdict.md"}
