@@ -16,10 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record local landing action evidence for `BANDIT-040` -
-Input Quarantine Gate. Do not start retrospective closeout, the next
-bootstrap-gap chore, or unrelated Phase 8 work before landing action evidence
-is recorded.
+**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-040` - Input Quarantine Gate. Do not start the next
+bootstrap-gap chore or unrelated Phase 8 work before retrospective closeout,
+gap-ledger disposition, and roadmap context closeout are recorded.
 `BANDIT-040` is active as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, its Stage 1 brief is
@@ -36,7 +36,10 @@ subject hash
 `d16c4c9edb34f2f9778600548037b9e8923d83e19002699ae4722d9d0a541482`, and
 Stage 5 landing verdict evidence is recorded in
 `docs/work/BANDIT-040/landing-verdict.md` with final verdict `safe-to-land`.
-`.bandit/bootstrap-gaps.json` links the active gap to `BANDIT-040`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-040/landing-action.md`. `.bandit/bootstrap-gaps.json` still
+links the active gap to `BANDIT-040` until Stage 6 retrospective closeout and
+gap-ledger disposition are recorded.
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
@@ -427,9 +430,10 @@ local-record landing action evidence, Stage 6 retrospective closeout, and
 bootstrap-gap disposition are recorded. `BANDIT-040` is active as the
 bootstrap-gap chore for `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured
 creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation
-evidence, Stage 4 review evidence, and Stage 5 landing verdict evidence are
-recorded, and the next required action is local-record landing action evidence
-for `BANDIT-040`.
+evidence, Stage 4 review evidence, Stage 5 landing verdict evidence, and
+local-record landing action evidence are recorded, and the next required action
+is Stage 6 retrospective closeout and bootstrap-gap disposition for
+`BANDIT-040`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -1051,11 +1055,11 @@ Current rule:
 
 Current priority:
 
-1. Record local landing action evidence for `BANDIT-040` - Input Quarantine
-   Gate now that Stage 5 landing verdict evidence exists and
-   `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-INPUT-QUARANTINE-GATE` to
-   active chore `BANDIT-040`. Do not start retrospective closeout, the next
-   bootstrap-gap chore, or unrelated Phase 8 work first.
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-040` - Input Quarantine Gate now that local-record landing action
+   evidence exists and `.bandit/bootstrap-gaps.json` links
+   `BANDIT-GAP-INPUT-QUARANTINE-GATE` to active chore `BANDIT-040`. Do not
+   start the next bootstrap-gap chore or unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
