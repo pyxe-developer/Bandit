@@ -8,6 +8,7 @@ import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEventLog } from "../state/events.js";
 import { validateHeartbeatPolicy } from "../state/heartbeat-policy.js";
+import { validateInputQuarantineGate } from "../state/input-quarantine.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
 import { validateLandingAgentContract } from "../state/landing-agent-contract.js";
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
@@ -32,6 +33,7 @@ export async function validateBandit(repoRoot: string) {
 
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
+  await validateInputQuarantineGate(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);

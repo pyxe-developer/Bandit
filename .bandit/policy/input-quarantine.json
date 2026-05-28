@@ -1,0 +1,33 @@
+{
+  "contract_version": 1,
+  "policy_id": "input-quarantine",
+  "source_classes": [
+    "trusted_local_repo",
+    "external_contributor_text",
+    "issue_or_pr_metadata",
+    "review_comment",
+    "dependency_documentation",
+    "fetched_third_party_content",
+    "generated_instruction",
+    "fetched_prompt"
+  ],
+  "trusted_local_repo_mode": {
+    "mode": "scoped_until_external_input_enters_release_authorized_path",
+    "applies_to_source_classes": [
+      "trusted_local_repo"
+    ],
+    "terminates_when_source_classes_enter_context": [
+      "external_contributor_text",
+      "issue_or_pr_metadata",
+      "review_comment",
+      "dependency_documentation",
+      "fetched_third_party_content",
+      "generated_instruction",
+      "fetched_prompt"
+    ]
+  },
+  "release_authorized_paths": [
+  ],
+  "trusted_source_gates": [
+  ]
+}

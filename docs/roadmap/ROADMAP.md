@@ -16,15 +16,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Implement Stage 3 for `BANDIT-040` - Input Quarantine
-Gate. Do not start unrelated Phase 8 work first.
+**Current next step:** Run Stage 4 review gates for `BANDIT-040` - Input
+Quarantine Gate. Do not start unrelated Phase 8 work first.
 `BANDIT-040` is active as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-040/brief.md`, its Stage 2 RED evidence spec is
 recorded in `docs/specs/BANDIT-040-red-evidence.json`, its Stage 2 RED
-evidence is recorded in `docs/work/BANDIT-040/red-evidence.md`, and
-`.bandit/bootstrap-gaps.json` links the active gap to `BANDIT-040`.
+evidence is recorded in `docs/work/BANDIT-040/red-evidence.md`, Stage 3
+implementation evidence is recorded in
+`docs/work/BANDIT-040/implementation-evidence.md`, and `.bandit/bootstrap-gaps.json`
+links the active gap to `BANDIT-040`.
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
@@ -722,8 +724,8 @@ implementation evidence, Stage 4 review evidence, Stage 5 landing verdict
 evidence, local-record landing action evidence, Stage 6 retrospective
 closeout, and bootstrap-gap disposition are recorded. `BANDIT-040` is active as
 the bootstrap-gap chore for `BANDIT-GAP-INPUT-QUARANTINE-GATE`; Stage 2 RED
-evidence is recorded, and the next target is Stage 3 implementation for
-`BANDIT-040`.
+evidence and Stage 3 implementation evidence are recorded, and the next target
+is Stage 4 review for `BANDIT-040`.
 
 ## Phase Map
 
@@ -1038,10 +1040,10 @@ Current rule:
 
 Current priority:
 
-1. Implement Stage 3 for `BANDIT-040` - Input Quarantine Gate now that the
-   Stage 2 RED evidence exists and `.bandit/bootstrap-gaps.json` links
-   `BANDIT-GAP-INPUT-QUARANTINE-GATE` to active chore `BANDIT-040`. Do not
-   start unrelated Phase 8 work first.
+1. Run Stage 4 review gates for `BANDIT-040` - Input Quarantine Gate now that
+   Stage 3 implementation evidence exists and `.bandit/bootstrap-gaps.json`
+   links `BANDIT-GAP-INPUT-QUARANTINE-GATE` to active chore `BANDIT-040`. Do
+   not start unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

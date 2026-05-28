@@ -5,6 +5,7 @@ import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
 import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
+import { writeDefaultInputQuarantinePolicy } from "../state/input-quarantine.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
 import { writeDefaultSkillLifecyclePolicy } from "../state/skill-lifecycle-contracts.js";
@@ -19,6 +20,9 @@ export async function initBandit(repoRoot: string) {
   );
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
   const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
+  const inputQuarantinePolicyExists = await pathExists(
+    paths.inputQuarantinePolicy
+  );
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
   const skillLifecyclePolicyExists = await pathExists(
     paths.skillLifecyclePolicy
@@ -43,6 +47,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!heartbeatPolicyExists) {
     await writeDefaultHeartbeatPolicy(paths.heartbeatPolicy);
+  }
+
+  if (!inputQuarantinePolicyExists) {
+    await writeDefaultInputQuarantinePolicy(paths.inputQuarantinePolicy);
   }
 
   if (!landingAgentContractExists) {
