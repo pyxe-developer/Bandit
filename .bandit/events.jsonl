@@ -89,3 +89,4 @@
 {"type":"artifact_created","work_item":"BANDIT-046","message":"Created implementation_evidence artifact at docs/work/BANDIT-046/implementation-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-046","message":"Created landing_verdict artifact at docs/work/BANDIT-046/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-046","message":"Created retrospective artifact at docs/work/BANDIT-046/retrospective.md"}
+{"type":"work_item_created","work_item":"BANDIT-047","message":"Created work item BANDIT-047 from docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json"}

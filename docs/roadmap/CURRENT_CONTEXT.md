@@ -393,13 +393,24 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create exactly one bootstrap-gap work item for
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`. Do not start the Worktree
-Bootstrap Contract gap, scheduler execution, full worktree lifecycle enablement,
-cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy
-behavior, product UAT scope, or unrelated Phase 8 work before the Bootstrap
-Model-Family Separation and Test Ownership Boundary gap is created, executed,
-landed, closed out, and dispositioned.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-047` -
+Bootstrap Model-Family Separation. Do not start the Focused Session Context
+gap, Worktree Bootstrap Contract gap, scheduler execution, full worktree
+lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+the Bootstrap Model-Family Separation and Test Ownership Boundary gap is
+executed, landed, closed out, and dispositioned.
+
+`BANDIT-047` - Bootstrap Model-Family Separation is active as the
+bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
+Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, its Stage 1
+brief is recorded in `docs/work/BANDIT-047/brief.md`, `.bandit/events.jsonl`
+records the work-item-created event, and `.bandit/bootstrap-gaps.json` links
+the gap to `BANDIT-047` with status `active`. The next required action is
+Stage 2 RED evidence for model-family separation, permanent Test Ownership
+Boundary enforcement, Stage 3 attempt invalidation after Writer test-surface
+edits, Claude Writer bootstrap routing, and Codex PM escalation routing.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -627,7 +638,20 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-046` - Git Mutation Serializer (closed out; next action is to create the Bootstrap Model-Family Separation and Test Ownership Boundary bootstrap-gap work item).
+**Active work item:** `BANDIT-047` - Bootstrap Model-Family Separation.
+
+`BANDIT-047` has structured creation spec evidence in
+`docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1 brief
+evidence in `docs/work/BANDIT-047/brief.md`, lifecycle event evidence in
+`.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. The brief requires Bootstrap Model-Family
+Separation after Codex-authored or Codex-materially-edited RED evidence,
+permanent Stage 3 Writer zero authority over tests, test helpers, fixtures, RED
+evidence, and acceptance mappings, full invalidation and revert of any
+contaminated Stage 3 attempt, Claude as the bootstrap Stage 3 Process Adapter
+path, Codex PM escalation disposition for Claude-authored code, and no live
+True Agent orchestration claim. The next required action is to write Stage 2
+RED evidence for `BANDIT-047`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -657,9 +681,8 @@ is recorded in `docs/work/BANDIT-046/landing-verdict.md`, local-record landing
 action evidence is recorded in `docs/work/BANDIT-046/landing-action.md`, Stage
 6 retrospective closeout is recorded in
 `docs/work/BANDIT-046/retrospective.md`, and `.bandit/bootstrap-gaps.json`
-marks `BANDIT-GAP-GIT-MUTATION-SERIALIZER` resolved. The next required action
-is to create exactly one bootstrap-gap work item for
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
+marks `BANDIT-GAP-GIT-MUTATION-SERIALIZER` resolved. The follow-up
+Bootstrap Model-Family Separation gap is now active as `BANDIT-047`.
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -687,10 +710,10 @@ Local-record landing action evidence is recorded in
 bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`;
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is now the next queued bootstrap
-gap for model-family separation and test ownership enforcement. This is
-bootstrap artifact/diff-gate enforcement around Process Adapter runs, not a
-claim that Codex can provide live cross-model orchestration.
+`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is active as `BANDIT-047` for
+model-family separation and test ownership enforcement. This is bootstrap
+artifact/diff-gate enforcement around Process Adapter runs, not a claim that
+Codex can provide live cross-model orchestration.
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -784,9 +807,9 @@ resolved.
 `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is now the next queued gap.
-`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is queued behind bootstrap model-family
-separation. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
+`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is active as `BANDIT-047`.
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is queued behind active `BANDIT-047`.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
 session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the
 worktree bootstrap contract gap.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
@@ -838,8 +861,7 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
 Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer.
 
-**Expected next deliverable:** Work-item creation for
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-047`.
 
 ## Known Bootstrap Gaps
 
@@ -1012,7 +1034,7 @@ These are expected because Bandit does not exist yet:
   full roadmap history and glossary text read on demand by pointer. Codex PM
   owns the packet-generation technical decision; the default is CLI-derived
   state with optional Markdown rendering, not a hand-maintained packet. It is
-  queued behind `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
+  queued behind active `BANDIT-047`.
 - `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
   Codex PM owns routine technical questions, and every Bandit-created worktree
@@ -1219,8 +1241,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap work item for
-   `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
+1. Write Stage 2 RED evidence for `BANDIT-047` -
+   Bootstrap Model-Family Separation.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1237,11 +1259,11 @@ The current priority is:
    `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is resolved by `BANDIT-044`.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
-   `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is now the next queued gap for
+   `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is active as `BANDIT-047` for
    model-family separation and test ownership enforcement, bounded to
    artifact/diff-gate enforcement around Process Adapter runs.
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is queued behind bootstrap model-family
-   separation. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
+   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is queued behind active `BANDIT-047`.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
    session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
    the worktree bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
@@ -1256,16 +1278,15 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next Bootstrap Model-Family
-Separation bootstrap-gap work-item creation step. Repo artifacts identify the
-queued gap, source artifacts, accepted Git Mutation Serializer closeout, resolved
-CAS/fenced claim authority closeout, the operator-resolved bootstrap
-RED/GREEN/verification model-family rule, the absolute Stage 3 Writer test-edit
-ban, the Bootstrap Orchestration Boundary that Codex cannot provide live
-cross-model orchestration without a harness, the CLI-derived Focused Session
-Context Packet direction as a Codex-owned technical decision, and the Codex PM
-boundary that routine technical routing is manager-owned when repo evidence and
-policy are sufficient.
+No operator-owned input is required for the next `BANDIT-047` Stage 2 RED
+evidence step. Repo artifacts identify the active gap, source artifacts,
+accepted Git Mutation Serializer closeout, resolved CAS/fenced claim authority
+closeout, the operator-resolved bootstrap RED/GREEN/verification model-family
+rule, the absolute Stage 3 Writer test-edit ban, the Bootstrap Orchestration
+Boundary that Codex cannot provide live cross-model orchestration without a
+harness, the CLI-derived Focused Session Context Packet direction as a
+Codex-owned technical decision, and the Codex PM boundary that routine technical
+routing is manager-owned when repo evidence and policy are sufficient.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

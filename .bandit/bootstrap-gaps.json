@@ -438,8 +438,8 @@
     {
       "id": "BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION",
       "title": "Bootstrap RED/GREEN work lacks enforced model-family and test-edit separation",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "GRILL-WITH-DOCS-2026-05-28",
       "source_artifacts": [
         "CONTEXT.md",
@@ -448,10 +448,10 @@
         "docs/architecture/founding-architecture.md",
         ".bandit/policy/smell-triggers.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-047",
       "rationale": "The operator identified a bootstrap workflow breakdown: Codex had stopped consistently handing Stage 3 implementation to Claude after Codex-authored RED tests. Current repo language preserved role boundaries and Test Writer ownership, but it did not make model-family separation or the absolute Writer test-edit ban a first-class enforced gate. During bootstrap the intended path is Codex writes Stage 2 RED tests, Claude writes Stage 3 implementation through the Process Adapter path with no authority to edit tests in any capacity, Qwen and CodeRabbit verify, and any escalation after Claude-authored code returns to Codex PM rather than Claude. This bootstrap repair is bounded by the Bootstrap Orchestration Boundary: Codex can enforce artifact and diff gates around Process Adapter runs, but live cross-model orchestration, bidirectional inter-agent messaging, scoped runtime permissions, and persistent worker context require a Harness. The test-edit ban is permanent across future harnesses, true agents, model families, and providers. If Claude or another Stage 3 Writer edits any test surface, the Stage 3 attempt is invalid and must be reverted completely before Stage 3 reruns clean.",
       "verification_target": null,
-      "next_action": "Before the Focused Session Context and Worktree Bootstrap Contract gaps, create a bootstrap-gap chore to enforce Bootstrap Model-Family Separation and the permanent Test Ownership Boundary in work-item briefs, RED evidence, implementation evidence, review escalation routing, cockpit status, validation, templates, and tests. The chore must require Claude as the bootstrap Stage 3 Writer path when Codex authored or materially edited Stage 2 RED tests, must forbid Claude and all Stage 3 Writers from editing tests, test helpers, fixtures, RED evidence, or acceptance mappings in any capacity across bootstrap and future harnesses, must invalidate and fully revert any Stage 3 attempt that touches a test surface before rerunning Stage 3 clean, and must route Claude-authored implementation escalation to Codex PM rather than Claude."
+      "next_action": "Complete active chore BANDIT-047."
     },
     {
       "id": "BANDIT-GAP-FOCUSED-SESSION-CONTEXT",
