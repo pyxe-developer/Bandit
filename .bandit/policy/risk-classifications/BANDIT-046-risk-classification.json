@@ -1,0 +1,238 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-046",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/git-mutations.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/git-mutation-serializer.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/git-mutations/BANDIT-046-git-mutation-serializer.json",
+      "surface": "workflow_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/git-mutations.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/git-mutation.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/claim-safety-simulation.ts",
+      "surface": "claim_safety_simulation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/templates.ts",
+      "surface": "template_validation",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/git-mutation-serializer.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/helpers/git-mutation-fixture.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/claim-safety-simulation.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "git_mutation_serializer_policy",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-046/implementation-evidence.md"
+    },
+    {
+      "signal_id": "shared_git_plumbing_guard",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-046/brief.md"
+    },
+    {
+      "signal_id": "parallel_write_authorization_remains_blocked",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_validation_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/git-mutation-serializer.test.mjs test/claim-safety-simulation.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- git-mutation validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- operator-boundary validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- coordination-authority validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-046/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-046/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-046-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-GIT-MUTATION-SERIALIZER-BYPASS",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-046/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CLAIM-WORKTREE-UNLOCKED",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-046/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-EXAMPLE-ONLY-CLAIM-SAFETY-TESTS",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-046/red-evidence.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-046 is a non-product bootstrap-gap chore implementing a CLI-owned Git Mutation Serializer policy, validation command, evidence template, and serializer-failure simulation while keeping true parallel writable workstreams blocked until the later Worktree Bootstrap Contract and scheduler gates pass. It requires pre-PR CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-046 changes local Git Mutation Serializer policy, template validation, evidence surface, CLI validation, command wiring, and claim-safety simulation coverage. It introduces no dependency or lockfile change, package-manager script change, CI or release workflow change, installed agent skill edit, fetched-prompt or external tool-install path, external side-effecting automation, product UAT surface, live scheduler execution, actual worktree lifecycle execution, merge/push/deploy behavior, paid reviewer routing, or cockpit UI behavior. Stage 4 evidence records CodeRabbit pass, Local Qwen pass, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-046-supply-chain-gate.json",
+    ".bandit/policy/git-mutations.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/templates/supply-chain-gate.md",
+    "docs/templates/git-mutation-serializer.md",
+    "docs/work/BANDIT-046/brief.md",
+    "docs/work/BANDIT-046/implementation-evidence.md",
+    "docs/work/BANDIT-046/review-evidence.md"
+  ]
+}
