@@ -311,8 +311,8 @@
     {
       "id": "BANDIT-GAP-INPUT-QUARANTINE-GATE",
       "title": "No structural input quarantine gate exists for external or third-party text",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -322,9 +322,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-040",
-      "rationale": "The research review identified prompt-injection posture as a P0 omission, and the operator confirmed that external contributor text, issue or PR metadata, review comments, dependency documentation, fetched third-party content, generated instructions, and fetched prompts must be treated as data-only by default. Bandit needs a structural input quarantine boundary before release-authorized agents can inspect those inputs, and a trusted-source gate before any such content can affect agent instructions, tool permissions, routing, or landing authority. Reviewer escalation alone is not sufficient because hostile text must be prevented from entering instruction-bearing context.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-040."
+      "rationale": "BANDIT-040 adds a repo-native Input Quarantine Gate policy, input quarantine and Trusted Source Gate templates, source-class validation, Data-Only External Input handling checks, quarantine boundary evidence checks, bounded Trusted Source Gate metadata validation, Trusted Local Repo Mode limits, bandit input-quarantine validate [--json], and bandit validate integration without implementing layered risk classification, supply-chain policy, dependency or lockfile policy, live reviewer routing, paid reviewer routing, scheduler authority, claim/worktree authority, installed global skill edits, external services, PR/CI workflow, or cockpit UI scope. It records Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective closeout, and gap-ledger disposition.",
+      "verification_target": "docs/work/BANDIT-040/retrospective.md",
+      "next_action": "Use Input Quarantine Gate contracts before release-authorized paths process external or third-party text. Create the next bootstrap-gap chore for BANDIT-GAP-LAYERED-RISK-CLASSIFICATION before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",

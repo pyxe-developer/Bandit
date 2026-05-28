@@ -382,64 +382,23 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-033` retrospective closeout and
-improvement disposition are recorded. The Phase 8 attention-first cockpit PRD
-and design review are recorded as the accepted visual UI starting point.
-`BANDIT-033` was created as the next Phase 8 visual UI slice; its
-structured spec is recorded in
-`docs/specs/BANDIT-033-attention-first-cockpit-visual-shell.json`, its Stage 1
-brief is recorded in `docs/work/BANDIT-033/brief.md`, and its Stage 2 RED
-evidence is recorded in `docs/work/BANDIT-033/red-evidence.md` with focused
-tests in `test/cockpit-view-model.test.mjs` and `test/cockpit-ui.test.mjs`.
-Stage 3 implementation evidence is recorded in
-`docs/work/BANDIT-033/implementation-evidence.md`; the implementation adds the
-focused attention-first view-model, guarded action, and render-contract modules
-without adding local server/API mode, state-index persistence, scheduler,
-worktree, claim, work surface, deploy, UAT approval, actor identity, PR/CI, or
-unrelated feature behavior. Stage 4 review evidence is recorded in
-`docs/work/BANDIT-033/coderabbit-review.md`,
-`docs/work/BANDIT-033/local-qwen-review.md`,
-`docs/work/BANDIT-033/qwen-finding-disposition.md`, and
-`docs/work/BANDIT-033/review-evidence.md`; CodeRabbit completed with minor
-prototype-source findings dispositioned as no-action, Local Qwen returned a
-`non_blocking` verdict, and the remaining cockpit-shell hardening candidate is
-routed as `BANDIT-033-COCKPIT-SHELL-HARDENING`. Stage 5 landing verdict is
-recorded in `docs/work/BANDIT-033/landing-verdict.md` with final verdict
-`safe-to-land` and `uat_status: not_applicable`; this slice records a
-presentation/render contract, not a browser-clickable operator surface, so
-browser UAT is deferred to the future slice that serves an actual cockpit page.
-`npm run bandit -- land-check BANDIT-033` passes with `UAT: not_applicable`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-033/landing-action.md`. Stage 6 retrospective closeout and
-improvement disposition are recorded in
-`docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
-`BANDIT-033-COCKPIT-SHELL-HARDENING`.
+**Last completed milestone:** `BANDIT-040` - Input Quarantine Gate is landed
+and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-INPUT-QUARANTINE-GATE`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
+CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4
+review evidence, Stage 5 landing verdict evidence, local-record landing action
+evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
+recorded in `docs/work/BANDIT-040/` and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-040` - Input Quarantine Gate. Do not
-start the next bootstrap-gap chore or unrelated Phase 8 work before
-retrospective closeout, gap-ledger disposition, and roadmap context closeout
-are recorded.
-`BANDIT-040` is active as the bootstrap-gap chore for
-`BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec is recorded in
-`docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-040/brief.md`, its Stage 2 RED evidence spec is
-recorded in `docs/specs/BANDIT-040-red-evidence.json`, its Stage 2 RED
-evidence is recorded in `docs/work/BANDIT-040/red-evidence.md`, Stage 3
-implementation evidence is recorded in
-`docs/work/BANDIT-040/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
-pass evidence is recorded in `docs/work/BANDIT-040/coderabbit-review.md`,
-Stage 4 Local Qwen pass evidence is recorded in
-`docs/work/BANDIT-040/local-qwen-review.md`, aggregate Stage 4 review evidence
-is recorded in `docs/work/BANDIT-040/review-evidence.md` with current review
-subject hash
-`d16c4c9edb34f2f9778600548037b9e8923d83e19002699ae4722d9d0a541482`, and
-Stage 5 landing verdict evidence is recorded in
-`docs/work/BANDIT-040/landing-verdict.md` with final verdict `safe-to-land`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-040/landing-action.md`. `.bandit/bootstrap-gaps.json` still
-links the active gap to `BANDIT-040` until Stage 6 retrospective closeout and
-gap-ledger disposition are recorded.
+**Current next action:** Create exactly one bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` before unrelated Phase 8 work. Do not
+start local server/API mode, state-index persistence, scheduler execution,
+worktree lifecycle, claim leases, work surface reservations, automatic
+merge/push/deploy behavior, product UAT, actor identity policy, PR/CI
+workflow, or unrelated feature work while any open bootstrap gap remains queued
+or active.
+
 `BANDIT-039` - Agent Evaluation Harness
 is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 pre-PR CodeRabbit pass evidence, Stage 4
@@ -519,34 +478,20 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-040` - Input Quarantine Gate is active after
-local-record landing action evidence. The structured creation spec is recorded in
-`docs/specs/BANDIT-GAP-INPUT-QUARANTINE-GATE.json`, the brief is recorded in
-`docs/work/BANDIT-040/brief.md`, the Stage 2 RED evidence spec is recorded in
-`docs/specs/BANDIT-040-red-evidence.json`, Stage 2 RED evidence is recorded in
-`docs/work/BANDIT-040/red-evidence.md`, Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-040/implementation-evidence.md`, Stage 4
-CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-040/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
-is recorded in `docs/work/BANDIT-040/local-qwen-review.md`, aggregate Stage 4
-review evidence is recorded in `docs/work/BANDIT-040/review-evidence.md` with
-current review subject hash
-`d16c4c9edb34f2f9778600548037b9e8923d83e19002699ae4722d9d0a541482`,
-Stage 5 landing verdict evidence is recorded in
-`docs/work/BANDIT-040/landing-verdict.md` with final verdict `safe-to-land`,
-local-record landing action evidence is recorded in
-`docs/work/BANDIT-040/landing-action.md`,
-`.bandit/events.jsonl` records the work-item-created, red-evidence
-artifact-created, and implementation-evidence artifact-created events, and
-`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-INPUT-QUARANTINE-GATE` to
-`BANDIT-040` as the active chore. The next action is Stage 6 retrospective
-closeout and bootstrap-gap disposition for `BANDIT-040` before any next
-bootstrap-gap chore or unrelated Phase 8 work.
+**Active work item:** `BANDIT-040` - Input Quarantine Gate is landed and closed
+out after local-record landing action evidence, Stage 6 retrospective closeout,
+and bootstrap-gap disposition. `.bandit/events.jsonl` records the
+work-item-created, red-evidence artifact-created, implementation-evidence
+artifact-created, landing-verdict artifact-created, and retrospective
+artifact-created events for `BANDIT-040`. `.bandit/bootstrap-gaps.json` marks
+`BANDIT-GAP-INPUT-QUARANTINE-GATE` resolved by `BANDIT-040`. The next action is
+to create exactly one bootstrap-gap chore for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` before unrelated Phase 8 work.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by `BANDIT-039`.
-`BANDIT-GAP-INPUT-QUARANTINE-GATE` is active and linked to `BANDIT-040`.
+`BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by `BANDIT-040`.
 `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`,
 `BANDIT-GAP-SUPPLY-CHAIN-GATE`,
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`,
@@ -568,8 +513,7 @@ behind the token-cost failsafe gap.
 `BANDIT-037` - Workflow Trial Decision Guardrails is landed and closed out.
 `BANDIT-038` - Skill Lifecycle Contract is landed and closed out.
 `BANDIT-039` - Agent Evaluation Harness is landed and closed out.
-`BANDIT-040` - Input Quarantine Gate has Stage 5 landing verdict evidence and
-local-record landing action evidence recorded.
+`BANDIT-040` - Input Quarantine Gate is landed and closed out.
 
 **Completed work items:** `BANDIT-001` - Repo-Native State And CLI Skeleton;
 `BANDIT-002` - Work Artifact Templates And Validation; `BANDIT-003` -
@@ -597,11 +541,11 @@ Cockpit Status Coverage Hardening; `BANDIT-033` - Attention-First Cockpit
 Visual Shell; `BANDIT-034` - Cockpit Shell Hardening; `BANDIT-035` - Artifact
 Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails; `BANDIT-038` - Skill
-Lifecycle Contract; `BANDIT-039` - Agent Evaluation Harness.
+Lifecycle Contract; `BANDIT-039` - Agent Evaluation Harness; `BANDIT-040` -
+Input Quarantine Gate.
 
-**Expected next deliverable:** Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-040` - Input Quarantine Gate, before any
-next bootstrap-gap chore or unrelated Phase 8 work.
+**Expected next deliverable:** Bootstrap-gap chore creation for
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`, before any unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -673,22 +617,15 @@ These are expected because Bandit does not exist yet:
   Future model, reviewer, skill, or component comparison evidence should use
   the replay-only Agent Evaluation Harness contract and holdout-backed evidence
   before it is treated as policy input.
-- `BANDIT-GAP-INPUT-QUARANTINE-GATE` is active and linked to `BANDIT-040` from
-  the 2026-05-26 strategic review: Bandit treats external contributor text,
-  issue or PR metadata, review comments, dependency documentation, fetched
-  third-party content, generated instructions, and fetched prompts as data-only
-  input by default. Release-authorized agents need an input quarantine boundary
-  and a trusted-source gate before any such content can affect instructions,
-  tool permissions, routing, or landing authority. Its Stage 1 brief is
-  recorded in `docs/work/BANDIT-040/brief.md`, Stage 2 RED evidence is
-  recorded in `docs/work/BANDIT-040/red-evidence.md`, Stage 3 implementation
-  evidence is recorded in `docs/work/BANDIT-040/implementation-evidence.md`,
-  and Stage 4 review evidence is recorded in
-  `docs/work/BANDIT-040/review-evidence.md`; Stage 5 landing verdict is
-  recorded in `docs/work/BANDIT-040/landing-verdict.md` with final verdict
-  `safe-to-land`, and local-record landing action evidence is recorded in
-  `docs/work/BANDIT-040/landing-action.md`. Stage 6 retrospective closeout and
-  bootstrap-gap disposition are the next action.
+- `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by `BANDIT-040` from the
+  2026-05-26 strategic review: Bandit now has a repo-native Input Quarantine
+  Gate policy, input quarantine and Trusted Source Gate templates, source-class
+  validation, Data-Only External Input handling checks, quarantine boundary
+  evidence checks, bounded Trusted Source Gate metadata validation, Trusted
+  Local Repo Mode limits, `bandit input-quarantine validate [--json]`, and
+  `bandit validate` integration. Stage 1 through Stage 6 evidence is recorded
+  in `docs/work/BANDIT-040/`, and `.bandit/bootstrap-gaps.json` marks the gap
+  resolved.
 - `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is open and queued from the
   2026-05-26 strategic review: Bandit now treats smell-list-only review-depth
   and auto-landing decisions as too brittle. Auto-landing and review depth need
@@ -696,8 +633,8 @@ These are expected because Bandit does not exist yet:
   static-analysis signals, source trust and input-quarantine state,
   supply-chain state, smell-trigger inputs, selected review depth,
   operator-supervision routing, and validation that any single high-risk signal
-  can block auto-landing without smell-list concurrence. It is queued behind
-  `BANDIT-GAP-INPUT-QUARANTINE-GATE`.
+  can block auto-landing without smell-list concurrence. It is the next queued
+  bootstrap-gap chore.
 - `BANDIT-GAP-SUPPLY-CHAIN-GATE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats supply-chain-sensitive changes as a
   blocker-level smell, but no CLI-owned gate records dependency, lockfile,
@@ -947,11 +884,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-040` - Input Quarantine Gate now that local-record landing action
-   evidence exists and `.bandit/bootstrap-gaps.json` links
-   `BANDIT-GAP-INPUT-QUARANTINE-GATE` to active chore `BANDIT-040`. Do not
-   start the next bootstrap-gap chore or unrelated Phase 8 work first.
+1. Create exactly one bootstrap-gap chore for
+   `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` now that `BANDIT-040` has
+   local-record landing action evidence, Stage 6 retrospective closeout, and a
+   resolved `.bandit/bootstrap-gaps.json` disposition for
+   `BANDIT-GAP-INPUT-QUARANTINE-GATE`. Do not start unrelated Phase 8 work
+   first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -961,9 +899,9 @@ The current priority is:
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
    by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by
-   `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is active as
+   `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
-   is queued behind the input quarantine gate. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is
+   is the next queued bootstrap-gap chore. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is
    queued behind the layered risk-classification gap. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
    is queued behind the supply-chain gate. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
    is queued behind the coordination event-log authority gap.
@@ -987,17 +925,18 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before running Stage 4 review for
-`BANDIT-040` - Input Quarantine Gate. Repo artifacts identify the source gap,
-queue order, data-only external input posture, input quarantine boundary,
-trusted-source-gate need, source artifacts, RED tests, Stage 3 implementation
-evidence, and dependency on the resolved Agent Evaluation Harness gap. Halt only
-if the next step would change
-product direction, UAT policy, workflow policy beyond defining the already queued input
-quarantine gate, business tradeoffs, cost/risk posture, external service setup,
-paid reviewer routing, live routing, scheduler authority, claim/worktree
-authority, installed global skill contents, dependency or lockfile policy, or
-broader workflow scope.
+No operator-owned input is required before creating the
+`BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` bootstrap-gap chore. Repo artifacts
+identify the source gap, queue order, review-depth and auto-landing policy
+concern, hard never-auto-landable exclusions, blast-radius and static-analysis
+signal need, source trust and input-quarantine signal need, supply-chain signal
+need, source artifacts, and dependency on the resolved Input Quarantine Gate
+gap. Halt only if the next step would change product direction, UAT policy,
+workflow policy beyond defining the already queued layered risk-classification
+gate, business tradeoffs, cost/risk posture, external service setup, paid
+reviewer routing, live routing, scheduler authority, claim/worktree authority,
+installed global skill contents, dependency or lockfile policy, or broader
+workflow scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require
