@@ -393,20 +393,23 @@ landing repair evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-044` - Operator
-Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
+**Current next action:** Repair or rerun the Stage 4 pre-PR CodeRabbit gate for
+`BANDIT-044` - Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
 `docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
 `docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
 evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
 `test/operator-boundary.test.mjs`, Stage 3 implementation evidence in
 `docs/work/BANDIT-044/implementation-evidence.md`, lifecycle event evidence in
 `.bandit/events.jsonl`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. Do not start landing evidence,
-unrelated Phase 8 work, local server/API mode, state-index persistence,
-scheduler execution, worktree lifecycle, claim leases, work surface
-reservations, automatic merge/push/deploy behavior, product UAT approval, actor
-identity policy, PR/CI workflow, or another unrelated work item before
-`BANDIT-044` Stage 4 aggregate review evidence is recorded.
+`.bandit/bootstrap-gaps.json`. `docs/work/BANDIT-044/coderabbit-review.md`
+records a Stage 4 blocker because the scoped CodeRabbit CLI review reached
+analyzing/reviewing but did not return completed review evidence before Codex PM
+terminated the hung provider process. Do not run Local Qwen, aggregate review
+evidence, landing evidence, unrelated Phase 8 work, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, claim leases,
+work surface reservations, automatic merge/push/deploy behavior, product UAT
+approval, actor identity policy, PR/CI workflow, or another unrelated work item
+before the CodeRabbit blocker is resolved or explicitly dispositioned.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. The Stage 1 brief scopes a
@@ -418,8 +421,11 @@ ambiguous scope decisions while derivable operational drift routes to Codex PM
 or CLI-owned mechanical repair. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-044/red-evidence.md`, with focused failing tests in
 `test/operator-boundary.test.mjs`. Stage 3 implementation evidence is recorded
-in `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 review has not
-started.
+in `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 pre-PR
+CodeRabbit evidence is recorded in
+`docs/work/BANDIT-044/coderabbit-review.md` with verdict `blocker` because the
+provider timed out without completed review evidence; Local Qwen and aggregate
+review evidence have not started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out. The
 implemented repair keeps append-only coordination history as canonical
@@ -570,7 +576,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (implementation evidence recorded).
+**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (Stage 4 CodeRabbit blocker recorded).
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -579,11 +585,12 @@ evidence in `.bandit/events.jsonl`, Stage 2 RED evidence in
 `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
 `test/operator-boundary.test.mjs`, and active bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json`. Stage 3 implementation evidence is recorded in
-`docs/work/BANDIT-044/implementation-evidence.md`. The next action is to run
-Stage 4 review gates for `BANDIT-044`: pre-PR CodeRabbit, Local Qwen, aggregate
-review evidence, and Codex PM disposition at the current review subject hash.
-Do not start landing evidence or unrelated Phase 8 work before Stage 4 review
-evidence is recorded.
+`docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
+evidence is recorded in `docs/work/BANDIT-044/coderabbit-review.md` with
+verdict `blocker` after the scoped provider run timed out. The next action is
+to repair or rerun the scoped CodeRabbit pre-PR review before Local Qwen,
+aggregate review evidence, Codex PM disposition, landing evidence, or unrelated
+Phase 8 work.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
@@ -1062,12 +1069,15 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-044` - Operator
-   Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log Authority is
-   landed and closed out, and `BANDIT-044` now has Stage 1 brief evidence,
-   Stage 2 RED evidence, Stage 3 implementation evidence, focused tests, and
-   active bootstrap-gap linkage recorded. Do not start landing evidence or
-   unrelated Phase 8 work before aggregate Stage 4 review evidence is recorded.
+1. Repair or rerun the Stage 4 pre-PR CodeRabbit gate for `BANDIT-044` -
+   Operator Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log
+   Authority is landed and closed out, and `BANDIT-044` now has Stage 1 brief
+   evidence, Stage 2 RED evidence, Stage 3 implementation evidence, focused
+   tests, active bootstrap-gap linkage, and a CodeRabbit blocker recorded in
+   `docs/work/BANDIT-044/coderabbit-review.md` after the scoped provider run
+   timed out. Do not run Local Qwen, aggregate review evidence, landing
+   evidence, or unrelated Phase 8 work before the CodeRabbit blocker is
+   resolved or explicitly dispositioned.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1102,10 +1112,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before running the Stage 4 review gates for
-`BANDIT-044`. Repo artifacts identify the active gap, source artifacts,
-rationale, implementation evidence, and boundary: operator-blocking fail-closed
-behavior is reserved for
+No operator-owned input is required for `BANDIT-044` product, UAT, policy,
+business, cost/risk, or ambiguous-scope decisions. The current Stage 4 blocker
+is a CodeRabbit provider timeout, not missing product direction. Repo artifacts
+identify the active gap, source artifacts, rationale, implementation evidence,
+and boundary: operator-blocking fail-closed behavior is reserved for
 safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely
 ambiguous scope gates, while derivable operational drift should route to
 CLI-owned mechanical repair with approved source artifacts, expected-current-state
