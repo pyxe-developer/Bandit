@@ -329,8 +329,8 @@
     {
       "id": "BANDIT-GAP-LAYERED-RISK-CLASSIFICATION",
       "title": "Auto-landing and review depth rely too heavily on smell triggers",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -341,10 +341,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-041",
       "rationale": "The operator confirmed that a smell-list-only safety posture is too brittle for review-depth, operator-supervision, and auto-landing decisions. Bandit needs a layered risk-classification gate with hard never-auto-landable exclusions, blast-radius signals, static-analysis signals, source trust and input quarantine state, supply-chain state, and smell triggers as one input. Any high-risk signal can block auto-landing or raise review depth without requiring smell-list concurrence.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-INPUT-QUARANTINE-GATE is resolved, create a bootstrap-gap chore to define layered risk classification, never-auto-landable surfaces, blast-radius/static-analysis/source-trust/input-quarantine/supply-chain signals, review-depth selection, operator-supervision routing, and auto-landing eligibility validation."
+      "next_action": "Complete active chore BANDIT-041."
     },
     {
       "id": "BANDIT-GAP-SUPPLY-CHAIN-GATE",
