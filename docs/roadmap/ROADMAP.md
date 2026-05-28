@@ -16,12 +16,14 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the bootstrap-gap chore for
-`BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` has landing verdict,
-local-record landing action, retrospective closeout, and bootstrap-gap
-disposition evidence recorded, so the layered risk-classification slice
-boundary is closed. Do not start unrelated Phase 8 work before the
-Supply-Chain Gate chore is created and routed.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-042` -
+Supply-Chain Gate. `BANDIT-042` has Stage 1 brief evidence recorded in
+`docs/work/BANDIT-042/brief.md`, its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, and
+`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-SUPPLY-CHAIN-GATE` as the
+active chore. Do not start implementation, review, landing, retrospective, the
+next bootstrap-gap chore, or unrelated Phase 8 work before RED evidence is
+recorded.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -50,6 +52,13 @@ marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved.
 `.bandit/events.jsonl` records the work-item-created, red-evidence artifact,
 implementation-evidence artifact, landing-verdict artifact, and retrospective
 artifact events.
+
+`BANDIT-042` - Supply-Chain Gate is the active bootstrap-gap chore for
+`BANDIT-GAP-SUPPLY-CHAIN-GATE`. Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json`, its Stage 1 brief is recorded
+in `docs/work/BANDIT-042/brief.md`, `.bandit/bootstrap-gaps.json` marks the gap
+active and links it to `BANDIT-042`, and `.bandit/events.jsonl` records the
+work-item-created event. Stage 2 RED evidence has not started.
 
 `BANDIT-040` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec, Stage 1
@@ -766,8 +775,9 @@ and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; Stage 1 through Stage 6 evidence and
 gap-ledger disposition are recorded. `BANDIT-041` is landed and closed out as
 the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; Stage 1
-through Stage 6 evidence and gap-ledger disposition are recorded. The next
-target is bootstrap-gap work-item creation for `BANDIT-GAP-SUPPLY-CHAIN-GATE`.
+through Stage 6 evidence and gap-ledger disposition are recorded. `BANDIT-042`
+is active as the bootstrap-gap chore for `BANDIT-GAP-SUPPLY-CHAIN-GATE`; Stage
+1 brief evidence is recorded, and the next target is Stage 2 RED evidence.
 
 ## Phase Map
 
@@ -1082,14 +1092,17 @@ Current rule:
 
 Current priority:
 
-1. Create the bootstrap-gap chore for `BANDIT-GAP-SUPPLY-CHAIN-GATE`.
-   `BANDIT-041` - Layered Risk Classification is landed and closed out:
-   Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence,
-   Stage 4 review evidence, Stage 5 landing verdict, local-record landing
-   action, Stage 6 retrospective closeout, and bootstrap-gap disposition are
-   recorded, and `.bandit/bootstrap-gaps.json` marks
-   `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. Do not start unrelated
-   Phase 8 work before the supply-chain gate chore is created and routed.
+1. Write Stage 2 RED evidence for `BANDIT-042` -
+   `BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` - Layered Risk Classification
+   is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
+   implementation evidence, Stage 4 review evidence, Stage 5 landing verdict,
+   local-record landing action, Stage 6 retrospective closeout, and
+   bootstrap-gap disposition are recorded, and `.bandit/bootstrap-gaps.json`
+   marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. `BANDIT-042` has
+   Stage 1 brief evidence recorded and `.bandit/bootstrap-gaps.json` marks
+   `BANDIT-GAP-SUPPLY-CHAIN-GATE` active. Do not start implementation, review,
+   landing, retrospective, the next bootstrap-gap chore, or unrelated Phase 8
+   work before RED evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1101,8 +1114,8 @@ Current priority:
    by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by
    `BANDIT-039`. `BANDIT-GAP-INPUT-QUARANTINE-GATE` is resolved by
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
-   `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is the next queued
-   bootstrap-gap chore. `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
+   `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is active as `BANDIT-042`.
+   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`
    is queued behind the supply-chain gate. `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`
    is queued behind the coordination event-log authority gap.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the

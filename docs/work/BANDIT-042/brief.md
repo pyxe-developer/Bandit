@@ -1,0 +1,115 @@
+# BANDIT-042: Supply-Chain Gate
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where Bandit has no dedicated supply-chain gate for dependency, lockfile, package-manager script, CI or release workflow, agent-skill, fetched-prompt, external tool-install, or other executable supply-chain surfaces.
+
+## Origin
+
+The 2026-05-26 strategic review and accepted Bandit PRDs identify supply-chain risk as unaddressed. Bandit now has Input Quarantine and Layered Risk Classification gates, but no CLI-readable policy, template, validation path, or focused tests force supply-chain-sensitive changes to record dependency, lockfile, package-manager script, CI/release workflow, agent-skill, fetched-prompt, or external tool-install evidence before auto-landing or release-authorized landing decisions. The first repair must define a narrow supply-chain gate that blocks auto-landing for supply-chain-sensitive surfaces unless explicit gate evidence and any required operator-supervised approval are recorded.
+
+## Scope
+
+- Define a repo-native Supply-Chain Gate contract for release-authorized work that touches dependency manifests, lockfiles, package-manager scripts, CI or release workflows, agent skills, fetched prompts, external tool install paths, or other executable supply-chain surfaces.
+- Define supply-chain surface classification fields for dependency manifests, lockfiles, package-manager scripts, CI/release workflow files, agent skills, fetched prompts, external tool-install paths, executable generated content, and unknown or mixed supply-chain surfaces.
+- Define required evidence for dependency and lockfile changes, including package manager, direct dependency additions or removals, version or pin changes, lockfile-only changes, script changes, SCA or equivalent unavailable-tool disposition, and rationale for any allowed low-risk state.
+- Define required evidence for package-manager scripts, lifecycle hooks, CI/release workflows, agent skills, fetched prompts, and external tool-install paths, including executable entry points, fetched or generated content sources, input-quarantine references, trusted-source gate references for instruction-bearing use, owner, freshness rule, and revocation path.
+- Consume Input Quarantine Gate evidence for dependency documentation, fetched third-party content, fetched prompts, generated instructions, and external tool metadata without redefining input quarantine.
+- Consume Layered Risk Classification output so supply-chain state remains an independent auto-landing blocker and review-depth input rather than a smell-list-only keyword match.
+- Define auto-landing eligibility rules that fail closed for supply-chain-sensitive surfaces unless the Supply-Chain Gate records an accepted low-risk state or explicit operator-supervised approval where required.
+- Add validation that rejects missing supply-chain gate evidence, unknown supply-chain surfaces treated as low risk, dependency additions without SCA or unavailable-tool disposition, lockfile drift without manifest rationale, package-manager scripts or lifecycle hooks without explicit review evidence, fetched prompts or external tool installs without quarantine and trusted-source evidence, and CI/release workflow changes marked auto-landable.
+- Add focused tests for missing gate evidence, dependency manifest changes, lockfile drift, package-manager scripts, CI/release workflow changes, agent-skill changes, fetched prompts, external tool installs, unknown supply-chain surfaces, operator-supervised approval requirements, auto-landing refusal output, and a complete accepted low-risk supply-chain classification.
+- Keep the repair limited to supply-chain gate contracts, templates, CLI-readable policy or registry validation, auto-land or landing-readiness integration, focused tests, and necessary roadmap/context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1 and perform clean-code evaluation before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence; Writer may edit supply-chain gate templates, policy or registry parsing, validation, auto-land or landing-readiness integration, and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond defining the already queued supply-chain gate, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, dependency or lockfile policy beyond the scoped supply-chain gate, CI/release workflow policy beyond gate evidence, or broader workflow scope.
+- Future-work scope: this chore must not implement broad dependency update automation, external service integrations, live SCA provider setup, paid reviewer routing, live model routing, scheduler execution, claim authority, worktree lifecycle, local server/API mode, state-index persistence, PR/CI workflow execution, automatic merge/push/deploy behavior, or unrelated Phase 8 cockpit UI work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-042/brief.md and links to BANDIT-GAP-SUPPLY-CHAIN-GATE.
+- A Supply-Chain Gate template or policy artifact names required inputs for work item, changed supply-chain surfaces, dependency manifest state, lockfile state, package-manager scripts, CI/release workflow state, agent-skill state, fetched-prompt state, external tool-install state, input-quarantine references, trusted-source gate references, SCA or unavailable-tool disposition, operator-supervised approval state, auto-landing eligibility, rationale, and evidence paths.
+- Validation fails closed when release-authorized work touches supply-chain-sensitive surfaces without current supply-chain gate evidence.
+- Validation fails closed when dependency additions, removals, version or pin changes, or lockfile drift lack explicit manifest/lockfile rationale and SCA or unavailable-tool disposition.
+- Validation fails closed when package-manager scripts, lifecycle hooks, CI/release workflows, agent skills, fetched prompts, or external tool-install paths are treated as low risk without explicit gate evidence.
+- Validation fails closed when fetched prompts, dependency documentation, generated instructions, or external tool metadata are used as instruction-bearing content without Input Quarantine Gate and Trusted Source Gate evidence.
+- Validation blocks auto-landing for CI/release workflow changes, dependency or fetched-prompt execution paths, package-manager script changes, external tool-install paths, or other executable supply-chain surfaces unless policy records explicit operator-supervised approval where required.
+- Layered Risk Classification consumes Supply-Chain Gate state as an independent risk signal and refuses auto-landing when supply-chain state is missing, stale, elevated, or pending operator supervision.
+- Auto-land or landing-readiness checks consume supply-chain gate output and refuse auto-landing when the gate records supply-chain-sensitive unresolved risk, missing evidence, stale evidence, or required operator-supervised approval.
+- Focused tests prove invalid supply-chain gate contracts are rejected before trusted status or auto-landing eligibility, and prove a complete accepted low-risk supply-chain gate record is accepted.
+- The implementation does not implement broad dependency update automation, external service integrations, live SCA provider setup, paid reviewer routing, live model routing, coordination authority, operator fail-closed boundary, claim authority, Git mutation serializer, worktree bootstrap contract, scheduler, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, installed global skill edits, PR/CI execution, merge/push/deploy behavior, or cockpit UI gaps.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-SUPPLY-CHAIN-GATE is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No local server/API mode, state-index persistence, scheduler execution, worktree lifecycle, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow execution, live reviewer routing change, paid reviewer route, external service integration, installed global skill edit, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run focused supply-chain gate tests for RED/GREEN coverage.
+- Run node --test test/landing-gates.test.mjs if auto-land or landing-readiness behavior is touched.
+- Run node --test test/risk-classification.test.mjs if layered risk classification consumption is touched.
+- Run node --test test/input-quarantine-gate.test.mjs if input quarantine integration is touched.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run node --test test/cockpit-status.test.mjs and node --test test/cockpit-view-model.test.mjs if cockpit status or action-affordance summaries are touched.
+- Run npm test if implementation touches shared command routing, validators, policy parsing, review evidence, landing gates, bootstrap gaps, roadmap/cockpit status parsing, input quarantine validation, risk classification validation, auto-landing policy, or template validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- input-quarantine validate --json.
+- Run npm run bandit -- risk-classification validate --json.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- auto-land-check BANDIT-042 before Stage 5 closeout if auto-landing eligibility behavior is touched.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-042 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-042 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-042 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-042 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-SUPPLY-CHAIN-GATE.json
+- docs/work/BANDIT-042/brief.md
+- docs/work/BANDIT-042/red-evidence.md
+- docs/work/BANDIT-042/implementation-evidence.md
+- docs/work/BANDIT-042/coderabbit-review.md
+- docs/work/BANDIT-042/local-qwen-review.md
+- docs/work/BANDIT-042/review-evidence.md
+- docs/work/BANDIT-042/landing-verdict.md
+- docs/work/BANDIT-042/landing-action.md
+- docs/work/BANDIT-042/retrospective.md
+- docs/templates/supply-chain-gate.md
+- .bandit/policy/supply-chain-gate.json
+- src/state/supply-chain-gate.ts
+- src/commands/supply-chain-gate.ts
+- src/commands/auto-land-check.ts
+- src/commands/land-check.ts
+- src/commands/validate.ts
+- test/supply-chain-gate.test.mjs
+- test/landing-gates.test.mjs
+- test/risk-classification.test.mjs
+- test/input-quarantine-gate.test.mjs
+- test/validate.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-042/brief.md
+- docs/work/BANDIT-042/red-evidence.md
+- docs/work/BANDIT-042/implementation-evidence.md
+- docs/work/BANDIT-042/coderabbit-review.md
+- docs/work/BANDIT-042/local-qwen-review.md
+- docs/work/BANDIT-042/review-evidence.md
+- docs/work/BANDIT-042/landing-verdict.md
+- docs/work/BANDIT-042/landing-action.md
+- docs/work/BANDIT-042/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the gap, source artifacts, rationale, dependency on the resolved Input Quarantine Gate and Layered Risk Classification Gate, supply-chain-sensitive surfaces, auto-landing blocker requirement, and required operator-supervised approval state for eligible supply-chain-sensitive changes. Halt only if implementation would change product direction, UAT policy, workflow policy beyond defining the already queued supply-chain gate, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer spend approval, paid reviewer routing, live routing, scheduler authority, claim/worktree authority, installed global skill contents, dependency or lockfile policy beyond the scoped supply-chain gate, CI/release workflow policy beyond gate evidence, merge/push/deploy authority, or broader workflow scope.
