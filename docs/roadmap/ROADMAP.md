@@ -16,26 +16,29 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Repair the Stage 5 landing blocker for `BANDIT-042` -
-Supply-Chain Gate. `BANDIT-042` has Stage 1 brief evidence recorded in
-`docs/work/BANDIT-042/brief.md`, Stage 2 RED evidence recorded in
-`docs/work/BANDIT-042/red-evidence.md`, focused tests in
-`test/supply-chain-gate.test.mjs`, Stage 3 implementation evidence recorded in
-`docs/work/BANDIT-042/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
-pass evidence recorded in `docs/work/BANDIT-042/coderabbit-review.md`, Stage 4
-Local Qwen `non_blocking` evidence and PM disposition recorded in
+**Current next step:** Record Stage 6 retrospective closeout and
+bootstrap-gap disposition for `BANDIT-042` - Supply-Chain Gate. `BANDIT-042`
+has Stage 1 brief evidence recorded in `docs/work/BANDIT-042/brief.md`, Stage
+2 RED evidence recorded in `docs/work/BANDIT-042/red-evidence.md`, focused
+tests in `test/supply-chain-gate.test.mjs`, Stage 3 implementation evidence
+recorded in `docs/work/BANDIT-042/implementation-evidence.md`, Stage 4
+pre-PR CodeRabbit pass evidence recorded in
+`docs/work/BANDIT-042/coderabbit-review.md`, Stage 4 Local Qwen
+`non_blocking` evidence and PM disposition recorded in
 `docs/work/BANDIT-042/local-qwen-review.md` and
 `docs/work/BANDIT-042/qwen-finding-disposition.md`, aggregate Stage 4 review
 evidence with current review subject hash
-`b4c185379c68743d76ec8c66b077584609286fa1f8a77826e2a8d0456dcd1da5`
-recorded in `docs/work/BANDIT-042/review-evidence.md`, and Stage 5 landing
+`459f24448eccddd5682a424fff4b76c3adf23a562dc709027dc7fdf44e35ecf6`
+recorded in `docs/work/BANDIT-042/review-evidence.md`, Stage 5 landing
 verdict evidence recorded in `docs/work/BANDIT-042/landing-verdict.md` with
-final verdict `needs-repair`. The repair is Codex-owned: register explicit
-layered risk-classification evidence and supply-chain gate evidence for
-`BANDIT-042`, refresh Stage 4 or Stage 5 evidence if the review-subject hash
-changes, then rerun local-record landing. Do not start retrospective, the next
-bootstrap-gap chore, or unrelated Phase 8 work before this landing blocker is
-repaired and landing action evidence is recorded.
+final verdict `safe-to-land`, explicit layered risk-classification and
+supply-chain gate landing repair evidence recorded in
+`.bandit/policy/risk-classifications/BANDIT-042-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json`, and
+local-record landing action evidence recorded in
+`docs/work/BANDIT-042/landing-action.md`. Do not create the next bootstrap-gap
+chore or start unrelated Phase 8 work before retrospective closeout and
+gap-ledger disposition are recorded.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -80,12 +83,15 @@ CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-042/local-qwen-review.md` and
 `docs/work/BANDIT-042/qwen-finding-disposition.md`; aggregate Stage 4 review
 evidence with current review subject hash
-`b4c185379c68743d76ec8c66b077584609286fa1f8a77826e2a8d0456dcd1da5`
+`459f24448eccddd5682a424fff4b76c3adf23a562dc709027dc7fdf44e35ecf6`
 is recorded in `docs/work/BANDIT-042/review-evidence.md`. Stage 5 landing
 verdict evidence is recorded in `docs/work/BANDIT-042/landing-verdict.md` with
-final verdict `needs-repair` because the local-record landing path requires
-explicit auto-landing evidence, and `BANDIT-042` does not yet have registered
-layered risk-classification or supply-chain gate decisions.
+final verdict `safe-to-land`, explicit layered risk-classification and
+supply-chain gate landing repair evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-042-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json`, and
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-042/landing-action.md`.
 
 `BANDIT-040` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-INPUT-QUARANTINE-GATE`; its structured creation spec, Stage 1
@@ -804,9 +810,10 @@ gap-ledger disposition are recorded. `BANDIT-041` is landed and closed out as
 the bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`; Stage 1
 through Stage 6 evidence and gap-ledger disposition are recorded. `BANDIT-042`
 is active as the bootstrap-gap chore for `BANDIT-GAP-SUPPLY-CHAIN-GATE`; Stage
-1 brief evidence, Stage 2 RED evidence, Stage 3 implementation evidence, and
-Stage 4 review evidence are recorded, and the next target is Stage 5 landing
-verdict.
+1 brief evidence, Stage 2 RED evidence, Stage 3 implementation evidence, Stage
+4 review evidence, Stage 5 landing verdict, explicit landing-gate repair
+evidence, and local-record landing action evidence are recorded, and the next
+target is Stage 6 retrospective closeout and gap-ledger disposition.
 
 ## Phase Map
 
@@ -1121,21 +1128,21 @@ Current rule:
 
 Current priority:
 
-1. Repair the Stage 5 landing blocker for `BANDIT-042` -
-   `BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` - Layered Risk Classification
-   is landed and closed out: Stage 1 brief, Stage 2 RED evidence, Stage 3
-   implementation evidence, Stage 4 review evidence, Stage 5 landing verdict,
-   local-record landing action, Stage 6 retrospective closeout, and
-   bootstrap-gap disposition are recorded, and `.bandit/bootstrap-gaps.json`
-   marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` resolved. `BANDIT-042` has
-   Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-   evidence, Stage 4 review evidence, and Stage 5 landing verdict evidence
-   recorded with final verdict `needs-repair`, and `.bandit/bootstrap-gaps.json`
-   marks `BANDIT-GAP-SUPPLY-CHAIN-GATE` active. Register explicit
-   risk-classification and supply-chain gate evidence for `BANDIT-042`, refresh
-   affected review or landing evidence if needed, then rerun local-record
-   landing. Do not start retrospective, the next bootstrap-gap chore, or
-   unrelated Phase 8 work before landing action evidence is recorded.
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-042` - `BANDIT-GAP-SUPPLY-CHAIN-GATE`. `BANDIT-041` - Layered Risk
+   Classification is landed and closed out: Stage 1 brief, Stage 2 RED
+   evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
+   landing verdict, local-record landing action, Stage 6 retrospective
+   closeout, and bootstrap-gap disposition are recorded, and
+   `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`
+   resolved. `BANDIT-042` has Stage 1 brief evidence, Stage 2 RED evidence,
+   Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
+   verdict evidence with final verdict `safe-to-land`, explicit
+   risk-classification and supply-chain gate repair evidence, and local-record
+   landing action evidence recorded; `.bandit/bootstrap-gaps.json` still marks
+   `BANDIT-GAP-SUPPLY-CHAIN-GATE` active until retrospective and gap-ledger
+   closeout are recorded. Do not create the next bootstrap-gap chore or start
+   unrelated Phase 8 work before Stage 6 closeout is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
