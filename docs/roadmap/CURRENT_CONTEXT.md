@@ -393,7 +393,7 @@ landing repair evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Repair or rerun the Stage 4 pre-PR CodeRabbit gate for
+**Current next action:** Run the Stage 4 Local Qwen adversarial review for
 `BANDIT-044` - Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
 `docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
 `docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
@@ -402,14 +402,14 @@ evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
 `docs/work/BANDIT-044/implementation-evidence.md`, lifecycle event evidence in
 `.bandit/events.jsonl`, and active bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json`. `docs/work/BANDIT-044/coderabbit-review.md`
-records a Stage 4 blocker because the scoped CodeRabbit CLI review reached
-analyzing/reviewing but did not return completed review evidence before Codex PM
-terminated the hung provider process. Do not run Local Qwen, aggregate review
-evidence, landing evidence, unrelated Phase 8 work, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, claim leases,
-work surface reservations, automatic merge/push/deploy behavior, product UAT
+records Stage 4 pre-PR CodeRabbit pass evidence at source head
+`9dff2b66ee95286c764433a78134a173f2baaee5`; the scoped CodeRabbit CLI review
+completed with findings 0. Do not run aggregate review evidence, landing
+evidence, unrelated Phase 8 work, local server/API mode, state-index
+persistence, scheduler execution, worktree lifecycle, claim leases, work
+surface reservations, automatic merge/push/deploy behavior, product UAT
 approval, actor identity policy, PR/CI workflow, or another unrelated work item
-before the CodeRabbit blocker is resolved or explicitly dispositioned.
+before Local Qwen review evidence is recorded.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. The Stage 1 brief scopes a
@@ -423,9 +423,9 @@ or CLI-owned mechanical repair. Stage 2 RED evidence is recorded in
 `test/operator-boundary.test.mjs`. Stage 3 implementation evidence is recorded
 in `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 pre-PR
 CodeRabbit evidence is recorded in
-`docs/work/BANDIT-044/coderabbit-review.md` with verdict `blocker` because the
-provider timed out without completed review evidence; Local Qwen and aggregate
-review evidence have not started.
+`docs/work/BANDIT-044/coderabbit-review.md` with verdict `pass`, findings 0,
+and source-drift status current; Local Qwen and aggregate review evidence have
+not started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out. The
 implemented repair keeps append-only coordination history as canonical
@@ -576,7 +576,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (Stage 4 CodeRabbit blocker recorded).
+**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (Stage 4 Local Qwen next).
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -587,10 +587,9 @@ evidence in `.bandit/events.jsonl`, Stage 2 RED evidence in
 `.bandit/bootstrap-gaps.json`. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
 evidence is recorded in `docs/work/BANDIT-044/coderabbit-review.md` with
-verdict `blocker` after the scoped provider run timed out. The next action is
-to repair or rerun the scoped CodeRabbit pre-PR review before Local Qwen,
-aggregate review evidence, Codex PM disposition, landing evidence, or unrelated
-Phase 8 work.
+verdict `pass` after the scoped provider run completed with findings 0. The
+next action is to run Local Qwen review before aggregate review evidence, Codex
+PM disposition, landing evidence, or unrelated Phase 8 work.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
@@ -714,9 +713,9 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-044` -
-Operator Fail-Closed Boundary, before landing evidence or unrelated Phase 8
-work.
+**Expected next deliverable:** Stage 4 Local Qwen review evidence for
+`BANDIT-044` - Operator Fail-Closed Boundary, before aggregate review evidence,
+landing evidence, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1069,15 +1068,15 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or rerun the Stage 4 pre-PR CodeRabbit gate for `BANDIT-044` -
+1. Run the Stage 4 Local Qwen adversarial review for `BANDIT-044` -
    Operator Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log
    Authority is landed and closed out, and `BANDIT-044` now has Stage 1 brief
    evidence, Stage 2 RED evidence, Stage 3 implementation evidence, focused
-   tests, active bootstrap-gap linkage, and a CodeRabbit blocker recorded in
-   `docs/work/BANDIT-044/coderabbit-review.md` after the scoped provider run
-   timed out. Do not run Local Qwen, aggregate review evidence, landing
-   evidence, or unrelated Phase 8 work before the CodeRabbit blocker is
-   resolved or explicitly dispositioned.
+   tests, active bootstrap-gap linkage, and Stage 4 pre-PR CodeRabbit pass
+   evidence recorded in `docs/work/BANDIT-044/coderabbit-review.md` after the
+   scoped provider run completed with findings 0. Do not run aggregate review
+   evidence, landing evidence, or unrelated Phase 8 work before Local Qwen
+   review evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

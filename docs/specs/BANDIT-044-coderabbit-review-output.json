@@ -1,8 +1,7 @@
 {
-  "sourceHead": "89a1d5267a85ec59192eb4c3ea9f4cb51143102f",
+  "sourceHead": "9dff2b66ee95286c764433a78134a173f2baaee5",
   "baseRevision": "1045751",
-  "reviewState": "timeout",
+  "reviewState": "completed",
   "verdict": "pass",
-  "findings": [],
-  "providerError": "CodeRabbit CLI review reached analyzing/reviewing but did not return completed review evidence before Codex PM terminated the hung provider process."
+  "findings": []
 }
