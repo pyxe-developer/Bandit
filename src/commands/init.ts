@@ -5,6 +5,10 @@ import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
 import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
+import {
+  writeDefaultCoordinationAuthorityPolicy,
+  writeDefaultCoordinationAuthorityTemplate
+} from "../state/coordination-authority.js";
 import { writeDefaultInputQuarantinePolicy } from "../state/input-quarantine.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
 import { getBanditPaths } from "../state/paths.js";
@@ -27,6 +31,12 @@ export async function initBandit(repoRoot: string) {
     paths.agentEvaluationPolicy
   );
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
+  const coordinationAuthorityPolicyExists = await pathExists(
+    paths.coordinationAuthorityPolicy
+  );
+  const coordinationAuthorityTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/coordination-authority.md`
+  );
   const heartbeatPolicyExists = await pathExists(paths.heartbeatPolicy);
   const inputQuarantinePolicyExists = await pathExists(
     paths.inputQuarantinePolicy
@@ -61,6 +71,16 @@ export async function initBandit(repoRoot: string) {
 
   if (!autoLandingPolicyExists) {
     await writeDefaultAutoLandingPolicy(paths.autoLandingPolicy);
+  }
+
+  if (!coordinationAuthorityPolicyExists) {
+    await writeDefaultCoordinationAuthorityPolicy(
+      paths.coordinationAuthorityPolicy
+    );
+  }
+
+  if (!coordinationAuthorityTemplateExists) {
+    await writeDefaultCoordinationAuthorityTemplate(repoRoot);
   }
 
   if (!heartbeatPolicyExists) {

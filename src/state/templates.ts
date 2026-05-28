@@ -210,6 +210,25 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("stage_bindings", /^stage_bindings:/im),
       metadata("installed_skill_drift", /^installed_skill_drift:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/coordination-authority.md",
+    requirements: [
+      metadata("work_item", /^work_item:/im),
+      metadata("canonical_history", /^canonical_history:/im),
+      metadata(
+        "accepted workflow event families",
+        /^accepted_workflow_event_families:/im
+      ),
+      metadata("actor event non-authority", /^actor_event_non_authority:/im),
+      metadata("projection surfaces", /^projection_surfaces:/im),
+      metadata("allowed mutation paths", /^allowed_mutation_paths:/im),
+      metadata("history replay", /^history_replay:/im),
+      metadata("projection reconciliation", /^projection_reconciliation:/im),
+      metadata("claim authority exception", /^claim_authority_exception:/im),
+      metadata("rationale", /^rationale:/im),
+      metadata("evidence paths", /^evidence_paths:/im)
+    ]
   }
 ];
 

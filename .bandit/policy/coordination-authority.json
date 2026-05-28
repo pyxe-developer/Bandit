@@ -1,0 +1,27 @@
+{
+  "contract_version": 1,
+  "policy_id": "coordination-event-log-authority",
+  "canonical_history": "per_work_item_append_only_coordination_log",
+  "authoritative_event_families": [
+    "step_transition"
+  ],
+  "actor_event_authority": "context_only",
+  "projection_surfaces": [
+    "current_state_view",
+    "cockpit_status",
+    "state_index",
+    "sqlite_cache",
+    "in_flight_registry",
+    "derived_status_report"
+  ],
+  "allowed_projection_mutation_paths": [
+    "rebuild_from_history",
+    "cli_append_or_reconcile",
+    "fail_closed_mechanical_repair"
+  ],
+  "claim_authority_exception": {
+    "authority": "cas_claim_authority",
+    "status": "future_scoped"
+  },
+  "release_authorized_decisions": []
+}

@@ -26,7 +26,8 @@ const requiredTemplateFiles = [
   "docs/templates/landing-verdict.md",
   "docs/templates/local-qwen-review.md",
   "docs/templates/coderabbit-review.md",
-  "docs/templates/skill-lifecycle-contract.md"
+  "docs/templates/skill-lifecycle-contract.md",
+  "docs/templates/coordination-authority.md"
 ];
 
 const validTemplates = {
@@ -174,6 +175,20 @@ evaluation_packets:
 rollback_criteria:
 stage_bindings:
 installed_skill_drift:
+`,
+  "docs/templates/coordination-authority.md": `# Coordination Event Log Authority Template
+
+work_item:
+canonical_history:
+accepted_workflow_event_families:
+actor_event_non_authority:
+projection_surfaces:
+allowed_mutation_paths:
+history_replay:
+projection_reconciliation:
+claim_authority_exception:
+rationale:
+evidence_paths:
 `
 };
 
@@ -371,6 +386,7 @@ async function copyCommittedTemplates(repo) {
 async function writeValidTemplates(repo, options = {}) {
   for (const [templatePath, content] of Object.entries(validTemplates)) {
     if (templatePath === options.omit) {
+      await rm(path.join(repo, templatePath), { force: true });
       continue;
     }
 
