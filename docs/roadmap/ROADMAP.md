@@ -16,21 +16,28 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-046` - Git
-Mutation Serializer. Use `docs/work/BANDIT-046/brief.md` and
-`docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`; create only RED
-evidence/tests and context updates required for Stage 2, and do not start
-implementation, review, landing, Worktree Bootstrap Contract, scheduler,
-worktree lifecycle, cockpit, PR/CI workflow, or unrelated Phase 8 work.
+**Current next step:** Implement the narrow Stage 3 Git Mutation Serializer
+repair for `BANDIT-046`. Use `docs/work/BANDIT-046/red-evidence.md`,
+`docs/specs/BANDIT-046-red-evidence.json`, and the focused RED tests in
+`test/git-mutation-serializer.test.mjs` and
+`test/claim-safety-simulation.test.mjs`; make those tests pass without
+starting review, landing, Worktree Bootstrap Contract, scheduler, full worktree
+lifecycle enablement, cockpit, PR/CI workflow, or unrelated Phase 8 work.
 
 `BANDIT-046` - Git Mutation Serializer is active as the bootstrap-gap chore for
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured creation spec is recorded
 in `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-046/brief.md`, `.bandit/events.jsonl` records
-the work-item-created event, and `.bandit/bootstrap-gaps.json` links the gap to
-`BANDIT-046` with status `active`. Stage 2 RED evidence is the next required
-artifact; do not start implementation or later gap work before RED evidence is
-recorded and verified.
+recorded in `docs/work/BANDIT-046/brief.md`, Stage 2 RED evidence is recorded
+in `docs/specs/BANDIT-046-red-evidence.json`,
+`docs/work/BANDIT-046/red-evidence.md`,
+`test/git-mutation-serializer.test.mjs`,
+`test/helpers/git-mutation-fixture.mjs`, and
+`test/claim-safety-simulation.test.mjs`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact-created events, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-046` with status
+`active`. Stage 3 implementation evidence is the next required artifact; do
+not start review, landing, retrospective, or later gap work before the RED
+tests pass and implementation evidence is recorded.
 
 `BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
@@ -47,7 +54,7 @@ disposition are recorded in
 is now active as `BANDIT-046`; do not start Worktree Bootstrap Contract,
 scheduler, worktree lifecycle, cockpit UI/server/API work, automatic
 merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
-or unrelated Phase 8 work before `BANDIT-046` Stage 2 RED evidence is recorded.
+or unrelated Phase 8 work before `BANDIT-046` lands and closes out.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -869,8 +876,8 @@ recorded in `docs/work/BANDIT-045/landing-verdict.md`, local-record landing
 action evidence is recorded in `docs/work/BANDIT-045/landing-action.md`, and
 Stage 6 retrospective closeout and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-045/retrospective.md` and `.bandit/bootstrap-gaps.json`.
-`BANDIT-046` is now active for Git Mutation Serializer, and the current target
-is Stage 2 RED evidence.
+`BANDIT-046` is now active for Git Mutation Serializer, Stage 2 RED evidence is
+recorded, and the current target is Stage 3 implementation.
 
 ## Phase Map
 
@@ -1185,11 +1192,11 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-046` - Git Mutation Serializer,
-   using `docs/work/BANDIT-046/brief.md`,
-   `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, PRD-002 source
-   artifacts, the accepted Git Mutation Serializer decision, the now-resolved
-   `BANDIT-045` closeout, and `CLEAN_CODE.md`.
+1. Implement the narrow Stage 3 Git Mutation Serializer repair for
+   `BANDIT-046`, using `docs/work/BANDIT-046/red-evidence.md`,
+   `docs/specs/BANDIT-046-red-evidence.json`, the focused RED tests, PRD-002
+   source artifacts, the accepted Git Mutation Serializer decision, the
+   now-resolved `BANDIT-045` closeout, and `CLEAN_CODE.md`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -393,21 +393,28 @@ local-record landing action evidence, Stage 6 retrospective closeout, and
 bootstrap-gap disposition are recorded in `docs/work/BANDIT-045/`,
 `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-046` - Git
-Mutation Serializer. Use `docs/work/BANDIT-046/brief.md` and
-`docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`; create only RED
-evidence/tests and context updates required for Stage 2, and do not start
-implementation, review, landing, Worktree Bootstrap Contract, scheduler,
-worktree lifecycle, cockpit, PR/CI workflow, or unrelated Phase 8 work.
+**Current next action:** Implement the narrow Stage 3 Git Mutation Serializer
+repair for `BANDIT-046`. Use `docs/work/BANDIT-046/red-evidence.md`,
+`docs/specs/BANDIT-046-red-evidence.json`, and the focused RED tests in
+`test/git-mutation-serializer.test.mjs` and
+`test/claim-safety-simulation.test.mjs`; make those tests pass without
+starting review, landing, Worktree Bootstrap Contract, scheduler, full worktree
+lifecycle enablement, cockpit, PR/CI workflow, or unrelated Phase 8 work.
 
 `BANDIT-046` - Git Mutation Serializer is active as the bootstrap-gap chore for
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured creation spec is recorded
 in `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-046/brief.md`, `.bandit/events.jsonl` records
-the work-item-created event, and `.bandit/bootstrap-gaps.json` links the gap to
-`BANDIT-046` with status `active`. Stage 2 RED evidence is the next required
-artifact; do not start implementation or later gap work before RED evidence is
-recorded and verified.
+recorded in `docs/work/BANDIT-046/brief.md`, Stage 2 RED evidence is recorded
+in `docs/specs/BANDIT-046-red-evidence.json`,
+`docs/work/BANDIT-046/red-evidence.md`,
+`test/git-mutation-serializer.test.mjs`,
+`test/helpers/git-mutation-fixture.mjs`, and
+`test/claim-safety-simulation.test.mjs`, `.bandit/events.jsonl` records the
+work-item-created and red-evidence artifact-created events, and
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-046` with status
+`active`. Stage 3 implementation evidence is the next required artifact; do
+not start review, landing, retrospective, or later gap work before the RED
+tests pass and implementation evidence is recorded.
 
 `BANDIT-045` - CAS Fenced Claim Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured
@@ -599,22 +606,25 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-046` - Git Mutation Serializer (Stage 1 brief created; next action is Stage 2 RED evidence).
+**Active work item:** `BANDIT-046` - Git Mutation Serializer (Stage 2 RED evidence recorded; next action is Stage 3 implementation).
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, lifecycle event evidence
-in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. The brief records `CLEAN_CODE.md` read evidence,
-the shared `.git` mutation allow-list boundary, CLI-owned single-writer guard,
-claim-owned worktree lock boundary, Repo PM Coordinator-only unlock rule,
-contention/timeout/stale-lock/bypass refusal requirements, claim-authority
-separation from refs/bandit/* CAS, focused verification plan, and operator
-input boundary. The next required evidence is Stage 2 RED evidence for
-serializer contention, worktree-lock behavior, bypass refusal, timeout,
-stale-lock, cleanup, and authority-separation tests; implementation and later
-bootstrap-gap work must not begin before RED evidence is recorded and context
-is updated.
+`docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, Stage 2 RED evidence in
+`docs/work/BANDIT-046/red-evidence.md`, focused RED tests in
+`test/git-mutation-serializer.test.mjs` and
+`test/claim-safety-simulation.test.mjs`, a serializer fixture helper in
+`test/helpers/git-mutation-fixture.mjs`, lifecycle event evidence in
+`.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. The RED tests define the git-mutations policy
+and template requirement, `bandit git-mutation validate --json`, shared `.git`
+mutation allow-list validation, release-authorized bypass refusal, exclusive
+single-writer contention behavior, claim-authority separation, claim-owned
+worktree lock reason and unlock authority, lock-failure cleanup, timeout and
+stale-lock fail-closed behavior, and serializer-failure cleanup simulation.
+The next required evidence is Stage 3 implementation evidence; review,
+landing, retrospective, and later bootstrap-gap work must not begin before the
+RED tests pass and context is updated.
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -789,11 +799,12 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
 Fenced Claim Authority.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-046` - Git
-Mutation Serializer, using `docs/work/BANDIT-046/brief.md`,
-`docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, PRD-002 source artifacts,
-the accepted Git Mutation Serializer decision, the now-resolved CAS/fenced
-claim authority closeout, and `CLEAN_CODE.md`.
+**Expected next deliverable:** Stage 3 implementation evidence for
+`BANDIT-046` - Git Mutation Serializer, using
+`docs/work/BANDIT-046/red-evidence.md`,
+`docs/specs/BANDIT-046-red-evidence.json`, the focused RED tests, PRD-002
+source artifacts, the accepted Git Mutation Serializer decision, the
+now-resolved CAS/fenced claim authority closeout, and `CLEAN_CODE.md`.
 
 ## Known Bootstrap Gaps
 
@@ -951,7 +962,8 @@ These are expected because Bandit does not exist yet:
   Item ID, and stage, and unlocked only by Repo PM Coordinator cleanup after
   handoff verification. Its Stage 1 spec and brief are recorded in
   `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json` and
-  `docs/work/BANDIT-046/brief.md`; Stage 2 RED evidence is next.
+  `docs/work/BANDIT-046/brief.md`; Stage 2 RED evidence is recorded in
+  `docs/work/BANDIT-046/red-evidence.md`, and Stage 3 implementation is next.
 - `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
   Codex PM owns routine technical questions, and every Bandit-created worktree
@@ -1158,11 +1170,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-046` - Git Mutation Serializer,
-   using `docs/work/BANDIT-046/brief.md`,
-   `docs/specs/BANDIT-GAP-GIT-MUTATION-SERIALIZER.json`, PRD-002 source
-   artifacts, the accepted Git Mutation Serializer decision, the now-resolved
-   `BANDIT-045` closeout, and `CLEAN_CODE.md`.
+1. Implement the narrow Stage 3 Git Mutation Serializer repair for
+   `BANDIT-046`, using `docs/work/BANDIT-046/red-evidence.md`,
+   `docs/specs/BANDIT-046-red-evidence.json`, the focused RED tests, PRD-002
+   source artifacts, the accepted Git Mutation Serializer decision, the
+   now-resolved `BANDIT-045` closeout, and `CLEAN_CODE.md`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1195,11 +1207,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next `BANDIT-046` Stage 2 RED
-evidence step. Repo artifacts identify the active gap, source artifacts,
+No operator-owned input is required for the next `BANDIT-046` Stage 3
+implementation step. Repo artifacts identify the active gap, source artifacts,
 accepted Git Mutation Serializer decision, resolved CAS/fenced claim authority
-closeout, Stage 1 brief, and the operator-delegated boundary that Codex PM owns
-routine Git mechanics when repo evidence and policy are sufficient.
+closeout, Stage 1 brief, Stage 2 RED evidence, and the operator-delegated
+boundary that Codex PM owns routine Git mechanics when repo evidence and policy
+are sufficient.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

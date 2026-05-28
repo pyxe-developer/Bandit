@@ -154,6 +154,51 @@ test("claim safety simulation treats failed worktree lock cleanup as recovery-re
   });
 });
 
+test("claim safety simulation treats failed serializer cleanup as recovery-required", async () => {
+  const repo = await createInitializedClaimRepo();
+  const authority = completeClaimAuthorityEvidence();
+  authority.simulation_plan.scenarios.push({
+    name: "serializer failure cleanup",
+    operations: [
+      {
+        actor: "repo-pm-coordinator",
+        operation: "claim",
+        claim_id: "claim-a",
+        expected_current_state: "claimable",
+        idempotency_key: "claim-a-create"
+      },
+      {
+        actor: "repo-pm-coordinator",
+        operation: "git_mutation_serializer_failed",
+        claim_id: "claim-a",
+        expected_current_state: "active",
+        fencing_token: 1,
+        idempotency_key: "claim-a-serializer-failure"
+      }
+    ],
+    expected_result: {
+      final_status: "recovery_required",
+      false_active_claim: false
+    }
+  });
+  await writeCompleteClaimAuthorityFixture(repo, { authority });
+
+  const result = await runBandit(repo, [
+    "claim",
+    "simulate",
+    claimAuthorityEvidencePath("BANDIT-970"),
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.deepEqual(report.scenarios["serializer failure cleanup"], {
+    final_status: "recovery_required",
+    false_active_claim: false,
+    invariant: "failed_serializer_cleanup_preserves_recovery_state"
+  });
+});
+
 test("claim safety simulation refuses incomplete invariant coverage", async () => {
   const repo = await createInitializedClaimRepo();
   const authority = completeClaimAuthorityEvidence();
