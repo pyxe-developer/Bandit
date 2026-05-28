@@ -393,32 +393,36 @@ landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
 disposition are recorded in `docs/work/BANDIT-044/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Implement Stage 3 for `BANDIT-045` - CAS Fenced Claim
-Authority. Its structured creation spec is recorded in
+**Current next action:** Run Stage 4 review gates for `BANDIT-045` - CAS Fenced
+Claim Authority. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-045/brief.md`, Stage 2 RED evidence is recorded
-in `docs/work/BANDIT-045/red-evidence.md`, `.bandit/events.jsonl` records the
-work-item creation and RED artifact creation events, and
+in `docs/work/BANDIT-045/red-evidence.md`, Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-045/implementation-evidence.md`,
+`.bandit/events.jsonl` records the work-item and artifact creation events, and
 `.bandit/bootstrap-gaps.json` marks
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` active with linked work item
-`BANDIT-045`. The next step is implementation only: make the focused RED tests
-pass for Git refs CAS claim authority, fencing tokens, idempotency keys, claim
-projection reconciliation, stale-agent rejection, deterministic Claim Safety
-Invariant simulation, and Work-Surface Wait-For Graph cycle refusal. Do not
-start Git Mutation Serializer, Worktree Bootstrap Contract, scheduler,
-worktree lifecycle, cockpit UI/server/API work, automatic merge/push/deploy,
-product UAT approval, actor identity policy, PR/CI workflow, or any later
-bootstrap gap before Stage 3 implementation evidence is recorded and verified.
+`BANDIT-045`. The next step is Stage 4 review only: run pre-PR CodeRabbit,
+Local Qwen, aggregate review evidence, required risk/supply-chain evidence, and
+Codex PM disposition at the current review subject hash. Do not start Git
+Mutation Serializer, Worktree Bootstrap Contract, scheduler, worktree
+lifecycle, cockpit UI/server/API work, automatic merge/push/deploy, product UAT
+approval, actor identity policy, PR/CI workflow, landing verdict, landing
+action, retrospective closeout, or any later bootstrap gap before Stage 4
+review evidence is recorded and verified.
 
 `BANDIT-045` - CAS Fenced Claim Authority is active as the bootstrap-gap chore
 for `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`. Its structured creation spec and
 Stage 1 brief are recorded in
 `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json` and
-`docs/work/BANDIT-045/brief.md`. The brief records CLEAN_CODE.md read evidence
-from 2026-05-28, source artifacts, accepted Git refs backend scope, Stage
-capability scope, operator input boundary, acceptance criteria, verification
-plan, expected files, and the out-of-scope boundary keeping true parallel
-writable workstreams blocked until later gates pass.
+`docs/work/BANDIT-045/brief.md`. Stage 2 RED evidence is recorded in
+`docs/work/BANDIT-045/red-evidence.md`, and Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-045/implementation-evidence.md`. The brief
+records CLEAN_CODE.md read evidence from 2026-05-28, source artifacts, accepted
+Git refs backend scope, Stage capability scope, operator input boundary,
+acceptance criteria, verification plan, expected files, and the out-of-scope
+boundary keeping true parallel writable workstreams blocked until later gates
+pass.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its
@@ -583,7 +587,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 2 RED evidence recorded; next action is Stage 3 implementation).
+**Active work item:** `BANDIT-045` - CAS Fenced Claim Authority (Stage 3 implementation evidence recorded; next action is Stage 4 review).
 
 `BANDIT-045` has Stage 1 brief evidence in `docs/work/BANDIT-045/brief.md`,
 structured creation spec evidence in
@@ -592,9 +596,10 @@ evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json`. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-045/red-evidence.md`, with focused RED tests in
 `test/claim-authority.test.mjs`, `test/claim-safety-simulation.test.mjs`, and
-`test/work-surface-graph.test.mjs`. The next required evidence is
-`docs/work/BANDIT-045/implementation-evidence.md`; review, landing, and
-retrospective evidence must not be created before the Stage 3 gate is recorded.
+`test/work-surface-graph.test.mjs`. Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-045/implementation-evidence.md`. The next
+required evidence is Stage 4 review evidence; landing and retrospective
+evidence must not be created before the Stage 4 gate is recorded.
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -740,9 +745,10 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary.
 
-**Expected next deliverable:** Stage 3 implementation evidence for
-`BANDIT-045`, including focused claim-authority implementation, passing focused
-tests, clean-code self-check, and roadmap/current-context handoff.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-045`,
+including pre-PR CodeRabbit, Local Qwen, aggregate review evidence, required
+risk/supply-chain evidence, and Codex PM disposition at the current review
+subject hash.
 
 ## Known Bootstrap Gaps
 
@@ -880,9 +886,9 @@ These are expected because Bandit does not exist yet:
   transactions, with `.bandit` claim files as projections rather than lock
   authority. Stage 1 spec, brief evidence, and Stage 2 RED evidence are
   recorded in `docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json`,
-  `docs/work/BANDIT-045/brief.md`, and
-  `docs/work/BANDIT-045/red-evidence.md`; the next action is Stage 3
-  implementation.
+  `docs/work/BANDIT-045/brief.md`, `docs/work/BANDIT-045/red-evidence.md`, and
+  `docs/work/BANDIT-045/implementation-evidence.md`; the next action is Stage
+  4 review.
 - `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 operator decision: Git refs CAS
   provides claim authority, but shared `.git` worktree and repository plumbing
@@ -1099,14 +1105,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Implement Stage 3 for `BANDIT-045` - CAS Fenced Claim Authority. The
-   implementation must make the focused RED tests pass for refs/bandit/* Git
-   refs CAS claim authority, git update-ref --stdin compare-and-swap
-   transactions, `.bandit` projection regeneration, fencing tokens,
-   idempotency keys, Work-Surface Wait-For Graph cycle detection, stale-agent
-   rejection, duplicate side-effect prevention, claim authority/projection/
-   history disagreement, deterministic Claim Safety Invariant simulation, and
-   recovery-required behavior.
+1. Run Stage 4 review gates for `BANDIT-045` - CAS Fenced Claim Authority:
+   pre-PR CodeRabbit, Local Qwen, aggregate review evidence, required
+   risk/supply-chain evidence, and Codex PM disposition at the current review
+   subject hash.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1140,10 +1142,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next `BANDIT-045` Stage 3
-implementation step. Repo artifacts identify the active gap, source artifacts,
-accepted Git refs backend decision, Stage 1 brief, Stage 2 RED evidence, and
-Stage 3 rubric requirements.
+No operator-owned input is required for the next `BANDIT-045` Stage 4 review
+step. Repo artifacts identify the active gap, source artifacts, accepted Git
+refs backend decision, Stage 1 brief, Stage 2 RED evidence, Stage 3
+implementation evidence, and Stage 4 review requirements.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

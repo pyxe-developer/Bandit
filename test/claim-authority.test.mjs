@@ -134,6 +134,12 @@ test("claim authority validation accepts a complete Git refs CAS claim authority
     projections: ["BANDIT-970:.bandit/claims/active.json:projection"],
     fencing: ["BANDIT-970:monotonic"],
     idempotency: ["BANDIT-970:required_after_token_issuance"],
-    parallel_write_authorization: ["BANDIT-970:blocked_until_full_gate"]
+    parallel_write_authorization: ["BANDIT-970:blocked_until_full_gate"],
+    work_surface_wait_for_graph: {
+      active_claims: 1,
+      candidate_claims: 1,
+      wait_for_edges: 0,
+      cycle_paths: []
+    }
   });
 });

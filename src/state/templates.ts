@@ -231,6 +231,26 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
     ]
   },
   {
+    displayPath: "docs/templates/claim-authority.md",
+    requirements: [
+      metadata("work item", /^work_item:/im),
+      metadata("source artifacts", /^source_artifacts:/im),
+      metadata("claim authority backend", /^claim_authority_backend:/im),
+      metadata("claim state values", /^claim_state_values:/im),
+      metadata("claim record fields", /^claim_record_fields:/im),
+      metadata("operations", /^operations:/im),
+      metadata("projection artifacts", /^projection_artifacts:/im),
+      metadata("reconciliation", /^reconciliation:/im),
+      metadata("fencing", /^fencing:/im),
+      metadata("idempotency", /^idempotency:/im),
+      metadata("work surface wait-for graph", /^work_surface_wait_for_graph:/im),
+      metadata("claim safety invariants", /^claim_safety_invariants:/im),
+      metadata("simulation plan", /^simulation_plan:/im),
+      metadata("parallel write authorization", /^parallel_write_authorization:/im),
+      metadata("evidence paths", /^evidence_paths:/im)
+    ]
+  },
+  {
     displayPath: "docs/templates/operator-boundary.md",
     requirements: [
       metadata("work item", /^work_item:/im),

@@ -2,6 +2,10 @@ import { mkdir, stat } from "node:fs/promises";
 import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
+import {
+  writeDefaultClaimAuthorityPolicy,
+  writeDefaultClaimAuthorityTemplate
+} from "../state/claim-authority.js";
 import { writeDefaultConfig } from "../state/config.js";
 import { appendLifecycleEvent } from "../state/events.js";
 import { writeDefaultHeartbeatPolicy } from "../state/heartbeat-policy.js";
@@ -35,6 +39,10 @@ export async function initBandit(repoRoot: string) {
     paths.agentEvaluationPolicy
   );
   const autoLandingPolicyExists = await pathExists(paths.autoLandingPolicy);
+  const claimAuthorityPolicyExists = await pathExists(paths.claimAuthorityPolicy);
+  const claimAuthorityTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/claim-authority.md`
+  );
   const coordinationAuthorityPolicyExists = await pathExists(
     paths.coordinationAuthorityPolicy
   );
@@ -81,6 +89,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!autoLandingPolicyExists) {
     await writeDefaultAutoLandingPolicy(paths.autoLandingPolicy);
+  }
+
+  if (!claimAuthorityPolicyExists) {
+    await writeDefaultClaimAuthorityPolicy(paths.claimAuthorityPolicy);
+  }
+
+  if (!claimAuthorityTemplateExists) {
+    await writeDefaultClaimAuthorityTemplate(repoRoot);
   }
 
   if (!coordinationAuthorityPolicyExists) {

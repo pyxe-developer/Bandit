@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { validateAgentEvaluationHarness } from "../state/agent-evaluation-harness.js";
 import { validateAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { validateBootstrapGaps } from "../state/bootstrap-gaps.js";
+import { validateClaimAuthority } from "../state/claim-authority.js";
 import { validateCodeRabbitReviewArtifacts } from "../state/coderabbit-review.js";
 import { validateCoordinationAuthority } from "../state/coordination-authority.js";
 import { validateCoordinationLogs } from "../state/coordination-log.js";
@@ -42,6 +43,7 @@ export async function validateBandit(repoRoot: string) {
   await validateRiskClassificationGate(repoRoot);
   await validateSupplyChainGate(repoRoot);
   await validateCoordinationAuthority(repoRoot);
+  await validateClaimAuthority(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);

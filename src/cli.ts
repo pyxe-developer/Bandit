@@ -3,6 +3,7 @@ import { agentEvaluation } from "./commands/agent-evaluation.js";
 import { initBandit } from "./commands/init.js";
 import { createArtifact } from "./commands/artifact-create.js";
 import { autoLandCheck } from "./commands/auto-land-check.js";
+import { claim } from "./commands/claim.js";
 import { cockpit } from "./commands/cockpit.js";
 import { coderabbitReview } from "./commands/coderabbit-review.js";
 import { coordination } from "./commands/coordination.js";
@@ -199,6 +200,12 @@ async function main() {
     return;
   }
 
+  if (command === "claim") {
+    const result = await claim(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "cockpit") {
     const result = await cockpit(process.cwd(), args);
     process.stdout.write(result.output);
@@ -206,7 +213,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit>`);
   process.exitCode = 1;
 }
 

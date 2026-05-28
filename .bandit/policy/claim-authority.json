@@ -1,0 +1,36 @@
+{
+  "contract_version": 1,
+  "policy_id": "cas-fenced-claim-authority",
+  "authority_backend": {
+    "authority": "git_refs",
+    "ref_namespace": "refs/bandit/*",
+    "transaction_primitive": "git update-ref --stdin",
+    "compare_and_swap": "required"
+  },
+  "projection_surfaces": [
+    ".bandit/claims/",
+    "in_flight_registry",
+    "cockpit_status",
+    "state_index"
+  ],
+  "required_claim_record_fields": [
+    "claim_id",
+    "work_item",
+    "stage",
+    "declared_work_surfaces",
+    "owner",
+    "status",
+    "expected_state",
+    "fencing_token",
+    "idempotency_keys",
+    "recovery_metadata",
+    "projection_ref",
+    "reconciliation_evidence"
+  ],
+  "required_state_change_fields_after_token": [
+    "expected_current_state",
+    "fencing_token",
+    "idempotency_key"
+  ],
+  "release_authorized_decisions": []
+}
