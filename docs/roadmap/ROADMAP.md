@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run the Stage 4 Local Qwen adversarial review for
+**Current next step:** Record aggregate Stage 4 review evidence for
 `BANDIT-044` - Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
 `docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
 `docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
@@ -27,12 +27,14 @@ evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
 `.bandit/bootstrap-gaps.json`. `docs/work/BANDIT-044/coderabbit-review.md`
 records Stage 4 pre-PR CodeRabbit pass evidence at source head
 `9dff2b66ee95286c764433a78134a173f2baaee5`; the scoped CodeRabbit CLI review
-completed with findings 0. Do not run aggregate review evidence, landing
-evidence, unrelated Phase 8 work, local server/API mode, state-index
+completed with findings 0. `docs/work/BANDIT-044/local-qwen-review.md` records
+Stage 4 Local Qwen pass evidence at source head
+`1e3e02e6e6a7368f789d52b1d9aa7aae4fbf8923` with no findings. Do not run
+landing evidence, unrelated Phase 8 work, local server/API mode, state-index
 persistence, scheduler execution, worktree lifecycle, claim leases, work
 surface reservations, automatic merge/push/deploy behavior, product UAT
 approval, actor identity policy, PR/CI workflow, or another unrelated work item
-before Local Qwen review evidence is recorded.
+before aggregate Stage 4 review evidence is recorded.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its structured creation spec
@@ -47,8 +49,10 @@ artifact events, and
 `BANDIT-044`. Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 pre-PR CodeRabbit
 evidence is recorded in `docs/work/BANDIT-044/coderabbit-review.md` with
-verdict `pass`, findings 0, and source-drift status current; Local Qwen and
-aggregate review evidence have not started.
+verdict `pass`, findings 0, and source-drift status current. Stage 4 Local
+Qwen evidence is recorded in `docs/work/BANDIT-044/local-qwen-review.md` with
+verdict `pass`, findings 0, and source-drift status current; aggregate review
+evidence has not started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its
@@ -1153,15 +1157,16 @@ Current rule:
 
 Current priority:
 
-1. Run the Stage 4 Local Qwen adversarial review for `BANDIT-044` -
+1. Record aggregate Stage 4 review evidence for `BANDIT-044` -
    Operator Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log
    Authority is landed and closed out, and `BANDIT-044` now has Stage 1 brief
    evidence, Stage 2 RED evidence, Stage 3 implementation evidence, focused
    tests, active bootstrap-gap linkage, and Stage 4 pre-PR CodeRabbit pass
    evidence recorded in `docs/work/BANDIT-044/coderabbit-review.md` after the
-   scoped provider run completed with findings 0. Do not run aggregate review
-   evidence, landing evidence, or unrelated Phase 8 work before Local Qwen
-   review evidence is recorded.
+   scoped provider run completed with findings 0. Stage 4 Local Qwen pass
+   evidence is recorded in `docs/work/BANDIT-044/local-qwen-review.md`. Do not
+   run landing evidence or unrelated Phase 8 work before aggregate review
+   evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
