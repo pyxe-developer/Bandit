@@ -393,20 +393,22 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-042/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-043` /
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`: pre-PR CodeRabbit, Local Qwen,
-aggregate review evidence, and Codex PM disposition at the current
-`review_subject_hash`. `BANDIT-043` - Coordination Event Log Authority has
-Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`, structured creation
-spec evidence in
+**Current next action:** Record the Stage 5 landing verdict for `BANDIT-043` /
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
+Event Log Authority has Stage 1 brief evidence in
+`docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
 `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
 evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
 `test/coordination-authority.test.mjs`, Stage 3 implementation evidence in
-`docs/work/BANDIT-043/implementation-evidence.md`, gap-ledger routing in
+`docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
+pass evidence in `docs/work/BANDIT-043/coderabbit-review.md`, Stage 4 Local
+Qwen pass evidence in `docs/work/BANDIT-043/local-qwen-review.md`, aggregate
+Stage 4 review evidence with current `review_subject_hash` in
+`docs/work/BANDIT-043/review-evidence.md`, gap-ledger routing in
 `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-`.bandit/events.jsonl`. Do not start landing, retrospective, another
-bootstrap-gap chore, or unrelated Phase 8 work before Stage 4 review evidence
-is recorded.
+`.bandit/events.jsonl`. Do not start landing action, retrospective, another
+bootstrap-gap chore, or unrelated Phase 8 work before the Stage 5 Landing
+Agent verdict is recorded.
 
 `BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
 chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
@@ -418,8 +420,12 @@ recorded in `docs/work/BANDIT-043/red-evidence.md`, with focused tests in
 the gap active with linked work item `BANDIT-043`, and `.bandit/events.jsonl`
 records the work-item-created and artifact-created events. Stage 3
 implementation evidence is recorded in
-`docs/work/BANDIT-043/implementation-evidence.md`; Stage 4 review is required
-next.
+`docs/work/BANDIT-043/implementation-evidence.md`; Stage 4 pre-PR CodeRabbit
+pass evidence is recorded in `docs/work/BANDIT-043/coderabbit-review.md`, Local
+Qwen pass evidence is recorded in
+`docs/work/BANDIT-043/local-qwen-review.md`, and aggregate Stage 4 review
+evidence is recorded in `docs/work/BANDIT-043/review-evidence.md`. Stage 5
+landing verdict is required next.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -565,13 +571,16 @@ evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
 `test/coordination-authority.test.mjs`, gap-ledger routing in
 `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
 `.bandit/events.jsonl`. Stage 3 implementation evidence is recorded in
-`docs/work/BANDIT-043/implementation-evidence.md`. The next action is to run
-Stage 4 review gates for `BANDIT-043` /
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`: pre-PR CodeRabbit, Local Qwen,
-aggregate review evidence, and Codex PM disposition at the current
-`review_subject_hash`. Do not start landing, retrospective, another
-bootstrap-gap chore, or unrelated Phase 8 work before Stage 4 review evidence
-is recorded.
+`docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
+pass evidence is recorded in `docs/work/BANDIT-043/coderabbit-review.md`, Local
+Qwen pass evidence is recorded in
+`docs/work/BANDIT-043/local-qwen-review.md`, and aggregate Stage 4 review
+evidence with current `review_subject_hash` is recorded in
+`docs/work/BANDIT-043/review-evidence.md`. The next action is to record the
+Stage 5 landing verdict for `BANDIT-043` /
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Do not start landing action,
+retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
+the Stage 5 Landing Agent verdict is recorded.
 
 `BANDIT-042` has Stage 1 brief evidence in `docs/work/BANDIT-042/brief.md`,
 Stage 2 RED evidence in `docs/work/BANDIT-042/red-evidence.md`, focused RED
@@ -1027,20 +1036,22 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-043` /
-   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`: pre-PR CodeRabbit, Local
-   Qwen, aggregate review evidence, and Codex PM disposition at the current
-   `review_subject_hash`. `BANDIT-043` - Coordination Event Log Authority has
-   Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`, structured
-   creation spec evidence in
+1. Record the Stage 5 landing verdict for `BANDIT-043` /
+   `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
+   Event Log Authority has Stage 1 brief evidence in
+   `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
    `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
    evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
    `test/coordination-authority.test.mjs`, Stage 3 implementation evidence in
-   `docs/work/BANDIT-043/implementation-evidence.md`, gap-ledger routing in
+   `docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
+   pass evidence in `docs/work/BANDIT-043/coderabbit-review.md`, Stage 4 Local
+   Qwen pass evidence in `docs/work/BANDIT-043/local-qwen-review.md`,
+   aggregate Stage 4 review evidence with current `review_subject_hash` in
+   `docs/work/BANDIT-043/review-evidence.md`, gap-ledger routing in
    `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-   `.bandit/events.jsonl`. Do not start landing, retrospective, another
-   bootstrap-gap chore, or unrelated Phase 8 work before Stage 4 review
-   evidence is recorded.
+   `.bandit/events.jsonl`. Do not start landing action, retrospective, another
+   bootstrap-gap chore, or unrelated Phase 8 work before the Stage 5 Landing
+   Agent verdict is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
