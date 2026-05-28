@@ -415,9 +415,9 @@ improvement disposition are recorded in
 `docs/work/BANDIT-033/retrospective.md`; the routed follow-up candidate is
 `BANDIT-033-COCKPIT-SHELL-HARDENING`.
 
-**Current next action:** Run the local-record landing action for `BANDIT-039` -
-Agent Evaluation Harness. Do not start Stage 6 retrospective closeout or
-unrelated Phase 8 work first. `BANDIT-038` -
+**Current next action:** Run Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-039` - Agent Evaluation Harness. Do not start the next
+bootstrap-gap chore or unrelated Phase 8 work first. `BANDIT-038` -
 Skill Lifecycle Contract is landed and closed out: Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
 evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4 review evidence
@@ -439,9 +439,10 @@ is recorded in `docs/work/BANDIT-039/local-qwen-review.md`, and aggregate Stage
 `d74ec2b37161cc3fe5a497d07fd27f4f721205f6fd1d7f6bbef6ff1c70fa6511` is
 recorded in `docs/work/BANDIT-039/review-evidence.md`. Stage 5 landing verdict
 evidence is recorded in `docs/work/BANDIT-039/landing-verdict.md` with final
-verdict `safe-to-land`. The slice is `ready-to-land`, not landed, until
-`docs/work/BANDIT-039/landing-action.md` records local-record landing action
-evidence.
+verdict `safe-to-land`. Local-record landing action evidence is recorded in
+`docs/work/BANDIT-039/landing-action.md`. The work item is landed but not
+closed until Stage 6 retrospective closeout and bootstrap-gap disposition are
+recorded.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -519,10 +520,12 @@ recorded in `docs/work/BANDIT-039/implementation-evidence.md`, Stage 4 review
 evidence is recorded in `docs/work/BANDIT-039/review-evidence.md`, Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-039/landing-verdict.md`, and
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-039/landing-action.md`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is active in `.bandit/bootstrap-gaps.json`.
-The next action is local-record landing action evidence for `BANDIT-039`; do
-not start Stage 6 retrospective closeout, the next bootstrap-gap chore, or
-unrelated Phase 8 work first.
+The next action is Stage 6 retrospective closeout and bootstrap-gap disposition
+for `BANDIT-039`; do not start the next bootstrap-gap chore or unrelated Phase
+8 work first.
 `BANDIT-GAP-STRUCTURED-RETROSPECTIVE-MINING` is resolved by `BANDIT-036`.
 `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is resolved by `BANDIT-037`.
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved by `BANDIT-038`.
@@ -578,10 +581,10 @@ Create Landing Work Item Field; `BANDIT-036` - Structured Retrospective Mining;
 `BANDIT-037` - Workflow Trial Decision Guardrails; `BANDIT-038` - Skill
 Lifecycle Contract.
 
-**Expected next deliverable:** Local-record landing action evidence for
-`BANDIT-039` - Agent Evaluation Harness, based on the recorded `safe-to-land`
-Stage 5 landing verdict before any retrospective closeout, next bootstrap-gap
-chore, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-039` - Agent Evaluation Harness, based on the recorded
+landing action evidence before any next bootstrap-gap chore or unrelated Phase
+8 work.
 
 ## Known Bootstrap Gaps
 
@@ -646,7 +649,9 @@ These are expected because Bandit does not exist yet:
   pass evidence, Local Qwen pass evidence, and aggregate review evidence are
   recorded in `docs/work/BANDIT-039/`. Stage 5 landing verdict evidence is
   recorded in `docs/work/BANDIT-039/landing-verdict.md` with final verdict
-  `safe-to-land`. The first harness
+  `safe-to-land`. Local-record landing action evidence is recorded in
+  `docs/work/BANDIT-039/landing-action.md`. The next action is Stage 6
+  retrospective closeout and bootstrap-gap disposition. The first harness
   must be benchmark-only and offline/replay-based: fixed packets for Qwen,
   Claude or paid reviewers, skill variants, reviewer profiles, and component
   variants, with repo-derived failure-mode stratification, visible calibration
@@ -929,10 +934,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-039` - Agent Evaluation Harness now
-   that the bootstrap-gap chore has a structured spec, Stage 1 brief, Stage 2
-   RED evidence, Stage 3 implementation evidence, and active gap-ledger link.
-   Do not start unrelated Phase 8 work first.
+1. Run Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-039` - Agent Evaluation Harness now that the bootstrap-gap chore has
+   Stage 5 landing verdict evidence, local-record landing action evidence, and
+   an active gap-ledger link. Do not start the next bootstrap-gap chore or
+   unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -968,10 +974,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before running Stage 4 review gates for
-`BANDIT-039` - Agent Evaluation Harness. Repo artifacts identify the source gap,
-queue order, benchmark-only scope, replay-only boundary, source artifacts, and
-dependency on stable Skill Lifecycle Contract evidence. Halt only if the next
+No operator-owned input is required before running Stage 6 retrospective
+closeout and bootstrap-gap disposition for `BANDIT-039` - Agent Evaluation
+Harness. Repo artifacts identify the source gap, queue order, benchmark-only
+scope, replay-only boundary, source artifacts, landing evidence, and dependency
+on stable Skill Lifecycle Contract evidence. Halt only if the next
 step would change product direction, UAT policy, workflow policy beyond
 defining the already queued benchmark-only evaluation harness, business
 tradeoffs, cost/risk posture, external service setup, paid reviewer routing,

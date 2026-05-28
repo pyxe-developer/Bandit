@@ -16,9 +16,9 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run the local-record landing action for `BANDIT-039` -
-Agent Evaluation Harness. Do not start Stage 6 retrospective closeout or
-unrelated Phase 8 work first. `BANDIT-038` -
+**Current next step:** Run Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-039` - Agent Evaluation Harness. Do not start the next
+bootstrap-gap chore or unrelated Phase 8 work first. `BANDIT-038` -
 Skill Lifecycle Contract is landed and closed out: Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 pre-PR CodeRabbit pass
 evidence, Stage 4 Local Qwen pass evidence, aggregate Stage 4 review evidence
@@ -40,9 +40,10 @@ evidence at `docs/work/BANDIT-039/review-evidence.md` with current review
 subject hash `d74ec2b37161cc3fe5a497d07fd27f4f721205f6fd1d7f6bbef6ff1c70fa6511`,
 Stage 5 landing verdict evidence at `docs/work/BANDIT-039/landing-verdict.md`
 with final verdict `safe-to-land`, and active gap-ledger link in
-`.bandit/bootstrap-gaps.json`. The slice is `ready-to-land`, not landed, until
-`docs/work/BANDIT-039/landing-action.md` records local-record landing action
-evidence.
+`.bandit/bootstrap-gaps.json`. Local-record landing action evidence is recorded
+in `docs/work/BANDIT-039/landing-action.md`. The work item is landed but not
+closed until Stage 6 retrospective closeout and bootstrap-gap disposition are
+recorded.
 
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out: Stage
 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 pre-PR
@@ -417,8 +418,9 @@ and bootstrap-gap disposition are recorded in `docs/work/BANDIT-038/` and
 chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`; its structured creation spec,
 Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
 CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate Stage
-4 review evidence, and Stage 5 landing verdict evidence are recorded. The next
-required action is local-record landing action evidence for `BANDIT-039`.
+4 review evidence, Stage 5 landing verdict evidence, and local-record landing
+action evidence are recorded. The next required action is Stage 6 retrospective
+closeout and bootstrap-gap disposition for `BANDIT-039`.
 `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is constrained to a benchmark-only
 offline/replay harness with fixed Qwen, Claude or paid-reviewer, skill,
 reviewer-profile, and component packets, repo-derived failure-mode
@@ -719,8 +721,10 @@ is landed and closed out as the
 `BANDIT-038` is landed and closed out as the
 `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` bootstrap-gap chore. `BANDIT-039` is the
 active bootstrap-gap chore for `BANDIT-GAP-AGENT-EVALUATION-HARNESS`; Stage 2
-RED evidence and Stage 3 implementation evidence are recorded, and the next
-target is Stage 4 review gates.
+RED evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage
+5 landing verdict evidence, and local-record landing action evidence are
+recorded, and the next target is Stage 6 retrospective closeout and
+bootstrap-gap disposition.
 
 ## Phase Map
 
@@ -1035,12 +1039,11 @@ Current rule:
 
 Current priority:
 
-1. Run the local-record landing action for `BANDIT-039` - Agent Evaluation Harness now
-   that the bootstrap-gap chore has a structured spec, Stage 1 brief, Stage 2
-   RED evidence, Stage 3 implementation evidence, Stage 4 CodeRabbit pass
-   evidence, Stage 4 Local Qwen pass evidence, aggregate review evidence, Stage
-   5 landing verdict evidence, and active gap-ledger link.
-   Do not start Stage 6 retrospective closeout or unrelated Phase 8 work first.
+1. Run Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-039` - Agent Evaluation Harness now that the bootstrap-gap chore has
+   Stage 5 landing verdict evidence, local-record landing action evidence, and
+   an active gap-ledger link. Do not start the next bootstrap-gap chore or
+   unrelated Phase 8 work first.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
