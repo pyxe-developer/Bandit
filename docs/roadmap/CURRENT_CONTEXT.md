@@ -393,22 +393,20 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-042/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record the Stage 5 landing verdict for `BANDIT-043` /
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
-Event Log Authority has Stage 1 brief evidence in
-`docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
-evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
-`test/coordination-authority.test.mjs`, Stage 3 implementation evidence in
-`docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
-pass evidence in `docs/work/BANDIT-043/coderabbit-review.md`, Stage 4 Local
-Qwen pass evidence in `docs/work/BANDIT-043/local-qwen-review.md`, aggregate
-Stage 4 review evidence with current `review_subject_hash` in
-`docs/work/BANDIT-043/review-evidence.md`, gap-ledger routing in
-`.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-`.bandit/events.jsonl`. Do not start landing action, retrospective, another
-bootstrap-gap chore, or unrelated Phase 8 work before the Stage 5 Landing
-Agent verdict is recorded.
+**Current next action:** Repair the Stage 5 auto-landing blocker for
+`BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. The Stage 5
+landing verdict is recorded in `docs/work/BANDIT-043/landing-verdict.md` with
+`final_verdict: safe-to-land`, and `npm run bandit -- land-check BANDIT-043`
+passes. `npm run bandit -- auto-land-check BANDIT-043` is blocked by missing
+layered risk-classification evidence and missing supply-chain gate evidence,
+recorded in `docs/work/BANDIT-043/landing-blocker.md`. Next, register explicit
+`.bandit/policy/risk-classifications/BANDIT-043-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-043-supply-chain-gate.json` evidence,
+wire them into `.bandit/policy/risk-classification.json` and
+`.bandit/policy/supply-chain-gate.json`, refresh Stage 4/Stage 5 evidence if
+the review-subject hash changes, then rerun auto-land-check and local-record
+landing. Do not start retrospective, another bootstrap-gap chore, or unrelated
+Phase 8 work before landing action evidence is recorded.
 
 `BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
 chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
@@ -423,9 +421,12 @@ implementation evidence is recorded in
 `docs/work/BANDIT-043/implementation-evidence.md`; Stage 4 pre-PR CodeRabbit
 pass evidence is recorded in `docs/work/BANDIT-043/coderabbit-review.md`, Local
 Qwen pass evidence is recorded in
-`docs/work/BANDIT-043/local-qwen-review.md`, and aggregate Stage 4 review
-evidence is recorded in `docs/work/BANDIT-043/review-evidence.md`. Stage 5
-landing verdict is required next.
+`docs/work/BANDIT-043/local-qwen-review.md`, aggregate Stage 4 review evidence
+is recorded in `docs/work/BANDIT-043/review-evidence.md`, and Stage 5 landing
+verdict evidence is recorded in `docs/work/BANDIT-043/landing-verdict.md`.
+Stage 5 auto-landing blocker evidence is recorded in
+`docs/work/BANDIT-043/landing-blocker.md`; repair that blocker before local
+landing action.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -574,13 +575,16 @@ evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
 `docs/work/BANDIT-043/implementation-evidence.md`, Stage 4 pre-PR CodeRabbit
 pass evidence is recorded in `docs/work/BANDIT-043/coderabbit-review.md`, Local
 Qwen pass evidence is recorded in
-`docs/work/BANDIT-043/local-qwen-review.md`, and aggregate Stage 4 review
-evidence with current `review_subject_hash` is recorded in
-`docs/work/BANDIT-043/review-evidence.md`. The next action is to record the
-Stage 5 landing verdict for `BANDIT-043` /
-`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Do not start landing action,
-retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
-the Stage 5 Landing Agent verdict is recorded.
+`docs/work/BANDIT-043/local-qwen-review.md`, aggregate Stage 4 review evidence
+with current `review_subject_hash` is recorded in
+`docs/work/BANDIT-043/review-evidence.md`, and Stage 5 landing verdict evidence
+is recorded in `docs/work/BANDIT-043/landing-verdict.md`. The next action is to
+repair the Stage 5 auto-landing blocker recorded in
+`docs/work/BANDIT-043/landing-blocker.md` by adding explicit layered
+risk-classification and supply-chain gate evidence for `BANDIT-043`, then
+rerunning auto-land-check and local-record landing. Do not start retrospective,
+another bootstrap-gap chore, or unrelated Phase 8 work before landing action
+evidence is recorded.
 
 `BANDIT-042` has Stage 1 brief evidence in `docs/work/BANDIT-042/brief.md`,
 Stage 2 RED evidence in `docs/work/BANDIT-042/red-evidence.md`, focused RED
@@ -1036,7 +1040,7 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record the Stage 5 landing verdict for `BANDIT-043` /
+1. Repair the Stage 5 auto-landing blocker for `BANDIT-043` /
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
    Event Log Authority has Stage 1 brief evidence in
    `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
@@ -1047,11 +1051,14 @@ The current priority is:
    pass evidence in `docs/work/BANDIT-043/coderabbit-review.md`, Stage 4 Local
    Qwen pass evidence in `docs/work/BANDIT-043/local-qwen-review.md`,
    aggregate Stage 4 review evidence with current `review_subject_hash` in
-   `docs/work/BANDIT-043/review-evidence.md`, gap-ledger routing in
-   `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-   `.bandit/events.jsonl`. Do not start landing action, retrospective, another
-   bootstrap-gap chore, or unrelated Phase 8 work before the Stage 5 Landing
-   Agent verdict is recorded.
+   `docs/work/BANDIT-043/review-evidence.md`, Stage 5 landing verdict evidence
+   in `docs/work/BANDIT-043/landing-verdict.md`, and Stage 5 blocker evidence
+   in `docs/work/BANDIT-043/landing-blocker.md`. Add explicit layered
+   risk-classification and supply-chain gate evidence for `BANDIT-043`, refresh
+   Stage 4/Stage 5 evidence if the review-subject hash changes, then rerun
+   auto-land-check and local-record landing. Do not start retrospective,
+   another bootstrap-gap chore, or unrelated Phase 8 work before landing action
+   evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1087,12 +1094,14 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before implementing Stage 3 for
-`BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Repo artifacts
-identify the active work item, source artifacts, rationale, operator-confirmed
-append-only workflow/event history authority, projection rebuildability
-requirement, and the CAS claim-authority exception boundary. Halt only if
-implementation would change product direction, UAT policy, workflow policy beyond
+No operator-owned input is required before repairing the Stage 5 auto-landing
+blocker for `BANDIT-043` /
+`BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Repo artifacts identify the
+active work item, source artifacts, rationale, operator-confirmed append-only
+workflow/event history authority, projection rebuildability requirement, CAS
+claim-authority exception boundary, and the missing layered risk-classification
+and supply-chain gate evidence needed for local-record landing. Halt only if
+the repair would change product direction, UAT policy, workflow policy beyond
 defining the active coordination event-log authority gap, business tradeoffs,
 cost/risk posture, external service setup, paid reviewer routing, live routing,
 scheduler authority, claim/worktree authority beyond the recorded CAS exception

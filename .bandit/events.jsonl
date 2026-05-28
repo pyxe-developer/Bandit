@@ -72,3 +72,4 @@
 {"type":"work_item_created","work_item":"BANDIT-043","message":"Created work item BANDIT-043 from docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json"}
 {"type":"artifact_created","work_item":"BANDIT-043","message":"Created red_evidence artifact at docs/work/BANDIT-043/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-043","message":"Created implementation_evidence artifact at docs/work/BANDIT-043/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-043","message":"Created landing_verdict artifact at docs/work/BANDIT-043/landing-verdict.md"}
