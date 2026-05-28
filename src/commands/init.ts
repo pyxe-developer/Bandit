@@ -11,6 +11,10 @@ import {
 } from "../state/coordination-authority.js";
 import { writeDefaultInputQuarantinePolicy } from "../state/input-quarantine.js";
 import { writeDefaultLandingAgentContract } from "../state/landing-agent-contract.js";
+import {
+  writeDefaultOperatorBoundaryPolicy,
+  writeDefaultOperatorBoundaryTemplate
+} from "../state/operator-boundary.js";
 import { getBanditPaths } from "../state/paths.js";
 import {
   writeDefaultRiskClassificationPolicy,
@@ -42,6 +46,12 @@ export async function initBandit(repoRoot: string) {
     paths.inputQuarantinePolicy
   );
   const landingAgentContractExists = await pathExists(paths.landingAgentContract);
+  const operatorBoundaryPolicyExists = await pathExists(
+    paths.operatorBoundaryPolicy
+  );
+  const operatorBoundaryTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/operator-boundary.md`
+  );
   const riskClassificationPolicyExists = await pathExists(
     paths.riskClassificationPolicy
   );
@@ -93,6 +103,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!landingAgentContractExists) {
     await writeDefaultLandingAgentContract(paths.landingAgentContract);
+  }
+
+  if (!operatorBoundaryPolicyExists) {
+    await writeDefaultOperatorBoundaryPolicy(paths.operatorBoundaryPolicy);
+  }
+
+  if (!operatorBoundaryTemplateExists) {
+    await writeDefaultOperatorBoundaryTemplate(repoRoot);
   }
 
   if (!riskClassificationPolicyExists) {

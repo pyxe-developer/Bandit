@@ -1,0 +1,13 @@
+# Operator Fail-Closed Boundary Template
+
+work_item:
+operator_blocking_gates:
+codex_owned_technical_decisions:
+derivable_operational_drift:
+cli_owned_mechanical_repair:
+repair_overreach_refusals:
+operator_escalation_overuse_smells:
+required_evidence:
+source_artifacts:
+escalation_targets:
+evidence_paths:

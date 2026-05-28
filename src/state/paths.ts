@@ -22,6 +22,7 @@ export function getBanditPaths(repoRoot: string) {
     heartbeatPolicy: path.join(policyRoot, "heartbeat-chore-agent.json"),
     inputQuarantinePolicy: path.join(policyRoot, "input-quarantine.json"),
     landingAgentContract: path.join(policyRoot, "landing-agent.json"),
+    operatorBoundaryPolicy: path.join(policyRoot, "operator-boundary.json"),
     riskClassificationPolicy: path.join(policyRoot, "risk-classification.json"),
     skillLifecyclePolicy: path.join(policyRoot, "skill-lifecycle-contracts.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),

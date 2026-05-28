@@ -27,7 +27,8 @@ const requiredTemplateFiles = [
   "docs/templates/local-qwen-review.md",
   "docs/templates/coderabbit-review.md",
   "docs/templates/skill-lifecycle-contract.md",
-  "docs/templates/coordination-authority.md"
+  "docs/templates/coordination-authority.md",
+  "docs/templates/operator-boundary.md"
 ];
 
 const validTemplates = {
@@ -189,6 +190,20 @@ projection_reconciliation:
 claim_authority_exception:
 rationale:
 evidence_paths:
+`,
+  "docs/templates/operator-boundary.md": `# Operator Fail-Closed Boundary Template
+
+work_item:
+operator_blocking_gates:
+codex_owned_technical_decisions:
+derivable_operational_drift:
+cli_owned_mechanical_repair:
+repair_overreach_refusals:
+operator_escalation_overuse_smells:
+required_evidence:
+source_artifacts:
+escalation_targets:
+evidence_paths:
 `
 };
 
@@ -205,6 +220,64 @@ const validSmellCatalog = {
       default_action: "require_qwen_review",
       escalation_target: "local-qwen-baseline",
       required_evidence: ["review-evidence.md"]
+    },
+    {
+      id: "BANDIT-SMELL-OPERATOR-INPUT-BOUNDARY",
+      name: "Operator Input Boundary",
+      category: "operator_boundary",
+      trigger:
+        "Required product direction, UAT, policy, business, explicit cost/risk, irreversible operational-risk, or genuinely ambiguous scope input is missing.",
+      severity: "blocker",
+      default_action: "halt_for_operator_input",
+      escalation_target: "operator",
+      required_evidence: ["operator-input-status"]
+    },
+    {
+      id: "BANDIT-SMELL-OPERATOR-ESCALATION-OVERUSE",
+      name: "Operator Escalation Overuse",
+      category: "operator_boundary",
+      trigger:
+        "Derivable operational drift is escalated to the operator even though approved repo artifacts determine the intended state.",
+      severity: "blocker",
+      default_action: "repair_artifact",
+      escalation_target: "codex-pm",
+      required_evidence: [
+        "operational-drift-evidence",
+        "approved-source-artifacts",
+        "operator-gate-not-required",
+        "mechanical-repair-path"
+      ]
+    },
+    {
+      id: "BANDIT-SMELL-TECHNICAL-QUESTION-ESCALATION",
+      name: "Technical Question Escalation",
+      category: "operator_boundary",
+      trigger:
+        "A workflow asks the operator to decide routine technical routing when repo evidence and accepted policy are sufficient.",
+      severity: "blocker",
+      default_action: "repair_artifact",
+      escalation_target: "codex-pm",
+      required_evidence: [
+        "codex-owned-technical-decision",
+        "repo-evidence",
+        "accepted-policy",
+        "operator-gate-not-required"
+      ]
+    },
+    {
+      id: "BANDIT-SMELL-MECHANICAL-REPAIR-OVERREACH",
+      name: "Mechanical Repair Overreach",
+      category: "operator_boundary",
+      trigger:
+        "A mechanical repair path invents product scope, grants approvals, overrides policy, resolves ambiguous cost/risk, performs irreversible operational action, or force-resolves unsafe claim recovery.",
+      severity: "blocker",
+      default_action: "halt_for_operator_input",
+      escalation_target: "operator",
+      required_evidence: [
+        "operator-owned-gate",
+        "repair-overreach-evidence",
+        "halted-action"
+      ]
     }
   ]
 };

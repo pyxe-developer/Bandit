@@ -1,0 +1,73 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-044",
+  "status": "pass",
+  "summary": "The Operator Fail-Closed Boundary repair is implemented as a repo-native policy, required template, focused validator, CLI command, validate/init wiring, and validation-test fixture update without broadening into work intake, operator inbox, claimability reports, claim leases, worktree lifecycle, scheduler execution, local server/API mode, cockpit UI work, PR/CI execution, automatic merge/push/deploy behavior, paid routing, live routing changes, installed global skill edits, external service integration, product UAT approval, or another bootstrap-gap chore.",
+  "implementation_summary": [
+    "Added src/state/operator-boundary.ts to validate the operator fail-closed boundary policy, required template fields, release-authorized decision evidence, operator-blocking gate families, Codex-owned technical decision families, derivable operational drift families, mechanical-repair evidence fields, operator-escalation-overuse refusal, mechanical-repair overreach refusal, repair-overreach refusal coverage, and smell-disposition evidence shape.",
+    "Added bandit operator-boundary validate [--json] and wired the command into the CLI so the boundary is directly inspectable through repo-native command authority.",
+    "Wired init, validate, path registration, and generic template validation so fresh repos receive .bandit/policy/operator-boundary.json and docs/templates/operator-boundary.md, and bandit validate fails closed if either required surface is missing or malformed.",
+    "Added .bandit/policy/operator-boundary.json and docs/templates/operator-boundary.md as the repo-native contract surfaces for the operator fail-closed boundary.",
+    "Updated validation fixtures so initialized test repos and required-template checks include the new operator-boundary template and required operator-boundary smell IDs without weakening existing fail-closed validator tests.",
+    "Kept the committed operator-boundary policy at an empty release_authorized_decisions set. Configured per-work-item decision evidence is covered by the focused operator-boundary tests, while the committed default does not make temporary repos inherit unresolved BANDIT-044 evidence dependencies.",
+    "Kept the repair out of Work Intake Ledger, Work Intake Triage Skill, Operator Inbox notification flow, Repo PM Coordinator protocol, claimability reports, CAS claim operations, claim leases, fencing tokens, idempotency-key enforcement, work-surface reservations, Git Mutation Serializer behavior, worktree lifecycle, scheduler execution, event-driven wakeups, observability traces, Stage Capability Scope, Token-Cost Failsafe, Evidence Freshness SLOs, local server/API mode, cockpit UI implementation, PR/CI execution, automatic merge/push/deploy behavior, installed global skill edits, paid reviewer routing, live routing changes, external service integration, product UAT approval, actor identity policy, and another bootstrap-gap chore."
+  ],
+  "verification": [
+    "node --test test/operator-boundary.test.mjs passed with 9 tests after verifying the RED failure in the current worktree.",
+    "node --test test/validate.test.mjs passed with 22 tests after validation fixtures were updated for the new required operator-boundary template.",
+    "node --test test/init.test.mjs passed with 2 tests.",
+    "npm run typecheck passed.",
+    "npm test passed with 339 tests.",
+    "npm run bandit -- operator-boundary validate --json passed for the committed default policy with no active release-authorized decisions; configured-policy acceptance is covered by the focused operator-boundary tests.",
+    "npm run bandit -- supply-chain-gate validate --json passed.",
+    "npm run bandit -- risk-classification validate --json passed.",
+    "npm run bandit -- input-quarantine validate --json passed.",
+    "npm run bandit -- validate passed after Stage 3 evidence and routing updates.",
+    "npm run bandit -- gaps list passed and shows BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY active as BANDIT-044.",
+    "node ./bin/bandit.mjs cockpit status --json passed after Stage 3 evidence and routing updates; Stage 3 reports pass, Stage 4 review is missing, and CURRENT_CONTEXT/ROADMAP next-action agreement passes.",
+    "git diff --check passed after Stage 3 evidence and routing updates."
+  ],
+  "clean_code_check": [
+    {
+      "rubric": "Spec alignment",
+      "verdict": "pass",
+      "evidence": "The implementation follows BANDIT-044 Stage 1/2 evidence by adding the operator-boundary policy, template, validator, command, validate/init integration, and focused fixture maintenance only."
+    },
+    {
+      "rubric": "Small surface area",
+      "verdict": "pass",
+      "evidence": "The production diff is limited to one state validator, one command shim, CLI/init/validate/path/template wiring, and the required repo-native policy/template artifacts."
+    },
+    {
+      "rubric": "Simple design",
+      "verdict": "pass",
+      "evidence": "Validation uses explicit contract fields and direct fail-closed checks rather than a generic policy engine or broader workflow repair system."
+    },
+    {
+      "rubric": "Explicit state",
+      "verdict": "pass",
+      "evidence": "Operator-boundary policy, template fields, release-authorized decision references, and per-work-item evidence paths are named repo artifacts; no UI, cache, or helper becomes canonical authority."
+    },
+    {
+      "rubric": "Failure clarity",
+      "verdict": "pass",
+      "evidence": "Missing policy, missing template, missing decision evidence, omitted gate families, derivable drift routed to the operator, missing repair evidence fields, repair overreach, and missing smell alignment fail closed with targeted messages."
+    },
+    {
+      "rubric": "Testable behavior",
+      "verdict": "pass",
+      "evidence": "Focused tests cover the RED failure paths and complete low-risk acceptance output; full repo tests verify shared command, validation, init, and template integration."
+    },
+    {
+      "rubric": "No hidden authority",
+      "verdict": "pass",
+      "evidence": "The validator accepts or rejects explicit operator-boundary artifacts; it does not implement claim authority, work intake, operator inbox, scheduler authority, live routing, paid routing, PR/CI execution, merge/push/deploy authority, or cockpit state."
+    },
+    {
+      "rubric": "No role erosion",
+      "verdict": "pass",
+      "evidence": "The implementation preserves Codex PM, Test Writer, Writer, CodeRabbit, Local Qwen, and Landing Agent stage boundaries and does not introduce a new agent role."
+    }
+  ],
+  "next_action": "Run Stage 4 review gates for BANDIT-044: pre-PR CodeRabbit, Local Qwen, aggregate review evidence, and Codex PM disposition at the current review subject hash before any landing verdict, landing action, retrospective closeout, next bootstrap-gap chore, or unrelated Phase 8 work."
+}

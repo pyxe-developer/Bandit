@@ -16,6 +16,7 @@ import { land } from "./commands/land.js";
 import { listBootstrapGaps } from "./commands/gaps.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
+import { operatorBoundary } from "./commands/operator-boundary.js";
 import { qwenReview } from "./commands/qwen-review.js";
 import { reviewSubjectHash } from "./commands/review-subject-hash.js";
 import { riskClassification } from "./commands/risk-classification.js";
@@ -86,6 +87,12 @@ async function main() {
 
   if (command === "supply-chain-gate") {
     const result = await supplyChainGate(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "operator-boundary") {
+    const result = await operatorBoundary(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }
@@ -199,7 +206,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|supply-chain-gate|uat|gaps|coordination|coordination-authority|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|cockpit>`);
   process.exitCode = 1;
 }
 

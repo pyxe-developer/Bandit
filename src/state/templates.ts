@@ -229,6 +229,28 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("rationale", /^rationale:/im),
       metadata("evidence paths", /^evidence_paths:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/operator-boundary.md",
+    requirements: [
+      metadata("work item", /^work_item:/im),
+      metadata("operator blocking gates", /^operator_blocking_gates:/im),
+      metadata(
+        "Codex-owned technical decisions",
+        /^codex_owned_technical_decisions:/im
+      ),
+      metadata("derivable operational drift", /^derivable_operational_drift:/im),
+      metadata("CLI-owned mechanical repair", /^cli_owned_mechanical_repair:/im),
+      metadata("repair overreach refusals", /^repair_overreach_refusals:/im),
+      metadata(
+        "operator escalation overuse smells",
+        /^operator_escalation_overuse_smells:/im
+      ),
+      metadata("required evidence", /^required_evidence:/im),
+      metadata("source artifacts", /^source_artifacts:/im),
+      metadata("escalation targets", /^escalation_targets:/im),
+      metadata("evidence paths", /^evidence_paths:/im)
+    ]
   }
 ];
 

@@ -1,0 +1,50 @@
+{
+  "contract_version": 1,
+  "policy_id": "operator-fail-closed-boundary",
+  "operator_blocking_gates": [
+    "product_direction",
+    "uat_approval_or_stale_uat",
+    "policy_change",
+    "business_tradeoff",
+    "explicit_cost_or_risk_approval",
+    "irreversible_operational_risk_approval",
+    "safety_critical_release_authorization",
+    "genuinely_ambiguous_scope"
+  ],
+  "codex_owned_technical_decisions": [
+    "technical_routing",
+    "implementation_mechanics",
+    "agent_or_tool_selection",
+    "skill_scoping",
+    "review_depth",
+    "test_strategy",
+    "artifact_structure",
+    "git_plumbing"
+  ],
+  "derivable_operational_drift": [
+    "missing_derivable_metadata",
+    "malformed_supported_artifact",
+    "registry_or_ledger_drift",
+    "projection_mismatch",
+    "current_context_or_roadmap_bookkeeping_drift",
+    "workflow_status_disagreement"
+  ],
+  "repair_overreach_refusals": [
+    "invent_product_scope",
+    "grant_uat_or_product_approval",
+    "override_policy",
+    "resolve_ambiguous_cost_or_risk",
+    "approve_spend",
+    "perform_irreversible_operational_action",
+    "force_resolve_unsafe_claim_recovery",
+    "break_dependencies",
+    "change_merge_push_deploy_authority"
+  ],
+  "smell_trigger_alignment": [
+    "BANDIT-SMELL-OPERATOR-INPUT-BOUNDARY",
+    "BANDIT-SMELL-OPERATOR-ESCALATION-OVERUSE",
+    "BANDIT-SMELL-TECHNICAL-QUESTION-ESCALATION",
+    "BANDIT-SMELL-MECHANICAL-REPAIR-OVERREACH"
+  ],
+  "release_authorized_decisions": []
+}

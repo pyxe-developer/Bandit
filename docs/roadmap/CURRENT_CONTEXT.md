@@ -393,19 +393,20 @@ landing repair evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Implement the narrow Stage 3 repair for `BANDIT-044` -
-Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
+**Current next action:** Run Stage 4 review gates for `BANDIT-044` - Operator
+Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
 `docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
 `docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
 evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
-`test/operator-boundary.test.mjs`, lifecycle event evidence in
+`test/operator-boundary.test.mjs`, Stage 3 implementation evidence in
+`docs/work/BANDIT-044/implementation-evidence.md`, lifecycle event evidence in
 `.bandit/events.jsonl`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. Do not start Stage 4 review, landing evidence,
+`.bandit/bootstrap-gaps.json`. Do not start landing evidence,
 unrelated Phase 8 work, local server/API mode, state-index persistence,
 scheduler execution, worktree lifecycle, claim leases, work surface
 reservations, automatic merge/push/deploy behavior, product UAT approval, actor
 identity policy, PR/CI workflow, or another unrelated work item before
-`BANDIT-044` Stage 3 implementation evidence is recorded.
+`BANDIT-044` Stage 4 aggregate review evidence is recorded.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. The Stage 1 brief scopes a
@@ -416,7 +417,9 @@ cost, irreversible-risk, safety-critical release authorization, and genuinely
 ambiguous scope decisions while derivable operational drift routes to Codex PM
 or CLI-owned mechanical repair. Stage 2 RED evidence is recorded in
 `docs/work/BANDIT-044/red-evidence.md`, with focused failing tests in
-`test/operator-boundary.test.mjs`. Stage 3 implementation has not started.
+`test/operator-boundary.test.mjs`. Stage 3 implementation evidence is recorded
+in `docs/work/BANDIT-044/implementation-evidence.md`. Stage 4 review has not
+started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out. The
 implemented repair keeps append-only coordination history as canonical
@@ -567,7 +570,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (RED evidence recorded).
+**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (implementation evidence recorded).
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -575,9 +578,12 @@ structured creation spec evidence in
 evidence in `.bandit/events.jsonl`, Stage 2 RED evidence in
 `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
 `test/operator-boundary.test.mjs`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. The next action is to implement the narrow Stage
-3 repair for `BANDIT-044`. Do not start Stage 4 review, landing evidence, or
-unrelated Phase 8 work before implementation evidence is recorded.
+`.bandit/bootstrap-gaps.json`. Stage 3 implementation evidence is recorded in
+`docs/work/BANDIT-044/implementation-evidence.md`. The next action is to run
+Stage 4 review gates for `BANDIT-044`: pre-PR CodeRabbit, Local Qwen, aggregate
+review evidence, and Codex PM disposition at the current review subject hash.
+Do not start landing evidence or unrelated Phase 8 work before Stage 4 review
+evidence is recorded.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
@@ -701,9 +707,9 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority.
 
-**Expected next deliverable:** Stage 3 implementation evidence for
-`BANDIT-044` - Operator Fail-Closed Boundary, before Stage 4 review, landing
-evidence, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-044` -
+Operator Fail-Closed Boundary, before landing evidence or unrelated Phase 8
+work.
 
 ## Known Bootstrap Gaps
 
@@ -1056,12 +1062,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Implement the narrow Stage 3 repair for `BANDIT-044` - Operator
+1. Run Stage 4 review gates for `BANDIT-044` - Operator
    Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log Authority is
    landed and closed out, and `BANDIT-044` now has Stage 1 brief evidence,
-   Stage 2 RED evidence, focused failing tests, and active bootstrap-gap
-   linkage recorded. Do not start Stage 4 review, landing evidence, or
-   unrelated Phase 8 work before implementation evidence is recorded.
+   Stage 2 RED evidence, Stage 3 implementation evidence, focused tests, and
+   active bootstrap-gap linkage recorded. Do not start landing evidence or
+   unrelated Phase 8 work before aggregate Stage 4 review evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1096,9 +1102,10 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before implementing the narrow Stage 3
-repair for `BANDIT-044`. Repo artifacts identify the active gap, source artifacts,
-rationale, and boundary: operator-blocking fail-closed behavior is reserved for
+No operator-owned input is required before running the Stage 4 review gates for
+`BANDIT-044`. Repo artifacts identify the active gap, source artifacts,
+rationale, implementation evidence, and boundary: operator-blocking fail-closed
+behavior is reserved for
 safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely
 ambiguous scope gates, while derivable operational drift should route to
 CLI-owned mechanical repair with approved source artifacts, expected-current-state
