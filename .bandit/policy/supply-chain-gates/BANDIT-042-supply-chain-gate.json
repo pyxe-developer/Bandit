@@ -1,0 +1,79 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-042",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-042/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, or lockfile change is present in the BANDIT-042 implementation."
+    },
+    "rationale": "BANDIT-042 adds a local Supply-Chain Gate contract and validator without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "not_applicable",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-042 touches local workflow gate policy, template, CLI validation, auto-land-check integration, and focused tests only. It does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, agent skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces, so no operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    "docs/templates/supply-chain-gate.md",
+    "docs/work/BANDIT-042/brief.md",
+    "docs/work/BANDIT-042/implementation-evidence.md",
+    "docs/work/BANDIT-042/review-evidence.md",
+    "docs/work/BANDIT-042/qwen-finding-disposition.md",
+    "docs/work/BANDIT-042/landing-verdict.md"
+  ]
+}

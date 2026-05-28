@@ -1,0 +1,159 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-042",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/supply-chain-gate.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/supply-chain-gate.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/supply-chain-gate.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/supply-chain-gate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/auto-land-check.ts",
+      "surface": "landing_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/supply-chain-gate.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/landing-gates.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "repo_native_supply_chain_gate",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-042/implementation-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/supply-chain-gate.test.mjs test/landing-gates.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-042/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-042/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-042/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-042 is a non-product bootstrap-gap chore that implements the already queued Supply-Chain Gate. It needs CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-042 changes a repo-native workflow gate, policy/template validation, CLI command wiring, auto-land-check consumption, and focused tests. It has no dependency manifest or lockfile change, no package-manager script change, no CI or release workflow change, no agent skill edit, no fetched-prompt or external tool-install path, no external side-effecting automation, and no product UAT surface. Stage 4 evidence records CodeRabbit pass, Local Qwen non_blocking with PM disposition, no required escalated review, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/templates/supply-chain-gate.md",
+    "docs/work/BANDIT-042/brief.md",
+    "docs/work/BANDIT-042/implementation-evidence.md",
+    "docs/work/BANDIT-042/review-evidence.md",
+    "docs/work/BANDIT-042/qwen-finding-disposition.md",
+    "docs/work/BANDIT-042/landing-verdict.md"
+  ]
+}

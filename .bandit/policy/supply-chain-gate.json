@@ -20,5 +20,11 @@
     "executable_generated_content",
     "unknown"
   ],
-  "release_authorized_decisions": []
+  "release_authorized_decisions": [
+    {
+      "work_item": "BANDIT-042",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-042-supply-chain-gate.json"
+    }
+  ]
 }
