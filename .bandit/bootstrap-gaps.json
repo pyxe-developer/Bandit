@@ -404,8 +404,8 @@
     {
       "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",
       "title": "Parallel writable workstreams lack Git refs CAS claim authority, fencing tokens, idempotency keys, and deadlock detection",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -413,10 +413,10 @@
         "docs/decisions/2026-05-27-git-refs-claim-authority-backend.md",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-045",
       "rationale": "The PRD-002 research review found that file-backed atomic claim operations are not a real compare-and-swap primitive, leases without fencing tokens cannot reject stale agents after pauses, and pairwise work-surface overlap checks do not catch wait-for deadlocks. The operator confirmed that true parallel writable workstreams must remain blocked until claim authority has real CAS semantics, fencing tokens, stale-agent rejection, idempotency keys for state-changing claim operations and external side effects, and Work-Surface Wait-For Graph cycle detection. On 2026-05-27, the operator accepted the first concrete backend: a repo-native Git refs claim authority using refs/bandit/* and git update-ref --stdin transactions, while .bandit claim files remain human-readable projections. The operator also confirmed that claim, release, and reconcile correctness must be proven through explicit Claim Safety Invariants and deterministic fault-injecting or property-style simulation, not only hand-picked duplicate-claim examples.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY is resolved, create a bootstrap-gap chore to define the Git refs claim authority primitive with refs/bandit/*, git update-ref --stdin compare-and-swap transactions, .bandit projection regeneration, fencing tokens, idempotency keys, Work-Surface Wait-For Graph cycle detection, stale-agent rejection, duplicate side-effect prevention, declared Claim Safety Invariants, and deterministic fault-injecting or property-style simulation that covers races, pauses, stale expected state, stale fencing tokens, idempotency replay/conflict, projection/history disagreement, work-surface cycles, and failed serializer or worktree-lock cleanup."
+      "next_action": "Complete active chore BANDIT-045."
     },
     {
       "id": "BANDIT-GAP-GIT-MUTATION-SERIALIZER",

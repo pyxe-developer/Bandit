@@ -1,0 +1,132 @@
+# BANDIT-045: CAS Fenced Claim Authority
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Resolve the bootstrap gap where true parallel writable workstreams lack Git refs compare-and-swap claim authority, fencing-token enforcement, idempotency keys, Work-Surface Wait-For Graph cycle detection, and Claim Safety Invariant simulation.
+
+## Origin
+
+The 2026-05-26 PRD-002 research review found that file-backed atomic claim operations are not a real compare-and-swap primitive, leases without fencing tokens cannot reject stale agents after pauses, and pairwise work-surface overlap checks do not catch wait-for deadlocks. The operator confirmed that true parallel writable workstreams must remain blocked until claim authority has real CAS semantics, fencing tokens, stale-agent rejection, idempotency keys for state-changing claim operations and external side effects, and Work-Surface Wait-For Graph cycle detection. On 2026-05-27, the operator accepted the first concrete backend: active writable claim authority lives in refs/bandit/* and claim state changes use git update-ref --stdin transactions, while .bandit claim files, in-flight registries, cockpit status, and state indexes remain projections. The accepted decision also requires declared Claim Safety Invariants and deterministic fault-injecting or property-style simulation instead of example-only duplicate-claim tests.
+
+## Scope
+
+- Define the first repo-native Claim Authority Primitive as a Git refs-backed writer authority under refs/bandit/* using git update-ref --stdin compare-and-swap transactions for active writable claim state.
+- Define claim record semantics for work item, stage, declared work surfaces, owner, status, expected state, issued fencing token, idempotency key records, timestamps, renewal metadata, release/fail/block/complete/recover metadata, projection reference, and reconciliation evidence.
+- Define CAS-backed claim, inspect, renew, release, fail, block, complete, recover, and reconcile operations, including expected-old-state checks and fail-closed behavior when the current ref state does not match the caller's expected state.
+- Define .bandit claim files, in-flight registries, cockpit status, and state indexes as Claim Projection Artifacts that are rebuilt from, or CAS-protected by, Git refs claim authority and cannot grant, renew, release, complete, or recover claims through manual edits.
+- Define reconciliation rules across Git refs claim authority, Claim Projection Artifacts, and append-only per-work-item coordination history before accepting any claim, state change, release, recovery, or claim-gated side effect.
+- Define fencing-token issuance and stale-agent rejection: every successful writable claim receives a monotonic fencing token, and later state-changing claim operations or external side-effecting operations under that claim must prove the current fencing token.
+- Define idempotency-key behavior for state-changing claim operations and external side-effecting operations under a claim, including same-key same-input replay, same-key different-input refusal, missing-key refusal after token issuance, retention scope, and diagnostics.
+- Define declared write-surface requirements and Work-Surface Wait-For Graph behavior so claimability refuses duplicate active claims, overlapping write-surface claims where applicable, and any cycle path that would allow deadlock.
+- Define v0 claim limits, including at most one active claim per work item, true parallel writable workstreams remaining blocked until the full Parallel Write Authorization Gate passes, and no scheduler execution from this chore.
+- Define Claim Safety Invariants covering duplicate claims, CAS mismatch, release, reconcile, stale expected state, stale fencing tokens, idempotency replay and conflict, projection/history disagreement, work-surface wait-for cycles, failed serializer or worktree-lock cleanup, and recovery-required state.
+- Add deterministic fault-injecting or property-style simulation requirements and focused tests proving the Claim Safety Invariants before implementation is accepted.
+- Add CLI-readable policy, template, validation, command, or evidence surfaces needed to make the claim authority contract enforceable without relying on chat context.
+- Consume the existing Coordination Event Log Authority, Operator Fail-Closed Boundary, Layered Risk Classification, Supply-Chain Gate, Input Quarantine Gate, bootstrap-gap ledger, and Stage 4 review-subject-hash vocabulary without redefining those gates.
+- Keep the repair limited to claim authority contracts, Git refs CAS operations, claim projection/reconciliation validation, fencing-token and idempotency-key enforcement, Work-Surface Wait-For Graph cycle detection, Claim Safety Invariant simulation, focused tests, and necessary roadmap/current-context/gap-ledger evidence.
+- Record CLEAN_CODE.md read evidence in Stage 1; CLEAN_CODE.md was read on 2026-05-28 before creating this brief, and clean-code compliance must be evaluated before landing.
+- Stage capability scope: Codex PM owns technical routing; Test Writer owns RED evidence and invariant simulation design; Writer may edit claim authority templates, policy parsing, Git refs command wrappers, projection/reconciliation validation, claim command wiring, simulation helpers, and focused tests; CodeRabbit and Local Qwen own Stage 4 review evidence; Landing Agent owns Stage 5 verdict/action evidence.
+- Operator-blocking boundary: no operator-owned input is required unless implementation would change product direction, UAT policy, workflow policy beyond defining the queued CAS/fenced claim authority gap, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer spend approval, paid reviewer routing, live routing, scheduler authority, claim/worktree authority beyond the accepted Git refs backend decision, installed global skill contents, dependency or lockfile policy, merge/push/deploy authority, or broader workflow scope.
+- Future-work scope: this chore must not implement Git Mutation Serializer behavior beyond declaring failed serializer cleanup invariants, create or lock worktrees beyond simulation fixtures, define the Worktree Bootstrap Contract, run scheduler execution, enable true parallel writable workstreams, perform automatic merge/push/deploy behavior, change PR/CI workflow, ship local server/API mode, persist a cockpit state index, implement cockpit UI work, add paid reviewer routing, change live model routing, edit installed global skills, add external service integration, or start any later bootstrap gap.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-045/brief.md and links to BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.
+- A Claim Authority Primitive contract or policy artifact names refs/bandit/*, git update-ref --stdin transaction semantics, claim state values, claim record fields, expected-old-state checks, fencing-token fields, idempotency-key fields, declared write surfaces, Work-Surface Wait-For Graph inputs, projection artifacts, reconciliation behavior, failure states, source artifacts, and evidence paths.
+- Validation or focused tests fail closed if any active writable claim authority is implemented as plain .bandit file edits, filesystem locks, current-state views, cockpit state, state indexes, in-flight registry mutation, or check-then-write logic instead of Git refs CAS.
+- Validation or focused tests prove two simultaneous claim attempts for the same work item, stage, or conflicting declared write surface cannot both succeed under the deterministic simulation.
+- Every successful writable claim receives a monotonic fencing token, and state-changing claim operations reject missing, stale, or mismatched fencing tokens after token issuance.
+- State-changing claim operations and claim-gated external side-effect envelopes require an idempotency key after token issuance; same-key same-input retry returns the prior result or equivalent no-op result, and same-key different-input reuse is refused.
+- Claimability builds a Work-Surface Wait-For Graph and refuses claims that would create a cycle, with diagnostics naming the cycle path or conflicting surfaces.
+- Claim authority reconciles Git refs claim state, Claim Projection Artifacts, and append-only per-work-item coordination history before accepting claims, renewals, releases, completions, failures, blocks, recovery, or claim-gated side effects.
+- Claim authority/registry/history/projection disagreement routes to PM repair, CLI-owned mechanical repair, or recovery-required evidence rather than default operator escalation unless an operator-owned gate is actually missing.
+- Manual projection edits cannot grant, renew, release, complete, block, fail, or recover a claim, and validation detects projection drift that breaks reconciliation.
+- Expired or interrupted claims with possible unmerged work become recovery-required or blocked with evidence rather than auto-deleted.
+- Declared Claim Safety Invariants cover duplicate claims, CAS mismatch, release, reconcile, stale expected state, stale fencing tokens, idempotency replay and conflict, projection/history disagreement, work-surface cycles, failed serializer or worktree-lock cleanup, and recovery-required state.
+- Deterministic fault-injecting or property-style simulation proves the Claim Safety Invariants; example-only duplicate-claim tests do not satisfy the gate.
+- The implementation records that true parallel writable workstreams remain blocked until the full Parallel Write Authorization Gate passes, including later Git Mutation Serializer and Worktree Bootstrap Contract gates.
+- The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY is resolved or explicitly dispositioned in .bandit/bootstrap-gaps.json only after landing action and retrospective closeout evidence exist.
+- No Git Mutation Serializer implementation, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, true parallel writable workstream enablement, local server/API mode, cockpit UI implementation, state-index persistence, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, PR/CI workflow execution, live reviewer routing change, paid reviewer route, external service integration, installed global skill edit, dependency or lockfile change, or unrelated Phase 8 work is introduced.
+
+## Verification Plan
+
+- Run focused claim-authority tests for RED/GREEN coverage.
+- Run deterministic fault-injecting or property-style Claim Safety Invariant simulation covering races, retries, pauses, CAS mismatch, stale expected state, stale fencing tokens, idempotency replay/conflict, projection/history disagreement, wait-for cycles, failed serializer cleanup, failed worktree-lock cleanup, and recovery-required behavior.
+- Run focused tests for duplicate active claims, CAS mismatch refusal, fencing-token issuance, stale-token rejection, idempotent replay, idempotency-key mismatch refusal, renewal, release, block, fail, complete, expiration, and recover paths.
+- Run focused claim-gated side-effect envelope tests for current fencing-token and idempotency-key requirements.
+- Run focused Work-Surface Wait-For Graph cycle tests.
+- Run fixture tests for claim authority, projection, registry, and append-only coordination-history disagreement.
+- Run node --test test/coordination-authority.test.mjs test/coordination-log.test.mjs test/coordination-status.test.mjs if reconciliation touches coordination authority, coordination history, or projection status behavior.
+- Run node --test test/operator-boundary.test.mjs if PM repair, CLI-owned mechanical repair, recovery, or required-operator-input behavior is touched.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run node --test test/bootstrap-gaps.test.mjs if bootstrap-gap ledger behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, policy parsing, Git helpers, coordination log readers, cockpit status parsing, bootstrap gaps, review evidence, landing gates, auto-landing policy, or template validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run npm run bandit -- supply-chain-gate validate --json.
+- Run npm run bandit -- risk-classification validate --json.
+- Run npm run bandit -- input-quarantine validate --json.
+- Run npm run bandit -- operator-boundary validate --json.
+- Run npm run bandit -- coordination-authority validate --json.
+- Run npm run bandit -- auto-land-check BANDIT-045 before Stage 5 closeout if auto-landing eligibility behavior is touched.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-045 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-045 before Stage 4 closeout.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-045 for aggregate review evidence freshness.
+- Run npm run bandit -- land-check BANDIT-045 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json
+- docs/work/BANDIT-045/brief.md
+- docs/work/BANDIT-045/red-evidence.md
+- docs/work/BANDIT-045/implementation-evidence.md
+- docs/work/BANDIT-045/coderabbit-review.md
+- docs/work/BANDIT-045/local-qwen-review.md
+- docs/work/BANDIT-045/review-evidence.md
+- docs/work/BANDIT-045/landing-verdict.md
+- docs/work/BANDIT-045/landing-action.md
+- docs/work/BANDIT-045/retrospective.md
+- docs/templates/claim-authority.md
+- .bandit/policy/claim-authority.json
+- .bandit/claims/
+- src/state/claim-authority.ts
+- src/state/claim-projections.ts
+- src/state/work-surface-graph.ts
+- src/state/claim-safety-simulation.ts
+- src/commands/claim.ts
+- src/commands/validate.ts
+- src/commands/cockpit.ts
+- test/claim-authority.test.mjs
+- test/claim-safety-simulation.test.mjs
+- test/work-surface-graph.test.mjs
+- test/validate.test.mjs
+- .bandit/bootstrap-gaps.json
+- .bandit/events.jsonl
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+
+## Required Evidence
+
+- docs/work/BANDIT-045/brief.md
+- docs/work/BANDIT-045/red-evidence.md
+- docs/work/BANDIT-045/implementation-evidence.md
+- docs/work/BANDIT-045/coderabbit-review.md
+- docs/work/BANDIT-045/local-qwen-review.md
+- docs/work/BANDIT-045/review-evidence.md
+- docs/work/BANDIT-045/landing-verdict.md
+- docs/work/BANDIT-045/landing-action.md
+- docs/work/BANDIT-045/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or writing RED evidence. Repo artifacts identify the queued gap, source artifacts, accepted Git refs backend decision, PRD-002 acceptance criteria, Stage 1 rubric requirements, and operator-confirmed boundary that true parallel writable workstreams remain blocked until CAS semantics, fencing tokens, idempotency keys, Work-Surface Wait-For Graph cycle detection, and Claim Safety Invariants are proven. Halt only if implementation would change product direction, UAT policy, workflow policy beyond defining the queued CAS/fenced claim authority gap, business tradeoffs, explicit cost/risk posture, external service setup, paid reviewer spend approval, paid reviewer routing, live routing, scheduler authority, claim/worktree authority beyond the accepted Git refs backend decision, installed global skill contents, dependency or lockfile policy, merge/push/deploy authority, or broader workflow scope.

@@ -79,3 +79,4 @@
 {"type":"artifact_created","work_item":"BANDIT-044","message":"Created implementation_evidence artifact at docs/work/BANDIT-044/implementation-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-044","message":"Created landing_verdict artifact at docs/work/BANDIT-044/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-044","message":"Created retrospective artifact at docs/work/BANDIT-044/retrospective.md"}
+{"type":"work_item_created","work_item":"BANDIT-045","message":"Created work item BANDIT-045 from docs/specs/BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY.json"}
