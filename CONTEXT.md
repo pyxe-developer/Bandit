@@ -10,6 +10,10 @@ Sourmash is source material, evidence archive, terminology history, and prior-ar
 A project-portable contract that constrains, observes, and verifies AI development work.
 _Avoid_: task tracker, generic agent runner
 
+**Cooperative Workflow Safety Claim**:
+The Trust Layer scope that Bandit can assert for self-owned or policy-trusted development workflows: reducing operator slips, agent drift, stale approvals, missing review, workflow forgetfulness, and untrusted-input confusion without claiming adversarial security against compromised credentials, malicious maintainers, or forged repository history.
+_Avoid_: adversarial security claim, hostile-repo guarantee, compromised-credential defense
+
 **Untrusted Input Posture**:
 The required Trust Layer stance that release-authorized agents must treat external contributor text, issue text, PR text, review text, dependency documentation, and generated instructions as untrusted unless policy marks the source trusted.
 _Avoid_: cooperative-only security, prompt text as authority, hostile-repo security blanket
@@ -41,6 +45,38 @@ _Avoid_: broad security proof, optional dependency note, auto-land waiver
 **Layered Risk Classification Gate**:
 A pre-landing gate that classifies work using hard exclusions, blast-radius signals, static-analysis signals, source trust, supply-chain state, and smell triggers before deciding review depth, operator supervision, or auto-landing eligibility.
 _Avoid_: smell-list-only safety, keyword-only escalation, optimistic auto-land
+
+**Bounded Compensatory Trust Boundary**:
+A Trust Layer posture where stronger independent evidence may reduce friction inside an already eligible risk band, but cannot move material-risk work or Never Auto-Landable Surfaces into Auto-Landing Scope.
+_Avoid_: evidence bypass, reviewer-waived material risk, green-to-auto-land escalation
+
+**Asymmetric Boundary Movement**:
+The governance rule that landing autonomy may contract fail-closed on escape-threshold breach, unresolved attribution, or evidence-freshness failure, while autonomy expansion requires a Workflow Trial and operator-reviewed Improvement Decision.
+_Avoid_: automatic loosening, symmetric ratchet, silent policy expansion
+
+**Boundary Contour**:
+The versioned risk-by-evidence policy shape that maps risk tier and Evidence Strength Tier to a Landing Autonomy Level under the Bounded Compensatory Trust Boundary.
+_Avoid_: ad hoc override, hidden threshold, vendor-owned policy
+
+**Initial Conservative Boundary Contour**:
+The starting Boundary Contour that grants Auto-Landing Scope only to Trivial Risk Work with fresh independent evidence, grants Notify-And-Revert Landing only to Low-Reversible Risk Work with fresh independent evidence and a rollback path, and caps Material-Risk Work at Operator Supervision.
+_Avoid_: data-free expansion, premature autonomy, inferred safe class
+
+**Bandit-Owned Boundary Logic**:
+The canonical workflow authority for Boundary Prediction Records, Escape Candidate classification, Confirmed Boundary Escape decisions, Boundary Contour changes, and Asymmetric Boundary Movement.
+_Avoid_: outsourced escape decision, telemetry vendor as policy, gateway-owned contour
+
+**Trivial Risk Work**:
+Non-behavioral, evidence-only, or metadata-only work with negligible blast radius and no sensitive surface.
+_Avoid_: small-looking behavior change, unreviewed policy change, hidden product impact
+
+**Low-Reversible Risk Work**:
+Bounded low-risk work with a clear rollback path, no sensitive surface, and no material product, workflow-authority, state, or user-facing impact.
+_Avoid_: no-rollback auto-land, broad chore, sensitive-surface exception
+
+**Material-Risk Work**:
+Work with behavior, policy, workflow-authority, durable-state, user-facing, product, cost, or operational impact that requires Operator Supervision before landing authority can be granted.
+_Avoid_: moderate auto-land, evidence bypass, routine chore framing
 
 **Never Auto-Landable Surface**:
 A change surface that cannot enter Auto-Landing Scope regardless of passing local tests or reviewer agreement. Initial examples include authentication, sessions, authorization, payment, billing, refunds, production data or schema migrations, secrets, credentials, CI or release workflow, dependency or fetched-prompt execution paths, privacy, telemetry, export, destructive operations, and external side-effecting automation.
@@ -439,8 +475,20 @@ A CLI-authorized release worker that evaluates PR readiness, interprets mechanic
 _Avoid_: human rubber-stamp, direct-main chore runner, operator-as-release-engineer
 
 **Landing Verdict**:
-A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair, or requires operator approval, backed by CI, tests, CodeRabbit, adversarial review, review freshness, PR accuracy, and policy evidence.
+A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair, or requires operator approval, backed by CI, tests, CodeRabbit, adversarial review, review freshness, PR accuracy, policy evidence, and any Boundary Prediction Record that authorized the landing.
 _Avoid_: warning dump, looks-good summary, user gut check
+
+**Boundary Prediction Record**:
+The standalone repo-native falsifiable Trust Layer claim referenced by a Landing Verdict: risk tier, Evidence Strength Tier, Landing Autonomy Level, Review Subject Hash, relied-on evidence artifacts, authorizing boundary cell, and predicted safety outcome.
+_Avoid_: post-hoc rationale, confidence prose, unjoinable landing note
+
+**Escape Candidate**:
+A later corrective signal, such as a revert, hotfix, downstream failure, incident, post-land human flag, or repair, that may indicate a Boundary Prediction Record was wrong but is not yet counted in boundary metrics.
+_Avoid_: every follow-up edit, normal iteration, unlinked defect count
+
+**Confirmed Boundary Escape**:
+An Escape Candidate with a recorded causal link and rationale tying the corrective signal back to the Boundary Prediction Record that should have caught or prevented the defect.
+_Avoid_: unattributed escaped defect, suspicion as metric, post-hoc blame
 
 **Pre-Landing Review Loop**:
 A CLI-driven quality loop that runs required external and cross-model review gates before the Landing Agent can produce a safe-to-land verdict.
@@ -461,6 +509,14 @@ _Avoid_: raw HEAD as review identity, evidence artifact commit as source freshne
 **Hash-Based Evidence Freshness**:
 The Stage 4 freshness method introduced by `BANDIT-019`: when review evidence records `review_subject_hash`, landing readiness compares the current review-subject hash instead of treating every raw git HEAD mismatch as stale. Historical artifacts without `review_subject_hash` keep the previous Stage 4 fallback behavior.
 _Avoid_: current-head refresh loop, self-invalidating evidence write
+
+**Evidence Independence**:
+The degree to which evidence was produced by a source, timing, model family, toolchain, or artifact path with failure modes decorrelated from the authoring path, without relying on the author's rationale.
+_Avoid_: duplicate confirmation, same-model self-review, rationale echo
+
+**Evidence Strength Tier**:
+The Trust Layer ordering of evidence by independence, freshness, and scope fit; author assertion and author-controlled checks are weaker than pre-existing red/green tests, static checks, independent review or tool evidence, decorrelated adversarial review, and operator-supervised or proven same-class track record.
+_Avoid_: artifact count, stale proof, unrelated green check
 
 **CodeRabbit Pre-Landing Loop**:
 A CLI-driven CodeRabbit cycle that requests or reads review, repairs actionable findings, waits for reruns when needed, and records the final CodeRabbit state before landing.
@@ -517,6 +573,14 @@ _Avoid_: canonical workflow state, chat transcript, retrospective replacement
 **Agent Operation Span**:
 A bounded observability record for one operation inside an agent trace, such as a claim operation, tool call, reviewer run, wake decision, or model call.
 _Avoid_: work-item artifact, workflow verdict, hidden log line
+
+**Attribution Join Key**:
+The shared human-readable identity tuple carried across model calls, tool calls, landing decisions, and escape evidence so outcomes can be traced to actor identity, model version, profile hash, work item, Review Subject Hash, evidence artifacts, touched surface, Boundary Prediction Record, and authorizing boundary cell. A derived hash may index the tuple, but does not replace it as canonical evidence.
+_Avoid_: log correlation by timestamp, opaque-only ID, unjoinable telemetry, anonymous evidence
+
+**Model-Call Boundary Adapter**:
+A swappable implementation of the model-call capture and cost-control boundary that may be an external gateway, local proxy, wrapper, or future provider integration, provided it emits the Attribution Join Key and preserves repo-reconstructable evidence.
+_Avoid_: product dependency, vendor lock-in, uninstrumented sidecar
 
 **Observability Projection**:
 A queryable non-canonical view built from agent traces to explain cost, latency, failure patterns, tool friction, and runtime behavior.
@@ -694,6 +758,18 @@ _Avoid_: guessing user intent, burying uncertainty, asking the operator routine 
 The operator-owned oversight of product direction, UAT, policy, business tradeoffs, explicit cost or risk approvals, and irreversible operational-risk decisions without owning routine code-safety, release-mechanics, git-recovery, or Operational Drift repair work.
 _Avoid_: human button-pusher, release engineer, code-safety judge
 
+**Landing Autonomy Level**:
+The policy outcome that states how much agent-owned landing authority remains after risk, evidence, and freshness gates are evaluated: block, Operator Supervision, Notify-And-Revert Landing, or Auto-Landing Scope.
+_Avoid_: confidence score, generic review status, hidden approval
+
+**Notify-And-Revert Landing**:
+A narrow Landing Agent path for reversible low-risk work that may land under policy while creating an asynchronous operator attention item and an explicit rollback path.
+_Avoid_: auto-land with courtesy ping, delayed approval, human rubber stamp
+
+**Notify-And-Revert Artifact**:
+The canonical landing evidence for a Notify-And-Revert Landing, recording the Landing Autonomy Level, rollback path, operator attention reason, follow-up or expiry state, and Boundary Prediction Record link. The Operator Inbox may summarize it, but does not replace it.
+_Avoid_: inbox-only landing evidence, courtesy message as source of truth, missing rollback record
+
 **Operator Inbox**:
 The compact repo-native communication surface where the Repo PM Coordinator records operator-owned questions, blocked decisions, required inputs, operator responses, and resolution status. In the file-based era, operator-visible coordination messages are written here rather than delivered through proactive notifications. It is not general worker context.
 _Avoid_: agent scratchpad, general chat, hidden approval store, GUI notification
@@ -777,6 +853,7 @@ _Avoid_: planner, architect
 ## Relationships
 
 - A **Trust Layer** can run on one or more **Harnesses**.
+- Trust-boundary autonomy is a **Cooperative Workflow Safety Claim**, not an adversarial security claim.
 - **Untrusted Input Posture** is required before **Landing Agent** authority can process external contributor input, fetched third-party content, or generated instructions.
 - **Data-Only External Input** must cross an **Input Quarantine Boundary** before release-authorized agents may inspect it; it remains quoted evidence, not executable instruction, unless a **Trusted Source Gate** explicitly upgrades the source for a bounded purpose.
 - **Trusted Local Repo Mode** is narrower than a security waiver; it ends at the boundary where untrusted input enters a release-authorized path.
@@ -784,6 +861,13 @@ _Avoid_: planner, architect
 - A **Supply-Chain Sensitive Surface** includes dependency manifests, lockfiles, package-manager scripts, CI or release workflows, agent skills, fetched prompts, external tool install paths, and similar inputs to executable or agent behavior.
 - A **Layered Risk Classification Gate** is required before **Auto-Landing Scope**, reviewer depth, or operator-supervision decisions are finalized.
 - **Smell Trigger Catalog** entries are one input to the **Layered Risk Classification Gate**; they are not the only authority for review depth or auto-landing eligibility.
+- The **Bounded Compensatory Trust Boundary** risk axis uses **Trivial Risk Work**, **Low-Reversible Risk Work**, **Material-Risk Work**, and **Never Auto-Landable Surface** rather than a smooth moderate-to-high autonomy ladder.
+- A **Landing Autonomy Level** is ordered from block to **Operator Supervision** to **Notify-And-Revert Landing** to **Auto-Landing Scope**.
+- The **Initial Conservative Boundary Contour** is the default until a **Workflow Trial** and **Improvement Decision** justify a narrower or broader cell.
+- A **Bounded Compensatory Trust Boundary** may reduce friction only inside risk bands already eligible for agent-owned landing; it cannot override **Never Auto-Landable Surfaces** or material-risk **Operator Supervision**.
+- **Asymmetric Boundary Movement** allows fast automatic contraction but only trial-governed expansion.
+- **Notify-And-Revert Landing** is unavailable for material-risk work, stale evidence, and **Never Auto-Landable Surfaces**.
+- A **Notify-And-Revert Artifact** is canonical for Notify-And-Revert Landing evidence; **Operator Inbox** exposure is only an attention surface.
 - **Never Auto-Landable Surfaces** cannot enter **Auto-Landing Scope** even when tests, CodeRabbit, Qwen, or escalated reviewers pass.
 - **Blast-Radius Signals**, **Static Analysis Risk Signals**, source-trust state, input-quarantine state, and supply-chain state can independently raise review depth, require operator supervision, or block auto-landing without requiring a matching smell trigger.
 - A **Supply-Chain Gate** is required before **Auto-Landing Scope** can include any **Supply-Chain Sensitive Surface**; until then those changes require blocker disposition, operator supervision, or an explicit bootstrap gap.
@@ -881,13 +965,21 @@ _Avoid_: planner, architect
 - A **Heartbeat Chore Agent** prepares eligible work; a **Landing Agent** decides whether a PR can land under policy.
 - A **Landing Verdict** replaces asking the operator to judge routine code-safety warnings or perform routine release mechanics.
 - A **Landing Verdict** requires a completed **Pre-Landing Review Loop**.
+- A **Boundary Prediction Record** is the join point between a landing decision and later escape detection or boundary-cell evaluation.
+- An **Escape Candidate** becomes a **Confirmed Boundary Escape** only after a causal link to a **Boundary Prediction Record** is recorded.
+- Codex PM may confirm an **Escape Candidate** from explicit repo evidence; ambiguous product, UAT, business, policy, or explicit risk judgments require an **Operator-Blocking Gate**.
 - **Stage 4 Evidence-Head Semantics** keeps iterative review closeout from becoming recursive while preserving fail-closed behavior for actual source drift.
 - A **CodeRabbit Pre-Landing Loop** runs before landing so review queues and repair loops do not happen after merge.
 - An **Adversarial Review Gate** is required for every PR and is configured by an **Adversarial Reviewer Profile**.
 - The **Local Qwen Baseline Reviewer** remains the no-paid-key default until **Reviewer Capability Benchmark** evidence and **Reviewer Cost Confidence** justify automatic paid escalation.
 - **Adversarial Escalation** may add a stronger or second reviewer when policy risk requires it, but recurring paid use needs benchmark evidence, current **Provider Pricing Evidence**, and **Spend Class Approval**.
+- **Evidence Independence** contributes to an **Evidence Strength Tier** only when the evidence is current under the relevant **Evidence SLO** and covers the **Review Subject Hash** scope.
+- Same-model self-review, post-hoc author-controlled tests, and reviewer output influenced by the author's rationale are weak evidence for **Bounded Compensatory Trust Boundary** decisions.
 - **Load-Bearing Agent Components** include **Goal Definition Component**, **Perception And Input Component**, **Context Component**, **Memory Component**, **Reasoning And Planning Component**, **Tool Execution Component**, **Orchestration And Coordination Component**, and **Feedback And Observability Component**.
 - The **Feedback And Observability Component** uses **OTel-Compatible Agent Traces** and **Agent Operation Spans** to explain runtime behavior, cost, latency, failures, reviewer runs, wakeups, claims, and tool friction.
+- An **Attribution Join Key** must connect model calls, tool calls, landing decisions, and escape evidence before telemetry can govern **Bounded Compensatory Trust Boundary** decisions.
+- A **Model-Call Boundary Adapter** is replaceable infrastructure; Bandit's durable product contract is the **Attribution Join Key**, repo-reconstructable evidence, and **Runtime Portability Gate** compliance.
+- **Bandit-Owned Boundary Logic** cannot be delegated to a **Model-Call Boundary Adapter**; adapters may supply capture, identity, cost, and trace evidence, but not canonical escape decisions or Boundary Contour changes.
 - **OTel-Compatible Agent Traces** and **Observability Projections** are evidence for analysis; **Canonical Workflow Artifacts** remain authoritative for workflow state, gates, decisions, UAT, landing, and closeout.
 - **Evidence SLOs** are artifact-type-specific: CI/test output, CodeRabbit evidence, Local Qwen evidence, escalated review, UAT approval, landing verdicts, retrospectives, and **Coordination Projections** can have different **Artifact Freshness Budgets**.
 - The **Workflow Cockpit** should display **Evidence Trust Signals** with source, owner, freshness state, and **Staleness Reason** instead of generic confidence badges.
