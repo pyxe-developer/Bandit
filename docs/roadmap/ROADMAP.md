@@ -16,26 +16,30 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-044` - Operator
-Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
+**Current next step:** Implement the narrow Stage 3 repair for `BANDIT-044` -
+Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
 `docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, lifecycle event
-evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
-`.bandit/bootstrap-gaps.json`. Do not start implementation, Stage 4 review,
-landing evidence, unrelated Phase 8 work, local server/API mode, state-index
-persistence, scheduler execution, worktree lifecycle, claim leases, work
-surface reservations, automatic merge/push/deploy behavior, product UAT
-approval, actor identity policy, PR/CI workflow, or another unrelated work item
-before `BANDIT-044` Stage 2 RED evidence is recorded.
+`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, Stage 2 RED
+evidence in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests in
+`test/operator-boundary.test.mjs`, lifecycle event evidence in
+`.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. Do not start Stage 4 review, landing evidence,
+unrelated Phase 8 work, local server/API mode, state-index persistence,
+scheduler execution, worktree lifecycle, claim leases, work surface
+reservations, automatic merge/push/deploy behavior, product UAT approval, actor
+identity policy, PR/CI workflow, or another unrelated work item before
+`BANDIT-044` Stage 3 implementation evidence is recorded.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its structured creation spec
 is recorded in
 `docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, its Stage 1 brief
-is recorded in `docs/work/BANDIT-044/brief.md`, `.bandit/events.jsonl` records
-the work-item-created event, and `.bandit/bootstrap-gaps.json` marks the gap
-active with linked work item `BANDIT-044`. Stage 2 RED evidence has not
-started.
+is recorded in `docs/work/BANDIT-044/brief.md`, Stage 2 RED evidence is
+recorded in `docs/work/BANDIT-044/red-evidence.md`, focused failing tests are
+recorded in `test/operator-boundary.test.mjs`, `.bandit/events.jsonl` records
+the work-item-created and red-evidence artifact events, and
+`.bandit/bootstrap-gaps.json` marks the gap active with linked work item
+`BANDIT-044`. Stage 3 implementation has not started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its
@@ -1140,11 +1144,12 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-044` - Operator Fail-Closed
-   Boundary. `BANDIT-043` - Coordination Event Log Authority is landed and
-   closed out, and `BANDIT-044` now has Stage 1 brief evidence plus active
-   bootstrap-gap linkage recorded. Do not start implementation or unrelated
-   Phase 8 work before RED evidence is recorded.
+1. Implement the narrow Stage 3 repair for `BANDIT-044` - Operator
+   Fail-Closed Boundary. `BANDIT-043` - Coordination Event Log Authority is
+   landed and closed out, and `BANDIT-044` now has Stage 1 brief evidence,
+   Stage 2 RED evidence, focused failing tests, and active bootstrap-gap
+   linkage recorded. Do not start Stage 4 review, landing evidence, or
+   unrelated Phase 8 work before implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
