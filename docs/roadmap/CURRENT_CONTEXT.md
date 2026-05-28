@@ -393,24 +393,25 @@ landing repair evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run local-record landing for `BANDIT-044` now that the
-Stage 5 auto-landing blocker is repaired. Stage 5 landing verdict evidence is
-recorded in `docs/work/BANDIT-044/landing-verdict.md` with final verdict
-`safe-to-land`; explicit layered risk-classification and supply-chain gate
-evidence is registered in
+**Current next action:** Run Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-044` now that local-record landing action evidence is
+recorded in `docs/work/BANDIT-044/landing-action.md`. Stage 5 landing verdict
+evidence is recorded in `docs/work/BANDIT-044/landing-verdict.md` with final
+verdict `safe-to-land`; explicit layered risk-classification and supply-chain
+gate evidence is registered in
 `.bandit/policy/risk-classifications/BANDIT-044-risk-classification.json` and
 `.bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json`;
 refreshed Stage 4 review evidence records current `review_subject_hash`
 `16767c5f4c5612ed4f86ef367005292cc115f7b3b3d077a42948e1313b31c7b8`; and
-`npm run bandit -- auto-land-check BANDIT-044` passes. Run
-`npm run bandit -- land BANDIT-044 --action local-record` and record
-`docs/work/BANDIT-044/landing-action.md` before retrospective closeout,
-bootstrap-gap disposition, or any unrelated work. Do not start unrelated Phase
-8 work, local server/API mode, state-index persistence, scheduler execution,
-worktree lifecycle, claim leases, work surface reservations, automatic
-merge/push/deploy behavior, product UAT approval, actor identity policy,
-PR/CI workflow, or another unrelated work item before landing action evidence
-is recorded.
+`npm run bandit -- auto-land-check BANDIT-044` passes. Record
+`docs/work/BANDIT-044/retrospective.md`, resolve or disposition
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` in `.bandit/bootstrap-gaps.json`,
+and update roadmap/current-context closeout before any unrelated work. Do not
+start unrelated Phase 8 work, local server/API mode, state-index persistence,
+scheduler execution, worktree lifecycle, claim leases, work surface
+reservations, automatic merge/push/deploy behavior, product UAT approval,
+actor identity policy, PR/CI workflow, or another unrelated work item before
+retrospective closeout and bootstrap-gap disposition are recorded.
 
 `BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
 for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. The Stage 1 brief scopes a
@@ -438,8 +439,9 @@ landing verdict evidence is recorded in
 risk-classification and supply-chain gate evidence is registered in
 `.bandit/policy/risk-classifications/BANDIT-044-risk-classification.json` and
 `.bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json`; and
-`npm run bandit -- auto-land-check BANDIT-044` passes. The next action is
-local-record landing.
+`npm run bandit -- auto-land-check BANDIT-044` passes. Local-record landing
+action evidence is recorded in `docs/work/BANDIT-044/landing-action.md`. The
+next action is Stage 6 retrospective closeout and bootstrap-gap disposition.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out. The
 implemented repair keeps append-only coordination history as canonical
@@ -590,7 +592,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (local-record landing next).
+**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (Stage 6 retrospective closeout next).
 
 `BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
 structured creation spec evidence in
@@ -613,9 +615,10 @@ landing verdict evidence is recorded in
 and supply-chain gate evidence is registered in
 `.bandit/policy/risk-classifications/BANDIT-044-risk-classification.json` and
 `.bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json`, and
-`npm run bandit -- auto-land-check BANDIT-044` passes. The next action is to
-run local-record landing before retrospective closeout, bootstrap-gap
-disposition, or unrelated Phase 8 work.
+`npm run bandit -- auto-land-check BANDIT-044` passes. Local-record landing
+action evidence is recorded in `docs/work/BANDIT-044/landing-action.md`. The
+next action is Stage 6 retrospective closeout and bootstrap-gap disposition
+before any unrelated Phase 8 work.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
@@ -739,10 +742,9 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority.
 
-**Expected next deliverable:** Local-record landing action evidence for
-`BANDIT-044` - Operator Fail-Closed Boundary in
-`docs/work/BANDIT-044/landing-action.md`, after running
-`npm run bandit -- land BANDIT-044 --action local-record`.
+**Expected next deliverable:** Stage 6 retrospective closeout for `BANDIT-044`
+- Operator Fail-Closed Boundary in `docs/work/BANDIT-044/retrospective.md`,
+plus bootstrap-gap disposition in `.bandit/bootstrap-gaps.json`.
 
 ## Known Bootstrap Gaps
 
@@ -869,10 +871,12 @@ These are expected because Bandit does not exist yet:
   is recorded in `docs/work/BANDIT-044/red-evidence.md`, Stage 3
   implementation evidence is recorded in
   `docs/work/BANDIT-044/implementation-evidence.md`, Stage 4 review evidence is
-  recorded in `docs/work/BANDIT-044/review-evidence.md`, and Stage 5 landing
-  verdict evidence is recorded in `docs/work/BANDIT-044/landing-verdict.md`.
-  Explicit layered risk-classification and supply-chain gate evidence is
-  registered, and the next action is local-record landing.
+  recorded in `docs/work/BANDIT-044/review-evidence.md`, Stage 5 landing
+  verdict evidence is recorded in `docs/work/BANDIT-044/landing-verdict.md`,
+  and local-record landing action evidence is recorded in
+  `docs/work/BANDIT-044/landing-action.md`. Explicit layered
+  risk-classification and supply-chain gate evidence is registered, and the
+  next action is Stage 6 retrospective closeout and bootstrap-gap disposition.
 - `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is open and queued from the
   2026-05-26 strategic review: PRD-002 now blocks true parallel writable
   workstreams until Bandit has CAS-backed claim authority, fencing-token
@@ -1100,7 +1104,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run local-record landing for `BANDIT-044` - Operator Fail-Closed Boundary.
+1. Run Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-044` - Operator Fail-Closed Boundary.
    `BANDIT-043` - Coordination Event Log Authority is landed and closed out,
    and `BANDIT-044` now has Stage 1 brief evidence, Stage 2 RED evidence,
    Stage 3 implementation evidence, focused tests, active bootstrap-gap
@@ -1108,10 +1113,10 @@ The current priority is:
    evidence, aggregate Stage 4 review evidence with current
    `review_subject_hash`, Stage 5 landing verdict evidence, explicit layered
    risk-classification and supply-chain gate evidence, and a passing
-   `npm run bandit -- auto-land-check BANDIT-044`. Run
-   `npm run bandit -- land BANDIT-044 --action local-record` before
-   retrospective closeout, bootstrap-gap disposition, or unrelated Phase 8
-   work.
+   `npm run bandit -- auto-land-check BANDIT-044`. Local-record landing action
+   evidence is recorded in `docs/work/BANDIT-044/landing-action.md`. Record
+   retrospective closeout and bootstrap-gap disposition before unrelated Phase
+   8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
