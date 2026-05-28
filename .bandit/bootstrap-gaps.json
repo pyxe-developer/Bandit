@@ -385,8 +385,8 @@
     {
       "id": "BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY",
       "title": "Fail-closed routing can escalate derivable operational drift to the operator",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -396,10 +396,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-044",
       "rationale": "The PRD-002 research review warned that pervasive fail-closed behavior can manufacture operator toil when ordinary registry, ledger, optional-field, projection, or workflow bookkeeping drift is escalated instead of repaired mechanically. The operator confirmed that operator-blocking fail-closed behavior should be reserved for safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely ambiguous scope gates. Derivable operational drift should route to CLI-owned mechanical repair with approved source artifacts, expected-current-state checks, immutable transition history, and no authority to invent scope, grant approvals, override policy, resolve ambiguous cost/risk, perform irreversible operational actions, or force-resolve unsafe claim recovery.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to define operator-blocking fail-closed boundaries, CLI-owned mechanical operational repair, operator-escalation-overuse smells, repair-overreach refusals, and validation that derivable operational drift does not become operator toil."
+      "next_action": "Complete active chore BANDIT-044."
     },
     {
       "id": "BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY",

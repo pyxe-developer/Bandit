@@ -16,15 +16,26 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create exactly one bootstrap-gap chore for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` has required
-verification, landing verdict, landing-action evidence, retrospective closeout,
-gap-ledger disposition, and roadmap/current-context closeout. Do not start
-unrelated Phase 8 work, local server/API mode, state-index persistence,
-scheduler execution, worktree lifecycle, claim leases, work surface
-reservations, automatic merge/push/deploy behavior, product UAT approval, actor
-identity policy, PR/CI workflow, or another unrelated work item before the next
-queued bootstrap gap is created and executed.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-044` - Operator
+Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
+`docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
+`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, lifecycle event
+evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. Do not start implementation, Stage 4 review,
+landing evidence, unrelated Phase 8 work, local server/API mode, state-index
+persistence, scheduler execution, worktree lifecycle, claim leases, work
+surface reservations, automatic merge/push/deploy behavior, product UAT
+approval, actor identity policy, PR/CI workflow, or another unrelated work item
+before `BANDIT-044` Stage 2 RED evidence is recorded.
+
+`BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
+for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Its structured creation spec
+is recorded in
+`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, its Stage 1 brief
+is recorded in `docs/work/BANDIT-044/brief.md`, `.bandit/events.jsonl` records
+the work-item-created event, and `.bandit/bootstrap-gaps.json` marks the gap
+active with linked work item `BANDIT-044`. Stage 2 RED evidence has not
+started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its
@@ -530,7 +541,7 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041`.
 `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`,
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is active in `BANDIT-044`;
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY`,
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER`,
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`,
@@ -538,8 +549,8 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order, with the
-operator fail-closed boundary gap next.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order behind active
+`BANDIT-044`.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
 2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
 `refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
@@ -1129,12 +1140,11 @@ Current rule:
 
 Current priority:
 
-1. Create exactly one bootstrap-gap chore for
-   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` - Coordination
-   Event Log Authority is landed and closed out with Stage 1 through Stage 6
-   evidence, local-record landing action, and gap-ledger disposition recorded.
-   Do not start unrelated Phase 8 work before the operator fail-closed boundary
-   gap is created and executed.
+1. Write Stage 2 RED evidence for `BANDIT-044` - Operator Fail-Closed
+   Boundary. `BANDIT-043` - Coordination Event Log Authority is landed and
+   closed out, and `BANDIT-044` now has Stage 1 brief evidence plus active
+   bootstrap-gap linkage recorded. Do not start implementation or unrelated
+   Phase 8 work before RED evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1148,7 +1158,7 @@ Current priority:
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
    `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
-   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is the next queued bootstrap gap.
+   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is active in `BANDIT-044`.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
    operator fail-closed boundary gap and must use the accepted Git refs claim
    authority backend.

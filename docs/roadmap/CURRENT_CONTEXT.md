@@ -393,15 +393,26 @@ landing repair evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-043/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create exactly one bootstrap-gap chore for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` has required
-verification, landing verdict, landing-action evidence, retrospective closeout,
-gap-ledger disposition, and roadmap/current-context closeout. Do not start
-unrelated Phase 8 work, local server/API mode, state-index persistence,
-scheduler execution, worktree lifecycle, claim leases, work surface
-reservations, automatic merge/push/deploy behavior, product UAT approval, actor
-identity policy, PR/CI workflow, or another unrelated work item before the next
-queued bootstrap gap is created and executed.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-044` -
+Operator Fail-Closed Boundary. `BANDIT-044` has Stage 1 brief evidence in
+`docs/work/BANDIT-044/brief.md`, structured creation spec evidence in
+`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, lifecycle event
+evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. Do not start implementation, Stage 4 review,
+landing evidence, unrelated Phase 8 work, local server/API mode, state-index
+persistence, scheduler execution, worktree lifecycle, claim leases, work
+surface reservations, automatic merge/push/deploy behavior, product UAT
+approval, actor identity policy, PR/CI workflow, or another unrelated work item
+before `BANDIT-044` Stage 2 RED evidence is recorded.
+
+`BANDIT-044` - Operator Fail-Closed Boundary is the active bootstrap-gap chore
+for `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. The Stage 1 brief scopes a
+repo-native operator fail-closed boundary contract, CLI-readable policy or
+template, validation, smell-trigger alignment, and focused tests so
+operator-blocking gates remain reserved for product, UAT, policy, business,
+cost, irreversible-risk, safety-critical release authorization, and genuinely
+ambiguous scope decisions while derivable operational drift routes to Codex PM
+or CLI-owned mechanical repair. Stage 2 RED evidence has not started.
 
 `BANDIT-043` - Coordination Event Log Authority is landed and closed out. The
 implemented repair keeps append-only coordination history as canonical
@@ -552,16 +563,15 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-043` - Coordination Event Log Authority (closed).
+**Active work item:** `BANDIT-044` - Operator Fail-Closed Boundary (brief created).
 
-No new work item is currently active; the machine-readable active-work line
-remains on the most recently closed work item until the next work item brief is
-created so cockpit status can verify closeout evidence. `BANDIT-043` is landed
-and closed out with Stage 1 through Stage 6 evidence, local-record landing
-action, and bootstrap-gap disposition recorded. The next action is to create
-exactly one bootstrap-gap chore for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Do not start unrelated Phase 8 work
-before that gap is created and executed.
+`BANDIT-044` has Stage 1 brief evidence in `docs/work/BANDIT-044/brief.md`,
+structured creation spec evidence in
+`docs/specs/BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY.json`, lifecycle event
+evidence in `.bandit/events.jsonl`, and active bootstrap-gap linkage in
+`.bandit/bootstrap-gaps.json`. The next action is to write Stage 2 RED evidence
+for `BANDIT-044`. Do not start implementation or unrelated Phase 8 work before
+that RED evidence is recorded.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
@@ -631,8 +641,8 @@ resolved.
 `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by `BANDIT-041`.
 `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` and
-`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` remain queued in that order.
+`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is active in `BANDIT-044`.
+`BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` remains queued behind `BANDIT-044`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind the CAS/fenced-claim
 authority gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind the
 Git mutation serializer gap.
@@ -685,9 +695,8 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority.
 
-**Expected next deliverable:** Stage 1 brief and active-work context for the
-bootstrap-gap chore that resolves `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`,
-before unrelated Phase 8 work.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-044` -
+Operator Fail-Closed Boundary, before implementation or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -802,15 +811,16 @@ These are expected because Bandit does not exist yet:
   workflow/event history canonical and current-state views, registries, state
   indexes, cockpit status, SQLite caches, and derived reports as rebuildable
   projections except for the future-scoped CAS claim-authority exception.
-- `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is open and queued from the
-  2026-05-26 strategic review: PRD-002 now reserves operator-blocking
+- `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is active in `BANDIT-044` from
+  the 2026-05-26 strategic review: PRD-002 now reserves operator-blocking
   fail-closed behavior for safety, product, UAT, policy, business, cost,
   irreversible-risk, and genuinely ambiguous scope gates. Derivable operational
   drift such as missing metadata, malformed supported artifacts, projection
   mismatch, ledger drift, or workflow bookkeeping drift should route to
   CLI-owned mechanical repair with approved source artifacts,
-  expected-current-state checks, and immutable transition history. It is the
-  next queued bootstrap gap after `BANDIT-043`.
+  expected-current-state checks, and immutable transition history. Stage 1 brief
+  evidence is recorded in `docs/work/BANDIT-044/brief.md`; the next action is
+  Stage 2 RED evidence.
 - `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is open and queued from the
   2026-05-26 strategic review: PRD-002 now blocks true parallel writable
   workstreams until Bandit has CAS-backed claim authority, fencing-token
@@ -821,8 +831,7 @@ These are expected because Bandit does not exist yet:
   2026-05-27 accepted backend decision requires the first Claim Authority
   Primitive to use `refs/bandit/*` and `git update-ref --stdin` compare-and-swap
   transactions, with `.bandit` claim files as projections rather than lock
-  authority. It is queued behind
-  `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`.
+  authority. It is queued behind active `BANDIT-044`.
 - `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 operator decision: Git refs CAS
   provides claim authority, but shared `.git` worktree and repository plumbing
@@ -1039,12 +1048,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap chore for
-   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. `BANDIT-043` - Coordination
-   Event Log Authority is landed and closed out with Stage 1 through Stage 6
-   evidence, local-record landing action, and gap-ledger disposition recorded.
-   Do not start unrelated Phase 8 work before the operator fail-closed boundary
-   gap is created and executed.
+1. Write Stage 2 RED evidence for `BANDIT-044` - Operator Fail-Closed
+   Boundary. `BANDIT-043` - Coordination Event Log Authority is landed and
+   closed out, and `BANDIT-044` now has Stage 1 brief evidence plus active
+   bootstrap-gap linkage recorded. Do not start implementation or unrelated
+   Phase 8 work before RED evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1058,7 +1066,7 @@ The current priority is:
    `BANDIT-040`. `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION` is resolved by
    `BANDIT-041`. `BANDIT-GAP-SUPPLY-CHAIN-GATE` is resolved by `BANDIT-042`.
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY` is resolved by `BANDIT-043`.
-   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is the next queued bootstrap gap.
+   `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is active in `BANDIT-044`.
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is queued behind the
    operator fail-closed boundary gap.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is queued behind CAS/fenced claim
@@ -1079,14 +1087,14 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before creating the Stage 1 brief for
-`BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY`. Repo artifacts identify the queued
-gap, source artifacts, rationale, and boundary: operator-blocking fail-closed
-behavior is reserved for safety, product, UAT, policy, business, cost,
-irreversible-risk, and genuinely ambiguous scope gates, while derivable
-operational drift should route to CLI-owned mechanical repair with approved
-source artifacts, expected-current-state checks, and immutable transition
-history. Halt only if the next step would change product direction, UAT policy,
+No operator-owned input is required before writing Stage 2 RED evidence for
+`BANDIT-044`. Repo artifacts identify the active gap, source artifacts,
+rationale, and boundary: operator-blocking fail-closed behavior is reserved for
+safety, product, UAT, policy, business, cost, irreversible-risk, and genuinely
+ambiguous scope gates, while derivable operational drift should route to
+CLI-owned mechanical repair with approved source artifacts, expected-current-state
+checks, and immutable transition history. Halt only if the next step would
+change product direction, UAT policy,
 workflow policy beyond the queued gap scope, business tradeoffs, cost/risk
 posture, external service setup, paid reviewer routing, live routing,
 scheduler authority, claim/worktree authority, installed global skill contents,
