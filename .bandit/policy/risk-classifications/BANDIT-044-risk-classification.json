@@ -1,0 +1,198 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-044",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/operator-boundary.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/operator-boundary.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/operator-boundary.ts",
+      "surface": "cli_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/operator-boundary.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "cli_command",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/templates.ts",
+      "surface": "template_validation",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/validate.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "operator_fail_closed_boundary_policy",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-044/implementation-evidence.md"
+    },
+    {
+      "signal_id": "mechanical_repair_refusal_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "signal_id": "local_cli_only",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/operator-boundary.test.mjs test/validate.test.mjs test/init.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- operator-boundary validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-044/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-044/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-OPERATOR-INPUT-BOUNDARY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-044/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-OPERATOR-ESCALATION-OVERUSE",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-044/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-TECHNICAL-QUESTION-ESCALATION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-044/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-MECHANICAL-REPAIR-OVERREACH",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-044/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-044 is a non-product bootstrap-gap chore that implements the already queued Operator Fail-Closed Boundary. It needs CodeRabbit plus Local Qwen review, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-044 changes a local operator-boundary workflow policy, required template, CLI validation, init/validate wiring, smell-trigger alignment, and focused tests. It has no never-auto-landable surface, no dependency or lockfile change, no package-manager script change, no CI or release workflow change, no agent skill edit, no fetched-prompt or external tool-install path, no external side-effecting automation, no product UAT surface, and no unresolved source-trust, input-quarantine, or supply-chain state. Stage 4 evidence records CodeRabbit pass, Local Qwen pass, no required escalated review, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json",
+    ".bandit/policy/operator-boundary.json",
+    "docs/templates/layered-risk-classification.md",
+    "docs/templates/supply-chain-gate.md",
+    "docs/templates/operator-boundary.md",
+    "docs/work/BANDIT-044/brief.md",
+    "docs/work/BANDIT-044/implementation-evidence.md",
+    "docs/work/BANDIT-044/review-evidence.md",
+    "docs/work/BANDIT-044/landing-verdict.md"
+  ]
+}

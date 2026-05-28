@@ -30,6 +30,11 @@
       "work_item": "BANDIT-043",
       "decision_kind": "auto_landing",
       "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-043-supply-chain-gate.json"
+    },
+    {
+      "work_item": "BANDIT-044",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-044-supply-chain-gate.json"
     }
   ]
 }
