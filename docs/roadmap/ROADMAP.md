@@ -16,24 +16,28 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-043` /
+**Current next step:** Implement Stage 3 for `BANDIT-043` /
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
 Event Log Authority has Stage 1 brief evidence in
 `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
-routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-`.bandit/events.jsonl`. Do not start implementation, review, landing,
-retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
-Stage 2 RED evidence is recorded.
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
+evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
+`test/coordination-authority.test.mjs`, gap-ledger routing in
+`.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+`.bandit/events.jsonl`. Do not start review, landing, retrospective, another
+bootstrap-gap chore, or unrelated Phase 8 work before Stage 3 implementation
+evidence is recorded.
 
 `BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
 chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, its Stage 1
-brief is recorded in `docs/work/BANDIT-043/brief.md`,
-`.bandit/bootstrap-gaps.json` marks the gap active with linked work item
-`BANDIT-043`, and `.bandit/events.jsonl` records the work-item-created event.
-Stage 2 RED evidence is required next.
+brief is recorded in `docs/work/BANDIT-043/brief.md`, Stage 2 RED evidence is
+recorded in `docs/work/BANDIT-043/red-evidence.md`, with focused tests in
+`test/coordination-authority.test.mjs`, `.bandit/bootstrap-gaps.json` marks
+the gap active with linked work item `BANDIT-043`, and `.bandit/events.jsonl`
+records the work-item-created and artifact-created events. Stage 3
+implementation is required next.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -1125,15 +1129,17 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-043` /
+1. Implement Stage 3 for `BANDIT-043` /
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` -
    Coordination Event Log Authority has Stage 1 brief evidence in
    `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
-   routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-   `.bandit/events.jsonl`. Do not start implementation, review, landing,
-   retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
-   Stage 2 RED evidence is recorded.
+   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
+   evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
+   `test/coordination-authority.test.mjs`, gap-ledger routing in
+   `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+   `.bandit/events.jsonl`. Do not start review, landing, retrospective,
+   another bootstrap-gap chore, or unrelated Phase 8 work before Stage 3
+   implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

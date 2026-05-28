@@ -393,24 +393,28 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-042/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-043` /
+**Current next action:** Implement Stage 3 for `BANDIT-043` /
 `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` - Coordination
 Event Log Authority has Stage 1 brief evidence in
 `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
-routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-`.bandit/events.jsonl`. Do not start implementation, review, landing,
-retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
-Stage 2 RED evidence is recorded.
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
+evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
+`test/coordination-authority.test.mjs`, gap-ledger routing in
+`.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+`.bandit/events.jsonl`. Do not start review, landing, retrospective, another
+bootstrap-gap chore, or unrelated Phase 8 work before Stage 3 implementation
+evidence is recorded.
 
 `BANDIT-043` - Coordination Event Log Authority is the active bootstrap-gap
 chore for `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, its Stage 1
-brief is recorded in `docs/work/BANDIT-043/brief.md`,
-`.bandit/bootstrap-gaps.json` marks the gap active with linked work item
-`BANDIT-043`, and `.bandit/events.jsonl` records the work-item-created event.
-Stage 2 RED evidence is required next.
+brief is recorded in `docs/work/BANDIT-043/brief.md`, Stage 2 RED evidence is
+recorded in `docs/work/BANDIT-043/red-evidence.md`, with focused tests in
+`test/coordination-authority.test.mjs`, `.bandit/bootstrap-gaps.json` marks
+the gap active with linked work item `BANDIT-043`, and `.bandit/events.jsonl`
+records the work-item-created and artifact-created events. Stage 3
+implementation is required next.
 
 `BANDIT-041` - Layered Risk Classification is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-LAYERED-RISK-CLASSIFICATION`. Its
@@ -551,12 +555,14 @@ that authority.
 
 `BANDIT-043` has Stage 1 brief evidence in `docs/work/BANDIT-043/brief.md`,
 structured spec evidence in
-`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
-routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-`.bandit/events.jsonl`. The next action is to write Stage 2 RED evidence for
+`docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
+evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
+`test/coordination-authority.test.mjs`, gap-ledger routing in
+`.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+`.bandit/events.jsonl`. The next action is to implement Stage 3 for
 `BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Do not start
-implementation, review, landing, retrospective, another bootstrap-gap chore, or
-unrelated Phase 8 work before Stage 2 RED evidence is recorded.
+review, landing, retrospective, another bootstrap-gap chore, or unrelated
+Phase 8 work before Stage 3 implementation evidence is recorded.
 
 `BANDIT-042` has Stage 1 brief evidence in `docs/work/BANDIT-042/brief.md`,
 Stage 2 RED evidence in `docs/work/BANDIT-042/red-evidence.md`, focused RED
@@ -772,7 +778,9 @@ These are expected because Bandit does not exist yet:
   current-state views, registries, state indexes, and cockpit status remain
   rebuildable projections except for CAS claim authority over active writable
   claims. Stage 1 brief evidence is recorded in
-  `docs/work/BANDIT-043/brief.md`, and Stage 2 RED evidence is required next.
+  `docs/work/BANDIT-043/brief.md`, Stage 2 RED evidence is recorded in
+  `docs/work/BANDIT-043/red-evidence.md`, and Stage 3 implementation is
+  required next.
 - `BANDIT-GAP-OPERATOR-FAIL-CLOSED-BOUNDARY` is open and queued from the
   2026-05-26 strategic review: PRD-002 now reserves operator-blocking
   fail-closed behavior for safety, product, UAT, policy, business, cost,
@@ -1010,15 +1018,17 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-043` /
+1. Implement Stage 3 for `BANDIT-043` /
    `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. `BANDIT-043` -
    Coordination Event Log Authority has Stage 1 brief evidence in
    `docs/work/BANDIT-043/brief.md`, structured creation spec evidence in
-   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, gap-ledger
-   routing in `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
-   `.bandit/events.jsonl`. Do not start implementation, review, landing,
-   retrospective, another bootstrap-gap chore, or unrelated Phase 8 work before
-   Stage 2 RED evidence is recorded.
+   `docs/specs/BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY.json`, Stage 2 RED
+   evidence in `docs/work/BANDIT-043/red-evidence.md`, focused RED tests in
+   `test/coordination-authority.test.mjs`, gap-ledger routing in
+   `.bandit/bootstrap-gaps.json`, and lifecycle event evidence in
+   `.bandit/events.jsonl`. Do not start review, landing, retrospective,
+   another bootstrap-gap chore, or unrelated Phase 8 work before Stage 3
+   implementation evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1054,12 +1064,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required before writing Stage 2 RED evidence for
+No operator-owned input is required before implementing Stage 3 for
 `BANDIT-043` / `BANDIT-GAP-COORDINATION-EVENT-LOG-AUTHORITY`. Repo artifacts
 identify the active work item, source artifacts, rationale, operator-confirmed
 append-only workflow/event history authority, projection rebuildability
-requirement, and the CAS claim-authority exception boundary. Halt only if RED
-evidence would change product direction, UAT policy, workflow policy beyond
+requirement, and the CAS claim-authority exception boundary. Halt only if
+implementation would change product direction, UAT policy, workflow policy beyond
 defining the active coordination event-log authority gap, business tradeoffs,
 cost/risk posture, external service setup, paid reviewer routing, live routing,
 scheduler authority, claim/worktree authority beyond the recorded CAS exception

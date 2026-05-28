@@ -1,0 +1,49 @@
+# BANDIT-043 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused tests define the Coordination Event Log Authority contract before production implementation. They fail because Bandit does not yet require coordination-authority policy or template validation, no coordination-authority validation command exists, and projection/claim-authority boundary checks are not implemented.
+
+## Test Command
+
+```sh
+node --test test/coordination-authority.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 10
+pass 0
+fail 10
+validate fails closed when the coordination authority policy is missing failed: expected exit code 1, received 0
+validate fails closed when the coordination authority template is missing failed: expected exit code 1, received 0
+coordination authority validation rejects registered decisions without evidence failed: Unknown command: coordination-authority
+coordination authority rejects source-less projection surfaces failed: Unknown command: coordination-authority
+coordination authority rejects direct projection workflow mutation failed: Unknown command: coordination-authority
+coordination authority rejects projection and history disagreement failed: Unknown command: coordination-authority
+coordination authority rejects registry-granted writable claims without CAS authority failed: Unknown command: coordination-authority
+coordination authority rejects .bandit claim files as independent claim authority failed: Unknown command: coordination-authority
+coordination authority preserves actor-event non-authority failed: Unknown command: coordination-authority
+coordination authority accepts a complete low-risk projection-boundary record failed: Unknown command: coordination-authority
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| A Coordination Event Log Authority template or policy artifact names canonical append-only coordination history, accepted workflow-state event families, actor-event non-authority, projection surfaces, allowed mutation paths, source-history references, projection rebuild rules, reconciliation behavior, CAS claim-authority exception, rationale, and evidence paths. | The focused tests expect docs/templates/coordination-authority.md, .bandit/policy/coordination-authority.json, and per-work-item docs/coordination-authority/<ID>-coordination-authority.json decision evidence to become required repo-native surfaces. |
+| Validation fails closed when current-state views, cockpit status, state indexes, SQLite caches, in-flight registries, derived status reports, or other projections claim canonical workflow authority without source-history or claim-authority backing. | The source-less projection test removes source_history_refs from a derived coordination_status projection and expects the authority validator to reject it before trusted projection status is accepted. |
+| Validation fails closed when projection-only mutation paths can change release-authorized workflow state without an accepted append-only coordination-history event or explicit future CAS claim-authority operation. | The direct projection mutation test marks coordination_status as direct_projection_write and expects fail-closed refusal instead of allowing a projection to mutate workflow position. |
+| Validation fails closed when an in-flight registry, .bandit claim file, state index, cockpit view, or derived projection grants release-authorized writable claims without the documented CAS claim-authority primitive. | The registry-granted writable claim and .bandit claim authority tests require explicit CAS claim-authority backing and reject .bandit files or registries as independent writable-claim authority. |
+| Validation distinguishes append-only coordination history from the CAS claim-authority exception: workflow position and accepted coordination context rebuild from history, while active writable claims are future-scoped to CAS authority and not granted by projections. | The complete low-risk fixture records append-only coordination history as workflow-position authority, keeps claim authority future-scoped to CAS, and expects the JSON validator output to report both boundaries separately. |
+| Validation fails closed on disagreement between append-only history, projections, and claim-authority references, and routes derivable projection drift to PM or CLI-owned mechanical repair rather than operator toil unless an operator-owned gate is missing. | The projection/history disagreement test reports implementation_recorded from the projection while the append-only coordination history derives red_recorded and expects a fail-closed disagreement error. |
+| Focused tests prove current-state and cockpit/status projection outputs can be rebuilt from append-only coordination history, and prove malformed or source-less projections are rejected before trusted status or release-authorized claims. | The complete fixture includes a coordination-log replay and derived coordination_status projection source, while the refusal tests cover source-less projections, direct mutation, and projection/history disagreement. |
+| Focused tests preserve actor coordination event non-authority: actor events may appear in canonical coordination history as context, but they do not advance workflow state, satisfy review/landing/UAT/chore-disposition gates, or emit safe triggers without accepted step transitions. | The actor-event non-authority test flips may_advance_workflow_state, may_satisfy_gates, and may_emit_safe_triggers to true and expects the coordination authority validator to reject the contract. |
+| The implementation does not create RED, implementation, review, landing, or retrospective evidence beyond the current stage until the prior stage gate is satisfied. | This RED step adds only focused tests, a Stage 2 red-evidence spec/artifact, lifecycle event evidence, and roadmap/current-context routing. It adds no production implementation, review evidence, landing evidence, retrospective, next-gap work, live routing, paid reviewer route, dependency or lockfile change, scheduler, claim/worktree authority, external service integration, installed global skill edit, or cockpit UI surface. |
+
+## Next Action
+
+Implement the narrow Coordination Event Log Authority repair: add the repo-native coordination-authority template and policy, per-work-item authority evidence parsing, coordination-authority validate --json command wiring, validate integration, projection/history replay checks, direct projection mutation refusal, registry and .bandit claim-authority refusal, actor-event non-authority checks, and focused acceptance behavior needed to make the RED tests pass without broadening into CAS claim operations, claim leases, fencing tokens, idempotency-key enforcement, work-surface reservations, Git Mutation Serializer behavior, worktree lifecycle, scheduler execution, event-driven wakeups, state-index persistence, local server/API mode, cockpit UI work, PR/CI execution, automatic merge/push/deploy behavior, or another bootstrap-gap chore.
