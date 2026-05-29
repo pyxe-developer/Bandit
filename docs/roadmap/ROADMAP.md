@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Codex PM disposition for the repeated Stage 4 pre-PR CodeRabbit timeout on `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Two scoped pre-PR CodeRabbit provider attempts timed out without a terminal verdict; timeout evidence is recorded in `docs/specs/BANDIT-048-coderabbit-review-output.json` and `docs/work/BANDIT-048/coderabbit-review.md` with `coderabbit_verdict: blocker`, `review_state: timeout`, and `operator_input_status: none_required`. Do not run Local Qwen, write aggregate review evidence, start landing, retrospective, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the timeout is explicitly dispositioned under Stage 4 policy.
+**Current next step:** Run Stage 4 Local Qwen adversarial review for `BANDIT-048` - Focused Session Context Packets at the current disposition head. CodeRabbit timeout disposition is recorded in `docs/work/BANDIT-048/coderabbit-timeout-disposition.md`; two scoped pre-PR CodeRabbit provider attempts timed out without a terminal verdict, and timeout evidence remains recorded in `docs/specs/BANDIT-048-coderabbit-review-output.json` and `docs/work/BANDIT-048/coderabbit-review.md` with `coderabbit_verdict: blocker`, `review_state: timeout`, and `operator_input_status: none_required`. Treat CodeRabbit as provider-refusal/bootstrap_gap replacement evidence for later aggregate Stage 4 review, not as pass evidence. Do not write aggregate review evidence, start landing, retrospective, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Local Qwen completes.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -37,7 +37,8 @@ Stage 4 pre-PR CodeRabbit provider attempts timed out without a terminal verdict
 timeout evidence is recorded in
 `docs/specs/BANDIT-048-coderabbit-review-output.json` and
 `docs/work/BANDIT-048/coderabbit-review.md`. Codex PM timeout disposition is
-the next required gate.
+recorded in `docs/work/BANDIT-048/coderabbit-timeout-disposition.md`; Local
+Qwen is the next required Stage 4 gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -1263,13 +1264,10 @@ Current rule:
 
 Current priority:
 
-1. Record Codex PM disposition for the repeated Stage 4 pre-PR CodeRabbit
-   timeout on `BANDIT-048` using the Stage 1 brief, Stage 2 RED evidence, Stage
-   3 implementation evidence, model-family separation contract, two timeout
-   attempts, and scoped diff from `05162c4`. Do not run Local Qwen, write
-   aggregate Stage 4 review evidence, begin landing, retrospective, Worktree
-   Bootstrap Contract work, or unrelated work until the timeout is explicitly
-   dispositioned under Stage 4 policy.
+1. Run Stage 4 Local Qwen adversarial review for `BANDIT-048` at the current
+   disposition head. Use `docs/work/BANDIT-048/coderabbit-timeout-disposition.md`
+   as CodeRabbit provider-refusal/bootstrap_gap replacement evidence later when
+   writing aggregate Stage 4 review evidence; do not treat CodeRabbit as a pass.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
