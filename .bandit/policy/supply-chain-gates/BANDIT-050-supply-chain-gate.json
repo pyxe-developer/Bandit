@@ -1,0 +1,78 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-050",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-050/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, installed agent skill, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-050 implementation."
+    },
+    "rationale": "BANDIT-050 adds local cockpit status interstitial recovery and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-050/review-evidence.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "not_applicable",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-050 touches local cockpit status interstitial recovery and focused tests only. It does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed agent skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces, so no operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    "docs/work/BANDIT-050/brief.md",
+    "docs/work/BANDIT-050/implementation-evidence.md",
+    "docs/work/BANDIT-050/review-evidence.md",
+    "src/state/cockpit-status.ts",
+    "test/cockpit-status.test.mjs"
+  ]
+}
