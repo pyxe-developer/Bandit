@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Record Codex PM disposition and durable routing for the `BANDIT-051` Local Qwen `non_blocking` findings.
+**Current next step:** Record `BANDIT-051` risk and supply-chain evidence, then write the Stage 5 landing verdict and run `land-check`.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
