@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Record aggregate Stage 4 review evidence for `BANDIT-052` with the current `review_subject_hash`. Focused pre-PR CodeRabbit pass evidence and Local Qwen pass evidence are recorded; no PM finding disposition is required. Do not create landing verdict/action evidence, retrospective evidence, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before aggregate Stage 4 review evidence is recorded.
+**Current next step:** Run the Stage 5 landing-verdict path for `BANDIT-052`, including required pre-landing verification and clean-code evaluation. Stage 4 aggregate review evidence is recorded with current `review_subject_hash`; CodeRabbit and Local Qwen both passed with no findings. Do not create landing-action evidence, retrospective evidence, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before Stage 5 landing verdict evidence is recorded.
 
 - `[Gap]` `BANDIT-053` - Agent Observability Traces
 

@@ -409,18 +409,18 @@ recorded in `docs/work/BANDIT-052/implementation-evidence.md`,
 `docs/work/BANDIT-052/writer-report.md`, focused pre-PR CodeRabbit pass
 evidence is recorded in `docs/work/BANDIT-052/coderabbit-review.md`, Local
 Qwen pass evidence is recorded in `docs/work/BANDIT-052/local-qwen-review.md`,
-and
+aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-052/review-evidence.md` with current `review_subject_hash`
+`bf41a7ab2c748625f9df3da759acfc427283a296aed493f7eaaff85ac34904b1`, and
 `.bandit/bootstrap-gaps.json` links the gap as `active_chore`.
 
-**Current next action:** Record aggregate Stage 4 review evidence for
-`BANDIT-052` with the current `review_subject_hash`, using focused pre-PR
-CodeRabbit pass evidence and Local Qwen pass evidence. No PM finding
-disposition is required because Local Qwen recorded no findings. Do not create
-landing verdict/action evidence, retrospective evidence, full scheduler
+**Current next action:** Run the Stage 5 landing-verdict path for `BANDIT-052`,
+including required pre-landing verification and clean-code evaluation. Do not
+create landing-action evidence, retrospective evidence, full scheduler
 execution runtime behavior, full worktree lifecycle work, claim lease creation
 or release, work-surface reservations, cockpit UI/server/API work, PR/CI
 workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8
-work before aggregate Stage 4 review evidence is recorded.
+work before Stage 5 landing verdict evidence is recorded.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
