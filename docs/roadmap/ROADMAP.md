@@ -16,7 +16,18 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the next queued bootstrap-gap work item for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. Do not start Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the session-context interstitial-recovery brief is recorded.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-049` - Session Context Interstitial Recovery, proving the current `bandit session-context current --json` closed-work-item/no-active-gap failure before implementation. Do not start implementation, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded.
+
+`BANDIT-049` - Session Context Interstitial Recovery is active as the
+bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
+Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY.json`, Stage 1
+brief evidence is recorded in `docs/work/BANDIT-049/brief.md`, lifecycle event
+evidence is recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json`
+links the gap to `BANDIT-049` with status `active`. The next required action is
+Stage 2 RED evidence for the focused session-context interstitial recovery
+failure. Do not start implementation or unrelated Phase 8 work before RED
+evidence is recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -663,14 +674,14 @@ state, and smell-trigger inputs rather than smell-list-only safety.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
 `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
-`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`,
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is active as `BANDIT-049`.
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`,
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`,
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`,
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`,
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`, and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order after focused
-session context.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remain queued in that order after
+session-context interstitial recovery.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is constrained by the accepted
 2026-05-27 Git refs backend decision: the first Claim Authority Primitive uses
 `refs/bandit/*` and `git update-ref --stdin` compare-and-swap transactions, and
@@ -1298,10 +1309,10 @@ Current rule:
 
 Current priority:
 
-1. Create the next queued bootstrap-gap work item for
-   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. `BANDIT-048` has
-   retrospective closeout, improvement dispositions, gap-ledger disposition, and
-   roadmap/current-context closeout recorded.
+1. Write Stage 2 RED evidence for `BANDIT-049` -
+   Session Context Interstitial Recovery, proving the current
+   `bandit session-context current --json` closed-work-item/no-active-gap
+   failure before implementation.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1320,8 +1331,8 @@ Current priority:
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
    `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
-   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is now the next queued
-   bootstrap gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
+   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is active as
+   `BANDIT-049`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
    session-context interstitial recovery, and
    `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
    bootstrap contract.

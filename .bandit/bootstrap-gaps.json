@@ -474,8 +474,8 @@
     {
       "id": "BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY",
       "title": "Focused session context fails between closed work item and next active gap",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-048",
       "source_artifacts": [
         "docs/work/BANDIT-048/retrospective.md",
@@ -485,10 +485,10 @@
         "docs/roadmap/ROADMAP.md",
         ".bandit/bootstrap-gaps.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-049",
       "rationale": "Stage 6 closeout verification for BANDIT-048 found that `bandit session-context current --json` fails with `Session context blocked: no active bootstrap gap linked to BANDIT-048` after the focused-session-context gap is resolved and before the next work item is created. The cold-start evaluation packet says the focused packet should be the compact first recovery surface, so the command needs an interstitial recovery path for the valid repo state where the last work item is closed, no new work item is active, and the exact next action is to create the next queued bootstrap-gap work item. The repair should preserve repo artifacts as authority and avoid treating a derived packet as canonical state.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to make `bandit session-context current --json` recover the closed-work-item/no-active-gap interstitial state by reporting the last closed work item, the next queued bootstrap gap, exact next action, operator-input status, blockers, source hierarchy, and required deep-read pointers without inventing an active work item."
+      "next_action": "Complete active chore BANDIT-049."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
