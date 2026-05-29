@@ -1039,14 +1039,13 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-052`
-covering event-driven wake triggers, deterministic non-LLM sweeper behavior,
-the Work Availability Wake Guarantee, one-claim activation, priority ordering,
-no-op behavior, and fail-closed ambiguous-state handling, without starting
-scheduler implementation, full worktree lifecycle implementation, claim lease
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-052`
+covering focused pre-PR CodeRabbit, clean-worktree Local Qwen, PM disposition
+for actionable findings, and aggregate `review_subject_hash` evidence, without
+starting landing verdict/action evidence, retrospective evidence, scheduler
+execution runtime behavior, full worktree lifecycle implementation, claim lease
 creation or release, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope,
-or unrelated Phase 8 work.
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1477,11 +1476,12 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. `BANDIT-052`
-has Stage 1 brief evidence for
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; the next action is writing Stage 2
-RED evidence for `BANDIT-052`. This is routine technical routing, not an
-operator-owned product, UAT, policy, business, cost, or scope decision unless
-the next work item would expand beyond the queued scheduler gap.
+has Stage 1 brief evidence, Stage 2 RED evidence, and Stage 3 implementation
+evidence for `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; the next action is
+running Stage 4 review gates for `BANDIT-052`. This is routine technical
+routing, not an operator-owned product, UAT, policy, business, cost, or scope
+decision unless the next work item would expand beyond the queued scheduler
+gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

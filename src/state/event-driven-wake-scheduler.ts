@@ -46,7 +46,11 @@ function parsePolicy(content: string): EventDrivenWakeSchedulerPolicy {
     throw new Error("Malformed event-driven wake scheduler policy: invalid JSON");
   }
 
-  if (!isRecord(parsed) || parsed.contract_version !== 1) {
+  if (
+    !isRecord(parsed) ||
+    typeof parsed.contract_version !== "number" ||
+    parsed.contract_version !== 1
+  ) {
     throw new Error(
       "Malformed event-driven wake scheduler policy: missing contract_version 1"
     );
