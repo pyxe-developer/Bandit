@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Repair unresolved pre-PR CodeRabbit Stage 4 findings for `BANDIT-053`, then rerun focused tests and refresh Stage 4 review evidence.
+**Current next step:** Run Local Qwen Stage 4 review for `BANDIT-053`, then record aggregate Stage 4 review evidence.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 

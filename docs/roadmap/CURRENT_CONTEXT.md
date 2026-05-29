@@ -395,10 +395,8 @@ are recorded in `docs/work/BANDIT-052/`, `docs/specs/`, `.bandit/policy/`, and
 
 **Current active work:** `BANDIT-053` - Agent Observability Traces.
 
-**Current next action:** Repair the unresolved pre-PR CodeRabbit Stage 4
-findings for `BANDIT-053`, starting with policy-driven Agent Observability Trace
-validation in `src/state/agent-observability.ts`, then rerun focused tests and
-refresh Stage 4 review evidence.
+**Current next action:** Run Local Qwen Stage 4 review for `BANDIT-053`, then
+record aggregate Stage 4 review evidence with the current review subject hash.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -766,11 +764,11 @@ recorded in `docs/specs/BANDIT-053-red-evidence.json`,
 `test/agent-observability.test.mjs`, and Stage 3 implementation evidence is
 recorded in `docs/work/BANDIT-053/implementation-evidence.md`. Pre-PR
 CodeRabbit Stage 4 evidence is recorded in
-`docs/work/BANDIT-053/coderabbit-review.md` with a `blocker` verdict and four
+`docs/work/BANDIT-053/coderabbit-review.md` with a `pass` verdict and no
 unresolved findings. The `.bandit/bootstrap-gaps.json` ledger links the gap as
-`active_chore`. The current stage is Stage 4: CodeRabbit repair required. The
-next action is to repair the unresolved CodeRabbit findings, rerun focused tests,
-and refresh Stage 4 review evidence.
+`active_chore`. The current stage is Stage 4: Local Qwen review required. The
+next action is to run Local Qwen Stage 4 review and record aggregate Stage 4
+review evidence.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -963,7 +961,7 @@ resolved.
 `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is resolved by `BANDIT-050`.
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by `BANDIT-051`.
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is resolved by `BANDIT-052`.
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is the next queued bootstrap-gap chore.
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is active as `BANDIT-053`.
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind the agent observability
 traces gap. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind the stage
 capability scope gap. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued behind
@@ -1014,13 +1012,14 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 1 work-item creation and brief evidence for
-`BANDIT-053`, the bootstrap-gap chore for
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`, without starting RED evidence,
-implementation, trace runtime execution, full scheduler execution runtime
-behavior, full worktree lifecycle implementation, claim lease creation or
-release, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.
+**Expected next deliverable:** Local Qwen Stage 4 review for `BANDIT-053`,
+followed by aggregate Stage 4 review evidence, Stage 5 landing verdict, and
+Stage 6 retrospective closeout for the
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` bootstrap-gap chore, without starting
+trace runtime execution, full scheduler execution runtime behavior, full
+worktree lifecycle implementation, claim lease creation or release, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
+product UAT scope, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1410,10 +1409,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair the unresolved pre-PR CodeRabbit Stage 4 findings for `BANDIT-053`,
-   starting with policy-driven Agent Observability Trace validation in
-   `src/state/agent-observability.ts`, then rerun focused tests and refresh
-   Stage 4 review evidence.
+1. Run Local Qwen Stage 4 review for `BANDIT-053`, then record aggregate Stage
+   4 review evidence with the current review subject hash.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1451,13 +1448,12 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-053`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, and pre-PR CodeRabbit Stage 4 evidence with unresolved findings.
-`.bandit/bootstrap-gaps.json` records
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as active for `BANDIT-053`. The next
-action is to repair the CodeRabbit findings for the scoped observability-traces
-contract only. This is routine technical routing, not an operator-owned product,
-UAT, policy, business, cost, or scope decision unless the repair would expand
-beyond the queued observability-traces gap.
+evidence, and passing pre-PR CodeRabbit Stage 4 evidence. `.bandit/bootstrap-gaps.json`
+records `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as active for `BANDIT-053`.
+The next action is to run Local Qwen Stage 4 review and record aggregate Stage 4
+review evidence. This is routine technical routing, not an operator-owned
+product, UAT, policy, business, cost, or scope decision unless the repair would
+expand beyond the queued observability-traces gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

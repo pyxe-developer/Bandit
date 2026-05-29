@@ -38,6 +38,35 @@ npm run typecheck
 # exit 0, no errors
 ```
 
+## Stage 4 CodeRabbit Repair
+
+Pre-PR CodeRabbit Stage 4 initially returned unresolved findings against the
+Agent Observability Trace validator. The repair keeps the implementation scoped
+to `src/state/agent-observability.ts` and now drives trace required fields,
+span required fields, operation kinds, and correlation checks from
+`.bandit/policy/agent-observability.json`, refuses empty trace directories, and
+normalizes a missing `docs/agent-observability` directory to a friendly
+fail-closed diagnostic.
+
+Repair verification:
+
+```sh
+node --test test/agent-observability.test.mjs
+# tests 5 / pass 5 / fail 0
+
+npm run typecheck
+# exit 0, no errors
+
+npm run bandit -- validate
+# Bandit state is valid.
+
+coderabbit review --agent --base-commit 0953579d2044786ba710e611c45648793e797874 --files docs/specs/BANDIT-GAP-AGENT-OBSERVABILITY-TRACES.json docs/specs/BANDIT-053-red-evidence.json docs/roadmap/CURRENT_CONTEXT.md docs/work/BANDIT-053/brief.md docs/work/BANDIT-053/red-evidence.md docs/work/BANDIT-053/implementation-evidence.md src/cli.ts src/commands/agent-observability.ts src/state/agent-observability.ts test/agent-observability.test.mjs -c AGENTS.md --no-color
+# review_completed / one out-of-scope BANDIT-052 finding dispositioned not applicable to BANDIT-053
+
+npm run bandit -- coderabbit-review pre-pr BANDIT-053 --base 0953579d2044786ba710e611c45648793e797874 --fixture docs/specs/BANDIT-053-coderabbit-review-output.json
+# CodeRabbit pre-PR review: pass
+```
+
 ## Test Ownership Boundary
 
 The Stage 3 Writer did not edit `test/agent-observability.test.mjs`, test
