@@ -1,0 +1,131 @@
+{
+  "contract_version": 1,
+  "trace_id": "trace-bandit-053-stage5",
+  "work_item": "BANDIT-053",
+  "stage": "Stage 5",
+  "actor": {
+    "identity": "codex_pm",
+    "role": "Landing Agent replacement"
+  },
+  "started_at": "2026-05-29T22:00:00Z",
+  "ended_at": "2026-05-29T22:00:09Z",
+  "outcome": "landing_verdict_prepared",
+  "source_artifacts": [
+    "docs/work/BANDIT-053/brief.md",
+    "docs/work/BANDIT-053/implementation-evidence.md",
+    "docs/work/BANDIT-053/review-evidence.md",
+    "docs/work/BANDIT-053/landing-verdict.md",
+    ".bandit/policy/agent-observability.json"
+  ],
+  "spans": [
+    {
+      "span_id": "span-wake-decision",
+      "operation_kind": "wake_decision",
+      "started_at": "2026-05-29T22:00:00Z",
+      "ended_at": "2026-05-29T22:00:01Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "wake_decision": "automation_next_step",
+        "authorizing_boundary": "docs/roadmap/CURRENT_CONTEXT.md"
+      },
+      "latency_ms": 1000,
+      "retry_count": 0,
+      "token_count": 0,
+      "outcome": "next_action_restored"
+    },
+    {
+      "span_id": "span-review-gate",
+      "operation_kind": "reviewer_run",
+      "started_at": "2026-05-29T22:00:01Z",
+      "ended_at": "2026-05-29T22:00:03Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "review_subject_hash": "0803fc37d05cbf7cf914b80cba186ecf726019dd5f0863e89717c1b5172c0274",
+        "review_evidence": "docs/work/BANDIT-053/review-evidence.md",
+        "authorizing_boundary": "docs/verification/STAGE_RUBRICS.md"
+      },
+      "latency_ms": 2000,
+      "retry_count": 0,
+      "token_count": 0,
+      "outcome": "review_evidence_current"
+    },
+    {
+      "span_id": "span-validation",
+      "operation_kind": "validation_gate",
+      "started_at": "2026-05-29T22:00:03Z",
+      "ended_at": "2026-05-29T22:00:06Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "risk_classification": ".bandit/policy/risk-classifications/BANDIT-053-risk-classification.json",
+        "supply_chain_state": ".bandit/policy/supply-chain-gates/BANDIT-053-supply-chain-gate.json",
+        "authorizing_boundary": "docs/verification/STAGE_RUBRICS.md"
+      },
+      "latency_ms": 3000,
+      "retry_count": 1,
+      "token_count": 0,
+      "failure_type": "missing_agent_observability_policy",
+      "outcome": "failed_then_repaired"
+    },
+    {
+      "span_id": "span-tool-call",
+      "operation_kind": "tool_call",
+      "started_at": "2026-05-29T22:00:06Z",
+      "ended_at": "2026-05-29T22:00:07Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "tool": "npm run bandit -- agent-observability validate --json",
+        "authorizing_boundary": ".bandit/policy/agent-observability.json"
+      },
+      "latency_ms": 1000,
+      "retry_count": 0,
+      "token_count": 0,
+      "outcome": "pass"
+    },
+    {
+      "span_id": "span-model-call",
+      "operation_kind": "model_call",
+      "started_at": "2026-05-29T22:00:07Z",
+      "ended_at": "2026-05-29T22:00:08Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "model_profile": "codex_pm",
+        "authorizing_boundary": "AGENTS.md"
+      },
+      "latency_ms": 1000,
+      "retry_count": 0,
+      "token_count": 1200,
+      "outcome": "verdict_written"
+    },
+    {
+      "span_id": "span-closeout",
+      "operation_kind": "closeout_outcome",
+      "started_at": "2026-05-29T22:00:08Z",
+      "ended_at": "2026-05-29T22:00:09Z",
+      "correlation": {
+        "work_item": "BANDIT-053",
+        "stage": "Stage 5",
+        "actor_identity": "codex_pm",
+        "landing_verdict": "docs/work/BANDIT-053/landing-verdict.md",
+        "authorizing_boundary": "docs/verification/STAGE_RUBRICS.md"
+      },
+      "latency_ms": 1000,
+      "retry_count": 0,
+      "token_count": 0,
+      "external_payload": {
+        "source": "repo_artifact_paths",
+        "handling": "data_only"
+      },
+      "outcome": "safe_to_land"
+    }
+  ]
+}

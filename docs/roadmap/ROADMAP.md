@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Write the Stage 5 landing verdict for `BANDIT-053`, including risk-classification and supply-chain gate evidence.
+**Current next step:** Run `npm run bandit -- land-check BANDIT-053`, then record the local landing action for `BANDIT-053` if the gate passes.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 

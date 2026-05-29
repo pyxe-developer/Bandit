@@ -1,0 +1,165 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-053",
+  "changed_surfaces": [
+    {
+      "path": "src/state/agent-observability.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/agent-observability.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/policy/agent-observability.json",
+      "surface": "policy_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/agent-observability/BANDIT-053-agent-observability-trace.json",
+      "surface": "derived_trace_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/agent-observability.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "agent_observability_policy_validator",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-053/implementation-evidence.md"
+    },
+    {
+      "signal_id": "derived_non_canonical_trace_projection",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/review-evidence.md"
+    },
+    {
+      "signal_id": "no_telemetry_backend_or_external_integration",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/brief.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/agent-observability.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/landing-verdict.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/landing-verdict.md"
+    },
+    {
+      "tool": "npm run bandit -- agent-observability validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/agent-observability.json"
+    },
+    {
+      "tool": "npm run bandit -- agent-observability project --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/agent-observability/BANDIT-053-agent-observability-trace.json"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/landing-verdict.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs review-subject-hash BANDIT-053",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-053-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-053-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- land-check BANDIT-053",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-053/landing-verdict.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": "docs/work/BANDIT-053/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-053-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-053/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-053/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-053 is a non-product bootstrap-gap chore implementing local Agent Observability Trace policy validation and derived non-canonical projection behavior. It requires pre-PR CodeRabbit plus Local Qwen review and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-053 changes local Agent Observability Trace validation, command routing, policy evidence, representative trace evidence, and focused tests. The work is medium workflow-risk because it defines future observability trace shape for agent runtime behavior, reviewer runs, model calls, tool calls, failures, and token/cost signals, but it is evidence-only today: it does not ingest a telemetry backend, integrate an external hosted observability service, authorize paid routing, execute a scheduler, create or release claims, reserve work surfaces, mutate worktrees, merge, push, deploy, change dependencies, change lockfiles, change installed global skills, or ship cockpit UI/server/API behavior. Stage 4 evidence records CodeRabbit pass, Local Qwen non_blocking with PM disposition, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/agent-observability.json",
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-053-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-053-supply-chain-gate.json",
+    "docs/agent-observability/BANDIT-053-agent-observability-trace.json",
+    "docs/work/BANDIT-053/brief.md",
+    "docs/work/BANDIT-053/implementation-evidence.md",
+    "docs/work/BANDIT-053/review-evidence.md",
+    "docs/work/BANDIT-053/landing-verdict.md",
+    "src/state/agent-observability.ts",
+    "src/commands/agent-observability.ts",
+    "test/agent-observability.test.mjs"
+  ]
+}

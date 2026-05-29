@@ -1,0 +1,56 @@
+{
+  "contract_version": 1,
+  "policy_id": "agent-observability-traces",
+  "trace_shape": {
+    "required_fields": [
+      "trace_id",
+      "work_item",
+      "stage",
+      "actor",
+      "started_at",
+      "ended_at",
+      "outcome",
+      "spans"
+    ],
+    "required_span_fields": [
+      "span_id",
+      "operation_kind",
+      "started_at",
+      "ended_at",
+      "correlation",
+      "outcome"
+    ],
+    "operation_kinds": [
+      "wake_decision",
+      "sweeper_decision",
+      "claim_operation",
+      "claim_renewal",
+      "claim_release",
+      "tool_call",
+      "reviewer_run",
+      "model_call",
+      "validation_gate",
+      "retry",
+      "failure",
+      "closeout_outcome"
+    ]
+  },
+  "correlation_requirements": [
+    "work_item",
+    "stage",
+    "actor_identity",
+    "source_artifacts",
+    "authorizing_boundary"
+  ],
+  "projection_boundary": {
+    "authority": "derived_non_canonical",
+    "can_satisfy_required_workflow_artifacts": false
+  },
+  "token_cost_boundary": {
+    "signal_only": true,
+    "can_authorize_paid_routing": false
+  },
+  "input_quarantine_boundary": {
+    "external_payloads": "data_only"
+  }
+}

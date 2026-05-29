@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-053
 source_head: f1e652154ee5df7c254bd2c38c5893a4f98a9656
-review_subject_hash: 13afd6e8e2fcdeba702d4da42ffa13ee65228347e7ebbc2b0b57ed6043c5fe60
+review_subject_hash: 0803fc37d05cbf7cf914b80cba186ecf726019dd5f0863e89717c1b5172c0274
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -11,7 +11,10 @@ verification_evidence:
   - docs/specs/BANDIT-053-coderabbit-review-output.json records the normalized terminal CodeRabbit result with reviewState completed, verdict pass, and no unresolved BANDIT-053 findings after focused repair.
   - docs/work/BANDIT-053/local-qwen-review.md records profile local-qwen-baseline, reviewer_verdict non_blocking, findings_status open, operator_input_status none_required, and source_drift_status current at source head f1e652154ee5df7c254bd2c38c5893a4f98a9656.
   - docs/work/BANDIT-053/qwen-finding-disposition.md records Codex PM accepted_non_blocking disposition for the Local Qwen findings with no new follow-up chore required.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-053 produced 13afd6e8e2fcdeba702d4da42ffa13ee65228347e7ebbc2b0b57ed6043c5fe60 from review-subject policy v1.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-053 produced 0803fc37d05cbf7cf914b80cba186ecf726019dd5f0863e89717c1b5172c0274 from review-subject policy v1 after Stage 5 layered risk-classification, supply-chain gate, and missing agent-observability policy evidence registration.
+  - .bandit/policy/risk-classifications/BANDIT-053-risk-classification.json records layered risk-classification evidence for local-record landing eligibility.
+  - .bandit/policy/supply-chain-gates/BANDIT-053-supply-chain-gate.json records supply-chain gate evidence with no dependency, lockfile, package-manager script, CI/release, agent-skill, fetched-prompt, external tool-install, executable generated-content, or unknown supply-chain surface changes.
+  - .bandit/policy/agent-observability.json records the required Agent Observability Trace policy and docs/agent-observability/BANDIT-053-agent-observability-trace.json records representative derived non-canonical trace evidence.
   - node --test test/agent-observability.test.mjs passed 5/5 assertions after CodeRabbit repair.
   - npm run typecheck passed after CodeRabbit repair.
   - npm run bandit -- validate passed after CodeRabbit repair.
