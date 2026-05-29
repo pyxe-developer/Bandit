@@ -547,8 +547,8 @@
     {
       "id": "BANDIT-GAP-AGENT-OBSERVABILITY-TRACES",
       "title": "Agent runtime behavior lacks first-class observability traces",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -557,9 +557,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-053",
-      "rationale": "The PRD-002 research review identified OpenTelemetry-style agent spans as missing observability, and the operator confirmed traces should be first-class for claims, tool calls, reviewer runs, token spend, wakeups, and failures while repo artifacts remain canonical workflow state.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-053."
+      "rationale": "BANDIT-053 created a repo-native Agent Observability Trace policy, validation command, projection command, representative trace evidence, focused tests, review evidence, landing verdict, local-record landing action, and retrospective closeout while preserving traces and projections as derived non-canonical observability evidence.",
+      "verification_target": "docs/work/BANDIT-053/retrospective.md",
+      "next_action": "Use agent-observability trace policy and projection evidence for trace-backed runtime signals; create the next bootstrap-gap chore for BANDIT-GAP-STAGE-CAPABILITY-SCOPE before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-STAGE-CAPABILITY-SCOPE",

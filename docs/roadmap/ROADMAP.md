@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-053` - Agent Observability Traces
+- `[Gap]` none - interstitial after `BANDIT-053` closeout
 
 ## Next Work Item
 
-**Current next step:** Record Stage 6 retrospective closeout for `BANDIT-053`, resolve `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`, and refresh context/status. Do not begin `BANDIT-054` yet.
+**Current next step:** Create the `BANDIT-054` bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Do not create RED evidence, implementation work, or unrelated Phase 8 work before the Stage 1 brief exists.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
@@ -87,3 +87,4 @@ bootstrap gaps are queued.
 - `BANDIT-050` - Cockpit Status Interstitial Recovery
 - `BANDIT-051` - Worktree Bootstrap Contract
 - `BANDIT-052` - Event-Driven Wake Scheduler
+- `BANDIT-053` - Agent Observability Traces
