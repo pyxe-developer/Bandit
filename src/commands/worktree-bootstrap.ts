@@ -1,5 +1,7 @@
 import { validateWorktreeBootstrap } from "../state/worktree-bootstrap.js";
 
+const VALIDATE_OPTIONS = new Set(["--json"]);
+
 export async function worktreeBootstrap(repoRoot: string, args: string[]) {
   const [action, ...options] = args;
 
@@ -11,7 +13,8 @@ export async function worktreeBootstrap(repoRoot: string, args: string[]) {
 }
 
 async function validate(repoRoot: string, args: string[]) {
-  if (args.some((arg) => arg !== "--json")) {
+  const invalidOption = args.find((arg) => !VALIDATE_OPTIONS.has(arg));
+  if (invalidOption) {
     throw new Error("Usage: bandit worktree-bootstrap validate [--json]");
   }
 

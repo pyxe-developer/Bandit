@@ -8,12 +8,14 @@ Stage 3 Complete
 
 Stage 3 GREEN implementation of `bandit worktree-bootstrap validate --json`. All 3 RED tests now pass. Full test suite (412 tests) passes. TypeScript typecheck is clean.
 
+Stage 4 CodeRabbit repair replaced the raw Claude writer stream with a minimal digest and hardened path validation, secret-classification normalization, explicit secret-copy exception handling, and validate-option parsing. Focused regression coverage now includes traversal refusal, case-variant secret classification refusal, unsupported secret-copy exception refusal, and unsupported option refusal.
+
 ## Acceptance Criteria Mapping
 
 | Criterion | Implementation Path | Status |
 |---|---|---|
 | Policy artifact validates allowed copy/link entries, setup commands, validation command | `src/state/worktree-bootstrap.ts` readEvidence + validateEvidenceAgainstDecision | Pass |
-| Secret material not copied by default | `validateNoSecretCopyEntries` throws when classification=secret_material and secret_copy_exception=none | Pass |
+| Secret material not copied by default | `validateNoSecretCopyEntries` normalizes classification and throws when classification=secret_material and secret_copy_exception=none | Pass |
 | Bootstrap validation command required | `validateBootstrapValidationCommand` throws when bootstrap_commands.validation is empty | Pass |
 | CLI-readable validation via worktree-bootstrap command | `src/commands/worktree-bootstrap.ts` + cli.ts dispatch | Pass |
 | Template validated for required fields | `validateTemplate` in state/worktree-bootstrap.ts | Pass |
@@ -34,7 +36,7 @@ Stage 3 GREEN implementation of `bandit worktree-bootstrap validate --json`. All
 3. Simple design: same validator pattern as supply-chain-gate; no new abstractions.
 4. Explicit state: all validation rules are named functions with clear failure messages.
 5. No hidden authority: output is a structured report; no claim, event, or state writes.
-6. Testable behavior: 3 focused tests cover pass, secret-copy refusal, and missing validation command.
+6. Testable behavior: focused tests cover pass, secret-copy refusal, missing validation command, traversal refusal, case-variant secret classification, unsupported secret-copy exception values, and unsupported command options.
 7. Readable flow: validate → readPolicy → validateTemplate → readEvidence → validateEvidenceAgainstDecision.
 8. Locality: worktree-bootstrap state and command are self-contained new files.
 9. Failure clarity: error messages match test assertions exactly; fail-closed by default.
@@ -43,6 +45,6 @@ Stage 3 GREEN implementation of `bandit worktree-bootstrap validate --json`. All
 
 ## Test Results
 
-- `node --test test/worktree-bootstrap.test.mjs`: 3/3 pass
-- `npm test`: 412/412 pass
+- `node --test test/worktree-bootstrap.test.mjs`: 7/7 pass after Stage 4 repair
+- `npm test`: 416/416 pass after Stage 4 repair
 - `npm run typecheck`: clean

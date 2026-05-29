@@ -8,9 +8,9 @@
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
-`BANDIT-051` is active as the bootstrap-gap chore for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief, Stage 2 RED evidence, and Stage 3 implementation evidence are recorded, and the gap ledger links the gap to `BANDIT-051`.
+`BANDIT-051` is active as the bootstrap-gap chore for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 CodeRabbit blocker evidence, and focused CodeRabbit repair evidence are recorded, and the gap ledger links the gap to `BANDIT-051`.
 
-The next required action is Stage 4 review gates for `BANDIT-051`: pre-PR CodeRabbit, Local Qwen, review-subject-hash evidence, and aggregate review evidence. Keep the review scoped to the Stage 3 `worktree-bootstrap validate --json` implementation and out of scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work.
+The next required action is to rerun Stage 4 review gates for `BANDIT-051`: pre-PR CodeRabbit, Local Qwen, review-subject-hash evidence, and aggregate review evidence at the repaired source. Keep the review scoped to the Stage 3 `worktree-bootstrap validate --json` implementation and focused CodeRabbit repair, and keep scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work out of scope.
 
 No operator-owned input is required for the next recorded action.
 

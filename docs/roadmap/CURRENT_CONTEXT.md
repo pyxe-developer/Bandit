@@ -395,19 +395,22 @@ disposition are recorded in `docs/work/BANDIT-050/`, `docs/specs/`,
 
 **Current active work:** `BANDIT-051` - Worktree Bootstrap Contract.
 
-The current stage is Stage 4: Review.
+The current stage is Stage 4: Review rerun.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-051`: pre-PR
+**Current next action:** Rerun Stage 4 review gates for `BANDIT-051`: pre-PR
 CodeRabbit, Local Qwen, review-subject-hash evidence, and aggregate review
-evidence. Stage 3 implementation evidence is recorded in
+evidence at the repaired source. Stage 3 implementation evidence is recorded in
 `docs/specs/BANDIT-051-implementation-evidence.json`,
 `docs/work/BANDIT-051/implementation-evidence.md`, and
-`docs/work/BANDIT-051/writer-report.md`; keep review scoped to the
-`worktree-bootstrap validate --json` implementation and keep scheduler
-execution, full worktree lifecycle, claim lease creation or release,
-work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy, product UAT scope, and unrelated Phase 8 work out
-of scope.
+`docs/work/BANDIT-051/writer-report.md`. Stage 4 CodeRabbit blocker evidence is
+recorded in `docs/work/BANDIT-051/coderabbit-review.md` with normalized
+provider output in `docs/specs/BANDIT-051-coderabbit-review-output.json`.
+Focused repair evidence is recorded in the Stage 3 implementation artifacts and
+source diff, covering raw writer-stream evidence hygiene and
+`worktree-bootstrap validate --json` validation hardening. Keep scheduler
+execution, full worktree lifecycle, claim lease creation or release, work-surface
+reservations, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy, product UAT scope, and unrelated Phase 8 work out of scope.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is active and linked to
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -1435,10 +1438,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-051` -
+1. Rerun Stage 4 review gates for `BANDIT-051` -
    `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence, Stage 2
-   RED evidence, and Stage 3 implementation evidence are recorded in
-   `docs/work/BANDIT-051/`, and the gap ledger marks the gap active.
+   RED evidence, Stage 3 implementation evidence, Stage 4 CodeRabbit blocker
+   evidence, and focused repair evidence are recorded in `docs/work/BANDIT-051/`,
+   and the gap ledger marks the gap active. The review rerun must cover the
+   repaired raw writer-stream evidence hygiene and `worktree-bootstrap
+   validate --json` validation hardening.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1476,12 +1482,13 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. `BANDIT-051`
-has Stage 1 brief evidence, Stage 2 RED evidence, and Stage 3 implementation
-evidence for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and the next action is
-Stage 4 review gates from existing repo source artifacts. This is routine
-technical routing, not an operator-owned product, UAT, policy, business, cost,
-or scope decision unless the work item scope would expand
-beyond the recorded Worktree Bootstrap Contract gap.
+has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
+evidence, Stage 4 CodeRabbit blocker evidence, and focused repair evidence for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and the next action is Stage 4 review
+rerun at the repaired source. This is routine technical routing, not an
+operator-owned product, UAT, policy, business, cost, or scope decision unless
+the review or repair would expand beyond the recorded Worktree Bootstrap
+Contract gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

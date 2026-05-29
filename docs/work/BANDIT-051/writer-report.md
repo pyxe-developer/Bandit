@@ -70,6 +70,7 @@ Implemented `bandit worktree-bootstrap validate --json` to enforce the Worktree 
 - CAS Claim Authority: not touched; `.bandit` files are not treated as writable claim authority.
 - Evidence Only: `validateWorktreeBootstrap` validates and reports; it does not create worktrees, modify claims, or grant runnable status.
 - Secret Values: no actual secret values appear in any artifact, policy, evidence, stdout, or stderr output.
+- Stage 4 evidence hygiene: the full-fidelity process stream was replaced with a minimal digest in `docs/work/BANDIT-051/claude-writer-stream.jsonl`; durable implementation evidence is `writer-report.md` plus `implementation-evidence.md`.
 
 ## Verification Commands to Run
 

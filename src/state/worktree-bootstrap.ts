@@ -44,6 +44,8 @@ type BootstrapCommands = {
 
 const POLICY_DISPLAY_PATH = ".bandit/policy/worktree-bootstrap.json";
 const TEMPLATE_DISPLAY_PATH = "docs/templates/worktree-bootstrap.md";
+const SECRET_CLASSIFICATION = "secret_material";
+const SECRET_COPY_EXCEPTIONS = new Set(["none", "operator_supervised_secret_copy"]);
 
 const REQUIRED_TEMPLATE_FIELDS = [
   "work_item",
@@ -107,8 +109,12 @@ function parsePolicy(content: string): WorktreeBootstrapPolicy {
   ).map((decision) => ({
     work_item: readRequiredString(decision, "work_item", "worktree-bootstrap decision"),
     decision_kind: readRequiredString(decision, "decision_kind", "worktree-bootstrap decision"),
-    evidence_path: readRequiredString(decision, "evidence_path", "worktree-bootstrap decision"),
-    secret_copy_exception: readRequiredString(decision, "secret_copy_exception", "worktree-bootstrap decision")
+    evidence_path: readRepoRelativePath(
+      decision,
+      "evidence_path",
+      "worktree-bootstrap decision"
+    ),
+    secret_copy_exception: readSecretCopyException(decision)
   }));
 
   return {
@@ -172,9 +178,13 @@ function readCopyEntries(parsed: RawRecord, workItem: string): CopyEntry[] {
   );
 
   return entries.map((entry) => ({
-    from: readRequiredString(entry, "from", `worktree-bootstrap copy entry for ${workItem}`),
-    to: readRequiredString(entry, "to", `worktree-bootstrap copy entry for ${workItem}`),
-    classification: readRequiredString(entry, "classification", `worktree-bootstrap copy entry for ${workItem}`)
+    from: readRepoRelativePath(entry, "from", `worktree-bootstrap copy entry for ${workItem}`),
+    to: readRepoRelativePath(entry, "to", `worktree-bootstrap copy entry for ${workItem}`),
+    classification: readRequiredString(
+      entry,
+      "classification",
+      `worktree-bootstrap copy entry for ${workItem}`
+    ).toLowerCase()
   }));
 }
 
@@ -204,14 +214,14 @@ function validateNoSecretCopyEntries(
   decision: WorktreeBootstrapDecision
 ) {
   const secretEntries = evidence.allowed_copy_entries.filter(
-    (entry) => entry.classification === "secret_material"
+    (entry) => entry.classification === SECRET_CLASSIFICATION
   );
 
   if (secretEntries.length === 0) {
     return;
   }
 
-  if (decision.secret_copy_exception !== "none") {
+  if (decision.secret_copy_exception === "operator_supervised_secret_copy") {
     return;
   }
 
@@ -285,6 +295,39 @@ function readRequiredString(record: RawRecord, field: string, label: string): st
   }
 
   return value.trim();
+}
+
+function readRepoRelativePath(record: RawRecord, field: string, label: string): string {
+  const value = readRequiredString(record, field, label);
+  const normalized = path.posix.normalize(value.replaceAll(path.win32.sep, path.posix.sep));
+
+  if (
+    path.isAbsolute(value) ||
+    path.win32.isAbsolute(value) ||
+    normalized === "." ||
+    normalized === ".." ||
+    normalized.startsWith("../")
+  ) {
+    throw new Error(`Malformed ${label}: ${field} must be a repo-relative path`);
+  }
+
+  return normalized;
+}
+
+function readSecretCopyException(record: RawRecord): string {
+  const value = readRequiredString(
+    record,
+    "secret_copy_exception",
+    "worktree-bootstrap decision"
+  );
+
+  if (!SECRET_COPY_EXCEPTIONS.has(value)) {
+    throw new Error(
+      "Malformed worktree-bootstrap decision: secret_copy_exception must be one of none, operator_supervised_secret_copy"
+    );
+  }
+
+  return value;
 }
 
 function isRecord(value: unknown): value is RawRecord {

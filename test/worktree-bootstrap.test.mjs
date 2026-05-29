@@ -63,6 +63,64 @@ test("worktree-bootstrap validate rejects missing validation command wiring", as
   );
 });
 
+test("worktree-bootstrap validate rejects path traversal evidence paths", async () => {
+  const repo = await createInitializedWorktreeBootstrapRepo();
+  const policy = completeWorktreeBootstrapPolicy();
+  policy.release_authorized_decisions[0].evidence_path = "../outside.json";
+  await writeCompleteWorktreeBootstrapFixture(repo, { policy });
+
+  const result = await runBandit(repo, ["worktree-bootstrap", "validate", "--json"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /evidence_path must be a repo-relative path/);
+});
+
+test("worktree-bootstrap validate rejects case-variant secret-copy entries by default", async () => {
+  const repo = await createInitializedWorktreeBootstrapRepo();
+  const evidence = completeWorktreeBootstrapEvidence();
+  evidence.allowed_copy_entries = [
+    {
+      from: ".env",
+      to: ".env",
+      classification: "Secret_Material"
+    }
+  ];
+  await writeCompleteWorktreeBootstrapFixture(repo, { evidence });
+
+  const result = await runBandit(repo, ["worktree-bootstrap", "validate", "--json"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /secret material copy entries require an explicit operator-supervised exception/
+  );
+});
+
+test("worktree-bootstrap validate rejects unsupported secret-copy exception values", async () => {
+  const repo = await createInitializedWorktreeBootstrapRepo();
+  const policy = completeWorktreeBootstrapPolicy();
+  policy.release_authorized_decisions[0].secret_copy_exception = "yes";
+  await writeCompleteWorktreeBootstrapFixture(repo, { policy });
+
+  const result = await runBandit(repo, ["worktree-bootstrap", "validate", "--json"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /secret_copy_exception must be one of none, operator_supervised_secret_copy/
+  );
+});
+
+test("worktree-bootstrap validate rejects unsupported options", async () => {
+  const repo = await createInitializedWorktreeBootstrapRepo();
+  await writeCompleteWorktreeBootstrapFixture(repo);
+
+  const result = await runBandit(repo, ["worktree-bootstrap", "validate", "--yaml"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Usage: bandit worktree-bootstrap validate \[--json\]/);
+});
+
 async function createInitializedWorktreeBootstrapRepo() {
   const repo = await createTempRepo();
   const init = await runBandit(repo, ["init"]);
