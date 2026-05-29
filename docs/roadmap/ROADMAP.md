@@ -16,10 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Resolve landing blockers for `BANDIT-050` -
+**Current next step:** Record local-record landing action for `BANDIT-050` -
 Cockpit Status Interstitial Recovery. Stage 1 brief evidence, Stage 2 RED
-evidence, Stage 3 implementation evidence, Stage 4 review evidence, and Stage 5
-landing verdict are recorded in
+evidence, Stage 3 implementation evidence, refreshed Stage 4 review evidence,
+Stage 5 landing verdict, and passing Stage 5 land-check evidence are recorded in
 `docs/work/BANDIT-050/brief.md`,
 `docs/specs/BANDIT-050-red-evidence.json`,
 `docs/work/BANDIT-050/red-evidence.md`,
@@ -27,8 +27,9 @@ landing verdict are recorded in
 `docs/work/BANDIT-050/implementation-evidence.md`,
 `docs/work/BANDIT-050/review-evidence.md`, and
 `docs/work/BANDIT-050/landing-verdict.md`. The landing verdict is currently
-`needs-repair` due pending clean-code closure, so the next action is to address
-that and rerun `bandit land-check BANDIT-050` before Stage 6 retrospective.
+`safe-to-land`, and `npm run bandit -- land-check BANDIT-050` passes, so the
+next action is to record `docs/work/BANDIT-050/landing-action.md` before Stage
+6 retrospective.
 
 `BANDIT-050` - Cockpit Status Interstitial Recovery is the active
 bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
@@ -39,11 +40,10 @@ recorded in `docs/specs/BANDIT-050-red-evidence.json`,
 `docs/work/BANDIT-050/red-evidence.md`,
 `docs/specs/BANDIT-050-implementation-evidence.json`, and
 `docs/work/BANDIT-050/implementation-evidence.md`; landing verdict evidence is now
-recorded in `docs/work/BANDIT-050/landing-verdict.md` as `needs-repair`; lifecycle event evidence is
+recorded in `docs/work/BANDIT-050/landing-verdict.md` as `safe-to-land`; lifecycle event evidence is
 recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` marks the
 gap active with linked work item `BANDIT-050`. The next required action is
-resolve clean-code closure and re-run land-check before local-record landing
-action.
+local-record landing action.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
 as the bootstrap-gap chore for
@@ -1366,16 +1366,17 @@ Current rule:
 
 Current priority:
 
-1. Resolve Stage 5 landing blockers for `BANDIT-050` - Cockpit Status
+1. Record local-record landing action for `BANDIT-050` - Cockpit Status
    Interstitial Recovery. Stage 1 brief, Stage 2 RED, Stage 3 implementation,
-   Stage 4 aggregate review evidence, and Stage 5 landing verdict are recorded in
+   Stage 4 aggregate review evidence, Stage 5 landing verdict, and passing
+   land-check evidence are recorded in
    `docs/work/BANDIT-050/brief.md`, `docs/work/BANDIT-050/red-evidence.md`,
    `docs/work/BANDIT-050/implementation-evidence.md`,
    `docs/specs/BANDIT-050-red-evidence.json`,
    `docs/specs/BANDIT-050-implementation-evidence.json`,
    `docs/work/BANDIT-050/review-evidence.md`, and
-   `docs/work/BANDIT-050/landing-verdict.md`. The next step is to resolve the clean-code closure blocker, rerun
-   `bandit land-check BANDIT-050`, and then record local-record landing action.
+   `docs/work/BANDIT-050/landing-verdict.md`. The next step is to record
+   `docs/work/BANDIT-050/landing-action.md` before Stage 6 retrospective.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

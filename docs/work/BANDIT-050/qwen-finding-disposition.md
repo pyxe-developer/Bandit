@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-050
-source_head: 3c430aff5304e412988ecfcdbd77d473e26dcd32
+source_head: 1b87d705e1218e3c44d0236cf5ad6447a9ab4c5e
 review_evidence: docs/work/BANDIT-050/local-qwen-review.md
 disposition_owner: Codex PM
 disposition_date: 2026-05-29
@@ -12,6 +12,7 @@ overall_disposition: accepted_non_blocking_with_clean_code_closure
 
 | Finding | Disposition | Rationale | Durable action |
 | --- | --- | --- | --- |
+| Stale verification count in review-evidence.md claims 12/13 assertions passed, but the source diff shows the interstitial assertion now passes 13/13. | `closed_by_evidence_refresh` | Stage 5 verification was rerun after the assertion repair and `node --test test/cockpit-status.test.mjs` passed 13/13 assertions. | Update aggregate review evidence to record the 13/13 focused test pass. |
 | Source diff content is truncated to a range string, preventing line-level verification of fail-closed behavior, source-of-truth boundaries, and interstitial recovery logic against the spec. | `accepted_non_blocking` | The current implementation diff is available in git, focused on cockpit-status interstitial recovery, and bounded to derived non-canonical reporting. The missing pasted diff weakens reviewer ergonomics but does not show a blocker-level clean-code or scope failure. | Queue follow-up candidate `BANDIT-050-SOURCE-DIFF-NORMALIZATION` for future review-evidence hardening. |
 | Implementation evidence verification relies on summary pass statements rather than explicit stdout/stderr for required commands. | `accepted_non_blocking` | The required commands were rerun for Stage 5 closure and remain reproducible from repo scripts. The evidence format should improve, but the current command surfaces are deterministic and do not require operator input. | Queue follow-up candidate `BANDIT-050-STAGE4-VERIFY-MATRIX` to require explicit command evidence per acceptance criterion. |
 | Stage 1 `CLEAN_CODE.md` read evidence is required by the brief but is not attached or verified in the current evidence package. | `closed_by_existing_brief_and_stage5_review` | `docs/work/BANDIT-050/brief.md` records that `CLEAN_CODE.md` was read on 2026-05-29 before the brief was created. Codex PM reread `CLEAN_CODE.md` during Stage 5 closure and evaluated the implementation surface against the rubric. | Queue follow-up candidate `BANDIT-050-CLEAN-CODE-READ-EVIDENCE` to make future artifact-level links less prose-dependent. |
