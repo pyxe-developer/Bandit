@@ -1,0 +1,45 @@
+{
+  "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+  "baseRevision": "0953579",
+  "reviewState": "completed",
+  "verdict": "pass",
+  "findings": [],
+  "providerError": "Repair-head focused CodeRabbit pre-PR retry completed with findings 0 after earlier rate-limit waits.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+      "endedAt": "2026-05-29T17:37:52Z",
+      "result": "interrupted_no_terminal_verdict",
+      "summary": "Broad coderabbit review --agent --base origin/main -c AGENTS.md --no-color reached setup/analyzing/summarizing and produced no terminal verdict for about two minutes before termination."
+    },
+    {
+      "attempt": 2,
+      "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+      "endedAt": "2026-05-29T17:38:38Z",
+      "result": "rate_limit",
+      "summary": "Focused coderabbit review --agent --base-commit 0953579 with BANDIT-052 implementation files failed with CodeRabbit rate_limit and waitTime 14 minutes and 47 seconds."
+    },
+    {
+      "attempt": 3,
+      "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+      "endedAt": "2026-05-29T17:57:12Z",
+      "result": "finding",
+      "summary": "Focused retry after the first wait completed with one critical finding: stale Known Bootstrap Gaps wording in docs/roadmap/CURRENT_CONTEXT.md still said Stage 2 RED evidence was next."
+    },
+    {
+      "attempt": 4,
+      "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+      "endedAt": "2026-05-29T17:58:19Z",
+      "result": "rate_limit",
+      "summary": "Repair-head focused retry including docs/roadmap/CURRENT_CONTEXT.md immediately failed with CodeRabbit rate_limit and waitTime 15 minutes and 54 seconds."
+    },
+    {
+      "attempt": 5,
+      "sourceHead": "91567ca85d53dbbb11cff5014dbd603f7d65c183",
+      "endedAt": "2026-05-29T18:14:48Z",
+      "result": "pass",
+      "summary": "Repair-head focused retry including docs/roadmap/CURRENT_CONTEXT.md completed with findings 0."
+    }
+  ]
+}
