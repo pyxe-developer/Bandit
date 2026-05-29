@@ -382,34 +382,29 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-047` - Bootstrap Model-Family Separation
-is landed and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`. Its structured creation spec,
-Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4
-pre-PR CodeRabbit pass evidence, Stage 4 Local Qwen pass evidence, aggregate
-Stage 4 review evidence, Stage 5 landing verdict evidence, explicit
-risk-classification and supply-chain evidence, local-record landing action
-evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
-recorded in `docs/work/BANDIT-047/`, `.bandit/policy/`, and
-`.bandit/bootstrap-gaps.json`.
+**Last completed milestone:** `BANDIT-048` - Focused Session Context Packets is
+landed and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 Claude Writer implementation evidence,
+CodeRabbit timeout disposition, Local Qwen non-blocking evidence and PM
+disposition, aggregate Stage 4 review evidence, explicit risk-classification
+and supply-chain evidence, Stage 5 landing verdict evidence, local-record
+landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
+disposition are recorded in `docs/work/BANDIT-048/`, `docs/specs/`,
+`.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record Stage 6 retrospective closeout for `BANDIT-048`.
-Do not resolve `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`, start Worktree Bootstrap
-Contract work, scheduler execution, worktree lifecycle, cockpit UI/server/API
-work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
-or unrelated Phase 8 work before retrospective evidence, improvement
-dispositions, gap-ledger disposition, and roadmap/current-context closeout are
-recorded.
+**Current next action:** Create the next queued bootstrap-gap work item for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. Do not start Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the session-context interstitial-recovery brief is recorded.
 
-`BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
-chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
+`BANDIT-048` - Focused Session Context Packets is landed and closed out as the
+bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
+creation spec is
 recorded in `docs/specs/BANDIT-GAP-FOCUSED-SESSION-CONTEXT.json`, Stage 1 brief
 evidence is recorded in `docs/work/BANDIT-048/brief.md`, Stage 2 RED evidence
 is recorded in `docs/specs/BANDIT-048-red-evidence.json`,
 `docs/work/BANDIT-048/red-evidence.md`, and
-`test/focused-session-context.test.mjs`, lifecycle event evidence is recorded in
-`.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` marks the gap active
-with linked work item `BANDIT-048`. Stage 3 Claude Writer dispatch and
+`test/focused-session-context.test.mjs`, lifecycle event evidence is recorded
+in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` marks the gap
+resolved with linked work item `BANDIT-048`. Stage 3 Claude Writer dispatch and
 implementation evidence are recorded in `docs/work/BANDIT-048/dispatch.md`,
 `docs/work/BANDIT-048/writer-report.md`,
 `docs/work/BANDIT-048/implementation-evidence.md`,
@@ -438,9 +433,13 @@ explicit layered risk-classification and supply-chain gate evidence is recorded
 in `.bandit/policy/`; post-verdict `npm run bandit -- land-check BANDIT-048`
 passes; and local-record landing action evidence is recorded in
 `docs/work/BANDIT-048/landing-action.md` with current head
-`48f156969586e01df52b6be2506ad6be838078fa`. The next required action is Stage
-6 retrospective closeout before bootstrap-gap resolution or unrelated Phase 8
-work.
+`48f156969586e01df52b6be2506ad6be838078fa`. Stage 6 retrospective closeout is
+recorded in `docs/specs/BANDIT-048-retrospective.json` and
+`docs/work/BANDIT-048/retrospective.md`, and `.bandit/bootstrap-gaps.json` marks
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` resolved. Stage 6 verification recorded
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` for the closed-work-item
+session-context recovery gap. The next required action is to create that work
+item before Worktree Bootstrap Contract work or unrelated Phase 8 work.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -690,7 +689,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-048` - Focused Session Context Packets.
+**Active work item:** `BANDIT-048` - Focused Session Context Packets (closed).
 
 `BANDIT-048` has structured creation spec evidence in
 `docs/specs/BANDIT-GAP-FOCUSED-SESSION-CONTEXT.json`, Stage 1 brief evidence in
@@ -698,7 +697,7 @@ that authority.
 `docs/specs/BANDIT-048-red-evidence.json`,
 `docs/work/BANDIT-048/red-evidence.md`, and
 `test/focused-session-context.test.mjs`, lifecycle event evidence in
-`.bandit/events.jsonl`, active bootstrap-gap linkage in
+`.bandit/events.jsonl`, resolved bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json` for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`, and
 Stage 3 implementation evidence in `docs/work/BANDIT-048/dispatch.md`,
 `docs/work/BANDIT-048/writer-report.md`,
@@ -728,14 +727,17 @@ non-blocking findings. Stage 5 landing verdict evidence is recorded in
 explicit layered risk-classification and supply-chain gate evidence is recorded
 in `.bandit/policy/`, post-verdict `npm run bandit -- land-check BANDIT-048`
 passes, and local-record landing action evidence is recorded in
-`docs/work/BANDIT-048/landing-action.md`.
-The current stage is Stage 6: Retrospective And Improvement Capture. The next
-required action is to record `docs/work/BANDIT-048/retrospective.md`, classify
-lessons and improvement dispositions, update `.bandit/bootstrap-gaps.json`, and
-refresh roadmap/current-context closeout. Do not start Worktree Bootstrap
-Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work,
-PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or
-unrelated Phase 8 work before Stage 6 closeout exists.
+`docs/work/BANDIT-048/landing-action.md`. Stage 6 retrospective closeout and
+bootstrap-gap disposition are recorded in
+`docs/specs/BANDIT-048-retrospective.json`,
+`docs/work/BANDIT-048/retrospective.md`, and `.bandit/bootstrap-gaps.json`.
+The current stage is Stage 6: Retrospective And Improvement Capture complete.
+The next required action is to create exactly one work item for
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. Do not start Worktree
+Bootstrap Contract work, scheduler execution, worktree lifecycle
+implementation, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+the session-context interstitial-recovery brief is recorded.
 
 `BANDIT-047` is landed and closed out. It has structured creation spec evidence
 in `docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1
@@ -916,10 +918,12 @@ resolved.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
 `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
-`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is active as `BANDIT-048`.
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused session
-context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the
-worktree bootstrap contract gap.
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is now the next queued
+bootstrap gap.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind session-context
+interstitial recovery. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued
+behind the worktree bootstrap contract gap.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
 scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind the agent
 observability traces gap. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind
@@ -971,10 +975,12 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 6 retrospective closeout for `BANDIT-048`
-- Focused Session Context Packets, using the recorded landing action, review
-evidence, landing verdict, risk/supply-chain evidence, and current verification
-without resolving the bootstrap gap or starting next work early.
+**Expected next deliverable:** Stage 1 work-item brief for the next queued
+bootstrap gap, `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`, using the
+recorded source artifacts and gap-ledger scope without starting Worktree
+Bootstrap Contract work, scheduler execution, worktree lifecycle
+implementation, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1137,17 +1143,23 @@ These are expected because Bandit does not exist yet:
   local-record landing action evidence, Stage 6 retrospective closeout, and
   bootstrap-gap disposition are recorded in `docs/work/BANDIT-046/` and
   `.bandit/bootstrap-gaps.json`.
-- `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is open and queued from the
-  2026-05-28 grill-with-docs context-pressure review: cold starts currently
-  require agents to reabsorb whole-project history and long roadmap/current
-  context files before narrow work. Bandit needs a Focused Session Context
-  Packet contract that includes only the role rules, active Work Item or gap,
-  current stage, exact next action, allowed and forbidden actions, blocker
-  state, required evidence paths, and source hierarchy for one activation, with
-  full roadmap history and glossary text read on demand by pointer. Codex PM
-  owns the packet-generation technical decision; the default is CLI-derived
-  state with optional Markdown rendering, not a hand-maintained packet. It is
-  the next queued bootstrap-gap chore.
+- `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`:
+  `bandit session-context current --json|--markdown` now emits a
+  CLI-derived, non-canonical Focused Session Context Packet with current phase,
+  active work item and gap, current stage, exact next action, operator-input
+  status, blocker state, allowed and forbidden actions, required evidence paths,
+  source hierarchy, and deep-read pointers while preserving repo artifacts as
+  authority. Stage 6 closeout and gap disposition are recorded in
+  `docs/work/BANDIT-048/retrospective.md` and `.bandit/bootstrap-gaps.json`.
+- `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is open and queued from
+  `BANDIT-048` Stage 6 closeout verification: after the focused-session-context
+  gap is resolved and before the next work item is created,
+  `bandit session-context current --json` fails because no active bootstrap gap
+  is linked to the closed work item. The command needs a recovery path that
+  reports the last closed work item, next queued bootstrap gap, exact next
+  action, operator-input status, blockers, source hierarchy, and deep-read
+  pointers without inventing an active work item or making the packet canonical.
+  It is the next queued bootstrap-gap chore.
 - `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is open and queued from the
   2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
   Codex PM owns routine technical questions, and every Bandit-created worktree
@@ -1157,7 +1169,7 @@ These are expected because Bandit does not exist yet:
   secret-handling boundary, expected runtime dependencies, and bootstrap failure
   evidence. Secret material is not copied by default unless existing
   operator-supervised policy explicitly authorizes a narrower exception. It is
-  queued behind `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`.
+  queued behind `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
 - `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is open and queued from the
   2026-05-26 strategic review: PRD-002 now rejects default LLM polling for
   ordinary no-op discovery, but the operator required work to still wake when
@@ -1354,11 +1366,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 6 retrospective closeout for `BANDIT-048` now that
-   `docs/work/BANDIT-048/landing-action.md` exists. Do not resolve the
-   focused-session-context gap or start unrelated next work before the
-   retrospective, improvement dispositions, gap-ledger disposition, and
-   roadmap/current-context closeout are recorded.
+1. Create the next queued bootstrap-gap work item for
+   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. `BANDIT-048` has
+   retrospective closeout, improvement dispositions, gap-ledger disposition, and
+   roadmap/current-context closeout recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1376,10 +1387,12 @@ The current priority is:
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is active as `BANDIT-048`.
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused session
-   context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
-   the worktree bootstrap contract.
+   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
+   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is now the next queued
+   bootstrap gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
+   session-context interstitial recovery, and
+   `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
+   bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
    wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
    agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued
@@ -1394,18 +1407,17 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-048`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 Claude Writer
-implementation evidence, active bootstrap-gap linkage, lifecycle event evidence,
-CodeRabbit timeout blocker evidence, Codex PM timeout disposition, Local Qwen
-`non_blocking` evidence, Codex PM Local Qwen finding disposition, aggregate
-Stage 4 review evidence, explicit risk-classification and supply-chain
-evidence, Stage 5 landing verdict evidence, and local-record landing action
-evidence recorded. The next action is Stage 6 retrospective closeout and
-bootstrap-gap disposition from the approved brief, RED evidence, implementation
-evidence, queued gap metadata, source artifacts, CodeRabbit timeout disposition,
-Local Qwen artifact, PM finding disposition, aggregate review evidence, current
-verification, current review-subject hash, landing verdict, and landing action;
-this is not an operator-owned product, UAT, policy, business, cost, or scope
-decision.
+implementation evidence, lifecycle event evidence, CodeRabbit timeout blocker
+evidence, Codex PM timeout disposition, Local Qwen `non_blocking` evidence,
+Codex PM Local Qwen finding disposition, aggregate Stage 4 review evidence,
+explicit risk-classification and supply-chain evidence, Stage 5 landing verdict
+evidence, local-record landing action evidence, Stage 6 retrospective closeout,
+and bootstrap-gap disposition recorded. Stage 6 verification also recorded
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` for the focused packet's
+closed-work-item/no-active-gap recovery path. The next action is creating that
+bootstrap-gap work item from existing repo source artifacts; this is not an
+operator-owned product, UAT, policy, business, cost, or scope decision unless
+the work item scope would expand beyond the recorded gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

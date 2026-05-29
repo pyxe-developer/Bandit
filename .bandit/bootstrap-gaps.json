@@ -456,8 +456,8 @@
     {
       "id": "BANDIT-GAP-FOCUSED-SESSION-CONTEXT",
       "title": "Cold starts lack focused session context packets",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "GRILL-WITH-DOCS-2026-05-28",
       "source_artifacts": [
         "CONTEXT.md",
@@ -467,9 +467,28 @@
         ".bandit/policy/smell-triggers.json"
       ],
       "linked_work_item": "BANDIT-048",
-      "rationale": "The operator identified that Bandit cold starts are consuming excessive tokens by requiring agents to reabsorb whole-project history and long roadmap/current-context files before performing narrow work. The current cold-start evaluation packet requires reading AGENTS.md, CONTEXT.md, CURRENT_CONTEXT.md, ROADMAP.md, BOOTSTRAP_METHODOLOGY.md, CLEAN_CODE.md, and STAGE_RUBRICS.md, while CURRENT_CONTEXT.md and ROADMAP.md have accumulated historical closeout narrative. Agents need the current role boundary, active Work Item or gap, current stage, exact next action, allowed and forbidden actions, blocker state, required evidence paths, and source hierarchy for the current activation; deeper roadmap history and glossary text should be referenced by pointer and read on demand. Packet generation strategy is a Codex-owned technical decision; the default should be CLI-derived state with optional Markdown rendering rather than a hand-maintained packet that can drift.",
+      "rationale": "BANDIT-048 created a CLI-derived Focused Session Context Packet that is computed from authoritative repo artifacts on demand and marked derived_non_canonical. The implementation adds `bandit session-context current --json|--markdown`, source-linked packet generation, Markdown rendering from the same data model, cold-start evaluation support, focused tests, honest CodeRabbit provider-timeout replacement evidence, Local Qwen non-blocking disposition with durable follow-up candidates, aggregate review evidence, explicit risk-classification and supply-chain evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout. The packet exposes current phase, active work item, active bootstrap gap, current stage, exact next action, required operator input, blockers, source hierarchy, required evidence paths, allowed and forbidden actions, and deep-read pointers without introducing a hand-maintained context packet or hidden workflow authority.",
+      "verification_target": "docs/work/BANDIT-048/retrospective.md",
+      "next_action": "Use `bandit session-context current --json` as the first compact recovery surface for future Bandit cold starts, then deep-read source pointers as required by AGENTS.md, CLEAN_CODE.md, stage rubrics, or the active work item."
+    },
+    {
+      "id": "BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY",
+      "title": "Focused session context fails between closed work item and next active gap",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-048",
+      "source_artifacts": [
+        "docs/work/BANDIT-048/retrospective.md",
+        "docs/evaluation/skills/bandit-cold-start.md",
+        "src/state/focused-session-context.ts",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        ".bandit/bootstrap-gaps.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Stage 6 closeout verification for BANDIT-048 found that `bandit session-context current --json` fails with `Session context blocked: no active bootstrap gap linked to BANDIT-048` after the focused-session-context gap is resolved and before the next work item is created. The cold-start evaluation packet says the focused packet should be the compact first recovery surface, so the command needs an interstitial recovery path for the valid repo state where the last work item is closed, no new work item is active, and the exact next action is to create the next queued bootstrap-gap work item. The repair should preserve repo artifacts as authority and avoid treating a derived packet as canonical state.",
       "verification_target": null,
-      "next_action": "Complete active chore BANDIT-048."
+      "next_action": "Create a bootstrap-gap chore to make `bandit session-context current --json` recover the closed-work-item/no-active-gap interstitial state by reporting the last closed work item, the next queued bootstrap gap, exact next action, operator-input status, blockers, source hierarchy, and required deep-read pointers without inventing an active work item."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
@@ -487,7 +506,7 @@
       "linked_work_item": null,
       "rationale": "The PRD-002 research review raised worktree lifecycle risk, and the operator delegated all technical questions to Codex PM when repo evidence and policy are sufficient. Codex PM decided that every Bandit-created worktree needs an explicit repo-native Worktree Bootstrap Contract before it can be considered runnable. The contract must cover allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence. Without this, a claim-owned worktree can be correctly claimed and locked but still fail after worker execution begins because the runtime environment was never proven.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-FOCUSED-SESSION-CONTEXT is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
+      "next_action": "After BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
     },
     {
       "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",
