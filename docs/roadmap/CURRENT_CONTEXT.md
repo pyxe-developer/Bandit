@@ -393,7 +393,7 @@ landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
 disposition are recorded in `docs/work/BANDIT-048/`, `docs/specs/`,
 `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Dispatch Stage 3 implementation for `BANDIT-049` - Session Context Interstitial Recovery to Claude through the bootstrap Process Adapter path. Implement only the narrow `bandit session-context current --json` interstitial recovery path proven by RED evidence, preserve derived non-canonical packet authority and source hierarchy, and keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence, acceptance mappings, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, and unrelated Phase 8 work.
+**Current next action:** Run Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery. Use scoped pre-PR CodeRabbit against base `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c` and the Stage 3 file list, then run Local Qwen adversarial review, then record aggregate Stage 4 review evidence with the current `review_subject_hash`. Do not start landing, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 4 evidence exists.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
@@ -404,10 +404,16 @@ evidence is recorded in `docs/specs/BANDIT-049-red-evidence.json`,
 `docs/work/BANDIT-049/red-evidence.md`, and
 `test/focused-session-context.test.mjs`, lifecycle event evidence is recorded
 in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap to
-`BANDIT-049` with status `active`. The current stage is Stage 2: Test Design
-And RED Evidence complete. The next required action is Stage 3 implementation
-dispatch to Claude through the bootstrap Process Adapter path. Do not start
-unrelated Phase 8 work before implementation evidence is recorded.
+`BANDIT-049` with status `active`. Stage 3 Claude Writer dispatch and
+implementation evidence are recorded in `docs/work/BANDIT-049/dispatch.md`,
+`docs/work/BANDIT-049/writer-report.md`,
+`docs/work/BANDIT-049/implementation-evidence.md`,
+`docs/specs/BANDIT-049-implementation-evidence.json`,
+`src/state/focused-session-context.ts`, and
+`src/commands/session-context.ts`. The current stage is Stage 3:
+Implementation complete. The next required action is Stage 4 review with
+scoped pre-PR CodeRabbit, Local Qwen, and aggregate review evidence. Do not
+start unrelated Phase 8 work before Stage 4 evidence is recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -713,15 +719,22 @@ brief evidence in `docs/work/BANDIT-049/brief.md`, Stage 2 RED evidence in
 `test/focused-session-context.test.mjs`, lifecycle event evidence in
 `.bandit/events.jsonl`, and active bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json` for
-`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. The current stage is Stage
-2: Test Design And RED Evidence complete. The next required action is to
-dispatch Stage 3 implementation to Claude through the bootstrap Process Adapter
-path. The Stage 3 Writer may edit only production implementation/evidence
-surfaces and must not edit tests, test helpers, fixtures, RED evidence, or
-acceptance mappings. Do not start Worktree Bootstrap Contract work, scheduler
-execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI
-workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated
-Phase 8 work before implementation evidence is recorded.
+`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. Stage 3 Claude Writer
+dispatch and implementation evidence are recorded in
+`docs/work/BANDIT-049/dispatch.md`,
+`docs/work/BANDIT-049/writer-report.md`,
+`docs/work/BANDIT-049/implementation-evidence.md`,
+`docs/specs/BANDIT-049-implementation-evidence.json`,
+`src/state/focused-session-context.ts`, and
+`src/commands/session-context.ts`. The current stage is Stage 3:
+Implementation complete. The next required action is Stage 4 review: scoped
+pre-PR CodeRabbit against base `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c`,
+Local Qwen adversarial review, and aggregate Stage 4 review evidence with
+current `review_subject_hash`. Do not start Worktree Bootstrap Contract work,
+scheduler execution, worktree lifecycle implementation, cockpit UI/server/API
+work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
+landing, retrospective, or unrelated Phase 8 work before Stage 4 evidence is
+recorded.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1356,10 +1369,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Dispatch Stage 3 implementation for `BANDIT-049` -
-   Session Context Interstitial Recovery to Claude through the bootstrap
-   Process Adapter path, implementing only the focused session-context
-   interstitial recovery behavior proven by RED evidence.
+1. Run Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery:
+   scoped pre-PR CodeRabbit against base
+   `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c`, Local Qwen adversarial review,
+   and aggregate Stage 4 review evidence with current `review_subject_hash`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1396,13 +1409,14 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. `BANDIT-049`
-has Stage 1 brief evidence, Stage 2 RED evidence, lifecycle event evidence, and
-active gap-ledger linkage for
-`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. The next action is Stage 3
-implementation dispatch to Claude through the bootstrap Process Adapter path;
-this is routine technical routing from existing repo source artifacts, not an
-operator-owned product, UAT, policy, business, cost, or scope decision unless
-the work item scope would expand beyond the recorded gap.
+has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 Claude Writer
+implementation evidence, lifecycle event evidence, and active gap-ledger
+linkage for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. The next
+action is Stage 4 review using scoped pre-PR CodeRabbit and Local Qwen, then
+aggregate review evidence; this is routine technical routing from existing repo
+source artifacts, not an operator-owned product, UAT, policy, business, cost,
+or scope decision unless the work item scope would expand beyond the recorded
+gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

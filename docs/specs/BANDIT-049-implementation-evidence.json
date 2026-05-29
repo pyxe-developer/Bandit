@@ -1,0 +1,160 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-049",
+  "stage": 3,
+  "status": "green",
+  "stage_label": "Stage 3: Implementation Clean-Code Rubric",
+  "summary": "All 9 focused tests pass. The interstitial recovery path for bandit session-context current --json is implemented. The command now recovers when the latest work item is closed, its linked bootstrap gap is resolved, and the next queued bootstrap gap has no linked work item yet. The packet reports null active_work_item and active_bootstrap_gap, last_closed_work_item from repo artifacts, next_queued_bootstrap_gap from .bandit/bootstrap-gaps.json, and preserves derived_non_canonical authority.",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "17ae50bda46b88e8a2e9014ff37046e6b9b0a07c",
+  "bootstrap_model_family_separation": {
+    "stage_2_author": "codex",
+    "stage_3_author": "claude",
+    "separation_satisfied": true
+  },
+  "test_ownership_boundary": {
+    "writer_edited_test_surfaces": false,
+    "forbidden_surfaces_touched": []
+  },
+  "test_command": "node --test test/focused-session-context.test.mjs",
+  "test_results": {
+    "total": 9,
+    "pass": 9,
+    "fail": 0,
+    "prior_red_state": {
+      "total": 9,
+      "pass": 6,
+      "fail": 3
+    }
+  },
+  "files_changed": [
+    {
+      "path": "src/state/focused-session-context.ts",
+      "role": "primary implementation — interstitial detection, gap scanning, packet assembly, shared helpers"
+    },
+    {
+      "path": "src/commands/session-context.ts",
+      "role": "null-safety fix for markdown rendering of interstitial packet fields"
+    }
+  ],
+  "implementation_details": {
+    "interstitial_detection": "isInterstitialState(currentContext) matches the **Active work item:** label in CURRENT_CONTEXT.md; returns true when the value normalizes to 'none' or 'none.'. Runs before requireActiveWorkItem.",
+    "last_closed_work_item": "findLastResolvedGapWithLinkedItem scans raw gap list from the end, returns first gap with status === 'resolved' and non-null linked_work_item. Source uses gap verification_target if present, else docs/work/{id}/retrospective.md.",
+    "next_queued_bootstrap_gap": "findNextQueuedGap returns first gap with status !== 'resolved' and linked_work_item === null. RawGap type extended to include verification_target and source_artifacts. parseBootstrapGapsRaw updated with optionalGapStringList helper.",
+    "agreement_check": "nextActionsAgree now accepts workItemId: string | null. When null (interstitial), only text-normalization equality/substring checks apply; work-item-ID and stage-number checks are skipped. Disagreement still fails closed.",
+    "required_evidence_paths": "deriveNextWorkItemId increments numeric suffix of last closed work item ID. buildRequiredEvidencePaths produces Stage 1-6 paths under docs/work/{nextWorkItemId}/ without requiring that work item to exist.",
+    "shared_helpers_extracted": [
+      "extractForbiddenActions",
+      "buildSourceArtifacts",
+      "buildSourceHierarchy",
+      "buildDeepReadPointers"
+    ],
+    "null_safety": "session-context.ts guards active_work_item and active_bootstrap_gap with conditional rendering in markdown output path"
+  },
+  "interstitial_packet_fields": {
+    "kind": "focused_session_context_packet",
+    "authority": "derived_non_canonical",
+    "active_work_item": null,
+    "active_bootstrap_gap": null,
+    "last_closed_work_item_source": "last resolved gap with linked_work_item in .bandit/bootstrap-gaps.json",
+    "next_queued_bootstrap_gap_source": "first open gap with linked_work_item === null in .bandit/bootstrap-gaps.json",
+    "exact_next_action_source": "CURRENT_CONTEXT.md verified against ROADMAP.md via normalized text comparison",
+    "required_operator_input": "none_required",
+    "required_evidence_paths_source": "buildRequiredEvidencePaths(deriveNextWorkItemId(lastClosedId)) — Stage 1-6 standard paths"
+  },
+  "verification_commands": [
+    {
+      "command": "node --test test/focused-session-context.test.mjs",
+      "result": "pass",
+      "output_summary": "9 tests, 9 pass, 0 fail"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass",
+      "output_summary": "clean exit, no output"
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "result": "pass",
+      "output_summary": "Bandit state is valid."
+    },
+    {
+      "command": "npm run bandit -- gaps list",
+      "result": "pass",
+      "output_summary": "full gap list returned; BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY shown as active | active_chore"
+    },
+    {
+      "command": "node ./bin/bandit.mjs cockpit status --json",
+      "result": "pass",
+      "output_summary": "kind: workflow_cockpit_status, authority: derived_non_canonical, active_work_item.id: BANDIT-049, next_action.agreement.status: pass"
+    },
+    {
+      "command": "node ./bin/bandit.mjs session-context current --json",
+      "result": "pass",
+      "output_summary": "kind: focused_session_context_packet, authority: derived_non_canonical, current_stage.value: Stage 2: Test Design And RED Evidence complete, active_bootstrap_gap.id: BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY, stale_or_missing_evidence: []"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass",
+      "output_summary": "no output, no whitespace errors"
+    }
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "bandit session-context current --json recovers the closed-work/no-active-gap interstitial state instead of blocking with missing active work item",
+      "evidence": "9/9 focused tests pass including 'session-context recovers closed-work/no-active-gap interstitial state'. Command emits focused_session_context_packet with active_work_item: null and active_bootstrap_gap: null."
+    },
+    {
+      "criterion": "Packet distinguishes last closed work item from active work item and does not report closed work as runnable",
+      "evidence": "last_closed_work_item.id: BANDIT-048 present in packet; active_work_item: null; closed work is not reported as runnable active work."
+    },
+    {
+      "criterion": "Packet reports next queued bootstrap gap, exact next action, and none_required operator-input status",
+      "evidence": "next_queued_bootstrap_gap.id: BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY with status open and disposition queued_chore. exact_next_action from CURRENT_CONTEXT.md. required_operator_input: none_required."
+    },
+    {
+      "criterion": "Packet reports forbidden actions including Worktree Bootstrap Contract work and unrelated Phase 8 work",
+      "evidence": "forbidden_actions list populated from CURRENT_CONTEXT.md forbidden-actions section. Interstitial fixture records required forbidden work; RED test expects and GREEN test confirms presence."
+    },
+    {
+      "criterion": "Packet source artifacts and source hierarchy identify required authority sources",
+      "evidence": "source_hierarchy and source_artifacts include AGENTS.md, CLEAN_CODE.md, CURRENT_CONTEXT.md, ROADMAP.md, STAGE_RUBRICS.md, .bandit/bootstrap-gaps.json. Test session-context current --json emits full source_hierarchy."
+    },
+    {
+      "criterion": "Required evidence paths point at future work item Stage 1-6 evidence without requiring it to exist",
+      "evidence": "required_evidence_paths includes docs/work/BANDIT-049/brief.md, docs/work/BANDIT-049/red-evidence.md, docs/work/BANDIT-049/retrospective.md. Paths computed by buildRequiredEvidencePaths; fixture does not create BANDIT-049 directory."
+    },
+    {
+      "criterion": "Missing or contradictory artifacts still fail closed with clear blocker messages",
+      "evidence": "Interstitial disagreement subtest passes: ROADMAP.md mutated to disagree produces 'Session context blocked: CURRENT_CONTEXT.md and ROADMAP.md disagree on next action'."
+    },
+    {
+      "criterion": "Cold-start evaluation packet or focused tests cover the interstitial recovery path",
+      "evidence": "Focused session-context test suite covers interstitial path. cold-start evaluation packet test continues to pass."
+    },
+    {
+      "criterion": "Bootstrap Model-Family Separation satisfied",
+      "evidence": "Stage 2 RED tests authored by Codex (Test Writer). Stage 3 implementation authored by Claude (Process Adapter path)."
+    },
+    {
+      "criterion": "Test Ownership Boundary satisfied — Stage 3 Writer made zero test-surface edits",
+      "evidence": "No test files, test helpers, fixtures, red-evidence.md, BANDIT-049-red-evidence.json, or acceptance mappings were edited."
+    },
+    {
+      "criterion": "No out-of-scope work introduced",
+      "evidence": "Diff limited to src/state/focused-session-context.ts and src/commands/session-context.ts. No Worktree Bootstrap Contract, scheduler, cockpit UI/server/API, state-index, auto-merge/push/deploy, claim leases, work surface reservations, paid reviewer routing, external services, dependency/lockfile changes, or Phase 8 work."
+    }
+  ],
+  "clean_code_self_check": {
+    "clean_code_md_read": true,
+    "single_responsibility": "Each new helper has one named responsibility. No large multi-responsibility functions introduced.",
+    "shared_helpers_extracted": "extractForbiddenActions, buildSourceArtifacts, buildSourceHierarchy, buildDeepReadPointers extracted from active-work block and shared by both paths.",
+    "no_flag_arguments": "workItemId: string | null signals interstitial vs. active by type, not by boolean flag.",
+    "fail_closed_preserved": "Missing resolved gaps, missing queued gaps, and source disagreement all fail closed with clear diagnostics.",
+    "no_hidden_state": "Packet computed on demand from repo artifacts. No cache, index, or state file written.",
+    "typecheck_clean": true,
+    "no_unrelated_refactors": true
+  },
+  "stop_conditions_and_risks": "None. All 9 focused tests passed on first clean run after implementation. No test-change requests needed. Scope boundary intact."
+}

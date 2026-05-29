@@ -20,6 +20,13 @@ export async function sessionContext(repoRoot: string, args: string[]) {
 }
 
 function renderMarkdown(packet: FocusedSessionContextPacket) {
+  const activeWorkItemLine = packet.active_work_item
+    ? `**Active work item:** ${packet.active_work_item.id}`
+    : `**Active work item:** none`;
+  const activeBootstrapGapLine = packet.active_bootstrap_gap
+    ? `**Active bootstrap gap:** ${packet.active_bootstrap_gap.id}`
+    : `**Active bootstrap gap:** none`;
+
   const lines: string[] = [
     "# Focused Session Context Packet",
     "",
@@ -28,8 +35,8 @@ function renderMarkdown(packet: FocusedSessionContextPacket) {
     "## Current Activation",
     "",
     `**Phase:** ${packet.current_phase.value} (source: ${packet.current_phase.source})`,
-    `**Active work item:** ${packet.active_work_item.id}`,
-    `**Active bootstrap gap:** ${packet.active_bootstrap_gap.id}`,
+    activeWorkItemLine,
+    activeBootstrapGapLine,
     `**Current stage:** ${packet.current_stage.value}`,
     `**Exact next action:** ${packet.exact_next_action.value}`,
     `**Required operator input:** ${packet.required_operator_input.value}`,

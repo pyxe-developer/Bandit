@@ -17,14 +17,18 @@ type RawGap = {
   status: string;
   disposition: string;
   linked_work_item: string | null;
+  verification_target: string | null;
+  source_artifacts: string[];
 };
 
 export type FocusedSessionContextPacket = {
   kind: "focused_session_context_packet";
   authority: "derived_non_canonical";
   current_phase: { value: string; source: string };
-  active_work_item: { id: string; source: string };
-  active_bootstrap_gap: { id: string; source: string };
+  active_work_item: { id: string; source: string } | null;
+  active_bootstrap_gap: { id: string; source: string } | null;
+  last_closed_work_item?: { id: string; status: string; source: string };
+  next_queued_bootstrap_gap?: { id: string; title: string; status: string; disposition: string; source_artifacts: string[] };
   current_stage: { value: string; source: string };
   exact_next_action: { value: string; source: string };
   required_operator_input: { value: "none_required" | "required"; source: string };
@@ -47,13 +51,26 @@ export async function readFocusedSessionContext(
   const roadmap = await readRequiredArtifact(repoRoot, ROADMAP_PATH);
 
   const phase = requireCurrentPhase(currentContext);
-  const activeWorkItemId = requireActiveWorkItem(currentContext);
   const nextAction = requireLabeledText(
     currentContext,
     "Current next action",
     CURRENT_CONTEXT_PATH
   );
   const roadmapNextStep = requireLabeledText(roadmap, "Current next step", ROADMAP_PATH);
+
+  const bootstrapGapsContent = await readRequiredArtifact(repoRoot, BOOTSTRAP_GAPS_PATH);
+  const rawGaps = parseBootstrapGapsRaw(bootstrapGapsContent);
+
+  if (isInterstitialState(currentContext)) {
+    if (!nextActionsAgree(nextAction, roadmapNextStep, null)) {
+      throw new Error(
+        "Session context blocked: CURRENT_CONTEXT.md and ROADMAP.md disagree on next action"
+      );
+    }
+    return buildInterstitialPacket(currentContext, phase, nextAction, rawGaps);
+  }
+
+  const activeWorkItemId = requireActiveWorkItem(currentContext);
 
   if (!nextActionsAgree(nextAction, roadmapNextStep, activeWorkItemId)) {
     throw new Error(
@@ -64,10 +81,6 @@ export async function readFocusedSessionContext(
   const currentStage = requireCurrentStage(currentContext);
   const requiredOperatorInput = readRequiredOperatorInput(currentContext);
   const forbiddenActions = extractForbiddenActions(currentContext);
-  const allowedActions = [nextAction];
-
-  const bootstrapGapsContent = await readRequiredArtifact(repoRoot, BOOTSTRAP_GAPS_PATH);
-  const rawGaps = parseBootstrapGapsRaw(bootstrapGapsContent);
   const activeBootstrapGap = findActiveGap(rawGaps, activeWorkItemId);
   const blockers = buildBlockers(rawGaps);
 
@@ -84,72 +97,177 @@ export async function readFocusedSessionContext(
     exact_next_action: { value: nextAction, source: CURRENT_CONTEXT_PATH },
     required_operator_input: { value: requiredOperatorInput, source: CURRENT_CONTEXT_PATH },
     blockers,
-    allowed_actions: allowedActions,
+    allowed_actions: [nextAction],
     forbidden_actions: forbiddenActions,
     required_evidence_paths: buildRequiredEvidencePaths(activeWorkItemId),
-    source_artifacts: [
-      { path: AGENTS_PATH, role: "role rules and process boundaries" },
-      { path: CLEAN_CODE_PATH, role: "code quality constraints" },
-      { path: CURRENT_CONTEXT_PATH, role: "current phase and next action authority" },
-      { path: ROADMAP_PATH, role: "roadmap position and phase history" },
-      { path: STAGE_RUBRICS_PATH, role: "stage gate rubrics" },
-      { path: BOOTSTRAP_GAPS_PATH, role: "bootstrap gap ledger" },
-      { path: SMELL_TRIGGERS_PATH, role: "smell trigger routing policy" },
-      { path: COLD_START_PATH, role: "cold-start evaluation packet" }
-    ],
-    source_hierarchy: [
-      {
-        source: AGENTS_PATH,
-        authority: "highest — role rules, process policy, PM and writer boundaries"
-      },
-      {
-        source: CURRENT_CONTEXT_PATH,
-        authority: "current phase, active work item, and exact next action"
-      },
-      {
-        source: ROADMAP_PATH,
-        authority: "roadmap position and phase history"
-      },
-      {
-        source: BOOTSTRAP_GAPS_PATH,
-        authority: "active and queued gap state"
-      },
-      {
-        source: STAGE_RUBRICS_PATH,
-        authority: "stage gate definitions"
-      },
-      {
-        source: CLEAN_CODE_PATH,
-        authority: "code quality constraints"
-      },
-      {
-        source: SMELL_TRIGGERS_PATH,
-        authority: "smell trigger routing policy"
-      },
-      {
-        source: COLD_START_PATH,
-        authority: "cold-start evaluation reference"
-      }
-    ],
+    source_artifacts: buildSourceArtifacts(),
+    source_hierarchy: buildSourceHierarchy(),
     stale_or_missing_evidence: [],
-    deep_read_pointers: [
-      {
-        source: CONTEXT_PATH,
-        reason:
-          "full glossary text and concept definitions — deep read when terminology is unclear"
-      },
-      {
-        source: ROADMAP_PATH,
-        reason:
-          "historical roadmap narrative and old closeout details — deep read when full history is needed"
-      },
-      {
-        source: CURRENT_CONTEXT_PATH,
-        reason:
-          "old closeout details in ## Status section — deep read when prior work item history is needed"
-      }
-    ]
+    deep_read_pointers: buildDeepReadPointers()
   };
+}
+
+function isInterstitialState(currentContext: string) {
+  const match = currentContext.match(/^\*\*Active work item:\*\*\s*(.+)$/m);
+  if (!match || !match[1]) return false;
+  const value = normalizeText(match[1]);
+  return value === "none" || value === "none.";
+}
+
+function buildInterstitialPacket(
+  currentContext: string,
+  phase: string,
+  nextAction: string,
+  rawGaps: RawGap[]
+): FocusedSessionContextPacket {
+  const lastClosedGap = findLastResolvedGapWithLinkedItem(rawGaps);
+  if (!lastClosedGap || !lastClosedGap.linked_work_item) {
+    throw new Error(
+      "Session context blocked: interstitial state requires a resolved gap with a linked work item"
+    );
+  }
+
+  const nextQueuedGap = findNextQueuedGap(rawGaps);
+  if (!nextQueuedGap) {
+    throw new Error(
+      "Session context blocked: interstitial state requires a next queued bootstrap gap"
+    );
+  }
+
+  const lastClosedWorkItemId = lastClosedGap.linked_work_item;
+  const lastClosedSource =
+    lastClosedGap.verification_target ?? `docs/work/${lastClosedWorkItemId}/retrospective.md`;
+
+  const requiredOperatorInput = readRequiredOperatorInput(currentContext);
+  const forbiddenActions = extractForbiddenActions(currentContext);
+  const blockers = buildBlockers(rawGaps);
+
+  const nextWorkItemId = deriveNextWorkItemId(lastClosedWorkItemId);
+
+  return {
+    kind: "focused_session_context_packet",
+    authority: "derived_non_canonical",
+    current_phase: { value: normalizePhase(phase), source: CURRENT_CONTEXT_PATH },
+    active_work_item: null,
+    active_bootstrap_gap: null,
+    last_closed_work_item: {
+      id: lastClosedWorkItemId,
+      status: "closed",
+      source: lastClosedSource
+    },
+    next_queued_bootstrap_gap: {
+      id: nextQueuedGap.id,
+      title: nextQueuedGap.title,
+      status: nextQueuedGap.status,
+      disposition: nextQueuedGap.disposition,
+      source_artifacts: nextQueuedGap.source_artifacts
+    },
+    current_stage: {
+      value: "Interstitial: Work-item creation required",
+      source: CURRENT_CONTEXT_PATH
+    },
+    exact_next_action: { value: nextAction, source: CURRENT_CONTEXT_PATH },
+    required_operator_input: { value: requiredOperatorInput, source: CURRENT_CONTEXT_PATH },
+    blockers,
+    allowed_actions: [nextAction],
+    forbidden_actions: forbiddenActions,
+    required_evidence_paths: buildRequiredEvidencePaths(nextWorkItemId),
+    source_artifacts: buildSourceArtifacts(),
+    source_hierarchy: buildSourceHierarchy(),
+    stale_or_missing_evidence: [],
+    deep_read_pointers: buildDeepReadPointers()
+  };
+}
+
+function findLastResolvedGapWithLinkedItem(gaps: RawGap[]): RawGap | undefined {
+  for (let i = gaps.length - 1; i >= 0; i--) {
+    const gap = gaps[i];
+    if (gap && gap.status === "resolved" && gap.linked_work_item) {
+      return gap;
+    }
+  }
+  return undefined;
+}
+
+function findNextQueuedGap(gaps: RawGap[]): RawGap | undefined {
+  return gaps.find((gap) => gap.status !== "resolved" && gap.linked_work_item === null);
+}
+
+function deriveNextWorkItemId(lastClosedWorkItemId: string): string {
+  const match = lastClosedWorkItemId.match(/^([A-Z][A-Z0-9]*)+-(\d+)$/);
+  if (!match || !match[2]) return lastClosedWorkItemId;
+  const prefix = lastClosedWorkItemId.slice(0, lastClosedWorkItemId.lastIndexOf("-"));
+  const num = parseInt(match[2], 10) + 1;
+  return `${prefix}-${String(num).padStart(3, "0")}`;
+}
+
+function buildSourceArtifacts() {
+  return [
+    { path: AGENTS_PATH, role: "role rules and process boundaries" },
+    { path: CLEAN_CODE_PATH, role: "code quality constraints" },
+    { path: CURRENT_CONTEXT_PATH, role: "current phase and next action authority" },
+    { path: ROADMAP_PATH, role: "roadmap position and phase history" },
+    { path: STAGE_RUBRICS_PATH, role: "stage gate rubrics" },
+    { path: BOOTSTRAP_GAPS_PATH, role: "bootstrap gap ledger" },
+    { path: SMELL_TRIGGERS_PATH, role: "smell trigger routing policy" },
+    { path: COLD_START_PATH, role: "cold-start evaluation packet" }
+  ];
+}
+
+function buildSourceHierarchy() {
+  return [
+    {
+      source: AGENTS_PATH,
+      authority: "highest — role rules, process policy, PM and writer boundaries"
+    },
+    {
+      source: CURRENT_CONTEXT_PATH,
+      authority: "current phase, active work item, and exact next action"
+    },
+    {
+      source: ROADMAP_PATH,
+      authority: "roadmap position and phase history"
+    },
+    {
+      source: BOOTSTRAP_GAPS_PATH,
+      authority: "active and queued gap state"
+    },
+    {
+      source: STAGE_RUBRICS_PATH,
+      authority: "stage gate definitions"
+    },
+    {
+      source: CLEAN_CODE_PATH,
+      authority: "code quality constraints"
+    },
+    {
+      source: SMELL_TRIGGERS_PATH,
+      authority: "smell trigger routing policy"
+    },
+    {
+      source: COLD_START_PATH,
+      authority: "cold-start evaluation reference"
+    }
+  ];
+}
+
+function buildDeepReadPointers() {
+  return [
+    {
+      source: CONTEXT_PATH,
+      reason: "full glossary text and concept definitions — deep read when terminology is unclear"
+    },
+    {
+      source: ROADMAP_PATH,
+      reason:
+        "historical roadmap narrative and old closeout details — deep read when full history is needed"
+    },
+    {
+      source: CURRENT_CONTEXT_PATH,
+      reason:
+        "old closeout details in ## Status section — deep read when prior work item history is needed"
+    }
+  ];
 }
 
 async function requireSourceArtifact(repoRoot: string, displayPath: string) {
@@ -274,7 +392,9 @@ function parseBootstrapGapsRaw(content: string): RawGap[] {
       title: optionalGapString(gap, "title"),
       status: requireGapString(gap, "status"),
       disposition: requireGapString(gap, "disposition"),
-      linked_work_item: optionalGapString(gap, "linked_work_item") || null
+      linked_work_item: optionalGapString(gap, "linked_work_item") || null,
+      verification_target: optionalGapString(gap, "verification_target") || null,
+      source_artifacts: optionalGapStringList(gap, "source_artifacts")
     };
   });
 }
@@ -332,10 +452,9 @@ function normalizeForComparison(value: string) {
     .toLowerCase();
 }
 
-function nextActionsAgree(first: string, second: string, workItemId: string) {
+function nextActionsAgree(first: string, second: string, workItemId: string | null) {
   const normalizedFirst = normalizeForComparison(first);
   const normalizedSecond = normalizeForComparison(second);
-  const workItem = workItemId.toLowerCase();
 
   if (
     normalizedFirst === normalizedSecond ||
@@ -345,6 +464,9 @@ function nextActionsAgree(first: string, second: string, workItemId: string) {
     return true;
   }
 
+  if (workItemId === null) return false;
+
+  const workItem = workItemId.toLowerCase();
   if (
     normalizedFirst.includes(workItem) &&
     normalizedSecond.includes(workItem) &&
@@ -382,6 +504,12 @@ function optionalGapString(record: Record<string, unknown>, field: string) {
     return "";
   }
   return value.trim();
+}
+
+function optionalGapStringList(record: Record<string, unknown>, field: string): string[] {
+  const value = record[field];
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === "string").map((s) => s.trim());
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
