@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Dispatch Stage 3 Claude Writer implementation for `BANDIT-048` - Focused Session Context Packets. Stage 2 RED evidence is recorded in `docs/specs/BANDIT-048-red-evidence.json`, `docs/work/BANDIT-048/red-evidence.md`, `test/focused-session-context.test.mjs`, and `.bandit/events.jsonl`. Codex PM authored the RED tests, so Stage 3 must run through the Claude Process Adapter path and the Writer has zero authority to edit tests, test helpers, fixtures, RED evidence, or acceptance mappings. Do not start Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 3 implementation evidence is recorded.
+**Current next step:** Run Stage 4 review for `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Next run pre-PR CodeRabbit and Local Qwen against the current implementation diff, then record aggregate Stage 4 review evidence with current `review_subject_hash`. Do not start Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, landing, retrospective, or unrelated Phase 8 work before Stage 4 review evidence is recorded and accepted.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -26,8 +26,14 @@ is recorded in `docs/specs/BANDIT-048-red-evidence.json`,
 `docs/work/BANDIT-048/red-evidence.md`, and
 `test/focused-session-context.test.mjs`, lifecycle event evidence is recorded in
 `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` marks the gap active
-with linked work item `BANDIT-048`. Stage 3 Claude Writer implementation is the
-next required gate.
+with linked work item `BANDIT-048`. Stage 3 Claude Writer dispatch and
+implementation evidence are recorded in `docs/work/BANDIT-048/dispatch.md`,
+`docs/work/BANDIT-048/writer-report.md`,
+`docs/work/BANDIT-048/implementation-evidence.md`,
+`docs/specs/BANDIT-048-implementation-evidence.json`,
+`src/state/focused-session-context.ts`, `src/commands/session-context.ts`,
+`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Stage 4
+review is the next required gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -1253,12 +1259,13 @@ Current rule:
 
 Current priority:
 
-1. Dispatch Stage 3 Claude Writer implementation for `BANDIT-048` using the
-   Stage 1 brief, Stage 2 RED evidence, and model-family separation contract.
-   Do not let the Writer edit tests, test helpers, fixtures, RED evidence, or
-   acceptance mappings, and do not begin Worktree Bootstrap Contract work or
-   unrelated work until Focused Session Context implementation evidence is
-   recorded.
+1. Run Stage 4 review for `BANDIT-048` using the Stage 1 brief, Stage 2 RED
+   evidence, Stage 3 implementation evidence, and model-family separation
+   contract. Run pre-PR CodeRabbit and Local Qwen against the current
+   implementation diff, then record aggregate Stage 4 review evidence with
+   current `review_subject_hash`. Do not begin landing, retrospective,
+   Worktree Bootstrap Contract work, or unrelated work until Stage 4 review
+   evidence is recorded and accepted.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -27,6 +27,7 @@ import { showWorkItem } from "./commands/show.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
 import { supplyChainGate } from "./commands/supply-chain-gate.js";
 import { uat } from "./commands/uat.js";
+import { sessionContext } from "./commands/session-context.js";
 import { validateBandit } from "./commands/validate.js";
 import { createWorkItem } from "./commands/work-item-create.js";
 
@@ -219,8 +220,14 @@ async function main() {
     return;
   }
 
+  if (command === "session-context") {
+    const result = await sessionContext(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context>`);
   process.exitCode = 1;
 }
 

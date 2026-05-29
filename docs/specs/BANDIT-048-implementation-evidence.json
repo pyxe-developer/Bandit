@@ -1,0 +1,31 @@
+{
+  "work_item": "BANDIT-048",
+  "stage": "Stage 3: Implementation",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "05162c49528a3b45ab8bcd8bd7a1ce7088e6bdf7",
+  "new_files": [
+    "src/state/focused-session-context.ts",
+    "src/commands/session-context.ts"
+  ],
+  "modified_files": [
+    "src/cli.ts",
+    "docs/evaluation/skills/bandit-cold-start.md",
+    "docs/work/BANDIT-048/implementation-evidence.md",
+    "docs/work/BANDIT-048/writer-report.md",
+    "docs/specs/BANDIT-048-implementation-evidence.json"
+  ],
+  "test_results": {
+    "focused_test_command": "node --test test/focused-session-context.test.mjs",
+    "focused_result": "7 pass, 0 fail",
+    "full_suite_command": "npm test",
+    "full_suite_result": "406 pass, 0 fail"
+  },
+  "verification": {
+    "typecheck": "pass",
+    "validate": "pass",
+    "gaps_list": "pass",
+    "cockpit_status": "pass",
+    "git_diff_check": "pass"
+  }
+}
