@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. The first scoped pre-PR CodeRabbit provider run timed out after entering analysis; timeout evidence is recorded in `docs/specs/BANDIT-048-coderabbit-review-output.json` and `docs/work/BANDIT-048/coderabbit-review.md` with `coderabbit_verdict: blocker`, `review_state: timeout`, and `operator_input_status: none_required`. Do not run Local Qwen, write aggregate review evidence, start landing, retrospective, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before CodeRabbit has completed or the timeout is explicitly dispositioned under Stage 4 policy.
+**Current next step:** Record Codex PM disposition for the repeated Stage 4 pre-PR CodeRabbit timeout on `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Two scoped pre-PR CodeRabbit provider attempts timed out without a terminal verdict; timeout evidence is recorded in `docs/specs/BANDIT-048-coderabbit-review-output.json` and `docs/work/BANDIT-048/coderabbit-review.md` with `coderabbit_verdict: blocker`, `review_state: timeout`, and `operator_input_status: none_required`. Do not run Local Qwen, write aggregate review evidence, start landing, retrospective, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the timeout is explicitly dispositioned under Stage 4 policy.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -32,12 +32,12 @@ implementation evidence are recorded in `docs/work/BANDIT-048/dispatch.md`,
 `docs/work/BANDIT-048/implementation-evidence.md`,
 `docs/specs/BANDIT-048-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, `src/commands/session-context.ts`,
-`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. The first
-Stage 4 pre-PR CodeRabbit provider run timed out after entering analysis;
+`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Two
+Stage 4 pre-PR CodeRabbit provider attempts timed out without a terminal verdict;
 timeout evidence is recorded in
 `docs/specs/BANDIT-048-coderabbit-review-output.json` and
-`docs/work/BANDIT-048/coderabbit-review.md`. Retrying CodeRabbit is the next
-required gate.
+`docs/work/BANDIT-048/coderabbit-review.md`. Codex PM timeout disposition is
+the next required gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -1263,13 +1263,13 @@ Current rule:
 
 Current priority:
 
-1. Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-048` using the Stage 1
-   brief, Stage 2 RED evidence, Stage 3 implementation evidence, model-family
-   separation contract, and scoped diff from `05162c4`. The first provider run
-   timed out after entering analysis; do not run Local Qwen, write aggregate
-   Stage 4 review evidence, begin landing, retrospective, Worktree Bootstrap
-   Contract work, or unrelated work until CodeRabbit has completed or the
-   timeout is explicitly dispositioned under Stage 4 policy.
+1. Record Codex PM disposition for the repeated Stage 4 pre-PR CodeRabbit
+   timeout on `BANDIT-048` using the Stage 1 brief, Stage 2 RED evidence, Stage
+   3 implementation evidence, model-family separation contract, two timeout
+   attempts, and scoped diff from `05162c4`. Do not run Local Qwen, write
+   aggregate Stage 4 review evidence, begin landing, retrospective, Worktree
+   Bootstrap Contract work, or unrelated work until the timeout is explicitly
+   dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

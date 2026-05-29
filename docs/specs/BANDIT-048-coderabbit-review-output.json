@@ -1,8 +1,24 @@
 {
-  "sourceHead": "f2d72b8534bfb68b78fd1ab7f337e741ad48a705",
+  "sourceHead": "4bba35a888c63deb2b2dd2bff2cf42c1fc5bcbe3",
   "baseRevision": "05162c4",
   "reviewState": "timeout",
   "verdict": "blocker",
   "findings": [],
-  "providerError": "CodeRabbit pre-PR provider run was terminated after more than four minutes with no output after the analysis phase."
+  "providerError": "CodeRabbit pre-PR provider retry was terminated after more than four minutes with no terminal verdict after setup and summarizing.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceHead": "f2d72b8534bfb68b78fd1ab7f337e741ad48a705",
+      "endedAt": "2026-05-29T07:40:42Z",
+      "result": "timeout",
+      "summary": "Provider entered analysis and produced no terminal verdict before termination after more than four minutes."
+    },
+    {
+      "attempt": 2,
+      "sourceHead": "4bba35a888c63deb2b2dd2bff2cf42c1fc5bcbe3",
+      "endedAt": "2026-05-29T08:06:16Z",
+      "result": "timeout",
+      "summary": "Provider reached setup and summarizing, then produced no terminal verdict before termination after more than four minutes."
+    }
+  ]
 }
