@@ -1,0 +1,8 @@
+{
+  "sourceHead": "f2d72b8534bfb68b78fd1ab7f337e741ad48a705",
+  "baseRevision": "05162c4",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "findings": [],
+  "providerError": "CodeRabbit pre-PR provider run was terminated after more than four minutes with no output after the analysis phase."
+}

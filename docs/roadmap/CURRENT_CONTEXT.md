@@ -393,7 +393,7 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-047/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Stage 4 review for `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Next run pre-PR CodeRabbit and Local Qwen against the current implementation diff, then record aggregate Stage 4 review evidence with current `review_subject_hash`. Do not start Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, landing, retrospective, or unrelated Phase 8 work before Stage 4 review evidence is recorded and accepted.
+**Current next action:** Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-048` - Focused Session Context Packets. Stage 3 Claude Writer implementation evidence is recorded in `docs/work/BANDIT-048/dispatch.md`, `docs/work/BANDIT-048/writer-report.md`, `docs/work/BANDIT-048/implementation-evidence.md`, `docs/specs/BANDIT-048-implementation-evidence.json`, `src/state/focused-session-context.ts`, `src/commands/session-context.ts`, `src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. The first scoped pre-PR CodeRabbit provider run timed out after entering analysis; timeout evidence is recorded in `docs/specs/BANDIT-048-coderabbit-review-output.json` and `docs/work/BANDIT-048/coderabbit-review.md` with `coderabbit_verdict: blocker`, `review_state: timeout`, and `operator_input_status: none_required`. Do not run Local Qwen, write aggregate review evidence, start landing, retrospective, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before CodeRabbit has completed or the timeout is explicitly dispositioned under Stage 4 policy.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -409,8 +409,12 @@ implementation evidence are recorded in `docs/work/BANDIT-048/dispatch.md`,
 `docs/work/BANDIT-048/implementation-evidence.md`,
 `docs/specs/BANDIT-048-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, `src/commands/session-context.ts`,
-`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. Stage 4
-review is the next required gate.
+`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. The first
+Stage 4 pre-PR CodeRabbit provider run timed out after entering analysis;
+timeout evidence is recorded in
+`docs/specs/BANDIT-048-coderabbit-review-output.json` and
+`docs/work/BANDIT-048/coderabbit-review.md`. Retrying CodeRabbit is the next
+required gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -675,15 +679,20 @@ Stage 3 implementation evidence in `docs/work/BANDIT-048/dispatch.md`,
 `docs/work/BANDIT-048/implementation-evidence.md`,
 `docs/specs/BANDIT-048-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, `src/commands/session-context.ts`,
-`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`.
+`src/cli.ts`, and `docs/evaluation/skills/bandit-cold-start.md`. The first
+scoped pre-PR CodeRabbit provider run timed out after entering analysis, and
+timeout evidence is recorded in
+`docs/specs/BANDIT-048-coderabbit-review-output.json` and
+`docs/work/BANDIT-048/coderabbit-review.md`.
 The current stage is Stage 4: Review And Cross-Model Gates. The next required
-action is to run pre-PR CodeRabbit and Local Qwen review on the current
-implementation diff and record aggregate Stage 4 review evidence before
-landing, retrospective, Worktree Bootstrap Contract, or unrelated Phase 8 work.
-Do not start landing, retrospective, Worktree Bootstrap Contract, scheduler
-execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before Stage 4 review evidence is recorded and accepted.
+action is to retry pre-PR CodeRabbit review before Local Qwen, aggregate Stage 4
+review evidence, landing, retrospective, Worktree Bootstrap Contract, or
+unrelated Phase 8 work. Do not start Local Qwen, aggregate review evidence,
+landing, retrospective, Worktree Bootstrap Contract, scheduler execution,
+worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+CodeRabbit has completed or the timeout is explicitly dispositioned under Stage
+4 policy.
 
 `BANDIT-047` is landed and closed out. It has structured creation spec evidence
 in `docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1
@@ -919,7 +928,7 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 4 review evidence for
+**Expected next deliverable:** completed pre-PR CodeRabbit Stage 4 evidence for
 `BANDIT-048` - Focused Session Context Packets.
 
 ## Known Bootstrap Gaps
@@ -1300,13 +1309,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review for `BANDIT-048` using the Stage 1 brief, Stage 2 RED
-   evidence, Stage 3 implementation evidence, and model-family separation
-   contract. Run pre-PR CodeRabbit and Local Qwen against the current
-   implementation diff, then record aggregate Stage 4 review evidence with
-   current `review_subject_hash`. Do not begin landing, retrospective,
-   Worktree Bootstrap Contract work, or unrelated work until Stage 4 review
-   evidence is recorded and accepted.
+1. Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-048` using the Stage 1
+   brief, Stage 2 RED evidence, Stage 3 implementation evidence, model-family
+   separation contract, and scoped diff from `05162c4`. The first provider run
+   timed out after entering analysis; do not run Local Qwen, write aggregate
+   Stage 4 review evidence, begin landing, retrospective, Worktree Bootstrap
+   Contract work, or unrelated work until CodeRabbit has completed or the
+   timeout is explicitly dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1342,11 +1351,12 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-048`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 Claude Writer
-implementation evidence, active bootstrap-gap linkage, and lifecycle event
-evidence recorded. The next action is to run the Stage 4 pre-landing review
-loop from the approved brief, RED evidence, implementation evidence, queued gap
-metadata, and source artifacts; this is not an operator-owned product, UAT,
-policy, business, cost, or scope decision.
+implementation evidence, active bootstrap-gap linkage, lifecycle event evidence,
+and CodeRabbit timeout blocker evidence recorded. The next action is to retry
+the Stage 4 pre-PR CodeRabbit provider review from the approved brief, RED
+evidence, implementation evidence, queued gap metadata, and source artifacts;
+this is not an operator-owned product, UAT, policy, business, cost, or scope
+decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
