@@ -8,9 +8,9 @@
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
-`BANDIT-053` is active as the bootstrap-gap chore for `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its structured creation spec, Stage 1 brief, and Stage 2 RED evidence are recorded, and `.bandit/bootstrap-gaps.json` links the gap as `active_chore`.
+`BANDIT-053` is active as the bootstrap-gap chore for `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its structured creation spec, Stage 1 brief, Stage 2 RED evidence, and Stage 3 implementation command surface are recorded, and `.bandit/bootstrap-gaps.json` links the gap as `active_chore`.
 
-The next required action is Stage 3 Claude Writer dispatch for `BANDIT-053` through the bootstrap Process Adapter path. Keep tests, fixtures, RED evidence artifacts/specs, acceptance mappings, full telemetry backend ingestion, hosted observability integration, Stage Capability Scope enforcement, Token-Cost Failsafe policy, Evidence SLO policy, full scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, paid routing changes, dependency/lockfile changes, installed global skill edits, or unrelated Phase 8 work out of Stage 3 Writer scope.
+The next required action is Stage 4 review evidence for `BANDIT-053`: run pre-PR CodeRabbit and Local Qwen at the current review-subject hash, then record aggregate review evidence with any required dispositions.
 
 No operator-owned input is required for the next recorded action.
 

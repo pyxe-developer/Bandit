@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { agentEvaluation } from "./commands/agent-evaluation.js";
+import { agentObservability } from "./commands/agent-observability.js";
 import { initBandit } from "./commands/init.js";
 import { createArtifact } from "./commands/artifact-create.js";
 import { autoLandCheck } from "./commands/auto-land-check.js";
@@ -162,6 +163,12 @@ async function main() {
     return;
   }
 
+  if (command === "agent-observability") {
+    const result = await agentObservability(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "uat") {
     const result = await uat(process.cwd(), args);
     process.stdout.write(result.output);
@@ -241,7 +248,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler>`);
   process.exitCode = 1;
 }
 

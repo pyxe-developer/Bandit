@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-053` to Claude through the bootstrap Process Adapter path: implement the narrow `bandit agent-observability validate --json` and `bandit agent-observability project --json` surfaces from the Stage 2 RED evidence. Do not let the Stage 3 Writer edit tests, fixtures, RED evidence artifacts/specs, acceptance mappings, full telemetry backend ingestion, hosted observability integration, Stage Capability Scope enforcement, Token-Cost Failsafe policy, Evidence SLO policy, full scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, paid routing changes, dependency/lockfile changes, installed global skill edits, or unrelated Phase 8 work.
+**Current next step:** Run Stage 4 review for `BANDIT-053` on the Stage 3 head: execute pre-PR CodeRabbit and Local Qwen, then publish `docs/work/BANDIT-053/review-evidence.md` with current `review_subject_hash` and any required non-blocking disposition routing.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
