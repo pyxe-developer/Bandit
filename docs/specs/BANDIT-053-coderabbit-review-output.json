@@ -1,0 +1,34 @@
+{
+  "sourceHead": "cb8726f16213891ee592550d21f48f063b093904",
+  "baseRevision": "0953579d2044786ba710e611c45648793e797874",
+  "reviewState": "completed",
+  "verdict": "blocker",
+  "findings": [
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "src/state/agent-observability.ts validates only projection_boundary plus hardcoded work_item and stage checks; drive trace, span, correlation, operation kind, outcome, and failure validation from the policy object."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "validateAgentObservability does not fail when no trace files are present; add an empty trace-directory refusal before span-level checks."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "docs/work/BANDIT-053/brief.md acceptance criterion overclaims validator coverage unless validateAgentObservability enforces the listed required fields."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "readTraces lets missing docs/agent-observability raise raw ENOENT instead of the module's friendly Missing <path> error."
+    }
+  ],
+  "providerError": "Live CodeRabbit pre-PR review completed with 4 findings on the focused BANDIT-053 implementation surface.",
+  "executableEvidence": [
+    "coderabbit --version returned 0.4.1.",
+    "coderabbit auth status --agent returned authenticated for github user pyxe-developer.",
+    "coderabbit review --agent --base-commit 0953579d2044786ba710e611c45648793e797874 --files docs/specs/BANDIT-GAP-AGENT-OBSERVABILITY-TRACES.json docs/specs/BANDIT-053-red-evidence.json docs/work/BANDIT-053/brief.md docs/work/BANDIT-053/red-evidence.md docs/work/BANDIT-053/implementation-evidence.md src/cli.ts src/commands/agent-observability.ts src/state/agent-observability.ts test/agent-observability.test.mjs -c AGENTS.md --no-color completed with 4 findings."
+  ]
+}

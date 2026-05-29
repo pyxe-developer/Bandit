@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Run Stage 4 review for `BANDIT-053` on the Stage 3 head: execute pre-PR CodeRabbit and Local Qwen, then publish `docs/work/BANDIT-053/review-evidence.md` with current `review_subject_hash` and any required non-blocking disposition routing.
+**Current next step:** Repair unresolved pre-PR CodeRabbit Stage 4 findings for `BANDIT-053`, then rerun focused tests and refresh Stage 4 review evidence.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
