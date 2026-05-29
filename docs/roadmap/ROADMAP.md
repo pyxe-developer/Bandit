@@ -4,13 +4,13 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
+- `[Gap]` `BANDIT-053` - Agent Observability Traces
 
 ## Next Work Item
 
-**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap disposition for `BANDIT-052`. Stage 5 landing verdict evidence is recorded with final verdict `safe-to-land`, `npm run bandit -- land-check BANDIT-052` passes, and local-record landing action evidence is recorded. Do not create `BANDIT-053`, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before retrospective closeout and gap-ledger disposition are recorded.
+**Current next step:** Create exactly one bootstrap-gap work item for `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as `BANDIT-053`. Do not create RED evidence, implementation, trace runtime execution, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before the `BANDIT-053` brief/spec exists.
 
-- `[Gap]` `BANDIT-053` - Agent Observability Traces
+- `[Gap]` `BANDIT-054` - Stage Capability Scope
 
 ## Planned Work
 
@@ -19,7 +19,6 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-054` - Stage Capability Scope
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
@@ -87,3 +86,4 @@ bootstrap gaps are queued.
 - `BANDIT-049` - Session Context Interstitial Recovery
 - `BANDIT-050` - Cockpit Status Interstitial Recovery
 - `BANDIT-051` - Worktree Bootstrap Contract
+- `BANDIT-052` - Event-Driven Wake Scheduler

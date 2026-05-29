@@ -111,3 +111,4 @@
 {"type":"artifact_created","work_item":"BANDIT-051","message":"Created retrospective artifact at docs/work/BANDIT-051/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-052","message":"Created work item BANDIT-052 from docs/specs/BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER.json"}
 {"type":"artifact_created","work_item":"BANDIT-052","message":"Created landing_verdict artifact at docs/work/BANDIT-052/landing-verdict.md"}
+{"type":"artifact_created","work_item":"BANDIT-052","message":"Created retrospective artifact at docs/work/BANDIT-052/retrospective.md"}

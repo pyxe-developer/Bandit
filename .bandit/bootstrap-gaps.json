@@ -531,8 +531,8 @@
     {
       "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",
       "title": "Parallel work scheduler depends on LLM polling and lacks a wake guarantee",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -540,9 +540,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-052",
-      "rationale": "The PRD-002 research review found that default LLM polling heartbeats would waste tokens on no-op discovery. The operator accepted event-driven scheduling only if work still wakes reliably when available. Bandit needs event-driven triggers, a deterministic non-LLM sweeper, and a Work Availability Wake Guarantee before removing polling fallback behavior.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-052."
+      "rationale": "BANDIT-052 created the event-driven wake scheduler policy and validation surface. The resolved contract defines event-driven triggers, deterministic non-LLM sweeper requirements, Work Availability Wake Guarantee, one-claim activation, scheduler priority ordering, no-authority trigger boundaries, and fallback-polling preservation until reliable wake behavior is proven.",
+      "verification_target": "docs/work/BANDIT-052/retrospective.md",
+      "next_action": "Use the event-driven wake scheduler policy and validation evidence before removing fallback LLM polling for ordinary work discovery; create the next bootstrap-gap chore for BANDIT-GAP-AGENT-OBSERVABILITY-TRACES before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-AGENT-OBSERVABILITY-TRACES",
