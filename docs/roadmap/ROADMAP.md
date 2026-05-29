@@ -16,20 +16,20 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write aggregate Stage 4 review evidence for
-`BANDIT-047` from the current CodeRabbit pass and Local Qwen pass evidence. The
-scoped pre-PR CodeRabbit provider rerun passed at repaired source head
-`78dcfce252e7425f4e060165258f917a932829cc` with `coderabbit_verdict: pass` and
-zero findings; evidence is recorded in
-`docs/specs/BANDIT-047-coderabbit-review-output.json` and
-`docs/work/BANDIT-047/coderabbit-review.md`. Local Qwen passed at source head
-`513e965f3e0efc52ac78e5e7a74540b08162f58e` with no findings; evidence is
-recorded in `docs/work/BANDIT-047/local-qwen-review.md`. Do not create a
-landing verdict or start the Focused Session Context gap, Worktree Bootstrap
+**Current next step:** Write the Stage 5 landing verdict for `BANDIT-047`
+from the current aggregate Stage 4 review evidence, including the brief-required
+layered risk-classification and supply-chain gate evidence before any landing
+action. Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-047/review-evidence.md` with
+`review_subject_hash`
+`cbfe95538e5bb3b326c256743511069afe8a4a9dd9fd96c9c3ac0044b90559d8`,
+CodeRabbit `pass`, Local Qwen `pass`, no open findings, no required operator
+input, UAT `not_applicable`, and clean-code `pass`. Do not record the local
+landing action or start the Focused Session Context gap, Worktree Bootstrap
 Contract gap, scheduler execution, full worktree lifecycle enablement, cockpit
 UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
-product UAT scope, or unrelated Phase 8 work before aggregate Stage 4 review
-evidence is written and verified under Stage 4 policy.
+product UAT scope, or unrelated Phase 8 work before the Stage 5 landing verdict
+is written and verified.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -56,8 +56,9 @@ Boundary, Stage 3 attempt invalidation after Writer test-surface edits, Claude
 Writer bootstrap routing, and Codex PM escalation routing while preserving
 historical/fresh-initialized repo compatibility when the model-family gate is
 inactive. Stage 4 CodeRabbit pass evidence is recorded in
-`docs/work/BANDIT-047/coderabbit-review.md`, and Stage 4 Local Qwen pass
-evidence is recorded in `docs/work/BANDIT-047/local-qwen-review.md`.
+`docs/work/BANDIT-047/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
+is recorded in `docs/work/BANDIT-047/local-qwen-review.md`, and aggregate Stage
+4 review evidence is recorded in `docs/work/BANDIT-047/review-evidence.md`.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -1262,10 +1263,11 @@ Current rule:
 
 Current priority:
 
-1. Write aggregate Stage 4 review evidence for `BANDIT-047` from the current
-   CodeRabbit pass and Local Qwen pass evidence. Do not create a landing
-   verdict or begin unrelated work until aggregate review evidence is written
-   and verified under Stage 4 policy.
+1. Write the Stage 5 landing verdict for `BANDIT-047` from the current
+   aggregate Stage 4 review evidence, including the brief-required layered
+   risk-classification and supply-chain gate evidence before any landing
+   action. Do not record the local landing action or begin unrelated work until
+   the landing verdict is written and verified.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
