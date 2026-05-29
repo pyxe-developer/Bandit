@@ -109,3 +109,4 @@
 {"type":"work_item_created","work_item":"BANDIT-051","message":"Created work item BANDIT-051 from docs/specs/BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT.json"}
 {"type":"artifact_created","work_item":"BANDIT-051","message":"Created red_evidence artifact at docs/work/BANDIT-051/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-051","message":"Created retrospective artifact at docs/work/BANDIT-051/retrospective.md"}
+{"type":"work_item_created","work_item":"BANDIT-052","message":"Created work item BANDIT-052 from docs/specs/BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER.json"}

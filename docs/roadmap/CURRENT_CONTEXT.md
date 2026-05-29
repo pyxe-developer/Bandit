@@ -393,18 +393,21 @@ action evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition
 are recorded in `docs/work/BANDIT-051/`, `docs/specs/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current active work:** none.
+**Current active work:** `BANDIT-052` - Event-Driven Wake Scheduler.
 
-The current stage is the valid interstitial state after `BANDIT-051` closeout
-and before the next bootstrap-gap work item is created.
+The current stage is Stage 1 complete / Stage 2 next. `BANDIT-052` is active as
+the bootstrap-gap chore for `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; its
+structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER.json`, its brief is recorded
+in `docs/work/BANDIT-052/brief.md`, and `.bandit/bootstrap-gaps.json` links
+the gap as `active_chore`.
 
-**Current next action:** Create exactly one bootstrap-gap work item for
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` as `BANDIT-052`. Do not create RED
-evidence, implementation evidence, a branch/worktree execution path, scheduler
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-052` only. Do
+not create implementation evidence, a branch/worktree execution path, scheduler
 execution, full worktree lifecycle work, claim lease creation or release,
 work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
 automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work
-before the `BANDIT-052` brief/spec exists.
+before RED evidence is recorded.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -465,9 +468,8 @@ marks `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` resolved. Stage 6
 verification recorded `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`
 because `node ./bin/bandit.mjs cockpit status --json` still fails in the valid
 no-active-work interstitial state while `node ./bin/bandit.mjs session-context
-current --json` recovers correctly. The next required action is to create the
-Cockpit Status Interstitial Recovery work item before Worktree Bootstrap
-Contract work or unrelated Phase 8 work.
+current --json` recovers correctly. That historical gap was later resolved by
+`BANDIT-050`.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -762,18 +764,18 @@ that authority.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-052`.
 
-`BANDIT-051` is landed and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 through Stage 6 evidence is
-recorded in `docs/work/BANDIT-051/`, `docs/specs/`, `.bandit/policy/`, and
-`.bandit/bootstrap-gaps.json`. The next action is to create exactly one
-bootstrap-gap work item for `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` as
-`BANDIT-052`; do not start RED evidence, implementation, branch/worktree
-execution, scheduler execution, full worktree lifecycle, claim lease creation
-or release, work-surface reservations, cockpit UI/server/API work, PR/CI
-workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8
-work first.
+`BANDIT-052` is active as the bootstrap-gap chore for
+`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`. Stage 1 brief evidence is recorded in
+`docs/work/BANDIT-052/brief.md`, generated from
+`docs/specs/BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER.json`, and
+`.bandit/bootstrap-gaps.json` links the gap as `active_chore`. The next action
+is to write Stage 2 RED evidence for `BANDIT-052` only; do not start
+implementation, branch/worktree execution, scheduler execution, full worktree
+lifecycle, claim lease creation or release, work-surface reservations, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT
+scope, or unrelated Phase 8 work first.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -964,9 +966,8 @@ resolved.
 `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is resolved by
 `BANDIT-049`.
 `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is resolved by `BANDIT-050`.
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is active as `BANDIT-051`.
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
-bootstrap contract gap.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by `BANDIT-051`.
+`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is active as `BANDIT-052`.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
 scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind the agent
 observability traces gap. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind
@@ -1018,11 +1019,13 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-051`
-covering the Worktree Bootstrap Contract validation/refusal implementation,
-without starting scheduler execution, full worktree lifecycle implementation,
-claim lease creation or release, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope,
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-052`
+covering event-driven wake triggers, deterministic non-LLM sweeper behavior,
+the Work Availability Wake Guarantee, one-claim activation, priority ordering,
+no-op behavior, and fail-closed ambiguous-state handling, without starting
+scheduler implementation, full worktree lifecycle implementation, claim lease
+creation or release, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope,
 or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
@@ -1207,27 +1210,14 @@ These are expected because Bandit does not exist yet:
   action, operator-input status, blockers, gate status, source hierarchy, and
   bootstrap gaps without inventing active work or making cockpit status
   canonical.
-- `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is active as `BANDIT-051` from the
-  2026-05-26 strategic review plus 2026-05-27 technical delegation decision:
-  Codex PM owns routine technical questions, and every Bandit-created worktree
-  now requires a repo-native Worktree Bootstrap Contract before worker execution
-  treats it as runnable. The contract must cover allowed copied or linked files,
-  setup commands, validation command, environment-variable references,
-  secret-handling boundary, expected runtime dependencies, and bootstrap failure
-  evidence. Secret material is not copied by default unless existing
-  operator-supervised policy explicitly authorizes a narrower exception. Stage
-  1 brief evidence is recorded in `docs/work/BANDIT-051/brief.md`, Stage 2
-  RED evidence is recorded in `docs/work/BANDIT-051/red-evidence.md`, and Stage
-  3 implementation evidence is recorded in
-  `docs/work/BANDIT-051/implementation-evidence.md`; the next action is Stage 4
-  review gates.
-- `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is open and queued from the
+- `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by `BANDIT-051`.
+- `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is active as `BANDIT-052` from the
   2026-05-26 strategic review: PRD-002 now rejects default LLM polling for
   ordinary no-op discovery, but the operator required work to still wake when
   available. Bandit needs event-driven triggers, a deterministic non-LLM
-  sweeper, wake-guarantee tests, and token-cost failsafes before scheduler
-  execution can rely on this path. It is queued behind
-  `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
+  sweeper, and a Work Availability Wake Guarantee. Stage 1 brief evidence is
+  recorded in `docs/work/BANDIT-052/brief.md`; the next action is Stage 2 RED
+  evidence.
 - `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is open and queued from the
   2026-05-26 strategic review: Bandit now treats OTel-compatible agent traces
   as first-class observability for claims, tool calls, reviewer runs, token
@@ -1428,11 +1418,7 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap work item for
-   `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` as `BANDIT-052`. `BANDIT-051` is
-   landed and closed out with Stage 1 through Stage 6 evidence recorded in
-   `docs/work/BANDIT-051/`, `docs/specs/`, `.bandit/policy/`, and
-   `.bandit/bootstrap-gaps.json`.
+1. Write Stage 2 RED evidence for `BANDIT-052` only.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1454,8 +1440,8 @@ The current priority is:
    `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is resolved by
    `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is resolved
    by `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
-   `BANDIT-051`, and `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is the next
-   queued bootstrap gap.
+   `BANDIT-051`, and `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is active as
+   `BANDIT-052`.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
    wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
    agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued
@@ -1468,13 +1454,12 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-051`
-has Stage 1 through Stage 6 closeout evidence for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`; the next action is creating the
-`BANDIT-052` bootstrap-gap work item for
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`. This is routine technical routing,
-not an operator-owned product, UAT, policy, business, cost, or scope decision
-unless the next work item would expand beyond the queued scheduler gap.
+No operator-owned input is required for the next recorded action. `BANDIT-052`
+has Stage 1 brief evidence for
+`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; the next action is writing Stage 2
+RED evidence for `BANDIT-052`. This is routine technical routing, not an
+operator-owned product, UAT, policy, business, cost, or scope decision unless
+the next work item would expand beyond the queued scheduler gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
