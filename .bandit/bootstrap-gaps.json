@@ -474,8 +474,8 @@
     {
       "id": "BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY",
       "title": "Focused session context fails between closed work item and next active gap",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-048",
       "source_artifacts": [
         "docs/work/BANDIT-048/retrospective.md",
@@ -486,9 +486,29 @@
         ".bandit/bootstrap-gaps.json"
       ],
       "linked_work_item": "BANDIT-049",
-      "rationale": "Stage 6 closeout verification for BANDIT-048 found that `bandit session-context current --json` fails with `Session context blocked: no active bootstrap gap linked to BANDIT-048` after the focused-session-context gap is resolved and before the next work item is created. The cold-start evaluation packet says the focused packet should be the compact first recovery surface, so the command needs an interstitial recovery path for the valid repo state where the last work item is closed, no new work item is active, and the exact next action is to create the next queued bootstrap-gap work item. The repair should preserve repo artifacts as authority and avoid treating a derived packet as canonical state.",
+      "rationale": "BANDIT-049 repaired the Focused Session Context Packet interstitial state after a work item has landed and closed but before the next bootstrap-gap work item is created. The implementation keeps the packet derived_non_canonical, reports last closed work separately from active work, identifies the next queued bootstrap gap and exact next action from repo artifacts, preserves forbidden-action boundaries, and adds focused tests, CodeRabbit pass evidence, Local Qwen non-blocking disposition, aggregate Stage 4 evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout.",
+      "verification_target": "docs/work/BANDIT-049/retrospective.md",
+      "next_action": "Use `bandit session-context current --json` as the first compact recovery surface in the valid interstitial state between closed work and the next active bootstrap-gap work item."
+    },
+    {
+      "id": "BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY",
+      "title": "Cockpit status fails between closed work item and next active gap",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-049",
+      "source_artifacts": [
+        "docs/work/BANDIT-049/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        ".bandit/bootstrap-gaps.json",
+        "src/commands/cockpit.ts",
+        "src/state/cockpit-status.ts",
+        "src/state/focused-session-context.ts"
+      ],
+      "linked_work_item": null,
+      "rationale": "Stage 6 closeout verification for BANDIT-049 found that `node ./bin/bandit.mjs session-context current --json` now recovers the valid interstitial state with no active work item, but `node ./bin/bandit.mjs cockpit status --json` fails with `Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item` when `CURRENT_CONTEXT.md` correctly records `**Active work item:** none.` The cockpit status surface is derived_non_canonical, but it remains a common cold-start and validation check; it should recover the same interstitial state from repo artifacts instead of forcing a false active work item.",
       "verification_target": null,
-      "next_action": "Complete active chore BANDIT-049."
+      "next_action": "Create a bootstrap-gap chore to make `bandit cockpit status --json` recover the valid interstitial state between closed work and the next active bootstrap-gap work item while preserving CURRENT_CONTEXT.md, ROADMAP.md, .bandit/bootstrap-gaps.json, and session-context packet authority boundaries."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
@@ -506,7 +526,7 @@
       "linked_work_item": null,
       "rationale": "The PRD-002 research review raised worktree lifecycle risk, and the operator delegated all technical questions to Codex PM when repo evidence and policy are sufficient. Codex PM decided that every Bandit-created worktree needs an explicit repo-native Worktree Bootstrap Contract before it can be considered runnable. The contract must cover allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence. Without this, a claim-owned worktree can be correctly claimed and locked but still fail after worker execution begins because the runtime environment was never proven.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
+      "next_action": "After BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
     },
     {
       "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",

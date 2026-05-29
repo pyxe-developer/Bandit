@@ -1,0 +1,108 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-049",
+  "outcome": "`BANDIT-049` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`. The work repairs the Focused Session Context Packet interstitial state after a work item has landed and closed but before the next bootstrap-gap work item is created. The implementation keeps the packet `derived_non_canonical`, reports last closed work separately from active work, identifies the next queued bootstrap gap and exact next action from repo artifacts, preserves required forbidden-action boundaries, and keeps `CURRENT_CONTEXT.md`, `ROADMAP.md`, `.bandit/bootstrap-gaps.json`, and the focused tests as the source-linked recovery surface. Stage 4 scoped pre-PR CodeRabbit passed, Local Qwen returned `non_blocking` hardening findings that Codex PM dispositioned to durable candidates or explicit no-action, Stage 5 landing verdict and local-record landing action evidence are recorded, and no Worktree Bootstrap Contract implementation, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, paid reviewer route, dependency or lockfile change, installed global skill edit, external service integration, or unrelated Phase 8 work was introduced.",
+  "what_worked": [
+    "The interstitial recovery path stayed a projection over existing repo artifacts instead of making a closed work item look active or creating a new canonical packet store.",
+    "Focused RED tests covered the valid no-active-work state, last-closed-work separation, next queued gap selection, exact next action, operator-input status, forbidden actions, source hierarchy, required evidence paths, and contradiction refusal behavior.",
+    "Stage 3 implementation stayed inside the focused session-context command/state surface while preserving the Bootstrap Model-Family Separation and Test Ownership Boundary.",
+    "Stage 4 review handled Qwen hardening findings without reopening a source-repair loop after CodeRabbit passed and the accepted findings were safe to route as future candidates.",
+    "The local-record landing path used existing review-subject hash, layered risk-classification, supply-chain gate, input-quarantine, operator-boundary, coordination-authority, land-check, and Landing Agent evidence without expanding workflow authority."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Focused session context must recover the interstitial state after a closed work item and before the next work item exists.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-049` adds focused tests, session-context implementation repair, cold-start evaluation support, Stage 4 review evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 closeout; `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` resolved during closeout."
+    },
+    {
+      "lesson": "Interstitial recovery must distinguish last closed work from active runnable work.",
+      "disposition": "explicit no-action decision",
+      "rationale": "The implemented packet reports no active work item in the interstitial state, reports the last closed work separately, and points to required evidence paths for the future work item without creating it early."
+    },
+    {
+      "lesson": "Session-context ID-prefix parsing can be simpler by using the already-captured regex prefix.",
+      "disposition": "durable follow-up candidate",
+      "rationale": "`docs/work/BANDIT-049/qwen-finding-disposition.md` records `BANDIT-049-SESSION-CONTEXT-ID-PREFIX-PARSING` with source artifacts, hypothesis, metric, baseline, expected direction, evaluation window, status, and pending outcome."
+    },
+    {
+      "lesson": "The load-bearing current-context active-work markdown label should gain an explicit parser contract or structured-source backing before broader automation depends on it.",
+      "disposition": "durable follow-up candidate",
+      "rationale": "`docs/work/BANDIT-049/qwen-finding-disposition.md` records `BANDIT-049-INTERSTITIAL-PROSE-CONTRACT-HARDENING` with source artifacts, hypothesis, metric, baseline, expected direction, evaluation window, status, and pending outcome."
+    },
+    {
+      "lesson": "The derived cockpit status surface must also recover the interstitial state instead of requiring a false active work item.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "Stage 6 verification found that `node ./bin/bandit.mjs session-context current --json` recovers the valid interstitial state, but `node ./bin/bandit.mjs cockpit status --json` fails when `CURRENT_CONTEXT.md` correctly records `**Active work item:** none.` `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is recorded as the next queued bootstrap gap."
+    },
+    {
+      "lesson": "A focused interstitial packet proves cold-start recovery but still does not make a Bandit-created worktree runnable.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` remains queued behind cockpit-status interstitial recovery and must define the runnable-worktree contract before scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "`node ./bin/bandit.mjs cockpit status --json` failed in the valid interstitial state with `Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item`; `node ./bin/bandit.mjs session-context current --json` recovered correctly.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to interstitial session-context recovery, focused tests, review evidence, landing evidence, retrospective closeout, bootstrap-gap disposition, and roadmap/current-context synchronization.",
+      "disposition": "explicit no-action decision - no cockpit status implementation repair, Worktree Bootstrap Contract behavior, scheduler, worktree lifecycle, cockpit UI/server/API, PR/CI workflow, merge, push, deploy, product UAT, paid-reviewer route, external service, dependency, lockfile, installed-skill, or unrelated Phase 8 work started"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore: repair a single session-context recovery failure after the prior focused-session-context work landed, then close out before creating the next work item.",
+      "disposition": "explicit no-action decision - Cockpit status interstitial recovery, Worktree Bootstrap Contract, event-driven wake scheduler, observability traces, stage capability scope, token-cost failsafes, and evidence freshness SLOs remain separate queued gaps"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "Codex PM owned routing, RED evidence, review disposition, landing readiness, and closeout; Claude owned Stage 3 implementation only; CodeRabbit and Local Qwen owned Stage 4 review evidence; Landing Agent evidence owned Stage 5.",
+      "disposition": "explicit no-action decision - no operator-owned routing question or agent-boundary follow-up remains for BANDIT-049"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "Stage 6 still requires synchronization across generated retrospective evidence, `.bandit/bootstrap-gaps.json`, `CURRENT_CONTEXT.md`, and `ROADMAP.md`; session-context now verifies the interstitial state, while cockpit status exposed a separate false-blocker gap.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit passed with no findings. Local Qwen returned non-blocking hardening findings, and Codex PM accepted and routed the real findings to durable candidates or no-action decisions. No recorded smell trigger required escalated reviewer routing.",
+      "disposition": "explicit no-action decision - no unresolved cross-model tension or reviewer-routing follow-up remains for BANDIT-049"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "The established invocation paths for pre-PR CodeRabbit, Local Qwen, review-subject hash, risk classification, supply-chain gate, input quarantine, operator boundary, coordination authority, land-check, local landing, artifact creation, validation, gaps list, session-context, and diff hygiene were available; cockpit status invocation was clear but hit an unsupported interstitial state.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "The repaired session-context packet reduces repeated cold-start scanning when the repo is between closed work and the next active work item, but the cockpit status surface still needs the same interstitial recovery behavior.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer call, recurring paid model route, spend-class approval, benchmark spend, live external service, dependency install, or live SCA provider was introduced.",
+      "disposition": "explicit no-action decision - no cost or paid-routing follow-up is required for BANDIT-049"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for the session-context interstitial recovery gap after focused tests, implementation evidence, review evidence, PM finding disposition, landing verdict, local-record landing action, and closeout. The newly recorded uncertainty is cockpit status behavior in the same interstitial state.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY"
+    }
+  ],
+  "improvement_chores": "No new retrospective-derived improvement chore is created by this closeout.\n\nThe two accepted Local Qwen hardening findings remain durable follow-up candidates in `docs/work/BANDIT-049/qwen-finding-disposition.md`: `BANDIT-049-SESSION-CONTEXT-ID-PREFIX-PARSING` and `BANDIT-049-INTERSTITIAL-PROSE-CONTRACT-HARDENING`. `BANDIT-049` also reinforces the existing `BANDIT-048-SESSION-CONTEXT-EVIDENCE-NOTES` candidate without creating a duplicate.\n\n`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is resolved by `BANDIT-049`. Stage 6 verification records `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` because cockpit status still fails when the repo is in the valid no-active-work interstitial state. The next queued bootstrap gap is `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`; `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` remains queued behind it before scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-049`. Focused pre-PR CodeRabbit review passed with no findings, Local Qwen returned `non_blocking` hardening findings, and Codex PM accepted/routed those findings without disputing the implementation's Stage 4 landability.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is open and queued as the next bootstrap-gap chore.",
+    "`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` remains queued behind cockpit-status interstitial recovery.",
+    "`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` remains queued behind the worktree bootstrap contract.",
+    "`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` remains queued behind the event-driven wake scheduler gap.",
+    "`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` remains queued behind agent observability traces.",
+    "`BANDIT-GAP-TOKEN-COST-FAILSAFE` remains queued behind stage capability scope.",
+    "`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remains queued behind token-cost fail-safe evidence.",
+    "Unrelated Phase 8 cockpit work remains blocked while any open bootstrap gap remains queued or active."
+  ]
+}
