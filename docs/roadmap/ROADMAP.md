@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Record `BANDIT-051` risk and supply-chain evidence, then write the Stage 5 landing verdict and run `land-check`.
+**Current next step:** Run the local-record landing action for `BANDIT-051` and record `docs/work/BANDIT-051/landing-action.md`.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 

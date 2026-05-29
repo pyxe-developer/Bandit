@@ -395,11 +395,10 @@ disposition are recorded in `docs/work/BANDIT-050/`, `docs/specs/`,
 
 **Current active work:** `BANDIT-051` - Worktree Bootstrap Contract.
 
-The current stage is Stage 5: Landing verdict.
+The current stage is ready-to-land after Stage 5 landing verdict.
 
-**Current next action:** Record `BANDIT-051` layered risk-classification and
-supply-chain gate evidence, then write the Stage 5 landing verdict and run
-`npm run bandit -- land-check BANDIT-051`. Stage 3 implementation evidence is recorded in
+**Current next action:** Run the local-record landing action for `BANDIT-051`
+and record `docs/work/BANDIT-051/landing-action.md`. Stage 3 implementation evidence is recorded in
 `docs/specs/BANDIT-051-implementation-evidence.json`,
 `docs/work/BANDIT-051/implementation-evidence.md`, and
 `docs/work/BANDIT-051/writer-report.md`. Stage 4 CodeRabbit pass evidence is
@@ -412,7 +411,15 @@ and future evidence freshness findings are recorded in
 `docs/work/BANDIT-051/qwen-finding-disposition.md`. Aggregate Stage 4 review
 evidence is recorded in `docs/work/BANDIT-051/review-evidence.md` with current
 review subject hash
-`5cb368b9aba6c768f8796dd5bc6b2b49137f61dbcda765403612f5190ab3d847`. Keep
+`e203880e11e648c692af173c1e683d6be8fb2dfdb4b429009b1a9bde19b8c88d`.
+Layered risk-classification evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-051-risk-classification.json`;
+supply-chain gate evidence is recorded in
+`.bandit/policy/supply-chain-gates/BANDIT-051-supply-chain-gate.json`; Stage 5
+landing verdict evidence is recorded in
+`docs/specs/BANDIT-051-landing-verdict.json` and
+`docs/work/BANDIT-051/landing-verdict.md`; `npm run bandit -- land-check
+BANDIT-051` passes with final verdict `safe-to-land`. Keep
 scheduler execution, full worktree lifecycle, claim lease creation or release,
 work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
 automatic merge/push/deploy, product UAT scope, and unrelated Phase 8 work out
@@ -785,8 +792,10 @@ that authority.
 in `docs/specs/BANDIT-051-implementation-evidence.json`,
 `docs/work/BANDIT-051/implementation-evidence.md`, and
 `docs/work/BANDIT-051/writer-report.md`, and `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-051` with disposition `active_chore`. The next action
-is to run Stage 4 review gates only; do not start branch/worktree execution,
+links the gap to `BANDIT-051` with disposition `active_chore`. Stage 4 review
+evidence, risk and supply-chain evidence, Stage 5 landing verdict evidence, and
+passing `land-check` are recorded. The next action is to run the local-record
+landing action only; do not start branch/worktree execution,
 scheduler execution, full worktree lifecycle, claim lease creation or release,
 work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
 automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work.
@@ -1444,13 +1453,14 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record `BANDIT-051` layered risk-classification and supply-chain gate
-   evidence, then write the Stage 5 landing verdict and run
-   `npm run bandit -- land-check BANDIT-051` for
+1. Run the local-record landing action for `BANDIT-051` and record
+   `docs/work/BANDIT-051/landing-action.md` for
    `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence, Stage 2
    RED evidence, Stage 3 implementation evidence, CodeRabbit pass evidence,
-   Local Qwen non-blocking evidence, Codex PM finding disposition, and aggregate
-   Stage 4 review evidence are recorded in `docs/work/BANDIT-051/`, and the gap
+   Local Qwen non-blocking evidence, Codex PM finding disposition, aggregate
+   Stage 4 review evidence, risk and supply-chain evidence, Stage 5 landing
+   verdict evidence, and passing `land-check` are recorded in
+   `docs/work/BANDIT-051/`, `docs/specs/`, and `.bandit/policy/`; the gap
    ledger marks the gap active.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
@@ -1491,12 +1501,12 @@ raw-HEAD evidence loops.
 No operator-owned input is required for the next recorded action. `BANDIT-051`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
 evidence, CodeRabbit pass evidence, Local Qwen non-blocking evidence, Codex PM
-finding disposition, and aggregate Stage 4 review evidence for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`; the next action is Stage 5 landing
-verdict preparation and `land-check`. This is routine technical routing, not an
-operator-owned product, UAT, policy, business, cost, or scope decision unless
-the landing verdict would expand beyond the recorded Worktree Bootstrap
-Contract gap.
+finding disposition, aggregate Stage 4 review evidence, risk and supply-chain
+gate evidence, Stage 5 landing verdict evidence, and passing `land-check` for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`; the next action is local-record
+landing. This is routine technical routing, not an operator-owned product, UAT,
+policy, business, cost, or scope decision unless the landing action would
+expand beyond the recorded Worktree Bootstrap Contract gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
