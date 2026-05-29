@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Run `npm run bandit -- land-check BANDIT-053`, then record the local landing action for `BANDIT-053` if the gate passes.
+**Current next step:** Record Stage 6 retrospective closeout for `BANDIT-053`, resolve `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`, and refresh context/status. Do not begin `BANDIT-054` yet.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
