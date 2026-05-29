@@ -393,20 +393,26 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Write the Stage 5 landing verdict for `BANDIT-047`
-from the current aggregate Stage 4 review evidence, including the brief-required
-layered risk-classification and supply-chain gate evidence before any landing
-action. Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-047/review-evidence.md` with
+**Current next action:** Record the local landing action for `BANDIT-047` after
+the Stage 5 landing verdict and auto-landing evidence pass verification. Stage
+5 landing verdict evidence is recorded in
+`docs/specs/BANDIT-047-landing-verdict.json` and
+`docs/work/BANDIT-047/landing-verdict.md`. Explicit layered
+risk-classification and supply-chain gate evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-047-risk-classification.json`,
+`.bandit/policy/risk-classification.json`,
+`.bandit/policy/supply-chain-gates/BANDIT-047-supply-chain-gate.json`, and
+`.bandit/policy/supply-chain-gate.json`. Aggregate Stage 4 review evidence is
+refreshed in `docs/work/BANDIT-047/review-evidence.md` with
 `review_subject_hash`
-`cbfe95538e5bb3b326c256743511069afe8a4a9dd9fd96c9c3ac0044b90559d8`,
+`23f7342ddea065d6b7730a74301723214e6a7e888776f78d9794a083ffbd1e78`,
 CodeRabbit `pass`, Local Qwen `pass`, no open findings, no required operator
-input, UAT `not_applicable`, and clean-code `pass`. Do not record the local
-landing action or start the Focused Session Context gap, Worktree Bootstrap
-Contract gap, scheduler execution, full worktree lifecycle enablement, cockpit
-UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
-product UAT scope, or unrelated Phase 8 work before the Stage 5 landing verdict
-is written and verified.
+input, UAT `not_applicable`, and clean-code `pass`. Do not start the Focused
+Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
+worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, retrospective
+closeout, or unrelated Phase 8 work before the local landing action is
+recorded.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -691,8 +697,12 @@ recorded in `docs/work/BANDIT-047/local-qwen-review.md` with a pass verdict and
 no findings at source head `513e965f3e0efc52ac78e5e7a74540b08162f58e`.
 Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-047/review-evidence.md` with current review subject hash
-`cbfe95538e5bb3b326c256743511069afe8a4a9dd9fd96c9c3ac0044b90559d8`. The next
-required action is to write the Stage 5 landing verdict for `BANDIT-047`.
+`23f7342ddea065d6b7730a74301723214e6a7e888776f78d9794a083ffbd1e78`. Stage 5
+landing verdict evidence is recorded in
+`docs/work/BANDIT-047/landing-verdict.md` with final verdict `safe-to-land`,
+UAT `not_applicable`, clean-code `pass`, and explicit layered
+risk-classification and supply-chain gate evidence. The next required action is
+to record the local landing action for `BANDIT-047`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -1282,11 +1292,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write the Stage 5 landing verdict for `BANDIT-047` from the current
-   aggregate Stage 4 review evidence, including the brief-required layered
-   risk-classification and supply-chain gate evidence before any landing
-   action. Do not record the local landing action or begin unrelated work until
-   the landing verdict is written and verified.
+1. Record the local landing action for `BANDIT-047` now that Stage 5 landing
+   verdict evidence, layered risk-classification evidence, supply-chain gate
+   evidence, `land-check`, and `auto-land-check` are the required verification
+   focus for this handoff. Do not begin retrospective closeout or unrelated work
+   until the local landing action is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

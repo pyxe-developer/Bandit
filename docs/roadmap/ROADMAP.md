@@ -16,20 +16,26 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write the Stage 5 landing verdict for `BANDIT-047`
-from the current aggregate Stage 4 review evidence, including the brief-required
-layered risk-classification and supply-chain gate evidence before any landing
-action. Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-047/review-evidence.md` with
+**Current next step:** Record the local landing action for `BANDIT-047` after
+the Stage 5 landing verdict and auto-landing evidence pass verification. Stage
+5 landing verdict evidence is recorded in
+`docs/specs/BANDIT-047-landing-verdict.json` and
+`docs/work/BANDIT-047/landing-verdict.md`. Explicit layered
+risk-classification and supply-chain gate evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-047-risk-classification.json`,
+`.bandit/policy/risk-classification.json`,
+`.bandit/policy/supply-chain-gates/BANDIT-047-supply-chain-gate.json`, and
+`.bandit/policy/supply-chain-gate.json`. Aggregate Stage 4 review evidence is
+refreshed in `docs/work/BANDIT-047/review-evidence.md` with
 `review_subject_hash`
-`cbfe95538e5bb3b326c256743511069afe8a4a9dd9fd96c9c3ac0044b90559d8`,
+`23f7342ddea065d6b7730a74301723214e6a7e888776f78d9794a083ffbd1e78`,
 CodeRabbit `pass`, Local Qwen `pass`, no open findings, no required operator
-input, UAT `not_applicable`, and clean-code `pass`. Do not record the local
-landing action or start the Focused Session Context gap, Worktree Bootstrap
-Contract gap, scheduler execution, full worktree lifecycle enablement, cockpit
-UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
-product UAT scope, or unrelated Phase 8 work before the Stage 5 landing verdict
-is written and verified.
+input, UAT `not_applicable`, and clean-code `pass`. Do not start the Focused
+Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
+worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, retrospective
+closeout, or unrelated Phase 8 work before the local landing action is
+recorded.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -59,6 +65,10 @@ inactive. Stage 4 CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-047/coderabbit-review.md`, Stage 4 Local Qwen pass evidence
 is recorded in `docs/work/BANDIT-047/local-qwen-review.md`, and aggregate Stage
 4 review evidence is recorded in `docs/work/BANDIT-047/review-evidence.md`.
+Stage 5 landing verdict evidence is recorded in
+`docs/work/BANDIT-047/landing-verdict.md` with final verdict `safe-to-land`,
+UAT `not_applicable`, clean-code `pass`, and explicit layered
+risk-classification and supply-chain gate evidence.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
