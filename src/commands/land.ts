@@ -170,7 +170,8 @@ function landingActionContent(fields: {
 
 This work item has landing action evidence for the supported local-record
 Landing Agent path. The next work item may not begin until retrospective,
-bootstrap-gap disposition, and roadmap context closeout are recorded.
+bootstrap-gap disposition, roadmap context closeout, and STATUS.md refresh are
+recorded.
 `;
 }
 

@@ -1328,6 +1328,15 @@ evidence and retrospective closeout.
 - If required operator-owned input is missing, call it out directly and halt the blocked action.
 - Before landing any slice, record whether it complies with `CLEAN_CODE.md` and `docs/verification/STAGE_RUBRICS.md`.
 - After each completed step, update this file if the next action changed.
+- Before ending any Bandit work session, update root `STATUS.md` if the current
+  work item, current status, next action, required operator input, or last-five
+  recent items changed. Keep `STATUS.md` concise; it is not a complete project
+  history.
+- Keep `ROADMAP.md` concise: current work, next work, planned work, and
+  completed work with short descriptions only. Label current, next, and planned
+  entries as `[Gap]` or `[Slice]` so bootstrap-gap repairs remain visually
+  distinct from original PRD slices. Do not copy work-item evidence or
+  retrospective history into the roadmap.
 - If the Bandit skill or operating vocabulary changes, update `CONTEXT.md` in the same turn.
 - If Codex cannot answer "what is next?" from this file and `ROADMAP.md`, stop and repair context.
 - The operator should not need to reconstruct status from chat.

@@ -206,7 +206,7 @@ function buildSourceArtifacts() {
     { path: AGENTS_PATH, role: "role rules and process boundaries" },
     { path: CLEAN_CODE_PATH, role: "code quality constraints" },
     { path: CURRENT_CONTEXT_PATH, role: "current phase and next action authority" },
-    { path: ROADMAP_PATH, role: "roadmap position and phase history" },
+    { path: ROADMAP_PATH, role: "concise roadmap position" },
     { path: STAGE_RUBRICS_PATH, role: "stage gate rubrics" },
     { path: BOOTSTRAP_GAPS_PATH, role: "bootstrap gap ledger" },
     { path: SMELL_TRIGGERS_PATH, role: "smell trigger routing policy" },
@@ -226,7 +226,7 @@ function buildSourceHierarchy() {
     },
     {
       source: ROADMAP_PATH,
-      authority: "roadmap position and phase history"
+      authority: "concise current, next, planned, and completed work list"
     },
     {
       source: BOOTSTRAP_GAPS_PATH,
@@ -260,7 +260,7 @@ function buildDeepReadPointers() {
     {
       source: ROADMAP_PATH,
       reason:
-        "historical roadmap narrative and old closeout details — deep read when full history is needed"
+        "concise roadmap list — use completed work-item packages for detailed history"
     },
     {
       source: CURRENT_CONTEXT_PATH,

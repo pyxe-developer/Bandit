@@ -12,9 +12,10 @@ Packet — a derived, non-canonical projection of the current activation from
 repo-native source artifacts.
 
 Use source-pointer deep reads when detailed history or glossary content is
-needed, rather than reading the full roadmap history. The packet's
-`deep_read_pointers` field names which sources to read and why, supporting
-next-action recovery without reading full roadmap history.
+needed. The roadmap stays concise; detailed history lives in completed
+work-item packages. The packet's `deep_read_pointers` field names which sources
+to read and why, supporting next-action recovery without replaying project
+history.
 
 ## Required Evidence
 
@@ -26,7 +27,8 @@ next-action recovery without reading full roadmap history.
 - Trust repo artifacts over memory or chat history.
 - Halt for operator-owned product, UAT, policy, business, cost, or genuinely
   ambiguous scope decisions.
-- Update `CURRENT_CONTEXT.md` when the next recorded action changes.
+- Update `CURRENT_CONTEXT.md`, `ROADMAP.md`, and root `STATUS.md` when the next
+  recorded action changes.
 
 ## Passing Behavior
 

@@ -23,7 +23,11 @@ Use these verdicts consistently:
 **Required evidence:**
 
 - `docs/roadmap/CURRENT_CONTEXT.md` names current phase, active work, next action, blockers, and bootstrap gaps.
-- `docs/roadmap/ROADMAP.md` maps the work to a phase.
+- `docs/roadmap/ROADMAP.md` maps current, next, planned, and completed work
+  with short descriptions only, and labels current/next/planned items as
+  `[Gap]` or `[Slice]`.
+- Root `STATUS.md` gives the operator a concise current-status view with the
+  current work item, current status, and last five recent items only.
 - The next step is narrow enough to execute.
 - If a prior slice just completed, `docs/work/<ID>/landing-action.md` or equivalent PR merge evidence exists before the next slice is active.
 
@@ -31,6 +35,11 @@ Use these verdicts consistently:
 
 - Current phase or next action is unclear.
 - Active work item cannot be identified.
+- `STATUS.md` is missing, stale, or has expanded into a complete project history.
+- `ROADMAP.md` has expanded into work-item evidence, review details, landing
+  details, retrospective history, or other material already stored in
+  `docs/work/<ID>/` packages.
+- `ROADMAP.md` current, next, or planned work omits `[Gap]` or `[Slice]` labels.
 - Context must be reconstructed from chat.
 - Implementation starts before context is repaired.
 - A new slice is active while the previous slice has only a safe-to-land verdict and no commit, merge, or landing-action evidence.
@@ -38,6 +47,12 @@ Use these verdicts consistently:
 **Verifier focus:**
 
 - Check whether the repo itself answers "what is next?"
+- Check whether `STATUS.md` gives a short operator-facing answer without
+  duplicating project history.
+- Check whether `ROADMAP.md` remains concise and points to work by short
+  descriptions instead of carrying historical detail.
+- Check whether current, next, and planned roadmap entries are labeled `[Gap]`
+  or `[Slice]`.
 - Reject stale current-context files when the change clearly moved the project forward.
 - Confirm the previous slice actually landed before accepting a new active slice.
 
@@ -499,6 +514,12 @@ Use these verdicts consistently:
   minimum-detectable-effect context, evaluation window, re-evaluation window,
   proxy-risk notes, evaluation result, and outcome status.
 - Current context updated if the next action changed.
+- Root `STATUS.md` updated during session closeout and Stage 6 closeout when
+  current work item, current status, next action, required operator input, or
+  last-five recent items changed.
+- `ROADMAP.md` kept concise during closeout, with planned work at the top and
+  completed work at the bottom, and current/next/planned items labeled `[Gap]`
+  or `[Slice]`.
 
 **Blockers:**
 
@@ -511,6 +532,11 @@ Use these verdicts consistently:
   re-evaluation window.
 - Cross-model tension is not logged.
 - Current context remains stale after completion.
+- `STATUS.md` remains stale, missing, or longer than the concise current-status
+  contract after session or Stage 6 closeout.
+- `ROADMAP.md` remains stale or accumulates detailed historical evidence that
+  belongs in completed work-item packages.
+- `ROADMAP.md` current, next, or planned work labels are missing or stale.
 
 **Verifier focus:**
 
@@ -521,6 +547,10 @@ Use these verdicts consistently:
   friction rather than waiting for voluntary suggestions.
 - Check that improvement chores are evaluable, not vague reminders, and do not
   treat proxy metric movement as causal proof.
+- Check that `STATUS.md` was refreshed without becoming a complete project
+  history.
+- Check that `ROADMAP.md` was refreshed without becoming a complete project
+  history.
 
 **CodeRabbit focus:**
 

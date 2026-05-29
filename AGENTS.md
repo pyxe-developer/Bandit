@@ -67,9 +67,26 @@ Do not create the next slice brief, RED evidence, implementation branch, or acti
 - landing verdict;
 - landing action evidence, such as `docs/work/<ID>/landing-action.md` with commit SHA or a PR merge artifact with merge SHA;
 - retrospective and improvement dispositions;
-- updated `CURRENT_CONTEXT.md` and `ROADMAP.md`.
+- updated `CURRENT_CONTEXT.md`, `ROADMAP.md`, and root `STATUS.md`.
 
 If the previous slice has only a `safe-to-land` verdict but no landing action evidence, the current state is `ready-to-land`, not complete. The next action is to land or explicitly block that slice, not to begin the next one.
+
+## Session Closeout Status Rule
+
+Before ending any Bandit work session, update root `STATUS.md` if the current
+work item, current status, next action, required operator input, or last-five
+recent items changed.
+
+`STATUS.md` is the operator-facing concise status page. Keep it short and
+current; do not turn it into a project history. `CURRENT_CONTEXT.md`,
+`ROADMAP.md`, `.bandit/`, and work-item artifacts remain the source of truth
+for detailed workflow state.
+
+`ROADMAP.md` is also concise. Keep planned work at the top, completed work at
+the bottom, label current/next/planned items as `[Gap]` or `[Slice]`, and use
+short descriptions only. Do not copy work-item evidence, review details,
+landing details, or retrospective history into the roadmap; those details
+belong in `docs/work/<ID>/` and `.bandit/` artifacts.
 
 ## Review And Landing Defaults
 

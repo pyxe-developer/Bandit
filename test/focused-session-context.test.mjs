@@ -107,7 +107,7 @@ test("session-context current --markdown renders from the same focused packet mo
   assert.doesNotMatch(markdownResult.stdout, new RegExp(historyMarker));
 });
 
-test("session-context keeps historical roadmap narrative behind deep-read pointers", async () => {
+test("session-context keeps detailed history behind work-item package pointers", async () => {
   const repo = await createFocusedSessionRepo();
 
   const result = await runBandit(repo, ["session-context", "current", "--json"]);
@@ -123,7 +123,7 @@ test("session-context keeps historical roadmap narrative behind deep-read pointe
   assert.ok(deepReadSources.includes("docs/roadmap/CURRENT_CONTEXT.md"));
   assert.match(
     packet.deep_read_pointers.map((pointer) => pointer.reason).join("\n"),
-    /historical roadmap narrative|full glossary text|old closeout details/
+    /completed work-item packages|full glossary text|old closeout details/
   );
 });
 
@@ -221,7 +221,7 @@ test("cold-start evaluation packet exercises focused session context recovery", 
   assert.match(evaluationPacket, /Focused Session Context Packet/);
   assert.match(evaluationPacket, /bandit session-context current --json/);
   assert.match(evaluationPacket, /source-pointer deep reads/);
-  assert.match(evaluationPacket, /without reading full roadmap history/);
+  assert.match(evaluationPacket, /roadmap stays concise/);
 });
 
 async function createFocusedSessionRepo(options = {}) {
