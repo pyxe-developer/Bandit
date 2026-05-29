@@ -393,17 +393,20 @@ evidence, local-record landing action evidence, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-049/`,
 `docs/specs/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record local-record landing action for `BANDIT-050` -
+**Current next action:** Record Stage 6 retrospective closeout for `BANDIT-050` -
 Cockpit Status Interstitial Recovery. Stage 1 brief evidence, Stage 2 RED
 evidence, Stage 3 implementation evidence, refreshed Stage 4 review evidence,
-Stage 5 landing verdict evidence, and passing Stage 5 land-check evidence are recorded in
+Stage 5 landing verdict evidence, passing Stage 5 land-check evidence, and
+local-record landing action evidence are recorded in
 `docs/work/BANDIT-050/brief.md`, `docs/work/BANDIT-050/red-evidence.md`,
 `docs/work/BANDIT-050/implementation-evidence.md`, and
 `docs/specs/BANDIT-050-implementation-evidence.json`,
 `docs/work/BANDIT-050/review-evidence.md`, and
-`docs/work/BANDIT-050/landing-verdict.md`. `npm run bandit -- land-check
-BANDIT-050` now passes with final verdict `safe-to-land`; the next step is to
-record `docs/work/BANDIT-050/landing-action.md` before Stage 6 retrospective.
+`docs/work/BANDIT-050/landing-verdict.md`, and
+`docs/work/BANDIT-050/landing-action.md`. `npm run bandit -- auto-land-check
+BANDIT-050` passed and `npm run bandit -- land BANDIT-050 --action
+local-record` recorded the landing action; the next step is Stage 6
+retrospective closeout before gap-ledger disposition or any next work item.
 
 `BANDIT-050` - Cockpit Status Interstitial Recovery is the active
 bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
@@ -416,7 +419,7 @@ make `bandit cockpit status --json` recover the valid interstitial state between
 closed work and the next active bootstrap-gap work item while preserving
 CURRENT_CONTEXT.md, ROADMAP.md, .bandit/bootstrap-gaps.json, work-item
 artifacts, lifecycle evidence, and focused session-context packet authority
-boundaries. The next required action is local-record landing action for this
+boundaries. The next required action is Stage 6 retrospective closeout for this
 interstitial recovery.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
@@ -1413,12 +1416,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record local-record landing action for `BANDIT-050` - Cockpit Status
+1. Record Stage 6 retrospective closeout for `BANDIT-050` - Cockpit Status
    Interstitial Recovery. Stage 5 landing verdict evidence is now recorded as
    `safe-to-land` in `docs/work/BANDIT-050/landing-verdict.md`, and
-   `npm run bandit -- land-check BANDIT-050` passes with clean-code `pass`.
-   The next action is to record `docs/work/BANDIT-050/landing-action.md` before
-   Stage 6 retrospective closeout.
+   `docs/work/BANDIT-050/landing-action.md` records local-record landing action.
+   The next action is to record retrospective closeout before resolving the
+   bootstrap gap or creating the next work item.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1458,10 +1461,11 @@ raw-HEAD evidence loops.
 No operator-owned input is required for the next recorded action. `BANDIT-050`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
 evidence, refreshed Stage 4 review evidence, Stage 5 landing verdict evidence,
-and passing `npm run bandit -- land-check BANDIT-050` evidence for
+passing `npm run bandit -- land-check BANDIT-050` evidence, and local-record
+landing action evidence for
 `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. The landing verdict is
-recorded as `safe-to-land`; the next action is local-record landing action and
-then retrospective closeout. This is routine technical routing from existing
+recorded as `safe-to-land`; the next action is retrospective closeout. This is
+routine technical routing from existing
 repo source artifacts, not an operator-owned product, UAT, policy, business,
 cost, or scope decision unless the work item scope would expand beyond the
 recorded gap.
