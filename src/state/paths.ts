@@ -29,6 +29,10 @@ export function getBanditPaths(repoRoot: string) {
     skillLifecyclePolicy: path.join(policyRoot, "skill-lifecycle-contracts.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
     supplyChainPolicy: path.join(policyRoot, "supply-chain-gate.json"),
-    smellTriggers: path.join(policyRoot, "smell-triggers.json")
+    smellTriggers: path.join(policyRoot, "smell-triggers.json"),
+    eventDrivenWakeSchedulerPolicy: path.join(
+      policyRoot,
+      "event-driven-wake-scheduler.json"
+    )
   };
 }

@@ -1,0 +1,5 @@
+{
+  "contract_version": 1,
+  "policy_id": "event-driven-wake-scheduler",
+  "include_deterministic_sweeper": true
+}

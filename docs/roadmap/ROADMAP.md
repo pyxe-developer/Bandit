@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-052` only. Do not create implementation evidence, a branch/worktree execution path, scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded.
+**Current next step:** Run Stage 4 review gates for `BANDIT-052`: focused pre-PR CodeRabbit, clean-worktree Local Qwen, PM disposition for actionable findings, and aggregate review evidence with the current `review_subject_hash`. Do not create landing verdict/action evidence, retrospective evidence, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before Stage 4 review evidence is recorded.
 
 - `[Gap]` `BANDIT-053` - Agent Observability Traces
 
