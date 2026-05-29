@@ -1335,7 +1335,9 @@ evidence and retrospective closeout.
 - Keep `ROADMAP.md` concise: current work, next work, planned work, and
   completed work with short descriptions only. Label current, next, and planned
   entries as `[Gap]` or `[Slice]` so bootstrap-gap repairs remain visually
-  distinct from original PRD slices. Do not copy work-item evidence or
+  distinct from original PRD slices. If bootstrap gaps block PRD/product work,
+  separate blocking gaps from deferred slices so deferred product work remains
+  visible without adding detailed history. Do not copy work-item evidence or
   retrospective history into the roadmap.
 - If the Bandit skill or operating vocabulary changes, update `CONTEXT.md` in the same turn.
 - If Codex cannot answer "what is next?" from this file and `ROADMAP.md`, stop and repair context.

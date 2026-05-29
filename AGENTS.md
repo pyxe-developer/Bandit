@@ -84,7 +84,9 @@ for detailed workflow state.
 
 `ROADMAP.md` is also concise. Keep planned work at the top, completed work at
 the bottom, label current/next/planned items as `[Gap]` or `[Slice]`, and use
-short descriptions only. Do not copy work-item evidence, review details,
+short descriptions only. When bootstrap gaps block PRD/product work, separate
+blocking gaps from deferred slices so the roadmap does not imply deferred
+product work disappeared. Do not copy work-item evidence, review details,
 landing details, or retrospective history into the roadmap; those details
 belong in `docs/work/<ID>/` and `.bandit/` artifacts.
 

@@ -14,11 +14,27 @@
 
 ## Planned Work
 
+### Blocking Gaps
+
+These are the active queue under the bootstrap-gap policy. They block unrelated
+cockpit feature work unless the operator explicitly changes priority.
+
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 - `[Gap]` `BANDIT-053` - Agent Observability Traces
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
+
+### Deferred PRD Slices
+
+These remain planned cockpit/product work, but are not currently unblocked while
+bootstrap gaps are queued.
+
+- `[Slice]` `TBD` - Browser-Served Cockpit App Shell
+- `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
+- `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
+- `[Slice]` `TBD` - Guarded CLI Action Requests
+- `[Slice]` `TBD` - Improvement Health Surface
 
 ## Completed Work
 

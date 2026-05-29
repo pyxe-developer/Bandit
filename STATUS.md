@@ -18,9 +18,8 @@ This file is now part of Bandit's session-closeout workflow and should be
 refreshed whenever the current work item, current status, next action, required
 operator input, or last-five recent items change.
 
-`ROADMAP.md` has also been made concise: it now carries current, next, planned,
-and completed work as short bullets only. Detailed history stays in completed
-work-item packages.
+`ROADMAP.md` is concise and now separates blocking bootstrap gaps from deferred
+PRD slices. Detailed history stays in completed work-item packages.
 
 ## Recently Completed / In Progress
 

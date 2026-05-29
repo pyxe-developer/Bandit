@@ -26,6 +26,8 @@ Use these verdicts consistently:
 - `docs/roadmap/ROADMAP.md` maps current, next, planned, and completed work
   with short descriptions only, and labels current/next/planned items as
   `[Gap]` or `[Slice]`.
+- When bootstrap gaps block PRD/product work, `ROADMAP.md` separates blocking
+  gaps from deferred slices instead of hiding the deferred slice queue.
 - Root `STATUS.md` gives the operator a concise current-status view with the
   current work item, current status, and last five recent items only.
 - The next step is narrow enough to execute.
@@ -40,6 +42,8 @@ Use these verdicts consistently:
   details, retrospective history, or other material already stored in
   `docs/work/<ID>/` packages.
 - `ROADMAP.md` current, next, or planned work omits `[Gap]` or `[Slice]` labels.
+- `ROADMAP.md` lists only bootstrap gaps when deferred PRD/product slices are
+  still planned.
 - Context must be reconstructed from chat.
 - Implementation starts before context is repaired.
 - A new slice is active while the previous slice has only a safe-to-land verdict and no commit, merge, or landing-action evidence.
@@ -53,6 +57,8 @@ Use these verdicts consistently:
   descriptions instead of carrying historical detail.
 - Check whether current, next, and planned roadmap entries are labeled `[Gap]`
   or `[Slice]`.
+- Check whether blocking gaps and deferred slices are visually distinct when
+  both exist.
 - Reject stale current-context files when the change clearly moved the project forward.
 - Confirm the previous slice actually landed before accepting a new active slice.
 
