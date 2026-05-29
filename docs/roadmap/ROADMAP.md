@@ -16,7 +16,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 5 landing verdict for `BANDIT-049` - Session Context Interstitial Recovery. Stage 4 CodeRabbit, Local Qwen, Codex PM finding disposition, layered risk-classification, supply-chain gate, and aggregate review evidence are recorded in `docs/work/BANDIT-049/`, `docs/specs/BANDIT-049-coderabbit-review-output.json`, and `.bandit/policy/`; review evidence uses current `review_subject_hash` `531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. Do not start landing action, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 5 landing verdict evidence exists.
+**Current next step:** Run the local-record landing action for `BANDIT-049` -
+Session Context Interstitial Recovery using
+`npm run bandit -- land BANDIT-049 --action local-record`. Stage 5 landing
+verdict evidence is recorded in
+`docs/specs/BANDIT-049-landing-verdict.json` and
+`docs/work/BANDIT-049/landing-verdict.md` with final verdict `safe-to-land`;
+post-verdict `npm run bandit -- land-check BANDIT-049` passes. Do not start
+retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree
+lifecycle implementation, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
+work before local-record landing action evidence exists.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
@@ -41,10 +51,13 @@ recorded in `docs/work/BANDIT-049/coderabbit-review.md` and
 recorded in `docs/work/BANDIT-049/qwen-finding-disposition.md`, and aggregate
 Stage 4 review evidence is recorded in `docs/work/BANDIT-049/review-evidence.md`
 with current `review_subject_hash`
-`531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. The next
-required action is Stage 5 landing verdict evidence. Do not start unrelated
-Phase 8 work or landing action before Stage 5 landing verdict evidence is
-recorded.
+`531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. Stage 5
+landing verdict evidence is recorded in
+`docs/specs/BANDIT-049-landing-verdict.json` and
+`docs/work/BANDIT-049/landing-verdict.md` with final verdict `safe-to-land`;
+post-verdict `npm run bandit -- land-check BANDIT-049` passes. The next
+required action is local-record landing action evidence. Do not start unrelated
+Phase 8 work or retrospective before landing action evidence is recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -1326,9 +1339,12 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 5 landing verdict for `BANDIT-049` - Session Context Interstitial
-   Recovery using the recorded Stage 4 review evidence with current
-   `review_subject_hash` `531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`.
+1. Run the local-record landing action for `BANDIT-049` - Session Context
+   Interstitial Recovery using
+   `npm run bandit -- land BANDIT-049 --action local-record`. Stage 5 landing
+   verdict evidence is recorded in
+   `docs/work/BANDIT-049/landing-verdict.md`, and post-verdict
+   `npm run bandit -- land-check BANDIT-049` passes.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
