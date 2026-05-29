@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-050
-source_head: 59c17284d4a7bf1b0d7e700ed41ed29f203356a9
+source_head: 3c430aff5304e412988ecfcdbd77d473e26dcd32
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:origin/main
 review_state: completed

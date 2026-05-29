@@ -175,7 +175,7 @@ test("cockpit status fails closed in no-active-work interstitial gap state", asy
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item/
+    /Cockpit status blocked: interstitial state requires a resolved gap with a linked work item/
   );
 });
 

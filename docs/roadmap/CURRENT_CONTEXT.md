@@ -1410,12 +1410,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Dispatch Stage 3 implementation for `BANDIT-050` -
-   Cockpit Status Interstitial Recovery. The Stage 1 brief and Stage 2 RED
-   evidence are recorded in
-   `docs/work/BANDIT-050/brief.md`, `.bandit/bootstrap-gaps.json` marks
-   `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` active with linked work
-   item `BANDIT-050`, and the next step is Stage 3 implementation dispatch.
+1. Resolve landing blockers for `BANDIT-050` - Cockpit Status Interstitial
+   Recovery. Stage 5 landing verdict evidence is now recorded as `needs-repair` in
+   `docs/work/BANDIT-050/landing-verdict.md` because clean-code evidence is still
+   pending. The next action is to address clean-code closure from Stage 4/1 and
+   rerun `bandit land-check BANDIT-050` before local-record landing action.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1453,12 +1452,15 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. `BANDIT-050`
-has Stage 1 brief evidence for
-`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`, and the next action is to
-create Stage 2 RED evidence proving the current cockpit-status interstitial
-failure. This is routine technical routing from existing repo source artifacts,
-not an operator-owned product, UAT, policy, business, cost, or scope decision
-unless the work item scope would expand beyond the recorded gap.
+has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
+evidence, and Stage 4 review evidence for
+`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. The landing verdict is
+recorded as `needs-repair` and the next action is clean-code closure before
+`bandit land-check BANDIT-050` passes, then local-record landing action and
+retrospective closeout. This is routine technical routing from existing repo
+source artifacts, not an operator-owned product, UAT, policy, business, cost,
+or scope decision unless the work item scope would expand beyond the recorded
+gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
