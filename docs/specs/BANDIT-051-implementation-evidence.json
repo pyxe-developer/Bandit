@@ -1,0 +1,33 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-051",
+  "stage": "Stage 3: Implementation",
+  "status": "pass",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "5678957168de8a0375760d72778b09d122e94c1f",
+  "summary": "Implemented bandit worktree-bootstrap validate --json. All 3 RED tests pass. Full suite (412 tests) passes. TypeScript typecheck clean.",
+  "files_created": [
+    "src/state/worktree-bootstrap.ts",
+    "src/commands/worktree-bootstrap.ts",
+    "docs/templates/worktree-bootstrap.md",
+    ".bandit/policy/worktree-bootstrap.json"
+  ],
+  "files_extended": [
+    "src/cli.ts"
+  ],
+  "test_results": {
+    "focused": "3/3 pass",
+    "full_suite": "412/412 pass",
+    "typecheck": "clean"
+  },
+  "forbidden_surfaces_confirmed_clean": [
+    "test files not modified",
+    "claim authority not modified",
+    "git mutation serializer not modified",
+    "no worktree add/remove/lock/unlock operations",
+    "no secret values in any artifact",
+    "no package.json or lockfile changes",
+    "no bootstrap-gaps.json or events.jsonl changes"
+  ]
+}

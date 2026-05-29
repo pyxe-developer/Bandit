@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-051`.
+**Current next step:** Run Stage 4 review gates for `BANDIT-051`.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
