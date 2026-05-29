@@ -16,17 +16,19 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run the local-record landing action for `BANDIT-049` -
-Session Context Interstitial Recovery using
-`npm run bandit -- land BANDIT-049 --action local-record`. Stage 5 landing
-verdict evidence is recorded in
+**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-049` - Session Context Interstitial Recovery. Stage 5
+landing verdict evidence is recorded in
 `docs/specs/BANDIT-049-landing-verdict.json` and
 `docs/work/BANDIT-049/landing-verdict.md` with final verdict `safe-to-land`;
-post-verdict `npm run bandit -- land-check BANDIT-049` passes. Do not start
-retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree
-lifecycle implementation, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before local-record landing action evidence exists.
+post-verdict `npm run bandit -- land-check BANDIT-049` passes; and
+local-record landing action evidence is recorded in
+`docs/work/BANDIT-049/landing-action.md` with current head
+`2ff75119d9e187d89d72ab9a3cb4989dd06b5c70`. Do not start Worktree Bootstrap
+Contract work, scheduler execution, worktree lifecycle implementation, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
+product UAT scope, or unrelated Phase 8 work before retrospective closeout and
+bootstrap-gap disposition are recorded.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
@@ -55,9 +57,13 @@ with current `review_subject_hash`
 landing verdict evidence is recorded in
 `docs/specs/BANDIT-049-landing-verdict.json` and
 `docs/work/BANDIT-049/landing-verdict.md` with final verdict `safe-to-land`;
-post-verdict `npm run bandit -- land-check BANDIT-049` passes. The next
-required action is local-record landing action evidence. Do not start unrelated
-Phase 8 work or retrospective before landing action evidence is recorded.
+post-verdict `npm run bandit -- land-check BANDIT-049` passes. Local-record
+landing action evidence is recorded in
+`docs/work/BANDIT-049/landing-action.md` with current head
+`2ff75119d9e187d89d72ab9a3cb4989dd06b5c70`. The next required action is Stage
+6 retrospective closeout and bootstrap-gap disposition. Do not start unrelated
+Phase 8 work or the next bootstrap-gap chore before retrospective closeout is
+recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -1339,12 +1345,13 @@ Current rule:
 
 Current priority:
 
-1. Run the local-record landing action for `BANDIT-049` - Session Context
-   Interstitial Recovery using
-   `npm run bandit -- land BANDIT-049 --action local-record`. Stage 5 landing
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-049` - Session Context Interstitial Recovery. Stage 5 landing
    verdict evidence is recorded in
-   `docs/work/BANDIT-049/landing-verdict.md`, and post-verdict
-   `npm run bandit -- land-check BANDIT-049` passes.
+   `docs/work/BANDIT-049/landing-verdict.md`, post-verdict
+   `npm run bandit -- land-check BANDIT-049` passes, and local-record landing
+   action evidence is recorded in
+   `docs/work/BANDIT-049/landing-action.md`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
