@@ -393,7 +393,7 @@ landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
 disposition are recorded in `docs/work/BANDIT-048/`, `docs/specs/`,
 `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Continue Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery. Scoped pre-PR CodeRabbit pass evidence is recorded in `docs/work/BANDIT-049/coderabbit-review.md` and `docs/specs/BANDIT-049-coderabbit-review-output.json`; next run Local Qwen adversarial review, then record aggregate Stage 4 review evidence with the current `review_subject_hash`. Do not start landing, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 4 evidence exists.
+**Current next action:** Run Stage 5 landing verdict for `BANDIT-049` - Session Context Interstitial Recovery. Stage 4 CodeRabbit, Local Qwen, Codex PM finding disposition, layered risk-classification, supply-chain gate, and aggregate review evidence are recorded in `docs/work/BANDIT-049/`, `docs/specs/BANDIT-049-coderabbit-review-output.json`, and `.bandit/policy/`; review evidence uses current `review_subject_hash` `531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. Do not start landing action, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 5 landing verdict evidence exists.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
@@ -410,12 +410,23 @@ implementation evidence are recorded in `docs/work/BANDIT-049/dispatch.md`,
 `docs/work/BANDIT-049/implementation-evidence.md`,
 `docs/specs/BANDIT-049-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, and
-`src/commands/session-context.ts`. The current stage is Stage 4. Scoped pre-PR
+`src/commands/session-context.ts`. The current stage is Stage 5: Stage 4 review
+evidence is recorded. Scoped pre-PR
 CodeRabbit pass evidence is recorded in
 `docs/work/BANDIT-049/coderabbit-review.md` and
-`docs/specs/BANDIT-049-coderabbit-review-output.json`. The next required
-action is Local Qwen adversarial review, followed by aggregate Stage 4 review
-evidence. Do not start unrelated Phase 8 work before Stage 4 evidence is
+`docs/specs/BANDIT-049-coderabbit-review-output.json`. Local Qwen
+`non_blocking` evidence is recorded in
+`docs/work/BANDIT-049/local-qwen-review.md`, Codex PM finding disposition is
+recorded in `docs/work/BANDIT-049/qwen-finding-disposition.md`, layered
+risk-classification evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-049-risk-classification.json`,
+supply-chain gate evidence is recorded in
+`.bandit/policy/supply-chain-gates/BANDIT-049-supply-chain-gate.json`, and
+aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-049/review-evidence.md`
+with current `review_subject_hash`
+`531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. The next
+required action is Stage 5 landing verdict evidence. Do not start unrelated
+Phase 8 work or landing action before Stage 5 landing verdict evidence is
 recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
@@ -729,15 +740,25 @@ dispatch and implementation evidence are recorded in
 `docs/work/BANDIT-049/implementation-evidence.md`,
 `docs/specs/BANDIT-049-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, and
-`src/commands/session-context.ts`. The current stage is Stage 3:
-Implementation complete. The next required action is Stage 4 review: scoped
-pre-PR CodeRabbit against base `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c`,
-Local Qwen adversarial review, and aggregate Stage 4 review evidence with
-current `review_subject_hash`. Do not start Worktree Bootstrap Contract work,
-scheduler execution, worktree lifecycle implementation, cockpit UI/server/API
-work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
-landing, retrospective, or unrelated Phase 8 work before Stage 4 evidence is
-recorded.
+`src/commands/session-context.ts`. The current stage is Stage 5: Stage 4 review
+evidence is recorded. Scoped pre-PR CodeRabbit pass evidence is recorded in
+`docs/work/BANDIT-049/coderabbit-review.md` and
+`docs/specs/BANDIT-049-coderabbit-review-output.json`. Local Qwen
+`non_blocking` evidence is recorded in
+`docs/work/BANDIT-049/local-qwen-review.md`, Codex PM finding disposition is
+recorded in `docs/work/BANDIT-049/qwen-finding-disposition.md`, layered
+risk-classification evidence is recorded in
+`.bandit/policy/risk-classifications/BANDIT-049-risk-classification.json`,
+supply-chain gate evidence is recorded in
+`.bandit/policy/supply-chain-gates/BANDIT-049-supply-chain-gate.json`, and
+aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-049/review-evidence.md` with current `review_subject_hash`
+`531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`. The next
+required action is Stage 5 landing verdict evidence. Do not start Worktree
+Bootstrap Contract work, scheduler execution, worktree lifecycle
+implementation, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, landing action, retrospective,
+or unrelated Phase 8 work before Stage 5 landing verdict evidence is recorded.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1372,11 +1393,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Continue Stage 4 review for `BANDIT-049` - Session Context Interstitial
-   Recovery: scoped pre-PR CodeRabbit pass evidence is recorded in
-   `docs/work/BANDIT-049/coderabbit-review.md`; next run Local Qwen adversarial
-   review and aggregate Stage 4 review evidence with current
-   `review_subject_hash`.
+1. Run Stage 5 landing verdict for `BANDIT-049` - Session Context Interstitial
+   Recovery using the recorded Stage 4 review evidence with current
+   `review_subject_hash` `531a5ec223b4fa8b431d6dec9070e8ccbc53ff91ad4625fb41261c31db0aa447`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1415,12 +1434,13 @@ raw-HEAD evidence loops.
 No operator-owned input is required for the next recorded action. `BANDIT-049`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 Claude Writer
 implementation evidence, lifecycle event evidence, active gap-ledger linkage
-for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`, and scoped pre-PR
-CodeRabbit pass evidence. The next action is Local Qwen adversarial review,
-then aggregate Stage 4 review evidence; this is routine technical routing from
-existing repo source artifacts, not an operator-owned product, UAT, policy,
-business, cost, or scope decision unless the work item scope would expand
-beyond the recorded gap.
+for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`, scoped pre-PR
+CodeRabbit pass evidence, Local Qwen `non_blocking` evidence, Codex PM finding
+disposition, layered risk-classification evidence, supply-chain gate evidence,
+and aggregate Stage 4 review evidence. The next action is Stage 5 landing
+verdict evidence; this is routine technical routing from existing repo source
+artifacts, not an operator-owned product, UAT, policy, business, cost, or scope
+decision unless the work item scope would expand beyond the recorded gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

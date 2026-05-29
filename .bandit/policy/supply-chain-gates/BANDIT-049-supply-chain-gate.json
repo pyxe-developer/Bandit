@@ -1,0 +1,79 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-049",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-049/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, installed agent skill, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-049 implementation."
+    },
+    "rationale": "BANDIT-049 adds local session-context interstitial recovery and a CLI markdown null-safety fix without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "not_applicable",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-049 touches local focused session context packet interstitial recovery, current-state parsing, CLI markdown rendering null-safety, and focused tests only. It does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed agent skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces, so no operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    "docs/work/BANDIT-049/brief.md",
+    "docs/work/BANDIT-049/implementation-evidence.md",
+    "docs/work/BANDIT-049/review-evidence.md",
+    "src/state/focused-session-context.ts",
+    "src/commands/session-context.ts",
+    "test/focused-session-context.test.mjs"
+  ]
+}

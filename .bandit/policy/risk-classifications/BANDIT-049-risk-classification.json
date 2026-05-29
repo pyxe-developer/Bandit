@@ -1,0 +1,173 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-049",
+  "changed_surfaces": [
+    {
+      "path": "src/state/focused-session-context.ts",
+      "surface": "derived_current_state_projection",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/session-context.ts",
+      "surface": "cli_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/focused-session-context.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "focused_session_context_interstitial_recovery",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-049/implementation-evidence.md"
+    },
+    {
+      "signal_id": "derived_non_canonical_boundary",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/implementation-evidence.md"
+    },
+    {
+      "signal_id": "no_live_execution_or_release_surface",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/focused-session-context.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- gaps list",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs session-context current --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs cockpit status --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs review-subject-hash BANDIT-049",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- operator-boundary validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- coordination-authority validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-049/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-049/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-049-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-049/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-049 is a non-product bootstrap-gap chore implementing local session-context interstitial recovery in a derived non-canonical packet. It requires pre-PR CodeRabbit plus Local Qwen review and PM disposition, not operator-owned product, UAT, business, cost, or policy-override input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-049 changes local focused session context packet interstitial recovery, current-state parsing, CLI markdown null-safety, and focused tests. It introduces no dependency or lockfile change, package-manager script change, CI or release workflow change, installed agent skill edit, fetched-prompt or external tool-install path, external side-effecting automation, product UAT surface, live scheduler execution, worktree lifecycle execution, merge/push/deploy behavior, paid reviewer routing, live routing change, or cockpit UI/server/API behavior. Stage 4 evidence records CodeRabbit pass, Local Qwen non_blocking evidence with PM disposition, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can be release-authorized under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-049-supply-chain-gate.json",
+    "docs/work/BANDIT-049/brief.md",
+    "docs/work/BANDIT-049/implementation-evidence.md",
+    "docs/work/BANDIT-049/review-evidence.md",
+    "src/state/focused-session-context.ts",
+    "src/commands/session-context.ts",
+    "test/focused-session-context.test.mjs"
+  ]
+}
