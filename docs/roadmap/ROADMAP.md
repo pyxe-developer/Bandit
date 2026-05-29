@@ -16,36 +16,24 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Record Stage 6 retrospective closeout for `BANDIT-050` -
-Cockpit Status Interstitial Recovery. Stage 1 brief evidence, Stage 2 RED
-evidence, Stage 3 implementation evidence, refreshed Stage 4 review evidence,
-Stage 5 landing verdict, passing Stage 5 land-check evidence, and local-record
-landing action evidence are recorded in
-`docs/work/BANDIT-050/brief.md`,
-`docs/specs/BANDIT-050-red-evidence.json`,
-`docs/work/BANDIT-050/red-evidence.md`,
-`docs/specs/BANDIT-050-implementation-evidence.json`,
-`docs/work/BANDIT-050/implementation-evidence.md`,
-`docs/work/BANDIT-050/review-evidence.md`, and
-`docs/work/BANDIT-050/landing-verdict.md`, and
-`docs/work/BANDIT-050/landing-action.md`. The landing verdict is
-`safe-to-land`, `npm run bandit -- auto-land-check BANDIT-050` passed, and the
-local-record landing action is recorded, so the next action is Stage 6
-retrospective closeout.
+**Current next step:** Create exactly one bootstrap-gap chore for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. `BANDIT-050` has required Stage 1
+through Stage 6 evidence, landing verdict, landing-action evidence, retrospective
+closeout, and gap-ledger disposition recorded. Do not start Worktree Bootstrap
+Contract RED evidence, implementation, scheduler execution, worktree lifecycle,
+cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy,
+product UAT scope, or unrelated Phase 8 work before creating the next work item
+brief/spec from the queued bootstrap gap.
 
-`BANDIT-050` - Cockpit Status Interstitial Recovery is the active
-bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
+`BANDIT-050` - Cockpit Status Interstitial Recovery is landed and closed out as
+the bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
 Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY.json`, Stage 1
-brief evidence, Stage 2 RED evidence, and Stage 3 implementation evidence are
-recorded in `docs/specs/BANDIT-050-red-evidence.json`,
-`docs/work/BANDIT-050/red-evidence.md`,
-`docs/specs/BANDIT-050-implementation-evidence.json`, and
-`docs/work/BANDIT-050/implementation-evidence.md`; landing verdict evidence is now
-recorded in `docs/work/BANDIT-050/landing-verdict.md` as `safe-to-land`; local-record landing action evidence is recorded in `docs/work/BANDIT-050/landing-action.md`; lifecycle event evidence is
-recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` marks the
-gap active with linked work item `BANDIT-050`. The next required action is
-Stage 6 retrospective closeout.
+through Stage 6 evidence is recorded in `docs/work/BANDIT-050/` and
+`docs/specs/`, local-record landing action evidence is recorded in
+`docs/work/BANDIT-050/landing-action.md`, and `.bandit/bootstrap-gaps.json`
+marks the gap resolved. The next required action is to create the
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` bootstrap-gap chore.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
 as the bootstrap-gap chore for
@@ -1368,18 +1356,10 @@ Current rule:
 
 Current priority:
 
-1. Record Stage 6 retrospective closeout for `BANDIT-050` - Cockpit Status
-   Interstitial Recovery. Stage 1 brief, Stage 2 RED, Stage 3 implementation,
-   Stage 4 aggregate review evidence, Stage 5 landing verdict, passing
-   land-check evidence, and local-record landing action evidence are recorded in
-   `docs/work/BANDIT-050/brief.md`, `docs/work/BANDIT-050/red-evidence.md`,
-   `docs/work/BANDIT-050/implementation-evidence.md`,
-   `docs/specs/BANDIT-050-red-evidence.json`,
-   `docs/specs/BANDIT-050-implementation-evidence.json`,
-   `docs/work/BANDIT-050/review-evidence.md`, and
-   `docs/work/BANDIT-050/landing-verdict.md`, and
-   `docs/work/BANDIT-050/landing-action.md`. The next step is Stage 6
-   retrospective closeout before gap-ledger disposition or any next work item.
+1. Create exactly one bootstrap-gap chore for
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. `BANDIT-050` is landed and closed
+   out with Stage 1 through Stage 6 evidence, local-record landing action, and
+   bootstrap-gap disposition recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1399,9 +1379,9 @@ Current priority:
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
    `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
    `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is resolved by
-   `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is active as
-   `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
-   cockpit-status interstitial recovery, and
+   `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is resolved
+   by `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is the next queued
+   bootstrap gap, and
    `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
    bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven

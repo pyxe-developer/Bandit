@@ -493,8 +493,8 @@
     {
       "id": "BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY",
       "title": "Cockpit status fails between closed work item and next active gap",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-049",
       "source_artifacts": [
         "docs/work/BANDIT-049/retrospective.md",
@@ -506,9 +506,9 @@
         "src/state/focused-session-context.ts"
       ],
       "linked_work_item": "BANDIT-050",
-      "rationale": "Stage 6 closeout verification for BANDIT-049 found that `node ./bin/bandit.mjs session-context current --json` now recovers the valid interstitial state with no active work item, but `node ./bin/bandit.mjs cockpit status --json` fails with `Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item` when `CURRENT_CONTEXT.md` correctly records `**Active work item:** none.` The cockpit status surface is derived_non_canonical, but it remains a common cold-start and validation check; it should recover the same interstitial state from repo artifacts instead of forcing a false active work item.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-050."
+      "rationale": "BANDIT-050 repaired the derived cockpit status interstitial state after a work item has landed and closed but before the next bootstrap-gap work item is created. The implementation keeps cockpit status derived_non_canonical, reports last closed work separately from active work, identifies the next queued bootstrap gap and exact next action from repo artifacts, preserves CLI authority and forbidden-action boundaries, and adds focused tests, CodeRabbit pass evidence, Local Qwen non-blocking disposition, aggregate Stage 4 evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout.",
+      "verification_target": "docs/work/BANDIT-050/retrospective.md",
+      "next_action": "Use `bandit cockpit status --json` as a derived recovery surface in the valid interstitial state between closed work and the next active bootstrap-gap work item."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
