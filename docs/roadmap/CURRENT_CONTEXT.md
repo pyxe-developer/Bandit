@@ -393,7 +393,15 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-047/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create the next bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` now that `BANDIT-047` has Stage 6 retrospective closeout and bootstrap-gap disposition recorded. Use the queued gap metadata in `.bandit/bootstrap-gaps.json` and source artifacts `CONTEXT.md`, `docs/evaluation/skills/bandit-cold-start.md`, `docs/roadmap/CURRENT_CONTEXT.md`, `docs/roadmap/ROADMAP.md`, and `.bandit/policy/smell-triggers.json`. Do not start Worktree Bootstrap Contract, scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the Focused Session Context work item is created with a Stage 1 brief.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-048` - Focused Session Context Packets. The Stage 1 brief is recorded in `docs/work/BANDIT-048/brief.md`, `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` active with linked work item `BANDIT-048`, and `.bandit/events.jsonl` records the work-item-created event. Do not start implementation, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded and mapped to the brief acceptance criteria.
+
+`BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
+chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
+recorded in `docs/specs/BANDIT-GAP-FOCUSED-SESSION-CONTEXT.json`, Stage 1 brief
+evidence is recorded in `docs/work/BANDIT-048/brief.md`, lifecycle event
+evidence is recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json`
+marks the gap active with linked work item `BANDIT-048`. Stage 2 RED evidence is
+the next required gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -643,37 +651,40 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-047` - Bootstrap Model-Family Separation
-closeout.
+**Active work item:** `BANDIT-048` - Focused Session Context Packets.
 
-`BANDIT-047` is retained as the active work-item marker until the next
-work-item creation step opens `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`.
-`BANDIT-047` has structured creation spec evidence in
-`docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1 brief
-evidence in `docs/work/BANDIT-047/brief.md`, lifecycle event evidence in
+`BANDIT-048` has structured creation spec evidence in
+`docs/specs/BANDIT-GAP-FOCUSED-SESSION-CONTEXT.json`, Stage 1 brief evidence in
+`docs/work/BANDIT-048/brief.md`, lifecycle event evidence in `.bandit/events.jsonl`,
+and active bootstrap-gap linkage in `.bandit/bootstrap-gaps.json` for
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. The current stage is Stage 2: Test Design
+And RED Evidence. The next required action is to write RED evidence mapped to
+the `BANDIT-048` brief acceptance criteria before implementation, review,
+landing, retrospective, Worktree Bootstrap Contract, or unrelated Phase 8 work.
+
+`BANDIT-047` is landed and closed out. It has structured creation spec evidence
+in `docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1
+brief evidence in `docs/work/BANDIT-047/brief.md`, lifecycle event evidence in
 `.bandit/events.jsonl`, and resolved bootstrap-gap linkage in
 `.bandit/bootstrap-gaps.json`. Stage 2 RED evidence is recorded in
-`docs/specs/BANDIT-047-red-evidence.json`,
-`docs/work/BANDIT-047/red-evidence.md`, and
-`test/model-family-separation.test.mjs`. Stage 3 implementation evidence is
+`docs/specs/BANDIT-047-red-evidence.json`, `docs/work/BANDIT-047/red-evidence.md`,
+and `test/model-family-separation.test.mjs`. Stage 3 implementation evidence is
 recorded in `docs/specs/BANDIT-047-implementation-evidence.json`,
-`docs/work/BANDIT-047/implementation-evidence.md`,
-`docs/work/BANDIT-047/writer-report.md`, the model-family policy/template and
-evidence artifacts, and the implementation source. Stage 4 CodeRabbit evidence
-is recorded in `docs/work/BANDIT-047/coderabbit-review.md` with a completed
-pass verdict and zero findings after repair. Stage 4 Local Qwen evidence is
-recorded in `docs/work/BANDIT-047/local-qwen-review.md` with a pass verdict and
-no findings. Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-047/implementation-evidence.md`, `docs/work/BANDIT-047/writer-report.md`,
+the model-family policy/template and evidence artifacts, and the implementation
+source. Stage 4 CodeRabbit evidence is recorded in
+`docs/work/BANDIT-047/coderabbit-review.md` with a completed pass verdict and
+zero findings after repair. Stage 4 Local Qwen evidence is recorded in
+`docs/work/BANDIT-047/local-qwen-review.md` with a pass verdict and no findings.
+Aggregate Stage 4 review evidence is recorded in
 `docs/work/BANDIT-047/review-evidence.md` with current review subject hash
 `23f7342ddea065d6b7730a74301723214e6a7e888776f78d9794a083ffbd1e78`. Stage 5
-landing verdict evidence is recorded in
-`docs/work/BANDIT-047/landing-verdict.md` with final verdict `safe-to-land`,
-UAT `not_applicable`, clean-code `pass`, and explicit layered
-risk-classification and supply-chain gate evidence. Local-record landing action
-evidence is recorded in `docs/work/BANDIT-047/landing-action.md`. Stage 6
-retrospective closeout is recorded in
-`docs/work/BANDIT-047/retrospective.md`. The next required action is to create
-the `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` work item and Stage 1 brief.
+landing verdict evidence is recorded in `docs/work/BANDIT-047/landing-verdict.md`
+with final verdict `safe-to-land`, UAT `not_applicable`, clean-code `pass`, and
+explicit layered risk-classification and supply-chain gate evidence.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-047/landing-action.md`. Stage 6 retrospective closeout is
+recorded in `docs/work/BANDIT-047/retrospective.md`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -830,9 +841,9 @@ resolved.
 `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
 `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
 `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
-`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is now the next queued bootstrap gap.
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
-session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the
+`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is active as `BANDIT-048`.
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused session
+context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the
 worktree bootstrap contract gap.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven wake
 scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind the agent
@@ -882,10 +893,11 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 `BANDIT-042` - Supply-Chain Gate; `BANDIT-043` - Coordination Event Log
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
 Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
-Bootstrap Model-Family Separation.
+Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
+Packets.
 
-**Expected next deliverable:** Stage 1 brief for the
-`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` bootstrap-gap chore.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-048` -
+Focused Session Context Packets.
 
 ## Known Bootstrap Gaps
 
@@ -1265,11 +1277,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create the next bootstrap-gap chore for
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` using the queued gap metadata and
-   source artifacts. Do not begin Worktree Bootstrap Contract work or unrelated
-   work until the Focused Session Context work item and Stage 1 brief are
-   recorded.
+1. Write Stage 2 RED evidence for `BANDIT-048` using the Stage 1 brief and
+   source artifacts. Do not begin implementation, Worktree Bootstrap Contract
+   work, or unrelated work until Focused Session Context RED evidence is
+   recorded and mapped to the brief acceptance criteria.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1287,9 +1298,9 @@ The current priority is:
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is now the next queued bootstrap gap.
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
-   session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
+   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is active as `BANDIT-048`.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused session
+   context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
    the worktree bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
    wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
@@ -1303,12 +1314,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-047`
-has Stage 6 retrospective closeout, bootstrap-gap disposition, and roadmap
-closeout recorded. The next action is to create the
-`BANDIT-GAP-FOCUSED-SESSION-CONTEXT` work item from existing queued gap
-metadata and source artifacts; this is not an operator-owned product, UAT,
-policy, business, cost, or scope decision.
+No operator-owned input is required for the next recorded action. `BANDIT-048`
+has Stage 1 brief evidence, active bootstrap-gap linkage, and lifecycle event
+evidence recorded. The next action is to write Stage 2 RED evidence from the
+approved brief, queued gap metadata, and source artifacts; this is not an
+operator-owned product, UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

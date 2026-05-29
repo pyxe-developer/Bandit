@@ -456,8 +456,8 @@
     {
       "id": "BANDIT-GAP-FOCUSED-SESSION-CONTEXT",
       "title": "Cold starts lack focused session context packets",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "GRILL-WITH-DOCS-2026-05-28",
       "source_artifacts": [
         "CONTEXT.md",
@@ -466,10 +466,10 @@
         "docs/roadmap/ROADMAP.md",
         ".bandit/policy/smell-triggers.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-048",
       "rationale": "The operator identified that Bandit cold starts are consuming excessive tokens by requiring agents to reabsorb whole-project history and long roadmap/current-context files before performing narrow work. The current cold-start evaluation packet requires reading AGENTS.md, CONTEXT.md, CURRENT_CONTEXT.md, ROADMAP.md, BOOTSTRAP_METHODOLOGY.md, CLEAN_CODE.md, and STAGE_RUBRICS.md, while CURRENT_CONTEXT.md and ROADMAP.md have accumulated historical closeout narrative. Agents need the current role boundary, active Work Item or gap, current stage, exact next action, allowed and forbidden actions, blocker state, required evidence paths, and source hierarchy for the current activation; deeper roadmap history and glossary text should be referenced by pointer and read on demand. Packet generation strategy is a Codex-owned technical decision; the default should be CLI-derived state with optional Markdown rendering rather than a hand-maintained packet that can drift.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to define and enforce CLI-derived Focused Session Context Packets for cold starts and worker/reviewer sessions. The chore should add a compact command-generated packet with optional Markdown rendering, update the cold-start evaluation packet, separate current-state projection from historical roadmap narrative, require source pointers for on-demand deep reads, preserve AGENTS.md and CLEAN_CODE.md authority, and add validation/tests proving sessions can identify the exact next action without reading full roadmap history."
+      "next_action": "Complete active chore BANDIT-048."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",

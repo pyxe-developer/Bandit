@@ -16,7 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the next bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` now that `BANDIT-047` has Stage 6 retrospective closeout and bootstrap-gap disposition recorded. Use the queued gap metadata in `.bandit/bootstrap-gaps.json` and source artifacts `CONTEXT.md`, `docs/evaluation/skills/bandit-cold-start.md`, `docs/roadmap/CURRENT_CONTEXT.md`, `docs/roadmap/ROADMAP.md`, and `.bandit/policy/smell-triggers.json`. Do not start Worktree Bootstrap Contract, scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before the Focused Session Context work item is created with a Stage 1 brief.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-048` - Focused Session Context Packets. The Stage 1 brief is recorded in `docs/work/BANDIT-048/brief.md`, `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` active with linked work item `BANDIT-048`, and `.bandit/events.jsonl` records the work-item-created event. Do not start implementation, Worktree Bootstrap Contract, scheduler execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded and mapped to the brief acceptance criteria.
+
+`BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
+chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
+recorded in `docs/specs/BANDIT-GAP-FOCUSED-SESSION-CONTEXT.json`, Stage 1 brief
+evidence is recorded in `docs/work/BANDIT-048/brief.md`, lifecycle event
+evidence is recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json`
+marks the gap active with linked work item `BANDIT-048`. Stage 2 RED evidence is
+the next required gate.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -1242,11 +1250,10 @@ Current rule:
 
 Current priority:
 
-1. Create the next bootstrap-gap chore for
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` using the queued gap metadata and
-   source artifacts. Do not begin Worktree Bootstrap Contract work or unrelated
-   work until the Focused Session Context work item and Stage 1 brief are
-   recorded.
+1. Write Stage 2 RED evidence for `BANDIT-048` using the Stage 1 brief and
+   source artifacts. Do not begin implementation, Worktree Bootstrap Contract
+   work, or unrelated work until Focused Session Context RED evidence is
+   recorded and mapped to the brief acceptance criteria.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1264,9 +1271,9 @@ Current priority:
    `BANDIT-GAP-CAS-FENCED-CLAIM-AUTHORITY` is resolved by `BANDIT-045`.
    `BANDIT-GAP-GIT-MUTATION-SERIALIZER` is resolved by `BANDIT-046`.
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
-   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is now the next queued bootstrap gap.
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused
-   session context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
+   `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is active as `BANDIT-048`.
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind focused session
+   context. `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind
    the worktree bootstrap contract.
    `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is queued behind the event-driven
    wake scheduler gap. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
