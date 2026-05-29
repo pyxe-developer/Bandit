@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Run Local Qwen Stage 4 review for `BANDIT-053`, then record aggregate Stage 4 review evidence.
+**Current next step:** Write the Stage 5 landing verdict for `BANDIT-053`, including risk-classification and supply-chain gate evidence.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
