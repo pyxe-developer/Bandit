@@ -1,0 +1,42 @@
+# BANDIT-053 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused Test Writer-owned tests define the Agent Observability Trace validation and projection surface before implementation. The suite fails because Bandit currently has no `agent-observability` command, so trace shape validation, operation-span correlation checks, non-canonical observability projection output, authority-boundary refusals, and data-only external payload handling are not implemented yet.
+
+## Test Command
+
+```sh
+node --test test/agent-observability.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 5
+pass 0
+fail 5
+agent-observability validate accepts a complete trace policy and trace fixture failed: Unknown command: agent-observability
+agent-observability validate requires operation span work item and stage correlation failed because the command is missing
+agent-observability project reports non-canonical cost, latency, retry, and failure signals failed: Unknown command: agent-observability
+agent-observability validate rejects trace or projection authority over canonical repo artifacts failed because the command is missing
+agent-observability validate keeps external trace payloads data-only failed because the command is missing
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| Focused RED evidence proves Bandit currently lacks enforced Agent Observability Trace shape validation. | `test/agent-observability.test.mjs` runs `bandit agent-observability validate --json` against a complete trace policy and trace fixture; it fails with `Unknown command: agent-observability`, proving no runnable validation surface exists yet. |
+| Operation Span correlation must require work item, stage, actor identity, source artifacts, and authorizing boundary where applicable. | The missing-correlation test removes span `work_item` and `stage` correlation fields and expects a fail-closed diagnostic; it currently fails earlier because the command is not implemented. |
+| Token spend, latency, retry count, failure type, tool friction, reviewer runtime, and repeated wake/no-op patterns must be queryable from a non-canonical observability projection. | The projection test runs `bandit agent-observability project --json` and expects derived cost, latency, retry, and failure signals with `authority: derived_non_canonical`; it fails because the command does not exist. |
+| Trace data, projections, dashboards, generated indexes, and telemetry backends cannot substitute for canonical repo artifacts or workflow gates. | The authority-boundary test marks the projection as able to satisfy required workflow artifacts and expects a refusal; it currently fails earlier because no validation command exists. |
+| Trace shape and projection output preserve input-quarantine boundaries by treating external or third-party text as data-only payload references. | The external-payload test marks a trace payload as instruction-bearing and expects a data-only refusal; it currently fails earlier because no validation command exists. |
+| RED coverage stays scoped to Agent Observability Trace behavior and avoids unrelated implementation surfaces. | This Stage 2 step adds only `test/agent-observability.test.mjs`, `docs/work/BANDIT-053/red-evidence.md`, and this spec artifact. No Stage 3 implementation, trace runtime execution, hosted telemetry backend, scheduler execution, worktree lifecycle behavior, cockpit UI/server/API code, dependency change, or broader Phase 8 work is added. |
+| Stage 2 RED evidence preserves Test Ownership Boundary and bootstrap model-family separation. | This RED evidence and tests are Codex PM/Test Writer-authored. Stage 3 implementation must be routed to Claude, and the Stage 3 Writer must not edit tests, fixtures, RED evidence artifacts/specs, or acceptance mappings for `BANDIT-053`. |
+
+## Next Action
+
+Dispatch Stage 3 implementation for `BANDIT-053` to Claude through the bootstrap Process Adapter path: implement the narrow `bandit agent-observability validate --json` and `bandit agent-observability project --json` surfaces with trace policy parsing, required operation-span correlation, derived non-canonical observability projection output, canonical-artifact authority refusals, data-only external payload handling, and trace-backed token/cost signals that remain observability data only. Keep the Stage 3 Writer away from tests, fixtures, RED evidence artifacts/specs, acceptance mappings, full telemetry backend ingestion, hosted observability integration, Stage Capability Scope enforcement, Token-Cost Failsafe policy, Evidence SLO policy, full scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, paid routing changes, dependency/lockfile changes, installed global skill edits, and unrelated Phase 8 work.
