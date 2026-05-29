@@ -4,13 +4,13 @@
 
 ## Current Work Item
 
-- None - no active work item.
+- `[Gap]` `BANDIT-051` - Worktree Bootstrap Contract
 
 ## Next Work Item
 
-**Current next step:** Create exactly one bootstrap-gap chore for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-051`.
 
-- `[Gap]` `BANDIT-051` - Worktree Bootstrap Contract
+- `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
 ## Planned Work
 
@@ -19,7 +19,6 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 - `[Gap]` `BANDIT-053` - Agent Observability Traces
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe

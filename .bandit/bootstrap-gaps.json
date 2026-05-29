@@ -513,8 +513,8 @@
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
       "title": "Bandit-created worktrees lack a runnable environment bootstrap contract",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -523,10 +523,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-051",
       "rationale": "The PRD-002 research review raised worktree lifecycle risk, and the operator delegated all technical questions to Codex PM when repo evidence and policy are sufficient. Codex PM decided that every Bandit-created worktree needs an explicit repo-native Worktree Bootstrap Contract before it can be considered runnable. The contract must cover allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence. Without this, a claim-owned worktree can be correctly claimed and locked but still fail after worker execution begins because the runtime environment was never proven.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY is resolved, create a bootstrap-gap chore to define the Worktree Bootstrap Contract, first CLI-readable policy artifact such as .bandit/policy/worktree-bootstrap.json, optional .worktreeinclude-style allow-list support, setup and validation command execution, environment-variable reference validation, secret-copy refusal unless existing policy explicitly approves it, bootstrap failure routing to claim failure/block/recovery evidence, and runnable-worktree tests."
+      "next_action": "Complete active chore BANDIT-051."
     },
     {
       "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",

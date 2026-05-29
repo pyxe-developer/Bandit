@@ -2,15 +2,15 @@
 
 ## Last Updated: 2026-05-29
 
-## Current Work Item: None
+## Current Work Item: BANDIT-051
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
-There is no active work item right now. `BANDIT-050` is landed and closed out, with landing action evidence, retrospective closeout, and bootstrap-gap disposition recorded.
+`BANDIT-051` is active as the bootstrap-gap chore for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence is recorded, and the gap ledger links the gap to `BANDIT-051`.
 
-The next required action is to create exactly one bootstrap-gap chore for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Do not start RED evidence, implementation, scheduler execution, worktree lifecycle work, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before that work-item brief/spec exists.
+The next required action is to write Stage 2 RED evidence for `BANDIT-051`. Do not start implementation, scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded.
 
 No operator-owned input is required for the next recorded action.
 
@@ -25,8 +25,8 @@ PRD slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
+- `BANDIT-051` - Worktree Bootstrap Contract
 - `BANDIT-050` - Cockpit Status Interstitial Recovery
 - `BANDIT-049` - Session Context Interstitial Recovery
 - `BANDIT-048` - Focused Session Context Packets
 - `BANDIT-047` - Bootstrap Model-Family Separation
-- `BANDIT-046` - Git Mutation Serializer
