@@ -407,17 +407,20 @@ recorded in `docs/work/BANDIT-052/dispatch.md` and
 recorded in `docs/work/BANDIT-052/implementation-evidence.md`,
 `docs/specs/BANDIT-052-implementation-evidence.json`, and
 `docs/work/BANDIT-052/writer-report.md`, focused pre-PR CodeRabbit pass
-evidence is recorded in `docs/work/BANDIT-052/coderabbit-review.md`, and
+evidence is recorded in `docs/work/BANDIT-052/coderabbit-review.md`, Local
+Qwen pass evidence is recorded in `docs/work/BANDIT-052/local-qwen-review.md`,
+and
 `.bandit/bootstrap-gaps.json` links the gap as `active_chore`.
 
-**Current next action:** Run clean-worktree Local Qwen adversarial review for
-`BANDIT-052`, disposition any actionable findings, and record aggregate review
-evidence with the current `review_subject_hash`. Do not create landing
-verdict/action evidence, retrospective evidence, full scheduler execution
-runtime behavior, full worktree lifecycle work, claim lease creation or
-release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work
-before Stage 4 review evidence is recorded.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-052` with the current `review_subject_hash`, using focused pre-PR
+CodeRabbit pass evidence and Local Qwen pass evidence. No PM finding
+disposition is required because Local Qwen recorded no findings. Do not create
+landing verdict/action evidence, retrospective evidence, full scheduler
+execution runtime behavior, full worktree lifecycle work, claim lease creation
+or release, work-surface reservations, cockpit UI/server/API work, PR/CI
+workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8
+work before aggregate Stage 4 review evidence is recorded.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -788,10 +791,11 @@ recorded in `docs/work/BANDIT-052/dispatch.md` and
 recorded in `docs/work/BANDIT-052/implementation-evidence.md`,
 `docs/specs/BANDIT-052-implementation-evidence.json`, and
 `docs/work/BANDIT-052/writer-report.md`. Focused pre-PR CodeRabbit pass
-evidence is recorded in `docs/work/BANDIT-052/coderabbit-review.md`. The next
-action is clean-worktree Local Qwen, PM disposition for actionable findings,
-and aggregate `review_subject_hash` evidence; do not start landing
-verdict/action evidence, retrospective evidence, full scheduler execution
+evidence is recorded in `docs/work/BANDIT-052/coderabbit-review.md`. Local Qwen
+pass evidence is recorded in `docs/work/BANDIT-052/local-qwen-review.md`. The
+next action is aggregate `review_subject_hash` evidence; no PM finding
+disposition is required because Local Qwen recorded no findings. Do not start
+landing verdict/action evidence, retrospective evidence, full scheduler execution
 runtime behavior, full worktree lifecycle, claim lease creation or release,
 work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
 automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work
@@ -1039,13 +1043,13 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** clean-worktree Local Qwen evidence for
-`BANDIT-052`, followed by PM disposition for actionable findings and aggregate
-`review_subject_hash` evidence, without starting landing verdict/action
-evidence, retrospective evidence, scheduler execution runtime behavior, full
-worktree lifecycle implementation, claim lease creation or release, cockpit
-UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
-product UAT scope, or unrelated Phase 8 work.
+**Expected next deliverable:** aggregate Stage 4 `review_subject_hash` evidence
+for `BANDIT-052`, using recorded CodeRabbit pass evidence and Local Qwen pass
+evidence, without starting landing verdict/action evidence, retrospective
+evidence, scheduler execution runtime behavior, full worktree lifecycle
+implementation, claim lease creation or release, cockpit UI/server/API work,
+PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or
+unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1439,10 +1443,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run clean-worktree Local Qwen for `BANDIT-052`, then PM disposition for
-   actionable findings and aggregate review evidence with the current
+1. Record aggregate Stage 4 review evidence for `BANDIT-052` with the current
    `review_subject_hash`. Focused pre-PR CodeRabbit pass evidence is recorded
-   in `docs/work/BANDIT-052/coderabbit-review.md`.
+   in `docs/work/BANDIT-052/coderabbit-review.md`, and Local Qwen pass evidence
+   is recorded in `docs/work/BANDIT-052/local-qwen-review.md`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1480,11 +1484,12 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-052`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, and focused pre-PR CodeRabbit pass evidence for
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; the next action is running
-clean-worktree Local Qwen for `BANDIT-052`. This is routine technical routing,
-not an operator-owned product, UAT, policy, business, cost, or scope decision
-unless the next work item would expand beyond the queued scheduler gap.
+evidence, focused pre-PR CodeRabbit pass evidence, and Local Qwen pass evidence
+for `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`; the next action is recording
+aggregate Stage 4 review evidence with the current `review_subject_hash`. This
+is routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless the next work item would expand beyond
+the queued scheduler gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
