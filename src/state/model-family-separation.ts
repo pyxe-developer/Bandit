@@ -3,6 +3,10 @@ import path from "node:path";
 
 const POLICY_DISPLAY_PATH = ".bandit/policy/model-family-separation.json";
 const TEMPLATE_DISPLAY_PATH = "docs/templates/model-family-separation.md";
+const STAGE2_OWNERSHIP_ERROR =
+  "Stage 2 RED evidence must record test writer identity, red author model family, material edit status, acceptance mapping owner, and zero Stage 3 test-edit authority";
+const STAGE3_MODEL_FAMILY_ERROR =
+  "Stage 3 implementation evidence must record a non-empty model_family before model-family routing checks";
 
 type Stage2RedEvidence = {
   test_writer_identity?: string;
@@ -129,6 +133,7 @@ function validateEvidence(evidence: ModelFamilyEvidence) {
   const escalation = evidence.escalation ?? {};
 
   checkStage2OwnershipFields(stage2);
+  checkStage3ModelFamily(stage3);
   checkModelFamilySeparation(stage2, stage3);
   checkClaudeBootstrapRouting(stage2, stage3);
   checkTestSurfaceEdits(stage3, invalidation);
@@ -136,17 +141,24 @@ function validateEvidence(evidence: ModelFamilyEvidence) {
 }
 
 function checkStage2OwnershipFields(stage2: Stage2RedEvidence) {
-  const required: (keyof Stage2RedEvidence)[] = [
+  const requiredStringFields = [
     "test_writer_identity",
     "red_author_model_family",
     "acceptance_mapping_owner",
     "stage3_test_edit_authority"
-  ];
+  ] satisfies (keyof Stage2RedEvidence)[];
 
-  if (required.some((field) => !(field in stage2))) {
-    throw new Error(
-      "Stage 2 RED evidence must record test writer identity, red author model family, material edit status, acceptance mapping owner, and zero Stage 3 test-edit authority"
-    );
+  if (
+    requiredStringFields.some((field) => !isNonEmptyString(stage2[field])) ||
+    typeof stage2.codex_materially_edited_tests !== "boolean"
+  ) {
+    throw new Error(STAGE2_OWNERSHIP_ERROR);
+  }
+}
+
+function checkStage3ModelFamily(stage3: Stage3ImplementationEvidence) {
+  if (!isNonEmptyString(stage3.model_family)) {
+    throw new Error(STAGE3_MODEL_FAMILY_ERROR);
   }
 }
 
@@ -199,6 +211,10 @@ function checkEscalationRouting(escalation: Escalation) {
       "Claude-authored implementation escalation must route to Codex PM, not Claude"
     );
   }
+}
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
 }
 
 async function pathExistsAt(repoRoot: string, relativePath: string): Promise<boolean> {

@@ -70,6 +70,66 @@ test("validate rejects missing Stage 2 Test Writer ownership fields", async () =
   );
 });
 
+test("validate rejects invalid Stage 2 Test Writer ownership values", async (t) => {
+  const cases = [
+    ["test_writer_identity", null],
+    ["test_writer_identity", ""],
+    ["test_writer_identity", "   "],
+    ["red_author_model_family", null],
+    ["red_author_model_family", ""],
+    ["red_author_model_family", "   "],
+    ["codex_materially_edited_tests", null],
+    ["acceptance_mapping_owner", null],
+    ["acceptance_mapping_owner", ""],
+    ["acceptance_mapping_owner", "   "],
+    ["stage3_test_edit_authority", null],
+    ["stage3_test_edit_authority", ""],
+    ["stage3_test_edit_authority", "   "]
+  ];
+
+  for (const [field, value] of cases) {
+    await t.test(`${field}=${JSON.stringify(value)}`, async () => {
+      const repo = await createInitializedModelFamilyRepo();
+      const evidence = completeModelFamilyEvidence();
+      evidence.stage2_red_evidence[field] = value;
+      await writeCompleteModelFamilyFixture(repo, { evidence });
+
+      const result = await runBandit(repo, ["validate"]);
+
+      assert.equal(result.code, 1);
+      assert.match(
+        result.stderr,
+        /Stage 2 RED evidence must record test writer identity, red author model family, material edit status, acceptance mapping owner, and zero Stage 3 test-edit authority/
+      );
+    });
+  }
+});
+
+test("validate rejects missing or blank Stage 3 model family before routing checks", async (t) => {
+  const cases = [undefined, null, "", "   "];
+
+  for (const value of cases) {
+    await t.test(`model_family=${JSON.stringify(value)}`, async () => {
+      const repo = await createInitializedModelFamilyRepo();
+      const evidence = completeModelFamilyEvidence();
+      if (value === undefined) {
+        delete evidence.stage3_implementation_evidence.model_family;
+      } else {
+        evidence.stage3_implementation_evidence.model_family = value;
+      }
+      await writeCompleteModelFamilyFixture(repo, { evidence });
+
+      const result = await runBandit(repo, ["validate"]);
+
+      assert.equal(result.code, 1);
+      assert.match(
+        result.stderr,
+        /Stage 3 implementation evidence must record a non-empty model_family before model-family routing checks/
+      );
+    });
+  }
+});
+
 test("validate rejects same-family RED and Stage 3 implementation routing", async () => {
   const repo = await createInitializedModelFamilyRepo();
   const evidence = completeModelFamilyEvidence();
