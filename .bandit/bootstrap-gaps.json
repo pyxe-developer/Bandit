@@ -438,8 +438,8 @@
     {
       "id": "BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION",
       "title": "Bootstrap RED/GREEN work lacks enforced model-family and test-edit separation",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "GRILL-WITH-DOCS-2026-05-28",
       "source_artifacts": [
         "CONTEXT.md",
@@ -449,9 +449,9 @@
         ".bandit/policy/smell-triggers.json"
       ],
       "linked_work_item": "BANDIT-047",
-      "rationale": "The operator identified a bootstrap workflow breakdown: Codex had stopped consistently handing Stage 3 implementation to Claude after Codex-authored RED tests. Current repo language preserved role boundaries and Test Writer ownership, but it did not make model-family separation or the absolute Writer test-edit ban a first-class enforced gate. During bootstrap the intended path is Codex writes Stage 2 RED tests, Claude writes Stage 3 implementation through the Process Adapter path with no authority to edit tests in any capacity, Qwen and CodeRabbit verify, and any escalation after Claude-authored code returns to Codex PM rather than Claude. This bootstrap repair is bounded by the Bootstrap Orchestration Boundary: Codex can enforce artifact and diff gates around Process Adapter runs, but live cross-model orchestration, bidirectional inter-agent messaging, scoped runtime permissions, and persistent worker context require a Harness. The test-edit ban is permanent across future harnesses, true agents, model families, and providers. If Claude or another Stage 3 Writer edits any test surface, the Stage 3 attempt is invalid and must be reverted completely before Stage 3 reruns clean.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-047."
+      "rationale": "BANDIT-047 created an enforced Bootstrap Model-Family Separation and Test Ownership Boundary gate. The implementation adds model-family separation policy, template, evidence artifacts, validator logic, validate integration, focused tests, Stage 4 CodeRabbit and Local Qwen pass evidence, explicit layered risk-classification and supply-chain gate evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout. The gate requires different-model-family Stage 3 routing after Codex-authored or materially edited RED evidence, Claude as the bootstrap Stage 3 Process Adapter path, zero Stage 3 Writer authority over tests, test helpers, fixtures, RED evidence, and acceptance mappings, full invalidation and revert evidence for contaminated Writer attempts, and Codex PM escalation disposition for Claude-authored code while preserving the Bootstrap Orchestration Boundary.",
+      "verification_target": "docs/work/BANDIT-047/retrospective.md",
+      "next_action": "Use the BANDIT-047 model-family separation gate for future Stage 2/Stage 3 work; create the next queued bootstrap-gap chore for BANDIT-GAP-FOCUSED-SESSION-CONTEXT before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-FOCUSED-SESSION-CONTEXT",
@@ -469,7 +469,7 @@
       "linked_work_item": null,
       "rationale": "The operator identified that Bandit cold starts are consuming excessive tokens by requiring agents to reabsorb whole-project history and long roadmap/current-context files before performing narrow work. The current cold-start evaluation packet requires reading AGENTS.md, CONTEXT.md, CURRENT_CONTEXT.md, ROADMAP.md, BOOTSTRAP_METHODOLOGY.md, CLEAN_CODE.md, and STAGE_RUBRICS.md, while CURRENT_CONTEXT.md and ROADMAP.md have accumulated historical closeout narrative. Agents need the current role boundary, active Work Item or gap, current stage, exact next action, allowed and forbidden actions, blocker state, required evidence paths, and source hierarchy for the current activation; deeper roadmap history and glossary text should be referenced by pointer and read on demand. Packet generation strategy is a Codex-owned technical decision; the default should be CLI-derived state with optional Markdown rendering rather than a hand-maintained packet that can drift.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION is resolved, create a bootstrap-gap chore to define and enforce CLI-derived Focused Session Context Packets for cold starts and worker/reviewer sessions. The chore should add a compact command-generated packet with optional Markdown rendering, update the cold-start evaluation packet, separate current-state projection from historical roadmap narrative, require source pointers for on-demand deep reads, preserve AGENTS.md and CLEAN_CODE.md authority, and add validation/tests proving sessions can identify the exact next action without reading full roadmap history."
+      "next_action": "Create a bootstrap-gap chore to define and enforce CLI-derived Focused Session Context Packets for cold starts and worker/reviewer sessions. The chore should add a compact command-generated packet with optional Markdown rendering, update the cold-start evaluation packet, separate current-state projection from historical roadmap narrative, require source pointers for on-demand deep reads, preserve AGENTS.md and CLEAN_CODE.md authority, and add validation/tests proving sessions can identify the exact next action without reading full roadmap history."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
