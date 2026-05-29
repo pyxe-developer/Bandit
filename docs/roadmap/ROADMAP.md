@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-051`.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-051`.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 

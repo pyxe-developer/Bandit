@@ -395,17 +395,18 @@ disposition are recorded in `docs/work/BANDIT-050/`, `docs/specs/`,
 
 **Current active work:** `BANDIT-051` - Worktree Bootstrap Contract.
 
-The current stage is Stage 2: Test Design And RED Evidence.
+The current stage is Stage 3: Implementation.
 
-**Current next action:** Write Stage 2 RED evidence for `BANDIT-051` covering
-the Worktree Bootstrap Contract policy artifact, allowed copy/link entries,
-setup-command and validation-command execution contracts, environment-reference
-validation, secret-copy refusal, bootstrap failure evidence, and refusal to
-treat a locked but unbootstrapped Bandit-created worktree as runnable. Do not
-start implementation, scheduler execution, full worktree lifecycle, claim lease
-creation or release, work-surface reservations, cockpit UI/server/API work,
-PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated
-Phase 8 work before RED evidence is recorded.
+**Current next action:** Dispatch Stage 3 implementation for `BANDIT-051` to
+Claude through the bootstrap Process Adapter path. Stage 2 RED evidence is
+recorded in `docs/specs/BANDIT-051-red-evidence.json`,
+`docs/work/BANDIT-051/red-evidence.md`, and
+`test/worktree-bootstrap.test.mjs`; implement only the `worktree-bootstrap
+validate --json` contract validation/refusal behavior and keep scheduler
+execution, full worktree lifecycle, claim lease creation or release,
+work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy, product UAT scope, and unrelated Phase 8 work out
+of scope.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is active and linked to
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -416,6 +417,9 @@ allowed copied or linked files, setup commands, validation command,
 environment-variable reference validation, secret-handling boundary, expected
 runtime dependencies, and bootstrap failure evidence before worker execution
 treats a claim-owned worktree as runnable.
+Stage 2 RED evidence is recorded in `docs/specs/BANDIT-051-red-evidence.json`,
+`docs/work/BANDIT-051/red-evidence.md`, and
+`test/worktree-bootstrap.test.mjs`.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
 as the bootstrap-gap chore for
@@ -760,13 +764,15 @@ that authority.
 
 `BANDIT-051` is active as the bootstrap-gap chore for
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence is recorded in
-`docs/work/BANDIT-051/brief.md`, and `.bandit/bootstrap-gaps.json` links the
+`docs/work/BANDIT-051/brief.md`, Stage 2 RED evidence is recorded in
+`docs/specs/BANDIT-051-red-evidence.json`,
+`docs/work/BANDIT-051/red-evidence.md`, and
+`test/worktree-bootstrap.test.mjs`, and `.bandit/bootstrap-gaps.json` links the
 gap to `BANDIT-051` with disposition `active_chore`. The next action is to
-write Stage 2 RED evidence only; do not start implementation,
-branch/worktree execution, scheduler execution, full worktree lifecycle,
-claim lease creation or release, work-surface reservations, cockpit
-UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT
-scope, or unrelated Phase 8 work before RED evidence is recorded.
+dispatch Stage 3 implementation only; do not start branch/worktree execution,
+scheduler execution, full worktree lifecycle, claim lease creation or release,
+work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1011,12 +1017,12 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-051` covering
-the Worktree Bootstrap Contract from the accepted decision, PRD-002 source
-artifacts, Stage 1 brief, and gap-ledger scope without starting implementation,
-scheduler execution, full worktree lifecycle implementation, claim lease
-creation or release, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 3 implementation evidence for `BANDIT-051`
+covering the Worktree Bootstrap Contract validation/refusal path defined by
+Stage 2 RED evidence, without starting scheduler execution, full worktree
+lifecycle implementation, claim lease creation or release, cockpit UI/server/API
+work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
+or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1209,8 +1215,9 @@ These are expected because Bandit does not exist yet:
   secret-handling boundary, expected runtime dependencies, and bootstrap failure
   evidence. Secret material is not copied by default unless existing
   operator-supervised policy explicitly authorizes a narrower exception. Stage
-  1 brief evidence is recorded in `docs/work/BANDIT-051/brief.md`; the next
-  action is Stage 2 RED evidence.
+  1 brief evidence is recorded in `docs/work/BANDIT-051/brief.md`, and Stage 2
+  RED evidence is recorded in `docs/work/BANDIT-051/red-evidence.md`; the next
+  action is Stage 3 implementation dispatch.
 - `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is open and queued from the
   2026-05-26 strategic review: PRD-002 now rejects default LLM polling for
   ordinary no-op discovery, but the operator required work to still wake when
@@ -1418,9 +1425,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 2 RED evidence for `BANDIT-051` -
+1. Dispatch Stage 3 implementation for `BANDIT-051` -
    `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence is recorded
-   in `docs/work/BANDIT-051/brief.md`, and the gap ledger marks the gap active.
+   in `docs/work/BANDIT-051/brief.md`, Stage 2 RED evidence is recorded in
+   `docs/work/BANDIT-051/red-evidence.md`, and the gap ledger marks the gap
+   active.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1458,10 +1467,11 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. `BANDIT-051`
-has Stage 1 brief evidence for `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and
-the next action is Stage 2 RED evidence from existing repo source artifacts.
-This is routine technical routing, not an operator-owned product, UAT, policy,
-business, cost, or scope decision unless the work item scope would expand
+has Stage 1 brief evidence plus Stage 2 RED evidence for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and the next action is Stage 3
+implementation dispatch from existing repo source artifacts. This is routine
+technical routing, not an operator-owned product, UAT, policy, business, cost,
+or scope decision unless the work item scope would expand
 beyond the recorded Worktree Bootstrap Contract gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
