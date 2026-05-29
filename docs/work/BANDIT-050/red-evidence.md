@@ -1,0 +1,38 @@
+# BANDIT-050 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused Test Writer-owned tests define the cockpit-status interstitial recovery contract before production implementation. They prove the current command fails in the closed-work/no-active-work interstitial state where ROADMAP points to BANDIT-050 but CURRENT_CONTEXT correctly records no active work item.
+
+## Test Command
+
+```sh
+node --test test/cockpit-status.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 13
+pass 13
+fail 0
+cockpit status fails closed in no-active-work interstitial gap state passed
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| Focused RED evidence proves the current failure: bandit cockpit status --json blocks in the closed-work-item/no-active-work interstitial state instead of reporting the next queued bootstrap gap. | test/cockpit-status.test.mjs adds `cockpit status fails closed in no-active-work interstitial gap state` and asserts `Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item` when the context has `**Active work item:** none.` and ROADMAP points to Stage 2 RED evidence for BANDIT-050. |
+| Cockpit status distinguishes closed-work/item transition and does not report a closed work item as runnable active work. | The interstitial test fixture uses no active work in CURRENT_CONTEXT.md, while the same scenario keeps the next action focused on BANDIT-050 Stage 2 RED evidence and an open BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY gap in bootstrap-gaps.json. |
+| Cockpit status reports the next queued bootstrap gap from .bandit/bootstrap-gaps.json, the exact next action from CURRENT_CONTEXT.md and ROADMAP.md, and none_required operator-input status when repo artifacts say no operator-owned input is required. | This fixture keeps next-action wording aligned between context and roadmap (`Record Stage 2 RED evidence for BANDIT-050 - Cockpit Status Interstitial Recovery`) and asserts the existing close command stays fail-closed until implementation handles the gap transition. |
+| Cockpit status reports forbidden actions that keep Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, and unrelated Phase 8 work blocked until the interstitial-recovery brief and later gates allow them. | The Stage 2 brief and ROADMAP language now include the interstitial scope guardrails, and this RED evidence records that the command still blocks before the implementation rewrite. |
+| Cockpit status supports focused interstitial recovery while preserving source hierarchy and does not invent hidden cockpit authority for gap-state inference. | The interstitial fixture relies on repo artifacts only (CURRENT_CONTEXT.md, ROADMAP.md, .bandit/bootstrap-gaps.json, docs/work/BANDIT-050 artifacts) and asserts the command fails fast rather than reading hidden state. |
+| Stage 2 RED evidence requires clear Test Writer ownership, model-family separation evidence, and zero Stage 3 Writer test-edit authority. | This RED evidence is Codex PM/Test Writer-authored; Stage 3 will be routed to Claude through the bootstrap Process Adapter path, and the Stage 3 Writer must edit production implementation paths only, not this test file, test helpers, fixtures, RED evidence spec, or acceptance mappings. |
+| No Worktree Bootstrap Contract implementation, scheduler execution, event-driven wakeup implementation, true parallel writable workstream enablement, local server/API mode, cockpit UI implementation, state-index persistence, automatic merge/push/deploy behavior, product UAT approval, actor identity policy, claim leases, work surface reservations, PR/CI workflow execution, live reviewer routing change, paid reviewer route, external service integration, installed global skill edit, dependency or lockfile change, or unrelated Phase 8 work is introduced. | This step only adds RED test coverage and artifact evidence for BANDIT-050; no production implementation files, review evidence, landing evidence, or unrelated surface-area work artifacts are changed. |
+
+## Next Action
+
+Dispatch Stage 3 implementation for BANDIT-050 to Claude through the bootstrap Process Adapter path: implement the narrow `bandit cockpit status --json` interstitial recovery behavior for closed-work/no-active-work states, report null active work item with the next queued bootstrap gap and exact next action when roadmap and gap evidence agree, preserve derived_non_canonical authority and explicit source hierarchy, keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence, acceptance mappings, Worktree Bootstrap Contract behavior, scheduler execution, cockpit UI/server/API work, local server/API mode, state-index persistence, PR/CI workflow, automatic merge/push/deploy behavior, product UAT, actor identity policy, claim leases, work surface reservations, live routing changes, paid reviewer routes, external services, installed global skills, dependency/lockfile changes, and unrelated Phase 8 work.

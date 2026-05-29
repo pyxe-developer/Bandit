@@ -393,16 +393,14 @@ evidence, local-record landing action evidence, Stage 6 retrospective closeout,
 and bootstrap-gap disposition are recorded in `docs/work/BANDIT-049/`,
 `docs/specs/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Create Stage 2 RED evidence for `BANDIT-050` -
-Cockpit Status Interstitial Recovery. Stage 1 brief evidence is recorded in
-`docs/work/BANDIT-050/brief.md`, `.bandit/bootstrap-gaps.json` marks
-`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` active with linked work item
-`BANDIT-050`, and the next step is to prove the current cockpit-status
-interstitial failure before implementation. Do not start implementation,
-Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle
-implementation, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
-Stage 2 RED evidence is recorded.
+**Current next action:** Record Stage 4 review evidence for `BANDIT-050` -
+Cockpit Status Interstitial Recovery. Stage 1 brief evidence, Stage 2 RED
+evidence, and Stage 3 implementation evidence are recorded in
+`docs/work/BANDIT-050/brief.md`, `docs/work/BANDIT-050/red-evidence.md`,
+`docs/work/BANDIT-050/implementation-evidence.md`, and
+`docs/specs/BANDIT-050-implementation-evidence.json`. The next step is Stage 4:
+run pre-PR CodeRabbit and Local Qwen, then record aggregate Stage 4 review
+evidence before `stage_5` is eligible.
 
 `BANDIT-050` - Cockpit Status Interstitial Recovery is the active
 bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
@@ -415,8 +413,8 @@ make `bandit cockpit status --json` recover the valid interstitial state between
 closed work and the next active bootstrap-gap work item while preserving
 CURRENT_CONTEXT.md, ROADMAP.md, .bandit/bootstrap-gaps.json, work-item
 artifacts, lifecycle evidence, and focused session-context packet authority
-boundaries. The next required action is Stage 2 RED evidence before
-implementation.
+boundaries. The next required action is Stage 4 review evidence recording for this
+interstitial recovery.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
 as the bootstrap-gap chore for
@@ -759,14 +757,16 @@ that authority.
 
 **Active work item:** `BANDIT-050`.
 
-The current stage is Stage 2: Test Design And RED Evidence.
+The current stage is Stage 3: Implementation complete.
 
 `BANDIT-050` is active as the bootstrap-gap chore for
-`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. Stage 1 brief evidence is
-recorded in `docs/work/BANDIT-050/brief.md`, and `.bandit/bootstrap-gaps.json`
-marks the gap active with linked work item `BANDIT-050`. The next action is
-Stage 2 RED evidence proving the current `bandit cockpit status --json`
-interstitial failure before implementation. Do not start implementation,
+`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. Stage 1 brief evidence,
+Stage 2 RED evidence, and Stage 3 implementation evidence are recorded in
+`docs/specs/BANDIT-050-red-evidence.json`,
+`docs/work/BANDIT-050/red-evidence.md`,
+`docs/work/BANDIT-050/implementation-evidence.md`, and
+`docs/specs/BANDIT-050-implementation-evidence.json`.
+The next action is Stage 4 review evidence recording.
 Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle
 implementation, cockpit UI/server/API work, PR/CI workflow, automatic
 merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
@@ -1410,12 +1410,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create Stage 2 RED evidence for `BANDIT-050` -
-   Cockpit Status Interstitial Recovery. The Stage 1 brief is recorded in
+1. Dispatch Stage 3 implementation for `BANDIT-050` -
+   Cockpit Status Interstitial Recovery. The Stage 1 brief and Stage 2 RED
+   evidence are recorded in
    `docs/work/BANDIT-050/brief.md`, `.bandit/bootstrap-gaps.json` marks
    `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` active with linked work
-   item `BANDIT-050`, and the RED evidence must prove the current
-   `bandit cockpit status --json` interstitial failure before implementation.
+   item `BANDIT-050`, and the next step is Stage 3 implementation dispatch.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -149,6 +149,36 @@ test("cockpit status fails closed when active work evidence is contradictory", a
   );
 });
 
+test("cockpit status fails closed in no-active-work interstitial gap state", async () => {
+  const repo = await createCockpitRepo({
+    currentContext: interstitialCurrentContextFixture(),
+    roadmapNextAction:
+      "Record Stage 2 RED evidence for BANDIT-050 - Cockpit Status Interstitial Recovery.",
+    bootstrapGaps: [
+      {
+        id: "BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY",
+        status: "open",
+        disposition: "queued",
+        linked_work_item: null,
+        source_artifacts: ["docs/work/BANDIT-050/brief.md"],
+        rationale:
+          "Cockpit status must report the next queued bootstrap gap when no active work item exists between gaps.",
+        next_action:
+          "Record Stage 2 RED evidence for BANDIT-050 - Cockpit Status Interstitial Recovery."
+      }
+    ],
+    omitActiveWorkItem: true
+  });
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item/
+  );
+});
+
 test("cockpit status does not create hidden cockpit authority state", async () => {
   const repo = await createCockpitRepo();
   const eventsBefore = await readFile(path.join(repo, ".bandit/events.jsonl"), "utf8");
@@ -346,32 +376,38 @@ async function createCockpitRepo(options = {}) {
     })
   );
   const activeWorkItemId = options.activeWorkItemId ?? "BANDIT-031";
-  await writeWorkBrief(
-    repo,
-    activeWorkItemId,
-    options.activeWorkTitle ?? "Workflow Cockpit Status Foundation",
-    options.workStatus ?? "RED Evidence Recorded"
-  );
-  await writeArtifact(repo, `docs/work/${activeWorkItemId}/red-evidence.md`, "# RED Evidence\n");
+  if (!options.omitActiveWorkItem) {
+    await writeWorkBrief(
+      repo,
+      activeWorkItemId,
+      options.activeWorkTitle ?? "Workflow Cockpit Status Foundation",
+      options.workStatus ?? "RED Evidence Recorded"
+    );
+    await writeArtifact(
+      repo,
+      `docs/work/${activeWorkItemId}/red-evidence.md`,
+      "# RED Evidence\n"
+    );
+    await writeArtifact(
+      repo,
+      `docs/work/${activeWorkItemId}/coordination-log.jsonl`,
+      `${JSON.stringify({
+        version: 1,
+        event_type: "step_transition",
+        work_item: activeWorkItemId,
+        sequence: 1,
+        timestamp: "2026-05-26T07:00:00.000Z",
+        actor: "codex_pm",
+        source: "test",
+        state: "red_evidence_recorded",
+        accountable_actor: "Writer",
+        next_action: "Implement the read-only cockpit status foundation",
+        evidence: ["docs/work/BANDIT-031/red-evidence.md"],
+        safe_triggers: ["implementation_allowed"]
+      })}\n`
+    );
+  }
   await writeArtifact(repo, "docs/work/BANDIT-028/qwen-finding-disposition.md", improvementFixture());
-  await writeArtifact(
-    repo,
-    `docs/work/${activeWorkItemId}/coordination-log.jsonl`,
-    `${JSON.stringify({
-      version: 1,
-      event_type: "step_transition",
-      work_item: activeWorkItemId,
-      sequence: 1,
-      timestamp: "2026-05-26T07:00:00.000Z",
-      actor: "codex_pm",
-      source: "test",
-      state: "red_evidence_recorded",
-      accountable_actor: "Writer",
-      next_action: "Implement the read-only cockpit status foundation",
-      evidence: ["docs/work/BANDIT-031/red-evidence.md"],
-      safe_triggers: ["implementation_allowed"]
-    })}\n`
-  );
   await writeArtifact(
     repo,
     ".bandit/bootstrap-gaps.json",
@@ -421,6 +457,27 @@ Current stage: Stage 3 implementation.
 ## Required Operator Input
 
 Operator must approve external reviewer setup.
+`;
+}
+
+function interstitialCurrentContextFixture({
+  nextAction = "Record Stage 2 RED evidence for BANDIT-050 - Cockpit Status Interstitial Recovery."
+} = {}) {
+  return `# Current Context
+
+## Status
+
+**Phase:** 8 - Workflow Cockpit kickoff.
+
+**Current next action:** ${nextAction}
+
+## Active Work
+
+**Active work item:** none.
+
+## Required Operator Input
+
+No operator-owned input is required for this interstitial recovery task.
 `;
 }
 

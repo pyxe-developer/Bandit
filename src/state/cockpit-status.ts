@@ -25,6 +25,17 @@ export type CockpitBlocker = {
   source_artifacts?: string[];
 };
 
+type RawGap = {
+  id: string;
+  title: string;
+  status: string;
+  disposition: string;
+  linked_work_item: string | null;
+  verification_target: string | null;
+  source_artifacts: string[];
+  next_action: string;
+};
+
 export type GateStatus = {
   status: "pass" | "missing";
   source: string;
@@ -98,7 +109,10 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   const currentContext = await readRequiredArtifact(repoRoot, CURRENT_CONTEXT_PATH);
   const roadmap = await readRequiredArtifact(repoRoot, ROADMAP_PATH);
   const currentPhase = requireCurrentPhase(currentContext.content);
-  const activeWorkItemId = requireActiveWorkItem(currentContext.content);
+  const bootstrapGapsRaw = parseBootstrapGapsRaw(
+    (await readRequiredArtifact(repoRoot, BOOTSTRAP_GAPS_PATH)).content
+  );
+  const bootstrapGaps = summarizeBootstrapGaps(bootstrapGapsRaw);
   const nextAction = requireLabeledText(
     currentContext.content,
     "Current next action",
@@ -110,28 +124,49 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     ROADMAP_PATH
   );
 
+  const isInterstitial = isInterstitialState(currentContext.content);
+  const activeWorkItemId = isInterstitial
+    ? "none"
+    : requireActiveWorkItem(currentContext.content);
+  const interstitialContext = isInterstitial
+    ? resolveInterstititalCockpitContext(bootstrapGapsRaw)
+    : null;
+  let evidenceWorkItemId: string | null = null;
+  if (isInterstitial) {
+    evidenceWorkItemId = interstitialContext?.nextWorkItemId ?? null;
+  } else {
+    evidenceWorkItemId = activeWorkItemId;
+  }
+
+  if (!evidenceWorkItemId) {
+    throw new Error(
+      "Cockpit status blocked: unable to derive a next work item id from interstitial gap state"
+    );
+  }
+
+  const briefPath = `docs/work/${evidenceWorkItemId}/brief.md`;
+  const redEvidencePath = `docs/work/${evidenceWorkItemId}/red-evidence.md`;
+  const implementationEvidencePath =
+    `docs/work/${evidenceWorkItemId}/implementation-evidence.md`;
+  const reviewEvidencePath = `docs/work/${evidenceWorkItemId}/review-evidence.md`;
+  const landingVerdictPath = `docs/work/${evidenceWorkItemId}/landing-verdict.md`;
+  const retrospectivePath = `docs/work/${evidenceWorkItemId}/retrospective.md`;
+
+  if (!isInterstitial) {
+    const activeWorkBrief = await readRequiredArtifact(repoRoot, `docs/work/${activeWorkItemId}/brief.md`);
+    assertActiveBrief(activeWorkItemId, activeWorkBrief.content);
+  }
+
   const nextActionAgreement = nextActionsAgree(
     nextAction,
     roadmapNextAction,
-    activeWorkItemId
+    isInterstitial ? null : activeWorkItemId
   );
   if (!nextActionAgreement) {
     throw new Error(
       "Cockpit status blocked: CURRENT_CONTEXT.md and ROADMAP.md disagree on next action"
     );
   }
-
-  const briefPath = `docs/work/${activeWorkItemId}/brief.md`;
-  const brief = await readRequiredArtifact(repoRoot, briefPath);
-  assertActiveBrief(activeWorkItemId, brief.content);
-
-  const redEvidencePath = `docs/work/${activeWorkItemId}/red-evidence.md`;
-  const implementationEvidencePath =
-    `docs/work/${activeWorkItemId}/implementation-evidence.md`;
-  const reviewEvidencePath = `docs/work/${activeWorkItemId}/review-evidence.md`;
-  const landingVerdictPath = `docs/work/${activeWorkItemId}/landing-verdict.md`;
-  const retrospectivePath = `docs/work/${activeWorkItemId}/retrospective.md`;
-  const bootstrapGaps = await readBootstrapGapSummary(repoRoot);
 
   return {
     kind: "workflow_cockpit_status",
@@ -142,7 +177,9 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     },
     active_work_item: {
       id: activeWorkItemId,
-      source: briefPath
+      source: isInterstitial
+        ? CURRENT_CONTEXT_PATH
+        : briefPath
     },
     next_action: {
       value: nextAction,
@@ -176,7 +213,7 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
       source: briefPath
     },
     improvement_health: await readImprovementHealth(repoRoot),
-    coordination: await readCoordinationSummary(repoRoot, activeWorkItemId),
+    coordination: await readCoordinationSummary(repoRoot, evidenceWorkItemId),
     stale_evidence: await readStaleEvidence(repoRoot, {
       reviewEvidencePath,
       landingVerdictPath
@@ -254,10 +291,13 @@ function requireLabeledText(content: string, label: string, source: string) {
   return text;
 }
 
-function nextActionsAgree(first: string, second: string, workItemId: string) {
+function nextActionsAgree(
+  first: string,
+  second: string,
+  workItemId: string | null
+) {
   const normalizedFirst = normalizeForComparison(first);
   const normalizedSecond = normalizeForComparison(second);
-  const workItem = workItemId.toLowerCase();
 
   if (
     normalizedFirst === normalizedSecond ||
@@ -266,6 +306,12 @@ function nextActionsAgree(first: string, second: string, workItemId: string) {
   ) {
     return "normalized_text";
   }
+
+  if (workItemId === null) {
+    return null;
+  }
+
+  const workItem = workItemId.toLowerCase();
 
   if (
     normalizedFirst.includes(workItem) &&
@@ -284,6 +330,38 @@ function nextActionsAgree(first: string, second: string, workItemId: string) {
   }
 
   return null;
+}
+
+function isInterstitialState(currentContext: string) {
+  const match = currentContext.match(
+    /^\*\*Active work item:\*\*\s*`?([A-Z][A-Z0-9]*-\d+|none\.?|none)`?/m
+  )?.[1];
+  if (!match) {
+    return false;
+  }
+  const value = normalizeText(match).toLowerCase();
+  return value === "none" || value === "none.";
+}
+
+function resolveInterstititalCockpitContext(rawGaps: RawGap[]) {
+  const lastClosedGap = findLastResolvedGapWithLinkedItem(rawGaps);
+  if (!lastClosedGap || !lastClosedGap.linked_work_item) {
+    throw new Error(
+      "Cockpit status blocked: interstitial state requires a resolved gap with a linked work item"
+    );
+  }
+
+  const nextQueuedGap = findNextQueuedGap(rawGaps);
+  if (!nextQueuedGap) {
+    throw new Error(
+      "Cockpit status blocked: interstitial state requires a next queued bootstrap gap"
+    );
+  }
+
+  return {
+    lastClosedGap,
+    nextWorkItemId: deriveNextWorkItemId(lastClosedGap.linked_work_item)
+  };
 }
 
 function matchingActionTopic(first: string, second: string) {
@@ -375,31 +453,106 @@ async function readBootstrapGapSummary(
   repoRoot: string
 ): Promise<BootstrapGapSummary> {
   const content = await readRequiredArtifact(repoRoot, BOOTSTRAP_GAPS_PATH);
-  const parsed = parseJsonRecord(content.content, "Malformed cockpit bootstrap gap source");
-  const rawGaps = parsed.gaps;
-  if (!Array.isArray(rawGaps)) {
-    throw new Error("Malformed cockpit bootstrap gap source: missing gaps list");
-  }
+  const rawGaps = parseBootstrapGapsRaw(content.content);
+  const gaps = summarizeBootstrapGaps(rawGaps);
+  return { ...gaps };
+}
 
-  const gaps = rawGaps.map((rawGap, index) => {
-    if (!isRecord(rawGap)) {
-      throw new Error(`Malformed cockpit bootstrap gap at index ${index + 1}`);
-    }
-
-    return {
-      id: requireJsonString(rawGap, "id", index + 1),
-      status: requireJsonString(rawGap, "status", index + 1),
-      next_action: requireJsonString(rawGap, "next_action", index + 1),
-      source_artifacts: readJsonStringList(rawGap, "source_artifacts")
-    };
-  });
+function summarizeBootstrapGaps(rawGaps: RawGap[]): BootstrapGapSummary {
+  const gaps = rawGaps.map((gap) => ({
+    id: gap.id,
+    status: gap.status,
+    next_action: gap.next_action,
+    source_artifacts: gap.source_artifacts
+  }));
   const openGaps = gaps.filter((gap) => gap.status !== "resolved");
-
   return {
     status: openGaps.length > 0 ? "open" : "none",
     source: BOOTSTRAP_GAPS_PATH,
     gaps: openGaps
   };
+}
+
+function parseBootstrapGapsRaw(content: string): RawGap[] {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    throw new Error("Malformed cockpit bootstrap gap source");
+  }
+
+  if (!isRecord(parsed) || !Array.isArray(parsed.gaps)) {
+    throw new Error("Malformed cockpit bootstrap gap source");
+  }
+
+  return parsed.gaps.map((rawGap: unknown, index: number) => {
+    if (!isRecord(rawGap)) {
+      throw new Error(`Malformed bootstrap gap at index ${index + 1}`);
+    }
+
+    return {
+      id: requireGapString(rawGap, "id", index + 1),
+      title: optionalGapString(rawGap, "title") || "",
+      status: requireGapString(rawGap, "status", index + 1),
+      disposition: requireGapString(rawGap, "disposition", index + 1),
+      linked_work_item: optionalGapString(rawGap, "linked_work_item"),
+      verification_target: optionalGapString(rawGap, "verification_target"),
+      source_artifacts: optionalGapStringList(rawGap, "source_artifacts"),
+      next_action: requireGapString(rawGap, "next_action", index + 1)
+    };
+  });
+}
+
+function findLastResolvedGapWithLinkedItem(gaps: RawGap[]): RawGap | undefined {
+  for (let i = gaps.length - 1; i >= 0; i--) {
+    const gap = gaps[i];
+    if (gap && gap.status === "resolved" && gap.linked_work_item) {
+      return gap;
+    }
+  }
+  return undefined;
+}
+
+function findNextQueuedGap(gaps: RawGap[]): RawGap | undefined {
+  return gaps.find(
+    (gap) => gap.status !== "resolved" && gap.linked_work_item === null
+  );
+}
+
+function deriveNextWorkItemId(lastClosedWorkItemId: string) {
+  const match = lastClosedWorkItemId.match(/^([A-Z][A-Z0-9]*)+-(\d+)$/);
+  if (!match || !match[2]) {
+    throw new Error(
+      `Cockpit status blocked: cannot derive next work item id from ${lastClosedWorkItemId}`
+    );
+  }
+  const prefix = lastClosedWorkItemId.slice(0, lastClosedWorkItemId.lastIndexOf("-"));
+  const num = parseInt(match[2], 10) + 1;
+  return `${prefix}-${String(num).padStart(3, "0")}`;
+}
+
+function requireGapString(record: Record<string, unknown>, field: string, index: number) {
+  const value = record[field];
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new Error(`Malformed bootstrap gap at index ${index}: missing ${field}`);
+  }
+  return value.trim();
+}
+
+function optionalGapString(record: Record<string, unknown>, field: string) {
+  const value = record[field];
+  if (typeof value !== "string" || value.trim().length === 0) {
+    return null;
+  }
+  return value.trim();
+}
+
+function optionalGapStringList(record: Record<string, unknown>, field: string) {
+  const value = record[field];
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter((item): item is string => typeof item === "string");
 }
 
 async function readLandingReadiness(repoRoot: string, source: string) {

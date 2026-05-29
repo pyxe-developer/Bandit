@@ -1,0 +1,41 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-050",
+  "stage": "Stage 3: Implementation",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "27ae6d8b2a07965b071f356bbaaa921386ff177b",
+  "summary": "Implemented cockpit-status interstitial recovery so `node ./bin/bandit.mjs cockpit status --json` can report the next queued bootstrap-gap context when CURRENT_CONTEXT.md records no active work item. The command now derives next-stage evidence work item and source paths from resolved gaps and active roadmap next action, while preserving fail-closed behavior for malformed or conflicting context artifacts.",
+  "files_changed": [
+    "src/state/cockpit-status.ts"
+  ],
+  "test_surface_edits": "none",
+  "forbidden_surfaces_confirmed_untouched": [
+    "test/cockpit-status.test.mjs",
+    "test/helpers/**",
+    "src/commands/cockpit.ts",
+    "src/state/focused-session-context.ts",
+    "docs/work/BANDIT-050/brief.md",
+    "docs/work/BANDIT-050/red-evidence.md",
+    "docs/work/BANDIT-050/coderabbit-review.md",
+    "docs/work/BANDIT-050/local-qwen-review.md",
+    "docs/work/BANDIT-050/review-evidence.md",
+    "docs/work/BANDIT-050/landing-verdict.md",
+    "docs/work/BANDIT-050/landing-action.md",
+    "docs/work/BANDIT-050/retrospective.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md"
+  ],
+  "verification": {
+    "session_context": "node ./bin/bandit.mjs session-context current --json",
+    "session_context_result": "pass",
+    "cockpit_status": "node ./bin/bandit.mjs cockpit status --json",
+    "cockpit_status_result": "pass",
+    "validate": "npm run bandit -- validate",
+    "validate_result": "Bandit state is valid.",
+    "git_diff_check": "git diff --check",
+    "git_diff_check_result": "pass"
+  }
+}
