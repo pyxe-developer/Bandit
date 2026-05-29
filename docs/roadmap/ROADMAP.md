@@ -16,17 +16,22 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Retry Stage 4 pre-PR CodeRabbit review for
-`BANDIT-047` after the scoped provider run timed out. Timeout evidence is
-recorded in `docs/specs/BANDIT-047-coderabbit-review-output.json` and
+**Current next step:** Repair or explicitly disposition the unresolved Stage 4
+CodeRabbit findings for `BANDIT-047`. The scoped provider retry completed at
+source head `f313a77b275d87c8db2d469f49d3d4678f67028d`; evidence is recorded
+in `docs/specs/BANDIT-047-coderabbit-review-output.json` and
 `docs/work/BANDIT-047/coderabbit-review.md` with `coderabbit_verdict:
-blocker`, `review_state: timeout`, and `operator_input_status: none_required`.
-Do not run Local Qwen, write aggregate review evidence, or start the Focused
-Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
-worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before CodeRabbit has completed or the timeout is explicitly dispositioned
-under Stage 4 policy.
+blocker`, `review_state: completed`, `findings_status: unresolved`, and
+`operator_input_status: none_required`. The findings target
+`src/state/model-family-separation.ts` evidence-field validation: Stage 3
+`model_family` must be explicitly present/non-empty before model-family routing
+checks, and Stage 2 ownership fields must reject undefined, null, empty, or
+whitespace-only values. Do not run Local Qwen, write aggregate review evidence,
+or start the Focused Session Context gap, Worktree Bootstrap Contract gap,
+scheduler execution, full worktree lifecycle enablement, cockpit UI/server/API
+work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
+or unrelated Phase 8 work before the CodeRabbit findings are repaired or
+explicitly dispositioned under Stage 4 policy.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -1257,10 +1262,10 @@ Current rule:
 
 Current priority:
 
-1. Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-047` after the scoped
-   provider run against base `5b3520f` timed out. Do not run Local Qwen or write
-   aggregate review evidence until CodeRabbit has completed or the timeout is
-   explicitly dispositioned under Stage 4 policy.
+1. Repair or explicitly disposition the two unresolved Stage 4 CodeRabbit
+   findings for `BANDIT-047` in `src/state/model-family-separation.ts`. Do not
+   run Local Qwen or write aggregate review evidence until the CodeRabbit
+   findings are repaired or explicitly dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -1,7 +1,18 @@
 {
-  "sourceHead": "d28caf7ecff48f46744ce52be942201994508775",
+  "sourceHead": "f313a77b275d87c8db2d469f49d3d4678f67028d",
   "baseRevision": "5b3520f",
-  "reviewState": "timeout",
+  "reviewState": "completed",
   "verdict": "blocker",
-  "findings": []
+  "findings": [
+    {
+      "severity": "major",
+      "status": "unresolved",
+      "body": "src/state/model-family-separation.ts:7-53 leaves evidence fields optional enough that undefined values can bypass model-family checks; explicitly validate Stage 3 model_family and Stage 2 ownership fields before comparison."
+    },
+    {
+      "severity": "minor",
+      "status": "unresolved",
+      "body": "src/state/model-family-separation.ts:138-151 uses field-in checks for Stage 2 ownership fields, allowing undefined, null, or empty strings; require non-empty values for the same field list."
+    }
+  ]
 }
