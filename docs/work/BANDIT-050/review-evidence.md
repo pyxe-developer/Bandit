@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-050
 source_head: 1b87d705e1218e3c44d0236cf5ad6447a9ab4c5e
-review_subject_hash: 7b65b8e092b60f9c723435ad4f98fb0be23b45db6d5c7249ef4842ab2f59cd5c
+review_subject_hash: 09c7a60f9730d949731b26123a24ea9017d4d06567460ed4f5aa155884c22bae
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -11,9 +11,9 @@ verification_evidence:
   - docs/specs/BANDIT-050-coderabbit-review-output.json records the normalized terminal CodeRabbit result with reviewState completed, verdict pass, and zero findings.
   - docs/work/BANDIT-050/local-qwen-review.md records profile local-qwen-baseline, reviewer_verdict non_blocking, findings_status open, operator_input_status none_required, and source_drift_status current at source head 1b87d705e1218e3c44d0236cf5ad6447a9ab4c5e.
   - docs/work/BANDIT-050/qwen-finding-disposition.md records Codex PM accepted_non_blocking disposition for Local Qwen findings, closes the stale verification-count finding with refreshed evidence, and closes the Stage 5 clean-code concern with a clean-code pass after rereading CLEAN_CODE.md.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-050 produced 7b65b8e092b60f9c723435ad4f98fb0be23b45db6d5c7249ef4842ab2f59cd5c from review-subject policy v1.
-  - npm run bandit -- risk-classification validate --json passed; BANDIT-050 has no item-specific risk-classification file yet, so this decision set reflects prior BANDIT-041 through BANDIT-049 classifications.
-  - npm run bandit -- supply-chain-gate validate --json passed with low surface states for prior closed-bandit gap items and no BANDIT-050 item-specific supply-chain surface.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-050 produced 09c7a60f9730d949731b26123a24ea9017d4d06567460ed4f5aa155884c22bae from review-subject policy v1 after item-specific BANDIT-050 risk-classification and supply-chain gate evidence were recorded.
+  - npm run bandit -- risk-classification validate --json passed with BANDIT-050 registered as auto-landing eligible and operator supervision not required.
+  - npm run bandit -- supply-chain-gate validate --json passed with BANDIT-050 registered as low surface state, auto-landing eligible, and operator supervision not required.
   - npm run bandit -- input-quarantine validate --json passed with release_authorized_paths set to [] and trusted_local_repo_mode scoped_until_external_input_enters_release_authorized_path.
   - npm run bandit -- operator-boundary validate --json passed with no operator-blocking smell-route required for this work item.
   - npm run bandit -- coordination-authority validate --json passed.
