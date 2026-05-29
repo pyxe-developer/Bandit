@@ -1,0 +1,157 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-052",
+  "changed_surfaces": [
+    {
+      "path": "src/state/event-driven-wake-scheduler.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/event-driven-wake-scheduler.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/policy/event-driven-wake-scheduler.json",
+      "surface": "policy_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/event-driven-wake-scheduler.md",
+      "surface": "template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/event-driven-wake-scheduler.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "event_driven_wake_scheduler_policy_validator",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-052/implementation-evidence.md"
+    },
+    {
+      "signal_id": "evidence_only_no_scheduler_execution",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/review-evidence.md"
+    },
+    {
+      "signal_id": "no_claim_or_worktree_authority_change",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/brief.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/event-driven-wake-scheduler.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/landing-verdict.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/landing-verdict.md"
+    },
+    {
+      "tool": "npm run bandit -- event-driven-wake-scheduler validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/landing-verdict.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/landing-verdict.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs review-subject-hash BANDIT-052",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-052-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-052-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- land-check BANDIT-052",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-052/landing-verdict.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "not_applicable",
+    "evidence_path": "docs/work/BANDIT-052/brief.md"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-052-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-052/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-052/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-052 is a non-product bootstrap-gap chore implementing local Event-Driven Wake Scheduler policy validation. It requires pre-PR CodeRabbit plus Local Qwen review and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-052 changes local Event-Driven Wake Scheduler validation, command routing, policy/template evidence, and focused tests. The work is medium workflow-risk because it affects future wake trigger and sweeper policy, but it is evidence-only today: it does not execute a scheduler, drain queues, create or release claims, reserve work surfaces, mutate worktrees, merge, push, deploy, change dependencies, change lockfiles, change installed global skills, or ship cockpit UI/server/API behavior. Stage 4 evidence records CodeRabbit pass, Local Qwen pass, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-052-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-052-supply-chain-gate.json",
+    "docs/work/BANDIT-052/brief.md",
+    "docs/work/BANDIT-052/implementation-evidence.md",
+    "docs/work/BANDIT-052/review-evidence.md",
+    "docs/work/BANDIT-052/landing-verdict.md",
+    "src/state/event-driven-wake-scheduler.ts",
+    "src/commands/event-driven-wake-scheduler.ts",
+    "test/event-driven-wake-scheduler.test.mjs"
+  ]
+}
