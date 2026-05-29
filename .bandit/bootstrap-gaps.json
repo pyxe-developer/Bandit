@@ -493,8 +493,8 @@
     {
       "id": "BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY",
       "title": "Cockpit status fails between closed work item and next active gap",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-049",
       "source_artifacts": [
         "docs/work/BANDIT-049/retrospective.md",
@@ -505,10 +505,10 @@
         "src/state/cockpit-status.ts",
         "src/state/focused-session-context.ts"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-050",
       "rationale": "Stage 6 closeout verification for BANDIT-049 found that `node ./bin/bandit.mjs session-context current --json` now recovers the valid interstitial state with no active work item, but `node ./bin/bandit.mjs cockpit status --json` fails with `Cockpit status blocked: CURRENT_CONTEXT.md is missing active work item` when `CURRENT_CONTEXT.md` correctly records `**Active work item:** none.` The cockpit status surface is derived_non_canonical, but it remains a common cold-start and validation check; it should recover the same interstitial state from repo artifacts instead of forcing a false active work item.",
       "verification_target": null,
-      "next_action": "Create a bootstrap-gap chore to make `bandit cockpit status --json` recover the valid interstitial state between closed work and the next active bootstrap-gap work item while preserving CURRENT_CONTEXT.md, ROADMAP.md, .bandit/bootstrap-gaps.json, and session-context packet authority boundaries."
+      "next_action": "Complete active chore BANDIT-050."
     },
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",

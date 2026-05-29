@@ -101,3 +101,4 @@
 {"type":"artifact_created","work_item":"BANDIT-049","message":"Created red_evidence artifact at docs/work/BANDIT-049/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-049","message":"Created landing_verdict artifact at docs/work/BANDIT-049/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-049","message":"Created retrospective artifact at docs/work/BANDIT-049/retrospective.md"}
+{"type":"work_item_created","work_item":"BANDIT-050","message":"Created work item BANDIT-050 from docs/specs/BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY.json"}

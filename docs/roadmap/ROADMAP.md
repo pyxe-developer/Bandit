@@ -16,19 +16,25 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Create the next bootstrap-gap work item for
-`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. `BANDIT-049` - Session
-Context Interstitial Recovery is landed and closed out with Stage 6
-retrospective evidence in `docs/specs/BANDIT-049-retrospective.json` and
-`docs/work/BANDIT-049/retrospective.md`, `.bandit/bootstrap-gaps.json` marks
-`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` resolved, and Stage 6
-verification recorded that `node ./bin/bandit.mjs cockpit status --json` still
-fails in the valid no-active-work interstitial state. Do not start Stage 2 RED
-evidence, implementation, Worktree Bootstrap Contract work, scheduler
-execution, worktree lifecycle implementation, cockpit UI/server/API work,
-PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or
-unrelated Phase 8 work before the Cockpit Status Interstitial Recovery work
-item is created.
+**Current next step:** Create Stage 2 RED evidence for `BANDIT-050` -
+Cockpit Status Interstitial Recovery. Stage 1 brief evidence is recorded in
+`docs/work/BANDIT-050/brief.md`, `.bandit/bootstrap-gaps.json` marks
+`BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` active with linked work item
+`BANDIT-050`, and the RED evidence must prove the current
+`node ./bin/bandit.mjs cockpit status --json` interstitial failure before
+implementation. Do not start implementation, Worktree Bootstrap Contract work,
+scheduler execution, worktree lifecycle implementation, cockpit UI/server/API
+work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope,
+or unrelated Phase 8 work before Stage 2 RED evidence is recorded.
+
+`BANDIT-050` - Cockpit Status Interstitial Recovery is the active
+bootstrap-gap chore for `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`.
+Its structured creation spec is recorded in
+`docs/specs/BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY.json`, Stage 1
+brief evidence is recorded in `docs/work/BANDIT-050/brief.md`, lifecycle event
+evidence is recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json`
+marks the gap active with linked work item `BANDIT-050`. The next required
+action is Stage 2 RED evidence before implementation.
 
 `BANDIT-049` - Session Context Interstitial Recovery is landed and closed out
 as the bootstrap-gap chore for
@@ -1351,13 +1357,12 @@ Current rule:
 
 Current priority:
 
-1. Create the next bootstrap-gap work item for
-   `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY`. `BANDIT-049` - Session
-   Context Interstitial Recovery is landed and closed out with retrospective
-   evidence in `docs/work/BANDIT-049/retrospective.md`,
-   `.bandit/bootstrap-gaps.json` marks
-   `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` resolved, and Stage 6
-   verification recorded cockpit status interstitial recovery as the next gap.
+1. Create Stage 2 RED evidence for `BANDIT-050` -
+   Cockpit Status Interstitial Recovery. The Stage 1 brief is recorded in
+   `docs/work/BANDIT-050/brief.md`, `.bandit/bootstrap-gaps.json` marks
+   `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` active with linked work
+   item `BANDIT-050`, and the RED evidence must prove the current
+   `bandit cockpit status --json` interstitial failure before implementation.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1377,8 +1382,8 @@ Current priority:
    `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION` is resolved by `BANDIT-047`.
    `BANDIT-GAP-FOCUSED-SESSION-CONTEXT` is resolved by `BANDIT-048`.
    `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY` is resolved by
-   `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is now the
-   next queued gap. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
+   `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is active as
+   `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is queued behind
    cockpit-status interstitial recovery, and
    `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is queued behind the worktree
    bootstrap contract.
