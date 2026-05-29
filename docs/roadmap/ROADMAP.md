@@ -16,15 +16,17 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review gates for `BANDIT-047`: pre-PR
-CodeRabbit review against the current local diff, Local Qwen adversarial
-review, PM disposition for any findings, and aggregate review evidence with the
-current `review_subject_hash`. Do not start the Focused Session Context gap,
-Worktree Bootstrap Contract gap, scheduler execution, full worktree lifecycle
-enablement, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
-the Bootstrap Model-Family Separation and Test Ownership Boundary gap is
-executed, landed, closed out, and dispositioned.
+**Current next step:** Retry Stage 4 pre-PR CodeRabbit review for
+`BANDIT-047` after the scoped provider run timed out. Timeout evidence is
+recorded in `docs/specs/BANDIT-047-coderabbit-review-output.json` and
+`docs/work/BANDIT-047/coderabbit-review.md` with `coderabbit_verdict:
+blocker`, `review_state: timeout`, and `operator_input_status: none_required`.
+Do not run Local Qwen, write aggregate review evidence, or start the Focused
+Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
+worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
+work before CodeRabbit has completed or the timeout is explicitly dispositioned
+under Stage 4 policy.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -1255,10 +1257,10 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review gates for `BANDIT-047`: pre-PR CodeRabbit review against
-   the current local diff, Local Qwen adversarial review, PM disposition for any
-   findings, and aggregate review evidence with the current
-   `review_subject_hash`.
+1. Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-047` after the scoped
+   provider run against base `5b3520f` timed out. Do not run Local Qwen or write
+   aggregate review evidence until CodeRabbit has completed or the timeout is
+   explicitly dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -393,15 +393,17 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Stage 4 review gates for `BANDIT-047`: pre-PR
-CodeRabbit review against the current local diff, Local Qwen adversarial
-review, PM disposition for any findings, and aggregate review evidence with the
-current `review_subject_hash`. Do not start the Focused Session Context gap,
-Worktree Bootstrap Contract gap, scheduler execution, full worktree lifecycle
-enablement, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
-the Bootstrap Model-Family Separation and Test Ownership Boundary gap is
-executed, landed, closed out, and dispositioned.
+**Current next action:** Retry Stage 4 pre-PR CodeRabbit review for
+`BANDIT-047` after the scoped provider run timed out. Timeout evidence is
+recorded in `docs/specs/BANDIT-047-coderabbit-review-output.json` and
+`docs/work/BANDIT-047/coderabbit-review.md` with `coderabbit_verdict:
+blocker`, `review_state: timeout`, and `operator_input_status: none_required`.
+Do not run Local Qwen, write aggregate review evidence, or start the Focused
+Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
+worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
+work before CodeRabbit has completed or the timeout is explicitly dispositioned
+under Stage 4 policy.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -676,7 +678,9 @@ implementation evidence is recorded in
 `docs/work/BANDIT-047/implementation-evidence.md`,
 `docs/work/BANDIT-047/writer-report.md`, the model-family policy/template and
 evidence artifacts, and the implementation source. The next required action is
-Stage 4 review evidence for `BANDIT-047`.
+to retry Stage 4 pre-PR CodeRabbit review for `BANDIT-047`; the prior scoped
+provider run against base `5b3520f` timed out and is recorded as blocker
+evidence in `docs/work/BANDIT-047/coderabbit-review.md`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -1266,10 +1270,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 review gates for `BANDIT-047`: pre-PR CodeRabbit review against
-   the current local diff, Local Qwen adversarial review, PM disposition for any
-   findings, and aggregate review evidence with the current
-   `review_subject_hash`.
+1. Retry Stage 4 pre-PR CodeRabbit review for `BANDIT-047` after the scoped
+   provider run against base `5b3520f` timed out. Do not run Local Qwen or write
+   aggregate review evidence until CodeRabbit has completed or the timeout is
+   explicitly dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1308,8 +1312,10 @@ raw-HEAD evidence loops.
 No operator-owned input is required for the next recorded action. The prior
 Claude Writer dispatch blocker was resolved by a PM-authorized resume attempt,
 a fresh Claude Writer rerun, and a focused Claude repair pass. Stage 3 evidence
-and fresh verification are recorded for `BANDIT-047`; the next gate is the
-routine Stage 4 review loop owned by Codex PM policy.
+and fresh verification are recorded for `BANDIT-047`. The scoped Stage 4
+CodeRabbit provider run timed out and is recorded as blocker evidence; the next
+gate is a Codex PM-owned retry or explicit Stage 4 timeout disposition, not an
+operator-owned product, UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
