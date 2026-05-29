@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-048
 source_head: 39d58e6229500281274ef007d5e29ea7327f1533
-review_subject_hash: b52bf99fd558bd6b8513071d813d570d4a113a0ddbf718a7d5a553e5e243c2f0
+review_subject_hash: 49efaa6e358d88efb24a9a48a4feeefddd7c2d797ed13e3bf7ba3083c8d1ba6d
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -13,7 +13,7 @@ verification_evidence:
   - docs/work/BANDIT-048/local-qwen-review.md records profile local-qwen-baseline, reviewer_verdict non_blocking, findings_status open, operator_input_status none_required, and source_drift_status current at source head 1df0464d54ba232768c50b2ce7d9df6f45a9b0c5.
   - docs/work/BANDIT-048/qwen-finding-disposition.md records Codex PM accepted_non_blocking disposition for all three Local Qwen findings and routes durable follow-up candidates BANDIT-048-SESSION-CONTEXT-EVIDENCE-NOTES, BANDIT-048-STRUCTURED-FORBIDDEN-ACTIONS, and BANDIT-048-AGENTS-AUTHORITY-SUMMARY.
   - This Stage 5 evidence repair registered explicit layered risk-classification and supply-chain gate auto-landing evidence for BANDIT-048 in .bandit/policy/risk-classification.json, .bandit/policy/risk-classifications/BANDIT-048-risk-classification.json, .bandit/policy/supply-chain-gate.json, and .bandit/policy/supply-chain-gates/BANDIT-048-supply-chain-gate.json.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-048 produced b52bf99fd558bd6b8513071d813d570d4a113a0ddbf718a7d5a553e5e243c2f0 from review-subject policy v1 after the landing-gate evidence registration.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-048 produced 49efaa6e358d88efb24a9a48a4feeefddd7c2d797ed13e3bf7ba3083c8d1ba6d from review-subject policy v1 after the landing-gate evidence registration.
   - node --test test/focused-session-context.test.mjs passed during Stage 4 aggregate verification.
   - npm run typecheck passed during Stage 4 aggregate verification.
   - npm run bandit -- validate passed during Stage 4 aggregate verification.
