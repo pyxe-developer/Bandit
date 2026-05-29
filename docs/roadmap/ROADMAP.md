@@ -16,7 +16,7 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery. Use scoped pre-PR CodeRabbit against base `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c` and the Stage 3 file list, then run Local Qwen adversarial review, then record aggregate Stage 4 review evidence with the current `review_subject_hash`. Do not start landing, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 4 evidence exists.
+**Current next step:** Continue Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery. Scoped pre-PR CodeRabbit pass evidence is recorded in `docs/work/BANDIT-049/coderabbit-review.md` and `docs/specs/BANDIT-049-coderabbit-review-output.json`; next run Local Qwen adversarial review, then record aggregate Stage 4 review evidence with the current `review_subject_hash`. Do not start landing, retrospective, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before Stage 4 evidence exists.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
@@ -33,9 +33,12 @@ implementation evidence are recorded in `docs/work/BANDIT-049/dispatch.md`,
 `docs/work/BANDIT-049/implementation-evidence.md`,
 `docs/specs/BANDIT-049-implementation-evidence.json`,
 `src/state/focused-session-context.ts`, and
-`src/commands/session-context.ts`. The next required action is Stage 4 review
-with scoped pre-PR CodeRabbit, Local Qwen, and aggregate review evidence. Do
-not start unrelated Phase 8 work before Stage 4 evidence is recorded.
+`src/commands/session-context.ts`. Scoped pre-PR CodeRabbit pass evidence is
+recorded in `docs/work/BANDIT-049/coderabbit-review.md` and
+`docs/specs/BANDIT-049-coderabbit-review-output.json`. The next required
+action is Local Qwen adversarial review, followed by aggregate Stage 4 review
+evidence. Do not start unrelated Phase 8 work before Stage 4 evidence is
+recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -1317,10 +1320,11 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 4 review for `BANDIT-049` - Session Context Interstitial Recovery:
-   scoped pre-PR CodeRabbit against base
-   `17ae50bda46b88e8a2e9014ff37046e6b9b0a07c`, Local Qwen adversarial review,
-   and aggregate Stage 4 review evidence with current `review_subject_hash`.
+1. Continue Stage 4 review for `BANDIT-049` - Session Context Interstitial
+   Recovery: scoped pre-PR CodeRabbit pass evidence is recorded in
+   `docs/work/BANDIT-049/coderabbit-review.md`; next run Local Qwen adversarial
+   review and aggregate Stage 4 review evidence with current
+   `review_subject_hash`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
