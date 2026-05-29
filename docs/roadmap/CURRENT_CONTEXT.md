@@ -393,23 +393,18 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Rerun the scoped Stage 4 pre-PR CodeRabbit provider
-against the repaired `BANDIT-047` source. The prior scoped provider retry
-completed at source head `f313a77b275d87c8db2d469f49d3d4678f67028d` with
-`coderabbit_verdict: blocker`; evidence is recorded in
+**Current next action:** Run the Stage 4 Local Qwen adversarial review for
+`BANDIT-047`. The scoped pre-PR CodeRabbit provider rerun passed at repaired
+source head `78dcfce252e7425f4e060165258f917a932829cc` with
+`coderabbit_verdict: pass` and zero findings; evidence is recorded in
 `docs/specs/BANDIT-047-coderabbit-review-output.json` and
-`docs/work/BANDIT-047/coderabbit-review.md`. Codex PM repaired the two
-evidence-field validation findings and recorded the repair disposition in
-`docs/work/BANDIT-047/coderabbit-finding-disposition.md`: Stage 3
-`model_family` is now explicitly required before model-family routing checks,
-and Stage 2 ownership fields now reject null, empty, whitespace-only, or
-non-boolean material-edit-status values. Do not run Local Qwen, write aggregate
-review evidence, or start the Focused Session Context gap, Worktree Bootstrap
-Contract gap, scheduler execution, full worktree lifecycle enablement, cockpit
-UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
-product UAT scope, or unrelated Phase 8 work before scoped CodeRabbit is
-rerun against the repaired source or explicitly dispositioned under Stage 4
-policy.
+`docs/work/BANDIT-047/coderabbit-review.md`. Do not write aggregate Stage 4
+review evidence, create a landing verdict, or start the Focused Session Context
+gap, Worktree Bootstrap Contract gap, scheduler execution, full worktree
+lifecycle enablement, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+Local Qwen runs and any findings are repaired, routed, or explicitly
+dispositioned under Stage 4 policy.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -683,12 +678,11 @@ implementation evidence is recorded in
 `docs/specs/BANDIT-047-implementation-evidence.json`,
 `docs/work/BANDIT-047/implementation-evidence.md`,
 `docs/work/BANDIT-047/writer-report.md`, the model-family policy/template and
-evidence artifacts, and the implementation source. Stage 4 CodeRabbit retry
-evidence is recorded in `docs/work/BANDIT-047/coderabbit-review.md` with a
-completed blocker verdict and two unresolved findings in
-`src/state/model-family-separation.ts`. The next required action is to repair
-or explicitly disposition those CodeRabbit findings before Local Qwen or
-aggregate review evidence.
+evidence artifacts, and the implementation source. Stage 4 CodeRabbit evidence
+is recorded in `docs/work/BANDIT-047/coderabbit-review.md` with a completed
+pass verdict, zero findings, and current repaired source head
+`78dcfce252e7425f4e060165258f917a932829cc`. The next required action is to
+run the Stage 4 Local Qwen adversarial review before aggregate review evidence.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -1278,10 +1272,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the two unresolved Stage 4 CodeRabbit
-   findings for `BANDIT-047` in `src/state/model-family-separation.ts`. Do not
-   run Local Qwen or write aggregate review evidence until the CodeRabbit
-   findings are repaired or explicitly dispositioned under Stage 4 policy.
+1. Run the Stage 4 Local Qwen adversarial review for `BANDIT-047`. Do not write
+   aggregate review evidence, create a landing verdict, or begin unrelated work
+   until Local Qwen runs and any findings are repaired, routed, or explicitly
+   dispositioned under Stage 4 policy.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1321,10 +1315,9 @@ No operator-owned input is required for the next recorded action. The prior
 Claude Writer dispatch blocker was resolved by a PM-authorized resume attempt,
 a fresh Claude Writer rerun, and a focused Claude repair pass. Stage 3 evidence
 and fresh verification are recorded for `BANDIT-047`. The scoped Stage 4
-CodeRabbit provider retry completed with unresolved findings in
-`src/state/model-family-separation.ts`; the next gate is a Codex PM-owned
-repair or explicit Stage 4 finding disposition, not an operator-owned product,
-UAT, policy, business, cost, or scope decision.
+CodeRabbit provider rerun passed at the repaired source head with zero
+findings; the next gate is the Stage 4 Local Qwen adversarial review, not an
+operator-owned product, UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
