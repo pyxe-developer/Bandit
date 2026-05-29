@@ -395,22 +395,23 @@ disposition are recorded in `docs/work/BANDIT-050/`, `docs/specs/`,
 
 **Current active work:** `BANDIT-051` - Worktree Bootstrap Contract.
 
-The current stage is Stage 4: Review rerun.
+The current stage is Stage 4: Review disposition.
 
-**Current next action:** Rerun Stage 4 review gates for `BANDIT-051`: pre-PR
-CodeRabbit, Local Qwen, review-subject-hash evidence, and aggregate review
-evidence at the repaired source. Stage 3 implementation evidence is recorded in
+**Current next action:** Record Codex PM disposition and durable routing for the
+`BANDIT-051` Local Qwen `non_blocking` findings, then refresh aggregate Stage 4
+review-subject-hash evidence. Stage 3 implementation evidence is recorded in
 `docs/specs/BANDIT-051-implementation-evidence.json`,
 `docs/work/BANDIT-051/implementation-evidence.md`, and
-`docs/work/BANDIT-051/writer-report.md`. Stage 4 CodeRabbit blocker evidence is
-recorded in `docs/work/BANDIT-051/coderabbit-review.md` with normalized
-provider output in `docs/specs/BANDIT-051-coderabbit-review-output.json`.
-Focused repair evidence is recorded in the Stage 3 implementation artifacts and
-source diff, covering raw writer-stream evidence hygiene and
-`worktree-bootstrap validate --json` validation hardening. Keep scheduler
-execution, full worktree lifecycle, claim lease creation or release, work-surface
-reservations, cockpit UI/server/API work, PR/CI workflow, automatic
-merge/push/deploy, product UAT scope, and unrelated Phase 8 work out of scope.
+`docs/work/BANDIT-051/writer-report.md`. Stage 4 CodeRabbit pass evidence is
+recorded in `docs/work/BANDIT-051/coderabbit-review.md` with normalized provider
+output in `docs/specs/BANDIT-051-coderabbit-review-output.json`. Local Qwen
+Stage 4 evidence is recorded in `docs/work/BANDIT-051/local-qwen-review.md`
+with reviewer verdict `non_blocking` and open hardening findings for
+environment/runtime dependency validation, markdown template parsing, and
+future evidence freshness handling. Keep scheduler execution, full worktree
+lifecycle, claim lease creation or release, work-surface reservations, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT
+scope, and unrelated Phase 8 work out of scope.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is active and linked to
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -1438,13 +1439,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Rerun Stage 4 review gates for `BANDIT-051` -
+1. Record PM disposition and durable routing for the `BANDIT-051` Local Qwen
+   `non_blocking` findings, then refresh aggregate Stage 4 review evidence for
    `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence, Stage 2
-   RED evidence, Stage 3 implementation evidence, Stage 4 CodeRabbit blocker
-   evidence, and focused repair evidence are recorded in `docs/work/BANDIT-051/`,
-   and the gap ledger marks the gap active. The review rerun must cover the
-   repaired raw writer-stream evidence hygiene and `worktree-bootstrap
-   validate --json` validation hardening.
+   RED evidence, Stage 3 implementation evidence, CodeRabbit pass evidence, and
+   Local Qwen non-blocking evidence are recorded in `docs/work/BANDIT-051/`, and
+   the gap ledger marks the gap active.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1483,12 +1483,12 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-051`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, Stage 4 CodeRabbit blocker evidence, and focused repair evidence for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and the next action is Stage 4 review
-rerun at the repaired source. This is routine technical routing, not an
+evidence, CodeRabbit pass evidence, and Local Qwen non-blocking evidence for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, and the next action is PM disposition
+and durable routing for the Local Qwen findings. This is routine technical routing, not an
 operator-owned product, UAT, policy, business, cost, or scope decision unless
-the review or repair would expand beyond the recorded Worktree Bootstrap
-Contract gap.
+the disposition would expand beyond the recorded Worktree Bootstrap Contract
+gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

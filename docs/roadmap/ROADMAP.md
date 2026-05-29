@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Rerun Stage 4 review gates for `BANDIT-051`.
+**Current next step:** Record Codex PM disposition and durable routing for the `BANDIT-051` Local Qwen `non_blocking` findings.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
