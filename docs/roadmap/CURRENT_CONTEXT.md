@@ -395,10 +395,9 @@ disposition are recorded in `docs/work/BANDIT-050/`, `docs/specs/`,
 
 **Current active work:** `BANDIT-051` - Worktree Bootstrap Contract.
 
-The current stage is ready-to-land after Stage 5 landing verdict.
+The current stage is Stage 6 closeout after local-record landing action.
 
-**Current next action:** Run the local-record landing action for `BANDIT-051`
-and record `docs/work/BANDIT-051/landing-action.md`. Stage 3 implementation evidence is recorded in
+**Current next action:** Record Stage 6 closeout for `BANDIT-051`: retrospective, improvement dispositions, gap-ledger disposition, roadmap context refresh, and verification before `BANDIT-052` begins. Stage 3 implementation evidence is recorded in
 `docs/specs/BANDIT-051-implementation-evidence.json`,
 `docs/work/BANDIT-051/implementation-evidence.md`, and
 `docs/work/BANDIT-051/writer-report.md`. Stage 4 CodeRabbit pass evidence is
@@ -419,7 +418,8 @@ supply-chain gate evidence is recorded in
 landing verdict evidence is recorded in
 `docs/specs/BANDIT-051-landing-verdict.json` and
 `docs/work/BANDIT-051/landing-verdict.md`; `npm run bandit -- land-check
-BANDIT-051` passes with final verdict `safe-to-land`. Keep
+BANDIT-051` passes with final verdict `safe-to-land`; local-record landing
+action evidence is recorded in `docs/work/BANDIT-051/landing-action.md`. Keep
 scheduler execution, full worktree lifecycle, claim lease creation or release,
 work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
 automatic merge/push/deploy, product UAT scope, and unrelated Phase 8 work out
@@ -1453,15 +1453,16 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run the local-record landing action for `BANDIT-051` and record
-   `docs/work/BANDIT-051/landing-action.md` for
-   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`. Stage 1 brief evidence, Stage 2
-   RED evidence, Stage 3 implementation evidence, CodeRabbit pass evidence,
-   Local Qwen non-blocking evidence, Codex PM finding disposition, aggregate
-   Stage 4 review evidence, risk and supply-chain evidence, Stage 5 landing
-   verdict evidence, and passing `land-check` are recorded in
-   `docs/work/BANDIT-051/`, `docs/specs/`, and `.bandit/policy/`; the gap
-   ledger marks the gap active.
+1. Record Stage 6 closeout for `BANDIT-051`: retrospective, improvement
+   dispositions, gap-ledger disposition for
+   `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`, roadmap context refresh, and
+   verification before `BANDIT-052` begins. Stage 1 brief evidence, Stage 2 RED
+   evidence, Stage 3 implementation evidence, CodeRabbit pass evidence, Local
+   Qwen non-blocking evidence, Codex PM finding disposition, aggregate Stage 4
+   review evidence, risk and supply-chain evidence, Stage 5 landing verdict
+   evidence, passing `land-check`, and local-record landing action evidence are
+   recorded in `docs/work/BANDIT-051/`, `docs/specs/`, and `.bandit/policy/`;
+   the gap ledger marks the gap active until Stage 6 disposition is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1502,11 +1503,12 @@ No operator-owned input is required for the next recorded action. `BANDIT-051`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
 evidence, CodeRabbit pass evidence, Local Qwen non-blocking evidence, Codex PM
 finding disposition, aggregate Stage 4 review evidence, risk and supply-chain
-gate evidence, Stage 5 landing verdict evidence, and passing `land-check` for
-`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`; the next action is local-record
-landing. This is routine technical routing, not an operator-owned product, UAT,
-policy, business, cost, or scope decision unless the landing action would
-expand beyond the recorded Worktree Bootstrap Contract gap.
+gate evidence, Stage 5 landing verdict evidence, passing `land-check`, and
+local-record landing action evidence for
+`BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT`; the next action is Stage 6 closeout.
+This is routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless closeout would expand beyond the
+recorded Worktree Bootstrap Contract gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

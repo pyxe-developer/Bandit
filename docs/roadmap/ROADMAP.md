@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Run the local-record landing action for `BANDIT-051` and record `docs/work/BANDIT-051/landing-action.md`.
+**Current next step:** Record Stage 6 closeout for `BANDIT-051`: retrospective, improvement dispositions, gap-ledger disposition, roadmap context refresh, and verification before `BANDIT-052` begins.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
