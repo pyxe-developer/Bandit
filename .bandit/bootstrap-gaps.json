@@ -547,8 +547,8 @@
     {
       "id": "BANDIT-GAP-AGENT-OBSERVABILITY-TRACES",
       "title": "Agent runtime behavior lacks first-class observability traces",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -556,10 +556,10 @@
         "docs/prds/BANDIT-PRD-002-post-bootstrap-parallel-workstreams.md",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-053",
       "rationale": "The PRD-002 research review identified OpenTelemetry-style agent spans as missing observability, and the operator confirmed traces should be first-class for claims, tool calls, reviewer runs, token spend, wakeups, and failures while repo artifacts remain canonical workflow state.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER is resolved, create a bootstrap-gap chore to define OTel-compatible trace shape, operation spans, correlation IDs, observability projections, and authority-boundary validation."
+      "next_action": "Complete active chore BANDIT-053."
     },
     {
       "id": "BANDIT-GAP-STAGE-CAPABILITY-SCOPE",

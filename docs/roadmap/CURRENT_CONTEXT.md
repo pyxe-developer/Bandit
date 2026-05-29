@@ -393,15 +393,18 @@ action evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition
 are recorded in `docs/work/BANDIT-052/`, `docs/specs/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current active work:** none.
+**Current active work:** `BANDIT-053` - Agent Observability Traces.
 
-**Current next action:** Create exactly one bootstrap-gap work item for
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as `BANDIT-053`. Do not create RED
-evidence, implementation, trace runtime execution, full scheduler execution
-runtime behavior, full worktree lifecycle work, claim lease creation or release,
-work-surface reservations, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work
-before the `BANDIT-053` brief/spec exists.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-053` only:
+focused failing tests and a RED evidence artifact proving Bandit lacks enforced
+Agent Observability Trace shape, Operation Span correlation, observability
+projection output, and authority-boundary validation. Do not create Stage 3
+implementation, trace runtime execution, full telemetry backend ingestion,
+hosted observability integration, Stage Capability Scope enforcement,
+Token-Cost Failsafe policy, Evidence SLO policy, full scheduler execution, full
+worktree lifecycle work, claim lease creation or release, work-surface
+reservations, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy, product UAT scope, or unrelated Phase 8 work.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -758,13 +761,20 @@ that authority.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-053`.
 
-`BANDIT-052` is landed and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER`. The next action is to create exactly
-one bootstrap-gap work item for `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as
-`BANDIT-053`. Do not start RED evidence, implementation, trace runtime
-execution, full scheduler execution runtime behavior, full worktree lifecycle,
+`BANDIT-053` is the active bootstrap-gap chore for
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its structured creation spec is
+recorded in `docs/specs/BANDIT-GAP-AGENT-OBSERVABILITY-TRACES.json`, its Stage
+1 brief is recorded in `docs/work/BANDIT-053/brief.md`, and
+`.bandit/bootstrap-gaps.json` links the gap as `active_chore`.
+The current stage is Stage 2: Test Design And RED Evidence. The next action is Stage 2 RED
+evidence only: focused failing tests and a RED evidence artifact for Agent
+Observability Trace shape, Operation Span correlation, observability projection
+output, and authority-boundary validation. Do not start Stage 3 implementation,
+trace runtime execution, full telemetry backend ingestion, hosted observability
+integration, Stage Capability Scope enforcement, Token-Cost Failsafe policy,
+Evidence SLO policy, full scheduler execution, full worktree lifecycle work,
 claim lease creation or release, work-surface reservations, cockpit
 UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT
 scope, or unrelated Phase 8 work first.
@@ -1407,13 +1417,16 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap work item for
-   `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as `BANDIT-053`. Do not create RED
-   evidence, implementation, trace runtime execution, full scheduler execution,
-   full worktree lifecycle work, claim lease creation or release, work-surface
+1. Write Stage 2 RED evidence for `BANDIT-053` only: focused failing tests and
+   a RED evidence artifact proving Bandit lacks enforced Agent Observability
+   Trace shape, Operation Span correlation, observability projection output,
+   and authority-boundary validation. Do not create Stage 3 implementation,
+   trace runtime execution, full telemetry backend ingestion, hosted
+   observability integration, Stage Capability Scope enforcement, Token-Cost
+   Failsafe policy, Evidence SLO policy, full scheduler execution, full
+   worktree lifecycle work, claim lease creation or release, work-surface
    reservations, cockpit UI/server/API work, PR/CI workflow, automatic
-   merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work
-   before the `BANDIT-053` brief/spec exists.
+   merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1437,11 +1450,11 @@ The current priority is:
    by `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
    `BANDIT-051`, and `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is resolved by
    `BANDIT-052`.
-   `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is the next queued bootstrap-gap
-   chore. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind
-   agent observability traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued
-   behind stage capability scope. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is
-   queued behind token-cost failsafe.
+   `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is active as `BANDIT-053`.
+   `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is queued behind agent observability
+   traces. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind stage capability
+   scope. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued behind token-cost
+   failsafe.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -1449,13 +1462,13 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-052`
-is closed out, and `.bandit/bootstrap-gaps.json` records
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as the next queued bootstrap gap. The
-next action is to create exactly one bootstrap-gap work item for that gap as
-`BANDIT-053`. This is routine technical routing, not an operator-owned product,
-UAT, policy, business, cost, or scope decision unless the next work item would
-expand beyond the queued observability-traces gap.
+No operator-owned input is required for the next recorded action. `BANDIT-053`
+has Stage 1 brief evidence, and `.bandit/bootstrap-gaps.json` records
+`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as active for `BANDIT-053`. The next
+action is to write Stage 2 RED evidence for the scoped observability-traces
+contract only. This is routine technical routing, not an operator-owned
+product, UAT, policy, business, cost, or scope decision unless the next work
+item would expand beyond the queued observability-traces gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

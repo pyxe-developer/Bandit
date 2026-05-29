@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Create exactly one bootstrap-gap work item for `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` as `BANDIT-053`. Do not create RED evidence, implementation, trace runtime execution, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before the `BANDIT-053` brief/spec exists.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-053` only. Do not create Stage 3 implementation, trace runtime execution, full telemetry backend ingestion, hosted observability integration, Stage Capability Scope enforcement, Token-Cost Failsafe policy, Evidence SLO policy, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before RED evidence exists.
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
