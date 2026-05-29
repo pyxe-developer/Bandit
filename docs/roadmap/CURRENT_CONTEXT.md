@@ -393,13 +393,15 @@ evidence, Stage 6 retrospective closeout, and bootstrap-gap disposition are
 recorded in `docs/work/BANDIT-047/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Run Stage 5 landing verdict for `BANDIT-048` using
-`docs/work/BANDIT-048/review-evidence.md`, current verification, clean-code
-compliance, and `npm run bandit -- land-check BANDIT-048`. Do not record the
-landing action, retrospective, Worktree Bootstrap Contract, scheduler
-execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before the Stage 5 landing verdict exists.
+**Current next action:** Run the local-record landing action for `BANDIT-048`
+using `docs/work/BANDIT-048/landing-verdict.md`, the post-verdict
+`npm run bandit -- land-check BANDIT-048` pass, and
+`npm run bandit -- land BANDIT-048 --action local-record`. Do not record the
+retrospective, resolve `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`, start Worktree
+Bootstrap Contract work, scheduler execution, worktree lifecycle, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
+product UAT scope, or unrelated Phase 8 work before landing action evidence
+exists.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -431,8 +433,12 @@ evidence is recorded in `docs/work/BANDIT-048/review-evidence.md` with current
 `157f3862e202c631e55f14bcde034f8d5e0c087735e85b601a23f4cbebcaaada`,
 CodeRabbit provider-refusal/bootstrap_gap replacement evidence, Local Qwen
 `non_blocking` evidence, PM disposition evidence, and durable routing for all
-non-blocking findings. Stage 5 landing verdict is the next required action
-before landing action, retrospective, or unrelated Phase 8 work.
+non-blocking findings. Stage 5 landing verdict evidence is recorded in
+`docs/specs/BANDIT-048-landing-verdict.json` and
+`docs/work/BANDIT-048/landing-verdict.md` with final verdict `safe-to-land`;
+post-verdict `npm run bandit -- land-check BANDIT-048` passes. The next
+required action is the local-record landing action before retrospective,
+bootstrap-gap resolution, or unrelated Phase 8 work.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -714,13 +720,17 @@ Aggregate Stage 4 review evidence is recorded in
 `157f3862e202c631e55f14bcde034f8d5e0c087735e85b601a23f4cbebcaaada`,
 CodeRabbit timeout replacement evidence, Local Qwen non-blocking evidence, PM
 finding disposition evidence, and durable follow-up routing for all
-non-blocking findings. The current stage is Stage 5: Landing And UAT. The next
-required action is the Stage 5 landing verdict using current verification,
-clean-code compliance, and `npm run bandit -- land-check BANDIT-048`. Do not
-record the landing action, retrospective, Worktree Bootstrap Contract, scheduler
-execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before the Stage 5 landing verdict exists.
+non-blocking findings. Stage 5 landing verdict evidence is recorded in
+`docs/specs/BANDIT-048-landing-verdict.json` and
+`docs/work/BANDIT-048/landing-verdict.md` with final verdict `safe-to-land`,
+and post-verdict `npm run bandit -- land-check BANDIT-048` passes.
+The current stage is Stage 5: Landing And UAT. It remains in Stage 5 until the
+local-record landing action is recorded. The next required action is
+`npm run bandit -- land BANDIT-048 --action local-record`. Do not record the
+retrospective, Worktree Bootstrap Contract, scheduler execution, worktree
+lifecycle, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+landing action evidence exists.
 
 `BANDIT-047` is landed and closed out. It has structured creation spec evidence
 in `docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json`, Stage 1
@@ -1339,11 +1349,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 5 landing verdict for `BANDIT-048` using
-   `docs/work/BANDIT-048/review-evidence.md`, current verification,
-   clean-code compliance, and `npm run bandit -- land-check BANDIT-048`.
-   Do not record the landing action, retrospective, or unrelated next work
-   before the landing verdict exists.
+1. Run the local-record landing action for `BANDIT-048` using
+   `docs/work/BANDIT-048/landing-verdict.md`, the post-verdict
+   `npm run bandit -- land-check BANDIT-048` pass, and
+   `npm run bandit -- land BANDIT-048 --action local-record`. Do not record the
+   retrospective, resolve the focused-session-context gap, or start unrelated
+   next work before landing action evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1382,12 +1393,16 @@ has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 Claude Writer
 implementation evidence, active bootstrap-gap linkage, lifecycle event evidence,
 CodeRabbit timeout blocker evidence, Codex PM timeout disposition, Local Qwen
 `non_blocking` evidence, Codex PM Local Qwen finding disposition, and aggregate
-Stage 4 review evidence recorded. The next action is Stage 5 landing verdict
-from the approved brief, RED evidence, implementation evidence, queued gap
-metadata, source artifacts, CodeRabbit timeout disposition, Local Qwen artifact,
-PM finding disposition, aggregate review evidence, current verification, and
-current review-subject hash; this is not an operator-owned product, UAT,
-policy, business, cost, or scope decision.
+Stage 4 review evidence recorded. Stage 5 landing verdict evidence is recorded
+in `docs/specs/BANDIT-048-landing-verdict.json` and
+`docs/work/BANDIT-048/landing-verdict.md`, and post-verdict
+`npm run bandit -- land-check BANDIT-048` passes. The next action is
+local-record landing action from the approved brief, RED evidence,
+implementation evidence, queued gap metadata, source artifacts, CodeRabbit
+timeout disposition, Local Qwen artifact, PM finding disposition, aggregate
+review evidence, current verification, current review-subject hash, and landing
+verdict; this is not an operator-owned product, UAT, policy, business, cost, or
+scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

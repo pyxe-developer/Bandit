@@ -16,13 +16,15 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Run Stage 5 landing verdict for `BANDIT-048` using
-`docs/work/BANDIT-048/review-evidence.md`, current verification, clean-code
-compliance, and `npm run bandit -- land-check BANDIT-048`. Do not record the
-landing action, retrospective, Worktree Bootstrap Contract, scheduler
-execution, worktree lifecycle, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work before the Stage 5 landing verdict exists.
+**Current next step:** Run the local-record landing action for `BANDIT-048`
+using `docs/work/BANDIT-048/landing-verdict.md`, the post-verdict
+`npm run bandit -- land-check BANDIT-048` pass, and
+`npm run bandit -- land BANDIT-048 --action local-record`. Do not record the
+retrospective, resolve `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`, start Worktree
+Bootstrap Contract work, scheduler execution, worktree lifecycle, cockpit
+UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior,
+product UAT scope, or unrelated Phase 8 work before landing action evidence
+exists.
 
 `BANDIT-048` - Focused Session Context Packets is active as the bootstrap-gap
 chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured creation spec is
@@ -54,8 +56,12 @@ evidence is recorded in `docs/work/BANDIT-048/review-evidence.md` with current
 `157f3862e202c631e55f14bcde034f8d5e0c087735e85b601a23f4cbebcaaada`,
 CodeRabbit provider-refusal/bootstrap_gap replacement evidence, Local Qwen
 `non_blocking` evidence, PM disposition evidence, and durable routing for all
-non-blocking findings. Stage 5 landing verdict is the next required action
-before landing action, retrospective, or unrelated Phase 8 work.
+non-blocking findings. Stage 5 landing verdict evidence is recorded in
+`docs/specs/BANDIT-048-landing-verdict.json` and
+`docs/work/BANDIT-048/landing-verdict.md` with final verdict `safe-to-land`;
+post-verdict `npm run bandit -- land-check BANDIT-048` passes. The next
+required action is the local-record landing action before retrospective,
+bootstrap-gap resolution, or unrelated Phase 8 work.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is landed and closed out as
 the bootstrap-gap chore for
@@ -1281,11 +1287,12 @@ Current rule:
 
 Current priority:
 
-1. Run Stage 5 landing verdict for `BANDIT-048` using
-   `docs/work/BANDIT-048/review-evidence.md`, current verification,
-   clean-code compliance, and `npm run bandit -- land-check BANDIT-048`.
-   Do not record the landing action, retrospective, or unrelated next work
-   before the landing verdict exists.
+1. Run the local-record landing action for `BANDIT-048` using
+   `docs/work/BANDIT-048/landing-verdict.md`, the post-verdict
+   `npm run bandit -- land-check BANDIT-048` pass, and
+   `npm run bandit -- land BANDIT-048 --action local-record`. Do not record the
+   retrospective, resolve the focused-session-context gap, or start unrelated
+   next work before landing action evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
