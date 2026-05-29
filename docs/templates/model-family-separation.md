@@ -1,0 +1,36 @@
+# Model-Family Separation Template
+
+work_item:
+source_artifacts:
+stage2_red_evidence:
+  test_writer_identity:
+  red_author_model_family:
+  codex_materially_edited_tests:
+  acceptance_mapping_owner:
+  stage3_test_edit_authority:
+  stage3_writer_routing:
+    writer_identity:
+    model_family:
+    adapter:
+stage3_implementation_evidence:
+  writer_identity:
+  model_family:
+  allowed_write_surfaces:
+  forbidden_write_surfaces:
+  implementation_diff_files:
+  writer_touched_test_surfaces:
+  writer_touched_acceptance_mappings:
+  test_surface_edit_status:
+invalidation:
+  required_when_writer_touches_test_surface:
+  contaminated_attempt_status:
+  complete_revert_evidence:
+escalation:
+  claude_authored_escalation_target:
+  claude_self_review_allowed:
+  pm_disposition_required_for_model_family_or_test_ownership_findings:
+bootstrap_orchestration_boundary:
+  enforcement:
+  process_adapter_path:
+  live_true_agent_orchestration_claimed:
+evidence_paths:

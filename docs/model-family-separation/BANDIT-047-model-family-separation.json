@@ -1,0 +1,85 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-047",
+  "source_artifacts": [
+    "CONTEXT.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-047/brief.md",
+    "docs/work/BANDIT-047/red-evidence.md"
+  ],
+  "stage2_red_evidence": {
+    "test_writer_identity": "codex_pm",
+    "red_author_model_family": "codex",
+    "codex_materially_edited_tests": true,
+    "acceptance_mapping_owner": "test_writer",
+    "stage3_test_edit_authority": "none",
+    "stage3_writer_routing": {
+      "writer_identity": "claude_process_adapter",
+      "model_family": "claude",
+      "adapter": "process_adapter"
+    }
+  },
+  "stage3_implementation_evidence": {
+    "writer_identity": "claude_process_adapter",
+    "model_family": "claude",
+    "allowed_write_surfaces": [
+      ".bandit/policy/model-family-separation.json",
+      "docs/templates/model-family-separation.md",
+      "docs/model-family-separation/BANDIT-047-model-family-separation.json",
+      "docs/specs/BANDIT-047-implementation-evidence.json",
+      "docs/work/BANDIT-047/implementation-evidence.md",
+      "docs/work/BANDIT-047/writer-report.md",
+      "src/state/model-family-separation.ts",
+      "src/commands/validate.ts"
+    ],
+    "forbidden_write_surfaces": [
+      "test/**",
+      "test/helpers/**",
+      "docs/work/BANDIT-047/red-evidence.md",
+      "docs/specs/BANDIT-047-red-evidence.json",
+      "docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json",
+      "docs/work/BANDIT-047/brief.md",
+      "docs/work/BANDIT-047/dispatch.md",
+      "docs/roadmap/CURRENT_CONTEXT.md",
+      "docs/roadmap/ROADMAP.md",
+      ".bandit/bootstrap-gaps.json",
+      ".bandit/events.jsonl"
+    ],
+    "implementation_diff_files": [
+      ".bandit/policy/model-family-separation.json",
+      "docs/templates/model-family-separation.md",
+      "docs/model-family-separation/BANDIT-047-model-family-separation.json",
+      "docs/specs/BANDIT-047-implementation-evidence.json",
+      "docs/work/BANDIT-047/implementation-evidence.md",
+      "docs/work/BANDIT-047/writer-report.md",
+      "src/state/model-family-separation.ts",
+      "src/commands/validate.ts"
+    ],
+    "writer_touched_test_surfaces": [],
+    "writer_touched_acceptance_mappings": [],
+    "test_surface_edit_status": "none"
+  },
+  "invalidation": {
+    "required_when_writer_touches_test_surface": true,
+    "contaminated_attempt_status": "not_applicable",
+    "complete_revert_evidence": []
+  },
+  "escalation": {
+    "claude_authored_escalation_target": "codex_pm",
+    "claude_self_review_allowed": false,
+    "pm_disposition_required_for_model_family_or_test_ownership_findings": true
+  },
+  "bootstrap_orchestration_boundary": {
+    "enforcement": "artifact_and_diff_gate",
+    "process_adapter_path": true,
+    "live_true_agent_orchestration_claimed": false
+  },
+  "evidence_paths": [
+    ".bandit/policy/model-family-separation.json",
+    "docs/templates/model-family-separation.md",
+    "docs/model-family-separation/BANDIT-047-model-family-separation.json",
+    "docs/work/BANDIT-047/red-evidence.md",
+    "docs/work/BANDIT-047/implementation-evidence.md"
+  ]
+}

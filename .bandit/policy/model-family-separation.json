@@ -1,0 +1,30 @@
+{
+  "contract_version": 1,
+  "policy_id": "bootstrap-model-family-separation",
+  "bootstrap_stage3_writer": {
+    "required_after_codex_red": "claude",
+    "adapter": "process_adapter"
+  },
+  "test_ownership_boundary": {
+    "stage3_writer_test_surface_authority": "none",
+    "contaminated_attempt_behavior": "invalidate_and_full_revert_before_rerun",
+    "forbidden_surface_patterns": [
+      "test/**",
+      "test/helpers/**",
+      "docs/work/*/red-evidence.md",
+      "docs/specs/*red-evidence*.json",
+      "acceptance-mapping"
+    ]
+  },
+  "escalation": {
+    "claude_authored_implementation_target": "codex_pm",
+    "claude_self_review_allowed": false
+  },
+  "release_authorized_decisions": [
+    {
+      "work_item": "BANDIT-047",
+      "decision_kind": "model_family_separation",
+      "evidence_path": "docs/model-family-separation/BANDIT-047-model-family-separation.json"
+    }
+  ]
+}

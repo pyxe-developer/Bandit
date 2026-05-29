@@ -16,13 +16,10 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Resolve the blocked `BANDIT-047` Claude Writer dispatch
-before Stage 3 implementation continues. The 2026-05-28 Claude Process Adapter
-dispatch is recorded in `docs/work/BANDIT-047/dispatch.md` and blocked in
-`docs/work/BANDIT-047/writer-dispatch-blocker.md`: the subprocess was launched
-with Sonnet 4.6, xhigh effort, verbose stream-json output, and raw audit
-capture, but it did not reach `end_turn`, produced no `writer-report.md`, and
-made no implementation changes. Do not start the Focused Session Context gap,
+**Current next step:** Run Stage 4 review gates for `BANDIT-047`: pre-PR
+CodeRabbit review against the current local diff, Local Qwen adversarial
+review, PM disposition for any findings, and aggregate review evidence with the
+current `review_subject_hash`. Do not start the Focused Session Context gap,
 Worktree Bootstrap Contract gap, scheduler execution, full worktree lifecycle
 enablement, cockpit UI/server/API work, PR/CI workflow, automatic
 merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
@@ -39,12 +36,21 @@ recorded in `docs/specs/BANDIT-047-red-evidence.json`,
 `test/model-family-separation.test.mjs`, `.bandit/events.jsonl` records the
 work-item-created and red-evidence artifact-created events, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-047` with status
-`active`. The Stage 3 dispatch artifact and blocked Writer evidence are
+`active`. The Stage 3 dispatch artifact and initial blocked Writer evidence are
 recorded in `docs/work/BANDIT-047/dispatch.md` and
-`docs/work/BANDIT-047/writer-dispatch-blocker.md`. Stage 3 implementation still
-requires model-family separation, permanent Test Ownership Boundary
-enforcement, Stage 3 attempt invalidation after Writer test-surface edits,
-Claude Writer bootstrap routing, and Codex PM escalation routing.
+`docs/work/BANDIT-047/writer-dispatch-blocker.md`. Stage 3 implementation
+evidence is recorded in `docs/specs/BANDIT-047-implementation-evidence.json`,
+`docs/work/BANDIT-047/implementation-evidence.md`,
+`docs/work/BANDIT-047/writer-report.md`,
+`.bandit/policy/model-family-separation.json`,
+`docs/templates/model-family-separation.md`,
+`docs/model-family-separation/BANDIT-047-model-family-separation.json`,
+`src/state/model-family-separation.ts`, and `src/commands/validate.ts`. The
+implemented gate enforces model-family separation, the permanent Test Ownership
+Boundary, Stage 3 attempt invalidation after Writer test-surface edits, Claude
+Writer bootstrap routing, and Codex PM escalation routing while preserving
+historical/fresh-initialized repo compatibility when the model-family gate is
+inactive.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -933,7 +939,8 @@ Stage 6 retrospective closeout and bootstrap-gap disposition are recorded in
 `BANDIT-046` is landed and closed out for Git Mutation Serializer; Stage 1
 through Stage 6 evidence and gap-ledger disposition are recorded. `BANDIT-047`
 is active for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`, Stage 2 RED
-evidence is recorded, and the current target is Stage 3 implementation.
+evidence and Stage 3 implementation evidence are recorded, and the current
+target is Stage 4 review evidence.
 
 ## Phase Map
 
@@ -1248,9 +1255,10 @@ Current rule:
 
 Current priority:
 
-1. Resolve the blocked `BANDIT-047` Claude Writer dispatch by choosing whether
-   to rerun Claude Writer with a revised dispatch, continue the existing
-   Claude session if recoverable, or roll back the PM-owned dispatch artifact.
+1. Run Stage 4 review gates for `BANDIT-047`: pre-PR CodeRabbit review against
+   the current local diff, Local Qwen adversarial review, PM disposition for any
+   findings, and aggregate review evidence with the current
+   `review_subject_hash`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI

@@ -393,18 +393,15 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Resolve the blocked `BANDIT-047` Claude Writer
-dispatch before Stage 3 implementation continues. The 2026-05-28 Claude
-Process Adapter dispatch is recorded in `docs/work/BANDIT-047/dispatch.md` and
-blocked in `docs/work/BANDIT-047/writer-dispatch-blocker.md`: the subprocess
-was launched with Sonnet 4.6, xhigh effort, verbose stream-json output, and raw
-audit capture, but it did not reach `end_turn`, produced no
-`writer-report.md`, and made no implementation changes. Do not start the
-Focused Session Context gap, Worktree Bootstrap Contract gap, scheduler
-execution, full worktree lifecycle enablement, cockpit UI/server/API work,
-PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or
-unrelated Phase 8 work before the Bootstrap Model-Family Separation and Test
-Ownership Boundary gap is executed, landed, closed out, and dispositioned.
+**Current next action:** Run Stage 4 review gates for `BANDIT-047`: pre-PR
+CodeRabbit review against the current local diff, Local Qwen adversarial
+review, PM disposition for any findings, and aggregate review evidence with the
+current `review_subject_hash`. Do not start the Focused Session Context gap,
+Worktree Bootstrap Contract gap, scheduler execution, full worktree lifecycle
+enablement, cockpit UI/server/API work, PR/CI workflow, automatic
+merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before
+the Bootstrap Model-Family Separation and Test Ownership Boundary gap is
+executed, landed, closed out, and dispositioned.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -416,12 +413,21 @@ recorded in `docs/specs/BANDIT-047-red-evidence.json`,
 `test/model-family-separation.test.mjs`, `.bandit/events.jsonl` records the
 work-item-created and red-evidence artifact-created events, and
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-047` with status
-`active`. The Stage 3 dispatch artifact and blocked Writer evidence are
+`active`. The Stage 3 dispatch artifact and initial blocked Writer evidence are
 recorded in `docs/work/BANDIT-047/dispatch.md` and
-`docs/work/BANDIT-047/writer-dispatch-blocker.md`. Stage 3 implementation still
-requires model-family separation, permanent Test Ownership Boundary
-enforcement, Stage 3 attempt invalidation after Writer test-surface edits,
-Claude Writer bootstrap routing, and Codex PM escalation routing.
+`docs/work/BANDIT-047/writer-dispatch-blocker.md`. Stage 3 implementation
+evidence is recorded in `docs/specs/BANDIT-047-implementation-evidence.json`,
+`docs/work/BANDIT-047/implementation-evidence.md`,
+`docs/work/BANDIT-047/writer-report.md`,
+`.bandit/policy/model-family-separation.json`,
+`docs/templates/model-family-separation.md`,
+`docs/model-family-separation/BANDIT-047-model-family-separation.json`,
+`src/state/model-family-separation.ts`, and `src/commands/validate.ts`. The
+implemented gate enforces model-family separation, the permanent Test Ownership
+Boundary, Stage 3 attempt invalidation after Writer test-surface edits, Claude
+Writer bootstrap routing, and Codex PM escalation routing while preserving
+historical/fresh-initialized repo compatibility when the model-family gate is
+inactive.
 
 `BANDIT-046` - Git Mutation Serializer is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-GIT-MUTATION-SERIALIZER`. Its structured
@@ -664,8 +670,13 @@ Codex-materially-edited RED evidence, permanent Stage 3 Writer zero authority
 over tests, test helpers, fixtures, RED evidence, and acceptance mappings, full
 invalidation and revert of any contaminated Stage 3 attempt, Claude as the
 bootstrap Stage 3 Process Adapter path, Codex PM escalation disposition for
-Claude-authored code, and no live True Agent orchestration claim. The next
-required action is to implement the narrow Stage 3 repair for `BANDIT-047`.
+Claude-authored code, and no live True Agent orchestration claim. Stage 3
+implementation evidence is recorded in
+`docs/specs/BANDIT-047-implementation-evidence.json`,
+`docs/work/BANDIT-047/implementation-evidence.md`,
+`docs/work/BANDIT-047/writer-report.md`, the model-family policy/template and
+evidence artifacts, and the implementation source. The next required action is
+Stage 4 review evidence for `BANDIT-047`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -875,8 +886,7 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
 Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer.
 
-**Expected next deliverable:** Stage 3 implementation evidence for
-`BANDIT-047`.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-047`.
 
 ## Known Bootstrap Gaps
 
@@ -1256,9 +1266,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Resolve the blocked `BANDIT-047` Claude Writer dispatch by choosing whether
-   to rerun Claude Writer with a revised dispatch, continue the existing
-   Claude session if recoverable, or roll back the PM-owned dispatch artifact.
+1. Run Stage 4 review gates for `BANDIT-047`: pre-PR CodeRabbit review against
+   the current local diff, Local Qwen adversarial review, PM disposition for any
+   findings, and aggregate review evidence with the current
+   `review_subject_hash`.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1294,17 +1305,11 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-Operator input is required before another `BANDIT-047` launched Writer attempt.
-Repo artifacts identify the active gap, source artifacts, accepted Git Mutation
-Serializer closeout, resolved CAS/fenced claim authority closeout, the recorded
-Stage 2 RED evidence, the operator-resolved bootstrap RED/GREEN/verification
-model-family rule, the absolute Stage 3 Writer test-edit ban, the Bootstrap
-Orchestration Boundary that Codex cannot provide live cross-model orchestration
-without a harness, and the Codex PM boundary that routine technical routing is
-manager-owned. However, the 2026-05-28 required Claude Writer subprocess
-launched and failed to complete before `end_turn`; the dispatch protocol
-requires Codex PM to surface this partial state rather than silently rerun,
-continue, roll back, or self-substitute.
+No operator-owned input is required for the next recorded action. The prior
+Claude Writer dispatch blocker was resolved by a PM-authorized resume attempt,
+a fresh Claude Writer rerun, and a focused Claude repair pass. Stage 3 evidence
+and fresh verification are recorded for `BANDIT-047`; the next gate is the
+routine Stage 4 review loop owned by Codex PM policy.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

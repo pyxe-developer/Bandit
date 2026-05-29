@@ -15,6 +15,7 @@ import { validateInputQuarantineGate } from "../state/input-quarantine.js";
 import { validateLandingVerdictArtifacts } from "../state/landing-verdicts.js";
 import { validateLandingAgentContract } from "../state/landing-agent-contract.js";
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
+import { validateModelFamilySeparation } from "../state/model-family-separation.js";
 import { validateOperatorBoundary } from "../state/operator-boundary.js";
 import { getBanditPaths } from "../state/paths.js";
 import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
@@ -57,6 +58,7 @@ export async function validateBandit(repoRoot: string) {
   await validateReviewEvidenceArtifacts(repoRoot);
   await validateLandingVerdictArtifacts(repoRoot);
   await validateUatApprovalArtifacts(repoRoot);
+  await validateModelFamilySeparation(repoRoot);
   await validateBootstrapGaps(repoRoot);
   await validateAutoLandingPolicy(repoRoot);
   await validateHeartbeatPolicy(repoRoot);

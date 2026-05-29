@@ -1,0 +1,47 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-047",
+  "stage": "Stage 3: Implementation",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "d5f83e6a3a23645c89053ebb9192c4bc79afcbd0",
+  "summary": "Implemented Bootstrap Model-Family Separation enforcement in bandit validate. Created src/state/model-family-separation.ts with inactive-gate historical compatibility, fail-closed policy/template/evidence validation when the gate is active, and the acceptance-criteria checks for Stage 2 ownership, model-family separation, Claude bootstrap routing, forbidden Writer test-surface edits, contaminated-attempt invalidation, and Codex PM escalation routing. Wired the validator into src/commands/validate.ts. Created the committed policy, template, and BANDIT-047 evidence artifacts required for the gate to pass on the main repo.",
+  "files_changed": [
+    "src/state/model-family-separation.ts",
+    "src/commands/validate.ts",
+    ".bandit/policy/model-family-separation.json",
+    "docs/templates/model-family-separation.md",
+    "docs/model-family-separation/BANDIT-047-model-family-separation.json",
+    "docs/specs/BANDIT-047-implementation-evidence.json",
+    "docs/work/BANDIT-047/implementation-evidence.md",
+    "docs/work/BANDIT-047/writer-report.md"
+  ],
+  "test_surface_edits": "none",
+  "forbidden_surfaces_confirmed_untouched": [
+    "test/**",
+    "test/helpers/**",
+    "docs/work/BANDIT-047/red-evidence.md",
+    "docs/specs/BANDIT-047-red-evidence.json",
+    "docs/specs/BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION.json",
+    "docs/work/BANDIT-047/brief.md",
+    "docs/work/BANDIT-047/dispatch.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "verification": {
+    "focused_test": "node --test test/model-family-separation.test.mjs",
+    "focused_test_result": "10 pass, 0 fail",
+    "affected_tests": "node --test test/landing-gates.test.mjs test/local-qwen-review.test.mjs test/validate.test.mjs test/bootstrap-gaps.test.mjs test/artifact-create.test.mjs test/draft-work.test.mjs test/work-item-create.test.mjs",
+    "affected_tests_result": "161 pass, 0 fail",
+    "full_test": "npm test",
+    "full_test_result": "380 pass, 0 fail",
+    "typecheck": "npm run typecheck",
+    "typecheck_result": "pass",
+    "validate": "npm run bandit -- validate",
+    "validate_result": "Bandit state is valid.",
+    "git_diff_check": "git diff --check",
+    "git_diff_check_result": "pass"
+  }
+}
