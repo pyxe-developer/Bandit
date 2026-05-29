@@ -393,9 +393,9 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-046/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current next action:** Record the local landing action for `BANDIT-047` after
-the Stage 5 landing verdict and auto-landing evidence pass verification. Stage
-5 landing verdict evidence is recorded in
+**Current next action:** Write Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-047` now that local-record landing action evidence is
+recorded. Stage 5 landing verdict evidence is recorded in
 `docs/specs/BANDIT-047-landing-verdict.json` and
 `docs/work/BANDIT-047/landing-verdict.md`. Explicit layered
 risk-classification and supply-chain gate evidence is recorded in
@@ -407,12 +407,13 @@ refreshed in `docs/work/BANDIT-047/review-evidence.md` with
 `review_subject_hash`
 `23f7342ddea065d6b7730a74301723214e6a7e888776f78d9794a083ffbd1e78`,
 CodeRabbit `pass`, Local Qwen `pass`, no open findings, no required operator
-input, UAT `not_applicable`, and clean-code `pass`. Do not start the Focused
-Session Context gap, Worktree Bootstrap Contract gap, scheduler execution, full
-worktree lifecycle enablement, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, retrospective
-closeout, or unrelated Phase 8 work before the local landing action is
-recorded.
+input, UAT `not_applicable`, and clean-code `pass`. Local-record landing action
+evidence is recorded in `docs/work/BANDIT-047/landing-action.md`. Do not start
+the Focused Session Context gap, Worktree Bootstrap Contract gap, scheduler
+execution, full worktree lifecycle enablement, cockpit UI/server/API work,
+PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or
+unrelated Phase 8 work before Stage 6 retrospective closeout, bootstrap-gap
+disposition, and roadmap/current-context closeout are recorded.
 
 `BANDIT-047` - Bootstrap Model-Family Separation is active as the
 bootstrap-gap chore for `BANDIT-GAP-BOOTSTRAP-MODEL-FAMILY-SEPARATION`.
@@ -701,8 +702,10 @@ Aggregate Stage 4 review evidence is recorded in
 landing verdict evidence is recorded in
 `docs/work/BANDIT-047/landing-verdict.md` with final verdict `safe-to-land`,
 UAT `not_applicable`, clean-code `pass`, and explicit layered
-risk-classification and supply-chain gate evidence. The next required action is
-to record the local landing action for `BANDIT-047`.
+risk-classification and supply-chain gate evidence. Local-record landing action
+evidence is recorded in `docs/work/BANDIT-047/landing-action.md`. The next
+required action is Stage 6 retrospective closeout and bootstrap-gap disposition
+for `BANDIT-047`.
 
 `BANDIT-046` has Stage 1 brief evidence in
 `docs/work/BANDIT-046/brief.md`, structured creation spec evidence in
@@ -912,7 +915,8 @@ Input Quarantine Gate; `BANDIT-041` - Layered Risk Classification;
 Authority; `BANDIT-044` - Operator Fail-Closed Boundary; `BANDIT-045` - CAS
 Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-047`.
+**Expected next deliverable:** Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-047`.
 
 ## Known Bootstrap Gaps
 
@@ -1292,11 +1296,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record the local landing action for `BANDIT-047` now that Stage 5 landing
-   verdict evidence, layered risk-classification evidence, supply-chain gate
-   evidence, `land-check`, and `auto-land-check` are the required verification
-   focus for this handoff. Do not begin retrospective closeout or unrelated work
-   until the local landing action is recorded.
+1. Write Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-047` now that Stage 5 landing verdict evidence, layered
+   risk-classification evidence, supply-chain gate evidence, `land-check`,
+   `auto-land-check`, and local-record landing action evidence are recorded. Do
+   not begin the Focused Session Context gap or unrelated work until the
+   retrospective, gap-ledger disposition, and roadmap/current-context closeout
+   are recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
