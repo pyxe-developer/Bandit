@@ -513,8 +513,8 @@
     {
       "id": "BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT",
       "title": "Bandit-created worktrees lack a runnable environment bootstrap contract",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -524,9 +524,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-051",
-      "rationale": "The PRD-002 research review raised worktree lifecycle risk, and the operator delegated all technical questions to Codex PM when repo evidence and policy are sufficient. Codex PM decided that every Bandit-created worktree needs an explicit repo-native Worktree Bootstrap Contract before it can be considered runnable. The contract must cover allowed copied or linked files, setup commands, validation command, environment-variable references, secret-handling boundary, expected runtime dependencies, and bootstrap failure evidence. Without this, a claim-owned worktree can be correctly claimed and locked but still fail after worker execution begins because the runtime environment was never proven.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-051."
+      "rationale": "BANDIT-051 created the Worktree Bootstrap Contract command surface, validation behavior, evidence artifacts, and worker-execution refusal boundary for Bandit-created worktrees. The resolved contract covers allowed copied or linked files, setup commands, validation commands, environment-variable references, secret-handling boundaries, expected runtime dependencies, and bootstrap failure evidence before a claim-owned worktree may be treated as runnable.",
+      "verification_target": "docs/work/BANDIT-051/retrospective.md",
+      "next_action": "Use the Worktree Bootstrap Contract validation before treating Bandit-created worktrees as runnable; create the next bootstrap-gap chore for BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER before scheduler execution or unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER",

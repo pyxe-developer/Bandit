@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-051` - Worktree Bootstrap Contract
+- None. `BANDIT-051` is landed and closed out.
 
 ## Next Work Item
 
-**Current next step:** Record Stage 6 closeout for `BANDIT-051`: retrospective, improvement dispositions, gap-ledger disposition, roadmap context refresh, and verification before `BANDIT-052` begins.
+**Current next step:** Create exactly one bootstrap-gap work item for `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` as `BANDIT-052`. Do not create RED evidence, implementation evidence, a branch/worktree execution path, scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before the `BANDIT-052` brief/spec exists.
 
 - `[Gap]` `BANDIT-052` - Event-Driven Wake Scheduler
 
@@ -87,3 +87,4 @@ bootstrap gaps are queued.
 - `BANDIT-048` - Focused Session Context Packets
 - `BANDIT-049` - Session Context Interstitial Recovery
 - `BANDIT-050` - Cockpit Status Interstitial Recovery
+- `BANDIT-051` - Worktree Bootstrap Contract
