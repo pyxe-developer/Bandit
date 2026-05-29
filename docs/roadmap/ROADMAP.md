@@ -16,18 +16,20 @@ It is not a full slice backlog. Slice briefs are created one at a time when a ph
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-049` - Session Context Interstitial Recovery, proving the current `bandit session-context current --json` closed-work-item/no-active-gap failure before implementation. Do not start implementation, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8 work before RED evidence is recorded.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-049` - Session Context Interstitial Recovery to Claude through the bootstrap Process Adapter path. Implement only the narrow `bandit session-context current --json` interstitial recovery path proven by RED evidence, preserve derived non-canonical packet authority and source hierarchy, and keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence, acceptance mappings, Worktree Bootstrap Contract work, scheduler execution, worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, and unrelated Phase 8 work.
 
 `BANDIT-049` - Session Context Interstitial Recovery is active as the
 bootstrap-gap chore for `BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY`.
 Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY.json`, Stage 1
-brief evidence is recorded in `docs/work/BANDIT-049/brief.md`, lifecycle event
-evidence is recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-049` with status `active`. The next required action is
-Stage 2 RED evidence for the focused session-context interstitial recovery
-failure. Do not start implementation or unrelated Phase 8 work before RED
-evidence is recorded.
+brief evidence is recorded in `docs/work/BANDIT-049/brief.md`, Stage 2 RED
+evidence is recorded in `docs/specs/BANDIT-049-red-evidence.json`,
+`docs/work/BANDIT-049/red-evidence.md`, and
+`test/focused-session-context.test.mjs`, lifecycle event evidence is recorded
+in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap to
+`BANDIT-049` with status `active`. The next required action is Stage 3
+implementation dispatch to Claude through the bootstrap Process Adapter path.
+Do not start unrelated Phase 8 work before implementation evidence is recorded.
 
 `BANDIT-048` - Focused Session Context Packets is landed and closed out as the
 bootstrap-gap chore for `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`. Its structured
@@ -1309,10 +1311,10 @@ Current rule:
 
 Current priority:
 
-1. Write Stage 2 RED evidence for `BANDIT-049` -
-   Session Context Interstitial Recovery, proving the current
-   `bandit session-context current --json` closed-work-item/no-active-gap
-   failure before implementation.
+1. Dispatch Stage 3 implementation for `BANDIT-049` -
+   Session Context Interstitial Recovery to Claude through the bootstrap
+   Process Adapter path, implementing only the focused session-context
+   interstitial recovery behavior proven by RED evidence.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
