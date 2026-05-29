@@ -8,7 +8,7 @@
 
 ## Next Work Item
 
-**Current next step:** Run the local-record landing action for `BANDIT-052`. Stage 5 landing verdict evidence is recorded with final verdict `safe-to-land`, and `npm run bandit -- land-check BANDIT-052` passes. Do not create retrospective evidence, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before local-record landing action evidence is recorded.
+**Current next step:** Record Stage 6 retrospective closeout and bootstrap-gap disposition for `BANDIT-052`. Stage 5 landing verdict evidence is recorded with final verdict `safe-to-land`, `npm run bandit -- land-check BANDIT-052` passes, and local-record landing action evidence is recorded. Do not create `BANDIT-053`, full scheduler execution runtime behavior, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy, product UAT scope, or unrelated Phase 8 work before retrospective closeout and gap-ledger disposition are recorded.
 
 - `[Gap]` `BANDIT-053` - Agent Observability Traces
 
