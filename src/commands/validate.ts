@@ -27,6 +27,7 @@ import { validateStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-
 import { validateSkillLifecycleContracts } from "../state/skill-lifecycle-contracts.js";
 import { validateStageCapabilityScopePolicy } from "../state/stage-capability-scope.js";
 import { validateSupplyChainGate } from "../state/supply-chain-gate.js";
+import { validateTokenCostFailsafePolicy } from "../state/token-cost-failsafe.js";
 import { validateTemplates } from "../state/templates.js";
 import { validateUatApprovalArtifacts } from "../state/uat-approval.js";
 import { validateWorkItems } from "../state/work-items.js";
@@ -50,6 +51,7 @@ export async function validateBandit(repoRoot: string) {
   await validateGitMutations(repoRoot);
   await validateSkillLifecycleContracts(repoRoot);
   await validateStageCapabilityScopePolicy(repoRoot);
+  await validateTokenCostFailsafePolicy(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);

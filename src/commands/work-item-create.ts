@@ -19,6 +19,15 @@ type StageCapabilityScopeRef = {
   forbiddenActions: string[];
 };
 
+type TokenCostFailsafeRef = {
+  policy: string;
+  softBudgetBands: string[];
+  providerPricingEvidence: string[];
+  spendClasses: string[];
+  continuationDecisions: string[];
+  stageCapabilityProfiles: string[];
+};
+
 type BaseWorkItemSpec = {
   kind: WorkItemKind;
   title: string;
@@ -30,6 +39,7 @@ type BaseWorkItemSpec = {
   operatorInputStatus: string;
   bootstrapGap?: string;
   stageCapabilityScope?: StageCapabilityScopeRef;
+  tokenCostFailsafe?: TokenCostFailsafeRef;
 };
 
 type SliceWorkItemSpec = BaseWorkItemSpec & {
@@ -200,7 +210,8 @@ function validateSpec(rawSpec: unknown): WorkItemSpec {
     requiredEvidence: requireStringList(rawSpec, "required_evidence"),
     operatorInputStatus: requireString(rawSpec, "operator_input_status"),
     bootstrapGap: optionalString(rawSpec.bootstrap_gap),
-    stageCapabilityScope: readOptionalStageCapabilityScope(rawSpec)
+    stageCapabilityScope: readOptionalStageCapabilityScope(rawSpec),
+    tokenCostFailsafe: readOptionalTokenCostFailsafe(rawSpec)
   };
 
   if (kind === "slice") {
@@ -495,6 +506,9 @@ function renderChoreBrief(id: string, spec: ChoreWorkItemSpec) {
   const stageCapabilitySection = spec.stageCapabilityScope
     ? `\n${renderStageCapabilityScope(spec.stageCapabilityScope)}\n`
     : "";
+  const tokenCostFailsafeSection = spec.tokenCostFailsafe
+    ? `\n${renderTokenCostFailsafe(spec.tokenCostFailsafe)}\n`
+    : "";
 
   return `# ${id}: ${spec.title}
 
@@ -533,7 +547,7 @@ ${renderList(spec.requiredEvidence, id)}
 ## Operator Input Status
 
 ${spec.operatorInputStatus}
-${stageCapabilitySection}`;
+${stageCapabilitySection}${tokenCostFailsafeSection}`;
 }
 
 function renderImprovementMetadata(improvement: ImprovementMetadata) {
@@ -694,6 +708,22 @@ function readOptionalStageCapabilityScope(
   };
 }
 
+function readOptionalTokenCostFailsafe(
+  spec: Record<string, unknown>
+): TokenCostFailsafeRef | undefined {
+  const raw = spec.token_cost_failsafe;
+  if (!isRecord(raw)) return undefined;
+
+  return {
+    policy: typeof raw.policy === "string" ? raw.policy : "",
+    softBudgetBands: toStringArray(raw.soft_budget_bands),
+    providerPricingEvidence: toStringArray(raw.provider_pricing_evidence),
+    spendClasses: toStringArray(raw.spend_classes),
+    continuationDecisions: toStringArray(raw.continuation_decisions),
+    stageCapabilityProfiles: toStringArray(raw.stage_capability_profiles)
+  };
+}
+
 function toStringArray(value: unknown): string[] {
   if (!Array.isArray(value)) return [];
   return value.filter((item): item is string => typeof item === "string");
@@ -711,6 +741,22 @@ required_skills:
 ${scope.requiredSkills.map((s) => `- ${s}`).join("\n")}
 forbidden_actions:
 ${scope.forbiddenActions.map((a) => `- ${a}`).join("\n")}`;
+}
+
+function renderTokenCostFailsafe(ref: TokenCostFailsafeRef): string {
+  return `## Token-Cost Failsafe
+
+policy: ${ref.policy}
+soft_budget_bands:
+${ref.softBudgetBands.map((b) => `- ${b}`).join("\n")}
+provider_pricing_evidence:
+${ref.providerPricingEvidence.map((p) => `- ${p}`).join("\n")}
+spend_classes:
+${ref.spendClasses.map((s) => `- ${s}`).join("\n")}
+continuation_decisions:
+${ref.continuationDecisions.map((d) => `- ${d}`).join("\n")}
+stage_capability_profiles:
+${ref.stageCapabilityProfiles.map((p) => `- ${p}`).join("\n")}`;
 }
 
 function isMissingPathError(error: unknown) {

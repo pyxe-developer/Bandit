@@ -28,6 +28,7 @@ import { showWorkItem } from "./commands/show.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
 import { stageCapabilityScope } from "./commands/stage-capability-scope.js";
 import { supplyChainGate } from "./commands/supply-chain-gate.js";
+import { tokenCostFailsafe } from "./commands/token-cost-failsafe.js";
 import { uat } from "./commands/uat.js";
 import { sessionContext } from "./commands/session-context.js";
 import { validateBandit } from "./commands/validate.js";
@@ -254,8 +255,14 @@ async function main() {
     return;
   }
 
+  if (command === "token-cost-failsafe") {
+    const result = await tokenCostFailsafe(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe>`);
   process.exitCode = 1;
 }
 

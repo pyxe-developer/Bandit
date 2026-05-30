@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-055` to Claude through the bootstrap Process Adapter path. The Stage 3 Writer must not edit tests, test helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings. Do not start review, landing, or unrelated Phase 8 work before Stage 3 implementation evidence exists.
+**Current next step:** Run Stage 4 pre-PR CodeRabbit review for `BANDIT-055` against base `a2ea27d9361c73b3beef30930dfe348feebcb709`, then continue Stage 4 review gates only after CodeRabbit evidence or honest provider-refusal evidence is recorded. Do not start landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work before Stage 4 aggregate review evidence exists.
 
 ## Next Work Item
 

@@ -1,0 +1,78 @@
+{
+  "contract_version": 1,
+  "policy_id": "token-cost-failsafe",
+  "provider_pricing_evidence": [
+    {
+      "id": "provider-pricing-qwen-local",
+      "provider": "local-qwen",
+      "model_or_profile": "local-qwen-baseline",
+      "pricing_source": "docs/work/BANDIT-055/provider-pricing-evidence.md",
+      "captured_date": "2026-05-30",
+      "effective_date": "2026-05-30",
+      "freshness_or_expiry_rule": "refresh before recurring paid route promotion",
+      "expected_per_run_cost": "0.00 USD",
+      "spend_class": "benchmark_evaluation",
+      "approval_owner": "operator"
+    }
+  ],
+  "spend_classes": [
+    {
+      "id": "benchmark_evaluation",
+      "approval_state": "active_spend_class_approval",
+      "approval_owner": "operator",
+      "expected_cost_ceiling": "5.00 USD"
+    }
+  ],
+  "benchmark_evaluation_spend": [
+    {
+      "id": "one-off-paid-reviewer-eval",
+      "provider_pricing_evidence": "provider-pricing-qwen-local",
+      "expected_per_run_cost": "0.00 USD",
+      "approval": "active_spend_class_approval",
+      "non_recurring_routing_disposition": "benchmark_only_no_live_routing"
+    }
+  ],
+  "recurring_paid_routes": [
+    {
+      "id": "stage4-review-paid-escalation",
+      "provider_pricing_evidence": "provider-pricing-qwen-local",
+      "spend_class_approval": "active_spend_class_approval",
+      "promotion_threshold": {
+        "locked_holdout_blocker_recall_improvement_over_qwen": ">= 10 percentage points",
+        "false_positive_ceiling": "<= 5 percent",
+        "expected_cost_ceiling": "5.00 USD"
+      },
+      "applies_to_stage_capability_profile": "stage4_review"
+    }
+  ],
+  "soft_budget_bands": [
+    {
+      "id": "deep_review_abnormal_run",
+      "budget_mode": "generous_abnormal_run_failsafe",
+      "normal_variance_policy": "allow_deep_review_variance",
+      "trigger_thresholds": {
+        "unexpected_token_growth_ratio": 3,
+        "repeated_retry_count": 3,
+        "repeated_wake_noop_count": 2,
+        "reviewer_runtime_loop_count": 2
+      }
+    }
+  ],
+  "abnormal_run_triggers": [
+    "unexpected_token_growth",
+    "repeated_wake_noop",
+    "reviewer_runtime_loop",
+    "missing_trace_cost_signal",
+    "stale_provider_pricing",
+    "missing_spend_approval",
+    "missing_continuation_decision"
+  ],
+  "trace_cost_signal_boundary": {
+    "required_when_available": true,
+    "authority": "observability_only",
+    "can_satisfy_required_workflow_artifacts": false,
+    "can_replace_approvals_or_landing_evidence": false
+  },
+  "failsafe_trips": [],
+  "continuation_decisions": ["pause", "reroute", "operator_cost_risk_approval"]
+}
