@@ -404,20 +404,24 @@ Stage 3 implementation evidence is recorded in
 `docs/work/BANDIT-054/implementation-evidence.md`,
 `docs/specs/BANDIT-054-implementation-evidence.json`, and
 `docs/work/BANDIT-054/writer-report.md`.
+Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
+`docs/work/BANDIT-054/coderabbit-review.md` and
+`docs/specs/BANDIT-054-coderabbit-review-output.json`. Codex PM
+provider-refusal/bootstrap-gap disposition is recorded in
+`docs/work/BANDIT-054/coderabbit-timeout-disposition.md`; CodeRabbit is not
+treated as pass evidence, and Local Qwen remains required.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** resolve the `BANDIT-054` Stage 4 CodeRabbit provider
-timeout. Focused pre-PR CodeRabbit attempts against the full `BANDIT-054`
-packet and the Stage 3 implementation delta reached setup, summarizing, and
-reviewing but returned no terminal verdict; blocker evidence is recorded in
-`docs/specs/BANDIT-054-coderabbit-review-output.json` and
-`docs/work/BANDIT-054/coderabbit-review.md`. Rerun or otherwise disposition
-pre-PR CodeRabbit before Local Qwen, risk-classification, supply-chain gate,
-aggregate review evidence, landing, closeout, or `BANDIT-055`. Historical
-Claude Process Adapter blocker evidence remains recorded in
+**Current next action:** run Stage 4 Local Qwen adversarial review for
+`BANDIT-054`. CodeRabbit is dispositioned as provider-refusal/bootstrap-gap
+replacement evidence, not pass evidence. Do not run risk-classification,
+supply-chain gate, aggregate review evidence, landing, closeout, or
+`BANDIT-055` until Local Qwen evidence exists. Historical Claude Process
+Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
-has Stage 3 implementation evidence and current passing verification.
+has Stage 3 implementation evidence, CodeRabbit timeout disposition evidence,
+and current passing verification.
 
 The current stage is Stage 4: Pre-Landing Review Loop.
 
