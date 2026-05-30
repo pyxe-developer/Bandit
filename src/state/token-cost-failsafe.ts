@@ -138,7 +138,7 @@ function parseAndValidatePolicy(content: string): TokenCostFailsafeValidationRep
   const failsafeTriggers = collectFailsafeTriggers(parsed);
   validateFailsafeTrips(parsed);
   validateTraceCostSignalBoundary(parsed);
-  const continuationDecisions = collectContinuationDecisions(parsed);
+  const continuationDecisions = validateContinuationDecisions(parsed);
 
   return {
     status: "pass",
@@ -158,7 +158,10 @@ function validateProviderPricingEvidence(policy: RawRecord): string[] {
 
   for (const item of policy.provider_pricing_evidence as unknown[]) {
     if (!isRecord(item)) continue;
-    const id = typeof item.id === "string" ? item.id : "unknown";
+    const id = requireNonEmptyString(
+      item.id,
+      "provider-pricing evidence entries require a non-empty string id"
+    );
 
     const missingField = REQUIRED_PROVIDER_PRICING_FIELDS.find((field) => {
       const value = item[field];
@@ -343,11 +346,27 @@ function validateTraceCostSignalBoundary(policy: RawRecord): void {
   }
 }
 
-function collectContinuationDecisions(policy: RawRecord): string[] {
+function validateContinuationDecisions(policy: RawRecord): string[] {
   if (!Array.isArray(policy.continuation_decisions)) return [];
-  return (policy.continuation_decisions as unknown[]).filter(
-    (item): item is string => typeof item === "string"
-  );
+  const decisions: string[] = [];
+
+  for (const item of policy.continuation_decisions as unknown[]) {
+    if (typeof item !== "string" || !VALID_CONTINUATION_DECISIONS.has(item)) {
+      throw new Error(
+        "continuation decisions must be continue, reroute, pause, stop, or operator-owned cost/risk approval"
+      );
+    }
+    decisions.push(item);
+  }
+
+  return decisions;
+}
+
+function requireNonEmptyString(value: unknown, message: string): string {
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new Error(message);
+  }
+  return value;
 }
 
 function escapeRegExp(value: string): string {

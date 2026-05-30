@@ -421,15 +421,17 @@ refresh completed at
 `de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0` with five open findings. No Local
 Qwen work, aggregate Stage 4 review work, landing work, retrospective work,
 `BANDIT-056` work, or unrelated Phase 8 work has started.
+The five terminal-refresh findings are repaired locally in the current repair
+delta; CodeRabbit evidence now needs a focused refresh before the Stage 4 gate
+can proceed.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Repair or explicitly disposition the five open
-CodeRabbit findings recorded for `BANDIT-055` before Local Qwen, aggregate
-Stage 4 review evidence, landing, retrospective, `BANDIT-056`, or unrelated
-Phase 8 work.
+**Current next action:** Run a focused CodeRabbit refresh for the repaired
+`BANDIT-055` findings before Local Qwen, aggregate Stage 4 review evidence,
+landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
-The current stage is Stage 4 CodeRabbit finding disposition for `BANDIT-055`.
+The current stage is Stage 4 CodeRabbit refresh for `BANDIT-055`.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -821,10 +823,10 @@ and gap-ledger disposition are recorded.
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`; Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-055/brief.md`, Stage 2 RED evidence is recorded, and Stage 3
 implementation evidence is recorded. Stage 4 pre-PR CodeRabbit evidence is
-recorded with a terminal repaired-delta refresh and five open findings. The
-next action is to repair or explicitly disposition those findings before Local
-Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or
-unrelated Phase 8 work.
+recorded with a terminal repaired-delta refresh and five open findings, and
+those findings are repaired locally. The next action is to refresh CodeRabbit
+against the repaired delta before Local Qwen, aggregate Stage 4 review,
+landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1068,10 +1070,10 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 4 pre-PR CodeRabbit review evidence, or
-honest provider-refusal evidence, for `BANDIT-055`, the bootstrap-gap chore for
-`BANDIT-GAP-TOKEN-COST-FAILSAFE`, before Local Qwen closeout, aggregate review
-evidence, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
+**Expected next deliverable:** Focused Stage 4 CodeRabbit refresh evidence for
+the repaired `BANDIT-055` findings, or honest provider-refusal replacement
+evidence, before Local Qwen closeout, aggregate review evidence, landing,
+retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1281,8 +1283,8 @@ These are expected because Bandit does not exist yet:
   benchmark/evaluation spend that require per-run approval or active
   spend-class approval. Stage 1 brief, Stage 2 RED evidence, and Stage 3
   implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
-  recorded with five open terminal-refresh findings; repairing or explicitly
-  dispositioning those findings is the next action.
+  recorded with five open terminal-refresh findings that are now repaired
+  locally; refreshing CodeRabbit against the repaired delta is the next action.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1460,10 +1462,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the five open CodeRabbit findings recorded
-   for `BANDIT-055`. Do not run Local Qwen, aggregate Stage 4 review, landing,
-   retrospective, `BANDIT-056`, or unrelated Phase 8 work before those findings
-   are resolved or accepted by Codex PM disposition.
+1. Run a focused CodeRabbit refresh for the repaired `BANDIT-055` findings. Do
+   not run Local Qwen, aggregate Stage 4 review, landing, retrospective,
+   `BANDIT-056`, or unrelated Phase 8 work before CodeRabbit refresh evidence
+   is current or honest provider-refusal replacement evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1509,11 +1511,11 @@ implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
 recorded at source head `de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0`; the prior
 template-guidance finding is repaired, the four repair-head validation findings
 against `src/state/token-cost-failsafe.ts` are repaired in the current repaired
-delta, and the terminal repaired-delta refresh returned five open findings. The
-next action is to repair or explicitly disposition those findings. This is
-routine technical routing, not an operator-owned product, UAT, policy,
-business, cost, or scope decision unless disposition would expand scope or
-require operator-owned cost/risk approval.
+delta, and the terminal repaired-delta refresh returned five open findings that
+are now repaired locally. The next action is to refresh CodeRabbit against the
+repaired findings. This is routine technical routing, not an operator-owned
+product, UAT, policy, business, cost, or scope decision unless disposition
+would expand scope or require operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

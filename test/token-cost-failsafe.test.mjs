@@ -62,6 +62,27 @@ test("token-cost-failsafe validation rejects stale provider-pricing evidence", a
   );
 });
 
+test("token-cost-failsafe validation rejects provider-pricing evidence without a string id", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  delete policy.provider_pricing_evidence[0].id;
+  policy.benchmark_evaluation_spend[0].provider_pricing_evidence = "unknown";
+  policy.recurring_paid_routes[0].provider_pricing_evidence = "unknown";
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /provider-pricing evidence entries require a non-empty string id/
+  );
+});
+
 test("token-cost-failsafe validation rejects one-off benchmark spend without approval and non-recurring disposition", async () => {
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();
@@ -236,6 +257,25 @@ test("token-cost-failsafe validation rejects trace signals replacing approvals o
   assert.match(
     result.stderr,
     /trace-backed token and cost signals cannot replace canonical workflow artifacts, approvals, landing evidence, UAT, or retrospective evidence/
+  );
+});
+
+test("token-cost-failsafe validation rejects unknown top-level continuation decisions", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  policy.continuation_decisions.push("auto_approve_extra_spend");
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /continuation decisions must be continue, reroute, pause, stop, or operator-owned cost\/risk approval/
   );
 });
 
