@@ -1,0 +1,48 @@
+# BANDIT-055 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused Test Writer-owned tests define the Token-Cost Failsafe validation and work-item integration surface before implementation. The suite fails because Bandit currently has no `token-cost-failsafe` command and generated chore briefs do not render token-cost failsafe scope evidence.
+
+## Test Command
+
+```sh
+node --test test/token-cost-failsafe.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 8
+pass 0
+fail 8
+token-cost-failsafe validation accepts a complete failsafe policy failed: Unknown command: token-cost-failsafe
+token-cost-failsafe validation rejects stale provider-pricing evidence failed before provider-pricing validation because the command is missing
+token-cost-failsafe validation rejects one-off benchmark spend without approval and non-recurring disposition failed before benchmark/evaluation spend validation because the command is missing
+token-cost-failsafe validation rejects recurring paid routes without scoped promotion and spend approval failed before recurring-route validation because the command is missing
+token-cost-failsafe validation rejects tight hard caps disguised as soft budget bands failed before soft-budget validation because the command is missing
+token-cost-failsafe validation rejects failsafe trips without continuation decisions failed before continuation-decision validation because the command is missing
+token-cost-failsafe validation keeps trace cost signals non-canonical failed before trace-boundary validation because the command is missing
+work-item create renders token-cost failsafe scope into generated briefs failed because the generated brief omitted the Token-Cost Failsafe section
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| Focused RED evidence proves Bandit currently lacks enforced Token-Cost Failsafe policy validation. | `test/token-cost-failsafe.test.mjs` runs `bandit token-cost-failsafe validate --json` against a complete policy fixture; it fails with `Unknown command: token-cost-failsafe`, proving no runnable validation surface exists yet. |
+| The Token-Cost Failsafe policy validates provider-pricing evidence fields for paid reviewer, paid model, and paid/high-token recurring routes. | The stale provider-pricing test removes the freshness or expiry rule and expects a fail-closed diagnostic requiring pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner; the current command is missing. |
+| Validation fails closed when one-off paid reviewer or paid model benchmark/evaluation spend lacks current provider-pricing evidence, expected per-run cost, per-run approval or active spend-class approval, and explicit non-recurring routing disposition. | The one-off benchmark spend test mutates approval and non-recurring routing disposition fields and expects fail-closed validation; the current command is missing. |
+| Validation fails closed when recurring paid reviewer, paid model, or paid/high-token route policy lacks provider-pricing evidence, spend-class approval, scoped promotion threshold, or route applicability. | The recurring paid route test removes the promotion threshold and spend-class approval and expects fail-closed validation; the current command is missing. |
+| Soft budget bands are modeled as generous abnormal-run failsafes rather than tight caps that create duplicate failed attempts. | The soft-budget test changes the complete fixture to a hard cap with immediate stop behavior and expects a fail-closed diagnostic; the current command is missing. |
+| Continuation-decision evidence records whether execution continued, rerouted, paused, stopped, or requires operator-owned cost/risk approval after a failsafe trip. | The failsafe-trip test removes the continuation decision and expects fail-closed validation requiring continue, reroute, pause, stop, or operator-owned cost/risk approval evidence; the current command is missing. |
+| Trace-backed token and cost signals are required where available but remain observability evidence only and cannot replace canonical workflow artifacts, approvals, landing evidence, UAT, or retrospective evidence. | The trace-boundary test makes trace cost signals satisfy required workflow artifacts and expects fail-closed validation; the current command is missing. |
+| Stage Capability Scope integration records when paid, high-token, reviewer, scheduler, or long-running stages need soft budget bands, provider-pricing evidence, spend approval, trace-backed cost signals, abnormal-run failsafes, and continuation decisions. | The complete fixture links Stage Capability Scope `stage4_review` evidence to token-cost failsafe requirements and the generated-brief test expects `token_cost_failsafe` spec data to render into chore briefs. |
+| Work-item/spec integration records token-cost failsafe requirements without relying on chat context. | The work-item creation test creates a spec with `token_cost_failsafe` and expects a `## Token-Cost Failsafe` section with policy, soft budget bands, provider-pricing evidence, and stage capability profiles; the current generated brief omits that section. |
+| Stage 2 RED evidence preserves the Permanent Test Ownership Boundary and bootstrap model-family separation. | This RED evidence and tests are Codex PM/Test Writer-authored. Stage 3 implementation must be routed to Claude through the bootstrap Process Adapter path, and the Stage 3 Writer must not edit tests, test helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings for `BANDIT-055`. |
+
+## Next Action
+
+Dispatch Stage 3 implementation for `BANDIT-055` to Claude through the bootstrap Process Adapter path: implement the narrow Token-Cost Failsafe repair by adding `.bandit/policy/token-cost-failsafe.json`, `docs/templates/token-cost-failsafe.md`, `bandit token-cost-failsafe validate --json`, `bandit validate` integration as appropriate, work-item spec validation and brief rendering for `token_cost_failsafe`, provider-pricing evidence validation, benchmark/evaluation spend validation, recurring route validation, soft-budget abnormal-run failsafe validation, failsafe-trip continuation-decision validation, trace-backed cost-signal non-canonical boundary validation, and Stage Capability Scope linkage needed to make the RED tests pass. Keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, Evidence SLO policy, full scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, live reviewer routing changes, paid reviewer route promotion, external service integration, installed global skill edits, dependency or lockfile changes, and unrelated Phase 8 work.

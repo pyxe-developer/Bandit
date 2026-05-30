@@ -398,16 +398,24 @@ retrospective closeout, and bootstrap-gap disposition are recorded in
 `docs/specs/BANDIT-GAP-TOKEN-COST-FAILSAFE.json`, its Stage 1 brief is recorded
 in `docs/work/BANDIT-055/brief.md`, `.bandit/bootstrap-gaps.json` links the gap
 to `BANDIT-055` with status `active`, and `.bandit/events.jsonl` records the
-work-item creation event. No RED evidence, implementation work, review work,
-landing work, or unrelated Phase 8 work has started.
+work-item creation event. Stage 2 RED evidence is recorded in
+`docs/specs/BANDIT-055-red-evidence.json`,
+`docs/work/BANDIT-055/red-evidence.md`, and
+`test/token-cost-failsafe.test.mjs`. The focused RED command
+`node --test test/token-cost-failsafe.test.mjs` fails 8/8 tests because Bandit
+currently lacks `bandit token-cost-failsafe validate --json` and generated
+briefs do not render Token-Cost Failsafe scope. No implementation work, review
+work, landing work, or unrelated Phase 8 work has started.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Create Stage 2 RED evidence for `BANDIT-055`. Do not
-start Stage 3 implementation, review, landing, or unrelated Phase 8 work before
-RED evidence exists.
+**Current next action:** Dispatch Stage 3 implementation for `BANDIT-055` to
+Claude through the bootstrap Process Adapter path. The Stage 3 Writer must make
+the RED tests pass without editing tests, test helpers, fixtures, RED evidence
+artifacts/specs, or acceptance mappings. Do not start review, landing, or
+unrelated Phase 8 work before Stage 3 implementation evidence exists.
 
-The current stage is Stage 2 RED evidence preparation for `BANDIT-055`.
+The current stage is Stage 3 implementation preparation for `BANDIT-055`.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in

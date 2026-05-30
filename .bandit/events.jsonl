@@ -122,3 +122,4 @@
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created landing_verdict artifact at docs/work/BANDIT-054/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created retrospective artifact at docs/work/BANDIT-054/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-055","message":"Created work item BANDIT-055 from docs/specs/BANDIT-GAP-TOKEN-COST-FAILSAFE.json"}
+{"type":"artifact_created","work_item":"BANDIT-055","message":"Created red_evidence artifact at docs/work/BANDIT-055/red-evidence.md"}

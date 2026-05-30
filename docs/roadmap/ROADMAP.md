@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Create Stage 2 RED evidence for `BANDIT-055`. Do not start Stage 3 implementation, review, landing, or unrelated Phase 8 work before RED evidence exists.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-055` to Claude through the bootstrap Process Adapter path. The Stage 3 Writer must not edit tests, test helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings. Do not start review, landing, or unrelated Phase 8 work before Stage 3 implementation evidence exists.
 
 ## Next Work Item
 
