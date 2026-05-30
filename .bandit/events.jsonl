@@ -119,3 +119,4 @@
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created red_evidence artifact at docs/work/BANDIT-054/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/specs/BANDIT-054-implementation-evidence.json"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/work/BANDIT-054/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-054","message":"Created landing_verdict artifact at docs/work/BANDIT-054/landing-verdict.md"}
