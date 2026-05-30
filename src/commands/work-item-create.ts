@@ -7,8 +7,17 @@ import {
   type BootstrapGapLedger,
   parseBootstrapGapLedger
 } from "../state/bootstrap-gaps.js";
+import { readStageCapabilityScopePolicyStagesCount } from "../state/stage-capability-scope.js";
 
 type WorkItemKind = "slice" | "chore" | "improvement_chore";
+
+type StageCapabilityScopeRef = {
+  policy: string;
+  stages: string[];
+  authorityRoles: string[];
+  requiredSkills: string[];
+  forbiddenActions: string[];
+};
 
 type BaseWorkItemSpec = {
   kind: WorkItemKind;
@@ -20,6 +29,7 @@ type BaseWorkItemSpec = {
   requiredEvidence: string[];
   operatorInputStatus: string;
   bootstrapGap?: string;
+  stageCapabilityScope?: StageCapabilityScopeRef;
 };
 
 type SliceWorkItemSpec = BaseWorkItemSpec & {
@@ -99,6 +109,7 @@ export async function createWorkItem(repoRoot: string, args: string[]) {
     await readRequiredFile(getBanditPaths(repoRoot).config, ".bandit/config.toml")
   );
   const rawSpec = await readSpec(specLocation.absolutePath, specLocation.displayPath);
+  await requireStageCapabilityScopeIfPolicyHasStages(repoRoot, rawSpec);
   const spec = validateSpec(rawSpec);
   const id = await allocateNextWorkItemId(repoRoot, config.workItemPrefix);
   const plannedWorkItem = planWorkItem(repoRoot, id, spec);
@@ -188,7 +199,8 @@ function validateSpec(rawSpec: unknown): WorkItemSpec {
     expectedFiles: requireStringList(rawSpec, "expected_files"),
     requiredEvidence: requireStringList(rawSpec, "required_evidence"),
     operatorInputStatus: requireString(rawSpec, "operator_input_status"),
-    bootstrapGap: optionalString(rawSpec.bootstrap_gap)
+    bootstrapGap: optionalString(rawSpec.bootstrap_gap),
+    stageCapabilityScope: readOptionalStageCapabilityScope(rawSpec)
   };
 
   if (kind === "slice") {
@@ -480,6 +492,9 @@ function renderChoreBrief(id: string, spec: ChoreWorkItemSpec) {
   const improvementMetadata = spec.improvement
     ? `\n${renderImprovementMetadata(spec.improvement)}`
     : "";
+  const stageCapabilitySection = spec.stageCapabilityScope
+    ? `\n${renderStageCapabilityScope(spec.stageCapabilityScope)}\n`
+    : "";
 
   return `# ${id}: ${spec.title}
 
@@ -518,7 +533,7 @@ ${renderList(spec.requiredEvidence, id)}
 ## Operator Input Status
 
 ${spec.operatorInputStatus}
-`;
+${stageCapabilitySection}`;
 }
 
 function renderImprovementMetadata(improvement: ImprovementMetadata) {
@@ -652,6 +667,50 @@ function normalizeDisplayPath(filePath: string) {
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function requireStageCapabilityScopeIfPolicyHasStages(
+  repoRoot: string,
+  rawSpec: unknown
+) {
+  const stagesCount = await readStageCapabilityScopePolicyStagesCount(repoRoot);
+  if (stagesCount > 0 && (!isRecord(rawSpec) || rawSpec.stage_capability_scope == null)) {
+    throw new Error("Work item spec missing required field: stage_capability_scope");
+  }
+}
+
+function readOptionalStageCapabilityScope(
+  spec: Record<string, unknown>
+): StageCapabilityScopeRef | undefined {
+  const raw = spec.stage_capability_scope;
+  if (!isRecord(raw)) return undefined;
+
+  return {
+    policy: typeof raw.policy === "string" ? raw.policy : "",
+    stages: toStringArray(raw.stages),
+    authorityRoles: toStringArray(raw.authority_roles),
+    requiredSkills: toStringArray(raw.required_skills),
+    forbiddenActions: toStringArray(raw.forbidden_actions)
+  };
+}
+
+function toStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item): item is string => typeof item === "string");
+}
+
+function renderStageCapabilityScope(scope: StageCapabilityScopeRef): string {
+  return `## Stage Capability Scope
+
+policy: ${scope.policy}
+stages:
+${scope.stages.map((s) => `- ${s}`).join("\n")}
+authority_roles:
+${scope.authorityRoles.map((r) => `- ${r}`).join("\n")}
+required_skills:
+${scope.requiredSkills.map((s) => `- ${s}`).join("\n")}
+forbidden_actions:
+${scope.forbiddenActions.map((a) => `- ${a}`).join("\n")}`;
 }
 
 function isMissingPathError(error: unknown) {

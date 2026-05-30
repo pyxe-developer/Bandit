@@ -1,0 +1,8 @@
+{
+  "contract_version": 1,
+  "policy_id": "stage-capability-scope",
+  "authority_roles": [],
+  "no_new_agent_roles_for_capabilities": true,
+  "soft_budget_bands": [],
+  "stages": []
+}

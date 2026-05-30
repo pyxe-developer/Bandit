@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** `BANDIT-054` is blocked on operator-owned input after the minimal Claude Process Adapter preflight/rerun classified the Claude Writer path unavailable under the current auth/profile setup. The post-auth-restoration full-bare preflight still failed with `apiKeySource: none`. Choose one path: provide a full-bare Claude auth profile that reports `apiKeySource` other than `none`, approve a scoped model-family-separation exception for non-Claude/Codex Stage 3 implementation, or defer/close `BANDIT-054` with explicit no-action disposition. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** `BANDIT-054` has Stage 3 implementation evidence recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Run Stage 4 review: pre-PR CodeRabbit, Local Qwen, risk-classification, supply-chain gate, and aggregate review evidence at the current review subject hash. Do not start `BANDIT-055` until `BANDIT-054` has Stage 4 review evidence, Stage 5 landing verdict and landing action, Stage 6 retrospective, gap-ledger disposition, and context closeout.
 
 ## Next Work Item
 

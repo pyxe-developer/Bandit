@@ -26,6 +26,7 @@ import { riskClassification } from "./commands/risk-classification.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
+import { stageCapabilityScope } from "./commands/stage-capability-scope.js";
 import { supplyChainGate } from "./commands/supply-chain-gate.js";
 import { uat } from "./commands/uat.js";
 import { sessionContext } from "./commands/session-context.js";
@@ -205,6 +206,12 @@ async function main() {
     return;
   }
 
+  if (command === "stage-capability-scope") {
+    const result = await stageCapabilityScope(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "coordination") {
     const result = await coordination(process.cwd(), args);
     process.stdout.write(result.output);
@@ -248,7 +255,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler>`);
   process.exitCode = 1;
 }
 

@@ -1,0 +1,28 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-054",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "writer": "claude-sonnet-4-6",
+  "writer_path": "bootstrap Process Adapter path",
+  "test_ownership_boundary_preserved": true,
+  "production_files_changed": [
+    "src/state/stage-capability-scope.ts",
+    "src/commands/stage-capability-scope.ts",
+    "src/cli.ts",
+    "src/commands/validate.ts",
+    "src/commands/work-item-create.ts",
+    ".bandit/policy/stage-capability-scope.json",
+    "docs/templates/stage-capability-scope.md"
+  ],
+  "test_files_changed": [],
+  "verification": {
+    "stage_capability_scope_tests": { "tests": 6, "pass": 6, "fail": 0 },
+    "work_item_create_tests": { "tests": 8, "pass": 8, "fail": 0 },
+    "validate_tests": { "tests": 22, "pass": 22, "fail": 0 },
+    "full_suite": { "tests": 430, "pass": 430, "fail": 0 },
+    "typecheck": "pass",
+    "bandit_validate": "pass",
+    "git_diff_check": "pass"
+  }
+}

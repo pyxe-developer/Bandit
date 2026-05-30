@@ -117,3 +117,5 @@
 {"type":"artifact_created","work_item":"BANDIT-053","message":"Created retrospective artifact at docs/work/BANDIT-053/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-054","message":"Created work item BANDIT-054 from docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created red_evidence artifact at docs/work/BANDIT-054/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/specs/BANDIT-054-implementation-evidence.json"}
+{"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/work/BANDIT-054/implementation-evidence.md"}

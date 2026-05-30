@@ -400,28 +400,21 @@ generated from `docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`.
 Stage 2 RED evidence is recorded in `test/stage-capability-scope.test.mjs`,
 `docs/specs/BANDIT-054-red-evidence.json`, and
 `docs/work/BANDIT-054/red-evidence.md`.
+Stage 3 implementation evidence is recorded in
+`docs/work/BANDIT-054/implementation-evidence.md`,
+`docs/specs/BANDIT-054-implementation-evidence.json`, and
+`docs/work/BANDIT-054/writer-report.md`.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** `BANDIT-054` is blocked on operator-owned input. The
-recorded minimal-profile preflight and rerun are complete: the full bare
-profile failed authentication with no API key source, `--disable-slash-commands`
-passed a preflight with `end_turn`, and the
-one permitted no-slash Stage 3 rerun wedged after source reads with no edits, no
-`end_turn`, and no `docs/work/BANDIT-054/writer-report.md`. Raw evidence is in
-`.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/`; diagnosis
-is recorded in `docs/work/BANDIT-054/writer-dispatch-blocker.md`. After the
-operator reported Claude auth restored, the full-bare preflight still failed
-with `apiKeySource: none` and `Not logged in`; raw evidence is in
-`.audit/BANDIT-054/claude-dispatch-20260530T134620Z-preflight-bare-restored/`.
-The operator must either provide an auth profile that makes the full `--bare`
-Claude Writer profile runnable with `apiKeySource` other than `none`, approve a
-scoped model-family-separation exception for non-Claude/Codex Stage 3
-implementation, or defer/close `BANDIT-054` with an explicit no-action policy
-decision. Do not self-substitute, edit Stage 2-owned surfaces, or start
-`BANDIT-055`.
+**Current next action:** run Stage 4 review for `BANDIT-054`: pre-PR
+CodeRabbit, Local Qwen, risk-classification, supply-chain gate, and aggregate
+review evidence at the current review subject hash. Historical Claude Process
+Adapter blocker evidence remains recorded in
+`docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
+has Stage 3 implementation evidence and current passing verification.
 
-The current stage is Stage 3: Implementation Clean-Code Rubric.
+The current stage is Stage 4: Pre-Landing Review Loop.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -811,18 +804,16 @@ in `test/stage-capability-scope.test.mjs`,
 `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap as
 active for `BANDIT-054`.
 
-The current stage is Stage 3: Implementation Clean-Code Rubric, but Stage 3 is
-blocked. The minimal Claude Process Adapter profile repair has been attempted
-and the Claude Writer path is unavailable for `BANDIT-054` under the current
-auth/profile setup. `docs/work/BANDIT-054/writer-dispatch-blocker.md` records
-the attempt-6 preflight/rerun diagnosis and the post-auth-restoration attempt-9
-full-bare preflight failure. The next action requires operator-owned input:
-provide a full-bare Claude auth profile that reports `apiKeySource` other than
-`none`, approve a scoped model-family-separation exception for non-Claude/Codex
-Stage 3 implementation, or defer/close `BANDIT-054` with explicit no-action
-disposition. Do not create landing evidence, Stage 4 review evidence, or
-unrelated Phase 8 work before Stage 3 implementation evidence exists or the
-operator changes the path.
+The current stage is Stage 4: Pre-Landing Review Loop. Stage 3 implementation
+evidence is recorded in `docs/work/BANDIT-054/implementation-evidence.md`,
+`docs/specs/BANDIT-054-implementation-evidence.json`, and
+`docs/work/BANDIT-054/writer-report.md`. The current verified implementation
+adds the Stage Capability Scope policy validator, command surface, validate
+integration, work-item spec requirement, and generated brief rendering without
+editing Stage 2-owned tests, fixtures, RED evidence artifacts/specs, or
+acceptance mappings. The next action is Stage 4 review evidence; do not create
+landing evidence, closeout evidence, or unrelated Phase 8 work before Stage 4
+review is complete.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1066,14 +1057,11 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 3 implementation evidence for `BANDIT-054`,
-the bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, after Claude
-implements the narrow Stage Capability Scope repair without editing tests, test
-helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, full
-scheduler execution runtime behavior, full worktree lifecycle implementation,
-claim lease creation or release, cockpit UI/server/API work, PR/CI workflow,
-automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
-work.
+**Expected next deliverable:** Stage 4 review evidence for `BANDIT-054`, the
+bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, including pre-PR
+CodeRabbit evidence, Local Qwen evidence, risk-classification evidence,
+supply-chain gate evidence, and aggregate review evidence with the current
+review subject hash.
 
 ## Known Bootstrap Gaps
 
@@ -1462,15 +1450,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Resolve the `BANDIT-054` operator-owned Stage 3 blocker. The minimal Claude
-   Process Adapter preflight/rerun is complete and the Claude Writer path is
-   unavailable under the current auth/profile setup. The post-auth-restoration
-   full-bare preflight still failed with `apiKeySource: none`. The operator
-   must provide a full-bare Claude auth profile that reports `apiKeySource`
-   other than `none`, approve a scoped model-family-separation exception for
-   non-Claude/Codex Stage 3 implementation, or defer/close `BANDIT-054` with
-   explicit no-action disposition. Do not edit tests, test helpers, fixtures,
-   RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+1. Run `BANDIT-054` Stage 4 review: pre-PR CodeRabbit, Local Qwen,
+   risk-classification, supply-chain gate, and aggregate review evidence at the
+   current review subject hash. Do not start landing or `BANDIT-055` until
+   Stage 4 evidence is recorded and dispositioned.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1504,31 +1487,14 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-Operator-owned input is required before `BANDIT-054` can proceed: provide a
-full-bare Claude auth profile that reports `apiKeySource` other than `none`,
-approve a scoped model-family-separation exception, or defer/close
-`BANDIT-054` with explicit no-action disposition.
-
-`BANDIT-053` has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, passing pre-PR CodeRabbit Stage 4 evidence, Local Qwen non-blocking
-evidence with PM disposition, aggregate Stage 4 review evidence, Stage 5
-landing verdict evidence with risk-classification and supply-chain gate
-evidence, local-record landing action evidence, Stage 6 retrospective closeout,
-and resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
-`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` as active for `BANDIT-054`. `BANDIT-054`
-has Stage 1 brief evidence and Stage 2 RED evidence. Codex PM prepared
-`docs/work/BANDIT-054/dispatch.md`, attempted the recorded Claude Process
-Adapter repairs, preflighted full-bare and no-slash minimal profiles, and
-performed the one permitted no-slash Stage 3 rerun. That rerun still produced no
-implementation edits, verification, `end_turn`, or `writer-report.md`; the
-Claude Writer path is unavailable under the current auth/profile setup. After
-the operator reported Claude auth restored, the full-bare preflight still failed
-with `apiKeySource: none` and `Not logged in`. The operator must choose one
-path: provide a Claude API-key or settings-backed auth profile that allows the
-full `--bare` direct-writer profile to run with `apiKeySource` other than
-`none`; approve a scoped policy exception allowing a non-Claude or Codex-authored
-Stage 3 implementation despite the model-family-separation boundary; or
-defer/close `BANDIT-054` with an explicit no-action policy decision.
+No operator-owned input is required for the next recorded action. `BANDIT-054`
+has Stage 1 brief evidence, Stage 2 RED evidence, and Stage 3 implementation
+evidence. The next required action is Stage 4 review evidence. Historical Claude Process Adapter
+blocker evidence remains recorded in
+`docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
+routing by `docs/work/BANDIT-054/implementation-evidence.md`,
+`docs/specs/BANDIT-054-implementation-evidence.json`, and
+`docs/work/BANDIT-054/writer-report.md`.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
