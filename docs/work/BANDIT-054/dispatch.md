@@ -10,6 +10,19 @@
 - Base SHA: `9003891`
 - Dispatch status: Stage 3 implementation requested
 
+## Narrowed Process Adapter Instructions
+
+This is a direct Stage 3 Writer dispatch. Do not perform meta-workflow
+selection, subagent selection, workflow planning, or skill delegation. Do not
+invoke `Task`, subagents, slash-command skills, or workflow-management tools.
+Read the required files below, make the focused production implementation
+edits allowed by this packet, run the required verification, write the required
+Writer report, and stop.
+
+If local runtime instructions force you to load a startup skill before work,
+load only the minimum required startup skill, then immediately return to this
+dispatch packet. Do not dispatch another agent or broaden the role taxonomy.
+
 ## Required First Reads
 
 Read these before editing:

@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** Rerun Claude Process Adapter Stage 3 for `BANDIT-054` with a narrowed dispatched-writer prompt that skips meta-workflow skill/subagent selection and executes `docs/work/BANDIT-054/dispatch.md` directly. `docs/work/BANDIT-054/writer-dispatch-blocker.md` records the attempt-4 diagnosis. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** Preflight a minimal Claude Process Adapter direct-writer profile for `BANDIT-054` (`--bare`, `--disable-slash-commands`, or current equivalents) while retaining Sonnet 4.6, `xhigh`, verbose `stream-json`, bypass permissions, no session persistence, and raw stdout/stderr capture. If it passes, rerun Stage 3 once; if it fails or wedges again before `end_turn` and `writer-report.md`, classify the Claude Writer path as unavailable. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 

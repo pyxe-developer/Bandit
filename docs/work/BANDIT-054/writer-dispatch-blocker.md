@@ -20,6 +20,16 @@ after two no-output `grep` probes and never reached `end_turn`, implementation
 edits, or `writer-report.md`. Codex PM terminated the still-running subprocess
 after the stream stayed inactive for more than two minutes.
 
+Codex PM then added narrowed direct-dispatch instructions to
+`docs/work/BANDIT-054/dispatch.md` and reran the Claude Process Adapter with
+Sonnet 4.6, `xhigh` effort, verbose `stream-json`, bypass permissions, no
+session persistence, a max-budget failsafe, and `Task` disallowed. Attempt 5
+produced active stream output and read the required Bandit context, RED
+evidence, tests, and implementation files, but again stopped before
+implementation edits, verification, `end_turn`, or `writer-report.md`. Codex PM
+interrupted the subprocess after the stream remained inactive for about two
+minutes.
+
 Codex PM did not self-substitute for the Stage 3 Writer because `BANDIT-054`
 Stage 2 RED evidence was Codex-authored and the active work item requires
 Claude-family Stage 3 implementation through the bootstrap Process Adapter
@@ -41,6 +51,11 @@ path.
    - Terminal state: Codex PM sent SIGTERM after more than two minutes of stream inactivity; wrapper exit code `143`.
    - Raw evidence: `.audit/BANDIT-054/claude-dispatch-20260530T005954Z/stdout.jsonl`, `.audit/BANDIT-054/claude-dispatch-20260530T005954Z/stderr.log`, `.audit/BANDIT-054/claude-dispatch-20260530T005954Z/command.txt`, `.audit/BANDIT-054/claude-dispatch-20260530T005954Z/exit-code.txt`.
    - Repo edits: none beyond existing PM-authored dispatch packet and this blocker/status update.
+5. `claude -p --model claude-sonnet-4-6 --effort xhigh --verbose --output-format stream-json --permission-mode bypassPermissions --no-session-persistence --max-budget-usd 5.00 --disallowedTools Task -- "<narrowed dispatch prompt>"`
+   - Result: emitted JSONL stream output, invoked Claude startup hooks, read the required Bandit context, RED evidence, test, and implementation files, reasoned about the Stage Capability Scope implementation strategy, and then stopped before edits.
+   - Terminal state: Codex PM interrupted the process after about two minutes of stream inactivity; Claude result recorded `subtype: error_during_execution`, `terminal_reason: aborted_streaming`, `stop_reason: tool_use`, total cost `$0.76342185`, and no permission denials. The wrapper did not reach its exit-code write after the interrupt.
+   - Raw evidence: `.audit/BANDIT-054/claude-dispatch-20260530T020000Z/stdout.jsonl`, `.audit/BANDIT-054/claude-dispatch-20260530T020000Z/stderr.log`, `.audit/BANDIT-054/claude-dispatch-20260530T020000Z/command.txt`.
+   - Repo edits: the PM-owned dispatch packet gained narrowed Process Adapter instructions; the Writer made no production edits and did not create `writer-report.md`.
 
 ## Boundary Decision
 
@@ -69,11 +84,33 @@ delegation, and directs the writer to execute the existing
 the Test Ownership Boundary and still stop rather than edit tests, test helpers,
 fixtures, RED evidence artifacts/specs, or acceptance mappings.
 
+## Attempt 5 Diagnosis
+
+Attempt 5 proved that prompt-only narrowing and `Task` disallowance were not
+sufficient. The adapter did avoid subagent delegation and reached deeper source
+analysis than attempt 4, including `src/commands/validate.ts`,
+`test/work-item-create.test.mjs`, `test/helpers/bandit-cli.mjs`,
+`docs/specs/BANDIT-054-red-evidence.json`,
+`test/stage-capability-scope.test.mjs`, `src/cli.ts`, and
+`src/state/templates.ts`. It still did not reach an edit, verification command,
+`end_turn`, or `docs/work/BANDIT-054/writer-report.md`.
+
+`stderr.log` is empty. The stream ended only because Codex PM interrupted the
+wedged subprocess, and the repo has no Writer-authored production changes from
+attempt 5.
+
 ## Next Action
 
-Rerun Stage 3 through the Claude Process Adapter with the narrowed dispatched
-writer prompt described above. A successful next dispatch must reach `end_turn`,
-make the focused Stage 3 implementation edits, and produce
-`docs/work/BANDIT-054/writer-report.md`. Do not edit Stage 2 tests, test
-helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings. Do not
-start `BANDIT-055`.
+Repair the Claude Process Adapter invocation one more level before rerunning
+Stage 3: preflight whether the installed Claude CLI can run a minimal
+direct-writer profile that suppresses startup skills/hooks or slash-command
+loading (`--bare`, `--disable-slash-commands`, or current equivalents) while
+retaining Sonnet 4.6, `xhigh` effort, verbose `stream-json`, bypass
+permissions, no session persistence, and raw stdout/stderr capture. If that
+preflight passes, rerun Stage 3 once with the existing
+`docs/work/BANDIT-054/dispatch.md` contract. If the preflight fails or the
+minimal rerun also wedges before `end_turn` and `writer-report.md`, classify
+the Claude Writer path as unavailable for this work item and surface the
+blocker instead of self-substituting. Do not edit Stage 2 tests, test helpers,
+fixtures, RED evidence artifacts/specs, or acceptance mappings. Do not start
+`BANDIT-055`.
