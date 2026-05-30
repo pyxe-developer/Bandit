@@ -12,9 +12,11 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 `BANDIT-054` is active as the bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Stage 1 brief evidence is recorded in `docs/work/BANDIT-054/brief.md`, generated from `docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`. Stage 2 RED evidence is recorded in `test/stage-capability-scope.test.mjs`, `docs/specs/BANDIT-054-red-evidence.json`, and `docs/work/BANDIT-054/red-evidence.md`. Historical Claude Process Adapter dispatch blockers are recorded in `docs/work/BANDIT-054/writer-dispatch-blocker.md`.
 
-Stage 3 implementation evidence is now recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Current verification passes: focused Stage Capability Scope tests, work-item-create tests, typecheck, `bandit validate`, `git diff --check`, and the full `npm test` suite.
+Stage 3 implementation evidence is recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Current verification passes: focused Stage Capability Scope tests, work-item-create tests, typecheck, `bandit validate`, `git diff --check`, and the full `npm test` suite.
 
-Next action: run Stage 4 review for `BANDIT-054` with pre-PR CodeRabbit, Local Qwen, risk-classification, supply-chain gate, and aggregate review evidence at the current review subject hash. No operator-owned input is currently required.
+Stage 4 pre-PR CodeRabbit is blocked: focused provider attempts against the full `BANDIT-054` packet and the Stage 3 implementation delta timed out without a terminal verdict. Standard blocker evidence is recorded in `docs/specs/BANDIT-054-coderabbit-review-output.json` and `docs/work/BANDIT-054/coderabbit-review.md`.
+
+Next action: rerun or disposition the `BANDIT-054` pre-PR CodeRabbit timeout before Local Qwen, risk-classification, supply-chain gate, aggregate review evidence, landing, closeout, or `BANDIT-055`. No operator-owned input is currently required.
 
 This file is now part of Bandit's session-closeout workflow and should be
 refreshed whenever the current work item, current status, next action, required
@@ -27,7 +29,7 @@ PRD slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-054` - Stage Capability Scope (Stage 4 review next)
+- `BANDIT-054` - Stage Capability Scope (Stage 4 CodeRabbit timeout)
 - `BANDIT-053` - Agent Observability Traces (closed)
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-051` - Worktree Bootstrap Contract

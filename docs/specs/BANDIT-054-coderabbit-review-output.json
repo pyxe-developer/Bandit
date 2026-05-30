@@ -1,0 +1,33 @@
+{
+  "sourceHead": "9fee8590b4441b16a03264ddedd328746cc6f9b9",
+  "baseRevision": "0efe60c",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "findings": [],
+  "providerError": "CodeRabbit pre-PR provider retry was terminated after more than four minutes with no terminal verdict after setup, summarizing, and reviewing phases.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceHead": "9fee8590b4441b16a03264ddedd328746cc6f9b9",
+      "baseRevision": "d55172f",
+      "endedAt": "2026-05-30T15:02:00Z",
+      "result": "timeout",
+      "summary": "Provider reached setup, summarizing, and reviewing for the focused BANDIT-054 packet, then produced no terminal verdict before termination after more than five minutes."
+    },
+    {
+      "attempt": 2,
+      "sourceHead": "9fee8590b4441b16a03264ddedd328746cc6f9b9",
+      "baseRevision": "0efe60c",
+      "endedAt": "2026-05-30T15:07:00Z",
+      "result": "timeout",
+      "summary": "Provider reached setup, summarizing, and reviewing for the Stage 3 implementation delta, then produced no terminal verdict before termination after more than four minutes."
+    }
+  ],
+  "executableEvidence": [
+    "coderabbit --version returned 0.4.1.",
+    "coderabbit auth status returned authenticated for github user pyxe-developer.",
+    "No obvious secret patterns were found in git diff origin/main...HEAD before provider review.",
+    "Attempt 1: coderabbit review --agent --base-commit d55172f --files <focused BANDIT-054 packet> -c AGENTS.md --no-color.",
+    "Attempt 2: coderabbit review --agent --base-commit 0efe60c --files <BANDIT-054 Stage 3 implementation delta> -c AGENTS.md --no-color."
+  ]
+}

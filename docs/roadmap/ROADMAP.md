@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** `BANDIT-054` has Stage 3 implementation evidence recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Run Stage 4 review: pre-PR CodeRabbit, Local Qwen, risk-classification, supply-chain gate, and aggregate review evidence at the current review subject hash. Do not start `BANDIT-055` until `BANDIT-054` has Stage 4 review evidence, Stage 5 landing verdict and landing action, Stage 6 retrospective, gap-ledger disposition, and context closeout.
+**Current next step:** `BANDIT-054` has Stage 3 implementation evidence recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Stage 4 pre-PR CodeRabbit is blocked by provider timeout evidence in `docs/work/BANDIT-054/coderabbit-review.md`; rerun or disposition CodeRabbit before Local Qwen, risk-classification, supply-chain gate, aggregate review evidence, landing, closeout, or `BANDIT-055`. Do not start `BANDIT-055` until `BANDIT-054` has Stage 4 review evidence, Stage 5 landing verdict and landing action, Stage 6 retrospective, gap-ledger disposition, and context closeout.
 
 ## Next Work Item
 
