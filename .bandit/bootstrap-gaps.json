@@ -582,8 +582,8 @@
     {
       "id": "BANDIT-GAP-TOKEN-COST-FAILSAFE",
       "title": "Agent execution lacks abnormal-run token and cost failsafes",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -593,10 +593,10 @@
         "docs/prds/reviews/prd-001-003-research-review",
         "docs/prds/reviews/prd-002-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-055",
       "rationale": "The PRD research reviews identified token economics and multi-agent scheduler cost as unresolved risks, and the operator confirmed budgets should act as failsafes for abnormal runs rather than overly strict caps. Tight caps can force repeated failed attempts and cost more than letting a normal deep review finish. Paid reviewer, paid model, and paid/high-token recurring routes also need current provider-pricing evidence with pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner before they can be treated as available routing. One-off paid reviewer or model calls before policy promotion must be classified as benchmark/evaluation spend with per-run approval or active spend-class approval, not recurring routing policy.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-STAGE-CAPABILITY-SCOPE is resolved, create a bootstrap-gap chore to define provider-pricing evidence, benchmark/evaluation spend approvals, spend-class approvals, soft budget bands, abnormal-run token-cost failsafes, trace-backed cost signals, and continuation decisions for paid, high-token, reviewer, scheduler, and long-running execution."
+      "next_action": "Complete active chore BANDIT-055."
     },
     {
       "id": "BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS",

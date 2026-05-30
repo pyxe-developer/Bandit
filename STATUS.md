@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-05-30
 
-## Current Work Item: None - interstitial after BANDIT-054 closeout
+## Current Work Item: BANDIT-055 - Token-Cost Failsafe
 
 ## Current Status
 
@@ -10,7 +10,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 `BANDIT-054` is landed and closed out as the bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Its structured creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3 implementation evidence, CodeRabbit provider-refusal/bootstrap-gap evidence, Local Qwen pass evidence, aggregate Stage 4 review evidence, risk-classification and supply-chain gate evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective, and bootstrap-gap disposition are recorded.
 
-The next required action is to create the `BANDIT-055` bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Do not create RED evidence, implementation work, or unrelated Phase 8 work before the Stage 1 brief exists.
+`BANDIT-055` is active as the bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Its structured creation spec is recorded in `docs/specs/BANDIT-GAP-TOKEN-COST-FAILSAFE.json`, its Stage 1 brief is recorded in `docs/work/BANDIT-055/brief.md`, and `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-055`.
+
+The next required action is to create Stage 2 RED evidence for `BANDIT-055`. Do not start Stage 3 implementation, review, landing, or unrelated Phase 8 work before RED evidence exists.
 
 No operator-owned input is required for the next recorded action.
 
@@ -25,8 +27,8 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
+- `BANDIT-055` - Token-Cost Failsafe (Stage 1 brief created)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-051` - Worktree Bootstrap Contract
-- `BANDIT-050` - Cockpit Status Interstitial Recovery

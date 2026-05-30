@@ -4,13 +4,13 @@
 
 ## Current Work Item
 
-- `[Gap]` none - interstitial after `BANDIT-054` closeout
+- `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Create the `BANDIT-055` bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Do not create RED evidence, implementation work, or unrelated Phase 8 work before the Stage 1 brief exists.
+**Current next step:** Create Stage 2 RED evidence for `BANDIT-055`. Do not start Stage 3 implementation, review, landing, or unrelated Phase 8 work before RED evidence exists.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-055` - Token-Cost Failsafe
+- `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
 ## Planned Work
 
@@ -19,7 +19,7 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
+- `[Gap]` none beyond `BANDIT-056` - Evidence Freshness SLOs is the next work item, not an additional queued blocking gap.
 
 ### Deferred PRD Slices
 
