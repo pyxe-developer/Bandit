@@ -424,15 +424,17 @@ Stage 5 landing verdict evidence is recorded in
 `npm run bandit -- land-check BANDIT-054` passes with CodeRabbit
 `bootstrap_gap`, Local Qwen `pass`, UAT `not_applicable`, clean-code `pass`,
 and source drift `current`.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-054/landing-action.md`.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** run the local-record landing action for `BANDIT-054`
-with `npm run bandit -- land BANDIT-054 --action local-record` before
-retrospective closeout, gap-ledger disposition, or `BANDIT-055`. CodeRabbit is
+**Current next action:** record Stage 6 retrospective closeout and
+bootstrap-gap disposition for `BANDIT-054` before `BANDIT-055`. CodeRabbit is
 dispositioned as provider-refusal/bootstrap-gap replacement evidence, not pass
 evidence, aggregate Stage 4 review evidence is recorded, Stage 5 landing
-verdict evidence is recorded, and `land-check` passes.
+verdict evidence is recorded, `land-check` passes, and local-record landing
+action evidence exists.
 Historical Claude Process
 Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
@@ -440,7 +442,7 @@ has Stage 3 implementation evidence, CodeRabbit timeout disposition evidence,
 Local Qwen pass evidence, explicit risk/supply evidence, aggregate Stage 4
 review evidence, and current passing verification.
 
-The current stage is Stage 5: Landing And UAT.
+The current stage is Stage 6: Retrospective And Improvement Capture.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -852,10 +854,11 @@ aggregate Stage 4 review evidence is recorded in
 `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`;
-`npm run bandit -- land-check BANDIT-054` passes. The next action is to run
-the local-record landing action for `BANDIT-054`; do not create closeout
-evidence, gap-ledger disposition, `BANDIT-055`, or unrelated Phase 8 work
-before landing-action evidence exists.
+`npm run bandit -- land-check BANDIT-054` passes, and local-record landing
+action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`. The
+next action is to record Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-054`; do not create `BANDIT-055` or unrelated Phase 8
+work before closeout evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1099,8 +1102,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-054`, the
-bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, using the recorded
+**Expected next deliverable:** Stage 6 retrospective closeout and bootstrap-gap
+disposition for `BANDIT-054`, the bootstrap-gap chore for
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, using the recorded landing action,
 aggregate Stage 4 review evidence, CodeRabbit provider-refusal replacement
 evidence, Local Qwen pass evidence, risk-classification evidence, supply-chain
 gate evidence, and current review subject hash.
@@ -1492,16 +1496,17 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run local-record landing action for `BANDIT-054` with
-   `npm run bandit -- land BANDIT-054 --action local-record`. Stage 4 aggregate
+1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
+   `BANDIT-054`. Stage 4 aggregate
    review evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with
    review-subject hash
    `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`;
    CodeRabbit remains bootstrap-gap replacement evidence, Local Qwen is pass,
    Stage 5 landing verdict evidence is recorded in
-   `docs/work/BANDIT-054/landing-verdict.md`, `land-check` passes, and no
-   operator-owned input is required. Do not run closeout or `BANDIT-055` until
-   landing-action evidence exists.
+   `docs/work/BANDIT-054/landing-verdict.md`, local-record landing action
+   evidence is recorded in `docs/work/BANDIT-054/landing-action.md`,
+   `land-check` passes, and no operator-owned input is required. Do not start
+   `BANDIT-055` until retrospective closeout and gap-ledger disposition exist.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1545,9 +1550,10 @@ evidence. Aggregate Stage 4 review evidence is recorded in
 `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. Stage 5
 landing verdict evidence is recorded in
 `docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`;
-`npm run bandit -- land-check BANDIT-054` passes. The next required action is
-to run the local-record landing action for `BANDIT-054` before retrospective
-closeout or gap-ledger disposition.
+`npm run bandit -- land-check BANDIT-054` passes, and local-record landing
+action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`. The
+next required action is to record Stage 6 retrospective closeout and
+bootstrap-gap disposition for `BANDIT-054` before `BANDIT-055`.
 Historical Claude Process Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
 routing by `docs/work/BANDIT-054/implementation-evidence.md`,

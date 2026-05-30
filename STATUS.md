@@ -20,8 +20,9 @@ Stage 4 Local Qwen pass evidence is recorded in `docs/work/BANDIT-054/local-qwen
 Stage 4 layered risk-classification and supply-chain gate evidence is recorded in `.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and `.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`.
 Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with review-subject hash `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`.
 Stage 5 landing verdict evidence is recorded in `docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`; `npm run bandit -- land-check BANDIT-054` passes.
+Local-record landing action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`.
 
-Next action: run local-record landing action for `BANDIT-054` with `npm run bandit -- land BANDIT-054 --action local-record` before closeout or `BANDIT-055`. No operator-owned input is currently required.
+Next action: record Stage 6 retrospective closeout and bootstrap-gap disposition for `BANDIT-054` before `BANDIT-055`. No operator-owned input is currently required.
 
 This file is now part of Bandit's session-closeout workflow and should be
 refreshed whenever the current work item, current status, next action, required
@@ -34,7 +35,7 @@ PRD slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-054` - Stage Capability Scope (local-record landing action next)
+- `BANDIT-054` - Stage Capability Scope (Stage 6 closeout next)
 - `BANDIT-053` - Agent Observability Traces (closed)
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-051` - Worktree Bootstrap Contract
