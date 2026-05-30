@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** `BANDIT-054` is blocked on operator-owned input after the minimal Claude Process Adapter preflight/rerun classified the Claude Writer path unavailable under the current auth/profile setup. Choose one path: provide a full-bare Claude auth profile, approve a scoped model-family-separation exception for non-Claude/Codex Stage 3 implementation, or defer/close `BANDIT-054` with explicit no-action disposition. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** `BANDIT-054` is blocked on operator-owned input after the minimal Claude Process Adapter preflight/rerun classified the Claude Writer path unavailable under the current auth/profile setup. The post-auth-restoration full-bare preflight still failed with `apiKeySource: none`. Choose one path: provide a full-bare Claude auth profile that reports `apiKeySource` other than `none`, approve a scoped model-family-separation exception for non-Claude/Codex Stage 3 implementation, or defer/close `BANDIT-054` with explicit no-action disposition. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 

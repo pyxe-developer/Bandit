@@ -45,6 +45,11 @@ made no repository edits, did not reach `end_turn`, and did not create
 `docs/work/BANDIT-054/writer-report.md`; the wrapper terminated it after 185
 seconds of stream silence.
 
+After the operator reported that Claude auth was restored on 2026-05-30, Codex
+PM retried the full bare preflight. The invocation still failed immediately
+with `apiKeySource: none` and `Not logged in`. The restored profile therefore
+does not satisfy the recorded full-bare Writer-path unblock condition.
+
 Codex PM did not self-substitute for the Stage 3 Writer because `BANDIT-054`
 Stage 2 RED evidence was Codex-authored and the active work item requires
 Claude-family Stage 3 implementation through the bootstrap Process Adapter
@@ -83,6 +88,12 @@ path.
    - Result: emitted JSONL stream output, read the required Bandit context, RED evidence, tests, and implementation files, then stopped before implementation edits.
    - Terminal state: wrapper sent SIGTERM after 185 seconds of stream silence; exit code `143`; no `end_turn`; `stderr.log` was empty.
    - Raw evidence: `.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/stdout.jsonl`, `.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/stderr.log`, `.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/command.txt`, `.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/exit-code.txt`, `.audit/BANDIT-054/claude-dispatch-20260530T023112Z-minimal-rerun/termination.txt`.
+   - Repo edits: none; `docs/work/BANDIT-054/writer-report.md` was not created.
+9. `claude -p --model claude-sonnet-4-6 --effort xhigh --verbose --output-format stream-json --permission-mode bypassPermissions --no-session-persistence --max-budget-usd 1.00 --bare --disable-slash-commands -- "<preflight prompt>"`
+   - Trigger: operator reported Claude auth was restored on 2026-05-30.
+   - Result: full bare profile still failed authentication.
+   - Terminal state: exit code `1`; stream recorded `apiKeySource: none` and `Not logged in`; no repo edits.
+   - Raw evidence: `.audit/BANDIT-054/claude-dispatch-20260530T134620Z-preflight-bare-restored/stdout.jsonl`, `.audit/BANDIT-054/claude-dispatch-20260530T134620Z-preflight-bare-restored/stderr.log`, `.audit/BANDIT-054/claude-dispatch-20260530T134620Z-preflight-bare-restored/command.txt`, `.audit/BANDIT-054/claude-dispatch-20260530T134620Z-preflight-bare-restored/exit-code.txt`.
    - Repo edits: none; `docs/work/BANDIT-054/writer-report.md` was not created.
 
 ## Boundary Decision
@@ -145,11 +156,21 @@ Claude-family Stage 3 implementation through the Process Adapter path unless
 the operator changes the policy, approves a scoped exception, or provides an
 auth profile that makes the full bare Claude Writer profile runnable.
 
+## Attempt 9 Diagnosis
+
+Attempt 9 tested the operator-reported auth restoration against the exact
+full-bare preflight profile required to unblock the Stage 3 Writer path. The
+profile still initializes with `apiKeySource: none` and returns `Not logged in`,
+with no stderr and no repo edits. The available restored auth therefore does
+not reach bare mode. The recorded no-slash profile remains insufficient because
+attempt 8 already proved it can authenticate but wedges before Writer output.
+
 ## Next Action
 
 `BANDIT-054` is blocked on operator-owned input. Choose one path: provide a
 Claude API-key or settings-backed auth profile that allows the full `--bare`
-direct-writer profile to run; approve a scoped policy exception allowing a
+direct-writer profile to run and report `apiKeySource` other than `none`;
+approve a scoped policy exception allowing a
 non-Claude or Codex-authored Stage 3 implementation despite the
 model-family-separation boundary; or defer/close `BANDIT-054` with an explicit
 no-action policy decision. Until that input exists, do not edit Stage 2 tests,
