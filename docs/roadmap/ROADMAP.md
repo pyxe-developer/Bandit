@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** Preflight a minimal Claude Process Adapter direct-writer profile for `BANDIT-054` (`--bare`, `--disable-slash-commands`, or current equivalents) while retaining Sonnet 4.6, `xhigh`, verbose `stream-json`, bypass permissions, no session persistence, and raw stdout/stderr capture. If it passes, rerun Stage 3 once; if it fails or wedges again before `end_turn` and `writer-report.md`, classify the Claude Writer path as unavailable. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** `BANDIT-054` is blocked on operator-owned input after the minimal Claude Process Adapter preflight/rerun classified the Claude Writer path unavailable under the current auth/profile setup. Choose one path: provide a full-bare Claude auth profile, approve a scoped model-family-separation exception for non-Claude/Codex Stage 3 implementation, or defer/close `BANDIT-054` with explicit no-action disposition. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 
