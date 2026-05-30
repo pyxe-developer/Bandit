@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Repair or explicitly disposition the open trivial CodeRabbit finding for `BANDIT-055` in `docs/templates/token-cost-failsafe.md`, then rerun focused verification and refresh CodeRabbit evidence before Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
+**Current next step:** Repair or explicitly disposition the four open repair-head CodeRabbit validation findings for `BANDIT-055` in `src/state/token-cost-failsafe.ts`, then rerun focused verification and refresh CodeRabbit evidence before Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 ## Next Work Item
 

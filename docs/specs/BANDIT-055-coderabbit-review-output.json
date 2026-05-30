@@ -1,14 +1,32 @@
 {
-  "sourceHead": "c916dbe4024d666d6e42a30022f6cfbc7af29d1b",
+  "sourceHead": "b696c13d72a64bb20fef0246cf01cd0641c75bbb",
   "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
   "reviewState": "completed",
-  "verdict": "non_blocking",
+  "verdict": "blocker",
   "findings": [
     {
-      "severity": "trivial",
-      "fileName": "docs/templates/token-cost-failsafe.md",
+      "severity": "minor",
+      "fileName": "src/state/token-cost-failsafe.ts",
       "status": "open",
-      "body": "The token-cost failsafe template only lists field names without field guidance, expected types, required or optional status, examples, validation rules, allowed values, or a schema/example block."
+      "body": "validateBenchmarkEvaluationSpend checks approval and non_recurring_routing_disposition but does not validate provider_pricing_evidence or expected_per_run_cost even though the refusal text requires them."
+    },
+    {
+      "severity": "minor",
+      "fileName": "src/state/token-cost-failsafe.ts",
+      "status": "open",
+      "body": "validateRecurringPaidRoutes checks spend_class_approval, promotion_threshold, and applies_to_stage_capability_profile but not provider_pricing_evidence or expected_cost_ceiling."
+    },
+    {
+      "severity": "trivial",
+      "fileName": "src/state/token-cost-failsafe.ts",
+      "status": "open",
+      "body": "validateSoftBudgetBands uses denylisted invalid values, allowing unknown budget_mode or normal_variance_policy values to pass instead of failing closed."
+    },
+    {
+      "severity": "major",
+      "fileName": "src/state/token-cost-failsafe.ts",
+      "status": "open",
+      "body": "validateTraceCostSignalBoundary rejects can_satisfy_required_workflow_artifacts=true but does not reject can_replace_approvals_or_landing_evidence=true."
     }
   ],
   "providerError": "",
@@ -28,12 +46,21 @@
       "endedAt": "2026-05-30T21:06:15Z",
       "result": "completed",
       "summary": "Provider reached setup, summarizing, and reviewing for the focused BANDIT-055 Stage 3 delta, then returned one trivial template-guidance finding."
+    },
+    {
+      "attempt": 3,
+      "sourceHead": "b696c13d72a64bb20fef0246cf01cd0641c75bbb",
+      "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
+      "endedAt": "2026-05-30T21:35:50Z",
+      "result": "completed",
+      "summary": "Provider completed the repair-head review after b696c13 repaired docs/templates/token-cost-failsafe.md. The prior template finding is cleared; four open src/state/token-cost-failsafe.ts validation findings remain."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status returned authenticated for github user pyxe-developer.",
     "Attempt 1: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta> -c AGENTS.md --no-color.",
-    "Attempt 2: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta> -c AGENTS.md --no-color."
+    "Attempt 2: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta> -c AGENTS.md --no-color.",
+    "Attempt 3: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta plus repaired docs/templates/token-cost-failsafe.md> -c AGENTS.md --no-color."
   ]
 }
