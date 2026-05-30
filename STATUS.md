@@ -16,7 +16,9 @@ Stage 3 implementation evidence is recorded in `docs/work/BANDIT-054/implementat
 
 Stage 4 pre-PR CodeRabbit timed out twice: focused provider attempts against the full `BANDIT-054` packet and the Stage 3 implementation delta timed out without a terminal verdict. Standard blocker evidence is recorded in `docs/specs/BANDIT-054-coderabbit-review-output.json` and `docs/work/BANDIT-054/coderabbit-review.md`; Codex PM provider-refusal/bootstrap-gap disposition is recorded in `docs/work/BANDIT-054/coderabbit-timeout-disposition.md`.
 
-Next action: run Stage 4 Local Qwen adversarial review for `BANDIT-054` before risk-classification, supply-chain gate, aggregate review evidence, landing, closeout, or `BANDIT-055`. No operator-owned input is currently required.
+Stage 4 Local Qwen pass evidence is recorded in `docs/work/BANDIT-054/local-qwen-review.md`.
+
+Next action: record the remaining Stage 4 layered risk-classification and supply-chain gate evidence for `BANDIT-054` before aggregate review evidence, landing, closeout, or `BANDIT-055`. No operator-owned input is currently required.
 
 This file is now part of Bandit's session-closeout workflow and should be
 refreshed whenever the current work item, current status, next action, required
@@ -29,7 +31,7 @@ PRD slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-054` - Stage Capability Scope (Stage 4 Local Qwen next)
+- `BANDIT-054` - Stage Capability Scope (Stage 4 risk/supply evidence next)
 - `BANDIT-053` - Agent Observability Traces (closed)
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-051` - Worktree Bootstrap Contract

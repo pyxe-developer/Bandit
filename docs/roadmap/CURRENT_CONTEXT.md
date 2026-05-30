@@ -409,19 +409,20 @@ Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
 `docs/specs/BANDIT-054-coderabbit-review-output.json`. Codex PM
 provider-refusal/bootstrap-gap disposition is recorded in
 `docs/work/BANDIT-054/coderabbit-timeout-disposition.md`; CodeRabbit is not
-treated as pass evidence, and Local Qwen remains required.
+treated as pass evidence. Stage 4 Local Qwen pass evidence is recorded in
+`docs/work/BANDIT-054/local-qwen-review.md`.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** run Stage 4 Local Qwen adversarial review for
-`BANDIT-054`. CodeRabbit is dispositioned as provider-refusal/bootstrap-gap
-replacement evidence, not pass evidence. Do not run risk-classification,
-supply-chain gate, aggregate review evidence, landing, closeout, or
-`BANDIT-055` until Local Qwen evidence exists. Historical Claude Process
+**Current next action:** record the remaining Stage 4 layered
+risk-classification and supply-chain gate evidence for `BANDIT-054` before
+aggregate review evidence, landing, closeout, or `BANDIT-055`. CodeRabbit is
+dispositioned as provider-refusal/bootstrap-gap replacement evidence, not pass
+evidence. Historical Claude Process
 Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
 has Stage 3 implementation evidence, CodeRabbit timeout disposition evidence,
-and current passing verification.
+Local Qwen pass evidence, and current passing verification.
 
 The current stage is Stage 4: Pre-Landing Review Loop.
 
@@ -825,10 +826,11 @@ acceptance mappings. Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
 `docs/specs/BANDIT-054-coderabbit-review-output.json`, and Codex PM
 provider-refusal/bootstrap-gap disposition is recorded in
 `docs/work/BANDIT-054/coderabbit-timeout-disposition.md`. CodeRabbit is not
-treated as pass evidence. The next action is to run Stage 4 Local Qwen
-adversarial review for `BANDIT-054`; do not create aggregate review evidence,
-landing evidence, closeout evidence, or unrelated Phase 8 work before Local
-Qwen evidence exists.
+treated as pass evidence. Stage 4 Local Qwen pass evidence is recorded in
+`docs/work/BANDIT-054/local-qwen-review.md`. The next action is to record the
+remaining Stage 4 layered risk-classification and supply-chain gate evidence
+for `BANDIT-054`; do not create aggregate review evidence, landing evidence,
+closeout evidence, or unrelated Phase 8 work before that evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1465,13 +1467,15 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 Local Qwen adversarial review for `BANDIT-054`.
+1. Record Stage 4 layered risk-classification and supply-chain gate evidence
+   for `BANDIT-054`.
    `docs/work/BANDIT-054/coderabbit-review.md` records a blocker timeout with
    no operator-owned input required, and
    `docs/work/BANDIT-054/coderabbit-timeout-disposition.md` records the Codex
-   PM provider-refusal/bootstrap-gap disposition. Do not run
-   risk-classification, supply-chain gate, aggregate review evidence, landing,
-   or `BANDIT-055` until Local Qwen evidence exists.
+   PM provider-refusal/bootstrap-gap disposition.
+   `docs/work/BANDIT-054/local-qwen-review.md` records a Local Qwen pass. Do
+   not run aggregate review evidence, landing, or `BANDIT-055` until layered
+   risk-classification and supply-chain gate evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1508,9 +1512,10 @@ raw-HEAD evidence loops.
 No operator-owned input is required for the next recorded action. `BANDIT-054`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
 evidence, Stage 4 pre-PR CodeRabbit blocker evidence, and Codex PM
-provider-refusal/bootstrap-gap disposition evidence. The next required action is
-to run Stage 4 Local Qwen adversarial review for `BANDIT-054` before the
-remaining Stage 4 gates.
+provider-refusal/bootstrap-gap disposition evidence, and Stage 4 Local Qwen
+pass evidence. The next required action is to record the remaining Stage 4
+layered risk-classification and supply-chain gate evidence for `BANDIT-054`
+before aggregate review evidence.
 Historical Claude Process Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
 routing by `docs/work/BANDIT-054/implementation-evidence.md`,
