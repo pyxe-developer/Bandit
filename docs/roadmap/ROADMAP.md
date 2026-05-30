@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Run Stage 4 pre-PR CodeRabbit review for `BANDIT-055` against base `a2ea27d9361c73b3beef30930dfe348feebcb709`, then continue Stage 4 review gates only after CodeRabbit evidence or honest provider-refusal evidence is recorded. Do not start landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work before Stage 4 aggregate review evidence exists.
+**Current next step:** Repair or explicitly disposition the open trivial CodeRabbit finding for `BANDIT-055` in `docs/templates/token-cost-failsafe.md`, then rerun focused verification and refresh CodeRabbit evidence before Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 ## Next Work Item
 

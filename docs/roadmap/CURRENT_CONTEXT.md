@@ -409,18 +409,22 @@ implementation evidence are recorded in `docs/work/BANDIT-055/dispatch.md`,
 `bandit token-cost-failsafe validate --json`, repo validation integration,
 token-cost failsafe policy/template artifacts, and work-item brief rendering
 for `token_cost_failsafe` without editing tests, test helpers, fixtures, RED
-evidence artifacts/specs, or acceptance mappings. No review work, landing work,
-retrospective work, `BANDIT-056` work, or unrelated Phase 8 work has started.
+evidence artifacts/specs, or acceptance mappings. Stage 4 pre-PR CodeRabbit
+evidence is recorded in `docs/work/BANDIT-055/coderabbit-review.md` and
+`docs/specs/BANDIT-055-coderabbit-review-output.json` with one trivial open
+template-guidance finding. No Local Qwen work, aggregate Stage 4 review work,
+landing work, retrospective work, `BANDIT-056` work, or unrelated Phase 8 work
+has started.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Run Stage 4 pre-PR CodeRabbit review for `BANDIT-055`
-against base `a2ea27d9361c73b3beef30930dfe348feebcb709`, then continue Stage
-4 review gates only after CodeRabbit evidence or honest provider-refusal
-evidence is recorded. Do not start landing, retrospective, `BANDIT-056`, or
-unrelated Phase 8 work before Stage 4 aggregate review evidence exists.
+**Current next action:** Repair or explicitly disposition the open trivial
+CodeRabbit finding for `BANDIT-055` in `docs/templates/token-cost-failsafe.md`,
+then rerun focused verification and refresh CodeRabbit evidence at the repair
+head before Local Qwen, aggregate Stage 4 review evidence, landing,
+retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
-The current stage is Stage 4 review preparation for `BANDIT-055`.
+The current stage is Stage 4 CodeRabbit finding disposition for `BANDIT-055`.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -1448,11 +1452,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 pre-PR CodeRabbit review for `BANDIT-055`, the bootstrap-gap
-   chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`, against base
-   `a2ea27d9361c73b3beef30930dfe348feebcb709`. Do not start landing,
-   retrospective, `BANDIT-056`, or unrelated Phase 8 work before Stage 4
-   aggregate review evidence exists.
+1. Repair or explicitly disposition the open trivial CodeRabbit finding for
+   `BANDIT-055` in `docs/templates/token-cost-failsafe.md`, then rerun focused
+   verification and refresh CodeRabbit evidence at the repair head. Do not run
+   Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`,
+   or unrelated Phase 8 work before the CodeRabbit finding is resolved or
+   dispositioned.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1494,12 +1499,13 @@ landing verdict evidence, local-record landing action evidence, Stage 6
 retrospective closeout, and resolved bootstrap-gap disposition.
 `.bandit/bootstrap-gaps.json` records `BANDIT-GAP-TOKEN-COST-FAILSAFE` as
 active for `BANDIT-055`. Stage 1 brief, Stage 2 RED evidence, and Stage 3
-implementation evidence are recorded. The next action is running Stage 4
-pre-PR CodeRabbit review for `BANDIT-055` against base
-`a2ea27d9361c73b3beef30930dfe348feebcb709`. This is routine technical
-routing, not an operator-owned product, UAT, policy, business, cost, or scope
-decision unless review evidence requires operator-owned cost/risk approval or
-scope expansion.
+implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
+recorded with one trivial open finding against
+`docs/templates/token-cost-failsafe.md`. The next action is to repair or
+explicitly disposition that finding and refresh focused verification and
+CodeRabbit evidence. This is routine technical routing, not an operator-owned
+product, UAT, policy, business, cost, or scope decision unless the repair would
+expand scope or review evidence requires operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
