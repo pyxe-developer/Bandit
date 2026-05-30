@@ -416,19 +416,18 @@ template-guidance finding is repaired at
 `b696c13d72a64bb20fef0246cf01cd0641c75bbb`. The four repair-head CodeRabbit
 validation findings in `src/state/token-cost-failsafe.ts` are repaired in the
 current repair delta with focused regression coverage in
-`test/token-cost-failsafe.test.mjs`. Focused verification passed, but two
-CodeRabbit refresh attempts against the repaired delta reached
-setup/summarizing and produced no terminal verdict. No Local Qwen work,
-aggregate Stage 4 review work, landing work, retrospective work, `BANDIT-056`
-work, or unrelated Phase 8 work has started.
+`test/token-cost-failsafe.test.mjs`. A terminal repaired-delta CodeRabbit
+refresh completed at
+`de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0` with five open findings. No Local
+Qwen work, aggregate Stage 4 review work, landing work, retrospective work,
+`BANDIT-056` work, or unrelated Phase 8 work has started.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Obtain terminal CodeRabbit refresh evidence for the
-`BANDIT-055` repaired delta or record explicit provider-refusal /
-bootstrap-gap replacement evidence for the two non-terminal refresh attempts
-before Local Qwen, aggregate Stage 4 review evidence, landing, retrospective,
-`BANDIT-056`, or unrelated Phase 8 work.
+**Current next action:** Repair or explicitly disposition the five open
+CodeRabbit findings recorded for `BANDIT-055` before Local Qwen, aggregate
+Stage 4 review evidence, landing, retrospective, `BANDIT-056`, or unrelated
+Phase 8 work.
 
 The current stage is Stage 4 CodeRabbit finding disposition for `BANDIT-055`.
 
@@ -821,9 +820,11 @@ and gap-ledger disposition are recorded.
 `BANDIT-055` is active as the bootstrap-gap chore for
 `BANDIT-GAP-TOKEN-COST-FAILSAFE`; Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-055/brief.md`, Stage 2 RED evidence is recorded, and Stage 3
-implementation evidence is recorded. The next action is Stage 4 pre-PR
-CodeRabbit review before landing, retrospective, `BANDIT-056`, or unrelated
-Phase 8 work.
+implementation evidence is recorded. Stage 4 pre-PR CodeRabbit evidence is
+recorded with a terminal repaired-delta refresh and five open findings. The
+next action is to repair or explicitly disposition those findings before Local
+Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or
+unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1279,8 +1280,9 @@ These are expected because Bandit does not exist yet:
   routing; one-off paid reviewer or model calls before promotion are
   benchmark/evaluation spend that require per-run approval or active
   spend-class approval. Stage 1 brief, Stage 2 RED evidence, and Stage 3
-  implementation evidence are recorded. Stage 4 pre-PR CodeRabbit review is
-  the next action.
+  implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
+  recorded with five open terminal-refresh findings; repairing or explicitly
+  dispositioning those findings is the next action.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1458,12 +1460,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Obtain terminal CodeRabbit refresh evidence for the repaired `BANDIT-055`
-   repaired delta, or record explicit provider-refusal / bootstrap-gap
-   replacement evidence for the two non-terminal refresh attempts. Do not run
-   Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`,
-   or unrelated Phase 8 work before the repaired CodeRabbit findings have
-   terminal review evidence or explicit replacement evidence.
+1. Repair or explicitly disposition the five open CodeRabbit findings recorded
+   for `BANDIT-055`. Do not run Local Qwen, aggregate Stage 4 review, landing,
+   retrospective, `BANDIT-056`, or unrelated Phase 8 work before those findings
+   are resolved or accepted by Codex PM disposition.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1506,16 +1506,14 @@ retrospective closeout, and resolved bootstrap-gap disposition.
 `.bandit/bootstrap-gaps.json` records `BANDIT-GAP-TOKEN-COST-FAILSAFE` as
 active for `BANDIT-055`. Stage 1 brief, Stage 2 RED evidence, and Stage 3
 implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
-recorded at repair head `b696c13d72a64bb20fef0246cf01cd0641c75bbb`; the prior
-template-guidance finding is repaired, and the four repair-head validation
-findings against `src/state/token-cost-failsafe.ts` are repaired in the current
-repaired delta. Focused verification passed, but two CodeRabbit refresh
-attempts timed out after setup/summarizing without a terminal verdict. The next
-action is to obtain terminal CodeRabbit refresh evidence for the repaired delta
-or record explicit provider-refusal / bootstrap-gap replacement evidence. This
-is routine technical routing, not an operator-owned product, UAT, policy,
-business, cost, or scope decision unless replacement evidence would expand
-scope or require operator-owned cost/risk approval.
+recorded at source head `de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0`; the prior
+template-guidance finding is repaired, the four repair-head validation findings
+against `src/state/token-cost-failsafe.ts` are repaired in the current repaired
+delta, and the terminal repaired-delta refresh returned five open findings. The
+next action is to repair or explicitly disposition those findings. This is
+routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless disposition would expand scope or
+require operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

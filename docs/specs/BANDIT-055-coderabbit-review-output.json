@@ -1,35 +1,41 @@
 {
-  "sourceHead": "a670684f9546cffe6f4d9ff0267b4a91f1e7c9c2-plus-repair-delta",
+  "sourceHead": "de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0",
   "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
-  "reviewState": "timeout",
+  "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
       "severity": "minor",
       "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "repaired_pending_terminal_refresh",
-      "body": "validateBenchmarkEvaluationSpend checks approval and non_recurring_routing_disposition but does not validate provider_pricing_evidence or expected_per_run_cost even though the refusal text requires them."
+      "status": "open",
+      "body": "provider_pricing_evidence entries can use a missing or non-string id that collapses to unknown and can satisfy cross-reference checks."
     },
     {
       "severity": "minor",
       "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "repaired_pending_terminal_refresh",
-      "body": "validateRecurringPaidRoutes checks spend_class_approval, promotion_threshold, and applies_to_stage_capability_profile but not provider_pricing_evidence or expected_cost_ceiling."
+      "status": "open",
+      "body": "Top-level continuation_decisions are string-filtered but not validated against VALID_CONTINUATION_DECISIONS."
     },
     {
       "severity": "trivial",
-      "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "repaired_pending_terminal_refresh",
-      "body": "validateSoftBudgetBands uses denylisted invalid values, allowing unknown budget_mode or normal_variance_policy values to pass instead of failing closed."
+      "fileName": "docs/roadmap/ROADMAP.md",
+      "status": "open",
+      "body": "The current next step is a long single sentence and uses terminal without a local definition or artifact reference for the two non-terminal refresh attempts."
     },
     {
-      "severity": "major",
-      "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "repaired_pending_terminal_refresh",
-      "body": "validateTraceCostSignalBoundary rejects can_satisfy_required_workflow_artifacts=true but does not reject can_replace_approvals_or_landing_evidence=true."
+      "severity": "minor",
+      "fileName": "docs/roadmap/CURRENT_CONTEXT.md",
+      "status": "open",
+      "body": "One active-work passage still says Stage 4 pre-PR CodeRabbit review is the next action even though refresh attempts have already timed out and terminal refresh evidence is now recorded."
+    },
+    {
+      "severity": "minor",
+      "fileName": "docs/roadmap/CURRENT_CONTEXT.md",
+      "status": "open",
+      "body": "One bootstrap-gap passage still says Stage 4 pre-PR CodeRabbit review is the next action instead of CodeRabbit refresh evidence or replacement evidence."
     }
   ],
-  "providerError": "Two focused CodeRabbit refresh attempts against the repaired delta reached setup/summarizing and emitted no terminal verdict; Codex PM terminated both non-terminal processes.",
+  "providerError": null,
   "attempts": [
     {
       "attempt": 1,
@@ -70,6 +76,14 @@
       "endedAt": "2026-05-30T22:05:26Z",
       "result": "timeout",
       "summary": "Provider again reached setup and summarizing for the focused BANDIT-055 repaired delta, then emitted no terminal verdict for more than three minutes; Codex PM terminated the stalled process and left Local Qwen, aggregate Stage 4 review, landing, retrospective, BANDIT-056, and unrelated Phase 8 work blocked."
+    },
+    {
+      "attempt": 6,
+      "sourceHead": "de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0",
+      "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
+      "endedAt": "2026-05-30T22:32:16Z",
+      "result": "completed",
+      "summary": "Provider completed the focused repaired-delta refresh and returned five open findings: two token-cost validator findings, two stale CURRENT_CONTEXT references, and one ROADMAP next-step readability finding."
     }
   ],
   "executableEvidence": [
@@ -82,6 +96,7 @@
     "Repair verification: node --test test/work-item-create.test.mjs passed 8/8.",
     "Repair verification: npm run typecheck, npm run bandit -- token-cost-failsafe validate --json, npm run bandit -- validate, npm run bandit -- gaps list, and git diff --check passed.",
     "Attempt 4: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta plus repaired docs/templates/token-cost-failsafe.md and repaired src/state/token-cost-failsafe.ts/test/token-cost-failsafe.test.mjs> -c AGENTS.md --no-color timed out after setup/summarizing.",
-    "Attempt 5: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta plus repaired docs/templates/token-cost-failsafe.md and repaired src/state/token-cost-failsafe.ts/test/token-cost-failsafe.test.mjs> -c AGENTS.md --no-color timed out after setup/summarizing."
+    "Attempt 5: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 Stage 3 implementation delta plus repaired docs/templates/token-cost-failsafe.md and repaired src/state/token-cost-failsafe.ts/test/token-cost-failsafe.test.mjs> -c AGENTS.md --no-color timed out after setup/summarizing.",
+    "Attempt 6: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 repaired delta> -c AGENTS.md --no-color completed with five open findings."
   ]
 }

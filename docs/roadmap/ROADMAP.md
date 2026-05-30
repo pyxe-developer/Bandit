@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Obtain terminal CodeRabbit refresh evidence for the `BANDIT-055` repaired delta or record explicit provider-refusal / bootstrap-gap replacement evidence for the two non-terminal refresh attempts before Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
+**Current next step:** Repair or explicitly disposition the five open CodeRabbit findings recorded for `BANDIT-055`. Do not run Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until those findings are resolved or accepted by Codex PM disposition.
 
 ## Next Work Item
 
