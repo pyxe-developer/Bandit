@@ -564,8 +564,8 @@
     {
       "id": "BANDIT-GAP-STAGE-CAPABILITY-SCOPE",
       "title": "Work-item stages lack enforced skill and tool scoping",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -575,9 +575,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-054",
-      "rationale": "The PRD research review challenged Bandit's over-decomposed role taxonomy, and the operator confirmed that stage-specific skills and tools are more important than many named agent roles. Bandit now prefers a small authority-based role set with Stage Capability Scope, but work-item brief creation and validation do not yet enforce stage-scoped skills, skill lifecycle contract references, allowed tools, inputs, outputs, evidence, and forbidden actions.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-054."
+      "rationale": "BANDIT-054 created a repo-native Stage Capability Scope policy, validation command, work-item creation spec requirements, generated brief rendering, focused tests, review evidence, landing verdict, local-record landing action, and retrospective closeout for stage-scoped authority roles, required skills, allowed tools, inputs, outputs, evidence, forbidden actions, skill lifecycle contract references, and optional soft budget metadata.",
+      "verification_target": "docs/work/BANDIT-054/retrospective.md",
+      "next_action": "Use Stage Capability Scope declarations in future work-item specs and briefs; create the next bootstrap-gap chore for BANDIT-GAP-TOKEN-COST-FAILSAFE before unrelated Phase 8 work."
     },
     {
       "id": "BANDIT-GAP-TOKEN-COST-FAILSAFE",

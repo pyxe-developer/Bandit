@@ -4,9 +4,9 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-054` - Stage Capability Scope
+- `[Gap]` none - interstitial after `BANDIT-054` closeout
 
-**Current next step:** `BANDIT-054` has Stage 3 implementation evidence recorded in `docs/work/BANDIT-054/implementation-evidence.md`, `docs/specs/BANDIT-054-implementation-evidence.json`, and `docs/work/BANDIT-054/writer-report.md`. Stage 4 pre-PR CodeRabbit timed out twice and is dispositioned as provider-refusal/bootstrap-gap replacement evidence in `docs/work/BANDIT-054/coderabbit-review.md`, `docs/specs/BANDIT-054-coderabbit-review-output.json`, and `docs/work/BANDIT-054/coderabbit-timeout-disposition.md`; Stage 4 Local Qwen pass evidence is recorded in `docs/work/BANDIT-054/local-qwen-review.md`. Stage 4 layered risk-classification and supply-chain gate evidence is registered in `.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and `.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`. Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with review-subject hash `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. Stage 5 landing verdict evidence is recorded in `docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`, `npm run bandit -- land-check BANDIT-054` passes, and local-record landing action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`. Record Stage 6 retrospective closeout and bootstrap-gap disposition next, before `BANDIT-055`. Do not start `BANDIT-055` until `BANDIT-054` has Stage 6 retrospective, gap-ledger disposition, and context closeout.
+**Current next step:** Create the `BANDIT-055` bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Do not create RED evidence, implementation work, or unrelated Phase 8 work before the Stage 1 brief exists.
 
 ## Next Work Item
 
@@ -87,3 +87,4 @@ bootstrap gaps are queued.
 - `BANDIT-051` - Worktree Bootstrap Contract
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-053` - Agent Observability Traces
+- `BANDIT-054` - Stage Capability Scope

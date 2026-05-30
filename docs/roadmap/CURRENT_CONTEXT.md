@@ -382,67 +382,24 @@ disposition are recorded in `docs/work/BANDIT-032/retrospective.md`; the source
 `BANDIT-031-COCKPIT-STATUS-COVERAGE-HARDENING` candidate is evaluated as
 `effective` with decision `keep`.
 
-**Last completed milestone:** `BANDIT-053` - Agent Observability Traces is
-landed and closed out as the bootstrap-gap chore for
-`BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its structured creation spec, Stage 1
-brief, Stage 2 RED evidence, Stage 3 implementation evidence, focused pre-PR
-CodeRabbit pass evidence, Local Qwen non-blocking evidence with Codex PM
-disposition, aggregate Stage 4 review evidence, explicit risk-classification
-and supply-chain evidence, Stage 5 landing verdict evidence, local-record
-landing action evidence, Stage 6 retrospective closeout, and bootstrap-gap
-disposition are recorded in `docs/work/BANDIT-053/`, `docs/specs/`,
-`.bandit/policy/`, `docs/agent-observability/`, and
+**Last completed milestone:** `BANDIT-054` - Stage Capability Scope is landed
+and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, CodeRabbit
+provider-refusal/bootstrap-gap evidence, Local Qwen pass evidence, aggregate
+Stage 4 review evidence, explicit risk-classification and supply-chain evidence,
+Stage 5 landing verdict evidence, local-record landing action evidence, Stage 6
+retrospective closeout, and bootstrap-gap disposition are recorded in
+`docs/work/BANDIT-054/`, `docs/specs/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-**Current active work:** `BANDIT-054` - Stage Capability Scope.
-Stage 1 brief evidence is recorded in `docs/work/BANDIT-054/brief.md`,
-generated from `docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`.
-Stage 2 RED evidence is recorded in `test/stage-capability-scope.test.mjs`,
-`docs/specs/BANDIT-054-red-evidence.json`, and
-`docs/work/BANDIT-054/red-evidence.md`.
-Stage 3 implementation evidence is recorded in
-`docs/work/BANDIT-054/implementation-evidence.md`,
-`docs/specs/BANDIT-054-implementation-evidence.json`, and
-`docs/work/BANDIT-054/writer-report.md`.
-Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
-`docs/work/BANDIT-054/coderabbit-review.md` and
-`docs/specs/BANDIT-054-coderabbit-review-output.json`. Codex PM
-provider-refusal/bootstrap-gap disposition is recorded in
-`docs/work/BANDIT-054/coderabbit-timeout-disposition.md`; CodeRabbit is not
-treated as pass evidence. Stage 4 Local Qwen pass evidence is recorded in
-`docs/work/BANDIT-054/local-qwen-review.md`.
-Stage 4 layered risk-classification and supply-chain gate evidence is
-registered in
-`.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and
-`.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`, with
-review-subject hash
-`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`.
-Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-054/review-evidence.md`.
-Stage 5 landing verdict evidence is recorded in
-`docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`;
-`npm run bandit -- land-check BANDIT-054` passes with CodeRabbit
-`bootstrap_gap`, Local Qwen `pass`, UAT `not_applicable`, clean-code `pass`,
-and source drift `current`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-054/landing-action.md`.
-`.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
-`BANDIT-054` as the active bootstrap-gap chore.
+**Current active work:** none.
 
-**Current next action:** record Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-054` before `BANDIT-055`. CodeRabbit is
-dispositioned as provider-refusal/bootstrap-gap replacement evidence, not pass
-evidence, aggregate Stage 4 review evidence is recorded, Stage 5 landing
-verdict evidence is recorded, `land-check` passes, and local-record landing
-action evidence exists.
-Historical Claude Process
-Adapter blocker evidence remains recorded in
-`docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
-has Stage 3 implementation evidence, CodeRabbit timeout disposition evidence,
-Local Qwen pass evidence, explicit risk/supply evidence, aggregate Stage 4
-review evidence, and current passing verification.
+**Current next action:** create the `BANDIT-055` bootstrap-gap chore for
+`BANDIT-GAP-TOKEN-COST-FAILSAFE`. Do not create RED evidence, implementation
+work, or unrelated Phase 8 work before the Stage 1 brief exists.
 
-The current stage is Stage 6: Retrospective And Improvement Capture.
+The current stage is interstitial after Stage 6 closeout.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -799,7 +756,7 @@ that authority.
 
 ## Active Work
 
-**Active work item:** `BANDIT-054`.
+**Active work item:** none.
 
 `BANDIT-053` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its
@@ -822,43 +779,17 @@ is recorded in `docs/work/BANDIT-053/landing-action.md`, Stage 6 retrospective
 closeout is recorded in `docs/work/BANDIT-053/retrospective.md`, and
 `.bandit/bootstrap-gaps.json` marks the gap resolved.
 
-`BANDIT-054` is the active bootstrap-gap chore for
-`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Its structured creation spec is recorded in
-`docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`, Stage 1 brief evidence is
-recorded in `docs/work/BANDIT-054/brief.md`, Stage 2 RED evidence is recorded
-in `test/stage-capability-scope.test.mjs`,
-`docs/specs/BANDIT-054-red-evidence.json`, and
-`docs/work/BANDIT-054/red-evidence.md`, lifecycle event evidence is recorded in
-`.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap as
-active for `BANDIT-054`.
+`BANDIT-054` is landed and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 implementation evidence, CodeRabbit
+provider-refusal/bootstrap-gap evidence, Local Qwen pass evidence, aggregate
+Stage 4 review evidence, risk-classification and supply-chain gate evidence,
+Stage 5 landing verdict, local-record landing action, Stage 6 retrospective,
+and gap-ledger disposition are recorded.
 
-The current stage is Stage 5: Landing And UAT. Stage 3 implementation
-evidence is recorded in `docs/work/BANDIT-054/implementation-evidence.md`,
-`docs/specs/BANDIT-054-implementation-evidence.json`, and
-`docs/work/BANDIT-054/writer-report.md`. The current verified implementation
-adds the Stage Capability Scope policy validator, command surface, validate
-integration, work-item spec requirement, and generated brief rendering without
-editing Stage 2-owned tests, fixtures, RED evidence artifacts/specs, or
-acceptance mappings. Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
-`docs/work/BANDIT-054/coderabbit-review.md` and
-`docs/specs/BANDIT-054-coderabbit-review-output.json`, and Codex PM
-provider-refusal/bootstrap-gap disposition is recorded in
-`docs/work/BANDIT-054/coderabbit-timeout-disposition.md`. CodeRabbit is not
-treated as pass evidence. Stage 4 Local Qwen pass evidence is recorded in
-`docs/work/BANDIT-054/local-qwen-review.md`. Stage 4 layered
-risk-classification and supply-chain gate evidence is registered in
-`.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and
-`.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`. The
-aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-054/review-evidence.md` with review-subject hash
-`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. Stage 5
-landing verdict evidence is recorded in
-`docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`;
-`npm run bandit -- land-check BANDIT-054` passes, and local-record landing
-action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`. The
-next action is to record Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-054`; do not create `BANDIT-055` or unrelated Phase 8
-work before closeout evidence exists.
+The next action is to create the `BANDIT-055` bootstrap-gap chore for
+`BANDIT-GAP-TOKEN-COST-FAILSAFE`; do not create RED evidence, implementation
+work, or unrelated Phase 8 work before the Stage 1 brief exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1052,10 +983,10 @@ resolved.
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by `BANDIT-051`.
 `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is resolved by `BANDIT-052`.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by `BANDIT-053`.
-`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is active as `BANDIT-054`.
-`BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind the stage capability scope
-gap. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued behind the token-cost
-failsafe gap.
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by `BANDIT-054`.
+`BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued as the next bootstrap gap.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued behind the token-cost failsafe
+gap.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 `BANDIT-035` - Artifact Create Landing Work Item Field is landed and closed out.
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out.
@@ -1102,12 +1033,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 6 retrospective closeout and bootstrap-gap
-disposition for `BANDIT-054`, the bootstrap-gap chore for
-`BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, using the recorded landing action,
-aggregate Stage 4 review evidence, CodeRabbit provider-refusal replacement
-evidence, Local Qwen pass evidence, risk-classification evidence, supply-chain
-gate evidence, and current review subject hash.
+**Expected next deliverable:** Stage 1 brief creation for `BANDIT-055`, the
+bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`, before RED evidence,
+implementation work, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1302,13 +1230,11 @@ These are expected because Bandit does not exist yet:
   projection command, representative trace evidence, Stage 1 through Stage 6
   evidence, and bootstrap-gap disposition while keeping trace data and
   projections derived and non-canonical.
-- `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is active as `BANDIT-054` from the
-  2026-05-26 strategic review: Bandit now keeps roles authority-based and
-  treats stage-specific skills, tools, reviewer depth, prompts, inputs, outputs,
-  evidence, forbidden actions, and skill lifecycle contract references as Stage
-  Capability Scope, but work-item specs and validation do not yet enforce that
-  scope. Stage 1 brief and Stage 2 RED evidence are recorded, and Stage 3
-  implementation dispatch is next.
+- `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by `BANDIT-054`.
+  `BANDIT-054` defines Stage Capability Scope policy, validation, work-item spec
+  requirements, generated brief rendering, Stage 1 through Stage 6 evidence,
+  and bootstrap-gap disposition while keeping authority roles small and
+  stage-scoped capability declarations explicit.
 - `BANDIT-GAP-TOKEN-COST-FAILSAFE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats token and cost budgets as abnormal-run
   failsafes for paid, high-token, reviewer, scheduler, or long-running work,
@@ -1317,8 +1243,7 @@ These are expected because Bandit does not exist yet:
   and spend-class approval before they are treated as available recurring
   routing; one-off paid reviewer or model calls before promotion are
   benchmark/evaluation spend that require per-run approval or active
-  spend-class approval. It is queued behind
-  `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`.
+  spend-class approval. It is queued as the next bootstrap gap.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1496,17 +1421,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 6 retrospective closeout and bootstrap-gap disposition for
-   `BANDIT-054`. Stage 4 aggregate
-   review evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with
-   review-subject hash
-   `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`;
-   CodeRabbit remains bootstrap-gap replacement evidence, Local Qwen is pass,
-   Stage 5 landing verdict evidence is recorded in
-   `docs/work/BANDIT-054/landing-verdict.md`, local-record landing action
-   evidence is recorded in `docs/work/BANDIT-054/landing-action.md`,
-   `land-check` passes, and no operator-owned input is required. Do not start
-   `BANDIT-055` until retrospective closeout and gap-ledger disposition exist.
+1. Create the `BANDIT-055` bootstrap-gap chore for
+   `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Do not create RED evidence,
+   implementation work, or unrelated Phase 8 work before the Stage 1 brief
+   exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1529,9 +1447,10 @@ The current priority is:
    `BANDIT-049`. `BANDIT-GAP-COCKPIT-STATUS-INTERSTITIAL-RECOVERY` is resolved
    by `BANDIT-050`. `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
    `BANDIT-051`, `BANDIT-GAP-EVENT-DRIVEN-WAKE-SCHEDULER` is resolved by
-   `BANDIT-052`, and `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by
-   `BANDIT-053`. `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is active as `BANDIT-054`.
-   `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued behind stage capability scope.
+   `BANDIT-052`, `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by
+   `BANDIT-053`, and `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by
+   `BANDIT-054`. `BANDIT-GAP-TOKEN-COST-FAILSAFE` is queued as the next
+   bootstrap gap.
    `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued behind token-cost failsafe.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
@@ -1542,23 +1461,15 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-054`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, Stage 4 pre-PR CodeRabbit blocker evidence, Codex PM
-provider-refusal/bootstrap-gap disposition evidence, Stage 4 Local Qwen pass
-evidence, and Stage 4 layered risk-classification and supply-chain gate
-evidence. Aggregate Stage 4 review evidence is recorded in
-`docs/work/BANDIT-054/review-evidence.md` with review-subject hash
-`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. Stage 5
-landing verdict evidence is recorded in
-`docs/work/BANDIT-054/landing-verdict.md` with final verdict `safe-to-land`;
-`npm run bandit -- land-check BANDIT-054` passes, and local-record landing
-action evidence is recorded in `docs/work/BANDIT-054/landing-action.md`. The
-next required action is to record Stage 6 retrospective closeout and
-bootstrap-gap disposition for `BANDIT-054` before `BANDIT-055`.
-Historical Claude Process Adapter blocker evidence remains recorded in
-`docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
-routing by `docs/work/BANDIT-054/implementation-evidence.md`,
-`docs/specs/BANDIT-054-implementation-evidence.json`, and
-`docs/work/BANDIT-054/writer-report.md`.
+evidence, Stage 4 pre-PR CodeRabbit provider-refusal/bootstrap-gap evidence,
+Stage 4 Local Qwen pass evidence, aggregate Stage 4 review evidence, Stage 5
+landing verdict evidence, local-record landing action evidence, Stage 6
+retrospective closeout, and resolved bootstrap-gap disposition.
+`.bandit/bootstrap-gaps.json` records `BANDIT-GAP-TOKEN-COST-FAILSAFE` as the
+next queued bootstrap gap. The next action is creating the Stage 1
+`BANDIT-055` bootstrap-gap chore. This is routine technical routing, not an
+operator-owned product, UAT, policy, business, cost, or scope decision unless
+the brief would expand beyond the queued token-cost-failsafe gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

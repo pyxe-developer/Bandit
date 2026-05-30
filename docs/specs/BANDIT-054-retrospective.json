@@ -1,0 +1,93 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-054",
+  "outcome": "`BANDIT-054` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. The work adds repo-native Stage Capability Scope policy validation, a CLI validation command, work-item spec requirements, and generated brief rendering for authority role, required skills, allowed tools, inputs, outputs, required evidence, forbidden actions, load-bearing skill lifecycle contract references, and optional soft budget band metadata. Stage 4 pre-PR CodeRabbit timed out twice and is recorded as provider-refusal/bootstrap-gap replacement evidence rather than pass evidence; Local Qwen returned `pass` with no findings. Stage 5 landing verdict and local-record landing action evidence are recorded, explicit layered risk-classification and supply-chain gate evidence are recorded, and no Token-Cost Failsafe policy, provider-pricing evidence, spend-class approval, Evidence SLO policy, full scheduler execution, worktree lifecycle work, claim lease creation or release, work-surface reservation implementation, automatic merge/push/deploy behavior, product UAT approval, cockpit UI/server/API work, PR/CI workflow, live reviewer routing change, paid reviewer route, external service integration, installed global skill edit, dependency or lockfile change, or unrelated Phase 8 work was introduced.",
+  "what_worked": [
+    "The chore converted the accepted stage-capability-scope boundary into repo-native policy and validation without expanding Bandit's authority-role taxonomy.",
+    "Focused RED and implementation evidence covered required stage fields, authority-role validation, required-skill validation, allowed-tool and forbidden-action validation, input/output/evidence declarations, lifecycle contract references, optional soft budget band metadata, and generated brief integration.",
+    "Stage 3 implementation preserved the Bootstrap Model-Family Separation and Permanent Test Ownership Boundary while keeping tests, test helpers, fixtures, RED evidence, and acceptance mappings out of Writer authority.",
+    "Stage 4 evidence stayed honest: CodeRabbit timeout evidence is dispositioned as provider-refusal/bootstrap-gap replacement evidence, Local Qwen passed, and aggregate review evidence records the current review-subject hash.",
+    "Stage 5 landing used current review-subject hash evidence, layered risk-classification evidence, supply-chain gate evidence, land-check, auto-land-check, and local-record landing action without expanding workflow authority."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Stage capability, tool, input, output, evidence, and forbidden-action scope should live in stage declarations instead of multiplying agent roles.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-054` adds Stage Capability Scope policy validation, CLI validation, work-item creation spec requirements, generated brief rendering, focused tests, implementation evidence, review evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 closeout; `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` resolved during closeout."
+    },
+    {
+      "lesson": "Optional soft budget band metadata is useful for stage scoping but must not become cost policy by implication.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-054` keeps soft budget fields as metadata only. Provider-pricing evidence, spend-class approvals, abnormal-run token-cost failsafes, retry budgets, and continuation decisions remain queued under `BANDIT-GAP-TOKEN-COST-FAILSAFE`."
+    },
+    {
+      "lesson": "CodeRabbit provider timeouts need explicit provider-refusal disposition instead of being treated as either pass evidence or a reason to restart the whole slice.",
+      "disposition": "explicit no-action decision",
+      "rationale": "`docs/work/BANDIT-054/coderabbit-timeout-disposition.md` records why two scoped pre-PR CodeRabbit timeouts are bootstrap-gap replacement evidence for this bounded chore, while Local Qwen, risk classification, supply-chain, review-subject-hash, land-check, and auto-land-check evidence remain current."
+    },
+    {
+      "lesson": "Evidence freshness for trusted cockpit and gate signals still needs artifact-specific rules.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remains queued behind Token-Cost Failsafe for artifact-specific freshness budgets, Evidence Trust Signals, staleness reasons, and cockpit/view-model validation."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "The Stage 6 closeout path had no required tool-call failure. Earlier CodeRabbit provider timeouts were already recorded and dispositioned before this closeout.",
+      "disposition": "explicit no-action decision - no new bootstrap gap or follow-up is needed for Stage 6 failed tool calls"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to Stage Capability Scope policy, validation, work-item spec and brief integration, review evidence, landing evidence, retrospective closeout, bootstrap-gap disposition, and roadmap/current-context synchronization.",
+      "disposition": "explicit no-action decision - no token-cost policy, Evidence SLO policy, scheduler execution, claim/worktree authority, cockpit UI/server/API, PR/CI workflow, merge, push, deploy, product UAT, paid-reviewer route, dependency, lockfile, installed-skill, or unrelated Phase 8 work started"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore: define and validate Stage Capability Scope before the queued Token-Cost Failsafe and Evidence Freshness SLO policy gaps.",
+      "disposition": "explicit no-action decision - Token-Cost Failsafe and Evidence Freshness SLOs remain separate queued gaps"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "Codex PM owned routing, Stage 2 RED evidence, CodeRabbit timeout disposition, landing readiness, and closeout; Claude owned Stage 3 implementation only; CodeRabbit and Local Qwen owned Stage 4 review evidence; Landing Agent evidence owned Stage 5.",
+      "disposition": "explicit no-action decision - no operator-owned routing question or agent-boundary follow-up remains for BANDIT-054"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "Stage 6 still requires synchronization across generated retrospective evidence, `.bandit/bootstrap-gaps.json`, `CURRENT_CONTEXT.md`, `ROADMAP.md`, and `STATUS.md`; the artifact-create path covers the retrospective but not gap-ledger or roadmap edits.",
+      "disposition": "explicit no-action decision - keep Stage 6 closeout as the current single step and update all source artifacts before creating BANDIT-055"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit timed out twice and is recorded as provider-refusal/bootstrap-gap evidence. Local Qwen passed with no findings. No recorded smell trigger required escalated reviewer routing.",
+      "disposition": "explicit no-action decision - no unresolved cross-model tension or reviewer-routing follow-up remains for BANDIT-054"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "The established invocation paths for pre-PR CodeRabbit, Local Qwen, review-subject hash, stage-capability-scope validation, risk classification, supply-chain gate, land-check, auto-land-check, local landing, artifact creation, validation, gaps list, cockpit status, session context, and diff hygiene were available. The only material friction was CodeRabbit provider timeout, which is already dispositioned.",
+      "disposition": "explicit no-action decision - no new bootstrap gap is recorded for tool invocation friction"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "Stage-capability declarations should reduce future handoff ambiguity by making allowed tools, forbidden actions, inputs, outputs, and evidence explicit in the work item before execution.",
+      "disposition": "explicit no-action decision - future effectiveness can be observed through normal Stage 1 and Stage 3 review without creating a separate immediate improvement chore"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer call, recurring paid model route, spend-class approval, benchmark spend, live external service, dependency install, or live SCA provider was introduced. Soft budget bands remain declaration metadata only.",
+      "disposition": "queued bootstrap gap - BANDIT-GAP-TOKEN-COST-FAILSAFE remains responsible for provider-pricing evidence, spend-class approvals, abnormal-run token-cost failsafes, retry budgets, and continuation decisions"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for local Stage Capability Scope policy validation and work-item integration after focused tests, implementation evidence, review evidence, landing verdict, local-record landing action, and closeout. Future uncertainty remains in Token-Cost Failsafe, Evidence Freshness SLOs, and later cockpit/product work.",
+      "disposition": "explicit no-action decision - next uncertainty belongs to the queued Token-Cost Failsafe gap and later queued gaps, not BANDIT-054"
+    }
+  ],
+  "improvement_chores": "No new immediate retrospective-derived improvement chore is created by this closeout.\n\n`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by `BANDIT-054`. The next queued bootstrap gap is `BANDIT-GAP-TOKEN-COST-FAILSAFE`, which should become `BANDIT-055` before unrelated Phase 8 work. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remains queued behind token-cost failsafe. Token-cost policy, provider-pricing evidence, spend-class approvals, Evidence SLO policy, scheduler execution, full worktree lifecycle implementation, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy behavior, product UAT scope, paid reviewer routes, dependency or lockfile changes, installed global skill edits, external service integration, or unrelated Phase 8 work remains blocked until queued bootstrap gaps are resolved or explicitly dispositioned.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-054`. CodeRabbit did not produce a terminal review verdict after two scoped timeout attempts and is dispositioned as provider-refusal/bootstrap-gap replacement evidence; Local Qwen returned `pass` with no findings; Codex PM accepted Stage 4 landability without requiring escalated review.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-TOKEN-COST-FAILSAFE` is open and queued as the next bootstrap-gap chore.",
+    "`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` remains queued behind token-cost failsafe evidence.",
+    "Unrelated Phase 8 cockpit work remains blocked while any open bootstrap gap remains queued or active."
+  ]
+}

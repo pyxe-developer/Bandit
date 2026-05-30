@@ -120,3 +120,4 @@
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/specs/BANDIT-054-implementation-evidence.json"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created implementation-evidence artifact at docs/work/BANDIT-054/implementation-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-054","message":"Created landing_verdict artifact at docs/work/BANDIT-054/landing-verdict.md"}
+{"type":"artifact_created","work_item":"BANDIT-054","message":"Created retrospective artifact at docs/work/BANDIT-054/retrospective.md"}
