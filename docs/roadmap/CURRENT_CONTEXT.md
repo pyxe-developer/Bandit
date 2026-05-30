@@ -413,19 +413,22 @@ evidence artifacts/specs, or acceptance mappings. Stage 4 pre-PR CodeRabbit
 evidence is recorded in `docs/work/BANDIT-055/coderabbit-review.md` and
 `docs/specs/BANDIT-055-coderabbit-review-output.json`. The prior trivial
 template-guidance finding is repaired at
-`b696c13d72a64bb20fef0246cf01cd0641c75bbb`, and the repair-head CodeRabbit
-review records four open validation findings in
-`src/state/token-cost-failsafe.ts`. No Local Qwen work, aggregate Stage 4 review
-work, landing work, retrospective work, `BANDIT-056` work, or unrelated Phase 8
-work has started.
+`b696c13d72a64bb20fef0246cf01cd0641c75bbb`. The four repair-head CodeRabbit
+validation findings in `src/state/token-cost-failsafe.ts` are repaired in the
+current repair delta with focused regression coverage in
+`test/token-cost-failsafe.test.mjs`. Focused verification passed, but two
+CodeRabbit refresh attempts against the repaired delta reached
+setup/summarizing and produced no terminal verdict. No Local Qwen work,
+aggregate Stage 4 review work, landing work, retrospective work, `BANDIT-056`
+work, or unrelated Phase 8 work has started.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Repair or explicitly disposition the four open
-repair-head CodeRabbit validation findings for `BANDIT-055` in
-`src/state/token-cost-failsafe.ts`, then rerun focused verification and refresh
-CodeRabbit evidence before Local Qwen, aggregate Stage 4 review evidence,
-landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work.
+**Current next action:** Obtain terminal CodeRabbit refresh evidence for the
+`BANDIT-055` repaired delta or record explicit provider-refusal /
+bootstrap-gap replacement evidence for the two non-terminal refresh attempts
+before Local Qwen, aggregate Stage 4 review evidence, landing, retrospective,
+`BANDIT-056`, or unrelated Phase 8 work.
 
 The current stage is Stage 4 CodeRabbit finding disposition for `BANDIT-055`.
 
@@ -1455,12 +1458,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the four open repair-head CodeRabbit
-   validation findings for `BANDIT-055` in `src/state/token-cost-failsafe.ts`,
-   then rerun focused verification and refresh CodeRabbit evidence. Do not run
+1. Obtain terminal CodeRabbit refresh evidence for the repaired `BANDIT-055`
+   repaired delta, or record explicit provider-refusal / bootstrap-gap
+   replacement evidence for the two non-terminal refresh attempts. Do not run
    Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`,
-   or unrelated Phase 8 work before the CodeRabbit findings are resolved or
-   dispositioned.
+   or unrelated Phase 8 work before the repaired CodeRabbit findings have
+   terminal review evidence or explicit replacement evidence.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1504,13 +1507,15 @@ retrospective closeout, and resolved bootstrap-gap disposition.
 active for `BANDIT-055`. Stage 1 brief, Stage 2 RED evidence, and Stage 3
 implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
 recorded at repair head `b696c13d72a64bb20fef0246cf01cd0641c75bbb`; the prior
-template-guidance finding is repaired, and four open repair-head validation
-findings remain against `src/state/token-cost-failsafe.ts`. The next action is
-to repair or explicitly disposition those findings and refresh focused
-verification and CodeRabbit evidence. This is routine technical routing, not an
-operator-owned product, UAT, policy, business, cost, or scope decision unless
-the repair would expand scope or review evidence requires operator-owned
-cost/risk approval.
+template-guidance finding is repaired, and the four repair-head validation
+findings against `src/state/token-cost-failsafe.ts` are repaired in the current
+repaired delta. Focused verification passed, but two CodeRabbit refresh
+attempts timed out after setup/summarizing without a terminal verdict. The next
+action is to obtain terminal CodeRabbit refresh evidence for the repaired delta
+or record explicit provider-refusal / bootstrap-gap replacement evidence. This
+is routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless replacement evidence would expand
+scope or require operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

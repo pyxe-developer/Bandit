@@ -49,6 +49,9 @@ const VALID_CONTINUATION_DECISIONS = new Set([
   "operator_cost_risk_approval"
 ]);
 
+const VALID_SOFT_BUDGET_MODES = new Set(["generous_abnormal_run_failsafe"]);
+const VALID_NORMAL_VARIANCE_POLICIES = new Set(["allow_deep_review_variance"]);
+
 export async function validateTokenCostFailsafe(
   repoRoot: string
 ): Promise<TokenCostFailsafeValidationReport> {
@@ -129,8 +132,8 @@ function parseAndValidatePolicy(content: string): TokenCostFailsafeValidationRep
 
   const providerPricingIds = validateProviderPricingEvidence(parsed);
   const spendClassIds = collectSpendClassIds(parsed);
-  validateBenchmarkEvaluationSpend(parsed);
-  const recurringRouteIds = validateRecurringPaidRoutes(parsed);
+  validateBenchmarkEvaluationSpend(parsed, providerPricingIds);
+  const recurringRouteIds = validateRecurringPaidRoutes(parsed, providerPricingIds);
   const softBudgetBandIds = validateSoftBudgetBands(parsed);
   const failsafeTriggers = collectFailsafeTriggers(parsed);
   validateFailsafeTrips(parsed);
@@ -182,14 +185,28 @@ function collectSpendClassIds(policy: RawRecord): string[] {
     .filter((id) => id.length > 0);
 }
 
-function validateBenchmarkEvaluationSpend(policy: RawRecord): void {
+function validateBenchmarkEvaluationSpend(
+  policy: RawRecord,
+  providerPricingIds: string[]
+): void {
   if (!Array.isArray(policy.benchmark_evaluation_spend)) return;
 
   for (const item of policy.benchmark_evaluation_spend as unknown[]) {
     if (!isRecord(item)) continue;
 
+    const providerPricingEvidence = item.provider_pricing_evidence;
+    const expectedPerRunCost = item.expected_per_run_cost;
     const approval = item.approval;
     const nonRecurringDisposition = item.non_recurring_routing_disposition;
+
+    const hasProviderPricingEvidence =
+      typeof providerPricingEvidence === "string" &&
+      providerPricingEvidence.trim().length > 0 &&
+      providerPricingIds.includes(providerPricingEvidence);
+
+    const hasExpectedPerRunCost =
+      typeof expectedPerRunCost === "string" &&
+      expectedPerRunCost.trim().length > 0;
 
     const hasValidApproval =
       typeof approval === "string" &&
@@ -200,7 +217,12 @@ function validateBenchmarkEvaluationSpend(policy: RawRecord): void {
       typeof nonRecurringDisposition === "string" &&
       nonRecurringDisposition.trim().length > 0;
 
-    if (!hasValidApproval || !hasValidDisposition) {
+    if (
+      !hasProviderPricingEvidence ||
+      !hasExpectedPerRunCost ||
+      !hasValidApproval ||
+      !hasValidDisposition
+    ) {
       throw new Error(
         "one-off benchmark or evaluation spend requires current provider-pricing evidence, expected per-run cost, per-run approval or active spend-class approval, and explicit non-recurring routing disposition"
       );
@@ -208,7 +230,10 @@ function validateBenchmarkEvaluationSpend(policy: RawRecord): void {
   }
 }
 
-function validateRecurringPaidRoutes(policy: RawRecord): string[] {
+function validateRecurringPaidRoutes(
+  policy: RawRecord,
+  providerPricingIds: string[]
+): string[] {
   if (!Array.isArray(policy.recurring_paid_routes)) return [];
   const ids: string[] = [];
 
@@ -216,18 +241,33 @@ function validateRecurringPaidRoutes(policy: RawRecord): string[] {
     if (!isRecord(item)) continue;
     const id = typeof item.id === "string" ? item.id : "unknown";
 
+    const providerPricingEvidence = item.provider_pricing_evidence;
+    const hasProviderPricingEvidence =
+      typeof providerPricingEvidence === "string" &&
+      providerPricingEvidence.trim().length > 0 &&
+      providerPricingIds.includes(providerPricingEvidence);
+
     const hasSpendClassApproval =
       typeof item.spend_class_approval === "string" &&
       item.spend_class_approval.trim().length > 0 &&
       item.spend_class_approval !== "missing";
 
-    const hasPromotionThreshold = item.promotion_threshold != null;
+    const promotionThreshold = item.promotion_threshold;
+    const hasExpectedCostCeiling =
+      isRecord(promotionThreshold) &&
+      typeof promotionThreshold.expected_cost_ceiling === "string" &&
+      promotionThreshold.expected_cost_ceiling.trim().length > 0;
 
     const hasApplicability =
       typeof item.applies_to_stage_capability_profile === "string" &&
       item.applies_to_stage_capability_profile.trim().length > 0;
 
-    if (!hasSpendClassApproval || !hasPromotionThreshold || !hasApplicability) {
+    if (
+      !hasProviderPricingEvidence ||
+      !hasSpendClassApproval ||
+      !hasExpectedCostCeiling ||
+      !hasApplicability
+    ) {
       throw new Error(
         "recurring paid routes require provider-pricing evidence, spend-class approval, scoped promotion threshold, and route applicability"
       );
@@ -248,8 +288,10 @@ function validateSoftBudgetBands(policy: RawRecord): string[] {
     const id = typeof item.id === "string" ? item.id : "unknown";
 
     if (
-      item.budget_mode === "hard_cap" ||
-      item.normal_variance_policy === "stop_immediately"
+      typeof item.budget_mode !== "string" ||
+      !VALID_SOFT_BUDGET_MODES.has(item.budget_mode) ||
+      typeof item.normal_variance_policy !== "string" ||
+      !VALID_NORMAL_VARIANCE_POLICIES.has(item.normal_variance_policy)
     ) {
       throw new Error(
         "soft budget bands must be generous abnormal-run failsafes, not tight caps that force repeated failed attempts"
@@ -291,7 +333,10 @@ function validateTraceCostSignalBoundary(policy: RawRecord): void {
   const boundary = policy.trace_cost_signal_boundary;
   if (!isRecord(boundary)) return;
 
-  if (boundary.can_satisfy_required_workflow_artifacts === true) {
+  if (
+    boundary.can_satisfy_required_workflow_artifacts === true ||
+    boundary.can_replace_approvals_or_landing_evidence === true
+  ) {
     throw new Error(
       "trace-backed token and cost signals cannot replace canonical workflow artifacts, approvals, landing evidence, UAT, or retrospective evidence"
     );

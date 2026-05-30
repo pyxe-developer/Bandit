@@ -82,6 +82,26 @@ test("token-cost-failsafe validation rejects one-off benchmark spend without app
   );
 });
 
+test("token-cost-failsafe validation rejects benchmark spend without provider pricing and expected cost", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  policy.benchmark_evaluation_spend[0].provider_pricing_evidence = "";
+  delete policy.benchmark_evaluation_spend[0].expected_per_run_cost;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /one-off benchmark or evaluation spend requires current provider-pricing evidence, expected per-run cost, per-run approval or active spend-class approval, and explicit non-recurring routing disposition/
+  );
+});
+
 test("token-cost-failsafe validation rejects recurring paid routes without scoped promotion and spend approval", async () => {
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();
@@ -102,11 +122,51 @@ test("token-cost-failsafe validation rejects recurring paid routes without scope
   );
 });
 
+test("token-cost-failsafe validation rejects recurring paid routes without provider pricing and expected cost ceiling", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  policy.recurring_paid_routes[0].provider_pricing_evidence = "";
+  delete policy.recurring_paid_routes[0].promotion_threshold.expected_cost_ceiling;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /recurring paid routes require provider-pricing evidence, spend-class approval, scoped promotion threshold, and route applicability/
+  );
+});
+
 test("token-cost-failsafe validation rejects tight hard caps disguised as soft budget bands", async () => {
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();
   policy.soft_budget_bands[0].budget_mode = "hard_cap";
   policy.soft_budget_bands[0].normal_variance_policy = "stop_immediately";
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /soft budget bands must be generous abnormal-run failsafes, not tight caps that force repeated failed attempts/
+  );
+});
+
+test("token-cost-failsafe validation rejects unknown soft budget band values", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  policy.soft_budget_bands[0].budget_mode = "normal_review_budget";
+  policy.soft_budget_bands[0].normal_variance_policy = "unspecified";
   await writeCompleteTokenCostFixture(repo, { policy });
 
   const result = await runBandit(repo, [
@@ -145,6 +205,25 @@ test("token-cost-failsafe validation keeps trace cost signals non-canonical", as
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();
   policy.trace_cost_signal_boundary.can_satisfy_required_workflow_artifacts = true;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /trace-backed token and cost signals cannot replace canonical workflow artifacts, approvals, landing evidence, UAT, or retrospective evidence/
+  );
+});
+
+test("token-cost-failsafe validation rejects trace signals replacing approvals or landing evidence", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  policy.trace_cost_signal_boundary.can_replace_approvals_or_landing_evidence = true;
   await writeCompleteTokenCostFixture(repo, { policy });
 
   const result = await runBandit(repo, [
