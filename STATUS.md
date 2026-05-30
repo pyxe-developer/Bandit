@@ -18,8 +18,9 @@ Stage 4 pre-PR CodeRabbit timed out twice: focused provider attempts against the
 
 Stage 4 Local Qwen pass evidence is recorded in `docs/work/BANDIT-054/local-qwen-review.md`.
 Stage 4 layered risk-classification and supply-chain gate evidence is recorded in `.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and `.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`.
+Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with review-subject hash `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`.
 
-Next action: record aggregate Stage 4 review evidence for `BANDIT-054` at review-subject hash `753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8` before landing, closeout, or `BANDIT-055`. No operator-owned input is currently required.
+Next action: record Stage 5 landing verdict for `BANDIT-054` before landing action, closeout, or `BANDIT-055`. No operator-owned input is currently required.
 
 This file is now part of Bandit's session-closeout workflow and should be
 refreshed whenever the current work item, current status, next action, required
@@ -32,7 +33,7 @@ PRD slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-054` - Stage Capability Scope (aggregate Stage 4 review evidence next)
+- `BANDIT-054` - Stage Capability Scope (Stage 5 landing verdict next)
 - `BANDIT-053` - Agent Observability Traces (closed)
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-051` - Worktree Bootstrap Contract

@@ -416,23 +416,24 @@ registered in
 `.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and
 `.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`, with
 review-subject hash
-`753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8`.
+`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`.
+Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-054/review-evidence.md`.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** record aggregate Stage 4 review evidence for
-`BANDIT-054` at review-subject hash
-`753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8` before
-landing, closeout, or `BANDIT-055`. CodeRabbit is dispositioned as
-provider-refusal/bootstrap-gap replacement evidence, not pass evidence.
+**Current next action:** record Stage 5 landing verdict for `BANDIT-054` before
+landing action, closeout, or `BANDIT-055`. CodeRabbit is dispositioned as
+provider-refusal/bootstrap-gap replacement evidence, not pass evidence, and
+aggregate Stage 4 review evidence is now recorded.
 Historical Claude Process
 Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`, but the active repo state now
 has Stage 3 implementation evidence, CodeRabbit timeout disposition evidence,
-Local Qwen pass evidence, explicit risk/supply evidence, and current passing
-verification.
+Local Qwen pass evidence, explicit risk/supply evidence, aggregate Stage 4
+review evidence, and current passing verification.
 
-The current stage is Stage 4: Pre-Landing Review Loop.
+The current stage is Stage 5: Landing And UAT.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -822,7 +823,7 @@ in `test/stage-capability-scope.test.mjs`,
 `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap as
 active for `BANDIT-054`.
 
-The current stage is Stage 4: Pre-Landing Review Loop. Stage 3 implementation
+The current stage is Stage 5: Landing And UAT. Stage 3 implementation
 evidence is recorded in `docs/work/BANDIT-054/implementation-evidence.md`,
 `docs/specs/BANDIT-054-implementation-evidence.json`, and
 `docs/work/BANDIT-054/writer-report.md`. The current verified implementation
@@ -839,11 +840,12 @@ treated as pass evidence. Stage 4 Local Qwen pass evidence is recorded in
 risk-classification and supply-chain gate evidence is registered in
 `.bandit/policy/risk-classifications/BANDIT-054-risk-classification.json` and
 `.bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json`. The
-next action is to record aggregate Stage 4 review evidence for `BANDIT-054` at
-review-subject hash
-`753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8`; do not
-create landing evidence, closeout evidence, or unrelated Phase 8 work before
-aggregate review evidence exists.
+aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-054/review-evidence.md` with review-subject hash
+`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. The next
+action is to record Stage 5 landing verdict for `BANDIT-054`; do not create
+landing-action evidence, closeout evidence, or unrelated Phase 8 work before
+landing verdict evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1087,11 +1089,11 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 4 review evidence for `BANDIT-054`, the
-bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, including pre-PR
-CodeRabbit evidence, Local Qwen evidence, risk-classification evidence,
-supply-chain gate evidence, and aggregate review evidence with the current
-review subject hash.
+**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-054`, the
+bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, using the recorded
+aggregate Stage 4 review evidence, CodeRabbit provider-refusal replacement
+evidence, Local Qwen pass evidence, risk-classification evidence, supply-chain
+gate evidence, and current review subject hash.
 
 ## Known Bootstrap Gaps
 
@@ -1480,15 +1482,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record aggregate Stage 4 review evidence for `BANDIT-054` at review-subject
-   hash `753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8`.
-   `docs/work/BANDIT-054/coderabbit-review.md` records a blocker timeout with
-   no operator-owned input required, and
-   `docs/work/BANDIT-054/coderabbit-timeout-disposition.md` records the Codex
-   PM provider-refusal/bootstrap-gap disposition.
-   `docs/work/BANDIT-054/local-qwen-review.md` records a Local Qwen pass. Do
-   not run landing, closeout, or `BANDIT-055` until aggregate Stage 4 review
-   evidence exists.
+1. Record Stage 5 landing verdict for `BANDIT-054`. Stage 4 aggregate review
+   evidence is recorded in `docs/work/BANDIT-054/review-evidence.md` with
+   review-subject hash
+   `1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`;
+   CodeRabbit remains bootstrap-gap replacement evidence, Local Qwen is pass,
+   and no operator-owned input is required. Do not run landing action, closeout,
+   or `BANDIT-055` until Stage 5 landing verdict evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1527,10 +1527,11 @@ has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
 evidence, Stage 4 pre-PR CodeRabbit blocker evidence, Codex PM
 provider-refusal/bootstrap-gap disposition evidence, Stage 4 Local Qwen pass
 evidence, and Stage 4 layered risk-classification and supply-chain gate
-evidence. The next required action is to record aggregate Stage 4 review
-evidence for `BANDIT-054` at review-subject hash
-`753d3293f825cd03d9a614aa9e0f3996720cded82db03b68e4af979c27d141f8` before
-landing evidence.
+evidence. Aggregate Stage 4 review evidence is recorded in
+`docs/work/BANDIT-054/review-evidence.md` with review-subject hash
+`1b87330bfd634acf678fea2e6200d04d6e10c02feaea61baa5c87ba1036f3fec`. The next
+required action is to record Stage 5 landing verdict for `BANDIT-054` before
+landing-action evidence.
 Historical Claude Process Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
 routing by `docs/work/BANDIT-054/implementation-evidence.md`,
