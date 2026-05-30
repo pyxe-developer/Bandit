@@ -397,15 +397,19 @@ disposition are recorded in `docs/work/BANDIT-053/`, `docs/specs/`,
 **Current active work:** `BANDIT-054` - Stage Capability Scope.
 Stage 1 brief evidence is recorded in `docs/work/BANDIT-054/brief.md`,
 generated from `docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`.
+Stage 2 RED evidence is recorded in `test/stage-capability-scope.test.mjs`,
+`docs/specs/BANDIT-054-red-evidence.json`, and
+`docs/work/BANDIT-054/red-evidence.md`.
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** record Stage 2 RED evidence for `BANDIT-054`, proving
-Bandit currently lacks enforced Stage Capability Scope policy validation,
-work-item spec and brief integration, skill lifecycle contract reference checks,
-allowed-tool checks, and forbidden-action checks.
+**Current next action:** dispatch Stage 3 implementation for `BANDIT-054` to
+Claude through the bootstrap Process Adapter path. The Stage 3 Writer must make
+the focused RED tests pass by implementing the narrow Stage Capability Scope
+repair without editing tests, test helpers, fixtures, RED evidence artifacts or
+specs, or acceptance mappings.
 
-The current stage is Stage 2: Test Design And RED Evidence.
+The current stage is Stage 3: Implementation Clean-Code Rubric.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -788,14 +792,18 @@ closeout is recorded in `docs/work/BANDIT-053/retrospective.md`, and
 `BANDIT-054` is the active bootstrap-gap chore for
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-STAGE-CAPABILITY-SCOPE.json`, Stage 1 brief evidence is
-recorded in `docs/work/BANDIT-054/brief.md`, lifecycle event evidence is
-recorded in `.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the
-gap as active for `BANDIT-054`.
+recorded in `docs/work/BANDIT-054/brief.md`, Stage 2 RED evidence is recorded
+in `test/stage-capability-scope.test.mjs`,
+`docs/specs/BANDIT-054-red-evidence.json`, and
+`docs/work/BANDIT-054/red-evidence.md`, lifecycle event evidence is recorded in
+`.bandit/events.jsonl`, and `.bandit/bootstrap-gaps.json` links the gap as
+active for `BANDIT-054`.
 
-The current stage is Stage 2: Test Design And RED Evidence. The next action is
-to record RED evidence for the missing Stage Capability Scope enforcement. Do
-not create implementation work, landing evidence, or unrelated Phase 8 work
-before the Stage 2 RED evidence exists.
+The current stage is Stage 3: Implementation Clean-Code Rubric. The next action
+is to dispatch Claude through the bootstrap Process Adapter path to implement
+the narrow Stage Capability Scope repair. Do not create landing evidence, Stage
+4 review evidence, or unrelated Phase 8 work before Stage 3 implementation
+evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1039,12 +1047,14 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-054`, the
-bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, without creating
-implementation work, trace runtime execution, full scheduler execution runtime
-behavior, full worktree lifecycle implementation, claim lease creation or
-release, cockpit UI/server/API work, PR/CI workflow, automatic merge/push/deploy
-behavior, product UAT scope, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 3 implementation evidence for `BANDIT-054`,
+the bootstrap-gap chore for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`, after Claude
+implements the narrow Stage Capability Scope repair without editing tests, test
+helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, full
+scheduler execution runtime behavior, full worktree lifecycle implementation,
+claim lease creation or release, cockpit UI/server/API work, PR/CI workflow,
+automatic merge/push/deploy behavior, product UAT scope, or unrelated Phase 8
+work.
 
 ## Known Bootstrap Gaps
 
@@ -1244,7 +1254,8 @@ These are expected because Bandit does not exist yet:
   treats stage-specific skills, tools, reviewer depth, prompts, inputs, outputs,
   evidence, forbidden actions, and skill lifecycle contract references as Stage
   Capability Scope, but work-item specs and validation do not yet enforce that
-  scope. Stage 1 brief evidence is recorded, and Stage 2 RED evidence is next.
+  scope. Stage 1 brief and Stage 2 RED evidence are recorded, and Stage 3
+  implementation dispatch is next.
 - `BANDIT-GAP-TOKEN-COST-FAILSAFE` is open and queued from the 2026-05-26
   strategic review: Bandit now treats token and cost budgets as abnormal-run
   failsafes for paid, high-token, reviewer, scheduler, or long-running work,
@@ -1432,9 +1443,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 2 RED evidence for `BANDIT-054`, the active bootstrap-gap chore
-   for `BANDIT-GAP-STAGE-CAPABILITY-SCOPE`. Do not create implementation work
-   or unrelated Phase 8 work before RED evidence exists.
+1. Dispatch Stage 3 implementation for `BANDIT-054` to Claude through the
+   bootstrap Process Adapter path. Do not edit tests, test helpers, fixtures,
+   RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1475,10 +1486,11 @@ evidence with PM disposition, aggregate Stage 4 review evidence, Stage 5
 landing verdict evidence with risk-classification and supply-chain gate
 evidence, local-record landing action evidence, Stage 6 retrospective closeout,
 and resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
-`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` as active for `BANDIT-054`. The next action
-is Stage 2 RED evidence for `BANDIT-054`. This is routine technical routing, not
-an operator-owned product, UAT, policy, business, cost, or scope decision unless
-the RED evidence would expand beyond the active stage-capability-scope gap.
+`BANDIT-GAP-STAGE-CAPABILITY-SCOPE` as active for `BANDIT-054`. `BANDIT-054`
+has Stage 1 brief evidence and Stage 2 RED evidence. The next action is Stage 3
+implementation dispatch for `BANDIT-054`. This is routine technical routing,
+not an operator-owned product, UAT, policy, business, cost, or scope decision
+unless implementation would expand beyond the active stage-capability-scope gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

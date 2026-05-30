@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** Record Stage 2 RED evidence for `BANDIT-054`. Do not create implementation work or unrelated Phase 8 work before the RED evidence exists.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-054` to Claude through the bootstrap Process Adapter path. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 
