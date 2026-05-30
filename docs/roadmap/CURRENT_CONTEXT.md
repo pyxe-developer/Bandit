@@ -820,14 +820,15 @@ evidence is recorded in `docs/work/BANDIT-054/implementation-evidence.md`,
 adds the Stage Capability Scope policy validator, command surface, validate
 integration, work-item spec requirement, and generated brief rendering without
 editing Stage 2-owned tests, fixtures, RED evidence artifacts/specs, or
-acceptance mappings. Stage 4 is currently blocked at pre-PR CodeRabbit:
-`docs/work/BANDIT-054/coderabbit-review.md` records `review_state: timeout`,
-`coderabbit_verdict: blocker`, `operator_input_status: none_required`, and
-`source_drift_status: current` after two focused provider attempts returned no
-terminal verdict. The next action is to rerun or disposition pre-PR CodeRabbit;
-do not run Local Qwen, create aggregate review evidence, landing evidence,
-closeout evidence, or unrelated Phase 8 work before the CodeRabbit blocker is
-resolved.
+acceptance mappings. Stage 4 pre-PR CodeRabbit timeout evidence is recorded in
+`docs/work/BANDIT-054/coderabbit-review.md` and
+`docs/specs/BANDIT-054-coderabbit-review-output.json`, and Codex PM
+provider-refusal/bootstrap-gap disposition is recorded in
+`docs/work/BANDIT-054/coderabbit-timeout-disposition.md`. CodeRabbit is not
+treated as pass evidence. The next action is to run Stage 4 Local Qwen
+adversarial review for `BANDIT-054`; do not create aggregate review evidence,
+landing evidence, closeout evidence, or unrelated Phase 8 work before Local
+Qwen evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1464,11 +1465,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Resolve `BANDIT-054` Stage 4 pre-PR CodeRabbit provider timeout evidence.
+1. Run Stage 4 Local Qwen adversarial review for `BANDIT-054`.
    `docs/work/BANDIT-054/coderabbit-review.md` records a blocker timeout with
-   no operator-owned input required. Do not run Local Qwen, risk-classification,
-   supply-chain gate, aggregate review evidence, landing, or `BANDIT-055` until
-   pre-PR CodeRabbit is rerun successfully or explicitly dispositioned.
+   no operator-owned input required, and
+   `docs/work/BANDIT-054/coderabbit-timeout-disposition.md` records the Codex
+   PM provider-refusal/bootstrap-gap disposition. Do not run
+   risk-classification, supply-chain gate, aggregate review evidence, landing,
+   or `BANDIT-055` until Local Qwen evidence exists.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1504,9 +1507,10 @@ raw-HEAD evidence loops.
 
 No operator-owned input is required for the next recorded action. `BANDIT-054`
 has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, and Stage 4 pre-PR CodeRabbit blocker evidence. The next required
-action is to rerun or disposition the CodeRabbit provider timeout recorded in
-`docs/work/BANDIT-054/coderabbit-review.md` before the remaining Stage 4 gates.
+evidence, Stage 4 pre-PR CodeRabbit blocker evidence, and Codex PM
+provider-refusal/bootstrap-gap disposition evidence. The next required action is
+to run Stage 4 Local Qwen adversarial review for `BANDIT-054` before the
+remaining Stage 4 gates.
 Historical Claude Process Adapter blocker evidence remains recorded in
 `docs/work/BANDIT-054/writer-dispatch-blocker.md`; it is superseded for active
 routing by `docs/work/BANDIT-054/implementation-evidence.md`,
