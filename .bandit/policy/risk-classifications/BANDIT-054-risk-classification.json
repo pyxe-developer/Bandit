@@ -1,0 +1,205 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-054",
+  "changed_surfaces": [
+    {
+      "path": "src/state/stage-capability-scope.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/stage-capability-scope.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/work-item-create.ts",
+      "surface": "work_item_creation_contract",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "repo_validation_contract",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/policy/stage-capability-scope.json",
+      "surface": "policy_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/stage-capability-scope.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/stage-capability-scope.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "stage_capability_scope_policy_validator",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "signal_id": "work_item_brief_and_spec_integration",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-054/brief.md"
+    },
+    {
+      "signal_id": "stage3_writer_test_surface_refusal",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "signal_id": "no_paid_routing_or_external_execution_authority",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/brief.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/stage-capability-scope.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "tool": "node --test test/work-item-create.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- stage-capability-scope validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/stage-capability-scope.json"
+    },
+    {
+      "tool": "npm run bandit -- coderabbit-review pre-pr BANDIT-054 --base 0efe60c",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-054/coderabbit-timeout-disposition.md"
+    },
+    {
+      "tool": "npm run bandit -- qwen-review BANDIT-054",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/local-qwen-review.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-054-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs review-subject-hash BANDIT-054",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-054/coderabbit-timeout-disposition.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-054/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-054/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-054 is a non-product bootstrap-gap chore implementing local Stage Capability Scope policy validation, command routing, work-item spec integration, template rendering, and fail-closed stage-scope checks. It requires pre-PR CodeRabbit or honest provider-refusal replacement evidence plus Local Qwen review and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-054 changes local workflow policy validation, command routing, generated work-item brief/spec handling, Stage 3 writer forbidden-action checks, and focused tests. The work is medium workflow-risk because it governs which skills, tools, inputs, outputs, evidence, and forbidden actions are declared before stage execution, but it does not introduce new authority roles, live routing, paid reviewer routes, token-cost policy, provider-pricing approvals, scheduler execution, claim leases, work-surface reservations, worktree lifecycle authority, merge, push, deploy, dependency or lockfile changes, installed global skill edits, external service setup, or cockpit UI/server/API behavior. Stage 4 evidence includes scoped CodeRabbit provider-refusal replacement evidence, Local Qwen pass evidence, current supply-chain gate evidence, current risk-classification evidence, and clean-code compliance evidence, so local-record landing can proceed after aggregate Stage 4 review evidence and Stage 5 landing verdict are recorded.",
+  "evidence_paths": [
+    ".bandit/policy/stage-capability-scope.json",
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-054-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json",
+    "docs/templates/stage-capability-scope.md",
+    "docs/work/BANDIT-054/brief.md",
+    "docs/work/BANDIT-054/red-evidence.md",
+    "docs/work/BANDIT-054/implementation-evidence.md",
+    "docs/work/BANDIT-054/coderabbit-review.md",
+    "docs/work/BANDIT-054/coderabbit-timeout-disposition.md",
+    "docs/work/BANDIT-054/local-qwen-review.md",
+    "src/state/stage-capability-scope.ts",
+    "src/commands/stage-capability-scope.ts",
+    "src/commands/work-item-create.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "test/stage-capability-scope.test.mjs",
+    "test/work-item-create.test.mjs"
+  ]
+}

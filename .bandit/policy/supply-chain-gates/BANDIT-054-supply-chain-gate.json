@@ -1,0 +1,108 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-054",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": ".bandit/policy/stage-capability-scope.json",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The policy records stage skill references and stage tool scopes, but it does not edit installed global skills or authorize new external skill installation."
+    },
+    {
+      "path": "docs/templates/stage-capability-scope.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template names skill lifecycle contract fields for future work-item evidence without changing installed skill contents."
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-054/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-054 implementation. Stage Capability Scope adds local skill-reference policy metadata only."
+    },
+    "rationale": "BANDIT-054 adds local Stage Capability Scope validation, command routing, policy metadata, templates, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-054/coderabbit-timeout-disposition.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "policy_reference_only",
+    "skills": [
+      {
+        "skill_id": "stage-capability-scope-referenced-skills",
+        "owner": "Codex PM",
+        "freshness_rule": "lifecycle contract reference required when load-bearing skill contracts exist",
+        "revocation_path": "update or remove the stage declaration in .bandit/policy/stage-capability-scope.json"
+      }
+    ],
+    "owner": "Codex PM",
+    "freshness_rule": "validated by npm run bandit -- stage-capability-scope validate --json",
+    "revocation_path": "remove or revise the corresponding Stage Capability Scope declaration"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-054 touches Stage Capability Scope policy and template surfaces that reference stage skills and tools, so explicit supply-chain gate evidence is recorded before aggregate review and landing. The implementation does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/stage-capability-scope.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-054-supply-chain-gate.json",
+    "docs/templates/stage-capability-scope.md",
+    "docs/work/BANDIT-054/brief.md",
+    "docs/work/BANDIT-054/implementation-evidence.md",
+    "docs/work/BANDIT-054/coderabbit-timeout-disposition.md",
+    "docs/work/BANDIT-054/local-qwen-review.md",
+    "src/state/stage-capability-scope.ts",
+    "src/commands/stage-capability-scope.ts",
+    "src/commands/work-item-create.ts",
+    "src/commands/validate.ts",
+    "test/stage-capability-scope.test.mjs",
+    "test/work-item-create.test.mjs"
+  ]
+}
