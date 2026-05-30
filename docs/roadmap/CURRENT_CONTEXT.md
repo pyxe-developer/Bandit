@@ -403,11 +403,12 @@ Stage 2 RED evidence is recorded in `test/stage-capability-scope.test.mjs`,
 `.bandit/bootstrap-gaps.json` links `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` to
 `BANDIT-054` as the active bootstrap-gap chore.
 
-**Current next action:** dispatch Stage 3 implementation for `BANDIT-054` to
-Claude through the bootstrap Process Adapter path. The Stage 3 Writer must make
-the focused RED tests pass by implementing the narrow Stage Capability Scope
-repair without editing tests, test helpers, fixtures, RED evidence artifacts or
-specs, or acceptance mappings.
+**Current next action:** diagnose or rerun the Claude Process Adapter Stage 3
+dispatch for `BANDIT-054`. `docs/work/BANDIT-054/dispatch.md` is prepared, and
+`docs/work/BANDIT-054/writer-dispatch-blocker.md` records three silent no-edit
+adapter attempts. The Stage 3 Writer must make the focused RED tests pass by
+implementing the narrow Stage Capability Scope repair without editing tests,
+test helpers, fixtures, RED evidence artifacts or specs, or acceptance mappings.
 
 The current stage is Stage 3: Implementation Clean-Code Rubric.
 
@@ -800,10 +801,11 @@ in `test/stage-capability-scope.test.mjs`,
 active for `BANDIT-054`.
 
 The current stage is Stage 3: Implementation Clean-Code Rubric. The next action
-is to dispatch Claude through the bootstrap Process Adapter path to implement
-the narrow Stage Capability Scope repair. Do not create landing evidence, Stage
-4 review evidence, or unrelated Phase 8 work before Stage 3 implementation
-evidence exists.
+is to diagnose or rerun the Claude Process Adapter Stage 3 dispatch for
+`BANDIT-054`; `docs/work/BANDIT-054/dispatch.md` is prepared, and
+`docs/work/BANDIT-054/writer-dispatch-blocker.md` records three silent no-edit
+adapter attempts. Do not create landing evidence, Stage 4 review evidence, or
+unrelated Phase 8 work before Stage 3 implementation evidence exists.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1443,9 +1445,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Dispatch Stage 3 implementation for `BANDIT-054` to Claude through the
-   bootstrap Process Adapter path. Do not edit tests, test helpers, fixtures,
-   RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+1. Diagnose or rerun the Claude Process Adapter Stage 3 dispatch for
+   `BANDIT-054`. `docs/work/BANDIT-054/dispatch.md` is prepared, and
+   `docs/work/BANDIT-054/writer-dispatch-blocker.md` records three silent
+   no-edit adapter attempts. Do not edit tests, test helpers, fixtures, RED
+   evidence artifacts/specs, or acceptance mappings during Stage 3.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1488,9 +1492,13 @@ evidence, local-record landing action evidence, Stage 6 retrospective closeout,
 and resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` as active for `BANDIT-054`. `BANDIT-054`
 has Stage 1 brief evidence and Stage 2 RED evidence. The next action is Stage 3
-implementation dispatch for `BANDIT-054`. This is routine technical routing,
-not an operator-owned product, UAT, policy, business, cost, or scope decision
-unless implementation would expand beyond the active stage-capability-scope gap.
+implementation dispatch repair or rerun for `BANDIT-054`: Codex PM prepared
+`docs/work/BANDIT-054/dispatch.md`, attempted three Claude Process Adapter
+invocations, and recorded the silent no-edit dispatch blocker in
+`docs/work/BANDIT-054/writer-dispatch-blocker.md`. This is routine technical
+routing and adapter repair, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless implementation would expand beyond the
+active stage-capability-scope gap.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

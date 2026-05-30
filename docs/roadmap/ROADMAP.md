@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-054` to Claude through the bootstrap Process Adapter path. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** Diagnose or rerun the Claude Process Adapter Stage 3 dispatch for `BANDIT-054`. `docs/work/BANDIT-054/dispatch.md` is prepared and `docs/work/BANDIT-054/writer-dispatch-blocker.md` records three silent no-edit adapter attempts. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 
