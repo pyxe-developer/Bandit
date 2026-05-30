@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-054` - Stage Capability Scope
 
-**Current next step:** Diagnose the Claude Process Adapter Stage 3 hang for `BANDIT-054` from the attempt-4 raw evidence before rerunning. `docs/work/BANDIT-054/dispatch.md` is prepared and `docs/work/BANDIT-054/writer-dispatch-blocker.md` records three silent no-edit attempts plus one repaired verbose stream-json attempt that hung before `end_turn`, implementation edits, or `writer-report.md`. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
+**Current next step:** Rerun Claude Process Adapter Stage 3 for `BANDIT-054` with a narrowed dispatched-writer prompt that skips meta-workflow skill/subagent selection and executes `docs/work/BANDIT-054/dispatch.md` directly. `docs/work/BANDIT-054/writer-dispatch-blocker.md` records the attempt-4 diagnosis. Do not edit Stage 2 tests, fixtures, RED evidence artifacts/specs, or acceptance mappings during Stage 3.
 
 ## Next Work Item
 

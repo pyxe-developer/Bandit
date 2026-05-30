@@ -48,10 +48,31 @@ This is not an operator-owned product, UAT, policy, business, or scope decision.
 The next action is a technical adapter repair or rerun decision owned by Codex
 PM under the existing Bootstrap Orchestration Boundary.
 
+## Attempt 4 Diagnosis
+
+The attempt-4 raw stream shows that the Process Adapter was producing structured
+events, not failing before startup. It reached Claude startup hooks, loaded
+Superpowers workflow skills, read the required Bandit and implementation files,
+and then ran two no-output `grep` probes against
+`test/work-item-create.test.mjs`.
+
+No `end_turn` event, implementation edit, verification command, or
+`docs/work/BANDIT-054/writer-report.md` write appears in the stream. `stderr.log`
+is empty and `exit-code.txt` records `143`, matching Codex PM termination rather
+than an adapter-owned refusal diagnostic.
+
+The likely repair is to rerun Stage 3 with a narrower Process Adapter prompt
+that treats the Claude session as a dispatched implementation writer, skips
+meta-workflow skill/subagent selection, forbids `Task`/`Workflow`/`Skill`
+delegation, and directs the writer to execute the existing
+`docs/work/BANDIT-054/dispatch.md` contract directly. The rerun must preserve
+the Test Ownership Boundary and still stop rather than edit tests, test helpers,
+fixtures, RED evidence artifacts/specs, or acceptance mappings.
+
 ## Next Action
 
-Diagnose the local Claude Process Adapter hang from the raw attempt-4 evidence
-before rerunning Stage 3. A successful next dispatch must reach `end_turn`,
+Rerun Stage 3 through the Claude Process Adapter with the narrowed dispatched
+writer prompt described above. A successful next dispatch must reach `end_turn`,
 make the focused Stage 3 implementation edits, and produce
 `docs/work/BANDIT-054/writer-report.md`. Do not edit Stage 2 tests, test
 helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings. Do not
