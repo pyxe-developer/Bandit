@@ -2,43 +2,34 @@
 
 contract_version: 1
 work_item: BANDIT-055
-source_head: de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0
+source_head: 3aa85de29c14958ccb15d291824acf70a03e78c8
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:a2ea27d9361c73b3beef30930dfe348feebcb709
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: resolved
-findings_disposition: The four repair-head validation findings from the completed b696c13 CodeRabbit review were repaired in src/state/token-cost-failsafe.ts with focused regression tests in test/token-cost-failsafe.test.mjs. A terminal repaired-delta refresh completed at de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0 and returned five open findings; all five are repaired locally in the current repair delta. Because source changed after the terminal CodeRabbit review, CodeRabbit evidence is stale and needs a focused refresh before Local Qwen, aggregate Stage 4 review, landing, retrospective, BANDIT-056, or unrelated Phase 8 work.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh completed at 3aa85de29c14958ccb15d291824acf70a03e78c8 and returned four open findings. The next action is to repair or explicitly disposition those findings before Local Qwen, aggregate Stage 4 review, landing, retrospective, BANDIT-056, or unrelated Phase 8 work.
 operator_input_status: none_required
-source_drift_status: stale
+source_drift_status: current
 executable_evidence:
   - coderabbit --version returned 0.4.1.
-  - coderabbit auth status returned authenticated for github user pyxe-developer.
+  - coderabbit auth status --agent returned authenticated for github user pyxe-developer.
   - b696c13d72a64bb20fef0246cf01cd0641c75bbb repairs the prior docs/templates/token-cost-failsafe.md finding.
-  - coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts -c AGENTS.md --no-color completed with four open validation findings.
-  - src/state/token-cost-failsafe.ts now validates benchmark provider_pricing_evidence and expected_per_run_cost, recurring paid route provider_pricing_evidence and promotion_threshold.expected_cost_ceiling, allowlisted soft budget band values, and trace_cost_signal_boundary.can_replace_approvals_or_landing_evidence.
-  - node --test test/token-cost-failsafe.test.mjs passed with 12/12 tests after the repair.
-  - node --test test/work-item-create.test.mjs passed with 8/8 tests after the repair.
-  - npm run typecheck, npm run bandit -- token-cost-failsafe validate --json, npm run bandit -- validate, npm run bandit -- gaps list, and git diff --check passed after the repair.
-  - Two repair refresh attempts using coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color reached setup/summarizing and then emitted no terminal verdict; Codex PM terminated each non-terminal process.
-  - A third repair refresh attempt using the same scoped repaired-delta command completed with five open findings.
-  - The five terminal-refresh findings are repaired locally: provider-pricing evidence ids now require non-empty strings, top-level continuation decisions are validated against the allowed decision set, ROADMAP.md names the prior non-terminal attempts artifact, and stale CURRENT_CONTEXT.md passages now route to a focused CodeRabbit refresh.
-  - docs/specs/BANDIT-055-coderabbit-review-output.json records the original timed-out attempt, original template finding, repair-head completed provider result, two non-terminal repaired-delta refresh attempts, and the terminal repaired-delta refresh.
-repaired_findings_pending_refresh:
-  - severity: minor
-    file: src/state/token-cost-failsafe.ts
-    finding: provider_pricing_evidence entries can use a missing or non-string id that collapses to unknown and can satisfy cross-reference checks.
-  - severity: minor
-    file: src/state/token-cost-failsafe.ts
-    finding: Top-level continuation_decisions are string-filtered but not validated against VALID_CONTINUATION_DECISIONS.
+  - de7b28d45fc7673ac03b7d2eb9ce12d7a48c78e0 repaired the four repair-head validation findings in src/state/token-cost-failsafe.ts with focused regression tests in test/token-cost-failsafe.test.mjs.
+  - 3aa85de29c14958ccb15d291824acf70a03e78c8 repaired the five terminal-refresh findings locally: provider-pricing evidence ids now require non-empty strings, top-level continuation decisions are validated against the allowed decision set, ROADMAP.md names the prior non-terminal attempts artifact, and stale CURRENT_CONTEXT.md passages route to a focused CodeRabbit refresh.
+  - coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color completed with four open findings.
+open_findings:
   - severity: trivial
-    file: docs/roadmap/ROADMAP.md
-    finding: The current next step is a long single sentence and uses terminal without a local definition or artifact reference for the two non-terminal refresh attempts.
+    file: docs/work/BANDIT-055/coderabbit-review.md
+    finding: findings_status was resolved while coderabbit_verdict was blocker and source_drift_status was stale, making local repair versus pending verification ambiguous.
   - severity: minor
-    file: docs/roadmap/CURRENT_CONTEXT.md
-    finding: One active-work passage still says Stage 4 pre-PR CodeRabbit review is the next action even though refresh attempts have already timed out and terminal refresh evidence is now recorded.
+    file: .bandit/policy/token-cost-failsafe.json
+    finding: trigger_thresholds includes repeated_retry_count without a matching abnormal_run_triggers entry or normalized trigger mapping.
   - severity: minor
-    file: docs/roadmap/CURRENT_CONTEXT.md
-    finding: One bootstrap-gap passage still says Stage 4 pre-PR CodeRabbit review is the next action instead of CodeRabbit refresh evidence or replacement evidence.
+    file: src/state/token-cost-failsafe.ts
+    finding: validateRecurringPaidRoutes and validateSoftBudgetBands still substitute unknown for missing ids instead of rejecting missing or empty ids.
+  - severity: minor
+    file: src/state/token-cost-failsafe.ts
+    finding: REQUIRED_PROVIDER_PRICING_FIELDS omits required provider and model_or_profile keys, so policy entries missing those fields can pass validation.
 bootstrap_gaps:
   - none

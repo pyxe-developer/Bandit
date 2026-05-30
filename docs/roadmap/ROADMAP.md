@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Run a focused CodeRabbit refresh for the repaired `BANDIT-055` findings. Prior non-terminal refresh attempts and the completed five-finding review are recorded in `docs/work/BANDIT-055/coderabbit-review.md`; do not run Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until CodeRabbit refresh evidence is current.
+**Current next step:** Repair or explicitly disposition the four open CodeRabbit findings for `BANDIT-055`. The focused refresh evidence is recorded in `docs/work/BANDIT-055/coderabbit-review.md`; do not run Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until those findings are resolved or dispositioned.
 
 ## Next Work Item
 
