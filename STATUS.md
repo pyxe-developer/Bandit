@@ -18,6 +18,10 @@ Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `doc
 
 The next required action is to run the focused CodeRabbit refresh for `BANDIT-056` on repair head `2688c3187cb4ee3c15e4320e5378fb0877a8d889` before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
+`BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
+`BANDIT-056` lands and closes out; it does not change the current next action.
+
 No operator-owned input is required for the next recorded action.
 
 This file is now part of Bandit's session-closeout workflow and should be
@@ -32,7 +36,7 @@ slices. Detailed history stays in completed work-item packages.
 Last 5 items only:
 
 - `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
+- `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)
-- `BANDIT-052` - Event-Driven Wake Scheduler

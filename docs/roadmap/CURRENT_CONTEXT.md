@@ -461,6 +461,12 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
+`BANDIT-056` Stage 4 repair ownership violation where Codex PM edited
+implementation-owned source and Test Writer-owned test coverage in the same
+repair step. The gap must be corrected after `BANDIT-056` lands and closes out;
+it does not supersede the current focused CodeRabbit refresh next action.
+
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
 `docs/work/BANDIT-051/brief.md`, generated from
@@ -1342,6 +1348,12 @@ These are expected because Bandit does not exist yet:
   artifact-specific Evidence SLOs and freshness budgets for tests, CodeRabbit,
   Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and
   projections instead of generic confidence badges.
+- `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
+  `BANDIT-056` Stage 4 repair ownership violation. The correction should add an
+  enforced repair-surface gate so Codex PM can route and update review/context
+  evidence, Claude Writer owns implementation-source repair, Test Writer owns
+  tests and acceptance mappings, and validators fail closed when one actor edits
+  both implementation and tests for the same work item.
 
 - The missing Bandit work-item creation command is resolved by `BANDIT-020`.
   Future one-off work-item starts should use
@@ -1522,7 +1534,10 @@ The current priority is:
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
+3. After `BANDIT-056` lands and closes out, create the queued
+   `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` chore before unrelated
+   Phase 8 work.
+4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
    by `BANDIT-038`. `BANDIT-GAP-AGENT-EVALUATION-HARNESS` is resolved by

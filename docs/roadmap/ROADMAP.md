@@ -10,7 +10,7 @@
 
 ## Next Work Item
 
-- `[Gap]` none queued beyond active `BANDIT-056`
+- `[Gap]` `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - enforce Stage 4 repair ownership boundaries after `BANDIT-056` lands and closes out.
 
 ## Planned Work
 
@@ -19,7 +19,7 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` none beyond active `BANDIT-056` - Evidence Freshness SLOs is the active work item, not an additional queued blocking gap.
+- `[Gap]` `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued from the `BANDIT-056` Stage 4 repair ownership violation; blocked until active `BANDIT-056` lands and closes out.
 
 ### Deferred PRD Slices
 

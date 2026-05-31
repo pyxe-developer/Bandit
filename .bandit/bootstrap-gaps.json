@@ -617,6 +617,25 @@
       "rationale": "The operator confirmed that cockpit trust signals should use explicit Evidence SLOs and artifact-specific freshness budgets rather than generic confidence badges. CI/tests, CodeRabbit, Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and derived projections need different freshness rules, source links, owners, and staleness reasons.",
       "verification_target": null,
       "next_action": "Complete active chore BANDIT-056."
+    },
+    {
+      "id": "BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT",
+      "title": "Stage 4 repair can violate Writer and Test Writer ownership boundaries",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-056",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/work/BANDIT-056/coderabbit-review.md",
+        "docs/specs/BANDIT-056-coderabbit-review-output.json",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "linked_work_item": null,
+      "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. This repeated ownership-boundary violation shows Bandit lacks an enforced Stage 4 repair-surface gate that distinguishes Claude Writer implementation repair, Test Writer regression evidence, and Codex PM-owned review/context evidence before edits are made.",
+      "verification_target": null,
+      "next_action": "After BANDIT-056 lands and closes out, create a bootstrap-gap chore that enforces Stage 4 repair ownership boundaries before edits: Codex PM may route and update review/context evidence, Claude Writer owns implementation-source repair, Test Writer owns tests and acceptance mappings, and validators must fail closed when one actor edits both implementation and tests for the same work item."
     }
   ]
 }
