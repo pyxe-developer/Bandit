@@ -231,14 +231,15 @@ function validateArtifactTypes(policy: RawRecord): string[] {
       "evidence freshness SLO artifact types require a non-empty string id"
     );
 
-    const hasSourceArtifacts =
-      Array.isArray(item.source_artifacts) &&
-      (item.source_artifacts as unknown[]).length > 0;
+    requireNonEmptyStringList(
+      item.source_artifacts,
+      `evidence freshness SLO ${id} requires source artifact and owner or authority role`
+    );
     const hasOwner =
       (typeof item.owner === "string" && item.owner.trim().length > 0) ||
       (typeof item.authority_role === "string" && item.authority_role.trim().length > 0);
 
-    if (!hasSourceArtifacts || !hasOwner) {
+    if (!hasOwner) {
       throw new Error(
         `evidence freshness SLO ${id} requires source artifact and owner or authority role`
       );

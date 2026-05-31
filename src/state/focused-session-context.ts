@@ -166,7 +166,14 @@ async function readStaleEvidenceReason(
 ): Promise<string | null> {
   if (artifactType !== "review_evidence") return null;
 
-  const content = await readRequiredArtifact(repoRoot, source);
+  let content: string;
+  try {
+    content = await readFile(path.join(repoRoot, source), "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) return null;
+    throw error;
+  }
+
   if (readScalarStatus(content, "source_drift_status") === "stale") {
     return "source_drift";
   }
