@@ -1,6 +1,6 @@
 {
-  "sourceHead": "c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23",
-  "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head; local evidence-artifact repair is recorded separately and still requires focused provider refresh",
+  "sourceHead": "b5e549ec6031fd2eba45b5ed4d3ccfa09da4e02c",
+  "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
   "latestRepairHead": "5a8a3d5ee762cd6f1544b91efc8653d82fd4937c",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
@@ -9,16 +9,16 @@
     {
       "severity": "minor",
       "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
-      "status": "locally_resolved_pending_refresh",
-      "body": "The summary for attempt 12 is inconsistent with the detailed findings: update the summary text to say five minor and two trivial and change the cockpit-status phrase to duplicated existence checks, or modify the findings to match the summary.",
-      "disposition": "Repaired locally by aligning the attempt 12 summary with the detailed findings: five minor findings, two trivial findings, and duplicated cockpit-status existence checks."
+      "status": "open",
+      "body": "The audit trail is missing a repair transition record between completed attempt 7 at source head fabcd55d7bd31e388708749b481a2a0634de9855 and attempt 8 at source head 1089c6b86e7f912a4e285fc11ef4845b68ab4504.",
+      "disposition": "Open; repair before Local Qwen or aggregate Stage 4 review."
     },
     {
-      "severity": "minor",
-      "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
-      "status": "locally_resolved_pending_refresh",
-      "body": "The bootstrap_gaps key is currently bare; change it to an explicit empty list so it parses as an empty array rather than null.",
-      "disposition": "Repaired locally by normalizing the markdown artifact bootstrap_gaps field to an explicit empty list."
+      "severity": "trivial",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "collectDerivedProjections duplicates validated projection ID collection already available during validateDerivedProjectionRules.",
+      "disposition": "Open; repair before Local Qwen or aggregate Stage 4 review."
     }
   ],
   "attempts": [
@@ -141,12 +141,21 @@
       "endedAt": "2026-05-31T14:57:03Z",
       "result": "local_repair_pending_provider_refresh",
       "summary": "Codex PM locally repaired both focused CodeRabbit evidence-artifact findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
+    },
+    {
+      "attempt": 16,
+      "sourceHead": "b5e549ec6031fd2eba45b5ed4d3ccfa09da4e02c",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T19:54:38Z",
+      "result": "completed",
+      "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned two open findings: one minor audit-trail gap in the CodeRabbit provider-output history and one trivial duplicate helper cleanup in evidence freshness SLO validation."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
     "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings at source head c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23.",
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files .bandit/events.jsonl .bandit/policy/evidence-freshness-slos.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-056-coderabbit-review-output.json docs/specs/BANDIT-056-implementation-evidence.json docs/templates/evidence-freshness-slos.md docs/work/BANDIT-056/claude-writer-stream.jsonl docs/work/BANDIT-056/coderabbit-review.md docs/work/BANDIT-056/dispatch.md docs/work/BANDIT-056/implementation-evidence.md docs/work/BANDIT-056/writer-report.md src/cli.ts src/commands/evidence-freshness-slos.ts src/commands/validate.ts src/state/cockpit-status.ts src/state/evidence-freshness-slos.ts src/state/focused-session-context.ts test/evidence-freshness-slos.test.mjs -c AGENTS.md --no-color completed with 2 findings at source head b5e549ec6031fd2eba45b5ed4d3ccfa09da4e02c.",
     "5a8a3d5ee762cd6f1544b91efc8653d82fd4937c repairs the two focused CodeRabbit evidence-artifact findings locally.",
     "e91081a57076120b236e0ba0fd48dd906ee2504e repairs the seven focused CodeRabbit findings locally.",
     "b8c9272f8cf69d9d1c86b0d0776236d571a1f7de repairs the three focused CodeRabbit findings locally.",
