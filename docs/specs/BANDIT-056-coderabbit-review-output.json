@@ -1,7 +1,7 @@
 {
   "sourceHead": "c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23",
   "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head; local evidence-artifact repair is recorded separately and still requires focused provider refresh",
-  "latestRepairHead": "pending-local-repair-commit",
+  "latestRepairHead": "5a8a3d5ee762cd6f1544b91efc8653d82fd4937c",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -136,7 +136,7 @@
     },
     {
       "attempt": 15,
-      "sourceHead": "pending-local-repair-commit",
+      "sourceHead": "5a8a3d5ee762cd6f1544b91efc8653d82fd4937c",
       "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
       "endedAt": "2026-05-31T14:57:03Z",
       "result": "local_repair_pending_provider_refresh",
@@ -147,7 +147,7 @@
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
     "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings at source head c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23.",
-    "pending-local-repair-commit repairs the two focused CodeRabbit evidence-artifact findings locally.",
+    "5a8a3d5ee762cd6f1544b91efc8653d82fd4937c repairs the two focused CodeRabbit evidence-artifact findings locally.",
     "e91081a57076120b236e0ba0fd48dd906ee2504e repairs the seven focused CodeRabbit findings locally.",
     "b8c9272f8cf69d9d1c86b0d0776236d571a1f7de repairs the three focused CodeRabbit findings locally.",
     "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",

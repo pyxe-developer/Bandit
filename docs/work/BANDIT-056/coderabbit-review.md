@@ -4,7 +4,7 @@ contract_version: 1
 work_item: BANDIT-056
 source_head: c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23
 source_head_meaning: latest completed CodeRabbit-reviewed source head; local evidence-artifact repair is recorded separately and still requires focused provider refresh.
-repair_commit: pending-local-repair-commit
+repair_commit: 5a8a3d5ee762cd6f1544b91efc8653d82fd4937c
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
@@ -17,7 +17,7 @@ executable_evidence:
   - coderabbit --version returned 0.4.1.
   - coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings at source head c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23.
-  - pending-local-repair-commit repairs the two focused CodeRabbit evidence-artifact findings locally.
+  - 5a8a3d5ee762cd6f1544b91efc8653d82fd4937c repairs the two focused CodeRabbit evidence-artifact findings locally.
 resolved_or_dispositioned_findings:
   - severity: minor
     file: docs/specs/BANDIT-056-coderabbit-review-output.json
