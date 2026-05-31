@@ -84,6 +84,31 @@ export function buildGateTrustSignal(
   };
 }
 
+export function withEvidenceSlo(
+  signal: Omit<EvidenceTrustSignal, "evidence_slo">
+): EvidenceTrustSignal {
+  return {
+    ...signal,
+    evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+  };
+}
+
+export function readScalarStatus(content: string, key: string): string | null {
+  const escapedKey = escapeRegExp(key);
+  const match = content.match(new RegExp(`^${escapedKey}:\\s*(.+)$`, "m"));
+  return match?.[1]?.trim() ?? null;
+}
+
+export async function pathExists(repoRoot: string, displayPath: string): Promise<boolean> {
+  try {
+    await stat(path.join(repoRoot, displayPath));
+    return true;
+  } catch (error) {
+    if (isMissingPathError(error)) return false;
+    throw error;
+  }
+}
+
 function resolveFreshnessState(
   fileExistsOrFreshnessState: boolean | EvidenceFreshnessState
 ): EvidenceFreshnessState {

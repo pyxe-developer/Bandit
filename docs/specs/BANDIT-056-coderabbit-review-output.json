@@ -7,23 +7,23 @@
     {
       "severity": "trivial",
       "fileName": "docs/work/BANDIT-056/implementation-evidence.md",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Update the docs/templates/evidence-freshness-slos.md production-file description to explicitly state that the template has all 6 required fields so it matches writer-report.md.",
-      "disposition": "Open; repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by updating the production-file description to state that docs/templates/evidence-freshness-slos.md has all 6 required fields."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/focused-session-context.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "withEvidenceSlo, readScalarStatus, and pathExists duplicate helper logic already present in cockpit-status.ts; extract/import shared helpers while preserving signatures.",
-      "disposition": "Open; repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by importing the shared withEvidenceSlo, readScalarStatus, and pathExists helpers from src/state/evidence-freshness-slos.ts."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Duplicate withEvidenceSlo helpers should be consolidated into one exported helper near the evidence-freshness SLO logic and reused by cockpit-status and focused-session-context.",
-      "disposition": "Open; repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by using the exported withEvidenceSlo helper from src/state/evidence-freshness-slos.ts and removing the local duplicate."
     }
   ],
   "attempts": [
@@ -106,11 +106,30 @@
       "endedAt": "2026-05-31T12:34:56Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned three trivial open findings: one implementation-evidence template-field wording issue and two shared evidence-trust-signal helper duplication issues."
+    },
+    {
+      "attempt": 11,
+      "sourceHead": "b30a5df643a952cb4a06b5a4c6e4ae77752f6863",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T12:57:58Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired all three focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 3 findings."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 3 findings.",
+    "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
+    "node --test test/cockpit-status.test.mjs passed after the local repair.",
+    "node --test test/focused-session-context.test.mjs passed after the local repair.",
+    "npm run typecheck passed after the local repair.",
+    "npm test passed after the local repair.",
+    "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.",
+    "npm run bandit -- coderabbit-review BANDIT-056 passed after the local repair with findings_status locally_resolved_pending_refresh.",
+    "npm run bandit -- validate passed after the local repair.",
+    "node ./bin/bandit.mjs cockpit status --json passed and reports focused CodeRabbit refresh as the next action.",
+    "node ./bin/bandit.mjs session-context current --json passed and reports focused CodeRabbit refresh as the allowed action.",
+    "git diff --check passed after the local repair."
   ]
 }

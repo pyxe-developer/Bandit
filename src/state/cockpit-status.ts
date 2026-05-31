@@ -1,11 +1,13 @@
-import { readFile, readdir, stat } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import {
-  EVIDENCE_FRESHNESS_POLICY_PATH,
   EvidenceFreshnessState,
   EvidenceTrustSignal,
   buildGateTrustSignal,
-  evidenceFreshnessPolicyExists
+  evidenceFreshnessPolicyExists,
+  pathExists,
+  readScalarStatus,
+  withEvidenceSlo
 } from "./evidence-freshness-slos.js";
 
 export type SourceValue<T> = {
@@ -333,15 +335,6 @@ async function buildCockpitTrustSignals(
         buildGateTrustSignal("retrospective", paths.retrospectivePath, "codex_pm", retroExists)
       )
     }
-  };
-}
-
-function withEvidenceSlo(
-  signal: Omit<EvidenceTrustSignal, "evidence_slo">
-): EvidenceTrustSignal {
-  return {
-    ...signal,
-    evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
   };
 }
 
@@ -824,12 +817,6 @@ async function readStaleEvidence(
   return staleEvidence;
 }
 
-function readScalarStatus(content: string, field: string) {
-  const match = content.match(new RegExp(`^${field}:\\s*(.*?)\\s*$`, "m"));
-  const value = match?.[1]?.trim();
-  return value ? value : null;
-}
-
 async function readImprovementHealth(repoRoot: string) {
   const candidateSources = await findImprovementCandidateSources(repoRoot);
   if (candidateSources.length === 0) {
@@ -918,18 +905,6 @@ async function readCoordinationSummary(repoRoot: string, workItemId: string) {
     next_action: optionalJsonString(latest, "next_action"),
     source
   };
-}
-
-async function pathExists(repoRoot: string, displayPath: string) {
-  try {
-    await stat(path.join(repoRoot, displayPath));
-    return true;
-  } catch (error) {
-    if (isMissingPathError(error)) {
-      return false;
-    }
-    throw error;
-  }
 }
 
 function parseJsonRecord(content: string, message: string) {

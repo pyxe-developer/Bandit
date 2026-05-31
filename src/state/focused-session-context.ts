@@ -1,10 +1,12 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import {
-  EVIDENCE_FRESHNESS_POLICY_PATH,
   EvidenceTrustSignal,
   buildGateTrustSignal,
-  evidenceFreshnessPolicyExists
+  evidenceFreshnessPolicyExists,
+  pathExists,
+  readScalarStatus,
+  withEvidenceSlo
 } from "./evidence-freshness-slos.js";
 
 const AGENTS_PATH = "AGENTS.md";
@@ -174,35 +176,10 @@ async function readStaleEvidenceReason(
   return null;
 }
 
-function withEvidenceSlo(
-  signal: Omit<EvidenceTrustSignal, "evidence_slo">
-): EvidenceTrustSignal {
-  return {
-    ...signal,
-    evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-  };
-}
-
-function readScalarStatus(content: string, key: string): string | null {
-  const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = content.match(new RegExp(`^${escapedKey}:\\s*(.+)$`, "m"));
-  return match?.[1]?.trim() ?? null;
-}
-
 function parseStageNumber(stageStr: string): number | null {
   const match = stageStr.match(/^Stage\s+(\d+)/i);
   if (!match || !match[1]) return null;
   return parseInt(match[1], 10);
-}
-
-async function pathExists(repoRoot: string, displayPath: string): Promise<boolean> {
-  try {
-    await stat(path.join(repoRoot, displayPath));
-    return true;
-  } catch (error) {
-    if (isMissingPathError(error)) return false;
-    throw error;
-  }
 }
 
 export async function readFocusedSessionContext(

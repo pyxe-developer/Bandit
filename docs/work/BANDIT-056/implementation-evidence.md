@@ -13,11 +13,11 @@ Evidence Freshness SLO validation surface and projection trust-signal output imp
 - `src/state/evidence-freshness-slos.ts` (new): Core validation logic, EvidenceTrustSignal types, buildGateTrustSignal helper, validateEvidenceFreshnessSlos, validateEvidenceFreshnessSlosPolicy, evidenceFreshnessPolicyExists
 - `src/commands/evidence-freshness-slos.ts` (new): Command handler for `bandit evidence-freshness-slos validate [--json]`
 - `src/cli.ts` (modified): Added `evidence-freshness-slos` command routing and updated usage string
-- `src/state/cockpit-status.ts` (modified): Added CockpitEvidenceTrustSignals type and optional evidence_trust_signals field; added buildCockpitTrustSignals function; imports from evidence-freshness-slos
-- `src/state/focused-session-context.ts` (modified): Added optional evidence_trust_signals field to FocusedSessionContextPacket; added buildSessionContextTrustSignals, parseStageNumber, pathExists helpers; imports from evidence-freshness-slos
+- `src/state/cockpit-status.ts` (modified): Added CockpitEvidenceTrustSignals type and optional evidence_trust_signals field; added buildCockpitTrustSignals function; imports shared Evidence Freshness SLO helpers
+- `src/state/focused-session-context.ts` (modified): Added optional evidence_trust_signals field to FocusedSessionContextPacket; added buildSessionContextTrustSignals and parseStageNumber helpers; imports shared Evidence Freshness SLO helpers
 - `src/commands/validate.ts` (modified): Added validateEvidenceFreshnessSlosPolicy call
 - `.bandit/policy/evidence-freshness-slos.json` (new): Production policy with 5 artifact types and 2 derived projection rules
-- `docs/templates/evidence-freshness-slos.md` (new): Required template with all required fields
+- `docs/templates/evidence-freshness-slos.md` (new): Required template with all 6 required fields
 
 ## Acceptance Criteria Coverage
 
