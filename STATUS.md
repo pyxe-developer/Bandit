@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `9db9b0a89212ca1fc9f671ecba703ce1c906174d`. The three latest findings were locally repaired at `2688c3187cb4ee3c15e4320e5378fb0877a8d889`; provider evidence is stale until the focused CodeRabbit refresh runs on that repair head.
+Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `2f8564ce88f9c0d7be2521a9cf638087c428865d`. The refresh returned six open findings: derived projection SLO documentation, evidence-freshness template key consistency, cockpit-status evidence path type extraction, and three writer-stream sanitizer cleanups.
 
-The next required action is to run the focused CodeRabbit refresh for `BANDIT-056` on repair head `2688c3187cb4ee3c15e4320e5378fb0877a8d889` before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
+The next required action is to repair or explicitly disposition the six latest focused CodeRabbit findings for `BANDIT-056` before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
 `BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
@@ -35,7 +35,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - CodeRabbit findings repair/disposition next)
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)

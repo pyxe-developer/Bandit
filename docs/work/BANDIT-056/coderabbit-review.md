@@ -2,17 +2,16 @@
 
 contract_version: 1
 work_item: BANDIT-056
-source_head: 9db9b0a89212ca1fc9f671ecba703ce1c906174d
+source_head: 2f8564ce88f9c0d7be2521a9cf638087c428865d
 source_head_meaning: latest completed CodeRabbit-reviewed source head.
-latest_repair_head: 2688c3187cb4ee3c15e4320e5378fb0877a8d889
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: locally_resolved_pending_refresh
-findings_disposition: The three latest focused CodeRabbit findings were locally repaired at 2688c3187cb4ee3c15e4320e5378fb0877a8d889. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source; do not proceed to Local Qwen, aggregate Stage 4 review, landing, or closeout before the refresh.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh completed at 2f8564ce88f9c0d7be2521a9cf638087c428865d with six open findings. Repair or explicitly disposition those findings before another refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
 operator_input_status: none_required
-source_drift_status: stale
+source_drift_status: current
 executable_evidence:
   - coderabbit --version returned 0.4.1.
   - coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.
@@ -46,17 +45,30 @@ executable_evidence:
   - npm run typecheck passed after the local repair.
   - npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.
   - git diff --check passed after the local repair.
+  - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 repair refresh file list> -c AGENTS.md --no-color completed with 6 findings at source head 2f8564ce88f9c0d7be2521a9cf638087c428865d.
 findings:
-  - severity: major
-    file: docs/work/BANDIT-056/coderabbit-repair-writer-stream.jsonl
-    finding: Committed writer stream contains sensitive runtime metadata; add a reusable sanitizer/redactor for writer stream JSONL before durable persistence and cover it with tests.
-    disposition: locally_resolved_pending_refresh; replaced with a sanitizer-produced durable digest and added focused sanitizer coverage; provider refresh required before Local Qwen, aggregate Stage 4 review, landing, or closeout.
-  - severity: minor
-    file: docs/work/BANDIT-056/coderabbit-repair-dispatch.md
-    finding: Replace the hard-coded absolute repository path with a portable repository value.
-    disposition: locally_resolved_pending_refresh; replaced the hard-coded absolute repository path with portable repository-root wording; provider refresh required before Local Qwen, aggregate Stage 4 review, landing, or closeout.
   - severity: trivial
-    file: src/state/focused-session-context.ts
-    finding: Parallelize buildDependencyTrustSignal calls over existenceResults with Promise.all while preserving the dependency filtering behavior.
-    disposition: locally_resolved_pending_refresh; parallelized buildDependencyTrustSignal calls with Promise.all while preserving null filtering; provider refresh required before Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    file: .bandit/policy/evidence-freshness-slos.json
+    finding: Add explicit documentation explaining why derived_projection_rules for cockpit_status and session_context are derived_non_canonical, propagate stale dependencies, and cannot upgrade missing dependencies to trusted.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+  - severity: minor
+    file: docs/templates/evidence-freshness-slos.md
+    finding: Make artifact_types and trust_signal_requirements use a consistent source_artifact/source_artifacts key name so form-fillers are not confused.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+  - severity: trivial
+    file: src/state/cockpit-status.ts
+    finding: Extract the repeated evidence artifact path object shape into a single shared type alias for cockpit-status trust-signal and gate-matrix helpers.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+  - severity: minor
+    file: src/state/writer-stream-sanitizer.ts
+    finding: Update isRecord so arrays are not treated as record objects before parsed.type access.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+  - severity: trivial
+    file: src/state/writer-stream-sanitizer.ts
+    finding: Extract duplicated raw stream line-splitting/trimming count logic into a shared helper.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+  - severity: trivial
+    file: src/state/writer-stream-sanitizer.ts
+    finding: Use a Set for redacted-field-name membership checks instead of repeated linear search.
+    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
 bootstrap_gaps: []

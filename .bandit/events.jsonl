@@ -162,3 +162,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Repaired two focused CodeRabbit evidence-artifact findings locally; next action is focused CodeRabbit refresh before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh with three open findings at source head 9db9b0a; next action is repair or explicit disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Repaired three latest CodeRabbit findings locally at 2688c31; next action is focused CodeRabbit refresh before Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh with six open findings at source head 2f8564c; next action is repair or explicit disposition before Local Qwen"}
