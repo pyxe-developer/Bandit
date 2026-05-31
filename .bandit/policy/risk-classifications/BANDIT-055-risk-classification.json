@@ -1,0 +1,224 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-055",
+  "changed_surfaces": [
+    {
+      "path": "src/state/token-cost-failsafe.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/token-cost-failsafe.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "repo_validation_contract",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/work-item-create.ts",
+      "surface": "work_item_creation_contract",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/coderabbit-review.ts",
+      "surface": "review_gate_state",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/policy/token-cost-failsafe.json",
+      "surface": "policy_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/token-cost-failsafe.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/token-cost-failsafe.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/coderabbit-state.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "token_cost_failsafe_policy_validator",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-055/implementation-evidence.md"
+    },
+    {
+      "signal_id": "provider_pricing_and_spend_boundary",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/token-cost-failsafe.json"
+    },
+    {
+      "signal_id": "trace_cost_signal_non_authority_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-055/review-evidence.md"
+    },
+    {
+      "signal_id": "coderabbit_timeout_disposition_state",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-055/qwen-finding-disposition.md"
+    },
+    {
+      "signal_id": "no_paid_route_promotion_or_live_spend",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/token-cost-failsafe.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    },
+    {
+      "tool": "node --test test/work-item-create.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    },
+    {
+      "tool": "node --test test/coderabbit-state.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    },
+    {
+      "tool": "npm run bandit -- token-cost-failsafe validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/token-cost-failsafe.json"
+    },
+    {
+      "tool": "npm run bandit -- coderabbit-review BANDIT-055",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-055/coderabbit-timeout-disposition.md"
+    },
+    {
+      "tool": "npm run bandit -- qwen-review BANDIT-055",
+      "state": "non_blocking",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-055/local-qwen-review.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-055-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-055-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- land-check BANDIT-055",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-055/landing-verdict.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-055-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-055/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-055/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-055 is a non-product bootstrap-gap chore implementing local Token-Cost Failsafe policy validation, work-item spec enforcement, and fail-closed token/cost boundary checks. It requires pre-PR CodeRabbit or honest provider-refusal replacement evidence plus Local Qwen review and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-055 changes local token-cost failsafe validation, command routing, generated work-item brief/spec handling, provider-pricing evidence shape, benchmark/evaluation spend boundaries, recurring paid route promotion prerequisites, soft budget abnormal-run failsafes, continuation decisions, trace-cost non-authority checks, and focused tests. The work is medium workflow-risk because it governs future paid or high-token execution evidence, but it does not approve spend, execute paid calls, promote recurring paid reviewer routes, add live reviewer routing, change dependencies, change lockfiles, edit installed global skills, add external services, mutate CI/release workflows, enable scheduler execution, create claims, reserve work surfaces, merge, push, deploy, or ship cockpit UI/server/API behavior. Stage 4 evidence records scoped CodeRabbit provider-refusal replacement evidence, Local Qwen non_blocking evidence with Codex PM disposition, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-055-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-055-supply-chain-gate.json",
+    ".bandit/policy/token-cost-failsafe.json",
+    "docs/templates/token-cost-failsafe.md",
+    "docs/work/BANDIT-055/brief.md",
+    "docs/work/BANDIT-055/implementation-evidence.md",
+    "docs/work/BANDIT-055/coderabbit-timeout-disposition.md",
+    "docs/work/BANDIT-055/local-qwen-review.md",
+    "docs/work/BANDIT-055/review-evidence.md",
+    "docs/work/BANDIT-055/landing-verdict.md",
+    "src/state/token-cost-failsafe.ts",
+    "src/state/coderabbit-review.ts",
+    "src/commands/token-cost-failsafe.ts",
+    "src/commands/validate.ts",
+    "src/commands/work-item-create.ts",
+    "src/cli.ts",
+    "test/token-cost-failsafe.test.mjs",
+    "test/coderabbit-state.test.mjs",
+    "test/work-item-create.test.mjs"
+  ]
+}

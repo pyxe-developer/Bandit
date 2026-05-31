@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-055
 source_head: c37d38752abd7af8e246b5070963b477a47058e6
-review_subject_hash: 455e51ea6c6cb07e2286e2614092fc69c9bb6f85e1facb128c23fb46b3983066
+review_subject_hash: e68456a4fcf071f9f2f345c9f6a9ee6babb90eeb3efc43a18c33211dc2c86870
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -12,7 +12,9 @@ verification_evidence:
   - docs/work/BANDIT-055/coderabbit-timeout-disposition.md records Codex PM provider-refusal/bootstrap_gap disposition for the repeated focused CodeRabbit refresh timeouts and explicitly forbids treating CodeRabbit as pass evidence.
   - docs/work/BANDIT-055/local-qwen-review.md records profile local-qwen-baseline, reviewer_verdict non_blocking, findings_status dispositioned, operator_input_status none_required, and source_drift_status current.
   - docs/work/BANDIT-055/qwen-finding-disposition.md records Codex PM accepted_non_blocking disposition for the Local Qwen locally_resolved_pending_refresh tracking concern, with durable Stage 6 retrospective routing and no source repair required before aggregate Stage 4 review.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-055 produced 455e51ea6c6cb07e2286e2614092fc69c9bb6f85e1facb128c23fb46b3983066 from review-subject policy v1.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-055 produced e68456a4fcf071f9f2f345c9f6a9ee6babb90eeb3efc43a18c33211dc2c86870 from review-subject policy v1 after Stage 5 risk-classification and supply-chain gate evidence registration.
+  - .bandit/policy/risk-classifications/BANDIT-055-risk-classification.json records layered risk-classification evidence for local-record landing eligibility.
+  - .bandit/policy/supply-chain-gates/BANDIT-055-supply-chain-gate.json records low-risk supply-chain gate evidence for local-record landing eligibility.
   - docs/work/BANDIT-055/implementation-evidence.md records passing focused Token-Cost Failsafe tests, work-item-create tests, typecheck, Bandit validation, gaps list, token-cost-failsafe validation, git diff --check, and npm test.
   - node --test test/token-cost-failsafe.test.mjs passed during aggregate Stage 4 verification.
   - node --test test/work-item-create.test.mjs passed during aggregate Stage 4 verification.

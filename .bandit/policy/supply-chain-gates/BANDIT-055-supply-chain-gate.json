@@ -1,0 +1,110 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-055",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": ".bandit/policy/token-cost-failsafe.json",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The policy records local token-cost failsafe, provider-pricing, spend-boundary, and promotion-threshold metadata for future agent execution gates, but it does not edit installed global skills or authorize external skill installation."
+    },
+    {
+      "path": "docs/templates/token-cost-failsafe.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records future work-item evidence fields for token-cost failsafes without changing installed skill contents."
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-055/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-055 implementation. Token-Cost Failsafe adds local policy and template metadata only."
+    },
+    "rationale": "BANDIT-055 adds local token-cost failsafe policy validation, generated brief/spec handling, command routing, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-055/coderabbit-timeout-disposition.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "policy_reference_only",
+    "skills": [
+      {
+        "skill_id": "token-cost-failsafe-policy",
+        "owner": "Codex PM",
+        "freshness_rule": "validated by npm run bandit -- token-cost-failsafe validate --json before landing and before recurring paid route promotion",
+        "revocation_path": "remove or revise .bandit/policy/token-cost-failsafe.json and any matching work-item token_cost_failsafe declarations"
+      }
+    ],
+    "owner": "Codex PM",
+    "freshness_rule": "validated by npm run bandit -- token-cost-failsafe validate --json",
+    "revocation_path": "remove or revise the Token-Cost Failsafe policy and template"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-055 touches local Token-Cost Failsafe policy and template surfaces that reference future agent execution budget evidence, so explicit supply-chain gate evidence is recorded before local-record landing. The implementation does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/token-cost-failsafe.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-055-supply-chain-gate.json",
+    "docs/templates/token-cost-failsafe.md",
+    "docs/work/BANDIT-055/brief.md",
+    "docs/work/BANDIT-055/implementation-evidence.md",
+    "docs/work/BANDIT-055/coderabbit-timeout-disposition.md",
+    "docs/work/BANDIT-055/local-qwen-review.md",
+    "docs/work/BANDIT-055/review-evidence.md",
+    "docs/work/BANDIT-055/landing-verdict.md",
+    "src/state/token-cost-failsafe.ts",
+    "src/commands/token-cost-failsafe.ts",
+    "src/commands/validate.ts",
+    "src/commands/work-item-create.ts",
+    "test/token-cost-failsafe.test.mjs",
+    "test/work-item-create.test.mjs"
+  ]
+}
