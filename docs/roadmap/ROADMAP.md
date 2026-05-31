@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Run the local-record landing action for `BANDIT-056` and record `docs/work/BANDIT-056/landing-action.md` with the landed commit SHA before Stage 6 closeout. Do not start another work item or unrelated Phase 8 work before landing and closeout.
+**Current next step:** Write Stage 6 retrospective closeout for `BANDIT-056`, resolve `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`, and refresh roadmap/status context before creating the queued Stage 4 repair-ownership chore. Do not start unrelated Phase 8 work.
 
 ## Next Work Item
 

@@ -22,7 +22,9 @@ Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-056/review-ev
 
 Stage 5 landing verdict evidence is recorded in `docs/work/BANDIT-056/landing-verdict.md` with final verdict `safe-to-land`.
 
-The next required action is local-record landing action evidence in `docs/work/BANDIT-056/landing-action.md` before closeout, creating another work item, or unrelated Phase 8 work.
+Local-record landing action evidence is recorded in `docs/work/BANDIT-056/landing-action.md` with current head `d09573263afb4e293117fe3047c8cd21049ec296`.
+
+The next required action is Stage 6 retrospective closeout and bootstrap-gap disposition before creating another work item or unrelated Phase 8 work.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
 `BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
@@ -41,7 +43,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - local-record landing action next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - Stage 6 closeout next)
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)

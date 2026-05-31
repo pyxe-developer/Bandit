@@ -169,3 +169,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded aggregate Stage 4 review evidence with CodeRabbit pass and Local Qwen bootstrap_gap; next action is Stage 5 landing verdict"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-056","message":"Recorded Stage 5 landing verdict safe-to-land; next action is local-record landing action evidence"}
 {"type":"stage5_landing_gate_evidence_updated","work_item":"BANDIT-056","message":"Recorded layered risk-classification and supply-chain gate evidence for local-record landing; next action remains local-record landing action evidence"}
+{"type":"landing_action_recorded","work_item":"BANDIT-056","message":"Recorded local-record landing action evidence at d095732; next action is Stage 6 retrospective closeout and bootstrap-gap disposition"}
