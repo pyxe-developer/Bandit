@@ -2,14 +2,14 @@
 
 contract_version: 1
 work_item: BANDIT-056
-source_head: b5e549ec6031fd2eba45b5ed4d3ccfa09da4e02c
+source_head: 7a30a4716d33cb319098976ad6467a60d61beef3
 source_head_meaning: latest completed CodeRabbit-reviewed source head.
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: locally_resolved_pending_refresh
-findings_disposition: Codex PM locally repaired both focused CodeRabbit findings: the missing attempt-7-to-attempt-8 local repair transition is now recorded in docs/specs/BANDIT-056-coderabbit-review-output.json, and src/state/evidence-freshness-slos.ts now reuses validated projection IDs from validateDerivedProjectionRules instead of recollecting them. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh returned five findings. The stale context count finding was locally repaired while recording this refresh result; four implementation cleanup findings remain open and require repair or explicit PM disposition before Local Qwen or aggregate Stage 4 review.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
@@ -21,13 +21,26 @@ executable_evidence:
   - 5dfc90bb3d0790ef1c2078124f16d30e35f69973 repairs the two focused CodeRabbit findings locally.
   - node --test test/evidence-freshness-slos.test.mjs passed after the local repair.
   - npm run typecheck passed after the local repair.
+  - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 file list> -c AGENTS.md --no-color completed with 5 findings at source head 7a30a4716d33cb319098976ad6467a60d61beef3.
 findings:
   - severity: minor
-    file: docs/specs/BANDIT-056-coderabbit-review-output.json
-    finding: The audit trail is missing a repair transition record between completed attempt 7 at source head fabcd55d7bd31e388708749b481a2a0634de9855 and attempt 8 at source head 1089c6b86e7f912a4e285fc11ef4845b68ab4504.
-    disposition: locally repaired; provider refresh required before Local Qwen or aggregate Stage 4 review.
+    file: docs/roadmap/CURRENT_CONTEXT.md
+    finding: The context has inconsistent counts for CodeRabbit findings: an expected-deliverable line still says seven focused findings while the active work text now describes two locally repaired findings.
+    disposition: locally repaired while recording this refresh result; provider refresh required after remaining open findings are repaired or dispositioned.
+  - severity: minor
+    file: src/state/evidence-freshness-slos.ts
+    finding: collectTrustSignalRequirements silently filters non-string trust_signal_requirements entries instead of rejecting malformed policy data.
+    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+  - severity: trivial
+    file: src/state/cockpit-status.ts
+    finding: buildCockpitTrustSignals uses a misleading parameter name because the argument includes paths plus staleEvidence and evidenceArtifactExistence metadata.
+    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+  - severity: trivial
+    file: src/state/cockpit-status.ts
+    finding: Gate and landing-readiness checks duplicate existence stat calls instead of reusing the precomputed evidenceArtifactExistence map.
+    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
   - severity: trivial
     file: src/state/evidence-freshness-slos.ts
-    finding: collectDerivedProjections duplicates validated projection ID collection already available during validateDerivedProjectionRules.
-    disposition: locally repaired; provider refresh required before Local Qwen or aggregate Stage 4 review.
+    finding: validateEvidenceFreshnessSlosPolicy duplicates policy read and ENOENT handling with readRequiredPolicy instead of sharing a small optional policy read helper.
+    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
 bootstrap_gaps: []
