@@ -133,3 +133,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded second focused CodeRabbit refresh timeout at 9fb71ed; next action is CodeRabbit provider-timeout disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded CodeRabbit provider-refusal/bootstrap_gap replacement disposition; next action is Stage 4 Local Qwen review"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded Local Qwen non_blocking review; next action is PM disposition or durable routing before aggregate Stage 4 review"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded Local Qwen finding disposition and durable retrospective routing; next action is aggregate Stage 4 review evidence"}
