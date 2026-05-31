@@ -44,6 +44,24 @@ test("token-cost-failsafe validation accepts a complete failsafe policy", async 
   });
 });
 
+test("token-cost-failsafe validation rejects duplicate json flags", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  await writeCompleteTokenCostFixture(repo);
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Usage: bandit token-cost-failsafe validate \[--json\]/
+  );
+});
+
 test("token-cost-failsafe validation rejects stale provider-pricing evidence", async () => {
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();

@@ -11,13 +11,16 @@ export async function tokenCostFailsafe(repoRoot: string, args: string[]) {
 }
 
 async function validate(repoRoot: string, args: string[]) {
-  if (args.some((arg) => arg !== "--json")) {
+  const wantsJson = args.length === 1 && args[0] === "--json";
+  const hasNoOptions = args.length === 0;
+
+  if (!hasNoOptions && !wantsJson) {
     throw new Error("Usage: bandit token-cost-failsafe validate [--json]");
   }
 
   const report = await validateTokenCostFailsafe(repoRoot);
 
-  if (args.includes("--json")) {
+  if (wantsJson) {
     return { output: `${JSON.stringify(report, null, 2)}\n` };
   }
 

@@ -7,16 +7,16 @@
     {
       "severity": "critical",
       "fileName": "test/coderabbit-state.test.mjs",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "This test file was modified by the Stage 3 writer, violating the Test Ownership Boundary; revert the changes to the test named \"validate accepts locally repaired CodeRabbit findings that still require refresh\" back to its original content so no Stage 3 edits remain, and if behavior needs changing submit a separate PR or issue for the test owners to update the test.",
-      "disposition": "Open. Codex PM must verify against repo evidence and repair or explicitly disposition before Local Qwen."
+      "disposition": "Dispositioned by Codex PM as not supported by repo evidence. The named test was added in Codex PM repair commit 84c462e after Stage 3, and git show --stat c916dbe confirms the Stage 3 Claude Writer implementation commit did not edit tests. Focused CodeRabbit refresh remains required before Local Qwen."
     },
     {
       "severity": "trivial",
       "fileName": "src/commands/token-cost-failsafe.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "The current arg validation uses args.some(...) which allows duplicates like \"--json --json\"; change it to explicitly validate that either no args are provided or exactly one \"--json\" is provided.",
-      "disposition": "Open. Repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by requiring either no options or exactly one --json option, with focused regression coverage in test/token-cost-failsafe.test.mjs. Focused CodeRabbit refresh remains required before Local Qwen."
     }
   ],
   "providerError": null,
@@ -92,6 +92,14 @@
       "endedAt": "2026-05-31T00:34:03Z",
       "result": "completed",
       "summary": "Provider completed the focused CodeRabbit refresh for the repaired BANDIT-055 findings and returned two open findings: one critical Test Ownership Boundary concern in test/coderabbit-state.test.mjs and one trivial duplicate --json validation concern in src/commands/token-cost-failsafe.ts."
+    },
+    {
+      "attempt": 10,
+      "sourceHead": "pending-repair-commit",
+      "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
+      "endedAt": "2026-05-31T00:57:41Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM dispositioned the test-ownership finding as unsupported by repo evidence and repaired duplicate --json validation locally; focused CodeRabbit refresh is required before Local Qwen."
     }
   ],
   "executableEvidence": [
@@ -108,6 +116,9 @@
     "Attempt 6: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 repaired delta> -c AGENTS.md --no-color completed with five open findings.",
     "Attempt 7: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color completed with four open findings.",
     "Attempt 8 local repair: CodeRabbit metadata ambiguity, repeated_retry trigger mapping, recurring route / soft budget band id validation, and provider/model pricing field validation are repaired locally; CodeRabbit refresh is required before Local Qwen.",
-    "Attempt 9: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs test/coderabbit-state.test.mjs -c AGENTS.md --no-color completed with two open findings."
+    "Attempt 9: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs test/coderabbit-state.test.mjs -c AGENTS.md --no-color completed with two open findings.",
+    "git show --stat c916dbe confirms the Stage 3 Claude Writer implementation commit did not edit tests, test helpers, fixtures, RED evidence, or acceptance mappings.",
+    "git diff 84c462e^ 84c462e -- test/coderabbit-state.test.mjs confirms Codex PM repair commit 84c462e added the named CodeRabbit validation test after Stage 3.",
+    "Attempt 10 local repair: duplicate --json arguments are now refused by bandit token-cost-failsafe validate, with regression coverage in test/token-cost-failsafe.test.mjs; CodeRabbit refresh is required before Local Qwen."
   ]
 }
