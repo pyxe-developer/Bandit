@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `bbd48de80d204fe556440893c162eb93ea4747ef`. Claude Writer repaired the two implementation-source findings in `5c8b8c9f735afc3496eebba7e825ec50da65c29d`, and Codex PM corrected the attempt timestamp ordering. The findings are now `locally_resolved_pending_refresh`.
+Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `9db9b0a89212ca1fc9f671ecba703ce1c906174d`. CodeRabbit returned three findings: one major stream-metadata sanitizer finding, one minor portable-path finding, and one trivial Promise.all cleanup finding.
 
-The next required action is to run the focused CodeRabbit refresh for `BANDIT-056` on the repaired source before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
+The next required action is to repair or explicitly disposition the three latest CodeRabbit findings before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 No operator-owned input is required for the next recorded action.
 
@@ -31,7 +31,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - CodeRabbit findings repair/disposition next)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)
