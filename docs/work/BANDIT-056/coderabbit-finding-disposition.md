@@ -1,10 +1,10 @@
 # BANDIT-056 CodeRabbit Finding Disposition
 
 recorded_time_utc: 2026-05-31T21:41:00Z
-updated_time_utc: 2026-05-31T22:14:00Z
+updated_time_utc: 2026-05-31T22:18:29Z
 work_item: BANDIT-056
-latest_review_head: b19fc9fa3499c1cc149bfae990b6a6102737de6a
-disposition_state: post_repair_refresh_findings_routed
+latest_review_head: 4beaf21e01f5d3f839d4612c8af01652eb18dacd
+disposition_state: coderabbit_resolved_proceed_to_local_qwen
 
 ## Source Evidence
 
@@ -22,8 +22,12 @@ The focused CodeRabbit refresh completed at source head
 `2f8564ce88f9c0d7be2521a9cf638087c428865d` and returned six open findings.
 Codex PM classified the findings instead of repairing all of them. Claude
 Writer then repaired the two repair-required findings at
-`b19fc9fa3499c1cc149bfae990b6a6102737de6a`, and a focused CodeRabbit refresh
-returned six follow-up findings.
+`b19fc9fa3499c1cc149bfae990b6a6102737de6a`. A focused CodeRabbit refresh
+returned six follow-up findings, which were repaired in
+`4beaf21e01f5d3f839d4612c8af01652eb18dacd`. The latest focused CodeRabbit
+refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned two trivial
+findings that Codex PM dispositioned as non-blocking/no-action for this Stage 4
+gate.
 
 ## PM Disposition
 
@@ -90,8 +94,8 @@ outcome: pending
 
 | Stage | Verdict | Evidence |
 | --- | --- | --- |
-| Stage 3: Implementation Clean-Code Rubric | `blocker` | The pre-repair `isRecord` array handling defect and template key mismatch were repaired by Claude Writer in `docs/work/BANDIT-056/coderabbit-repair-writer-report.md`. The post-repair refresh found a still-valid sanitizer coverage gap and schema-wide trust-signal key consistency gap, both repaired in the follow-up bundle. |
-| Stage 4: Review And Cross-Model Gates | `blocker` | The 2026-05-31 focused CodeRabbit refresh at `b19fc9fa3499c1cc149bfae990b6a6102737de6a` returned six findings. The repair-required findings are routed below; another focused refresh is required before Local Qwen, aggregate Stage 4 review, landing, or closeout. |
+| Stage 3: Implementation Clean-Code Rubric | `pass` | The pre-repair `isRecord` array handling defect and template key mismatch were repaired by Claude Writer in `docs/work/BANDIT-056/coderabbit-repair-writer-report.md`. The post-repair refresh sanitizer coverage gap and schema-wide trust-signal key consistency gap were repaired in `4beaf21e01f5d3f839d4612c8af01652eb18dacd`; focused tests and typecheck pass. |
+| Stage 4: Review And Cross-Model Gates | `non_blocking` | The latest focused CodeRabbit refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned only two trivial findings. Both have explicit no-action/opportunistic dispositions below, so CodeRabbit no longer blocks Local Qwen. |
 
 ## Post-Repair Refresh Routing
 
@@ -102,6 +106,8 @@ outcome: pending
 | Add sanitizer coverage for array-valued JSON lines. | `repair_required` | Claude Writer noted the gap, and CodeRabbit correctly identified it as a testability blocker for the new `isRecord` branch. | Repair `test/writer-stream-sanitizer.test.mjs` so arrays are asserted as `unknown` events. |
 | Update this disposition's next action and stage table after the repairs. | `repair_required` | The pre-repair table and next action were stale after `b19fc9f`. | PM repaired this artifact with the post-repair refresh routing and current next action. |
 | Reconcile the Writer report's complete-repair language with post-repair findings. | `repair_required` | The Writer report was true for its bounded dispatch but needed a post-refresh reconciliation note. | PM repaired `docs/work/BANDIT-056/coderabbit-repair-writer-report.md`. |
+| Extract duplicated `writer-stream-sanitizer` test spawn/run/assert boilerplate into a helper. | `no_action_opportunistic` | The duplication is local to two focused tests, current sanitizer coverage passes, and helper extraction is stylistic cleanup rather than a Stage 4 blocker. | No standalone repair and no CodeRabbit refresh solely for this stylistic finding. |
+| Add schema-level guidance explaining `owner` versus `authority_role`. | `no_action` | Current Evidence SLO policy validation, cockpit/session-context projection tests, and focused tests pass. The suggestion is documentation hardening, not a current validator or runtime break. | Explicit no-action for this slice; do not run another CodeRabbit refresh solely for this documentation-hardening finding. |
 
 ## Verification
 
@@ -111,12 +117,13 @@ outcome: pending
 ## Next Action
 
 The two original repair-required findings were repaired by Claude Writer. The
-post-repair refresh findings are repaired in the follow-up bundle: the original
-Stage 3 dispatch now uses `<repo-root>`, the SLO trust requirement key is
-consistently `source_artifacts` across policy/validator/tests/template, the
+post-repair refresh findings were repaired in the follow-up bundle: the
+original Stage 3 dispatch now uses `<repo-root>`, the SLO trust requirement key
+is consistently `source_artifacts` across policy/validator/tests/template, the
 sanitizer array branch has focused coverage, and stale PM evidence wording is
-updated. Run a focused CodeRabbit refresh on the repaired bundle before Local
-Qwen, aggregate Stage 4 review, landing, or closeout. Do not run another
-CodeRabbit refresh solely for the derived-projection rationale, cockpit
-evidence-path alias, line-count helper extraction, or redacted-field `Set`
-suggestions.
+updated. The latest CodeRabbit refresh returned only two trivial findings, both
+dispositioned above as no-action or opportunistic. Proceed to Local Qwen before
+aggregate Stage 4 review, landing, or closeout. Do not run another CodeRabbit
+refresh solely for the derived-projection rationale, cockpit evidence-path
+alias, line-count helper extraction, redacted-field `Set`, test-helper
+extraction, or owner-versus-authority-role documentation suggestions.

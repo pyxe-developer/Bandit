@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Run a focused CodeRabbit refresh for `BANDIT-056` after the post-repair bundle covering Evidence SLO `source_artifacts` consistency, sanitizer array-event coverage, portable dispatch metadata, and stale PM evidence wording. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
+**Current next step:** Run Local Qwen adversarial review for `BANDIT-056` after the focused CodeRabbit refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned only two trivial findings that Codex PM dispositioned as no-action or opportunistic. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
 
 ## Next Work Item
 
