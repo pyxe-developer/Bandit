@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Record aggregate Stage 4 review evidence for `BANDIT-055`. CodeRabbit provider-refusal/bootstrap-gap replacement evidence is recorded in `docs/work/BANDIT-055/coderabbit-timeout-disposition.md`, `docs/work/BANDIT-055/coderabbit-review.md`, and `docs/specs/BANDIT-055-coderabbit-review-output.json`; Local Qwen evidence is recorded in `docs/work/BANDIT-055/local-qwen-review.md`; Local Qwen finding disposition and durable Stage 6 retrospective routing are recorded in `docs/work/BANDIT-055/qwen-finding-disposition.md`. Do not write landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until aggregate Stage 4 review evidence is recorded.
+**Current next step:** Record the Stage 5 landing verdict for `BANDIT-055`. Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-055/review-evidence.md` with CodeRabbit provider-refusal/bootstrap-gap replacement evidence, Local Qwen `non_blocking` evidence, Codex PM disposition, current review-subject hash, and clean-code closure. Do not write landing action, retrospective, `BANDIT-056`, or unrelated Phase 8 work until the Stage 5 landing verdict is recorded.
 
 ## Next Work Item
 
