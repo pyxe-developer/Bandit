@@ -10,7 +10,7 @@ work_item:
         allowed_freshness_states:
         staleness_reasons:
     trust_signal_requirements:
-      - source_artifact
+      - source_artifacts
       - owner_or_authority_role
       - freshness_state
       - staleness_reason
