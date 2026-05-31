@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-056
-source_head: b711c17b45aece4321d9b7d2168f8f4e1308b29e
-review_subject_hash: 1ae772bc55a809720e2214f1c1d6084d077f4bb04ce6e39a14f16aa1b8be2e23
+source_head: 91857054afff355f1caaf80ef135eaea38ee9f06
+review_subject_hash: 9ba9a4b791152d5b3a26da0ba00e6ba7cd0d2c3c4087e163fa0c0d5259bcefc1
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -11,7 +11,7 @@ verification_evidence:
   - docs/specs/BANDIT-056-coderabbit-review-output.json records the focused CodeRabbit sequence, including repair-required findings, Claude Writer repair, post-repair refresh, and final two trivial findings dispositioned as no-action or opportunistic.
   - docs/work/BANDIT-056/coderabbit-finding-disposition.md records Codex PM routing for accepted non-blocking follow-ups, no-action findings, repair-required findings, and final trivial CodeRabbit findings.
   - docs/work/BANDIT-056/local-qwen-review.md records profile local-qwen-baseline, run_status bootstrap_gap, reviewer_verdict bootstrap_gap, findings_status unavailable, operator_input_status none_required, and source_drift_status current at source head ff0c734052f50916a31a865b2d8d4107a63e1d23.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-056 produced 1ae772bc55a809720e2214f1c1d6084d077f4bb04ce6e39a14f16aa1b8be2e23 from review-subject policy v1 after adding Stage 5 layered risk-classification and supply-chain gate evidence.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-056 produced 9ba9a4b791152d5b3a26da0ba00e6ba7cd0d2c3c4087e163fa0c0d5259bcefc1 from review-subject policy v1 after committing Stage 5 layered risk-classification and supply-chain gate evidence.
   - node --test test/evidence-freshness-slos.test.mjs test/cockpit-status.test.mjs test/writer-stream-sanitizer.test.mjs passed with 31 focused tests during aggregate Stage 4 verification.
   - npm run typecheck passed during aggregate Stage 4 verification.
   - npm run bandit -- evidence-freshness-slos validate --json passed during aggregate Stage 4 verification and reports trust_signal_requirements source_artifacts, owner_or_authority_role, freshness_state, and staleness_reason.
