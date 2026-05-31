@@ -148,3 +148,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Repaired two focused CodeRabbit findings locally; next action is focused CodeRabbit refresh before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh with five open findings; next action is repair or explicit disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Repaired five focused CodeRabbit findings locally; next action is focused CodeRabbit refresh before Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh with four open findings; next action is repair or explicit disposition before Local Qwen"}
