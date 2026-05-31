@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Record local landing action evidence for `BANDIT-055`. Stage 5 landing verdict evidence is recorded in `docs/work/BANDIT-055/landing-verdict.md` with final verdict `safe-to-land`, and `npm run bandit -- land-check BANDIT-055` passes. Do not write retrospective, `BANDIT-056`, or unrelated Phase 8 work until `docs/work/BANDIT-055/landing-action.md` exists.
+**Current next step:** Record Stage 6 retrospective closeout for `BANDIT-055`, including improvement/no-action dispositions and bootstrap-gap disposition for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Stage 5 landing verdict and local-record landing action evidence are recorded in `docs/work/BANDIT-055/`. Do not create `BANDIT-056` or unrelated Phase 8 work until `docs/work/BANDIT-055/retrospective.md` exists and `.bandit/bootstrap-gaps.json` records the gap resolved or explicitly dispositioned.
 
 ## Next Work Item
 
