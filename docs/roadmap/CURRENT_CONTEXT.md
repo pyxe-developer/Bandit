@@ -455,18 +455,17 @@ recorded in `docs/specs/BANDIT-055-retrospective.json` and
 `docs/work/BANDIT-055/retrospective.md`, and `.bandit/bootstrap-gaps.json`
 marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
-**Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
+**Active work item:** none.
 
-**Current next action:** Write Stage 6 retrospective closeout for `BANDIT-056`, resolve `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`, and refresh roadmap/status context before creating the queued Stage 4 repair-ownership chore. Do not start unrelated Phase 8 work.
+**Current next action:** Create the `BANDIT-057` work item for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before unrelated Phase 8 work; do not write RED evidence until the work-item brief is recorded.
 
-The current stage is Stage 6: Retrospective And Improvement Capture.
+The current stage is Interstitial: Work-item creation required.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
 `BANDIT-056` Stage 4 repair ownership violation where Codex PM edited
 implementation-owned source and Test Writer-owned test coverage in the same
-repair step. The gap must be corrected after `BANDIT-056` lands and closes out;
-it does not supersede the current CodeRabbit findings repair/disposition next
-action.
+repair step. The gap must be corrected next now that `BANDIT-056` is landed and
+closed out.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -869,36 +868,17 @@ action evidence is recorded in `docs/work/BANDIT-055/landing-action.md`. Stage
 and `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-TOKEN-COST-FAILSAFE`
 resolved.
 
-`BANDIT-056` is active as the bootstrap-gap chore for
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. Its structured creation spec is recorded
-in `docs/specs/BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-056/brief.md`, Stage 2 RED evidence is recorded
-in `test/evidence-freshness-slos.test.mjs`,
-`docs/specs/BANDIT-056-red-evidence.json`, and
-`docs/work/BANDIT-056/red-evidence.md`, and Stage 3 implementation evidence is
-recorded in `docs/work/BANDIT-056/dispatch.md`,
-`docs/work/BANDIT-056/writer-report.md`,
-`docs/work/BANDIT-056/implementation-evidence.md`, and
-`docs/specs/BANDIT-056-implementation-evidence.json`.
-`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-056` with status
-`active`, and `.bandit/events.jsonl` records the work-item, RED evidence, and
-implementation evidence artifact events. Stage 4 pre-PR CodeRabbit evidence is
-recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
-`docs/specs/BANDIT-056-coderabbit-review-output.json` at source head
-`2f8564ce88f9c0d7be2521a9cf638087c428865d`. The latest focused CodeRabbit
-refresh returned six open findings covering derived projection SLO
-documentation, evidence-freshness template key consistency, cockpit-status
-evidence path type extraction, and writer-stream sanitizer cleanup. Codex PM
-classification is recorded in
-`docs/work/BANDIT-056/coderabbit-finding-disposition.md`: the template key
-mismatch and `writer-stream-sanitizer` `isRecord` array rejection are
-repair-required; the derived-projection rationale and cockpit evidence-path
-alias are non-blocking follow-up candidates because current validation passes;
-and the line-count helper extraction plus redacted-field `Set` suggestions are
-no-action/opportunistic only. The next action is to repair the two
-repair-required findings before another focused refresh, Local Qwen, aggregate
-Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8
-work.
+`BANDIT-056` is landed and closed out as the bootstrap-gap chore for
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. Its structured creation spec, Stage 1
+brief, Stage 2 RED evidence, Stage 3 Claude Writer implementation evidence,
+CodeRabbit repair/disposition evidence, Local Qwen bootstrap_gap timeout
+evidence, aggregate Stage 4 review evidence, risk-classification and
+supply-chain gate evidence, Stage 5 landing verdict, local-record landing
+action, Stage 6 retrospective, and resolved bootstrap-gap disposition are
+recorded in `docs/work/BANDIT-056/`, `docs/specs/`, `.bandit/policy/`, and
+`.bandit/bootstrap-gaps.json`. The derived-projection rationale and cockpit
+evidence-path alias findings remain follow-up candidates; stylistic helper and
+documentation suggestions remain explicit no-action/opportunistic decisions.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1094,7 +1074,8 @@ resolved.
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by `BANDIT-053`.
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by `BANDIT-054`.
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by `BANDIT-055`.
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued next.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by `BANDIT-056`.
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued next.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 `BANDIT-035` - Artifact Create Landing Work Item Field is landed and closed out.
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out.
@@ -1141,9 +1122,8 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 6 retrospective closeout for `BANDIT-056`,
-including bootstrap-gap disposition, improvement/no-action decisions, and
-roadmap/status refresh.
+**Expected next deliverable:** Stage 1 work-item brief for `BANDIT-057`, created
+from `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`.
 
 ## Known Bootstrap Gaps
 
@@ -1351,11 +1331,9 @@ These are expected because Bandit does not exist yet:
   provider-refusal/bootstrap_gap replacement evidence, refreshed Local Qwen
   non-blocking evidence, landing action, retrospective closeout, and
   bootstrap-gap disposition are recorded.
-- `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is active as `BANDIT-056` from the
-  2026-05-26 strategic review: cockpit trust signals now need
-  artifact-specific Evidence SLOs and freshness budgets for tests, CodeRabbit,
-  Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and
-  projections instead of generic confidence badges.
+- `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by `BANDIT-056`; its policy,
+  validation command, derived trust signals, review evidence, landing evidence,
+  and retrospective closeout are recorded.
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
   `BANDIT-056` Stage 4 repair ownership violation. The correction should add an
   enforced repair-surface gate so Codex PM can route and update review/context
@@ -1533,18 +1511,16 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write Stage 6 retrospective closeout for `BANDIT-056`, resolve
-   `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`, and refresh roadmap/status context
-   before creating the queued Stage 4 repair-ownership chore. Do not start
-   unrelated Phase 8 work.
+1. Create the `BANDIT-057` work item for
+   `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before unrelated Phase 8
+   work; do not write RED evidence until the work-item brief is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. After `BANDIT-056` lands and closes out, create the queued
-   `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` chore before unrelated
-   Phase 8 work.
+3. Keep `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` as the next queued
+   chore before unrelated Phase 8 work.
 4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
@@ -1565,8 +1541,9 @@ The current priority is:
    `BANDIT-052`, `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by
    `BANDIT-053`, `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by
    `BANDIT-054`, and `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by
-   `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is active as
-   `BANDIT-056`.
+   `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by
+   `BANDIT-056`, and `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is the
+   next queued gap.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -1582,7 +1559,7 @@ aggregate Stage 4 review evidence, Stage 5 landing verdict evidence,
 local-record landing action evidence, Stage 6 retrospective closeout, and
 resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as resolved by `BANDIT-056`. Stage 3
 implementation evidence is recorded for `BANDIT-056`; latest Stage 4 focused
 CodeRabbit refresh completed at
 `4beaf21e01f5d3f839d4612c8af01652eb18dacd` with two trivial findings. Codex PM
@@ -1596,7 +1573,11 @@ recorded in `docs/work/BANDIT-056/review-evidence.md` with PM disposition
 Local-record landing action evidence is recorded in
 `docs/work/BANDIT-056/landing-action.md` with current head
 `d09573263afb4e293117fe3047c8cd21049ec296`. The next required step is Stage 6
-retrospective closeout and bootstrap-gap disposition.
+retrospective closeout and bootstrap-gap disposition. Stage 6 retrospective
+closeout is recorded in `docs/work/BANDIT-056/retrospective.md` and
+`docs/specs/BANDIT-056-retrospective.json`, and `.bandit/bootstrap-gaps.json`
+marks `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` resolved. The next required step is
+creating `BANDIT-057` for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

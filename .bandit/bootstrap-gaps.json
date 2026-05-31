@@ -601,8 +601,8 @@
     {
       "id": "BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS",
       "title": "Cockpit trust signals lack artifact-specific evidence freshness SLOs",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -614,9 +614,9 @@
         "docs/prds/reviews/prd-001-003-research-review"
       ],
       "linked_work_item": "BANDIT-056",
-      "rationale": "The operator confirmed that cockpit trust signals should use explicit Evidence SLOs and artifact-specific freshness budgets rather than generic confidence badges. CI/tests, CodeRabbit, Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and derived projections need different freshness rules, source links, owners, and staleness reasons.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-056."
+      "rationale": "BANDIT-056 created repo-native Evidence Freshness SLO policy validation, an evidence-freshness-slos CLI command, validate wiring, artifact-specific trust-signal requirements, derived cockpit/session-context Evidence Trust Signals, missing/stale dependency propagation, review-subject hash coverage, focused tests, CodeRabbit repair/disposition evidence, Local Qwen bootstrap_gap timeout evidence, aggregate review evidence, layered risk-classification evidence, supply-chain gate evidence, Stage 5 landing verdict, local-record landing action, and Stage 6 retrospective closeout.",
+      "verification_target": "docs/work/BANDIT-056/retrospective.md",
+      "next_action": "Use Evidence Freshness SLO policy validation and derived trust-signal output for future trusted cockpit/session-context evidence; keep missing or stale evidence explicit with source artifacts, owner or authority role, freshness state, and staleness reason."
     },
     {
       "id": "BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT",

@@ -4,9 +4,9 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
+- `[Gap]` none - no active work item; interstitial before creating `BANDIT-057`
 
-**Current next step:** Write Stage 6 retrospective closeout for `BANDIT-056`, resolve `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`, and refresh roadmap/status context before creating the queued Stage 4 repair-ownership chore. Do not start unrelated Phase 8 work.
+**Current next step:** Create the `BANDIT-057` work item for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before unrelated Phase 8 work; do not write RED evidence until the work-item brief is recorded.
 
 ## Next Work Item
 
@@ -19,7 +19,7 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued from the `BANDIT-056` Stage 4 repair ownership violation; blocked until active `BANDIT-056` lands and closes out.
+- `[Gap]` `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued from the `BANDIT-056` Stage 4 repair ownership violation; next gap before unrelated Phase 8 work.
 
 ### Deferred PRD Slices
 
@@ -89,3 +89,4 @@ bootstrap gaps are queued.
 - `BANDIT-053` - Agent Observability Traces
 - `BANDIT-054` - Stage Capability Scope
 - `BANDIT-055` - Token-Cost Failsafe
+- `BANDIT-056` - Evidence Freshness SLOs

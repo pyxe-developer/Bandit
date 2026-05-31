@@ -1,0 +1,92 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-056",
+  "outcome": "`BANDIT-056` landed and closed out the bootstrap-gap chore for `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. The work adds repo-native Evidence Freshness SLO policy validation, derived cockpit/session-context Evidence Trust Signals, missing/stale dependency propagation, review-subject hash coverage, focused tests, review evidence, landing verdict, risk-classification evidence, supply-chain gate evidence, and local-record landing action.",
+  "what_worked": [
+    "Evidence freshness moved from generic confidence language into explicit artifact type, source artifact, owner or authority role, freshness state, and staleness reason metadata.",
+    "Derived cockpit and session-context trust signals remain non-canonical and propagate missing or stale dependencies.",
+    "The final CodeRabbit loop separated repair-required findings, non-blocking follow-up candidates, and no-action stylistic findings.",
+    "Stage 5 failed closed on missing risk-classification and supply-chain gate evidence before local-record landing."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Evidence trust signals need artifact-specific SLO policy, not generic pass/fail confidence.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-056` adds the policy, template, CLI validation, derived projection trust signals, tests, review evidence, landing evidence, and closeout."
+    },
+    {
+      "lesson": "Stage 4 repair ownership boundaries need an enforced pre-edit gate.",
+      "disposition": "queued_bootstrap_gap",
+      "rationale": "`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` remains the next queued gap."
+    },
+    {
+      "lesson": "Derived-projection rationale and cockpit evidence-path alias findings are valid hardening candidates but did not break current validation.",
+      "disposition": "follow_up_candidate",
+      "rationale": "Current Evidence SLO, cockpit-status, and session-context validation passed; candidates remain recorded in the CodeRabbit disposition artifact."
+    },
+    {
+      "lesson": "Stylistic helper extraction and documentation suggestions should not force another repair loop.",
+      "disposition": "explicit no-action decision",
+      "rationale": "CodeRabbit did not show a current validator or runtime break, and the findings were explicitly no-action or opportunistic."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "Local Qwen timed out twice; landing failed closed until risk/supply evidence and current review-subject hash were recorded.",
+      "disposition": "explicit no-action decision - all failures produced durable evidence or immediate gate repair"
+    },
+    {
+      "signal": "overreasoning",
+      "finding": "The work stayed bounded to Evidence Freshness SLO validation, derived non-canonical trust signals, review/landing evidence, and closeout.",
+      "disposition": "explicit no-action decision - no unrelated Phase 8 or product work started"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The gap was well-sized as one bootstrap chore.",
+      "disposition": "explicit no-action decision - repair-ownership enforcement remains separate"
+    },
+    {
+      "signal": "agent-scope fit",
+      "finding": "The final repair used Claude for implementation-source repair and Codex PM for routing/evidence.",
+      "disposition": "queued bootstrap gap - future Stage 4 repairs need enforced ownership boundaries before edits"
+    },
+    {
+      "signal": "tool-use rule pressure",
+      "finding": "Risk and supply-chain evidence were discovered by the landing command rather than created before the first landing attempt.",
+      "disposition": "explicit no-action decision - the land command failed closed and the corrected evidence is recorded"
+    },
+    {
+      "signal": "reviewer/model routing",
+      "finding": "CodeRabbit produced actionable findings and Local Qwen timed out.",
+      "disposition": "explicit no-action decision - no unresolved cross-model tension remains"
+    },
+    {
+      "signal": "tool invocation friction",
+      "finding": "Required commands were usable except Local Qwen timeout.",
+      "disposition": "explicit no-action decision - no new invocation-gap chore is created"
+    },
+    {
+      "signal": "recurring inefficiency",
+      "finding": "The CodeRabbit loop required several repair/disposition refreshes and one post-commit review-subject hash refresh.",
+      "disposition": "explicit no-action decision - future systemic repair-surface enforcement is covered by the queued gap"
+    },
+    {
+      "signal": "cost or latency signals",
+      "finding": "No paid reviewer, recurring paid model route, external service setup, dependency install, or live SCA provider was introduced.",
+      "disposition": "explicit no-action decision - no cost-policy follow-up is required"
+    },
+    {
+      "signal": "unresolved uncertainty",
+      "finding": "No uncertainty remains for the Evidence Freshness SLO policy/validation/projection surface.",
+      "disposition": "bootstrap_gap_resolved - remaining uncertainty belongs to the queued Stage 4 repair-ownership enforcement gap"
+    }
+  ],
+  "improvement_chores": "No new immediate retrospective-derived improvement chore is created by this closeout. `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` remains queued as the next bootstrap-gap chore before unrelated Phase 8 work.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-056`. CodeRabbit findings were repaired or dispositioned with PM rationale. Local Qwen did not return findings and is recorded as bootstrap_gap timeout evidence.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is open and queued as the next bootstrap-gap chore.",
+    "Unrelated Phase 8 cockpit work remains blocked while any open bootstrap gap remains queued or active.",
+    "`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by `BANDIT-056`."
+  ]
+}
