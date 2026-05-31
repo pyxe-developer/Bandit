@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `b31c336167918bb5a114e78a813458182e320dc9`. Codex PM locally repaired the seven focused CodeRabbit findings. CodeRabbit evidence is intentionally stale until a focused refresh runs on the repaired source.
+Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23`. The refresh returned two minor open evidence-artifact findings.
 
-The next required action is focused CodeRabbit refresh for `BANDIT-056` on the repaired source before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
+The next required action is repair or explicit disposition of the two focused CodeRabbit findings before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 No operator-owned input is required for the next recorded action.
 
@@ -31,7 +31,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - CodeRabbit findings repair/disposition next)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)

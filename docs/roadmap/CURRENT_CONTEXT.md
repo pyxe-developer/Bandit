@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Run focused CodeRabbit refresh for `BANDIT-056` on the locally repaired source before Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Current next action:** Repair or explicitly disposition the two focused CodeRabbit findings for `BANDIT-056` before Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -878,13 +878,14 @@ recorded in `docs/work/BANDIT-056/dispatch.md`,
 implementation evidence artifact events. Stage 4 pre-PR CodeRabbit evidence is
 recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
 `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head
-`b31c336167918bb5a114e78a813458182e320dc9`. Focused CodeRabbit refresh
-completed with seven open findings: six minor artifact/policy/template findings
-and one trivial cockpit-status I/O hardening finding. Codex PM locally repaired
-all seven findings; CodeRabbit evidence is intentionally stale until focused
-refresh runs on the repaired source. The next action is focused CodeRabbit
-refresh before Local Qwen, aggregate Stage 4 review, landing, retrospective,
-another work item, or unrelated Phase 8 work.
+`c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23`. Focused CodeRabbit refresh
+completed with two minor open findings in CodeRabbit evidence artifacts: the
+attempt-12 summary/count wording mismatch in
+`docs/specs/BANDIT-056-coderabbit-review-output.json` and the explicit empty
+`bootstrap_gaps` normalization issue in
+`docs/work/BANDIT-056/coderabbit-review.md`. The next action is repair or
+explicit disposition of those two findings before Local Qwen, aggregate Stage 4
+review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1514,8 +1515,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run focused CodeRabbit refresh for `BANDIT-056` on the locally repaired
-   source before Local Qwen, aggregate Stage 4 review, landing,
+1. Repair or explicitly disposition the two focused CodeRabbit findings for
+   `BANDIT-056` before Local Qwen, aggregate Stage 4 review, landing,
    closeout, another work item, or unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
@@ -1561,9 +1562,9 @@ resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
 implementation evidence is recorded for `BANDIT-056`; Stage 4 focused
-CodeRabbit refresh evidence is recorded with seven findings locally repaired by
-Codex PM. The next action is focused CodeRabbit refresh before Local Qwen. This
-is routine technical routing, not an operator-owned product,
+CodeRabbit refresh evidence is recorded with two minor open findings. The next
+action is repair or explicit disposition of those findings before Local Qwen.
+This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
