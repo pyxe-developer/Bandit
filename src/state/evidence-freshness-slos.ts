@@ -19,10 +19,12 @@ export type EvidenceTrustSignal = {
   artifact_type: string;
   source: string;
   owner_or_authority_role: string;
-  freshness_state: "current" | "stale" | "missing";
+  freshness_state: EvidenceFreshnessState;
   staleness_reason: string;
   evidence_slo: string;
 };
+
+export type EvidenceFreshnessState = "current" | "stale" | "missing";
 
 export type EvidenceFreshnessValidationReport = {
   status: "pass";
@@ -67,14 +69,24 @@ export function buildGateTrustSignal(
   artifactType: string,
   source: string,
   ownerOrAuthorityRole: string,
-  fileExists: boolean
+  fileExistsOrFreshnessState: boolean | EvidenceFreshnessState,
+  stalenessReason?: string
 ): Omit<EvidenceTrustSignal, "evidence_slo"> {
+  const freshnessState =
+    typeof fileExistsOrFreshnessState === "boolean"
+      ? fileExistsOrFreshnessState
+        ? "current"
+        : "missing"
+      : fileExistsOrFreshnessState;
+
   return {
     artifact_type: artifactType,
     source,
     owner_or_authority_role: ownerOrAuthorityRole,
-    freshness_state: fileExists ? "current" : "missing",
-    staleness_reason: fileExists ? "none" : "missing_required_stage_evidence"
+    freshness_state: freshnessState,
+    staleness_reason:
+      stalenessReason ??
+      (freshnessState === "current" ? "none" : "missing_required_stage_evidence")
   };
 }
 
@@ -91,7 +103,7 @@ async function validateTemplate(repoRoot: string) {
   }
 
   const missingFields = REQUIRED_TEMPLATE_FIELDS.filter(
-    (field) => !new RegExp(`^${escapeRegExp(field)}:`, "im").test(content)
+    (field) => !new RegExp(`^\\s*(?:-\\s*)?${escapeRegExp(field)}:`, "im").test(content)
   );
 
   if (missingFields.length > 0) {
@@ -166,7 +178,7 @@ function validateArtifactTypes(policy: RawRecord): string[] {
 
     if (!hasSourceArtifacts || !hasOwner) {
       throw new Error(
-        `evidence freshness SLO ${id} requires source artifact, owner or authority role, freshness budget or source identity rule, freshness state, and staleness reason behavior`
+        `evidence freshness SLO ${id} requires source artifact and owner or authority role`
       );
     }
 
@@ -230,7 +242,7 @@ function requireNonEmptyString(value: unknown, message: string): string {
   if (typeof value !== "string" || value.trim().length === 0) {
     throw new Error(message);
   }
-  return value;
+  return value.trim();
 }
 
 function escapeRegExp(value: string): string {

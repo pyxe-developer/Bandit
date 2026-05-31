@@ -7,32 +7,37 @@
     {
       "severity": "major",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "buildGateTrustSignal currently sets freshness_state from fileExists only, so stale is never emitted; pass computed stale/current/missing state from the same logic that drives readStaleEvidence/source_drift_status/review_subject_hash_status into evidence_trust_signals."
+      "status": "locally_resolved_pending_refresh",
+      "body": "buildGateTrustSignal currently sets freshness_state from fileExists only, so stale is never emitted; pass computed stale/current/missing state from the same logic that drives readStaleEvidence/source_drift_status/review_subject_hash_status into evidence_trust_signals.",
+      "disposition": "Repaired locally by allowing computed current/stale/missing freshness state plus explicit staleness reason in buildGateTrustSignal; cockpit trust signals now mark stale review evidence from source_drift_status and review_subject_hash_status. Focused regression coverage was added in test/evidence-freshness-slos.test.mjs. CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "The artifact-type prerequisite error message mentions freshness budget, source identity, freshness state, and staleness behavior even though this branch only checks source_artifacts and owner or authority_role."
+      "status": "locally_resolved_pending_refresh",
+      "body": "The artifact-type prerequisite error message mentions freshness budget, source identity, freshness state, and staleness behavior even though this branch only checks source_artifacts and owner or authority_role.",
+      "disposition": "Repaired locally by narrowing the prerequisite error to source artifact plus owner or authority role. Focused regression coverage updates the expected error text. CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "minor",
       "fileName": "docs/templates/evidence-freshness-slos.md",
-      "status": "open",
-      "body": "The evidence-freshness SLO template lists work_item, policy, artifact_types, trust_signal_requirements, derived_projection_rules, and source_artifacts as flat sibling keys instead of using indentation for the intended hierarchy."
+      "status": "locally_resolved_pending_refresh",
+      "body": "The evidence-freshness SLO template lists work_item, policy, artifact_types, trust_signal_requirements, derived_projection_rules, and source_artifacts as flat sibling keys instead of using indentation for the intended hierarchy.",
+      "disposition": "Repaired locally by indenting the template hierarchy and allowing required template fields under indented YAML-like structure. Focused regression coverage accepts the indented template hierarchy. CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "requireNonEmptyString validates the trimmed length but returns the original string, preserving leading or trailing whitespace in validated ids."
+      "status": "locally_resolved_pending_refresh",
+      "body": "requireNonEmptyString validates the trimmed length but returns the original string, preserving leading or trailing whitespace in validated ids.",
+      "disposition": "Repaired locally by returning the trimmed string after validation. Focused regression coverage verifies normalized artifact type ids. CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "open",
-      "body": "The repeated evidence_slo assignment in gate trust signals can be replaced with a small wrapper helper around buildGateTrustSignal."
+      "status": "locally_resolved_pending_refresh",
+      "body": "The repeated evidence_slo assignment in gate trust signals can be replaced with a small wrapper helper around buildGateTrustSignal.",
+      "disposition": "Repaired locally by adding withEvidenceSlo as the cockpit gate trust-signal wrapper. Existing cockpit and evidence-freshness tests cover unchanged output shape. CodeRabbit refresh is required before Local Qwen."
     }
   ],
   "attempts": [
@@ -59,11 +64,23 @@
       "endedAt": "2026-05-31T08:42:00Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the repaired source and returned five open findings: one major stale-freshness trust-signal issue, three minor validation/template normalization issues, and one trivial cockpit-status helper extraction issue."
+    },
+    {
+      "attempt": 4,
+      "sourceHead": "pending-repair-commit",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T08:59:39Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired all five focused CodeRabbit findings with regression coverage and adjacent projection verification. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 5 findings."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 5 findings.",
+    "Local repair verification: node --test test/evidence-freshness-slos.test.mjs passed 10/10.",
+    "Local repair verification: node --test test/cockpit-status.test.mjs passed 13/13.",
+    "Local repair verification: node --test test/focused-session-context.test.mjs passed 9/9.",
+    "Local repair verification: npm run typecheck passed."
   ]
 }

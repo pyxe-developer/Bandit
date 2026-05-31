@@ -62,8 +62,49 @@ test("evidence-freshness-slos validation rejects trusted evidence without source
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /evidence freshness SLO tests requires source artifact, owner or authority role, freshness budget or source identity rule, freshness state, and staleness reason behavior/
+    /evidence freshness SLO tests requires source artifact and owner or authority role/
   );
+});
+
+test("evidence-freshness-slos validation normalizes artifact type ids", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  policy.artifact_types[0].id = " tests ";
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const parsed = JSON.parse(result.stdout);
+  assert.equal(parsed.artifact_types[0], "tests");
+});
+
+test("evidence-freshness-slos validation accepts an indented template hierarchy", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  await writeCompleteEvidenceFixture(repo, {
+    template: `# Evidence Freshness SLOs
+
+work_item:
+  policy:
+    artifact_types:
+      - trust_signal_requirements:
+          - source_artifacts:
+    derived_projection_rules:
+      - projection:
+`
+  });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
 });
 
 test("evidence-freshness-slos validation rejects missing freshness states", async () => {
@@ -138,6 +179,32 @@ test("cockpit status exposes evidence trust signals for gate dependencies", asyn
     owner_or_authority_role: "test_writer",
     freshness_state: "current",
     staleness_reason: "none",
+    evidence_slo: evidencePolicyPath
+  });
+});
+
+test("cockpit status exposes stale review evidence in gate trust signals", async () => {
+  const repo = await createProjectionEvidenceRepo();
+  await writeFileAt(
+    repo,
+    "docs/work/BANDIT-056/review-evidence.md",
+    [
+      "# Review Evidence",
+      "source_drift_status: current",
+      "review_subject_hash_status: stale"
+    ].join("\n")
+  );
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.deepEqual(status.evidence_trust_signals.gates.stage_4_review, {
+    artifact_type: "review_evidence",
+    source: "docs/work/BANDIT-056/review-evidence.md",
+    owner_or_authority_role: "reviewer",
+    freshness_state: "stale",
+    staleness_reason: "review_subject_hash_drift",
     evidence_slo: evidencePolicyPath
   });
 });
@@ -222,14 +289,14 @@ async function writeCompleteEvidenceFixture(repo, options = {}) {
   await writeFileAt(
     repo,
     evidenceTemplatePath,
-    `# Evidence Freshness SLOs
+    options.template ?? `# Evidence Freshness SLOs
 
 work_item:
-policy:
-artifact_types:
-trust_signal_requirements:
-derived_projection_rules:
-source_artifacts:
+  policy:
+    artifact_types:
+      trust_signal_requirements:
+      derived_projection_rules:
+      source_artifacts:
 `
   );
 }

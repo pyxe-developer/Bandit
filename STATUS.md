@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 pre-PR CodeRabbit evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `109e026fcb13e6f819f228917c22291ecc85e3a6`. Focused CodeRabbit refresh completed with five open findings: one major stale-freshness trust-signal issue, three minor validation/template normalization issues, and one trivial cockpit-status helper extraction issue.
+Stage 4 pre-PR CodeRabbit evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `109e026fcb13e6f819f228917c22291ecc85e3a6`. The five focused CodeRabbit refresh findings are locally repaired and marked `locally_resolved_pending_refresh`; provider evidence is intentionally stale until the focused refresh runs on the repaired source.
 
-The next required action is to repair or explicitly disposition the five open focused CodeRabbit findings before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
+The next required action is focused CodeRabbit refresh for the locally repaired `BANDIT-056` findings before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 No operator-owned input is required for the next recorded action.
 
@@ -31,7 +31,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - repair or disposition CodeRabbit findings next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)

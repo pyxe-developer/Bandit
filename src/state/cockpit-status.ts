@@ -2,6 +2,7 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import {
   EVIDENCE_FRESHNESS_POLICY_PATH,
+  EvidenceFreshnessState,
   EvidenceTrustSignal,
   buildGateTrustSignal,
   evidenceFreshnessPolicyExists
@@ -279,46 +280,102 @@ async function buildCockpitTrustSignals(
     pathExists(repoRoot, paths.landingVerdictPath),
     pathExists(repoRoot, paths.retrospectivePath)
   ]);
+  const reviewFreshness = await readReviewGateFreshness(
+    repoRoot,
+    paths.reviewEvidencePath,
+    reviewExists
+  );
+  const landingFreshness = await readLandingGateFreshness(
+    repoRoot,
+    paths.landingVerdictPath,
+    landingExists
+  );
 
   return {
     authority: "derived_non_canonical",
     gates: {
-      stage_1_brief: {
-        ...buildGateTrustSignal("brief", paths.briefPath, "codex_pm", briefExists),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      },
-      stage_2_red_evidence: {
-        ...buildGateTrustSignal("red_evidence", paths.redEvidencePath, "test_writer", redExists),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      },
-      stage_3_implementation: {
-        ...buildGateTrustSignal(
+      stage_1_brief: withEvidenceSlo(
+        buildGateTrustSignal("brief", paths.briefPath, "codex_pm", briefExists)
+      ),
+      stage_2_red_evidence: withEvidenceSlo(
+        buildGateTrustSignal("red_evidence", paths.redEvidencePath, "test_writer", redExists)
+      ),
+      stage_3_implementation: withEvidenceSlo(
+        buildGateTrustSignal(
           "implementation_evidence",
           paths.implementationEvidencePath,
           "writer",
           implExists
-        ),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      },
-      stage_4_review: {
-        ...buildGateTrustSignal("review_evidence", paths.reviewEvidencePath, "reviewer", reviewExists),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      },
-      stage_5_landing: {
-        ...buildGateTrustSignal(
+        )
+      ),
+      stage_4_review: withEvidenceSlo(
+        buildGateTrustSignal(
+          "review_evidence",
+          paths.reviewEvidencePath,
+          "reviewer",
+          reviewFreshness.state,
+          reviewFreshness.reason
+        )
+      ),
+      stage_5_landing: withEvidenceSlo(
+        buildGateTrustSignal(
           "landing_verdict",
           paths.landingVerdictPath,
           "landing_agent",
-          landingExists
-        ),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      },
-      stage_6_retrospective: {
-        ...buildGateTrustSignal("retrospective", paths.retrospectivePath, "codex_pm", retroExists),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      }
+          landingFreshness.state,
+          landingFreshness.reason
+        )
+      ),
+      stage_6_retrospective: withEvidenceSlo(
+        buildGateTrustSignal("retrospective", paths.retrospectivePath, "codex_pm", retroExists)
+      )
     }
   };
+}
+
+function withEvidenceSlo(
+  signal: Omit<EvidenceTrustSignal, "evidence_slo">
+): EvidenceTrustSignal {
+  return {
+    ...signal,
+    evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+  };
+}
+
+async function readReviewGateFreshness(
+  repoRoot: string,
+  source: string,
+  fileExists: boolean
+): Promise<{ state: EvidenceFreshnessState; reason?: string }> {
+  if (!fileExists) return { state: "missing" };
+
+  const reviewEvidence = await readRequiredArtifact(repoRoot, source);
+  if (readScalarStatus(reviewEvidence.content, "source_drift_status") === "stale") {
+    return { state: "stale", reason: "source_drift" };
+  }
+  if (
+    readScalarStatus(reviewEvidence.content, "review_subject_hash_status") ===
+    "stale"
+  ) {
+    return { state: "stale", reason: "review_subject_hash_drift" };
+  }
+
+  return { state: "current" };
+}
+
+async function readLandingGateFreshness(
+  repoRoot: string,
+  source: string,
+  fileExists: boolean
+): Promise<{ state: EvidenceFreshnessState; reason?: string }> {
+  if (!fileExists) return { state: "missing" };
+
+  const landingVerdict = await readRequiredArtifact(repoRoot, source);
+  if (readScalarStatus(landingVerdict.content, "source_drift_status") === "stale") {
+    return { state: "stale", reason: "source_drift" };
+  }
+
+  return { state: "current" };
 }
 
 async function readRequiredArtifact(repoRoot: string, displayPath: string) {
