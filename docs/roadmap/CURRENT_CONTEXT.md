@@ -429,13 +429,17 @@ open findings: a critical Test Ownership Boundary concern in
 `test/coderabbit-state.test.mjs` and a trivial duplicate `--json` argument
 validation concern in `src/commands/token-cost-failsafe.ts`. Codex PM
 dispositioned the test-ownership finding as unsupported by repo evidence and
-repaired the duplicate `--json` validation concern locally. The next action is
-focused CodeRabbit refresh before the Stage 4 gate can proceed.
+repaired the duplicate `--json` validation concern locally. The focused
+CodeRabbit refresh attempt at `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`
+timed out after setup/summarizing/reviewing without a terminal verdict. The
+next action is to rerun focused CodeRabbit refresh before the Stage 4 gate can
+proceed.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Run a focused CodeRabbit refresh for the locally
-repaired/dispositioned `BANDIT-055` CodeRabbit findings before Local Qwen,
+**Current next action:** Rerun a focused CodeRabbit refresh for the locally
+repaired/dispositioned `BANDIT-055` CodeRabbit findings after the
+`3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` provider timeout before Local Qwen,
 aggregate Stage 4 review evidence, landing, retrospective, `BANDIT-056`, or
 unrelated Phase 8 work.
 
@@ -1290,10 +1294,12 @@ These are expected because Bandit does not exist yet:
   routing; one-off paid reviewer or model calls before promotion are
   benchmark/evaluation spend that require per-run approval or active
   spend-class approval. Stage 1 brief, Stage 2 RED evidence, and Stage 3
-  implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
-  recorded with a current focused refresh at
-  `84c462e66c75bc08fd129aedf5e6ada355fc78c1` and two open findings; repair or
-  explicit disposition is the next action.
+  implementation evidence are recorded. The focused refresh at
+  `84c462e66c75bc08fd129aedf5e6ada355fc78c1` returned two findings that are
+  repaired or explicitly dispositioned locally; the follow-up focused refresh at
+  `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` timed out without terminal
+  verdict. Rerun focused CodeRabbit refresh before Local Qwen or aggregate
+  Stage 4 review.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1472,10 +1478,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 The current priority is:
 
 1. Run a focused CodeRabbit refresh for the locally repaired/dispositioned
-   `BANDIT-055` findings after the focused refresh at
-   `84c462e66c75bc08fd129aedf5e6ada355fc78c1`. Do not run Local Qwen,
+   `BANDIT-055` findings after the provider timeout at
+   `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`. Do not run Local Qwen,
    aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated
-   Phase 8 work until CodeRabbit refresh evidence is recorded.
+   Phase 8 work until terminal CodeRabbit refresh evidence is recorded or an
+   explicit provider-refusal/bootstrap-gap replacement is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1518,11 +1525,12 @@ retrospective closeout, and resolved bootstrap-gap disposition.
 `.bandit/bootstrap-gaps.json` records `BANDIT-GAP-TOKEN-COST-FAILSAFE` as
 active for `BANDIT-055`. Stage 1 brief, Stage 2 RED evidence, and Stage 3
 implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
-recorded at source head `84c462e66c75bc08fd129aedf5e6ada355fc78c1`; the prior
+recorded at source head `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`; the prior
 template-guidance finding, four repair-head validation findings, five
 terminal-refresh findings, and four focused-refresh findings are repaired
 locally. The current focused refresh returned two findings, and those findings
-are now repaired or explicitly dispositioned locally. The next action is a
+are now repaired or explicitly dispositioned locally. The follow-up focused
+refresh timed out without a terminal verdict. The next action is to rerun
 focused CodeRabbit refresh before Local Qwen. This is routine
 technical routing, not an operator-owned product, UAT, policy, business, cost,
 or scope decision unless disposition would expand scope or require

@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Run a focused CodeRabbit refresh for the locally repaired/dispositioned `BANDIT-055` findings after the focused refresh at `84c462e66c75bc08fd129aedf5e6ada355fc78c1`. The repair/disposition evidence is recorded in `docs/work/BANDIT-055/coderabbit-review.md`; do not run Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until refresh evidence is recorded.
+**Current next step:** Rerun a focused CodeRabbit refresh for the locally repaired/dispositioned `BANDIT-055` findings after the provider timeout at `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`. Timeout and repair/disposition evidence is recorded in `docs/work/BANDIT-055/coderabbit-review.md`; do not run Local Qwen, aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until terminal refresh evidence or explicit provider-refusal/bootstrap-gap replacement evidence is recorded.
 
 ## Next Work Item
 

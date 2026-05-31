@@ -2,15 +2,15 @@
 
 contract_version: 1
 work_item: BANDIT-055
-source_head: 84c462e66c75bc08fd129aedf5e6ada355fc78c1
+source_head: 3b6c4040eb399e8f2f16b3bdc4bd98c369201b96
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:a2ea27d9361c73b3beef30930dfe348feebcb709
-review_state: completed
+review_state: timeout
 coderabbit_verdict: blocker
 findings_status: locally_resolved_pending_refresh
-findings_disposition: Codex PM verified and dispositioned the test-ownership finding against test/coderabbit-state.test.mjs as not supported by repo evidence because the named test was added in Codex PM repair commit 84c462e, while the Stage 3 Claude Writer commit c916dbe did not edit tests. The duplicate --json validation finding in src/commands/token-cost-failsafe.ts is repaired locally with focused regression coverage. Focused CodeRabbit refresh is required before Local Qwen, aggregate Stage 4 review, landing, retrospective, BANDIT-056, or unrelated Phase 8 work.
+findings_disposition: Codex PM verified and dispositioned the test-ownership finding against test/coderabbit-state.test.mjs as not supported by repo evidence because the named test was added in Codex PM repair commit 84c462e, while the Stage 3 Claude Writer commit c916dbe did not edit tests. The duplicate --json validation finding in src/commands/token-cost-failsafe.ts is repaired locally with focused regression coverage. The 2026-05-31 focused CodeRabbit refresh attempt at source head 3b6c4040eb399e8f2f16b3bdc4bd98c369201b96 timed out after setup/summarizing/reviewing without a terminal verdict. Focused CodeRabbit refresh remains required before Local Qwen, aggregate Stage 4 review, landing, retrospective, BANDIT-056, or unrelated Phase 8 work.
 operator_input_status: none_required
-source_drift_status: stale
+source_drift_status: unavailable
 executable_evidence:
   - coderabbit --version returned 0.4.1.
   - coderabbit auth status --agent returned authenticated for github user pyxe-developer.
@@ -23,6 +23,7 @@ executable_evidence:
   - git show --stat c916dbe confirms the Stage 3 Claude Writer implementation commit did not edit tests, test helpers, fixtures, RED evidence, or acceptance mappings.
   - git diff 84c462e^ 84c462e -- test/coderabbit-state.test.mjs confirms Codex PM repair commit 84c462e added the named CodeRabbit validation test after Stage 3.
   - Local repair now rejects duplicate --json arguments in bandit token-cost-failsafe validate and covers the refusal path in test/token-cost-failsafe.test.mjs.
+  - coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-coderabbit-review-output.json docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/coderabbit-review.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/coderabbit-review.ts src/state/token-cost-failsafe.ts test/coderabbit-state.test.mjs test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color reached setup, summarizing, and reviewing, then was terminated after more than three minutes without a terminal verdict.
 resolved_or_dispositioned_findings:
   - severity: critical
     file: test/coderabbit-state.test.mjs
