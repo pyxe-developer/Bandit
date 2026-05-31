@@ -1,7 +1,7 @@
 {
   "sourceHead": "bbd48de80d204fe556440893c162eb93ea4747ef",
   "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
-  "latestRepairHead": "b33eb482173fa67a0e77fa20636d72c0cf810963",
+  "latestRepairHead": "5c8b8c9f735afc3496eebba7e825ec50da65c29d",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -9,23 +9,23 @@
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Replace the loose non-empty-array source_artifacts check with requireNonEmptyStringList so blank or non-string entries are rejected before treating source_artifacts as present.",
-      "disposition": "Open from focused CodeRabbit refresh at bbd48de; repair or explicitly disposition before another refresh, Local Qwen, or aggregate Stage 4 review."
+      "disposition": "Repaired by Claude Writer in 5c8b8c9f735afc3496eebba7e825ec50da65c29d; requires focused CodeRabbit refresh before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "minor",
       "fileName": "src/state/focused-session-context.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Make readStaleEvidenceReason tolerate a missing file between buildDependencyTrustSignal existence check and readRequiredArtifact so the race returns no stale reason instead of throwing.",
-      "disposition": "Open from focused CodeRabbit refresh at bbd48de; repair or explicitly disposition before another refresh, Local Qwen, or aggregate Stage 4 review."
+      "disposition": "Repaired by Claude Writer in 5c8b8c9f735afc3496eebba7e825ec50da65c29d; requires focused CodeRabbit refresh before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "minor",
       "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Attempt 17 endedAt is out of chronological order and should use a UTC Z timestamp between attempt 16 and attempt 18.",
-      "disposition": "Open from focused CodeRabbit refresh at bbd48de; repair or explicitly disposition before another refresh, Local Qwen, or aggregate Stage 4 review."
+      "disposition": "Repaired by Codex PM evidence correction in 5c8b8c9f735afc3496eebba7e825ec50da65c29d follow-up; requires focused CodeRabbit refresh before Local Qwen or aggregate Stage 4 review."
     }
   ],
   "attempts": [
@@ -169,7 +169,7 @@
       "attempt": 17,
       "sourceHead": "5dfc90bb3d0790ef1c2078124f16d30e35f69973",
       "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
-      "endedAt": "2026-05-31T15:15:00-04:00",
+      "endedAt": "2026-05-31T20:05:00Z",
       "result": "local_repair_pending_provider_refresh",
       "summary": "Codex PM locally repaired both focused CodeRabbit findings: the missing audit-trail transition record is present and duplicate derived projection collection was removed. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     },
@@ -212,6 +212,14 @@
       "endedAt": "2026-05-31T20:45:19Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned three minor open findings: source_artifacts list validation, focused-session-context missing-file race tolerance, and attempt 17 timestamp ordering."
+    },
+    {
+      "attempt": 23,
+      "sourceHead": "5c8b8c9f735afc3496eebba7e825ec50da65c29d",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T20:55:54Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Claude Writer repaired the two implementation-source findings through docs/work/BANDIT-056/coderabbit-repair-dispatch.md and Codex PM corrected the attempt 17 timestamp ordering. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -243,6 +251,14 @@
     "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.",
     "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/cockpit-status.ts --files src/commands/evidence-freshness-slos.ts --files test/evidence-freshness-slos.test.mjs --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 4 findings at source head d2b422695ebba83429f5564570b762e517ebe2ec.",
     "b33eb482173fa67a0e77fa20636d72c0cf810963 repairs the four latest focused CodeRabbit findings locally.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/cockpit-status.ts --files src/commands/evidence-freshness-slos.ts --files test/evidence-freshness-slos.test.mjs --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 3 findings at source head bbd48de80d204fe556440893c162eb93ea4747ef."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/cockpit-status.ts --files src/commands/evidence-freshness-slos.ts --files test/evidence-freshness-slos.test.mjs --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 3 findings at source head bbd48de80d204fe556440893c162eb93ea4747ef.",
+    "claude -p <docs/work/BANDIT-056/coderabbit-repair-dispatch.md> --model claude-sonnet-4-6 --effort xhigh --verbose --output-format stream-json reached end_turn and wrote docs/work/BANDIT-056/coderabbit-repair-writer-report.md.",
+    "5c8b8c9f735afc3496eebba7e825ec50da65c29d repairs the two implementation-source findings through the Claude Writer path.",
+    "Codex PM corrected the attempt 17 timestamp ordering in docs/specs/BANDIT-056-coderabbit-review-output.json to UTC Z between attempts 16 and 18.",
+    "node --test test/evidence-freshness-slos.test.mjs passed after the source repair.",
+    "node --test test/focused-session-context.test.mjs passed after the source repair.",
+    "npm run typecheck passed after the source repair.",
+    "npm run bandit -- evidence-freshness-slos validate --json passed after the source repair.",
+    "git diff --check passed after the source repair."
   ]
 }
