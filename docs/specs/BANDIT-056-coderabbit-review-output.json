@@ -1,7 +1,7 @@
 {
   "sourceHead": "7a30a4716d33cb319098976ad6467a60d61beef3",
   "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
-  "latestRepairHead": null,
+  "latestRepairHead": "23fd3e8d470c9afd7a7f51d7c6fef3046e60c931",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -16,30 +16,30 @@
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "collectTrustSignalRequirements filters out non-string entries silently; it should validate every policy.trust_signal_requirements entry is a string and throw a descriptive trust_signal_requirements error when malformed.",
-      "disposition": "Repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931; provider refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "buildCockpitTrustSignals uses a misleading parameter name paths even though the object also contains staleEvidence and evidenceArtifactExistence metadata.",
-      "disposition": "Repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931; provider refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "readGateMatrix/readGate/readLandingReadiness restat evidence artifacts even after evidenceArtifactExistence has already been computed.",
-      "disposition": "Repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931; provider refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "validateEvidenceFreshnessSlosPolicy duplicates policy read and ENOENT handling with readRequiredPolicy instead of sharing an optional policy read helper.",
-      "disposition": "Repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931; provider refresh required before Local Qwen or aggregate Stage 4 review."
     }
   ],
   "attempts": [
@@ -194,6 +194,14 @@
       "endedAt": "2026-05-31T20:15:50Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned five open findings: two minor findings covering stale context count wording and trust_signal_requirements validation, plus three trivial cleanup findings in cockpit-status/evidence-freshness helpers."
+    },
+    {
+      "attempt": 19,
+      "sourceHead": "23fd3e8d470c9afd7a7f51d7c6fef3046e60c931",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T20:21:52Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired the four remaining focused CodeRabbit findings: strict trust_signal_requirements validation, clearer cockpit trust-signal dependency naming, gate/landing existence reuse, and shared optional Evidence SLO policy reading. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -218,6 +226,10 @@
     "git diff --check passed after the local repair.",
     "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
     "npm run typecheck passed after the local repair.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files .bandit/events.jsonl --files .bandit/policy/evidence-freshness-slos.json --files STATUS.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/specs/BANDIT-056-implementation-evidence.json --files docs/templates/evidence-freshness-slos.md --files docs/work/BANDIT-056/claude-writer-stream.jsonl --files docs/work/BANDIT-056/coderabbit-review.md --files docs/work/BANDIT-056/dispatch.md --files docs/work/BANDIT-056/implementation-evidence.md --files docs/work/BANDIT-056/writer-report.md --files src/cli.ts --files src/commands/evidence-freshness-slos.ts --files src/commands/validate.ts --files src/state/cockpit-status.ts --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files test/evidence-freshness-slos.test.mjs -c AGENTS.md --no-color completed with 5 findings at source head 7a30a4716d33cb319098976ad6467a60d61beef3."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files .bandit/events.jsonl --files .bandit/policy/evidence-freshness-slos.json --files STATUS.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/specs/BANDIT-056-implementation-evidence.json --files docs/templates/evidence-freshness-slos.md --files docs/work/BANDIT-056/claude-writer-stream.jsonl --files docs/work/BANDIT-056/coderabbit-review.md --files docs/work/BANDIT-056/dispatch.md --files docs/work/BANDIT-056/implementation-evidence.md --files docs/work/BANDIT-056/writer-report.md --files src/cli.ts --files src/commands/evidence-freshness-slos.ts --files src/commands/validate.ts --files src/state/cockpit-status.ts --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files test/evidence-freshness-slos.test.mjs -c AGENTS.md --no-color completed with 5 findings at source head 7a30a4716d33cb319098976ad6467a60d61beef3.",
+    "23fd3e8d470c9afd7a7f51d7c6fef3046e60c931 repairs the four remaining focused CodeRabbit findings locally.",
+    "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
+    "npm run typecheck passed after the local repair.",
+    "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair."
   ]
 }

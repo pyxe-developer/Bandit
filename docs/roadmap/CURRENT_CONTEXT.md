@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Repair or explicitly disposition the four remaining open focused CodeRabbit findings for `BANDIT-056` before the next focused CodeRabbit refresh, Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Current next action:** Run the focused CodeRabbit refresh for `BANDIT-056` on local repair head `23fd3e8d470c9afd7a7f51d7c6fef3046e60c931` before Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -882,9 +882,10 @@ recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
 returned five findings: stale context count wording, strict
 `trust_signal_requirements` validation, and three trivial cleanup findings in
 cockpit-status/evidence-freshness helpers. The stale context count finding was
-locally repaired while recording this refresh result. The next action is repair
-or explicit PM disposition for the four remaining open findings before the next
-focused CodeRabbit refresh, Local Qwen, aggregate Stage 4 review, landing,
+locally repaired while recording this refresh result. Commit
+`23fd3e8d470c9afd7a7f51d7c6fef3046e60c931` locally repairs the four remaining
+focused CodeRabbit findings. The next action is focused CodeRabbit refresh on
+that local repair head before Local Qwen, aggregate Stage 4 review, landing,
 retrospective, another work item, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
@@ -1515,10 +1516,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the four remaining open focused CodeRabbit
-   findings for `BANDIT-056` before the next focused CodeRabbit refresh, Local
-   Qwen, aggregate Stage 4 review, landing, closeout, another work item, or
-   unrelated Phase 8 work.
+1. Run the focused CodeRabbit refresh for `BANDIT-056` on local repair head
+   `23fd3e8d470c9afd7a7f51d7c6fef3046e60c931` before Local Qwen, aggregate
+   Stage 4 review, landing, closeout, another work item, or unrelated Phase 8
+   work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
