@@ -1,36 +1,20 @@
 {
-  "sourceHead": "bebd075a03b7653e56389014aec7c886cb9abf6e",
+  "sourceHead": "fabcd55d7bd31e388708749b481a2a0634de9855",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
       "severity": "minor",
-      "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "The contract_version validation error message implies a missing field even when the parsed value exists but is not 1.",
-      "disposition": "Repaired locally by splitting malformed policy validation into object, missing contract_version, and invalid contract_version branches; focused regression coverage verifies the invalid-version message."
-    },
-    {
-      "severity": "trivial",
-      "fileName": "src/state/cockpit-status.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "readReviewGateFreshness and readLandingGateFreshness duplicate file reads and parsing already performed by readCockpitStatus/readStaleEvidence.",
-      "disposition": "Repaired locally by computing stale evidence once in readCockpitStatus and deriving review/landing trust-signal freshness from that shared result."
+      "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
+      "status": "open",
+      "body": "Attempt 6 still uses the placeholder sourceHead pending-repair-commit instead of the actual repair commit."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "buildGateTrustSignal uses a nested ternary for freshness_state and can mislabel stale state with a missing-evidence default staleness reason.",
-      "disposition": "Repaired locally by extracting freshness-state/default-reason helpers and using a stale_dependency default for explicit stale states without a more specific reason."
-    },
-    {
-      "severity": "minor",
-      "fileName": "test/evidence-freshness-slos.test.mjs",
-      "status": "locally_resolved_pending_refresh",
-      "body": "The template fixture YAML nests derived_projection_rules and source_artifacts under artifact_types instead of aligning them as policy siblings of artifact_types.",
-      "disposition": "Repaired locally by aligning the test fixtures and committed template so derived_projection_rules and source_artifacts are policy siblings of artifact_types."
+      "status": "open",
+      "body": "buildGateTrustSignal should document why its return type intentionally omits evidence_slo for callers to attach context-specific SLO data later."
     }
   ],
   "attempts": [
@@ -81,11 +65,19 @@
       "endedAt": "2026-05-31T09:58:10Z",
       "result": "local_repair_pending_provider_refresh",
       "summary": "Codex PM locally repaired all four focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
+    },
+    {
+      "attempt": 7,
+      "sourceHead": "fabcd55d7bd31e388708749b481a2a0634de9855",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T10:32:57Z",
+      "result": "completed",
+      "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned two open findings: one minor evidence-metadata sourceHead placeholder issue and one trivial buildGateTrustSignal documentation issue."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 4 findings."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings."
   ]
 }
