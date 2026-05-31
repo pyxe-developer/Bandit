@@ -145,3 +145,4 @@
 {"type":"artifact_created","work_item":"BANDIT-056","message":"Created red_evidence artifact at docs/work/BANDIT-056/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-056","message":"Created implementation_evidence artifact at docs/work/BANDIT-056/implementation-evidence.md; next action is Stage 4 pre-PR CodeRabbit review"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded pre-PR CodeRabbit review with two open findings; next action is repair or explicit disposition before Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Repaired two focused CodeRabbit findings locally; next action is focused CodeRabbit refresh before Local Qwen"}

@@ -19,8 +19,7 @@
       "authority_role": "reviewer",
       "source_artifacts": ["docs/work/<ID>/coderabbit-review.md"],
       "freshness_budget": {
-        "kind": "review_subject_hash",
-        "source_identity": "current_review_subject_hash"
+        "kind": "review_subject_hash"
       },
       "allowed_freshness_states": ["current", "stale", "missing"],
       "staleness_reasons": ["review_subject_hash_drift", "provider_refusal"],
@@ -31,8 +30,7 @@
       "authority_role": "reviewer",
       "source_artifacts": ["docs/work/<ID>/local-qwen-review.md"],
       "freshness_budget": {
-        "kind": "review_subject_hash",
-        "source_identity": "current_review_subject_hash"
+        "kind": "review_subject_hash"
       },
       "allowed_freshness_states": ["current", "stale", "missing"],
       "staleness_reasons": ["review_subject_hash_drift", "missing_review"],

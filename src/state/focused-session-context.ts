@@ -87,11 +87,21 @@ async function buildSessionContextTrustSignals(
   }
 
   const dependencies: EvidenceTrustSignal[] = [];
+  const requiredStageEvidence = STAGE_EVIDENCE_INFOS.filter(
+    (info) => info.stageNum <= stageNum
+  );
+  const existenceResults = await Promise.all(
+    requiredStageEvidence.map(async (info) => {
+      const source = `docs/work/${workItemId}/${info.filename}`;
+      return {
+        info,
+        source,
+        fileExists: await pathExists(repoRoot, source)
+      };
+    })
+  );
 
-  for (const info of STAGE_EVIDENCE_INFOS) {
-    if (info.stageNum > stageNum) break;
-    const source = `docs/work/${workItemId}/${info.filename}`;
-    const fileExists = await pathExists(repoRoot, source);
+  for (const { info, source, fileExists } of existenceResults) {
     if (!fileExists) {
       dependencies.push({
         ...buildGateTrustSignal(info.artifact_type, source, info.owner, false),

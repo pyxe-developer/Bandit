@@ -7,14 +7,39 @@
     {
       "severity": "trivial",
       "fileName": "src/state/focused-session-context.ts",
-      "status": "open",
-      "body": "src/state/focused-session-context.ts should run the STAGE_EVIDENCE_INFOS pathExists checks in parallel for entries with stageNum <= current stage, then preserve the current dependency order when adding missing dependency trust signals."
+      "status": "locally_resolved_pending_refresh",
+      "body": "src/state/focused-session-context.ts should run the STAGE_EVIDENCE_INFOS pathExists checks in parallel for entries with stageNum <= current stage, then preserve the current dependency order when adding missing dependency trust signals.",
+      "disposition": "Repaired locally by filtering STAGE_EVIDENCE_INFOS to entries at or before the current stage, running pathExists checks through Promise.all, and iterating the ordered result array when adding missing dependency trust signals. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass; focused CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "trivial",
       "fileName": ".bandit/policy/evidence-freshness-slos.json",
-      "status": "open",
-      "body": ".bandit/policy/evidence-freshness-slos.json uses source_identity current_review_subject_hash for review_subject_hash freshness budget entries; CodeRabbit recommends changing matching source_identity values to current or removing the redundant field if kind is sufficient."
+      "status": "locally_resolved_pending_refresh",
+      "body": ".bandit/policy/evidence-freshness-slos.json uses source_identity current_review_subject_hash for review_subject_hash freshness budget entries; CodeRabbit recommends changing matching source_identity values to current or removing the redundant field if kind is sufficient.",
+      "disposition": "Repaired locally by removing redundant source_identity fields from review_subject_hash freshness budgets for CodeRabbit and Local Qwen review evidence. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass; focused CodeRabbit refresh is required before Local Qwen."
     }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceHead": "a43ca6e36beea55b34387205733e3e9cff2ec61f",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T07:33:50Z",
+      "result": "completed",
+      "summary": "CodeRabbit completed the focused BANDIT-056 Stage 3 delta review and returned two trivial open findings against focused session-context pathExists sequencing and review_subject_hash source_identity metadata."
+    },
+    {
+      "attempt": 2,
+      "sourceHead": "pending-repair-commit",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T08:00:00Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired both CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
+    }
+  ],
+  "executableEvidence": [
+    "node --test test/evidence-freshness-slos.test.mjs passed 7/7.",
+    "npm run typecheck passed.",
+    "npm run bandit -- evidence-freshness-slos validate --json passed."
   ]
 }
