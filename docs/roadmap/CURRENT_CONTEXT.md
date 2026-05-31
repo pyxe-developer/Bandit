@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Write the Stage 5 landing verdict for `BANDIT-056` using current Stage 4 review evidence, Local Qwen bootstrap-gap timeout evidence, clean-code pass, and focused verification. Do not start another work item or unrelated Phase 8 work before landing and closeout.
+**Current next action:** Run the local-record landing action for `BANDIT-056` and record `docs/work/BANDIT-056/landing-action.md` with the landed commit SHA before Stage 6 closeout. Do not start another work item or unrelated Phase 8 work before landing and closeout.
 
 The current stage is Stage 5: Landing And UAT.
 
@@ -1141,9 +1141,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 5 landing verdict for `BANDIT-056`, using
-current Stage 4 review evidence, Local Qwen bootstrap-gap timeout evidence,
-focused verification, and clean-code review.
+**Expected next deliverable:** Local-record landing action evidence for
+`BANDIT-056`, including the landed commit SHA in
+`docs/work/BANDIT-056/landing-action.md`.
 
 ## Known Bootstrap Gaps
 
@@ -1533,10 +1533,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Write the Stage 5 landing verdict for `BANDIT-056` using current Stage 4
-   review evidence, Local Qwen bootstrap-gap timeout evidence, clean-code pass,
-   and focused verification. Do not start another work item or unrelated Phase
-   8 work before landing and closeout.
+1. Run the local-record landing action for `BANDIT-056` and record
+   `docs/work/BANDIT-056/landing-action.md` with the landed commit SHA before
+   Stage 6 closeout. Do not start another work item or unrelated Phase 8 work
+   before landing and closeout.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1591,7 +1591,9 @@ dispositioned both as no-action or opportunistic in
 is recorded in `docs/work/BANDIT-056/local-qwen-review.md` as a bootstrap-gap
 timeout after two fail-closed attempts. Aggregate Stage 4 review evidence is
 recorded in `docs/work/BANDIT-056/review-evidence.md` with PM disposition
-`pass`. The next required step is the Stage 5 landing verdict.
+`pass`. Stage 5 landing verdict evidence is recorded in
+`docs/work/BANDIT-056/landing-verdict.md` with final verdict `safe-to-land`.
+The next required step is local-record landing action evidence.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

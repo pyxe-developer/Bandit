@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Write the Stage 5 landing verdict for `BANDIT-056` using current Stage 4 review evidence, Local Qwen bootstrap-gap timeout evidence, clean-code pass, and focused verification. Do not start another work item or unrelated Phase 8 work before landing and closeout.
+**Current next step:** Run the local-record landing action for `BANDIT-056` and record `docs/work/BANDIT-056/landing-action.md` with the landed commit SHA before Stage 6 closeout. Do not start another work item or unrelated Phase 8 work before landing and closeout.
 
 ## Next Work Item
 

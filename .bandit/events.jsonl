@@ -167,3 +167,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh at 4beaf21 with two trivial findings dispositioned as no-action or opportunistic; next action is Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded Local Qwen bootstrap-gap timeout evidence after two fail-closed attempts; next action is aggregate Stage 4 review evidence"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded aggregate Stage 4 review evidence with CodeRabbit pass and Local Qwen bootstrap_gap; next action is Stage 5 landing verdict"}
+{"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-056","message":"Recorded Stage 5 landing verdict safe-to-land; next action is local-record landing action evidence"}
