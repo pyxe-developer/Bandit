@@ -18,7 +18,7 @@ executable_evidence:
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings at source head c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23.
   - 5a8a3d5ee762cd6f1544b91efc8653d82fd4937c repairs the two focused CodeRabbit evidence-artifact findings locally.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 file list> -c AGENTS.md --no-color completed with 2 findings at source head b5e549ec6031fd2eba45b5ed4d3ccfa09da4e02c.
-  - 060ebd35171b563723f9f81d380ff45ad9accc91 repairs the two focused CodeRabbit findings locally.
+  - 5dfc90bb3d0790ef1c2078124f16d30e35f69973 repairs the two focused CodeRabbit findings locally.
   - node --test test/evidence-freshness-slos.test.mjs passed after the local repair.
   - npm run typecheck passed after the local repair.
 findings:
