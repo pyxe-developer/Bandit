@@ -432,16 +432,20 @@ dispositioned the test-ownership finding as unsupported by repo evidence and
 repaired the duplicate `--json` validation concern locally. The focused
 CodeRabbit refresh attempt at `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`
 timed out after setup/summarizing/reviewing without a terminal verdict. The
-next action is to rerun focused CodeRabbit refresh before the Stage 4 gate can
-proceed.
+focused CodeRabbit refresh attempt at
+`9fb71edd16d161d530a1b62beb10758009903867` timed out after setup/summarizing
+without a terminal verdict. The next action is to record explicit CodeRabbit
+provider-refusal/bootstrap-gap replacement disposition before the Stage 4 gate
+can proceed to Local Qwen.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Rerun a focused CodeRabbit refresh for the locally
-repaired/dispositioned `BANDIT-055` CodeRabbit findings after the
-`3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` provider timeout before Local Qwen,
-aggregate Stage 4 review evidence, landing, retrospective, `BANDIT-056`, or
-unrelated Phase 8 work.
+**Current next action:** Record explicit CodeRabbit provider-refusal/bootstrap-gap
+replacement disposition for `BANDIT-055` after focused refresh timeouts at
+`3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` and
+`9fb71edd16d161d530a1b62beb10758009903867` before Local Qwen, aggregate Stage 4
+review evidence, landing, retrospective, `BANDIT-056`, or unrelated Phase 8
+work.
 
 The current stage is Stage 4 CodeRabbit repair/disposition for `BANDIT-055`.
 
@@ -1082,10 +1086,10 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Focused CodeRabbit refresh evidence for the
-locally repaired/dispositioned `BANDIT-055` findings, before Local Qwen
-closeout, aggregate review evidence, landing, retrospective, `BANDIT-056`, or
-unrelated Phase 8 work.
+**Expected next deliverable:** Explicit CodeRabbit provider-refusal/bootstrap-gap
+replacement disposition for `BANDIT-055`, before Local Qwen closeout, aggregate
+review evidence, landing, retrospective, `BANDIT-056`, or unrelated Phase 8
+work.
 
 ## Known Bootstrap Gaps
 
@@ -1298,8 +1302,10 @@ These are expected because Bandit does not exist yet:
   `84c462e66c75bc08fd129aedf5e6ada355fc78c1` returned two findings that are
   repaired or explicitly dispositioned locally; the follow-up focused refresh at
   `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` timed out without terminal
-  verdict. Rerun focused CodeRabbit refresh before Local Qwen or aggregate
-  Stage 4 review.
+  verdict, and the second focused refresh at
+  `9fb71edd16d161d530a1b62beb10758009903867` also timed out without terminal
+  verdict. Record explicit CodeRabbit provider-refusal/bootstrap-gap
+  replacement disposition before Local Qwen or aggregate Stage 4 review.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1477,12 +1483,12 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run a focused CodeRabbit refresh for the locally repaired/dispositioned
-   `BANDIT-055` findings after the provider timeout at
-   `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`. Do not run Local Qwen,
+1. Record explicit CodeRabbit provider-refusal/bootstrap-gap replacement
+   disposition for `BANDIT-055` after focused refresh timeouts at
+   `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` and
+   `9fb71edd16d161d530a1b62beb10758009903867`. Do not run Local Qwen,
    aggregate Stage 4 review, landing, retrospective, `BANDIT-056`, or unrelated
-   Phase 8 work until terminal CodeRabbit refresh evidence is recorded or an
-   explicit provider-refusal/bootstrap-gap replacement is recorded.
+   Phase 8 work until that disposition is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1530,11 +1536,13 @@ template-guidance finding, four repair-head validation findings, five
 terminal-refresh findings, and four focused-refresh findings are repaired
 locally. The current focused refresh returned two findings, and those findings
 are now repaired or explicitly dispositioned locally. The follow-up focused
-refresh timed out without a terminal verdict. The next action is to rerun
-focused CodeRabbit refresh before Local Qwen. This is routine
-technical routing, not an operator-owned product, UAT, policy, business, cost,
-or scope decision unless disposition would expand scope or require
-operator-owned cost/risk approval.
+refresh timed out without a terminal verdict, and a second focused refresh at
+source head `9fb71edd16d161d530a1b62beb10758009903867` also timed out without a
+terminal verdict. The next action is to record explicit CodeRabbit
+provider-refusal/bootstrap-gap replacement disposition before Local Qwen. This
+is routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless disposition would expand scope or
+require operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

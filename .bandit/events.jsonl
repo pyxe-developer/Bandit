@@ -130,3 +130,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded focused CodeRabbit refresh with two open findings; next action is repair or explicit disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Repaired or dispositioned two focused CodeRabbit findings locally; next action is focused CodeRabbit refresh before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded focused CodeRabbit refresh timeout at 3b6c404; next action is rerun focused CodeRabbit refresh before Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded second focused CodeRabbit refresh timeout at 9fb71ed; next action is CodeRabbit provider-timeout disposition before Local Qwen"}
