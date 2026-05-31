@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Repair or explicitly disposition the two open focused CodeRabbit findings for `BANDIT-056` before Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Current next action:** Focused CodeRabbit refresh for the locally repaired `BANDIT-056` findings before Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -879,11 +879,13 @@ implementation evidence artifact events. Stage 4 pre-PR CodeRabbit evidence is
 recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
 `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head
 `fabcd55d7bd31e388708749b481a2a0634de9855`. Focused CodeRabbit refresh
-completed with two open findings: one minor evidence-metadata sourceHead
-placeholder issue and one trivial buildGateTrustSignal documentation issue. The
-next action is repair or explicit disposition before Local Qwen, aggregate
-Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8
-work.
+completed with two findings: one minor evidence-metadata sourceHead placeholder
+issue and one trivial buildGateTrustSignal documentation issue. Codex PM
+locally repaired both findings and marked the evidence
+`locally_resolved_pending_refresh`; provider evidence is intentionally stale
+until focused refresh runs on the repaired source. The next action is focused
+CodeRabbit refresh before Local Qwen, aggregate Stage 4 review, landing,
+retrospective, another work item, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1126,8 +1128,8 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Repair or explicit disposition evidence for the
-two open focused `BANDIT-056` CodeRabbit findings, before Local Qwen, aggregate
+**Expected next deliverable:** Focused CodeRabbit refresh evidence for the
+locally repaired `BANDIT-056` CodeRabbit findings, before Local Qwen, aggregate
 Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8
 work.
 
@@ -1513,9 +1515,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the two open focused `BANDIT-056`
-   CodeRabbit findings before Local Qwen, aggregate Stage 4 review, landing,
-   closeout, another work item, or unrelated Phase 8 work.
+1. Run focused CodeRabbit refresh for the locally repaired `BANDIT-056`
+   findings before Local Qwen, aggregate Stage 4 review, landing, closeout,
+   another work item, or unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1560,9 +1562,10 @@ resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
 implementation evidence is recorded for `BANDIT-056`; Stage 4 pre-PR
-CodeRabbit evidence is recorded with two open focused refresh findings. The next
-action is repair or explicit disposition before Local Qwen. This is routine
-technical routing, not an operator-owned product, UAT, policy,
+CodeRabbit evidence is recorded with two focused refresh findings that Codex PM
+repaired locally; the evidence is marked `locally_resolved_pending_refresh`.
+The next action is focused CodeRabbit refresh before Local Qwen. This is
+routine technical routing, not an operator-owned product, UAT, policy,
 business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,

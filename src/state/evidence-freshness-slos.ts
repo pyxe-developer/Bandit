@@ -72,6 +72,7 @@ export function buildGateTrustSignal(
   fileExistsOrFreshnessState: boolean | EvidenceFreshnessState,
   stalenessReason?: string
 ): Omit<EvidenceTrustSignal, "evidence_slo"> {
+  // Projection builders attach context-specific SLO policy provenance.
   const freshnessState = resolveFreshnessState(fileExistsOrFreshnessState);
 
   return {

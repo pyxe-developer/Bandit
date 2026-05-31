@@ -7,14 +7,16 @@
     {
       "severity": "minor",
       "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
-      "status": "open",
-      "body": "Attempt 6 still uses the placeholder sourceHead pending-repair-commit instead of the actual repair commit."
+      "status": "locally_resolved_pending_refresh",
+      "body": "Attempt 6 still uses the placeholder sourceHead pending-repair-commit instead of the actual repair commit.",
+      "disposition": "Repaired locally by replacing the attempt 6 placeholder with actual repair commit fabcd55d7bd31e388708749b481a2a0634de9855. CodeRabbit refresh is required before Local Qwen."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "buildGateTrustSignal should document why its return type intentionally omits evidence_slo for callers to attach context-specific SLO data later."
+      "status": "locally_resolved_pending_refresh",
+      "body": "buildGateTrustSignal should document why its return type intentionally omits evidence_slo for callers to attach context-specific SLO data later.",
+      "disposition": "Repaired locally with an inline contract note that projection builders attach context-specific SLO policy provenance. CodeRabbit refresh is required before Local Qwen."
     }
   ],
   "attempts": [
@@ -60,7 +62,7 @@
     },
     {
       "attempt": 6,
-      "sourceHead": "pending-repair-commit",
+      "sourceHead": "fabcd55d7bd31e388708749b481a2a0634de9855",
       "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
       "endedAt": "2026-05-31T09:58:10Z",
       "result": "local_repair_pending_provider_refresh",
@@ -78,6 +80,8 @@
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings.",
+    "Local repair verification: node --test test/evidence-freshness-slos.test.mjs passed.",
+    "Local repair verification: npm run typecheck passed."
   ]
 }
