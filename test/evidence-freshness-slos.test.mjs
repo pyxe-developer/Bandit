@@ -108,6 +108,31 @@ test("evidence-freshness-slos validation rejects incomplete trust signal require
   );
 });
 
+test("evidence-freshness-slos validation rejects malformed trust signal requirements", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  policy.trust_signal_requirements = [
+    "source_artifact",
+    "owner_or_authority_role",
+    42,
+    "freshness_state",
+    "staleness_reason"
+  ];
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /trust_signal_requirements entries must be non-empty strings/
+  );
+});
+
 test("evidence-freshness-slos validation normalizes artifact type ids", async () => {
   const repo = await createInitializedEvidenceRepo();
   const policy = completeEvidenceFreshnessPolicy();

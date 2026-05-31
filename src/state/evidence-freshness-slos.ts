@@ -58,14 +58,9 @@ export async function validateEvidenceFreshnessSlos(
 }
 
 export async function validateEvidenceFreshnessSlosPolicy(repoRoot: string): Promise<void> {
-  const policyPath = path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH);
-  let content: string;
-  try {
-    content = await readFile(policyPath, "utf8");
-  } catch (error) {
-    if (isMissingPathError(error)) return;
-    throw error;
-  }
+  const content = await readOptionalPolicy(repoRoot);
+  if (content === null) return;
+
   await validateTemplate(repoRoot);
   parseAndValidatePolicy(content);
 }
@@ -163,13 +158,23 @@ async function validateTemplate(repoRoot: string) {
 }
 
 async function readRequiredPolicy(repoRoot: string): Promise<string> {
+  const content = await readPolicyFile(repoRoot);
+  if (content === null) {
+    throw new Error(`Missing required policy: ${EVIDENCE_FRESHNESS_POLICY_PATH}`);
+  }
+  return content;
+}
+
+async function readOptionalPolicy(repoRoot: string): Promise<string | null> {
+  return readPolicyFile(repoRoot);
+}
+
+async function readPolicyFile(repoRoot: string): Promise<string | null> {
   const policyPath = path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH);
   try {
     return await readFile(policyPath, "utf8");
   } catch (error) {
-    if (isMissingPathError(error)) {
-      throw new Error(`Missing required policy: ${EVIDENCE_FRESHNESS_POLICY_PATH}`);
-    }
+    if (isMissingPathError(error)) return null;
     throw error;
   }
 }
@@ -289,8 +294,12 @@ function collectTrustSignalRequirements(policy: RawRecord): string[] {
     );
   }
 
-  const requirements = (policy.trust_signal_requirements as unknown[]).filter(
-    (item): item is string => typeof item === "string"
+  const requirements = (policy.trust_signal_requirements as unknown[]).map(
+    (item) =>
+      requireNonEmptyString(
+        item,
+        "Malformed evidence freshness SLO policy: trust_signal_requirements entries must be non-empty strings"
+      )
   );
 
   const missingRequirements = REQUIRED_TRUST_SIGNAL_REQUIREMENTS.filter(

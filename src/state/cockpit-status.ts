@@ -217,12 +217,14 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   }, evidenceArtifactExistence);
   const evidence_trust_signals = hasFreshnessSlos
     ? buildCockpitTrustSignals({
-        briefPath,
-        redEvidencePath,
-        implementationEvidencePath,
-        reviewEvidencePath,
-        landingVerdictPath,
-        retrospectivePath,
+        evidencePaths: {
+          briefPath,
+          redEvidencePath,
+          implementationEvidencePath,
+          reviewEvidencePath,
+          landingVerdictPath,
+          retrospectivePath
+        },
         staleEvidence,
         evidenceArtifactExistence
       })
@@ -256,17 +258,20 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     },
     blockers: readBlockers(currentContext.content, bootstrapGaps),
     bootstrap_gaps: bootstrapGaps,
-    gates: await readGateMatrix(repoRoot, {
-      briefPath,
-      redEvidencePath,
-      implementationEvidencePath,
-      reviewEvidencePath,
-      landingVerdictPath,
-      retrospectivePath
+    gates: readGateMatrix({
+      paths: {
+        briefPath,
+        redEvidencePath,
+        implementationEvidencePath,
+        reviewEvidencePath,
+        landingVerdictPath,
+        retrospectivePath
+      },
+      evidenceArtifactExistence
     }),
-    landing_readiness: await readLandingReadiness(
-      repoRoot,
-      implementationEvidencePath
+    landing_readiness: readLandingReadiness(
+      implementationEvidencePath,
+      evidenceArtifactExistence.implementationExists
     ),
     uat: {
       status: "not_applicable",
@@ -280,13 +285,15 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
 }
 
 function buildCockpitTrustSignals(
-  paths: {
-    briefPath: string;
-    redEvidencePath: string;
-    implementationEvidencePath: string;
-    reviewEvidencePath: string;
-    landingVerdictPath: string;
-    retrospectivePath: string;
+  dependencies: {
+    evidencePaths: {
+      briefPath: string;
+      redEvidencePath: string;
+      implementationEvidencePath: string;
+      reviewEvidencePath: string;
+      landingVerdictPath: string;
+      retrospectivePath: string;
+    };
     staleEvidence: StaleEvidence[];
     evidenceArtifactExistence: EvidenceArtifactExistence;
   }
@@ -298,16 +305,17 @@ function buildCockpitTrustSignals(
     reviewExists,
     landingExists,
     retrospectiveExists
-  } = paths.evidenceArtifactExistence;
+  } = dependencies.evidenceArtifactExistence;
+  const paths = dependencies.evidencePaths;
   const reviewFreshness = resolveReviewGateFreshness(
     paths.reviewEvidencePath,
     reviewExists,
-    paths.staleEvidence
+    dependencies.staleEvidence
   );
   const landingFreshness = resolveLandingGateFreshness(
     paths.landingVerdictPath,
     landingExists,
-    paths.staleEvidence
+    dependencies.staleEvidence
   );
 
   return {
@@ -769,8 +777,8 @@ function optionalGapStringList(record: Record<string, unknown>, field: string) {
   return value.filter((item): item is string => typeof item === "string");
 }
 
-async function readLandingReadiness(repoRoot: string, source: string) {
-  if (await pathExists(repoRoot, source)) {
+function readLandingReadiness(source: string, implementationExists: boolean) {
+  if (implementationExists) {
     return {
       status: "ready" as const,
       reason: "implementation evidence is recorded",
@@ -785,8 +793,7 @@ async function readLandingReadiness(repoRoot: string, source: string) {
   };
 }
 
-async function readGateMatrix(
-  repoRoot: string,
+function readGateMatrix(input: {
   paths: {
     briefPath: string;
     redEvidencePath: string;
@@ -794,28 +801,42 @@ async function readGateMatrix(
     reviewEvidencePath: string;
     landingVerdictPath: string;
     retrospectivePath: string;
-  }
-) {
+  };
+  evidenceArtifactExistence: EvidenceArtifactExistence;
+}) {
+  const { paths, evidenceArtifactExistence } = input;
   return {
     stage_0_context_readiness: {
       status: "pass" as const,
       sources: [CURRENT_CONTEXT_PATH, ROADMAP_PATH]
     },
-    stage_1_brief: await readGate(repoRoot, paths.briefPath),
-    stage_2_red_evidence: await readGate(repoRoot, paths.redEvidencePath),
-    stage_3_implementation: await readGate(
-      repoRoot,
-      paths.implementationEvidencePath
+    stage_1_brief: readGate(paths.briefPath, evidenceArtifactExistence.briefExists),
+    stage_2_red_evidence: readGate(
+      paths.redEvidencePath,
+      evidenceArtifactExistence.redExists
     ),
-    stage_4_review: await readGate(repoRoot, paths.reviewEvidencePath),
-    stage_5_landing: await readGate(repoRoot, paths.landingVerdictPath),
-    stage_6_retrospective: await readGate(repoRoot, paths.retrospectivePath)
+    stage_3_implementation: readGate(
+      paths.implementationEvidencePath,
+      evidenceArtifactExistence.implementationExists
+    ),
+    stage_4_review: readGate(
+      paths.reviewEvidencePath,
+      evidenceArtifactExistence.reviewExists
+    ),
+    stage_5_landing: readGate(
+      paths.landingVerdictPath,
+      evidenceArtifactExistence.landingExists
+    ),
+    stage_6_retrospective: readGate(
+      paths.retrospectivePath,
+      evidenceArtifactExistence.retrospectiveExists
+    )
   };
 }
 
-async function readGate(repoRoot: string, source: string): Promise<GateStatus> {
+function readGate(source: string, fileExists: boolean): GateStatus {
   return {
-    status: (await pathExists(repoRoot, source)) ? "pass" : "missing",
+    status: fileExists ? "pass" : "missing",
     source
   };
 }
