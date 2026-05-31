@@ -1,7 +1,7 @@
 {
   "sourceHead": "c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23",
-  "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
-  "latestRepairHead": "c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23",
+  "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head; local evidence-artifact repair is recorded separately and still requires focused provider refresh",
+  "latestRepairHead": "pending-local-repair-commit",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -9,16 +9,16 @@
     {
       "severity": "minor",
       "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
-      "status": "unresolved",
+      "status": "locally_resolved_pending_refresh",
       "body": "The summary for attempt 12 is inconsistent with the detailed findings: update the summary text to say five minor and two trivial and change the cockpit-status phrase to duplicated existence checks, or modify the findings to match the summary.",
-      "disposition": "Open; repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by aligning the attempt 12 summary with the detailed findings: five minor findings, two trivial findings, and duplicated cockpit-status existence checks."
     },
     {
       "severity": "minor",
       "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
-      "status": "unresolved",
+      "status": "locally_resolved_pending_refresh",
       "body": "The bootstrap_gaps key is currently bare; change it to an explicit empty list so it parses as an empty array rather than null.",
-      "disposition": "Open; repair or explicitly disposition before Local Qwen."
+      "disposition": "Repaired locally by normalizing the markdown artifact bootstrap_gaps field to an explicit empty list."
     }
   ],
   "attempts": [
@@ -116,7 +116,7 @@
       "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
       "endedAt": "2026-05-31T13:33:06Z",
       "result": "completed",
-      "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned seven open findings: six minor artifact/policy/template findings and one trivial cockpit-status I/O hardening finding."
+      "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned seven open findings: five minor artifact/policy/template findings and two trivial findings, including duplicated cockpit-status existence checks."
     },
     {
       "attempt": 13,
@@ -133,12 +133,21 @@
       "endedAt": "2026-05-31T14:31:00Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned two minor open findings in CodeRabbit evidence artifacts."
+    },
+    {
+      "attempt": 15,
+      "sourceHead": "pending-local-repair-commit",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T14:57:03Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired both focused CodeRabbit evidence-artifact findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
     "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings at source head c00a86cdfa61f0d1de00c27a8d7b63add5ce4d23.",
+    "pending-local-repair-commit repairs the two focused CodeRabbit evidence-artifact findings locally.",
     "e91081a57076120b236e0ba0fd48dd906ee2504e repairs the seven focused CodeRabbit findings locally.",
     "b8c9272f8cf69d9d1c86b0d0776236d571a1f7de repairs the three focused CodeRabbit findings locally.",
     "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
