@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`: the Evidence SLO template key mismatch and `writer-stream-sanitizer` `isRecord` array rejection. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
+**Current next step:** Run a focused CodeRabbit refresh for `BANDIT-056` after the post-repair bundle covering Evidence SLO `source_artifacts` consistency, sanitizer array-event coverage, portable dispatch metadata, and stale PM evidence wording. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
 
 ## Next Work Item
 

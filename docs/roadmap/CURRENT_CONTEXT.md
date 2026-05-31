@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`: the Evidence SLO template key mismatch and `writer-stream-sanitizer` `isRecord` array rejection. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
+**Current next action:** Run a focused CodeRabbit refresh for `BANDIT-056` after the post-repair bundle covering Evidence SLO `source_artifacts` consistency, sanitizer array-event coverage, portable dispatch metadata, and stale PM evidence wording. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -1141,11 +1141,11 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Focused repair evidence for the two
-repair-required `BANDIT-056` CodeRabbit findings: the Evidence SLO template key
-mismatch and `writer-stream-sanitizer` `isRecord` array rejection. No focused
-refresh should run solely for the four dispositioned non-blocking,
-no-action, or opportunistic findings.
+**Expected next deliverable:** Focused CodeRabbit refresh evidence for the
+post-repair `BANDIT-056` bundle covering Evidence SLO `source_artifacts`
+consistency, sanitizer array-event coverage, portable dispatch metadata, and
+stale PM evidence wording. No focused refresh should run solely for the four
+dispositioned non-blocking, no-action, or opportunistic findings.
 
 ## Known Bootstrap Gaps
 
@@ -1535,11 +1535,14 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`:
-   the Evidence SLO template key mismatch and `writer-stream-sanitizer`
-   `isRecord` array rejection. Do not run another CodeRabbit refresh solely for
-   the derived-projection rationale, cockpit evidence-path alias, line-count
-   helper extraction, or redacted-field `Set` findings.
+1. Run a focused CodeRabbit refresh for `BANDIT-056` after the post-repair
+   bundle that made Evidence SLO trust requirements consistently use
+   `source_artifacts`, added `writer-stream-sanitizer` array-event coverage,
+   replaced the original Stage 3 dispatch's machine-local repository path, and
+   reconciled stale CodeRabbit disposition/report wording. Do not run another
+   CodeRabbit refresh solely for the derived-projection rationale, cockpit
+   evidence-path alias, line-count helper extraction, or redacted-field `Set`
+   findings.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1588,11 +1591,10 @@ resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
 implementation evidence is recorded for `BANDIT-056`; latest Stage 4 focused
 CodeRabbit refresh completed at
-`2f8564ce88f9c0d7be2521a9cf638087c428865d` with six open findings. Codex PM
-classified the findings in
+`b19fc9fa3499c1cc149bfae990b6a6102737de6a` with six follow-up findings. The
+post-repair bundle is recorded in
 `docs/work/BANDIT-056/coderabbit-finding-disposition.md`; the next required
-step is focused repair for the two repair-required findings before another
-focused refresh, Local Qwen, or aggregate review.
+step is a focused CodeRabbit refresh before Local Qwen or aggregate review.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

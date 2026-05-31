@@ -37,7 +37,7 @@ test("evidence-freshness-slos validation accepts a complete SLO policy", async (
       "derived_projection"
     ],
     trust_signal_requirements: [
-      "source_artifact",
+      "source_artifacts",
       "owner_or_authority_role",
       "freshness_state",
       "staleness_reason"
@@ -89,7 +89,7 @@ test("evidence-freshness-slos validation rejects incomplete trust signal require
   const repo = await createInitializedEvidenceRepo();
   const policy = completeEvidenceFreshnessPolicy();
   policy.trust_signal_requirements = [
-    "source_artifact",
+    "source_artifacts",
     "freshness_state",
     "staleness_reason"
   ];
@@ -112,7 +112,7 @@ test("evidence-freshness-slos validation rejects malformed trust signal requirem
   const repo = await createInitializedEvidenceRepo();
   const policy = completeEvidenceFreshnessPolicy();
   policy.trust_signal_requirements = [
-    "source_artifact",
+    "source_artifacts",
     "owner_or_authority_role",
     42,
     "freshness_state",
@@ -180,7 +180,7 @@ work_item:
       - id:
         source_artifacts:
     trust_signal_requirements:
-      - source_artifact
+      - source_artifacts
     derived_projection_rules:
       - projection:
         source_artifacts:
@@ -447,7 +447,7 @@ work_item:
       - id:
         source_artifacts:
     trust_signal_requirements:
-      - source_artifact
+      - source_artifacts
     derived_projection_rules:
       - projection:
         source_artifacts:
@@ -512,7 +512,7 @@ function completeEvidenceFreshnessPolicy() {
       })
     ],
     trust_signal_requirements: [
-      "source_artifact",
+      "source_artifacts",
       "owner_or_authority_role",
       "freshness_state",
       "staleness_reason"

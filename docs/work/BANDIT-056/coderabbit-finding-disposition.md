@@ -1,9 +1,10 @@
 # BANDIT-056 CodeRabbit Finding Disposition
 
 recorded_time_utc: 2026-05-31T21:41:00Z
+updated_time_utc: 2026-05-31T22:14:00Z
 work_item: BANDIT-056
-latest_review_head: 2f8564ce88f9c0d7be2521a9cf638087c428865d
-disposition_state: partial_findings_classified
+latest_review_head: b19fc9fa3499c1cc149bfae990b6a6102737de6a
+disposition_state: post_repair_refresh_findings_routed
 
 ## Source Evidence
 
@@ -19,7 +20,10 @@ disposition_state: partial_findings_classified
 
 The focused CodeRabbit refresh completed at source head
 `2f8564ce88f9c0d7be2521a9cf638087c428865d` and returned six open findings.
-Codex PM classified the findings instead of repairing all of them.
+Codex PM classified the findings instead of repairing all of them. Claude
+Writer then repaired the two repair-required findings at
+`b19fc9fa3499c1cc149bfae990b6a6102737de6a`, and a focused CodeRabbit refresh
+returned six follow-up findings.
 
 ## PM Disposition
 
@@ -86,8 +90,18 @@ outcome: pending
 
 | Stage | Verdict | Evidence |
 | --- | --- | --- |
-| Stage 3: Implementation Clean-Code Rubric | `blocker` | The `isRecord` array handling defect and template key mismatch require focused repair before Stage 4 can advance. |
-| Stage 4: Review And Cross-Model Gates | `blocker` | CodeRabbit remains `blocker` with two repair-required findings. Two findings are accepted non-blocking follow-ups and two stylistic findings are no-action/opportunistic only. |
+| Stage 3: Implementation Clean-Code Rubric | `blocker` | The pre-repair `isRecord` array handling defect and template key mismatch were repaired by Claude Writer in `docs/work/BANDIT-056/coderabbit-repair-writer-report.md`. The post-repair refresh found a still-valid sanitizer coverage gap and schema-wide trust-signal key consistency gap, both repaired in the follow-up bundle. |
+| Stage 4: Review And Cross-Model Gates | `blocker` | The 2026-05-31 focused CodeRabbit refresh at `b19fc9fa3499c1cc149bfae990b6a6102737de6a` returned six findings. The repair-required findings are routed below; another focused refresh is required before Local Qwen, aggregate Stage 4 review, landing, or closeout. |
+
+## Post-Repair Refresh Routing
+
+| Finding | Verdict | Rationale | Durable routing |
+| --- | --- | --- | --- |
+| Replace the host-specific absolute path in `docs/work/BANDIT-056/dispatch.md`. | `repair_required` | The finding is valid: the original Stage 3 Writer dispatch still contained a machine-local path. | PM repaired the dispatch metadata to use `<repo-root>`. |
+| Make `trust_signal_requirements` consistently use `source_artifacts` or `source_artifact`. | `repair_required` | Repo evidence shows policy, template, and author-facing metadata already use `source_artifacts`; keeping the trust requirement singular continues the ambiguity. | Repair `.bandit/policy/evidence-freshness-slos.json`, `src/state/evidence-freshness-slos.ts`, and focused tests to use `source_artifacts`. |
+| Add sanitizer coverage for array-valued JSON lines. | `repair_required` | Claude Writer noted the gap, and CodeRabbit correctly identified it as a testability blocker for the new `isRecord` branch. | Repair `test/writer-stream-sanitizer.test.mjs` so arrays are asserted as `unknown` events. |
+| Update this disposition's next action and stage table after the repairs. | `repair_required` | The pre-repair table and next action were stale after `b19fc9f`. | PM repaired this artifact with the post-repair refresh routing and current next action. |
+| Reconcile the Writer report's complete-repair language with post-repair findings. | `repair_required` | The Writer report was true for its bounded dispatch but needed a post-refresh reconciliation note. | PM repaired `docs/work/BANDIT-056/coderabbit-repair-writer-report.md`. |
 
 ## Verification
 
@@ -96,8 +110,13 @@ outcome: pending
 
 ## Next Action
 
-Repair the two repair-required findings: the Evidence SLO template key mismatch
-and `writer-stream-sanitizer` `isRecord` array rejection. Do not run another
+The two original repair-required findings were repaired by Claude Writer. The
+post-repair refresh findings are repaired in the follow-up bundle: the original
+Stage 3 dispatch now uses `<repo-root>`, the SLO trust requirement key is
+consistently `source_artifacts` across policy/validator/tests/template, the
+sanitizer array branch has focused coverage, and stale PM evidence wording is
+updated. Run a focused CodeRabbit refresh on the repaired bundle before Local
+Qwen, aggregate Stage 4 review, landing, or closeout. Do not run another
 CodeRabbit refresh solely for the derived-projection rationale, cockpit
 evidence-path alias, line-count helper extraction, or redacted-field `Set`
 suggestions.

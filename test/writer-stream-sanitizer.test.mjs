@@ -73,3 +73,26 @@ test("writer stream sanitizer emits durable digest without raw runtime payloads"
   assert.match(result.stdout, /stdout/);
   assert.match(result.stdout, /session_id/);
 });
+
+test("writer stream sanitizer classifies array events as unknown", () => {
+  const rawStream = JSON.stringify([{ type: "assistant" }]);
+  const script = `
+    import { sanitizeWriterStreamJsonl } from "./src/state/writer-stream-sanitizer.ts";
+    const raw = ${JSON.stringify(rawStream)};
+    process.stdout.write(sanitizeWriterStreamJsonl(raw, {
+      workItem: "BANDIT-999",
+      stage: "Stage 4 Repair",
+      rawStreamPath: ".bandit/tmp/BANDIT-999/writer-stream.jsonl"
+    }));
+  `;
+  const result = spawnSync(
+    process.execPath,
+    ["--import", "tsx", "--input-type=module", "-e", script],
+    { cwd: repoRoot, encoding: "utf8" }
+  );
+
+  assert.equal(result.status, 0, result.stderr);
+  const digest = JSON.parse(result.stdout);
+  assert.deepEqual(digest.event_counts, { unknown: 1 });
+  assert.equal(digest.line_count, 1);
+});

@@ -5,7 +5,7 @@
 - Work item: `BANDIT-056` - Evidence Freshness SLOs
 - Codex PM: Codex
 - Claude Writer: `claude-sonnet-4-6`
-- Repository: `/Users/matthewflebbe/Bandit`
+- Repository: `<repo-root>`
 - Branch: `main`
 - Base SHA: `c5eb2700502237e3269a82818edd994a4006d878`
 - Dispatch status: Stage 3 implementation requested

@@ -45,7 +45,7 @@ npm run bandit -- evidence-freshness-slos validate --json
   "status": "pass",
   "policy": ".bandit/policy/evidence-freshness-slos.json",
   "artifact_types": ["tests", "coderabbit_review", "local_qwen_review", "landing_verdict", "derived_projection"],
-  "trust_signal_requirements": ["source_artifact", "owner_or_authority_role", "freshness_state", "staleness_reason"],
+  "trust_signal_requirements": ["source_artifacts", "owner_or_authority_role", "freshness_state", "staleness_reason"],
   "derived_projections": ["cockpit_status", "session_context"]
 }
 ```
@@ -75,7 +75,17 @@ exercises valid JSON object event lines. A test that feeds an array-valued JSON 
 asserts it is counted as `"unknown"` would close this gap. Tests are forbidden for this
 Writer handoff, so the gap is noted here for Codex PM disposition.
 
-## Stop Conditions and Follow-Up Concerns
+## Post-Refresh Reconciliation
+
+The 2026-05-31 focused CodeRabbit refresh at source head
+`b19fc9fa3499c1cc149bfae990b6a6102737de6a` found follow-up issues outside
+this Writer handoff's allowed edit boundary: schema-wide
+`source_artifact`/`source_artifacts` consistency, focused sanitizer array
+coverage, stale PM disposition wording, and the original Stage 3 dispatch's
+absolute repository path. Codex PM routed those as the next repair bundle in
+`docs/work/BANDIT-056/coderabbit-finding-disposition.md`.
+
+## Writer Stop Conditions and Follow-Up Concerns
 
 None. Both in-scope repairs are complete, all required verification commands pass, and
 no forbidden paths were touched. The four other CodeRabbit findings (derived-projection

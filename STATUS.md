@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `2f8564ce88f9c0d7be2521a9cf638087c428865d`. Codex PM classification for the six findings is recorded in `docs/work/BANDIT-056/coderabbit-finding-disposition.md`: the Evidence SLO template key mismatch and `writer-stream-sanitizer` `isRecord` array rejection are repair-required; the derived-projection rationale and cockpit evidence-path alias are non-blocking follow-up candidates; the line-count helper extraction and redacted-field `Set` suggestions are no-action/opportunistic only.
+Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md`, `docs/specs/BANDIT-056-coderabbit-review-output.json`, and `docs/work/BANDIT-056/coderabbit-finding-disposition.md`. The original two repair-required findings were repaired at `b19fc9fa3499c1cc149bfae990b6a6102737de6a`; the post-repair bundle now covers Evidence SLO `source_artifacts` consistency, sanitizer array-event coverage, portable dispatch metadata, and stale PM evidence wording. The derived-projection rationale and cockpit evidence-path alias remain non-blocking follow-up candidates; the line-count helper extraction and redacted-field `Set` suggestions remain no-action/opportunistic only.
 
-The next required action is to repair the two repair-required findings before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work. Do not run another CodeRabbit refresh solely for the dispositioned stylistic findings.
+The next required action is a focused CodeRabbit refresh on the post-repair bundle before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work. Do not run another CodeRabbit refresh solely for the dispositioned stylistic findings.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
 `BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
@@ -35,7 +35,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - two repair-required CodeRabbit findings next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
