@@ -66,13 +66,7 @@ export async function validateEvidenceFreshnessSlosPolicy(repoRoot: string): Pro
 }
 
 export async function evidenceFreshnessPolicyExists(repoRoot: string): Promise<boolean> {
-  try {
-    await stat(path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH));
-    return true;
-  } catch (error) {
-    if (isMissingPathError(error)) return false;
-    throw error;
-  }
+  return pathExists(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH);
 }
 
 export function buildGateTrustSignal(
@@ -82,7 +76,7 @@ export function buildGateTrustSignal(
   fileExistsOrFreshnessState: boolean | EvidenceFreshnessState,
   stalenessReason?: string
 ): Omit<EvidenceTrustSignal, "evidence_slo"> {
-  // Projection builders attach context-specific SLO policy provenance.
+  // Projection builders add the fixed policy provenance through withEvidenceSlo.
   const freshnessState = resolveFreshnessState(fileExistsOrFreshnessState);
 
   return {
