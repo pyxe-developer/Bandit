@@ -32,6 +32,8 @@ const REQUIRED_TEMPLATE_FIELDS = [
 ];
 
 const REQUIRED_PROVIDER_PRICING_FIELDS = [
+  "provider",
+  "model_or_profile",
   "pricing_source",
   "captured_date",
   "effective_date",
@@ -170,7 +172,7 @@ function validateProviderPricingEvidence(policy: RawRecord): string[] {
 
     if (missingField) {
       throw new Error(
-        `provider-pricing evidence ${id} requires pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner`
+        `provider-pricing evidence ${id} requires provider, model or profile, pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner`
       );
     }
 
@@ -242,7 +244,10 @@ function validateRecurringPaidRoutes(
 
   for (const item of policy.recurring_paid_routes as unknown[]) {
     if (!isRecord(item)) continue;
-    const id = typeof item.id === "string" ? item.id : "unknown";
+    const id = requireNonEmptyString(
+      item.id,
+      "recurring paid routes require a non-empty string id"
+    );
 
     const providerPricingEvidence = item.provider_pricing_evidence;
     const hasProviderPricingEvidence =
@@ -288,7 +293,10 @@ function validateSoftBudgetBands(policy: RawRecord): string[] {
 
   for (const item of policy.soft_budget_bands as unknown[]) {
     if (!isRecord(item)) continue;
-    const id = typeof item.id === "string" ? item.id : "unknown";
+    const id = requireNonEmptyString(
+      item.id,
+      "soft budget bands require a non-empty string id"
+    );
 
     if (
       typeof item.budget_mode !== "string" ||

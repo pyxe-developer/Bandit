@@ -423,15 +423,16 @@ Qwen work, aggregate Stage 4 review work, landing work, retrospective work,
 `BANDIT-056` work, or unrelated Phase 8 work has started.
 The five terminal-refresh findings are repaired locally, and the focused
 CodeRabbit refresh at `3aa85de29c14958ccb15d291824acf70a03e78c8` returned four
-open findings. The next action is to repair or explicitly disposition those
-findings before the Stage 4 gate can proceed.
+open findings. Those four findings are now locally repaired and the provider
+evidence is stale after source changes. The next action is a focused CodeRabbit
+refresh before the Stage 4 gate can proceed.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Repair or explicitly disposition the four open
-CodeRabbit findings for `BANDIT-055` before Local Qwen, aggregate Stage 4
-review evidence, landing, retrospective, `BANDIT-056`, or unrelated Phase 8
-work.
+**Current next action:** Run a focused CodeRabbit refresh for `BANDIT-055`
+after the local repair of the four open findings and before Local Qwen,
+aggregate Stage 4 review evidence, landing, retrospective, `BANDIT-056`, or
+unrelated Phase 8 work.
 
 The current stage is Stage 4 CodeRabbit repair/disposition for `BANDIT-055`.
 
@@ -1072,10 +1073,10 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Repair or explicit disposition evidence for the
-four open `BANDIT-055` CodeRabbit findings before Local Qwen closeout,
-aggregate review evidence, landing, retrospective, `BANDIT-056`, or unrelated
-Phase 8 work.
+**Expected next deliverable:** Focused CodeRabbit refresh evidence for
+`BANDIT-055` after the local repair of the four findings, before Local Qwen
+closeout, aggregate review evidence, landing, retrospective, `BANDIT-056`, or
+unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1286,8 +1287,8 @@ These are expected because Bandit does not exist yet:
   spend-class approval. Stage 1 brief, Stage 2 RED evidence, and Stage 3
   implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
   recorded with a current focused refresh at
-  `3aa85de29c14958ccb15d291824acf70a03e78c8` and four open findings; repair or
-  explicit disposition of those findings is the next action.
+  `3aa85de29c14958ccb15d291824acf70a03e78c8` and four findings now locally
+  repaired; focused CodeRabbit refresh is the next action.
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
   strategic review: cockpit trust signals now need artifact-specific Evidence
   SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
@@ -1465,10 +1466,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the four open CodeRabbit findings for
-   `BANDIT-055`. Do not run Local Qwen, aggregate Stage 4 review, landing,
-   retrospective, `BANDIT-056`, or unrelated Phase 8 work before those findings
-   are resolved or dispositioned.
+1. Run a focused CodeRabbit refresh for `BANDIT-055` after the local repair of
+   the four open findings. Do not run Local Qwen, aggregate Stage 4 review,
+   landing, retrospective, `BANDIT-056`, or unrelated Phase 8 work until
+   CodeRabbit returns terminal refreshed evidence or provider-refusal/bootstrap
+   gap replacement evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1514,10 +1516,11 @@ implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
 recorded at source head `3aa85de29c14958ccb15d291824acf70a03e78c8`; the prior
 template-guidance finding, four repair-head validation findings, and five
 terminal-refresh findings are repaired locally, and the current focused refresh
-returned four open findings. The next action is to repair or explicitly
-disposition those four findings. This is routine technical routing, not an
-operator-owned product, UAT, policy, business, cost, or scope decision unless
-disposition would expand scope or require operator-owned cost/risk approval.
+returned four findings that are now locally repaired with stale provider
+evidence. The next action is to run a focused CodeRabbit refresh. This is
+routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision unless disposition would expand scope or
+require operator-owned cost/risk approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

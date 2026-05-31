@@ -102,6 +102,19 @@ test("validate fails closed when a CodeRabbit pass lacks executable evidence", a
   assert.match(result.stderr, /CodeRabbit pass requires executable evidence/);
 });
 
+test("validate accepts locally repaired CodeRabbit findings that still require refresh", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-989", "CodeRabbit Local Repair Pending Refresh");
+  await writeCodeRabbitReview(repo, "BANDIT-989", {
+    coderabbitVerdict: "blocker",
+    findingsStatus: "locally_resolved_pending_refresh"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 0, result.stderr);
+});
+
 test("coderabbit-review reports usage when the work item ID is omitted", async () => {
   const repo = await createInitializedRepo();
 

@@ -1,32 +1,36 @@
 {
   "sourceHead": "3aa85de29c14958ccb15d291824acf70a03e78c8",
   "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
-  "reviewState": "completed",
+  "reviewState": "stale_after_local_repair",
   "verdict": "blocker",
   "findings": [
     {
       "severity": "trivial",
       "fileName": "docs/work/BANDIT-055/coderabbit-review.md",
-      "status": "open",
-      "body": "findings_status was resolved while coderabbit_verdict was blocker and source_drift_status was stale, making local repair versus pending verification ambiguous."
+      "status": "locally_resolved_pending_refresh",
+      "body": "findings_status was resolved while coderabbit_verdict was blocker and source_drift_status was stale, making local repair versus pending verification ambiguous.",
+      "disposition": "Repaired by using findings_status locally_resolved_pending_refresh, preserving coderabbit_verdict blocker, and marking source_drift_status stale until CodeRabbit refreshes the repaired source."
     },
     {
       "severity": "minor",
       "fileName": ".bandit/policy/token-cost-failsafe.json",
-      "status": "open",
-      "body": "trigger_thresholds includes repeated_retry_count without a matching abnormal_run_triggers entry or normalized trigger mapping."
+      "status": "locally_resolved_pending_refresh",
+      "body": "trigger_thresholds includes repeated_retry_count without a matching abnormal_run_triggers entry or normalized trigger mapping.",
+      "disposition": "Repaired by adding repeated_retry to abnormal_run_triggers so repeated_retry_count has an explicit matching trigger."
     },
     {
       "severity": "minor",
       "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "open",
-      "body": "validateRecurringPaidRoutes and validateSoftBudgetBands still substitute unknown for missing ids instead of rejecting missing or empty ids."
+      "status": "locally_resolved_pending_refresh",
+      "body": "validateRecurringPaidRoutes and validateSoftBudgetBands still substitute unknown for missing ids instead of rejecting missing or empty ids.",
+      "disposition": "Repaired by requiring non-empty string ids for recurring_paid_routes and soft_budget_bands, with focused regression tests."
     },
     {
       "severity": "minor",
       "fileName": "src/state/token-cost-failsafe.ts",
-      "status": "open",
-      "body": "REQUIRED_PROVIDER_PRICING_FIELDS omits required provider and model_or_profile keys, so policy entries missing those fields can pass validation."
+      "status": "locally_resolved_pending_refresh",
+      "body": "REQUIRED_PROVIDER_PRICING_FIELDS omits required provider and model_or_profile keys, so policy entries missing those fields can pass validation.",
+      "disposition": "Repaired by requiring provider and model_or_profile in provider-pricing evidence, with focused regression tests."
     }
   ],
   "providerError": null,
@@ -86,6 +90,14 @@
       "endedAt": "2026-05-30T23:31:37Z",
       "result": "completed",
       "summary": "Provider completed the focused CodeRabbit refresh for the repaired BANDIT-055 findings and returned four open findings: one metadata ambiguity in coderabbit-review.md, one trigger-threshold drift in token-cost-failsafe policy, and two token-cost validator hardening gaps."
+    },
+    {
+      "attempt": 8,
+      "sourceHead": "pending-repair-commit",
+      "baseRevision": "a2ea27d9361c73b3beef30930dfe348feebcb709",
+      "endedAt": "2026-05-30T23:52:00Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired the four attempt 7 findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -100,6 +112,7 @@
     "Attempt 4: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 repaired delta> -c AGENTS.md --no-color timed out after setup/summarizing.",
     "Attempt 5: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 repaired delta> -c AGENTS.md --no-color timed out after setup/summarizing.",
     "Attempt 6: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files <BANDIT-055 repaired delta> -c AGENTS.md --no-color completed with five open findings.",
-    "Attempt 7: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color completed with four open findings."
+    "Attempt 7: coderabbit review --agent --base-commit a2ea27d9361c73b3beef30930dfe348feebcb709 --files .bandit/policy/token-cost-failsafe.json STATUS.md docs/roadmap/CURRENT_CONTEXT.md docs/roadmap/ROADMAP.md docs/specs/BANDIT-055-implementation-evidence.json docs/templates/token-cost-failsafe.md docs/work/BANDIT-055/dispatch.md docs/work/BANDIT-055/implementation-evidence.md docs/work/BANDIT-055/writer-report.md src/cli.ts src/commands/token-cost-failsafe.ts src/commands/validate.ts src/commands/work-item-create.ts src/state/token-cost-failsafe.ts test/token-cost-failsafe.test.mjs -c AGENTS.md --no-color completed with four open findings.",
+    "Attempt 8 local repair: CodeRabbit metadata ambiguity, repeated_retry trigger mapping, recurring route / soft budget band id validation, and provider/model pricing field validation are repaired locally; CodeRabbit refresh is required before Local Qwen."
   ]
 }

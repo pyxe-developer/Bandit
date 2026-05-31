@@ -79,6 +79,7 @@ const REVIEW_STATES = new Set([
 const FINDINGS_STATUSES = new Set([
   "none",
   "resolved",
+  "locally_resolved_pending_refresh",
   "open",
   "unresolved",
   "inconclusive",
@@ -88,6 +89,7 @@ const FINDINGS_STATUSES = new Set([
 
 const BLOCKING_FINDINGS_STATUSES = new Set([
   "open",
+  "locally_resolved_pending_refresh",
   "unresolved",
   "inconclusive"
 ]);

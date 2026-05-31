@@ -32,6 +32,7 @@ test("token-cost-failsafe validation accepts a complete failsafe policy", async 
     recurring_routes: ["stage4-review-paid-escalation"],
     failsafe_triggers: [
       "unexpected_token_growth",
+      "repeated_retry",
       "repeated_wake_noop",
       "reviewer_runtime_loop",
       "missing_trace_cost_signal",
@@ -58,7 +59,27 @@ test("token-cost-failsafe validation rejects stale provider-pricing evidence", a
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /provider-pricing evidence provider-pricing-qwen-local requires pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner/
+    /provider-pricing evidence provider-pricing-qwen-local requires provider, model or profile, pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner/
+  );
+});
+
+test("token-cost-failsafe validation rejects provider-pricing evidence without provider and model profile", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  delete policy.provider_pricing_evidence[0].provider;
+  delete policy.provider_pricing_evidence[0].model_or_profile;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /provider-pricing evidence provider-pricing-qwen-local requires provider, model or profile, pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner/
   );
 });
 
@@ -143,6 +164,25 @@ test("token-cost-failsafe validation rejects recurring paid routes without scope
   );
 });
 
+test("token-cost-failsafe validation rejects recurring paid routes without a string id", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  delete policy.recurring_paid_routes[0].id;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /recurring paid routes require a non-empty string id/
+  );
+});
+
 test("token-cost-failsafe validation rejects recurring paid routes without provider pricing and expected cost ceiling", async () => {
   const repo = await createInitializedTokenCostRepo();
   const policy = completeTokenCostPolicy();
@@ -180,6 +220,25 @@ test("token-cost-failsafe validation rejects tight hard caps disguised as soft b
   assert.match(
     result.stderr,
     /soft budget bands must be generous abnormal-run failsafes, not tight caps that force repeated failed attempts/
+  );
+});
+
+test("token-cost-failsafe validation rejects soft budget bands without a string id", async () => {
+  const repo = await createInitializedTokenCostRepo();
+  const policy = completeTokenCostPolicy();
+  delete policy.soft_budget_bands[0].id;
+  await writeCompleteTokenCostFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "token-cost-failsafe",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /soft budget bands require a non-empty string id/
   );
 });
 
@@ -420,6 +479,7 @@ function completeTokenCostPolicy() {
     ],
     abnormal_run_triggers: [
       "unexpected_token_growth",
+      "repeated_retry",
       "repeated_wake_noop",
       "reviewer_runtime_loop",
       "missing_trace_cost_signal",

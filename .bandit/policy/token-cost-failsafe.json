@@ -60,6 +60,7 @@
   ],
   "abnormal_run_triggers": [
     "unexpected_token_growth",
+    "repeated_retry",
     "repeated_wake_noop",
     "reviewer_runtime_loop",
     "missing_trace_cost_signal",
