@@ -1,22 +1,38 @@
 {
-  "sourceHead": "a43ca6e36beea55b34387205733e3e9cff2ec61f",
+  "sourceHead": "109e026fcb13e6f819f228917c22291ecc85e3a6",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
-      "severity": "trivial",
-      "fileName": "src/state/focused-session-context.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "src/state/focused-session-context.ts should run the STAGE_EVIDENCE_INFOS pathExists checks in parallel for entries with stageNum <= current stage, then preserve the current dependency order when adding missing dependency trust signals.",
-      "disposition": "Repaired locally by filtering STAGE_EVIDENCE_INFOS to entries at or before the current stage, running pathExists checks through Promise.all, and iterating the ordered result array when adding missing dependency trust signals. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass; focused CodeRabbit refresh is required before Local Qwen."
+      "severity": "major",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "buildGateTrustSignal currently sets freshness_state from fileExists only, so stale is never emitted; pass computed stale/current/missing state from the same logic that drives readStaleEvidence/source_drift_status/review_subject_hash_status into evidence_trust_signals."
+    },
+    {
+      "severity": "minor",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "The artifact-type prerequisite error message mentions freshness budget, source identity, freshness state, and staleness behavior even though this branch only checks source_artifacts and owner or authority_role."
+    },
+    {
+      "severity": "minor",
+      "fileName": "docs/templates/evidence-freshness-slos.md",
+      "status": "open",
+      "body": "The evidence-freshness SLO template lists work_item, policy, artifact_types, trust_signal_requirements, derived_projection_rules, and source_artifacts as flat sibling keys instead of using indentation for the intended hierarchy."
+    },
+    {
+      "severity": "minor",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "requireNonEmptyString validates the trimmed length but returns the original string, preserving leading or trailing whitespace in validated ids."
     },
     {
       "severity": "trivial",
-      "fileName": ".bandit/policy/evidence-freshness-slos.json",
-      "status": "locally_resolved_pending_refresh",
-      "body": ".bandit/policy/evidence-freshness-slos.json uses source_identity current_review_subject_hash for review_subject_hash freshness budget entries; CodeRabbit recommends changing matching source_identity values to current or removing the redundant field if kind is sufficient.",
-      "disposition": "Repaired locally by removing redundant source_identity fields from review_subject_hash freshness budgets for CodeRabbit and Local Qwen review evidence. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass; focused CodeRabbit refresh is required before Local Qwen."
+      "fileName": "src/state/cockpit-status.ts",
+      "status": "open",
+      "body": "The repeated evidence_slo assignment in gate trust signals can be replaced with a small wrapper helper around buildGateTrustSignal."
     }
   ],
   "attempts": [
@@ -30,16 +46,24 @@
     },
     {
       "attempt": 2,
-      "sourceHead": "pending-repair-commit",
+      "sourceHead": "109e026fcb13e6f819f228917c22291ecc85e3a6",
       "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
       "endedAt": "2026-05-31T08:00:00Z",
       "result": "local_repair_pending_provider_refresh",
-      "summary": "Codex PM locally repaired both CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
+      "summary": "Codex PM locally repaired both prior CodeRabbit findings. Provider evidence was intentionally stale until focused CodeRabbit refresh on the repaired source."
+    },
+    {
+      "attempt": 3,
+      "sourceHead": "109e026fcb13e6f819f228917c22291ecc85e3a6",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T08:42:00Z",
+      "result": "completed",
+      "summary": "Focused CodeRabbit refresh completed on the repaired source and returned five open findings: one major stale-freshness trust-signal issue, three minor validation/template normalization issues, and one trivial cockpit-status helper extraction issue."
     }
   ],
   "executableEvidence": [
-    "node --test test/evidence-freshness-slos.test.mjs passed 7/7.",
-    "npm run typecheck passed.",
-    "npm run bandit -- evidence-freshness-slos validate --json passed."
+    "coderabbit --version returned 0.4.1.",
+    "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 5 findings."
   ]
 }

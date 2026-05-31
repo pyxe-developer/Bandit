@@ -2,28 +2,32 @@
 
 contract_version: 1
 work_item: BANDIT-056
-source_head: a43ca6e36beea55b34387205733e3e9cff2ec61f
+source_head: 109e026fcb13e6f819f228917c22291ecc85e3a6
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: locally_resolved_pending_refresh
-findings_disposition: Codex PM locally repaired the focused-session-context finding by running STAGE_EVIDENCE_INFOS pathExists checks in parallel for stage evidence at or before the current stage, while preserving dependency output order when adding missing dependency trust signals. Codex PM locally repaired the Evidence Freshness SLO policy finding by removing redundant source_identity fields from review_subject_hash freshness budgets. CodeRabbit evidence is stale until a focused refresh runs on the repaired source; do not proceed to Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work before that refresh or explicit provider-refusal/bootstrap-gap replacement evidence.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh completed on repaired source head 109e026fcb13e6f819f228917c22291ecc85e3a6 and returned five open findings: one major stale-freshness trust-signal finding, three minor validation/template normalization findings, and one trivial cockpit-status helper extraction finding. Do not proceed to Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work before repairing or explicitly dispositioning these findings.
 operator_input_status: none_required
-source_drift_status: stale
+source_drift_status: current
 executable_evidence:
-  - coderabbit review --agent --base c5eb2700502237e3269a82818edd994a4006d878
-  - node --test test/evidence-freshness-slos.test.mjs passed 7/7 after the local repair.
-  - npm run typecheck passed after the local repair.
-  - npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.
-resolved_or_dispositioned_findings:
+  - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 5 findings.
+open_findings:
+  - severity: major
+    file: src/state/evidence-freshness-slos.ts
+    finding: buildGateTrustSignal sets freshness_state from file existence only, so stale evidence is never emitted; trust signals should reflect current, stale, or missing consistently with readStaleEvidence/source-drift and review-subject-hash logic.
+  - severity: minor
+    file: src/state/evidence-freshness-slos.ts
+    finding: Artifact-type prerequisite error text overstates what the hasSourceArtifacts/hasOwner branch validates.
+  - severity: minor
+    file: docs/templates/evidence-freshness-slos.md
+    finding: Template keys are flat at column 0 instead of indented into the intended work_item/policy hierarchy.
+  - severity: minor
+    file: src/state/evidence-freshness-slos.ts
+    finding: requireNonEmptyString validates trimmed length but returns the original untrimmed string.
   - severity: trivial
-    file: src/state/focused-session-context.ts
-    finding: STAGE_EVIDENCE_INFOS pathExists checks should run in parallel for entries with stageNum <= current stage, while preserving current dependency order when adding missing dependency trust signals.
-    disposition: Repaired locally in src/state/focused-session-context.ts by filtering required stage evidence, running Promise.all over pathExists checks, and iterating the ordered result array when adding missing dependency trust signals. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass.
-  - severity: trivial
-    file: .bandit/policy/evidence-freshness-slos.json
-    finding: review_subject_hash freshness budget entries redundantly use source_identity current_review_subject_hash.
-    disposition: Repaired locally by removing source_identity from review_subject_hash budget entries for CodeRabbit and Local Qwen review evidence; the budget kind now carries the review-subject-hash semantics. Focused Evidence Freshness SLO tests, typecheck, and policy validation pass.
+    file: src/state/cockpit-status.ts
+    finding: Repeated evidence_slo assignment can be extracted into a small gate trust-signal helper.
 bootstrap_gaps:
   - none
