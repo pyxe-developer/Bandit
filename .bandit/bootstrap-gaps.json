@@ -601,8 +601,8 @@
     {
       "id": "BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS",
       "title": "Cockpit trust signals lack artifact-specific evidence freshness SLOs",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -613,10 +613,10 @@
         ".bandit/policy/smell-triggers.json",
         "docs/prds/reviews/prd-001-003-research-review"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-056",
       "rationale": "The operator confirmed that cockpit trust signals should use explicit Evidence SLOs and artifact-specific freshness budgets rather than generic confidence badges. CI/tests, CodeRabbit, Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and derived projections need different freshness rules, source links, owners, and staleness reasons.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-TOKEN-COST-FAILSAFE is resolved, create a bootstrap-gap chore to define artifact-specific Evidence SLOs, freshness budgets, Evidence Trust Signals, staleness reasons, and cockpit/view-model validation for tests, review, UAT, landing, retrospective, and projection evidence."
+      "next_action": "Complete active chore BANDIT-056."
     }
   ]
 }

@@ -4,13 +4,13 @@
 
 ## Current Work Item
 
-- `[Gap]` none active - interstitial after `BANDIT-055` closeout
+- `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Create exactly one bootstrap-gap chore for `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as `BANDIT-056`. `BANDIT-055` is landed and closed out with retrospective and bootstrap-gap disposition recorded. Do not start unrelated Phase 8 work until the queued Evidence Freshness SLOs gap is resolved or explicitly dispositioned.
+**Current next step:** Stage 2 RED evidence for `BANDIT-056`. Create focused RED tests and `docs/specs/BANDIT-056-red-evidence.json`, then render `docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3 implementation, run review, land, close out, create another work item, or start unrelated Phase 8 work before RED evidence is recorded.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
+- `[Gap]` none queued beyond active `BANDIT-056`
 
 ## Planned Work
 
@@ -19,7 +19,7 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` none beyond `BANDIT-056` - Evidence Freshness SLOs is the next work item, not an additional queued blocking gap.
+- `[Gap]` none beyond active `BANDIT-056` - Evidence Freshness SLOs is the active work item, not an additional queued blocking gap.
 
 ### Deferred PRD Slices
 

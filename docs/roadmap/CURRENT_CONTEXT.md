@@ -455,15 +455,15 @@ recorded in `docs/specs/BANDIT-055-retrospective.json` and
 `docs/work/BANDIT-055/retrospective.md`, and `.bandit/bootstrap-gaps.json`
 marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
-**Current active work:** none.
+**Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Create exactly one bootstrap-gap chore for
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as `BANDIT-056`. `BANDIT-055` is landed
-and closed out with retrospective and bootstrap-gap disposition recorded. Do
-not start unrelated Phase 8 work until the queued Evidence Freshness SLOs gap
-is resolved or explicitly dispositioned.
+**Current next action:** Stage 2 RED evidence for `BANDIT-056`. Create focused
+RED tests and `docs/specs/BANDIT-056-red-evidence.json`, then render
+`docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3 implementation,
+run review, land, close out, create another work item, or start unrelated Phase
+8 work before RED evidence is recorded.
 
-The current stage is Interstitial: Work-item creation required.
+The current stage is Stage 2: Test Design And RED Evidence.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -864,8 +864,14 @@ recorded in `docs/work/BANDIT-055/landing-verdict.md`, and local-record landing
 action evidence is recorded in `docs/work/BANDIT-055/landing-action.md`. Stage
 6 retrospective closeout is recorded in `docs/work/BANDIT-055/retrospective.md`,
 and `.bandit/bootstrap-gaps.json` marks `BANDIT-GAP-TOKEN-COST-FAILSAFE`
-resolved. The next action is to create exactly one bootstrap-gap chore for
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as `BANDIT-056`.
+resolved.
+
+`BANDIT-056` is active as the bootstrap-gap chore for
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. Its structured creation spec is recorded
+in `docs/specs/BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS.json`, its Stage 1 brief is
+recorded in `docs/work/BANDIT-056/brief.md`, `.bandit/bootstrap-gaps.json`
+links the gap to `BANDIT-056` with status `active`, and `.bandit/events.jsonl`
+records the work-item creation event. The next action is Stage 2 RED evidence.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1108,8 +1114,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Local-record landing action evidence for
-`BANDIT-055`, before retrospective, `BANDIT-056`, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-056`, before
+Stage 3 implementation dispatch, review, landing, retrospective, another work
+item, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1317,11 +1324,11 @@ These are expected because Bandit does not exist yet:
   provider-refusal/bootstrap_gap replacement evidence, refreshed Local Qwen
   non-blocking evidence, landing action, retrospective closeout, and
   bootstrap-gap disposition are recorded.
-- `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is open and queued from the 2026-05-26
-  strategic review: cockpit trust signals now need artifact-specific Evidence
-  SLOs and freshness budgets for tests, CodeRabbit, Local Qwen, escalated
-  review, UAT, landing verdicts, retrospectives, and projections instead of
-  generic confidence badges. It is the next queued bootstrap gap.
+- `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is active as `BANDIT-056` from the
+  2026-05-26 strategic review: cockpit trust signals now need
+  artifact-specific Evidence SLOs and freshness budgets for tests, CodeRabbit,
+  Local Qwen, escalated review, UAT, landing verdicts, retrospectives, and
+  projections instead of generic confidence badges.
 
 - The missing Bandit work-item creation command is resolved by `BANDIT-020`.
   Future one-off work-item starts should use
@@ -1493,11 +1500,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create exactly one bootstrap-gap chore for
-   `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as `BANDIT-056`. `BANDIT-055` is landed
-   and closed out with retrospective and bootstrap-gap disposition recorded. Do
-   not start unrelated Phase 8 work until the queued Evidence Freshness SLOs gap
-   is resolved or explicitly dispositioned.
+1. Record Stage 2 RED evidence for `BANDIT-056` by creating focused failing
+   tests, `docs/specs/BANDIT-056-red-evidence.json`, and
+   `docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3
+   implementation, run review, land, close out, create another work item, or
+   start unrelated Phase 8 work before RED evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1523,7 +1530,8 @@ The current priority is:
    `BANDIT-052`, `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES` is resolved by
    `BANDIT-053`, `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by
    `BANDIT-054`, and `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by
-   `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is queued next.
+   `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is active as
+   `BANDIT-056`.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -1539,10 +1547,10 @@ aggregate Stage 4 review evidence, Stage 5 landing verdict evidence,
 local-record landing action evidence, Stage 6 retrospective closeout, and
 resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as the next queued gap. The next action is
-to create exactly one bootstrap-gap chore for `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`
-as `BANDIT-056`. This is routine technical routing, not an operator-owned
-product, UAT, policy, business, cost, or scope decision.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. The next
+action is Stage 2 RED evidence for `BANDIT-056`. This is routine technical
+routing, not an operator-owned product, UAT, policy, business, cost, or scope
+decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
