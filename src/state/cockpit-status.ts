@@ -57,6 +57,15 @@ export type StaleEvidence = {
   basis: "source_drift_status" | "review_subject_hash_status";
 };
 
+type EvidenceArtifactExistence = {
+  briefExists: boolean;
+  redExists: boolean;
+  implementationExists: boolean;
+  reviewExists: boolean;
+  landingExists: boolean;
+  retrospectiveExists: boolean;
+};
+
 export type CockpitEvidenceTrustSignals = {
   authority: "derived_non_canonical";
   gates: {
@@ -173,6 +182,17 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   const reviewEvidencePath = `docs/work/${evidenceWorkItemId}/review-evidence.md`;
   const landingVerdictPath = `docs/work/${evidenceWorkItemId}/landing-verdict.md`;
   const retrospectivePath = `docs/work/${evidenceWorkItemId}/retrospective.md`;
+  const evidenceArtifactExistence = await readEvidenceArtifactExistence(
+    repoRoot,
+    {
+      briefPath,
+      redEvidencePath,
+      implementationEvidencePath,
+      reviewEvidencePath,
+      landingVerdictPath,
+      retrospectivePath
+    }
+  );
 
   if (!isInterstitial) {
     const activeWorkBrief = await readRequiredArtifact(repoRoot, `docs/work/${activeWorkItemId}/brief.md`);
@@ -194,16 +214,17 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   const staleEvidence = await readStaleEvidence(repoRoot, {
     reviewEvidencePath,
     landingVerdictPath
-  });
+  }, evidenceArtifactExistence);
   const evidence_trust_signals = hasFreshnessSlos
-    ? await buildCockpitTrustSignals(repoRoot, {
+    ? buildCockpitTrustSignals({
         briefPath,
         redEvidencePath,
         implementationEvidencePath,
         reviewEvidencePath,
         landingVerdictPath,
         retrospectivePath,
-        staleEvidence
+        staleEvidence,
+        evidenceArtifactExistence
       })
     : undefined;
 
@@ -258,8 +279,7 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   };
 }
 
-async function buildCockpitTrustSignals(
-  repoRoot: string,
+function buildCockpitTrustSignals(
   paths: {
     briefPath: string;
     redEvidencePath: string;
@@ -268,23 +288,17 @@ async function buildCockpitTrustSignals(
     landingVerdictPath: string;
     retrospectivePath: string;
     staleEvidence: StaleEvidence[];
+    evidenceArtifactExistence: EvidenceArtifactExistence;
   }
-): Promise<CockpitEvidenceTrustSignals> {
-  const [
+): CockpitEvidenceTrustSignals {
+  const {
     briefExists,
     redExists,
-    implExists,
+    implementationExists,
     reviewExists,
     landingExists,
-    retroExists
-  ] = await Promise.all([
-    pathExists(repoRoot, paths.briefPath),
-    pathExists(repoRoot, paths.redEvidencePath),
-    pathExists(repoRoot, paths.implementationEvidencePath),
-    pathExists(repoRoot, paths.reviewEvidencePath),
-    pathExists(repoRoot, paths.landingVerdictPath),
-    pathExists(repoRoot, paths.retrospectivePath)
-  ]);
+    retrospectiveExists
+  } = paths.evidenceArtifactExistence;
   const reviewFreshness = resolveReviewGateFreshness(
     paths.reviewEvidencePath,
     reviewExists,
@@ -310,7 +324,7 @@ async function buildCockpitTrustSignals(
           "implementation_evidence",
           paths.implementationEvidencePath,
           "writer",
-          implExists
+          implementationExists
         )
       ),
       stage_4_review: withEvidenceSlo(
@@ -332,9 +346,51 @@ async function buildCockpitTrustSignals(
         )
       ),
       stage_6_retrospective: withEvidenceSlo(
-        buildGateTrustSignal("retrospective", paths.retrospectivePath, "codex_pm", retroExists)
+        buildGateTrustSignal(
+          "retrospective",
+          paths.retrospectivePath,
+          "codex_pm",
+          retrospectiveExists
+        )
       )
     }
+  };
+}
+
+async function readEvidenceArtifactExistence(
+  repoRoot: string,
+  paths: {
+    briefPath: string;
+    redEvidencePath: string;
+    implementationEvidencePath: string;
+    reviewEvidencePath: string;
+    landingVerdictPath: string;
+    retrospectivePath: string;
+  }
+): Promise<EvidenceArtifactExistence> {
+  const [
+    briefExists,
+    redExists,
+    implementationExists,
+    reviewExists,
+    landingExists,
+    retrospectiveExists
+  ] = await Promise.all([
+    pathExists(repoRoot, paths.briefPath),
+    pathExists(repoRoot, paths.redEvidencePath),
+    pathExists(repoRoot, paths.implementationEvidencePath),
+    pathExists(repoRoot, paths.reviewEvidencePath),
+    pathExists(repoRoot, paths.landingVerdictPath),
+    pathExists(repoRoot, paths.retrospectivePath)
+  ]);
+
+  return {
+    briefExists,
+    redExists,
+    implementationExists,
+    reviewExists,
+    landingExists,
+    retrospectiveExists
   };
 }
 
@@ -769,11 +825,12 @@ async function readStaleEvidence(
   paths: {
     reviewEvidencePath: string;
     landingVerdictPath: string;
-  }
+  },
+  evidenceArtifactExistence: EvidenceArtifactExistence
 ): Promise<StaleEvidence[]> {
   const staleEvidence: StaleEvidence[] = [];
 
-  if (await pathExists(repoRoot, paths.reviewEvidencePath)) {
+  if (evidenceArtifactExistence.reviewExists) {
     const reviewEvidence = await readRequiredArtifact(
       repoRoot,
       paths.reviewEvidencePath
@@ -799,7 +856,7 @@ async function readStaleEvidence(
     }
   }
 
-  if (await pathExists(repoRoot, paths.landingVerdictPath)) {
+  if (evidenceArtifactExistence.landingExists) {
     const landingVerdict = await readRequiredArtifact(
       repoRoot,
       paths.landingVerdictPath

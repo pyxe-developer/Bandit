@@ -1,5 +1,7 @@
 {
   "sourceHead": "b31c336167918bb5a114e78a813458182e320dc9",
+  "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head; local repair evidence is recorded separately and still requires focused provider refresh",
+  "latestRepairHead": "pending-local-repair-commit",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -7,44 +9,51 @@
     {
       "severity": "minor",
       "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
-      "status": "open",
-      "body": "Top-level sourceHead is inconsistent with the most recent repair attempt; verify whether it should represent the original review target or latest repaired state."
+      "status": "locally_resolved_pending_refresh",
+      "body": "Top-level sourceHead is inconsistent with the most recent repair attempt; verify whether it should represent the original review target or latest repaired state.",
+      "disposition": "Repaired locally by documenting sourceHead as the latest completed CodeRabbit-reviewed source head and adding latestRepairHead for the local repair head."
     },
     {
       "severity": "minor",
       "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
-      "status": "open",
-      "body": "Metadata is ambiguous about whether source_head refers to the reviewed commit or repaired commit; add a clear repair_commit field or document the source_head rule."
+      "status": "locally_resolved_pending_refresh",
+      "body": "Metadata is ambiguous about whether source_head refers to the reviewed commit or repaired commit; add a clear repair_commit field or document the source_head rule.",
+      "disposition": "Repaired locally by adding source_head_meaning and repair_commit metadata fields."
     },
     {
       "severity": "trivial",
       "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
-      "status": "open",
-      "body": "bootstrap_gaps uses a list containing none while related JSON artifacts use an empty array; normalize or document the semantic difference."
+      "status": "locally_resolved_pending_refresh",
+      "body": "bootstrap_gaps uses a list containing none while related JSON artifacts use an empty array; normalize or document the semantic difference.",
+      "disposition": "Repaired locally by normalizing the markdown artifact bootstrap_gaps field to an empty list."
     },
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "Policy validation fails open when artifact_types or trust-signal requirements are missing; enforce required artifact_types and trust signals fail-closed."
+      "status": "locally_resolved_pending_refresh",
+      "body": "Policy validation fails open when artifact_types or trust-signal requirements are missing; enforce required artifact_types and trust signals fail-closed.",
+      "disposition": "Repaired locally by requiring artifact_types and trust_signal_requirements arrays and their required Evidence Freshness SLO entries."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "open",
-      "body": "reviewEvidencePath and landingVerdictPath existence checks are duplicated between readStaleEvidence and buildCockpitTrustSignals; compute them once or return the flags."
+      "status": "locally_resolved_pending_refresh",
+      "body": "reviewEvidencePath and landingVerdictPath existence checks are duplicated between readStaleEvidence and buildCockpitTrustSignals; compute them once or return the flags.",
+      "disposition": "Repaired locally by computing evidence artifact existence once and reusing the flags in stale-evidence and trust-signal generation."
     },
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
-      "body": "validateDerivedProjectionRules should enforce both propagate_missing_or_stale_dependencies and cannot_upgrade_missing_dependency_to_trusted as true."
+      "status": "locally_resolved_pending_refresh",
+      "body": "validateDerivedProjectionRules should enforce both propagate_missing_or_stale_dependencies and cannot_upgrade_missing_dependency_to_trusted as true.",
+      "disposition": "Repaired locally by requiring both derived projection guardrails to be true."
     },
     {
       "severity": "minor",
       "fileName": "docs/templates/evidence-freshness-slos.md",
-      "status": "open",
-      "body": "derived_projection_rules scaffold is missing cannot_upgrade_missing_dependency_to_trusted."
+      "status": "locally_resolved_pending_refresh",
+      "body": "derived_projection_rules scaffold is missing cannot_upgrade_missing_dependency_to_trusted.",
+      "disposition": "Repaired locally by adding cannot_upgrade_missing_dependency_to_trusted to the template scaffold."
     }
   ],
   "attempts": [
@@ -143,6 +152,14 @@
       "endedAt": "2026-05-31T13:33:06Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned seven open findings: six minor artifact/policy/template findings and one trivial cockpit-status I/O hardening finding."
+    },
+    {
+      "attempt": 13,
+      "sourceHead": "pending-local-repair-commit",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T14:00:03Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired all seven focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -158,8 +175,8 @@
     "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.",
     "npm run bandit -- coderabbit-review BANDIT-056 passed after the local repair with findings_status locally_resolved_pending_refresh.",
     "npm run bandit -- validate passed after the local repair.",
-    "node ./bin/bandit.mjs cockpit status --json passed after recording the refresh and reports repair or explicit disposition as the next action.",
-    "node ./bin/bandit.mjs session-context current --json passed after recording the refresh and reports repair or explicit disposition as the allowed action.",
+    "node ./bin/bandit.mjs cockpit status --json passed after the local repair and reports focused CodeRabbit refresh as the next action.",
+    "node ./bin/bandit.mjs session-context current --json passed after the local repair and reports focused CodeRabbit refresh as the allowed action.",
     "git diff --check passed after the local repair."
   ]
 }

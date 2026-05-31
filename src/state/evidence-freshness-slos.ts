@@ -13,6 +13,21 @@ const REQUIRED_TEMPLATE_FIELDS = [
   "source_artifacts"
 ];
 
+const REQUIRED_ARTIFACT_TYPES = [
+  "tests",
+  "coderabbit_review",
+  "local_qwen_review",
+  "landing_verdict",
+  "derived_projection"
+];
+
+const REQUIRED_TRUST_SIGNAL_REQUIREMENTS = [
+  "source_artifact",
+  "owner_or_authority_role",
+  "freshness_state",
+  "staleness_reason"
+];
+
 type RawRecord = Record<string, unknown>;
 
 export type EvidenceTrustSignal = {
@@ -200,11 +215,18 @@ function parseAndValidatePolicy(content: string): EvidenceFreshnessValidationRep
 }
 
 function validateArtifactTypes(policy: RawRecord): string[] {
-  if (!Array.isArray(policy.artifact_types)) return [];
+  if (!Array.isArray(policy.artifact_types) || policy.artifact_types.length === 0) {
+    throw new Error(
+      "Malformed evidence freshness SLO policy: artifact_types must define required trusted evidence types"
+    );
+  }
+
   const ids: string[] = [];
 
   for (const item of policy.artifact_types as unknown[]) {
-    if (!isRecord(item)) continue;
+    if (!isRecord(item)) {
+      throw new Error("Malformed evidence freshness SLO policy: artifact_types entries must be objects");
+    }
 
     const id = requireNonEmptyString(
       item.id,
@@ -248,23 +270,76 @@ function validateArtifactTypes(policy: RawRecord): string[] {
     ids.push(id);
   }
 
+  const missingTypes = REQUIRED_ARTIFACT_TYPES.filter((id) => !ids.includes(id));
+  if (missingTypes.length > 0) {
+    throw new Error(
+      `Malformed evidence freshness SLO policy: missing required artifact_types: ${missingTypes.join(", ")}`
+    );
+  }
+
   return ids;
 }
 
 function collectTrustSignalRequirements(policy: RawRecord): string[] {
-  if (!Array.isArray(policy.trust_signal_requirements)) return [];
-  return (policy.trust_signal_requirements as unknown[]).filter(
+  if (
+    !Array.isArray(policy.trust_signal_requirements) ||
+    policy.trust_signal_requirements.length === 0
+  ) {
+    throw new Error(
+      "Malformed evidence freshness SLO policy: trust_signal_requirements must define required trust signal fields"
+    );
+  }
+
+  const requirements = (policy.trust_signal_requirements as unknown[]).filter(
     (item): item is string => typeof item === "string"
   );
+
+  const missingRequirements = REQUIRED_TRUST_SIGNAL_REQUIREMENTS.filter(
+    (requirement) => !requirements.includes(requirement)
+  );
+  if (missingRequirements.length > 0) {
+    throw new Error(
+      `Malformed evidence freshness SLO policy: missing required trust_signal_requirements: ${missingRequirements.join(", ")}`
+    );
+  }
+
+  return requirements;
 }
 
 function validateDerivedProjectionRules(policy: RawRecord): void {
-  if (!Array.isArray(policy.derived_projection_rules)) return;
+  if (
+    !Array.isArray(policy.derived_projection_rules) ||
+    policy.derived_projection_rules.length === 0
+  ) {
+    throw new Error(
+      "Malformed evidence freshness SLO policy: derived_projection_rules must define fail-closed projection rules"
+    );
+  }
 
   for (const item of policy.derived_projection_rules as unknown[]) {
-    if (!isRecord(item)) continue;
+    if (!isRecord(item)) {
+      throw new Error(
+        "Malformed evidence freshness SLO policy: derived_projection_rules entries must be objects"
+      );
+    }
 
-    if (item.propagate_missing_or_stale_dependencies !== true) {
+    requireNonEmptyString(
+      item.projection,
+      "derived projection rules require a non-empty projection id"
+    );
+    requireNonEmptyStringList(
+      item.source_artifacts,
+      "derived projection rules require source artifacts"
+    );
+    requireNonEmptyStringList(
+      item.dependent_evidence,
+      "derived projection rules require dependent evidence"
+    );
+
+    if (
+      item.propagate_missing_or_stale_dependencies !== true ||
+      item.cannot_upgrade_missing_dependency_to_trusted !== true
+    ) {
       throw new Error(
         "derived projections must propagate missing or stale source dependencies and cannot upgrade them to trusted status"
       );
@@ -285,6 +360,17 @@ function requireNonEmptyString(value: unknown, message: string): string {
     throw new Error(message);
   }
   return value.trim();
+}
+
+function requireNonEmptyStringList(value: unknown, message: string): string[] {
+  if (
+    !Array.isArray(value) ||
+    value.length === 0 ||
+    !value.every((item) => typeof item === "string" && item.trim().length > 0)
+  ) {
+    throw new Error(message);
+  }
+  return value.map((item) => item.trim());
 }
 
 function escapeRegExp(value: string): string {

@@ -19,5 +19,6 @@ work_item:
         source_artifacts:
         dependent_evidence:
         propagate_missing_or_stale_dependencies:
+        cannot_upgrade_missing_dependency_to_trusted:
     source_artifacts:
       - artifact:

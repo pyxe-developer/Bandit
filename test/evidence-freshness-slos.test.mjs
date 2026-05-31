@@ -66,6 +66,48 @@ test("evidence-freshness-slos validation rejects trusted evidence without source
   );
 });
 
+test("evidence-freshness-slos validation rejects missing artifact type definitions", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  delete policy.artifact_types;
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /artifact_types must define required trusted evidence types/
+  );
+});
+
+test("evidence-freshness-slos validation rejects incomplete trust signal requirements", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  policy.trust_signal_requirements = [
+    "source_artifact",
+    "freshness_state",
+    "staleness_reason"
+  ];
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /missing required trust_signal_requirements: owner_or_authority_role/
+  );
+});
+
 test("evidence-freshness-slos validation normalizes artifact type ids", async () => {
   const repo = await createInitializedEvidenceRepo();
   const policy = completeEvidenceFreshnessPolicy();
@@ -116,6 +158,10 @@ work_item:
       - source_artifact
     derived_projection_rules:
       - projection:
+        source_artifacts:
+        dependent_evidence:
+        propagate_missing_or_stale_dependencies:
+        cannot_upgrade_missing_dependency_to_trusted:
     source_artifacts:
       - docs/work/BANDIT-056/brief.md
 `
@@ -172,6 +218,25 @@ test("evidence-freshness-slos validation rejects derived projections that hide s
   const repo = await createInitializedEvidenceRepo();
   const policy = completeEvidenceFreshnessPolicy();
   policy.derived_projection_rules[0].propagate_missing_or_stale_dependencies = false;
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /derived projections must propagate missing or stale source dependencies and cannot upgrade them to trusted status/
+  );
+});
+
+test("evidence-freshness-slos validation rejects derived projections that upgrade missing dependencies", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  policy.derived_projection_rules[0].cannot_upgrade_missing_dependency_to_trusted = false;
   await writeCompleteEvidenceFixture(repo, { policy });
 
   const result = await runBandit(repo, [
@@ -360,6 +425,10 @@ work_item:
       - source_artifact
     derived_projection_rules:
       - projection:
+        source_artifacts:
+        dependent_evidence:
+        propagate_missing_or_stale_dependencies:
+        cannot_upgrade_missing_dependency_to_trusted:
     source_artifacts:
       - docs/work/BANDIT-056/brief.md
 `
