@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Run Local Qwen adversarial review for `BANDIT-056` after the focused CodeRabbit refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned only two trivial findings that Codex PM dispositioned as no-action or opportunistic. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
+**Current next action:** Write aggregate Stage 4 review evidence for `BANDIT-056` using current CodeRabbit pass evidence, Local Qwen bootstrap-gap timeout evidence, focused verification, and clean-code review. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -1141,10 +1141,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Local Qwen adversarial review evidence for
-`BANDIT-056`, using the current source after the focused CodeRabbit refresh at
-`4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned only two trivial findings
-that Codex PM dispositioned as no-action or opportunistic.
+**Expected next deliverable:** Aggregate Stage 4 review evidence for
+`BANDIT-056`, using current CodeRabbit pass evidence, Local Qwen bootstrap-gap
+timeout evidence, focused verification, and clean-code review.
 
 ## Known Bootstrap Gaps
 
@@ -1534,11 +1533,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Local Qwen adversarial review for `BANDIT-056` after the focused
-   CodeRabbit refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned
-   only two trivial findings that Codex PM dispositioned as no-action or
-   opportunistic. Do not run another CodeRabbit refresh solely for the
-   dispositioned trivial findings.
+1. Write aggregate Stage 4 review evidence for `BANDIT-056` using current
+   CodeRabbit pass evidence, Local Qwen bootstrap-gap timeout evidence, focused
+   verification, and clean-code review. Do not run another CodeRabbit refresh
+   solely for the dispositioned trivial findings.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1589,8 +1587,10 @@ implementation evidence is recorded for `BANDIT-056`; latest Stage 4 focused
 CodeRabbit refresh completed at
 `4beaf21e01f5d3f839d4612c8af01652eb18dacd` with two trivial findings. Codex PM
 dispositioned both as no-action or opportunistic in
-`docs/work/BANDIT-056/coderabbit-finding-disposition.md`; the next required
-step is Local Qwen before aggregate review.
+`docs/work/BANDIT-056/coderabbit-finding-disposition.md`. Local Qwen evidence
+is recorded in `docs/work/BANDIT-056/local-qwen-review.md` as a bootstrap-gap
+timeout after two fail-closed attempts. The next required step is aggregate
+Stage 4 review evidence.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

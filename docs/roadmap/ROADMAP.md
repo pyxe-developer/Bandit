@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Run Local Qwen adversarial review for `BANDIT-056` after the focused CodeRabbit refresh at `4beaf21e01f5d3f839d4612c8af01652eb18dacd` returned only two trivial findings that Codex PM dispositioned as no-action or opportunistic. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
+**Current next step:** Write aggregate Stage 4 review evidence for `BANDIT-056` using current CodeRabbit pass evidence, Local Qwen bootstrap-gap timeout evidence, focused verification, and clean-code review. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
 
 ## Next Work Item
 

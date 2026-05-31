@@ -165,3 +165,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh with six open findings at source head 2f8564c; next action is repair or explicit disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Classified the six latest CodeRabbit findings; next action is repair for the Evidence SLO template key mismatch and writer-stream-sanitizer isRecord array rejection only"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded focused CodeRabbit refresh at 4beaf21 with two trivial findings dispositioned as no-action or opportunistic; next action is Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-056","message":"Recorded Local Qwen bootstrap-gap timeout evidence after two fail-closed attempts; next action is aggregate Stage 4 review evidence"}

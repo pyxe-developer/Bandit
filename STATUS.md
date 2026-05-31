@@ -16,7 +16,9 @@ Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDI
 
 Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md`, `docs/specs/BANDIT-056-coderabbit-review-output.json`, and `docs/work/BANDIT-056/coderabbit-finding-disposition.md`. The original two repair-required findings were repaired at `b19fc9fa3499c1cc149bfae990b6a6102737de6a`; the post-repair bundle was repaired at `4beaf21e01f5d3f839d4612c8af01652eb18dacd`; the latest focused CodeRabbit refresh returned only two trivial findings, both dispositioned as no-action or opportunistic. The derived-projection rationale and cockpit evidence-path alias remain non-blocking follow-up candidates; the line-count helper extraction, redacted-field `Set`, test-helper extraction, and owner-versus-authority-role documentation suggestions remain no-action/opportunistic only.
 
-The next required action is Local Qwen adversarial review before aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
+Local Qwen evidence is recorded in `docs/work/BANDIT-056/local-qwen-review.md` as a bootstrap-gap timeout after two fail-closed attempts against the current source.
+
+The next required action is aggregate Stage 4 review evidence before landing, closeout, creating another work item, or unrelated Phase 8 work. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
 `BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
@@ -35,7 +37,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - Local Qwen next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - aggregate Stage 4 review evidence next)
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
