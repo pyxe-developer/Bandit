@@ -109,7 +109,6 @@ async function buildSessionContextTrustSignals(
     return { authority: "derived_non_canonical", dependencies: [] };
   }
 
-  const dependencies: EvidenceTrustSignal[] = [];
   const requiredStageEvidence = STAGE_EVIDENCE_INFOS.filter(
     (info) => info.stageNum <= stageNum
   );
@@ -124,18 +123,19 @@ async function buildSessionContextTrustSignals(
     })
   );
 
-  for (const { info, source, fileExists } of existenceResults) {
-    const trustSignal = await buildDependencyTrustSignal(
-      repoRoot,
-      source,
-      info.artifact_type,
-      info.owner,
-      fileExists
-    );
-    if (trustSignal) {
-      dependencies.push(trustSignal);
-    }
-  }
+  const dependencies = (
+    await Promise.all(
+      existenceResults.map(({ info, source, fileExists }) =>
+        buildDependencyTrustSignal(
+          repoRoot,
+          source,
+          info.artifact_type,
+          info.owner,
+          fileExists
+        )
+      )
+    )
+  ).filter((signal): signal is EvidenceTrustSignal => signal !== null);
 
   return { authority: "derived_non_canonical", dependencies };
 }

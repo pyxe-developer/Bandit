@@ -5,7 +5,7 @@
 - Work item: `BANDIT-056` - Evidence Freshness SLOs
 - Dispatch owner: Codex PM
 - Repair writer: Claude Writer `claude-sonnet-4-6`
-- Repository: `/Users/matthewflebbe/Bandit`
+- Repository: Bandit context root (`$BANDIT_CONTEXT_ROOT` / current repository root)
 - Branch: `main`
 - Base review revision: `c5eb2700502237e3269a82818edd994a4006d878`
 - Latest CodeRabbit-reviewed source head: `bbd48de80d204fe556440893c162eb93ea4747ef`
