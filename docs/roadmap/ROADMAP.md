@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Repair or explicitly disposition the three latest CodeRabbit findings for `BANDIT-056` before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
+**Current next step:** Run the focused CodeRabbit refresh for `BANDIT-056` on repair head `2688c3187cb4ee3c15e4320e5378fb0877a8d889` before Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
 
 ## Next Work Item
 

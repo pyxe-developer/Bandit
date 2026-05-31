@@ -1,7 +1,7 @@
 {
   "sourceHead": "9db9b0a89212ca1fc9f671ecba703ce1c906174d",
   "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
-  "latestRepairHead": "5c8b8c9f735afc3496eebba7e825ec50da65c29d",
+  "latestRepairHead": "2688c3187cb4ee3c15e4320e5378fb0877a8d889",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -9,23 +9,23 @@
     {
       "severity": "major",
       "fileName": "docs/work/BANDIT-056/coderabbit-repair-writer-stream.jsonl",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Committed writer stream contains sensitive runtime metadata; add a reusable sanitizer/redactor for writer stream JSONL before durable persistence and cover it with tests.",
-      "disposition": "Requires repair or explicit PM disposition before Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "disposition": "Locally repaired at 2688c3187cb4ee3c15e4320e5378fb0877a8d889; requires focused CodeRabbit refresh before Local Qwen, aggregate Stage 4 review, landing, or closeout."
     },
     {
       "severity": "minor",
       "fileName": "docs/work/BANDIT-056/coderabbit-repair-dispatch.md",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Replace the hard-coded absolute repository path with a portable repository value.",
-      "disposition": "Requires repair or explicit PM disposition before Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "disposition": "Locally repaired at 2688c3187cb4ee3c15e4320e5378fb0877a8d889; requires focused CodeRabbit refresh before Local Qwen, aggregate Stage 4 review, landing, or closeout."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/focused-session-context.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Parallelize buildDependencyTrustSignal calls over existenceResults with Promise.all while preserving the dependency filtering behavior.",
-      "disposition": "Requires repair or explicit PM disposition before Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "disposition": "Locally repaired at 2688c3187cb4ee3c15e4320e5378fb0877a8d889; requires focused CodeRabbit refresh before Local Qwen, aggregate Stage 4 review, landing, or closeout."
     }
   ],
   "attempts": [
@@ -228,6 +228,14 @@
       "endedAt": "2026-05-31T21:05:33Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the repaired source and returned three findings: one major stream-metadata sanitizer finding, one minor portable-repository-path finding, and one trivial Promise.all cleanup finding."
+    },
+    {
+      "attempt": 25,
+      "sourceHead": "2688c3187cb4ee3c15e4320e5378fb0877a8d889",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T21:13:00Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired the three latest focused CodeRabbit findings: replaced the raw writer repair stream with a sanitizer-produced durable digest and added sanitizer coverage, made the repair dispatch repository metadata portable, and parallelized session-context trust-signal dependency building. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -268,6 +276,8 @@
     "npm run typecheck passed after the source repair.",
     "npm run bandit -- evidence-freshness-slos validate --json passed after the source repair.",
     "git diff --check passed after the source repair.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/work/BANDIT-056/coderabbit-repair-dispatch.md --files docs/work/BANDIT-056/coderabbit-repair-writer-report.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 3 findings at source head 9db9b0a89212ca1fc9f671ecba703ce1c906174d."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/work/BANDIT-056/coderabbit-repair-dispatch.md --files docs/work/BANDIT-056/coderabbit-repair-writer-report.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 3 findings at source head 9db9b0a89212ca1fc9f671ecba703ce1c906174d.",
+    "node --test test/writer-stream-sanitizer.test.mjs passed after the local repair.",
+    "2688c3187cb4ee3c15e4320e5378fb0877a8d889 repairs the three latest focused CodeRabbit findings locally; focused CodeRabbit refresh is required before Local Qwen or aggregate Stage 4 review."
   ]
 }
