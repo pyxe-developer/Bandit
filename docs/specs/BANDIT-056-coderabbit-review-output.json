@@ -7,14 +7,16 @@
     {
       "severity": "trivial",
       "fileName": "src/state/focused-session-context.ts",
-      "status": "unresolved",
-      "body": "STAGE_EVIDENCE_INFOS duplicates the stage-to-filename data also encoded in buildRequiredEvidencePaths; consolidate into a single shared stage evidence definition so filenames and stage numbers are defined once."
+      "status": "locally_resolved_pending_refresh",
+      "body": "STAGE_EVIDENCE_INFOS duplicates the stage-to-filename data also encoded in buildRequiredEvidencePaths; consolidate into a single shared stage evidence definition so filenames and stage numbers are defined once.",
+      "disposition": "Repaired locally by adding a shared stage evidence definition with stage label and filename metadata, and by deriving required evidence paths from that definition."
     },
     {
       "severity": "minor",
       "fileName": "test/evidence-freshness-slos.test.mjs",
-      "status": "unresolved",
-      "body": "Add session-context stale stage_4_review parity coverage mirroring the cockpit stale review evidence gate trust-signal case, asserting review_evidence stale state, review_subject_hash_drift reason, reviewer owner, source path, and SLO policy path."
+      "status": "locally_resolved_pending_refresh",
+      "body": "Add session-context stale stage_4_review parity coverage mirroring the cockpit stale review evidence gate trust-signal case, asserting review_evidence stale state, review_subject_hash_drift reason, reviewer owner, source path, and SLO policy path.",
+      "disposition": "Repaired locally with Stage 4 session-context regression coverage for stale review evidence, including review_subject_hash_drift reason, reviewer owner, source path, and SLO policy path."
     }
   ],
   "attempts": [
@@ -81,11 +83,23 @@
       "endedAt": "2026-05-31T11:30:38Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned two open findings: one trivial focused-session-context stage evidence mapping duplication issue and one minor session-context stale review evidence parity coverage issue."
+    },
+    {
+      "attempt": 9,
+      "sourceHead": "7728afc03d0e202c3751672f3fb000822dd0aefe",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T11:59:25Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired both focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 2 findings.",
+    "Local repair verification: node --test test/evidence-freshness-slos.test.mjs passed.",
+    "Local repair verification: npm run typecheck passed.",
+    "Local repair verification: npm run bandit -- validate passed.",
+    "Local repair verification: git diff --check passed."
   ]
 }

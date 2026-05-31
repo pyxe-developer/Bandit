@@ -232,6 +232,43 @@ test("cockpit status exposes stale review evidence in gate trust signals", async
   });
 });
 
+test("session-context exposes stale review evidence as a trust-signal dependency", async () => {
+  const repo = await createProjectionEvidenceRepo({
+    currentStage: "Stage 4: Review And Cross-Model Gates",
+    nextAction: "Stage 4 review for BANDIT-056."
+  });
+  await writeFileAt(
+    repo,
+    "docs/work/BANDIT-056/implementation-evidence.md",
+    "# Implementation Evidence\n"
+  );
+  await writeFileAt(
+    repo,
+    "docs/work/BANDIT-056/review-evidence.md",
+    [
+      "# Review Evidence",
+      "source_drift_status: current",
+      "review_subject_hash_status: stale"
+    ].join("\n")
+  );
+
+  const result = await runBandit(repo, ["session-context", "current", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const packet = JSON.parse(result.stdout);
+  assert.ok(packet.evidence_trust_signals, "missing evidence trust signals");
+  assert.deepEqual(packet.evidence_trust_signals.dependencies, [
+    {
+      artifact_type: "review_evidence",
+      source: "docs/work/BANDIT-056/review-evidence.md",
+      owner_or_authority_role: "reviewer",
+      freshness_state: "stale",
+      staleness_reason: "review_subject_hash_drift",
+      evidence_slo: evidencePolicyPath
+    }
+  ]);
+});
+
 test("session-context exposes stale or missing evidence as trust-signal dependencies", async () => {
   const repo = await createProjectionEvidenceRepo({ omitRedEvidence: true });
 
@@ -277,8 +314,8 @@ async function createProjectionEvidenceRepo(options = {}) {
   if (!options.omitRedEvidence) {
     await writeFileAt(repo, "docs/work/BANDIT-056/red-evidence.md", "# RED Evidence\n");
   }
-  await writeFileAt(repo, "docs/roadmap/CURRENT_CONTEXT.md", currentContextFixture());
-  await writeFileAt(repo, "docs/roadmap/ROADMAP.md", roadmapFixture());
+  await writeFileAt(repo, "docs/roadmap/CURRENT_CONTEXT.md", currentContextFixture(options));
+  await writeFileAt(repo, "docs/roadmap/ROADMAP.md", roadmapFixture(options));
   await writeJson(repo, ".bandit/bootstrap-gaps.json", {
     gaps: [
       {
@@ -430,27 +467,32 @@ function artifactType(overrides) {
   };
 }
 
-function currentContextFixture() {
+function currentContextFixture(options = {}) {
+  const nextAction = options.nextAction ?? "Stage 2 RED evidence for BANDIT-056.";
+  const currentStage = options.currentStage ?? "Stage 2: Test Design And RED Evidence";
+
   return `# Current Context
 
 ## Status
 
 **Phase:** 8 - Workflow Cockpit kickoff.
 
-**Current next action:** Stage 2 RED evidence for BANDIT-056.
+**Current next action:** ${nextAction}
 
 ## Active Work
 
 **Active work item:** \`BANDIT-056\` - Evidence Freshness SLOs.
-The current stage is Stage 2: Test Design And RED Evidence.
+The current stage is ${currentStage}.
 
 ## Required Operator Input
 
-No operator-owned input is required for Stage 2 RED evidence.
+No operator-owned input is required.
 `;
 }
 
-function roadmapFixture() {
+function roadmapFixture(options = {}) {
+  const nextAction = options.nextAction ?? "Stage 2 RED evidence for BANDIT-056.";
+
   return `# Roadmap
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
@@ -459,7 +501,7 @@ function roadmapFixture() {
 
 - \`[Gap]\` \`BANDIT-056\` - Evidence Freshness SLOs
 
-**Current next step:** Stage 2 RED evidence for BANDIT-056.
+**Current next step:** ${nextAction}
 `;
 }
 

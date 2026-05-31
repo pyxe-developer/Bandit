@@ -53,27 +53,48 @@ export type FocusedSessionContextPacket = {
 };
 
 const STAGE_EVIDENCE_INFOS = [
-  { stageNum: 1, artifact_type: "brief", owner: "codex_pm", filename: "brief.md" },
-  { stageNum: 2, artifact_type: "red_evidence", owner: "test_writer", filename: "red-evidence.md" },
+  {
+    stageNum: 1,
+    stageLabel: "Stage 1",
+    artifact_type: "brief",
+    owner: "codex_pm",
+    filename: "brief.md"
+  },
+  {
+    stageNum: 2,
+    stageLabel: "Stage 2",
+    artifact_type: "red_evidence",
+    owner: "test_writer",
+    filename: "red-evidence.md"
+  },
   {
     stageNum: 3,
+    stageLabel: "Stage 3",
     artifact_type: "implementation_evidence",
     owner: "writer",
     filename: "implementation-evidence.md"
   },
   {
     stageNum: 4,
+    stageLabel: "Stage 4",
     artifact_type: "review_evidence",
     owner: "reviewer",
     filename: "review-evidence.md"
   },
   {
     stageNum: 5,
+    stageLabel: "Stage 5",
     artifact_type: "landing_verdict",
     owner: "landing_agent",
     filename: "landing-verdict.md"
   },
-  { stageNum: 6, artifact_type: "retrospective", owner: "codex_pm", filename: "retrospective.md" }
+  {
+    stageNum: 6,
+    stageLabel: "Stage 6",
+    artifact_type: "retrospective",
+    owner: "codex_pm",
+    filename: "retrospective.md"
+  }
 ] as const;
 
 async function buildSessionContextTrustSignals(
@@ -92,7 +113,7 @@ async function buildSessionContextTrustSignals(
   );
   const existenceResults = await Promise.all(
     requiredStageEvidence.map(async (info) => {
-      const source = `docs/work/${workItemId}/${info.filename}`;
+      const source = buildEvidenceSource(workItemId, info.filename);
       return {
         info,
         source,
@@ -102,15 +123,70 @@ async function buildSessionContextTrustSignals(
   );
 
   for (const { info, source, fileExists } of existenceResults) {
-    if (!fileExists) {
-      dependencies.push({
-        ...buildGateTrustSignal(info.artifact_type, source, info.owner, false),
-        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
-      });
+    const trustSignal = await buildDependencyTrustSignal(
+      repoRoot,
+      source,
+      info.artifact_type,
+      info.owner,
+      fileExists
+    );
+    if (trustSignal) {
+      dependencies.push(trustSignal);
     }
   }
 
   return { authority: "derived_non_canonical", dependencies };
+}
+
+async function buildDependencyTrustSignal(
+  repoRoot: string,
+  source: string,
+  artifactType: string,
+  owner: string,
+  fileExists: boolean
+): Promise<EvidenceTrustSignal | null> {
+  if (!fileExists) {
+    return withEvidenceSlo(buildGateTrustSignal(artifactType, source, owner, false));
+  }
+
+  const staleReason = await readStaleEvidenceReason(repoRoot, source, artifactType);
+  if (!staleReason) return null;
+
+  return withEvidenceSlo(
+    buildGateTrustSignal(artifactType, source, owner, "stale", staleReason)
+  );
+}
+
+async function readStaleEvidenceReason(
+  repoRoot: string,
+  source: string,
+  artifactType: string
+): Promise<string | null> {
+  if (artifactType !== "review_evidence") return null;
+
+  const content = await readRequiredArtifact(repoRoot, source);
+  if (readScalarStatus(content, "source_drift_status") === "stale") {
+    return "source_drift";
+  }
+  if (readScalarStatus(content, "review_subject_hash_status") === "stale") {
+    return "review_subject_hash_drift";
+  }
+  return null;
+}
+
+function withEvidenceSlo(
+  signal: Omit<EvidenceTrustSignal, "evidence_slo">
+): EvidenceTrustSignal {
+  return {
+    ...signal,
+    evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+  };
+}
+
+function readScalarStatus(content: string, key: string): string | null {
+  const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const match = content.match(new RegExp(`^${escapedKey}:\\s*(.+)$`, "m"));
+  return match?.[1]?.trim() ?? null;
 }
 
 function parseStageNumber(stageStr: string): number | null {
@@ -516,14 +592,14 @@ function buildBlockers(gaps: RawGap[]) {
 }
 
 function buildRequiredEvidencePaths(workItemId: string) {
-  return [
-    { path: `docs/work/${workItemId}/brief.md`, stage: "Stage 1" },
-    { path: `docs/work/${workItemId}/red-evidence.md`, stage: "Stage 2" },
-    { path: `docs/work/${workItemId}/implementation-evidence.md`, stage: "Stage 3" },
-    { path: `docs/work/${workItemId}/review-evidence.md`, stage: "Stage 4" },
-    { path: `docs/work/${workItemId}/landing-verdict.md`, stage: "Stage 5" },
-    { path: `docs/work/${workItemId}/retrospective.md`, stage: "Stage 6" }
-  ];
+  return STAGE_EVIDENCE_INFOS.map((info) => ({
+    path: buildEvidenceSource(workItemId, info.filename),
+    stage: info.stageLabel
+  }));
+}
+
+function buildEvidenceSource(workItemId: string, filename: string) {
+  return `docs/work/${workItemId}/${filename}`;
 }
 
 function normalizePhase(phase: string) {
