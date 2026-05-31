@@ -2,15 +2,15 @@
 
 contract_version: 1
 work_item: BANDIT-056
-source_head: d2b422695ebba83429f5564570b762e517ebe2ec
+source_head: bbd48de80d204fe556440893c162eb93ea4747ef
 source_head_meaning: latest completed CodeRabbit-reviewed source head.
 latest_repair_head: b33eb482173fa67a0e77fa20636d72c0cf810963
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: locally_resolved_pending_refresh
-findings_disposition: Four latest CodeRabbit findings are locally repaired by b33eb482173fa67a0e77fa20636d72c0cf810963. Focused CodeRabbit refresh is required before Local Qwen or aggregate Stage 4 review.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh completed on bbd48de80d204fe556440893c162eb93ea4747ef with three minor findings. Repair or explicitly disposition these findings before another refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
@@ -29,21 +29,18 @@ executable_evidence:
   - npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 file list> -c AGENTS.md --no-color completed with 4 findings at source head d2b422695ebba83429f5564570b762e517ebe2ec.
   - b33eb482173fa67a0e77fa20636d72c0cf810963 repairs the four latest focused CodeRabbit findings locally.
+  - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 file list> -c AGENTS.md --no-color completed with 3 findings at source head bbd48de80d204fe556440893c162eb93ea4747ef.
 findings:
   - severity: minor
     file: src/state/evidence-freshness-slos.ts
-    finding: Update the projection-builder comment so it does not imply withEvidenceSlo attaches a context-specific policy instead of the fixed EVIDENCE_FRESHNESS_POLICY_PATH provenance.
-    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
-  - severity: trivial
-    file: src/state/evidence-freshness-slos.ts
-    finding: evidenceFreshnessPolicyExists duplicates stat/ENOENT handling instead of delegating to pathExists(path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH)).
-    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
-  - severity: trivial
-    file: STATUS.md
-    finding: The BANDIT-056 finding-count progression should explicitly distinguish the one immediate repair from the four later repairs.
-    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
+    finding: Replace the loose non-empty-array source_artifacts check with requireNonEmptyStringList so blank or non-string entries are rejected before treating source_artifacts as present.
+    disposition: open; repair or explicitly disposition before another focused refresh, Local Qwen, or aggregate Stage 4 review.
   - severity: minor
-    file: docs/roadmap/CURRENT_CONTEXT.md
-    finding: Expected-deliverable/current-context wording should describe the four findings at 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931 as locally repaired and pending provider verification, not remaining open.
-    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
+    file: src/state/focused-session-context.ts
+    finding: Make readStaleEvidenceReason tolerate a missing file between buildDependencyTrustSignal existence check and readRequiredArtifact so the race returns no stale reason instead of throwing.
+    disposition: open; repair or explicitly disposition before another focused refresh, Local Qwen, or aggregate Stage 4 review.
+  - severity: minor
+    file: docs/specs/BANDIT-056-coderabbit-review-output.json
+    finding: Attempt 17 endedAt is out of chronological order and should use a UTC Z timestamp between attempt 16 and attempt 18.
+    disposition: open; repair or explicitly disposition before another focused refresh, Local Qwen, or aggregate Stage 4 review.
 bootstrap_gaps: []
