@@ -1,0 +1,108 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-056",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": ".bandit/policy/evidence-freshness-slos.json",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The policy records local evidence freshness requirements for future workflow evidence gates, but it does not edit installed global skills or authorize external skill installation."
+    },
+    {
+      "path": "docs/templates/evidence-freshness-slos.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records future work-item evidence fields for Evidence Freshness SLOs without changing installed skill contents."
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-056/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-056 implementation. Evidence Freshness SLOs add local policy and template metadata only."
+    },
+    "rationale": "BANDIT-056 adds local Evidence Freshness SLO policy validation, command routing, derived projection trust-signal output, sanitizer hardening, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-056/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "policy_reference_only",
+    "skills": [
+      {
+        "skill_id": "evidence-freshness-slos-policy",
+        "owner": "Codex PM",
+        "freshness_rule": "validated by npm run bandit -- evidence-freshness-slos validate --json before landing and before trusting derived evidence projections",
+        "revocation_path": "remove or revise .bandit/policy/evidence-freshness-slos.json and matching derived projection trust-signal validation"
+      }
+    ],
+    "owner": "Codex PM",
+    "freshness_rule": "validated by npm run bandit -- evidence-freshness-slos validate --json",
+    "revocation_path": "remove or revise the Evidence Freshness SLO policy and template"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-056 touches local Evidence Freshness SLO policy and template surfaces that define future evidence trust-signal metadata, so explicit supply-chain gate evidence is recorded before local-record landing. The implementation does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/evidence-freshness-slos.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-056-supply-chain-gate.json",
+    "docs/templates/evidence-freshness-slos.md",
+    "docs/work/BANDIT-056/brief.md",
+    "docs/work/BANDIT-056/implementation-evidence.md",
+    "docs/work/BANDIT-056/coderabbit-review.md",
+    "docs/work/BANDIT-056/local-qwen-review.md",
+    "docs/work/BANDIT-056/review-evidence.md",
+    "docs/work/BANDIT-056/landing-verdict.md",
+    "src/state/evidence-freshness-slos.ts",
+    "src/commands/evidence-freshness-slos.ts",
+    "src/commands/validate.ts",
+    "test/evidence-freshness-slos.test.mjs"
+  ]
+}
