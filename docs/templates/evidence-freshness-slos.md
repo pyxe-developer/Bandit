@@ -19,3 +19,5 @@ work_item:
         source_artifacts:
         dependent_evidence:
         propagate_missing_or_stale_dependencies:
+    source_artifacts:
+      - artifact:

@@ -72,22 +72,30 @@ export function buildGateTrustSignal(
   fileExistsOrFreshnessState: boolean | EvidenceFreshnessState,
   stalenessReason?: string
 ): Omit<EvidenceTrustSignal, "evidence_slo"> {
-  const freshnessState =
-    typeof fileExistsOrFreshnessState === "boolean"
-      ? fileExistsOrFreshnessState
-        ? "current"
-        : "missing"
-      : fileExistsOrFreshnessState;
+  const freshnessState = resolveFreshnessState(fileExistsOrFreshnessState);
 
   return {
     artifact_type: artifactType,
     source,
     owner_or_authority_role: ownerOrAuthorityRole,
     freshness_state: freshnessState,
-    staleness_reason:
-      stalenessReason ??
-      (freshnessState === "current" ? "none" : "missing_required_stage_evidence")
+    staleness_reason: stalenessReason ?? defaultStalenessReason(freshnessState)
   };
+}
+
+function resolveFreshnessState(
+  fileExistsOrFreshnessState: boolean | EvidenceFreshnessState
+): EvidenceFreshnessState {
+  if (typeof fileExistsOrFreshnessState !== "boolean") {
+    return fileExistsOrFreshnessState;
+  }
+  return fileExistsOrFreshnessState ? "current" : "missing";
+}
+
+function defaultStalenessReason(freshnessState: EvidenceFreshnessState): string {
+  if (freshnessState === "current") return "none";
+  if (freshnessState === "missing") return "missing_required_stage_evidence";
+  return "stale_dependency";
 }
 
 async function validateTemplate(repoRoot: string) {
@@ -133,8 +141,16 @@ function parseAndValidatePolicy(content: string): EvidenceFreshnessValidationRep
     throw new Error("Malformed evidence freshness SLO policy: invalid JSON");
   }
 
-  if (!isRecord(parsed) || parsed.contract_version !== 1) {
+  if (!isRecord(parsed)) {
+    throw new Error("Malformed evidence freshness SLO policy: expected object");
+  }
+
+  if (!Object.hasOwn(parsed, "contract_version")) {
     throw new Error("Malformed evidence freshness SLO policy: missing contract_version 1");
+  }
+
+  if (parsed.contract_version !== 1) {
+    throw new Error("Malformed evidence freshness SLO policy: contract_version must be 1");
   }
 
   if (parsed.policy_id !== "evidence-freshness-slos") {

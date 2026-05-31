@@ -189,6 +189,10 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
   }
 
   const hasFreshnessSlos = await evidenceFreshnessPolicyExists(repoRoot);
+  const staleEvidence = await readStaleEvidence(repoRoot, {
+    reviewEvidencePath,
+    landingVerdictPath
+  });
   const evidence_trust_signals = hasFreshnessSlos
     ? await buildCockpitTrustSignals(repoRoot, {
         briefPath,
@@ -196,7 +200,8 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
         implementationEvidencePath,
         reviewEvidencePath,
         landingVerdictPath,
-        retrospectivePath
+        retrospectivePath,
+        staleEvidence
       })
     : undefined;
 
@@ -246,10 +251,7 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     },
     improvement_health: await readImprovementHealth(repoRoot),
     coordination: await readCoordinationSummary(repoRoot, evidenceWorkItemId),
-    stale_evidence: await readStaleEvidence(repoRoot, {
-      reviewEvidencePath,
-      landingVerdictPath
-    }),
+    stale_evidence: staleEvidence,
     evidence_trust_signals
   };
 }
@@ -263,6 +265,7 @@ async function buildCockpitTrustSignals(
     reviewEvidencePath: string;
     landingVerdictPath: string;
     retrospectivePath: string;
+    staleEvidence: StaleEvidence[];
   }
 ): Promise<CockpitEvidenceTrustSignals> {
   const [
@@ -280,15 +283,15 @@ async function buildCockpitTrustSignals(
     pathExists(repoRoot, paths.landingVerdictPath),
     pathExists(repoRoot, paths.retrospectivePath)
   ]);
-  const reviewFreshness = await readReviewGateFreshness(
-    repoRoot,
+  const reviewFreshness = resolveReviewGateFreshness(
     paths.reviewEvidencePath,
-    reviewExists
+    reviewExists,
+    paths.staleEvidence
   );
-  const landingFreshness = await readLandingGateFreshness(
-    repoRoot,
+  const landingFreshness = resolveLandingGateFreshness(
     paths.landingVerdictPath,
-    landingExists
+    landingExists,
+    paths.staleEvidence
   );
 
   return {
@@ -342,40 +345,45 @@ function withEvidenceSlo(
   };
 }
 
-async function readReviewGateFreshness(
-  repoRoot: string,
+function resolveReviewGateFreshness(
   source: string,
-  fileExists: boolean
-): Promise<{ state: EvidenceFreshnessState; reason?: string }> {
+  fileExists: boolean,
+  staleEvidence: StaleEvidence[]
+): { state: EvidenceFreshnessState; reason?: string } {
   if (!fileExists) return { state: "missing" };
 
-  const reviewEvidence = await readRequiredArtifact(repoRoot, source);
-  if (readScalarStatus(reviewEvidence.content, "source_drift_status") === "stale") {
+  if (hasStaleEvidence(staleEvidence, source, "review_evidence")) {
     return { state: "stale", reason: "source_drift" };
   }
-  if (
-    readScalarStatus(reviewEvidence.content, "review_subject_hash_status") ===
-    "stale"
-  ) {
+  if (hasStaleEvidence(staleEvidence, source, "review_subject_hash")) {
     return { state: "stale", reason: "review_subject_hash_drift" };
   }
 
   return { state: "current" };
 }
 
-async function readLandingGateFreshness(
-  repoRoot: string,
+function resolveLandingGateFreshness(
   source: string,
-  fileExists: boolean
-): Promise<{ state: EvidenceFreshnessState; reason?: string }> {
+  fileExists: boolean,
+  staleEvidence: StaleEvidence[]
+): { state: EvidenceFreshnessState; reason?: string } {
   if (!fileExists) return { state: "missing" };
 
-  const landingVerdict = await readRequiredArtifact(repoRoot, source);
-  if (readScalarStatus(landingVerdict.content, "source_drift_status") === "stale") {
+  if (hasStaleEvidence(staleEvidence, source, "landing_verdict")) {
     return { state: "stale", reason: "source_drift" };
   }
 
   return { state: "current" };
+}
+
+function hasStaleEvidence(
+  staleEvidence: StaleEvidence[],
+  source: string,
+  kind: StaleEvidence["kind"]
+): boolean {
+  return staleEvidence.some(
+    (item) => item.source === source && item.kind === kind
+  );
 }
 
 async function readRequiredArtifact(repoRoot: string, displayPath: string) {

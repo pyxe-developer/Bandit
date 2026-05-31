@@ -83,6 +83,25 @@ test("evidence-freshness-slos validation normalizes artifact type ids", async ()
   assert.equal(parsed.artifact_types[0], "tests");
 });
 
+test("evidence-freshness-slos validation reports invalid contract version distinctly", async () => {
+  const repo = await createInitializedEvidenceRepo();
+  const policy = completeEvidenceFreshnessPolicy();
+  policy.contract_version = 2;
+  await writeCompleteEvidenceFixture(repo, { policy });
+
+  const result = await runBandit(repo, [
+    "evidence-freshness-slos",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Malformed evidence freshness SLO policy: contract_version must be 1/
+  );
+});
+
 test("evidence-freshness-slos validation accepts an indented template hierarchy", async () => {
   const repo = await createInitializedEvidenceRepo();
   await writeCompleteEvidenceFixture(repo, {
@@ -91,10 +110,14 @@ test("evidence-freshness-slos validation accepts an indented template hierarchy"
 work_item:
   policy:
     artifact_types:
-      - trust_signal_requirements:
-          - source_artifacts:
+      - id:
+        source_artifacts:
+    trust_signal_requirements:
+      - source_artifact
     derived_projection_rules:
       - projection:
+    source_artifacts:
+      - docs/work/BANDIT-056/brief.md
 `
   });
 
@@ -294,9 +317,14 @@ async function writeCompleteEvidenceFixture(repo, options = {}) {
 work_item:
   policy:
     artifact_types:
-      trust_signal_requirements:
-      derived_projection_rules:
-      source_artifacts:
+      - id:
+        source_artifacts:
+    trust_signal_requirements:
+      - source_artifact
+    derived_projection_rules:
+      - projection:
+    source_artifacts:
+      - docs/work/BANDIT-056/brief.md
 `
   );
 }
