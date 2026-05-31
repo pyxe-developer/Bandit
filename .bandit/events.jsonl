@@ -135,3 +135,4 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded Local Qwen non_blocking review; next action is PM disposition or durable routing before aggregate Stage 4 review"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded Local Qwen finding disposition and durable retrospective routing; next action is aggregate Stage 4 review evidence"}
 {"type":"artifact_created","work_item":"BANDIT-055","message":"Created review evidence artifact at docs/work/BANDIT-055/review-evidence.md; next action is Stage 5 landing verdict"}
+{"type":"artifact_created","work_item":"BANDIT-055","message":"Created landing_verdict artifact at docs/work/BANDIT-055/landing-verdict.md"}

@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-055` - Token-Cost Failsafe
 
-**Current next step:** Record the Stage 5 landing verdict for `BANDIT-055`. Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-055/review-evidence.md` with CodeRabbit provider-refusal/bootstrap-gap replacement evidence, Local Qwen `non_blocking` evidence, Codex PM disposition, current review-subject hash, and clean-code closure. Do not write landing action, retrospective, `BANDIT-056`, or unrelated Phase 8 work until the Stage 5 landing verdict is recorded.
+**Current next step:** Record local landing action evidence for `BANDIT-055`. Stage 5 landing verdict evidence is recorded in `docs/work/BANDIT-055/landing-verdict.md` with final verdict `safe-to-land`, and `npm run bandit -- land-check BANDIT-055` passes. Do not write retrospective, `BANDIT-056`, or unrelated Phase 8 work until `docs/work/BANDIT-055/landing-action.md` exists.
 
 ## Next Work Item
 
