@@ -457,7 +457,7 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Repair or explicitly disposition the six latest focused CodeRabbit findings for `BANDIT-056` before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Current next action:** Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`: the Evidence SLO template key mismatch and `writer-stream-sanitizer` `isRecord` array rejection. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -888,10 +888,17 @@ recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
 `2f8564ce88f9c0d7be2521a9cf638087c428865d`. The latest focused CodeRabbit
 refresh returned six open findings covering derived projection SLO
 documentation, evidence-freshness template key consistency, cockpit-status
-evidence path type extraction, and writer-stream sanitizer cleanup. The next
-action is to repair or explicitly disposition those findings before another
-focused refresh, Local Qwen, aggregate Stage 4 review, landing, retrospective,
-another work item, or unrelated Phase 8 work.
+evidence path type extraction, and writer-stream sanitizer cleanup. Codex PM
+classification is recorded in
+`docs/work/BANDIT-056/coderabbit-finding-disposition.md`: the template key
+mismatch and `writer-stream-sanitizer` `isRecord` array rejection are
+repair-required; the derived-projection rationale and cockpit evidence-path
+alias are non-blocking follow-up candidates because current validation passes;
+and the line-count helper extraction plus redacted-field `Set` suggestions are
+no-action/opportunistic only. The next action is to repair the two
+repair-required findings before another focused refresh, Local Qwen, aggregate
+Stage 4 review, landing, retrospective, another work item, or unrelated Phase 8
+work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1134,10 +1141,11 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** CodeRabbit finding repair/disposition evidence
-for the six latest `BANDIT-056` focused refresh findings before another focused
-refresh, Local Qwen, aggregate Stage 4 review, landing, retrospective, another
-work item, or unrelated Phase 8 work.
+**Expected next deliverable:** Focused repair evidence for the two
+repair-required `BANDIT-056` CodeRabbit findings: the Evidence SLO template key
+mismatch and `writer-stream-sanitizer` `isRecord` array rejection. No focused
+refresh should run solely for the four dispositioned non-blocking,
+no-action, or opportunistic findings.
 
 ## Known Bootstrap Gaps
 
@@ -1527,9 +1535,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the six latest focused CodeRabbit findings
-   for `BANDIT-056` before another focused refresh, Local Qwen, aggregate Stage
-   4 review, landing, closeout, another work item, or unrelated Phase 8 work.
+1. Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`:
+   the Evidence SLO template key mismatch and `writer-stream-sanitizer`
+   `isRecord` array rejection. Do not run another CodeRabbit refresh solely for
+   the derived-projection rationale, cockpit evidence-path alias, line-count
+   helper extraction, or redacted-field `Set` findings.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1578,9 +1588,11 @@ resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
 implementation evidence is recorded for `BANDIT-056`; latest Stage 4 focused
 CodeRabbit refresh completed at
-`2f8564ce88f9c0d7be2521a9cf638087c428865d` with six open findings, so the
-next required step is repair or explicit disposition before another focused
-refresh, Local Qwen, or aggregate review.
+`2f8564ce88f9c0d7be2521a9cf638087c428865d` with six open findings. Codex PM
+classified the findings in
+`docs/work/BANDIT-056/coderabbit-finding-disposition.md`; the next required
+step is focused repair for the two repair-required findings before another
+focused refresh, Local Qwen, or aggregate review.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

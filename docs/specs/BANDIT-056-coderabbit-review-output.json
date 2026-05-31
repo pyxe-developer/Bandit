@@ -10,42 +10,48 @@
       "fileName": ".bandit/policy/evidence-freshness-slos.json",
       "status": "open",
       "body": "Add explicit documentation explaining why derived_projection_rules for cockpit_status and session_context are derived_non_canonical, propagate stale dependencies, and cannot upgrade missing dependencies to trusted.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "accepted_non_blocking",
+      "disposition": "Current validation and focused tests pass, so route to BANDIT-056-DERIVED-PROJECTION-RATIONALE follow-up instead of blocking the next repair step."
     },
     {
       "severity": "minor",
       "fileName": "docs/templates/evidence-freshness-slos.md",
       "status": "open",
       "body": "Make artifact_types and trust_signal_requirements use a consistent source_artifact/source_artifacts key name so form-fillers are not confused.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "repair_required",
+      "disposition": "Repair the template key mismatch before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
       "status": "open",
       "body": "Extract the repeated evidence artifact path object shape into a single shared type alias for cockpit-status trust-signal and gate-matrix helpers.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "accepted_non_blocking",
+      "disposition": "Current cockpit status validation and focused tests pass, so route to BANDIT-056-COCKPIT-EVIDENCE-PATH-ALIAS follow-up instead of blocking the next repair step."
     },
     {
       "severity": "minor",
       "fileName": "src/state/writer-stream-sanitizer.ts",
       "status": "open",
       "body": "Update isRecord so arrays are not treated as record objects before parsed.type access.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "repair_required",
+      "disposition": "Repair array rejection in isRecord before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/writer-stream-sanitizer.ts",
       "status": "open",
       "body": "Extract duplicated raw stream line-splitting/trimming count logic into a shared helper.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "no_action_opportunistic",
+      "disposition": "No standalone repair and no CodeRabbit refresh solely for this stylistic finding."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/writer-stream-sanitizer.ts",
       "status": "open",
       "body": "Use a Set for redacted-field-name membership checks instead of repeated linear search.",
-      "disposition": "Open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout."
+      "pmClassification": "no_action",
+      "disposition": "No source repair and no CodeRabbit refresh solely for this stylistic finding."
     }
   ],
   "attempts": [
@@ -307,6 +313,9 @@
     "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/work/BANDIT-056/coderabbit-repair-dispatch.md --files docs/work/BANDIT-056/coderabbit-repair-writer-report.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 3 findings at source head 9db9b0a89212ca1fc9f671ecba703ce1c906174d.",
     "node --test test/writer-stream-sanitizer.test.mjs passed after the local repair.",
     "2688c3187cb4ee3c15e4320e5378fb0877a8d889 repairs the three latest focused CodeRabbit findings locally; focused CodeRabbit refresh is required before Local Qwen or aggregate Stage 4 review.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files src/state/writer-stream-sanitizer.ts --files test/writer-stream-sanitizer.test.mjs --files docs/work/BANDIT-056/coderabbit-repair-writer-stream.jsonl --files docs/work/BANDIT-056/coderabbit-repair-dispatch.md --files docs/work/BANDIT-056/coderabbit-repair-writer-report.md --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 6 findings at source head 2f8564ce88f9c0d7be2521a9cf638087c428865d."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/focused-session-context.ts --files src/state/writer-stream-sanitizer.ts --files test/writer-stream-sanitizer.test.mjs --files docs/work/BANDIT-056/coderabbit-repair-writer-stream.jsonl --files docs/work/BANDIT-056/coderabbit-repair-dispatch.md --files docs/work/BANDIT-056/coderabbit-repair-writer-report.md --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 6 findings at source head 2f8564ce88f9c0d7be2521a9cf638087c428865d.",
+    "Codex PM classified the six latest findings in docs/work/BANDIT-056/coderabbit-finding-disposition.md instead of repairing all of them.",
+    "npm run bandit -- evidence-freshness-slos validate --json passed before classifying the derived-projection rationale and cockpit evidence-path alias findings as non-blocking follow-ups.",
+    "node --test test/evidence-freshness-slos.test.mjs test/cockpit-status.test.mjs test/writer-stream-sanitizer.test.mjs passed with 30 tests before classifying the latest six findings."
   ]
 }

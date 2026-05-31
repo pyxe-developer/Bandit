@@ -9,7 +9,7 @@ review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
 findings_status: open
-findings_disposition: Focused CodeRabbit refresh completed at 2f8564ce88f9c0d7be2521a9cf638087c428865d with six open findings. Repair or explicitly disposition those findings before another refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+findings_disposition: Codex PM classified the six latest focused CodeRabbit findings in docs/work/BANDIT-056/coderabbit-finding-disposition.md. Two findings are repair-required: the Evidence SLO template key mismatch and writer-stream-sanitizer isRecord array rejection. Two findings are accepted non-blocking follow-up candidates because current validation passes. Two stylistic findings are no-action/opportunistic only. Repair the two repair-required findings before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout; do not run another CodeRabbit refresh solely for the stylistic findings.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
@@ -46,29 +46,32 @@ executable_evidence:
   - npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.
   - git diff --check passed after the local repair.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 repair refresh file list> -c AGENTS.md --no-color completed with 6 findings at source head 2f8564ce88f9c0d7be2521a9cf638087c428865d.
+  - Codex PM classified the six latest findings in docs/work/BANDIT-056/coderabbit-finding-disposition.md instead of repairing all of them.
+  - npm run bandit -- evidence-freshness-slos validate --json passed before classifying the derived-projection rationale and cockpit evidence-path alias findings as non-blocking follow-ups.
+  - node --test test/evidence-freshness-slos.test.mjs test/cockpit-status.test.mjs test/writer-stream-sanitizer.test.mjs passed with 30 tests before classifying the latest six findings.
 findings:
   - severity: trivial
     file: .bandit/policy/evidence-freshness-slos.json
     finding: Add explicit documentation explaining why derived_projection_rules for cockpit_status and session_context are derived_non_canonical, propagate stale dependencies, and cannot upgrade missing dependencies to trusted.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: accepted_non_blocking; current validation and focused tests pass, so route to BANDIT-056-DERIVED-PROJECTION-RATIONALE follow-up instead of blocking the next repair step.
   - severity: minor
     file: docs/templates/evidence-freshness-slos.md
     finding: Make artifact_types and trust_signal_requirements use a consistent source_artifact/source_artifacts key name so form-fillers are not confused.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: repair_required; repair the template key mismatch before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
   - severity: trivial
     file: src/state/cockpit-status.ts
     finding: Extract the repeated evidence artifact path object shape into a single shared type alias for cockpit-status trust-signal and gate-matrix helpers.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: accepted_non_blocking; current cockpit status validation and focused tests pass, so route to BANDIT-056-COCKPIT-EVIDENCE-PATH-ALIAS follow-up instead of blocking the next repair step.
   - severity: minor
     file: src/state/writer-stream-sanitizer.ts
     finding: Update isRecord so arrays are not treated as record objects before parsed.type access.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: repair_required; repair array rejection in isRecord before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
   - severity: trivial
     file: src/state/writer-stream-sanitizer.ts
     finding: Extract duplicated raw stream line-splitting/trimming count logic into a shared helper.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: no_action_opportunistic; no standalone repair and no CodeRabbit refresh solely for this stylistic finding.
   - severity: trivial
     file: src/state/writer-stream-sanitizer.ts
     finding: Use a Set for redacted-field-name membership checks instead of repeated linear search.
-    disposition: open; repair or explicit PM disposition required before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, or closeout.
+    disposition: no_action; no source repair and no CodeRabbit refresh solely for this stylistic finding.
 bootstrap_gaps: []

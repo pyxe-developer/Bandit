@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Repair or explicitly disposition the six latest focused CodeRabbit findings for `BANDIT-056` before another focused refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
+**Current next step:** Repair the two repair-required latest CodeRabbit findings for `BANDIT-056`: the Evidence SLO template key mismatch and `writer-stream-sanitizer` `isRecord` array rejection. Do not run another CodeRabbit refresh solely for the derived-projection rationale, cockpit evidence-path alias, line-count helper extraction, or redacted-field `Set` findings.
 
 ## Next Work Item
 
