@@ -437,19 +437,23 @@ focused CodeRabbit refresh attempt at
 without a terminal verdict. Codex PM provider-refusal/bootstrap-gap replacement
 disposition is recorded in
 `docs/work/BANDIT-055/coderabbit-timeout-disposition.md`; CodeRabbit is not
-treated as pass evidence. The next action is to run Stage 4 Local Qwen
-adversarial review before aggregate Stage 4 review evidence, landing,
+treated as pass evidence. Stage 4 Local Qwen evidence is recorded in
+`docs/work/BANDIT-055/local-qwen-review.md` at source head
+`5e0b6e6d7400d51b1eeed9377410dccd5ee21318` with reviewer verdict
+`non_blocking`, `findings_status: open`, and one finding requiring explicit
+PM disposition/routing before aggregate Stage 4 review evidence, landing,
 retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Run Stage 4 Local Qwen adversarial review for
-`BANDIT-055` at the current disposition head. Do not write aggregate Stage 4
-review evidence, landing evidence, retrospective evidence, `BANDIT-056`, or
-unrelated Phase 8 work until Local Qwen completes and its findings are repaired,
+**Current next action:** Disposition or durably route the `BANDIT-055` Local
+Qwen `non_blocking` finding about `locally_resolved_pending_refresh` state
+expansion before aggregate Stage 4 review evidence. Do not write aggregate
+Stage 4 review evidence, landing evidence, retrospective evidence,
+`BANDIT-056`, or unrelated Phase 8 work until that finding is repaired,
 dispositioned, or routed under Stage 4 policy.
 
-The current stage is Stage 4 Local Qwen review for `BANDIT-055`.
+The current stage is Stage 4 Local Qwen finding disposition for `BANDIT-055`.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -1533,18 +1537,16 @@ retrospective closeout, and resolved bootstrap-gap disposition.
 `.bandit/bootstrap-gaps.json` records `BANDIT-GAP-TOKEN-COST-FAILSAFE` as
 active for `BANDIT-055`. Stage 1 brief, Stage 2 RED evidence, and Stage 3
 implementation evidence are recorded. Stage 4 pre-PR CodeRabbit evidence is
-recorded at source head `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`; the prior
-template-guidance finding, four repair-head validation findings, five
-terminal-refresh findings, and four focused-refresh findings are repaired
-locally. The current focused refresh returned two findings, and those findings
-are now repaired or explicitly dispositioned locally. The follow-up focused
-refresh timed out without a terminal verdict, and a second focused refresh at
-source head `9fb71edd16d161d530a1b62beb10758009903867` also timed out without a
-terminal verdict. The next action is to record explicit CodeRabbit
-provider-refusal/bootstrap-gap replacement disposition before Local Qwen. This
-is routine technical routing, not an operator-owned product, UAT, policy,
-business, cost, or scope decision unless disposition would expand scope or
-require operator-owned cost/risk approval.
+recorded and explicitly dispositioned as provider-refusal/bootstrap-gap
+replacement evidence, not CodeRabbit pass evidence. Stage 4 Local Qwen evidence
+is recorded in `docs/work/BANDIT-055/local-qwen-review.md` with reviewer
+verdict `non_blocking` and one open finding about explicitly tracking the
+`locally_resolved_pending_refresh` state expansion in Stage 6 retrospective
+evidence. The next action is to disposition or durably route that Local Qwen
+finding before aggregate Stage 4 review. This is routine technical routing, not
+an operator-owned product, UAT, policy, business, cost, or scope decision
+unless disposition would expand scope or require operator-owned cost/risk
+approval.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
