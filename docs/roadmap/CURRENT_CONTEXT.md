@@ -434,20 +434,22 @@ CodeRabbit refresh attempt at `3b6c4040eb399e8f2f16b3bdc4bd98c369201b96`
 timed out after setup/summarizing/reviewing without a terminal verdict. The
 focused CodeRabbit refresh attempt at
 `9fb71edd16d161d530a1b62beb10758009903867` timed out after setup/summarizing
-without a terminal verdict. The next action is to record explicit CodeRabbit
-provider-refusal/bootstrap-gap replacement disposition before the Stage 4 gate
-can proceed to Local Qwen.
+without a terminal verdict. Codex PM provider-refusal/bootstrap-gap replacement
+disposition is recorded in
+`docs/work/BANDIT-055/coderabbit-timeout-disposition.md`; CodeRabbit is not
+treated as pass evidence. The next action is to run Stage 4 Local Qwen
+adversarial review before aggregate Stage 4 review evidence, landing,
+retrospective, `BANDIT-056`, or unrelated Phase 8 work.
 
 **Current active work:** `BANDIT-055` - Token-Cost Failsafe.
 
-**Current next action:** Record explicit CodeRabbit provider-refusal/bootstrap-gap
-replacement disposition for `BANDIT-055` after focused refresh timeouts at
-`3b6c4040eb399e8f2f16b3bdc4bd98c369201b96` and
-`9fb71edd16d161d530a1b62beb10758009903867` before Local Qwen, aggregate Stage 4
-review evidence, landing, retrospective, `BANDIT-056`, or unrelated Phase 8
-work.
+**Current next action:** Run Stage 4 Local Qwen adversarial review for
+`BANDIT-055` at the current disposition head. Do not write aggregate Stage 4
+review evidence, landing evidence, retrospective evidence, `BANDIT-056`, or
+unrelated Phase 8 work until Local Qwen completes and its findings are repaired,
+dispositioned, or routed under Stage 4 policy.
 
-The current stage is Stage 4 CodeRabbit repair/disposition for `BANDIT-055`.
+The current stage is Stage 4 Local Qwen review for `BANDIT-055`.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
