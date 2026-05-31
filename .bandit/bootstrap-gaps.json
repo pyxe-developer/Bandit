@@ -582,8 +582,8 @@
     {
       "id": "BANDIT-GAP-TOKEN-COST-FAILSAFE",
       "title": "Agent execution lacks abnormal-run token and cost failsafes",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "STRATEGIC-REVIEW-2026-05-26",
       "source_artifacts": [
         "CONTEXT.md",
@@ -594,9 +594,9 @@
         "docs/prds/reviews/prd-002-research-review"
       ],
       "linked_work_item": "BANDIT-055",
-      "rationale": "The PRD research reviews identified token economics and multi-agent scheduler cost as unresolved risks, and the operator confirmed budgets should act as failsafes for abnormal runs rather than overly strict caps. Tight caps can force repeated failed attempts and cost more than letting a normal deep review finish. Paid reviewer, paid model, and paid/high-token recurring routes also need current provider-pricing evidence with pricing source, captured date, effective date, freshness or expiry rule, expected per-run cost, spend class, and approval owner before they can be treated as available routing. One-off paid reviewer or model calls before policy promotion must be classified as benchmark/evaluation spend with per-run approval or active spend-class approval, not recurring routing policy.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-055."
+      "rationale": "BANDIT-055 created repo-native Token-Cost Failsafe policy validation, a CLI validation command, work-item spec requirements, generated brief rendering, provider-pricing evidence requirements, benchmark/evaluation spend boundaries, recurring paid-route promotion prerequisites, soft budget bands, continuation-decision evidence, and trace-cost non-authority rules. Stage 4 CodeRabbit findings were repaired or dispositioned, final CodeRabbit timeout evidence was recorded as provider-refusal/bootstrap_gap replacement evidence rather than pass evidence, refreshed Local Qwen non-blocking findings were dispositioned as explicit Stage 6 no-action decisions, Stage 5 landing verdict and local-record landing action evidence are recorded, and Stage 6 retrospective closeout is recorded.",
+      "verification_target": "docs/work/BANDIT-055/retrospective.md",
+      "next_action": "Use token-cost-failsafe policy validation and work-item brief integration for future paid, high-token, reviewer, scheduler, or long-running execution; keep provider-pricing evidence, spend approval, continuation decisions, and trace-cost non-authority explicit."
     },
     {
       "id": "BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS",

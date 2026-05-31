@@ -4,9 +4,9 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-055` - Token-Cost Failsafe
+- `[Gap]` none active - interstitial after `BANDIT-055` closeout
 
-**Current next step:** Record Stage 6 retrospective closeout for `BANDIT-055`, including improvement/no-action dispositions and bootstrap-gap disposition for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Stage 5 landing verdict and local-record landing action evidence are recorded in `docs/work/BANDIT-055/`. Do not create `BANDIT-056` or unrelated Phase 8 work until `docs/work/BANDIT-055/retrospective.md` exists and `.bandit/bootstrap-gaps.json` records the gap resolved or explicitly dispositioned.
+**Current next step:** Create exactly one bootstrap-gap chore for `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as `BANDIT-056`. `BANDIT-055` is landed and closed out with retrospective and bootstrap-gap disposition recorded. Do not start unrelated Phase 8 work until the queued Evidence Freshness SLOs gap is resolved or explicitly dispositioned.
 
 ## Next Work Item
 
@@ -88,3 +88,4 @@ bootstrap gaps are queued.
 - `BANDIT-052` - Event-Driven Wake Scheduler
 - `BANDIT-053` - Agent Observability Traces
 - `BANDIT-054` - Stage Capability Scope
+- `BANDIT-055` - Token-Cost Failsafe

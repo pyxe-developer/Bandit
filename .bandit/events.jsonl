@@ -139,3 +139,5 @@
 {"type":"stage5_evidence_updated","work_item":"BANDIT-055","message":"Registered risk-classification and supply-chain gate evidence for local-record landing eligibility; refreshed Local Qwen returned non_blocking findings"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Dispositioned refreshed Local Qwen non_blocking findings and refreshed aggregate review/landing evidence; next action is local-record landing action"}
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-055","message":"Recorded local-record landing action evidence at docs/work/BANDIT-055/landing-action.md; next action is Stage 6 retrospective closeout"}
+{"type":"artifact_created","work_item":"BANDIT-055","message":"Created retrospective artifact at docs/work/BANDIT-055/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-055","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-TOKEN-COST-FAILSAFE; next action is BANDIT-056 Evidence Freshness SLOs work-item creation"}
