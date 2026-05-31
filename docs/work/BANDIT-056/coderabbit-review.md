@@ -14,6 +14,7 @@ source_drift_status: stale
 executable_evidence:
   - coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 3 findings.
+  - b8c9272f8cf69d9d1c86b0d0776236d571a1f7de repairs the three focused CodeRabbit findings locally.
   - node --test test/evidence-freshness-slos.test.mjs passed after the local repair.
   - node --test test/cockpit-status.test.mjs passed after the local repair.
   - node --test test/focused-session-context.test.mjs passed after the local repair.
