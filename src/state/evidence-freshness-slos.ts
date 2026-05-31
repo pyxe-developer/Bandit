@@ -202,8 +202,7 @@ function parseAndValidatePolicy(content: string): EvidenceFreshnessValidationRep
 
   const artifactTypeIds = validateArtifactTypes(parsed);
   const trustSignalRequirements = collectTrustSignalRequirements(parsed);
-  validateDerivedProjectionRules(parsed);
-  const derivedProjections = collectDerivedProjections(parsed);
+  const derivedProjections = validateDerivedProjectionRules(parsed);
 
   return {
     status: "pass",
@@ -306,7 +305,7 @@ function collectTrustSignalRequirements(policy: RawRecord): string[] {
   return requirements;
 }
 
-function validateDerivedProjectionRules(policy: RawRecord): void {
+function validateDerivedProjectionRules(policy: RawRecord): string[] {
   if (
     !Array.isArray(policy.derived_projection_rules) ||
     policy.derived_projection_rules.length === 0
@@ -316,6 +315,8 @@ function validateDerivedProjectionRules(policy: RawRecord): void {
     );
   }
 
+  const projections: string[] = [];
+
   for (const item of policy.derived_projection_rules as unknown[]) {
     if (!isRecord(item)) {
       throw new Error(
@@ -323,7 +324,7 @@ function validateDerivedProjectionRules(policy: RawRecord): void {
       );
     }
 
-    requireNonEmptyString(
+    const projection = requireNonEmptyString(
       item.projection,
       "derived projection rules require a non-empty projection id"
     );
@@ -344,15 +345,11 @@ function validateDerivedProjectionRules(policy: RawRecord): void {
         "derived projections must propagate missing or stale source dependencies and cannot upgrade them to trusted status"
       );
     }
-  }
-}
 
-function collectDerivedProjections(policy: RawRecord): string[] {
-  if (!Array.isArray(policy.derived_projection_rules)) return [];
-  return (policy.derived_projection_rules as unknown[])
-    .filter(isRecord)
-    .map((item) => (typeof item.projection === "string" ? item.projection : ""))
-    .filter((p) => p.length > 0);
+    projections.push(projection);
+  }
+
+  return projections;
 }
 
 function requireNonEmptyString(value: unknown, message: string): string {
