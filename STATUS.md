@@ -14,9 +14,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `d2b422695ebba83429f5564570b762e517ebe2ec`. The latest refresh returned four findings after commit `23fd3e8d470c9afd7a7f51d7c6fef3046e60c931` locally repaired the previous cleanup findings.
+Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/coderabbit-review.md` and `docs/specs/BANDIT-056-coderabbit-review-output.json` at source head `d2b422695ebba83429f5564570b762e517ebe2ec`. The latest refresh returned four findings after commit `23fd3e8d470c9afd7a7f51d7c6fef3046e60c931` locally repaired the prior four implementation cleanup findings; one stale-context finding from that refresh had been repaired immediately while recording the evidence. Commit `b33eb482173fa67a0e77fa20636d72c0cf810963` locally repairs the four latest findings.
 
-The next required action is to repair or explicitly disposition the four latest CodeRabbit findings for `BANDIT-056` before another focused CodeRabbit refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
+The next required action is to run a focused CodeRabbit refresh for `BANDIT-056` on repair head `b33eb482173fa67a0e77fa20636d72c0cf810963` before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 No operator-owned input is required for the next recorded action.
 
@@ -31,7 +31,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - CodeRabbit finding repair next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - focused CodeRabbit refresh next)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)

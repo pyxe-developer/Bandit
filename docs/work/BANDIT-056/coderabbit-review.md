@@ -4,13 +4,13 @@ contract_version: 1
 work_item: BANDIT-056
 source_head: d2b422695ebba83429f5564570b762e517ebe2ec
 source_head_meaning: latest completed CodeRabbit-reviewed source head.
-latest_repair_head: none
+latest_repair_head: b33eb482173fa67a0e77fa20636d72c0cf810963
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: open
-findings_disposition: Focused CodeRabbit refresh returned four findings. Repair or explicit PM disposition is required before Local Qwen or aggregate Stage 4 review.
+findings_status: locally_resolved_pending_refresh
+findings_disposition: Four latest CodeRabbit findings are locally repaired by b33eb482173fa67a0e77fa20636d72c0cf810963. Focused CodeRabbit refresh is required before Local Qwen or aggregate Stage 4 review.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
@@ -28,21 +28,22 @@ executable_evidence:
   - npm run typecheck passed after the local repair.
   - npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files <focused BANDIT-056 file list> -c AGENTS.md --no-color completed with 4 findings at source head d2b422695ebba83429f5564570b762e517ebe2ec.
+  - b33eb482173fa67a0e77fa20636d72c0cf810963 repairs the four latest focused CodeRabbit findings locally.
 findings:
   - severity: minor
     file: src/state/evidence-freshness-slos.ts
     finding: Update the projection-builder comment so it does not imply withEvidenceSlo attaches a context-specific policy instead of the fixed EVIDENCE_FRESHNESS_POLICY_PATH provenance.
-    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
   - severity: trivial
     file: src/state/evidence-freshness-slos.ts
     finding: evidenceFreshnessPolicyExists duplicates stat/ENOENT handling instead of delegating to pathExists(path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH)).
-    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
   - severity: trivial
     file: STATUS.md
     finding: The BANDIT-056 finding-count progression should explicitly distinguish the one immediate repair from the four later repairs.
-    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
   - severity: minor
     file: docs/roadmap/CURRENT_CONTEXT.md
     finding: Expected-deliverable/current-context wording should describe the four findings at 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931 as locally repaired and pending provider verification, not remaining open.
-    disposition: open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review.
+    disposition: locally_resolved_pending_refresh by b33eb482173fa67a0e77fa20636d72c0cf810963; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review.
 bootstrap_gaps: []

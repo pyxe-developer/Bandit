@@ -1,7 +1,7 @@
 {
   "sourceHead": "d2b422695ebba83429f5564570b762e517ebe2ec",
   "sourceHeadMeaning": "latest completed CodeRabbit-reviewed source head",
-  "latestRepairHead": null,
+  "latestRepairHead": "b33eb482173fa67a0e77fa20636d72c0cf810963",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
@@ -9,30 +9,30 @@
     {
       "severity": "minor",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Update the misleading comment near the projection builders to reflect that withEvidenceSlo always attaches the fixed EVIDENCE_FRESHNESS_POLICY_PATH rather than a context-specific policy.",
-      "disposition": "Open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by b33eb48; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/evidence-freshness-slos.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "evidenceFreshnessPolicyExists duplicates stat/ENOENT handling; replace the body with pathExists(path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH)).",
-      "disposition": "Open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by b33eb48; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "trivial",
       "fileName": "STATUS.md",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Make the BANDIT-056 finding-count progression explicit so the immediate stale-context repair and four later repairs are not conflated.",
-      "disposition": "Open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by b33eb48; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review."
     },
     {
       "severity": "minor",
       "fileName": "docs/roadmap/CURRENT_CONTEXT.md",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Update expected-deliverable/current-context wording so the four findings repaired at 23fd3e8d470c9afd7a7f51d7c6fef3046e60c931 are described as locally repaired and pending provider verification, not remaining open.",
-      "disposition": "Open; repair or explicit PM disposition required before Local Qwen or aggregate Stage 4 review."
+      "disposition": "Locally repaired by b33eb48; focused CodeRabbit refresh required before Local Qwen or aggregate Stage 4 review."
     }
   ],
   "attempts": [
@@ -203,6 +203,14 @@
       "endedAt": "2026-05-31T20:29:24Z",
       "result": "completed",
       "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned four open findings: one minor projection-builder SLO provenance comment, one trivial policy-existence helper cleanup, one trivial STATUS finding-count wording issue, and one minor CURRENT_CONTEXT expected-deliverable wording issue."
+    },
+    {
+      "attempt": 21,
+      "sourceHead": "b33eb482173fa67a0e77fa20636d72c0cf810963",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T20:37:00Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Codex PM locally repaired the four latest focused CodeRabbit findings: fixed SLO provenance comment, reused pathExists for policy existence, clarified STATUS finding-count progression, and updated current-context wording. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
     }
   ],
   "executableEvidence": [
@@ -232,6 +240,7 @@
     "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
     "npm run typecheck passed after the local repair.",
     "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/cockpit-status.ts --files src/commands/evidence-freshness-slos.ts --files test/evidence-freshness-slos.test.mjs --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 4 findings at source head d2b422695ebba83429f5564570b762e517ebe2ec."
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 --files src/state/evidence-freshness-slos.ts --files src/state/cockpit-status.ts --files src/commands/evidence-freshness-slos.ts --files test/evidence-freshness-slos.test.mjs --files docs/work/BANDIT-056/coderabbit-review.md --files docs/specs/BANDIT-056-coderabbit-review-output.json --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files STATUS.md -c AGENTS.md --no-color completed with 4 findings at source head d2b422695ebba83429f5564570b762e517ebe2ec.",
+    "b33eb482173fa67a0e77fa20636d72c0cf810963 repairs the four latest focused CodeRabbit findings locally."
   ]
 }
