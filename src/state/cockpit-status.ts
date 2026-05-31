@@ -1,5 +1,11 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import path from "node:path";
+import {
+  EVIDENCE_FRESHNESS_POLICY_PATH,
+  EvidenceTrustSignal,
+  buildGateTrustSignal,
+  evidenceFreshnessPolicyExists
+} from "./evidence-freshness-slos.js";
 
 export type SourceValue<T> = {
   value: T;
@@ -46,6 +52,18 @@ export type StaleEvidence = {
   status: "stale";
   source: string;
   basis: "source_drift_status" | "review_subject_hash_status";
+};
+
+export type CockpitEvidenceTrustSignals = {
+  authority: "derived_non_canonical";
+  gates: {
+    stage_1_brief: EvidenceTrustSignal;
+    stage_2_red_evidence: EvidenceTrustSignal;
+    stage_3_implementation: EvidenceTrustSignal;
+    stage_4_review: EvidenceTrustSignal;
+    stage_5_landing: EvidenceTrustSignal;
+    stage_6_retrospective: EvidenceTrustSignal;
+  };
 };
 
 export type CockpitStatus = {
@@ -99,6 +117,7 @@ export type CockpitStatus = {
     source: string;
   } | null;
   stale_evidence: StaleEvidence[];
+  evidence_trust_signals?: CockpitEvidenceTrustSignals;
 };
 
 const CURRENT_CONTEXT_PATH = "docs/roadmap/CURRENT_CONTEXT.md";
@@ -168,6 +187,18 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     );
   }
 
+  const hasFreshnessSlos = await evidenceFreshnessPolicyExists(repoRoot);
+  const evidence_trust_signals = hasFreshnessSlos
+    ? await buildCockpitTrustSignals(repoRoot, {
+        briefPath,
+        redEvidencePath,
+        implementationEvidencePath,
+        reviewEvidencePath,
+        landingVerdictPath,
+        retrospectivePath
+      })
+    : undefined;
+
   return {
     kind: "workflow_cockpit_status",
     authority: "derived_non_canonical",
@@ -217,7 +248,76 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     stale_evidence: await readStaleEvidence(repoRoot, {
       reviewEvidencePath,
       landingVerdictPath
-    })
+    }),
+    evidence_trust_signals
+  };
+}
+
+async function buildCockpitTrustSignals(
+  repoRoot: string,
+  paths: {
+    briefPath: string;
+    redEvidencePath: string;
+    implementationEvidencePath: string;
+    reviewEvidencePath: string;
+    landingVerdictPath: string;
+    retrospectivePath: string;
+  }
+): Promise<CockpitEvidenceTrustSignals> {
+  const [
+    briefExists,
+    redExists,
+    implExists,
+    reviewExists,
+    landingExists,
+    retroExists
+  ] = await Promise.all([
+    pathExists(repoRoot, paths.briefPath),
+    pathExists(repoRoot, paths.redEvidencePath),
+    pathExists(repoRoot, paths.implementationEvidencePath),
+    pathExists(repoRoot, paths.reviewEvidencePath),
+    pathExists(repoRoot, paths.landingVerdictPath),
+    pathExists(repoRoot, paths.retrospectivePath)
+  ]);
+
+  return {
+    authority: "derived_non_canonical",
+    gates: {
+      stage_1_brief: {
+        ...buildGateTrustSignal("brief", paths.briefPath, "codex_pm", briefExists),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      },
+      stage_2_red_evidence: {
+        ...buildGateTrustSignal("red_evidence", paths.redEvidencePath, "test_writer", redExists),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      },
+      stage_3_implementation: {
+        ...buildGateTrustSignal(
+          "implementation_evidence",
+          paths.implementationEvidencePath,
+          "writer",
+          implExists
+        ),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      },
+      stage_4_review: {
+        ...buildGateTrustSignal("review_evidence", paths.reviewEvidencePath, "reviewer", reviewExists),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      },
+      stage_5_landing: {
+        ...buildGateTrustSignal(
+          "landing_verdict",
+          paths.landingVerdictPath,
+          "landing_agent",
+          landingExists
+        ),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      },
+      stage_6_retrospective: {
+        ...buildGateTrustSignal("retrospective", paths.retrospectivePath, "codex_pm", retroExists),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      }
+    }
   };
 }
 

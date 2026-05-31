@@ -457,14 +457,14 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Stage 3 implementation dispatch for `BANDIT-056`
-through the Claude bootstrap Process Adapter. Dispatch Claude Writer to
-implement Evidence Freshness SLO validation and projection trust-signal output
-from the RED suite. Do not run Stage 4 review, land, close out, create another
-work item, or start unrelated Phase 8 work before implementation evidence is
-recorded.
+**Current next action:** Stage 4 pre-PR CodeRabbit review for `BANDIT-056`
+against current `HEAD` with base
+`c5eb2700502237e3269a82818edd994a4006d878`. Run
+`npm run bandit -- coderabbit-review pre-pr BANDIT-056 --base c5eb2700502237e3269a82818edd994a4006d878`
+and record CodeRabbit review evidence before Local Qwen, aggregate Stage 4
+review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
-The current stage is Stage 3: Implementation Clean-Code Rubric.
+The current stage is Stage 4: Review And Cross-Model Gates.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -873,10 +873,16 @@ in `docs/specs/BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS.json`, its Stage 1 brief is
 recorded in `docs/work/BANDIT-056/brief.md`, Stage 2 RED evidence is recorded
 in `test/evidence-freshness-slos.test.mjs`,
 `docs/specs/BANDIT-056-red-evidence.json`, and
-`docs/work/BANDIT-056/red-evidence.md`, `.bandit/bootstrap-gaps.json` links the
-gap to `BANDIT-056` with status `active`, and `.bandit/events.jsonl` records
-the work-item creation and RED evidence artifact events. The next action is
-Stage 3 implementation dispatch through the Claude bootstrap Process Adapter.
+`docs/work/BANDIT-056/red-evidence.md`, and Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-056/dispatch.md`,
+`docs/work/BANDIT-056/writer-report.md`,
+`docs/work/BANDIT-056/implementation-evidence.md`, and
+`docs/specs/BANDIT-056-implementation-evidence.json`.
+`.bandit/bootstrap-gaps.json` links the gap to `BANDIT-056` with status
+`active`, and `.bandit/events.jsonl` records the work-item, RED evidence, and
+implementation evidence artifact events. The next action is Stage 4 pre-PR
+CodeRabbit review against current `HEAD` with base
+`c5eb2700502237e3269a82818edd994a4006d878`.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1119,9 +1125,10 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-056`, before
-Stage 3 implementation dispatch, review, landing, retrospective, another work
-item, or unrelated Phase 8 work.
+**Expected next deliverable:** Stage 4 pre-PR CodeRabbit review evidence for
+`BANDIT-056` against current `HEAD` with base
+`c5eb2700502237e3269a82818edd994a4006d878`, before Local Qwen, aggregate Stage
+4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1505,13 +1512,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Dispatch Stage 3 implementation for `BANDIT-056` through the Claude
-   bootstrap Process Adapter. Implement Evidence Freshness SLO validation and
-   projection trust-signal output from the RED suite. The Stage 3 Writer has no
-   authority to edit tests, test helpers, fixtures, RED evidence artifacts/specs,
-   or acceptance mappings. Do not run Stage 4 review, land, close out, create
-   another work item, or start unrelated Phase 8 work before implementation
-   evidence is recorded.
+1. Run Stage 4 pre-PR CodeRabbit review for `BANDIT-056` against
+   current `HEAD` with base
+   `c5eb2700502237e3269a82818edd994a4006d878` and record review evidence before
+   Local Qwen, aggregate Stage 4 review, landing, closeout, another work item,
+   or unrelated Phase 8 work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1554,11 +1559,11 @@ aggregate Stage 4 review evidence, Stage 5 landing verdict evidence,
 local-record landing action evidence, Stage 6 retrospective closeout, and
 resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 2 RED
-evidence is recorded for `BANDIT-056`; the next action is Stage 3 implementation
-dispatch through the Claude bootstrap Process Adapter. This is routine technical
-routing, not an operator-owned product, UAT, policy, business, cost, or scope
-decision.
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
+implementation evidence is recorded for `BANDIT-056`; the next action is Stage
+4 pre-PR CodeRabbit review against current `HEAD` with base
+`c5eb2700502237e3269a82818edd994a4006d878`. This is routine technical routing,
+not an operator-owned product, UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

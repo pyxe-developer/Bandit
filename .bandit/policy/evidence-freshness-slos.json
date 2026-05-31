@@ -1,0 +1,104 @@
+{
+  "contract_version": 1,
+  "policy_id": "evidence-freshness-slos",
+  "artifact_types": [
+    {
+      "id": "tests",
+      "owner": "test_writer",
+      "source_artifacts": ["test/evidence-freshness-slos.test.mjs"],
+      "freshness_budget": {
+        "kind": "source_identity",
+        "source_identity": "current_head"
+      },
+      "allowed_freshness_states": ["current", "stale", "missing"],
+      "staleness_reasons": ["source_drift", "missing_required_stage_evidence"],
+      "missing_evidence_behavior": "fail_closed"
+    },
+    {
+      "id": "coderabbit_review",
+      "authority_role": "reviewer",
+      "source_artifacts": ["docs/work/<ID>/coderabbit-review.md"],
+      "freshness_budget": {
+        "kind": "review_subject_hash",
+        "source_identity": "current_review_subject_hash"
+      },
+      "allowed_freshness_states": ["current", "stale", "missing"],
+      "staleness_reasons": ["review_subject_hash_drift", "provider_refusal"],
+      "missing_evidence_behavior": "fail_closed"
+    },
+    {
+      "id": "local_qwen_review",
+      "authority_role": "reviewer",
+      "source_artifacts": ["docs/work/<ID>/local-qwen-review.md"],
+      "freshness_budget": {
+        "kind": "review_subject_hash",
+        "source_identity": "current_review_subject_hash"
+      },
+      "allowed_freshness_states": ["current", "stale", "missing"],
+      "staleness_reasons": ["review_subject_hash_drift", "missing_review"],
+      "missing_evidence_behavior": "fail_closed"
+    },
+    {
+      "id": "landing_verdict",
+      "authority_role": "landing_agent",
+      "source_artifacts": ["docs/work/<ID>/landing-verdict.md"],
+      "freshness_budget": {
+        "kind": "source_identity",
+        "source_identity": "current_head"
+      },
+      "allowed_freshness_states": ["current", "stale", "missing"],
+      "staleness_reasons": ["source_drift", "missing_landing_action"],
+      "missing_evidence_behavior": "fail_closed"
+    },
+    {
+      "id": "derived_projection",
+      "authority_role": "codex_pm",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md"
+      ],
+      "freshness_budget": {
+        "kind": "source_identity",
+        "source_identity": "current_head"
+      },
+      "allowed_freshness_states": ["current", "stale", "missing"],
+      "staleness_reasons": [
+        "missing_dependency",
+        "stale_dependency",
+        "projection_source_disagreement"
+      ],
+      "missing_evidence_behavior": "fail_closed"
+    }
+  ],
+  "trust_signal_requirements": [
+    "source_artifact",
+    "owner_or_authority_role",
+    "freshness_state",
+    "staleness_reason"
+  ],
+  "derived_projection_rules": [
+    {
+      "projection": "cockpit_status",
+      "authority": "derived_non_canonical",
+      "source_artifacts": [
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md"
+      ],
+      "dependent_evidence": ["docs/work/<ID>/red-evidence.md"],
+      "propagate_missing_or_stale_dependencies": true,
+      "cannot_upgrade_missing_dependency_to_trusted": true
+    },
+    {
+      "projection": "session_context",
+      "authority": "derived_non_canonical",
+      "source_artifacts": [
+        "AGENTS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md"
+      ],
+      "dependent_evidence": ["docs/work/<ID>/red-evidence.md"],
+      "propagate_missing_or_stale_dependencies": true,
+      "cannot_upgrade_missing_dependency_to_trusted": true
+    }
+  ]
+}

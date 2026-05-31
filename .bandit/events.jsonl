@@ -143,3 +143,4 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-055","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-TOKEN-COST-FAILSAFE; next action is BANDIT-056 Evidence Freshness SLOs work-item creation"}
 {"type":"work_item_created","work_item":"BANDIT-056","message":"Created work item BANDIT-056 from docs/specs/BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS.json"}
 {"type":"artifact_created","work_item":"BANDIT-056","message":"Created red_evidence artifact at docs/work/BANDIT-056/red-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-056","message":"Created implementation_evidence artifact at docs/work/BANDIT-056/implementation-evidence.md; next action is Stage 4 pre-PR CodeRabbit review"}

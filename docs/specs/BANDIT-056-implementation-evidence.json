@@ -1,0 +1,35 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-056",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "writer_model": "claude-sonnet-4-6",
+  "writer_path": "process_adapter",
+  "summary": "Evidence Freshness SLO validation surface and projection trust-signal output implemented. All 7 RED tests pass. Full test suite passes (456/456).",
+  "production_files_changed": [
+    "src/state/evidence-freshness-slos.ts",
+    "src/commands/evidence-freshness-slos.ts",
+    "src/cli.ts",
+    "src/state/cockpit-status.ts",
+    "src/state/focused-session-context.ts",
+    "src/commands/validate.ts",
+    ".bandit/policy/evidence-freshness-slos.json",
+    "docs/templates/evidence-freshness-slos.md"
+  ],
+  "test_ownership_boundary_preserved": true,
+  "bootstrap_model_family_separation_preserved": true,
+  "verification": {
+    "focused_tests": "pass",
+    "cockpit_tests": "pass",
+    "session_context_tests": "pass",
+    "full_test_suite": "456/456 pass",
+    "typecheck": "pass",
+    "validate_command": "pass",
+    "evidence_freshness_slos_validate": "pass",
+    "gaps_list": "pass",
+    "cockpit_status_json": "pass",
+    "session_context_current_json": "pass",
+    "git_diff_check": "pass"
+  },
+  "bootstrap_gaps": []
+}

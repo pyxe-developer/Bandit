@@ -8,6 +8,7 @@ import { validateCoordinationAuthority } from "../state/coordination-authority.j
 import { validateCoordinationLogs } from "../state/coordination-log.js";
 import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
+import { validateEvidenceFreshnessSlosPolicy } from "../state/evidence-freshness-slos.js";
 import { validateEventLog } from "../state/events.js";
 import { validateGitMutations } from "../state/git-mutations.js";
 import { validateHeartbeatPolicy } from "../state/heartbeat-policy.js";
@@ -52,6 +53,7 @@ export async function validateBandit(repoRoot: string) {
   await validateSkillLifecycleContracts(repoRoot);
   await validateStageCapabilityScopePolicy(repoRoot);
   await validateTokenCostFailsafePolicy(repoRoot);
+  await validateEvidenceFreshnessSlosPolicy(repoRoot);
   await validateAgentEvaluationHarness(repoRoot);
   await validateLocalQwenProfile(repoRoot);
   const smellCatalog = await readSmellCatalog(repoRoot);

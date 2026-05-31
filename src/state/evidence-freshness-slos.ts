@@ -1,0 +1,250 @@
+import { readFile, stat } from "node:fs/promises";
+import path from "node:path";
+
+export const EVIDENCE_FRESHNESS_POLICY_PATH = ".bandit/policy/evidence-freshness-slos.json";
+const TEMPLATE_PATH = "docs/templates/evidence-freshness-slos.md";
+
+const REQUIRED_TEMPLATE_FIELDS = [
+  "work_item",
+  "policy",
+  "artifact_types",
+  "trust_signal_requirements",
+  "derived_projection_rules",
+  "source_artifacts"
+];
+
+type RawRecord = Record<string, unknown>;
+
+export type EvidenceTrustSignal = {
+  artifact_type: string;
+  source: string;
+  owner_or_authority_role: string;
+  freshness_state: "current" | "stale" | "missing";
+  staleness_reason: string;
+  evidence_slo: string;
+};
+
+export type EvidenceFreshnessValidationReport = {
+  status: "pass";
+  policy: string;
+  artifact_types: string[];
+  trust_signal_requirements: string[];
+  derived_projections: string[];
+};
+
+export async function validateEvidenceFreshnessSlos(
+  repoRoot: string
+): Promise<EvidenceFreshnessValidationReport> {
+  await validateTemplate(repoRoot);
+  const content = await readRequiredPolicy(repoRoot);
+  return parseAndValidatePolicy(content);
+}
+
+export async function validateEvidenceFreshnessSlosPolicy(repoRoot: string): Promise<void> {
+  const policyPath = path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH);
+  let content: string;
+  try {
+    content = await readFile(policyPath, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) return;
+    throw error;
+  }
+  await validateTemplate(repoRoot);
+  parseAndValidatePolicy(content);
+}
+
+export async function evidenceFreshnessPolicyExists(repoRoot: string): Promise<boolean> {
+  try {
+    await stat(path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH));
+    return true;
+  } catch (error) {
+    if (isMissingPathError(error)) return false;
+    throw error;
+  }
+}
+
+export function buildGateTrustSignal(
+  artifactType: string,
+  source: string,
+  ownerOrAuthorityRole: string,
+  fileExists: boolean
+): Omit<EvidenceTrustSignal, "evidence_slo"> {
+  return {
+    artifact_type: artifactType,
+    source,
+    owner_or_authority_role: ownerOrAuthorityRole,
+    freshness_state: fileExists ? "current" : "missing",
+    staleness_reason: fileExists ? "none" : "missing_required_stage_evidence"
+  };
+}
+
+async function validateTemplate(repoRoot: string) {
+  const templatePath = path.join(repoRoot, TEMPLATE_PATH);
+  let content: string;
+  try {
+    content = await readFile(templatePath, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      throw new Error(`Missing required template: ${TEMPLATE_PATH}`);
+    }
+    throw error;
+  }
+
+  const missingFields = REQUIRED_TEMPLATE_FIELDS.filter(
+    (field) => !new RegExp(`^${escapeRegExp(field)}:`, "im").test(content)
+  );
+
+  if (missingFields.length > 0) {
+    throw new Error(
+      `Malformed template: ${TEMPLATE_PATH}; missing required fields: ${missingFields.join(", ")}`
+    );
+  }
+}
+
+async function readRequiredPolicy(repoRoot: string): Promise<string> {
+  const policyPath = path.join(repoRoot, EVIDENCE_FRESHNESS_POLICY_PATH);
+  try {
+    return await readFile(policyPath, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      throw new Error(`Missing required policy: ${EVIDENCE_FRESHNESS_POLICY_PATH}`);
+    }
+    throw error;
+  }
+}
+
+function parseAndValidatePolicy(content: string): EvidenceFreshnessValidationReport {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    throw new Error("Malformed evidence freshness SLO policy: invalid JSON");
+  }
+
+  if (!isRecord(parsed) || parsed.contract_version !== 1) {
+    throw new Error("Malformed evidence freshness SLO policy: missing contract_version 1");
+  }
+
+  if (parsed.policy_id !== "evidence-freshness-slos") {
+    throw new Error(
+      "Malformed evidence freshness SLO policy: policy_id must be evidence-freshness-slos"
+    );
+  }
+
+  const artifactTypeIds = validateArtifactTypes(parsed);
+  const trustSignalRequirements = collectTrustSignalRequirements(parsed);
+  validateDerivedProjectionRules(parsed);
+  const derivedProjections = collectDerivedProjections(parsed);
+
+  return {
+    status: "pass",
+    policy: EVIDENCE_FRESHNESS_POLICY_PATH,
+    artifact_types: artifactTypeIds,
+    trust_signal_requirements: trustSignalRequirements,
+    derived_projections: derivedProjections
+  };
+}
+
+function validateArtifactTypes(policy: RawRecord): string[] {
+  if (!Array.isArray(policy.artifact_types)) return [];
+  const ids: string[] = [];
+
+  for (const item of policy.artifact_types as unknown[]) {
+    if (!isRecord(item)) continue;
+
+    const id = requireNonEmptyString(
+      item.id,
+      "evidence freshness SLO artifact types require a non-empty string id"
+    );
+
+    const hasSourceArtifacts =
+      Array.isArray(item.source_artifacts) &&
+      (item.source_artifacts as unknown[]).length > 0;
+    const hasOwner =
+      (typeof item.owner === "string" && item.owner.trim().length > 0) ||
+      (typeof item.authority_role === "string" && item.authority_role.trim().length > 0);
+
+    if (!hasSourceArtifacts || !hasOwner) {
+      throw new Error(
+        `evidence freshness SLO ${id} requires source artifact, owner or authority role, freshness budget or source identity rule, freshness state, and staleness reason behavior`
+      );
+    }
+
+    if (Array.isArray(item.allowed_freshness_states)) {
+      const states = item.allowed_freshness_states as unknown[];
+      if (
+        !states.includes("current") ||
+        !states.includes("stale") ||
+        !states.includes("missing")
+      ) {
+        throw new Error(
+          "freshness states must include current, stale, and missing for trusted evidence signals"
+        );
+      }
+    }
+
+    if (Array.isArray(item.staleness_reasons)) {
+      if ((item.staleness_reasons as unknown[]).length === 0) {
+        throw new Error(
+          "trusted evidence signals require explicit staleness reason behavior"
+        );
+      }
+    }
+
+    ids.push(id);
+  }
+
+  return ids;
+}
+
+function collectTrustSignalRequirements(policy: RawRecord): string[] {
+  if (!Array.isArray(policy.trust_signal_requirements)) return [];
+  return (policy.trust_signal_requirements as unknown[]).filter(
+    (item): item is string => typeof item === "string"
+  );
+}
+
+function validateDerivedProjectionRules(policy: RawRecord): void {
+  if (!Array.isArray(policy.derived_projection_rules)) return;
+
+  for (const item of policy.derived_projection_rules as unknown[]) {
+    if (!isRecord(item)) continue;
+
+    if (item.propagate_missing_or_stale_dependencies !== true) {
+      throw new Error(
+        "derived projections must propagate missing or stale source dependencies and cannot upgrade them to trusted status"
+      );
+    }
+  }
+}
+
+function collectDerivedProjections(policy: RawRecord): string[] {
+  if (!Array.isArray(policy.derived_projection_rules)) return [];
+  return (policy.derived_projection_rules as unknown[])
+    .filter(isRecord)
+    .map((item) => (typeof item.projection === "string" ? item.projection : ""))
+    .filter((p) => p.length > 0);
+}
+
+function requireNonEmptyString(value: unknown, message: string): string {
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new Error(message);
+  }
+  return value;
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function isRecord(value: unknown): value is RawRecord {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function isMissingPathError(error: unknown): boolean {
+  return (
+    error instanceof Error &&
+    "code" in error &&
+    (error as NodeJS.ErrnoException).code === "ENOENT"
+  );
+}

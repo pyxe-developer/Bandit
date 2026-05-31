@@ -1,5 +1,11 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import {
+  EVIDENCE_FRESHNESS_POLICY_PATH,
+  EvidenceTrustSignal,
+  buildGateTrustSignal,
+  evidenceFreshnessPolicyExists
+} from "./evidence-freshness-slos.js";
 
 const AGENTS_PATH = "AGENTS.md";
 const CONTEXT_PATH = "CONTEXT.md";
@@ -40,7 +46,78 @@ export type FocusedSessionContextPacket = {
   source_hierarchy: Array<{ source: string; authority: string }>;
   stale_or_missing_evidence: string[];
   deep_read_pointers: Array<{ source: string; reason: string }>;
+  evidence_trust_signals?: {
+    authority: "derived_non_canonical";
+    dependencies: EvidenceTrustSignal[];
+  };
 };
+
+const STAGE_EVIDENCE_INFOS = [
+  { stageNum: 1, artifact_type: "brief", owner: "codex_pm", filename: "brief.md" },
+  { stageNum: 2, artifact_type: "red_evidence", owner: "test_writer", filename: "red-evidence.md" },
+  {
+    stageNum: 3,
+    artifact_type: "implementation_evidence",
+    owner: "writer",
+    filename: "implementation-evidence.md"
+  },
+  {
+    stageNum: 4,
+    artifact_type: "review_evidence",
+    owner: "reviewer",
+    filename: "review-evidence.md"
+  },
+  {
+    stageNum: 5,
+    artifact_type: "landing_verdict",
+    owner: "landing_agent",
+    filename: "landing-verdict.md"
+  },
+  { stageNum: 6, artifact_type: "retrospective", owner: "codex_pm", filename: "retrospective.md" }
+] as const;
+
+async function buildSessionContextTrustSignals(
+  repoRoot: string,
+  workItemId: string,
+  currentStage: string
+): Promise<{ authority: "derived_non_canonical"; dependencies: EvidenceTrustSignal[] }> {
+  const stageNum = parseStageNumber(currentStage);
+  if (stageNum === null) {
+    return { authority: "derived_non_canonical", dependencies: [] };
+  }
+
+  const dependencies: EvidenceTrustSignal[] = [];
+
+  for (const info of STAGE_EVIDENCE_INFOS) {
+    if (info.stageNum > stageNum) break;
+    const source = `docs/work/${workItemId}/${info.filename}`;
+    const fileExists = await pathExists(repoRoot, source);
+    if (!fileExists) {
+      dependencies.push({
+        ...buildGateTrustSignal(info.artifact_type, source, info.owner, false),
+        evidence_slo: EVIDENCE_FRESHNESS_POLICY_PATH
+      });
+    }
+  }
+
+  return { authority: "derived_non_canonical", dependencies };
+}
+
+function parseStageNumber(stageStr: string): number | null {
+  const match = stageStr.match(/^Stage\s+(\d+)/i);
+  if (!match || !match[1]) return null;
+  return parseInt(match[1], 10);
+}
+
+async function pathExists(repoRoot: string, displayPath: string): Promise<boolean> {
+  try {
+    await stat(path.join(repoRoot, displayPath));
+    return true;
+  } catch (error) {
+    if (isMissingPathError(error)) return false;
+    throw error;
+  }
+}
 
 export async function readFocusedSessionContext(
   repoRoot: string
@@ -84,6 +161,11 @@ export async function readFocusedSessionContext(
   const activeBootstrapGap = findActiveGap(rawGaps, activeWorkItemId);
   const blockers = buildBlockers(rawGaps);
 
+  const hasFreshnessSlos = await evidenceFreshnessPolicyExists(repoRoot);
+  const evidence_trust_signals = hasFreshnessSlos
+    ? await buildSessionContextTrustSignals(repoRoot, activeWorkItemId, currentStage)
+    : undefined;
+
   return {
     kind: "focused_session_context_packet",
     authority: "derived_non_canonical",
@@ -103,7 +185,8 @@ export async function readFocusedSessionContext(
     source_artifacts: buildSourceArtifacts(),
     source_hierarchy: buildSourceHierarchy(),
     stale_or_missing_evidence: [],
-    deep_read_pointers: buildDeepReadPointers()
+    deep_read_pointers: buildDeepReadPointers(),
+    evidence_trust_signals
   };
 }
 

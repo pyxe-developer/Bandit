@@ -12,9 +12,9 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 `BANDIT-055` is landed and closed out as the bootstrap-gap chore for `BANDIT-GAP-TOKEN-COST-FAILSAFE`. Its structured creation spec, Stage 1 brief, Stage 2 RED evidence, Stage 3 Claude Writer implementation evidence, Stage 4 CodeRabbit provider-refusal/bootstrap-gap replacement evidence, refreshed Local Qwen non-blocking evidence, aggregate Stage 4 review evidence, Stage 5 landing verdict, risk-classification and supply-chain gate evidence, local-record landing action, Stage 6 retrospective, and bootstrap-gap disposition are recorded in `docs/work/BANDIT-055/`, `docs/specs/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-Stage 2 RED evidence for `BANDIT-056` is recorded in `test/evidence-freshness-slos.test.mjs`, `docs/specs/BANDIT-056-red-evidence.json`, and `docs/work/BANDIT-056/red-evidence.md`.
+Stage 3 implementation evidence for `BANDIT-056` is recorded in `docs/work/BANDIT-056/dispatch.md`, `docs/work/BANDIT-056/writer-report.md`, `docs/work/BANDIT-056/implementation-evidence.md`, and `docs/specs/BANDIT-056-implementation-evidence.json`.
 
-The next required action is Stage 3 implementation dispatch for `BANDIT-056`: dispatch Claude Writer through the bootstrap Process Adapter to implement Evidence Freshness SLO validation and projection trust-signal output from the RED suite. Do not run Stage 4 review, land, close out, create another work item, or start unrelated Phase 8 work before implementation evidence is recorded.
+The next required action is Stage 4 pre-PR CodeRabbit review for `BANDIT-056` against current `HEAD` with base `c5eb2700502237e3269a82818edd994a4006d878`. Run `npm run bandit -- coderabbit-review pre-pr BANDIT-056 --base c5eb2700502237e3269a82818edd994a4006d878` and record CodeRabbit review evidence before Local Qwen, aggregate Stage 4 review, landing, closeout, creating another work item, or unrelated Phase 8 work.
 
 No operator-owned input is required for the next recorded action.
 
@@ -29,7 +29,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - Stage 3 dispatch next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - Stage 4 CodeRabbit review next)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
 - `BANDIT-053` - Agent Observability Traces (closed)
