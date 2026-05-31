@@ -1,29 +1,50 @@
 {
-  "sourceHead": "512e5b9b931c06459a8eb6f38c4d0d717ce26a6f",
+  "sourceHead": "b31c336167918bb5a114e78a813458182e320dc9",
   "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
   "reviewState": "completed",
   "verdict": "blocker",
   "findings": [
     {
-      "severity": "trivial",
-      "fileName": "docs/work/BANDIT-056/implementation-evidence.md",
-      "status": "locally_resolved_pending_refresh",
-      "body": "Update the docs/templates/evidence-freshness-slos.md production-file description to explicitly state that the template has all 6 required fields so it matches writer-report.md.",
-      "disposition": "Repaired locally by updating the production-file description to state that docs/templates/evidence-freshness-slos.md has all 6 required fields."
+      "severity": "minor",
+      "fileName": "docs/specs/BANDIT-056-coderabbit-review-output.json",
+      "status": "open",
+      "body": "Top-level sourceHead is inconsistent with the most recent repair attempt; verify whether it should represent the original review target or latest repaired state."
+    },
+    {
+      "severity": "minor",
+      "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
+      "status": "open",
+      "body": "Metadata is ambiguous about whether source_head refers to the reviewed commit or repaired commit; add a clear repair_commit field or document the source_head rule."
     },
     {
       "severity": "trivial",
-      "fileName": "src/state/focused-session-context.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "withEvidenceSlo, readScalarStatus, and pathExists duplicate helper logic already present in cockpit-status.ts; extract/import shared helpers while preserving signatures.",
-      "disposition": "Repaired locally by importing the shared withEvidenceSlo, readScalarStatus, and pathExists helpers from src/state/evidence-freshness-slos.ts."
+      "fileName": "docs/work/BANDIT-056/coderabbit-review.md",
+      "status": "open",
+      "body": "bootstrap_gaps uses a list containing none while related JSON artifacts use an empty array; normalize or document the semantic difference."
+    },
+    {
+      "severity": "minor",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "Policy validation fails open when artifact_types or trust-signal requirements are missing; enforce required artifact_types and trust signals fail-closed."
     },
     {
       "severity": "trivial",
       "fileName": "src/state/cockpit-status.ts",
-      "status": "locally_resolved_pending_refresh",
-      "body": "Duplicate withEvidenceSlo helpers should be consolidated into one exported helper near the evidence-freshness SLO logic and reused by cockpit-status and focused-session-context.",
-      "disposition": "Repaired locally by using the exported withEvidenceSlo helper from src/state/evidence-freshness-slos.ts and removing the local duplicate."
+      "status": "open",
+      "body": "reviewEvidencePath and landingVerdictPath existence checks are duplicated between readStaleEvidence and buildCockpitTrustSignals; compute them once or return the flags."
+    },
+    {
+      "severity": "minor",
+      "fileName": "src/state/evidence-freshness-slos.ts",
+      "status": "open",
+      "body": "validateDerivedProjectionRules should enforce both propagate_missing_or_stale_dependencies and cannot_upgrade_missing_dependency_to_trusted as true."
+    },
+    {
+      "severity": "minor",
+      "fileName": "docs/templates/evidence-freshness-slos.md",
+      "status": "open",
+      "body": "derived_projection_rules scaffold is missing cannot_upgrade_missing_dependency_to_trusted."
     }
   ],
   "attempts": [
@@ -114,12 +135,20 @@
       "endedAt": "2026-05-31T12:57:58Z",
       "result": "local_repair_pending_provider_refresh",
       "summary": "Codex PM locally repaired all three focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source."
+    },
+    {
+      "attempt": 12,
+      "sourceHead": "b31c336167918bb5a114e78a813458182e320dc9",
+      "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+      "endedAt": "2026-05-31T13:33:06Z",
+      "result": "completed",
+      "summary": "Focused CodeRabbit refresh completed on the locally repaired source and returned seven open findings: six minor artifact/policy/template findings and one trivial cockpit-status I/O hardening finding."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 3 findings.",
+    "coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 7 findings at source head b31c336167918bb5a114e78a813458182e320dc9.",
     "b8c9272f8cf69d9d1c86b0d0776236d571a1f7de repairs the three focused CodeRabbit findings locally.",
     "node --test test/evidence-freshness-slos.test.mjs passed after the local repair.",
     "node --test test/cockpit-status.test.mjs passed after the local repair.",
@@ -129,8 +158,8 @@
     "npm run bandit -- evidence-freshness-slos validate --json passed after the local repair.",
     "npm run bandit -- coderabbit-review BANDIT-056 passed after the local repair with findings_status locally_resolved_pending_refresh.",
     "npm run bandit -- validate passed after the local repair.",
-    "node ./bin/bandit.mjs cockpit status --json passed and reports focused CodeRabbit refresh as the next action.",
-    "node ./bin/bandit.mjs session-context current --json passed and reports focused CodeRabbit refresh as the allowed action.",
+    "node ./bin/bandit.mjs cockpit status --json passed after recording the refresh and reports repair or explicit disposition as the next action.",
+    "node ./bin/bandit.mjs session-context current --json passed after recording the refresh and reports repair or explicit disposition as the allowed action.",
     "git diff --check passed after the local repair."
   ]
 }
