@@ -18,7 +18,9 @@ Stage 4 focused CodeRabbit refresh evidence for `BANDIT-056` is recorded in `doc
 
 Local Qwen evidence is recorded in `docs/work/BANDIT-056/local-qwen-review.md` as a bootstrap-gap timeout after two fail-closed attempts against the current source.
 
-The next required action is aggregate Stage 4 review evidence before landing, closeout, creating another work item, or unrelated Phase 8 work. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
+Aggregate Stage 4 review evidence is recorded in `docs/work/BANDIT-056/review-evidence.md` with PM disposition `pass`.
+
+The next required action is the Stage 5 landing verdict before landing action, closeout, creating another work item, or unrelated Phase 8 work.
 
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
 `BANDIT-056` Stage 4 repair ownership violation. It must be addressed after
@@ -37,7 +39,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-056` - Evidence Freshness SLOs (active - aggregate Stage 4 review evidence next)
+- `BANDIT-056` - Evidence Freshness SLOs (active - Stage 5 landing verdict next)
 - `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued after BANDIT-056 closeout
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)

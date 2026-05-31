@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Write aggregate Stage 4 review evidence for `BANDIT-056` using current CodeRabbit pass evidence, Local Qwen bootstrap-gap timeout evidence, focused verification, and clean-code review. Do not run another CodeRabbit refresh solely for the dispositioned trivial findings.
+**Current next step:** Write the Stage 5 landing verdict for `BANDIT-056` using current Stage 4 review evidence, Local Qwen bootstrap-gap timeout evidence, clean-code pass, and focused verification. Do not start another work item or unrelated Phase 8 work before landing and closeout.
 
 ## Next Work Item
 
