@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Stage 2 RED evidence for `BANDIT-056`. Create focused RED tests and `docs/specs/BANDIT-056-red-evidence.json`, then render `docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3 implementation, run review, land, close out, create another work item, or start unrelated Phase 8 work before RED evidence is recorded.
+**Current next step:** Stage 3 implementation dispatch for `BANDIT-056` through the Claude bootstrap Process Adapter. Dispatch Claude Writer to implement Evidence Freshness SLO validation and projection trust-signal output from the RED suite. Do not run Stage 4 review, land, close out, create another work item, or start unrelated Phase 8 work before implementation evidence is recorded.
 
 ## Next Work Item
 

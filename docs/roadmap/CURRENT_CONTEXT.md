@@ -457,13 +457,14 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Stage 2 RED evidence for `BANDIT-056`. Create focused
-RED tests and `docs/specs/BANDIT-056-red-evidence.json`, then render
-`docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3 implementation,
-run review, land, close out, create another work item, or start unrelated Phase
-8 work before RED evidence is recorded.
+**Current next action:** Stage 3 implementation dispatch for `BANDIT-056`
+through the Claude bootstrap Process Adapter. Dispatch Claude Writer to
+implement Evidence Freshness SLO validation and projection trust-signal output
+from the RED suite. Do not run Stage 4 review, land, close out, create another
+work item, or start unrelated Phase 8 work before implementation evidence is
+recorded.
 
-The current stage is Stage 2: Test Design And RED Evidence.
+The current stage is Stage 3: Implementation Clean-Code Rubric.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -869,9 +870,13 @@ resolved.
 `BANDIT-056` is active as the bootstrap-gap chore for
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. Its structured creation spec is recorded
 in `docs/specs/BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS.json`, its Stage 1 brief is
-recorded in `docs/work/BANDIT-056/brief.md`, `.bandit/bootstrap-gaps.json`
-links the gap to `BANDIT-056` with status `active`, and `.bandit/events.jsonl`
-records the work-item creation event. The next action is Stage 2 RED evidence.
+recorded in `docs/work/BANDIT-056/brief.md`, Stage 2 RED evidence is recorded
+in `test/evidence-freshness-slos.test.mjs`,
+`docs/specs/BANDIT-056-red-evidence.json`, and
+`docs/work/BANDIT-056/red-evidence.md`, `.bandit/bootstrap-gaps.json` links the
+gap to `BANDIT-056` with status `active`, and `.bandit/events.jsonl` records
+the work-item creation and RED evidence artifact events. The next action is
+Stage 3 implementation dispatch through the Claude bootstrap Process Adapter.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1500,11 +1505,13 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record Stage 2 RED evidence for `BANDIT-056` by creating focused failing
-   tests, `docs/specs/BANDIT-056-red-evidence.json`, and
-   `docs/work/BANDIT-056/red-evidence.md`. Do not dispatch Stage 3
-   implementation, run review, land, close out, create another work item, or
-   start unrelated Phase 8 work before RED evidence is recorded.
+1. Dispatch Stage 3 implementation for `BANDIT-056` through the Claude
+   bootstrap Process Adapter. Implement Evidence Freshness SLO validation and
+   projection trust-signal output from the RED suite. The Stage 3 Writer has no
+   authority to edit tests, test helpers, fixtures, RED evidence artifacts/specs,
+   or acceptance mappings. Do not run Stage 4 review, land, close out, create
+   another work item, or start unrelated Phase 8 work before implementation
+   evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1547,8 +1554,9 @@ aggregate Stage 4 review evidence, Stage 5 landing verdict evidence,
 local-record landing action evidence, Stage 6 retrospective closeout, and
 resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. The next
-action is Stage 2 RED evidence for `BANDIT-056`. This is routine technical
+`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 2 RED
+evidence is recorded for `BANDIT-056`; the next action is Stage 3 implementation
+dispatch through the Claude bootstrap Process Adapter. This is routine technical
 routing, not an operator-owned product, UAT, policy, business, cost, or scope
 decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

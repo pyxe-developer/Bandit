@@ -1,0 +1,63 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-056",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Focused Test Writer-owned tests define the Evidence Freshness SLO validation and projection trust-signal surface before implementation. The suite fails because Bandit currently has no `evidence-freshness-slos` command and cockpit/session-context projections do not expose Evidence Trust Signals for stage evidence dependencies.",
+  "test_command": "node --test test/evidence-freshness-slos.test.mjs",
+  "observed_output": [
+    "tests 7",
+    "pass 0",
+    "fail 7",
+    "evidence-freshness-slos validation accepts a complete SLO policy failed: Unknown command: evidence-freshness-slos",
+    "evidence-freshness-slos validation rejects trusted evidence without source or owner failed before source/owner validation because the command is missing",
+    "evidence-freshness-slos validation rejects missing freshness states failed before freshness-state validation because the command is missing",
+    "evidence-freshness-slos validation rejects missing staleness reasons failed before staleness-reason validation because the command is missing",
+    "evidence-freshness-slos validation rejects derived projections that hide stale dependencies failed before dependency-propagation validation because the command is missing",
+    "cockpit status exposes evidence trust signals for gate dependencies failed because the cockpit status payload has no evidence_trust_signals object",
+    "session-context exposes stale or missing evidence as trust-signal dependencies failed because the session-context payload has no evidence_trust_signals object"
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "Focused RED evidence proves Bandit currently lacks enforced Evidence Freshness SLO policy validation.",
+      "evidence": "`test/evidence-freshness-slos.test.mjs` runs `bandit evidence-freshness-slos validate --json` against a complete policy fixture; it fails with `Unknown command: evidence-freshness-slos`, proving no runnable validation surface exists yet."
+    },
+    {
+      "criterion": "Evidence Freshness SLO policy validation requires every trusted evidence signal to declare artifact type, source artifact, owner or authority role, freshness budget or source identity rule, freshness state, and staleness reason behavior.",
+      "evidence": "The missing source/owner test removes source artifacts and owner metadata from a trusted evidence SLO and expects a fail-closed diagnostic requiring source artifact, owner or authority role, freshness rule, freshness state, and staleness reason behavior; the current command is missing."
+    },
+    {
+      "criterion": "Validation fails closed when trusted states omit artifact-specific freshness-state validation.",
+      "evidence": "The missing freshness-state test narrows the allowed state list to `current` and expects a fail-closed diagnostic requiring `current`, `stale`, and `missing` for trusted evidence signals; the current command is missing."
+    },
+    {
+      "criterion": "Validation fails closed when trusted states omit staleness-reason behavior.",
+      "evidence": "The missing staleness-reason test empties the staleness reason list and expects a fail-closed diagnostic that trusted evidence signals need explicit staleness reason behavior; the current command is missing."
+    },
+    {
+      "criterion": "Derived cockpit and session-context views propagate missing or stale source dependencies instead of silently reporting trusted status.",
+      "evidence": "The derived projection test disables missing/stale dependency propagation and expects fail-closed validation that derived projections cannot upgrade missing dependencies to trusted status; the current command is missing."
+    },
+    {
+      "criterion": "Cockpit status exposes source artifact path, owner or authority role, freshness state, staleness reason, and SLO source for gate evidence dependencies.",
+      "evidence": "The cockpit projection test expects `evidence_trust_signals.gates.stage_2_red_evidence` to expose `docs/work/BANDIT-056/red-evidence.md`, owner `test_writer`, freshness state `current`, staleness reason `none`, and the policy source; the current payload has no `evidence_trust_signals` object."
+    },
+    {
+      "criterion": "Session-context projections expose missing evidence as trust-signal dependencies instead of hiding it.",
+      "evidence": "The session-context projection test omits RED evidence and expects a missing dependency signal for `docs/work/BANDIT-056/red-evidence.md` with staleness reason `missing_required_stage_evidence`; the current payload has no `evidence_trust_signals` object."
+    },
+    {
+      "criterion": "Review evidence freshness remains tied to review-subject-hash semantics where applicable and records how artifact-specific SLO state composes with that hash.",
+      "evidence": "The complete SLO fixture defines CodeRabbit and Local Qwen review artifact types with `review_subject_hash` freshness budgets; the missing command prevents policy validation from accepting or enforcing this boundary."
+    },
+    {
+      "criterion": "Policy and projection evidence freshness rules preserve CLI authority and repo-native artifacts as canonical state; generated view models, caches, cockpit state, traces, and projections remain derived non-canonical evidence.",
+      "evidence": "The cockpit and session-context tests require `evidence_trust_signals.authority: derived_non_canonical` and assert the trust signals are computed from repo artifacts, not hidden generated authority state."
+    },
+    {
+      "criterion": "Stage 2 RED evidence preserves the Permanent Test Ownership Boundary and bootstrap model-family separation.",
+      "evidence": "This RED evidence and tests are Codex PM/Test Writer-authored. Stage 3 implementation must be routed to Claude through the bootstrap Process Adapter path, and the Stage 3 Writer must not edit tests, test helpers, fixtures, RED evidence artifacts/specs, or acceptance mappings for `BANDIT-056`."
+    }
+  ],
+  "next_action": "Dispatch Stage 3 implementation for `BANDIT-056` to Claude through the bootstrap Process Adapter path: implement the narrow Evidence Freshness SLO repair by adding `.bandit/policy/evidence-freshness-slos.json`, `docs/templates/evidence-freshness-slos.md`, `bandit evidence-freshness-slos validate --json`, `bandit validate` integration as appropriate, evidence trust-signal generation for cockpit status and session-context projections, artifact-specific freshness state and staleness-reason validation, missing/stale dependency propagation, and review-subject-hash composition needed to make the RED tests pass. Keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, full scheduler execution, full worktree lifecycle work, claim lease creation or release, work-surface reservations, cockpit UI/server/API work beyond existing CLI-derived payload validation, state-index persistence, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval changes, live reviewer routing changes, paid reviewer promotion, external service integration, installed global skill edits, dependency or lockfile changes, and unrelated Phase 8 work."
+}
