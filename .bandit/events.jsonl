@@ -136,3 +136,5 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Recorded Local Qwen finding disposition and durable retrospective routing; next action is aggregate Stage 4 review evidence"}
 {"type":"artifact_created","work_item":"BANDIT-055","message":"Created review evidence artifact at docs/work/BANDIT-055/review-evidence.md; next action is Stage 5 landing verdict"}
 {"type":"artifact_created","work_item":"BANDIT-055","message":"Created landing_verdict artifact at docs/work/BANDIT-055/landing-verdict.md"}
+{"type":"stage5_evidence_updated","work_item":"BANDIT-055","message":"Registered risk-classification and supply-chain gate evidence for local-record landing eligibility; refreshed Local Qwen returned non_blocking findings"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-055","message":"Dispositioned refreshed Local Qwen non_blocking findings and refreshed aggregate review/landing evidence; next action is local-record landing action"}
