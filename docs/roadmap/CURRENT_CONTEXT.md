@@ -457,12 +457,12 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-056` - Evidence Freshness SLOs.
 
-**Current next action:** Stage 4 pre-PR CodeRabbit review for `BANDIT-056`
-against current `HEAD` with base
-`c5eb2700502237e3269a82818edd994a4006d878`. Run
-`npm run bandit -- coderabbit-review pre-pr BANDIT-056 --base c5eb2700502237e3269a82818edd994a4006d878`
-and record CodeRabbit review evidence before Local Qwen, aggregate Stage 4
-review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Current next action:** Repair or explicitly disposition the two open
+CodeRabbit findings for `BANDIT-056` in
+`src/state/focused-session-context.ts` and
+`.bandit/policy/evidence-freshness-slos.json` before Local Qwen, aggregate
+Stage 4 review, landing, retrospective, another work item, or unrelated Phase
+8 work.
 
 The current stage is Stage 4: Review And Cross-Model Gates.
 
@@ -880,9 +880,14 @@ recorded in `docs/work/BANDIT-056/dispatch.md`,
 `docs/specs/BANDIT-056-implementation-evidence.json`.
 `.bandit/bootstrap-gaps.json` links the gap to `BANDIT-056` with status
 `active`, and `.bandit/events.jsonl` records the work-item, RED evidence, and
-implementation evidence artifact events. The next action is Stage 4 pre-PR
-CodeRabbit review against current `HEAD` with base
-`c5eb2700502237e3269a82818edd994a4006d878`.
+implementation evidence artifact events. Stage 4 pre-PR CodeRabbit evidence is
+recorded in `docs/work/BANDIT-056/coderabbit-review.md` and
+`docs/specs/BANDIT-056-coderabbit-review-output.json` at source head
+`a43ca6e36beea55b34387205733e3e9cff2ec61f`. CodeRabbit completed with two
+open trivial findings against `src/state/focused-session-context.ts` and
+`.bandit/policy/evidence-freshness-slos.json`. The next action is to repair or
+explicitly disposition those findings before Local Qwen, aggregate Stage 4
+review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 `BANDIT-048` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-FOCUSED-SESSION-CONTEXT`; its Stage 1 through Stage 6 evidence,
@@ -1125,10 +1130,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 4 pre-PR CodeRabbit review evidence for
-`BANDIT-056` against current `HEAD` with base
-`c5eb2700502237e3269a82818edd994a4006d878`, before Local Qwen, aggregate Stage
-4 review, landing, retrospective, another work item, or unrelated Phase 8 work.
+**Expected next deliverable:** Repair or explicit disposition evidence for the
+two open `BANDIT-056` CodeRabbit findings, before Local Qwen, aggregate Stage 4
+review, landing, retrospective, another work item, or unrelated Phase 8 work.
 
 ## Known Bootstrap Gaps
 
@@ -1512,11 +1516,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run Stage 4 pre-PR CodeRabbit review for `BANDIT-056` against
-   current `HEAD` with base
-   `c5eb2700502237e3269a82818edd994a4006d878` and record review evidence before
-   Local Qwen, aggregate Stage 4 review, landing, closeout, another work item,
-   or unrelated Phase 8 work.
+1. Repair or explicitly disposition the two open CodeRabbit findings for
+   `BANDIT-056` in `src/state/focused-session-context.ts` and
+   `.bandit/policy/evidence-freshness-slos.json` before Local Qwen, aggregate
+   Stage 4 review, landing, closeout, another work item, or unrelated Phase 8
+   work.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1560,10 +1564,11 @@ local-record landing action evidence, Stage 6 retrospective closeout, and
 resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as active for `BANDIT-056`. Stage 3
-implementation evidence is recorded for `BANDIT-056`; the next action is Stage
-4 pre-PR CodeRabbit review against current `HEAD` with base
-`c5eb2700502237e3269a82818edd994a4006d878`. This is routine technical routing,
-not an operator-owned product, UAT, policy, business, cost, or scope decision.
+implementation evidence is recorded for `BANDIT-056`; Stage 4 pre-PR
+CodeRabbit evidence is recorded with two open trivial findings. The next action
+is to repair or explicitly disposition those findings before Local Qwen. This
+is routine technical routing, not an operator-owned product, UAT, policy,
+business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable

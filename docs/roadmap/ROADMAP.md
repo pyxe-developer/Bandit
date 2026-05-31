@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-056` - Evidence Freshness SLOs
 
-**Current next step:** Stage 4 pre-PR CodeRabbit review for `BANDIT-056` against current `HEAD` with base `c5eb2700502237e3269a82818edd994a4006d878`. Run `npm run bandit -- coderabbit-review pre-pr BANDIT-056 --base c5eb2700502237e3269a82818edd994a4006d878` and record CodeRabbit review evidence before Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
+**Current next step:** Repair or explicitly disposition the two open CodeRabbit findings for `BANDIT-056` in `src/state/focused-session-context.ts` and `.bandit/policy/evidence-freshness-slos.json` before Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
 
 ## Next Work Item
 

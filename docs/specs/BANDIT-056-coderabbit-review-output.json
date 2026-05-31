@@ -1,0 +1,20 @@
+{
+  "sourceHead": "a43ca6e36beea55b34387205733e3e9cff2ec61f",
+  "baseRevision": "c5eb2700502237e3269a82818edd994a4006d878",
+  "reviewState": "completed",
+  "verdict": "blocker",
+  "findings": [
+    {
+      "severity": "trivial",
+      "fileName": "src/state/focused-session-context.ts",
+      "status": "open",
+      "body": "src/state/focused-session-context.ts should run the STAGE_EVIDENCE_INFOS pathExists checks in parallel for entries with stageNum <= current stage, then preserve the current dependency order when adding missing dependency trust signals."
+    },
+    {
+      "severity": "trivial",
+      "fileName": ".bandit/policy/evidence-freshness-slos.json",
+      "status": "open",
+      "body": ".bandit/policy/evidence-freshness-slos.json uses source_identity current_review_subject_hash for review_subject_hash freshness budget entries; CodeRabbit recommends changing matching source_identity values to current or removing the redundant field if kind is sufficient."
+    }
+  ]
+}
