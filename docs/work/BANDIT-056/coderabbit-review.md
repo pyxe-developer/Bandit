@@ -4,7 +4,7 @@ contract_version: 1
 work_item: BANDIT-056
 source_head: b31c336167918bb5a114e78a813458182e320dc9
 source_head_meaning: latest completed CodeRabbit-reviewed source head; local repair evidence is recorded separately and still requires focused provider refresh.
-repair_commit: pending-local-repair-commit
+repair_commit: e91081a57076120b236e0ba0fd48dd906ee2504e
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:c5eb2700502237e3269a82818edd994a4006d878
 review_state: completed
@@ -17,6 +17,7 @@ executable_evidence:
   - coderabbit --version returned 0.4.1.
   - coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.
   - coderabbit review --agent --base-commit c5eb2700502237e3269a82818edd994a4006d878 -c AGENTS.md --no-color completed with 7 findings at source head b31c336167918bb5a114e78a813458182e320dc9.
+  - e91081a57076120b236e0ba0fd48dd906ee2504e repairs the seven focused CodeRabbit findings locally.
   - node --test test/evidence-freshness-slos.test.mjs passed after the local repair.
   - node --test test/cockpit-status.test.mjs passed after the local repair.
   - node --test test/focused-session-context.test.mjs passed after the local repair.
