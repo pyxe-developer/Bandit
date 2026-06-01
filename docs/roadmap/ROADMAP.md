@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Run Stage 2 Test Writer RED evidence for `BANDIT-058` before Stage 3 implementation.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-058` to Claude through the bootstrap Process Adapter path.
 
 ## Next Work Item
 
