@@ -14,7 +14,7 @@ landing action, retrospective, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-056/`, `docs/specs/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-057` is active at Stage 4. Its structured creation spec is recorded in
+`BANDIT-057` is active at Stage 5. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`, and its Stage
 1 brief is recorded in `docs/work/BANDIT-057/brief.md`. Stage 2 RED evidence
 is recorded in `docs/specs/BANDIT-057-red-evidence.json`,
@@ -44,17 +44,18 @@ because Stage 4 review, landing, and closeout evidence are still required
 before formally replacing that narrow gap with
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`.
 
-Stage 4 aggregate review is pending. Codex PM attempted the aggregate Stage 4
-review evidence step without another CodeRabbit call, but focused verification
-found that bare workflow invocation usage text lacked the required
-`role-required` refusal wording. Blocker evidence is recorded in
-`docs/work/BANDIT-057/stage4-aggregate-review-blocker.md`. The bounded Claude
-Implementation Writer repair is recorded in
+Stage 4 aggregate review evidence is recorded in
+`docs/work/BANDIT-057/review-evidence.md` with current review subject hash
+`6f88e45cca931387abd45d54de6b2d98d1e1f31ab9078e5a735f8d18ce22ceb2`.
+Codex PM attempted the aggregate Stage 4 review evidence step without another
+CodeRabbit call, found the focused `role-required` wording blocker, recorded
+blocker evidence in
+`docs/work/BANDIT-057/stage4-aggregate-review-blocker.md`, and verified the
+bounded Claude Implementation Writer repair recorded in
 `docs/work/BANDIT-057/stage4-aggregate-review-repair-dispatch.md` and
-`docs/work/BANDIT-057/stage4-aggregate-review-repair-writer-report.md`; focused
-verification now passes. The next action is aggregate Stage 4 review evidence;
-do not call CodeRabbit again for this finding set, land, close out, or begin
-unrelated Phase 8 work before that evidence is recorded.
+`docs/work/BANDIT-057/stage4-aggregate-review-repair-writer-report.md`. The
+next action is Stage 5 landing verdict evidence; do not land, close out, or
+begin unrelated Phase 8 work before the landing verdict is recorded.
 
 Stage 3 repair dispatch is recorded in
 `docs/work/BANDIT-057/stage3-repair-dispatch.md`. The operator completed a
@@ -71,12 +72,14 @@ and Codex PM has recorded a remaining blocker in
 is now recorded in the refreshed implementation evidence and Writer report.
 Codex PM accepted Stage 3 in `docs/work/BANDIT-057/stage3-pm-review.md`.
 Focused pre-PR CodeRabbit review, bounded Claude Writer repair, focused
-CodeRabbit refresh, and operator-directed major-only repair disposition are now
-recorded. Local Qwen Stage 4 review passed at
+CodeRabbit refresh, operator-directed major-only repair disposition, Local Qwen
+pass evidence, and aggregate Stage 4 review evidence are now recorded. Local
+Qwen Stage 4 review passed at
 `ea21712f29bcfdd40b14571783b117dbafbdaab2` and is recorded in
 `docs/work/BANDIT-057/local-qwen-review.md`. The focused `role-required`
-refusal wording blocker is repaired and verified. Do not call CodeRabbit again
-for this finding set.
+refusal wording blocker is repaired, verified, and accepted in
+`docs/work/BANDIT-057/review-evidence.md`. Do not call CodeRabbit again for
+this finding set.
 
 No operator-owned input is required for the next recorded action.
 
@@ -84,7 +87,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 aggregate review evidence pending)
+- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 5 landing verdict pending)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
