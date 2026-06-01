@@ -174,3 +174,4 @@
 {"type":"work_item_created","work_item":"BANDIT-057","message":"Created work item BANDIT-057 from docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json"}
 {"type":"artifact_created","work_item":"BANDIT-057","message":"Created red_evidence artifact at docs/work/BANDIT-057/red-evidence.md"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded focused CodeRabbit review with four open findings at source head 4f48272; next action is repair or explicit PM disposition before Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded focused CodeRabbit refresh with seven open findings at source head c2488aa; next action is repair or explicit PM disposition before another refresh or Local Qwen"}

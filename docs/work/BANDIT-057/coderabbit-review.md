@@ -2,18 +2,18 @@
 
 contract_version: 1
 work_item: BANDIT-057
-source_head: 4f482727903ab7863881a9e7f812c579a397624a
-source_head_meaning: accepted Stage 3 implementation head reviewed by CodeRabbit.
+source_head: c2488aa3cfd532dfac54d5edc28fe133d725ab0d
+source_head_meaning: focused CodeRabbit refresh head after Claude repair and PM routing evidence.
 repair_head: 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08
 current_review_subject_hash: d94f21f549e560607cbe3b2b2d0753114e5d75b2d19382e4d5019ae40b431767
 provider: coderabbit-agent-pre-pr
 review_target: local-diff:5e04acd0d188884b984438d83f1d23e655d6d7fa
 review_state: completed
 coderabbit_verdict: blocker
-findings_status: locally_resolved_pending_refresh
-findings_disposition: Claude Implementation Writer repaired all four CodeRabbit findings at repair head 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on the repaired source. Do not run Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work before that refresh is recorded.
+findings_status: open
+findings_disposition: Focused CodeRabbit refresh completed on 2026-06-01 with seven open findings. Next action is repair or explicit PM disposition of exactly those findings before another refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, another work item, or unrelated Phase 8 work.
 operator_input_status: none_required
-source_drift_status: stale
+source_drift_status: current
 executable_evidence:
   - coderabbit --version returned 0.4.1.
   - coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.
@@ -26,27 +26,44 @@ executable_evidence:
   - npm run typecheck passed after the repair.
   - npm run bandit -- validate passed after the repair.
   - git diff --check passed after the repair.
+  - coderabbit review --agent --base-commit 5e04acd0d188884b984438d83f1d23e655d6d7fa --files <focused BANDIT-057 changed file list> -c AGENTS.md --no-color completed with seven findings at source head c2488aa3cfd532dfac54d5edc28fe133d725ab0d.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-057 returned d94f21f549e560607cbe3b2b2d0753114e5d75b2d19382e4d5019ae40b431767.
 bootstrap_gaps:
   - none
 
 findings:
   - severity: trivial
     file: src/commands/repo-pm.ts
-    finding: Add an explicit Promise return type to the repo-pm async command entrypoint.
-    status: locally_resolved_pending_refresh
-    disposition: repaired by Claude Writer in 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08; pending focused CodeRabbit refresh.
+    finding: Wrap approveFormation invocation with contextual failure attribution for the work item while preserving original error details.
+    status: open
+    disposition: requires repair or explicit PM disposition.
+  - severity: major
+    file: src/cli.ts
+    finding: Clarify no-command usage text so explicit role entry points and legacy commands are both represented.
+    status: open
+    disposition: requires repair or explicit PM disposition.
+  - severity: trivial
+    file: src/state/coordination-log.ts
+    finding: Validate existing step-transition order before constructing and appending a new transition.
+    status: open
+    disposition: requires repair or explicit PM disposition.
   - severity: trivial
     file: src/state/bootstrap-gaps.ts
-    finding: Validate that replacement_work_item references an existing docs/work/<ID>/brief.md, mirroring linked_work_item integrity checks.
-    status: locally_resolved_pending_refresh
-    disposition: repaired by Claude Writer in 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08; pending focused CodeRabbit refresh.
+    finding: Validate replacement_gap referential integrity and reject self-references while parsing the bootstrap-gap ledger.
+    status: open
+    disposition: requires repair or explicit PM disposition.
+  - severity: minor
+    file: .bandit/events.jsonl
+    finding: Record the repair-head Stage 4 event state so the ledger no longer only points at the pre-repair CodeRabbit result.
+    status: open
+    disposition: requires repair or explicit PM disposition.
+  - severity: minor
+    file: docs/work/BANDIT-057/coderabbit-repair-writer-report.md
+    finding: Correct repair_head frontmatter to the actual repair commit 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08.
+    status: open
+    disposition: requires repair or explicit PM disposition.
   - severity: trivial
     file: src/state/formation-gate.ts
-    finding: Remove or reorder unreachable mixed-verdict consistency logic because inspectFormationReviewContent already blocks fail/blocker verdicts.
-    status: locally_resolved_pending_refresh
-    disposition: repaired by Claude Writer in 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08; pending focused CodeRabbit refresh.
-  - severity: minor
-    file: src/state/formation-gate.ts
-    finding: Avoid duplicate error entries when findings_status is non_blocking and findings_disposition is undispositioned.
-    status: locally_resolved_pending_refresh
-    disposition: repaired by Claude Writer in 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08; pending focused CodeRabbit refresh.
+    finding: Anchor extractSectionContent matching to genuine level-2 headings so subheadings do not terminate or satisfy sections incorrectly.
+    status: open
+    disposition: requires repair or explicit PM disposition.
