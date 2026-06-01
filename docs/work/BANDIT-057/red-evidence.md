@@ -1,0 +1,47 @@
+# BANDIT-057 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused Test Writer-owned tests define the first role-scoped workflow orchestration surface before implementation. The suite fails because Bandit currently rejects `replaced` bootstrap-gap dispositions, has no role-required bare invocation refusal, has no `repo-pm` or `work-item-pm` command surfaces, and does not accept `formation_approved` as an append-only coordination transition.
+
+## Test Command
+
+```sh
+node --test test/role-entrypoints-formation.test.mjs
+```
+
+## Observed Output
+
+```text
+tests 7
+pass 0
+fail 7
+bootstrap gap validation accepts replaced disposition with replacement evidence failed because the bootstrap gap parser reports unsupported disposition: replaced
+bare workflow invocation fails closed with role-required refusal before context hydration failed because bare invocation still reports Missing command plus generic usage
+repo-pm create-work-item preserves work-item creation safety and artifacts failed because repo-pm is an unknown command
+repo-pm approve-formation refuses malformed formation before review artifacts failed because repo-pm is an unknown command before deterministic formation validation can run
+repo-pm approve-formation requires Qwen, CodeRabbit, and aggregate formation review artifacts failed because repo-pm is an unknown command before formation review artifact checks can run
+coordination validate accepts formation_approved between brief and RED evidence failed because formation_approved is an invalid coordination state
+work-item-pm start refuses work before formation approval failed because work-item-pm is an unknown command before readiness checks can run
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| Focused RED evidence proves the current failure modes: unsupported replaced bootstrap-gap disposition, missing role-required workflow entrypoint refusal, missing Repo PM create-work-item entrypoint, missing formation approval gate, missing deterministic formation validation, missing formation review artifact requirement, missing formation-approved coordination transition, and missing Work Item PM readiness refusal before formation approval. | `test/role-entrypoints-formation.test.mjs` covers all eight failure families through public CLI invocations and append-only coordination evidence; the focused suite fails 7/7 before any production implementation is added. |
+| `replaced` bootstrap-gap disposition support validates source gap, replacement gap, replacement work item or artifact evidence, rationale, and verification target without treating replaced gaps as resolved implementation work or no-action decisions. | The replaced-disposition test creates a source gap replaced by `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`, links replacement work item `BANDIT-057`, includes replacement evidence and verification target, and expects `bandit validate` plus `bandit gaps list` to accept and report `replaced`; current validation rejects the disposition before replacement evidence can be validated. |
+| Bare role-less Bandit workflow invocation fails closed with a concise role-required message and does not hydrate roadmap, gap ledger, or work-item state before a role is selected. | The bare-invocation test corrupts `.bandit/bootstrap-gaps.json` and writes a sentinel current-context file, then runs `bandit` with no arguments and expects a role-required refusal mentioning `repo-pm` and `work-item-pm` without parsing context; current output is only `Missing command` and generic usage. |
+| Repo PM work-item creation creates the same safe work-item artifacts as the existing CLI-owned work-item creation path while making Repo PM formation authority explicit. | The Repo PM creation test runs `bandit repo-pm create-work-item docs/specs/create-gap-chore.json` and expects the same brief and lifecycle event behavior as `work-item create`; current output is `Unknown command: repo-pm`. |
+| Formation approval cannot be recorded unless deterministic formation validation passes and required formation review artifacts exist with blocker findings absent or repaired and non-blocking findings dispositioned. | The malformed-formation test expects `repo-pm approve-formation BANDIT-001` to fail before appending to coordination history when the brief lacks verifiable acceptance criteria; the missing-review test expects the same command to require `qwen-formation-review.md`, `coderabbit-formation-review.md`, and `formation-review.md`; current behavior fails earlier because `repo-pm` does not exist. |
+| `formation_approved` is recorded as append-only coordination history between `brief_created` and RED evidence stages; it is not stored as a mutable flag, projection-only state, or inferred from artifact presence alone. | The coordination test writes `brief_created`, `formation_approved`, and `red_recorded` step transitions with formation review artifacts and expects `bandit coordination validate BANDIT-001` to pass; current validation rejects `formation_approved` as an invalid coordination state. |
+| Work Item PM start/readiness checks refuse unknown work items, missing briefs, missing formation validation, missing formation review, blocker formation findings, missing operator-owned input, missing `formation_approved` transition, and stale or contradictory coordination evidence. | The Work Item PM readiness test runs `bandit work-item-pm start BANDIT-001` against a brief-created item with no `formation_approved` transition and expects a fail-closed readiness diagnostic naming `formation_approved` and formation review evidence; current behavior fails earlier because `work-item-pm` does not exist. |
+| Formation review scope is limited to work formation quality and does not review implementation code or authorize execution-stage repairs. | The formation tests use only brief, formation review, aggregate formation review, and coordination evidence. They do not create implementation, reviewer, landing, scheduler, worktree, claim, PR/CI, UAT, merge, push, deploy, or cockpit artifacts. |
+| The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, or acceptance mappings. | This RED evidence and `test/role-entrypoints-formation.test.mjs` are Codex PM/Test Writer-authored. Stage 3 implementation must be routed to Claude through the bootstrap Process Adapter path, and the Stage 3 Writer has zero authority to edit tests, test helpers, fixtures, `docs/specs/BANDIT-057-red-evidence.json`, `docs/work/BANDIT-057/red-evidence.md`, or acceptance mappings for `BANDIT-057`. |
+| No full PRD decomposition, role-run manifest system, execution packet system, diff-based write validation, same-agent repair continuation, landing/closeout packet system, scheduler, worktree lifecycle, claim lease, work-surface reservation, automatic merge/push/deploy, product UAT approval, dependency or lockfile change, local server/API mode, installed global skill edit, external service integration, or unrelated Phase 8 cockpit feature work is introduced. | This Stage 2 step adds only focused RED tests and RED evidence artifacts. It does not add production implementation, server/API mode, scheduler execution, worktree lifecycle, claim leases, work-surface reservations, product UAT, dependency changes, external integration, installed skill edits, or unrelated cockpit work. |
+
+## Next Action
+
+Dispatch Stage 3 implementation for `BANDIT-057` to Claude through the bootstrap Process Adapter path: implement the narrow role entrypoint and formation gate repair by adding supported `replaced` bootstrap-gap disposition validation and listing, role-required bare workflow refusal, `repo-pm create-work-item`, `repo-pm approve-formation`, deterministic formation validation, formation review artifact validation, accepted `formation_approved` coordination state between brief and RED evidence, and `work-item-pm start` readiness refusal/acceptance behavior needed to make `test/role-entrypoints-formation.test.mjs` pass. Keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, full role contracts, role-run manifests, execution packet systems beyond minimal readiness checks, diff-based write validation, same-agent repair continuation, landing/closeout packets, scheduler execution, worktree lifecycle, claim leases, work-surface reservations, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, dependency or lockfile changes, local server/API mode, installed global skill edits, external service integration, and unrelated Phase 8 cockpit feature work.

@@ -6,14 +6,16 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Write Stage 2 RED evidence for `BANDIT-057` - Role
-Entry Points And Formation Gate; do not write implementation code, dispatch
-Stage 3, run Stage 4 review, land, close out, or begin unrelated Phase 8 work
-until RED evidence is recorded.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-057` - Role
+Entry Points And Formation Gate to Claude through the bootstrap Process Adapter
+path. Do not let the Stage 3 Writer edit tests, test helpers, fixtures, RED
+evidence artifacts/specs, or acceptance mappings. Do not run Stage 4 review,
+land, close out, or begin unrelated Phase 8 work until implementation evidence
+is recorded.
 
 ## Next Work Item
 
-- `[Gap]` none - continue active `BANDIT-057` until Stage 2 through closeout
+- `[Gap]` none - continue active `BANDIT-057` until Stage 3 through closeout
   evidence is complete.
 
 ## Planned Work
