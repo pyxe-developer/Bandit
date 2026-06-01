@@ -630,12 +630,14 @@
         "docs/verification/STAGE_RUBRICS.md",
         "docs/work/BANDIT-056/coderabbit-review.md",
         "docs/specs/BANDIT-056-coderabbit-review-output.json",
-        "docs/roadmap/CURRENT_CONTEXT.md"
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/design/role-scoped-workflow-orchestration.md",
+        "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md"
       ],
       "linked_work_item": null,
-      "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. This repeated ownership-boundary violation shows Bandit lacks an enforced Stage 4 repair-surface gate that distinguishes Claude Writer implementation repair, Test Writer regression evidence, and Codex PM-owned review/context evidence before edits are made.",
+      "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. The 2026-06-01 role-scoped workflow design records this as a symptom of overloaded PM authority and accepts BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION as the replacement umbrella. The current ledger keeps this narrow gap open until BANDIT-057 adds a supported replaced disposition and can formally replace it without abusing no_action.",
       "verification_target": null,
-      "next_action": "After BANDIT-056 lands and closes out, create a bootstrap-gap chore that enforces Stage 4 repair ownership boundaries before edits: Codex PM may route and update review/context evidence, Claude Writer owns implementation-source repair, Test Writer owns tests and acceptance mappings, and validators must fail closed when one actor edits both implementation and tests for the same work item."
+      "next_action": "Create BANDIT-057 - Role Entry Points And Formation Gate as the first slice of BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION. BANDIT-057 must add explicit role entrypoints, formation approval, and replaced gap disposition support before formally replacing this narrow gap."
     }
   ]
 }

@@ -442,6 +442,38 @@ _Avoid_: batch backlog grooming, silent auto-acceptance, freeform chat triage
 A durable orchestration role attached to one Work Item that preserves lifecycle context, routes specialized agents, maintains evidence continuity, records blockers, writes only its owned orchestration surfaces, proposes Work Item Proposals, and drives the Work Item toward closed state without becoming an implementation worker, reviewer, landing authority, claim recovery authority, or repo-level queue owner.
 _Avoid_: coder, landing agent, live-session memory owner
 
+**Explicit Role Entrypoint**:
+A workflow invocation that names the authority role before Bandit loads role-specific context or performs work.
+_Avoid_: bare PM dispatcher, implicit role inference, context-heavy default command
+
+**Formation Gate**:
+A CLI Authority gate that makes a Work Item available for execution only after Repo PM-owned formation evidence passes deterministic validation and required formation review.
+_Avoid_: brief exists, ready by convention, PM skim
+
+**Formation Review**:
+Independent review of Repo PM-owned work formation evidence before a Work Item becomes executable.
+_Avoid_: implementation review, Work Item PM preflight, late brief critique
+
+**Formation Approved State**:
+The append-only coordination state proving a Work Item has passed the Formation Gate and may be started by a Work Item PM Orchestrator.
+_Avoid_: available flag, brief-created state, mutable readiness marker
+
+**Work Item Execution Packet**:
+A generated compact context packet that lets a Work Item PM Orchestrator execute a formation-approved Work Item without reading the full brief by default.
+_Avoid_: full brief, roadmap history, raw review stream
+
+**Role Input Packet**:
+A generated role-specific context packet derived from approved formation evidence, role contracts, and decomposed rubrics.
+_Avoid_: hand-picked prompt context, full repository packet, raw stage dump
+
+**Role Run Manifest**:
+A CLI-generated authorization record for one role-run attempt, including role contract, base revision, allowed writes, forbidden writes, inputs, summary path, and validation commands.
+_Avoid_: prompt-only permission, hand-authored write grant, informal handoff
+
+**Role Run Attempt**:
+An append-only record of a single role-bound subagent invocation, its summary, validation result, and invalidation or continuation status.
+_Avoid_: overwritten latest run, chat-only attempt, untracked repair
+
 **Work Item A2A Channel**:
 A bidirectional agent-to-agent communication channel scoped to one Work Item that lets specialized agents ask the Work Item PM Orchestrator for clarification, blocker escalation, dependency checks, scope checks, review-finding disposition, or stop/split/routing decisions. Messages are interaction records, not canonical workflow state unless reconciled into repo-native artifacts by CLI Authority or the owning role.
 _Avoid_: global agent chat, hidden session authority, tracker thread
@@ -909,6 +941,11 @@ _Avoid_: planner, architect
 - An **Agent Coordination Event** may be a **Trigger Signal**, but it is not a **Safe Trigger Point** until validated into workflow state.
 - **Cross-Repo Coordination** depends on **Self-Governing Repositories** that share the same core coordination contracts while retaining repo-local canonical state.
 - A **Repo PM Coordinator** supervises **Work Item PM Orchestrators**, reconciles repo-level coordination state, and uses the **Operator Inbox** for operator-owned decisions.
+- An **Explicit Role Entrypoint** must name Repo PM or Work Item PM before Bandit loads role-specific context or mutates workflow state.
+- A **Repo PM Coordinator** owns work formation and **Formation Review**; a **Work Item PM Orchestrator** starts only after a **Formation Approved State** exists.
+- A **Formation Gate** is enforced by **CLI Authority** using Repo PM-owned formation evidence and independent reviewer evidence.
+- A **Work Item Execution Packet** is the default context for a **Work Item PM Orchestrator** after formation approval.
+- A **Role Input Packet** and **Role Run Manifest** scope each subagent invocation, while **Role Run Attempts** preserve the append-only execution record.
 - Until a GUI or cockpit notification surface exists, the **Repo PM Coordinator** records operator-visible coordination messages in the **Operator Inbox** rather than interrupting through a separate channel.
 - A **Feature PRD** is split into **Work Items** so product delivery and maintenance can use different workflows through **Slices** and **Chores**.
 - **Slices** and **Chores** are **Work Item** types.
@@ -1104,6 +1141,10 @@ _Avoid_: planner, architect
 - "worktree exists" could be mistaken for "worktree is runnable"; resolved: Bandit-created worktrees require a **Worktree Bootstrap Contract** and must validate as **Runnable Worktrees** before worker execution starts.
 - "heartbeat" was used as if periodic LLM polling were the default way to discover work; resolved: **Event-Driven Work Triggers** plus a **Deterministic Work Sweeper** should provide a **Work Availability Wake Guarantee** before default LLM no-op polling is removed.
 - "swarm" and "fleet" describe runtime scaling patterns; resolved: Bandit adopts **Runtime-Agnostic Coordination**, not a VM, fleet, or swarm architecture.
+- "PM" was used as if Repo PM and Work Item PM shared one authority; resolved: **Repo PM Coordinator** owns work formation and final repo-level closure, while **Work Item PM Orchestrator** executes one formation-approved Work Item.
+- "bare `/bandit`" was used as a default dispatcher; resolved: Bandit requires an **Explicit Role Entrypoint** before loading role-specific context or doing work.
+- "brief exists" was used as if a Work Item were executable; resolved: a Work Item needs a **Formation Approved State** from the **Formation Gate** before Work Item PM execution starts.
+- "subagent prompt" was used as if it could grant authority; resolved: subagent authority comes from structured role contracts, **Role Input Packets**, **Role Run Manifests**, and validated **Role Run Attempts**.
 
 ## Imported Decision Context
 

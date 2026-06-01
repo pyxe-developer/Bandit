@@ -457,15 +457,19 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** none.
 
-**Current next action:** Create the `BANDIT-057` work item for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before unrelated Phase 8 work; do not write RED evidence until the work-item brief is recorded.
+**Current next action:** Create the `BANDIT-057` work item for Role Entry Points
+And Formation Gate, the first slice of
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; do not write RED evidence
+until the work-item brief is recorded.
 
 The current stage is Interstitial: Work-item creation required.
 
-`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
-`BANDIT-056` Stage 4 repair ownership violation where Codex PM edited
-implementation-owned source and Test Writer-owned test coverage in the same
-repair step. The gap must be corrected next now that `BANDIT-056` is landed and
-closed out.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
+umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
+finding. `docs/design/role-scoped-workflow-orchestration.md` and
+`docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md`
+record the design. `BANDIT-057` must add `replaced` bootstrap-gap disposition
+support before formally replacing the old ledger entry.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -1075,7 +1079,8 @@ resolved.
 `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by `BANDIT-054`.
 `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by `BANDIT-055`.
 `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by `BANDIT-056`.
-`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued next.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
+umbrella for the next work queue; `BANDIT-057` is the first slice.
 `BANDIT-032` - Cockpit Status Coverage Hardening is landed and closed out.
 `BANDIT-035` - Artifact Create Landing Work Item Field is landed and closed out.
 `BANDIT-036` - Structured Retrospective Mining is landed and closed out.
@@ -1122,8 +1127,9 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 1 work-item brief for `BANDIT-057`, created
-from `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`.
+**Expected next deliverable:** Stage 1 work-item brief for `BANDIT-057` - Role
+Entry Points And Formation Gate, created from the role-scoped workflow
+orchestration design.
 
 ## Known Bootstrap Gaps
 
@@ -1334,12 +1340,10 @@ These are expected because Bandit does not exist yet:
 - `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by `BANDIT-056`; its policy,
   validation command, derived trust signals, review evidence, landing evidence,
   and retrospective closeout are recorded.
-- `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is queued from the
-  `BANDIT-056` Stage 4 repair ownership violation. The correction should add an
-  enforced repair-surface gate so Codex PM can route and update review/context
-  evidence, Claude Writer owns implementation-source repair, Test Writer owns
-  tests and acceptance mappings, and validators fail closed when one actor edits
-  both implementation and tests for the same work item.
+- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
+  umbrella for the `BANDIT-056` Stage 4 repair ownership violation. The first
+  slice should add explicit role entrypoints, formation approval, and
+  `replaced` gap disposition support before broader role-run machinery.
 
 - The missing Bandit work-item creation command is resolved by `BANDIT-020`.
   Future one-off work-item starts should use
@@ -1511,16 +1515,18 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create the `BANDIT-057` work item for
-   `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before unrelated Phase 8
-   work; do not write RED evidence until the work-item brief is recorded.
+1. Create the `BANDIT-057` work item for Role Entry Points And Formation Gate,
+   the first slice of `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; do not
+   write RED evidence until the work-item brief is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. Keep `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` as the next queued
-   chore before unrelated Phase 8 work.
+3. Keep `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the next queued
+   umbrella before unrelated Phase 8 work; `BANDIT-057` must add `replaced`
+   gap disposition support before formally replacing the old narrow ledger
+   entry.
 4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
@@ -1542,8 +1548,8 @@ The current priority is:
    `BANDIT-053`, `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by
    `BANDIT-054`, and `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by
    `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by
-   `BANDIT-056`, and `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is the
-   next queued gap.
+   `BANDIT-056`, and `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the
+   accepted replacement umbrella for the next work.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -1577,7 +1583,7 @@ retrospective closeout and bootstrap-gap disposition. Stage 6 retrospective
 closeout is recorded in `docs/work/BANDIT-056/retrospective.md` and
 `docs/specs/BANDIT-056-retrospective.json`, and `.bandit/bootstrap-gaps.json`
 marks `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` resolved. The next required step is
-creating `BANDIT-057` for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`.
+creating `BANDIT-057` for Role Entry Points And Formation Gate.
 This is routine technical routing, not an operator-owned product,
 UAT, policy, business, cost, or scope decision.
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking

@@ -1,6 +1,6 @@
 # Current Context
 
-## Last Updated: 2026-05-31
+## Last Updated: 2026-06-01
 
 ## Current Work Item: none - interstitial before BANDIT-057
 
@@ -14,10 +14,16 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff.
 
 `BANDIT-056` is landed and closed out as the bootstrap-gap chore for `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS`. Its Stage 1 brief, Stage 2 RED evidence, Stage 3 Claude Writer implementation evidence, Stage 4 CodeRabbit pass/disposition evidence, Local Qwen bootstrap-gap timeout evidence, aggregate review evidence, risk-classification and supply-chain gate evidence, Stage 5 landing verdict, local-record landing action, Stage 6 retrospective, and bootstrap-gap disposition are recorded in `docs/work/BANDIT-056/`, `docs/specs/`, `.bandit/policy/`, and `.bandit/bootstrap-gaps.json`.
 
-The next required action is creating `BANDIT-057` for `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` before RED evidence, another work item, or unrelated Phase 8 work.
+The next required action is creating `BANDIT-057` - Role Entry Points And
+Formation Gate, the first slice for
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. `BANDIT-057` must add
+`replaced` bootstrap-gap disposition support before formally replacing
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`.
 
-`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` is now queued from the
-`BANDIT-056` Stage 4 repair ownership violation and must be addressed next.
+`docs/design/role-scoped-workflow-orchestration.md` and
+`docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md`
+record the replacement design. The current bootstrap-gap ledger still carries
+the old narrow gap because the validator does not support `replaced` yet.
 
 No operator-owned input is required for the next recorded action.
 
@@ -32,7 +38,7 @@ slices. Detailed history stays in completed work-item packages.
 
 Last 5 items only:
 
-- `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` - queued next
+- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - design recorded; first slice next
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
 - `BANDIT-054` - Stage Capability Scope (closed)
