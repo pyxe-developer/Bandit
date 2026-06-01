@@ -60,8 +60,10 @@ is now recorded in the refreshed implementation evidence and Writer report.
 Codex PM accepted Stage 3 in `docs/work/BANDIT-057/stage3-pm-review.md`.
 Focused pre-PR CodeRabbit review, bounded Claude Writer repair, focused
 CodeRabbit refresh, and operator-directed major-only repair disposition are now
-recorded. The next action is Local Qwen Stage 4 review. Do not call CodeRabbit
-again for this finding set.
+recorded. Local Qwen Stage 4 review passed at
+`ea21712f29bcfdd40b14571783b117dbafbdaab2` and is recorded in
+`docs/work/BANDIT-057/local-qwen-review.md`. The next action is aggregate Stage
+4 review evidence. Do not call CodeRabbit again for this finding set.
 
 No operator-owned input is required for the next recorded action.
 
@@ -69,7 +71,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 Local Qwen pending)
+- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 aggregate review pending)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)

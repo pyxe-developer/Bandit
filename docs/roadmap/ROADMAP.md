@@ -6,10 +6,10 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Run Local Qwen Stage 4 review for `BANDIT-057`. Do not
-call CodeRabbit again for the current finding set, aggregate Stage 4 review,
-land, close out, or begin unrelated Phase 8 work until Local Qwen evidence is
-recorded.
+**Current next step:** Record aggregate Stage 4 review evidence for `BANDIT-057`
+using the current CodeRabbit disposition and Local Qwen pass evidence. Do not
+call CodeRabbit again for this finding set, land, close out, or begin unrelated
+Phase 8 work until aggregate Stage 4 review evidence is recorded.
 
 ## Next Work Item
 
@@ -25,7 +25,8 @@ cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
   `BANDIT-057`; Stage 3 is accepted, CodeRabbit major repair and non-major
-  skip disposition are recorded, and Local Qwen is pending.
+  skip disposition are recorded, Local Qwen passed, and aggregate Stage 4
+  review evidence is pending.
 
 ### Deferred PRD Slices
 
