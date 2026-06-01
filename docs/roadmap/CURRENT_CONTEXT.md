@@ -457,14 +457,14 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Dispatch Stage 3 implementation for `BANDIT-057` -
-Role Entry Points And Formation Gate to Claude through the bootstrap Process
-Adapter path. Do not let the Stage 3 Writer edit tests, test helpers, fixtures,
-RED evidence artifacts/specs, or acceptance mappings. Do not run Stage 4
-review, land, close out, or begin unrelated Phase 8 work until implementation
-evidence is recorded.
+**Current next action:** Run focused pre-PR CodeRabbit review for `BANDIT-057`
+at the accepted Stage 3 implementation head. Do not run Local Qwen, aggregate
+Stage 4 review, land, close out, or begin unrelated Phase 8 work until
+CodeRabbit evidence is recorded or an honest provider-refusal/continuation
+artifact is recorded.
 
-The current stage is Stage 3: Implementation Clean-Code Rubric.
+The current stage is Stage 4: Review And Cross-Model Gates, focused pre-PR
+CodeRabbit review pending.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -475,9 +475,16 @@ record the design. `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`. Stage 2 RED
 evidence is recorded in `docs/specs/BANDIT-057-red-evidence.json`,
 `docs/work/BANDIT-057/red-evidence.md`, and
-`test/role-entrypoints-formation.test.mjs`. `BANDIT-057` must add `replaced`
-bootstrap-gap disposition support before formally replacing the old ledger
-entry.
+`test/role-entrypoints-formation.test.mjs`. Stage 3 Claude Writer
+implementation evidence is recorded in
+`docs/work/BANDIT-057/implementation-evidence.md`,
+`docs/specs/BANDIT-057-implementation-evidence.json`, and
+`docs/work/BANDIT-057/writer-report.md`. Codex PM Stage 3 review is recorded in
+`docs/work/BANDIT-057/stage3-pm-review.md`; the latest Codex PM verdict is
+`pass`. Fourth-pass Claude Writer repair evidence is recorded and makes the
+active brief reach the expected missing-review-artifact gate instead of failing
+brief validation. Formal ledger replacement is still pending Stage 4 review,
+landing, and closeout evidence.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -836,25 +843,45 @@ that authority.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-`BANDIT-057` is active at Stage 3 after Stage 2 RED evidence. Its structured
+`BANDIT-057` is active at Stage 3 after Claude Writer implementation evidence,
+manual Claude repair evidence, Codex PM blocker review, second-pass Claude
+Writer repair evidence, third-pass Claude Writer repair evidence, and
+fourth-pass Claude Writer repair evidence. Its structured
 creation spec is recorded in
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`, and its brief
 is recorded in `docs/work/BANDIT-057/brief.md`. RED evidence is recorded in
 `docs/specs/BANDIT-057-red-evidence.json`,
 `docs/work/BANDIT-057/red-evidence.md`, and
-`test/role-entrypoints-formation.test.mjs`. The active bootstrap-gap ledger
+`test/role-entrypoints-formation.test.mjs`. Stage 3 implementation evidence is
+recorded in `docs/work/BANDIT-057/implementation-evidence.md`,
+`docs/specs/BANDIT-057-implementation-evidence.json`, and
+`docs/work/BANDIT-057/writer-report.md`. Codex PM Stage 3 review is recorded in
+`docs/work/BANDIT-057/stage3-pm-review.md`; the latest Codex PM verdict is
+`pass`. Fourth-pass Claude Writer repair evidence is recorded and accepted.
+The active
+bootstrap-gap ledger
 entry remains `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`, linked to
-`BANDIT-057`, because `BANDIT-057` must add supported `replaced` disposition
-semantics before the narrow gap can be formally replaced by the accepted
+`BANDIT-057`, because Stage 4 review and later lifecycle evidence are still required
+before the narrow gap can be formally replaced by the accepted
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` umbrella.
 
-Do not let the Stage 3 Writer edit tests, test helpers, fixtures, RED evidence
-artifacts/specs, or acceptance mappings. Do not start Stage 4 review, landing,
-closeout, local server/API mode, state-index persistence, scheduler execution,
-worktree lifecycle, claim leases, work surface reservations, automatic
-merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
-or unrelated Phase 8 work until `BANDIT-057` Stage 3 implementation evidence is
-recorded.
+The Stage 3 Writer reported no edits to tests, test helpers, fixtures, RED
+evidence artifacts/specs, or acceptance mappings. The next action is focused
+pre-PR CodeRabbit review for `BANDIT-057` at the accepted Stage 3
+implementation head. Do not start Local Qwen, aggregate Stage 4 review,
+landing, closeout, local server/API mode,
+state-index persistence, scheduler execution, worktree lifecycle, claim leases,
+work surface reservations, automatic merge/push/deploy, product UAT approval,
+actor identity policy, PR/CI workflow, or unrelated Phase 8 work until
+CodeRabbit evidence is recorded or an honest provider-refusal/continuation
+artifact is recorded.
+
+Claude Writer repair recovery evidence is recorded in
+`docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
+operator-run manual Claude repair, which took about 9 minutes and refreshed
+Stage 3 Writer evidence. The second-pass Claude Writer repair evidence was
+reviewed by Codex PM and followed by third-pass and fourth-pass Claude Writer
+repair evidence.
 
 `BANDIT-053` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its
@@ -1155,11 +1182,8 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 3 implementation evidence for
-`BANDIT-057` - Role Entry Points And Formation Gate, making
-`test/role-entrypoints-formation.test.mjs` pass while preserving the Test
-Writer-owned test surfaces, RED evidence artifacts/specs, and acceptance
-mappings.
+**Expected next deliverable:** Focused pre-PR CodeRabbit review evidence for
+`BANDIT-057` at the accepted Stage 3 implementation head.
 
 ## Known Bootstrap Gaps
 
@@ -1547,19 +1571,18 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Dispatch Stage 3 implementation for `BANDIT-057` - Role Entry Points And
-   Formation Gate to Claude through the bootstrap Process Adapter path, making
-   the focused RED suite pass without editing tests, test helpers, fixtures, RED
-   evidence artifacts/specs, or acceptance mappings.
+1. Run focused pre-PR CodeRabbit review for `BANDIT-057` at the accepted Stage
+   3 implementation head and record review evidence or honest
+   provider-refusal/continuation evidence.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
 3. Keep `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the active
-   replacement umbrella before unrelated Phase 8 work; `BANDIT-057` must add
-   `replaced` gap disposition support before formally replacing the old narrow
-   ledger entry.
+   replacement umbrella before unrelated Phase 8 work; `BANDIT-057` has
+   accepted Stage 3 evidence, and the old narrow ledger entry is not formally
+   replaced until Stage 4 review, landing, and closeout evidence allow it.
 4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
@@ -1590,7 +1613,9 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action.
+No operator-owned input is required for the next recorded action. The active
+next action is focused pre-PR CodeRabbit review for `BANDIT-057`, not a
+product, UAT, policy, business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1598,17 +1623,22 @@ Stage 2 RED evidence is recorded in
 `docs/specs/BANDIT-057-red-evidence.json`,
 `docs/work/BANDIT-057/red-evidence.md`, and
 `test/role-entrypoints-formation.test.mjs`.
+Stage 3 Claude Writer implementation evidence and repair evidence are recorded in
+`docs/work/BANDIT-057/implementation-evidence.md`,
+`docs/specs/BANDIT-057-implementation-evidence.json`, and
+`docs/work/BANDIT-057/writer-report.md`. Codex PM Stage 3 review is recorded in
+`docs/work/BANDIT-057/stage3-pm-review.md`; the latest Codex PM verdict is
+`pass`. Fourth-pass repair evidence is recorded and makes the active brief
+reach the expected missing-review-artifact gate instead of failing brief
+validation.
 `.bandit/bootstrap-gaps.json` links the active
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` ledger entry to
 `BANDIT-057`; the work item itself scopes the accepted
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. The next
-required step is Stage 3 implementation for supported `replaced` bootstrap-gap
-disposition, role-required entrypoint refusal, Repo PM creation entrypoint,
-Formation Gate validation and approval, formation review artifact requirements,
-`formation_approved` coordination transition, and Work Item PM readiness
-refusal before formation approval. This is routine technical routing from repo
-artifacts, not
-an operator-owned product, UAT, policy, business, cost, or scope decision.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. Stage 3
+fourth-pass repair evidence is accepted; Codex PM must not start Local Qwen,
+aggregate Stage 4 review, landing, closeout, or unrelated Phase 8 work until
+focused pre-PR CodeRabbit evidence is recorded or an honest
+provider-refusal/continuation artifact is recorded.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,

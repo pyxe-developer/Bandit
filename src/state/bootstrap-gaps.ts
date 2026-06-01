@@ -13,6 +13,9 @@ export type BootstrapGap = {
   rationale: string;
   verificationTarget: string | null;
   nextAction: string;
+  replacementGap?: string;
+  replacementWorkItem?: string;
+  replacementEvidence?: string[];
 };
 
 export type BootstrapGapLedger = {
@@ -33,6 +36,7 @@ const SUPPORTED_DISPOSITIONS = new Set([
   "queued_chore",
   "queued_chore_candidate",
   "resolved",
+  "replaced",
   "operator_input_blocker",
   "no_action"
 ]);
@@ -105,6 +109,16 @@ async function validateGapReferences(repoRoot: string, gap: BootstrapGap) {
       `Bootstrap gap ${gap.id} links to missing work item brief: ${briefPath}`
     );
   }
+
+  if (gap.disposition === "replaced" && gap.replacementEvidence) {
+    for (const artifact of gap.replacementEvidence) {
+      await requireExistingPath(
+        repoRoot,
+        artifact,
+        `Bootstrap gap ${gap.id} replacement evidence is missing: ${artifact}`
+      );
+    }
+  }
 }
 
 function parseBootstrapGap(rawGap: unknown, gapNumber: number) {
@@ -137,6 +151,34 @@ function parseBootstrapGap(rawGap: unknown, gapNumber: number) {
     throw new Error(
       `Bootstrap gap ${id} operator_input_blocker disposition requires rationale`
     );
+  }
+
+  if (disposition === "replaced") {
+    if (rationale.length === 0) {
+      throw new Error(`Bootstrap gap ${id} replaced disposition requires rationale`);
+    }
+    if (!verificationTarget) {
+      throw new Error(`Bootstrap gap ${id} replaced disposition requires verification_target`);
+    }
+    const replacementGap = requireGapString(rawGap, "replacement_gap", id);
+    const replacementWorkItem = requireGapString(rawGap, "replacement_work_item", id);
+    const replacementEvidence = requireStringList(rawGap, "replacement_evidence", gapNumber);
+
+    return {
+      id,
+      title: requireString(rawGap, "title", gapNumber),
+      status,
+      disposition,
+      sourceWorkItem: requireString(rawGap, "source_work_item", gapNumber),
+      sourceArtifacts: requireStringList(rawGap, "source_artifacts", gapNumber),
+      linkedWorkItem,
+      rationale,
+      verificationTarget,
+      nextAction: requireString(rawGap, "next_action", gapNumber),
+      replacementGap,
+      replacementWorkItem,
+      replacementEvidence
+    };
   }
 
   return {

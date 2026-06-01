@@ -34,11 +34,35 @@ import { uat } from "./commands/uat.js";
 import { sessionContext } from "./commands/session-context.js";
 import { validateBandit } from "./commands/validate.js";
 import { eventDrivenWakeScheduler } from "./commands/event-driven-wake-scheduler.js";
+import { repoPm } from "./commands/repo-pm.js";
+import { workItemPm } from "./commands/work-item-pm.js";
 import { worktreeBootstrap } from "./commands/worktree-bootstrap.js";
 import { createWorkItem } from "./commands/work-item-create.js";
 
 async function main() {
   const [command, ...args] = process.argv.slice(2);
+
+  if (!command) {
+    console.error(
+      "Role-required: bandit must be invoked with an explicit authority role.\n" +
+        "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
+        "  bandit work-item-pm <start> <work-item-id>"
+    );
+    process.exitCode = 1;
+    return;
+  }
+
+  if (command === "repo-pm") {
+    const result = await repoPm(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "work-item-pm") {
+    const result = await workItemPm(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
 
   if (command === "init") {
     const result = await initBandit(process.cwd());

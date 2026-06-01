@@ -1,0 +1,60 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-057",
+  "writer_identity": "claude_process_adapter",
+  "model_family": "claude",
+  "base_sha": "5e04acd0d188884b984438d83f1d23e655d6d7fa",
+  "stage": "Stage 3: Implementation Clean-Code Rubric (fourth-pass repair)",
+  "status": "complete",
+  "test_result": {
+    "command": "node --test test/role-entrypoints-formation.test.mjs",
+    "tests": 7,
+    "pass": 7,
+    "fail": 0
+  },
+  "supporting_suite_results": [
+    { "command": "node --test test/bootstrap-gaps.test.mjs", "pass": 6, "fail": 0 },
+    { "command": "node --test test/work-item-create.test.mjs", "pass": 8, "fail": 0 },
+    { "command": "node --test test/coordination-log.test.mjs test/coordination-status.test.mjs", "pass": 20, "fail": 0 }
+  ],
+  "approve_formation_probe": {
+    "command": "node ./bin/bandit.mjs repo-pm approve-formation BANDIT-057",
+    "result": "brief validation passes; fails only on missing review artifacts (expected)",
+    "exit_code": 1,
+    "failure_stage": "review_artifact_check"
+  },
+  "files_changed_fourth_pass": [
+    "src/state/formation-gate.ts",
+    "docs/work/BANDIT-057/implementation-evidence.md",
+    "docs/specs/BANDIT-057-implementation-evidence.json",
+    "docs/work/BANDIT-057/writer-report.md"
+  ],
+  "files_changed_third_pass": [
+    "src/state/formation-gate.ts",
+    "docs/work/BANDIT-057/implementation-evidence.md",
+    "docs/specs/BANDIT-057-implementation-evidence.json",
+    "docs/work/BANDIT-057/writer-report.md"
+  ],
+  "files_changed_second_pass": [
+    "src/state/formation-gate.ts",
+    "docs/work/BANDIT-057/implementation-evidence.md",
+    "docs/specs/BANDIT-057-implementation-evidence.json",
+    "docs/work/BANDIT-057/writer-report.md"
+  ],
+  "files_changed_first_pass": [
+    "src/state/formation-gate.ts",
+    "src/state/coordination-log.ts",
+    "src/commands/repo-pm.ts",
+    "src/commands/work-item-pm.ts"
+  ],
+  "repair_blockers_addressed_first_pass": [
+    "repo-pm approve-formation now inspects formation review content for blocker and undispositioned findings",
+    "validateFormationBrief now enforces source provenance, execution readiness, Test Writer boundary, and Implementation Writer boundary",
+    "work-item-pm start now re-checks formation evidence for stale, blocker, undispositioned, contradictory, and operator input conditions"
+  ],
+  "repair_blocker_addressed_second_pass": "inspectFormationReviewContent now fails closed for missing findings_status, unsupported findings_status, findings_status=open (unresolved findings), findings_status=non_blocking without acceptable disposition, and explicit findings_disposition=undispositioned. Added SUPPORTED_FINDINGS_STATUSES constant (Set) and hasAcceptableDisposition named helper to make pass conditions explicit.",
+  "repair_blocker_addressed_third_pass": "inspectFormationReviewContent now validates the verdict field before findings_status. Fails closed for missing verdict, unsupported verdict (outside SUPPORTED_VERDICTS), and verdict=blocker or verdict=fail regardless of findings_status. Replaces standalone findings_status=blocker and findings_status=open checks with a single contradiction check that produces an explicit cross-field error message and uses continue to avoid duplicate entries. Added SUPPORTED_VERDICTS constant (Set). Runtime probe confirmed: verdict:blocker + findings_status:none now fails correctly.",
+  "repair_blocker_addressed_fourth_pass": "collectFormationErrors in validateFormationBrief now accepts repo-native brief section alternatives alongside canonical fixture-format sections. (1) work_type: accepts work_type YAML field OR Non-Product Work / Product Work section heading. (2) Out Of Scope: accepts Out Of Scope section OR Stage Capability Scope section (forbidden_actions = out-of-scope boundaries). (3) Role Boundary Evidence: accepts Role Boundary Evidence section OR Stage Capability Scope section for content; Test Writer / Implementation Writer pattern updated to match spaced form and underscore form (test_writer, implementation_writer). (4) Write-Surface Families: accepts Write-Surface Families section OR Expected Files section. The BANDIT-057 brief and future chore briefs with stage_capability_scope now pass brief validation and reach review-artifact inspection.",
+  "test_surface_edited": false,
+  "confirmation": "The Stage 3 fourth-pass repair Writer made zero changes to tests, test helpers, fixtures, RED evidence artifacts, acceptance mappings, PM review, dispatch, roadmap, status, review, landing, or retrospective evidence. Only src/state/formation-gate.ts was changed in source. Stage 3 (all passes) was authored by Claude through the interactive session path, satisfying Bootstrap Model-Family Separation after Codex-authored RED tests."
+}

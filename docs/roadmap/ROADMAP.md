@@ -6,17 +6,16 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-057` - Role
-Entry Points And Formation Gate to Claude through the bootstrap Process Adapter
-path. Do not let the Stage 3 Writer edit tests, test helpers, fixtures, RED
-evidence artifacts/specs, or acceptance mappings. Do not run Stage 4 review,
-land, close out, or begin unrelated Phase 8 work until implementation evidence
-is recorded.
+**Current next step:** Run focused pre-PR CodeRabbit review for `BANDIT-057` at
+the accepted Stage 3 implementation head. Do not run Local Qwen, aggregate
+Stage 4 review, land, close out, or begin unrelated Phase 8 work until
+CodeRabbit evidence is recorded or an honest provider-refusal/continuation
+artifact is recorded.
 
 ## Next Work Item
 
-- `[Gap]` none - continue active `BANDIT-057` until Stage 3 through closeout
-  evidence is complete.
+- `[Gap]` none - continue active `BANDIT-057` until Stage 4 review through
+  closeout evidence is complete.
 
 ## Planned Work
 
@@ -26,8 +25,8 @@ These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-057`; first adds role entrypoints, formation approval, and
-  `replaced` gap disposition support before unrelated Phase 8 work.
+  `BANDIT-057`; Stage 3 is accepted and focused pre-PR CodeRabbit review is
+  next.
 
 ### Deferred PRD Slices
 

@@ -32,6 +32,7 @@ type TypedExtensionStatus = {
 
 type CoordinationState =
   | "brief_created"
+  | "formation_approved"
   | "red_recorded"
   | "implementation_recorded"
   | "review_recorded"
@@ -113,6 +114,7 @@ const VALID_ACTOR_EVENT_TYPES = new Set([
 ]);
 const STATE_ORDER = [
   "brief_created",
+  "formation_approved",
   "red_recorded",
   "implementation_recorded",
   "review_recorded",
@@ -156,6 +158,60 @@ export async function appendActorCoordinationEvent(
   validateStepTransitionOrder(nextEvents);
 
   await appendFile(logPath, `${JSON.stringify(event)}\n`, "utf8");
+}
+
+export async function appendFormationApprovedStepTransition(
+  repoRoot: string,
+  workItemId: string,
+  reviewArtifacts: string[]
+) {
+  const logPath = coordinationLogPath(repoRoot, workItemId);
+  const content = await readRequiredLog(logPath, workItemId);
+  const existingEvents = await parseCoordinationEvents(repoRoot, workItemId, content);
+
+  const lastSequence = existingEvents.at(-1)?.sequence ?? 0;
+  const transition = {
+    version: 1 as const,
+    event_type: "step_transition" as const,
+    work_item: workItemId,
+    sequence: lastSequence + 1,
+    timestamp: new Date().toISOString(),
+    actor: "repo_pm",
+    source: "repo-pm approve-formation",
+    state: "formation_approved" as const,
+    evidence: reviewArtifacts,
+    safe_triggers: ["red_evidence_required"],
+    next_action: null,
+    accountable_actor: null,
+    accepted_block: null
+  };
+
+  const nextContent = appendJsonLine(content, transition);
+  const workItem = await readWorkItem(repoRoot, workItemId);
+  const nextEvents = await parseCoordinationEvents(repoRoot, workItemId, nextContent);
+  await validateTypedExtensionTransitions(repoRoot, workItem, nextEvents);
+  validateStepTransitionOrder(nextEvents);
+
+  await appendFile(logPath, `${JSON.stringify(transition)}\n`, "utf8");
+}
+
+export async function hasFormationApprovedTransition(
+  repoRoot: string,
+  workItemId: string
+): Promise<boolean> {
+  const { events } = await readCoordinationTimeline(repoRoot, workItemId);
+  return events.filter(isStepTransition).some((t) => t.state === "formation_approved");
+}
+
+export async function readFormationApprovedEvidence(
+  repoRoot: string,
+  workItemId: string
+): Promise<string[]> {
+  const { events } = await readCoordinationTimeline(repoRoot, workItemId);
+  const transition = events
+    .filter(isStepTransition)
+    .find((t) => t.state === "formation_approved");
+  return transition?.evidence ?? [];
 }
 
 export async function readCoordinationStatus(
@@ -219,6 +275,10 @@ async function validateTypedExtensionTransitions(
       continue;
     }
 
+    if (event.state === "formation_approved") {
+      validateFormationApprovedTransition(workItem.id, event, previousOrderedState);
+    }
+
     if (event.state === "feature_uat_approved") {
       await validateFeatureUatTransition(
         repoRoot,
@@ -242,6 +302,24 @@ async function validateTypedExtensionTransitions(
     if (event.state !== "blocked") {
       previousOrderedState = event.state;
     }
+  }
+}
+
+function validateFormationApprovedTransition(
+  workItemId: string,
+  event: StepTransition,
+  previousOrderedState: CoordinationState | null
+) {
+  if (previousOrderedState !== "brief_created") {
+    throw new Error(
+      `formation_approved must follow brief_created for ${workItemId}: found ${previousOrderedState ?? "none"}`
+    );
+  }
+
+  if (event.evidence.length === 0) {
+    throw new Error(
+      `formation_approved requires formation review evidence for ${workItemId}`
+    );
   }
 }
 
