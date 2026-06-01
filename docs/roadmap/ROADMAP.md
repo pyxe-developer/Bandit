@@ -4,14 +4,16 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
+- `[Gap]` None - no active work item.
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition, and gap disposition for `BANDIT-058` before any new work item.
+**Current next step:** Create the next bounded role-scoped orchestration work
+item for Execution And Role Input Packets before unrelated Phase 8 cockpit
+product work.
 
 ## Next Work Item
 
-- `[Gap]` TBD - next bounded role-scoped orchestration slice after
-  `BANDIT-058` lands and closes out.
+- `[Gap]` TBD - Execution And Role Input Packets under
+  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`
 
 ## Planned Work
 
@@ -20,11 +22,10 @@
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-058`; keep the current slice bounded to Role Contracts And Run
-  Manifests before later execution packets, diff validation, repair
-  continuation, landing/closeout packets, rubric migration, or unrelated Phase
-  8 cockpit product work.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued after
+  `BANDIT-058`; next bounded follow-on is Execution And Role Input Packets
+  before later Stage 4 Repair Continuation, Landing And Closeout Handoffs,
+  Decomposed Rubric Migration, or unrelated Phase 8 cockpit product work.
 
 ### Deferred PRD Slices
 
@@ -96,3 +97,4 @@ bootstrap gaps are queued.
 - `BANDIT-055` - Token-Cost Failsafe
 - `BANDIT-056` - Evidence Freshness SLOs
 - `BANDIT-057` - Role Entry Points And Formation Gate
+- `BANDIT-058` - Role Contracts And Run Manifests
