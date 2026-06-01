@@ -1,39 +1,41 @@
 {
   "sourceHead": "4f482727903ab7863881a9e7f812c579a397624a",
-  "sourceHeadMeaning": "accepted Stage 3 implementation head",
+  "sourceHeadMeaning": "accepted Stage 3 implementation head reviewed by CodeRabbit",
+  "repairHead": "2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08",
   "reviewSubjectHash": "a8a2641ff3973681be797a7ee80d8787d0443d33ff2422f8c8f98cb07cfea674",
+  "currentReviewSubjectHash": "d94f21f549e560607cbe3b2b2d0753114e5d75b2d19382e4d5019ae40b431767",
   "baseRevision": "5e04acd0d188884b984438d83f1d23e655d6d7fa",
   "reviewState": "completed",
   "verdict": "blocker",
-  "findingsStatus": "open",
+  "findingsStatus": "locally_resolved_pending_refresh",
   "findings": [
     {
       "severity": "trivial",
       "fileName": "src/commands/repo-pm.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Add an explicit Promise return type to the repo-pm async command entrypoint.",
-      "disposition": "pending_repair_or_pm_disposition"
+      "disposition": "repaired_by_claude_writer_pending_focused_coderabbit_refresh"
     },
     {
       "severity": "trivial",
       "fileName": "src/state/bootstrap-gaps.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Validate that replacement_work_item references an existing docs/work/<ID>/brief.md, mirroring linked_work_item integrity checks.",
-      "disposition": "pending_repair_or_pm_disposition"
+      "disposition": "repaired_by_claude_writer_pending_focused_coderabbit_refresh"
     },
     {
       "severity": "trivial",
       "fileName": "src/state/formation-gate.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Remove or reorder unreachable mixed-verdict consistency logic because inspectFormationReviewContent already blocks fail/blocker verdicts.",
-      "disposition": "pending_repair_or_pm_disposition"
+      "disposition": "repaired_by_claude_writer_pending_focused_coderabbit_refresh"
     },
     {
       "severity": "minor",
       "fileName": "src/state/formation-gate.ts",
-      "status": "open",
+      "status": "locally_resolved_pending_refresh",
       "body": "Avoid duplicate error entries when findings_status is non_blocking and findings_disposition is undispositioned.",
-      "disposition": "pending_repair_or_pm_disposition"
+      "disposition": "repaired_by_claude_writer_pending_focused_coderabbit_refresh"
     }
   ],
   "attempts": [
@@ -44,11 +46,27 @@
       "endedAt": "2026-06-01T16:08:18Z",
       "result": "completed",
       "summary": "Focused pre-PR CodeRabbit review completed with four open findings: repo-pm return type, replacement_work_item brief integrity check, formation-gate unreachable mixed-verdict consistency logic, and duplicate non_blocking/undispositioned formation-review diagnostics."
+    },
+    {
+      "attempt": 2,
+      "sourceHead": "2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08",
+      "baseRevision": "5e04acd0d188884b984438d83f1d23e655d6d7fa",
+      "endedAt": "2026-06-01T16:22:11Z",
+      "result": "local_repair_pending_provider_refresh",
+      "summary": "Claude Implementation Writer repaired all four focused CodeRabbit findings. Provider evidence is intentionally stale until focused CodeRabbit refresh runs on repair head 2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08."
     }
   ],
   "executableEvidence": [
     "coderabbit --version returned 0.4.1.",
     "coderabbit auth status --agent returned authenticated for GitHub user pyxe-developer.",
-    "coderabbit review --agent --base-commit 5e04acd0d188884b984438d83f1d23e655d6d7fa --files STATUS.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files docs/specs/BANDIT-057-implementation-evidence.json --files docs/templates/bootstrap-gap-disposition.md --files docs/templates/formation-review.md --files docs/work/BANDIT-057/dispatch.md --files docs/work/BANDIT-057/implementation-evidence.md --files docs/work/BANDIT-057/stage3-pm-review.md --files docs/work/BANDIT-057/stage3-repair-dispatch.md --files docs/work/BANDIT-057/stage3-repair-recovery.md --files docs/work/BANDIT-057/writer-report.md --files src/cli.ts --files src/commands/repo-pm.ts --files src/commands/work-item-pm.ts --files src/state/bootstrap-gaps.ts --files src/state/coordination-log.ts --files src/state/formation-gate.ts -c AGENTS.md --no-color completed with four findings at source head 4f482727903ab7863881a9e7f812c579a397624a."
+    "coderabbit review --agent --base-commit 5e04acd0d188884b984438d83f1d23e655d6d7fa --files STATUS.md --files docs/roadmap/CURRENT_CONTEXT.md --files docs/roadmap/ROADMAP.md --files docs/specs/BANDIT-057-implementation-evidence.json --files docs/templates/bootstrap-gap-disposition.md --files docs/templates/formation-review.md --files docs/work/BANDIT-057/dispatch.md --files docs/work/BANDIT-057/implementation-evidence.md --files docs/work/BANDIT-057/stage3-pm-review.md --files docs/work/BANDIT-057/stage3-repair-dispatch.md --files docs/work/BANDIT-057/stage3-repair-recovery.md --files docs/work/BANDIT-057/writer-report.md --files src/cli.ts --files src/commands/repo-pm.ts --files src/commands/work-item-pm.ts --files src/state/bootstrap-gaps.ts --files src/state/coordination-log.ts --files src/state/formation-gate.ts -c AGENTS.md --no-color completed with four findings at source head 4f482727903ab7863881a9e7f812c579a397624a.",
+    "Codex PM recorded bounded repair dispatch in docs/work/BANDIT-057/stage4-coderabbit-repair-dispatch.md.",
+    "claude -p <docs/work/BANDIT-057/stage4-coderabbit-repair-dispatch.md> --model claude-sonnet-4-6 --effort xhigh --permission-mode bypassPermissions --output-format stream-json --verbose reached end_turn and wrote docs/work/BANDIT-057/coderabbit-repair-writer-report.md.",
+    "2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08 repairs the four CodeRabbit findings through the Claude Writer path.",
+    "node --test test/role-entrypoints-formation.test.mjs passed after the repair.",
+    "node --test test/bootstrap-gaps.test.mjs passed after the repair.",
+    "npm run typecheck passed after the repair.",
+    "npm run bandit -- validate passed after the repair.",
+    "git diff --check passed after the repair."
   ]
 }

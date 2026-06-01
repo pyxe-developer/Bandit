@@ -6,11 +6,10 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Repair or explicitly disposition the four open
-CodeRabbit findings for `BANDIT-057`. Do not run Local Qwen, aggregate Stage 4
-review, land, close out, or begin unrelated Phase 8 work until those findings
-are repaired or dispositioned and the required CodeRabbit follow-up routing is
-recorded.
+**Current next step:** Run focused CodeRabbit refresh for `BANDIT-057` on repair
+head `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`. Do not run Local Qwen,
+aggregate Stage 4 review, land, close out, or begin unrelated Phase 8 work until
+that refresh is recorded.
 
 ## Next Work Item
 
@@ -25,8 +24,8 @@ These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-057`; Stage 3 is accepted and focused pre-PR CodeRabbit returned four
-  open findings requiring repair or explicit PM disposition.
+  `BANDIT-057`; Stage 3 is accepted, CodeRabbit findings are locally repaired,
+  and focused CodeRabbit refresh is pending.
 
 ### Deferred PRD Slices
 

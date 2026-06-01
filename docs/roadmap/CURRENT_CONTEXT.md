@@ -457,14 +457,13 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Repair or explicitly disposition the four open
-CodeRabbit findings for `BANDIT-057`. Do not run Local Qwen, aggregate Stage 4
-review, land, close out, or begin unrelated Phase 8 work until those findings
-are repaired or dispositioned and the required CodeRabbit follow-up routing is
-recorded.
+**Current next action:** Run a focused CodeRabbit refresh for `BANDIT-057` on
+repair head `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`. Do not run Local
+Qwen, aggregate Stage 4 review, land, close out, or begin unrelated Phase 8
+work until that refresh is recorded.
 
-The current stage is Stage 4: Review And Cross-Model Gates, CodeRabbit findings
-open.
+The current stage is Stage 4: Review And Cross-Model Gates, CodeRabbit refresh
+pending after local repair.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -484,9 +483,11 @@ implementation evidence is recorded in
 `pass`. Fourth-pass Claude Writer repair evidence is recorded and makes the
 active brief reach the expected missing-review-artifact gate instead of failing
 brief validation. Focused pre-PR CodeRabbit evidence is recorded in
-`docs/work/BANDIT-057/coderabbit-review.md` with four open findings requiring
-repair or explicit PM disposition. Formal ledger replacement is still pending
-Stage 4 review, landing, and closeout evidence.
+`docs/work/BANDIT-057/coderabbit-review.md`; Claude Implementation Writer
+repaired all four findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, and
+provider evidence is intentionally stale until focused CodeRabbit refresh runs
+on the repair head. Formal ledger replacement is still pending Stage 4 review,
+landing, and closeout evidence.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -869,14 +870,14 @@ before the narrow gap can be formally replaced by the accepted
 
 The Stage 3 Writer reported no edits to tests, test helpers, fixtures, RED
 evidence artifacts/specs, or acceptance mappings. Focused pre-PR CodeRabbit
-review is recorded with four open findings. The next action is repair or
-explicit PM disposition of those findings. Do not start Local Qwen, aggregate
+review is recorded, and Claude Implementation Writer repaired all four findings
+at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`. The next action is focused
+CodeRabbit refresh on that repair head. Do not start Local Qwen, aggregate
 Stage 4 review, landing, closeout, local server/API mode,
 state-index persistence, scheduler execution, worktree lifecycle, claim leases,
 work surface reservations, automatic merge/push/deploy, product UAT approval,
 actor identity policy, PR/CI workflow, or unrelated Phase 8 work until
-the CodeRabbit findings are repaired or explicitly dispositioned and required
-follow-up routing is recorded.
+the CodeRabbit refresh is recorded.
 
 Claude Writer repair recovery evidence is recorded in
 `docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
@@ -1184,8 +1185,8 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Focused pre-PR CodeRabbit review evidence for
-`BANDIT-057` at the accepted Stage 3 implementation head.
+**Expected next deliverable:** Focused CodeRabbit refresh evidence for
+`BANDIT-057` at repair head `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`.
 
 ## Known Bootstrap Gaps
 
@@ -1573,9 +1574,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the four open CodeRabbit findings for
-   `BANDIT-057`, then record the required follow-up routing before Local Qwen
-   or aggregate Stage 4 review.
+1. Run focused CodeRabbit refresh for `BANDIT-057` on repair head
+   `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08` before Local Qwen or aggregate
+   Stage 4 review.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1616,8 +1617,9 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The active
-next action is CodeRabbit finding repair or explicit PM disposition for
-`BANDIT-057`, not a product, UAT, policy, business, cost, or scope decision.
+next action is focused CodeRabbit refresh on repair head
+`2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08` for `BANDIT-057`, not a product,
+UAT, policy, business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1637,11 +1639,11 @@ validation.
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` ledger entry to
 `BANDIT-057`; the work item itself scopes the accepted
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. Stage 3
-fourth-pass repair evidence is accepted, and focused pre-PR CodeRabbit evidence
-is recorded with four open findings. Codex PM must not start Local Qwen,
-aggregate Stage 4 review, landing, closeout, or unrelated Phase 8 work until
-the CodeRabbit findings are repaired or explicitly dispositioned and required
-follow-up routing is recorded.
+fourth-pass repair evidence is accepted, focused pre-PR CodeRabbit evidence is
+recorded, and Claude Implementation Writer repaired all four CodeRabbit
+findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`. Codex PM must not
+start Local Qwen, aggregate Stage 4 review, landing, closeout, or unrelated
+Phase 8 work until focused CodeRabbit refresh is recorded.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
