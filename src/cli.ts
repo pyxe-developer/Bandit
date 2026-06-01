@@ -44,9 +44,12 @@ async function main() {
 
   if (!command) {
     console.error(
-      "Role-required: bandit must be invoked with an explicit authority role.\n" +
+      "Usage: bandit <command>\n\n" +
+        "Role entry points:\n" +
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
-        "  bandit work-item-pm <start> <work-item-id>"
+        "  bandit work-item-pm <start> <work-item-id>\n\n" +
+        "Commands:\n" +
+        "  bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos>"
     );
     process.exitCode = 1;
     return;
