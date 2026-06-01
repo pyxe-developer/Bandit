@@ -1,0 +1,111 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-057",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": "docs/templates/bootstrap-gap-disposition.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records local bootstrap-gap replacement disposition fields for future work-item evidence without changing installed global skills or authorizing external skill installation."
+    },
+    {
+      "path": "docs/templates/formation-review.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records local formation-review evidence fields used by repo-native validation without changing installed global skills or authorizing external skill installation."
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-057/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, or unknown supply-chain surface change is present in the BANDIT-057 implementation. Role-scoped orchestration adds local CLI/state/template behavior only."
+    },
+    "rationale": "BANDIT-057 adds local Repo PM and Work Item PM command routing, Formation Gate validation, bootstrap-gap replacement disposition parsing, coordination-state handling, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-057/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "policy_reference_only",
+    "skills": [
+      {
+        "skill_id": "role-scoped-workflow-orchestration-templates",
+        "owner": "Codex PM",
+        "freshness_rule": "validated by npm run bandit -- validate plus focused formation-gate tests before landing and before trusting formation-approved readiness",
+        "revocation_path": "remove or revise docs/templates/bootstrap-gap-disposition.md, docs/templates/formation-review.md, and matching Formation Gate validation"
+      }
+    ],
+    "owner": "Codex PM",
+    "freshness_rule": "validated by npm run bandit -- validate and focused role-entrypoint/formation tests",
+    "revocation_path": "remove or revise the local role-scoped workflow orchestration templates and validation"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-057 touches local workflow templates used by formation and bootstrap-gap disposition evidence, so explicit supply-chain gate evidence is recorded before local-record landing. The implementation does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, or unknown supply-chain surfaces. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-057-supply-chain-gate.json",
+    "docs/templates/bootstrap-gap-disposition.md",
+    "docs/templates/formation-review.md",
+    "docs/work/BANDIT-057/brief.md",
+    "docs/work/BANDIT-057/implementation-evidence.md",
+    "docs/work/BANDIT-057/coderabbit-review.md",
+    "docs/work/BANDIT-057/local-qwen-review.md",
+    "docs/work/BANDIT-057/review-evidence.md",
+    "docs/work/BANDIT-057/landing-verdict.md",
+    "src/cli.ts",
+    "src/commands/repo-pm.ts",
+    "src/commands/work-item-pm.ts",
+    "src/state/bootstrap-gaps.ts",
+    "src/state/coordination-log.ts",
+    "src/state/formation-gate.ts",
+    "test/role-entrypoints-formation.test.mjs"
+  ]
+}

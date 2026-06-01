@@ -46,16 +46,20 @@ before formally replacing that narrow gap with
 
 Stage 4 aggregate review evidence is recorded in
 `docs/work/BANDIT-057/review-evidence.md` with current review subject hash
-`6f88e45cca931387abd45d54de6b2d98d1e1f31ab9078e5a735f8d18ce22ceb2`.
+`1a6515ff1f881c948f66343ce6ef2dd048217c32c2fb5ab43283d97709f6d4ab`.
 Codex PM attempted the aggregate Stage 4 review evidence step without another
 CodeRabbit call, found the focused `role-required` wording blocker, recorded
 blocker evidence in
 `docs/work/BANDIT-057/stage4-aggregate-review-blocker.md`, and verified the
 bounded Claude Implementation Writer repair recorded in
 `docs/work/BANDIT-057/stage4-aggregate-review-repair-dispatch.md` and
-`docs/work/BANDIT-057/stage4-aggregate-review-repair-writer-report.md`. The
-next action is Stage 5 landing verdict evidence; do not land, close out, or
-begin unrelated Phase 8 work before the landing verdict is recorded.
+`docs/work/BANDIT-057/stage4-aggregate-review-repair-writer-report.md`.
+Layered risk-classification evidence, supply-chain gate evidence, and Stage 5
+landing verdict evidence are recorded in `.bandit/policy/`,
+`docs/specs/BANDIT-057-landing-verdict.json`, and
+`docs/work/BANDIT-057/landing-verdict.md`. The final verdict is `safe-to-land`.
+The next action is local-record landing action evidence; do not close out or
+begin unrelated Phase 8 work before landing-action evidence is recorded.
 
 Stage 3 repair dispatch is recorded in
 `docs/work/BANDIT-057/stage3-repair-dispatch.md`. The operator completed a
@@ -87,7 +91,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 5 landing verdict pending)
+- `BANDIT-057` - Role Entry Points And Formation Gate (safe-to-land; local-record landing action pending)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)

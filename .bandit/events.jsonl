@@ -180,3 +180,5 @@
 {"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded aggregate Stage 4 blocker: focused role-entrypoints test fails because bare workflow usage lacks role-required wording; next action is bounded Claude Writer repair without another CodeRabbit call"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded bounded Claude Writer repair for bare workflow role-required wording; focused verification passed; next action is aggregate Stage 4 review evidence without another CodeRabbit call"}
 {"type":"stage4_review_recorded","work_item":"BANDIT-057","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 6f88e45; next action is Stage 5 landing verdict evidence"}
+{"type":"stage5_landing_gate_evidence_updated","work_item":"BANDIT-057","message":"Recorded layered risk-classification and supply-chain gate evidence; refreshed review-subject hash to 1a6515ff before landing verdict"}
+{"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-057","message":"Recorded Stage 5 landing verdict safe-to-land; next action is local-record landing action evidence"}
