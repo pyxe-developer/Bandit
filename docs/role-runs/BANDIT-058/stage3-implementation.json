@@ -1,0 +1,51 @@
+{
+  "contract_version": 1,
+  "manifest_id": "stage3-implementation",
+  "work_item_id": "BANDIT-058",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-sonnet-4-6-process-adapter",
+  "base_revision": "c2a504c4a885213e3ac0c89d065f1c905d9c135e",
+  "allowed_target_files": [
+    "src/state/role-contracts.ts",
+    "src/state/role-run-manifests.ts",
+    "src/commands/role-contracts.ts",
+    "src/commands/role-runs.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    ".bandit/policy/role-contracts.json",
+    "docs/templates/role-contract.md",
+    "docs/templates/role-run-manifest.md",
+    "docs/work/BANDIT-058/implementation-evidence.md",
+    "docs/work/BANDIT-058/writer-report.md",
+    "docs/specs/BANDIT-058-implementation-evidence.json",
+    "docs/role-runs/BANDIT-058/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-058/red-evidence.md",
+    "docs/specs/BANDIT-058-red-evidence.json"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-058/dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-058/implementation-evidence.md",
+  "validation_commands": [
+    "node --test test/role-contracts.test.mjs",
+    "node --test test/role-run-manifests.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate"
+  ],
+  "source_artifacts": [
+    "docs/work/BANDIT-058/brief.md",
+    "docs/work/BANDIT-058/red-evidence.md"
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false
+  }
+}

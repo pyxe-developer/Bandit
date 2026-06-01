@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-058` to Claude through the bootstrap Process Adapter path.
+**Current next step:** Run Local Qwen adversarial review for the current `BANDIT-058` source before aggregate Stage 4 review evidence.
 
 ## Next Work Item
 

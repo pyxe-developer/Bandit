@@ -1,0 +1,53 @@
+{
+  "work_item": "BANDIT-058",
+  "captured_at": "2026-06-01T21:55:34Z",
+  "provider": "coderabbit-agent-pre-pr",
+  "command": "coderabbit review --agent --base-commit c2a504c --files <20 BANDIT-058 Stage 3 changed and untracked files> -c AGENTS.md --no-color",
+  "base_commit": "c2a504ca2991eecb281132dfac1074a6f4e7324b",
+  "review_target": "local-diff:c2a504ca2991eecb281132dfac1074a6f4e7324b",
+  "review_state": "completed",
+  "terminal_event": {
+    "type": "complete",
+    "status": "review_completed",
+    "findings": 6
+  },
+  "review_subject_hash": "7ab063b5ee5438437e540c4e3f29b1ddbe173bb8724664adbc409805b5dd062b",
+  "findings": [
+    {
+      "severity": "trivial",
+      "file": "docs/templates/role-contract.md",
+      "summary": "Add inline documentation and example values for each role contract template field.",
+      "pm_disposition": "no_action_for_stage4"
+    },
+    {
+      "severity": "minor",
+      "file": "docs/roadmap/CURRENT_CONTEXT.md",
+      "summary": "Current next action says to run Stage 4 review while nearby constraint text says not to begin Stage 4 review.",
+      "pm_disposition": "resolved_by_codex_pm_routing_update"
+    },
+    {
+      "severity": "major",
+      "file": "src/state/role-run-manifests.ts",
+      "summary": "validateInputPacketRef uses path.join and fileExists, allowing path traversal, absolute-path escape, and directories for required input packet refs.",
+      "pm_disposition": "repair_required"
+    },
+    {
+      "severity": "minor",
+      "file": "src/state/role-run-manifests.ts",
+      "summary": "validateManifestAuthorityBoundary message forbids multiple authority claims while implementation checks only can_satisfy_coordination_history.",
+      "pm_disposition": "repair_required"
+    },
+    {
+      "severity": "major",
+      "file": "src/state/role-run-manifests.ts",
+      "summary": "source_artifacts validation allows absolute paths or paths escaping the repository because path.resolve can discard repoRoot.",
+      "pm_disposition": "repair_required"
+    },
+    {
+      "severity": "major",
+      "file": "src/state/role-contracts.ts",
+      "summary": "validateRole treats only null/undefined as missing and accepts required fields with empty strings or empty arrays.",
+      "pm_disposition": "repair_required"
+    }
+  ]
+}

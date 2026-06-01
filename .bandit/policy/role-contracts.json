@@ -1,0 +1,314 @@
+{
+  "contract_version": 1,
+  "policy_id": "role-contracts",
+  "authority_boundary": {
+    "manifests_are_append_only_evidence": true,
+    "projections_are_derived_non_canonical": true,
+    "manifests_can_satisfy_coordination_history": false,
+    "manifests_can_satisfy_review_or_landing_evidence": false
+  },
+  "roles": [
+    {
+      "role_id": "repo_pm",
+      "version": "1.0.0",
+      "authority_boundary": "repo_pm may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage1_brief",
+        "formation_review"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "docs/specs/**",
+        "docs/work/**/brief.md",
+        "docs/work/**/formation-review.md",
+        "docs/work/**/coordination-log.jsonl",
+        "docs/roadmap/**",
+        "STATUS.md",
+        ".bandit/bootstrap-gaps.json"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/repo_pm-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "work_item_pm",
+      "version": "1.0.0",
+      "authority_boundary": "work_item_pm may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage2_red_evidence"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "docs/work/**/coordination-log.jsonl",
+        "docs/roadmap/**",
+        "STATUS.md"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/work_item_pm-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "test_writer",
+      "version": "1.0.0",
+      "authority_boundary": "test_writer may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage2_red_evidence"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "test/**",
+        "docs/work/**/red-evidence.md",
+        "docs/specs/*red-evidence*.json"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/test_writer-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "implementation_writer",
+      "version": "1.0.0",
+      "authority_boundary": "implementation_writer may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage3_implementation"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "src/**",
+        "docs/templates/**",
+        ".bandit/policy/role-contracts.json",
+        "docs/work/**/implementation-evidence.md",
+        "docs/work/**/writer-report.md",
+        "docs/specs/*implementation-evidence*.json",
+        "docs/role-runs/**"
+      ],
+      "forbidden_actions": [
+        "edit_tests",
+        "edit_test_helpers",
+        "edit_fixtures",
+        "edit_red_evidence",
+        "edit_acceptance_mappings"
+      ],
+      "required_output_summary": "docs/work/<ID>/implementation_writer-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "reviewer",
+      "version": "1.0.0",
+      "authority_boundary": "reviewer may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage4_review"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "docs/work/**/coderabbit-review.md",
+        "docs/work/**/local-qwen-review.md",
+        "docs/work/**/review-evidence.md",
+        "docs/specs/*coderabbit-review-output*.json"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/reviewer-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "landing_agent",
+      "version": "1.0.0",
+      "authority_boundary": "landing_agent may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage5_landing"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "docs/work/**/landing-verdict.md",
+        "docs/work/**/landing-action.md",
+        "docs/specs/*landing-verdict*.json",
+        ".bandit/policy/risk-classifications/**",
+        ".bandit/policy/supply-chain-gates/**"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/landing_agent-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    },
+    {
+      "role_id": "closeout_agent",
+      "version": "1.0.0",
+      "authority_boundary": "closeout_agent may write only its declared stage evidence and cannot replace canonical workflow history.",
+      "allowed_stages": [
+        "stage6_retrospective"
+      ],
+      "required_inputs": [
+        "approved_brief",
+        "current_context",
+        "stage_rubric",
+        "role_run_manifest"
+      ],
+      "allowed_tools_or_command_families": [
+        "node",
+        "npm",
+        "bandit"
+      ],
+      "allowed_write_surface_families": [
+        "docs/work/**/retrospective.md",
+        "docs/specs/*retrospective*.json",
+        ".bandit/bootstrap-gaps.json",
+        "docs/roadmap/**",
+        "STATUS.md"
+      ],
+      "forbidden_actions": [
+        "merge",
+        "push",
+        "deploy",
+        "edit_installed_global_skill"
+      ],
+      "required_output_summary": "docs/work/<ID>/closeout_agent-summary.md",
+      "validation_commands": [
+        "npm run bandit -- validate",
+        "git diff --check"
+      ],
+      "escalation_paths": [
+        "codex_pm",
+        "operator_owned_input"
+      ],
+      "rollback_or_supersession_rule": "Supersede with a newer versioned contract and keep prior run manifests append-only.",
+      "owner": "codex_pm"
+    }
+  ]
+}

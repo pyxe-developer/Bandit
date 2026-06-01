@@ -14,12 +14,27 @@ linked `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the active gap,
 recorded Qwen, CodeRabbit, and aggregate formation review evidence, and
 recorded the `formation_approved` coordination transition. Test Writer recorded
 Stage 2 RED evidence in `docs/work/BANDIT-058/red-evidence.md` and
-`docs/specs/BANDIT-058-red-evidence.json`.
+`docs/specs/BANDIT-058-red-evidence.json`. Claude Implementation Writer
+recorded Stage 3 implementation evidence in
+`docs/work/BANDIT-058/implementation-evidence.md`,
+`docs/work/BANDIT-058/writer-report.md`, and
+`docs/specs/BANDIT-058-implementation-evidence.json`, then recorded bounded
+Stage 3 repair evidence for role-run manifest required-field validation,
+bounded Stage 3 repair 2 evidence for role-run manifest non-empty array element
+validation, and Codex PM Stage 3 acceptance evidence. CodeRabbit Stage 4
+pre-PR review completed with open source-level findings. Claude Implementation
+Writer recorded the bounded CodeRabbit source repair with focused verification
+and fail-closed probes passing. Codex PM accepted the CodeRabbit source repair
+at `docs/work/BANDIT-058/stage4-repair-acceptance.md`. The recorded Local Qwen
+review command was attempted and failed before reviewer invocation because the
+worktree was dirty and `qwen-review` requires a clean source-head baseline.
+Codex PM prepared the focused `BANDIT-058` implementation/evidence checkpoint
+baseline in the current commit.
 
-Current stage: Stage 3 RED evidence recorded, implementation pending.
+Current stage: Stage 4 Local Qwen review required.
 
-Next action: dispatch Stage 3 implementation for `BANDIT-058` to Claude through
-the bootstrap Process Adapter path.
+Next action: run Local Qwen adversarial review for the current `BANDIT-058`
+source before aggregate Stage 4 review evidence.
 
 No operator-owned input is required for the next recorded action.
 
@@ -27,7 +42,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-058` - Role Contracts And Run Manifests (active; Stage 3 implementation pending)
+- `BANDIT-058` - Role Contracts And Run Manifests (active; Local Qwen review required)
 - `BANDIT-057` - Role Entry Points And Formation Gate (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
