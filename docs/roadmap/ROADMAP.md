@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Run Repo PM formation review for `BANDIT-058` and approve formation before Stage 2 RED evidence.
+**Current next step:** Run Stage 2 Test Writer RED evidence for `BANDIT-058` before Stage 3 implementation.
 
 ## Next Work Item
 
