@@ -110,6 +110,15 @@ async function validateGapReferences(repoRoot: string, gap: BootstrapGap) {
     );
   }
 
+  if (gap.replacementWorkItem) {
+    const briefPath = path.join("docs/work", gap.replacementWorkItem, "brief.md");
+    await requireExistingPath(
+      repoRoot,
+      briefPath,
+      `Bootstrap gap ${gap.id} replacement work item brief is missing: ${briefPath}`
+    );
+  }
+
   if (gap.disposition === "replaced" && gap.replacementEvidence) {
     for (const artifact of gap.replacementEvidence) {
       await requireExistingPath(

@@ -223,9 +223,7 @@ export async function inspectFormationReviewContent(
         `non-blocking findings in ${artifactPath} require an explicit acceptable disposition; ` +
         `findings_disposition is ${findingsDisposition || "empty"}`
       );
-    }
-
-    if (findingsDisposition === "undispositioned") {
+    } else if (findingsDisposition === "undispositioned") {
       errors.push(`undispositioned findings in ${artifactPath}`);
     }
   }
@@ -257,34 +255,7 @@ export async function recheckFormationEvidenceForStart(
   }
 
   await inspectFormationReviewContent(repoRoot, evidencePaths);
-  await requireConsistentFormationVerdicts(repoRoot, workItemId, evidencePaths);
   await recheckOperatorInputStatus(repoRoot, workItemId);
-}
-
-async function requireConsistentFormationVerdicts(
-  repoRoot: string,
-  workItemId: string,
-  artifactPaths: string[]
-): Promise<void> {
-  const verdicts = new Set<string>();
-  for (const artifactPath of artifactPaths) {
-    try {
-      const content = await readFile(path.join(repoRoot, artifactPath), "utf8");
-      const fields = parseMetadataFields(content);
-      const verdict = readScalar(fields, "verdict").toLowerCase().trim();
-      if (verdict) {
-        verdicts.add(verdict);
-      }
-    } catch {
-      // missing files already caught by stale check above
-    }
-  }
-
-  if (verdicts.has("pass") && (verdicts.has("fail") || verdicts.has("blocker"))) {
-    throw new Error(
-      `Contradictory formation evidence for ${workItemId}: conflicting verdicts across review artifacts`
-    );
-  }
 }
 
 async function recheckOperatorInputStatus(

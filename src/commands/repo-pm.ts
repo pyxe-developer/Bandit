@@ -9,7 +9,7 @@ import {
 } from "../state/formation-gate.js";
 import { createWorkItem } from "./work-item-create.js";
 
-export async function repoPm(repoRoot: string, args: string[]) {
+export async function repoPm(repoRoot: string, args: string[]): Promise<{ output: string }> {
   const [subcommand, ...subArgs] = args;
 
   if (subcommand === "create-work-item") {
