@@ -457,15 +457,16 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Record aggregate Stage 4 review evidence for
-`BANDIT-057` using the current CodeRabbit disposition and Local Qwen pass
-evidence. Do not call CodeRabbit again for this finding set, land, close out,
-or begin unrelated Phase 8 work until aggregate Stage 4 review evidence is
-recorded.
+**Current next action:** Dispatch bounded Claude Implementation Writer repair
+for the `BANDIT-057` Stage 4 aggregate-review blocker: bare workflow invocation
+usage in `src/cli.ts` must restore the required `role-required` refusal wording
+while preserving explicit role entry points. Do not call CodeRabbit again for
+this finding set, land, close out, or begin unrelated Phase 8 work until the
+repair is verified and aggregate Stage 4 review evidence is recorded.
 
 The current stage is Stage 4: Review And Cross-Model Gates, aggregate review
-evidence pending after operator-directed CodeRabbit major-only repair
-disposition and Local Qwen pass evidence.
+blocked by a focused verification failure discovered before aggregate pass
+evidence could be recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -495,7 +496,11 @@ skip the other six findings and not call CodeRabbit again. Formal ledger
 replacement is still pending aggregate Stage 4 review, landing, and closeout
 evidence. Local Qwen Stage 4 review passed at
 `ea21712f29bcfdd40b14571783b117dbafbdaab2` and is recorded in
-`docs/work/BANDIT-057/local-qwen-review.md`.
+`docs/work/BANDIT-057/local-qwen-review.md`. Codex PM attempted aggregate Stage
+4 review evidence without another CodeRabbit call and recorded
+`docs/work/BANDIT-057/stage4-aggregate-review-blocker.md` because
+`node --test test/role-entrypoints-formation.test.mjs` failed the bare
+workflow invocation `role-required` wording check.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -883,13 +888,16 @@ findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, focused CodeRabbit
 refresh is recorded with seven findings, and operator-directed major-only
 repair disposition is recorded at
 `9338c2dcf822f07832963541dadf295b67325370`. Local Qwen Stage 4 review passed
-at `ea21712f29bcfdd40b14571783b117dbafbdaab2`. The next action is aggregate
-Stage 4 review evidence. Do not start another CodeRabbit refresh, landing,
-closeout, local server/API mode,
+at `ea21712f29bcfdd40b14571783b117dbafbdaab2`. The attempted aggregate Stage 4
+review found a blocker in the focused RED suite: bare workflow invocation usage
+does not include the required `role-required` wording. The next action is a
+bounded Claude Implementation Writer repair for `src/cli.ts`. Do not start
+another CodeRabbit refresh, aggregate review evidence, landing, closeout, local server/API mode,
 state-index persistence, scheduler execution, worktree lifecycle, claim leases,
 work surface reservations, automatic merge/push/deploy, product UAT approval,
 actor identity policy, PR/CI workflow, or unrelated Phase 8 work until Local
-Qwen evidence is incorporated into aggregate Stage 4 review evidence.
+Qwen evidence and the repair are incorporated into aggregate Stage 4 review
+evidence.
 
 Claude Writer repair recovery evidence is recorded in
 `docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
@@ -1586,9 +1594,11 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Record aggregate Stage 4 review evidence for `BANDIT-057` using the current
-   CodeRabbit disposition and Local Qwen pass evidence; do not call CodeRabbit
-   again for this finding set before aggregate Stage 4 review.
+1. Dispatch bounded Claude Implementation Writer repair for the `BANDIT-057`
+   Stage 4 aggregate-review blocker: bare workflow invocation usage in
+   `src/cli.ts` must restore the required `role-required` refusal wording while
+   preserving explicit role entry points; do not call CodeRabbit again for this
+   finding set before aggregate Stage 4 review.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1597,8 +1607,9 @@ The current priority is:
 3. Keep `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the active
    replacement umbrella before unrelated Phase 8 work; `BANDIT-057` has
    accepted Stage 3 evidence plus CodeRabbit and Local Qwen Stage 4 evidence,
-   and the old narrow ledger entry is not formally replaced until aggregate
-   Stage 4 review, landing, and closeout evidence allow it.
+   but aggregate Stage 4 review is blocked until the role-required usage repair
+   is verified, and the old narrow ledger entry is not formally replaced until
+   aggregate Stage 4 review, landing, and closeout evidence allow it.
 4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
@@ -1630,8 +1641,9 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The active
-next action is aggregate Stage 4 review evidence for `BANDIT-057`, not a
-product, UAT, policy, business, cost, or scope decision.
+next action is a bounded Claude Implementation Writer repair for the
+`BANDIT-057` Stage 4 aggregate-review blocker, not a product, UAT, policy,
+business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1658,8 +1670,9 @@ refresh found seven findings, and operator-directed major-only repair
 disposition is recorded. Local Qwen Stage 4 review passed at
 `ea21712f29bcfdd40b14571783b117dbafbdaab2` and is recorded in
 `docs/work/BANDIT-057/local-qwen-review.md`. Codex PM must not call CodeRabbit
-again for this finding set or start landing, closeout, or unrelated Phase 8
-work until aggregate Stage 4 review evidence is recorded.
+again for this finding set or start aggregate review evidence, landing,
+closeout, or unrelated Phase 8 work until the role-required usage repair is
+verified.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,

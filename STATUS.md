@@ -44,6 +44,16 @@ because Stage 4 review, landing, and closeout evidence are still required
 before formally replacing that narrow gap with
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`.
 
+Stage 4 aggregate review is blocked. Codex PM attempted the aggregate Stage 4
+review evidence step without another CodeRabbit call, but focused verification
+failed `node --test test/role-entrypoints-formation.test.mjs`: the bare
+workflow invocation usage text no longer contains the required `role-required`
+refusal wording. Blocker evidence is recorded in
+`docs/work/BANDIT-057/stage4-aggregate-review-blocker.md`. The next action is a
+bounded Claude Implementation Writer repair for `src/cli.ts`; do not record
+aggregate review evidence, land, close out, or begin unrelated Phase 8 work
+before that repair is verified.
+
 Stage 3 repair dispatch is recorded in
 `docs/work/BANDIT-057/stage3-repair-dispatch.md`. The operator completed a
 manual bounded Claude Writer repair after about 9 minutes, Codex PM repair
@@ -62,8 +72,9 @@ Focused pre-PR CodeRabbit review, bounded Claude Writer repair, focused
 CodeRabbit refresh, and operator-directed major-only repair disposition are now
 recorded. Local Qwen Stage 4 review passed at
 `ea21712f29bcfdd40b14571783b117dbafbdaab2` and is recorded in
-`docs/work/BANDIT-057/local-qwen-review.md`. The next action is aggregate Stage
-4 review evidence. Do not call CodeRabbit again for this finding set.
+`docs/work/BANDIT-057/local-qwen-review.md`. The attempted aggregate Stage 4
+review found the focused `role-required` refusal wording blocker described
+above. Do not call CodeRabbit again for this finding set.
 
 No operator-owned input is required for the next recorded action.
 
@@ -71,7 +82,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 aggregate review pending)
+- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 aggregate review blocked on role-required usage repair)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
