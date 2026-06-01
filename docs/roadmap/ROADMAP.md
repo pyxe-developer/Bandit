@@ -6,10 +6,10 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Run the local-record landing action for `BANDIT-057` and
-record `docs/work/BANDIT-057/landing-action.md` with the landed commit SHA. Do
-not close out, call CodeRabbit again for this finding set, or begin unrelated
-Phase 8 work before landing-action evidence is recorded.
+**Current next step:** Complete Stage 6 retrospective closeout for `BANDIT-057`,
+including retrospective evidence, bootstrap-gap disposition, and refreshed
+roadmap/status context. Do not begin unrelated Phase 8 work before closeout
+evidence is recorded.
 
 ## Next Work Item
 
@@ -27,8 +27,8 @@ cockpit feature work unless the operator explicitly changes priority.
   `BANDIT-057`; Stage 3 is accepted, CodeRabbit major repair and non-major
   skip disposition are recorded, Local Qwen passed, focused role-required
   usage-text repair is verified, aggregate Stage 4 review evidence is recorded,
-  and Stage 5 landing verdict evidence is recorded as `safe-to-land`; local-record
-  landing action is next.
+  Stage 5 landing verdict evidence is recorded as `safe-to-land`, and
+  local-record landing action evidence is recorded; Stage 6 closeout is next.
 
 ### Deferred PRD Slices
 

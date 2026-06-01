@@ -457,13 +457,14 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Run the local-record landing action for `BANDIT-057`
-and record `docs/work/BANDIT-057/landing-action.md` with the landed commit SHA.
-Do not close out, call CodeRabbit again for this finding set, or begin unrelated
-Phase 8 work before landing-action evidence is recorded.
+**Current next action:** Complete Stage 6 retrospective closeout for
+`BANDIT-057`, including retrospective evidence, bootstrap-gap disposition for
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`, and refreshed roadmap/status
+context. Do not begin unrelated Phase 8 work before closeout evidence is
+recorded.
 
-The current stage is Stage 5: Landing And UAT, landing verdict recorded
-`safe-to-land`; landing action evidence is pending.
+The current stage is Stage 6: Retrospective And Improvement, landing action
+evidence recorded; retrospective and gap disposition are pending.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -508,7 +509,10 @@ landing verdict evidence is recorded in
 `docs/specs/BANDIT-057-landing-verdict.json` and
 `docs/work/BANDIT-057/landing-verdict.md` with final verdict `safe-to-land`;
 post-verdict `npm run bandit -- land-check BANDIT-057` passes. Local-record
-landing action evidence is next.
+landing action evidence is recorded in
+`docs/work/BANDIT-057/landing-action.md` with landed commit
+`3b3850131d798d9910fe368bd2bbcad98e764f6f`. Stage 6 retrospective closeout
+and bootstrap-gap disposition are next.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -867,7 +871,7 @@ that authority.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-`BANDIT-057` is active at Stage 5 after Claude Writer implementation evidence,
+`BANDIT-057` is active at Stage 6 after Claude Writer implementation evidence,
 manual Claude repair evidence, Codex PM blocker review, second-pass Claude
 Writer repair evidence, third-pass Claude Writer repair evidence, and
 fourth-pass Claude Writer repair evidence. Its structured
@@ -885,8 +889,8 @@ recorded in `docs/work/BANDIT-057/implementation-evidence.md`,
 The active
 bootstrap-gap ledger
 entry remains `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`, linked to
-`BANDIT-057`, because landing action and closeout evidence are still required
-before the narrow gap can be formally replaced by the accepted
+`BANDIT-057`, because retrospective closeout and gap disposition evidence are
+still required before the narrow gap can be formally replaced by the accepted
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` umbrella.
 
 The Stage 3 Writer reported no edits to tests, test helpers, fixtures, RED
@@ -905,11 +909,14 @@ records passing focused verification. Aggregate Stage 4 review evidence is
 recorded in `docs/work/BANDIT-057/review-evidence.md`. Layered
 risk-classification evidence, supply-chain gate evidence, and Stage 5 landing
 verdict evidence are recorded; `npm run bandit -- land-check BANDIT-057` passes.
-Do not start another CodeRabbit refresh, closeout, local server/API mode,
-state-index persistence, scheduler execution, worktree lifecycle, claim leases,
-work surface reservations, automatic merge/push/deploy, product UAT approval,
-actor identity policy, PR/CI workflow, or unrelated Phase 8 work until
-local-record landing action evidence is recorded.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-057/landing-action.md` with landed commit
+`3b3850131d798d9910fe368bd2bbcad98e764f6f`. Do not start another CodeRabbit
+refresh, local server/API mode, state-index persistence, scheduler execution,
+worktree lifecycle, claim leases, work surface reservations, automatic
+merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
+or unrelated Phase 8 work until Stage 6 retrospective closeout and bootstrap-gap
+disposition are recorded.
 
 Claude Writer repair recovery evidence is recorded in
 `docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
@@ -1606,10 +1613,10 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run the local-record landing action for `BANDIT-057` and record
-   `docs/work/BANDIT-057/landing-action.md` with the landed commit SHA; do not
-   close out, call CodeRabbit again for this finding set, or begin unrelated
-   Phase 8 work before landing-action evidence is recorded.
+1. Complete Stage 6 retrospective closeout for `BANDIT-057`, including
+   retrospective evidence, bootstrap-gap disposition, and refreshed
+   roadmap/status context; do not call CodeRabbit again for this finding set or
+   begin unrelated Phase 8 work before closeout evidence is recorded.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1652,8 +1659,8 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The active
-next action is local-record landing action evidence for `BANDIT-057`, not a
-product, UAT, policy, business, cost, or scope decision.
+next action is Stage 6 retrospective closeout for `BANDIT-057`, not a product,
+UAT, policy, business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1689,10 +1696,10 @@ Implementation Writer restored the bare-invocation `role-required` refusal in
 `docs/work/BANDIT-057/stage4-aggregate-review-repair-writer-report.md`.
 Aggregate Stage 4 review evidence is now recorded in
 `docs/work/BANDIT-057/review-evidence.md`. Layered risk-classification evidence,
-supply-chain gate evidence, and Stage 5 landing verdict evidence are now
-recorded. Codex PM must not call CodeRabbit again for this finding set, close
-out, or start unrelated Phase 8 work before local-record landing-action evidence
-is recorded.
+supply-chain gate evidence, Stage 5 landing verdict evidence, and local-record
+landing action evidence are now recorded. Codex PM must not call CodeRabbit
+again for this finding set or start unrelated Phase 8 work before Stage 6
+retrospective closeout and bootstrap-gap disposition are recorded.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,

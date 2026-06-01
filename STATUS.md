@@ -14,7 +14,7 @@ landing action, retrospective, and bootstrap-gap disposition are recorded in
 `docs/work/BANDIT-056/`, `docs/specs/`, `.bandit/policy/`, and
 `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-057` is active at Stage 5. Its structured creation spec is recorded in
+`BANDIT-057` is active at Stage 6. Its structured creation spec is recorded in
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`, and its Stage
 1 brief is recorded in `docs/work/BANDIT-057/brief.md`. Stage 2 RED evidence
 is recorded in `docs/specs/BANDIT-057-red-evidence.json`,
@@ -58,8 +58,11 @@ Layered risk-classification evidence, supply-chain gate evidence, and Stage 5
 landing verdict evidence are recorded in `.bandit/policy/`,
 `docs/specs/BANDIT-057-landing-verdict.json`, and
 `docs/work/BANDIT-057/landing-verdict.md`. The final verdict is `safe-to-land`.
-The next action is local-record landing action evidence; do not close out or
-begin unrelated Phase 8 work before landing-action evidence is recorded.
+Local-record landing action evidence is recorded in
+`docs/work/BANDIT-057/landing-action.md` with landed commit
+`3b3850131d798d9910fe368bd2bbcad98e764f6f`. The next action is Stage 6
+retrospective closeout and bootstrap-gap disposition; do not begin unrelated
+Phase 8 work before closeout evidence is recorded.
 
 Stage 3 repair dispatch is recorded in
 `docs/work/BANDIT-057/stage3-repair-dispatch.md`. The operator completed a
@@ -91,7 +94,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (safe-to-land; local-record landing action pending)
+- `BANDIT-057` - Role Entry Points And Formation Gate (landed; Stage 6 closeout pending)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)
