@@ -182,3 +182,5 @@
 {"type":"stage4_review_recorded","work_item":"BANDIT-057","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 6f88e45; next action is Stage 5 landing verdict evidence"}
 {"type":"stage5_landing_gate_evidence_updated","work_item":"BANDIT-057","message":"Recorded layered risk-classification and supply-chain gate evidence; refreshed review-subject hash to 1a6515ff before landing verdict"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-057","message":"Recorded Stage 5 landing verdict safe-to-land; next action is local-record landing action evidence"}
+{"type":"artifact_created","work_item":"BANDIT-057","message":"Created retrospective artifact at docs/work/BANDIT-057/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-057","message":"Recorded Stage 6 retrospective closeout; replaced BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT with queued BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION; next action is replacement work-item creation"}

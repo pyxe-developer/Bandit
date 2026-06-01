@@ -4,17 +4,14 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
+- `[Gap]` none - `BANDIT-057` is closed
 
-**Current next step:** Complete Stage 6 retrospective closeout for `BANDIT-057`,
-including retrospective evidence, bootstrap-gap disposition, and refreshed
-roadmap/status context. Do not begin unrelated Phase 8 work before closeout
-evidence is recorded.
+**Current next step:** Create the queued bootstrap-gap work item for `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`.
 
 ## Next Work Item
 
-- `[Gap]` none - continue active `BANDIT-057` until Stage 4 review through
-  closeout evidence is complete.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queue the next
+  bounded role-scoped orchestration slice.
 
 ## Planned Work
 
@@ -24,11 +21,10 @@ These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-057`; Stage 3 is accepted, CodeRabbit major repair and non-major
-  skip disposition are recorded, Local Qwen passed, focused role-required
-  usage-text repair is verified, aggregate Stage 4 review evidence is recorded,
-  Stage 5 landing verdict evidence is recorded as `safe-to-land`, and
-  local-record landing action evidence is recorded; Stage 6 closeout is next.
+  `BANDIT-057` closeout as the accepted replacement umbrella for
+  `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`; create the next bounded
+  role-scoped orchestration work item before unrelated Phase 8 cockpit product
+  work.
 
 ### Deferred PRD Slices
 
@@ -99,3 +95,4 @@ bootstrap gaps are queued.
 - `BANDIT-054` - Stage Capability Scope
 - `BANDIT-055` - Token-Cost Failsafe
 - `BANDIT-056` - Evidence Freshness SLOs
+- `BANDIT-057` - Role Entry Points And Formation Gate

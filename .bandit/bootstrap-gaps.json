@@ -621,8 +621,8 @@
     {
       "id": "BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT",
       "title": "Stage 4 repair can violate Writer and Test Writer ownership boundaries",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "replaced",
       "source_work_item": "BANDIT-056",
       "source_artifacts": [
         "AGENTS.md",
@@ -635,9 +635,46 @@
         "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md"
       ],
       "linked_work_item": "BANDIT-057",
-      "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. The 2026-06-01 role-scoped workflow design records this as a symptom of overloaded PM authority and accepts BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION as the replacement umbrella. The current ledger keeps this narrow gap open until BANDIT-057 adds a supported replaced disposition and can formally replace it without abusing no_action.",
+      "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. BANDIT-057 added supported replaced disposition semantics, explicit Repo PM and Work Item PM role entrypoints, role-required bare invocation refusal, deterministic Formation Gate validation, formation review evidence requirements, append-only formation_approved coordination state, and Work Item PM readiness checks. The narrow repair-ownership symptom is therefore formally replaced by the broader BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION umbrella instead of being treated as resolved implementation work or no-action.",
+      "verification_target": "docs/work/BANDIT-057/retrospective.md",
+      "next_action": "Track remaining role-scoped orchestration work through BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.",
+      "replacement_gap": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+      "replacement_work_item": "BANDIT-057",
+      "replacement_evidence": [
+        "docs/design/role-scoped-workflow-orchestration.md",
+        "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md",
+        "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json",
+        "docs/work/BANDIT-057/brief.md",
+        "docs/work/BANDIT-057/red-evidence.md",
+        "docs/work/BANDIT-057/implementation-evidence.md",
+        "docs/work/BANDIT-057/stage3-pm-review.md",
+        "docs/work/BANDIT-057/coderabbit-review.md",
+        "docs/work/BANDIT-057/local-qwen-review.md",
+        "docs/work/BANDIT-057/review-evidence.md",
+        "docs/work/BANDIT-057/landing-verdict.md",
+        "docs/work/BANDIT-057/landing-action.md",
+        "docs/work/BANDIT-057/retrospective.md"
+      ]
+    },
+    {
+      "id": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+      "title": "Role-scoped workflow orchestration",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-057",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/design/role-scoped-workflow-orchestration.md",
+        "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md",
+        "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json",
+        "docs/work/BANDIT-057/retrospective.md"
+      ],
+      "linked_work_item": null,
+      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. Remaining role-scoped orchestration work such as role-run manifests, execution packets, diff-based write validation, same-agent repair continuation, landing/closeout packets, and rubric migration must be scoped as future bounded work items before unrelated Phase 8 cockpit product work.",
       "verification_target": null,
-      "next_action": "Complete active chore BANDIT-057."
+      "next_action": "Create the queued bootstrap-gap work item for BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION."
     }
   ]
 }
