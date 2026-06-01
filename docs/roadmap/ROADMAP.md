@@ -4,14 +4,14 @@
 
 ## Current Work Item
 
-- `[Gap]` none - `BANDIT-057` is closed
+- `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Create the queued bootstrap-gap work item for `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`.
+**Current next step:** Run Repo PM formation review for `BANDIT-058` and approve formation before Stage 2 RED evidence.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queue the next
-  bounded role-scoped orchestration slice.
+- `[Gap]` TBD - next bounded role-scoped orchestration slice after
+  `BANDIT-058` lands and closes out.
 
 ## Planned Work
 
@@ -21,10 +21,10 @@ These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-057` closeout as the accepted replacement umbrella for
-  `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`; create the next bounded
-  role-scoped orchestration work item before unrelated Phase 8 cockpit product
-  work.
+  `BANDIT-058`; keep the current slice bounded to Role Contracts And Run
+  Manifests before later execution packets, diff validation, repair
+  continuation, landing/closeout packets, rubric migration, or unrelated Phase
+  8 cockpit product work.
 
 ### Deferred PRD Slices
 

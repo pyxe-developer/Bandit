@@ -184,3 +184,4 @@
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-057","message":"Recorded Stage 5 landing verdict safe-to-land; next action is local-record landing action evidence"}
 {"type":"artifact_created","work_item":"BANDIT-057","message":"Created retrospective artifact at docs/work/BANDIT-057/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-057","message":"Recorded Stage 6 retrospective closeout; replaced BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT with queued BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION; next action is replacement work-item creation"}
+{"type":"work_item_created","work_item":"BANDIT-058","message":"Created work item BANDIT-058 from docs/specs/BANDIT-GAP-ROLE-CONTRACTS-RUN-MANIFESTS.json"}
