@@ -44,7 +44,8 @@ async function main() {
 
   if (!command) {
     console.error(
-      "Usage: bandit <command>\n\n" +
+      "role-required: specify a role entry point to invoke the workflow\n\n" +
+        "Usage: bandit <command>\n\n" +
         "Role entry points:\n" +
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +

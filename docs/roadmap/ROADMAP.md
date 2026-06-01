@@ -6,12 +6,11 @@
 
 - `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Dispatch bounded Claude Implementation Writer repair for
-the `BANDIT-057` Stage 4 aggregate-review blocker: bare workflow invocation
-usage in `src/cli.ts` must restore the required `role-required` refusal wording
-while preserving explicit role entry points. Do not call CodeRabbit again for
-this finding set, land, close out, or begin unrelated Phase 8 work until the
-repair is verified and aggregate Stage 4 review evidence is recorded.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-057` using the current CodeRabbit major-only disposition, Local Qwen
+pass evidence, and verified Claude Writer repair evidence. Do not call
+CodeRabbit again for this finding set, land, close out, or begin unrelated
+Phase 8 work before aggregate Stage 4 review evidence is recorded.
 
 ## Next Work Item
 
@@ -27,8 +26,8 @@ cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
   `BANDIT-057`; Stage 3 is accepted, CodeRabbit major repair and non-major
-  skip disposition are recorded, Local Qwen passed, and aggregate Stage 4
-  review is blocked on a focused role-required usage-text repair.
+  skip disposition are recorded, Local Qwen passed, focused role-required
+  usage-text repair is verified, and aggregate Stage 4 review evidence is next.
 
 ### Deferred PRD Slices
 
