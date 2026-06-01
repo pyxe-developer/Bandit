@@ -455,21 +455,24 @@ recorded in `docs/specs/BANDIT-055-retrospective.json` and
 `docs/work/BANDIT-055/retrospective.md`, and `.bandit/bootstrap-gaps.json`
 marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
-**Active work item:** none.
+**Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Create the `BANDIT-057` work item for Role Entry Points
-And Formation Gate, the first slice of
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; do not write RED evidence
-until the work-item brief is recorded.
+**Current next action:** Write Stage 2 RED evidence for `BANDIT-057` - Role
+Entry Points And Formation Gate; do not write implementation code, dispatch
+Stage 3, run Stage 4 review, land, close out, or begin unrelated Phase 8 work
+until RED evidence is recorded.
 
-The current stage is Interstitial: Work-item creation required.
+The current stage is Stage 2: Test Design And RED Evidence.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
 finding. `docs/design/role-scoped-workflow-orchestration.md` and
 `docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md`
-record the design. `BANDIT-057` must add `replaced` bootstrap-gap disposition
-support before formally replacing the old ledger entry.
+record the design. `BANDIT-057` Stage 1 brief evidence is recorded in
+`docs/work/BANDIT-057/brief.md`, generated from
+`docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`. `BANDIT-057`
+must add `replaced` bootstrap-gap disposition support before formally replacing
+the old ledger entry.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -826,7 +829,22 @@ that authority.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
+
+`BANDIT-057` is active at Stage 2 after Stage 1 brief creation. Its structured
+creation spec is recorded in
+`docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`, and its brief
+is recorded in `docs/work/BANDIT-057/brief.md`. The active bootstrap-gap ledger
+entry remains `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`, linked to
+`BANDIT-057`, because `BANDIT-057` must add supported `replaced` disposition
+semantics before the narrow gap can be formally replaced by the accepted
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` umbrella.
+
+Do not start implementation, Stage 3 dispatch, Stage 4 review, landing,
+closeout, local server/API mode, state-index persistence, scheduler execution,
+worktree lifecycle, claim leases, work surface reservations, automatic
+merge/push/deploy, product UAT approval, actor identity policy, PR/CI workflow,
+or unrelated Phase 8 work until `BANDIT-057` Stage 2 RED evidence is recorded.
 
 `BANDIT-053` is landed and closed out as the bootstrap-gap chore for
 `BANDIT-GAP-AGENT-OBSERVABILITY-TRACES`. Its
@@ -1127,9 +1145,13 @@ Fenced Claim Authority; `BANDIT-046` - Git Mutation Serializer; `BANDIT-047` -
 Bootstrap Model-Family Separation; `BANDIT-048` - Focused Session Context
 Packets.
 
-**Expected next deliverable:** Stage 1 work-item brief for `BANDIT-057` - Role
-Entry Points And Formation Gate, created from the role-scoped workflow
-orchestration design.
+**Expected next deliverable:** Stage 2 RED evidence for `BANDIT-057` - Role
+Entry Points And Formation Gate, proving unsupported `replaced` gap
+disposition, missing role-required entrypoint refusal, missing Repo PM
+create-work-item entrypoint, missing Formation Gate validation and approval,
+missing formation review artifact requirements, missing `formation_approved`
+coordination transition, and missing Work Item PM readiness refusal before
+formation approval.
 
 ## Known Bootstrap Gaps
 
@@ -1341,8 +1363,9 @@ These are expected because Bandit does not exist yet:
   validation command, derived trust signals, review evidence, landing evidence,
   and retrospective closeout are recorded.
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
-  umbrella for the `BANDIT-056` Stage 4 repair ownership violation. The first
-  slice should add explicit role entrypoints, formation approval, and
+  umbrella for the `BANDIT-056` Stage 4 repair ownership violation.
+  `BANDIT-057` is active with Stage 1 brief evidence recorded and must next
+  write RED evidence for explicit role entrypoints, formation approval, and
   `replaced` gap disposition support before broader role-run machinery.
 
 - The missing Bandit work-item creation command is resolved by `BANDIT-020`.
@@ -1515,18 +1538,20 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Create the `BANDIT-057` work item for Role Entry Points And Formation Gate,
-   the first slice of `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; do not
-   write RED evidence until the work-item brief is recorded.
+1. Write Stage 2 RED evidence for `BANDIT-057` - Role Entry Points And
+   Formation Gate, proving the missing `replaced` gap disposition support,
+   role-required entrypoint refusal, Repo PM creation entrypoint, Formation Gate
+   validation and approval, formation review requirements, `formation_approved`
+   transition, and Work Item PM readiness refusal.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
    workflow, and unrelated feature work out of scope unless explicitly
    authorized by a future work item.
-3. Keep `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the next queued
-   umbrella before unrelated Phase 8 work; `BANDIT-057` must add `replaced`
-   gap disposition support before formally replacing the old narrow ledger
-   entry.
+3. Keep `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the active
+   replacement umbrella before unrelated Phase 8 work; `BANDIT-057` must add
+   `replaced` gap disposition support before formally replacing the old narrow
+   ledger entry.
 4. Keep unrelated Phase 8 work blocked while any open bootstrap gap remains
    queued or active. `BANDIT-GAP-WORKFLOW-TRIAL-DECISION-GUARDRAILS` is
    resolved by `BANDIT-037`. `BANDIT-GAP-SKILL-LIFECYCLE-CONTRACT` is resolved
@@ -1548,8 +1573,8 @@ The current priority is:
    `BANDIT-053`, `BANDIT-GAP-STAGE-CAPABILITY-SCOPE` is resolved by
    `BANDIT-054`, and `BANDIT-GAP-TOKEN-COST-FAILSAFE` is resolved by
    `BANDIT-055`. `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` is resolved by
-   `BANDIT-056`, and `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the
-   accepted replacement umbrella for the next work.
+   `BANDIT-056`, and `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is active
+   through `BANDIT-057`.
 
 `BANDIT-021` resolved the general artifact creation command gap and is closed
 out. Future Stage 4 review evidence must use `review_subject_hash` to avoid
@@ -1557,46 +1582,33 @@ raw-HEAD evidence loops.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-055`
-has Stage 1 brief evidence, Stage 2 RED evidence, Stage 3 implementation
-evidence, Stage 4 pre-PR CodeRabbit provider-refusal/bootstrap-gap evidence,
-Stage 4 refreshed Local Qwen non-blocking evidence with Codex PM disposition,
-aggregate Stage 4 review evidence, Stage 5 landing verdict evidence,
-local-record landing action evidence, Stage 6 retrospective closeout, and
-resolved bootstrap-gap disposition. `.bandit/bootstrap-gaps.json` records
-`BANDIT-GAP-TOKEN-COST-FAILSAFE` as resolved by `BANDIT-055` and
-`BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` as resolved by `BANDIT-056`. Stage 3
-implementation evidence is recorded for `BANDIT-056`; latest Stage 4 focused
-CodeRabbit refresh completed at
-`4beaf21e01f5d3f839d4612c8af01652eb18dacd` with two trivial findings. Codex PM
-dispositioned both as no-action or opportunistic in
-`docs/work/BANDIT-056/coderabbit-finding-disposition.md`. Local Qwen evidence
-is recorded in `docs/work/BANDIT-056/local-qwen-review.md` as a bootstrap-gap
-timeout after two fail-closed attempts. Aggregate Stage 4 review evidence is
-recorded in `docs/work/BANDIT-056/review-evidence.md` with PM disposition
-`pass`. Stage 5 landing verdict evidence is recorded in
-`docs/work/BANDIT-056/landing-verdict.md` with final verdict `safe-to-land`.
-Local-record landing action evidence is recorded in
-`docs/work/BANDIT-056/landing-action.md` with current head
-`d09573263afb4e293117fe3047c8cd21049ec296`. The next required step is Stage 6
-retrospective closeout and bootstrap-gap disposition. Stage 6 retrospective
-closeout is recorded in `docs/work/BANDIT-056/retrospective.md` and
-`docs/specs/BANDIT-056-retrospective.json`, and `.bandit/bootstrap-gaps.json`
-marks `BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS` resolved. The next required step is
-creating `BANDIT-057` for Role Entry Points And Formation Gate.
-This is routine technical routing, not an operator-owned product,
-UAT, policy, business, cost, or scope decision.
+No operator-owned input is required for the next recorded action.
+`BANDIT-057` Stage 1 brief evidence is recorded in
+`docs/work/BANDIT-057/brief.md`, generated from
+`docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
+`.bandit/bootstrap-gaps.json` links the active
+`BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` ledger entry to
+`BANDIT-057`; the work item itself scopes the accepted
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. The next
+required step is Stage 2 RED evidence for unsupported `replaced`
+bootstrap-gap disposition, missing role-required entrypoint refusal, missing
+Repo PM creation entrypoint, missing Formation Gate validation and approval,
+missing formation review artifact requirements, missing `formation_approved`
+coordination transition, and missing Work Item PM readiness refusal before
+formation approval. This is routine technical routing from repo artifacts, not
+an operator-owned product, UAT, policy, business, cost, or scope decision.
+
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
 cost, irreversible-risk, and genuinely ambiguous scope gates, while derivable
-operational drift should route to
-CLI-owned mechanical repair with approved source artifacts,
-expected-current-state checks, and immutable transition history. Halt only if
-the next step would change product direction, UAT policy, workflow policy beyond
-the queued gap scope, business tradeoffs, cost/risk posture, external service
-setup, paid reviewer routing, live routing, scheduler authority,
-claim/worktree authority, installed global skill contents, merge/push/deploy
-authority, or broader workflow scope.
+operational drift should route to CLI-owned mechanical repair with approved
+source artifacts, expected-current-state checks, and immutable transition
+history. Halt only if the next step would change product direction, UAT policy,
+workflow policy beyond the accepted role-scoped orchestration scope, business
+tradeoffs, cost/risk posture, external service setup, paid reviewer routing,
+live routing policy, scheduler authority, claim/worktree authority, installed
+global skill contents, dependency or lockfile policy, merge/push/deploy
+authority, or broader cockpit/product scope.
 
 If the next step would expand beyond the recorded PRD/design-review scope,
 choose local server/API mode, choose state-index persistence timing, require

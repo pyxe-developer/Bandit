@@ -4,18 +4,17 @@
 
 ## Current Work Item
 
-- `[Gap]` none - no active work item; interstitial before creating `BANDIT-057`
+- `[Gap]` `BANDIT-057` - Role Entry Points And Formation Gate
 
-**Current next step:** Create the `BANDIT-057` work item for Role Entry Points
-And Formation Gate, the first slice of
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; do not write RED evidence
-until the work-item brief is recorded.
+**Current next step:** Write Stage 2 RED evidence for `BANDIT-057` - Role
+Entry Points And Formation Gate; do not write implementation code, dispatch
+Stage 3, run Stage 4 review, land, close out, or begin unrelated Phase 8 work
+until RED evidence is recorded.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - replace the
-  narrow Stage 4 repair-ownership gap with explicit role entrypoints,
-  formation approval, and role-scoped orchestration.
+- `[Gap]` none - continue active `BANDIT-057` until Stage 2 through closeout
+  evidence is complete.
 
 ## Planned Work
 
@@ -24,11 +23,9 @@ until the work-item brief is recorded.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued from the
-  `BANDIT-056` Stage 4 repair ownership violation and the 2026-06-01
-  grill-with-docs design; `BANDIT-057` first adds role entrypoints,
-  formation approval, and `replaced` gap disposition support before unrelated
-  Phase 8 work.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
+  `BANDIT-057`; first adds role entrypoints, formation approval, and
+  `replaced` gap disposition support before unrelated Phase 8 work.
 
 ### Deferred PRD Slices
 

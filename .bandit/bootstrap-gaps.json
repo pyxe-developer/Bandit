@@ -621,8 +621,8 @@
     {
       "id": "BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT",
       "title": "Stage 4 repair can violate Writer and Test Writer ownership boundaries",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-056",
       "source_artifacts": [
         "AGENTS.md",
@@ -634,10 +634,10 @@
         "docs/design/role-scoped-workflow-orchestration.md",
         "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-057",
       "rationale": "During BANDIT-056 Stage 4 CodeRabbit repair, Codex PM edited both implementation-owned source and Test Writer-owned test coverage in one repair step after the Stage 3 Writer boundary was already established. The 2026-06-01 role-scoped workflow design records this as a symptom of overloaded PM authority and accepts BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION as the replacement umbrella. The current ledger keeps this narrow gap open until BANDIT-057 adds a supported replaced disposition and can formally replace it without abusing no_action.",
       "verification_target": null,
-      "next_action": "Create BANDIT-057 - Role Entry Points And Formation Gate as the first slice of BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION. BANDIT-057 must add explicit role entrypoints, formation approval, and replaced gap disposition support before formally replacing this narrow gap."
+      "next_action": "Complete active chore BANDIT-057."
     }
   ]
 }
