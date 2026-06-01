@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-058
-source_head: 367c681a00a0f96313b809d6d4a5d263973bf23d
-review_subject_hash: a0752609b290012c5ea80a79b3d015ab537090be5a9b03df2dd08bcec68fbf09
+source_head: a7c4082744569d3a48432f65f69d467b4facd475
+review_subject_hash: 13b38f59f4404f80851b7077ee0b16b218c11d08d07aff9b8b07e0d3bd47a812
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -13,7 +13,7 @@ verification_evidence:
   - docs/work/BANDIT-058/local-qwen-review-blocker.md records the prior clean-worktree reviewability blocker, and checkpoint commit 367c681a00a0f96313b809d6d4a5d263973bf23d resolved that blocker before Local Qwen ran.
   - docs/work/BANDIT-058/local-qwen-review.md records profile local-qwen-baseline, reviewer_verdict non_blocking, findings_status open, operator_input_status none_required, source_drift_status current, and no blocker-level findings at source head 367c681a00a0f96313b809d6d4a5d263973bf23d.
   - docs/work/BANDIT-058/qwen-finding-disposition.md records Codex PM disposition for the three Local Qwen findings: accepted_non_blocking diagnostic-clarity follow-up candidate, no_action for broader glob syntax, and not_applicable for the already resolved clean-worktree blocker.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-058 produced 3a699d327fc1716ff3dcf85c1e69c3478657f0c2e6895e32bf562849e062380a from review-subject policy v1.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-058 produced 3a699d327fc1716ff3dcf85c1e69c3478657f0c2e6895e32bf562849e062380a from review-subject policy v1 before Stage 5 policy gate files were tracked.
   - node --test test/role-contracts.test.mjs passed with 4/4 tests during PM finding-disposition verification.
   - node --test test/role-run-manifests.test.mjs passed with 6/6 tests during PM finding-disposition verification.
   - node --test test/role-entrypoints-formation.test.mjs passed with 7/7 tests during PM finding-disposition verification.
@@ -27,7 +27,7 @@ verification_evidence:
   - git diff --check passed during PM finding-disposition verification.
   - npm run bandit -- risk-classification validate --json passed after Stage 5 layered risk-classification evidence was recorded.
   - npm run bandit -- supply-chain-gate validate --json passed after Stage 5 supply-chain gate evidence was recorded.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-058 produced a0752609b290012c5ea80a79b3d015ab537090be5a9b03df2dd08bcec68fbf09 after Stage 5 policy gate evidence was added to the tracked review subject.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-058 produced 13b38f59f4404f80851b7077ee0b16b218c11d08d07aff9b8b07e0d3bd47a812 after the Stage 5 policy gate evidence baseline was committed.
 coderabbit_state: bootstrap_gap
 coderabbit_replacement_evidence:
   - Raw CodeRabbit evidence remains blocker/open because the pre-PR review artifact is immutable. The four source-level findings were repaired by Claude Implementation Writer and accepted by Codex PM at docs/work/BANDIT-058/stage4-repair-acceptance.md; Local Qwen then reviewed the repaired source and returned non_blocking findings with PM disposition. This bootstrap replacement is required because current land-check treats raw CodeRabbit pass or bootstrap_gap replacement evidence as the terminal CodeRabbit landing state.
