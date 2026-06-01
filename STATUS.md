@@ -36,11 +36,12 @@ Codex PM dispositioned those findings at
 `docs/work/BANDIT-058/qwen-finding-disposition.md`. Aggregate Stage 4 review
 evidence is recorded at `docs/work/BANDIT-058/review-evidence.md`. Stage 5
 layered risk-classification and supply-chain gate evidence are recorded, the
-landing verdict is `safe-to-land`, and `land-check` passes.
+landing verdict is `safe-to-land`, and `land-check` passes. Local landing
+action evidence is recorded at `docs/work/BANDIT-058/landing-action.md`.
 
-Current stage: Stage 5 ready-to-land.
+Current stage: Stage 5 landed; Stage 6 closeout required.
 
-Next action: record local landing action evidence for `BANDIT-058`.
+Next action: record Stage 6 retrospective, improvement disposition, and gap disposition for `BANDIT-058`.
 
 No operator-owned input is required for the next recorded action.
 
@@ -48,7 +49,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-058` - Role Contracts And Run Manifests (active; safe-to-land, landing action required)
+- `BANDIT-058` - Role Contracts And Run Manifests (active; landed, Stage 6 closeout required)
 - `BANDIT-057` - Role Entry Points And Formation Gate (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)

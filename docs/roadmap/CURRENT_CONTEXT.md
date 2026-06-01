@@ -51,13 +51,16 @@ source-head evidence. Local Qwen review then completed at
 dispositioned those findings at
 `docs/work/BANDIT-058/qwen-finding-disposition.md`. Aggregate Stage 4 review
 evidence is recorded at `docs/work/BANDIT-058/review-evidence.md` with current
-review-subject hash `a0752609b290012c5ea80a79b3d015ab537090be5a9b03df2dd08bcec68fbf09`
+review-subject hash `13b38f59f4404f80851b7077ee0b16b218c11d08d07aff9b8b07e0d3bd47a812`
 after Stage 5 layered risk-classification and supply-chain gate evidence was
 added. Stage 5 landing-gate evidence is recorded at
 `.bandit/policy/risk-classifications/BANDIT-058-risk-classification.json`,
 `.bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json`, and
 `docs/work/BANDIT-058/landing-verdict.md`; `npm run bandit -- land-check
-BANDIT-058` passes with final verdict `safe-to-land`.
+BANDIT-058` passes with final verdict `safe-to-land`. Local landing action
+evidence is recorded at `docs/work/BANDIT-058/landing-action.md`; it records
+local-record landing at current head
+`a266a10acae995dac33231470cde968c408ea112`.
 
 `BANDIT-057` remains landed and closed out. Its Stage 1 through Stage 6 evidence
 and the formal replacement of
@@ -67,14 +70,15 @@ and the formal replacement of
 
 **Active work item:** `BANDIT-058` - Role Contracts And Run Manifests.
 
-**Current next action:** Record local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
+**Current next action:** Record Stage 6 retrospective, improvement disposition, and gap disposition for `BANDIT-058` before any new work item.
 
-The current stage is Stage 5 ready-to-land: landing-gate evidence and landing
-verdict are recorded, and `land-check` passes. Local landing action evidence is
-required before Stage 6 retrospective/closeout or any new work item.
+The current stage is Stage 5 landed: landing-gate evidence, landing verdict,
+and local landing action evidence are recorded. Stage 6 retrospective, durable
+improvement disposition, gap disposition, and closeout routing are required
+before any new work item.
 
 Do not close out, begin another work item, or begin unrelated Phase 8 cockpit
-product work until local landing action evidence is recorded.
+product work until Stage 6 closeout evidence is recorded.
 The Stage 3 Writer had no authority to edit tests, test helpers, fixtures, RED
 evidence, or acceptance mappings; Codex PM confirmed no such edits occurred.
 
@@ -109,9 +113,9 @@ prepared a focused implementation/evidence checkpoint baseline for
 `BANDIT-058`. Local Qwen then completed with `non_blocking` open findings, and
 Codex PM dispositioned them at
 `docs/work/BANDIT-058/qwen-finding-disposition.md`. Aggregate Stage 4 review
-evidence is now recorded. Stage 5 landing-gate evidence and landing verdict are
-now recorded and `land-check` passes, so the next step is local landing action
-evidence.
+evidence is now recorded. Stage 5 landing-gate evidence, landing verdict, and
+local landing action evidence are now recorded, so the next step is Stage 6
+retrospective and disposition evidence.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -120,8 +124,8 @@ PR/CI workflow, or unrelated Phase 8 work while `BANDIT-058` is active.
 
 ## Priority
 
-1. Record the local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
-2. Then complete Stage 6 retrospective, improvement disposition, and gap disposition.
+1. Complete Stage 6 retrospective, improvement disposition, and gap disposition.
+2. Then update closeout routing and only then select the next bounded role-scoped orchestration slice.
 3. Keep the review bounded to the accepted Role Contracts And Run Manifests
    implementation, including the CodeRabbit source repair and Test Ownership
    Boundary.
@@ -132,6 +136,6 @@ PR/CI workflow, or unrelated Phase 8 work while `BANDIT-058` is active.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The next step
-is local landing action evidence for a repo-derived bootstrap-gap chore with a
-safe-to-land verdict, not a product, UAT, policy, business, cost, or scope
+is Stage 6 retrospective and disposition evidence for a repo-derived
+bootstrap-gap chore, not a product, UAT, policy, business, cost, or scope
 decision.

@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Record local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
+**Current next step:** Record Stage 6 retrospective, improvement disposition, and gap disposition for `BANDIT-058` before any new work item.
 
 ## Next Work Item
 
