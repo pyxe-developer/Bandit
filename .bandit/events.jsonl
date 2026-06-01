@@ -175,3 +175,4 @@
 {"type":"artifact_created","work_item":"BANDIT-057","message":"Created red_evidence artifact at docs/work/BANDIT-057/red-evidence.md"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded focused CodeRabbit review with four open findings at source head 4f48272; next action is repair or explicit PM disposition before Local Qwen"}
 {"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded focused CodeRabbit refresh with seven open findings at source head c2488aa; next action is repair or explicit PM disposition before another refresh or Local Qwen"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded operator-directed major-only CodeRabbit repair at source head 9338c2d and skipped six non-major findings; next action is Local Qwen without another CodeRabbit call"}

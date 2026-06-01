@@ -34,8 +34,11 @@ of failing brief validation. Focused pre-PR CodeRabbit evidence is recorded in
 `docs/specs/BANDIT-057-coderabbit-review-output.json`. Claude Implementation
 Writer repaired the prior four findings at
 `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`; focused CodeRabbit refresh then
-completed at `c2488aa3cfd532dfac54d5edc28fe133d725ab0d` with seven open
-findings. The active bootstrap gap ledger entry remains
+completed at `c2488aa3cfd532dfac54d5edc28fe133d725ab0d` with seven findings.
+The operator directed Codex PM to fix only the major item, skip the other six,
+and not call CodeRabbit again. Claude Implementation Writer repaired the major
+CLI usage finding at `9338c2dcf822f07832963541dadf295b67325370`. The active
+bootstrap gap ledger entry remains
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`, linked to `BANDIT-057`,
 because Stage 4 review, landing, and closeout evidence are still required
 before formally replacing that narrow gap with
@@ -55,11 +58,10 @@ and Codex PM has recorded a remaining blocker in
 `docs/work/BANDIT-057/stage3-pm-review.md`. A fourth-pass Claude Writer repair
 is now recorded in the refreshed implementation evidence and Writer report.
 Codex PM accepted Stage 3 in `docs/work/BANDIT-057/stage3-pm-review.md`.
-Focused pre-PR CodeRabbit review, bounded Claude Writer repair, and focused
-CodeRabbit refresh are now recorded. The next action is repair or explicit PM
-disposition of exactly the seven latest CodeRabbit findings before another
-refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, another work
-item, or unrelated Phase 8 work.
+Focused pre-PR CodeRabbit review, bounded Claude Writer repair, focused
+CodeRabbit refresh, and operator-directed major-only repair disposition are now
+recorded. The next action is Local Qwen Stage 4 review. Do not call CodeRabbit
+again for this finding set.
 
 No operator-owned input is required for the next recorded action.
 
@@ -67,7 +69,7 @@ No operator-owned input is required for the next recorded action.
 
 Last 5 items only:
 
-- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 CodeRabbit findings open)
+- `BANDIT-057` - Role Entry Points And Formation Gate (Stage 4 Local Qwen pending)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active replacement umbrella
 - `BANDIT-056` - Evidence Freshness SLOs (closed)
 - `BANDIT-055` - Token-Cost Failsafe (closed)

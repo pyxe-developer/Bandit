@@ -457,13 +457,13 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Repair or explicitly disposition the seven latest
-CodeRabbit findings for `BANDIT-057`. Do not run another CodeRabbit refresh,
-Local Qwen, aggregate Stage 4 review, land, close out, or begin unrelated Phase
-8 work until those findings are repaired or dispositioned.
+**Current next action:** Run Local Qwen Stage 4 review for `BANDIT-057`. Do not
+call CodeRabbit again for the current finding set, aggregate Stage 4 review,
+land, close out, or begin unrelated Phase 8 work until Local Qwen evidence is
+recorded.
 
-The current stage is Stage 4: Review And Cross-Model Gates, CodeRabbit findings
-open after focused refresh.
+The current stage is Stage 4: Review And Cross-Model Gates, Local Qwen pending
+after operator-directed CodeRabbit major-only repair disposition.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -485,10 +485,12 @@ active brief reach the expected missing-review-artifact gate instead of failing
 brief validation. Focused pre-PR CodeRabbit evidence is recorded in
 `docs/work/BANDIT-057/coderabbit-review.md`; Claude Implementation Writer
 repaired the prior four findings at
-`2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, and focused CodeRabbit refresh
-completed at `c2488aa3cfd532dfac54d5edc28fe133d725ab0d` with seven open
-findings. Formal ledger replacement is still pending Stage 4 review, landing,
-and closeout evidence.
+`2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, focused CodeRabbit refresh
+completed at `c2488aa3cfd532dfac54d5edc28fe133d725ab0d` with seven findings,
+and Claude Implementation Writer repaired only the major CLI usage finding at
+`9338c2dcf822f07832963541dadf295b67325370`. The operator directed Codex PM to
+skip the other six findings and not call CodeRabbit again. Formal ledger
+replacement is still pending Stage 4 review, landing, and closeout evidence.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -872,15 +874,16 @@ before the narrow gap can be formally replaced by the accepted
 The Stage 3 Writer reported no edits to tests, test helpers, fixtures, RED
 evidence artifacts/specs, or acceptance mappings. Focused pre-PR CodeRabbit
 review is recorded, Claude Implementation Writer repaired the prior four
-findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, and focused
-CodeRabbit refresh is recorded with seven open findings. The next action is
-repair or explicit PM disposition of those seven findings. Do not start another
-CodeRabbit refresh, Local Qwen, aggregate Stage 4 review, landing, closeout,
-local server/API mode,
+findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, focused CodeRabbit
+refresh is recorded with seven findings, and operator-directed major-only
+repair disposition is recorded at
+`9338c2dcf822f07832963541dadf295b67325370`. The next action is Local Qwen Stage
+4 review. Do not start another CodeRabbit refresh, aggregate Stage 4 review,
+landing, closeout, local server/API mode,
 state-index persistence, scheduler execution, worktree lifecycle, claim leases,
 work surface reservations, automatic merge/push/deploy, product UAT approval,
-actor identity policy, PR/CI workflow, or unrelated Phase 8 work until
-the findings are repaired or dispositioned.
+actor identity policy, PR/CI workflow, or unrelated Phase 8 work until Local
+Qwen evidence is recorded.
 
 Claude Writer repair recovery evidence is recorded in
 `docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
@@ -1577,9 +1580,8 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Repair or explicitly disposition the seven latest CodeRabbit findings for
-   `BANDIT-057` before another CodeRabbit refresh, Local Qwen, or aggregate
-   Stage 4 review.
+1. Run Local Qwen Stage 4 review for `BANDIT-057`; do not call CodeRabbit again
+   for the current finding set before aggregate Stage 4 review.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1620,9 +1622,8 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The active
-next action is repair or explicit PM disposition of the seven latest CodeRabbit
-findings for `BANDIT-057`, not a product, UAT, policy, business, cost, or scope
-decision.
+next action is Local Qwen Stage 4 review for `BANDIT-057`, not a product, UAT,
+policy, business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1644,11 +1645,11 @@ validation.
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. Stage 3
 fourth-pass repair evidence is accepted, focused pre-PR CodeRabbit evidence is
 recorded, Claude Implementation Writer repaired the prior four CodeRabbit
-findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, and focused
-CodeRabbit refresh found seven open findings. Codex PM must not start another
-CodeRabbit refresh, Local Qwen, aggregate Stage 4 review, landing, closeout, or
-unrelated Phase 8 work until those findings are repaired or explicitly
-dispositioned.
+findings at `2a9a05b8cc03ac18d975d9bb0b34b70ee1091d08`, focused CodeRabbit
+refresh found seven findings, and operator-directed major-only repair
+disposition is recorded. Codex PM must not call CodeRabbit again for this
+finding set or start aggregate Stage 4 review, landing, closeout, or unrelated
+Phase 8 work until Local Qwen evidence is recorded.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
