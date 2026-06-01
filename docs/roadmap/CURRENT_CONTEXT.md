@@ -43,8 +43,21 @@ Codex PM attempted the recorded Local Qwen Stage 4 review command, but
 because the active worktree was dirty and the command requires a clean
 source-head baseline. The blocker is recorded at
 `docs/work/BANDIT-058/local-qwen-review-blocker.md`. Codex PM prepared the
-focused `BANDIT-058` implementation/evidence checkpoint baseline in the
-current commit so Local Qwen can run against source-head evidence.
+focused `BANDIT-058` implementation/evidence checkpoint baseline in commit
+`367c681a00a0f96313b809d6d4a5d263973bf23d` so Local Qwen could run against
+source-head evidence. Local Qwen review then completed at
+`docs/work/BANDIT-058/local-qwen-review.md` with verdict `non_blocking`,
+`findings_status: open`, and source drift current at that checkpoint. Codex PM
+dispositioned those findings at
+`docs/work/BANDIT-058/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded at `docs/work/BANDIT-058/review-evidence.md` with current
+review-subject hash `a0752609b290012c5ea80a79b3d015ab537090be5a9b03df2dd08bcec68fbf09`
+after Stage 5 layered risk-classification and supply-chain gate evidence was
+added. Stage 5 landing-gate evidence is recorded at
+`.bandit/policy/risk-classifications/BANDIT-058-risk-classification.json`,
+`.bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json`, and
+`docs/work/BANDIT-058/landing-verdict.md`; `npm run bandit -- land-check
+BANDIT-058` passes with final verdict `safe-to-land`.
 
 `BANDIT-057` remains landed and closed out. Its Stage 1 through Stage 6 evidence
 and the formal replacement of
@@ -54,15 +67,14 @@ and the formal replacement of
 
 **Active work item:** `BANDIT-058` - Role Contracts And Run Manifests.
 
-**Current next action:** Run Local Qwen adversarial review for the current `BANDIT-058` source before aggregate Stage 4 review evidence.
+**Current next action:** Record local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
 
-The current stage is Stage 4: CodeRabbit source repair accepted; Local Qwen is
-the next required independent reviewer gate before aggregate review evidence.
+The current stage is Stage 5 ready-to-land: landing-gate evidence and landing
+verdict are recorded, and `land-check` passes. Local landing action evidence is
+required before Stage 6 retrospective/closeout or any new work item.
 
-Do not record aggregate Stage 4 review evidence, land, close out, begin another
-work item, or begin unrelated Phase 8 cockpit product work until Local Qwen and
-aggregate Stage 4 review evidence are recorded, and any findings are explicitly
-dispositioned.
+Do not close out, begin another work item, or begin unrelated Phase 8 cockpit
+product work until local landing action evidence is recorded.
 The Stage 3 Writer had no authority to edit tests, test helpers, fixtures, RED
 evidence, or acceptance mappings; Codex PM confirmed no such edits occurred.
 
@@ -94,8 +106,12 @@ recorded the bounded CodeRabbit source repair and preserved the Test Ownership
 Boundary; Codex PM accepted the repair. The Local Qwen command then failed
 closed before reviewer invocation because the worktree was dirty, so Codex PM
 prepared a focused implementation/evidence checkpoint baseline for
-`BANDIT-058`. The next step is to run Local Qwen against the current
-source-head evidence.
+`BANDIT-058`. Local Qwen then completed with `non_blocking` open findings, and
+Codex PM dispositioned them at
+`docs/work/BANDIT-058/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is now recorded. Stage 5 landing-gate evidence and landing verdict are
+now recorded and `land-check` passes, so the next step is local landing action
+evidence.
 
 Do not start local server/API mode, state-index persistence, scheduler
 execution, worktree lifecycle, claim leases, work surface reservations,
@@ -104,9 +120,8 @@ PR/CI workflow, or unrelated Phase 8 work while `BANDIT-058` is active.
 
 ## Priority
 
-1. Run Local Qwen adversarial review for the current `BANDIT-058` source.
-2. Then record aggregate Stage 4 review evidence after Local Qwen completes or
-   an honest provider/refusal replacement artifact is recorded.
+1. Record the local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
+2. Then complete Stage 6 retrospective, improvement disposition, and gap disposition.
 3. Keep the review bounded to the accepted Role Contracts And Run Manifests
    implementation, including the CodeRabbit source repair and Test Ownership
    Boundary.
@@ -117,5 +132,6 @@ PR/CI workflow, or unrelated Phase 8 work while `BANDIT-058` is active.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The next step
-is the required Local Qwen reviewer gate for a repo-derived bootstrap-gap chore,
-not a product, UAT, policy, business, cost, or scope decision.
+is local landing action evidence for a repo-derived bootstrap-gap chore with a
+safe-to-land verdict, not a product, UAT, policy, business, cost, or scope
+decision.

@@ -6,7 +6,7 @@
 
 - `[Gap]` `BANDIT-058` - Role Contracts And Run Manifests
 
-**Current next step:** Run Local Qwen adversarial review for the current `BANDIT-058` source before aggregate Stage 4 review evidence.
+**Current next step:** Record local landing action evidence for `BANDIT-058` after the safe-to-land verdict.
 
 ## Next Work Item
 

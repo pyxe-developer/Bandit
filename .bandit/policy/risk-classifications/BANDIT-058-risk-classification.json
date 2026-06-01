@@ -1,0 +1,231 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-058",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/role-contracts.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/role-contracts.ts",
+      "surface": "role_contract_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/role-runs.ts",
+      "surface": "role_run_manifest_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "repo_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/role-contracts.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/role-run-manifests.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/role-contract.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/role-run-manifest.md",
+      "surface": "workflow_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/role-contracts.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/role-run-manifests.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "role_contract_authority_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-058/implementation-evidence.md"
+    },
+    {
+      "signal_id": "role_run_manifest_execution_evidence_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-058/implementation-evidence.md"
+    },
+    {
+      "signal_id": "manifest_path_containment_and_source_artifacts",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-058/stage4-repair-acceptance.md"
+    },
+    {
+      "signal_id": "test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/stage4-repair-acceptance.md"
+    },
+    {
+      "signal_id": "no_product_or_external_side_effect_surface",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/role-contracts.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/review-evidence.md"
+    },
+    {
+      "tool": "node --test test/role-run-manifests.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/review-evidence.md"
+    },
+    {
+      "tool": "node --test test/role-entrypoints-formation.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/review-evidence.md"
+    },
+    {
+      "tool": "coderabbit review --agent",
+      "state": "blocker_repaired_and_pm_accepted",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-058/stage4-repair-acceptance.md"
+    },
+    {
+      "tool": "npm run bandit -- qwen-review BANDIT-058",
+      "state": "non_blocking_with_pm_disposition",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-058/qwen-finding-disposition.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-058-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- land-check BANDIT-058",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-058/landing-verdict.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-058/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-058/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-ROLE-BOUNDARY-EROSION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-058/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-058 is a non-product bootstrap-gap chore implementing local role contract policy evidence, role-run manifest evidence, fail-closed validators, CLI command wiring, templates, and reviewable run manifests. It requires CodeRabbit evidence with source repair acceptance, Local Qwen evidence with PM disposition, focused verification, layered risk evidence, supply-chain evidence, and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-058 changes local workflow authority surfaces for role contract policy validation, role-run manifest validation, command routing, and templates. The work is medium workflow-risk because it governs what role evidence can claim before future execution orchestration trusts it, but it does not approve product behavior, execute external services, change dependencies, change lockfiles, edit installed global skills, mutate CI or release workflows, enable scheduler execution, create claims, reserve work surfaces, merge, push, deploy, or ship cockpit UI/server/API behavior. Stage 4 evidence records CodeRabbit source findings repaired and PM-accepted, Local Qwen non_blocking evidence with PM disposition and follow-up routing, current supply-chain gate evidence, current risk-classification evidence, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-058-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json",
+    ".bandit/policy/role-contracts.json",
+    "docs/templates/role-contract.md",
+    "docs/templates/role-run-manifest.md",
+    "docs/work/BANDIT-058/brief.md",
+    "docs/work/BANDIT-058/implementation-evidence.md",
+    "docs/work/BANDIT-058/stage4-repair-acceptance.md",
+    "docs/work/BANDIT-058/coderabbit-review.md",
+    "docs/work/BANDIT-058/local-qwen-review.md",
+    "docs/work/BANDIT-058/qwen-finding-disposition.md",
+    "docs/work/BANDIT-058/review-evidence.md",
+    "docs/work/BANDIT-058/landing-verdict.md",
+    "src/cli.ts",
+    "src/commands/role-contracts.ts",
+    "src/commands/role-runs.ts",
+    "src/commands/validate.ts",
+    "src/state/role-contracts.ts",
+    "src/state/role-run-manifests.ts",
+    "test/role-contracts.test.mjs",
+    "test/role-run-manifests.test.mjs"
+  ]
+}

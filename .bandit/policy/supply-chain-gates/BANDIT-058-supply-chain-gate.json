@@ -1,0 +1,113 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-058",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": "docs/templates/role-contract.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records local role-contract evidence fields for repo-native validation without changing installed global skills or authorizing external skill installation."
+    },
+    {
+      "path": "docs/templates/role-run-manifest.md",
+      "surface": "agent_skill",
+      "risk": "low",
+      "operator_supervision_required": false,
+      "rationale": "The template records local role-run manifest evidence fields for repo-native validation without changing installed global skills or authorizing external skill installation."
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-058/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, external tool install path, or unknown supply-chain surface change is present in the BANDIT-058 implementation. Role Contracts And Run Manifests adds local CLI/state/template behavior only."
+    },
+    "rationale": "BANDIT-058 adds local role contract policy validation, role-run manifest validation, command routing, templates, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-058/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "policy_reference_only",
+    "skills": [
+      {
+        "skill_id": "role-contract-and-run-manifest-templates",
+        "owner": "Codex PM",
+        "freshness_rule": "validated by npm run bandit -- validate plus focused role-contract and role-run manifest tests before landing and before trusting role-run evidence",
+        "revocation_path": "remove or revise docs/templates/role-contract.md, docs/templates/role-run-manifest.md, matching role-contract validation, and matching role-run manifest validation"
+      }
+    ],
+    "owner": "Codex PM",
+    "freshness_rule": "validated by npm run bandit -- validate and focused role-contract/role-run manifest tests",
+    "revocation_path": "remove or revise the local role contract and role-run manifest templates and validation"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-058 touches local role-contract and role-run manifest templates used by repo-native role evidence, so explicit supply-chain gate evidence is recorded before local-record landing. The implementation does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, external side-effecting automation, or unknown supply-chain surfaces. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-058-supply-chain-gate.json",
+    "docs/templates/role-contract.md",
+    "docs/templates/role-run-manifest.md",
+    "docs/work/BANDIT-058/brief.md",
+    "docs/work/BANDIT-058/implementation-evidence.md",
+    "docs/work/BANDIT-058/coderabbit-review.md",
+    "docs/work/BANDIT-058/stage4-repair-acceptance.md",
+    "docs/work/BANDIT-058/local-qwen-review.md",
+    "docs/work/BANDIT-058/qwen-finding-disposition.md",
+    "docs/work/BANDIT-058/review-evidence.md",
+    "src/cli.ts",
+    "src/commands/role-contracts.ts",
+    "src/commands/role-runs.ts",
+    "src/commands/validate.ts",
+    "src/state/role-contracts.ts",
+    "src/state/role-run-manifests.ts",
+    "test/role-contracts.test.mjs",
+    "test/role-run-manifests.test.mjs"
+  ]
+}
