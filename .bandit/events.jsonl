@@ -173,3 +173,4 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-056","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-EVIDENCE-FRESHNESS-SLOS; next action is BANDIT-057 Stage 4 repair ownership enforcement work-item creation"}
 {"type":"work_item_created","work_item":"BANDIT-057","message":"Created work item BANDIT-057 from docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json"}
 {"type":"artifact_created","work_item":"BANDIT-057","message":"Created red_evidence artifact at docs/work/BANDIT-057/red-evidence.md"}
+{"type":"stage4_evidence_updated","work_item":"BANDIT-057","message":"Recorded focused CodeRabbit review with four open findings at source head 4f48272; next action is repair or explicit PM disposition before Local Qwen"}

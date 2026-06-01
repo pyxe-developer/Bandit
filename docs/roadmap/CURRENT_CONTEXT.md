@@ -457,14 +457,14 @@ marks `BANDIT-GAP-TOKEN-COST-FAILSAFE` resolved.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-**Current next action:** Run focused pre-PR CodeRabbit review for `BANDIT-057`
-at the accepted Stage 3 implementation head. Do not run Local Qwen, aggregate
-Stage 4 review, land, close out, or begin unrelated Phase 8 work until
-CodeRabbit evidence is recorded or an honest provider-refusal/continuation
-artifact is recorded.
+**Current next action:** Repair or explicitly disposition the four open
+CodeRabbit findings for `BANDIT-057`. Do not run Local Qwen, aggregate Stage 4
+review, land, close out, or begin unrelated Phase 8 work until those findings
+are repaired or dispositioned and the required CodeRabbit follow-up routing is
+recorded.
 
-The current stage is Stage 4: Review And Cross-Model Gates, focused pre-PR
-CodeRabbit review pending.
+The current stage is Stage 4: Review And Cross-Model Gates, CodeRabbit findings
+open.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is the accepted replacement
 umbrella for the narrower `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT`
@@ -483,8 +483,10 @@ implementation evidence is recorded in
 `docs/work/BANDIT-057/stage3-pm-review.md`; the latest Codex PM verdict is
 `pass`. Fourth-pass Claude Writer repair evidence is recorded and makes the
 active brief reach the expected missing-review-artifact gate instead of failing
-brief validation. Formal ledger replacement is still pending Stage 4 review,
-landing, and closeout evidence.
+brief validation. Focused pre-PR CodeRabbit evidence is recorded in
+`docs/work/BANDIT-057/coderabbit-review.md` with four open findings requiring
+repair or explicit PM disposition. Formal ledger replacement is still pending
+Stage 4 review, landing, and closeout evidence.
 
 `BANDIT-GAP-WORKTREE-BOOTSTRAP-CONTRACT` is resolved by
 `BANDIT-051`. The Stage 1 brief is recorded in
@@ -843,7 +845,7 @@ that authority.
 
 **Active work item:** `BANDIT-057` - Role Entry Points And Formation Gate.
 
-`BANDIT-057` is active at Stage 3 after Claude Writer implementation evidence,
+`BANDIT-057` is active at Stage 4 after Claude Writer implementation evidence,
 manual Claude repair evidence, Codex PM blocker review, second-pass Claude
 Writer repair evidence, third-pass Claude Writer repair evidence, and
 fourth-pass Claude Writer repair evidence. Its structured
@@ -866,15 +868,15 @@ before the narrow gap can be formally replaced by the accepted
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` umbrella.
 
 The Stage 3 Writer reported no edits to tests, test helpers, fixtures, RED
-evidence artifacts/specs, or acceptance mappings. The next action is focused
-pre-PR CodeRabbit review for `BANDIT-057` at the accepted Stage 3
-implementation head. Do not start Local Qwen, aggregate Stage 4 review,
-landing, closeout, local server/API mode,
+evidence artifacts/specs, or acceptance mappings. Focused pre-PR CodeRabbit
+review is recorded with four open findings. The next action is repair or
+explicit PM disposition of those findings. Do not start Local Qwen, aggregate
+Stage 4 review, landing, closeout, local server/API mode,
 state-index persistence, scheduler execution, worktree lifecycle, claim leases,
 work surface reservations, automatic merge/push/deploy, product UAT approval,
 actor identity policy, PR/CI workflow, or unrelated Phase 8 work until
-CodeRabbit evidence is recorded or an honest provider-refusal/continuation
-artifact is recorded.
+the CodeRabbit findings are repaired or explicitly dispositioned and required
+follow-up routing is recorded.
 
 Claude Writer repair recovery evidence is recorded in
 `docs/work/BANDIT-057/stage3-repair-recovery.md`; it is superseded by the
@@ -1571,9 +1573,9 @@ evaluation recorded in `docs/work/BANDIT-033/qwen-finding-disposition.md`,
 `docs/work/BANDIT-034/retrospective.md`.
 The current priority is:
 
-1. Run focused pre-PR CodeRabbit review for `BANDIT-057` at the accepted Stage
-   3 implementation head and record review evidence or honest
-   provider-refusal/continuation evidence.
+1. Repair or explicitly disposition the four open CodeRabbit findings for
+   `BANDIT-057`, then record the required follow-up routing before Local Qwen
+   or aggregate Stage 4 review.
 2. Keep local server/API mode, state-index persistence, scheduler execution,
    worktree lifecycle, automatic merge/push/deploy behavior, product UAT,
    actor identity policy, claim leases, work surface reservations, PR/CI
@@ -1614,8 +1616,8 @@ raw-HEAD evidence loops.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The active
-next action is focused pre-PR CodeRabbit review for `BANDIT-057`, not a
-product, UAT, policy, business, cost, or scope decision.
+next action is CodeRabbit finding repair or explicit PM disposition for
+`BANDIT-057`, not a product, UAT, policy, business, cost, or scope decision.
 `BANDIT-057` Stage 1 brief evidence is recorded in
 `docs/work/BANDIT-057/brief.md`, generated from
 `docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json`.
@@ -1635,10 +1637,11 @@ validation.
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` ledger entry to
 `BANDIT-057`; the work item itself scopes the accepted
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` replacement umbrella. Stage 3
-fourth-pass repair evidence is accepted; Codex PM must not start Local Qwen,
+fourth-pass repair evidence is accepted, and focused pre-PR CodeRabbit evidence
+is recorded with four open findings. Codex PM must not start Local Qwen,
 aggregate Stage 4 review, landing, closeout, or unrelated Phase 8 work until
-focused pre-PR CodeRabbit evidence is recorded or an honest
-provider-refusal/continuation artifact is recorded.
+the CodeRabbit findings are repaired or explicitly dispositioned and required
+follow-up routing is recorded.
 
 `BANDIT-044` resolved the operator fail-closed boundary: operator-blocking
 fail-closed behavior is reserved for safety, product, UAT, policy, business,
