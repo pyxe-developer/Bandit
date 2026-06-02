@@ -691,14 +691,16 @@
         "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md",
         "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json",
         "docs/specs/BANDIT-GAP-ROLE-CONTRACTS-RUN-MANIFESTS.json",
+        "docs/decisions/2026-06-01-true-agent-harness-pivot.md",
+        "docs/spikes/pi-aperture-agent-scope-and-harness-spike.md",
         "docs/work/BANDIT-057/retrospective.md",
         "docs/work/BANDIT-058/landing-action.md",
         "docs/work/BANDIT-058/retrospective.md"
       ],
       "linked_work_item": null,
-      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. Remaining role-scoped orchestration work such as execution packets, role input packets, diff-based write validation, same-agent repair continuation, landing/closeout handoffs, and rubric migration must be scoped as future bounded work items before unrelated Phase 8 cockpit product work.",
+      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. On 2026-06-01 the operator rejected continuing normal Stage 1-6 Process Adapter bootstrap slices because the current Codex-plus-subprocess loop cannot produce True Agents without a Harness and has become token-incoherent. The selected pivot direction is Pi for the harness plane and Aperture by Tailscale for the model plane. The accepted proof shape is recorded in docs/spikes/pi-aperture-agent-scope-and-harness-spike.md: a repo-native Pi/Aperture Agent Scope and Harness Spike Plan that proves Work Item PM Single-Session Slice Orchestration, not a normal Bandit Stage 1-6 Process Adapter slice or one-agent smoke test. Remaining role-scoped orchestration work is source material until the True-Agent Harness Pivot is resolved.",
       "verification_target": "docs/work/BANDIT-058/retrospective.md",
-      "next_action": "Create the next bounded role-scoped orchestration work item for Execution And Role Input Packets before unrelated Phase 8 cockpit product work."
+      "next_action": "Implement the first Pi/Aperture Harness Spike step: add repo-native agent scope schema/policy plus projection validation for Pi and Aperture before any live proof run or normal adapter-loop bootstrap slice resumes."
     }
   ]
 }

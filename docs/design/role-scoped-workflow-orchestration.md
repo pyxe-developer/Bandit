@@ -5,6 +5,13 @@
 Design record for the workflow redesign that replaces the narrow queued
 `BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT` gap.
 
+Paused by `docs/decisions/2026-06-01-true-agent-harness-pivot.md`. After
+`BANDIT-058`, the operator rejected continuing normal Stage 1-6 Process Adapter
+bootstrap slices for this umbrella because they cannot produce True Agents
+without a Harness and have become token-incoherent. Treat the remaining
+follow-on slice list as source material until the True-Agent Harness Pivot is
+resolved.
+
 This artifact captures the decisions from the 2026-06-01 grill-with-docs
 session. It is a planning and terminology source for `BANDIT-057`; it is not
 implementation evidence and does not mutate the current bootstrap-gap ledger.

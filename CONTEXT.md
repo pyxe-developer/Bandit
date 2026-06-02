@@ -134,6 +134,46 @@ _Avoid_: preferred vendor, default CLI
 A harness that can configure agents across multiple model providers through explicit per-agent settings.
 _Avoid_: single-provider harness, proprietary lock-in
 
+**Model Plane**:
+The model-call layer that owns provider routing, credential custody, identity attribution, quotas, cost controls, and model-call telemetry without owning agent lifecycle or workflow authority.
+_Avoid_: harness, control plane, Bandit boundary logic
+
+**Aperture Model Plane**:
+The selected model-plane implementation for the True-Agent Harness Pivot, using Aperture by Tailscale as a swappable Model-Call Boundary Adapter.
+_Avoid_: true-agent harness, workflow authority, escape detector
+
+**Model-Plane Guardrail**:
+A synchronous pre-provider model-call policy check that can allow, block, or rewrite an LLM request before data leaves the network.
+_Avoid_: post-response filter, async integration hook, Bandit gate verdict
+
+**Model-Plane Tool Declaration Gate**:
+A Model-Plane Guardrail that blocks or removes unauthorized tool declarations, tool schemas, or capability requests from an LLM request before provider submission.
+_Avoid_: local tool execution gate, filesystem permission, post-response tool-call audit
+
+**Harness Tool Execution Gate**:
+A harness-plane enforcement point that blocks local tool execution, such as file writes, shell commands, child-agent dispatch, or repo mutations, before the side effect happens.
+_Avoid_: model-plane guardrail, async tool-call observation, request-body filter
+
+**Fail-Closed Model-Plane Guardrail**:
+A mandatory Model-Plane Guardrail that blocks the model request when its endpoint is unavailable, errors, or cannot prove the request is safe to forward.
+_Avoid_: advisory classifier, best-effort scrubber, availability preference
+
+**Fail-Open Model-Plane Guardrail**:
+A non-mandatory Model-Plane Guardrail that allows the model request to proceed when its endpoint is unavailable or errors.
+_Avoid_: enforcement policy, exfiltration prevention, attribution requirement
+
+**Integration Hook**:
+An asynchronous model-plane observation hook for completed requests, authorization records, or audit logging that cannot block or modify the in-flight request.
+_Avoid_: guardrail, pre-provider enforcement, workflow authority
+
+**Bandit Model-Call Envelope**:
+A small attribution and correlation payload attached to a model request so Model-Plane Guardrails can validate work-item, stage, role, run, scope, tool, model, and budget context before provider submission.
+_Avoid_: workflow authority, landing evidence, fabricated attribution, prompt-only permission
+
+**Pi Harness Plane**:
+The selected harness-plane direction for the True-Agent Harness Pivot, using Pi for True Agent identity, permissions, context, lifecycle, and A2A handoffs while routing model calls through the Aperture Model Plane.
+_Avoid_: model gateway, provider-key store, telemetry backend
+
 **Runtime Portability Gate**:
 A hard exclusion rule requiring harness candidates to avoid proprietary lock-in and support provider-agnostic agent configuration.
 _Avoid_: preference, nice-to-have
@@ -145,6 +185,42 @@ _Avoid_: decision memo, architecture essay
 **Harness Spike Plan**:
 A source-material documentation artifact under `docs/spikes/` that defines evidence-producing harness evaluation work.
 _Avoid_: ADR, decision record
+
+**Pi/Aperture Harness Spike**:
+A Harness Spike that proves a Work Item PM Orchestrator can keep one slice context alive while calling scoped Pi-managed True Agents through the Aperture Model Plane.
+_Avoid_: one-agent smoke test, normal Bandit slice, adapter-loop role packet, full migration
+
+**Pi/Aperture Agent Scope Plan**:
+A versioned migration plan that defines Bandit's named agents in Pi configuration and binds those agents to Bandit's workflow authority, evidence, and gate model before the first Work Item PM orchestration proof runs.
+_Avoid_: prompt inventory, model preference list, immediate full migration
+
+**Pi Canonical Agent Taxonomy**:
+The Pi-configured set of Bandit-named agents used as the canonical role taxonomy for harness-native work.
+_Avoid_: unconfigured default Pi roles, prompt-only roles, repo-only taxonomy
+
+**Repo-Native Agent Scope**:
+The repo-owned binding from Pi Canonical Agent Taxonomy roles to Bandit's authority, lifecycle, inputs, outputs, write surfaces, A2A permissions, model-plane guardrails, telemetry join keys, and failure behavior.
+_Avoid_: role taxonomy source, chat-only scope, prompt-only authority
+
+**Pi Agent Scope Projection**:
+A generated or mirrored repo-facing validation view of Pi Canonical Agent Taxonomy roles and Repo-Native Agent Scope bindings.
+_Avoid_: workflow authority, manual drift, separate planning authority
+
+**Single-Session Slice Orchestration**:
+A Work Item PM Orchestrator activation that keeps lifecycle context for a whole slice and calls scoped agents for testing, implementation, review, landing, and closeout without cold-starting each stage as an isolated PM activation.
+_Avoid_: next-step-only PM loop, cold-start-per-stage, monolithic do-everything agent
+
+**Minimum Whole-Slice Harness Proof**:
+A tiny non-product proof slice that exercises Single-Session Slice Orchestration end to end: Work Item PM stays alive and calls scoped Test Writer, Implementation Writer or Execution Worker, Reviewer, Landing Agent, and Closeout or Retrospective agents.
+_Avoid_: one-agent smoke test, partial stage demo, artifact-only shortcut without orchestration
+
+**Harness-Native Build Continuation**:
+Continuing Bandit implementation on the Pi Harness Plane with Aperture as the Model Plane after the Harness path is proven and agent scopes are recorded.
+_Avoid_: adapter-loop continuation, subprocess hardening, cockpit-first build
+
+**True-Agent Harness Pivot**:
+The architecture correction that pauses normal Process Adapter bootstrap slices until Bandit selects or proves a Harness path capable of running True Agents without the current token-heavy adapter loop.
+_Avoid_: next adapter-hardening slice, role-packet continuation, Codex-as-runtime
 
 **Fresh Harness Repo**:
 Bandit: the new implementation home for the next trust-layer runtime, using Sourmash as source material rather than continuing the subprocess-first Sourmash architecture in place.
@@ -922,8 +998,29 @@ _Avoid_: planner, architect
 - A **Harness** manages one or more **True Agents**.
 - A **Harness Candidate** must pass the **Runtime Portability Gate**.
 - A **Provider-Agnostic Harness** satisfies one part of the **Runtime Portability Gate**.
+- A **Pi Harness Plane** supplies True Agent lifecycle, scoped permissions, context, and A2A handoffs.
+- An **Aperture Model Plane** supplies provider routing, model-call identity, credential custody, quotas, cost controls, and telemetry.
+- An **Aperture Model Plane** may enforce **Model-Plane Guardrails** before a request reaches an upstream model provider.
+- A **Model-Plane Tool Declaration Gate** can block unauthorized tool exposure in an LLM request, but it is not a **Harness Tool Execution Gate**.
+- A **Harness Tool Execution Gate** must block local tool side effects even when model-plane tool declarations were allowed.
+- A **Model-Plane Guardrail** can block or rewrite a model request, but it cannot issue **Bandit** workflow gate verdicts or own **Bandit-Owned Boundary Logic**.
+- A **Fail-Closed Model-Plane Guardrail** is required for missing or invalid attribution, context-scope violations, unauthorized model-plane tool declarations, unauthorized model/provider routing, hard budget or quota violations, and secret or PII exfiltration risk.
+- A **Fail-Open Model-Plane Guardrail** is limited to advisory classification, metadata enrichment, analytics, and other non-authoritative observations.
+- An **Integration Hook** can observe completed model-plane activity, but it is not a **Model-Plane Guardrail**.
+- A **Bandit Model-Call Envelope** gives the **Aperture Model Plane** enough attribution to enforce model-plane scope, but it cannot satisfy **Bandit** workflow gates or replace repo-native role-run evidence.
+- A **Model Plane** is a **Model-Call Boundary Adapter**, not a **Harness**.
 - A **Harness Spike** evaluates **Harness Candidates** before any replacement architecture is adopted.
 - A **Harness Spike** may be specified by a **Harness Spike Plan** imported from Sourmash source material.
+- A **Pi/Aperture Harness Spike** is the first proof artifact for the **True-Agent Harness Pivot**; it is not a normal Stage 1-6 Process Adapter slice.
+- A **Pi/Aperture Agent Scope Plan** is required before the **Pi/Aperture Harness Spike** runs.
+- A **Pi/Aperture Agent Scope Plan** defines every Bandit-named agent, including **Repo PM Coordinator**, in the **Pi Canonical Agent Taxonomy** first, then records **Repo-Native Agent Scope** bindings and **Pi Agent Scope Projections** for validation.
+- A **Pi/Aperture Agent Scope Plan** must cover Bandit's authority-bearing agents: **Repo PM Coordinator**, **Work Item PM Orchestrator**, Test Writer, Implementation Writer or **Execution Workers**, Reviewer, **Landing Agent**, Closeout or Retrospective, and **Heartbeat Chore Agent**.
+- A **Pi/Aperture Harness Spike** must prove **Single-Session Slice Orchestration**, not merely a one-agent model-call path.
+- **Single-Session Slice Orchestration** is owned by the **Work Item PM Orchestrator** after formation approval; **Repo PM Coordinator** owns formation, blocker amendment, final repo-level closure, and next-work availability.
+- A **Minimum Whole-Slice Harness Proof** may use a tiny artifact-only non-product slice, but it must exercise the full Work Item PM orchestration path.
+- **Single-Session Slice Orchestration** is the core token-control invariant: the **Work Item PM Orchestrator** preserves slice context while scoped agents do their own work.
+- **Harness-Native Build Continuation** starts only after the **Pi/Aperture Agent Scope Plan** records lifecycle, context, permissions, guardrails, telemetry, A2A handoffs, and migration order for those agents, and the **Pi/Aperture Harness Spike** proves the orchestration path.
+- A **True-Agent Harness Pivot** stops normal Process Adapter bootstrap-slice execution until the next architecture path can support **True Agents** through a **Harness**.
 - **Bandit** preserves Sourmash's **Trust Layer** contracts while replacing Sourmash's deprecated subprocess-first architecture.
 - **CLI Authority** keeps the **Trust Layer** enforceable while the **Workflow Cockpit** keeps slices, chores, reviews, lessons, follow-ups, and UAT readiness visible.
 - **Repo-Native Workflow State** is canonical; a **State Index** may be rebuilt from it for cockpit speed and filtering.
@@ -1145,6 +1242,10 @@ _Avoid_: planner, architect
 - "bare `/bandit`" was used as a default dispatcher; resolved: Bandit requires an **Explicit Role Entrypoint** before loading role-specific context or doing work.
 - "brief exists" was used as if a Work Item were executable; resolved: a Work Item needs a **Formation Approved State** from the **Formation Gate** before Work Item PM execution starts.
 - "subagent prompt" was used as if it could grant authority; resolved: subagent authority comes from structured role contracts, **Role Input Packets**, **Role Run Manifests**, and validated **Role Run Attempts**.
+- "first-class agents" were discussed while Codex and subprocesses remained the runtime; resolved: Bandit needs a **True-Agent Harness Pivot** before continuing normal adapter-loop role orchestration slices.
+- "Aperture" could be mistaken for the harness; resolved: Aperture is the **Aperture Model Plane**, while Pi is the **Pi Harness Plane**.
+- "Pi config" was discussed as a projection of repo-native scope, then as adopting Pi's default agent names, then as excluding **Repo PM Coordinator** from Pi; resolved: harness-native work defines every Bandit-named agent in the **Pi Canonical Agent Taxonomy**, while **Repo-Native Agent Scope** binds that taxonomy to Bandit workflow authority and evidence.
+- "parent session" could mean Repo PM stayed alive through the whole slice; resolved: **Work Item PM Orchestrator** owns the durable parent session for Stage 2-6, while **Repo PM Coordinator** remains formation and final-closure authority.
 
 ## Imported Decision Context
 

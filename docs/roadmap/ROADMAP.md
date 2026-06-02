@@ -1,19 +1,22 @@
 # Roadmap
 
-**Current phase:** Phase 8 - Workflow Cockpit kickoff.
+**Current phase:** Phase 8 - Workflow Cockpit kickoff / True-Agent Harness Pivot.
 
 ## Current Work Item
 
 - `[Gap]` None - no active work item.
 
-**Current next step:** Create the next bounded role-scoped orchestration work
-item for Execution And Role Input Packets before unrelated Phase 8 cockpit
-product work.
+The Pi/Aperture Agent Scope and Harness Spike Plan is recorded at
+`docs/spikes/pi-aperture-agent-scope-and-harness-spike.md`.
+
+**Current next step:** Implement the first Pi/Aperture Harness Spike step: add
+repo-native agent scope schema/policy plus projection validation for Pi and
+Aperture before any live proof run or normal adapter-loop bootstrap slice
+resumes.
 
 ## Next Work Item
 
-- `[Gap]` TBD - Execution And Role Input Packets under
-  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`
+- `[Gap]` TBD - Pi/Aperture Agent Scope Schema And Projection Validation
 
 ## Planned Work
 
@@ -22,10 +25,15 @@ product work.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued after
-  `BANDIT-058`; next bounded follow-on is Execution And Role Input Packets
-  before later Stage 4 Repair Continuation, Landing And Closeout Handoffs,
-  Decomposed Rubric Migration, or unrelated Phase 8 cockpit product work.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued for the
+  recorded Pi/Aperture Agent Scope and Harness Spike Plan after `BANDIT-058`;
+  remaining role-scoped follow-ons are source material, not the next
+  implementation queue, until the Harness path proves Single-Session Slice
+  Orchestration.
+- `[Gap]` `TBD` - Pi/Aperture Agent Scope Schema And Projection Validation;
+  add repo-native scope schema/policy and generated Pi/Aperture projection
+  validation before the tiny non-product whole-slice proof runs and before
+  Harness-Native Build Continuation.
 
 ### Deferred PRD Slices
 
