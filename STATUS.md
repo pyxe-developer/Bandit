@@ -2,12 +2,17 @@
 
 ## Last Updated: 2026-06-05
 
-## Current Work Item: None
+## Current Work Item: BANDIT-059
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
+
+`BANDIT-059` is active. Repo PM created the Trust Verify Snapshot Foundation
+work item from `docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json`
+and linked `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` as the active
+bootstrap chore.
 
 `BANDIT-058` is closed. It delivered the Role Contracts And Run Manifests slice
 under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`, including role contract
@@ -22,14 +27,14 @@ design.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Next action: Codex PM should create and record the Trust Verify Snapshot
-Foundation work item for a read-only `bandit trust verify <snapshot.json>`
-verifier.
+Current stage: Stage 1 work-item brief / formation review pending.
 
-No operator-owned input remains for creating that work item. Do not start
-implementation, RED evidence, a new normal bootstrap work item, or Pi/Aperture
-agent-scope work until the Trust Verify Snapshot Foundation work item is
-recorded.
+Next action: Run Repo PM formation review for `BANDIT-059` before Stage 2 RED
+evidence.
+
+No operator-owned input is required for formation review. Do not start RED
+evidence, implementation, Trust Verifier cutover, a new work item, or
+Pi/Aperture agent-scope work until `BANDIT-059` records formation approval.
 
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is queued as a cleanup candidate to
 separate artifact-renderer JSON inputs and reviewer captures from work/gap specs
@@ -40,8 +45,8 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 1 formation pending)
+- `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`
 - `BANDIT-058` - Role Contracts And Run Manifests (closed)
-- `BANDIT-057` - Role Entry Points And Formation Gate (closed)
-- `BANDIT-056` - Evidence Freshness SLOs (closed)

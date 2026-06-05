@@ -156,6 +156,28 @@
       "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
+      "id": "BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION",
+      "title": "Trust Verify Snapshot Foundation",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-058",
+      "source_artifacts": [
+        "docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md",
+        "docs/work/BANDIT-058/landing-action.md",
+        "docs/work/BANDIT-058/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "STATUS.md",
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md"
+      ],
+      "linked_work_item": "BANDIT-059",
+      "rationale": "The accepted harness-agnostic CLI trust-layer decision supersedes the Pi/Aperture harness-specific implementation queue and makes deterministic trust verification Bandit's load-bearing product boundary. The first bounded implementation slice is a compatibility-mode, read-only `bandit trust verify <snapshot.json>` foundation with Work Item Snapshot schema, snapshot hashing, captured-evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, and deterministic report output.",
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-059."
+    },
+    {
       "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
       "title": "Artifact input JSON is mixed into docs/specs",
       "status": "open",

@@ -4,18 +4,19 @@
 
 ## Current Work Item
 
-- `[Gap]` None - no active work item.
+- `[Gap]` `BANDIT-059` - Trust Verify Snapshot Foundation
 
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Create and record the first implementable read-only
-`bandit trust verify <snapshot.json>` work item for Trust Verify Snapshot
-Foundation.
+**Current next step:** Run Repo PM formation review for `BANDIT-059` before
+Stage 2 RED evidence.
 
 ## Next Work Item
 
-- `[Gap]` TBD - Trust Verify Snapshot Foundation
+- `[Gap]` TBD - Artifact Input Directory Split, only if path clarity blocks the
+  trust verifier/report contract; otherwise Trust Verifier Cutover Gate after
+  compatibility evidence exists.
 
 ## Planned Work
 
@@ -27,7 +28,8 @@ cockpit feature work unless the operator explicitly changes priority.
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
   orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
   queue.
-- `[Gap]` `TBD` - Trust Verify Snapshot Foundation; add a read-only
+- `[Gap]` `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active in
+  `BANDIT-059`; add a read-only
   `bandit trust verify <snapshot.json>` command, Work Item Snapshot schema,
   deterministic snapshot hash, captured-evidence checks, reviewer-finding
   routing validation, Trust Verdict derivation, and reproducible JSON report

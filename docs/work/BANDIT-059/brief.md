@@ -1,0 +1,193 @@
+# BANDIT-059: Trust Verify Snapshot Foundation
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Create the first compatibility-mode deterministic trust verifier slice: a read-only `bandit trust verify <snapshot.json>` command with a Work Item Snapshot schema, canonical snapshot hashing, local evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, and deterministic JSON report output.
+
+## Origin
+
+The accepted 2026-06-05 harness-agnostic CLI trust-layer decision supersedes the Pi/Aperture harness-specific implementation path and identifies deterministic trust verification as Bandit's load-bearing product boundary. Current repo context records no active work item and requires the first implementable read-only `bandit trust verify <snapshot.json>` work item before RED evidence, implementation, Pi/Aperture agent-scope work, or unrelated cockpit product work.
+
+## Scope
+
+- Add a read-only `bandit trust verify <snapshot.json> [--json] [--report <path>]` command surface for compatibility-mode deterministic trust verification.
+- Define the initial Work Item Snapshot schema with schema_version, trust_goal, stable orchestrator-supplied work identifier, repo base/head refs or hashes, declared intent, changed surfaces, policy context references, captured evidence references with expected content digests, and reviewer findings with dispositions when review evidence is present.
+- Require trust_goal values to be explicit and initially limited to stage_transition, landing, closeout, or evidence_refresh so trusted never means trusted for every workflow action.
+- Compute a deterministic snapshot hash from a canonical normalized snapshot document that does not change when local evidence files are read.
+- Verify referenced local evidence files against expected digests and fail closed when files are missing, paths are unsafe, digests differ, or referenced evidence changes after snapshot capture.
+- Validate reviewer-finding routing from captured snapshot data, including unresolved blocker or actionable findings, accepted non-blocking dispositions, rejected findings with rationale, and required operator input markers.
+- Derive Trust Verdict values limited to trusted, needs_repair, blocked, and requires_operator, with optional trust-goal-specific interpretation in the report but no generic safe-to-land verdict.
+- Produce deterministic JSON report output containing snapshot hash, trust goal, verdict, passed and failed checks, evidence digest verification, reviewer-finding routing state, required operator input, and optional trust-goal-specific interpretation without wall-clock timestamps, live provider state, network calls, or auth state.
+- Permit report writing only when `--report <path>` is explicitly supplied; default command behavior remains read-only and must not update queues, active work, coordination state, routing state, evidence artifacts, landing evidence, closeout evidence, or other workflow state.
+- Keep the first slice inside the Trust Verifier Compatibility Period: it must not replace land-check, review evidence validation, closeout validation, coordination checks, artifact creation, test execution, reviewer invocation, model calls, work-item creation, routing, landing, or queue mutation.
+- Preserve the existing Formation Gate: this work item must pass formation review and record formation_approved before Stage 2 RED evidence or Work Item PM execution starts.
+- Record CLEAN_CODE.md read evidence in Stage 1; CLEAN_CODE.md was read on 2026-06-05 before creating this brief, and clean-code compliance must be evaluated before landing.
+- Stage capability scope for this chore: Codex PM/Repo PM owns Stage 1 brief creation, formation routing, and context-artifact synchronization; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation is assigned to Claude through the bootstrap Process Adapter path; Stage 3 Implementation Writer has no authority to edit tests, test helpers, fixtures, RED evidence, snapshot fixtures, or acceptance mappings; reviewers own Stage 4 evidence; Landing Agent owns Stage 5 verdict/action evidence; Closeout Agent/Codex PM own Stage 6 closeout evidence.
+- Token-cost failsafe boundary: use existing Token-Cost Failsafe policy for abnormal-run guardrails if paid, high-token, reviewer, or long-running execution becomes necessary; this chore must not approve new provider-pricing evidence, spend-class approval, paid reviewer promotion, recurring paid routing, or operator-owned cost/risk overrides.
+- Future-work scope: this chore must not implement Trust Verifier cutover, gate replacement, live evidence capture helpers, test execution, reviewer execution, model calls, harness queues, auth or provider routing, live status, agent lifecycle, role input packets, generated execution packets, Pi/Aperture agent-scope schema/projection work, artifact input directory split, state-index persistence, local server/API mode, scheduler execution, worktree lifecycle execution, claim leases, work-surface reservations, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, dependency or lockfile changes, installed global skill edits, external service integration, or unrelated Phase 8 cockpit feature work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-059/brief.md and links to BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION as the active bootstrap gap created from the accepted harness-agnostic CLI trust-layer decision.
+- Stage 1 brief evidence records CLEAN_CODE.md read evidence, Stage Capability Scope requirements, Codex-owned technical decisions, source hierarchy, Formation Gate requirement, Work Item Snapshot schema boundary, snapshot hash boundary, local evidence digest verification boundary, reviewer-finding routing boundary, Trust Verdict vocabulary, report determinism boundary, read-only/no-mutation boundary, Trust Verifier Compatibility Period boundary, and Token-Cost Failsafe boundary.
+- Focused RED evidence proves Bandit currently lacks `bandit trust verify <snapshot.json>`, Work Item Snapshot schema validation, canonical snapshot hashing, evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, deterministic JSON report output, and explicit `--report` write behavior.
+- The snapshot schema fails closed for missing schema_version, unsupported trust_goal, missing stable work identifier, missing repo base/head refs or hashes, missing declared intent, malformed changed surfaces, missing policy context references when required by the trust goal, missing evidence digests, unsafe paths, malformed reviewer findings, and unsupported dispositions.
+- Snapshot hashing is deterministic across equivalent normalized JSON input and independent of object key order, whitespace, wall-clock time, live provider state, auth state, queue state, active harness memory, or evidence file read order.
+- Evidence verification reads only local repo-contained evidence references, compares content digests to expected snapshot digests, and fails closed on missing files, directory references, out-of-repo paths, digest mismatch, or changed evidence content.
+- Reviewer-finding routing validation fails closed for unresolved blockers, unresolved actionable findings, missing non-blocking disposition, accepted findings without rationale, required operator input without requires_operator verdict, or review evidence present without corresponding captured routing data.
+- Trust Verdict derivation emits only trusted, needs_repair, blocked, or requires_operator and separates generic trust verdicts from landing-specific interpretations such as safe-to-land.
+- JSON report output is reproducible and includes snapshot_hash, trust_goal, verdict, passed_checks, failed_checks, evidence verification details, reviewer-finding routing state, required operator input, and optional trust-goal-specific interpretation without nondeterministic timestamps.
+- `bandit trust verify <snapshot.json>` is read-only by default; `--report <path>` writes only the requested report file after safe path validation and never mutates queues, active work, coordination logs, routing docs, evidence artifacts, landing artifacts, closeout artifacts, or bootstrap-gap state.
+- The first implementation slice does not replace land-check, review evidence validation, closeout validation, coordination checks, artifact creation, test execution, reviewer invocation, model calls, work-item creation, routing, landing, or queue mutation; any cutover remains blocked on a later per-trust-goal cutover decision with reproducible parity evidence.
+- The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, snapshot fixtures, or acceptance mappings.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review-subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Layered risk-classification and supply-chain gate evidence are recorded before landing because this chore adds a trust-verification command, schema, digest checking, report output, and policy-routing logic.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION is resolved only after landing action and retrospective closeout evidence exist for this bounded compatibility-mode verifier foundation.
+- No Trust Verifier cutover, old gate replacement, live evidence capture helper, test execution, reviewer execution, model call, harness queue, auth or provider routing, live status, agent lifecycle, role input packet, execution packet, Pi/Aperture agent-scope schema/projection work, artifact input directory split, state-index persistence, local server/API mode, scheduler, worktree lifecycle, claim lease, work-surface reservation, PR/CI workflow, automatic merge/push/deploy, product UAT approval, dependency or lockfile change, installed global skill edit, external service integration, or unrelated Phase 8 cockpit feature work is introduced.
+
+## Verification Plan
+
+- Run focused Trust Verify CLI RED/GREEN tests proving missing command behavior becomes `bandit trust verify <snapshot.json> [--json] [--report <path>]` with read-only default behavior.
+- Run focused snapshot schema tests for schema_version, trust_goal, stable work identifier, repo refs or hashes, declared intent, changed surfaces, policy context references, evidence references with expected digests, reviewer findings, and dispositions.
+- Run focused canonical-hash tests proving equivalent normalized snapshots produce the same hash while changed snapshot content changes the hash.
+- Run focused local evidence digest tests for missing files, digest mismatch, unsafe paths, directory references, out-of-repo paths, and changed evidence content.
+- Run focused reviewer-finding routing tests for unresolved blockers, unresolved actionable findings, non-blocking findings with and without disposition, rejected findings with rationale, and required operator input routing.
+- Run focused Trust Verdict tests for trusted, needs_repair, blocked, and requires_operator outcomes across stage_transition, landing, closeout, and evidence_refresh trust goals.
+- Run focused deterministic report tests proving JSON report output omits wall-clock timestamps and live provider/auth/queue state.
+- Run focused explicit report-write tests proving `--report <path>` writes only to safe repo-contained paths and default verify does not mutate repo state.
+- Run focused compatibility-period tests proving `bandit trust verify` does not replace or invoke land-check, reviewer capture, model calls, test execution, artifact creation, coordination mutation, routing mutation, landing, or closeout behavior.
+- Run node --test test/trust-verify.test.mjs for the focused verifier contract.
+- Run node --test test/work-item-create.test.mjs if work-item spec validation, brief rendering, bootstrap-gap linking, or Repo PM creation routing is touched.
+- Run node --test test/role-entrypoints-formation.test.mjs if formation approval, role entrypoint routing, or Work Item PM readiness behavior is touched.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, artifact renderers, work-item parsing, templates, bootstrap gaps, coordination history, cockpit status, session-context packets, risk classification, supply-chain gates, input quarantine, operator boundaries, token-cost failsafes, evidence freshness, role contracts, role-run manifests, or policy validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- gaps list.
+- Run npm run bandit -- stage-capability-scope validate --json.
+- Run npm run bandit -- token-cost-failsafe validate --json.
+- Run npm run bandit -- evidence-freshness-slos validate --json.
+- Run npm run bandit -- risk-classification validate --json.
+- Run npm run bandit -- supply-chain-gate validate --json.
+- Run npm run bandit -- input-quarantine validate --json.
+- Run npm run bandit -- operator-boundary validate --json.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run node ./bin/bandit.mjs session-context current --json.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-059 for aggregate review evidence freshness.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-059 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-059 before Stage 4 closeout.
+- Run npm run bandit -- land-check BANDIT-059 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json
+- docs/work/BANDIT-059/brief.md
+- docs/work/BANDIT-059/qwen-formation-review.md
+- docs/work/BANDIT-059/coderabbit-formation-review.md
+- docs/work/BANDIT-059/formation-review.md
+- docs/work/BANDIT-059/coordination-log.jsonl
+- docs/work/BANDIT-059/red-evidence.md
+- docs/work/BANDIT-059/implementation-evidence.md
+- docs/work/BANDIT-059/coderabbit-review.md
+- docs/work/BANDIT-059/local-qwen-review.md
+- docs/work/BANDIT-059/review-evidence.md
+- docs/work/BANDIT-059/landing-verdict.md
+- docs/work/BANDIT-059/landing-action.md
+- docs/work/BANDIT-059/retrospective.md
+- docs/specs/BANDIT-059-red-evidence.json
+- docs/specs/BANDIT-059-implementation-evidence.json
+- docs/specs/BANDIT-059-landing-verdict.json
+- docs/specs/BANDIT-059-retrospective.json
+- src/commands/trust.ts
+- src/state/trust-verify.ts
+- src/cli.ts
+- test/trust-verify.test.mjs
+- .bandit/bootstrap-gaps.json
+- .bandit/events.jsonl
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## Required Evidence
+
+- docs/work/BANDIT-059/brief.md
+- docs/work/BANDIT-059/qwen-formation-review.md
+- docs/work/BANDIT-059/coderabbit-formation-review.md
+- docs/work/BANDIT-059/formation-review.md
+- docs/work/BANDIT-059/coordination-log.jsonl
+- docs/work/BANDIT-059/red-evidence.md
+- docs/work/BANDIT-059/implementation-evidence.md
+- docs/work/BANDIT-059/coderabbit-review.md
+- docs/work/BANDIT-059/local-qwen-review.md
+- docs/work/BANDIT-059/review-evidence.md
+- docs/work/BANDIT-059/landing-verdict.md
+- docs/work/BANDIT-059/landing-action.md
+- docs/work/BANDIT-059/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or running formation review. Repo artifacts identify the accepted harness-agnostic CLI trust-layer decision, current Stage Rubric requirements, Clean-Code authority, Formation Gate boundary, Work Item Snapshot schema boundary, Trust Verdict vocabulary, read-only compatibility-mode verifier boundary, Token-Cost Failsafe boundary, Evidence Freshness SLO boundary, Operator Fail-Closed Boundary, Input Quarantine Gate, Layered Risk Classification, Supply-Chain Gate, and Codex PM/Repo PM authority to route routine trust-verifier implementation mechanics. Halt only if implementation would change product direction, UAT policy, workflow policy beyond enforcing the accepted read-only trust-verifier boundary, business tradeoffs, explicit cost/risk posture, provider-pricing approval, spend-class approval, paid reviewer promotion, recurring paid routing policy, external service setup, live routing policy, claim authority, worktree lifecycle authority, installed global skill contents, dependency or lockfile policy, merge/push/deploy authority, Trust Verifier cutover policy, or broader cockpit/product scope.
+
+## Stage Capability Scope
+
+policy: .bandit/policy/stage-capability-scope.json
+stages:
+- stage1_brief
+- formation_review
+- stage2_red_evidence
+- stage3_implementation
+- stage4_review
+- stage5_landing
+- stage6_retrospective
+authority_roles:
+- codex_pm
+- repo_pm
+- work_item_pm
+- test_writer
+- implementation_writer
+- reviewer
+- landing_agent
+- closeout_agent
+required_skills:
+- bandit
+- tdd
+- review
+- superpowers:verification-before-completion
+forbidden_actions:
+- Do not write RED evidence before Stage 1 brief and Formation Gate evidence exist.
+- Do not let Stage 3 Writer edit tests, test helpers, fixtures, RED evidence, snapshot fixtures, or acceptance mappings.
+- Do not infer Work Item PM readiness from brief existence alone.
+- Do not let `bandit trust verify` replace existing gate authority during the compatibility period.
+- Do not make default trust verification mutate queues, coordination state, routing state, evidence artifacts, landing artifacts, closeout artifacts, or bootstrap-gap state.
+- Do not implement Trust Verifier cutover, live evidence capture, test or reviewer execution, model calls, Pi/Aperture agent-scope work, artifact input directory split, claim leases, worktrees, scheduler execution, merge, push, deploy, dependency changes, external services, or unrelated cockpit features in this chore.
+
+## Token-Cost Failsafe
+
+policy: .bandit/policy/token-cost-failsafe.json
+soft_budget_bands:
+- Stage 1 Repo PM brief creation and formation review should use local-only default budget guidance.
+- Stage 2 RED evidence and Stage 3 implementation should use existing abnormal-run soft budget guidance; do not set brittle caps that force duplicate attempts.
+- Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly.
+provider_pricing_evidence:
+- No new paid provider-pricing evidence is approved by this work-item brief.
+- Any paid reviewer, paid model, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists.
+spend_classes:
+- local-only-default
+- one-off-paid-evaluation-blocked-without-approval
+- recurring-paid-routing-blocked-without-policy-promotion
+continuation_decisions:
+- If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass.
+- If token or cost failsafe trips, halt the expensive action and record the continuation decision before retrying.
+stage_capability_profiles:
+- repo-pm-stage1-formation
+- test-writer-stage2
+- claude-implementation-writer-stage3
+- qwen-and-coderabbit-review-stage4
+- landing-agent-stage5
+- closeout-agent-stage6

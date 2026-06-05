@@ -4,51 +4,48 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
-Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` with
-Stage 1 brief evidence, Formation Gate approval, Test Writer RED evidence,
-Claude Implementation Writer evidence, CodeRabbit repair evidence, Local Qwen
-review and PM disposition, aggregate Stage 4 review evidence, Stage 5
-landing-gate evidence, local-record landing action evidence, and Stage 6
-retrospective/improvement/gap disposition evidence.
+`BANDIT-059` is active. Repo PM created the Trust Verify Snapshot Foundation
+work item from `docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json`
+and linked `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` as the active
+bootstrap chore. Stage 1 brief evidence is recorded at
+`docs/work/BANDIT-059/brief.md`; `docs/work/BANDIT-059/coordination-log.jsonl`
+records the `brief_created` transition.
 
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains open, but its Pi/Aperture
-agent-scope path is superseded by
+`BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
+Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. That
+umbrella remains open as source material, but its Pi/Aperture agent-scope path
+is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`. The previously
 queued Execution And Role Input Packets follow-on and the Pi/Aperture scope
-schema/projection work are no longer the next action.
+schema/projection work are not the next action.
 
-**Active work item:** none.
+**Active work item:** `BANDIT-059` - Trust Verify Snapshot Foundation.
 
 The accepted architecture boundary is that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Create and record the first implementable read-only
-`bandit trust verify <snapshot.json>` work item for Trust Verify Snapshot
-Foundation.
+**Current next action:** Run Repo PM formation review for `BANDIT-059` before
+Stage 2 RED evidence.
 
-Do not implement Pi/Aperture agent-scope schema/projection work. The emerging
-next implementation target is a read-only `bandit trust verify <snapshot.json>`
-slice with explicit snapshot schema, snapshot hash, captured-evidence
-validation, reviewer-finding routing, Trust Verdict derivation, and
-deterministic JSON report output. This first slice is compatibility-mode only:
-it must not replace `land-check`, review evidence validation, closeout
-validation, coordination checks, or any other existing gate path.
+Do not create RED evidence, implementation branches, Work Item PM active
+execution context, Pi/Aperture agent-scope schema/projection work, Trust
+Verifier cutover work, or unrelated cockpit product work until `BANDIT-059`
+passes formation review and records the `formation_approved` transition.
 
-The current stage is Stage 0 work-item formation / interstitial queue
-selection: no work item is active, `BANDIT-058` has landing action and Stage 6
-closeout evidence, and the accepted trust-layer decision resolves the minimum
-product boundary for creating the first verifier work item. Do not create RED
-evidence, implementation branches, Work Item PM active context, a normal
-Execution And Role Input Packets work item, a Pi/Aperture live proof run, or
-unrelated cockpit product work until the Trust Verify Snapshot Foundation work
-item is recorded.
+The current stage is Stage 1 work-item brief / formation review pending.
+The formation-review next step must verify that the brief is narrow,
+verifiable, read-only, compatibility-mode only, and clean-code/rubric evaluable
+before any Stage 2 RED evidence is written.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-059` - Trust Verify Snapshot Foundation.
+
+`BANDIT-059` is the active work item. Its Stage 1 brief is recorded at
+`docs/work/BANDIT-059/brief.md`; its initial coordination log is recorded at
+`docs/work/BANDIT-059/coordination-log.jsonl`.
 
 `BANDIT-058` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-058/retrospective.md`; local-record landing evidence is
@@ -62,29 +59,34 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Create the Trust Verify Snapshot Foundation work item from
-   `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
-2. Record the first implementation slice as `bandit trust verify <snapshot.json>`
+1. Run Repo PM formation review for `BANDIT-059` and record
+   `docs/work/BANDIT-059/qwen-formation-review.md`,
+   `docs/work/BANDIT-059/coderabbit-formation-review.md`, and
+   `docs/work/BANDIT-059/formation-review.md`.
+2. If formation passes, record the `formation_approved` coordination transition
+   before Stage 2 RED evidence.
+3. Keep the first implementation slice as `bandit trust verify <snapshot.json>`
    with read-only verification, optional explicit report writing, and no
    reviewer/test execution or workflow-state mutation.
-3. Keep the first slice in Trust Verifier Compatibility Period; cutover to any
+4. Keep the first slice in Trust Verifier Compatibility Period; cutover to any
    existing gate path requires a later per-Trust-Goal cutover decision with
    reproducible parity evidence.
-4. Decide how this verifier coexists with existing work-item, gate, evidence,
+5. Decide how this verifier coexists with existing work-item, gate, evidence,
    review, landing, closeout, and improvement artifacts before replacing any
    older command path.
-5. Keep unrelated Phase 8 cockpit product work, Execution And Role Input
+6. Keep unrelated Phase 8 cockpit product work, Execution And Role Input
    Packets work-item creation, and Pi/Aperture agent-scope work blocked while
-   the verifier foundation work item is being formed.
+   the verifier foundation work item is active.
 
 ## Required Operator Input
 
-No operator-owned input remains for creating the Trust Verify Snapshot
-Foundation work item. The minimum trust-layer surface is recorded in
-`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`: validate and
-hash a local Work Item Snapshot, verify captured repo evidence, enforce
-reviewer-finding routing, derive a Trust Verdict, and produce a reproducible
-report without running tests/reviewers or mutating workflow state.
+No operator-owned input is required for the recorded formation-review next
+action. The minimum trust-layer surface is recorded in
+`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md` and
+`docs/work/BANDIT-059/brief.md`: validate and hash a local Work Item Snapshot,
+verify captured repo evidence, enforce reviewer-finding routing, derive a
+Trust Verdict, and produce a reproducible report without running
+tests/reviewers or mutating workflow state.
 
 Ask the operator only if the proposed work item would expand beyond that
 read-only compatibility-mode verifier boundary.
