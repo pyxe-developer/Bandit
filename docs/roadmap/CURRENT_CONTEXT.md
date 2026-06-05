@@ -11,13 +11,12 @@ bootstrap chore. Stage 1 brief evidence is recorded at
 `docs/work/BANDIT-059/brief.md`; `docs/work/BANDIT-059/coordination-log.jsonl`
 records the `brief_created` transition.
 
-Repo PM formation review was attempted on 2026-06-05 and the Local Qwen retry
-at 2026-06-05T20:26:43Z still failed. CodeRabbit formation review passed with
-zero findings at
-`docs/work/BANDIT-059/coderabbit-formation-review.md`, but Local Qwen formation
-review remains blocked by an API connection failure recorded at
-`docs/work/BANDIT-059/qwen-formation-review.md`; the aggregate formation review
-at `docs/work/BANDIT-059/formation-review.md` remains `blocker`.
+Repo PM formation review was refreshed on 2026-06-05 after Local Qwen provider
+availability was restored. CodeRabbit formation review passed with zero findings
+at `docs/work/BANDIT-059/coderabbit-formation-review.md`; Local Qwen formation
+review passed with zero findings at
+`docs/work/BANDIT-059/qwen-formation-review.md`; and the aggregate formation
+review at `docs/work/BANDIT-059/formation-review.md` is `pass`.
 
 `BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
 Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. That
@@ -34,19 +33,18 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Restore Local Qwen availability or rerun the Local Qwen
-formation review for `BANDIT-059`, then refresh
-`docs/work/BANDIT-059/formation-review.md` before Stage 2 RED evidence.
+**Current next action:** Record the CLI-owned `formation_approved` coordination
+transition for `BANDIT-059` before Stage 2 RED evidence.
 
 Do not create RED evidence, implementation branches, Work Item PM active
 execution context, Pi/Aperture agent-scope schema/projection work, Trust
 Verifier cutover work, or unrelated cockpit product work until `BANDIT-059`
-passes formation review and records the `formation_approved` transition.
+records the `formation_approved` transition.
 
-The current stage is Stage 1 work-item brief / formation review blocked on
-required Qwen provider evidence. The formation-review retry must verify that the
-brief is narrow, verifiable, read-only, compatibility-mode only, and
-clean-code/rubric evaluable before any Stage 2 RED evidence is written.
+The current stage is Stage 1 formation review passed / coordination transition
+pending. The formation review verified that the brief is narrow, verifiable,
+read-only, compatibility-mode only, and clean-code/rubric evaluable before any
+Stage 2 RED evidence is written.
 
 ## Active Work
 
@@ -68,11 +66,10 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Resolve the Qwen formation-review blocker for `BANDIT-059` and refresh
-   `docs/work/BANDIT-059/qwen-formation-review.md` plus
-   `docs/work/BANDIT-059/formation-review.md`.
-2. If formation passes, record the `formation_approved` coordination transition
+1. Record the `formation_approved` coordination transition for `BANDIT-059`
    before Stage 2 RED evidence.
+2. Route Stage 2 RED evidence through the Test Writer boundary after formation
+   approval is recorded.
 3. Keep the first implementation slice as `bandit trust verify <snapshot.json>`
    with read-only verification, optional explicit report writing, and no
    reviewer/test execution or workflow-state mutation.

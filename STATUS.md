@@ -24,15 +24,14 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 1 work-item brief / formation review blocked on required
-Local Qwen provider evidence.
+Current stage: Stage 1 formation review passed / coordination transition
+pending.
 
-Latest Qwen retry: 2026-06-05T20:26:43Z; still failed with
-`[API Error: Connection error. (cause: fetch failed)]`.
+Latest Qwen retry: 2026-06-05T20:44:57Z; passed with zero findings after Local
+Qwen provider availability was restored.
 
-Next action: Restore Local Qwen availability or rerun the Local Qwen formation
-review for `BANDIT-059`, then refresh
-`docs/work/BANDIT-059/formation-review.md` before Stage 2 RED evidence.
+Next action: Record the CLI-owned `formation_approved` coordination transition
+for `BANDIT-059` before Stage 2 RED evidence.
 
 No operator-owned input is required for the Qwen retry/repair. Do not start RED
 evidence, implementation, Trust Verifier cutover, a new work item, or
@@ -47,7 +46,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 1 formation blocked on Qwen provider evidence)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 1 formation passed; `formation_approved` pending)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`

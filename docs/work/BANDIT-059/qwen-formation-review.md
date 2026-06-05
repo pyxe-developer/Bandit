@@ -4,50 +4,29 @@ contract_version: 1
 work_item: BANDIT-059
 reviewer: local-qwen-baseline
 review_type: qwen_formation_review
-verdict: blocker
-findings_status: blocker
-findings_disposition: required Qwen formation review unavailable; retry still fails with API connection error.
-source_head: 27135a0
-reviewed_at: 2026-06-05T20:26:43Z
+verdict: pass
+findings_status: none
+findings_disposition: no unresolved findings
+source_head: 47e56a8
+reviewed_at: 2026-06-05T20:44:57Z
 
 ## Scope Check
 
-- work_type present and correct: not evaluated - Qwen did not produce a formation review.
-- source provenance clear: not evaluated - Qwen did not produce a formation review.
-- scope is narrow and bounded: not evaluated - Qwen did not produce a formation review.
-- acceptance criteria are verifiable: not evaluated - Qwen did not produce a formation review.
-- out-of-scope boundaries explicit: not evaluated - Qwen did not produce a formation review.
-- operator input status recorded: not evaluated - Qwen did not produce a formation review.
-- role boundary evidence present: not evaluated - Qwen did not produce a formation review.
-- write-surface families declared: not evaluated - Qwen did not produce a formation review.
-- Test Writer boundary explicit: not evaluated - Qwen did not produce a formation review.
-- Implementation Writer boundary explicit: not evaluated - Qwen did not produce a formation review.
+- work_type present and correct: pass - the brief defines a non-product bootstrap-gap chore for the read-only `bandit trust verify <snapshot.json>` verifier foundation.
+- source provenance clear: pass - the brief traces to the accepted 2026-06-05 harness-agnostic CLI trust-layer decision and the active `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` gap.
+- scope is narrow and bounded: pass - the scope is limited to a compatibility-mode CLI command, snapshot schema, deterministic hashing, local evidence verification, reviewer-routing validation, Trust Verdict derivation, and deterministic JSON report output.
+- acceptance criteria are verifiable: pass - the criteria name schema, hashing, evidence digest, reviewer-routing, verdict, report determinism, report-write, compatibility-period, and no-mutation behaviors that Stage 2 can drive with RED evidence.
+- out-of-scope boundaries explicit: pass - the brief excludes cutover, gate replacement, live evidence capture, test/reviewer execution, model calls, harness queues, auth/provider routing, state mutation, scheduler, worktree, claim, PR/CI, merge, push, deploy, dependency changes, and unrelated cockpit work.
+- operator input status recorded: pass - no operator-owned input is required for formation, and product, UAT, policy, business, cost/risk, provider-pricing, spend-class, paid-routing, external-service, cutover, and broader cockpit decisions remain halt conditions.
+- role boundary evidence present: pass - Repo PM, Work Item PM, Test Writer, Implementation Writer, Reviewer, Landing Agent, and Closeout Agent authority boundaries are declared.
+- write-surface families declared: pass - expected files cover the active work package, spec evidence, CLI/state/test surfaces, gap ledger, roadmap, and status files.
+- Test Writer boundary explicit: pass - Stage 2 RED evidence is Test Writer-owned.
+- Implementation Writer boundary explicit: pass - if Codex authors or materially edits Stage 2 RED evidence, Stage 3 implementation is assigned to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, snapshot fixtures, or acceptance mappings.
+- CLEAN_CODE.md read evidence present: pass - the brief records `CLEAN_CODE.md` read evidence dated 2026-06-05 and mandates compliance evaluation before landing.
+- Formation Gate preserved: pass - the brief requires passing formation review and recording `formation_approved` before Stage 2 RED evidence or Work Item PM execution.
+- Read-only Trust Verifier compatibility-mode boundary preserved: pass - the brief keeps `bandit trust verify` beside existing gates and prohibits default workflow-state mutation or same-slice cutover.
 
 ## Command Evidence
-
-Formation-review command:
-
-```sh
-qwen --output-format text -p "<BANDIT-059 Stage 1 formation review prompt>"
-```
-
-Result:
-
-```text
-[API Error: Connection error. (cause: fetch failed)]
-```
-
-Formation-review retry:
-
-```sh
-qwen --output-format text -p "<BANDIT-059 Stage 1 formation review prompt>"
-```
-
-Result:
-
-```text
-[API Error: Connection error. (cause: fetch failed)]
-```
 
 Connectivity probe:
 
@@ -58,38 +37,47 @@ qwen --output-format text -p "Return exactly: qwen connectivity probe ok"
 Result:
 
 ```text
-[API Error: Connection error. (cause: fetch failed)]
+qwen connectivity probe ok
 ```
 
-Connectivity retry:
+Local reviewer endpoint probe:
 
 ```sh
-qwen --output-format text -p "Return exactly: qwen connectivity probe ok"
+curl -sS -m 5 http://127.0.0.1:8000/v1/models
 ```
 
 Result:
 
-```text
-[API Error: Connection error. (cause: fetch failed)]
+```json
+{"object":"list","data":[{"id":"Qwen3.6-35B-A3B-MLX-8bit","object":"model","created":1780692166,"owned_by":"omlx"},{"id":"Qwen3.6-40B-Claude-4.6-Opus-Deckard-Heretic-Uncensored-Thinking-8bit","object":"model","created":1780692166,"owned_by":"omlx"},{"id":"gemma-4-31b-it-bf16","object":"model","created":1780692166,"owned_by":"omlx"},{"id":"supergemma4-26b-uncensored-mlx-4bit-v2","object":"model","created":1780692166,"owned_by":"omlx"}]}
+```
+
+Formation-review command:
+
+```sh
+node bin/omlx-chat-completions.mjs <<'PROMPT'
+<BANDIT-059 Stage 1 formation review prompt>
+PROMPT
+```
+
+Result:
+
+```json
+{
+  "verdict": "pass",
+  "findings_status": "none",
+  "findings": [],
+  "summary": "The BANDIT-059 Stage 1 brief is fully formed, narrowly scoped, and explicitly bounded. All rubric criteria are satisfied: work type is correct, provenance is traceable to the accepted harness-agnostic decision, scope is tightly limited to a read-only CLI command and deterministic verification logic, acceptance criteria are verifiable via RED evidence, and out-of-scope boundaries are exhaustively listed. Operator input is explicitly waived, role boundaries across Stages 1-4 are clearly assigned, write-surface families are declared, and the Formation Gate is preserved. The brief requires no operator-owned input, maintains strict compatibility-mode constraints, and records CLEAN_CODE.md read evidence. It is ready for formation approval and progression to Stage 2 RED evidence."
+}
 ```
 
 ## Findings
 
-### Blocker
-
-Local Qwen baseline review did not run. The CLI returned an API connection
-failure before producing formation-review findings on the initial attempt and
-the 2026-06-05T20:26:43Z retry, so no independent Qwen formation verdict exists
-for `BANDIT-059`.
-
-Disposition: blocker. Rerun the Local Qwen formation review after Qwen API
-connectivity is restored, then refresh this artifact and the aggregate
-formation review before requesting the CLI-owned `formation_approved`
-transition.
+No blocker or non-blocking findings.
 
 ## Summary
 
-`BANDIT-059` is not ready for formation approval because required Local Qwen
-formation-review evidence is unavailable. Do not start Stage 2 RED evidence or
-record `formation_approved` until a real Qwen formation review is captured or
-repo policy explicitly records a valid alternate disposition.
+Local Qwen baseline review passed the `BANDIT-059` Stage 1 formation review with
+no findings after the local MLX OpenAI-compatible endpoint became available.
+The brief is ready for the CLI-owned `formation_approved` transition. Do not
+start Stage 2 RED evidence until that transition is recorded.
