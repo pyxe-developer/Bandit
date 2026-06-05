@@ -9,9 +9,9 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Retry Stage 3 implementation for `BANDIT-059` through
-the existing Claude bootstrap Process Adapter dispatch packet at
-`docs/work/BANDIT-059/dispatch.md`.
+**Current next step:** Create a shorter Stage 3 Claude Process Adapter dispatch
+packet from `docs/work/BANDIT-059/dispatch.md`, then retry Claude Writer
+implementation for `BANDIT-059` through that narrower packet.
 
 ## Next Work Item
 

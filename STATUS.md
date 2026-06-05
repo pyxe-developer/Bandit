@@ -30,12 +30,12 @@ evidence.
 Latest Stage 2 RED run: 2026-06-05T21:33:02Z; `node --test
 test/trust-verify.test.mjs` failed 8/8 because `trust` is not registered.
 
-Next action: Retry Stage 3 implementation for `BANDIT-059` through the existing
-Claude bootstrap Process Adapter dispatch packet at
-`docs/work/BANDIT-059/dispatch.md`.
+Next action: Create a shorter Stage 3 Claude Process Adapter dispatch packet
+from `docs/work/BANDIT-059/dispatch.md`, then retry Claude Writer
+implementation for `BANDIT-059` through that narrower packet.
 
-The first Claude Process Adapter attempt stalled before source edits or Writer
-evidence; the attempt is recorded at
+Two Claude Process Adapter attempts stalled before source edits or Writer
+evidence; both attempts are recorded at
 `docs/work/BANDIT-059/dispatch-attempt.md`. Codex PM did not substitute
 Codex-authored implementation work.
 
@@ -53,7 +53,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 implementation retry pending)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 shorter dispatch packet pending)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`
