@@ -11,12 +11,13 @@ bootstrap chore. Stage 1 brief evidence is recorded at
 `docs/work/BANDIT-059/brief.md`; `docs/work/BANDIT-059/coordination-log.jsonl`
 records the `brief_created` transition.
 
-Repo PM formation review was attempted on 2026-06-05. CodeRabbit formation
-review passed with zero findings at
+Repo PM formation review was attempted on 2026-06-05 and the Local Qwen retry
+at 2026-06-05T20:26:43Z still failed. CodeRabbit formation review passed with
+zero findings at
 `docs/work/BANDIT-059/coderabbit-formation-review.md`, but Local Qwen formation
-review is blocked by an API connection failure recorded at
+review remains blocked by an API connection failure recorded at
 `docs/work/BANDIT-059/qwen-formation-review.md`; the aggregate formation review
-at `docs/work/BANDIT-059/formation-review.md` is therefore `blocker`.
+at `docs/work/BANDIT-059/formation-review.md` remains `blocker`.
 
 `BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
 Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. That

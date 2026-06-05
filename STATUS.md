@@ -21,14 +21,14 @@ authority and path-containment checks, focused tests, Stage 4 review evidence,
 Stage 5 landing evidence, local-record landing action, and Stage 6
 retrospective/improvement/gap disposition.
 
-Current stage: Stage 0 work-item formation / harness-agnostic CLI trust layer
-design.
-
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
 Current stage: Stage 1 work-item brief / formation review blocked on required
 Local Qwen provider evidence.
+
+Latest Qwen retry: 2026-06-05T20:26:43Z; still failed with
+`[API Error: Connection error. (cause: fetch failed)]`.
 
 Next action: Restore Local Qwen availability or rerun the Local Qwen formation
 review for `BANDIT-059`, then refresh

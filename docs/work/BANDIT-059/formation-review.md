@@ -6,9 +6,9 @@ reviewer: codex_pm
 review_type: aggregate_formation_review
 verdict: blocker
 findings_status: blocker
-findings_disposition: CodeRabbit passed with zero findings; Qwen formation review is unavailable due API connection failure and must be rerun before formation approval.
-source_head: 3c58ea1
-reviewed_at: 2026-06-05T20:20:38Z
+findings_disposition: CodeRabbit passed with zero findings; Qwen formation review remains unavailable after retry due API connection failure and must be rerun before formation approval.
+source_head: 27135a0
+reviewed_at: 2026-06-05T20:26:43Z
 
 ## Scope Check
 
@@ -25,7 +25,7 @@ reviewed_at: 2026-06-05T20:20:38Z
 
 ## Formation Evidence
 
-- `docs/work/BANDIT-059/qwen-formation-review.md` - `blocker`, because the Local Qwen CLI returned `[API Error: Connection error. (cause: fetch failed)]` before producing a review.
+- `docs/work/BANDIT-059/qwen-formation-review.md` - `blocker`, because the Local Qwen CLI returned `[API Error: Connection error. (cause: fetch failed)]` before producing a review on the initial attempt and the 2026-06-05T20:26:43Z retry.
 - `docs/work/BANDIT-059/coderabbit-formation-review.md` - `pass`, zero findings.
 - `docs/work/BANDIT-059/brief.md` - Stage 1 brief with `CLEAN_CODE.md` read evidence, stage capability scope, formation requirement, token-cost boundary, operator-input status, and bounded expected files.
 - `docs/work/BANDIT-059/coordination-log.jsonl` - initial `brief_created` transition with `formation_required`.
@@ -36,7 +36,8 @@ reviewed_at: 2026-06-05T20:20:38Z
 
 Required Local Qwen formation review evidence is unavailable. The Qwen CLI
 failed with an API connection error on both the formation-review run and a
-minimal connectivity probe, so the repo cannot treat the missing review as
+minimal connectivity probe, and the same failure repeated on the
+2026-06-05T20:26:43Z retry, so the repo cannot treat the missing review as
 pass, non-blocking, or resolved.
 
 Disposition: rerun the Local Qwen formation review after Qwen API connectivity

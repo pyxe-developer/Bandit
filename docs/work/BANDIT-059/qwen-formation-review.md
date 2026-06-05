@@ -6,9 +6,9 @@ reviewer: local-qwen-baseline
 review_type: qwen_formation_review
 verdict: blocker
 findings_status: blocker
-findings_disposition: required Qwen formation review unavailable; rerun after API connectivity is restored.
-source_head: 3c58ea1
-reviewed_at: 2026-06-05T20:20:38Z
+findings_disposition: required Qwen formation review unavailable; retry still fails with API connection error.
+source_head: 27135a0
+reviewed_at: 2026-06-05T20:26:43Z
 
 ## Scope Check
 
@@ -37,7 +37,31 @@ Result:
 [API Error: Connection error. (cause: fetch failed)]
 ```
 
+Formation-review retry:
+
+```sh
+qwen --output-format text -p "<BANDIT-059 Stage 1 formation review prompt>"
+```
+
+Result:
+
+```text
+[API Error: Connection error. (cause: fetch failed)]
+```
+
 Connectivity probe:
+
+```sh
+qwen --output-format text -p "Return exactly: qwen connectivity probe ok"
+```
+
+Result:
+
+```text
+[API Error: Connection error. (cause: fetch failed)]
+```
+
+Connectivity retry:
 
 ```sh
 qwen --output-format text -p "Return exactly: qwen connectivity probe ok"
@@ -54,8 +78,9 @@ Result:
 ### Blocker
 
 Local Qwen baseline review did not run. The CLI returned an API connection
-failure before producing formation-review findings, so no independent Qwen
-formation verdict exists for `BANDIT-059`.
+failure before producing formation-review findings on the initial attempt and
+the 2026-06-05T20:26:43Z retry, so no independent Qwen formation verdict exists
+for `BANDIT-059`.
 
 Disposition: blocker. Rerun the Local Qwen formation review after Qwen API
 connectivity is restored, then refresh this artifact and the aggregate
