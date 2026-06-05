@@ -1,0 +1,55 @@
+{
+  "contract_version": 1,
+  "manifest_id": "stage3-implementation",
+  "work_item_id": "BANDIT-059",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-sonnet-4-6-process-adapter",
+  "base_revision": "df6b52d",
+  "allowed_target_files": [
+    "src/cli.ts",
+    "src/commands/trust.ts",
+    "src/state/trust-verify.ts",
+    "src/state/paths.ts",
+    "src/state/templates.ts",
+    "src/commands/validate.ts",
+    "docs/work/BANDIT-059/implementation-evidence.md",
+    "docs/work/BANDIT-059/writer-report.md",
+    "docs/specs/BANDIT-059-implementation-evidence.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-059/red-evidence.md",
+    "docs/specs/BANDIT-059-red-evidence.json",
+    "docs/work/BANDIT-059/brief.md",
+    "docs/work/BANDIT-059/qwen-formation-review.md",
+    "docs/work/BANDIT-059/coderabbit-formation-review.md",
+    "docs/work/BANDIT-059/formation-review.md",
+    "docs/work/BANDIT-059/coordination-log.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-059/dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-059/implementation-evidence.md",
+  "validation_commands": [
+    "node --test test/trust-verify.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate",
+    "npm run bandit -- role-runs validate BANDIT-059 --json"
+  ],
+  "source_artifacts": [
+    "docs/work/BANDIT-059/brief.md",
+    "docs/work/BANDIT-059/red-evidence.md",
+    "docs/specs/BANDIT-059-red-evidence.json"
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false
+  }
+}

@@ -36,8 +36,9 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Dispatch Stage 3 implementation for `BANDIT-059` to
-Claude through the bootstrap Process Adapter path.
+**Current next action:** Retry Stage 3 implementation for `BANDIT-059` through
+the existing Claude bootstrap Process Adapter dispatch packet at
+`docs/work/BANDIT-059/dispatch.md`.
 
 Do not route Stage 3 to Codex, do not let the Stage 3 Writer edit tests, test
 helpers, fixtures, snapshot fixtures, RED evidence artifacts/specs, or
@@ -47,7 +48,11 @@ bounded implementation.
 
 The current stage is Stage 3 implementation pending. Stage 2 RED evidence
 defines the public CLI verifier contract and currently fails 8/8 because
-`bandit trust verify` is not registered.
+`bandit trust verify` is not registered. Codex PM created the Stage 3 dispatch
+packet at `docs/work/BANDIT-059/dispatch.md` and role-run manifest at
+`docs/role-runs/BANDIT-059/stage3-implementation.json`. The first Claude
+Process Adapter attempt stalled before source edits or Writer evidence; the
+attempt is recorded at `docs/work/BANDIT-059/dispatch-attempt.md`.
 
 ## Active Work
 
@@ -70,8 +75,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Dispatch Stage 3 implementation for `BANDIT-059` to Claude through the
-   bootstrap Process Adapter path.
+1. Retry Stage 3 implementation for `BANDIT-059` through the existing Claude
+   bootstrap Process Adapter dispatch packet at
+   `docs/work/BANDIT-059/dispatch.md`.
 2. Preserve model-family separation: Codex authored and materially edited Stage
    2 RED tests, so Stage 3 implementation must be routed to Claude with zero
    test edit authority.
@@ -91,7 +97,7 @@ resulting work can proceed or land.
 ## Required Operator Input
 
 No operator-owned input is required for the recorded Stage 3 implementation
-dispatch action. The minimum trust-layer surface is recorded in
+retry action. The minimum trust-layer surface is recorded in
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md` and
 `docs/work/BANDIT-059/brief.md`: validate and hash a local Work Item Snapshot,
 verify captured repo evidence, enforce reviewer-finding routing, derive a
