@@ -9,8 +9,9 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Run Repo PM formation review for `BANDIT-059` before
-Stage 2 RED evidence.
+**Current next step:** Restore Local Qwen availability or rerun the Local Qwen
+formation review for `BANDIT-059`, then refresh
+`docs/work/BANDIT-059/formation-review.md` before Stage 2 RED evidence.
 
 ## Next Work Item
 
