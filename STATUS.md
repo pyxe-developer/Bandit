@@ -16,19 +16,20 @@ authority and path-containment checks, focused tests, Stage 4 review evidence,
 Stage 5 landing evidence, local-record landing action, and Stage 6
 retrospective/improvement/gap disposition.
 
-Current stage: Stage 0 architecture clarification / harness-agnostic CLI trust
-layer design.
+Current stage: Stage 0 work-item formation / harness-agnostic CLI trust layer
+design.
 
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Next action: continue defining the smallest CLI-verifiable trust contract for
-agentic software delivery and record the first implementable read-only
-`bandit trust verify <snapshot.json>` work item.
+Next action: Codex PM should create and record the Trust Verify Snapshot
+Foundation work item for a read-only `bandit trust verify <snapshot.json>`
+verifier.
 
-Operator-owned product-boundary input is currently being gathered. Do not start
+No operator-owned input remains for creating that work item. Do not start
 implementation, RED evidence, a new normal bootstrap work item, or Pi/Aperture
-agent-scope work until the minimal trust-layer surface is resolved.
+agent-scope work until the Trust Verify Snapshot Foundation work item is
+recorded.
 
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is queued as a cleanup candidate to
 separate artifact-renderer JSON inputs and reviewer captures from work/gap specs

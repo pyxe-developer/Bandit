@@ -9,9 +9,9 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Continue defining the smallest CLI-verifiable trust
-contract for agentic software delivery and record the first implementable
-read-only `bandit trust verify <snapshot.json>` work item.
+**Current next step:** Create and record the first implementable read-only
+`bandit trust verify <snapshot.json>` work item for Trust Verify Snapshot
+Foundation.
 
 ## Next Work Item
 

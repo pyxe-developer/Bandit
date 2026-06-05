@@ -25,9 +25,9 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Continue defining the smallest CLI-verifiable trust
-contract for agentic software delivery and record the first implementable
-read-only `bandit trust verify <snapshot.json>` work item.
+**Current next action:** Create and record the first implementable read-only
+`bandit trust verify <snapshot.json>` work item for Trust Verify Snapshot
+Foundation.
 
 Do not implement Pi/Aperture agent-scope schema/projection work. The emerging
 next implementation target is a read-only `bandit trust verify <snapshot.json>`
@@ -37,14 +37,14 @@ deterministic JSON report output. This first slice is compatibility-mode only:
 it must not replace `land-check`, review evidence validation, closeout
 validation, coordination checks, or any other existing gate path.
 
-The current stage is Stage 0 architecture clarification / interstitial queue
+The current stage is Stage 0 work-item formation / interstitial queue
 selection: no work item is active, `BANDIT-058` has landing action and Stage 6
-closeout evidence, and the next action is operator-guided design clarification
-of Bandit's minimum deterministic trust contract. Do not create RED evidence,
-implementation branches, Work Item PM active context, a normal Execution And
-Role Input Packets work item, a Pi/Aperture live proof run, or unrelated
-cockpit product work until this product-boundary pivot is recorded into the
-next implementable work item.
+closeout evidence, and the accepted trust-layer decision resolves the minimum
+product boundary for creating the first verifier work item. Do not create RED
+evidence, implementation branches, Work Item PM active context, a normal
+Execution And Role Input Packets work item, a Pi/Aperture live proof run, or
+unrelated cockpit product work until the Trust Verify Snapshot Foundation work
+item is recorded.
 
 ## Active Work
 
@@ -62,10 +62,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Define the smallest CLI-verifiable trust contract for agentic software
-   delivery around Work Item Snapshot validation, hashing, evidence
-   verification, reviewer-finding routing, Trust Verdicts, and reproducible
-   reports.
+1. Create the Trust Verify Snapshot Foundation work item from
+   `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 2. Record the first implementation slice as `bandit trust verify <snapshot.json>`
    with read-only verification, optional explicit report writing, and no
    reviewer/test execution or workflow-state mutation.
@@ -75,14 +73,18 @@ resulting work can proceed or land.
 4. Decide how this verifier coexists with existing work-item, gate, evidence,
    review, landing, closeout, and improvement artifacts before replacing any
    older command path.
-5. Convert the resolved boundary into a next implementable Bandit work item.
-6. Keep unrelated Phase 8 cockpit product work, Execution And Role Input
+5. Keep unrelated Phase 8 cockpit product work, Execution And Role Input
    Packets work-item creation, and Pi/Aperture agent-scope work blocked while
-   this product-boundary pivot is unresolved.
+   the verifier foundation work item is being formed.
 
 ## Required Operator Input
 
-Operator-owned product-boundary input is currently being gathered. Repo
-artifacts cannot infer the minimum trust-layer surface without that product
-direction. After the boundary is resolved, Codex PM can turn it into the next
-bounded work item.
+No operator-owned input remains for creating the Trust Verify Snapshot
+Foundation work item. The minimum trust-layer surface is recorded in
+`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`: validate and
+hash a local Work Item Snapshot, verify captured repo evidence, enforce
+reviewer-finding routing, derive a Trust Verdict, and produce a reproducible
+report without running tests/reviewers or mutating workflow state.
+
+Ask the operator only if the proposed work item would expand beyond that
+read-only compatibility-mode verifier boundary.
