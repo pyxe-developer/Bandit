@@ -1,7 +1,7 @@
 # Pi Config Owns Canonical Bandit Agent Taxonomy
 
 **Date:** 2026-06-02
-**Status:** Accepted
+**Status:** Superseded by `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`
 **Participants:** Matt Flebbe, Codex
 **Supersedes:** The taxonomy-source portion of `docs/decisions/2026-06-01-true-agent-harness-pivot.md`
 

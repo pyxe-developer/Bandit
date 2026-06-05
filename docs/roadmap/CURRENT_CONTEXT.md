@@ -2,7 +2,7 @@
 
 ## Status
 
-**Phase:** 8 - Workflow Cockpit kickoff / True-Agent Harness Pivot.
+**Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
 `BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
 Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` with
@@ -12,29 +12,39 @@ review and PM disposition, aggregate Stage 4 review evidence, Stage 5
 landing-gate evidence, local-record landing action evidence, and Stage 6
 retrospective/improvement/gap disposition evidence.
 
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains open, but normal
-Stage 1-6 Process Adapter bootstrap slice execution is paused by
-`docs/decisions/2026-06-01-true-agent-harness-pivot.md`. The previously queued
-Execution And Role Input Packets follow-on is no longer the next action until
-the True-Agent Harness Pivot is resolved.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains open, but its Pi/Aperture
+agent-scope path is superseded by
+`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`. The previously
+queued Execution And Role Input Packets follow-on and the Pi/Aperture scope
+schema/projection work are no longer the next action.
 
 **Active work item:** none.
 
-The Pi/Aperture Agent Scope and Harness Spike Plan is recorded at
-`docs/spikes/pi-aperture-agent-scope-and-harness-spike.md`.
+The accepted architecture boundary is that Bandit is the deterministic CLI
+trust layer for agentic software delivery. Harnesses and orchestrator prompts
+may own live orchestration, agents, queues, auth, and status if they can call
+Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Implement the first Pi/Aperture Harness Spike step:
-add repo-native agent scope schema/policy plus projection validation for Pi and
-Aperture before any live proof run or normal adapter-loop bootstrap slice
-resumes.
+**Current next action:** Continue the design clarification for the smallest
+CLI-verifiable trust contract an external orchestrator prompt can use from any
+harness: validate a work item snapshot, hash it, verify repo evidence, enforce
+reviewer-finding routing, produce a verdict, and emit a reproducible report. Do
+not implement Pi/Aperture agent-scope schema/projection work. The emerging next
+implementation target is a read-only `bandit trust verify <snapshot.json>`
+slice with explicit snapshot schema, snapshot hash, captured-evidence
+validation, reviewer-finding routing, Trust Verdict derivation, and deterministic
+JSON report output. This first slice is compatibility-mode only: it must not
+replace `land-check`, review evidence validation, closeout validation,
+coordination checks, or any other existing gate path.
 
-The current stage is Stage 0 context readiness / interstitial queue selection:
-no work item is active, `BANDIT-058` has landing action and Stage 6 closeout
-evidence, the spike plan is recorded, and the next action is Codex-owned
-Pi/Aperture agent-scope schema/policy and projection validation. Do not create
-RED evidence, implementation branches, Work Item PM active context, a normal
-Execution And Role Input Packets work item, a live proof run, or unrelated
-cockpit product work until the repo-native agent scope foundation is recorded.
+The current stage is Stage 0 architecture clarification / interstitial queue
+selection: no work item is active, `BANDIT-058` has landing action and Stage 6
+closeout evidence, and the next action is operator-guided design clarification
+of Bandit's minimum deterministic trust contract. Do not create RED evidence,
+implementation branches, Work Item PM active context, a normal Execution And
+Role Input Packets work item, a Pi/Aperture live proof run, or unrelated
+cockpit product work until this product-boundary pivot is recorded into the
+next implementable work item.
 
 ## Active Work
 
@@ -44,32 +54,35 @@ cockpit product work until the repo-native agent scope foundation is recorded.
 `docs/work/BANDIT-058/retrospective.md`; local-record landing evidence is
 recorded at `docs/work/BANDIT-058/landing-action.md`.
 
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains source material for the
-assembly-line design, but the next bounded slice is paused. The accepted proof
-shape is recorded in
-`docs/spikes/pi-aperture-agent-scope-and-harness-spike.md`: a Pi/Aperture
-Harness Spike rather than a normal Bandit Stage 1-6 Process Adapter slice. The
-selected direction is Pi for the harness plane and Aperture by Tailscale for
-the model plane. The agent scopes must be recorded before the spike runs, and
-the spike must prove that Work Item PM can orchestrate a whole tiny non-product
-slice in one durable session by calling scoped agents. If the spike passes,
-Bandit moves to Harness-Native Build Continuation on Pi with Aperture.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains source material, but the
+load-bearing direction has changed. Single-session orchestration is now an
+orchestrator-prompt pattern that external harnesses may run; Bandit's product
+boundary is the CLI-verifiable trust contract that determines whether the
+resulting work can proceed or land.
 
 ## Priority
 
-1. Add repo-native agent scope schema/policy plus projection validation for Pi
-   and Aperture from the recorded spike plan.
-2. Scope all authority-bearing Bandit agents for Pi with Aperture before the
-   spike runs.
-3. Prove Work Item PM Single-Session Slice Orchestration through Aperture
-   guardrails and telemetry on a tiny non-product whole-slice proof before any
-   normal adapter-loop bootstrap slice resumes.
-4. Keep unrelated Phase 8 cockpit product work and Execution And Role Input
-   Packets work-item creation blocked while the harness pivot is unresolved.
+1. Define the smallest CLI-verifiable trust contract for agentic software
+   delivery around Work Item Snapshot validation, hashing, evidence
+   verification, reviewer-finding routing, Trust Verdicts, and reproducible
+   reports.
+2. Record the first implementation slice as `bandit trust verify <snapshot.json>`
+   with read-only verification, optional explicit report writing, and no
+   reviewer/test execution or workflow-state mutation.
+3. Keep the first slice in Trust Verifier Compatibility Period; cutover to any
+   existing gate path requires a later per-Trust-Goal cutover decision with
+   reproducible parity evidence.
+4. Decide how this verifier coexists with existing work-item, gate, evidence,
+   review, landing, closeout, and improvement artifacts before replacing any
+   older command path.
+5. Convert the resolved boundary into a next implementable Bandit work item.
+6. Keep unrelated Phase 8 cockpit product work, Execution And Role Input
+   Packets work-item creation, and Pi/Aperture agent-scope work blocked while
+   this product-boundary pivot is unresolved.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. The next step
-is Codex-owned technical implementation of repo-native Pi/Aperture agent scope
-schema/policy and projection validation, not a product, UAT, policy, business,
-cost, or ambiguous scope decision.
+Operator-owned product-boundary input is currently being gathered. Repo
+artifacts cannot infer the minimum trust-layer surface without that product
+direction. After the boundary is resolved, Codex PM can turn it into the next
+bounded work item.

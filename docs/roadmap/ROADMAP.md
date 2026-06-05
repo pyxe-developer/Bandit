@@ -1,22 +1,23 @@
 # Roadmap
 
-**Current phase:** Phase 8 - Workflow Cockpit kickoff / True-Agent Harness Pivot.
+**Current phase:** Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
 ## Current Work Item
 
 - `[Gap]` None - no active work item.
 
-The Pi/Aperture Agent Scope and Harness Spike Plan is recorded at
-`docs/spikes/pi-aperture-agent-scope-and-harness-spike.md`.
+The harness-specific Pi/Aperture path is superseded by
+`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Implement the first Pi/Aperture Harness Spike step: add
-repo-native agent scope schema/policy plus projection validation for Pi and
-Aperture before any live proof run or normal adapter-loop bootstrap slice
-resumes.
+**Current next step:** Continue defining the smallest CLI-verifiable trust
+contract for agentic software delivery: Work Item Snapshot validation, snapshot
+hashing, repo evidence verification, reviewer-finding routing, Trust Verdicts,
+and reproducible reports. The first implementable target is a read-only
+`bandit trust verify <snapshot.json>` slice.
 
 ## Next Work Item
 
-- `[Gap]` TBD - Pi/Aperture Agent Scope Schema And Projection Validation
+- `[Gap]` TBD - Trust Verify Snapshot Foundation
 
 ## Planned Work
 
@@ -25,15 +26,18 @@ resumes.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued for the
-  recorded Pi/Aperture Agent Scope and Harness Spike Plan after `BANDIT-058`;
-  remaining role-scoped follow-ons are source material, not the next
-  implementation queue, until the Harness path proves Single-Session Slice
-  Orchestration.
-- `[Gap]` `TBD` - Pi/Aperture Agent Scope Schema And Projection Validation;
-  add repo-native scope schema/policy and generated Pi/Aperture projection
-  validation before the tiny non-product whole-slice proof runs and before
-  Harness-Native Build Continuation.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
+  orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
+  queue.
+- `[Gap]` `TBD` - Trust Verify Snapshot Foundation; add a read-only
+  `bandit trust verify <snapshot.json>` command, Work Item Snapshot schema,
+  deterministic snapshot hash, captured-evidence checks, reviewer-finding
+  routing validation, Trust Verdict derivation, and reproducible JSON report
+  output without running tests/reviewers, mutating workflow state, or replacing
+  existing gate commands.
+- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode evidence
+  exists, decide per Trust Goal when `bandit trust verify` becomes the canonical
+  verifier or wrapper for an older gate path.
 
 ### Deferred PRD Slices
 

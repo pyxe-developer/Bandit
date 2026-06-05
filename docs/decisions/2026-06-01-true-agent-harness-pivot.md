@@ -1,7 +1,7 @@
 # True-Agent Harness Pivot
 
 **Date:** 2026-06-01
-**Status:** Partially superseded by `docs/decisions/2026-06-02-pi-config-canonical-agent-taxonomy.md`
+**Status:** Superseded by `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`
 **Participants:** Matt Flebbe, Codex
 
 ## Decision

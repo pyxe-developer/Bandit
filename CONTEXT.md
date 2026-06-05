@@ -1,14 +1,30 @@
 # Bandit
 
-Bandit defines a repo-native trust layer for AI-authored development workflows, with a learning loop for operator-reviewed workflow trials. This glossary keeps the product language precise while preserving the decisions and context that led from Sourmash to this fresh repository.
+Bandit defines a deterministic repo-native trust layer for agentic software delivery, with a learning loop for operator-reviewed workflow trials. This glossary keeps the product language precise while preserving the decisions and context that led from Sourmash to this fresh repository.
 
 Sourmash is source material, evidence archive, terminology history, and prior-art context. It is not Bandit's planning authority. Bandit owns the current implementation direction.
 
 ## Language
 
 **Trust Layer**:
-A project-portable contract that constrains, observes, and verifies AI development work.
-_Avoid_: task tracker, generic agent runner
+A CLI-enforced project-portable contract that constrains, observes, and verifies whether agentic software delivery work can be trusted.
+_Avoid_: task tracker, generic agent runner, agent runtime, orchestration platform
+
+**Agentic Software Delivery**:
+Software delivery where AI systems perform planning, editing, review, landing, or maintenance work under explicit trust, evidence, and operator-boundary contracts.
+_Avoid_: generic automation, autonomous software factory, harness feature
+
+**Deterministic Trust Verification**:
+The local repeatable read-only CLI process that validates a work snapshot, hashes it, verifies captured evidence, enforces reviewer-finding routing, produces a verdict, and may explicitly emit a reproducible report.
+_Avoid_: orchestration, auth flow, live status, agent runtime, test runner, reviewer runner
+
+**Trust Verifier Compatibility Period**:
+The migration phase where `bandit trust verify` runs beside existing gate commands without replacing their authority.
+_Avoid_: silent cutover, partial replacement, shadow authority
+
+**Trust Verifier Cutover Gate**:
+The explicit per-Trust-Goal decision point where `bandit trust verify` becomes the canonical verifier or wrapper for an older gate path after reproducible parity evidence.
+_Avoid_: same-slice replacement, implicit deprecation, confidence by intent
 
 **Cooperative Workflow Safety Claim**:
 The Trust Layer scope that Bandit can assert for self-owned or policy-trusted development workflows: reducing operator slips, agent drift, stale approvals, missing review, workflow forgetfulness, and untrusted-input confusion without claiming adversarial security against compromised credentials, malicious maintainers, or forged repository history.
@@ -118,6 +134,10 @@ _Avoid_: subprocess prompt, one-shot reviewer, structured-output command
 A compatibility bridge that invokes a model through a CLI or subprocess without making it a true agent.
 _Avoid_: agent, subagent
 
+**Orchestrator Prompt**:
+A harness-portable instruction layer that tells an agentic runtime how to call Bandit's CLI without owning Bandit's trust decisions.
+_Avoid_: workflow authority, canonical state, agent taxonomy
+
 **Bootstrap Orchestration Boundary**:
 The bootstrap constraint that Codex can coordinate cross-model work only through Process Adapters, repo-native artifacts, and after-the-fact gates; it cannot provide True Agent behavior for other model sessions.
 _Avoid_: true cross-model orchestration, live harness control plane, agent intercom
@@ -139,7 +159,7 @@ The model-call layer that owns provider routing, credential custody, identity at
 _Avoid_: harness, control plane, Bandit boundary logic
 
 **Aperture Model Plane**:
-The selected model-plane implementation for the True-Agent Harness Pivot, using Aperture by Tailscale as a swappable Model-Call Boundary Adapter.
+The model-plane implementation selected during the superseded True-Agent Harness Pivot, using Aperture by Tailscale as a swappable Model-Call Boundary Adapter.
 _Avoid_: true-agent harness, workflow authority, escape detector
 
 **Model-Plane Guardrail**:
@@ -171,7 +191,7 @@ A small attribution and correlation payload attached to a model request so Model
 _Avoid_: workflow authority, landing evidence, fabricated attribution, prompt-only permission
 
 **Pi Harness Plane**:
-The selected harness-plane direction for the True-Agent Harness Pivot, using Pi for True Agent identity, permissions, context, lifecycle, and A2A handoffs while routing model calls through the Aperture Model Plane.
+The harness-plane direction selected during the superseded True-Agent Harness Pivot, using Pi for True Agent identity, permissions, context, lifecycle, and A2A handoffs while routing model calls through the Aperture Model Plane.
 _Avoid_: model gateway, provider-key store, telemetry backend
 
 **Runtime Portability Gate**:
@@ -187,40 +207,40 @@ A source-material documentation artifact under `docs/spikes/` that defines evide
 _Avoid_: ADR, decision record
 
 **Pi/Aperture Harness Spike**:
-A Harness Spike that proves a Work Item PM Orchestrator can keep one slice context alive while calling scoped Pi-managed True Agents through the Aperture Model Plane.
-_Avoid_: one-agent smoke test, normal Bandit slice, adapter-loop role packet, full migration
+A superseded Harness Spike plan that treated Pi plus Aperture as the next proof path before Bandit narrowed its product boundary to a harness-agnostic CLI Trust Layer.
+_Avoid_: current next step, normal Bandit slice, adapter-loop role packet, full migration
 
 **Pi/Aperture Agent Scope Plan**:
-A versioned migration plan that defines Bandit's named agents in Pi configuration and binds those agents to Bandit's workflow authority, evidence, and gate model before the first Work Item PM orchestration proof runs.
-_Avoid_: prompt inventory, model preference list, immediate full migration
+A superseded migration plan that defined Bandit's named agents in Pi configuration before Bandit shifted agent and orchestration concerns out of the load-bearing product boundary.
+_Avoid_: current planning authority, prompt inventory, model preference list
 
 **Pi Canonical Agent Taxonomy**:
-The Pi-configured set of Bandit-named agents used as the canonical role taxonomy for harness-native work.
-_Avoid_: unconfigured default Pi roles, prompt-only roles, repo-only taxonomy
+A superseded term for Pi-configured Bandit-named agents from the abandoned Pi-first harness direction.
+_Avoid_: current Bandit taxonomy, workflow authority, prompt-only roles
 
 **Repo-Native Agent Scope**:
-The repo-owned binding from Pi Canonical Agent Taxonomy roles to Bandit's authority, lifecycle, inputs, outputs, write surfaces, A2A permissions, model-plane guardrails, telemetry join keys, and failure behavior.
-_Avoid_: role taxonomy source, chat-only scope, prompt-only authority
+A superseded binding concept from the Pi-first direction that tried to attach Pi-defined agents to Bandit authority, lifecycle, evidence, and failure behavior.
+_Avoid_: current planning authority, role taxonomy source, chat-only scope, prompt-only authority
 
 **Pi Agent Scope Projection**:
-A generated or mirrored repo-facing validation view of Pi Canonical Agent Taxonomy roles and Repo-Native Agent Scope bindings.
+A superseded repo-facing validation view from the abandoned Pi-first harness direction.
 _Avoid_: workflow authority, manual drift, separate planning authority
 
 **Single-Session Slice Orchestration**:
-A Work Item PM Orchestrator activation that keeps lifecycle context for a whole slice and calls scoped agents for testing, implementation, review, landing, and closeout without cold-starting each stage as an isolated PM activation.
-_Avoid_: next-step-only PM loop, cold-start-per-stage, monolithic do-everything agent
+A Work Item PM Orchestrator activation that keeps lifecycle context for a whole slice while preserving stage and gate checkpoints and calling scoped agents for testing, implementation, review, landing, and closeout.
+_Avoid_: next-step-only PM loop, cold-start-per-stage, monolithic do-everything agent, skipped gates
 
 **Minimum Whole-Slice Harness Proof**:
-A tiny non-product proof slice that exercises Single-Session Slice Orchestration end to end: Work Item PM stays alive and calls scoped Test Writer, Implementation Writer or Execution Worker, Reviewer, Landing Agent, and Closeout or Retrospective agents.
-_Avoid_: one-agent smoke test, partial stage demo, artifact-only shortcut without orchestration
+A superseded proof target for selecting a true-agent harness as Bandit's next substrate.
+_Avoid_: current next step, one-agent smoke test, partial stage demo
 
 **Harness-Native Build Continuation**:
-Continuing Bandit implementation on the Pi Harness Plane with Aperture as the Model Plane after the Harness path is proven and agent scopes are recorded.
-_Avoid_: adapter-loop continuation, subprocess hardening, cockpit-first build
+A superseded continuation path that would have moved Bandit implementation onto a selected harness substrate.
+_Avoid_: current next step, adapter-loop continuation, cockpit-first build
 
 **True-Agent Harness Pivot**:
-The architecture correction that pauses normal Process Adapter bootstrap slices until Bandit selects or proves a Harness path capable of running True Agents without the current token-heavy adapter loop.
-_Avoid_: next adapter-hardening slice, role-packet continuation, Codex-as-runtime
+A superseded architecture correction that paused normal work while Bandit tried to select or prove a True Agent Harness path.
+_Avoid_: current product boundary, next adapter-hardening slice, role-packet continuation, Codex-as-runtime
 
 **Fresh Harness Repo**:
 Bandit: the new implementation home for the next trust-layer runtime, using Sourmash as source material rather than continuing the subprocess-first Sourmash architecture in place.
@@ -490,6 +510,22 @@ _Avoid_: writer-editable tests, mechanical test fix, implementation-owned test u
 The durable repo-native execution unit Bandit manages through coordination state, lifecycle evidence, review, landing, retrospective, and closeout. Slices and Chores are Work Item types.
 _Avoid_: tracker task, agent session, pull request
 
+**Work Item Snapshot**:
+A bounded local representation of agentic work at a specific repo state, including a Trust Goal and only normalized reproducible inputs such as repo file references, git refs or hashes, changed surfaces, declared intent, policy context, captured test output, captured reviewer output, and finding dispositions.
+_Avoid_: live queue item, chat transcript, mutable session state, auth state, provider dashboard
+
+**Captured Evidence**:
+A local reproducible artifact that records the output of tests, reviewers, tools, or external facts before Deterministic Trust Verification consumes it.
+_Avoid_: live command execution, provider dashboard, transient stdout, chat summary
+
+**Trust Goal**:
+The declared purpose for Deterministic Trust Verification, initially `stage_transition`, `landing`, `closeout`, or `evidence_refresh`.
+_Avoid_: vague trusted-for-everything, implicit phase, orchestrator intention
+
+**Snapshot Hash**:
+A deterministic hash of a Work Item Snapshot used to make trust verification reproducible across reruns and harnesses.
+_Avoid_: raw git HEAD, timestamped report identity, session ID
+
 **In-Progress Work Item**:
 A Work Item with an existing Work Item PM Orchestrator context and prior non-terminal lifecycle evidence, such as an active claim, blocked stage, cleanup-ready handoff, review-feedback loop, or equivalent non-terminal state. A newly materialized queued Work Item is not in progress.
 _Avoid_: newly queued work, priority hint, claimable item
@@ -598,6 +634,14 @@ _Avoid_: human rubber-stamp, direct-main chore runner, operator-as-release-engin
 A recorded decision that classifies a PR as safe-to-land, blocked, needs-repair, or requires operator approval, backed by CI, tests, CodeRabbit, adversarial review, review freshness, PR accuracy, policy evidence, and any Boundary Prediction Record that authorized the landing.
 _Avoid_: warning dump, looks-good summary, user gut check
 
+**Trust Verdict**:
+The CLI-produced result of Deterministic Trust Verification for a Work Item Snapshot: `trusted`, `needs_repair`, `blocked`, or `requires_operator`.
+_Avoid_: orchestrator opinion, reviewer summary, chat conclusion, generic safe-to-land
+
+**Reproducible Trust Report**:
+A local report explicitly written by Deterministic Trust Verification that records the Work Item Snapshot, Snapshot Hash, evidence checks, reviewer-finding routing state, policy inputs, and Trust Verdict so the verification can be rerun and audited.
+_Avoid_: live dashboard state, opaque transcript, non-repeatable summary
+
 **Boundary Prediction Record**:
 The standalone repo-native falsifiable Trust Layer claim referenced by a Landing Verdict: risk tier, Evidence Strength Tier, Landing Autonomy Level, Review Subject Hash, relied-on evidence artifacts, authorizing boundary cell, and predicted safety outcome.
 _Avoid_: post-hoc rationale, confidence prose, unjoinable landing note
@@ -617,6 +661,10 @@ _Avoid_: post-merge cleanup, optional advisory scan
 **Non-Blocking Review Finding**:
 A real reviewer finding that is safe to defer only after Codex PM records rationale and routes it to a tagged chore, improvement chore, or explicit no-action decision. It must not be treated as a landing blocker, and it must not weaken blocker-level review, stale-evidence, or request-changes gates.
 _Avoid_: nitpick blocker, recursive review churn, ignored warning
+
+**Reviewer-Finding Routing**:
+The CLI-enforced rule that every reviewer finding must resolve to blocker repair, accepted non-blocking follow-up, explicit no-action, not-applicable disposition, or operator-owned escalation before a Trust Verdict can pass.
+_Avoid_: ignored finding, reviewer-by-vibes, chat-only disposition
 
 **Stage 4 Evidence-Head Semantics**:
 The contract that distinguishes historical review artifacts from current landing-gate evidence during iterative review and disposition loops. The contract must keep actual source-code drift fail-closed without requiring every historical review artifact to share one final source head.
@@ -976,7 +1024,19 @@ _Avoid_: planner, architect
 
 ## Relationships
 
-- A **Trust Layer** can run on one or more **Harnesses**.
+- A **Trust Layer** can be invoked by one or more **Harnesses** without becoming part of those harnesses.
+- **Deterministic Trust Verification** is the load-bearing CLI process of the **Trust Layer**.
+- A **Work Item Snapshot** is the input to **Deterministic Trust Verification**.
+- A **Work Item Snapshot** must declare a **Trust Goal** so `trusted` always means trusted for a specific purpose.
+- A **Snapshot Hash** identifies the exact **Work Item Snapshot** that was verified.
+- A **Work Item Snapshot** may include network, auth, queue, harness, or provider facts only after an orchestrator materializes them as local reproducible evidence.
+- **Deterministic Trust Verification** consumes **Captured Evidence**; it does not run tests, invoke reviewers, call models, or launch network checks as part of the core verification path.
+- During the **Trust Verifier Compatibility Period**, existing gate commands such as landing, review, closeout, and coordination checks remain authoritative.
+- A **Trust Verifier Cutover Gate** must name the affected **Trust Goal**, old command path, new trust-verifier path, parity evidence, stricter-failure behavior, report format, and rollback or fallback rule.
+- **Reviewer-Finding Routing** must be satisfied before a passing **Trust Verdict**.
+- `safe-to-land` is a landing-specific interpretation of a **Trust Verdict**, not a generic verifier verdict.
+- A **Reproducible Trust Report** records the **Work Item Snapshot**, **Snapshot Hash**, evidence checks, **Reviewer-Finding Routing**, and **Trust Verdict**.
+- **Deterministic Trust Verification** does not mutate queues, active work, coordination state, routing state, or repo workflow state; writing a **Reproducible Trust Report** requires an explicit output request and remains a report write only.
 - Trust-boundary autonomy is a **Cooperative Workflow Safety Claim**, not an adversarial security claim.
 - **Untrusted Input Posture** is required before **Landing Agent** authority can process external contributor input, fetched third-party content, or generated instructions.
 - **Data-Only External Input** must cross an **Input Quarantine Boundary** before release-authorized agents may inspect it; it remains quoted evidence, not executable instruction, unless a **Trusted Source Gate** explicitly upgrades the source for a bounded purpose.
@@ -995,34 +1055,17 @@ _Avoid_: planner, architect
 - **Never Auto-Landable Surfaces** cannot enter **Auto-Landing Scope** even when tests, CodeRabbit, Qwen, or escalated reviewers pass.
 - **Blast-Radius Signals**, **Static Analysis Risk Signals**, source-trust state, input-quarantine state, and supply-chain state can independently raise review depth, require operator supervision, or block auto-landing without requiring a matching smell trigger.
 - A **Supply-Chain Gate** is required before **Auto-Landing Scope** can include any **Supply-Chain Sensitive Surface**; until then those changes require blocker disposition, operator supervision, or an explicit bootstrap gap.
-- A **Harness** manages one or more **True Agents**.
-- A **Harness Candidate** must pass the **Runtime Portability Gate**.
-- A **Provider-Agnostic Harness** satisfies one part of the **Runtime Portability Gate**.
-- A **Pi Harness Plane** supplies True Agent lifecycle, scoped permissions, context, and A2A handoffs.
-- An **Aperture Model Plane** supplies provider routing, model-call identity, credential custody, quotas, cost controls, and telemetry.
-- An **Aperture Model Plane** may enforce **Model-Plane Guardrails** before a request reaches an upstream model provider.
-- A **Model-Plane Tool Declaration Gate** can block unauthorized tool exposure in an LLM request, but it is not a **Harness Tool Execution Gate**.
-- A **Harness Tool Execution Gate** must block local tool side effects even when model-plane tool declarations were allowed.
+- A **Harness** may manage one or more **True Agents**, but harness lifecycle is outside Bandit's load-bearing product boundary.
+- A **Harness Candidate** and **Provider-Agnostic Harness** are runtime options that may consume Bandit's CLI contract; they are not prerequisites for Bandit to deliver its **Trust Layer**.
+- An **Orchestrator Prompt** may help a harness run a coherent work session, but it does not create **CLI Authority**, canonical workflow state, or gate verdicts.
+- A **Model Plane** and its guardrails may provide useful evidence, but model routing, credential custody, auth, and live model telemetry are outside Bandit's load-bearing product boundary.
 - A **Model-Plane Guardrail** can block or rewrite a model request, but it cannot issue **Bandit** workflow gate verdicts or own **Bandit-Owned Boundary Logic**.
-- A **Fail-Closed Model-Plane Guardrail** is required for missing or invalid attribution, context-scope violations, unauthorized model-plane tool declarations, unauthorized model/provider routing, hard budget or quota violations, and secret or PII exfiltration risk.
-- A **Fail-Open Model-Plane Guardrail** is limited to advisory classification, metadata enrichment, analytics, and other non-authoritative observations.
-- An **Integration Hook** can observe completed model-plane activity, but it is not a **Model-Plane Guardrail**.
-- A **Bandit Model-Call Envelope** gives the **Aperture Model Plane** enough attribution to enforce model-plane scope, but it cannot satisfy **Bandit** workflow gates or replace repo-native role-run evidence.
-- A **Model Plane** is a **Model-Call Boundary Adapter**, not a **Harness**.
-- A **Harness Spike** evaluates **Harness Candidates** before any replacement architecture is adopted.
-- A **Harness Spike** may be specified by a **Harness Spike Plan** imported from Sourmash source material.
-- A **Pi/Aperture Harness Spike** is the first proof artifact for the **True-Agent Harness Pivot**; it is not a normal Stage 1-6 Process Adapter slice.
-- A **Pi/Aperture Agent Scope Plan** is required before the **Pi/Aperture Harness Spike** runs.
-- A **Pi/Aperture Agent Scope Plan** defines every Bandit-named agent, including **Repo PM Coordinator**, in the **Pi Canonical Agent Taxonomy** first, then records **Repo-Native Agent Scope** bindings and **Pi Agent Scope Projections** for validation.
-- A **Pi/Aperture Agent Scope Plan** must cover Bandit's authority-bearing agents: **Repo PM Coordinator**, **Work Item PM Orchestrator**, Test Writer, Implementation Writer or **Execution Workers**, Reviewer, **Landing Agent**, Closeout or Retrospective, and **Heartbeat Chore Agent**.
-- A **Pi/Aperture Harness Spike** must prove **Single-Session Slice Orchestration**, not merely a one-agent model-call path.
-- **Single-Session Slice Orchestration** is owned by the **Work Item PM Orchestrator** after formation approval; **Repo PM Coordinator** owns formation, blocker amendment, final repo-level closure, and next-work availability.
-- A **Minimum Whole-Slice Harness Proof** may use a tiny artifact-only non-product slice, but it must exercise the full Work Item PM orchestration path.
-- **Single-Session Slice Orchestration** is the core token-control invariant: the **Work Item PM Orchestrator** preserves slice context while scoped agents do their own work.
-- **Harness-Native Build Continuation** starts only after the **Pi/Aperture Agent Scope Plan** records lifecycle, context, permissions, guardrails, telemetry, A2A handoffs, and migration order for those agents, and the **Pi/Aperture Harness Spike** proves the orchestration path.
-- A **True-Agent Harness Pivot** stops normal Process Adapter bootstrap-slice execution until the next architecture path can support **True Agents** through a **Harness**.
+- An **Integration Hook** can observe completed model-plane activity, but it is not **CLI Authority**.
+- **Pi/Aperture Harness Spike**, **Pi/Aperture Agent Scope Plan**, **Pi Canonical Agent Taxonomy**, **Repo-Native Agent Scope**, **Pi Agent Scope Projection**, **Minimum Whole-Slice Harness Proof**, **Harness-Native Build Continuation**, and **True-Agent Harness Pivot** are superseded source material, not current planning authority.
+- **Single-Session Slice Orchestration** remains a useful orchestrator-prompt pattern, but Bandit should verify its evidence and gates through the CLI rather than own the live orchestrator session.
 - **Bandit** preserves Sourmash's **Trust Layer** contracts while replacing Sourmash's deprecated subprocess-first architecture.
-- **CLI Authority** keeps the **Trust Layer** enforceable while the **Workflow Cockpit** keeps slices, chores, reviews, lessons, follow-ups, and UAT readiness visible.
+- **CLI Authority** is Bandit's deterministic product boundary: queues, agents, coordination runtimes, auth, and live status may live in external systems if they satisfy Bandit's CLI-verifiable trust contracts.
+- Network, auth, live orchestration, work queues, and live status are outside **Deterministic Trust Verification** unless represented as local reproducible evidence in a **Work Item Snapshot**.
 - **Repo-Native Workflow State** is canonical; a **State Index** may be rebuilt from it for cockpit speed and filtering.
 - A **Coordination Primitive** is part of **Repo-Native Workflow State**.
 - An **SDLC Microstep State Machine** is recorded in a **Step Transition Ledger** so work-item progress is explicit instead of inferred from artifacts alone.
@@ -1190,6 +1233,9 @@ _Avoid_: planner, architect
 >
 > **Dev:** "What if Claude edits tests during Stage 3?"
 > **Domain expert:** "Revert the Stage 3 attempt and rerun Stage 3 clean; do not repair around a contaminated diff."
+>
+> **Dev:** "Does Bandit need to know which harness ran the work?"
+> **Domain expert:** "No. Bandit needs a **Work Item Snapshot**, local evidence, reviewer-finding routing, and enough policy context to produce a reproducible **Trust Verdict**."
 
 ## Flagged Ambiguities
 
@@ -1242,10 +1288,18 @@ _Avoid_: planner, architect
 - "bare `/bandit`" was used as a default dispatcher; resolved: Bandit requires an **Explicit Role Entrypoint** before loading role-specific context or doing work.
 - "brief exists" was used as if a Work Item were executable; resolved: a Work Item needs a **Formation Approved State** from the **Formation Gate** before Work Item PM execution starts.
 - "subagent prompt" was used as if it could grant authority; resolved: subagent authority comes from structured role contracts, **Role Input Packets**, **Role Run Manifests**, and validated **Role Run Attempts**.
-- "first-class agents" were discussed while Codex and subprocesses remained the runtime; resolved: Bandit needs a **True-Agent Harness Pivot** before continuing normal adapter-loop role orchestration slices.
+- "first-class agents" were discussed while Codex and subprocesses remained the runtime; resolved, then superseded: Bandit no longer needs a **True-Agent Harness Pivot** as its next product path, because its load-bearing boundary is the harness-agnostic **Trust Layer**.
 - "Aperture" could be mistaken for the harness; resolved: Aperture is the **Aperture Model Plane**, while Pi is the **Pi Harness Plane**.
 - "Pi config" was discussed as a projection of repo-native scope, then as adopting Pi's default agent names, then as excluding **Repo PM Coordinator** from Pi; resolved: harness-native work defines every Bandit-named agent in the **Pi Canonical Agent Taxonomy**, while **Repo-Native Agent Scope** binds that taxonomy to Bandit workflow authority and evidence.
 - "parent session" could mean Repo PM stayed alive through the whole slice; resolved: **Work Item PM Orchestrator** owns the durable parent session for Stage 2-6, while **Repo PM Coordinator** remains formation and final-closure authority.
+- "agents" and "harness" were discussed as Bandit's product center; resolved: Bandit's load-bearing job is the deterministic **Trust Layer**, while agents, coordination runtimes, auth, live status, and work queues may be owned by external harnesses or platforms that call the Bandit CLI.
+- "single-session orchestration" was discussed as something Bandit had to implement in a harness; resolved: it is an **Orchestrator Prompt** pattern that Bandit can verify after the fact through CLI-owned evidence and gates.
+- "trust layer" could still sound broad; resolved: Bandit's deterministic part is **Deterministic Trust Verification** over a local **Work Item Snapshot**, not network/auth/orchestration ownership.
+- "safe-to-land" could become the generic trust answer; resolved: generic **Trust Verdict** values are `trusted`, `needs_repair`, `blocked`, and `requires_operator`, while landing reports may derive landing-specific interpretations.
+- "verification" could imply advancing workflow state; resolved: **Deterministic Trust Verification** is read-only by default and only writes a **Reproducible Trust Report** when explicitly asked.
+- "`trusted`" could be context-free; resolved: every **Work Item Snapshot** declares a **Trust Goal** such as `stage_transition`, `landing`, `closeout`, or `evidence_refresh`.
+- "verify evidence" could imply running tests or reviewers; resolved: **Deterministic Trust Verification** verifies **Captured Evidence** only, while evidence capture can happen before verification.
+- "run alongside" could leave cutover ambiguous; resolved: `bandit trust verify` remains non-replacing during the **Trust Verifier Compatibility Period** until a per-goal **Trust Verifier Cutover Gate** is explicitly recorded.
 
 ## Imported Decision Context
 
