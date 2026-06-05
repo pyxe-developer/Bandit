@@ -24,17 +24,19 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 2 RED evidence pending after CLI-owned formation approval.
+Current stage: Stage 3 implementation pending after Test Writer-owned RED
+evidence.
 
-Latest Qwen retry: 2026-06-05T20:44:57Z; passed with zero findings after Local
-Qwen provider availability was restored.
+Latest Stage 2 RED run: 2026-06-05T21:33:02Z; `node --test
+test/trust-verify.test.mjs` failed 8/8 because `trust` is not registered.
 
-Next action: Create Stage 2 RED evidence for `BANDIT-059` through the Test
-Writer boundary.
+Next action: Dispatch Stage 3 implementation for `BANDIT-059` to Claude through
+the bootstrap Process Adapter path.
 
-No operator-owned input is required for the next RED evidence step. Do not start
-implementation, Trust Verifier cutover, a new work item, or Pi/Aperture
-agent-scope work before Stage 2 RED evidence is recorded.
+No operator-owned input is required for the next Stage 3 implementation step.
+Do not route Stage 3 to Codex, let the Stage 3 Writer edit tests or RED
+evidence, start Trust Verifier cutover, create a new work item, or start
+Pi/Aperture agent-scope work.
 
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is queued as a cleanup candidate to
 separate artifact-renderer JSON inputs and reviewer captures from work/gap specs
@@ -45,7 +47,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 2 RED evidence pending)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 implementation pending)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`

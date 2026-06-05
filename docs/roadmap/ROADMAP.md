@@ -9,8 +9,8 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Create Stage 2 RED evidence for `BANDIT-059` through the
-Test Writer boundary.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-059` to
+Claude through the bootstrap Process Adapter path.
 
 ## Next Work Item
 

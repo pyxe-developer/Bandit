@@ -205,3 +205,4 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-058","message":"Recorded Stage 6 retrospective closeout; Role Contracts And Run Manifests is closed; next action is Execution And Role Input Packets work-item formation under BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION"}
 {"type":"work_item_created","work_item":"BANDIT-059","message":"Created work item BANDIT-059 from docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json"}
 {"type":"stage1_formation_approved","work_item":"BANDIT-059","message":"Recorded CLI-owned formation_approved transition; next action is Stage 2 RED evidence through the Test Writer boundary"}
+{"type":"artifact_created","work_item":"BANDIT-059","message":"Created red_evidence artifact at docs/work/BANDIT-059/red-evidence.md"}
