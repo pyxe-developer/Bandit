@@ -156,6 +156,26 @@
       "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
+      "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
+      "title": "Artifact input JSON is mixed into docs/specs",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
+      "source_work_item": "BANDIT-021",
+      "source_artifacts": [
+        "docs/work/BANDIT-021/brief.md",
+        "docs/work/BANDIT-021/implementation-evidence.md",
+        "docs/work/BANDIT-021/retrospective.md",
+        "src/commands/artifact-create.ts",
+        "src/commands/artifact-create-renderers.ts",
+        "docs/specs/BANDIT-058-landing-verdict.json",
+        "docs/specs/BANDIT-058-retrospective.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "BANDIT-021 intentionally introduced JSON input specs for artifact rendering, but later workflow use overloaded docs/specs with work/gap specs, artifact-renderer inputs, and reviewer output captures. That makes the folder look like canonical evidence or planning authority when those JSON files are often structured command inputs for generated docs/work artifacts. The naming and layout should be split or explicitly modeled before the trust verifier/report contract depends on artifact input paths.",
+      "verification_target": null,
+      "next_action": "Promote to a bounded cleanup chore if artifact-input path clarity blocks Trust Verify Snapshot Foundation; otherwise schedule after the trust verifier boundary is recorded."
+    },
+    {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
       "title": "No heartbeat chore-agent exists yet",
       "status": "resolved",
@@ -700,7 +720,7 @@
       "linked_work_item": null,
       "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. On 2026-06-01 the operator rejected continuing normal Stage 1-6 Process Adapter bootstrap slices because the current Codex-plus-subprocess loop cannot produce True Agents without a Harness and has become token-incoherent. The selected pivot direction is Pi for the harness plane and Aperture by Tailscale for the model plane. The accepted proof shape is recorded in docs/spikes/pi-aperture-agent-scope-and-harness-spike.md: a repo-native Pi/Aperture Agent Scope and Harness Spike Plan that proves Work Item PM Single-Session Slice Orchestration, not a normal Bandit Stage 1-6 Process Adapter slice or one-agent smoke test. Remaining role-scoped orchestration work is source material until the True-Agent Harness Pivot is resolved.",
       "verification_target": "docs/work/BANDIT-058/retrospective.md",
-      "next_action": "Implement the first Pi/Aperture Harness Spike step: add repo-native agent scope schema/policy plus projection validation for Pi and Aperture before any live proof run or normal adapter-loop bootstrap slice resumes."
+      "next_action": "Hold as source material while the harness-agnostic trust verifier pivot is resolved; do not start Pi/Aperture agent-scope implementation."
     }
   ]
 }

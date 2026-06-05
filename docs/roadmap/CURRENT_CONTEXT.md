@@ -25,17 +25,17 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Continue the design clarification for the smallest
-CLI-verifiable trust contract an external orchestrator prompt can use from any
-harness: validate a work item snapshot, hash it, verify repo evidence, enforce
-reviewer-finding routing, produce a verdict, and emit a reproducible report. Do
-not implement Pi/Aperture agent-scope schema/projection work. The emerging next
-implementation target is a read-only `bandit trust verify <snapshot.json>`
+**Current next action:** Continue defining the smallest CLI-verifiable trust
+contract for agentic software delivery and record the first implementable
+read-only `bandit trust verify <snapshot.json>` work item.
+
+Do not implement Pi/Aperture agent-scope schema/projection work. The emerging
+next implementation target is a read-only `bandit trust verify <snapshot.json>`
 slice with explicit snapshot schema, snapshot hash, captured-evidence
-validation, reviewer-finding routing, Trust Verdict derivation, and deterministic
-JSON report output. This first slice is compatibility-mode only: it must not
-replace `land-check`, review evidence validation, closeout validation,
-coordination checks, or any other existing gate path.
+validation, reviewer-finding routing, Trust Verdict derivation, and
+deterministic JSON report output. This first slice is compatibility-mode only:
+it must not replace `land-check`, review evidence validation, closeout
+validation, coordination checks, or any other existing gate path.
 
 The current stage is Stage 0 architecture clarification / interstitial queue
 selection: no work item is active, `BANDIT-058` has landing action and Stage 6

@@ -10,10 +10,8 @@ The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
 **Current next step:** Continue defining the smallest CLI-verifiable trust
-contract for agentic software delivery: Work Item Snapshot validation, snapshot
-hashing, repo evidence verification, reviewer-finding routing, Trust Verdicts,
-and reproducible reports. The first implementable target is a read-only
-`bandit trust verify <snapshot.json>` slice.
+contract for agentic software delivery and record the first implementable
+read-only `bandit trust verify <snapshot.json>` work item.
 
 ## Next Work Item
 
@@ -38,6 +36,10 @@ cockpit feature work unless the operator explicitly changes priority.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode evidence
   exists, decide per Trust Goal when `bandit trust verify` becomes the canonical
   verifier or wrapper for an older gate path.
+- `[Gap]` `TBD` - Artifact Input Directory Split; queued candidate to separate
+  artifact-renderer JSON inputs and reviewer captures from work/gap specs in
+  `docs/specs/`, only before Trust Verify Snapshot Foundation if path clarity
+  blocks the verifier/report contract.
 
 ### Deferred PRD Slices
 
