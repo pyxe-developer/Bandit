@@ -9,14 +9,16 @@ work item from `docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json`
 and linked `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` as the active
 bootstrap chore. Stage 1 brief evidence is recorded at
 `docs/work/BANDIT-059/brief.md`; `docs/work/BANDIT-059/coordination-log.jsonl`
-records the `brief_created` transition.
+records the `brief_created` and `formation_approved` transitions.
 
 Repo PM formation review was refreshed on 2026-06-05 after Local Qwen provider
 availability was restored. CodeRabbit formation review passed with zero findings
 at `docs/work/BANDIT-059/coderabbit-formation-review.md`; Local Qwen formation
 review passed with zero findings at
 `docs/work/BANDIT-059/qwen-formation-review.md`; and the aggregate formation
-review at `docs/work/BANDIT-059/formation-review.md` is `pass`.
+review at `docs/work/BANDIT-059/formation-review.md` is `pass`. The CLI-owned
+`formation_approved` transition is recorded in
+`docs/work/BANDIT-059/coordination-log.jsonl`.
 
 `BANDIT-058` is landed and closed out. It delivered the Role Contracts And Run
 Manifests slice under `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. That
@@ -33,25 +35,24 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record the CLI-owned `formation_approved` coordination
-transition for `BANDIT-059` before Stage 2 RED evidence.
+**Current next action:** Create Stage 2 RED evidence for `BANDIT-059` through
+the Test Writer boundary.
 
-Do not create RED evidence, implementation branches, Work Item PM active
-execution context, Pi/Aperture agent-scope schema/projection work, Trust
-Verifier cutover work, or unrelated cockpit product work until `BANDIT-059`
-records the `formation_approved` transition.
+Do not create implementation branches, Pi/Aperture agent-scope schema/projection
+work, Trust Verifier cutover work, or unrelated cockpit product work before
+Stage 2 RED evidence is recorded for `BANDIT-059`.
 
-The current stage is Stage 1 formation review passed / coordination transition
-pending. The formation review verified that the brief is narrow, verifiable,
-read-only, compatibility-mode only, and clean-code/rubric evaluable before any
-Stage 2 RED evidence is written.
+The current stage is Stage 2 RED evidence pending. Stage 1 formation review
+verified that the brief is narrow, verifiable, read-only, compatibility-mode
+only, and clean-code/rubric evaluable; the CLI-owned formation approval
+transition is now recorded.
 
 ## Active Work
 
 **Active work item:** `BANDIT-059` - Trust Verify Snapshot Foundation.
 
 `BANDIT-059` is the active work item. Its Stage 1 brief is recorded at
-`docs/work/BANDIT-059/brief.md`; its initial coordination log is recorded at
+`docs/work/BANDIT-059/brief.md`; its coordination log is recorded at
 `docs/work/BANDIT-059/coordination-log.jsonl`.
 
 `BANDIT-058` is closed. Its closeout evidence is recorded at
@@ -66,10 +67,11 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record the `formation_approved` coordination transition for `BANDIT-059`
-   before Stage 2 RED evidence.
-2. Route Stage 2 RED evidence through the Test Writer boundary after formation
-   approval is recorded.
+1. Create Stage 2 RED evidence for `BANDIT-059` through the Test Writer
+   boundary.
+2. Preserve model-family separation: if Codex authors or materially edits Stage
+   2 RED tests, Stage 3 implementation must be routed to Claude with zero test
+   edit authority.
 3. Keep the first implementation slice as `bandit trust verify <snapshot.json>`
    with read-only verification, optional explicit report writing, and no
    reviewer/test execution or workflow-state mutation.
