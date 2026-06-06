@@ -14,18 +14,18 @@ item from `docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and
 linked `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap
 chore.
 
-Current stage: Stage 1 formation review passed; CLI-owned formation approval
-transition pending.
+Current stage: Stage 2 RED evidence pending. CLI-owned formation approval is
+recorded, and Work Item PM readiness passes.
 
-Next action: Run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-060`
-to record `formation_approved` before Stage 2 RED evidence.
+Next action: Create Stage 2 RED evidence for `BANDIT-060` through the Test
+Writer boundary.
 
 No operator-owned input is required for the recorded next action. Local Qwen
 and CodeRabbit formation reviews passed with zero findings, and aggregate
-formation review passes. Do not start RED evidence, implementation, Trust
-Verifier cutover, role input packet work, execution packet work, Pi/Aperture
-agent-scope work, or unrelated cockpit product work until `BANDIT-060` records
-formation approval.
+formation review passes. `formation_approved` is recorded. Do not start
+implementation, Trust Verifier cutover, role input packet work, execution
+packet work, Pi/Aperture agent-scope work, or unrelated cockpit product work
+until `BANDIT-060` records Stage 2 RED evidence.
 
 `BANDIT-059` is landed and closed out. It resolved
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` with the compatibility-mode
@@ -35,7 +35,7 @@ formation approval.
 
 Last 5 items only:
 
-- `BANDIT-060` - Artifact Input Directory Split (formation approval pending)
+- `BANDIT-060` - Artifact Input Directory Split (Stage 2 RED evidence pending)
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active bootstrap cleanup chore
 - `BANDIT-059` - Trust Verify Snapshot Foundation (closed)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - resolved by `BANDIT-059`

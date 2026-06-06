@@ -6,7 +6,8 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-060` to record `formation_approved` before Stage 2 RED evidence.
+**Current next step:** Create Stage 2 RED evidence for `BANDIT-060` through the
+Test Writer boundary.
 
 ## Next Work Item
 
