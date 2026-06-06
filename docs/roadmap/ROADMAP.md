@@ -6,8 +6,8 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Create Stage 2 RED evidence for `BANDIT-060` through the
-Test Writer boundary.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-060` to
+Claude through the bootstrap Process Adapter path.
 
 ## Next Work Item
 

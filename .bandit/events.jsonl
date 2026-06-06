@@ -218,3 +218,4 @@
 {"type":"artifact_created","work_item":"BANDIT-059","message":"Created retrospective artifact at docs/work/BANDIT-059/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-059","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION; next action is BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT work-item creation"}
 {"type":"work_item_created","work_item":"BANDIT-060","message":"Created work item BANDIT-060 from docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json"}
+{"type":"artifact_created","work_item":"BANDIT-060","message":"Created red_evidence artifact at docs/work/BANDIT-060/red-evidence.md"}

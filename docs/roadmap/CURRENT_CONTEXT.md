@@ -16,7 +16,10 @@ formation review completed on retry with zero findings at
 `docs/work/BANDIT-060/coderabbit-formation-review.md`; aggregate formation
 review passes at `docs/work/BANDIT-060/formation-review.md`; and the CLI-owned
 `formation_approved` transition is recorded in
-`docs/work/BANDIT-060/coordination-log.jsonl`.
+`docs/work/BANDIT-060/coordination-log.jsonl`. Stage 2 RED evidence is recorded
+at `docs/work/BANDIT-060/red-evidence.md` and
+`docs/specs/BANDIT-060-red-evidence.json`; the coordination log records the
+`red_recorded` transition.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -36,25 +39,25 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Create Stage 2 RED evidence for `BANDIT-060` through
-the Test Writer boundary.
+**Current next action:** Dispatch Stage 3 implementation for `BANDIT-060` to
+Claude through the bootstrap Process Adapter path.
 
-Do not create implementation branches, Trust Verifier cutover work,
-Pi/Aperture agent-scope schema/projection work, role input packet work,
-execution packet work, or unrelated cockpit product work until `BANDIT-060`
-records Stage 2 RED evidence. If Codex authors or materially edits the Stage 2
-RED tests, Stage 3 implementation must be dispatched to Claude through the
-bootstrap Process Adapter path, and the Stage 3 Writer must not edit tests,
-test helpers, fixtures, RED evidence, acceptance mappings, or canonical
-historical work evidence except as explicitly scoped in the dispatch packet.
+Do not let Codex implement Stage 3, and do not start Trust Verifier cutover
+work, Pi/Aperture agent-scope schema/projection work, role input packet work,
+execution packet work, or unrelated cockpit product work. Codex authored the
+Stage 2 RED tests, so Stage 3 implementation must be dispatched to Claude
+through the bootstrap Process Adapter path, and the Stage 3 Writer must not
+edit tests, test helpers, fixtures, RED evidence, acceptance mappings,
+canonical historical work evidence, or any Test Writer-owned surface except as
+explicitly scoped in the dispatch packet.
 
-The current stage is Stage 2 RED evidence pending. The completed CodeRabbit
-retry verified that the brief is narrow, verifiable, clean-code/rubric
-evaluable, compatible with the Trust Verifier Compatibility Period, and bounded
-to path/type semantics for artifact-renderer inputs, reviewer captures,
-work/gap specs, and trust snapshot fixtures. `node ./bin/bandit.mjs
-work-item-pm start BANDIT-060` passes after formation approval and confirms the
-work item is ready for Test Writer-owned Stage 2 work.
+The current stage is Stage 3 implementation dispatch pending. Stage 2 RED tests
+define `bandit artifact-inputs validate --json`, deterministic taxonomy
+classification for work/gap specs, artifact-renderer inputs, reviewer captures,
+and trust snapshot fixtures, fail-closed path/class diagnostics, legacy
+`docs/specs/` readability, and `artifact create` enforcement for future
+artifact-renderer inputs. `node --test test/artifact-inputs.test.mjs` is
+intentionally RED with five failing tests.
 
 ## Active Work
 
@@ -64,8 +67,10 @@ work item is ready for Test Writer-owned Stage 2 work.
 `docs/work/BANDIT-060/brief.md`; its coordination log is recorded at
 `docs/work/BANDIT-060/coordination-log.jsonl`. Local Qwen and CodeRabbit
 formation reviews passed with zero findings, aggregate formation review passes,
-and `formation_approved` is recorded. The earlier blocked coordination
-transition remains historical evidence; the next stage is Stage 2 RED evidence.
+`formation_approved` is recorded, and Stage 2 RED evidence is recorded at
+`docs/work/BANDIT-060/red-evidence.md`. The earlier blocked coordination
+transition remains historical evidence; the next stage is Stage 3
+implementation through the Claude bootstrap Process Adapter path.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -77,17 +82,19 @@ orchestrator-prompt pattern that external harnesses may run; Bandit's product
 boundary is the CLI-verifiable trust contract that determines whether the
 resulting work can proceed or land.
 
-Do not start implementation, Trust Verifier cutover, Pi/Aperture
-agent-scope work, role input packet work, execution packet work, or unrelated
-cockpit product work until `BANDIT-060` records Stage 2 RED evidence.
+Do not let Codex implement Stage 3, and do not start Trust Verifier cutover,
+Pi/Aperture agent-scope work, role input packet work, execution packet work, or
+unrelated cockpit product work while `BANDIT-060` is awaiting Claude Stage 3
+implementation.
 
 ## Priority
 
-1. Create Stage 2 RED evidence for `BANDIT-060` through the Test Writer
-   boundary.
-2. If Codex authors or materially edits the Stage 2 RED tests, route Stage 3
-   implementation to Claude through the bootstrap Process Adapter path and
-   preserve the Permanent Test Ownership Boundary.
+1. Dispatch Stage 3 implementation for `BANDIT-060` to Claude through the
+   bootstrap Process Adapter path.
+2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
+   authority to edit tests, test helpers, fixtures, RED evidence, acceptance
+   mappings, or canonical historical evidence outside the scoped dispatch
+   packet.
 3. Keep the chore bounded to explicit artifact-input path/type semantics:
    work/gap specs, artifact-renderer command inputs, reviewer/provider captures,
    and trust snapshot fixtures.
@@ -102,12 +109,12 @@ cockpit product work until `BANDIT-060` records Stage 2 RED evidence.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded Stage 2 RED evidence next
+No operator-owned input is required for the recorded Stage 3 dispatch next
 action. Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input ambiguity, reviewer capture
-ambiguity, work/gap spec boundary, and Codex PM/Repo PM authority to route
-routine cleanup mechanics.
+ambiguity, work/gap spec boundary, Test Writer ownership, and the required
+Claude bootstrap Process Adapter route for Stage 3.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

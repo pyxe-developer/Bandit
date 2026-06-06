@@ -1,0 +1,79 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-060",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Focused Test Writer-owned tests define the Artifact Input Directory Split behavior before production implementation. The suite fails because Bandit has no `artifact-inputs validate --json` command for deterministic taxonomy validation, and `bandit artifact create` still accepts future artifact-renderer JSON inputs under `docs/specs/` instead of failing closed and requiring `docs/artifact-inputs/`.",
+  "test_command": "node --test test/artifact-inputs.test.mjs",
+  "observed_output": [
+    "tests 5",
+    "pass 0",
+    "fail 5",
+    "artifact-inputs validation accepts explicit taxonomy classes failed because `bandit artifact-inputs validate --json` returns `Unknown command: artifact-inputs` instead of a pass payload.",
+    "artifact-inputs validation refuses ambiguous future docs/specs artifact renderer inputs failed before expected ambiguous-path diagnostics because `artifact-inputs` is not registered.",
+    "artifact create refuses future artifact-renderer inputs under docs/specs and accepts docs/artifact-inputs failed because `bandit artifact create docs/specs/BANDIT-001-red-evidence.json` exits 0 instead of refusing the ambiguous future artifact-renderer input path.",
+    "artifact-inputs validation keeps historical docs/specs inputs readable without making them future defaults failed because `artifact-inputs` is not registered.",
+    "artifact-inputs validation fails closed for unsafe paths and class/name mismatches failed before expected unsafe-path and class-mismatch diagnostics because `artifact-inputs` is not registered."
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "Focused RED evidence proves Bandit currently cannot distinguish work/gap specs, artifact-renderer JSON inputs, reviewer captures, and trust snapshot fixtures under `docs/specs/` with deterministic validation.",
+      "evidence": "`test/artifact-inputs.test.mjs` defines the public `bandit artifact-inputs validate --json` taxonomy validation surface and currently fails 4/4 validator tests because the command is missing."
+    },
+    {
+      "criterion": "A repo-native taxonomy or policy artifact names the supported JSON input classes, canonical or preferred directory for each class, legacy compatibility rules, owner/authority role, allowed writer stage, expected consumers, and refusal behavior for ambiguous future paths.",
+      "evidence": "`artifact-inputs validation accepts explicit taxonomy classes` writes `.bandit/policy/artifact-inputs.json` with `work_or_gap_spec`, `artifact_renderer_input`, `reviewer_capture`, and `trust_snapshot_fixture` classes plus preferred directories, owners, allowed stages, consumers, and refusal behavior; current Bandit cannot validate or report the policy."
+    },
+    {
+      "criterion": "`bandit validate` or an equivalently narrow CLI validation path fails closed for new or future JSON inputs that do not match a supported class, have unsafe paths, use unsupported directories, or claim a class inconsistent with the file name or consumer.",
+      "evidence": "`artifact-inputs validation refuses ambiguous future docs/specs artifact renderer inputs` and `artifact-inputs validation fails closed for unsafe paths and class/name mismatches` expect fail-closed diagnostics for future `docs/specs/*-red-evidence.json`, `../outside.json`, and class/directory mismatches; current Bandit fails earlier because the validation path is absent."
+    },
+    {
+      "criterion": "`bandit artifact create <spec-path>` accepts the new artifact-renderer input location and preserves safe path checks, no-overwrite behavior, lifecycle evidence behavior, and rollback behavior for supported artifact families.",
+      "evidence": "`artifact create refuses future artifact-renderer inputs under docs/specs and accepts docs/artifact-inputs` first requires future `docs/specs/BANDIT-001-red-evidence.json` to fail closed, then verifies `docs/artifact-inputs/BANDIT-001-red-evidence.json` can render the RED evidence artifact; current Bandit accepts the ambiguous `docs/specs` input and therefore fails before proving the dedicated path."
+    },
+    {
+      "criterion": "Historical `docs/specs/` files remain readable for existing work-item evidence, reviewer evidence, role-run manifests, model-family separation checks, and trust-verifier snapshot tests unless explicit compatibility aliases are implemented and verified.",
+      "evidence": "`artifact-inputs validation keeps historical docs/specs inputs readable without making them future defaults` marks historical `docs/specs/BANDIT-059-red-evidence.json`, `docs/specs/BANDIT-059-coderabbit-review-output.json`, and `docs/specs/snapshots/stage-transition.json` as legacy readable while future preferred paths use `docs/artifact-inputs/`, `docs/reviewer-captures/`, and `docs/trust-snapshot-fixtures/`; current Bandit cannot validate that distinction."
+    },
+    {
+      "criterion": "Reviewer/provider capture JSON has an explicit future path or modeled class separate from artifact-renderer command inputs and work/gap specs.",
+      "evidence": "The taxonomy RED tests model `reviewer_capture` with preferred directory `docs/reviewer-captures/`, reviewer-owned Stage 4 authority, and `bandit coderabbit-review pre-pr` or `bandit qwen-review` consumers; current Bandit has no validator to enforce this separation."
+    },
+    {
+      "criterion": "Trust snapshot fixtures have an explicit future path or modeled class that does not imply they are work-item specs or generated artifact inputs.",
+      "evidence": "The taxonomy RED tests model `trust_snapshot_fixture` with preferred directory `docs/trust-snapshot-fixtures/`, Codex PM/Test Writer Stage 2 ownership, and `bandit trust verify` as the consumer while preserving legacy readability for `docs/specs/snapshots/*.json`; current Bandit has no validator to enforce this separation."
+    },
+    {
+      "criterion": "Role contracts, role-run manifests, and model-family separation policies remain consistent with the path taxonomy and continue to preserve Test Writer and Stage 3 Writer boundaries.",
+      "evidence": "This RED evidence, `test/artifact-inputs.test.mjs`, and the acceptance mapping are Codex PM/Test Writer-authored. Stage 3 must run through Claude via the bootstrap Process Adapter path, and the Stage 3 Writer has zero authority to edit tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, canonical historical evidence, or policy beyond the scoped artifact-input taxonomy implementation."
+    },
+    {
+      "criterion": "No generated Markdown evidence, landing evidence, retrospective evidence, coordination history, roadmap/current-context state, bootstrap-gap ledger state, or trust-verifier report becomes less authoritative because of the JSON input taxonomy.",
+      "evidence": "The RED tests keep generated Markdown evidence under `docs/work/<ID>/`, append-only events, and coordination history outside the taxonomy policy. The taxonomy only classifies JSON command inputs and captured fixtures; it does not grant JSON inputs canonical workflow authority."
+    },
+    {
+      "criterion": "The implementation does not start Trust Verifier cutover or parity replacement; any old-gate replacement remains blocked on a later per-trust-goal cutover decision with reproducible parity evidence.",
+      "evidence": "This Stage 2 step adds only focused tests and RED evidence for artifact-input path/type semantics. It does not implement Trust Verifier cutover, parity replacement, live evidence capture helpers, reviewer execution, model calls, harness queues, auth/provider routing, live status, role input packets, execution packets, or unrelated cockpit work."
+    },
+    {
+      "criterion": "The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, or acceptance mappings for this work item.",
+      "evidence": "This RED evidence, `test/artifact-inputs.test.mjs`, and acceptance mappings are Codex PM/Test Writer-authored. Stage 3 implementation must be routed to Claude through the bootstrap Process Adapter path with no Stage 3 authority over Test Writer-owned surfaces."
+    },
+    {
+      "criterion": "No Trust Verifier cutover, old gate replacement, live evidence capture helper, reviewer execution, model call, harness queue, auth or provider routing, live status, agent lifecycle, role input packet, execution packet, Pi/Aperture agent-scope schema/projection work, state-index persistence, local server/API mode, scheduler, worktree lifecycle, claim lease, work-surface reservation, PR/CI workflow, automatic merge/push/deploy, product UAT approval, dependency or lockfile change, installed global skill edit, external service integration, or unrelated Phase 8 cockpit feature work is introduced.",
+      "evidence": "This Stage 2 step adds only `test/artifact-inputs.test.mjs`, `docs/specs/BANDIT-060-red-evidence.json`, rendered RED evidence, coordination/routing evidence, and status/context alignment. It adds no production implementation, dependency, lockfile, external service, installed skill, scheduler, worktree, claim, PR/CI, deploy, product UAT, Trust Verifier cutover, or unrelated cockpit work."
+    }
+  ],
+  "test_writer_identity": "codex_pm as Test Writer",
+  "red_author_model_family": "codex",
+  "codex_materially_edited_tests": true,
+  "acceptance_mapping_owner": "codex_pm",
+  "stage3_test_edit_authority": "none",
+  "stage3_writer_routing": {
+    "model_family": "claude",
+    "adapter": "bootstrap_process_adapter",
+    "reason": "Codex-authored Stage 2 RED evidence requires bootstrap model-family separation."
+  },
+  "next_action": "Dispatch Stage 3 implementation for `BANDIT-060` to Claude through the bootstrap Process Adapter path: implement the narrow Artifact Input Directory Split behavior needed to make `test/artifact-inputs.test.mjs` pass. Add `bandit artifact-inputs validate --json`, `.bandit/policy/artifact-inputs.json` validation and `bandit validate` integration only as needed, deterministic classification for `work_or_gap_spec`, `artifact_renderer_input`, `reviewer_capture`, and `trust_snapshot_fixture`, fail-closed diagnostics for ambiguous future `docs/specs/` artifact-renderer inputs, unsafe paths, unsupported directories, and class/name mismatches, legacy-readable handling for historical `docs/specs/*-red-evidence.json`, `docs/specs/*-implementation-evidence.json`, `docs/specs/*-landing-verdict.json`, `docs/specs/*-retrospective.json`, `docs/specs/*coderabbit-review-output*.json`, and `docs/specs/snapshots/*.json`, and `artifact create` path enforcement that requires future artifact-renderer inputs to use `docs/artifact-inputs/` while preserving safe path checks, no-overwrite behavior, lifecycle event append, and rollback behavior. Keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, canonical historical evidence, Trust Verifier cutover, old gate replacement, live evidence capture, reviewer execution, model calls, harness queues, auth/provider routing, live status, agent lifecycle, role input packets, execution packets, Pi/Aperture agent-scope work, state-index persistence, server/API mode, scheduler/worktree/claim/work-surface lifecycle, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, dependency or lockfile changes, installed global skill edits, external service integration, and unrelated Phase 8 cockpit feature work."
+}
