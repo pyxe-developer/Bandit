@@ -13,13 +13,16 @@ Layer Pivot.
 Surface chore for
 `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE`.
 
-Current stage: Stage 2 RED evidence pending. CLI-owned formation approval is
-recorded, and Work Item PM readiness passes.
+Current stage: Stage 3 implementation dispatch pending. Stage 2 RED evidence
+is recorded, and coordination history records `red_recorded`.
 
-Next action: Create Stage 2 RED evidence for `BANDIT-061` through the Test
-Writer boundary.
+Next action: Dispatch Stage 3 implementation for `BANDIT-061` to Claude
+through the bootstrap Process Adapter path.
 
-No operator-owned input is required for that Stage 2 RED evidence action.
+No operator-owned input is required for that Stage 3 dispatch action. Codex
+authored the Stage 2 RED tests, so Stage 3 must go to Claude and must not edit
+tests, test helpers, fixtures, RED evidence, acceptance mappings, formation
+evidence, review evidence, landing evidence, or retrospective evidence.
 
 `BANDIT-060` is landed and closed out. It resolved
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` with a repo-native artifact-input
@@ -35,7 +38,7 @@ lost replacement metadata during work-item creation.
 
 Last 5 items only:
 
-- `BANDIT-061` - Role Contract Artifact Input Write Surface (Stage 2 RED evidence pending)
+- `BANDIT-061` - Role Contract Artifact Input Write Surface (Stage 3 dispatch pending)
 - `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - active via `BANDIT-061`
 - `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued gap
 - `BANDIT-060` - Artifact Input Directory Split (closed)

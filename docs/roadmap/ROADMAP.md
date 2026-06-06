@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 2
-  RED evidence pending.
+- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 3
+  implementation dispatch pending.
 
-**Current next step:** Create Stage 2 RED evidence for `BANDIT-061` through the
-Test Writer boundary.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-061` to
+Claude through the bootstrap Process Adapter path.
 
 ## Next Work Item
 

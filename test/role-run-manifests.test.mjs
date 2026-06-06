@@ -138,6 +138,78 @@ test("role-runs validation rejects manifest authority over canonical state", asy
   );
 });
 
+test("role-runs validation rejects future manifests without observed changed-file evidence", async () => {
+  const repo = await createRoleRunRepo();
+  const manifest = completeRoleRunManifest({
+    contractVersion: 2,
+    workItemId: "BANDIT-061"
+  });
+  await writeRoleRunManifest(repo, manifest, "BANDIT-061");
+
+  const result = await runBandit(repo, [
+    "role-runs",
+    "validate",
+    "BANDIT-061",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /role-run manifest stage3-implementation requires observed_changed_files for contract_version 2/
+  );
+});
+
+test("role-runs validation rejects observed changed files missing from allowed targets", async () => {
+  const repo = await createRoleRunRepo();
+  const manifest = completeRoleRunManifest({
+    contractVersion: 2,
+    workItemId: "BANDIT-061"
+  });
+  manifest.observed_changed_files = [
+    "src/state/role-run-manifests.ts",
+    "src/state/unlisted-role-run-helper.ts"
+  ];
+  await writeRoleRunManifest(repo, manifest, "BANDIT-061");
+
+  const result = await runBandit(repo, [
+    "role-runs",
+    "validate",
+    "BANDIT-061",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /role-run manifest stage3-implementation observed changed file src\/state\/unlisted-role-run-helper\.ts is not listed in allowed_target_files/
+  );
+});
+
+test("role-runs validation rejects observed changed files outside contract surfaces", async () => {
+  const repo = await createRoleRunRepo();
+  const manifest = completeRoleRunManifest({
+    contractVersion: 2,
+    workItemId: "BANDIT-061"
+  });
+  manifest.allowed_target_files.push("docs/work/BANDIT-061/brief.md");
+  manifest.observed_changed_files = ["docs/work/BANDIT-061/brief.md"];
+  await writeRoleRunManifest(repo, manifest, "BANDIT-061");
+
+  const result = await runBandit(repo, [
+    "role-runs",
+    "validate",
+    "BANDIT-061",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /role-run manifest stage3-implementation observed changed file docs\/work\/BANDIT-061\/brief\.md is outside the implementation_writer contract write surfaces or matches a forbidden pattern/
+  );
+});
+
 async function createRoleRunRepo() {
   const repo = await createTempRepo();
   const init = await runBandit(repo, ["init"]);
@@ -154,6 +226,17 @@ async function createRoleRunRepo() {
     "docs/work/BANDIT-058/stage3-input-packet.md",
     "# Stage 3 Input Packet\n"
   );
+  await writeFileAt(repo, "docs/work/BANDIT-061/brief.md", "# BANDIT-061\n");
+  await writeFileAt(
+    repo,
+    "docs/work/BANDIT-061/red-evidence.md",
+    "# RED Evidence\n"
+  );
+  await writeFileAt(
+    repo,
+    "docs/work/BANDIT-061/stage3-input-packet.md",
+    "# Stage 3 Input Packet\n"
+  );
   return repo;
 }
 
@@ -161,15 +244,24 @@ async function writeRoleContractsPolicy(repo, policy = completeRoleContractsPoli
   await writeJson(repo, ROLE_CONTRACTS_POLICY_PATH, policy);
 }
 
-async function writeRoleRunManifest(repo, manifest = completeRoleRunManifest()) {
-  await writeJson(repo, ROLE_RUN_MANIFEST_PATH, manifest);
+async function writeRoleRunManifest(
+  repo,
+  manifest = completeRoleRunManifest(),
+  workItemId = manifest.work_item_id ?? "BANDIT-058"
+) {
+  await writeJson(
+    repo,
+    `docs/role-runs/${workItemId}/stage3-implementation.json`,
+    manifest
+  );
 }
 
-function completeRoleRunManifest() {
+function completeRoleRunManifest(options = {}) {
+  const workItemId = options.workItemId ?? "BANDIT-058";
   return {
-    contract_version: 1,
+    contract_version: options.contractVersion ?? 1,
     manifest_id: "stage3-implementation",
-    work_item_id: "BANDIT-058",
+    work_item_id: workItemId,
     stage: "stage3_implementation",
     role_contract_ref: {
       role_id: "implementation_writer",
@@ -188,16 +280,16 @@ function completeRoleRunManifest() {
       ".bandit/policy/role-contracts.json",
       "docs/templates/role-contract.md",
       "docs/templates/role-run-manifest.md",
-      "docs/work/BANDIT-058/implementation-evidence.md",
-      "docs/specs/BANDIT-058-implementation-evidence.json"
+      `docs/work/${workItemId}/implementation-evidence.md`,
+      `docs/specs/${workItemId}-implementation-evidence.json`
     ],
     forbidden_file_patterns: [
       "test/**",
-      "docs/work/BANDIT-058/red-evidence.md",
-      "docs/specs/BANDIT-058-red-evidence.json"
+      `docs/work/${workItemId}/red-evidence.md`,
+      `docs/specs/${workItemId}-red-evidence.json`
     ],
-    required_input_packet_ref: "docs/work/BANDIT-058/stage3-input-packet.md",
-    required_summary_path: "docs/work/BANDIT-058/implementation-evidence.md",
+    required_input_packet_ref: `docs/work/${workItemId}/stage3-input-packet.md`,
+    required_summary_path: `docs/work/${workItemId}/implementation-evidence.md`,
     validation_commands: [
       "node --test test/role-contracts.test.mjs",
       "node --test test/role-run-manifests.test.mjs",
@@ -205,8 +297,8 @@ function completeRoleRunManifest() {
       "npm run bandit -- validate"
     ],
     source_artifacts: [
-      "docs/work/BANDIT-058/brief.md",
-      "docs/work/BANDIT-058/red-evidence.md"
+      `docs/work/${workItemId}/brief.md`,
+      `docs/work/${workItemId}/red-evidence.md`
     ],
     authority_boundary: {
       append_only_evidence: true,

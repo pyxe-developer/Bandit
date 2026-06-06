@@ -99,6 +99,29 @@ test("role-contracts validation rejects role authority over canonical workflow s
   );
 });
 
+test("role-contracts validation rejects implementation writer missing artifact-input support surfaces", async () => {
+  const repo = await createInitializedRepo();
+  await writeFileAt(
+    repo,
+    ".bandit/policy/artifact-inputs.json",
+    `${JSON.stringify(artifactInputPolicy(), null, 2)}\n`
+  );
+  const policy = completeRoleContractsPolicy();
+  await writeRoleContractsPolicy(repo, policy);
+
+  const result = await runBandit(repo, [
+    "role-contracts",
+    "validate",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /implementation_writer role contract must include artifact-input policy support surfaces: \.bandit\/policy\/artifact-inputs\.json, docs\/artifact-inputs\/\*\*, docs\/reviewer-captures\/\.gitkeep, docs\/trust-snapshot-fixtures\/\.gitkeep/
+  );
+});
+
 async function createInitializedRepo() {
   const repo = await createTempRepo();
   const init = await runBandit(repo, ["init"]);
@@ -178,6 +201,36 @@ function completeRoleContractsPolicy() {
         "docs/roadmap/**",
         "STATUS.md"
       ])
+    ]
+  };
+}
+
+function artifactInputPolicy() {
+  return {
+    contract_version: 1,
+    policy_id: "artifact-input-directory-taxonomy",
+    supported_classes: [
+      {
+        class_id: "artifact_renderer_input",
+        preferred_directory: "docs/artifact-inputs",
+        path_patterns: ["docs/artifact-inputs/*.json"],
+        owner_authority_role: "test_writer",
+        allowed_writer_stages: ["stage2_red_evidence", "stage3_implementation"]
+      },
+      {
+        class_id: "reviewer_capture",
+        preferred_directory: "docs/reviewer-captures",
+        path_patterns: ["docs/reviewer-captures/*.json"],
+        owner_authority_role: "reviewer",
+        allowed_writer_stages: ["stage4_review"]
+      },
+      {
+        class_id: "trust_snapshot_fixture",
+        preferred_directory: "docs/trust-snapshot-fixtures",
+        path_patterns: ["docs/trust-snapshot-fixtures/*.json"],
+        owner_authority_role: "codex_pm",
+        allowed_writer_stages: ["stage2_red_evidence"]
+      }
     ]
   };
 }

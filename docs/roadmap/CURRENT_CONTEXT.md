@@ -24,7 +24,10 @@ completed with zero findings after the accepted placeholder-command repair at
 `docs/work/BANDIT-061/coderabbit-formation-review.md`; aggregate formation
 review passes at `docs/work/BANDIT-061/formation-review.md`; and the CLI-owned
 `formation_approved` transition is recorded in
-`docs/work/BANDIT-061/coordination-log.jsonl`.
+`docs/work/BANDIT-061/coordination-log.jsonl`. Stage 2 RED evidence is recorded
+at `docs/work/BANDIT-061/red-evidence.md` and
+`docs/artifact-inputs/BANDIT-061-red-evidence.json`; the coordination log
+records the `red_recorded` transition.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
 `BANDIT-061`. It records that the current work-item creation path can drop
@@ -38,24 +41,24 @@ resolved.
 
 **Active work item:** BANDIT-061
 
-The current stage is Stage 2 RED evidence pending.
+The current stage is Stage 3 implementation dispatch pending.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Create Stage 2 RED evidence for `BANDIT-061` through
-the Test Writer boundary.
+**Current next action:** Dispatch Stage 3 implementation for `BANDIT-061` to
+Claude through the bootstrap Process Adapter path.
 
-Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
-schema/projection work, create role input or execution packet work, dispatch
-implementation, or start unrelated cockpit product work while `BANDIT-061` is
-waiting on Stage 2 RED evidence. If Codex authors or materially edits the
-Stage 2 RED tests, Stage 3 implementation must be dispatched to Claude through
-the bootstrap Process Adapter path, and the Stage 3 Writer must not edit tests,
-test helpers, fixtures, RED evidence, acceptance mappings, formation evidence,
-review evidence, landing evidence, or retrospective evidence.
+Do not let Codex implement Stage 3, and do not create Trust Verifier cutover
+work, create Pi/Aperture agent-scope schema/projection work, create role input
+or execution packet work, or start unrelated cockpit product work. Codex
+authored the Stage 2 RED tests, so Stage 3 implementation must be dispatched to
+Claude through the bootstrap Process Adapter path, and the Stage 3 Writer must
+not edit tests, test helpers, fixtures, RED evidence, acceptance mappings,
+formation evidence, review evidence, landing evidence, or retrospective
+evidence.
 
 ## Active Work
 
@@ -65,8 +68,9 @@ review evidence, landing evidence, or retrospective evidence.
 `docs/work/BANDIT-061/brief.md`, and its coordination log records
 `brief_created` and `formation_approved`. Local Qwen and CodeRabbit formation
 reviews passed with zero findings after the accepted placeholder-command repair,
-and aggregate formation review passes. The next required evidence is Stage 2 RED
-evidence through the Test Writer boundary.
+aggregate formation review passes, and Stage 2 RED evidence is recorded at
+`docs/work/BANDIT-061/red-evidence.md`. The next required evidence is Stage 3
+implementation through the Claude bootstrap Process Adapter path.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
 follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
@@ -90,8 +94,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Create Stage 2 RED evidence for `BANDIT-061` through the Test Writer
-   boundary.
+1. Dispatch Stage 3 implementation for `BANDIT-061` to Claude through the
+   bootstrap Process Adapter path.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -113,10 +117,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 2 RED evidence action.
+No operator-owned input is required for the current Stage 3 dispatch action.
 Repo artifacts identify the active bootstrap-gap chore and the required
-boundary: create Test Writer-owned RED evidence for `BANDIT-061` without
-starting implementation, cutover, cockpit product work, Pi/Aperture agent-scope
+boundary: dispatch Claude Stage 3 implementation for `BANDIT-061` without
+Codex implementation, cutover, cockpit product work, Pi/Aperture agent-scope
 work, role input packets, or execution packets.
 
 Ask the operator only if the proposed work item would expand into product
