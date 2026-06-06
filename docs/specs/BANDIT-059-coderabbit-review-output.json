@@ -1,0 +1,25 @@
+{
+  "sourceHead": "a773202da712d9fbaca40ed7522a51b92c418979",
+  "baseRevision": "origin/main",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "findings": [],
+  "providerError": "CodeRabbit pre-PR provider review reached setup, sandbox preparation, and summarizing for the origin/main local diff, then produced no terminal verdict for more than five minutes before termination with SIGTERM.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "sourceHead": "a773202da712d9fbaca40ed7522a51b92c418979",
+      "baseRevision": "origin/main",
+      "endedAt": "2026-06-06T14:08:51Z",
+      "result": "timeout",
+      "summary": "coderabbit review --agent --base origin/main --no-color emitted review_context, connecting, setup, sandbox preparation, and analyzing/summarizing statuses, then no terminal verdict for more than five minutes before SIGTERM."
+    }
+  ],
+  "executableEvidence": [
+    "coderabbit --version returned 0.4.1.",
+    "coderabbit auth status returned authenticated for GitHub user pyxe-developer.",
+    "git diff origin/main..HEAD secret-pattern scan found no obvious SECRET/TOKEN/PRIVATE KEY/password/api_key patterns before provider review.",
+    "coderabbit review --agent --base origin/main --no-color started from /Users/matthewflebbe/Bandit and used reviewType all, currentBranch main, baseBranch origin/main.",
+    "The provider emitted statuses connecting_to_review_service, setting_up, preparing_sandbox, and summarizing, then did not return completed review evidence before SIGTERM."
+  ]
+}

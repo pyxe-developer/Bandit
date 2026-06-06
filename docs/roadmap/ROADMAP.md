@@ -9,9 +9,11 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-059`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, and explicit disposition for any findings before Stage 5 landing.
+**Current next step:** Run a focused Stage 4 CodeRabbit pre-PR retry for
+BANDIT-059 against the implementation delta, or record a provider-timeout
+disposition if the retry again produces no terminal verdict; do not run Local
+Qwen or aggregate review evidence until CodeRabbit timeout/finding disposition
+is recorded.
 
 ## Next Work Item
 

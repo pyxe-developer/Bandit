@@ -24,17 +24,25 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 4 review required after accepted Claude Stage 3
-implementation.
+Current stage: Stage 4 CodeRabbit timeout continuation required after accepted
+Claude Stage 3 implementation.
 
 Latest Stage 3 verification: 2026-06-06; `node --test
 test/trust-verify.test.mjs` passed 8/8, `npm run typecheck` passed,
 `npm run bandit -- validate` passed, `npm run bandit -- role-runs validate
 BANDIT-059 --json` passed, and `git diff --check` passed.
 
-Next action: Run Stage 4 pre-landing review for `BANDIT-059`: CodeRabbit
-pre-PR review, Local Qwen adversarial review, aggregate review evidence, and
-explicit disposition for any findings before Stage 5 landing.
+Latest Stage 4 CodeRabbit evidence: 2026-06-06; `coderabbit review --agent
+--base origin/main --no-color` reached provider setup/summarizing but produced
+no terminal verdict for more than five minutes before SIGTERM. Bandit rendered
+the fail-closed timeout artifact at
+`docs/work/BANDIT-059/coderabbit-review.md`.
+
+Next action: Run a focused Stage 4 CodeRabbit pre-PR retry for BANDIT-059
+against the implementation delta, or record a provider-timeout disposition if
+the retry again produces no terminal verdict; do not run Local Qwen or
+aggregate review evidence until CodeRabbit timeout/finding disposition is
+recorded.
 
 The prior Stage 3 operator unblock is satisfied: the operator approved using
 the ready `claude -p` Process Adapter profile, and Claude recorded
@@ -52,7 +60,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 4 review required)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 4 CodeRabbit timeout continuation required)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`
