@@ -249,3 +249,5 @@
 {"type":"artifact_created","work_item":"BANDIT-061","message":"Created retrospective artifact at docs/work/BANDIT-061/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-061","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE; next action is the queued replacement-metadata serializer gap"}
 {"type":"bootstrap_gap_recorded","work_item":"none","message":"Queued BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION behind the replacement-metadata serializer gap; next action remains the serializer gap chore"}
+{"type":"work_item_created","work_item":"BANDIT-062","message":"Created work item BANDIT-062 from docs/specs/BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA.json"}
+{"type":"artifact_created","work_item":"BANDIT-062","message":"Created red_evidence artifact at docs/work/BANDIT-062/red-evidence.md"}

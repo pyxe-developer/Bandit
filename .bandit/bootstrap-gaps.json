@@ -158,8 +158,8 @@
     {
       "id": "BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA",
       "title": "Work item creation drops replaced gap metadata during ledger rewrites",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-061",
       "source_artifacts": [
         "src/commands/work-item-create.ts",
@@ -168,10 +168,10 @@
         "docs/work/BANDIT-061/coordination-log.jsonl",
         "docs/specs/BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-062",
       "rationale": "During BANDIT-061 work-item creation, the Repo PM create-work-item path correctly linked the active role-contract gap but rewrote .bandit/bootstrap-gaps.json through serializeBootstrapGapLedger, which omitted replacement_gap, replacement_work_item, and replacement_evidence from the already-replaced BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT entry. npm run bandit -- validate caught the missing replacement_gap field, and Codex PM restored the lost metadata from HEAD before completing the session. The serializer needs a bounded repair so future queued-gap creation cannot silently drop replacement evidence.",
       "verification_target": null,
-      "next_action": "Create or disposition a bounded chore to preserve replacement metadata when work-item creation rewrites the bootstrap-gap ledger."
+      "next_action": "Complete active chore BANDIT-062."
     },
     {
       "id": "BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION",

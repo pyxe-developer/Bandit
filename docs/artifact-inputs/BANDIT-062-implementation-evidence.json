@@ -1,0 +1,91 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-062",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "author": "claude-sonnet-4-6",
+  "author_path": "bootstrap-process-adapter",
+  "summary": "Narrow serializer repair: three conditional spread lines added to serializeBootstrapGapLedger in src/commands/work-item-create.ts to preserve replacement_gap, replacement_work_item, and replacement_evidence when present on a BootstrapGap. All 9 tests pass, typecheck is clean, bandit validate is clean, and git diff --check is clean.",
+  "production_files_changed": [
+    "src/commands/work-item-create.ts"
+  ],
+  "acceptance_criteria_coverage": [
+    {
+      "criterion": "Focused RED evidence proves the current failure mode: creating or Repo PM-creating a work item for one eligible open gap rewrites the ledger and drops replacement_gap, replacement_work_item, or replacement_evidence from an unrelated replaced gap.",
+      "status": "pass",
+      "evidence": "Test 5 was RED before the fix (replacement_gap undefined). It is now GREEN."
+    },
+    {
+      "criterion": "The implementation preserves replacement_gap, replacement_work_item, and replacement_evidence for replaced gaps during every work-item creation ledger rewrite.",
+      "status": "pass",
+      "evidence": "Test 5 asserts all three fields after work-item creation and the full test suite passes 9/9."
+    },
+    {
+      "criterion": "The implementation preserves existing validations for replaced gaps, including required replacement metadata and existing replacement evidence paths.",
+      "status": "pass",
+      "evidence": "bandit validate passes after work-item creation with replacement evidence file present in the test repo."
+    },
+    {
+      "criterion": "The implementation preserves existing work-item create safety behavior: malformed specs, occupied output paths, specs outside the repository, and ineligible bootstrap gaps fail closed before writes.",
+      "status": "pass",
+      "evidence": "Tests 1-4 and 6-9 all still pass."
+    },
+    {
+      "criterion": "No projection, generated file, helper, or JSON input becomes canonical workflow state authority; .bandit/bootstrap-gaps.json remains the bootstrap-gap ledger source of truth and CLI commands remain the mutation authority.",
+      "status": "pass",
+      "evidence": "Only production serializer changed. No new state surface introduced."
+    },
+    {
+      "criterion": "The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation.",
+      "status": "pass",
+      "evidence": "Stage 3 Writer changed zero test surfaces. Claude (claude-sonnet-4-6) authored Stage 3 after Codex authored Stage 2 RED tests."
+    },
+    {
+      "criterion": "No Work Item PM plan-mode orchestration, Trust Verifier cutover, old gate replacement, role input packet, generated execution packet, Pi/Aperture agent-scope work, claim authority, worktree lifecycle execution, scheduler execution, cockpit UI, dependency or lockfile change, merge/push/deploy behavior, external service integration, or unrelated Phase 8 product work is introduced.",
+      "status": "pass",
+      "evidence": "Diff is three conditional spread lines inside serializeBootstrapGapLedger."
+    }
+  ],
+  "verification_commands": [
+    {
+      "command": "node --test test/work-item-create.test.mjs",
+      "result": "tests 9 / pass 9 / fail 0"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "clean"
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "result": "Bandit state is valid."
+    },
+    {
+      "command": "git diff --check",
+      "result": "clean"
+    }
+  ],
+  "clean_code_self_check": {
+    "spec_alignment": "pass",
+    "small_surface_area": "pass",
+    "simple_design": "pass",
+    "explicit_state": "pass",
+    "no_hidden_authority": "pass",
+    "testable_behavior": "pass",
+    "readable_flow": "pass",
+    "locality": "pass",
+    "failure_clarity": "pass",
+    "no_role_erosion": "pass",
+    "improvement_capture": "not_applicable"
+  },
+  "test_ownership_boundary": {
+    "status": "pass",
+    "evidence": "Stage 3 Writer changed only src/commands/work-item-create.ts. Zero test-surface edits."
+  },
+  "bootstrap_model_family_separation": {
+    "status": "pass",
+    "evidence": "Codex authored Stage 2 RED tests. Claude (claude-sonnet-4-6) authored Stage 3 via bootstrap Process Adapter path."
+  },
+  "ledger_source_of_truth_statement": ".bandit/bootstrap-gaps.json remains the canonical bootstrap-gap ledger. This repair only preserves parsed replacement metadata during an existing CLI-authorized rewrite. No projection or new state surface introduced.",
+  "bootstrap_gaps": [],
+  "follow_up_concerns": []
+}

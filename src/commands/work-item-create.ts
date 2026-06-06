@@ -591,7 +591,10 @@ function serializeBootstrapGapLedger(ledger: BootstrapGapLedger) {
       linked_work_item: gap.linkedWorkItem || null,
       rationale: gap.rationale,
       verification_target: gap.verificationTarget || null,
-      next_action: gap.nextAction
+      next_action: gap.nextAction,
+      ...(gap.replacementGap !== undefined && { replacement_gap: gap.replacementGap }),
+      ...(gap.replacementWorkItem !== undefined && { replacement_work_item: gap.replacementWorkItem }),
+      ...(gap.replacementEvidence !== undefined && { replacement_evidence: gap.replacementEvidence })
     }))
   };
 }

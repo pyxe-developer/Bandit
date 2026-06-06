@@ -174,6 +174,62 @@ test("work-item create links an eligible bootstrap gap to the active chore", asy
   );
 });
 
+test("work-item create preserves replaced bootstrap gap metadata when linking a gap", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-011", "Bootstrap Gap Tracking", "Landed");
+  await writeWorkBrief(repo, "BANDIT-057", "Role Scoped Workflow", "Closed");
+  await writeFile(
+    path.join(repo, "docs/work/BANDIT-057/retrospective.md"),
+    "# BANDIT-057 Retrospective\n",
+    "utf8"
+  );
+  await writeBootstrapGapLedger(repo, [
+    {
+      ...openGap("BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT"),
+      status: "open",
+      disposition: "replaced",
+      linked_work_item: "BANDIT-057",
+      verification_target: "docs/work/BANDIT-057/retrospective.md",
+      next_action: "Track replacement through the umbrella gap.",
+      replacement_gap: "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+      replacement_work_item: "BANDIT-057",
+      replacement_evidence: ["docs/work/BANDIT-057/retrospective.md"]
+    },
+    openGap("BANDIT-GAP-WORK-ITEM-CREATE-COMMAND")
+  ]);
+  await writeSpec(
+    repo,
+    "docs/specs/create-gap-chore.json",
+    validChoreSpec({
+      title: "Resolve Work Item Create Gap",
+      bootstrap_gap: "BANDIT-GAP-WORK-ITEM-CREATE-COMMAND"
+    })
+  );
+
+  const result = await runBandit(repo, [
+    "work-item",
+    "create",
+    "docs/specs/create-gap-chore.json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const ledger = JSON.parse(
+    await readFile(path.join(repo, ".bandit/bootstrap-gaps.json"), "utf8")
+  );
+  const replacedGap = ledger.gaps[0];
+  assert.equal(
+    replacedGap.replacement_gap,
+    "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION"
+  );
+  assert.equal(replacedGap.replacement_work_item, "BANDIT-057");
+  assert.deepEqual(replacedGap.replacement_evidence, [
+    "docs/work/BANDIT-057/retrospective.md"
+  ]);
+
+  const validate = await runBandit(repo, ["validate"]);
+  assert.equal(validate.code, 0, validate.stderr);
+});
+
 test("work-item create fails closed for malformed specs before writing files", async () => {
   const repo = await createInitializedRepo();
   await writeSpec(repo, "docs/specs/malformed.json", {

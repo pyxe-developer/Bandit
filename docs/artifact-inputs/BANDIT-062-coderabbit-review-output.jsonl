@@ -1,0 +1,5 @@
+{"type":"review_context","reviewType":"all","currentBranch":"main","baseBranch":"origin/main","baseCommit":"7eb298e736f9a8aa160be0002a00c4fb9adbf9d0","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","phase":"connecting","status":"connecting_to_review_service"}
+{"type":"status","phase":"setup","status":"setting_up"}
+{"type":"status","phase":"setup","status":"preparing_sandbox"}
+{"type":"status","phase":"analyzing","status":"summarizing"}
