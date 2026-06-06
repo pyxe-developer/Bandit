@@ -14,22 +14,23 @@ item from `docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and
 linked `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap
 chore.
 
-Current stage: Stage 4 Local Qwen review pending. Stage 2 RED
-evidence is recorded, Claude Stage 3 Writer evidence is recorded, Codex PM
-Stage 3 acceptance review now passes after Test Writer contract reconciliation,
+Current stage: Stage 4 aggregate review evidence pending. Stage 2 RED evidence
+is recorded, Claude Stage 3 Writer evidence is recorded, Codex PM Stage 3
+acceptance review now passes after Test Writer contract reconciliation,
 CodeRabbit pre-PR review is recorded with eight findings, Codex PM finding
-disposition is recorded, bounded repair evidence is recorded, and Codex PM
-repair acceptance passes.
+disposition is recorded, bounded repair evidence is recorded, Codex PM repair
+acceptance passes, and Local Qwen review passes with no findings.
 
-Next action: Run Local Qwen adversarial review for the current `BANDIT-060`
-source before aggregate Stage 4 review evidence, Stage 5 landing, closeout, or
-unrelated work.
+Next action: Record aggregate Stage 4 review evidence for `BANDIT-060` using
+CodeRabbit review/disposition/repair acceptance, Local Qwen pass evidence,
+layered risk-classification and supply-chain gate checks, and current
+review-subject hash.
 
 No operator-owned input is required for the recorded next action. Do not start
 Trust Verifier cutover, role input packet work, execution packet work,
 Pi/Aperture agent-scope work, the queued role-contract write-surface gap, Stage
-5 landing, or unrelated cockpit product work while `BANDIT-060` Local Qwen
-review is pending.
+5 landing, or unrelated cockpit product work while `BANDIT-060` aggregate Stage
+4 review evidence is pending.
 
 `BANDIT-059` is landed and closed out. It resolved
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` with the compatibility-mode
@@ -39,7 +40,7 @@ review is pending.
 
 Last 5 items only:
 
-- `BANDIT-060` - Artifact Input Directory Split (Local Qwen review pending)
+- `BANDIT-060` - Artifact Input Directory Split (aggregate Stage 4 review pending)
 - `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - queued after `BANDIT-060`
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active bootstrap cleanup chore
 - `BANDIT-059` - Trust Verify Snapshot Foundation (closed)

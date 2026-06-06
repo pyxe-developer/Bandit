@@ -6,9 +6,10 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Run Local Qwen adversarial review for the current
-`BANDIT-060` source before aggregate Stage 4 review evidence, Stage 5 landing,
-closeout, or unrelated work.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-060` using CodeRabbit review/disposition/repair acceptance, Local Qwen
+pass evidence, layered risk-classification and supply-chain gate checks, and
+current review-subject hash.
 
 ## Next Work Item
 

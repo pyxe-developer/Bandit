@@ -41,19 +41,25 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Local Qwen adversarial review for the current
-`BANDIT-060` source before aggregate Stage 4 review evidence, Stage 5 landing,
-closeout, or unrelated work.
+Stage 4 CodeRabbit pre-PR review, Codex PM finding disposition, bounded repair,
+and Codex PM repair acceptance are recorded. Local Qwen adversarial review is
+recorded at `docs/work/BANDIT-060/local-qwen-review.md` with a `pass` verdict
+and no findings.
 
-Do not proceed to aggregate Stage 4 review, Stage 5 landing, closeout, Trust
-Verifier cutover, Pi/Aperture agent-scope work, role input packet work,
-execution packet work, the queued role-contract write-surface gap, or unrelated
-cockpit product work until Local Qwen review evidence is recorded and any
-findings are explicitly dispositioned.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-060` using CodeRabbit review/disposition/repair acceptance, Local Qwen
+pass evidence, layered risk-classification and supply-chain gate checks, and
+current review-subject hash.
 
-The current stage is Stage 4 Local Qwen review pending. Stage 3 implementation
-is accepted for review, CodeRabbit review and bounded repair acceptance are
-recorded, but `BANDIT-060` is not safe-to-land and is not landed.
+Do not proceed to Stage 5 landing, closeout, Trust Verifier cutover,
+Pi/Aperture agent-scope work, role input packet work, execution packet work, the
+queued role-contract write-surface gap, or unrelated cockpit product work until
+aggregate Stage 4 review evidence is recorded and accepted.
+
+The current stage is Stage 4 aggregate review evidence pending. Stage 3
+implementation is accepted for review, CodeRabbit review and bounded repair
+acceptance are recorded, and Local Qwen passed with no findings, but
+`BANDIT-060` is not safe-to-land and is not landed.
 
 ## Active Work
 
@@ -72,8 +78,10 @@ findings. Codex PM disposition is recorded at
 evidence is recorded at
 `docs/work/BANDIT-060/stage4-coderabbit-repair-writer-report.md`, and Codex PM
 repair acceptance is recorded at
-`docs/work/BANDIT-060/stage4-repair-acceptance.md`. Local Qwen is the next
-required Stage 4 reviewer gate before aggregate Stage 4 review.
+`docs/work/BANDIT-060/stage4-repair-acceptance.md`. Local Qwen review is
+recorded at `docs/work/BANDIT-060/local-qwen-review.md` with a `pass` verdict
+and no findings. Aggregate Stage 4 review evidence is the next required gate
+before Stage 5 landing.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -91,9 +99,10 @@ or unrelated cockpit product work while `BANDIT-060` is in Stage 4 review.
 
 ## Priority
 
-1. Run Local Qwen adversarial review for the current `BANDIT-060` source before
-   aggregate Stage 4 review evidence, Stage 5 landing, closeout, or unrelated
-   work.
+1. Record aggregate Stage 4 review evidence for `BANDIT-060` using CodeRabbit
+   review/disposition/repair acceptance, Local Qwen pass evidence, layered
+   risk-classification and supply-chain gate checks, and current review-subject
+   hash.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -112,7 +121,8 @@ or unrelated cockpit product work while `BANDIT-060` is in Stage 4 review.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded Local Qwen next action.
+No operator-owned input is required for the recorded aggregate Stage 4 review
+next action.
 Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input taxonomy, reviewer capture
