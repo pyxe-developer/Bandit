@@ -214,3 +214,4 @@
 {"type":"stage4_local_qwen_review_pass","work_item":"BANDIT-059","message":"Local Qwen completed with pass and no findings; next action is aggregate Stage 4 review evidence using CodeRabbit timeout disposition, Local Qwen pass evidence, and current review-subject hash"}
 {"type":"stage4_review_recorded","work_item":"BANDIT-059","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 8711847; next action is Stage 5 landing-gate evidence and landing verdict"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-059","message":"Recorded layered risk-classification evidence, supply-chain gate evidence, and safe-to-land verdict; next action is local landing action evidence"}
+{"type":"stage5_landing_action_recorded","work_item":"BANDIT-059","message":"Recorded local landing action evidence at docs/work/BANDIT-059/landing-action.md; next action is Stage 6 retrospective and disposition closeout"}
