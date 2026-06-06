@@ -6,9 +6,9 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Perform Codex PM repair acceptance review for the
-recorded `BANDIT-060` CodeRabbit bounded repair before Local Qwen, aggregate
-Stage 4 review, Stage 5 landing, or unrelated work.
+**Current next step:** Run Local Qwen adversarial review for the current
+`BANDIT-060` source before aggregate Stage 4 review evidence, Stage 5 landing,
+closeout, or unrelated work.
 
 ## Next Work Item
 
