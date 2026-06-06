@@ -41,18 +41,19 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Perform Codex PM disposition of the eight `BANDIT-060`
-CodeRabbit findings, classify repair-required versus no-action/deferred items,
-and route any accepted bounded repair before Local Qwen, aggregate Stage 4
-review, or Stage 5 landing.
+**Current next action:** Dispatch bounded Claude Implementation Writer repair
+for the accepted `BANDIT-060` CodeRabbit findings: role-run manifest contract
+metadata and `artifact-inputs` command usage/return typing. Do not run Local
+Qwen, aggregate Stage 4 review, Stage 5 landing, or unrelated work until repair
+evidence and Codex PM repair acceptance are recorded.
 
 Do not proceed to Stage 5 landing, closeout, Trust Verifier cutover,
 Pi/Aperture agent-scope work, role input packet work, execution packet work,
 the queued role-contract write-surface gap, or unrelated cockpit product work
-until CodeRabbit findings are dispositioned, any accepted repair is routed, and
-Stage 4 evidence is recorded and current.
+until the accepted CodeRabbit repairs are recorded, Codex PM accepts the repair,
+and Stage 4 evidence is recorded and current.
 
-The current stage is Stage 4 CodeRabbit findings pending disposition. Stage 3
+The current stage is Stage 4 CodeRabbit bounded repair required. Stage 3
 implementation is accepted for review, but `BANDIT-060` is not safe-to-land and
 is not landed.
 
@@ -68,8 +69,9 @@ formation reviews passed with zero findings, aggregate formation review passes,
 Stage 3 Writer evidence is recorded, and Codex PM Stage 3 acceptance review
 passes after Test Writer contract reconciliation. Stage 4 CodeRabbit pre-PR
 review is recorded at `docs/work/BANDIT-060/coderabbit-review.md` with eight
-findings pending Codex PM disposition before Local Qwen or aggregate Stage 4
-review.
+findings. Codex PM disposition is recorded at
+`docs/work/BANDIT-060/coderabbit-finding-disposition.md`; four active-slice
+findings require bounded repair before Local Qwen or aggregate Stage 4 review.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -87,10 +89,11 @@ or unrelated cockpit product work while `BANDIT-060` is in Stage 4 review.
 
 ## Priority
 
-1. Perform Codex PM disposition of the eight `BANDIT-060` CodeRabbit findings,
-   classify repair-required versus no-action/deferred items, and route any
-   accepted bounded repair before Local Qwen, aggregate Stage 4 review, or Stage
-   5 landing.
+1. Dispatch bounded Claude Implementation Writer repair for the accepted
+   `BANDIT-060` CodeRabbit findings: role-run manifest contract metadata and
+   `artifact-inputs` command usage/return typing. Do not run Local Qwen,
+   aggregate Stage 4 review, Stage 5 landing, or unrelated work until repair
+   evidence and Codex PM repair acceptance are recorded.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -109,8 +112,8 @@ or unrelated cockpit product work while `BANDIT-060` is in Stage 4 review.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded CodeRabbit finding
-disposition next action.
+No operator-owned input is required for the recorded CodeRabbit bounded repair
+next action.
 Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input taxonomy, reviewer capture

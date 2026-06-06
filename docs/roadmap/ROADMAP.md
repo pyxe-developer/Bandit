@@ -6,10 +6,11 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Perform Codex PM disposition of the eight `BANDIT-060`
-CodeRabbit findings, classify repair-required versus no-action/deferred items,
-and route any accepted bounded repair before Local Qwen, aggregate Stage 4
-review, or Stage 5 landing.
+**Current next step:** Dispatch bounded Claude Implementation Writer repair for
+the accepted `BANDIT-060` CodeRabbit findings: role-run manifest contract
+metadata and `artifact-inputs` command usage/return typing. Do not run Local
+Qwen, aggregate Stage 4 review, Stage 5 landing, or unrelated work until repair
+evidence and Codex PM repair acceptance are recorded.
 
 ## Next Work Item
 
