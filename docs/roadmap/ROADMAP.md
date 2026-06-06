@@ -5,11 +5,12 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
-  Local Qwen refresh pending.
+  aggregate review evidence pending.
 
-**Current next step:** Rerun Local Qwen adversarial review for `BANDIT-061`
-after risk and supply-chain policy evidence changed the review subject, then
-record aggregate Stage 4 review evidence.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-061` using CodeRabbit review/disposition evidence, refreshed Local Qwen
+review/disposition evidence, layered risk-classification and supply-chain gate
+evidence, and current review-subject hash.
 
 ## Next Work Item
 
