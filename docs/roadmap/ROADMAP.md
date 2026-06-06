@@ -5,11 +5,11 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
-  review complete; Stage 5 landing verdict pending.
+  Local Qwen refresh pending.
 
-**Current next step:** Record Stage 5 landing verdict evidence for
-`BANDIT-061` before landing action, closeout, next work item, Trust Verifier
-cutover, or unrelated work.
+**Current next step:** Rerun Local Qwen adversarial review for `BANDIT-061`
+after risk and supply-chain policy evidence changed the review subject, then
+record aggregate Stage 4 review evidence.
 
 ## Next Work Item
 

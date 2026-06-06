@@ -239,4 +239,4 @@
 {"type":"stage4_coderabbit_finding_disposition_recorded","work_item":"BANDIT-061","message":"Codex PM dispositioned two CodeRabbit procedural findings as no-source-repair; next action is Local Qwen adversarial review before aggregate Stage 4 review"}
 {"type":"stage4_local_qwen_review_non_blocking","work_item":"BANDIT-061","message":"Local Qwen completed with non_blocking open findings; next action is Codex PM disposition before aggregate Stage 4 review evidence"}
 {"type":"stage4_local_qwen_findings_dispositioned","work_item":"BANDIT-061","message":"Codex PM dispositioned Local Qwen non_blocking findings as no-source-repair; next action is aggregate Stage 4 review evidence"}
-{"type":"stage4_review_recorded","work_item":"BANDIT-061","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 073259e; next action is Stage 5 landing verdict evidence before landing action"}
+{"type":"stage4_review_subject_changed","work_item":"BANDIT-061","message":"Recorded BANDIT-061 risk and supply-chain policy evidence after Local Qwen, changing the review subject; next action is a Local Qwen refresh before aggregate Stage 4 review evidence"}
