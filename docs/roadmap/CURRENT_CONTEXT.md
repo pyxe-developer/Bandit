@@ -43,28 +43,30 @@ Bandit's CLI and produce CLI-verifiable evidence.
 
 Stage 4 CodeRabbit pre-PR review, Codex PM finding disposition, bounded repair,
 Codex PM repair acceptance, Local Qwen adversarial review, layered
-risk-classification evidence, supply-chain gate evidence, and aggregate Stage 4
-review evidence are recorded. Local Qwen review at
+risk-classification evidence, supply-chain gate evidence, aggregate Stage 4
+review evidence, and Stage 5 landing verdict evidence are recorded. Local Qwen review at
 `docs/work/BANDIT-060/local-qwen-review.md` has a `pass` verdict and no
 findings; aggregate review evidence at
 `docs/work/BANDIT-060/review-evidence.md` records `pass` with current
 review-subject hash
-`caa7d2d515f3c1fb3c3d7db5ef2d7311c3aa41fe235b78ba7bdcb33d252ab274`.
+`caa7d2d515f3c1fb3c3d7db5ef2d7311c3aa41fe235b78ba7bdcb33d252ab274`. Stage 5
+landing verdict evidence at `docs/work/BANDIT-060/landing-verdict.md` records
+`safe-to-land`; `npm run bandit -- land-check BANDIT-060` and
+`npm run bandit -- auto-land-check BANDIT-060` pass.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-060` using
-aggregate Stage 4 review evidence, layered risk-classification and supply-chain
-gate evidence, clean-code compliance, current review-subject hash, and
-land-check fail-closed pre-verdict evidence.
+**Current next action:** Run the local-record landing action for `BANDIT-060`
+and record landing action evidence.
 
-Do not proceed to landing action, closeout, Trust Verifier cutover, Pi/Aperture
-agent-scope work, role input packet work, execution packet work, the queued
-role-contract write-surface gap, or unrelated cockpit product work until Stage
-5 landing verdict evidence is recorded.
+Do not proceed to closeout, Trust Verifier cutover, Pi/Aperture agent-scope
+work, role input packet work, execution packet work, the queued role-contract
+write-surface gap, or unrelated cockpit product work until local-record landing
+action evidence is recorded in `docs/work/BANDIT-060/landing-action.md`.
 
-The current stage is Stage 5 landing verdict evidence pending. Stage 3
-implementation is accepted, Stage 4 aggregate review evidence passes, and
-`BANDIT-060` is eligible for landing-verdict evaluation, but it is not
-safe-to-land and is not landed.
+The current stage is Stage 5 landing action pending. Stage 3 implementation is
+accepted, Stage 4 aggregate review evidence passes, Stage 5 landing verdict
+evidence records `safe-to-land`, but `BANDIT-060` is not landed until the
+local-record landing action completes and `docs/work/BANDIT-060/landing-action.md`
+records the commit SHA.
 
 ## Active Work
 
@@ -87,8 +89,10 @@ repair acceptance is recorded at
 recorded at `docs/work/BANDIT-060/local-qwen-review.md` with a `pass` verdict
 and no findings. Aggregate Stage 4 review evidence is recorded at
 `docs/work/BANDIT-060/review-evidence.md` with layered risk and supply-chain
-gate evidence. Stage 5 landing verdict evidence is the next required gate
-before landing action.
+gate evidence. Stage 5 landing verdict evidence is recorded at
+`docs/work/BANDIT-060/landing-verdict.md`, rendered from
+`docs/artifact-inputs/BANDIT-060-landing-verdict.json`; the local-record landing
+action is the next required gate.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -103,14 +107,12 @@ resulting work can proceed or land.
 Do not start Trust Verifier cutover, Pi/Aperture agent-scope work, role input
 packet work, execution packet work, the queued role-contract write-surface gap,
 or unrelated cockpit product work while `BANDIT-060` is in Stage 5 landing
-verdict evidence.
+action pending.
 
 ## Priority
 
-1. Record Stage 5 landing verdict for `BANDIT-060` using aggregate Stage 4
-   review evidence, layered risk-classification and supply-chain gate evidence,
-   clean-code compliance, current review-subject hash, and land-check
-   fail-closed pre-verdict evidence.
+1. Run the local-record landing action for `BANDIT-060` and record landing
+   action evidence.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -129,14 +131,14 @@ verdict evidence.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded Stage 5 landing verdict
+No operator-owned input is required for the recorded local-record landing action
 next action.
 Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input taxonomy, reviewer capture
 boundary, work/gap spec boundary, Test Writer ownership, Permanent Test
-Ownership Boundary, the recorded Stage 4 review gates, and the required Stage 5
-landing verdict gate.
+Ownership Boundary, the recorded Stage 4 review gates, the recorded Stage 5
+landing verdict gate, and the required local-record landing action.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

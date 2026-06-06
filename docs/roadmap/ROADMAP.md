@@ -6,10 +6,8 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Record Stage 5 landing verdict for `BANDIT-060` using
-aggregate Stage 4 review evidence, layered risk-classification and supply-chain
-gate evidence, clean-code compliance, current review-subject hash, and
-land-check fail-closed pre-verdict evidence.
+**Current next step:** Run the local-record landing action for `BANDIT-060`
+and record landing action evidence.
 
 ## Next Work Item
 
