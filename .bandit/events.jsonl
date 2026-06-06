@@ -246,3 +246,5 @@
 {"type":"artifact_created","work_item":"BANDIT-061","message":"Created landing_verdict artifact at docs/work/BANDIT-061/landing-verdict.md"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-061","message":"Recorded Stage 5 safe-to-land verdict for BANDIT-061; next action is local-record landing action evidence"}
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-061","message":"Recorded local-record landing action evidence for BANDIT-061; next action is Stage 6 retrospective, improvement disposition, and gap disposition"}
+{"type":"artifact_created","work_item":"BANDIT-061","message":"Created retrospective artifact at docs/work/BANDIT-061/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-061","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE; next action is the queued replacement-metadata serializer gap"}

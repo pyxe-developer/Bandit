@@ -156,24 +156,6 @@
       "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
-      "id": "BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE",
-      "title": "Implementation writer role contract omits artifact-input policy surfaces",
-      "status": "active",
-      "disposition": "active_chore",
-      "source_work_item": "BANDIT-060",
-      "source_artifacts": [
-        "docs/work/BANDIT-060/stage3-pm-review.md",
-        "docs/work/BANDIT-060/writer-report.md",
-        "docs/role-runs/BANDIT-060/stage3-implementation.json",
-        ".bandit/policy/artifact-inputs.json",
-        "docs/work/BANDIT-060/retrospective.md"
-      ],
-      "linked_work_item": "BANDIT-061",
-      "rationale": "BANDIT-060 needed a new artifact-input taxonomy policy and preferred input directories, but the implementation_writer role contract still only models the older role-contract policy surface. The current role-run validator cannot compare actual changed files with the manifest, so this is a follow-up contract-hardening gap rather than a Stage 3 source blocker.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-061."
-    },
-    {
       "id": "BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA",
       "title": "Work item creation drops replaced gap metadata during ledger rewrites",
       "status": "open",
@@ -189,7 +171,7 @@
       "linked_work_item": null,
       "rationale": "During BANDIT-061 work-item creation, the Repo PM create-work-item path correctly linked the active role-contract gap but rewrote .bandit/bootstrap-gaps.json through serializeBootstrapGapLedger, which omitted replacement_gap, replacement_work_item, and replacement_evidence from the already-replaced BANDIT-GAP-STAGE4-REPAIR-OWNERSHIP-ENFORCEMENT entry. npm run bandit -- validate caught the missing replacement_gap field, and Codex PM restored the lost metadata from HEAD before completing the session. The serializer needs a bounded repair so future queued-gap creation cannot silently drop replacement evidence.",
       "verification_target": null,
-      "next_action": "After BANDIT-061 lands and closes, create or disposition a bounded chore to preserve replacement metadata when work-item creation rewrites the bootstrap-gap ledger."
+      "next_action": "Create or disposition a bounded chore to preserve replacement metadata when work-item creation rewrites the bootstrap-gap ledger."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
@@ -798,6 +780,29 @@
       "rationale": "BANDIT-060 created the artifact-input taxonomy policy, preferred artifact-renderer input directory, artifact-input validation command, artifact-create fail-closed path guard for future docs/specs renderer inputs, reviewer-capture and trust-snapshot fixture class boundaries, legacy-readable docs/specs compatibility for historical renderer inputs, focused artifact-input and artifact-create tests, Stage 4 review evidence, Stage 5 landing verdict/action evidence, and Stage 6 retrospective closeout. Work/gap specs remain under docs/specs, while future artifact-renderer inputs use docs/artifact-inputs.",
       "verification_target": "docs/work/BANDIT-060/retrospective.md",
       "next_action": "Use docs/artifact-inputs for future artifact-renderer command inputs; keep docs/specs for work and gap specs, and treat historical renderer inputs there as legacy readable only."
+    },
+    {
+      "id": "BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE",
+      "title": "Implementation writer role contract omits artifact-input policy surfaces",
+      "status": "resolved",
+      "disposition": "resolved",
+      "source_work_item": "BANDIT-060",
+      "source_artifacts": [
+        "docs/work/BANDIT-060/stage3-pm-review.md",
+        "docs/work/BANDIT-060/writer-report.md",
+        "docs/role-runs/BANDIT-060/stage3-implementation.json",
+        ".bandit/policy/artifact-inputs.json",
+        "docs/work/BANDIT-060/retrospective.md",
+        "docs/work/BANDIT-061/red-evidence.md",
+        "docs/work/BANDIT-061/implementation-evidence.md",
+        "docs/role-runs/BANDIT-061/stage3-implementation.json",
+        "docs/work/BANDIT-061/landing-action.md",
+        "docs/work/BANDIT-061/retrospective.md"
+      ],
+      "linked_work_item": "BANDIT-061",
+      "rationale": "BANDIT-061 extends implementation-writer support surfaces for artifact-input policy paths, docs/artifact-inputs, reviewer-capture fixtures, and trust-snapshot fixtures when artifact-input policy exists. It also adds contract-versioned role-run manifest validation requiring observed_changed_files for future manifests and rejects observed files outside allowed target files or role write surfaces while preserving historical manifest compatibility.",
+      "verification_target": "docs/work/BANDIT-061/retrospective.md",
+      "next_action": "Use BANDIT-061 role-contract and role-run manifest validation for future implementation-writer artifact-input policy work."
     }
   ]
 }

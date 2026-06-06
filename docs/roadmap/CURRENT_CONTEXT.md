@@ -15,7 +15,7 @@ renderer inputs. Stage 6 retrospective, improvement disposition, and gap
 disposition are recorded at `docs/work/BANDIT-060/retrospective.md`, and the
 gap ledger marks `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` resolved.
 
-`BANDIT-061` is active. It is the bounded Role Contract Artifact Input Write
+`BANDIT-061` is landed and closed out. It delivered the bounded Role Contract Artifact Input Write
 Surface bootstrap-gap chore under
 `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE`. The Stage 1 brief is
 created at `docs/work/BANDIT-061/brief.md`; Local Qwen formation review passed
@@ -50,10 +50,13 @@ evidence is recorded at `docs/work/BANDIT-061/review-evidence.md`. Stage 5
 safe-to-land verdict evidence is recorded at
 `docs/work/BANDIT-061/landing-verdict.md`.
 Local-record landing action evidence is recorded at
-`docs/work/BANDIT-061/landing-action.md`.
+`docs/work/BANDIT-061/landing-action.md`. Stage 6 retrospective, improvement
+disposition, and bootstrap-gap disposition are recorded at
+`docs/work/BANDIT-061/retrospective.md`, and the gap ledger marks
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` resolved.
 
-`BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
-`BANDIT-061`. It records that the current work-item creation path can drop
+`BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is the next queued
+bootstrap gap. It records that the current work-item creation path can drop
 `replacement_gap`, `replacement_work_item`, and `replacement_evidence` fields
 from replaced gaps during bootstrap-gap ledger rewrites.
 
@@ -62,27 +65,31 @@ Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
 resolved.
 
-**Active work item:** BANDIT-061
+**Active work item:** none.
 
-The current stage is Stage 6 closeout pending.
+The current stage is Interstitial: Work-item creation required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record Stage 6 retrospective, improvement disposition,
-and gap disposition for `BANDIT-061` before any new work item.
+**Current next action:** Create or disposition a bounded chore spec and work
+item for
+`BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` before Trust
+Verifier cutover work.
 
-Do not land, close out, create Trust Verifier cutover work, create Pi/Aperture
-agent-scope schema/projection work, create role input or execution packet work,
-or start unrelated cockpit product work until closeout evidence is complete.
+Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
+schema/projection work, create role input or execution packet work, or start
+unrelated cockpit product work until the queued serializer gap is handled or
+explicitly dispositioned.
 
 ## Active Work
 
-**Active work item:** BANDIT-061
+**Active work item:** none.
 
-`BANDIT-061` is active. Its Stage 1 brief is recorded at
+No active work item is currently open. `BANDIT-061` is landed and closed out.
+Its Stage 1 brief is recorded at
 `docs/work/BANDIT-061/brief.md`, and its coordination log records
 `brief_created` and `formation_approved`. Local Qwen and CodeRabbit formation
 reviews passed with zero findings after the accepted placeholder-command repair,
@@ -91,14 +98,12 @@ aggregate formation review passes, and Stage 2 RED evidence is recorded at
 and Codex PM acceptance are recorded. CodeRabbit Stage 4 review/disposition and
 refreshed Local Qwen Stage 4 review/disposition are recorded. Layered
 risk-classification, supply-chain gate evidence, aggregate Stage 4 review
-evidence, Stage 5 safe-to-land verdict evidence, and local-record landing
-action evidence are recorded. The next required evidence is Stage 6
-retrospective, improvement disposition, and gap disposition.
+evidence, Stage 5 safe-to-land verdict evidence, local-record landing action
+evidence, and Stage 6 retrospective/gap disposition evidence are recorded.
 
-`BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
-follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
-active work item, but it should be handled or dispositioned before Trust
-Verifier cutover work.
+`BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is the next queued
+gap discovered during `BANDIT-061` creation. It should be handled or
+dispositioned before Trust Verifier cutover work.
 
 `BANDIT-060` is the last closed work item. Its Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
@@ -117,8 +122,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record Stage 6 retrospective, improvement disposition, and gap disposition
-   for `BANDIT-061` before any new work item.
+1. Create or disposition a bounded chore spec and work item for
+   `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` before Trust
+   Verifier cutover work.
 2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
    Separation evidence recorded during Stage 3.
 3. Keep the chore bounded to implementation-writer write-surface policy,
@@ -138,10 +144,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current closeout action. Repo
-artifacts identify the active bootstrap-gap chore and the required boundary:
-record retrospective, improvement disposition, and gap disposition before any
-new work item.
+No operator-owned input is required for the current interstitial action. Repo
+artifacts identify the next queued bootstrap gap and the required boundary:
+create or disposition a bounded chore for the replacement-metadata serializer
+repair before Trust Verifier cutover or unrelated cockpit product work.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; landed by
-  local-record action; Stage 6 closeout pending.
+- None. `BANDIT-061` is landed and closed out.
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and gap disposition for `BANDIT-061` before any new work item.
+**Current next step:** Create or disposition a bounded chore spec and work item
+for `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` before Trust
+Verifier cutover work.
 
 ## Next Work Item
 
@@ -23,8 +23,6 @@ and gap disposition for `BANDIT-061` before any new work item.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-061` - active role-contract hardening before Trust Verifier
-  cutover work.
 - `[Gap]` `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued
   serializer repair before Trust Verifier cutover work.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
@@ -109,3 +107,4 @@ bootstrap gaps are queued.
 - `BANDIT-058` - Role Contracts And Run Manifests
 - `BANDIT-059` - Trust Verify Snapshot Foundation
 - `BANDIT-060` - Artifact Input Directory Split
+- `BANDIT-061` - Role Contract Artifact Input Write Surface
