@@ -215,3 +215,5 @@
 {"type":"stage4_review_recorded","work_item":"BANDIT-059","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 8711847; next action is Stage 5 landing-gate evidence and landing verdict"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-059","message":"Recorded layered risk-classification evidence, supply-chain gate evidence, and safe-to-land verdict; next action is local landing action evidence"}
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-059","message":"Recorded local landing action evidence at docs/work/BANDIT-059/landing-action.md; next action is Stage 6 retrospective and disposition closeout"}
+{"type":"artifact_created","work_item":"BANDIT-059","message":"Created retrospective artifact at docs/work/BANDIT-059/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-059","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION; next action is BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT work-item creation"}

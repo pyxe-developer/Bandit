@@ -4,19 +4,17 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-059` - Trust Verify Snapshot Foundation
+- `[Gap]` none - interstitial after `BANDIT-059` closeout
 
-The harness-specific Pi/Aperture path is superseded by
-`docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
-
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and gap disposition for BANDIT-059 before any new work item.
+**Current next step:** Create a bounded cleanup chore spec and work item for
+BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work.
 
 ## Next Work Item
 
-- `[Gap]` TBD - Artifact Input Directory Split, only if path clarity blocks the
-  trust verifier/report contract; otherwise Trust Verifier Cutover Gate after
-  compatibility evidence exists.
+- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - split or explicitly
+  model artifact-renderer JSON inputs, reviewer captures, and work/gap specs
+  before Trust Verifier cutover or parity work depends on ambiguous
+  `docs/specs/` path semantics.
 
 ## Planned Work
 
@@ -25,23 +23,15 @@ and gap disposition for BANDIT-059 before any new work item.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
+- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup before
+  Trust Verifier cutover work.
+- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
+  evidence exists and artifact-input paths are clear, decide per Trust Goal
+  when `bandit trust verify` becomes the canonical verifier or wrapper for an
+  older gate path.
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
   orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
   queue.
-- `[Gap]` `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active in
-  `BANDIT-059`; add a read-only
-  `bandit trust verify <snapshot.json>` command, Work Item Snapshot schema,
-  deterministic snapshot hash, captured-evidence checks, reviewer-finding
-  routing validation, Trust Verdict derivation, and reproducible JSON report
-  output without running tests/reviewers, mutating workflow state, or replacing
-  existing gate commands.
-- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode evidence
-  exists, decide per Trust Goal when `bandit trust verify` becomes the canonical
-  verifier or wrapper for an older gate path.
-- `[Gap]` `TBD` - Artifact Input Directory Split; queued candidate to separate
-  artifact-renderer JSON inputs and reviewer captures from work/gap specs in
-  `docs/specs/`, only before Trust Verify Snapshot Foundation if path clarity
-  blocks the verifier/report contract.
 
 ### Deferred PRD Slices
 
@@ -114,3 +104,4 @@ bootstrap gaps are queued.
 - `BANDIT-056` - Evidence Freshness SLOs
 - `BANDIT-057` - Role Entry Points And Formation Gate
 - `BANDIT-058` - Role Contracts And Run Manifests
+- `BANDIT-059` - Trust Verify Snapshot Foundation

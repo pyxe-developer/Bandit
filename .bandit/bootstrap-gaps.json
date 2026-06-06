@@ -156,32 +156,10 @@
       "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
-      "id": "BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION",
-      "title": "Trust Verify Snapshot Foundation",
-      "status": "active",
-      "disposition": "active_chore",
-      "source_work_item": "BANDIT-058",
-      "source_artifacts": [
-        "docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md",
-        "docs/work/BANDIT-058/landing-action.md",
-        "docs/work/BANDIT-058/retrospective.md",
-        "docs/roadmap/CURRENT_CONTEXT.md",
-        "docs/roadmap/ROADMAP.md",
-        "STATUS.md",
-        "AGENTS.md",
-        "CLEAN_CODE.md",
-        "docs/verification/STAGE_RUBRICS.md"
-      ],
-      "linked_work_item": "BANDIT-059",
-      "rationale": "The accepted harness-agnostic CLI trust-layer decision supersedes the Pi/Aperture harness-specific implementation queue and makes deterministic trust verification Bandit's load-bearing product boundary. The first bounded implementation slice is a compatibility-mode, read-only `bandit trust verify <snapshot.json>` foundation with Work Item Snapshot schema, snapshot hashing, captured-evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, and deterministic report output.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-059."
-    },
-    {
       "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
       "title": "Artifact input JSON is mixed into docs/specs",
       "status": "open",
-      "disposition": "queued_chore_candidate",
+      "disposition": "queued_chore",
       "source_work_item": "BANDIT-021",
       "source_artifacts": [
         "docs/work/BANDIT-021/brief.md",
@@ -189,13 +167,15 @@
         "docs/work/BANDIT-021/retrospective.md",
         "src/commands/artifact-create.ts",
         "src/commands/artifact-create-renderers.ts",
+        "docs/work/BANDIT-059/retrospective.md",
         "docs/specs/BANDIT-058-landing-verdict.json",
-        "docs/specs/BANDIT-058-retrospective.json"
+        "docs/specs/BANDIT-058-retrospective.json",
+        "docs/specs/BANDIT-059-retrospective.json"
       ],
       "linked_work_item": null,
-      "rationale": "BANDIT-021 intentionally introduced JSON input specs for artifact rendering, but later workflow use overloaded docs/specs with work/gap specs, artifact-renderer inputs, and reviewer output captures. That makes the folder look like canonical evidence or planning authority when those JSON files are often structured command inputs for generated docs/work artifacts. The naming and layout should be split or explicitly modeled before the trust verifier/report contract depends on artifact input paths.",
+      "rationale": "BANDIT-021 intentionally introduced JSON input specs for artifact rendering, but later workflow use overloaded docs/specs with work/gap specs, artifact-renderer inputs, and reviewer output captures. BANDIT-059 proved the trust-verifier snapshot/report boundary while still creating another artifact-renderer input in docs/specs, so this cleanup should be handled before Trust Verifier cutover or parity work depends on ambiguous artifact input paths.",
       "verification_target": null,
-      "next_action": "Promote to a bounded cleanup chore if artifact-input path clarity blocks Trust Verify Snapshot Foundation; otherwise schedule after the trust verifier boundary is recorded."
+      "next_action": "Create a bounded cleanup chore spec and work item for BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
@@ -740,9 +720,38 @@
         "docs/work/BANDIT-058/retrospective.md"
       ],
       "linked_work_item": null,
-      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. On 2026-06-01 the operator rejected continuing normal Stage 1-6 Process Adapter bootstrap slices because the current Codex-plus-subprocess loop cannot produce True Agents without a Harness and has become token-incoherent. The selected pivot direction is Pi for the harness plane and Aperture by Tailscale for the model plane. The accepted proof shape is recorded in docs/spikes/pi-aperture-agent-scope-and-harness-spike.md: a repo-native Pi/Aperture Agent Scope and Harness Spike Plan that proves Work Item PM Single-Session Slice Orchestration, not a normal Bandit Stage 1-6 Process Adapter slice or one-agent smoke test. Remaining role-scoped orchestration work is source material until the True-Agent Harness Pivot is resolved.",
+      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. The later harness-agnostic CLI trust-layer decision superseded the Pi/Aperture harness-specific implementation queue, so remaining role-scoped orchestration work is source material unless a future bounded trust-layer or orchestrator-prompt slice explicitly scopes it.",
       "verification_target": "docs/work/BANDIT-058/retrospective.md",
-      "next_action": "Hold as source material while the harness-agnostic trust verifier pivot is resolved; do not start Pi/Aperture agent-scope implementation."
+      "next_action": "Hold as source material while artifact-input cleanup and Trust Verifier cutover work are resolved; do not start Pi/Aperture agent-scope implementation."
+    },
+    {
+      "id": "BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION",
+      "title": "Trust Verify Snapshot Foundation",
+      "status": "resolved",
+      "disposition": "resolved",
+      "source_work_item": "BANDIT-058",
+      "source_artifacts": [
+        "docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md",
+        "docs/work/BANDIT-058/landing-action.md",
+        "docs/work/BANDIT-058/retrospective.md",
+        "docs/work/BANDIT-059/brief.md",
+        "docs/work/BANDIT-059/red-evidence.md",
+        "docs/work/BANDIT-059/implementation-evidence.md",
+        "docs/work/BANDIT-059/review-evidence.md",
+        "docs/work/BANDIT-059/landing-verdict.md",
+        "docs/work/BANDIT-059/landing-action.md",
+        "docs/work/BANDIT-059/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "STATUS.md",
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md"
+      ],
+      "linked_work_item": "BANDIT-059",
+      "rationale": "BANDIT-059 delivered the first compatibility-mode, read-only `bandit trust verify <snapshot.json>` foundation with Work Item Snapshot schema validation, deterministic snapshot hashing, captured-evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, deterministic JSON report output, focused tests, Stage 4 review evidence, Stage 5 landing evidence, local-record landing action, and Stage 6 retrospective closeout. The command remains compatibility-mode evidence only and does not replace existing gate authority.",
+      "verification_target": "docs/work/BANDIT-059/retrospective.md",
+      "next_action": "Use `bandit trust verify` only as a read-only compatibility-mode verifier until a later per-trust-goal cutover decision has reproducible parity evidence."
     }
   ]
 }
