@@ -21,7 +21,12 @@ recorded at `docs/work/BANDIT-059/coderabbit-review.md`,
 `docs/work/BANDIT-059/coderabbit-timeout-disposition.md`. Stage 4 Local Qwen
 review passed with zero findings at
 `docs/work/BANDIT-059/local-qwen-review.md`. Aggregate Stage 4 review evidence
-is recorded at `docs/work/BANDIT-059/review-evidence.md`.
+is recorded at `docs/work/BANDIT-059/review-evidence.md`. Stage 5 landing-gate
+evidence is recorded at
+`.bandit/policy/risk-classifications/BANDIT-059-risk-classification.json`,
+`.bandit/policy/supply-chain-gates/BANDIT-059-supply-chain-gate.json`, and
+`docs/work/BANDIT-059/landing-verdict.md`; the Stage 5 landing verdict is
+`safe-to-land`.
 
 Repo PM formation review was refreshed on 2026-06-05 after Local Qwen provider
 availability was restored. CodeRabbit formation review passed with zero findings
@@ -47,15 +52,15 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record Stage 5 landing-gate evidence and landing
-verdict for BANDIT-059 before any landing action.
+**Current next action:** Run the local-record landing action for BANDIT-059 and
+record landing action evidence.
 
-Do not land, close out, create the next work item, create Trust Verifier cutover
-work, create Pi/Aperture agent-scope schema/projection work, or start unrelated
-cockpit product work until Stage 5 landing-gate evidence and a landing verdict
-exist.
+Do not close out, create the next work item, create Trust Verifier cutover work,
+create Pi/Aperture agent-scope schema/projection work, or start unrelated
+cockpit product work until local-record landing action evidence exists at
+`docs/work/BANDIT-059/landing-action.md`.
 
-The current stage is Stage 5 landing verdict required. Stage 2 RED evidence
+The current stage is Stage 5 landing action required. Stage 2 RED evidence
 defines the public CLI verifier contract, and the accepted Stage 3 Claude
 implementation now makes `node --test test/trust-verify.test.mjs` pass 8/8.
 Codex PM created the Stage 3 dispatch packet at
@@ -71,7 +76,9 @@ provider-refusal/bootstrap_gap replacement evidence without claiming a
 CodeRabbit pass. Local Qwen passed at source head
 `83d889cb9c2816840303bd06907099a7efe4f402` with no findings. Codex PM accepted
 aggregate Stage 4 with current review-subject hash
-`8711847599d514f42e408649f55378109892b43a2cee6791378f4f904ae98af6`.
+`5229a5f93496e1b4537a5891f5c096f3a5c97c26a0ba9fd2bafce48788a8a84c` after
+Stage 5 policy gate evidence was recorded. Stage 5 landing verdict evidence
+marks the work `safe-to-land`; the landing action itself is not yet recorded.
 
 ## Active Work
 
@@ -94,8 +101,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record Stage 5 landing-gate evidence and landing verdict for BANDIT-059
-   before any landing action.
+1. Run the local-record landing action for BANDIT-059 and record
+   `docs/work/BANDIT-059/landing-action.md`.
 2. Preserve model-family separation evidence: Codex authored and materially edited Stage
    2 RED tests, so Stage 3 implementation must be routed to Claude with zero
    test edit authority; Stage 3 evidence records Claude authorship.
@@ -114,8 +121,8 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current aggregate Stage 4 review
-evidence step. The prior Stage 3 operator unblock was satisfied when the
+No operator-owned input is required for the current local-record landing action.
+The prior Stage 3 operator unblock was satisfied when the
 operator approved using the ready `claude -p` Process Adapter profile on
 2026-06-06, the Stage 4 CodeRabbit timeout disposition is PM-owned
 provider-refusal routing, and Local Qwen passed with no findings.

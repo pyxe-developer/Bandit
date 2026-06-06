@@ -1,0 +1,193 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-059",
+  "changed_surfaces": [
+    {
+      "path": "src/cli.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/trust.ts",
+      "surface": "trust_verifier_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/trust-verify.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/trust-verify.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "compatibility_mode_trust_verifier_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-059/brief.md"
+    },
+    {
+      "signal_id": "read_only_no_workflow_mutation_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-059/implementation-evidence.md"
+    },
+    {
+      "signal_id": "local_evidence_digest_fail_closed_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-059/red-evidence.md"
+    },
+    {
+      "signal_id": "reviewer_finding_routing_to_trust_verdict_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-059/review-evidence.md"
+    },
+    {
+      "signal_id": "no_cutover_or_gate_replacement_surface",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-059/implementation-evidence.md"
+    },
+    {
+      "signal_id": "no_product_or_external_side_effect_surface",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-059/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/trust-verify.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-059/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-059/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-059/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- stage-capability-scope validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- token-cost-failsafe validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- evidence-freshness-slos validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-059-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- input-quarantine validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- operator-boundary validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-059-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-059/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-059/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-INPUT-QUARANTINE",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-059/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-059 is a non-product bootstrap-gap chore implementing a local, read-only compatibility-mode trust verifier command, deterministic snapshot hashing, local evidence digest checking, reviewer-finding routing validation, and deterministic JSON report output. It requires CodeRabbit attempt/disposition evidence, Local Qwen pass evidence, focused verification, layered risk evidence, supply-chain evidence, and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-059 changes local workflow authority surfaces by adding the first compatibility-mode trust verifier command and fail-closed verifier logic. The work is medium workflow-risk because it produces trust reports over captured evidence, reviewer routing, and trust goals, but it remains read-only by default, does not replace land-check or any existing gate, does not run tests or reviewers, does not execute model calls, does not mutate workflow state, and does not ship product UI/server/API behavior. Stage 4 evidence records scoped CodeRabbit provider-timeout disposition, Local Qwen pass evidence, current verifier tests, typecheck, Bandit validation, no unresolved findings, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-059-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-059-supply-chain-gate.json",
+    "docs/work/BANDIT-059/brief.md",
+    "docs/work/BANDIT-059/red-evidence.md",
+    "docs/work/BANDIT-059/implementation-evidence.md",
+    "docs/work/BANDIT-059/stage3-pm-review.md",
+    "docs/work/BANDIT-059/coderabbit-review.md",
+    "docs/work/BANDIT-059/coderabbit-timeout-disposition.md",
+    "docs/work/BANDIT-059/local-qwen-review.md",
+    "docs/work/BANDIT-059/review-evidence.md",
+    "src/cli.ts",
+    "src/commands/trust.ts",
+    "src/state/trust-verify.ts",
+    "test/trust-verify.test.mjs"
+  ]
+}

@@ -24,9 +24,10 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 5 landing verdict required after accepted aggregate Stage 4
-review evidence for the Claude Stage 3 implementation, CodeRabbit
-provider-timeout disposition, and Local Qwen pass evidence.
+Current stage: Stage 5 landing action required after safe-to-land landing
+verdict evidence for the Claude Stage 3 implementation, CodeRabbit
+provider-timeout disposition, Local Qwen pass evidence, layered
+risk-classification evidence, and supply-chain gate evidence.
 
 Latest Stage 3 verification: 2026-06-06; `node --test
 test/trust-verify.test.mjs` passed 8/8, `npm run typecheck` passed,
@@ -45,8 +46,8 @@ BANDIT-059` passed at source head
 `83d889cb9c2816840303bd06907099a7efe4f402` with zero findings and wrote
 `docs/work/BANDIT-059/local-qwen-review.md`.
 
-Next action: Record Stage 5 landing-gate evidence and landing verdict for
-BANDIT-059 before any landing action.
+Next action: Run the local-record landing action for BANDIT-059 and record
+landing action evidence.
 
 The prior Stage 3 operator unblock is satisfied: the operator approved using
 the ready `claude -p` Process Adapter profile, and Claude recorded
@@ -64,7 +65,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 5 landing verdict required)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 5 landing action required)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`
