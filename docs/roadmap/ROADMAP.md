@@ -25,11 +25,13 @@ cockpit feature work unless the operator explicitly changes priority.
 
 - `[Gap]` `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued
   serializer repair before Trust Verifier cutover work.
+- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued Work Item
+  PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
-  evidence exists, artifact-input paths are clear, and role-contract
-  artifact-input write-surface hardening is addressed, decide per Trust Goal
-  when `bandit trust verify` becomes the canonical verifier or wrapper for an
-  older gate path.
+  evidence exists, artifact-input paths are clear, serializer replacement
+  metadata is preserved, and Work Item PM plan-mode orchestration is addressed,
+  decide per Trust Goal when `bandit trust verify` becomes the canonical
+  verifier or wrapper for an older gate path.
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
   orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
   queue.

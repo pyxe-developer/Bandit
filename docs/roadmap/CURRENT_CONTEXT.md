@@ -60,6 +60,13 @@ bootstrap gap. It records that the current work-item creation path can drop
 `replacement_gap`, `replacement_work_item`, and `replacement_evidence` fields
 from replaced gaps during bootstrap-gap ledger rewrites.
 
+`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is queued behind the
+replacement-metadata serializer gap. It records the operator-directed
+requirement that, after Work Item PM reads the brief and grounds itself in
+current repo state, it must enter a plan-mode gate and produce durable
+orchestration-plan evidence before Stage 2 RED evidence or full orchestration
+begins.
+
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
@@ -105,10 +112,19 @@ evidence, and Stage 6 retrospective/gap disposition evidence are recorded.
 gap discovered during `BANDIT-061` creation. It should be handled or
 dispositioned before Trust Verifier cutover work.
 
-`BANDIT-060` is the last closed work item. Its Stage 1 brief, Stage 2 RED
+`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is a queued workflow-policy
+gap. It must not preempt the serializer gap unless the operator explicitly
+changes priority, but it should be handled before Trust Verifier cutover or
+unrelated cockpit product work.
+
+`BANDIT-061` is the last closed work item. Its Stage 1 brief, Stage 2 RED
 evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
 landing verdict/action evidence, and Stage 6 retrospective closeout are
-recorded under `docs/work/BANDIT-060/`.
+recorded under `docs/work/BANDIT-061/`.
+
+`BANDIT-060` is closed. Its closeout evidence is recorded at
+`docs/work/BANDIT-060/retrospective.md`; local-record landing evidence is
+recorded at `docs/work/BANDIT-060/landing-action.md`.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -125,22 +141,21 @@ resulting work can proceed or land.
 1. Create or disposition a bounded chore spec and work item for
    `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` before Trust
    Verifier cutover work.
-2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
+2. Keep `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` queued behind the
+   serializer gap so Work Item PM plan-mode orchestration can be enforced before
+   Trust Verifier cutover or unrelated cockpit work.
+3. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
    Separation evidence recorded during Stage 3.
-3. Keep the chore bounded to implementation-writer write-surface policy,
-   role-run actual changed-file evidence, artifact-input policy/support paths,
-   and historical role-run manifest compatibility.
-4. Preserve canonical Markdown evidence, append-only lifecycle/coordination
+4. Keep the next serializer chore bounded to preserving `replacement_*` fields
+   when work-item creation rewrites the bootstrap-gap ledger.
+5. Preserve canonical Markdown evidence, append-only lifecycle/coordination
    evidence, and repo-native roadmap/current-context authority; JSON command
    inputs must not become canonical workflow state.
-5. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
+6. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
    a later per-trust-goal cutover decision has reproducible parity evidence.
-6. Keep unrelated Phase 8 cockpit product work, role input packet work,
+7. Keep unrelated Phase 8 cockpit product work, role input packet work,
    execution packet work, Pi/Aperture agent-scope work, and Trust Verifier
-   cutover blocked while `BANDIT-061` is active.
-7. After `BANDIT-061` lands and closes, address or explicitly disposition the
-   queued work-item creation replacement-metadata serializer gap before Trust
-   Verifier cutover work.
+   cutover blocked while bootstrap gaps remain queued or active.
 
 ## Required Operator Input
 

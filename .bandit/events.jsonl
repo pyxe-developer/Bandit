@@ -248,3 +248,4 @@
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-061","message":"Recorded local-record landing action evidence for BANDIT-061; next action is Stage 6 retrospective, improvement disposition, and gap disposition"}
 {"type":"artifact_created","work_item":"BANDIT-061","message":"Created retrospective artifact at docs/work/BANDIT-061/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-061","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE; next action is the queued replacement-metadata serializer gap"}
+{"type":"bootstrap_gap_recorded","work_item":"none","message":"Queued BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION behind the replacement-metadata serializer gap; next action remains the serializer gap chore"}

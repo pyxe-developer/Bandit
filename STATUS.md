@@ -33,12 +33,16 @@ compatibility.
 `BANDIT-061`; it records the serializer repair needed after validation caught
 lost replacement metadata during work-item creation.
 
+`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is queued behind the
+serializer gap; it records the required Work Item PM plan-mode gate after
+brief/current-state grounding and before full orchestration.
+
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-061` - Role Contract Artifact Input Write Surface (closed)
-- `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - active via `BANDIT-061`
 - `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued gap
+- `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued gap
+- `BANDIT-061` - Role Contract Artifact Input Write Surface (closed)
+- `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - resolved by `BANDIT-061`
 - `BANDIT-060` - Artifact Input Directory Split (closed)
-- `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - resolved by `BANDIT-060`
