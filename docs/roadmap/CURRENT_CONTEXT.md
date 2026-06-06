@@ -10,11 +10,11 @@ work item from
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap chore.
 Stage 1 brief evidence is recorded at `docs/work/BANDIT-060/brief.md`;
 `docs/work/BANDIT-060/coordination-log.jsonl` records the `brief_created`
-transition. Local Qwen formation review passed at
-`docs/work/BANDIT-060/qwen-formation-review.md`, but CodeRabbit formation review
-did not complete and is recorded as a blocker at
-`docs/work/BANDIT-060/coderabbit-formation-review.md`. Aggregate formation
-review is blocked at `docs/work/BANDIT-060/formation-review.md`.
+transition and the earlier CodeRabbit provider blocker. Local Qwen formation
+review passed at `docs/work/BANDIT-060/qwen-formation-review.md`; CodeRabbit
+formation review completed on retry with zero findings at
+`docs/work/BANDIT-060/coderabbit-formation-review.md`; aggregate formation
+review passes at `docs/work/BANDIT-060/formation-review.md`.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -34,18 +34,16 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Complete CodeRabbit formation review for `BANDIT-060`
-and update aggregate formation review before formation approval or Stage 2 RED
-evidence.
+**Current next action:** Run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-060` to record `formation_approved` before Stage 2 RED evidence.
 
 Do not create RED evidence, implementation branches, Work Item PM active
 execution context, Trust Verifier cutover work, Pi/Aperture agent-scope
 schema/projection work, role input packet work, execution packet work, or
-unrelated cockpit product work until `BANDIT-060` passes formation review and
-records the `formation_approved` transition.
+unrelated cockpit product work until `BANDIT-060` records the
+`formation_approved` transition.
 
-The current stage is Stage 1 formation review blocked on CodeRabbit provider
-completion. The completed or retried CodeRabbit review must verify that the
+The current stage is Stage 1 formation review passed; CLI-owned formation
+approval remains pending. The completed CodeRabbit retry verified that the
 brief is narrow, verifiable, clean-code/rubric evaluable, compatible with the
 Trust Verifier Compatibility Period, and bounded to path/type semantics for
 artifact-renderer inputs, reviewer captures, work/gap specs, and trust snapshot
@@ -57,10 +55,10 @@ fixtures.
 
 `BANDIT-060` is the active work item. Its Stage 1 brief is recorded at
 `docs/work/BANDIT-060/brief.md`; its initial coordination log is recorded at
-`docs/work/BANDIT-060/coordination-log.jsonl`. Local Qwen formation review
-passed, but CodeRabbit formation review did not complete; aggregate formation
-review is therefore blocked until CodeRabbit evidence is completed and the
-aggregate review is updated.
+`docs/work/BANDIT-060/coordination-log.jsonl`. Local Qwen and CodeRabbit
+formation reviews passed with zero findings, and aggregate formation review now
+passes. The earlier blocked coordination transition remains historical evidence;
+the next CLI-owned transition is `formation_approved`.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -74,16 +72,14 @@ resulting work can proceed or land.
 
 Do not start RED evidence, implementation, Trust Verifier cutover, Pi/Aperture
 agent-scope work, role input packet work, execution packet work, or unrelated
-cockpit product work until `BANDIT-060` passes formation review and records
-`formation_approved`.
+cockpit product work until `BANDIT-060` records `formation_approved`.
 
 ## Priority
 
-1. Complete CodeRabbit formation review for `BANDIT-060` and update
-   `docs/work/BANDIT-060/coderabbit-formation-review.md` plus
-   `docs/work/BANDIT-060/formation-review.md`.
-2. If aggregate formation review passes, record the `formation_approved`
-   coordination transition before Stage 2 RED evidence.
+1. Run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-060` to record
+   the `formation_approved` coordination transition before Stage 2 RED evidence.
+2. If formation approval succeeds, the next action becomes Stage 2 RED evidence
+   through the Test Writer boundary.
 3. Keep the chore bounded to explicit artifact-input path/type semantics:
    work/gap specs, artifact-renderer command inputs, reviewer/provider captures,
    and trust snapshot fixtures.
@@ -98,7 +94,7 @@ cockpit product work until `BANDIT-060` passes formation review and records
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded formation-review next
+No operator-owned input is required for the recorded formation-approval next
 action. Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input ambiguity, reviewer capture
