@@ -4,98 +4,56 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-060` is active. Repo PM created the Artifact Input Directory Split
-work item from
-`docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and linked
-`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap chore.
-Stage 1 brief evidence, formation review, `formation_approved`, Stage 2 RED
-evidence, and Claude Stage 3 Writer evidence are recorded in the
-`docs/work/BANDIT-060/` package and coordination log.
+`BANDIT-060` is landed and closed out. It delivered the Artifact Input
+Directory Split bootstrap-gap chore under
+`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT`: repo-native artifact-input
+taxonomy policy, preferred `docs/artifact-inputs/` support for future
+artifact-renderer JSON inputs, `docs/specs/` preservation for work/gap specs,
+reviewer-capture and trust-snapshot fixture class boundaries, fail-closed
+future `docs/specs/` renderer-input refusal, and legacy-readable historical
+renderer inputs. Stage 6 retrospective, improvement disposition, and gap
+disposition are recorded at `docs/work/BANDIT-060/retrospective.md`, and the
+gap ledger marks `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` resolved.
 
-Codex PM/Test Writer reconciled the Stage 3 PM acceptance blockers. The older
-artifact-create test contract now uses `docs/artifact-inputs/` for future
-artifact-renderer command inputs, while `test/artifact-inputs.test.mjs` still
-proves future `docs/specs/` artifact-renderer inputs fail closed and legacy
-`docs/specs/` paths remain readable only when explicitly marked legacy. Codex
-PM Stage 3 acceptance review now passes at
-`docs/work/BANDIT-060/stage3-pm-review.md`.
-
-The Writer write-surface mismatch is dispositioned as non-blocking for Stage 3
-because the dispatch packet explicitly allowed `.bandit/policy/artifact-inputs.json`,
-the directory markers are inert preferred-directory support files, and the
-Stage 3 Writer did not edit Test Writer-owned surfaces. The contract-hardening
-follow-up is recorded as
-`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` in
-`.bandit/bootstrap-gaps.json` and must not be started before `BANDIT-060`
-closes out.
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` remains the next queued
+bootstrap gap. `BANDIT-060` recorded the gap because implementation-writer role
+contracts and role-run validation still do not model actual changed files
+against artifact-input policy and preferred-directory support files.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
 resolved.
 
-**Active work item:** `BANDIT-060` - Artifact Input Directory Split.
+**Active work item:** none
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-Stage 4 CodeRabbit pre-PR review, Codex PM finding disposition, bounded repair,
-Codex PM repair acceptance, Local Qwen adversarial review, layered
-risk-classification evidence, supply-chain gate evidence, aggregate Stage 4
-review evidence, and Stage 5 landing verdict evidence are recorded. Local Qwen review at
-`docs/work/BANDIT-060/local-qwen-review.md` has a `pass` verdict and no
-findings; aggregate review evidence at
-`docs/work/BANDIT-060/review-evidence.md` records `pass` with current
-review-subject hash
-`caa7d2d515f3c1fb3c3d7db5ef2d7311c3aa41fe235b78ba7bdcb33d252ab274`. Stage 5
-landing verdict evidence at `docs/work/BANDIT-060/landing-verdict.md` records
-`safe-to-land`; `npm run bandit -- land-check BANDIT-060` and
-`npm run bandit -- auto-land-check BANDIT-060` pass. Local-record landing
-action evidence is recorded at `docs/work/BANDIT-060/landing-action.md`.
+**Current next action:** Create a bounded chore spec and work item for
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` before Trust Verifier
+cutover work.
 
-**Current next action:** Record Stage 6 retrospective, improvement disposition,
-and gap disposition for `BANDIT-060` before any new work item.
-
-Do not create the next work item, proceed to Trust Verifier cutover, start
-Pi/Aperture agent-scope work, role input packet work, execution packet work, the
-queued role-contract write-surface gap, or unrelated cockpit product work until
-Stage 6 retrospective, improvement disposition, gap disposition, and context
-closeout evidence exist for `BANDIT-060`.
-
-The current stage is Stage 6 retrospective and disposition closeout required.
-Stage 3 implementation is accepted, Stage 4 aggregate review evidence passes,
-Stage 5 landing verdict evidence records `safe-to-land`, and Stage 5 landing
-action evidence records the supported `local_record` landing action. Stage 6
-retrospective, improvement disposition, and gap disposition are not yet recorded.
+Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
+schema/projection work, create role input or execution packet work, or start
+unrelated cockpit product work while
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` is queued.
 
 ## Active Work
 
-**Active work item:** `BANDIT-060` - Artifact Input Directory Split.
+**Active work item:** none
 
-`BANDIT-060` is the active work item. Its Stage 1 brief is recorded at
-`docs/work/BANDIT-060/brief.md`; its coordination log is recorded at
-`docs/work/BANDIT-060/coordination-log.jsonl`. Local Qwen and CodeRabbit
-formation reviews passed with zero findings, aggregate formation review passes,
-`formation_approved` is recorded, Stage 2 RED evidence is recorded, Claude
-Stage 3 Writer evidence is recorded, and Codex PM Stage 3 acceptance review
-passes after Test Writer contract reconciliation. Stage 4 CodeRabbit pre-PR
-review is recorded at `docs/work/BANDIT-060/coderabbit-review.md` with eight
-findings. Codex PM disposition is recorded at
-`docs/work/BANDIT-060/coderabbit-finding-disposition.md`; bounded repair
-evidence is recorded at
-`docs/work/BANDIT-060/stage4-coderabbit-repair-writer-report.md`, and Codex PM
-repair acceptance is recorded at
-`docs/work/BANDIT-060/stage4-repair-acceptance.md`. Local Qwen review is
-recorded at `docs/work/BANDIT-060/local-qwen-review.md` with a `pass` verdict
-and no findings. Aggregate Stage 4 review evidence is recorded at
-`docs/work/BANDIT-060/review-evidence.md` with layered risk and supply-chain
-gate evidence. Stage 5 landing verdict evidence is recorded at
-`docs/work/BANDIT-060/landing-verdict.md`, rendered from
-`docs/artifact-inputs/BANDIT-060-landing-verdict.json`; local-record landing
-action evidence is recorded at `docs/work/BANDIT-060/landing-action.md`. Stage 6
-retrospective and disposition closeout is the next required gate.
+`BANDIT-060` is the last closed work item. Its Stage 1 brief, Stage 2 RED
+evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
+landing verdict/action evidence, and Stage 6 retrospective closeout are
+recorded under `docs/work/BANDIT-060/`.
+
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` is the next queued
+bootstrap gap. It should align implementation-writer write-surface policy and
+role-run validation with artifact-input policy and preferred-directory support
+files before Trust Verifier cutover or unrelated cockpit product work.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -107,15 +65,10 @@ orchestrator-prompt pattern that external harnesses may run; Bandit's product
 boundary is the CLI-verifiable trust contract that determines whether the
 resulting work can proceed or land.
 
-Do not start Trust Verifier cutover, Pi/Aperture agent-scope work, role input
-packet work, execution packet work, the queued role-contract write-surface gap,
-or unrelated cockpit product work while `BANDIT-060` is in Stage 6 closeout
-pending.
-
 ## Priority
 
-1. Record Stage 6 retrospective, improvement disposition, and gap disposition
-   for `BANDIT-060` before any new work item.
+1. Create the bounded chore spec and work item for
+   `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE`.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -129,19 +82,18 @@ pending.
 5. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
    a later per-trust-goal cutover decision has reproducible parity evidence.
 6. Keep unrelated Phase 8 cockpit product work, role input packet work,
-   execution packet work, Pi/Aperture agent-scope work, and queued bootstrap
-   gaps blocked while `BANDIT-060` remains active.
+   execution packet work, Pi/Aperture agent-scope work, and Trust Verifier
+   cutover blocked while the role-contract artifact-input write-surface gap is
+   queued.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded Stage 6 closeout action.
-Repo artifacts identify the active bootstrap gap, current Stage Rubric
-requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
-Compatibility Period boundary, artifact-input taxonomy, reviewer capture
-boundary, work/gap spec boundary, Test Writer ownership, Permanent Test
-Ownership Boundary, the recorded Stage 4 review gates, the recorded Stage 5
-landing verdict gate, the recorded local-record landing action, and the required
-Stage 6 retrospective and disposition closeout.
+No operator-owned input is required for the current interstitial work-item
+creation action. Repo artifacts identify the next queued bootstrap gap and the
+required boundary: create a bounded chore spec/work item for
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` without starting
+cutover, cockpit product work, Pi/Aperture agent-scope work, role input
+packets, or execution packets.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

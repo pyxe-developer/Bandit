@@ -156,28 +156,6 @@
       "next_action": "Use bandit artifact create <spec-path> for supported evidence artifact families when explicit structured input exists; keep unsupported artifact families manual or future-scope until their input contracts stabilize."
     },
     {
-      "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
-      "title": "Artifact input JSON is mixed into docs/specs",
-      "status": "active",
-      "disposition": "active_chore",
-      "source_work_item": "BANDIT-021",
-      "source_artifacts": [
-        "docs/work/BANDIT-021/brief.md",
-        "docs/work/BANDIT-021/implementation-evidence.md",
-        "docs/work/BANDIT-021/retrospective.md",
-        "src/commands/artifact-create.ts",
-        "src/commands/artifact-create-renderers.ts",
-        "docs/work/BANDIT-059/retrospective.md",
-        "docs/specs/BANDIT-058-landing-verdict.json",
-        "docs/specs/BANDIT-058-retrospective.json",
-        "docs/specs/BANDIT-059-retrospective.json"
-      ],
-      "linked_work_item": "BANDIT-060",
-      "rationale": "BANDIT-021 intentionally introduced JSON input specs for artifact rendering, but later workflow use overloaded docs/specs with work/gap specs, artifact-renderer inputs, and reviewer output captures. BANDIT-059 proved the trust-verifier snapshot/report boundary while still creating another artifact-renderer input in docs/specs, so this cleanup should be handled before Trust Verifier cutover or parity work depends on ambiguous artifact input paths.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-060."
-    },
-    {
       "id": "BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE",
       "title": "Implementation writer role contract omits artifact-input policy surfaces",
       "status": "open",
@@ -187,11 +165,12 @@
         "docs/work/BANDIT-060/stage3-pm-review.md",
         "docs/work/BANDIT-060/writer-report.md",
         "docs/role-runs/BANDIT-060/stage3-implementation.json",
-        ".bandit/policy/artifact-inputs.json"
+        ".bandit/policy/artifact-inputs.json",
+        "docs/work/BANDIT-060/retrospective.md"
       ],
       "rationale": "BANDIT-060 needed a new artifact-input taxonomy policy and preferred input directories, but the implementation_writer role contract still only models the older role-contract policy surface. The current role-run validator cannot compare actual changed files with the manifest, so this is a follow-up contract-hardening gap rather than a Stage 3 source blocker.",
       "verification_target": null,
-      "next_action": "After BANDIT-060 lands, create a bounded chore to align implementation_writer write-surface policy and role-run validation with artifact-input policy and directory-marker surfaces."
+      "next_action": "Create a bounded chore spec and work item to align implementation_writer write-surface policy and role-run validation with artifact-input policy and preferred-directory support files."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
@@ -768,6 +747,38 @@
       "rationale": "BANDIT-059 delivered the first compatibility-mode, read-only `bandit trust verify <snapshot.json>` foundation with Work Item Snapshot schema validation, deterministic snapshot hashing, captured-evidence digest verification, reviewer-finding routing validation, Trust Verdict derivation, deterministic JSON report output, focused tests, Stage 4 review evidence, Stage 5 landing evidence, local-record landing action, and Stage 6 retrospective closeout. The command remains compatibility-mode evidence only and does not replace existing gate authority.",
       "verification_target": "docs/work/BANDIT-059/retrospective.md",
       "next_action": "Use `bandit trust verify` only as a read-only compatibility-mode verifier until a later per-trust-goal cutover decision has reproducible parity evidence."
+    },
+    {
+      "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
+      "title": "Artifact input JSON is mixed into docs/specs",
+      "status": "resolved",
+      "disposition": "resolved",
+      "source_work_item": "BANDIT-021",
+      "source_artifacts": [
+        "docs/work/BANDIT-021/brief.md",
+        "docs/work/BANDIT-021/implementation-evidence.md",
+        "docs/work/BANDIT-021/retrospective.md",
+        "src/commands/artifact-create.ts",
+        "src/commands/artifact-create-renderers.ts",
+        "docs/work/BANDIT-059/retrospective.md",
+        "docs/specs/BANDIT-058-landing-verdict.json",
+        "docs/specs/BANDIT-058-retrospective.json",
+        "docs/specs/BANDIT-059-retrospective.json",
+        ".bandit/policy/artifact-inputs.json",
+        "docs/work/BANDIT-060/brief.md",
+        "docs/work/BANDIT-060/red-evidence.md",
+        "docs/work/BANDIT-060/implementation-evidence.md",
+        "docs/work/BANDIT-060/stage3-pm-review.md",
+        "docs/work/BANDIT-060/review-evidence.md",
+        "docs/work/BANDIT-060/landing-verdict.md",
+        "docs/work/BANDIT-060/landing-action.md",
+        "docs/work/BANDIT-060/retrospective.md",
+        "docs/artifact-inputs/BANDIT-060-retrospective.json"
+      ],
+      "linked_work_item": "BANDIT-060",
+      "rationale": "BANDIT-060 created the artifact-input taxonomy policy, preferred artifact-renderer input directory, artifact-input validation command, artifact-create fail-closed path guard for future docs/specs renderer inputs, reviewer-capture and trust-snapshot fixture class boundaries, legacy-readable docs/specs compatibility for historical renderer inputs, focused artifact-input and artifact-create tests, Stage 4 review evidence, Stage 5 landing verdict/action evidence, and Stage 6 retrospective closeout. Work/gap specs remain under docs/specs, while future artifact-renderer inputs use docs/artifact-inputs.",
+      "verification_target": "docs/work/BANDIT-060/retrospective.md",
+      "next_action": "Use docs/artifact-inputs for future artifact-renderer command inputs; keep docs/specs for work and gap specs, and treat historical renderer inputs there as legacy readable only."
     }
   ]
 }

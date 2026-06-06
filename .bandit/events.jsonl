@@ -230,3 +230,5 @@
 {"type":"artifact_created","work_item":"BANDIT-060","message":"Created landing_verdict artifact at docs/work/BANDIT-060/landing-verdict.md"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-060","message":"Recorded Stage 5 safe-to-land verdict using docs/artifact-inputs renderer input; land-check and auto-land-check pass, and next action is local landing action evidence"}
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-060","message":"Recorded local landing action evidence at docs/work/BANDIT-060/landing-action.md; next action is Stage 6 retrospective and disposition closeout"}
+{"type":"artifact_created","work_item":"BANDIT-060","message":"Created retrospective artifact at docs/work/BANDIT-060/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-060","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT; next action is BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE work-item creation"}

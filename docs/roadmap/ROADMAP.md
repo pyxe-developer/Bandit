@@ -4,16 +4,17 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-060` - Artifact Input Directory Split
+- `[Gap]` none - interstitial after `BANDIT-060` closeout
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and gap disposition for `BANDIT-060` before any new work item.
+**Current next step:** Create a bounded chore spec and work item for
+`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` before Trust Verifier
+cutover work.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - after
-  `BANDIT-060` lands, align implementation-writer write-surface policy and
-  role-run validation with artifact-input policy and directory-marker surfaces.
+- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - align
+  implementation-writer write-surface policy and role-run validation with
+  artifact-input policy and preferred-directory support files.
 
 ## Planned Work
 
@@ -22,16 +23,11 @@ and gap disposition for `BANDIT-060` before any new work item.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active in
-  `BANDIT-060`; split or explicitly model artifact-renderer JSON inputs,
-  reviewer captures, work/gap specs, and trust snapshot fixtures before Trust
-  Verifier cutover or parity work depends on ambiguous `docs/specs/` path
-  semantics.
 - `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - queued
-  after `BANDIT-060`; harden implementation-writer role contracts and role-run
-  validation for artifact-input policy and preferred-directory support files.
+  role-contract hardening before Trust Verifier cutover work.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
-  evidence exists and artifact-input paths are clear, decide per Trust Goal
+  evidence exists, artifact-input paths are clear, and role-contract
+  artifact-input write-surface hardening is addressed, decide per Trust Goal
   when `bandit trust verify` becomes the canonical verifier or wrapper for an
   older gate path.
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
@@ -110,3 +106,4 @@ bootstrap gaps are queued.
 - `BANDIT-057` - Role Entry Points And Formation Gate
 - `BANDIT-058` - Role Contracts And Run Manifests
 - `BANDIT-059` - Trust Verify Snapshot Foundation
+- `BANDIT-060` - Artifact Input Directory Split
