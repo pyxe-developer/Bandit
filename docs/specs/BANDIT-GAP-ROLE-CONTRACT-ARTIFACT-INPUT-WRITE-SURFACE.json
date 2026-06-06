@@ -52,7 +52,7 @@
     "Run npm run typecheck.",
     "Run npm run bandit -- validate.",
     "Run npm run bandit -- role-contracts validate --json.",
-    "Run npm run bandit -- role-runs validate <ID> --json.",
+    "Run npm run bandit -- role-runs validate BANDIT-061 --json.",
     "Run npm run bandit -- artifact-inputs validate --json.",
     "Run npm run bandit -- gaps list.",
     "Run npm run bandit -- stage-capability-scope validate --json.",
