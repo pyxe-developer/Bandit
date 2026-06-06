@@ -2,31 +2,38 @@
 
 ## Last Updated: 2026-06-06
 
-## Current Work Item: none
+## Current Work Item: BANDIT-060
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-059` is landed and closed out. It delivered the compatibility-mode
-`bandit trust verify <snapshot.json>` foundation and resolved
-`BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`.
+`BANDIT-060` is active. Repo PM created the Artifact Input Directory Split work
+item from `docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and
+linked `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap
+chore.
 
-Current stage: interstitial after Stage 6 closeout; work-item creation required
-for the next queued bootstrap gap.
+Current stage: Stage 1 work-item brief / formation review pending.
 
-Next action: Create a bounded cleanup chore spec and work item for
-`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` before Trust Verifier cutover work.
+Next action: Run Repo PM formation review for `BANDIT-060` before Stage 2 RED
+evidence.
 
-No operator-owned input is required for that work-item creation action.
+No operator-owned input is required for formation review. Do not start RED
+evidence, implementation, Trust Verifier cutover, role input packet work,
+execution packet work, Pi/Aperture agent-scope work, or unrelated cockpit
+product work until `BANDIT-060` records formation approval.
+
+`BANDIT-059` is landed and closed out. It resolved
+`BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` with the compatibility-mode
+`bandit trust verify <snapshot.json>` foundation.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
+- `BANDIT-060` - Artifact Input Directory Split (Stage 1 formation pending)
+- `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active bootstrap cleanup chore
 - `BANDIT-059` - Trust Verify Snapshot Foundation (closed)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - resolved by `BANDIT-059`
-- `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - next queued cleanup gap
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material while trust-verifier gaps remain queued
-- `BANDIT-058` - Role Contracts And Run Manifests (closed)

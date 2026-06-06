@@ -4,6 +4,14 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
+`BANDIT-060` is active. Repo PM created the Artifact Input Directory Split
+work item from
+`docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and linked
+`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap chore.
+Stage 1 brief evidence is recorded at `docs/work/BANDIT-060/brief.md`;
+`docs/work/BANDIT-060/coordination-log.jsonl` records the `brief_created`
+transition.
+
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`: compatibility-mode
@@ -15,34 +23,39 @@ retrospective, improvement disposition, and gap disposition are recorded at
 `docs/work/BANDIT-059/retrospective.md`, and the gap ledger marks
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` resolved.
 
+**Active work item:** `BANDIT-060` - Artifact Input Directory Split.
+
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Active work item:** none
+**Current next action:** Run Repo PM formation review for `BANDIT-060` before
+Stage 2 RED evidence.
 
-**Current next action:** Create a bounded cleanup chore spec and work item for
-BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work.
+Do not create RED evidence, implementation branches, Work Item PM active
+execution context, Trust Verifier cutover work, Pi/Aperture agent-scope
+schema/projection work, role input packet work, execution packet work, or
+unrelated cockpit product work until `BANDIT-060` passes formation review and
+records the `formation_approved` transition.
 
-Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
-schema/projection work, create role input or execution packet work, or start
-unrelated cockpit product work while
-`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is queued.
+The current stage is Stage 1 work-item brief / formation review pending.
+The formation-review next step must verify that the brief is narrow,
+verifiable, clean-code/rubric evaluable, compatible with the Trust Verifier
+Compatibility Period, and bounded to path/type semantics for artifact-renderer
+inputs, reviewer captures, work/gap specs, and trust snapshot fixtures.
 
 ## Active Work
 
-**Active work item:** none
+**Active work item:** `BANDIT-060` - Artifact Input Directory Split.
 
-`BANDIT-059` is the last closed work item. Its Stage 1 brief, Stage 2 RED
-evidence, Stage 3 implementation evidence, Stage 4 review evidence, Stage 5
-landing verdict/action evidence, and Stage 6 retrospective closeout are recorded
-under `docs/work/BANDIT-059/`.
+`BANDIT-060` is the active work item. Its Stage 1 brief is recorded at
+`docs/work/BANDIT-060/brief.md`; its initial coordination log is recorded at
+`docs/work/BANDIT-060/coordination-log.jsonl`.
 
-`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is the next queued bootstrap gap.
-It should split or explicitly model artifact-renderer JSON inputs, reviewer
-captures, and work/gap specs before Trust Verifier cutover or parity work
-depends on ambiguous `docs/specs/` path semantics.
+`BANDIT-059` is closed. Its closeout evidence is recorded at
+`docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
+recorded at `docs/work/BANDIT-059/landing-action.md`.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains source material, but the
 load-bearing direction has changed. Single-session orchestration is now an
@@ -50,25 +63,44 @@ orchestrator-prompt pattern that external harnesses may run; Bandit's product
 boundary is the CLI-verifiable trust contract that determines whether the
 resulting work can proceed or land.
 
+Do not start RED evidence, implementation, Trust Verifier cutover, Pi/Aperture
+agent-scope work, role input packet work, execution packet work, or unrelated
+cockpit product work until `BANDIT-060` passes formation review.
+
 ## Priority
 
-1. Create the bounded cleanup chore spec and work item for
-   `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT`.
-2. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
+1. Run Repo PM formation review for `BANDIT-060` and record
+   `docs/work/BANDIT-060/qwen-formation-review.md`,
+   `docs/work/BANDIT-060/coderabbit-formation-review.md`, and
+   `docs/work/BANDIT-060/formation-review.md`.
+2. If formation passes, record the `formation_approved` coordination transition
+   before Stage 2 RED evidence.
+3. Keep the chore bounded to explicit artifact-input path/type semantics:
+   work/gap specs, artifact-renderer command inputs, reviewer/provider captures,
+   and trust snapshot fixtures.
+4. Preserve canonical Markdown evidence, append-only lifecycle/coordination
+   evidence, and repo-native roadmap/current-context authority; JSON command
+   inputs must not become canonical workflow state.
+5. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
    a later per-trust-goal cutover decision has reproducible parity evidence.
-3. Preserve the completed `BANDIT-059` role boundary evidence: Codex authored
-   and materially edited Stage 2 RED tests, Claude authored Stage 3
-   implementation, and Stage 3 Writer did not edit Test Writer-owned surfaces.
-4. Keep the role-scoped orchestration umbrella as source material while
-   harness-agnostic trust-verifier bootstrap gaps are queued.
-5. Keep unrelated Phase 8 cockpit product work blocked while open bootstrap
-   gaps remain queued or active.
+6. Keep unrelated Phase 8 cockpit product work, role input packet work,
+   execution packet work, and Pi/Aperture agent-scope work blocked while open
+   bootstrap gaps remain active or queued.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current interstitial work-item
-creation action. Repo artifacts identify the next queued bootstrap gap and the
-required boundary: create a bounded cleanup chore spec/work item for
-`BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` without starting cutover, cockpit
-product work, Pi/Aperture agent-scope work, role input packets, or execution
-packets.
+No operator-owned input is required for the recorded formation-review next
+action. Repo artifacts identify the active bootstrap gap, current Stage Rubric
+requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
+Compatibility Period boundary, artifact-input ambiguity, reviewer capture
+ambiguity, work/gap spec boundary, and Codex PM/Repo PM authority to route
+routine cleanup mechanics.
+
+Ask the operator only if the proposed work item would expand into product
+direction, UAT policy, workflow policy beyond explicit artifact-input path
+semantics, business tradeoffs, explicit cost/risk posture, provider-pricing
+approval, spend-class approval, paid reviewer promotion, recurring paid routing
+policy, external service setup, live routing policy, claim authority, worktree
+lifecycle authority, installed global skill contents, dependency or lockfile
+policy, merge/push/deploy authority, Trust Verifier cutover policy, or broader
+cockpit/product scope.

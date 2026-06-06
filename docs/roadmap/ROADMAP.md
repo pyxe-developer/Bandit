@@ -4,17 +4,17 @@
 
 ## Current Work Item
 
-- `[Gap]` none - interstitial after `BANDIT-059` closeout
+- `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Create a bounded cleanup chore spec and work item for
-BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work.
+**Current next step:** Run Repo PM formation review for `BANDIT-060` before
+Stage 2 RED evidence.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - split or explicitly
-  model artifact-renderer JSON inputs, reviewer captures, and work/gap specs
-  before Trust Verifier cutover or parity work depends on ambiguous
-  `docs/specs/` path semantics.
+- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
+  evidence exists and artifact-input paths are clear, decide per Trust Goal
+  when `bandit trust verify` becomes the canonical verifier or wrapper for an
+  older gate path.
 
 ## Planned Work
 
@@ -23,8 +23,11 @@ BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup before
-  Trust Verifier cutover work.
+- `[Gap]` `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active in
+  `BANDIT-060`; split or explicitly model artifact-renderer JSON inputs,
+  reviewer captures, work/gap specs, and trust snapshot fixtures before Trust
+  Verifier cutover or parity work depends on ambiguous `docs/specs/` path
+  semantics.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
   evidence exists and artifact-input paths are clear, decide per Trust Goal
   when `bandit trust verify` becomes the canonical verifier or wrapper for an

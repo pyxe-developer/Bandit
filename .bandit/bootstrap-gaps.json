@@ -158,8 +158,8 @@
     {
       "id": "BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT",
       "title": "Artifact input JSON is mixed into docs/specs",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-021",
       "source_artifacts": [
         "docs/work/BANDIT-021/brief.md",
@@ -172,10 +172,10 @@
         "docs/specs/BANDIT-058-retrospective.json",
         "docs/specs/BANDIT-059-retrospective.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-060",
       "rationale": "BANDIT-021 intentionally introduced JSON input specs for artifact rendering, but later workflow use overloaded docs/specs with work/gap specs, artifact-renderer inputs, and reviewer output captures. BANDIT-059 proved the trust-verifier snapshot/report boundary while still creating another artifact-renderer input in docs/specs, so this cleanup should be handled before Trust Verifier cutover or parity work depends on ambiguous artifact input paths.",
       "verification_target": null,
-      "next_action": "Create a bounded cleanup chore spec and work item for BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT before Trust Verifier cutover work."
+      "next_action": "Complete active chore BANDIT-060."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",
