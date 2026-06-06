@@ -1,0 +1,258 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-060",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/artifact-inputs.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/artifact-inputs.ts",
+      "surface": "workflow_gate_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/artifact-inputs.ts",
+      "surface": "command_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/artifact-create.ts",
+      "surface": "artifact_renderer_input_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "validation_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/artifact-inputs/.gitkeep",
+      "surface": "evidence_directory_support",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/reviewer-captures/.gitkeep",
+      "surface": "evidence_directory_support",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/trust-snapshot-fixtures/.gitkeep",
+      "surface": "evidence_directory_support",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/role-runs/BANDIT-060/stage3-implementation.json",
+      "surface": "append_only_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/artifact-inputs.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/artifact-create.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "artifact_input_taxonomy_boundary",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-060/brief.md"
+    },
+    {
+      "signal_id": "docs_specs_future_artifact_renderer_refusal",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-060/red-evidence.md"
+    },
+    {
+      "signal_id": "legacy_docs_specs_readability_preserved",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-060/implementation-evidence.md"
+    },
+    {
+      "signal_id": "reviewer_capture_and_trust_snapshot_directory_split",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/artifact-inputs.json"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "no_trust_verifier_cutover_or_gate_replacement",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/implementation-evidence.md"
+    },
+    {
+      "signal_id": "no_product_or_external_side_effect_surface",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/artifact-create.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "node --test test/artifact-inputs.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- artifact-inputs validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- role-runs validate BANDIT-060 --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- risk-classification validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-060-risk-classification.json"
+    },
+    {
+      "tool": "npm run bandit -- supply-chain-gate validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-060-supply-chain-gate.json"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs cockpit status --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs session-context current --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-060/review-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-060-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-060/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-060/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-060/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-UNTRUSTED-INPUT-QUARANTINE",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-060/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-TEST-BOUNDARY-VIOLATION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-060/stage3-pm-review.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-060 is a non-product bootstrap-gap chore that clarifies local artifact-input path semantics, adds fail-closed validators and command routing, preserves historical generated Markdown evidence, and records reviewer/provider capture and trust snapshot fixture directories. It requires CodeRabbit disposition/repair evidence, Local Qwen pass evidence, focused tests, layered risk evidence, supply-chain evidence, and Codex PM disposition, not operator-owned product, UAT, business, cost, policy-override, or supply-chain exception input."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-060 changes workflow validation and command input boundaries by splitting artifact-renderer inputs, reviewer captures, work/gap specs, and trust snapshot fixtures out of the ambiguous docs/specs path family. The work is medium workflow risk because it changes parser/validator behavior and command routing, but it remains local, repo-native, test-covered, non-product, and does not touch dependency manifests, lockfiles, CI/release workflows, paid reviewer routing, trust-verifier cutover, live model routing, worktree/claim authority, external services, merge/push/deploy behavior, or cockpit UI/server/API scope. Stage 4 evidence records CodeRabbit findings disposition and accepted bounded repair, Local Qwen pass evidence, current focused verification, no unresolved findings, and clean-code pass, so local-record landing can proceed under the layered risk gate.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/risk-classifications/BANDIT-060-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-060-supply-chain-gate.json",
+    ".bandit/policy/artifact-inputs.json",
+    "docs/work/BANDIT-060/brief.md",
+    "docs/work/BANDIT-060/red-evidence.md",
+    "docs/work/BANDIT-060/implementation-evidence.md",
+    "docs/work/BANDIT-060/stage3-pm-review.md",
+    "docs/work/BANDIT-060/coderabbit-review.md",
+    "docs/work/BANDIT-060/coderabbit-finding-disposition.md",
+    "docs/work/BANDIT-060/stage4-coderabbit-repair-writer-report.md",
+    "docs/work/BANDIT-060/stage4-repair-acceptance.md",
+    "docs/work/BANDIT-060/local-qwen-review.md",
+    "docs/work/BANDIT-060/review-evidence.md",
+    "docs/role-runs/BANDIT-060/stage3-implementation.json",
+    "src/cli.ts",
+    "src/commands/artifact-create.ts",
+    "src/commands/artifact-inputs.ts",
+    "src/commands/validate.ts",
+    "src/state/artifact-inputs.ts",
+    "test/artifact-create.test.mjs",
+    "test/artifact-inputs.test.mjs"
+  ]
+}

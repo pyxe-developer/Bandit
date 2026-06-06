@@ -6,10 +6,10 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-060` using CodeRabbit review/disposition/repair acceptance, Local Qwen
-pass evidence, layered risk-classification and supply-chain gate checks, and
-current review-subject hash.
+**Current next step:** Record Stage 5 landing verdict for `BANDIT-060` using
+aggregate Stage 4 review evidence, layered risk-classification and supply-chain
+gate evidence, clean-code compliance, current review-subject hash, and
+land-check fail-closed pre-verdict evidence.
 
 ## Next Work Item
 

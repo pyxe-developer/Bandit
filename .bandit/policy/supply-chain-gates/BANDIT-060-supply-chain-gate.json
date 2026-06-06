@@ -1,0 +1,91 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-060",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-060/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, external side-effecting automation, or unknown supply-chain surface change is present in the BANDIT-060 implementation. Artifact Input Directory Split adds local CLI/state validation behavior, evidence-directory markers, and focused tests only."
+    },
+    "rationale": "BANDIT-060 adds local artifact-input taxonomy validation, artifact-create path refusal behavior, command routing, and focused tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-060/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "No installed or repo-local agent skill surface changed for BANDIT-060.",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-060 does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, external side-effecting automation, or unknown supply-chain surfaces. The implementation is local CLI/state/test code plus preferred evidence-directory markers for JSON input classes. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-060-supply-chain-gate.json",
+    ".bandit/policy/artifact-inputs.json",
+    "docs/work/BANDIT-060/brief.md",
+    "docs/work/BANDIT-060/red-evidence.md",
+    "docs/work/BANDIT-060/implementation-evidence.md",
+    "docs/work/BANDIT-060/coderabbit-review.md",
+    "docs/work/BANDIT-060/coderabbit-finding-disposition.md",
+    "docs/work/BANDIT-060/stage4-repair-acceptance.md",
+    "docs/work/BANDIT-060/local-qwen-review.md",
+    "docs/work/BANDIT-060/review-evidence.md",
+    "docs/role-runs/BANDIT-060/stage3-implementation.json",
+    "src/cli.ts",
+    "src/commands/artifact-create.ts",
+    "src/commands/artifact-inputs.ts",
+    "src/commands/validate.ts",
+    "src/state/artifact-inputs.ts",
+    "test/artifact-create.test.mjs",
+    "test/artifact-inputs.test.mjs"
+  ]
+}
