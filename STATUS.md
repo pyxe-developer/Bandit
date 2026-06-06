@@ -1,6 +1,6 @@
 # Current Context
 
-## Last Updated: 2026-06-05
+## Last Updated: 2026-06-06
 
 ## Current Work Item: BANDIT-059
 
@@ -24,28 +24,24 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 3 implementation blocked after three Claude Process Adapter
-attempts stalled before source edits or Writer evidence.
+Current stage: Stage 4 review required after accepted Claude Stage 3
+implementation.
 
-Latest Stage 2 RED run: 2026-06-05T21:33:02Z; `node --test
-test/trust-verify.test.mjs` failed 8/8 because `trust` is not registered.
+Latest Stage 3 verification: 2026-06-06; `node --test
+test/trust-verify.test.mjs` passed 8/8, `npm run typecheck` passed,
+`npm run bandit -- validate` passed, `npm run bandit -- role-runs validate
+BANDIT-059 --json` passed, and `git diff --check` passed.
 
-Next action: Operator must choose the `BANDIT-059` Stage 3 unblock path:
-provide or approve a Claude Process Adapter invocation/profile that can complete
-source edits and Writer evidence, or approve a scoped policy exception changing
-the Stage 3 implementation writer path for this Codex-authored RED slice.
+Next action: Run Stage 4 pre-landing review for `BANDIT-059`: CodeRabbit
+pre-PR review, Local Qwen adversarial review, aggregate review evidence, and
+explicit disposition for any findings before Stage 5 landing.
 
-Three Claude Process Adapter attempts stalled before source edits or Writer
-evidence; all attempts are recorded at
-`docs/work/BANDIT-059/dispatch-attempt.md`. Codex PM did not substitute
-Codex-authored implementation work.
-
-Operator-owned input is required for the next Stage 3 implementation step
-because repo policy requires Claude-family Stage 3 implementation after
-Codex-authored RED tests, and Codex PM cannot silently route around that policy.
-Do not route Stage 3 to Codex, let the Stage 3 Writer edit tests or RED
-evidence, start Trust Verifier cutover, create a new work item, or start
-Pi/Aperture agent-scope work.
+The prior Stage 3 operator unblock is satisfied: the operator approved using
+the ready `claude -p` Process Adapter profile, and Claude recorded
+`docs/work/BANDIT-059/implementation-evidence.md`,
+`docs/work/BANDIT-059/writer-report.md`, and
+`docs/specs/BANDIT-059-implementation-evidence.json`. Codex PM acceptance is
+recorded at `docs/work/BANDIT-059/stage3-pm-review.md`.
 
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` is queued as a cleanup candidate to
 separate artifact-renderer JSON inputs and reviewer captures from work/gap specs
@@ -56,7 +52,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 operator unblock required)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 4 review required)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`

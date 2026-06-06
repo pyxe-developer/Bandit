@@ -1,0 +1,44 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-059",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "stage3_author": "claude-sonnet-4-6",
+  "stage3_adapter": "bootstrap_process_adapter",
+  "production_files_changed": [
+    "src/state/trust-verify.ts",
+    "src/commands/trust.ts",
+    "src/cli.ts"
+  ],
+  "verification_results": {
+    "focused_tests": "node --test test/trust-verify.test.mjs: 8 pass, 0 fail",
+    "typecheck": "npm run typecheck: clean",
+    "validate": "npm run bandit -- validate: Bandit state is valid.",
+    "role_runs_validate": "npm run bandit -- role-runs validate BANDIT-059 --json: status pass",
+    "git_diff_check": "git diff --check: clean"
+  },
+  "acceptance_coverage": [
+    "trust verify command registered and routes to verify subcommand",
+    "snapshot schema validation fails closed for missing schema_version and unsupported trust_goal",
+    "deterministic sha256 canonical hash independent of key order and whitespace",
+    "evidence digest verification fails closed for unsafe paths and digest mismatch",
+    "needs_repair verdict for unresolved actionable reviewer findings",
+    "blocked verdict for accepted non-blocking finding without rationale",
+    "requires_operator verdict for required_operator_input entries",
+    "read-only by default; report file written only on explicit --report flag",
+    "compatibility-period refusal for --replace-land-check and --run-tests"
+  ],
+  "test_ownership_boundary": {
+    "tests_edited_by_stage3_writer": false,
+    "fixtures_edited_by_stage3_writer": false,
+    "red_evidence_edited_by_stage3_writer": false,
+    "stage3_writer_identity": "claude-sonnet-4-6"
+  },
+  "bootstrap_model_family_separation": {
+    "red_author_model_family": "codex",
+    "stage3_writer_model_family": "claude",
+    "separation_preserved": true
+  },
+  "read_only_compatibility_statement": "bandit trust verify is read-only by default and does not replace existing workflow gates, mutate queues, active work, coordination state, routing state, evidence artifacts, landing artifacts, closeout artifacts, or bootstrap-gap state. No Trust Verifier cutover is introduced.",
+  "bootstrap_gaps": []
+}

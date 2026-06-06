@@ -37,6 +37,7 @@ import { eventDrivenWakeScheduler } from "./commands/event-driven-wake-scheduler
 import { repoPm } from "./commands/repo-pm.js";
 import { roleContracts } from "./commands/role-contracts.js";
 import { roleRuns } from "./commands/role-runs.js";
+import { trust } from "./commands/trust.js";
 import { workItemPm } from "./commands/work-item-pm.js";
 import { worktreeBootstrap } from "./commands/worktree-bootstrap.js";
 import { createWorkItem } from "./commands/work-item-create.js";
@@ -52,7 +53,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs>"
+        "  bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>"
     );
     process.exitCode = 1;
     return;
@@ -310,8 +311,14 @@ async function main() {
     return;
   }
 
+  if (command === "trust") {
+    const result = await trust(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>`);
   process.exitCode = 1;
 }
 

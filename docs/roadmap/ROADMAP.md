@@ -9,11 +9,9 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Operator must choose the `BANDIT-059` Stage 3 unblock
-path: provide or approve a Claude Process Adapter invocation/profile that can
-complete source edits and Writer evidence, or approve a scoped policy exception
-changing the Stage 3 implementation writer path for this Codex-authored RED
-slice.
+**Current next step:** Run Stage 4 pre-landing review for `BANDIT-059`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, and explicit disposition for any findings before Stage 5 landing.
 
 ## Next Work Item
 

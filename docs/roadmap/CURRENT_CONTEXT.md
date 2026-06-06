@@ -4,13 +4,17 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-059` is active and blocked. Repo PM created the Trust Verify Snapshot Foundation
+`BANDIT-059` is active. Repo PM created the Trust Verify Snapshot Foundation
 work item from `docs/specs/BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION.json`
 and linked `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` as the active
 bootstrap chore. Stage 1 brief evidence is recorded at
 `docs/work/BANDIT-059/brief.md`; Stage 2 RED evidence is recorded at
 `docs/work/BANDIT-059/red-evidence.md` and
-`docs/specs/BANDIT-059-red-evidence.json`.
+`docs/specs/BANDIT-059-red-evidence.json`; Stage 3 implementation evidence is
+recorded at `docs/work/BANDIT-059/implementation-evidence.md`,
+`docs/work/BANDIT-059/writer-report.md`, and
+`docs/specs/BANDIT-059-implementation-evidence.json`; and Codex PM Stage 3
+acceptance is recorded at `docs/work/BANDIT-059/stage3-pm-review.md`.
 
 Repo PM formation review was refreshed on 2026-06-05 after Local Qwen provider
 availability was restored. CodeRabbit formation review passed with zero findings
@@ -36,27 +40,23 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Operator must choose the `BANDIT-059` Stage 3 unblock
-path: provide or approve a Claude Process Adapter invocation/profile that can
-complete source edits and Writer evidence, or approve a scoped policy exception
-changing the Stage 3 implementation writer path for this Codex-authored RED
-slice.
+**Current next action:** Run Stage 4 pre-landing review for `BANDIT-059`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, and explicit disposition for any findings before Stage 5 landing.
 
-Do not route Stage 3 to Codex, do not let the Stage 3 Writer edit tests, test
-helpers, fixtures, snapshot fixtures, RED evidence artifacts/specs, or
-acceptance mappings, and do not create Pi/Aperture agent-scope schema/projection
-work, Trust Verifier cutover work, or unrelated cockpit product work during this
-bounded implementation.
+Do not land, close out, create the next work item, create Trust Verifier cutover
+work, create Pi/Aperture agent-scope schema/projection work, or start unrelated
+cockpit product work until Stage 4 review evidence and required finding
+dispositions exist.
 
-The current stage is Stage 3 implementation blocked. Stage 2 RED evidence
-defines the public CLI verifier contract and currently fails 8/8 because
-`bandit trust verify` is not registered. Codex PM created the Stage 3 dispatch
-packet at `docs/work/BANDIT-059/dispatch.md` and role-run manifest at
-`docs/role-runs/BANDIT-059/stage3-implementation.json`, then created the
-shorter retry packet at `docs/work/BANDIT-059/dispatch-short.md`. Three Claude
-Process Adapter attempts stalled before source edits or Writer evidence; all
-attempts are recorded at `docs/work/BANDIT-059/dispatch-attempt.md`. Codex PM
-did not substitute Codex-authored implementation work.
+The current stage is Stage 4 review required. Stage 2 RED evidence defines the
+public CLI verifier contract, and the accepted Stage 3 Claude implementation
+now makes `node --test test/trust-verify.test.mjs` pass 8/8. Codex PM created
+the Stage 3 dispatch packet at `docs/work/BANDIT-059/dispatch.md`, role-run
+manifest at `docs/role-runs/BANDIT-059/stage3-implementation.json`, and shorter
+retry packet at `docs/work/BANDIT-059/dispatch-short.md`. The operator approved
+using `claude -p`; Claude wrote the bounded Stage 3 implementation and evidence
+without editing Test Writer-owned surfaces.
 
 ## Active Work
 
@@ -79,13 +79,12 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Operator must choose the `BANDIT-059` Stage 3 unblock path: provide or
-   approve a Claude Process Adapter invocation/profile that can complete source
-   edits and Writer evidence, or approve a scoped policy exception changing the
-   Stage 3 implementation writer path for this Codex-authored RED slice.
-2. Preserve model-family separation: Codex authored and materially edited Stage
+1. Run Stage 4 pre-landing review for `BANDIT-059`: CodeRabbit pre-PR review,
+   Local Qwen adversarial review, aggregate review evidence, and explicit
+   disposition for any findings before Stage 5 landing.
+2. Preserve model-family separation evidence: Codex authored and materially edited Stage
    2 RED tests, so Stage 3 implementation must be routed to Claude with zero
-   test edit authority.
+   test edit authority; Stage 3 evidence records Claude authorship.
 3. Keep the first implementation slice as `bandit trust verify <snapshot.json>`
    with read-only verification, optional explicit report writing, and no
    reviewer/test execution or workflow-state mutation.
@@ -101,20 +100,9 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-Operator-owned input is required for the recorded Stage 3 unblock. The operator
-must choose one path:
-
-1. Provide or approve a Claude Process Adapter invocation/profile that can
-   complete source edits and Writer evidence for `BANDIT-059`.
-2. Approve a scoped policy exception changing the Stage 3 implementation writer
-   path for this Codex-authored RED slice.
-
-Repo artifacts cannot answer this automatically. `AGENTS.md`,
-`docs/work/BANDIT-059/brief.md`, `docs/work/BANDIT-059/red-evidence.md`, and
-`docs/verification/STAGE_RUBRICS.md` require Claude-family Stage 3
-implementation through the bootstrap Process Adapter path after Codex-authored
-RED tests. Codex PM cannot implement the source change locally or silently route
-to another model family without operator-owned policy input.
+No operator-owned input is required for the current Stage 4 review step. The
+prior Stage 3 operator unblock was satisfied when the operator approved using
+the ready `claude -p` Process Adapter profile on 2026-06-06.
 
 The minimum trust-layer surface is recorded in
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md` and
