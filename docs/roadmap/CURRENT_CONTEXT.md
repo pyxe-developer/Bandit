@@ -45,7 +45,8 @@ classification and supply-chain gate policy evidence are recorded at
 required Local Qwen refresh after those policy files changed the review subject
 is recorded at `docs/work/BANDIT-061/local-qwen-review.md`, and Codex PM
 dispositioned the refreshed findings at
-`docs/work/BANDIT-061/qwen-finding-disposition.md`.
+`docs/work/BANDIT-061/qwen-finding-disposition.md`. Aggregate Stage 4 review
+evidence is recorded at `docs/work/BANDIT-061/review-evidence.md`.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
 `BANDIT-061`. It records that the current work-item creation path can drop
@@ -59,22 +60,21 @@ resolved.
 
 **Active work item:** BANDIT-061
 
-The current stage is Stage 4 aggregate review evidence pending.
+The current stage is Stage 5 landing verdict pending.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record aggregate Stage 4 review evidence for
-`BANDIT-061` using CodeRabbit review/disposition evidence, refreshed Local Qwen
-review/disposition evidence, layered risk-classification and supply-chain gate
-evidence, and current review-subject hash.
+**Current next action:** Record Stage 5 landing verdict evidence for
+`BANDIT-061` before landing action, closeout, next work item, Trust Verifier
+cutover, or unrelated work.
 
 Do not land, close out, create Trust Verifier cutover work, create Pi/Aperture
 agent-scope schema/projection work, create role input or execution packet work,
-or start unrelated cockpit product work until aggregate Stage 4 review evidence
-is complete.
+or start unrelated cockpit product work until Stage 5 landing verdict evidence
+and landing action evidence are complete.
 
 ## Active Work
 
@@ -88,8 +88,9 @@ aggregate formation review passes, and Stage 2 RED evidence is recorded at
 `docs/work/BANDIT-061/red-evidence.md`. Stage 3 Claude implementation evidence
 and Codex PM acceptance are recorded. CodeRabbit Stage 4 review/disposition and
 refreshed Local Qwen Stage 4 review/disposition are recorded. Layered
-risk-classification and supply-chain gate evidence are recorded. The next
-required evidence is aggregate Stage 4 review evidence.
+risk-classification, supply-chain gate evidence, and aggregate Stage 4 review
+evidence are recorded. The next required evidence is Stage 5 landing verdict
+evidence.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
 follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
@@ -113,10 +114,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record aggregate Stage 4 review evidence for `BANDIT-061` using CodeRabbit
-   review/disposition evidence, refreshed Local Qwen review/disposition
-   evidence, layered risk-classification and supply-chain gate evidence, and
-   current review-subject hash.
+1. Record Stage 5 landing verdict evidence for `BANDIT-061` before landing
+   action, closeout, next work item, Trust Verifier cutover, or unrelated work.
 2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
    Separation evidence recorded during Stage 3.
 3. Keep the chore bounded to implementation-writer write-surface policy,
@@ -136,9 +135,9 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current aggregate Stage 4 review
+No operator-owned input is required for the current Stage 5 landing verdict
 action. Repo artifacts identify the active bootstrap-gap chore and the required
-boundary: record aggregate review evidence before Stage 5 landing.
+boundary: record landing verdict evidence before landing action or closeout.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path
