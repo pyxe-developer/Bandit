@@ -49,6 +49,8 @@ dispositioned the refreshed findings at
 evidence is recorded at `docs/work/BANDIT-061/review-evidence.md`. Stage 5
 safe-to-land verdict evidence is recorded at
 `docs/work/BANDIT-061/landing-verdict.md`.
+Local-record landing action evidence is recorded at
+`docs/work/BANDIT-061/landing-action.md`.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
 `BANDIT-061`. It records that the current work-item creation path can drop
@@ -62,20 +64,19 @@ resolved.
 
 **Active work item:** BANDIT-061
 
-The current stage is Stage 5 landing action pending.
+The current stage is Stage 6 closeout pending.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run the local-record landing action for `BANDIT-061`
-and record landing action evidence.
+**Current next action:** Record Stage 6 retrospective, improvement disposition,
+and gap disposition for `BANDIT-061` before any new work item.
 
 Do not land, close out, create Trust Verifier cutover work, create Pi/Aperture
 agent-scope schema/projection work, create role input or execution packet work,
-or start unrelated cockpit product work until landing action evidence is
-complete.
+or start unrelated cockpit product work until closeout evidence is complete.
 
 ## Active Work
 
@@ -90,8 +91,9 @@ aggregate formation review passes, and Stage 2 RED evidence is recorded at
 and Codex PM acceptance are recorded. CodeRabbit Stage 4 review/disposition and
 refreshed Local Qwen Stage 4 review/disposition are recorded. Layered
 risk-classification, supply-chain gate evidence, aggregate Stage 4 review
-evidence, and Stage 5 safe-to-land verdict evidence are recorded. The next
-required evidence is local-record landing action evidence.
+evidence, Stage 5 safe-to-land verdict evidence, and local-record landing
+action evidence are recorded. The next required evidence is Stage 6
+retrospective, improvement disposition, and gap disposition.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
 follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
@@ -115,8 +117,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run the local-record landing action for `BANDIT-061` and record landing
-   action evidence.
+1. Record Stage 6 retrospective, improvement disposition, and gap disposition
+   for `BANDIT-061` before any new work item.
 2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
    Separation evidence recorded during Stage 3.
 3. Keep the chore bounded to implementation-writer write-surface policy,
@@ -136,9 +138,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current landing action. Repo
+No operator-owned input is required for the current closeout action. Repo
 artifacts identify the active bootstrap-gap chore and the required boundary:
-record landing action evidence before closeout.
+record retrospective, improvement disposition, and gap disposition before any
+new work item.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

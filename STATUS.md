@@ -13,18 +13,19 @@ Layer Pivot.
 Surface chore for
 `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE`.
 
-Current stage: landing action pending. Stage 2 RED evidence, Stage 3
+Current stage: Stage 6 closeout pending. Stage 2 RED evidence, Stage 3
 Claude implementation evidence, Codex PM Stage 3 acceptance, CodeRabbit Stage 4
 review/disposition, refreshed Local Qwen Stage 4 review/disposition, risk
 classification, supply-chain gate evidence, and aggregate Stage 4 review
-evidence are recorded. Stage 5 landing verdict is safe-to-land.
+evidence are recorded. Stage 5 landing verdict is safe-to-land and local-record
+landing action evidence is recorded.
 
-Next action: Run the local-record landing action for `BANDIT-061` and record
-landing action evidence.
+Next action: Record Stage 6 retrospective, improvement disposition, and gap
+disposition for `BANDIT-061` before any new work item.
 
-No operator-owned input is required for that landing action. Do not close out,
-begin Trust Verifier cutover work, or start unrelated cockpit product work until
-landing action evidence is complete.
+No operator-owned input is required for that closeout action. Do not begin the
+next work item, begin Trust Verifier cutover work, or start unrelated cockpit
+product work until closeout evidence is complete.
 
 `BANDIT-060` is landed and closed out. It resolved
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` with a repo-native artifact-input
@@ -40,7 +41,7 @@ lost replacement metadata during work-item creation.
 
 Last 5 items only:
 
-- `BANDIT-061` - Role Contract Artifact Input Write Surface (landing action pending)
+- `BANDIT-061` - Role Contract Artifact Input Write Surface (Stage 6 closeout pending)
 - `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - active via `BANDIT-061`
 - `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued gap
 - `BANDIT-060` - Artifact Input Directory Split (closed)
