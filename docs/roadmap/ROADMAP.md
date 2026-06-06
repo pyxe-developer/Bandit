@@ -5,12 +5,11 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
-  aggregate review evidence pending.
+  review complete; Stage 5 landing verdict pending.
 
-**Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-061` using CodeRabbit review/disposition evidence, Local Qwen
-review/disposition evidence, layered risk-classification and supply-chain gate
-evidence, and current review-subject hash.
+**Current next step:** Record Stage 5 landing verdict evidence for
+`BANDIT-061` before landing action, closeout, next work item, Trust Verifier
+cutover, or unrelated work.
 
 ## Next Work Item
 

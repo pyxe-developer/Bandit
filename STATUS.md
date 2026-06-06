@@ -13,19 +13,20 @@ Layer Pivot.
 Surface chore for
 `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE`.
 
-Current stage: Stage 4 aggregate review evidence pending. Stage 2 RED evidence,
-Stage 3 Claude implementation evidence, Codex PM Stage 3 acceptance,
-CodeRabbit Stage 4 review/disposition, and Local Qwen Stage 4 review/disposition
-are recorded.
+Current stage: Stage 5 landing verdict pending. Stage 2 RED evidence, Stage 3
+Claude implementation evidence, Codex PM Stage 3 acceptance, CodeRabbit Stage 4
+review/disposition, Local Qwen Stage 4 review/disposition, aggregate Stage 4
+review evidence, risk classification, and supply-chain gate evidence are
+recorded.
 
-Next action: Record aggregate Stage 4 review evidence for `BANDIT-061` using
-CodeRabbit review/disposition evidence, Local Qwen review/disposition evidence,
-layered risk-classification and supply-chain gate evidence, and current
-review-subject hash.
+Next action: Record Stage 5 landing verdict evidence for `BANDIT-061` before
+landing action, closeout, next work item, Trust Verifier cutover, or unrelated
+work.
 
-No operator-owned input is required for that aggregate Stage 4 review action.
-Do not land, close out, begin Trust Verifier cutover work, or start unrelated
-cockpit product work until aggregate Stage 4 review evidence is complete.
+No operator-owned input is required for that Stage 5 landing verdict action. Do
+not land, close out, begin Trust Verifier cutover work, or start unrelated
+cockpit product work until landing verdict and landing action evidence are
+complete.
 
 `BANDIT-060` is landed and closed out. It resolved
 `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` with a repo-native artifact-input
@@ -41,7 +42,7 @@ lost replacement metadata during work-item creation.
 
 Last 5 items only:
 
-- `BANDIT-061` - Role Contract Artifact Input Write Surface (aggregate Stage 4 review pending)
+- `BANDIT-061` - Role Contract Artifact Input Write Surface (Stage 5 landing verdict pending)
 - `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - active via `BANDIT-061`
 - `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued gap
 - `BANDIT-060` - Artifact Input Directory Split (closed)

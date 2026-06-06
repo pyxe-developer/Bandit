@@ -135,6 +135,11 @@
       "work_item": "BANDIT-060",
       "decision_kind": "auto_landing",
       "evidence_path": ".bandit/policy/risk-classifications/BANDIT-060-risk-classification.json"
+    },
+    {
+      "work_item": "BANDIT-061",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-061-risk-classification.json"
     }
   ]
 }
