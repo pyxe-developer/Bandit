@@ -27,7 +27,7 @@ Stage 3 Writer did not edit Test Writer-owned surfaces. The contract-hardening
 follow-up is recorded as
 `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` in
 `.bandit/bootstrap-gaps.json` and must not be started before `BANDIT-060`
-lands.
+closes out.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -52,21 +52,23 @@ review-subject hash
 `caa7d2d515f3c1fb3c3d7db5ef2d7311c3aa41fe235b78ba7bdcb33d252ab274`. Stage 5
 landing verdict evidence at `docs/work/BANDIT-060/landing-verdict.md` records
 `safe-to-land`; `npm run bandit -- land-check BANDIT-060` and
-`npm run bandit -- auto-land-check BANDIT-060` pass.
+`npm run bandit -- auto-land-check BANDIT-060` pass. Local-record landing
+action evidence is recorded at `docs/work/BANDIT-060/landing-action.md`.
 
-**Current next action:** Run the local-record landing action for `BANDIT-060`
-and record landing action evidence.
+**Current next action:** Record Stage 6 retrospective, improvement disposition,
+and gap disposition for `BANDIT-060` before any new work item.
 
-Do not proceed to closeout, Trust Verifier cutover, Pi/Aperture agent-scope
-work, role input packet work, execution packet work, the queued role-contract
-write-surface gap, or unrelated cockpit product work until local-record landing
-action evidence is recorded in `docs/work/BANDIT-060/landing-action.md`.
+Do not create the next work item, proceed to Trust Verifier cutover, start
+Pi/Aperture agent-scope work, role input packet work, execution packet work, the
+queued role-contract write-surface gap, or unrelated cockpit product work until
+Stage 6 retrospective, improvement disposition, gap disposition, and context
+closeout evidence exist for `BANDIT-060`.
 
-The current stage is Stage 5 landing action pending. Stage 3 implementation is
-accepted, Stage 4 aggregate review evidence passes, Stage 5 landing verdict
-evidence records `safe-to-land`, but `BANDIT-060` is not landed until the
-local-record landing action completes and `docs/work/BANDIT-060/landing-action.md`
-records the commit SHA.
+The current stage is Stage 6 retrospective and disposition closeout required.
+Stage 3 implementation is accepted, Stage 4 aggregate review evidence passes,
+Stage 5 landing verdict evidence records `safe-to-land`, and Stage 5 landing
+action evidence records the supported `local_record` landing action. Stage 6
+retrospective, improvement disposition, and gap disposition are not yet recorded.
 
 ## Active Work
 
@@ -91,8 +93,9 @@ and no findings. Aggregate Stage 4 review evidence is recorded at
 `docs/work/BANDIT-060/review-evidence.md` with layered risk and supply-chain
 gate evidence. Stage 5 landing verdict evidence is recorded at
 `docs/work/BANDIT-060/landing-verdict.md`, rendered from
-`docs/artifact-inputs/BANDIT-060-landing-verdict.json`; the local-record landing
-action is the next required gate.
+`docs/artifact-inputs/BANDIT-060-landing-verdict.json`; local-record landing
+action evidence is recorded at `docs/work/BANDIT-060/landing-action.md`. Stage 6
+retrospective and disposition closeout is the next required gate.
 
 `BANDIT-059` is closed. Its closeout evidence is recorded at
 `docs/work/BANDIT-059/retrospective.md`; local-record landing evidence is
@@ -106,13 +109,13 @@ resulting work can proceed or land.
 
 Do not start Trust Verifier cutover, Pi/Aperture agent-scope work, role input
 packet work, execution packet work, the queued role-contract write-surface gap,
-or unrelated cockpit product work while `BANDIT-060` is in Stage 5 landing
-action pending.
+or unrelated cockpit product work while `BANDIT-060` is in Stage 6 closeout
+pending.
 
 ## Priority
 
-1. Run the local-record landing action for `BANDIT-060` and record landing
-   action evidence.
+1. Record Stage 6 retrospective, improvement disposition, and gap disposition
+   for `BANDIT-060` before any new work item.
 2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
    authority to edit tests, test helpers, fixtures, RED evidence, acceptance
    mappings, or canonical historical evidence outside the scoped dispatch
@@ -131,14 +134,14 @@ action pending.
 
 ## Required Operator Input
 
-No operator-owned input is required for the recorded local-record landing action
-next action.
+No operator-owned input is required for the recorded Stage 6 closeout action.
 Repo artifacts identify the active bootstrap gap, current Stage Rubric
 requirements, Clean-Code authority, Formation Gate boundary, Trust Verifier
 Compatibility Period boundary, artifact-input taxonomy, reviewer capture
 boundary, work/gap spec boundary, Test Writer ownership, Permanent Test
 Ownership Boundary, the recorded Stage 4 review gates, the recorded Stage 5
-landing verdict gate, and the required local-record landing action.
+landing verdict gate, the recorded local-record landing action, and the required
+Stage 6 retrospective and disposition closeout.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

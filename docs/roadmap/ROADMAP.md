@@ -6,8 +6,8 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Run the local-record landing action for `BANDIT-060`
-and record landing action evidence.
+**Current next step:** Record Stage 6 retrospective, improvement disposition,
+and gap disposition for `BANDIT-060` before any new work item.
 
 ## Next Work Item
 
