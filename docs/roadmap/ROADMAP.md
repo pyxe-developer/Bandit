@@ -9,9 +9,8 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Record aggregate Stage 4 review evidence for BANDIT-059
-using CodeRabbit timeout disposition, Local Qwen pass evidence, and current
-review-subject hash.
+**Current next step:** Record Stage 5 landing-gate evidence and landing verdict
+for BANDIT-059 before any landing action.
 
 ## Next Work Item
 
