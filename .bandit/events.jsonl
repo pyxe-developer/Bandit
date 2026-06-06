@@ -243,3 +243,5 @@
 {"type":"stage4_local_qwen_review_non_blocking","work_item":"BANDIT-061","message":"Refreshed Local Qwen completed with non_blocking findings after risk/supply-chain policy registration; next action is Codex PM disposition before aggregate Stage 4 review evidence"}
 {"type":"stage4_local_qwen_findings_dispositioned","work_item":"BANDIT-061","message":"Codex PM dispositioned refreshed Local Qwen non_blocking findings as no-source-repair; next action is aggregate Stage 4 review evidence"}
 {"type":"stage4_review_recorded","work_item":"BANDIT-061","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 0922c9d; next action is Stage 5 landing verdict evidence before landing action"}
+{"type":"artifact_created","work_item":"BANDIT-061","message":"Created landing_verdict artifact at docs/work/BANDIT-061/landing-verdict.md"}
+{"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-061","message":"Recorded Stage 5 safe-to-land verdict for BANDIT-061; next action is local-record landing action evidence"}

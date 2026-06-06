@@ -1,0 +1,20 @@
+{
+  "kind": "landing_verdict",
+  "contract_version": "1",
+  "work_item": "BANDIT-061",
+  "title": "BANDIT-061 Landing Verdict",
+  "source_head": "bf9555da1e38064bf33d65f754b07e58a9104072",
+  "review_evidence": "docs/work/BANDIT-061/review-evidence.md",
+  "tests_status": "pass",
+  "clean_code_status": "pass",
+  "coderabbit_state": "bootstrap_gap",
+  "local_qwen_state": "non_blocking",
+  "escalated_review_state": "not_applicable",
+  "uat_status": "not_applicable",
+  "source_drift_status": "current",
+  "operator_input_status": "none_required",
+  "landing_agent_state": "bootstrap_gap",
+  "landing_agent_replacement_evidence": "\n  - Codex PM local-record Stage 5 landing verdict replaces unavailable standalone Landing Agent for this bootstrap-gap chore; local-record landing action remains the next required step after land-check passes.",
+  "final_verdict": "safe-to-land",
+  "rationale": "BANDIT-061 is safe to land as the bounded bootstrap-gap chore for Role Contract Artifact Input Write Surface.\n  Aggregate Stage 4 review evidence records current review_subject_hash 0922c9da9c3f566a2b62082aef70dec1b1c396e73b66fad40fe4be428acf43d1, CodeRabbit procedural findings dispositioned as no-source-repair, refreshed Local Qwen non_blocking findings dispositioned as no-source-repair or satisfied-by-refresh, escalated review not_applicable, source drift current, no operator input required, and UAT not_applicable because this non-product chore changes local role-contract and role-run validation behavior without shipping an operator-clickable product surface.\n  Current Stage 5 verification includes focused role-run manifest and role-contract test coverage from Stage 3 and Stage 4, typecheck, role-contract validation, role-run validation, risk-classification validation, supply-chain-gate validation, Bandit validation, current review-subject hash evidence, cockpit/session-context agreement, and clean-code review against CLEAN_CODE.md.\n  Clean-code status is pass because the final source changes stay scoped to fail-closed role-run manifest validation, implementation-writer role-contract support surfaces, artifact-input policy support paths, and role-run manifest template guidance; they preserve canonical Markdown evidence, append-only coordination authority, repo-native roadmap/current-context authority, Bootstrap Model-Family Separation, the Permanent Test Ownership Boundary, historical manifest compatibility, and the Trust Verifier Compatibility Period.\n  Explicit layered risk-classification and supply-chain gate evidence mark BANDIT-061 eligible for local-record landing with no operator supervision required and no dependency, lockfile, package-manager script, CI/release workflow, installed agent skill, fetched prompt, external tool install, executable generated content, external side-effecting automation, or unknown supply-chain surface change.\n  The active BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE gap is not closed by this verdict alone; local-record landing action and Stage 6 retrospective/gap disposition remain required before the bounded chore can close.\n  The work introduces no Trust Verifier cutover, old gate replacement, live evidence capture helper, reviewer execution, model call, harness queue, auth or provider routing, live status, agent lifecycle, role input packet, execution packet, Pi/Aperture agent-scope schema/projection work, state-index persistence, local server/API mode, scheduler execution, worktree lifecycle, claim lease, work-surface reservation, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, dependency or lockfile change, installed global skill edit, external service integration, or unrelated Phase 8 cockpit feature work."
+}

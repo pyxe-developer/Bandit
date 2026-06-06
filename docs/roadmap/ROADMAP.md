@@ -4,12 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
-  review complete; Stage 5 landing verdict pending.
+- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 5
+  safe-to-land verdict recorded; landing action pending.
 
-**Current next step:** Record Stage 5 landing verdict evidence for
-`BANDIT-061` before landing action, closeout, next work item, Trust Verifier
-cutover, or unrelated work.
+**Current next step:** Run the local-record landing action for `BANDIT-061` and
+record landing action evidence.
 
 ## Next Work Item
 
