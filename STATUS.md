@@ -24,8 +24,9 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 4 Local Qwen review required after accepted Claude Stage 3
-implementation and CodeRabbit provider-timeout disposition.
+Current stage: Stage 4 aggregate review evidence required after accepted Claude
+Stage 3 implementation, CodeRabbit provider-timeout disposition, and Local Qwen
+pass evidence.
 
 Latest Stage 3 verification: 2026-06-06; `node --test
 test/trust-verify.test.mjs` passed 8/8, `npm run typecheck` passed,
@@ -39,8 +40,14 @@ recorded provider-refusal/bootstrap_gap disposition at
 `docs/work/BANDIT-059/coderabbit-timeout-disposition.md`; CodeRabbit is not
 treated as pass evidence.
 
-Next action: Run Stage 4 Local Qwen adversarial review for BANDIT-059 at the
-current disposition head before aggregate Stage 4 review evidence.
+Latest Stage 4 Local Qwen evidence: 2026-06-06; `npm run bandit -- qwen-review
+BANDIT-059` passed at source head
+`83d889cb9c2816840303bd06907099a7efe4f402` with zero findings and wrote
+`docs/work/BANDIT-059/local-qwen-review.md`.
+
+Next action: Record aggregate Stage 4 review evidence for BANDIT-059 using
+CodeRabbit timeout disposition, Local Qwen pass evidence, and current
+review-subject hash.
 
 The prior Stage 3 operator unblock is satisfied: the operator approved using
 the ready `claude -p` Process Adapter profile, and Claude recorded
@@ -58,7 +65,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 4 Local Qwen review required)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 4 aggregate review evidence required)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`

@@ -9,9 +9,9 @@
 The harness-specific Pi/Aperture path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-**Current next step:** Run Stage 4 Local Qwen adversarial review for
-BANDIT-059 at the current disposition head before aggregate Stage 4 review
-evidence.
+**Current next step:** Record aggregate Stage 4 review evidence for BANDIT-059
+using CodeRabbit timeout disposition, Local Qwen pass evidence, and current
+review-subject hash.
 
 ## Next Work Item
 

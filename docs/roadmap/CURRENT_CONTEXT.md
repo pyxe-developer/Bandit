@@ -18,7 +18,9 @@ acceptance is recorded at `docs/work/BANDIT-059/stage3-pm-review.md`.
 Stage 4 CodeRabbit timeout and provider-refusal disposition evidence is
 recorded at `docs/work/BANDIT-059/coderabbit-review.md`,
 `docs/specs/BANDIT-059-coderabbit-review-output.json`, and
-`docs/work/BANDIT-059/coderabbit-timeout-disposition.md`.
+`docs/work/BANDIT-059/coderabbit-timeout-disposition.md`. Stage 4 Local Qwen
+review passed with zero findings at
+`docs/work/BANDIT-059/local-qwen-review.md`.
 
 Repo PM formation review was refreshed on 2026-06-05 after Local Qwen provider
 availability was restored. CodeRabbit formation review passed with zero findings
@@ -44,19 +46,18 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Stage 4 Local Qwen adversarial review for
-BANDIT-059 at the current disposition head before aggregate Stage 4 review
-evidence.
+**Current next action:** Record aggregate Stage 4 review evidence for BANDIT-059
+using CodeRabbit timeout disposition, Local Qwen pass evidence, and current
+review-subject hash.
 
 Do not land, close out, create the next work item, create Trust Verifier cutover
 work, create Pi/Aperture agent-scope schema/projection work, or start unrelated
-cockpit product work until Stage 4 review evidence and required finding
-dispositions exist. Do not run aggregate Stage 4 review evidence until Local
-Qwen completes.
+cockpit product work until aggregate Stage 4 review evidence and required
+finding dispositions exist.
 
-The current stage is Stage 4 Local Qwen review required. Stage 2 RED evidence
-defines the public CLI verifier contract, and the accepted Stage 3 Claude
-implementation now makes `node --test test/trust-verify.test.mjs` pass 8/8.
+The current stage is Stage 4 aggregate review evidence required. Stage 2 RED
+evidence defines the public CLI verifier contract, and the accepted Stage 3
+Claude implementation now makes `node --test test/trust-verify.test.mjs` pass 8/8.
 Codex PM created the Stage 3 dispatch packet at
 `docs/work/BANDIT-059/dispatch.md`, role-run manifest at
 `docs/role-runs/BANDIT-059/stage3-implementation.json`, and shorter retry
@@ -67,7 +68,8 @@ authenticated, but two live pre-PR review attempts against `origin/main`
 produced no terminal verdict after reaching setup, sandbox preparation, and
 summarizing. Codex PM dispositioned the repeated timeout as scoped
 provider-refusal/bootstrap_gap replacement evidence without claiming a
-CodeRabbit pass.
+CodeRabbit pass. Local Qwen passed at source head
+`83d889cb9c2816840303bd06907099a7efe4f402` with no findings.
 
 ## Active Work
 
@@ -90,8 +92,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run Stage 4 Local Qwen adversarial review for BANDIT-059 at the current
-   disposition head before aggregate Stage 4 review evidence.
+1. Record aggregate Stage 4 review evidence for BANDIT-059 using CodeRabbit
+   timeout disposition, Local Qwen pass evidence, and current review-subject
+   hash.
 2. Preserve model-family separation evidence: Codex authored and materially edited Stage
    2 RED tests, so Stage 3 implementation must be routed to Claude with zero
    test edit authority; Stage 3 evidence records Claude authorship.
@@ -110,10 +113,11 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 4 Local Qwen review
-step. The prior Stage 3 operator unblock was satisfied when the operator
-approved using the ready `claude -p` Process Adapter profile on 2026-06-06, and
-the Stage 4 CodeRabbit timeout disposition is PM-owned provider-refusal routing.
+No operator-owned input is required for the current aggregate Stage 4 review
+evidence step. The prior Stage 3 operator unblock was satisfied when the
+operator approved using the ready `claude -p` Process Adapter profile on
+2026-06-06, the Stage 4 CodeRabbit timeout disposition is PM-owned
+provider-refusal routing, and Local Qwen passed with no findings.
 
 The minimum trust-layer surface is recorded in
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md` and
