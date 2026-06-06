@@ -27,7 +27,11 @@ review passes at `docs/work/BANDIT-061/formation-review.md`; and the CLI-owned
 `docs/work/BANDIT-061/coordination-log.jsonl`. Stage 2 RED evidence is recorded
 at `docs/work/BANDIT-061/red-evidence.md` and
 `docs/artifact-inputs/BANDIT-061-red-evidence.json`; the coordination log
-records the `red_recorded` transition.
+records the `red_recorded` transition. Stage 3 Claude implementation evidence
+is recorded at `docs/work/BANDIT-061/implementation-evidence.md`,
+`docs/work/BANDIT-061/writer-report.md`, and
+`docs/role-runs/BANDIT-061/stage3-implementation.json`; Codex PM acceptance is
+recorded at `docs/work/BANDIT-061/stage3-pm-review.md`.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
 `BANDIT-061`. It records that the current work-item creation path can drop
@@ -41,24 +45,22 @@ resolved.
 
 **Active work item:** BANDIT-061
 
-The current stage is Stage 3 implementation dispatch pending.
+The current stage is Stage 4 pre-landing review.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Dispatch Stage 3 implementation for `BANDIT-061` to
-Claude through the bootstrap Process Adapter path.
+**Current next action:** Run Stage 4 pre-landing review for `BANDIT-061`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, layered risk-classification and supply-chain gate evidence, and
+explicit disposition for any findings before Stage 5 landing.
 
-Do not let Codex implement Stage 3, and do not create Trust Verifier cutover
-work, create Pi/Aperture agent-scope schema/projection work, create role input
-or execution packet work, or start unrelated cockpit product work. Codex
-authored the Stage 2 RED tests, so Stage 3 implementation must be dispatched to
-Claude through the bootstrap Process Adapter path, and the Stage 3 Writer must
-not edit tests, test helpers, fixtures, RED evidence, acceptance mappings,
-formation evidence, review evidence, landing evidence, or retrospective
-evidence.
+Do not land, close out, create Trust Verifier cutover work, create Pi/Aperture
+agent-scope schema/projection work, create role input or execution packet work,
+or start unrelated cockpit product work until Stage 4 review evidence and
+finding dispositions are complete.
 
 ## Active Work
 
@@ -69,8 +71,10 @@ evidence.
 `brief_created` and `formation_approved`. Local Qwen and CodeRabbit formation
 reviews passed with zero findings after the accepted placeholder-command repair,
 aggregate formation review passes, and Stage 2 RED evidence is recorded at
-`docs/work/BANDIT-061/red-evidence.md`. The next required evidence is Stage 3
-implementation through the Claude bootstrap Process Adapter path.
+`docs/work/BANDIT-061/red-evidence.md`. Stage 3 Claude implementation evidence
+and Codex PM acceptance are recorded. The next required evidence is Stage 4
+pre-landing review: CodeRabbit, Local Qwen, aggregate review evidence, layered
+risk-classification, supply-chain gate evidence, and finding disposition.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
 follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
@@ -94,12 +98,12 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Dispatch Stage 3 implementation for `BANDIT-061` to Claude through the
-   bootstrap Process Adapter path.
-2. Preserve the Permanent Test Ownership Boundary: the Stage 3 Writer has zero
-   authority to edit tests, test helpers, fixtures, RED evidence, acceptance
-   mappings, or canonical historical evidence outside the scoped dispatch
-   packet.
+1. Run Stage 4 pre-landing review for `BANDIT-061`: CodeRabbit pre-PR review,
+   Local Qwen adversarial review, aggregate review evidence, layered
+   risk-classification and supply-chain gate evidence, and explicit disposition
+   for any findings before Stage 5 landing.
+2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
+   Separation evidence recorded during Stage 3.
 3. Keep the chore bounded to implementation-writer write-surface policy,
    role-run actual changed-file evidence, artifact-input policy/support paths,
    and historical role-run manifest compatibility.
@@ -117,11 +121,11 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 3 dispatch action.
-Repo artifacts identify the active bootstrap-gap chore and the required
-boundary: dispatch Claude Stage 3 implementation for `BANDIT-061` without
-Codex implementation, cutover, cockpit product work, Pi/Aperture agent-scope
-work, role input packets, or execution packets.
+No operator-owned input is required for the current Stage 4 review action. Repo
+artifacts identify the active bootstrap-gap chore and the required boundary:
+run CodeRabbit and Local Qwen review, record aggregate review evidence,
+layered risk-classification and supply-chain evidence, and disposition any
+findings before Stage 5 landing.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

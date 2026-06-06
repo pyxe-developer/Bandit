@@ -1,0 +1,58 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-061",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "authored_by": "claude-implementation-writer-stage3",
+  "process_adapter_path": true,
+  "summary": "Role-run validation now requires observed_changed_files for contract_version 2+ manifests, checks each observed file against allowed_target_files and the referenced role contract write surfaces/forbidden patterns, and role-contract validation requires implementation_writer to model the BANDIT-060 artifact-input policy/support surfaces when the artifact-input policy is present. Historical contract_version 1 manifests remain valid append-only evidence.",
+  "production_files_changed": [
+    "src/state/role-run-manifests.ts",
+    "src/state/role-contracts.ts",
+    ".bandit/policy/role-contracts.json",
+    "docs/templates/role-run-manifest.md"
+  ],
+  "acceptance_coverage": [
+    {
+      "criterion": "Role-run validation fails closed when future contract_version 2 manifests omit observed_changed_files.",
+      "evidence": "validateObservedChangedFiles requires observed_changed_files for contract_version 2+. test/role-run-manifests.test.mjs passes 9/9."
+    },
+    {
+      "criterion": "Role-run validation rejects observed changed files absent from allowed_target_files.",
+      "evidence": "Each observed file is checked against allowed_target_files before write-surface checks; diagnostic names the offending file."
+    },
+    {
+      "criterion": "Role-run validation rejects observed changed files outside contract write surfaces or matching forbidden patterns.",
+      "evidence": "Observed files are checked with isTargetFileAllowed against allowed_write_surface_families and forbidden_file_patterns; observed check runs before the declared-target check."
+    },
+    {
+      "criterion": "Historical contract_version 1 manifest compatibility preserved.",
+      "evidence": "Observed check returns early below contract_version 2; npm run bandit -- validate keeps BANDIT-058/059/060 manifests valid."
+    },
+    {
+      "criterion": "implementation_writer models BANDIT-060 artifact-input policy/support surfaces.",
+      "evidence": "validateImplementationWriterSurfaces requires .bandit/policy/artifact-inputs.json, docs/artifact-inputs/**, docs/reviewer-captures/.gitkeep, docs/trust-snapshot-fixtures/.gitkeep when the artifact-input policy exists; role-contracts.json declares all four. test/role-contracts.test.mjs passes 5/5."
+    },
+    {
+      "criterion": "Stage 3 refusal of tests, RED evidence, and acceptance mappings preserved.",
+      "evidence": "Existing test-surface refusal unchanged; no test/RED/acceptance surfaces added to role-contracts.json."
+    }
+  ],
+  "verification": [
+    { "command": "node --test test/role-run-manifests.test.mjs", "result": "pass (9/9)" },
+    { "command": "node --test test/role-contracts.test.mjs", "result": "pass (5/5)" },
+    { "command": "npm run typecheck", "result": "pass" },
+    { "command": "npm run bandit -- role-contracts validate --json", "result": "pass" },
+    { "command": "npm run bandit -- role-runs validate BANDIT-061 --json", "result": "pass" },
+    { "command": "npm run bandit -- validate", "result": "pass" },
+    { "command": "npm test", "result": "pass (501/501)" },
+    { "command": "git diff --check", "result": "clean (exit 0)" }
+  ],
+  "clean_code_self_check": "Spec-aligned, small surface area, simple design reusing isTargetFileAllowed with a shared stringArray helper, explicit named checks, clear fail-closed messages, no hidden authority, no role erosion.",
+  "test_ownership_boundary": "Codex PM/Test Writer authored the Stage 2 RED tests, test helpers, RED evidence, and acceptance mappings. Stage 3 Writer changed none of them.",
+  "bootstrap_model_family_separation": "Codex authored the Stage 2 RED tests, so Stage 3 was dispatched to Claude through the bootstrap Process Adapter path as claude-implementation-writer-stage3.",
+  "authority_boundary": "Role contracts and role-run manifests remain append-only evidence and derived non-canonical projections. They do not replace coordination logs, review evidence, landing evidence, UAT, retrospective evidence, roadmap/current-context state, or bootstrap-gap ledger authority. The artifact-input taxonomy remains policy evidence, not workflow-state authority.",
+  "trust_verifier_cutover": "out_of_scope",
+  "bootstrap_gaps": [],
+  "follow_up_concerns": []
+}

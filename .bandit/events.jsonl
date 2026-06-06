@@ -234,3 +234,4 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-060","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT; next action is BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE work-item creation"}
 {"type":"work_item_created","work_item":"BANDIT-061","message":"Created work item BANDIT-061 from docs/specs/BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE.json"}
 {"type":"artifact_created","work_item":"BANDIT-061","message":"Created red_evidence artifact at docs/work/BANDIT-061/red-evidence.md"}
+{"type":"stage3_pm_review_accepted","work_item":"BANDIT-061","message":"Codex PM accepted Claude Stage 3 implementation evidence; next action is Stage 4 CodeRabbit, Local Qwen, aggregate review evidence, layered risk-classification and supply-chain gate evidence, and finding disposition before Stage 5 landing"}

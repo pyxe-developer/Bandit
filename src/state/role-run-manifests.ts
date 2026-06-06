@@ -4,6 +4,8 @@ import { readRoleContractRoles, type RoleContract } from "./role-contracts.js";
 
 const POLICY_DISPLAY_PATH = ".bandit/policy/role-contracts.json";
 
+const OBSERVED_CHANGED_FILES_MIN_CONTRACT_VERSION = 2;
+
 export type RoleRunManifestsValidationReport = {
   status: "pass";
   work_item: string;
@@ -94,6 +96,7 @@ async function validateManifest(
 
   const matchedRole = findRoleContract(roles, roleId, version, manifestId);
   validateRoleStageCompatibility(manifest, matchedRole, manifestId);
+  validateObservedChangedFiles(manifest, matchedRole, manifestId);
   validateTargetFiles(manifest, matchedRole, manifestId);
 }
 
@@ -219,6 +222,38 @@ function validateRoleStageCompatibility(
   }
 }
 
+function validateObservedChangedFiles(
+  manifest: RawRecord,
+  role: RoleContract,
+  manifestId: string
+): void {
+  const contractVersion =
+    typeof manifest.contract_version === "number" ? manifest.contract_version : 1;
+  if (contractVersion < OBSERVED_CHANGED_FILES_MIN_CONTRACT_VERSION) return;
+
+  if (!isNonEmptyStringArray(manifest.observed_changed_files)) {
+    throw new Error(
+      `role-run manifest ${manifestId} requires observed_changed_files for contract_version ${OBSERVED_CHANGED_FILES_MIN_CONTRACT_VERSION}`
+    );
+  }
+
+  const allowedTargets = stringArray(manifest.allowed_target_files);
+  const forbiddenPatterns = stringArray(manifest.forbidden_file_patterns);
+
+  for (const file of manifest.observed_changed_files as string[]) {
+    if (!allowedTargets.includes(file)) {
+      throw new Error(
+        `role-run manifest ${manifestId} observed changed file ${file} is not listed in allowed_target_files`
+      );
+    }
+    if (!isTargetFileAllowed(file, role.allowed_write_surface_families, forbiddenPatterns)) {
+      throw new Error(
+        `role-run manifest ${manifestId} observed changed file ${file} is outside the ${role.role_id} contract write surfaces or matches a forbidden pattern`
+      );
+    }
+  }
+}
+
 function validateTargetFiles(
   manifest: RawRecord,
   role: RoleContract,
@@ -226,11 +261,7 @@ function validateTargetFiles(
 ): void {
   if (!Array.isArray(manifest.allowed_target_files)) return;
 
-  const forbiddenPatterns = Array.isArray(manifest.forbidden_file_patterns)
-    ? (manifest.forbidden_file_patterns as unknown[]).filter(
-        (p): p is string => typeof p === "string"
-      )
-    : [];
+  const forbiddenPatterns = stringArray(manifest.forbidden_file_patterns);
 
   for (const file of manifest.allowed_target_files as unknown[]) {
     if (typeof file !== "string") continue;
@@ -240,6 +271,12 @@ function validateTargetFiles(
       );
     }
   }
+}
+
+function stringArray(value: unknown): string[] {
+  return Array.isArray(value)
+    ? (value as unknown[]).filter((item): item is string => typeof item === "string")
+    : [];
 }
 
 function isTargetFileAllowed(

@@ -1,7 +1,15 @@
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const POLICY_DISPLAY_PATH = ".bandit/policy/role-contracts.json";
+const ARTIFACT_INPUTS_POLICY_PATH = ".bandit/policy/artifact-inputs.json";
+
+const REQUIRED_ARTIFACT_INPUT_SURFACES = [
+  ".bandit/policy/artifact-inputs.json",
+  "docs/artifact-inputs/**",
+  "docs/reviewer-captures/.gitkeep",
+  "docs/trust-snapshot-fixtures/.gitkeep"
+];
 
 const REQUIRED_ROLE_FIELDS = [
   "role_id",
@@ -41,7 +49,8 @@ export async function validateRoleContracts(
   repoRoot: string
 ): Promise<RoleContractsValidationReport> {
   const content = await readRequiredPolicy(repoRoot);
-  return parseAndValidatePolicy(content);
+  const requireArtifactInputSurfaces = await artifactInputsPolicyExists(repoRoot);
+  return parseAndValidatePolicy(content, requireArtifactInputSurfaces);
 }
 
 export async function validateRoleContractsPolicy(repoRoot: string): Promise<void> {
@@ -53,7 +62,17 @@ export async function validateRoleContractsPolicy(repoRoot: string): Promise<voi
     if (isMissingPathError(error)) return;
     throw error;
   }
-  parseAndValidatePolicy(content);
+  const requireArtifactInputSurfaces = await artifactInputsPolicyExists(repoRoot);
+  parseAndValidatePolicy(content, requireArtifactInputSurfaces);
+}
+
+async function artifactInputsPolicyExists(repoRoot: string): Promise<boolean> {
+  try {
+    await stat(path.join(repoRoot, ARTIFACT_INPUTS_POLICY_PATH));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function readRoleContractRoles(repoRoot: string): Promise<RoleContract[]> {
@@ -92,7 +111,10 @@ async function readRequiredPolicy(repoRoot: string): Promise<string> {
   }
 }
 
-function parseAndValidatePolicy(content: string): RoleContractsValidationReport {
+function parseAndValidatePolicy(
+  content: string,
+  requireArtifactInputSurfaces: boolean
+): RoleContractsValidationReport {
   let parsed: unknown;
   try {
     parsed = JSON.parse(content);
@@ -115,7 +137,7 @@ function parseAndValidatePolicy(content: string): RoleContractsValidationReport 
     if (!isRecord(rawRole)) {
       throw new Error("Malformed role contracts policy: each role must be an object");
     }
-    validateRole(rawRole);
+    validateRole(rawRole, requireArtifactInputSurfaces);
     roleIds.push(rawRole.role_id as string);
   }
 
@@ -138,7 +160,7 @@ function validateAuthorityBoundary(policy: RawRecord): void {
   }
 }
 
-function validateRole(role: RawRecord): void {
+function validateRole(role: RawRecord, requireArtifactInputSurfaces: boolean): void {
   const roleId = typeof role.role_id === "string" ? role.role_id : "unknown";
 
   const missingField = REQUIRED_ROLE_FIELDS.find((field) => !isValidRequiredField(role[field]));
@@ -149,7 +171,7 @@ function validateRole(role: RawRecord): void {
   }
 
   if (roleId === "implementation_writer") {
-    validateImplementationWriterSurfaces(role);
+    validateImplementationWriterSurfaces(role, requireArtifactInputSurfaces);
   }
 }
 
@@ -168,7 +190,10 @@ function isValidRequiredField(value: unknown): boolean {
   return true;
 }
 
-function validateImplementationWriterSurfaces(role: RawRecord): void {
+function validateImplementationWriterSurfaces(
+  role: RawRecord,
+  requireArtifactInputSurfaces: boolean
+): void {
   if (!Array.isArray(role.allowed_write_surface_families)) return;
   const surfaces = role.allowed_write_surface_families as unknown[];
 
@@ -183,6 +208,19 @@ function validateImplementationWriterSurfaces(role: RawRecord): void {
   if (hasTestSurface) {
     throw new Error(
       "implementation_writer role contract cannot authorize tests, test helpers, fixtures, RED evidence, or acceptance mappings"
+    );
+  }
+
+  if (!requireArtifactInputSurfaces) return;
+
+  const declaredSurfaces = surfaces.filter((s): s is string => typeof s === "string");
+  const missingSurfaces = REQUIRED_ARTIFACT_INPUT_SURFACES.filter(
+    (surface) => !declaredSurfaces.includes(surface)
+  );
+
+  if (missingSurfaces.length > 0) {
+    throw new Error(
+      `implementation_writer role contract must include artifact-input policy support surfaces: ${REQUIRED_ARTIFACT_INPUT_SURFACES.join(", ")}`
     );
   }
 }

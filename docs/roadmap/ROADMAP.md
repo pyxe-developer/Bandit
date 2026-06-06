@@ -4,11 +4,13 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 3
-  implementation dispatch pending.
+- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
+  pre-landing review pending.
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-061` to
-Claude through the bootstrap Process Adapter path.
+**Current next step:** Run Stage 4 pre-landing review for `BANDIT-061`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, layered risk-classification and supply-chain gate evidence, and
+finding disposition before Stage 5 landing.
 
 ## Next Work Item
 
