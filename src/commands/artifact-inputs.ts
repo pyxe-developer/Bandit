@@ -1,13 +1,13 @@
 import { validateArtifactInputTaxonomy } from "../state/artifact-inputs.js";
 
-export async function artifactInputs(repoRoot: string, args: string[]) {
+export async function artifactInputs(repoRoot: string, args: string[]): Promise<{ output: string }> {
   const [action, ...options] = args;
 
   if (action === "validate") {
     return validate(repoRoot, options);
   }
 
-  throw new Error("Usage: bandit artifact-inputs <validate>");
+  throw new Error("Usage: bandit artifact-inputs <validate> [--json]");
 }
 
 async function validate(repoRoot: string, args: string[]) {

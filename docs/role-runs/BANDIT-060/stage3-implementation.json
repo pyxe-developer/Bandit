@@ -1,4 +1,5 @@
 {
+  "contract_version": 1,
   "manifest_id": "BANDIT-060-stage3-implementation",
   "work_item_id": "BANDIT-060",
   "stage": "stage3_implementation",
@@ -63,7 +64,8 @@
     ".bandit/policy/role-contracts.json"
   ],
   "authority_boundary": {
-    "is_append_only_evidence": true,
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
     "can_satisfy_coordination_history": false,
     "can_satisfy_review_or_landing_evidence": false,
     "can_satisfy_uat": false,
