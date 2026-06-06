@@ -6,8 +6,9 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Run Repo PM formation review for `BANDIT-060` before
-Stage 2 RED evidence.
+**Current next step:** Complete CodeRabbit formation review for `BANDIT-060`
+and update aggregate formation review before formation approval or Stage 2 RED
+evidence.
 
 ## Next Work Item
 
