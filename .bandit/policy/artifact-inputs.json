@@ -1,0 +1,86 @@
+{
+  "contract_version": 1,
+  "policy_id": "artifact-input-directory-taxonomy",
+  "supported_classes": [
+    {
+      "class_id": "work_or_gap_spec",
+      "description": "work_or_gap_spec input class",
+      "preferred_directory": "docs/specs",
+      "path_patterns": ["docs/specs/*.json"],
+      "owner_authority_role": "repo_pm",
+      "allowed_writer_stages": ["stage1_brief"],
+      "expected_consumers": [
+        "bandit work-item create",
+        "bandit repo-pm create-work-item"
+      ],
+      "refusal_behavior": "docs/specs accepts only work-item and bootstrap-gap creation specs for future inputs."
+    },
+    {
+      "class_id": "artifact_renderer_input",
+      "description": "artifact_renderer_input input class",
+      "preferred_directory": "docs/artifact-inputs",
+      "path_patterns": ["docs/artifact-inputs/*.json"],
+      "owner_authority_role": "test_writer",
+      "allowed_writer_stages": [
+        "stage2_red_evidence",
+        "stage3_implementation",
+        "stage5_landing",
+        "stage6_retrospective"
+      ],
+      "expected_consumers": ["bandit artifact create"],
+      "refusal_behavior": "Future artifact-renderer inputs under docs/specs fail closed except legacy readable files."
+    },
+    {
+      "class_id": "reviewer_capture",
+      "description": "reviewer_capture input class",
+      "preferred_directory": "docs/reviewer-captures",
+      "path_patterns": ["docs/reviewer-captures/*.json"],
+      "owner_authority_role": "reviewer",
+      "allowed_writer_stages": ["stage4_review"],
+      "expected_consumers": [
+        "bandit coderabbit-review pre-pr",
+        "bandit qwen-review"
+      ],
+      "refusal_behavior": "Reviewer/provider captures must not be treated as artifact-renderer command inputs."
+    },
+    {
+      "class_id": "trust_snapshot_fixture",
+      "description": "trust_snapshot_fixture input class",
+      "preferred_directory": "docs/trust-snapshot-fixtures",
+      "path_patterns": ["docs/trust-snapshot-fixtures/*.json"],
+      "owner_authority_role": "codex_pm",
+      "allowed_writer_stages": ["stage2_red_evidence"],
+      "expected_consumers": ["bandit trust verify"],
+      "refusal_behavior": "Trust snapshot fixtures must not be treated as work-item specs or generated artifact inputs."
+    }
+  ],
+  "legacy_compatibility": [
+    {
+      "class_id": "artifact_renderer_input",
+      "path_patterns": [
+        "docs/specs/*-red-evidence.json",
+        "docs/specs/*-implementation-evidence.json",
+        "docs/specs/*-landing-verdict.json",
+        "docs/specs/*-retrospective.json"
+      ],
+      "status": "legacy_readable_only"
+    },
+    {
+      "class_id": "reviewer_capture",
+      "path_patterns": ["docs/specs/*coderabbit-review-output*.json"],
+      "status": "legacy_readable_only"
+    },
+    {
+      "class_id": "trust_snapshot_fixture",
+      "path_patterns": ["docs/specs/snapshots/*.json"],
+      "status": "legacy_readable_only"
+    }
+  ],
+  "observed_inputs": [],
+  "refusal_behavior": {
+    "ambiguous_future_docs_specs": "blocker",
+    "unsafe_path": "blocker",
+    "class_name_mismatch": "blocker",
+    "unsupported_directory": "blocker"
+  }
+}

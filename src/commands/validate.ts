@@ -28,6 +28,7 @@ import { validateStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-
 import { validateSkillLifecycleContracts } from "../state/skill-lifecycle-contracts.js";
 import { validateStageCapabilityScopePolicy } from "../state/stage-capability-scope.js";
 import { validateSupplyChainGate } from "../state/supply-chain-gate.js";
+import { validateArtifactInputsPolicy } from "../state/artifact-inputs.js";
 import { validateRoleContractsPolicy } from "../state/role-contracts.js";
 import { validateTokenCostFailsafePolicy } from "../state/token-cost-failsafe.js";
 import { validateTemplates } from "../state/templates.js";
@@ -73,6 +74,7 @@ export async function validateBandit(repoRoot: string) {
   await validateStage4EvidenceHeadPolicy(repoRoot);
   await validateCoordinationLogs(repoRoot);
   await validateRoleContractsPolicy(repoRoot);
+  await validateArtifactInputsPolicy(repoRoot);
 
   return { message: "Bandit state is valid." };
 }

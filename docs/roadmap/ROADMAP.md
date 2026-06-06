@@ -6,15 +6,16 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-060` to
-Claude through the bootstrap Process Adapter path.
+**Current next step:** Run Stage 4 pre-landing review for `BANDIT-060`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, layered risk-classification and supply-chain gate evidence, and
+explicit disposition for any findings before Stage 5 landing.
 
 ## Next Work Item
 
-- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
-  evidence exists and artifact-input paths are clear, decide per Trust Goal
-  when `bandit trust verify` becomes the canonical verifier or wrapper for an
-  older gate path.
+- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - after
+  `BANDIT-060` lands, align implementation-writer write-surface policy and
+  role-run validation with artifact-input policy and directory-marker surfaces.
 
 ## Planned Work
 
@@ -28,6 +29,9 @@ cockpit feature work unless the operator explicitly changes priority.
   reviewer captures, work/gap specs, and trust snapshot fixtures before Trust
   Verifier cutover or parity work depends on ambiguous `docs/specs/` path
   semantics.
+- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - queued
+  after `BANDIT-060`; harden implementation-writer role contracts and role-run
+  validation for artifact-input policy and preferred-directory support files.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
   evidence exists and artifact-input paths are clear, decide per Trust Goal
   when `bandit trust verify` becomes the canonical verifier or wrapper for an

@@ -14,18 +14,20 @@ item from `docs/specs/BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT.json` and
 linked `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` as the active bootstrap
 chore.
 
-Current stage: Stage 3 implementation dispatch pending. Stage 2 RED evidence is
-recorded, and coordination history records `red_recorded`.
+Current stage: Stage 4 review pending. Stage 2 RED evidence is recorded,
+Claude Stage 3 Writer evidence is recorded, and Codex PM Stage 3 acceptance
+review now passes after Test Writer contract reconciliation.
 
-Next action: Dispatch Stage 3 implementation for `BANDIT-060` to Claude through
-the bootstrap Process Adapter path.
+Next action: Run Stage 4 pre-landing review for `BANDIT-060`: CodeRabbit
+pre-PR review, Local Qwen adversarial review, aggregate review evidence,
+layered risk-classification and supply-chain gate evidence, and explicit
+disposition for any findings before Stage 5 landing.
 
-No operator-owned input is required for the recorded next action. Codex authored
-the Stage 2 RED tests, so Stage 3 must go to Claude and must not edit tests,
-test helpers, fixtures, RED evidence, acceptance mappings, or canonical
-historical evidence. Do not start Trust Verifier cutover, role input packet
-work, execution packet work, Pi/Aperture agent-scope work, or unrelated cockpit
-product work while `BANDIT-060` is awaiting Claude Stage 3 implementation.
+No operator-owned input is required for the recorded next action. Do not start
+Trust Verifier cutover, role input packet work, execution packet work,
+Pi/Aperture agent-scope work, the queued role-contract write-surface gap, Stage
+5 landing, or unrelated cockpit product work while `BANDIT-060` is in Stage 4
+review.
 
 `BANDIT-059` is landed and closed out. It resolved
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` with the compatibility-mode
@@ -35,8 +37,8 @@ product work while `BANDIT-060` is awaiting Claude Stage 3 implementation.
 
 Last 5 items only:
 
-- `BANDIT-060` - Artifact Input Directory Split (Stage 3 dispatch pending)
+- `BANDIT-060` - Artifact Input Directory Split (Stage 4 review pending)
+- `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - queued after `BANDIT-060`
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - active bootstrap cleanup chore
 - `BANDIT-059` - Trust Verify Snapshot Foundation (closed)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - resolved by `BANDIT-059`
-- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material while trust-verifier gaps remain queued

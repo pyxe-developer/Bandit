@@ -2,6 +2,7 @@ import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { appendLifecycleEvent } from "../state/events.js";
 import { getBanditPaths } from "../state/paths.js";
+import { artifactInputsPolicyExists } from "../state/artifact-inputs.js";
 import { readWorkItem } from "../state/work-items.js";
 import {
   OUTPUT_FILES,
@@ -23,6 +24,7 @@ export async function createArtifact(repoRoot: string, args: string[]) {
   }
 
   const specLocation = resolveRepoPath(repoRoot, args[1]);
+  await assertNotAmbiguousArtifactRendererPath(repoRoot, specLocation.displayPath);
   const rawSpec = await readSpec(specLocation.absolutePath, specLocation.displayPath);
   const spec = validateSpec(rawSpec);
   const workDir = path.join(repoRoot, "docs/work", spec.workItem);
@@ -49,6 +51,16 @@ export async function createArtifact(repoRoot: string, args: string[]) {
   return {
     output: `Created artifact: ${artifactDisplayPath}\n`
   };
+}
+
+async function assertNotAmbiguousArtifactRendererPath(
+  repoRoot: string,
+  displayPath: string
+): Promise<void> {
+  if (!displayPath.startsWith("docs/specs/")) return;
+  const policyExists = await artifactInputsPolicyExists(repoRoot);
+  if (!policyExists) return;
+  throw new Error("artifact_renderer_input inputs must use docs/artifact-inputs");
 }
 
 function resolveRepoPath(repoRoot: string, inputPath: string) {

@@ -1,0 +1,134 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-060",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "stage3_authorship": {
+    "model_family": "claude",
+    "model_id": "claude-sonnet-4-6",
+    "adapter": "bootstrap_process_adapter",
+    "reason": "Codex-authored Stage 2 RED evidence requires Stage 3 to use a different model family."
+  },
+  "production_files_changed": [
+    "src/state/artifact-inputs.ts",
+    "src/commands/artifact-inputs.ts",
+    "src/cli.ts",
+    "src/commands/artifact-create.ts",
+    "src/commands/validate.ts",
+    ".bandit/policy/artifact-inputs.json",
+    "docs/artifact-inputs/.gitkeep",
+    "docs/reviewer-captures/.gitkeep",
+    "docs/trust-snapshot-fixtures/.gitkeep"
+  ],
+  "acceptance_coverage": [
+    {
+      "criterion": "Focused RED evidence proves Bandit currently cannot distinguish input classes with deterministic validation.",
+      "status": "pass",
+      "evidence": "All 5 RED tests now pass GREEN after adding artifact-inputs validate command and artifact create path enforcement."
+    },
+    {
+      "criterion": "Repo-native taxonomy policy artifact names supported JSON input classes with all required fields.",
+      "status": "pass",
+      "evidence": ".bandit/policy/artifact-inputs.json defines four classes: work_or_gap_spec, artifact_renderer_input, reviewer_capture, trust_snapshot_fixture with preferred directories, owners, stages, consumers, and refusal behavior."
+    },
+    {
+      "criterion": "bandit validate or narrow CLI path fails closed for ambiguous future inputs, unsafe paths, unsupported directories, class/name mismatches.",
+      "status": "pass",
+      "evidence": "artifact-inputs validate refuses ambiguous docs/specs artifact_renderer_input paths (test 2), unsafe paths and class mismatches (test 5)."
+    },
+    {
+      "criterion": "bandit artifact create accepts new artifact-renderer input location while preserving path checks, no-overwrite, lifecycle events, rollback.",
+      "status": "pass",
+      "evidence": "Test 3 confirms docs/specs/ path fails closed and docs/artifact-inputs/ path renders the artifact correctly."
+    },
+    {
+      "criterion": "Historical docs/specs/ files remain readable as legacy inputs.",
+      "status": "pass",
+      "evidence": "Test 4 confirms legacy=true observed inputs appear in legacy_readable_paths and do not fail validation."
+    },
+    {
+      "criterion": "Reviewer/provider capture JSON has explicit future path or modeled class.",
+      "status": "pass",
+      "evidence": "reviewer_capture class with preferred directory docs/reviewer-captures/ defined in policy."
+    },
+    {
+      "criterion": "Trust snapshot fixtures have explicit future path or modeled class.",
+      "status": "pass",
+      "evidence": "trust_snapshot_fixture class with preferred directory docs/trust-snapshot-fixtures/ defined in policy."
+    },
+    {
+      "criterion": "Role contracts, role-run manifests, and model-family separation remain consistent.",
+      "status": "pass",
+      "evidence": "role-runs validate BANDIT-060 passes. Stage 2 (Codex) and Stage 3 (Claude) are different model families."
+    },
+    {
+      "criterion": "No generated Markdown evidence loses authority.",
+      "status": "pass",
+      "evidence": "Taxonomy classifies JSON command inputs only. Markdown evidence artifacts and append-only coordination history are unaffected."
+    },
+    {
+      "criterion": "No Trust Verifier cutover or parity replacement introduced.",
+      "status": "pass",
+      "evidence": "No trust verifier, gate replacement, live execution, or cockpit work added. Trust Verifier cutover remains blocked on a later per-trust-goal cutover decision."
+    },
+    {
+      "criterion": "Permanent Test Ownership Boundary preserved.",
+      "status": "pass",
+      "evidence": "Zero test-surface edits by Stage 3 Writer."
+    }
+  ],
+  "verification_commands": [
+    {
+      "command": "node --test test/artifact-inputs.test.mjs",
+      "result": "tests 5 / pass 5 / fail 0"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "clean, no type errors"
+    },
+    {
+      "command": "npm run bandit -- artifact-inputs validate --json",
+      "result": "exit 0, status: pass"
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "result": "Bandit state is valid."
+    },
+    {
+      "command": "npm run bandit -- role-runs validate BANDIT-060 --json",
+      "result": "status: pass"
+    },
+    {
+      "command": "git diff --check",
+      "result": "clean"
+    }
+  ],
+  "clean_code_self_check": {
+    "spec_alignment": "pass",
+    "small_surface_area": "pass",
+    "simple_design": "pass",
+    "explicit_state": "pass",
+    "no_hidden_authority": "pass",
+    "testable_behavior": "pass",
+    "readable_flow": "pass",
+    "locality": "pass",
+    "failure_clarity": "pass",
+    "no_role_erosion": "pass",
+    "improvement_capture": "pass"
+  },
+  "test_ownership_boundary_evidence": "Stage 3 made zero changes to test/**, docs/specs/BANDIT-060-red-evidence.json, docs/work/BANDIT-060/red-evidence.md, any test helper, fixture, or acceptance mapping.",
+  "bootstrap_model_family_separation_evidence": {
+    "stage2_author_model_family": "codex",
+    "stage3_author_model_family": "claude",
+    "separation_satisfied": true
+  },
+  "json_taxonomy_boundary_statement": "The artifact-input taxonomy policy and validation reports do not replace or reduce the authority of canonical Markdown evidence, append-only coordination history, roadmap/current-context authority, review evidence, landing evidence, retrospective evidence, trust-verifier reports, or bootstrap-gap ledger state.",
+  "trust_verifier_cutover_boundary": "Trust Verifier cutover remains out of scope. No old gates were replaced. No live evidence capture, parity replacement, or trust-goal cutover decision was implemented.",
+  "bootstrap_gaps": [
+    {
+      "gap": "implementation_writer role contract does not cover .bandit/policy/artifact-inputs.json",
+      "impact": "The policy file created in this stage cannot be listed in the role-run manifest allowed_target_files because it is outside the declared write surfaces. A follow-up gap chore should extend the role contract.",
+      "disposition": "bootstrap_gap_recorded"
+    }
+  ]
+}

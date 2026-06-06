@@ -31,7 +31,7 @@ const retrospectiveMiningSignals = [
 test("artifact create creates RED evidence from explicit structured input", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Brief Created");
-  await writeSpec(repo, "docs/specs/red-evidence.json", {
+  await writeSpec(repo, "docs/artifact-inputs/red-evidence.json", {
     kind: "red_evidence",
     work_item: "BANDIT-001",
     status: "pass",
@@ -54,7 +54,7 @@ test("artifact create creates RED evidence from explicit structured input", asyn
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/red-evidence.json"
+    "docs/artifact-inputs/red-evidence.json"
   ]);
 
   assert.equal(result.code, 0, result.stderr);
@@ -82,7 +82,7 @@ test("artifact create creates RED evidence from explicit structured input", asyn
 test("artifact create creates implementation evidence without taking hidden authority", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "RED Recorded");
-  await writeSpec(repo, "docs/specs/implementation-evidence.json", {
+  await writeSpec(repo, "docs/artifact-inputs/implementation-evidence.json", {
     kind: "implementation_evidence",
     work_item: "BANDIT-001",
     status: "pass",
@@ -109,7 +109,7 @@ test("artifact create creates implementation evidence without taking hidden auth
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/implementation-evidence.json"
+    "docs/artifact-inputs/implementation-evidence.json"
   ]);
 
   assert.equal(result.code, 0, result.stderr);
@@ -176,7 +176,7 @@ test("artifact create renders parser-compatible landing agent state", async () =
 test("artifact create creates a retrospective with durable dispositions", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
-  await writeSpec(repo, "docs/specs/retrospective.json", {
+  await writeSpec(repo, "docs/artifact-inputs/retrospective.json", {
     kind: "retrospective",
     work_item: "BANDIT-001",
     outcome: "Artifact creation landed as a workflow-infrastructure chore.",
@@ -202,7 +202,7 @@ test("artifact create creates a retrospective with durable dispositions", async 
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/retrospective.json"
+    "docs/artifact-inputs/retrospective.json"
   ]);
 
   assert.equal(result.code, 0, result.stderr);
@@ -224,7 +224,7 @@ test("artifact create creates a retrospective with durable dispositions", async 
 test("artifact create refuses retrospective specs without structured improvement mining", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
-  await writeSpec(repo, "docs/specs/retrospective.json", {
+  await writeSpec(repo, "docs/artifact-inputs/retrospective.json", {
     kind: "retrospective",
     work_item: "BANDIT-001",
     outcome: "Artifact creation landed as a workflow-infrastructure chore.",
@@ -246,7 +246,7 @@ test("artifact create refuses retrospective specs without structured improvement
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/retrospective.json"
+    "docs/artifact-inputs/retrospective.json"
   ]);
 
   assert.equal(result.code, 1);
@@ -263,7 +263,7 @@ test("artifact create refuses retrospective specs without structured improvement
 test("artifact create refuses retrospective mining entries without durable disposition", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
-  await writeSpec(repo, "docs/specs/retrospective.json", {
+  await writeSpec(repo, "docs/artifact-inputs/retrospective.json", {
     kind: "retrospective",
     work_item: "BANDIT-001",
     outcome: "Artifact creation landed as a workflow-infrastructure chore.",
@@ -291,7 +291,7 @@ test("artifact create refuses retrospective mining entries without durable dispo
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/retrospective.json"
+    "docs/artifact-inputs/retrospective.json"
   ]);
 
   assert.equal(result.code, 1);
@@ -301,7 +301,7 @@ test("artifact create refuses retrospective mining entries without durable dispo
 test("artifact create renders retrospective structured mining evidence", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Landed");
-  await writeSpec(repo, "docs/specs/retrospective.json", {
+  await writeSpec(repo, "docs/artifact-inputs/retrospective.json", {
     kind: "retrospective",
     work_item: "BANDIT-001",
     outcome: "Artifact creation landed as a workflow-infrastructure chore.",
@@ -326,7 +326,7 @@ test("artifact create renders retrospective structured mining evidence", async (
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/retrospective.json"
+    "docs/artifact-inputs/retrospective.json"
   ]);
 
   assert.equal(result.code, 0, result.stderr);
@@ -346,7 +346,7 @@ test("artifact create renders retrospective structured mining evidence", async (
 test("artifact create fails closed for unsupported kinds before writing files", async () => {
   const repo = await createInitializedRepo();
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Brief Created");
-  await writeSpec(repo, "docs/specs/unsupported.json", {
+  await writeSpec(repo, "docs/artifact-inputs/unsupported.json", {
     kind: "broad_dashboard_artifact",
     work_item: "BANDIT-001"
   });
@@ -354,7 +354,7 @@ test("artifact create fails closed for unsupported kinds before writing files", 
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/unsupported.json"
+    "docs/artifact-inputs/unsupported.json"
   ]);
 
   assert.equal(result.code, 1);
@@ -376,7 +376,7 @@ test("artifact create refuses occupied output paths before writing files", async
     "existing evidence\n",
     "utf8"
   );
-  await writeSpec(repo, "docs/specs/red-evidence.json", {
+  await writeSpec(repo, "docs/artifact-inputs/red-evidence.json", {
     kind: "red_evidence",
     work_item: "BANDIT-001",
     status: "pass",
@@ -396,7 +396,7 @@ test("artifact create refuses occupied output paths before writing files", async
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/red-evidence.json"
+    "docs/artifact-inputs/red-evidence.json"
   ]);
 
   assert.equal(result.code, 1);
@@ -451,7 +451,7 @@ async function createInitializedRepo() {
 
 async function createLandingVerdictArtifact(repo, overrides = {}) {
   await writeWorkBrief(repo, "BANDIT-001", "Artifact Creation", "Review Recorded");
-  await writeSpec(repo, "docs/specs/landing-verdict.json", {
+  await writeSpec(repo, "docs/artifact-inputs/landing-verdict.json", {
     kind: "landing_verdict",
     work_item: "BANDIT-001",
     contract_version: "1",
@@ -475,7 +475,7 @@ async function createLandingVerdictArtifact(repo, overrides = {}) {
   const result = await runBandit(repo, [
     "artifact",
     "create",
-    "docs/specs/landing-verdict.json"
+    "docs/artifact-inputs/landing-verdict.json"
   ]);
 
   assert.equal(result.code, 0, result.stderr);
