@@ -6,10 +6,10 @@
 
 - `[Gap]` `BANDIT-060` - Artifact Input Directory Split
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-060`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next step:** Perform Codex PM disposition of the eight `BANDIT-060`
+CodeRabbit findings, classify repair-required versus no-action/deferred items,
+and route any accepted bounded repair before Local Qwen, aggregate Stage 4
+review, or Stage 5 landing.
 
 ## Next Work Item
 
