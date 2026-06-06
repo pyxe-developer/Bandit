@@ -235,3 +235,5 @@
 {"type":"work_item_created","work_item":"BANDIT-061","message":"Created work item BANDIT-061 from docs/specs/BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE.json"}
 {"type":"artifact_created","work_item":"BANDIT-061","message":"Created red_evidence artifact at docs/work/BANDIT-061/red-evidence.md"}
 {"type":"stage3_pm_review_accepted","work_item":"BANDIT-061","message":"Codex PM accepted Claude Stage 3 implementation evidence; next action is Stage 4 CodeRabbit, Local Qwen, aggregate review evidence, layered risk-classification and supply-chain gate evidence, and finding disposition before Stage 5 landing"}
+{"type":"stage4_coderabbit_review_blocked","work_item":"BANDIT-061","message":"CodeRabbit Stage 4 pre-PR review completed with two procedural findings; next action is Codex PM finding disposition before Local Qwen or aggregate Stage 4 review"}
+{"type":"stage4_coderabbit_finding_disposition_recorded","work_item":"BANDIT-061","message":"Codex PM dispositioned two CodeRabbit procedural findings as no-source-repair; next action is Local Qwen adversarial review before aggregate Stage 4 review"}

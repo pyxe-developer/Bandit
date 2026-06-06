@@ -5,12 +5,11 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 4
-  pre-landing review pending.
+  Local Qwen review pending.
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-061`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-finding disposition before Stage 5 landing.
+**Current next step:** Run Local Qwen adversarial review for the current
+`BANDIT-061` source before aggregate Stage 4 review evidence, Stage 5 landing,
+closeout, or unrelated work.
 
 ## Next Work Item
 

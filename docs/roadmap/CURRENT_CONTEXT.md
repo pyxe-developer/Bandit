@@ -31,7 +31,11 @@ records the `red_recorded` transition. Stage 3 Claude implementation evidence
 is recorded at `docs/work/BANDIT-061/implementation-evidence.md`,
 `docs/work/BANDIT-061/writer-report.md`, and
 `docs/role-runs/BANDIT-061/stage3-implementation.json`; Codex PM acceptance is
-recorded at `docs/work/BANDIT-061/stage3-pm-review.md`.
+recorded at `docs/work/BANDIT-061/stage3-pm-review.md`. Stage 4 CodeRabbit
+pre-PR review completed with two procedural findings at
+`docs/work/BANDIT-061/coderabbit-review.md`; Codex PM dispositioned both as
+no-source-repair at
+`docs/work/BANDIT-061/coderabbit-finding-disposition.md`.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is queued behind
 `BANDIT-061`. It records that the current work-item creation path can drop
@@ -52,15 +56,14 @@ trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Stage 4 pre-landing review for `BANDIT-061`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next action:** Run Local Qwen adversarial review for the current
+`BANDIT-061` source before aggregate Stage 4 review evidence, Stage 5 landing,
+closeout, or unrelated work.
 
 Do not land, close out, create Trust Verifier cutover work, create Pi/Aperture
 agent-scope schema/projection work, create role input or execution packet work,
-or start unrelated cockpit product work until Stage 4 review evidence and
-finding dispositions are complete.
+or start unrelated cockpit product work until Local Qwen, aggregate Stage 4
+review evidence, and any finding dispositions are complete.
 
 ## Active Work
 
@@ -72,9 +75,9 @@ finding dispositions are complete.
 reviews passed with zero findings after the accepted placeholder-command repair,
 aggregate formation review passes, and Stage 2 RED evidence is recorded at
 `docs/work/BANDIT-061/red-evidence.md`. Stage 3 Claude implementation evidence
-and Codex PM acceptance are recorded. The next required evidence is Stage 4
-pre-landing review: CodeRabbit, Local Qwen, aggregate review evidence, layered
-risk-classification, supply-chain gate evidence, and finding disposition.
+and Codex PM acceptance are recorded. CodeRabbit Stage 4 review and PM finding
+disposition are recorded. The next required evidence is Local Qwen adversarial
+review at the current source head.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is a queued
 follow-up gap discovered during `BANDIT-061` creation. It must not preempt the
@@ -98,10 +101,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run Stage 4 pre-landing review for `BANDIT-061`: CodeRabbit pre-PR review,
-   Local Qwen adversarial review, aggregate review evidence, layered
-   risk-classification and supply-chain gate evidence, and explicit disposition
-   for any findings before Stage 5 landing.
+1. Run Local Qwen adversarial review for the current `BANDIT-061` source before
+   aggregate Stage 4 review evidence, Stage 5 landing, closeout, or unrelated
+   work.
 2. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
    Separation evidence recorded during Stage 3.
 3. Keep the chore bounded to implementation-writer write-surface policy,
@@ -121,11 +123,11 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 4 review action. Repo
-artifacts identify the active bootstrap-gap chore and the required boundary:
-run CodeRabbit and Local Qwen review, record aggregate review evidence,
-layered risk-classification and supply-chain evidence, and disposition any
-findings before Stage 5 landing.
+No operator-owned input is required for the current Local Qwen review action.
+Repo artifacts identify the active bootstrap-gap chore and the required
+boundary: run Local Qwen review, then record aggregate review evidence, layered
+risk-classification and supply-chain evidence, and disposition any findings
+before Stage 5 landing.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path
