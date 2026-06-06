@@ -208,3 +208,4 @@
 {"type":"artifact_created","work_item":"BANDIT-059","message":"Created red_evidence artifact at docs/work/BANDIT-059/red-evidence.md"}
 {"type":"stage3_dispatch_attempt_blocked","work_item":"BANDIT-059","message":"Claude Process Adapter dispatch attempt stalled before source edits or Writer evidence; retry Stage 3 from docs/work/BANDIT-059/dispatch.md"}
 {"type":"stage3_dispatch_retry_blocked","work_item":"BANDIT-059","message":"Second Claude Process Adapter dispatch attempt stalled before source edits or Writer evidence; next action is a shorter Stage 3 Claude dispatch packet before retry"}
+{"type":"stage3_dispatch_short_retry_blocked","work_item":"BANDIT-059","message":"Short-packet Claude Process Adapter retry stalled before source edits or Writer evidence; operator-owned unblock input is required before Stage 3 can resume"}

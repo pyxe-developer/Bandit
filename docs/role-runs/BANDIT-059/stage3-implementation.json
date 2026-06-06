@@ -31,7 +31,7 @@
     "docs/work/BANDIT-059/formation-review.md",
     "docs/work/BANDIT-059/coordination-log.jsonl"
   ],
-  "required_input_packet_ref": "docs/work/BANDIT-059/dispatch.md",
+  "required_input_packet_ref": "docs/work/BANDIT-059/dispatch-short.md",
   "required_summary_path": "docs/work/BANDIT-059/implementation-evidence.md",
   "validation_commands": [
     "node --test test/trust-verify.test.mjs",

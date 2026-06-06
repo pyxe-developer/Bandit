@@ -24,22 +24,25 @@ retrospective/improvement/gap disposition.
 The Pi/Aperture harness-specific path is superseded by
 `docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md`.
 
-Current stage: Stage 3 implementation pending after Test Writer-owned RED
-evidence.
+Current stage: Stage 3 implementation blocked after three Claude Process Adapter
+attempts stalled before source edits or Writer evidence.
 
 Latest Stage 2 RED run: 2026-06-05T21:33:02Z; `node --test
 test/trust-verify.test.mjs` failed 8/8 because `trust` is not registered.
 
-Next action: Create a shorter Stage 3 Claude Process Adapter dispatch packet
-from `docs/work/BANDIT-059/dispatch.md`, then retry Claude Writer
-implementation for `BANDIT-059` through that narrower packet.
+Next action: Operator must choose the `BANDIT-059` Stage 3 unblock path:
+provide or approve a Claude Process Adapter invocation/profile that can complete
+source edits and Writer evidence, or approve a scoped policy exception changing
+the Stage 3 implementation writer path for this Codex-authored RED slice.
 
-Two Claude Process Adapter attempts stalled before source edits or Writer
-evidence; both attempts are recorded at
+Three Claude Process Adapter attempts stalled before source edits or Writer
+evidence; all attempts are recorded at
 `docs/work/BANDIT-059/dispatch-attempt.md`. Codex PM did not substitute
 Codex-authored implementation work.
 
-No operator-owned input is required for the next Stage 3 implementation step.
+Operator-owned input is required for the next Stage 3 implementation step
+because repo policy requires Claude-family Stage 3 implementation after
+Codex-authored RED tests, and Codex PM cannot silently route around that policy.
 Do not route Stage 3 to Codex, let the Stage 3 Writer edit tests or RED
 evidence, start Trust Verifier cutover, create a new work item, or start
 Pi/Aperture agent-scope work.
@@ -53,7 +56,7 @@ artifact-input path clarity blocks the verifier/report contract.
 
 Last 5 items only:
 
-- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 shorter dispatch packet pending)
+- `BANDIT-059` - Trust Verify Snapshot Foundation (Stage 3 operator unblock required)
 - `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION` - active bootstrap chore for read-only verifier foundation
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for harness-agnostic trust-layer pivot
 - `BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT` - queued cleanup candidate for overloaded `docs/specs/`
