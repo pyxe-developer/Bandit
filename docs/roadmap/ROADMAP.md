@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 1
-  formation review pending.
+- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 2
+  RED evidence pending.
 
-**Current next step:** Run Repo PM formation review for BANDIT-061 before
-Stage 2 RED evidence.
+**Current next step:** Create Stage 2 RED evidence for `BANDIT-061` through the
+Test Writer boundary.
 
 ## Next Work Item
 
