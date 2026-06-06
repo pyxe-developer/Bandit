@@ -232,3 +232,4 @@
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-060","message":"Recorded local landing action evidence at docs/work/BANDIT-060/landing-action.md; next action is Stage 6 retrospective and disposition closeout"}
 {"type":"artifact_created","work_item":"BANDIT-060","message":"Created retrospective artifact at docs/work/BANDIT-060/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-060","message":"Recorded Stage 6 retrospective closeout and resolved BANDIT-GAP-ARTIFACT-INPUT-DIRECTORY-SPLIT; next action is BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE work-item creation"}
+{"type":"work_item_created","work_item":"BANDIT-061","message":"Created work item BANDIT-061 from docs/specs/BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE.json"}

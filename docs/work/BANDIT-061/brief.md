@@ -1,0 +1,193 @@
+# BANDIT-061: Role Contract Artifact Input Write Surface
+
+## Status
+
+Brief Created
+
+## Non-Product Work
+
+Create a bounded role-contract and role-run validation hardening chore so implementation-writer authority can model artifact-input policy surfaces and future role-run evidence can prove actual changed files stayed inside the declared role contract.
+
+## Origin
+
+BANDIT-060 introduced the artifact-input directory taxonomy and preferred JSON input directories, but Stage 3 PM review accepted a non-blocking mismatch: the implementation_writer role contract did not model the new artifact-input policy/support surfaces and role-run validation only checked declared manifest targets against broad contract patterns. It did not compare actual changed files from the Writer run against the manifest or artifact-input policy. The BANDIT-060 retrospective queued BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE as the next bounded bootstrap gap before Trust Verifier cutover or unrelated cockpit work.
+
+## Scope
+
+- Align the implementation_writer role contract with artifact-input policy and preferred-directory support files introduced by BANDIT-060, including .bandit/policy/artifact-inputs.json and the dedicated docs/artifact-inputs/, docs/reviewer-captures/, and docs/trust-snapshot-fixtures/ directory markers only where the role authority genuinely needs them.
+- Add focused RED evidence before implementation for the current role-run validation gap: a manifest can pass while omitting actual changed artifact-input policy/support files or while declaring targets that do not prove the Writer's observed change set stayed inside the role contract.
+- Extend role-run manifest evidence or validation with an explicit actual-changed-files boundary, equivalent observed-write-surface evidence, or a narrower repo-native mechanism that proves the Writer's real changed files are covered by the manifest and permitted by the referenced role contract.
+- Require role-runs validation to fail closed when future manifests omit required changed-file evidence, list changed files outside allowed_target_files, list changed files outside the referenced role contract write surfaces, or list files matching forbidden patterns.
+- Preserve historical role-run manifests as auditable append-only evidence. Any new schema, contract version, compatibility branch, or migration rule must avoid invalidating already-landed BANDIT-058, BANDIT-059, and BANDIT-060 evidence unless explicit compatibility evidence is recorded.
+- Keep the artifact-input taxonomy source-of-truth in .bandit/policy/artifact-inputs.json as policy evidence, not workflow state authority; role contracts and role-run manifests remain append-only evidence/projection boundaries and cannot replace coordination history, review evidence, landing evidence, or retrospective evidence.
+- Update templates and expected future role-run manifest examples only as needed to make the new write-surface evidence visible to future Stage 3 dispatches and reviewers.
+- Record CLEAN_CODE.md read evidence in Stage 1; CLEAN_CODE.md was read on 2026-06-06 before creating this brief, and clean-code compliance must be evaluated before landing.
+- Stage capability scope for this chore: Codex PM/Repo PM owns Stage 1 brief creation, formation routing, and context-artifact synchronization; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation is assigned to Claude through the bootstrap Process Adapter path; Stage 3 Implementation Writer has no authority to edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, or retrospective evidence; reviewers own Stage 4 evidence; Landing Agent owns Stage 5 verdict/action evidence; Closeout Agent/Codex PM owns Stage 6 closeout evidence.
+- Token-cost failsafe boundary: use existing Token-Cost Failsafe policy for abnormal-run guardrails if paid, high-token, reviewer, or long-running execution becomes necessary; this chore must not approve new provider-pricing evidence, spend-class approval, paid reviewer promotion, recurring paid routing, or operator-owned cost/risk overrides.
+- Future-work scope: this chore must not implement Trust Verifier cutover, old gate replacement, live evidence capture helpers, reviewer execution, model calls, harness queues, auth or provider routing, live status, agent lifecycle, role input packets, generated execution packets, Pi/Aperture agent-scope schema/projection work, broad role taxonomy redesign, state-index persistence, local server/API mode, scheduler execution, worktree lifecycle execution, claim leases, work-surface reservations, PR/CI workflow, automatic merge/push/deploy behavior, product UAT approval, dependency or lockfile changes, installed global skill edits, external service integration, or unrelated Phase 8 cockpit feature work.
+
+## Acceptance Criteria
+
+- The chore brief exists at docs/work/BANDIT-061/brief.md and links to BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE as the active bootstrap gap created from BANDIT-060 Stage 3 PM review and retrospective evidence.
+- Stage 1 brief evidence records CLEAN_CODE.md read evidence, Stage Capability Scope requirements, Codex-owned technical decisions, source hierarchy, Formation Gate requirement, implementation_writer write-surface boundary, artifact-input policy/support path boundary, actual-changed-files or equivalent observed-write evidence boundary, historical manifest compatibility boundary, append-only role-run evidence boundary, Token-Cost Failsafe boundary, Evidence Freshness SLO boundary, Operator Fail-Closed Boundary, Input Quarantine Gate, Layered Risk Classification, and Supply-Chain Gate requirements.
+- Focused RED evidence proves the current failure mode where role-run validation can pass without proving the Writer's actual changed files are all declared in the manifest and permitted by the referenced role contract.
+- Focused RED evidence proves artifact-input policy/support files introduced by BANDIT-060 are either unrepresentable or insufficiently validated under the current implementation_writer role contract and role-run manifest validation.
+- The implementation_writer role contract or compatible policy model explicitly covers only the artifact-input policy/support paths needed for Stage 3 implementation authority, while still refusing tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, and retrospective evidence.
+- Role-run validation fails closed for future manifests when observed changed-file evidence is missing, when an observed changed file is absent from allowed_target_files, when an observed changed file is outside the referenced role contract write surfaces, or when an observed changed file matches forbidden_file_patterns.
+- Role-run validation preserves append-only historical evidence compatibility for already-landed role-run manifests and records any compatibility rule clearly in code, tests, and Stage 3 evidence.
+- Role-run manifest templates, examples, or dispatch guidance expose the new changed-file/write-surface evidence requirement so future Stage 3 packets do not rely on chat memory.
+- No role-run manifest, role contract policy, artifact-input policy, template, or derived validation output becomes canonical workflow history or replaces coordination logs, review evidence, landing evidence, UAT, retrospective evidence, roadmap/current-context state, or bootstrap-gap ledger authority.
+- The implementation does not start Trust Verifier cutover or parity replacement; any old-gate replacement remains blocked on a later per-trust-goal cutover decision with reproducible parity evidence.
+- The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, or acceptance mappings for this work item.
+- Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review-subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.
+- Layered risk-classification and supply-chain gate evidence are recorded before landing because this chore changes role contracts, role-run validation, policy surfaces, templates, and Stage 3 authority checks.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE is resolved only after landing action and retrospective closeout evidence exist for this bounded role-contract hardening chore.
+- No Trust Verifier cutover, old gate replacement, live evidence capture helper, reviewer execution, model call, harness queue, auth or provider routing, live status, agent lifecycle, role input packet, execution packet, Pi/Aperture agent-scope schema/projection work, broad role taxonomy redesign, state-index persistence, local server/API mode, scheduler, worktree lifecycle, claim lease, work-surface reservation, PR/CI workflow, automatic merge/push/deploy, product UAT approval, dependency or lockfile change, installed global skill edit, external service integration, or unrelated Phase 8 cockpit feature work is introduced.
+
+## Verification Plan
+
+- Run focused role-run manifest RED/GREEN tests proving validation rejects missing observed changed-file evidence for future manifests.
+- Run focused role-run manifest tests proving validation rejects observed changed files that are not listed in allowed_target_files.
+- Run focused role-run manifest tests proving validation rejects observed changed files outside the referenced role contract write-surface families or matching forbidden_file_patterns.
+- Run focused role-contract tests proving implementation_writer can represent the required artifact-input policy/support paths without authorizing Test Writer, formation, review, landing, retrospective, merge, push, deploy, dependency, external service, or unrelated cockpit surfaces.
+- Run focused compatibility tests proving existing BANDIT-058, BANDIT-059, and BANDIT-060 role-run manifests remain auditable under the declared compatibility rule.
+- Run focused template or fixture tests if role-run manifest templates, role contracts, or dispatch guidance are changed.
+- Run node --test test/role-run-manifests.test.mjs.
+- Run node --test test/role-contracts.test.mjs.
+- Run node --test test/artifact-inputs.test.mjs if artifact-input policy path semantics are touched.
+- Run node --test test/work-item-create.test.mjs if work-item spec validation, brief rendering, bootstrap-gap linking, or Repo PM creation routing is touched.
+- Run node --test test/role-entrypoints-formation.test.mjs if formation approval, role entrypoint routing, or Work Item PM readiness behavior is touched.
+- Run node --test test/validate.test.mjs if repo validation behavior is touched.
+- Run npm test if implementation touches shared command routing, validators, artifact renderers, work-item parsing, templates, bootstrap gaps, coordination history, cockpit status, session-context packets, risk classification, supply-chain gates, input quarantine, operator boundaries, token-cost failsafes, evidence freshness, role contracts, role-run manifests, model-family separation, or policy validation beyond focused tests.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run npm run bandit -- role-contracts validate --json.
+- Run npm run bandit -- role-runs validate BANDIT-061 --json.
+- Run npm run bandit -- artifact-inputs validate --json.
+- Run npm run bandit -- gaps list.
+- Run npm run bandit -- stage-capability-scope validate --json.
+- Run npm run bandit -- token-cost-failsafe validate --json.
+- Run npm run bandit -- evidence-freshness-slos validate --json.
+- Run npm run bandit -- risk-classification validate --json.
+- Run npm run bandit -- supply-chain-gate validate --json.
+- Run npm run bandit -- input-quarantine validate --json.
+- Run npm run bandit -- operator-boundary validate --json.
+- Run node ./bin/bandit.mjs cockpit status --json.
+- Run node ./bin/bandit.mjs session-context current --json.
+- Run node ./bin/bandit.mjs review-subject-hash BANDIT-061 for aggregate review evidence freshness.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-061 --base origin/main before Stage 4 closeout, unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-061 before Stage 4 closeout.
+- Run npm run bandit -- land-check BANDIT-061 before landing.
+- Run git diff --check.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE.json
+- docs/work/BANDIT-061/brief.md
+- docs/work/BANDIT-061/qwen-formation-review.md
+- docs/work/BANDIT-061/coderabbit-formation-review.md
+- docs/work/BANDIT-061/formation-review.md
+- docs/work/BANDIT-061/coordination-log.jsonl
+- docs/work/BANDIT-061/red-evidence.md
+- docs/work/BANDIT-061/implementation-evidence.md
+- docs/work/BANDIT-061/coderabbit-review.md
+- docs/work/BANDIT-061/local-qwen-review.md
+- docs/work/BANDIT-061/review-evidence.md
+- docs/work/BANDIT-061/landing-verdict.md
+- docs/work/BANDIT-061/landing-action.md
+- docs/work/BANDIT-061/retrospective.md
+- docs/specs/BANDIT-061-red-evidence.json
+- docs/specs/BANDIT-061-implementation-evidence.json
+- docs/specs/BANDIT-061-landing-verdict.json
+- docs/specs/BANDIT-061-retrospective.json
+- .bandit/policy/role-contracts.json
+- .bandit/policy/artifact-inputs.json
+- docs/templates/role-run-manifest.md
+- src/state/role-contracts.ts
+- src/state/role-run-manifests.ts
+- test/role-contracts.test.mjs
+- test/role-run-manifests.test.mjs
+- .bandit/bootstrap-gaps.json
+- .bandit/events.jsonl
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## Required Evidence
+
+- docs/work/BANDIT-061/brief.md
+- docs/work/BANDIT-061/qwen-formation-review.md
+- docs/work/BANDIT-061/coderabbit-formation-review.md
+- docs/work/BANDIT-061/formation-review.md
+- docs/work/BANDIT-061/coordination-log.jsonl
+- docs/work/BANDIT-061/red-evidence.md
+- docs/work/BANDIT-061/implementation-evidence.md
+- docs/work/BANDIT-061/coderabbit-review.md
+- docs/work/BANDIT-061/local-qwen-review.md
+- docs/work/BANDIT-061/review-evidence.md
+- docs/work/BANDIT-061/landing-verdict.md
+- docs/work/BANDIT-061/landing-action.md
+- docs/work/BANDIT-061/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required before creating this bootstrap-gap chore or running formation review. Repo artifacts identify the queued role-contract artifact-input write-surface gap, current Stage Rubric requirements, Clean-Code authority, Formation Gate boundary, implementation_writer contract mismatch, role-run actual changed-file validation gap, artifact-input policy/support path boundary, historical manifest compatibility boundary, Token-Cost Failsafe boundary, Evidence Freshness SLO boundary, Operator Fail-Closed Boundary, Input Quarantine Gate, Layered Risk Classification, Supply-Chain Gate, and Codex PM/Repo PM authority to route routine contract-hardening mechanics. Halt only if implementation would change product direction, UAT policy, workflow policy beyond enforcing explicit role-contract and role-run write-surface semantics, business tradeoffs, explicit cost/risk posture, provider-pricing approval, spend-class approval, paid reviewer promotion, recurring paid routing policy, external service setup, live routing policy, claim authority, worktree lifecycle authority, installed global skill contents, dependency or lockfile policy, merge/push/deploy authority, Trust Verifier cutover policy, or broader cockpit/product scope.
+
+## Stage Capability Scope
+
+policy: .bandit/policy/stage-capability-scope.json
+stages:
+- stage1_brief
+- formation_review
+- stage2_red_evidence
+- stage3_implementation
+- stage4_review
+- stage5_landing
+- stage6_retrospective
+authority_roles:
+- codex_pm
+- repo_pm
+- work_item_pm
+- test_writer
+- implementation_writer
+- reviewer
+- landing_agent
+- closeout_agent
+required_skills:
+- bandit
+- tdd
+- review
+- superpowers:verification-before-completion
+forbidden_actions:
+- Do not write RED evidence before Stage 1 brief and Formation Gate evidence exist.
+- Do not let Stage 3 Writer edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, or retrospective evidence.
+- Do not infer Work Item PM readiness from brief existence alone.
+- Do not let role-run manifests or role contracts become canonical workflow history.
+- Do not let artifact-input policy paths silently expand implementation_writer authority beyond the explicit policy/support files needed for this chore.
+- Do not implement Trust Verifier cutover, old gate replacement, live evidence capture, reviewer execution, model calls, Pi/Aperture agent-scope work, role input packets, execution packets, broad role taxonomy redesign, claim leases, worktrees, scheduler execution, merge, push, deploy, dependency changes, external services, or unrelated cockpit features in this chore.
+
+## Token-Cost Failsafe
+
+policy: .bandit/policy/token-cost-failsafe.json
+soft_budget_bands:
+- Stage 1 Repo PM brief creation and formation review should use local-only default budget guidance.
+- Stage 2 RED evidence and Stage 3 implementation should use existing abnormal-run soft budget guidance; do not set brittle caps that force duplicate attempts.
+- Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly.
+provider_pricing_evidence:
+- No new paid provider-pricing evidence is approved by this work-item brief.
+- Any paid reviewer, paid model, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists.
+spend_classes:
+- local-only-default
+- one-off-paid-evaluation-blocked-without-approval
+- recurring-paid-routing-blocked-without-policy-promotion
+continuation_decisions:
+- If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass.
+- If token or cost failsafe trips, halt the expensive action and record the continuation decision before retrying.
+stage_capability_profiles:
+- repo-pm-stage1-formation
+- test-writer-stage2
+- claude-implementation-writer-stage3
+- qwen-and-coderabbit-review-stage4
+- landing-agent-stage5
+- closeout-agent-stage6

@@ -4,17 +4,17 @@
 
 ## Current Work Item
 
-- `[Gap]` none - interstitial after `BANDIT-060` closeout
+- `[Gap]` `BANDIT-061` - Role Contract Artifact Input Write Surface; Stage 1
+  formation review pending.
 
-**Current next step:** Create a bounded chore spec and work item for
-`BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` before Trust Verifier
-cutover work.
+**Current next step:** Run Repo PM formation review for BANDIT-061 before
+Stage 2 RED evidence.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - align
-  implementation-writer write-surface policy and role-run validation with
-  artifact-input policy and preferred-directory support files.
+- `[Gap]` `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` -
+  preserve `replacement_*` fields when work-item creation rewrites the
+  bootstrap-gap ledger.
 
 ## Planned Work
 
@@ -23,8 +23,10 @@ cutover work.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - queued
-  role-contract hardening before Trust Verifier cutover work.
+- `[Gap]` `BANDIT-061` - active role-contract hardening before Trust Verifier
+  cutover work.
+- `[Gap]` `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - queued
+  serializer repair before Trust Verifier cutover work.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
   evidence exists, artifact-input paths are clear, and role-contract
   artifact-input write-surface hardening is addressed, decide per Trust Goal
