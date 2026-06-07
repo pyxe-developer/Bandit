@@ -5,9 +5,11 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-067` - Live Cockpit Status View From CLI Payload
-  (landed; Stage 6 closeout required)
+  (closed; no next work item formed yet)
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition, and roadmap/status closeout for `BANDIT-067`.
+**Current next step:** Create the next Phase 8 slice work item for Evidence
+Drilldown And Gate Matrix through Repo PM Stage 1 formation before RED
+evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -28,7 +30,6 @@ separate authorization and evidence.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
 - `[Slice]` `TBD` - Guarded CLI Action Requests
 - `[Slice]` `TBD` - Improvement Health Surface
 
@@ -101,3 +102,4 @@ separate authorization and evidence.
 - `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition for remaining runtime/harness source material
 - `BANDIT-066` - Browser-Served Cockpit App Shell
+- `BANDIT-067` - Live Cockpit Status View From CLI Payload

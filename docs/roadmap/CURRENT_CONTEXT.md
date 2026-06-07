@@ -22,21 +22,18 @@ future product or trust-layer decision scopes them.
 Workflow Cockpit app shell and static preview while preserving CLI authority
 and presentation-only browser state.
 
-`BANDIT-067` is landed for Live Cockpit Status View From CLI Payload. Its
-brief, formation review evidence, Work Item PM plan-mode orchestration
-evidence, Test Writer-owned RED evidence, Claude implementation evidence,
-Writer report, PM acceptance review, reviewer bootstrap replacement evidence,
-layered risk classification, supply-chain gate, aggregate review evidence, UAT
-approval, landing verdict, and local-record landing action are recorded under
-`docs/work/BANDIT-067/` and `.bandit/policy/`. No independent CodeRabbit or
-Local Qwen pass is claimed because those providers were unavailable or timed
-out.
+`BANDIT-067` is landed and closed out. It delivered the Live Cockpit Status
+View From CLI Payload slice, including source-linked first-screen cues and a
+full Stage 0-6 gate strip in the browser shell while preserving CLI authority
+and presentation-only browser state.
 
-**Active work item:** `BANDIT-067`.
+**Active work item:** `BANDIT-067` (closed).
 
-The current stage is Stage 6: Closeout required.
+The current stage is Stage 6: Closed / next work item formation required.
 
-**Current next action:** Record Stage 6 retrospective, improvement disposition, and roadmap/status closeout for `BANDIT-067` before starting any next work item.
+**Current next action:** Create the next Phase 8 slice work item for Evidence
+Drilldown And Gate Matrix through Repo PM Stage 1 formation before RED
+evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -44,7 +41,7 @@ and no merge/push/deploy behavior is authorized.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current orchestration step. Halt for
+No operator-owned input is required for the current formation step. Halt for
 operator input if a future step would
 approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
 or wrap an older gate path, merge/push/deploy, change product or UAT direction,
@@ -59,20 +56,20 @@ decision repo artifacts cannot answer.
 recorded under `docs/work/BANDIT-066/`, and local-record landing action
 evidence is recorded at `docs/work/BANDIT-066/landing-action.md`.
 
-`BANDIT-067` is the active Phase 8 Live Cockpit Status View From CLI Payload
-slice. Its source spec is
-`docs/specs/BANDIT-067-live-cockpit-status-view-from-cli-payload.json`; its
-brief, formation review artifacts, `formation_approved`,
-`orchestration_plan_recorded`, `red_recorded`, `implementation_recorded`,
-`review_recorded`, `feature_uat_approved`, `landing_verdict_recorded`, and `landed`
-coordination transitions are recorded under `docs/work/BANDIT-067/`.
+`BANDIT-067` is landed and closed out. Its Stage 1 through Stage 6 evidence is
+recorded under `docs/work/BANDIT-067/`, and local-record landing action
+evidence is recorded at `docs/work/BANDIT-067/landing-action.md`.
 
-The next allowed action is to record Stage 6 retrospective, structured
-improvement disposition, and roadmap/status closeout for `BANDIT-067`. Do not
-merge, push, deploy, start the next work item, approve Trust Verifier cutover,
-guarded browser action execution, local API work, State Index work, scheduler
+The next allowed action is to create the Phase 8 Evidence Drilldown And Gate
+Matrix work item through Repo PM Stage 1 formation. Do not write RED evidence,
+implementation, review evidence, landing evidence, or UAT evidence for the next
+slice before formation is complete and approved.
+
+No next work item is active yet. Do not start RED evidence, implementation,
+review, landing, UAT, merge, push, deploy, Trust Verifier cutover, guarded
+browser action execution, local API work, State Index work, scheduler
 execution, claim execution, worktree execution, or unrelated Phase 8 scope
-before closeout evidence is recorded.
+before the next slice is formed and approved.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before the next Phase 8
