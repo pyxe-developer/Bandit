@@ -105,6 +105,8 @@ classification and supply-chain gate evidence are recorded at
 Aggregate Stage 4 review evidence is recorded at
 `docs/work/BANDIT-063/review-evidence.md`, and the coordination log records the
 aggregate review transition.
+Stage 5 safe-to-land verdict evidence is recorded at
+`docs/work/BANDIT-063/landing-verdict.md`.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -113,20 +115,20 @@ resolved.
 
 **Active work item:** `BANDIT-063`.
 
-The current stage is Stage 5: landing verdict required.
+The current stage is Stage 5: landing action required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record Stage 5 landing verdict evidence for
-`BANDIT-063` before any landing action.
+**Current next action:** Run local-record landing action for `BANDIT-063`
+before Stage 6 closeout.
 
-Do not start Stage 5 landing action, Stage 6 closeout, Trust Verifier cutover
-work, Pi/Aperture agent-scope schema/projection work, role input or execution
-packet work, or unrelated cockpit product work until Stage 5 landing verdict
-evidence is recorded and accepted.
+Do not start Stage 6 closeout, Trust Verifier cutover work, Pi/Aperture
+agent-scope schema/projection work, role input or execution packet work, or
+unrelated cockpit product work until landing action evidence is recorded and
+accepted.
 
 ## Active Work
 
@@ -147,8 +149,9 @@ evidence is recorded at `docs/work/BANDIT-063/implementation-evidence.md`,
 recorded at `docs/work/BANDIT-063/stage3-pm-review.md`. Stage 4 CodeRabbit,
 Local Qwen, finding disposition, risk classification, and supply-chain gate
 evidence are recorded. Aggregate Stage 4 review evidence is recorded at
-`docs/work/BANDIT-063/review-evidence.md`. Stage 5 landing verdict evidence is
-the next required gate before landing action.
+`docs/work/BANDIT-063/review-evidence.md`. Stage 5 safe-to-land verdict
+evidence is recorded at `docs/work/BANDIT-063/landing-verdict.md`.
+Local-record landing action is the next required gate before closeout.
 
 `BANDIT-062` is landed and closed out. Its Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
@@ -184,8 +187,7 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record Stage 5 landing verdict evidence for `BANDIT-063` before any landing
-   action.
+1. Run local-record landing action for `BANDIT-063` before Stage 6 closeout.
 2. Keep Work Item PM plan-mode orchestration bounded to the operator-directed
    gate: after brief/current-state grounding and before Stage 2 RED evidence or
    full orchestration.
@@ -204,10 +206,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 5 landing verdict.
+No operator-owned input is required for the current local-record landing action.
 Repo artifacts identify the active bootstrap-gap chore, accepted Stage 3
-implementation evidence, completed aggregate Stage 4 review evidence, and the
-required landing verdict before local-record landing action.
+implementation evidence, completed aggregate Stage 4 review evidence,
+safe-to-land verdict, and the required landing action before Stage 6 closeout.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path
