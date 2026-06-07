@@ -27,10 +27,11 @@ for those gates.
 
 **Active work item:** `BANDIT-066`.
 
-The current stage is Stage 4: Review recorded / UAT required before Stage 5.
+The current stage is Stage 5: Landed / Stage 6 closeout required.
 
-**Current next action:** Record CLI-owned product UAT for `BANDIT-066` before
-Stage 5 landing verdict.
+**Current next action:** Record Stage 6 retrospective, improvement disposition,
+and roadmap/status closeout for `BANDIT-066` before starting any next work
+item.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -38,8 +39,8 @@ and no merge/push/deploy behavior is authorized.
 
 ## Required Operator Input
 
-CLI-owned product UAT is required before landing the operator-facing browser
-shell. Halt for operator input if a future step would
+No operator-owned input is required for the current closeout step. Halt for
+operator input if a future step would
 approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
 or wrap an older gate path, merge/push/deploy, change product or UAT direction,
 approve business tradeoffs, approve explicit cost/risk posture, choose local
@@ -49,9 +50,9 @@ decision repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-066` is active with review evidence recorded. Do not start Stage 5
-landing, closeout, or any next work item until CLI-owned product UAT is
-recorded.
+`BANDIT-066` is landed with local-record landing action evidence. Do not start
+any next work item until Stage 6 retrospective, improvement disposition,
+roadmap context closeout, and STATUS.md refresh are recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before `BANDIT-066`.

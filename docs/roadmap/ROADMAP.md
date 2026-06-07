@@ -6,8 +6,9 @@
 
 - `[Slice]` `BANDIT-066` - Browser-Served Cockpit App Shell
 
-**Current next step:** Record CLI-owned product UAT for `BANDIT-066` before
-Stage 5 landing verdict.
+**Current next step:** Record Stage 6 retrospective, improvement disposition,
+and roadmap/status closeout for `BANDIT-066` before starting any next work
+item.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

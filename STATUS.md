@@ -19,20 +19,19 @@ The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
 source material is resolved with disposition `no_action`; no role-scoped
 bootstrap gap remains queued before Phase 8 cockpit work.
 
-Current stage: Stage 4 - Review recorded / UAT required before Stage 5.
+Current stage: Stage 5 - Landed / Stage 6 closeout required.
 
-Next action: Record CLI-owned product UAT for `BANDIT-066` before Stage 5
-landing verdict.
+Next action: Record Stage 6 retrospective, improvement disposition, and
+roadmap/status closeout for `BANDIT-066` before starting any next work item.
 
-Required operator input: CLI-owned product UAT is required before landing the
-operator-facing browser shell. No product scope, policy, business, or cost/risk
-input is otherwise required from repo artifacts.
+Required operator input: none for the current closeout step. Product UAT is
+recorded in `docs/work/BANDIT-066/uat-approval.md`.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-066` - Browser-Served Cockpit App Shell (Stage 4 review recorded; UAT required)
+- `BANDIT-066` - Browser-Served Cockpit App Shell (landed; closeout required)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition
 - `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract (closed)
 - `BANDIT-064` - Trust Verifier Cutover Gate Triage (closed)
