@@ -934,8 +934,8 @@
     {
       "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",
       "title": "Private Installable Distribution And Update Notification Channel",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -949,10 +949,10 @@
         "docs/work/BANDIT-068/brief.md",
         "docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-071",
       "rationale": "Operator direction on 2026-06-07 clarified that Bandit should not be public yet, but should be installable in multiple private repos and should alert from the CLI when private updates are available. Current package evidence shows a bin entry exists, but public publishing is blocked by private package metadata, packed install fails because the CLI depends on devDependency-only tsx, package contents are not scoped for distribution, and no private update-channel metadata or non-blocking update-check command exists.",
       "verification_target": null,
-      "next_action": "After the queued oracle-provenance gate is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Complete active chore BANDIT-071."
     },
     {
       "id": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
