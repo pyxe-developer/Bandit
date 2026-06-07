@@ -265,3 +265,12 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-062","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA; next action is the queued Work Item PM plan-mode orchestration gap"}
 {"type":"work_item_created","work_item":"BANDIT-063","message":"Created work item BANDIT-063 from docs/specs/BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION.json"}
 {"type":"artifact_created","work_item":"BANDIT-063","message":"Created red_evidence artifact at docs/work/BANDIT-063/red-evidence.md"}
+{"type":"stage3_pm_review_accepted","work_item":"BANDIT-063","message":"Codex PM accepted Claude Stage 3 implementation evidence for the Work Item PM plan-mode gate; next action is Stage 4 review"}
+{"type":"stage4_coderabbit_review_pass","work_item":"BANDIT-063","message":"CodeRabbit Stage 4 pre-PR review completed with zero findings; next action is Local Qwen adversarial review and aggregate Stage 4 evidence"}
+{"type":"stage4_local_qwen_review_non_blocking","work_item":"BANDIT-063","message":"Local Qwen completed with non_blocking findings about semantic plan validation; next action is Codex PM disposition"}
+{"type":"stage4_local_qwen_findings_dispositioned","work_item":"BANDIT-063","message":"Codex PM dispositioned Local Qwen non_blocking findings as no-source-repair for the current deterministic plan-evidence contract"}
+{"type":"stage4_review_recorded","work_item":"BANDIT-063","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash f096f92; next action is Stage 5 landing verdict evidence before landing action"}
+{"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-063","message":"Recorded safe-to-land verdict for BANDIT-063; next action is local-record landing action before Stage 6 closeout"}
+{"type":"stage5_landing_action_recorded","work_item":"BANDIT-063","message":"Recorded local-record landing action for BANDIT-063 at docs/work/BANDIT-063/landing-action.md; next action is Stage 6 closeout"}
+{"type":"artifact_created","work_item":"BANDIT-063","message":"Created retrospective artifact at docs/work/BANDIT-063/retrospective.md"}
+{"type":"stage6_closeout_recorded","work_item":"BANDIT-063","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION; next action is Trust Verifier Cutover Gate triage while role-scoped orchestration remains held as source material"}

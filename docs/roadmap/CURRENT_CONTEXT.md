@@ -68,7 +68,7 @@ retrospective, improvement disposition, and bootstrap-gap disposition are
 recorded at `docs/work/BANDIT-062/retrospective.md`, and the gap ledger marks
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` resolved.
 
-`BANDIT-063` is active. It is the bounded bootstrap-gap chore for
+`BANDIT-063` is landed and closed out. It delivered the bounded bootstrap-gap chore for
 `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION`, which records the
 operator-directed requirement that, after Work Item PM reads the brief and
 grounds itself in current repo state, it must enter a plan-mode gate and produce
@@ -109,35 +109,40 @@ Stage 5 safe-to-land verdict evidence is recorded at
 `docs/work/BANDIT-063/landing-verdict.md`.
 Local-record landing action evidence is recorded at
 `docs/work/BANDIT-063/landing-action.md`.
+Stage 6 retrospective, improvement disposition, and bootstrap-gap disposition
+evidence is recorded at `docs/work/BANDIT-063/retrospective.md`, and the gap
+ledger marks `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` resolved.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
 resolved.
 
-**Active work item:** `BANDIT-063`.
+**Active work item:** none.
 
-The current stage is Stage 6: closeout required.
+The current stage is Interstitial: Bootstrap-policy triage required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Record Stage 6 retrospective, improvement disposition,
-and bootstrap-gap disposition for `BANDIT-063` before starting any next work
-item.
+**Current next action:** Triage the Trust Verifier Cutover Gate as the next
+bootstrap-policy item before unrelated cockpit product work; keep
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material until
+that dependency is resolved.
 
-Do not start the next work item, Trust Verifier cutover work, Pi/Aperture
-agent-scope schema/projection work, role input or execution packet work, or
-unrelated cockpit product work until Stage 6 closeout evidence is recorded and
-accepted.
+Do not start unrelated cockpit product work, Pi/Aperture agent-scope
+schema/projection work, role input or execution packet work, or role-scoped
+workflow implementation until Trust Verifier cutover gate triage is recorded or
+explicitly dispositioned.
 
 ## Active Work
 
-**Active work item:** `BANDIT-063`.
+**Active work item:** none.
 
-`BANDIT-063` is active. Its Stage 1 brief is recorded at
+No active work item is currently open. `BANDIT-063` is landed and closed out.
+Its Stage 1 brief is recorded at
 `docs/work/BANDIT-063/brief.md`. Formation review/approval evidence is recorded
 at `docs/work/BANDIT-063/qwen-formation-review.md`,
 `docs/work/BANDIT-063/coderabbit-formation-review.md`,
@@ -155,8 +160,8 @@ evidence are recorded. Aggregate Stage 4 review evidence is recorded at
 `docs/work/BANDIT-063/review-evidence.md`. Stage 5 safe-to-land verdict
 evidence is recorded at `docs/work/BANDIT-063/landing-verdict.md`.
 Local-record landing action evidence is recorded at
-`docs/work/BANDIT-063/landing-action.md`. Stage 6 closeout evidence is the next
-required gate before any next work item.
+`docs/work/BANDIT-063/landing-action.md`. Stage 6 retrospective closeout is
+recorded at `docs/work/BANDIT-063/retrospective.md`.
 
 `BANDIT-062` is landed and closed out. Its Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
@@ -167,9 +172,9 @@ verdict/action evidence, and Stage 6 retrospective closeout are recorded under
 `BANDIT-062`; the gap ledger marks it resolved and points to
 `docs/work/BANDIT-062/retrospective.md`.
 
-`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is active in `BANDIT-063`.
-It must be handled before Trust Verifier cutover or unrelated cockpit product
-work.
+`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is resolved by
+`BANDIT-063`; the gap ledger marks it resolved and points to
+`docs/work/BANDIT-063/retrospective.md`.
 
 `BANDIT-061` is closed. Its Stage 1 brief, Stage 2 RED evidence, Stage 3
 implementation evidence, Stage 4 review evidence, Stage 5 landing
@@ -192,13 +197,14 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record Stage 6 retrospective, improvement disposition, and bootstrap-gap
-   disposition for `BANDIT-063` before starting any next work item.
-2. Keep Work Item PM plan-mode orchestration bounded to the operator-directed
-   gate: after brief/current-state grounding and before Stage 2 RED evidence or
-   full orchestration.
+1. Triage the Trust Verifier Cutover Gate as the next bootstrap-policy item
+   before unrelated cockpit product work; keep
+   `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material
+   until that dependency is resolved.
+2. Preserve the Work Item PM plan-mode gate: after brief/current-state
+   grounding and before Stage 2 RED evidence or full orchestration.
 3. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
-   Separation evidence recorded during Stage 3.
+   Separation evidence recorded during `BANDIT-063`.
 4. Keep the serializer repair outcome stable: work-item creation must preserve
    `replacement_*` fields when it rewrites the bootstrap-gap ledger.
 5. Preserve canonical Markdown evidence, append-only lifecycle/coordination
@@ -212,11 +218,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 6 closeout.
-Repo artifacts identify the active bootstrap-gap chore, accepted Stage 3
-implementation evidence, completed aggregate Stage 4 review evidence,
-safe-to-land verdict, completed local-record landing action, and the required
-retrospective/bootstrap-gap disposition before any next work item.
+No operator-owned input is required for Trust Verifier Cutover Gate triage.
+Halt for operator input if the next step would approve Trust Verifier cutover
+policy, replace or wrap an older gate path, or make another policy decision
+that repo artifacts cannot answer.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

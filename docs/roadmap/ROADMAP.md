@@ -4,16 +4,18 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Local-record
-  landing action evidence is recorded; Stage 6 closeout is required.
+- None. `BANDIT-063` is landed and closed out.
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and bootstrap-gap disposition for `BANDIT-063` before starting any next work
-item.
+**Current next step:** Triage the Trust Verifier Cutover Gate as the next
+bootstrap-policy item before unrelated cockpit product work; keep
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material until
+that dependency is resolved.
 
 ## Next Work Item
 
-- None until `BANDIT-063` lands and closes out.
+- `[Gap]` `TBD` - Trust Verifier Cutover Gate triage; decide the bounded
+  bootstrap-policy work item or explicit no-action/deferred disposition needed
+  before unrelated cockpit product work.
 
 ## Planned Work
 
@@ -22,8 +24,6 @@ item.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - active in
-  `BANDIT-063`; add the Work Item PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
   evidence exists, artifact-input paths are clear, serializer replacement
   metadata is preserved, and Work Item PM plan-mode orchestration is addressed,
@@ -108,3 +108,4 @@ bootstrap gaps are queued.
 - `BANDIT-060` - Artifact Input Directory Split
 - `BANDIT-061` - Role Contract Artifact Input Write Surface
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation
+- `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate
