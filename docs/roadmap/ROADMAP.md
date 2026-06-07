@@ -4,12 +4,11 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-066` - Browser-Served Cockpit App Shell (closed; no next
-  work item formed yet)
+- `[Slice]` `BANDIT-067` - Live Cockpit Status View From CLI Payload
+  (formation approved; Work Item PM plan-mode orchestration required)
 
-**Current next step:** Create the next Phase 8 slice work item for Live Cockpit
-Status View From CLI Payload through Repo PM Stage 1 formation before RED
-evidence.
+**Current next step:** Start Work Item PM plan-mode orchestration for
+`BANDIT-067` before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -19,7 +18,7 @@ separate authorization and evidence.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
+- `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
 
 ## Planned Work
 
@@ -30,7 +29,6 @@ separate authorization and evidence.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
 - `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
 - `[Slice]` `TBD` - Guarded CLI Action Requests
 - `[Slice]` `TBD` - Improvement Health Surface

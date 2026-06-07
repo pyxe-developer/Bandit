@@ -22,13 +22,18 @@ future product or trust-layer decision scopes them.
 Workflow Cockpit app shell and static preview while preserving CLI authority
 and presentation-only browser state.
 
-**Active work item:** `BANDIT-066`.
+`BANDIT-067` is formed and Stage 1 formation-approved for Live Cockpit Status
+View From CLI Payload. Its brief and formation review evidence are recorded
+under `docs/work/BANDIT-067/`, with Qwen and CodeRabbit unavailable as
+bootstrap replacement evidence and no independent reviewer pass claimed.
 
-The current stage is Stage 6: Closed / next work item formation required.
+**Active work item:** `BANDIT-067`.
 
-**Current next action:** Create the next Phase 8 slice work item for Live
-Cockpit Status View From CLI Payload through Repo PM Stage 1 formation before
-RED evidence.
+The current stage is Stage 1: Formation approved / Work Item PM plan-mode
+orchestration required.
+
+**Current next action:** Start Work Item PM plan-mode orchestration for
+`BANDIT-067` before RED evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -36,7 +41,7 @@ and no merge/push/deploy behavior is authorized.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current formation step. Halt for
+No operator-owned input is required for the current orchestration step. Halt for
 operator input if a future step would
 approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
 or wrap an older gate path, merge/push/deploy, change product or UAT direction,
@@ -51,16 +56,18 @@ decision repo artifacts cannot answer.
 recorded under `docs/work/BANDIT-066/`, and local-record landing action
 evidence is recorded at `docs/work/BANDIT-066/landing-action.md`.
 
-The next allowed action is to create the Phase 8 Live Cockpit Status View From
-CLI Payload work item through Repo PM Stage 1 formation. Do not write RED
-evidence, implementation, review evidence, landing evidence, or UAT evidence
-for the next slice before formation is complete and approved.
+`BANDIT-067` is the active Phase 8 Live Cockpit Status View From CLI Payload
+slice. Its source spec is
+`docs/specs/BANDIT-067-live-cockpit-status-view-from-cli-payload.json`; its
+brief, formation review artifacts, and `formation_approved` coordination
+transition are recorded under `docs/work/BANDIT-067/`.
 
-No next work item is active yet. Do not start RED evidence, implementation,
+The next allowed action is to start Work Item PM plan-mode orchestration for
+`BANDIT-067` before RED evidence. Do not write RED evidence, implementation,
 review, landing, UAT, merge, push, deploy, Trust Verifier cutover, guarded
 browser action execution, local API work, State Index work, scheduler
 execution, claim execution, worktree execution, or unrelated Phase 8 scope
-before the next slice is formed and approved.
+before Work Item PM plan-mode orchestration is recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before the next Phase 8
