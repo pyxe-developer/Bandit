@@ -124,6 +124,14 @@ select a Trust Goal for cutover, replace or wrap an old gate path, or start RED
 evidence, implementation, review, landing, closeout, role packet work, or
 unrelated cockpit product work.
 
+Stage 1 formation review evidence is recorded at
+`docs/work/BANDIT-064/qwen-formation-review.md`,
+`docs/work/BANDIT-064/coderabbit-formation-review.md`, and
+`docs/work/BANDIT-064/formation-review.md`. Local Qwen passed with two
+non-blocking findings that require no Stage 1 source repair; CodeRabbit timed
+out and is recorded only as provider-timeout/bootstrap-gap replacement
+evidence; aggregate formation review passes.
+
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
@@ -131,27 +139,24 @@ resolved.
 
 **Active work item:** `BANDIT-064`.
 
-The current stage is Stage 1: Work-item brief created; formation review
-required.
+The current stage is Stage 1: formation review recorded; CLI-owned
+`formation_approved` transition required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Stage 1 formation review for `BANDIT-064`.
-
-Required formation evidence is `docs/work/BANDIT-064/qwen-formation-review.md`,
-`docs/work/BANDIT-064/coderabbit-formation-review.md`, and
-`docs/work/BANDIT-064/formation-review.md`; after passing formation review, the
-Repo PM may run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064`.
+**Current next action:** Repo PM should run
+`node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064` and repair any
+CLI-reported formation-transition prerequisite before Stage 2 begins.
 
 Do not write Stage 2 RED evidence, run `work-item-pm start`, write an
 orchestration plan, dispatch implementation, start Trust Verifier cutover,
 replace or wrap any old gate path, start unrelated cockpit product work,
 Pi/Aperture agent-scope schema/projection work, role input or execution packet
-work, or role-scoped workflow implementation until formation review passes and
-the `formation_approved` transition is recorded.
+work, or role-scoped workflow implementation until the `formation_approved`
+transition is recorded.
 
 ## Active Work
 
@@ -162,12 +167,13 @@ the `formation_approved` transition is recorded.
 `BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE`; `.bandit/events.jsonl`
 records `work_item_created` for `BANDIT-064`, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore`. Formation review
-evidence is not recorded yet. The next action is formation review only.
+evidence is recorded and passes with CodeRabbit provider-timeout replacement
+evidence. The next action is Repo PM formation approval only.
 
 Do not start Stage 2 RED evidence, `work-item-pm start`, orchestration-plan
 drafting, implementation dispatch, Trust Verifier cutover, old-gate
 replacement/wrapping, role packet work, or unrelated cockpit product work
-before formation review passes and `formation_approved` is recorded.
+before `formation_approved` is recorded.
 
 `BANDIT-063` is landed and closed out. Its Stage 1 brief, formation review,
 Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 review evidence,
@@ -208,9 +214,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run formation review for `BANDIT-064` before RED evidence, implementation,
-   Trust Verifier cutover, old-gate replacement/wrapping, or unrelated cockpit
-   product work.
+1. Record the Repo PM `formation_approved` transition for `BANDIT-064` before
+   RED evidence, implementation, Trust Verifier cutover, old-gate
+   replacement/wrapping, or unrelated cockpit product work.
 2. Preserve the Work Item PM plan-mode gate: after brief/current-state
    grounding and before Stage 2 RED evidence or full orchestration.
 3. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family

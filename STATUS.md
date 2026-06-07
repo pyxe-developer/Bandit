@@ -14,11 +14,15 @@ Layer Pivot.
 `docs/work/BANDIT-064/brief.md`, and the gap ledger marks the gap active with
 linked work item `BANDIT-064`.
 
-Current stage: Stage 1 brief created; formation review required.
+Current stage: Stage 1 formation review recorded; CLI-owned
+`formation_approved` transition required.
 
-Next action: Run Stage 1 formation review for `BANDIT-064`. Do not write RED
-evidence, run `work-item-pm start`, approve Trust Verifier cutover, replace or
-wrap old gates, or start unrelated product work before formation approval.
+Next action: Repo PM should run
+`node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064` and repair any
+CLI-reported formation-transition prerequisite before Stage 2 begins. Do not
+write RED evidence, run `work-item-pm start`, approve Trust Verifier cutover,
+replace or wrap old gates, or start unrelated product work before formation
+approval.
 
 No operator-owned input is required for formation review. Halt for operator
 input if the next step would approve Trust Verifier cutover policy, select a
@@ -59,7 +63,7 @@ Verifier cutover policy remains unresolved.
 
 Last 5 items only:
 
-- `BANDIT-064` - Trust Verifier Cutover Gate Triage (Stage 1 brief created; formation review next)
+- `BANDIT-064` - Trust Verifier Cutover Gate Triage (formation review recorded; Repo PM approval next)
 - `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate (closed)
 - `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - resolved by `BANDIT-063`
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation (closed)
