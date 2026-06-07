@@ -4,12 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Stage 5
-  safe-to-land verdict evidence is recorded; local-record landing action is
-  required before closeout.
+- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Local-record
+  landing action evidence is recorded; Stage 6 closeout is required.
 
-**Current next step:** Run local-record landing action for `BANDIT-063` before
-Stage 6 closeout.
+**Current next step:** Record Stage 6 retrospective, improvement disposition,
+and bootstrap-gap disposition for `BANDIT-063` before starting any next work
+item.
 
 ## Next Work Item
 
