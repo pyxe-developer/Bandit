@@ -5,10 +5,12 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-070` - Verification Oracle Provenance Gate
-  (Stage 5 landing verdict recorded)
+  (closed; retained as the derived-status anchor until the next work item is
+  formed)
 
-**Current next step:** Run `npm run bandit -- land-check BANDIT-070`, then
-perform local-record landing if the gate passes.
+**Current next step:** Create a bounded chore from
+`docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json` before unrelated
+Phase 8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -23,19 +25,15 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
-  distribution and CLI update notification channel (queued after `BANDIT-070`
-  is landed/closed or explicitly dispositioned)
+  distribution and CLI update notification channel (next queued bootstrap gap)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Oracle provenance
-  gate requiring covered pass/trusted/ready claims to name the evidence oracle
-  and reject circular self-attestation, active as `BANDIT-070`.
 - `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
-  distribution and CLI update notification channel, queued behind the
-  oracle-provenance gate unless explicitly reprioritized.
+  distribution and CLI update notification channel, next queued gap unless
+  explicitly reprioritized.
 - `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
   Bandit workflow failures, queued behind the private install/update channel.
 - `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate output,
@@ -61,6 +59,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-070` - Verification Oracle Provenance Gate
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload

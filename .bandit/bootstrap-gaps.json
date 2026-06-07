@@ -906,8 +906,8 @@
     {
       "id": "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE",
       "title": "Verification Oracle Provenance Gate",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -917,12 +917,19 @@
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/roadmap/ROADMAP.md",
         "docs/work/BANDIT-068/brief.md",
-        "docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json"
+        "docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json",
+        "docs/work/BANDIT-070/brief.md",
+        "docs/work/BANDIT-070/red-evidence.md",
+        "docs/work/BANDIT-070/implementation-evidence.md",
+        "docs/work/BANDIT-070/review-evidence.md",
+        "docs/work/BANDIT-070/landing-verdict.md",
+        "docs/work/BANDIT-070/landing-action.md",
+        "docs/work/BANDIT-070/retrospective.md"
       ],
       "linked_work_item": "BANDIT-070",
-      "rationale": "Operator direction on 2026-06-07 identified Verification Oracle Provenance as the next verification-layer strengthening gap. Bandit records many verdicts and freshness checks, but covered pass/trusted/ready claims do not yet have to name the oracle they rely on or prove that oracle is independent enough for the trust decision. This gap should prevent circular self-attestation where a projection, validator, generated report, or command output becomes the evidence oracle for its own correctness.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-070."
+      "rationale": "BANDIT-070 delivered the Verification Oracle Provenance Gate as a repo-native policy, evidence template, validator, CLI command, init wiring, and land-check integration. Covered high-risk safe-to-land claims now fail closed without current, independent, non-circular oracle provenance evidence while historical aggregate validation compatibility, Trust Verifier cutover boundaries, and the Permanent Test Ownership Boundary are preserved.",
+      "verification_target": "docs/work/BANDIT-070/retrospective.md",
+      "next_action": "Use node ./bin/bandit.mjs verification-oracle-provenance validate <work-item-id> and land-check for future work items with covered high-risk oracle-provenance surfaces."
     },
     {
       "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",
