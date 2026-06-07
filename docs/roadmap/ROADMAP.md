@@ -5,16 +5,16 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-064` - Trust Verifier Cutover Gate Triage. Stage 1 brief is
-  created and formation review is recorded; Repo PM formation approval is the
+  created and formation is approved; Work Item PM plan-mode evidence is the
   next action.
 
-**Current next step:** Repo PM should run
-`node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064` and repair any
-CLI-reported formation-transition prerequisite before Stage 2 begins.
+**Current next step:** Work Item PM should draft
+`docs/work/BANDIT-064/orchestration-plan.md` and then run
+`node ./bin/bandit.mjs work-item-pm start BANDIT-064` before Stage 2 begins.
 
-Do not write RED evidence, run `work-item-pm start`, approve Trust Verifier
-cutover, replace or wrap old gates, or start unrelated product work before
-formation approval.
+Do not write RED evidence, approve Trust Verifier cutover, replace or wrap old
+gates, or start unrelated product work before Work Item PM plan-mode evidence
+is recorded.
 
 ## Next Work Item
 

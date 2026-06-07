@@ -130,7 +130,10 @@ Stage 1 formation review evidence is recorded at
 `docs/work/BANDIT-064/formation-review.md`. Local Qwen passed with two
 non-blocking findings that require no Stage 1 source repair; CodeRabbit timed
 out and is recorded only as provider-timeout/bootstrap-gap replacement
-evidence; aggregate formation review passes.
+evidence; aggregate formation review passes. Repo PM repaired the missing
+`brief_created` coordination-log prerequisite and recorded the CLI-owned
+`formation_approved` transition at
+`docs/work/BANDIT-064/coordination-log.jsonl`.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -139,24 +142,23 @@ resolved.
 
 **Active work item:** `BANDIT-064`.
 
-The current stage is Stage 1: formation review recorded; CLI-owned
-`formation_approved` transition required.
+The current stage is Stage 1: formation approved; Work Item PM plan-mode
+evidence required before Stage 2 RED evidence.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Repo PM should run
-`node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064` and repair any
-CLI-reported formation-transition prerequisite before Stage 2 begins.
+**Current next action:** Work Item PM should draft
+`docs/work/BANDIT-064/orchestration-plan.md` and then run
+`node ./bin/bandit.mjs work-item-pm start BANDIT-064` before Stage 2 begins.
 
-Do not write Stage 2 RED evidence, run `work-item-pm start`, write an
-orchestration plan, dispatch implementation, start Trust Verifier cutover,
-replace or wrap any old gate path, start unrelated cockpit product work,
-Pi/Aperture agent-scope schema/projection work, role input or execution packet
-work, or role-scoped workflow implementation until the `formation_approved`
-transition is recorded.
+Do not write Stage 2 RED evidence, dispatch implementation, start Trust
+Verifier cutover, replace or wrap any old gate path, start unrelated cockpit
+product work, Pi/Aperture agent-scope schema/projection work, role input or
+execution packet work, or role-scoped workflow implementation until the
+`orchestration_plan_recorded` transition is recorded.
 
 ## Active Work
 
@@ -168,12 +170,13 @@ transition is recorded.
 records `work_item_created` for `BANDIT-064`, and
 `.bandit/bootstrap-gaps.json` marks the gap `active_chore`. Formation review
 evidence is recorded and passes with CodeRabbit provider-timeout replacement
-evidence. The next action is Repo PM formation approval only.
+evidence. `docs/work/BANDIT-064/coordination-log.jsonl` now records both the
+`brief_created` prerequisite and the CLI-owned `formation_approved` transition.
+The next action is Work Item PM plan-mode evidence only.
 
-Do not start Stage 2 RED evidence, `work-item-pm start`, orchestration-plan
-drafting, implementation dispatch, Trust Verifier cutover, old-gate
-replacement/wrapping, role packet work, or unrelated cockpit product work
-before `formation_approved` is recorded.
+Do not start Stage 2 RED evidence, implementation dispatch, Trust Verifier
+cutover, old-gate replacement/wrapping, role packet work, or unrelated cockpit
+product work before `orchestration_plan_recorded` is recorded.
 
 `BANDIT-063` is landed and closed out. Its Stage 1 brief, formation review,
 Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 review evidence,
@@ -214,9 +217,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record the Repo PM `formation_approved` transition for `BANDIT-064` before
-   RED evidence, implementation, Trust Verifier cutover, old-gate
-   replacement/wrapping, or unrelated cockpit product work.
+1. Record Work Item PM plan-mode evidence for `BANDIT-064` before RED evidence,
+   implementation, Trust Verifier cutover, old-gate replacement/wrapping, or
+   unrelated cockpit product work.
 2. Preserve the Work Item PM plan-mode gate: after brief/current-state
    grounding and before Stage 2 RED evidence or full orchestration.
 3. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
