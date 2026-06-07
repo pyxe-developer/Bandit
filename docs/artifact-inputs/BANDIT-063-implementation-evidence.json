@@ -1,0 +1,133 @@
+{
+  "kind": "implementation_evidence",
+  "work_item": "BANDIT-063",
+  "status": "pass",
+  "stage": "Stage 3: Implementation",
+  "author": "claude-opus-4-8",
+  "author_path": "bootstrap-process-adapter",
+  "summary": "Narrow Work Item PM plan-mode gate. New src/state/work-item-pm-plan.ts fails closed on a missing or under-scoped orchestration-plan.md; src/state/coordination-log.ts adds the orchestration_plan_recorded state between formation_approved and red_recorded plus its append-only recorder and presence helper; src/commands/work-item-pm.ts requires the plan and records the append-only transition after formation approval; docs/templates/work-item-pm-plan.md documents the advisory artifact. Focused tests are GREEN, typecheck clean, bandit validate clean, role-runs validate pass, git diff --check clean.",
+  "production_files_changed": [
+    "src/commands/work-item-pm.ts",
+    "src/state/coordination-log.ts",
+    "src/state/work-item-pm-plan.ts",
+    "docs/templates/work-item-pm-plan.md"
+  ],
+  "red_failures_satisfied": [
+    {
+      "test": "test/role-entrypoints-formation.test.mjs",
+      "subtest": "work-item-pm start refuses orchestration before plan-mode evidence exists",
+      "red_state": "not ok 8 (0 !== 1)",
+      "now": "pass"
+    },
+    {
+      "test": "test/role-entrypoints-formation.test.mjs",
+      "subtest": "work-item-pm start refuses under-scoped plan-mode evidence",
+      "red_state": "not ok 9 (0 !== 1)",
+      "now": "pass"
+    },
+    {
+      "test": "test/coordination-log.test.mjs",
+      "subtest": "coordination validate accepts orchestration plan evidence between formation and RED",
+      "red_state": "not ok 2 (Invalid coordination state: orchestration_plan_recorded)",
+      "now": "pass"
+    }
+  ],
+  "acceptance_criteria_coverage": [
+    {
+      "criterion": "Focused RED evidence proves Work Item PM orchestration can currently proceed from brief/readiness into Stage 2 or broader execution without a durable plan-mode artifact.",
+      "status": "pass",
+      "evidence": "requireOrchestrationPlan now refuses when docs/work/<ID>/orchestration-plan.md is missing; the missing-plan subtest is GREEN (role-entrypoints-formation 9/9)."
+    },
+    {
+      "criterion": "Focused RED evidence proves missing, stale, contradictory, or under-scoped plan artifacts fail closed before Stage 2 RED evidence or implementation dispatch begins.",
+      "status": "pass",
+      "evidence": "requireOrchestrationPlan enumerates missing required sections and refuses; the under-scoped-plan subtest is GREEN."
+    },
+    {
+      "criterion": "A deterministic plan-mode artifact contract exists and requires current repo-state grounding, stage-by-stage orchestration sequence, role assignments, required evidence, verification commands, known blockers, stop conditions, and forbidden actions.",
+      "status": "pass",
+      "evidence": "REQUIRED_PLAN_SECTIONS in src/state/work-item-pm-plan.ts enforces all eight sections with non-empty content; docs/templates/work-item-pm-plan.md documents the contract."
+    },
+    {
+      "criterion": "A Work Item PM command or readiness path refuses orchestration when the plan-mode gate is unsatisfied and reports the exact missing or stale evidence.",
+      "status": "pass",
+      "evidence": "Refusal messages name docs/work/<ID>/orchestration-plan.md and list the specific missing plan-mode sections."
+    },
+    {
+      "criterion": "The coordination log records the satisfied planning gate as append-only evidence between formation/readiness and Stage 2 RED evidence, using supported or newly validated state vocabulary.",
+      "status": "pass",
+      "evidence": "appendOrchestrationPlanRecordedStepTransition records a work_item_pm transition with safe_triggers [red_evidence_required]; orchestration_plan_recorded is ordered between formation_approved and red_recorded; coordination-log tests 13/13."
+    },
+    {
+      "criterion": "The plan artifact is explicitly advisory/orchestration evidence and cannot replace canonical brief, coordination, review, landing, retrospective, roadmap, current-context, or bootstrap-gap authority.",
+      "status": "pass",
+      "evidence": "The plan is recorded only as an append-only coordination transition plus a template; canonical authority remains in the coordination log and stage artifacts. The template states this explicitly."
+    },
+    {
+      "criterion": "The implementation preserves Bootstrap Model-Family Separation and Permanent Test Ownership Boundary; if Codex authors Stage 2 RED tests, Stage 3 implementation remains assigned to Claude through the bootstrap Process Adapter path.",
+      "status": "pass",
+      "evidence": "Codex authored Stage 2 RED tests; Claude (claude-opus-4-8) authored Stage 3 via the bootstrap Process Adapter path; the Writer changed zero test surfaces."
+    },
+    {
+      "criterion": "The implementation does not start Trust Verifier cutover, role input packet generation, execution packet generation, Pi/Aperture agent-scope schema/projection work, claim authority, worktree lifecycle execution, scheduler execution, cockpit product work, dependency or lockfile changes, external service setup, merge/push/deploy behavior, or product UAT scope.",
+      "status": "pass",
+      "evidence": "The diff is limited to the plan gate, coordination-state vocabulary, the command call site, and the template. No unrelated workflow or product surfaces were touched."
+    }
+  ],
+  "verification_commands": [
+    {
+      "command": "node --test test/role-entrypoints-formation.test.mjs",
+      "result": "tests 9 / pass 9 / fail 0"
+    },
+    {
+      "command": "node --test test/coordination-log.test.mjs",
+      "result": "tests 13 / pass 13 / fail 0"
+    },
+    {
+      "command": "node --test test/coordination-status.test.mjs",
+      "result": "tests 8 / pass 8 / fail 0"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "clean"
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "result": "Bandit state is valid."
+    },
+    {
+      "command": "npm run bandit -- role-runs validate BANDIT-063 --json",
+      "result": "pass"
+    },
+    {
+      "command": "git diff --check",
+      "result": "clean"
+    }
+  ],
+  "clean_code_self_check": {
+    "spec_alignment": "pass",
+    "small_surface_area": "pass",
+    "simple_design": "pass",
+    "explicit_state": "pass",
+    "no_hidden_authority": "pass",
+    "testable_behavior": "pass",
+    "readable_flow": "pass",
+    "locality": "pass",
+    "failure_clarity": "pass",
+    "no_role_erosion": "pass",
+    "improvement_capture": "not_applicable"
+  },
+  "test_ownership_boundary": {
+    "status": "pass",
+    "evidence": "Stage 3 Writer changed only src/commands/work-item-pm.ts, src/state/coordination-log.ts, src/state/work-item-pm-plan.ts, and docs/templates/work-item-pm-plan.md. Zero test, test-helper, fixture, RED evidence, or acceptance-mapping edits."
+  },
+  "bootstrap_model_family_separation": {
+    "status": "pass",
+    "evidence": "Codex authored Stage 2 RED tests and RED evidence. Claude (claude-opus-4-8) authored Stage 3 via the bootstrap Process Adapter path."
+  },
+  "plan_artifact_authority_statement": "The orchestration plan recorded by this gate is append-only advisory orchestration evidence. It cannot satisfy or replace canonical workflow-state, coordination history, review, landing, UAT, or retrospective authority, which remain owned by the coordination log and the respective stage artifacts under docs/work/BANDIT-063/.",
+  "operator_input_required": false,
+  "operator_input_note": "No operator-owned input is required. The operator already supplied the product/workflow direction (plan-mode gate after brief/current-state grounding); Codex PM owns the technical shape, which is fully specified by the dispatch and RED evidence. No product-direction, UAT, cost/risk, dependency, or merge/deploy gate was crossed.",
+  "bootstrap_gaps": [],
+  "follow_up_concerns": []
+}

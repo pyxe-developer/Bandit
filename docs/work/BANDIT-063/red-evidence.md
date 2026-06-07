@@ -1,0 +1,52 @@
+# BANDIT-063 RED Evidence
+
+## Status
+
+`pass` for Stage 2: Test Design And RED Evidence.
+
+Focused Test Writer-owned tests define the Work Item PM plan-mode orchestration gate before production implementation. Current work-item-pm start behavior fails open after formation_approved: it reports the work item ready without any orchestration-plan.md evidence, accepts an under-scoped plan artifact, and the coordination validator rejects the planned append-only orchestration_plan_recorded state between formation approval and RED evidence.
+
+## Test Command
+
+```sh
+node --test test/role-entrypoints-formation.test.mjs; node --test test/coordination-log.test.mjs
+```
+
+## Observed Output
+
+```text
+Subtest: work-item-pm start refuses orchestration before plan-mode evidence exists
+not ok 8 - work-item-pm start refuses orchestration before plan-mode evidence exists
+Expected values to be strictly equal:
+0 !== 1
+Subtest: work-item-pm start refuses under-scoped plan-mode evidence
+not ok 9 - work-item-pm start refuses under-scoped plan-mode evidence
+Expected values to be strictly equal:
+0 !== 1
+tests 9
+pass 7
+fail 2
+Subtest: coordination validate accepts orchestration plan evidence between formation and RED
+not ok 2 - coordination validate accepts orchestration plan evidence between formation and RED
+Invalid coordination state: orchestration_plan_recorded
+tests 13
+pass 12
+fail 1
+```
+
+## Acceptance Criteria Mapping
+
+| Criterion | Evidence |
+| --- | --- |
+| Focused RED evidence proves Work Item PM orchestration can currently proceed from brief/readiness into Stage 2 or broader execution without a durable plan-mode artifact. | test/role-entrypoints-formation.test.mjs adds work-item-pm start coverage after formation_approved and expects refusal when docs/work/BANDIT-001/orchestration-plan.md is missing. Current code exits 0 and reports ready, proving the missing gate fails open. |
+| Focused RED evidence proves missing, stale, contradictory, or under-scoped plan artifacts fail closed before Stage 2 RED evidence or implementation dispatch begins. | test/role-entrypoints-formation.test.mjs adds an under-scoped orchestration-plan.md fixture containing only current repo state and expects refusal for missing stage sequence, required evidence, role boundaries, verification commands, and stop conditions. Current code exits 0, proving plan completeness is not enforced. |
+| A deterministic plan-mode artifact contract exists and requires current repo-state grounding, stage-by-stage orchestration sequence, role assignments, required evidence, verification commands, known blockers, stop conditions, and forbidden actions. | The under-scoped plan test encodes the minimum required contract sections through public work-item-pm start behavior. The implementation must validate the plan before orchestration may proceed. |
+| A Work Item PM command or readiness path refuses orchestration when the plan-mode gate is unsatisfied and reports the exact missing or stale evidence. | The missing-plan RED test requires stderr to name orchestration-plan.md and the plan-mode gate. Current output has no refusal because work-item-pm start succeeds. |
+| The coordination log records the satisfied planning gate as append-only evidence between formation/readiness and Stage 2 RED evidence, using supported or newly validated state vocabulary. | test/coordination-log.test.mjs adds a valid sequence with formation_approved -> orchestration_plan_recorded -> red_recorded and expects coordination validate to pass. Current code rejects orchestration_plan_recorded as an invalid coordination state. |
+| The plan artifact is explicitly advisory/orchestration evidence and cannot replace canonical brief, coordination, review, landing, retrospective, roadmap, current-context, or bootstrap-gap authority. | The RED tests route plan satisfaction through work-item-pm start and append-only coordination evidence. They do not let the plan replace the brief, coordination log, roadmap/current-context, or any later stage artifact. |
+| The implementation preserves Bootstrap Model-Family Separation and Permanent Test Ownership Boundary; if Codex authors Stage 2 RED tests, Stage 3 implementation remains assigned to Claude through the bootstrap Process Adapter path. | Codex authored this Stage 2 RED evidence and acceptance mapping. Stage 3 must be dispatched to Claude through the bootstrap Process Adapter path, with no authority to edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, or retrospective evidence. |
+| The implementation does not start Trust Verifier cutover, role input packet generation, execution packet generation, Pi/Aperture agent-scope schema/projection work, claim authority, worktree lifecycle execution, scheduler execution, cockpit product work, dependency or lockfile changes, external service setup, merge/push/deploy behavior, or product UAT scope. | This Stage 2 step changes only focused tests plus RED evidence for the Work Item PM plan-mode gate. It does not implement unrelated workflow or product surfaces. |
+
+## Next Action
+
+Dispatch Stage 3 implementation for BANDIT-063 to Claude through the bootstrap Process Adapter path. Implement the narrow Work Item PM plan-mode gate: validate docs/work/<ID>/orchestration-plan.md after formation approval, refuse missing or under-scoped plan evidence with clear diagnostics, accept append-only orchestration_plan_recorded coordination evidence before red_recorded, and keep the plan artifact advisory rather than canonical workflow authority. Keep the Stage 3 Writer away from tests, test helpers, fixtures, RED evidence artifacts/specs, acceptance mappings, formation evidence, review evidence, landing evidence, retrospective evidence, Trust Verifier cutover, role input packets, generated execution packets, Pi/Aperture agent-scope work, claim authority, worktree lifecycle execution, scheduler execution, cockpit product work, dependency or lockfile changes, external service setup, merge/push/deploy behavior, and product UAT scope.

@@ -1,0 +1,92 @@
+{
+  "contract_version": 2,
+  "manifest_id": "BANDIT-063-stage3-implementation",
+  "work_item_id": "BANDIT-063",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-implementation-writer-stage3",
+  "base_revision": "b63781221659c710b661f0cb7971c4911727277e",
+  "allowed_target_files": [
+    "src/commands/work-item-pm.ts",
+    "src/state/coordination-log.ts",
+    "src/state/work-item-pm-plan.ts",
+    "docs/templates/work-item-pm-plan.md",
+    "docs/work/BANDIT-063/implementation-evidence.md",
+    "docs/work/BANDIT-063/writer-report.md",
+    "docs/artifact-inputs/BANDIT-063-implementation-evidence.json",
+    "docs/role-runs/BANDIT-063/stage3-implementation.json"
+  ],
+  "observed_changed_files": [
+    "src/commands/work-item-pm.ts",
+    "src/state/coordination-log.ts",
+    "src/state/work-item-pm-plan.ts",
+    "docs/templates/work-item-pm-plan.md",
+    "docs/work/BANDIT-063/implementation-evidence.md",
+    "docs/work/BANDIT-063/writer-report.md",
+    "docs/artifact-inputs/BANDIT-063-implementation-evidence.json",
+    "docs/role-runs/BANDIT-063/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-063/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-063-red-evidence.json",
+    "docs/work/BANDIT-063/brief.md",
+    "docs/work/BANDIT-063/formation-review.md",
+    "docs/work/BANDIT-063/qwen-formation-review.md",
+    "docs/work/BANDIT-063/coderabbit-formation-review.md",
+    "docs/work/BANDIT-063/coordination-log.jsonl",
+    "docs/work/BANDIT-063/coderabbit-review.md",
+    "docs/work/BANDIT-063/local-qwen-review.md",
+    "docs/work/BANDIT-063/review-evidence.md",
+    "docs/work/BANDIT-063/landing-verdict.md",
+    "docs/work/BANDIT-063/landing-action.md",
+    "docs/work/BANDIT-063/retrospective.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-063/dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-063/implementation-evidence.md",
+  "validation_commands": [
+    "node --test test/role-entrypoints-formation.test.mjs",
+    "node --test test/coordination-log.test.mjs",
+    "node --test test/coordination-status.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate",
+    "npm run bandit -- role-runs validate BANDIT-063 --json",
+    "git diff --check"
+  ],
+  "source_artifacts": [
+    "AGENTS.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-063/brief.md",
+    "docs/work/BANDIT-063/dispatch.md",
+    "docs/work/BANDIT-063/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-063-red-evidence.json",
+    "test/role-entrypoints-formation.test.mjs",
+    "test/coordination-log.test.mjs",
+    "test/coordination-status.test.mjs",
+    "src/commands/work-item-pm.ts",
+    "src/state/coordination-log.ts",
+    "src/state/work-item-pm-plan.ts",
+    "src/state/formation-gate.ts",
+    "docs/templates/work-item-pm-plan.md",
+    "docs/templates/role-run-manifest.md"
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false,
+    "note": "Role-run evidence is append-only evidence. It cannot satisfy coordination history, review evidence, landing evidence, UAT approval, or retrospective authority. Canonical authority for those stages remains in the respective stage artifacts under docs/work/BANDIT-063/. The orchestration plan-mode artifact this slice introduces is likewise advisory and cannot replace canonical workflow-state authority."
+  }
+}

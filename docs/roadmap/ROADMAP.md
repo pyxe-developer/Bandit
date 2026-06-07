@@ -4,16 +4,18 @@
 
 ## Current Work Item
 
-- None. `BANDIT-062` is landed and closed out.
+- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Stage 3
+  Claude implementation evidence is accepted; Stage 4 pre-landing review is
+  required.
 
-**Current next step:** Create or disposition a bounded chore spec and work item
-for `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` before Trust Verifier
-cutover, unrelated cockpit product work, or any next slice.
+**Current next step:** Run Stage 4 pre-landing review for `BANDIT-063`:
+CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
+evidence, layered risk-classification and supply-chain gate evidence, and
+explicit disposition for any findings before Stage 5 landing.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - add the Work
-  Item PM plan-mode gate before full orchestration.
+- None until `BANDIT-063` lands and closes out.
 
 ## Planned Work
 
@@ -22,8 +24,8 @@ cutover, unrelated cockpit product work, or any next slice.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued Work Item
-  PM plan-mode gate before full orchestration.
+- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - active in
+  `BANDIT-063`; add the Work Item PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
   evidence exists, artifact-input paths are clear, serializer replacement
   metadata is preserved, and Work Item PM plan-mode orchestration is addressed,

@@ -158,8 +158,8 @@
     {
       "id": "BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION",
       "title": "Work Item PM needs a plan-mode orchestration gate before execution",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-06",
       "source_artifacts": [
         "AGENTS.md",
@@ -169,10 +169,10 @@
         "docs/verification/STAGE_RUBRICS.md",
         "docs/specs/BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-063",
       "rationale": "Operator direction identified that Work Item PM should be forced through a plan-mode stage after reading the brief and grounding in current repo state, but before full orchestration. Without a durable planning gate, Work Item PM can start Stage 2 or broader orchestration without proving it understands the required stage sequence, role boundaries, evidence, verification commands, blockers, and stop conditions.",
       "verification_target": null,
-      "next_action": "Create or disposition a bounded chore spec and work item for BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION before Trust Verifier cutover, unrelated cockpit product work, or any next slice."
+      "next_action": "Complete active chore BANDIT-063."
     },
     {
       "id": "BANDIT-GAP-HEARTBEAT-CHORE-AGENT",

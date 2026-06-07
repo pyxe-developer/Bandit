@@ -1,29 +1,48 @@
 # Current Context
 
-## Last Updated: 2026-06-06
+## Last Updated: 2026-06-07
 
-## Current Work Item: none
+## Current Work Item: BANDIT-063
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
+`BANDIT-063` is active. It is the bounded bootstrap-gap chore for
+`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION`.
+
+Current stage: Stage 4 - pre-landing review required.
+
+Stage 1 brief evidence is recorded at `docs/work/BANDIT-063/brief.md`, and the
+formation review/approval evidence is recorded at
+`docs/work/BANDIT-063/qwen-formation-review.md`,
+`docs/work/BANDIT-063/coderabbit-formation-review.md`,
+`docs/work/BANDIT-063/formation-review.md`, and
+`docs/work/BANDIT-063/coordination-log.jsonl`.
+Stage 2 RED evidence is recorded at `docs/work/BANDIT-063/red-evidence.md` and
+`docs/artifact-inputs/BANDIT-063-red-evidence.json`. Stage 3 Claude
+implementation evidence is recorded at
+`docs/work/BANDIT-063/implementation-evidence.md`,
+`docs/work/BANDIT-063/writer-report.md`,
+`docs/artifact-inputs/BANDIT-063-implementation-evidence.json`, and
+`docs/role-runs/BANDIT-063/stage3-implementation.json`; Codex PM acceptance is
+recorded at `docs/work/BANDIT-063/stage3-pm-review.md`.
+
+Next action: Run Stage 4 pre-landing review for `BANDIT-063`: CodeRabbit
+pre-PR review, Local Qwen adversarial review, aggregate review evidence, layered
+risk-classification and supply-chain gate evidence, and explicit disposition
+for any findings before Stage 5 landing.
+
+No operator-owned input is required for that next action. Do not start Stage 5
+landing, Trust Verifier cutover work, or unrelated cockpit product work until
+Stage 4 review evidence is recorded and accepted.
+
 `BANDIT-062` is landed and closed out. It resolved
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA`; Stage 6
 retrospective/gap disposition evidence is recorded at
 `docs/work/BANDIT-062/retrospective.md`, and the gap ledger marks the serializer
 metadata preservation gap resolved.
-
-Current stage: Interstitial. No active work item is open.
-
-Next action: Create or disposition a bounded chore spec and work item for
-`BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` before Trust Verifier
-cutover, unrelated cockpit product work, or any next slice.
-
-No operator-owned input is required for that next action. Do not begin Trust
-Verifier cutover work or unrelated cockpit product work until the queued Work
-Item PM plan-mode orchestration gap is handled or explicitly dispositioned.
 
 `BANDIT-061` is landed and closed out. It resolved the bounded Role Contract
 Artifact Input Write Surface chore for
@@ -47,8 +66,8 @@ state grounding and before full orchestration.
 
 Last 5 items only:
 
+- `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate (active, Stage 4 pre-landing review required)
+- `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - active chore linked to `BANDIT-063`
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation (closed)
 - `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` - resolved by `BANDIT-062`
-- `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued gap
 - `BANDIT-061` - Role Contract Artifact Input Write Surface (closed)
-- `BANDIT-060` - Artifact Input Directory Split (closed)

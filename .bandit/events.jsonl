@@ -263,3 +263,5 @@
 {"type":"stage5_landing_action_recorded","work_item":"BANDIT-062","message":"Recorded local-record landing action for BANDIT-062 at docs/work/BANDIT-062/landing-action.md; next action is Stage 6 closeout"}
 {"type":"artifact_created","work_item":"BANDIT-062","message":"Created retrospective artifact at docs/work/BANDIT-062/retrospective.md"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-062","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA; next action is the queued Work Item PM plan-mode orchestration gap"}
+{"type":"work_item_created","work_item":"BANDIT-063","message":"Created work item BANDIT-063 from docs/specs/BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION.json"}
+{"type":"artifact_created","work_item":"BANDIT-063","message":"Created red_evidence artifact at docs/work/BANDIT-063/red-evidence.md"}

@@ -33,6 +33,7 @@ type TypedExtensionStatus = {
 type CoordinationState =
   | "brief_created"
   | "formation_approved"
+  | "orchestration_plan_recorded"
   | "red_recorded"
   | "implementation_recorded"
   | "review_recorded"
@@ -115,6 +116,7 @@ const VALID_ACTOR_EVENT_TYPES = new Set([
 const STATE_ORDER = [
   "brief_created",
   "formation_approved",
+  "orchestration_plan_recorded",
   "red_recorded",
   "implementation_recorded",
   "review_recorded",
@@ -195,12 +197,57 @@ export async function appendFormationApprovedStepTransition(
   await appendFile(logPath, `${JSON.stringify(transition)}\n`, "utf8");
 }
 
+export async function appendOrchestrationPlanRecordedStepTransition(
+  repoRoot: string,
+  workItemId: string,
+  planEvidence: string
+) {
+  const logPath = coordinationLogPath(repoRoot, workItemId);
+  const content = await readRequiredLog(logPath, workItemId);
+  const existingEvents = await parseCoordinationEvents(repoRoot, workItemId, content);
+
+  const lastSequence = existingEvents.at(-1)?.sequence ?? 0;
+  const transition = {
+    version: 1 as const,
+    event_type: "step_transition" as const,
+    work_item: workItemId,
+    sequence: lastSequence + 1,
+    timestamp: new Date().toISOString(),
+    actor: "work_item_pm",
+    source: "work-item-pm start",
+    state: "orchestration_plan_recorded" as const,
+    evidence: [planEvidence],
+    safe_triggers: ["red_evidence_required"],
+    next_action: null,
+    accountable_actor: null,
+    accepted_block: null
+  };
+
+  const nextContent = appendJsonLine(content, transition);
+  const workItem = await readWorkItem(repoRoot, workItemId);
+  const nextEvents = await parseCoordinationEvents(repoRoot, workItemId, nextContent);
+  await validateTypedExtensionTransitions(repoRoot, workItem, nextEvents);
+  validateStepTransitionOrder(nextEvents);
+
+  await appendFile(logPath, `${JSON.stringify(transition)}\n`, "utf8");
+}
+
 export async function hasFormationApprovedTransition(
   repoRoot: string,
   workItemId: string
 ): Promise<boolean> {
   const { events } = await readCoordinationTimeline(repoRoot, workItemId);
   return events.filter(isStepTransition).some((t) => t.state === "formation_approved");
+}
+
+export async function hasOrchestrationPlanRecordedTransition(
+  repoRoot: string,
+  workItemId: string
+): Promise<boolean> {
+  const { events } = await readCoordinationTimeline(repoRoot, workItemId);
+  return events
+    .filter(isStepTransition)
+    .some((t) => t.state === "orchestration_plan_recorded");
 }
 
 export async function readFormationApprovedEvidence(

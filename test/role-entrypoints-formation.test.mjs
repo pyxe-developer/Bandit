@@ -263,6 +263,85 @@ test("work-item-pm start refuses work before formation approval", async () => {
   assert.match(result.stderr, /docs\/work\/BANDIT-001\/formation-review\.md/);
 });
 
+test("work-item-pm start refuses orchestration before plan-mode evidence exists", async () => {
+  const repo = await createInitializedRepo();
+  await writeFormationReadyBrief(repo, "BANDIT-001");
+  await writeFormationReviewArtifacts(repo, "BANDIT-001");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      evidence: ["docs/work/BANDIT-001/brief.md"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "formation_approved",
+      actor: "repo_pm",
+      evidence: [
+        "docs/work/BANDIT-001/qwen-formation-review.md",
+        "docs/work/BANDIT-001/coderabbit-formation-review.md",
+        "docs/work/BANDIT-001/formation-review.md"
+      ],
+      safe_triggers: ["work_item_pm_plan_required"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "work-item-pm",
+    "start",
+    "BANDIT-001"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /orchestration-plan\.md/);
+  assert.match(result.stderr, /plan[- ]mode/i);
+  assert.doesNotMatch(result.stdout, /ready to start/);
+});
+
+test("work-item-pm start refuses under-scoped plan-mode evidence", async () => {
+  const repo = await createInitializedRepo();
+  await writeFormationReadyBrief(repo, "BANDIT-001");
+  await writeFormationReviewArtifacts(repo, "BANDIT-001");
+  await writeOrchestrationPlan(
+    repo,
+    "BANDIT-001",
+    `# BANDIT-001 Orchestration Plan
+
+work_item: BANDIT-001
+
+## Current Repo State
+
+Formation is approved.
+`
+  );
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      evidence: ["docs/work/BANDIT-001/brief.md"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "formation_approved",
+      actor: "repo_pm",
+      evidence: [
+        "docs/work/BANDIT-001/qwen-formation-review.md",
+        "docs/work/BANDIT-001/coderabbit-formation-review.md",
+        "docs/work/BANDIT-001/formation-review.md"
+      ],
+      safe_triggers: ["work_item_pm_plan_required"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "work-item-pm",
+    "start",
+    "BANDIT-001"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /orchestration plan/i);
+  assert.match(result.stderr, /Stage Sequence|Required Evidence|Role Boundaries|Verification Commands|Stop Conditions/);
+});
+
 async function createInitializedRepo() {
   const repo = await createTempRepo();
   const init = await runBandit(repo, ["init"]);
@@ -350,6 +429,35 @@ No operator-owned input is required.
 - src/
 `
   );
+}
+
+async function writeFormationReviewArtifacts(repo, workItem) {
+  for (const artifact of [
+    "qwen-formation-review.md",
+    "coderabbit-formation-review.md",
+    "formation-review.md"
+  ]) {
+    await writeFileAt(
+      repo,
+      `docs/work/${workItem}/${artifact}`,
+      `# ${artifact}
+
+contract_version: 1
+work_item: ${workItem}
+verdict: pass
+findings_status: none
+findings_disposition: no unresolved findings
+
+## Summary
+
+Formation review fixture passes.
+`
+    );
+  }
+}
+
+async function writeOrchestrationPlan(repo, workItem, contents) {
+  await writeFileAt(repo, `docs/work/${workItem}/orchestration-plan.md`, contents);
 }
 
 async function writeCoordinationLog(repo, workItem, events) {

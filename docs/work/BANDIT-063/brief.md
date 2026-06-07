@@ -1,0 +1,151 @@
+# BANDIT-063: Work Item PM Plan Mode Orchestration Gate
+
+## Status
+
+Queued
+
+## Non-Product Work
+
+Add a bounded Work Item PM planning gate immediately after the Work Item PM reads the brief and grounds itself in current repo state, before full orchestration begins.
+
+## Origin
+
+Operator direction on 2026-06-06 identified a workflow gap: after Work Item PM reads a brief and hydrates current repo state, Bandit should force a plan-mode step before full slice orchestration so the Work Item PM demonstrates understanding of all required stages, gates, role boundaries, evidence, and stop conditions before executing them.
+
+## Scope
+
+- Define a Work Item PM plan-mode gate that occurs after `work-item-pm start BANDIT-063` reads the approved brief and current repo state, and before Stage 2 RED evidence, implementation dispatch, or full single-session orchestration begins.
+- Require the Work Item PM to produce a durable repo-native plan artifact, expected as `docs/work/BANDIT-063/orchestration-plan.md` or an equivalent explicitly named artifact, that summarizes the current repo state, stage sequence, required evidence, role boundaries, verification commands, expected blockers, and stop conditions.
+- Require the plan to be grounded in current repo artifacts, including the brief, coordination log, current context, roadmap, bootstrap-gap ledger, stage rubrics, clean-code rules, relevant policy files, and any current derived status command outputs.
+- Make Work Item PM orchestration fail closed when the plan-mode artifact is missing, stale, contradicts current repo state, skips required stage gates, erodes model-family separation, erodes Permanent Test Ownership Boundary, or starts execution before the planning gate is satisfied.
+- Record the planning gate as append-only coordination evidence between formation/readiness and Stage 2 RED evidence, without letting the plan become canonical workflow state or replace existing brief, RED evidence, implementation evidence, review evidence, landing evidence, retrospective evidence, current context, roadmap, or bootstrap-gap ledger authority.
+- Preserve existing Repo PM, Work Item PM, Test Writer, Implementation Writer, Reviewer, Landing Agent, and Closeout Agent role boundaries; the Work Item PM plan may coordinate and sequence work but cannot grant itself permission to write tests, implement source, approve review findings, land, or close out work outside existing stage authority.
+- Keep this chore limited to the planning gate contract, command/refusal behavior, templates, coordination state, and focused validation tests. Do not implement unrelated role input packets, generated execution packets, Pi/Aperture agent-scope work, claim authority, worktree lifecycle execution, scheduler execution, cockpit UI, Trust Verifier cutover, old gate replacement, dependency changes, or external service integration.
+
+## Acceptance Criteria
+
+- The chore brief exists at `docs/work/BANDIT-063/brief.md` and links to `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` as the active bootstrap gap once it becomes the next queued work item.
+- Stage 1 brief evidence records `CLEAN_CODE.md` read evidence, stage capability scope, source hierarchy, Work Item PM plan-mode gate boundary, coordination-state boundary, plan artifact authority boundary, operator-input status, model-family separation boundary, Permanent Test Ownership Boundary, and out-of-scope orchestration surfaces.
+- Focused RED evidence proves Work Item PM orchestration can currently proceed from brief/readiness into Stage 2 or broader execution without a durable plan-mode artifact.
+- Focused RED evidence proves missing, stale, contradictory, or under-scoped plan artifacts fail closed before Stage 2 RED evidence or implementation dispatch begins.
+- A deterministic plan-mode artifact contract exists and requires current repo-state grounding, stage-by-stage orchestration sequence, role assignments, required evidence, verification commands, known blockers, stop conditions, and forbidden actions.
+- A Work Item PM command or readiness path refuses orchestration when the plan-mode gate is unsatisfied and reports the exact missing or stale evidence.
+- The coordination log records the satisfied planning gate as append-only evidence between formation/readiness and Stage 2 RED evidence, using supported or newly validated state vocabulary.
+- The plan artifact is explicitly advisory/orchestration evidence and cannot replace canonical brief, coordination, review, landing, retrospective, roadmap, current-context, or bootstrap-gap authority.
+- The implementation preserves Bootstrap Model-Family Separation and Permanent Test Ownership Boundary; if Codex authors Stage 2 RED tests, Stage 3 implementation remains assigned to Claude through the bootstrap Process Adapter path.
+- The implementation does not start Trust Verifier cutover, role input packet generation, execution packet generation, Pi/Aperture agent-scope schema/projection work, claim authority, worktree lifecycle execution, scheduler execution, cockpit product work, dependency or lockfile changes, external service setup, merge/push/deploy behavior, or product UAT scope.
+
+## Verification Plan
+
+- Run focused Work Item PM tests proving orchestration refuses before the plan-mode artifact exists.
+- Run focused Work Item PM tests proving orchestration refuses stale, contradictory, or incomplete plan-mode artifacts.
+- Run focused coordination-log tests proving the planning gate is append-only evidence between formation/readiness and Stage 2 RED evidence.
+- Run focused template or artifact-renderer tests if a plan-mode artifact template or renderer is introduced.
+- Run `node --test test/role-entrypoints-formation.test.mjs` if Work Item PM start/readiness behavior changes.
+- Run `node --test test/coordination-log.test.mjs test/coordination-status.test.mjs` if coordination state or status derivation changes.
+- Run `node --test test/work-item-create.test.mjs` if brief rendering, spec validation, or bootstrap-gap linking changes.
+- Run `node --test test/focused-session-context.test.mjs test/cockpit-status.test.mjs` if current-state projections expose the planning gate.
+- Run `npm run typecheck`.
+- Run `npm run bandit -- validate`.
+- Run `node ./bin/bandit.mjs cockpit status --json`.
+- Run `node ./bin/bandit.mjs session-context current --json`.
+- Run Stage 4 CodeRabbit and Local Qwen review before landing unless honest provider-refusal or bootstrap-gap evidence is recorded.
+- Run `npm run bandit -- land-check BANDIT-063` before landing.
+- Run `git diff --check`.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION.json
+- docs/work/BANDIT-063/brief.md
+- docs/work/BANDIT-063/orchestration-plan.md
+- docs/work/BANDIT-063/coordination-log.jsonl
+- docs/work/BANDIT-063/red-evidence.md
+- docs/work/BANDIT-063/implementation-evidence.md
+- docs/work/BANDIT-063/review-evidence.md
+- docs/work/BANDIT-063/landing-verdict.md
+- docs/work/BANDIT-063/landing-action.md
+- docs/work/BANDIT-063/retrospective.md
+- docs/templates/work-item-pm-plan.md
+- src/commands/work-item-pm.ts
+- src/state/coordination-log.ts
+- src/state/formation-gate.ts
+- test/role-entrypoints-formation.test.mjs
+- test/coordination-log.test.mjs
+- test/coordination-status.test.mjs
+- .bandit/bootstrap-gaps.json
+- .bandit/events.jsonl
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## Required Evidence
+
+- docs/work/BANDIT-063/brief.md
+- docs/work/BANDIT-063/orchestration-plan.md
+- docs/work/BANDIT-063/coordination-log.jsonl
+- docs/work/BANDIT-063/red-evidence.md
+- docs/work/BANDIT-063/implementation-evidence.md
+- docs/work/BANDIT-063/review-evidence.md
+- docs/work/BANDIT-063/landing-verdict.md
+- docs/work/BANDIT-063/landing-action.md
+- docs/work/BANDIT-063/retrospective.md
+
+## Operator Input Status
+
+No further operator-owned input is required to queue this bootstrap-gap chore. The operator supplied the product/workflow direction: Work Item PM must enter a plan-mode stage after brief/current-state grounding and before full orchestration. Codex PM owns the technical shape of the plan artifact, command/refusal behavior, tests, stage capability scope, and review routing. Halt only if implementation would change product direction beyond this planning gate, alter UAT policy, approve business tradeoffs, approve explicit cost/risk overrides, introduce paid recurring model or reviewer routing, change dependency or lockfile policy, change merge/push/deploy authority, perform Trust Verifier cutover, or expand into unrelated cockpit/product scope.
+
+## Stage Capability Scope
+
+policy: .bandit/policy/stage-capability-scope.json
+stages:
+- stage1_brief
+- work_item_pm_plan_mode
+- stage2_red_evidence
+- stage3_implementation
+- stage4_review
+- stage5_landing
+- stage6_retrospective
+authority_roles:
+- codex_pm
+- repo_pm
+- work_item_pm
+- test_writer
+- implementation_writer
+- reviewer
+- landing_agent
+- closeout_agent
+required_skills:
+- bandit
+- tdd
+- review
+- superpowers:verification-before-completion
+forbidden_actions:
+- Do not let Work Item PM orchestration proceed before plan-mode evidence is recorded.
+- Do not let the plan artifact replace canonical workflow state or stage evidence.
+- Do not let Work Item PM plan mode authorize Stage 3 Writer test edits or same-model RED/implementation routing.
+- Do not implement Trust Verifier cutover, role input packets, generated execution packets, Pi/Aperture agent-scope work, claim authority, worktree lifecycle execution, scheduler execution, merge, push, deploy, dependency changes, external services, or unrelated cockpit features in this chore.
+
+## Token-Cost Failsafe
+
+policy: .bandit/policy/token-cost-failsafe.json
+soft_budget_bands:
+- Work Item PM plan mode should use local/default planning budget guidance and should fail closed by artifact absence or staleness rather than repeated retries.
+- Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly.
+provider_pricing_evidence:
+- No new paid provider-pricing evidence is approved by this queued chore.
+- Any paid reviewer, paid model, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists.
+spend_classes:
+- local-only-default
+- one-off-paid-evaluation-blocked-without-approval
+- recurring-paid-routing-blocked-without-policy-promotion
+continuation_decisions:
+- If plan-mode execution hits a token or cost failsafe, halt and record continuation evidence before retrying.
+- If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass.
+stage_capability_profiles:
+- repo-pm-stage1
+- work-item-pm-plan-mode
+- test-writer-stage2
+- claude-implementation-writer-stage3
+- qwen-and-coderabbit-review-stage4
+- landing-agent-stage5
+- closeout-agent-stage6

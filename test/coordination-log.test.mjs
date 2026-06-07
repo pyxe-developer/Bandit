@@ -34,6 +34,52 @@ test("coordination validate accepts append-only step transitions with evidence r
   assert.match(result.stdout, /Coordination log is valid: BANDIT-001/);
 });
 
+test("coordination validate accepts orchestration plan evidence between formation and RED", async () => {
+  const repo = await createCoordinationRepo();
+  await writeEvidence(repo, "BANDIT-001", "qwen-formation-review.md");
+  await writeEvidence(repo, "BANDIT-001", "coderabbit-formation-review.md");
+  await writeEvidence(repo, "BANDIT-001", "formation-review.md");
+  await writeEvidence(repo, "BANDIT-001", "orchestration-plan.md");
+  await writeEvidence(repo, "BANDIT-001", "red-evidence.md");
+  await writeCoordinationLog(repo, "BANDIT-001", [
+    stepTransition({
+      state: "brief_created",
+      evidence: ["docs/work/BANDIT-001/brief.md"],
+      safe_triggers: ["formation_required"]
+    }),
+    stepTransition({
+      sequence: 2,
+      state: "formation_approved",
+      evidence: [
+        "docs/work/BANDIT-001/qwen-formation-review.md",
+        "docs/work/BANDIT-001/coderabbit-formation-review.md",
+        "docs/work/BANDIT-001/formation-review.md"
+      ],
+      safe_triggers: ["work_item_pm_plan_required"]
+    }),
+    stepTransition({
+      sequence: 3,
+      state: "orchestration_plan_recorded",
+      evidence: ["docs/work/BANDIT-001/orchestration-plan.md"],
+      safe_triggers: ["red_evidence_required"]
+    }),
+    stepTransition({
+      sequence: 4,
+      state: "red_recorded",
+      evidence: ["docs/work/BANDIT-001/red-evidence.md"],
+      safe_triggers: ["implementation_allowed"]
+    })
+  ]);
+
+  const result = await runBandit(repo, [
+    "coordination",
+    "validate",
+    "BANDIT-001"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+});
+
 test("coordination validate accepts feature UAT typed extension with current CLI evidence", async () => {
   const repo = await createCoordinationRepo("slice");
   for (const evidence of [
