@@ -134,6 +134,9 @@ evidence; aggregate formation review passes. Repo PM repaired the missing
 `brief_created` coordination-log prerequisite and recorded the CLI-owned
 `formation_approved` transition at
 `docs/work/BANDIT-064/coordination-log.jsonl`.
+Work Item PM plan-mode evidence is recorded at
+`docs/work/BANDIT-064/orchestration-plan.md`, and the coordination log records
+the CLI-owned `orchestration_plan_recorded` transition.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -142,23 +145,22 @@ resolved.
 
 **Active work item:** `BANDIT-064`.
 
-The current stage is Stage 1: formation approved; Work Item PM plan-mode
-evidence required before Stage 2 RED evidence.
+The current stage is Stage 2: RED evidence required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Work Item PM should draft
-`docs/work/BANDIT-064/orchestration-plan.md` and then run
-`node ./bin/bandit.mjs work-item-pm start BANDIT-064` before Stage 2 begins.
+**Current next action:** Test Writer should create Stage 2 RED evidence for
+`BANDIT-064`, recording `docs/work/BANDIT-064/red-evidence.md` and any required
+artifact-input JSON before implementation begins.
 
-Do not write Stage 2 RED evidence, dispatch implementation, start Trust
-Verifier cutover, replace or wrap any old gate path, start unrelated cockpit
-product work, Pi/Aperture agent-scope schema/projection work, role input or
-execution packet work, or role-scoped workflow implementation until the
-`orchestration_plan_recorded` transition is recorded.
+Do not dispatch implementation, start Trust Verifier cutover, replace or wrap
+any old gate path, start unrelated cockpit product work, Pi/Aperture
+agent-scope schema/projection work, role input or execution packet work, or
+role-scoped workflow implementation until Stage 2 RED evidence is recorded and
+the `red_recorded` transition is recorded.
 
 ## Active Work
 
@@ -172,11 +174,13 @@ records `work_item_created` for `BANDIT-064`, and
 evidence is recorded and passes with CodeRabbit provider-timeout replacement
 evidence. `docs/work/BANDIT-064/coordination-log.jsonl` now records both the
 `brief_created` prerequisite and the CLI-owned `formation_approved` transition.
-The next action is Work Item PM plan-mode evidence only.
+`docs/work/BANDIT-064/orchestration-plan.md` is recorded, and the coordination
+log records `orchestration_plan_recorded`. The next action is Stage 2 RED
+evidence only.
 
-Do not start Stage 2 RED evidence, implementation dispatch, Trust Verifier
-cutover, old-gate replacement/wrapping, role packet work, or unrelated cockpit
-product work before `orchestration_plan_recorded` is recorded.
+Do not start implementation dispatch, Trust Verifier cutover, old-gate
+replacement/wrapping, role packet work, or unrelated cockpit product work before
+Stage 2 RED evidence and `red_recorded` are recorded.
 
 `BANDIT-063` is landed and closed out. Its Stage 1 brief, formation review,
 Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 review evidence,
@@ -217,7 +221,7 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Record Work Item PM plan-mode evidence for `BANDIT-064` before RED evidence,
+1. Record Stage 2 RED evidence for `BANDIT-064` before implementation,
    implementation, Trust Verifier cutover, old-gate replacement/wrapping, or
    unrelated cockpit product work.
 2. Preserve the Work Item PM plan-mode gate: after brief/current-state

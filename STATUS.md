@@ -14,15 +14,14 @@ Layer Pivot.
 `docs/work/BANDIT-064/brief.md`, and the gap ledger marks the gap active with
 linked work item `BANDIT-064`.
 
-Current stage: Stage 1 formation approved; Work Item PM plan-mode evidence
-required before Stage 2 RED evidence.
+Current stage: Stage 2 RED evidence required.
 
-Next action: Work Item PM should draft
-`docs/work/BANDIT-064/orchestration-plan.md` and then run
-`node ./bin/bandit.mjs work-item-pm start BANDIT-064` before Stage 2 begins. Do
-not write RED evidence, approve Trust Verifier cutover, replace or wrap old
-gates, or start unrelated product work before Work Item PM plan-mode evidence
-is recorded.
+Next action: Test Writer should create Stage 2 RED evidence for `BANDIT-064`,
+recording `docs/work/BANDIT-064/red-evidence.md` and any required
+artifact-input JSON before implementation begins. Do not dispatch
+implementation, approve Trust Verifier cutover, replace or wrap old gates, or
+start unrelated product work before Stage 2 RED evidence and `red_recorded` are
+recorded.
 
 No operator-owned input is required for formation review. Halt for operator
 input if the next step would approve Trust Verifier cutover policy, select a
@@ -63,7 +62,7 @@ Verifier cutover policy remains unresolved.
 
 Last 5 items only:
 
-- `BANDIT-064` - Trust Verifier Cutover Gate Triage (formation approved; Work Item PM plan-mode next)
+- `BANDIT-064` - Trust Verifier Cutover Gate Triage (plan-mode recorded; Stage 2 RED next)
 - `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate (closed)
 - `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - resolved by `BANDIT-063`
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation (closed)

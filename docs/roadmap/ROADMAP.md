@@ -5,16 +5,16 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-064` - Trust Verifier Cutover Gate Triage. Stage 1 brief is
-  created and formation is approved; Work Item PM plan-mode evidence is the
-  next action.
+  created, formation is approved, and Work Item PM plan-mode evidence is
+  recorded; Stage 2 RED evidence is the next action.
 
-**Current next step:** Work Item PM should draft
-`docs/work/BANDIT-064/orchestration-plan.md` and then run
-`node ./bin/bandit.mjs work-item-pm start BANDIT-064` before Stage 2 begins.
+**Current next step:** Test Writer should create Stage 2 RED evidence for
+`BANDIT-064`, recording `docs/work/BANDIT-064/red-evidence.md` and any required
+artifact-input JSON before implementation begins.
 
-Do not write RED evidence, approve Trust Verifier cutover, replace or wrap old
-gates, or start unrelated product work before Work Item PM plan-mode evidence
-is recorded.
+Do not dispatch implementation, approve Trust Verifier cutover, replace or wrap
+old gates, or start unrelated product work before Stage 2 RED evidence and
+`red_recorded` are recorded.
 
 ## Next Work Item
 
