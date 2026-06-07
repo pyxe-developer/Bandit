@@ -294,3 +294,4 @@
 {"type":"artifact_created","work_item":"BANDIT-069","message":"Created landing_verdict artifact at docs/work/BANDIT-069/landing-verdict.md"}
 {"type":"artifact_created","work_item":"BANDIT-069","message":"Created retrospective artifact at docs/work/BANDIT-069/retrospective.md"}
 {"type":"work_item_created","work_item":"BANDIT-070","message":"Created work item BANDIT-070 from docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json"}
+{"type":"artifact_created","work_item":"BANDIT-070","message":"Created red_evidence artifact at docs/work/BANDIT-070/red-evidence.md"}

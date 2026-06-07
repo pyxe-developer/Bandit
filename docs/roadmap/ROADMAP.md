@@ -5,10 +5,9 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-070` - Verification Oracle Provenance Gate
-  (formation approved)
+  (Stage 3 implementation accepted)
 
-**Current next step:** Run Work Item PM plan-mode orchestration for
-`BANDIT-070` before RED evidence.
+**Current next step:** Run Stage 4 review for `BANDIT-070`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

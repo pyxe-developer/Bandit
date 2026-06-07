@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "covered_surfaces": [
+    "brief",
+    "review-evidence",
+    "landing-verdict",
+    "cockpit-status",
+    "session-context",
+    "trust-verify"
+  ],
+  "covered_claims": [
+    "pass",
+    "safe-to-land",
+    "trusted",
+    "current",
+    "ready"
+  ],
+  "supported_oracle_types": [
+    "independent_external_artifact",
+    "independent_repo_artifact",
+    "independent_command_output",
+    "replay_packet",
+    "reviewer_finding",
+    "invariant_or_property",
+    "trusted_source_artifact",
+    "self_reported_or_derived"
+  ],
+  "independent_oracle_types": [
+    "independent_external_artifact",
+    "independent_repo_artifact",
+    "independent_command_output",
+    "replay_packet",
+    "reviewer_finding",
+    "invariant_or_property",
+    "trusted_source_artifact"
+  ],
+  "required_fields": [
+    "target_surface",
+    "claim",
+    "oracle_type",
+    "oracle_source",
+    "owner_or_authority_role",
+    "independence_class",
+    "freshness_source",
+    "claim_mapping",
+    "source_drift_status"
+  ],
+  "require_command_for_oracle_types": [
+    "independent_command_output",
+    "replay_packet"
+  ],
+  "low_risk_self_reported_claims": [
+    "metadata-present"
+  ]
+}

@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-070 (formation approved)
+## Current Work Item: BANDIT-070 (Stage 3 implementation accepted)
 
 ## Current Status
 
@@ -14,19 +14,17 @@ Layer Pivot.
 test-strength policy, evidence template, validator, CLI command, init wiring,
 and `land-check` enforcement for covered high-risk surfaces.
 
-`BANDIT-070` is formed and approved for
-`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE`. Stage 1 evidence is recorded
-under `docs/work/BANDIT-070/`: brief, coordination log, Local Qwen formation
-review, CodeRabbit provider-timeout replacement evidence, aggregate formation
-review, and `formation_approved`.
+`BANDIT-070` is active for
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE`. Stage 1 formation evidence,
+Work Item PM orchestration evidence, Stage 2 RED evidence, and Stage 3
+implementation evidence are recorded under `docs/work/BANDIT-070/`.
 
 `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` remains queued behind
 `BANDIT-070`.
 
-Current stage: Stage 1 formation approved.
+Current stage: Stage 3 implementation accepted.
 
-Next action: Run Work Item PM plan-mode orchestration for `BANDIT-070` before
-RED evidence.
+Next action: Run Stage 4 review for `BANDIT-070`.
 
 Required operator input: none currently required.
 
@@ -34,7 +32,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-070` - Verification Oracle Provenance Gate (formation approved)
+- `BANDIT-070` - Verification Oracle Provenance Gate (Stage 3 implementation accepted)
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate (closed)
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (closed)
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)

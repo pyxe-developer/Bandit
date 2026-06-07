@@ -39,6 +39,10 @@ import {
   writeDefaultSupplyChainGateTemplate
 } from "../state/supply-chain-gate.js";
 import { writeDefaultTestStrengthGatePolicy } from "../state/test-strength-gate.js";
+import {
+  writeDefaultVerificationOracleProvenancePolicy,
+  writeDefaultVerificationOracleProvenanceTemplate
+} from "../state/verification-oracle-provenance.js";
 import { writeDefaultTrustVerifierCutoverGatesPolicy } from "../state/trust-verifier-cutover-gates.js";
 
 export async function initBandit(repoRoot: string) {
@@ -98,6 +102,12 @@ export async function initBandit(repoRoot: string) {
   );
   const testStrengthGatePolicyExists = await pathExists(
     paths.testStrengthGatePolicy
+  );
+  const verificationOracleProvenancePolicyExists = await pathExists(
+    paths.verificationOracleProvenancePolicy
+  );
+  const verificationOracleProvenanceTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/verification-oracle-provenance.md`
   );
   const trustVerifierCutoverGatesPolicyExists = await pathExists(
     paths.trustVerifierCutoverGatesPolicy
@@ -197,6 +207,16 @@ export async function initBandit(repoRoot: string) {
 
   if (!testStrengthGatePolicyExists) {
     await writeDefaultTestStrengthGatePolicy(paths.testStrengthGatePolicy);
+  }
+
+  if (!verificationOracleProvenancePolicyExists) {
+    await writeDefaultVerificationOracleProvenancePolicy(
+      paths.verificationOracleProvenancePolicy
+    );
+  }
+
+  if (!verificationOracleProvenanceTemplateExists) {
+    await writeDefaultVerificationOracleProvenanceTemplate(repoRoot);
   }
 
   if (!trustVerifierCutoverGatesPolicyExists) {

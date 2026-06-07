@@ -34,6 +34,10 @@ export function getBanditPaths(repoRoot: string) {
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
     supplyChainPolicy: path.join(policyRoot, "supply-chain-gate.json"),
     testStrengthGatePolicy: path.join(policyRoot, "test-strength-gate.json"),
+    verificationOracleProvenancePolicy: path.join(
+      policyRoot,
+      "verification-oracle-provenance.json"
+    ),
     trustVerifierCutoverGatesPolicy: path.join(
       policyRoot,
       "trust-verifier-cutover-gates.json"
