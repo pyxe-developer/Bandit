@@ -1,0 +1,173 @@
+{
+  "kind": "chore",
+  "title": "Verification Oracle Provenance Gate",
+  "status": "Queued",
+  "non_product_work": "Create a provenance gate that requires verification verdicts to name the oracle they rely on and prove that oracle is independent enough for the claimed trust decision.",
+  "origin": "Operator direction on 2026-06-07 accepted the Verification Oracle Provenance Gate as the next verification-layer strengthening idea after the queued Test Strength / Mutation Adequacy Gate. Bandit already records tests, review evidence, risk classification, supply-chain evidence, freshness, and landing verdicts, but it does not yet require each pass verdict to identify whether its oracle is a spec clause, invariant, independent command output, golden fixture, replay packet, reviewer finding, trusted source artifact, or another evidence class. Without oracle provenance, a gate can drift into circular verification where the same code path creates both the behavior and the evidence that claims the behavior is trustworthy.",
+  "scope": [
+    "Define a repo-native Verification Oracle Provenance Gate for trust-layer verdicts, pass evidence, aggregate review evidence, landing verdicts, and derived status projections.",
+    "Require covered verification artifacts to identify their oracle type, oracle source artifact, oracle owner or authority role, independence class, freshness source, command or replay packet when applicable, and the claim the oracle supports.",
+    "Classify oracle independence levels such as independent_external_artifact, independent_repo_artifact, independent_command_output, replay_packet, reviewer_finding, invariant_or_property, trusted_source_artifact, and self_reported_or_derived.",
+    "Fail closed when a pass verdict relies only on self-reported or same-code-path evidence for a claim that requires independent proof.",
+    "Require any derived status surface, including cockpit status, session-context, trust verify reports, review evidence, and landing evidence, to distinguish canonical source artifacts from projections and to avoid presenting derived output as the oracle for itself.",
+    "Require Stage 1 briefs for covered verification or projection work to declare the oracle provenance strategy and explain which claims need independent or replay-backed evidence.",
+    "Require Stage 2 RED evidence for covered gate work to include tests for missing oracle provenance, circular self-attestation, stale oracle source, unsupported oracle type, and mismatched claim-to-oracle mapping.",
+    "Require Stage 4 reviewer packets to ask whether the reported oracle would still catch the claimed failure if the implementation or projection code were wrong.",
+    "Allow explicit no-action or bootstrap-gap disposition for trivial metadata-only work, but require the disposition to name why independent oracle provenance is not needed for that risk tier.",
+    "Keep replay packets as an allowed oracle type without requiring this chore to build the full replay regression corpus; a later replay-corpus chore may expand this gate.",
+    "Keep this chore focused on policy, templates, validators, command wiring, reviewer-packet language, and focused tests. Do not approve Trust Verifier cutover, replace old gates, introduce live reviewer/model routing, install external services, alter UAT policy, add paid tooling, or expand unrelated Phase 8 cockpit product scope.",
+    "Preserve Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: Stage 3 Writers cannot edit tests, test helpers, fixtures, RED evidence, oracle-provenance evidence, or acceptance mappings for their work item."
+  ],
+  "acceptance_criteria": [
+    "The chore brief exists at `docs/work/<ID>/brief.md` and links to `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` as the active bootstrap gap once it becomes the next queued work item.",
+    "A repo-native policy artifact or equivalent validator defines covered artifact types, covered trust claims, supported oracle types, oracle independence classes, required provenance fields, freshness requirements, and explicit no-action/bootstrap disposition rules.",
+    "Covered Stage 1 briefs must declare oracle provenance strategy for verification, projection, aggregate review, landing, or trust-verifier work before Stage 2 begins.",
+    "Validation rejects pass, safe-to-land, trusted, current, or ready verdicts for covered claims when the evidence lacks oracle type, oracle source, owner or authority role, independence class, freshness source, claim mapping, or command/replay reference when applicable.",
+    "Validation rejects circular self-attestation where the same projection, validator, command output, or generated report is treated as the independent oracle for its own correctness.",
+    "Validation rejects stale, missing, unsupported, or mismatched oracle sources before trusted status can be exposed in cockpit status, session-context, trust verify reports, review evidence, or landing evidence.",
+    "Validation allows self-reported or derived oracle classes only for explicitly low-risk claims or when paired with a stronger independent oracle for the trust decision being made.",
+    "Reviewer packet templates and aggregate Stage 4 evidence ask whether the named oracle would catch the relevant failure if the implementation or projection path were wrong.",
+    "Landing, land-check, repo validation, or trust-verifier compatibility validation consumes current oracle-provenance evidence for covered high-risk verification surfaces and fails closed when provenance is missing, stale, circular, or generic.",
+    "The implementation does not build the full replay regression corpus, approve Trust Verifier cutover, replace or wrap old gate paths, add blanket ceremony to trivial work, approve paid/external tooling, change product direction, alter UAT policy, change merge/push/deploy authority, or expand unrelated Phase 8 cockpit/product scope.",
+    "The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation; Stage 3 Writers cannot edit oracle-provenance tests, fixtures, RED evidence, oracle evidence, or acceptance mappings.",
+    "Stage 4 review uses CodeRabbit and Local Qwen or honest provider-refusal/bootstrap replacement evidence, with layered risk-classification, supply-chain, clean-code, and review-subject freshness evidence before landing.",
+    "`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is resolved only after landing action and retrospective closeout evidence exist for this bounded gate chore."
+  ],
+  "verification_plan": [
+    "Run focused oracle-provenance validation tests proving covered pass/trusted/ready verdicts fail closed without oracle type, source, owner or authority role, independence class, freshness source, and claim mapping.",
+    "Run focused tests proving circular self-attestation is rejected when a projection, validator, report, or generated artifact is treated as its own independent oracle.",
+    "Run focused tests proving stale, missing, unsupported, and mismatched oracle sources fail closed.",
+    "Run focused tests proving self-reported or derived oracle classes are accepted only for low-risk claims or when paired with an independent oracle.",
+    "Run focused tests proving reviewer packets or aggregate review evidence include the oracle-quality question.",
+    "Run focused landing, validation, or trust-verifier compatibility tests proving covered high-risk verification surfaces cannot expose trusted status without current oracle provenance.",
+    "Run `npm test` if implementation touches shared validators, work-item parsing, review evidence, landing gates, trust verify, cockpit/session-context projections, templates, bootstrap gaps, or policy validation beyond focused tests.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `node ./bin/bandit.mjs review-subject-hash <ID>` for aggregate review evidence freshness.",
+    "Run `npm run bandit -- coderabbit-review pre-pr <ID> --base origin/main` before Stage 4 closeout unless provider-refusal evidence is recorded.",
+    "Run `npm run bandit -- qwen-review <ID>` before Stage 4 closeout unless provider-refusal evidence is recorded.",
+    "Run `npm run bandit -- land-check <ID>` before landing.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    ".bandit/policy/verification-oracle-provenance.json",
+    "docs/templates/verification-oracle-provenance.md",
+    "docs/templates/review-evidence.md",
+    "docs/templates/landing-verdict.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "src/state/verification-oracle-provenance.ts",
+    "src/commands/verification-oracle-provenance.ts",
+    "src/commands/validate.ts",
+    "src/commands/land-check.ts",
+    "src/state/review-evidence.ts",
+    "src/state/landing-verdicts.ts",
+    "src/state/cockpit-status.ts",
+    "src/state/focused-session-context.ts",
+    "src/state/trust-verify.ts",
+    "test/verification-oracle-provenance.test.mjs",
+    "test/landing-gates.test.mjs",
+    "test/validate.test.mjs",
+    "test/trust-verify.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. The operator supplied the workflow-policy direction: add a Verification Oracle Provenance Gate. Codex PM owns the technical shape of policy artifacts, validators, test strategy, reviewer packet wording, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, approve paid or external tooling, approve recurring paid model/reviewer routing, approve Trust Verifier cutover, alter merge/push/deploy authority, change dependency or lockfile policy, or expand into unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not treat a projection, validator, generated report, or command output as its own independent oracle.",
+      "Do not let Stage 3 Writers edit tests, test helpers, fixtures, RED evidence, oracle-provenance evidence, or acceptance mappings.",
+      "Do not replace existing gate authority or approve Trust Verifier cutover in this chore.",
+      "Do not approve paid/external tooling, product UAT changes, merge, push, deploy, guarded action execution, or unrelated Phase 8 cockpit work in this chore."
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "Stage 1 Repo PM brief creation and formation review should use local-only default budget guidance.",
+      "Oracle-provenance validation should be deterministic and local; unavailable external oracle sources should be recorded as missing or bootstrap evidence rather than pass evidence.",
+      "Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly."
+    ],
+    "provider_pricing_evidence": [
+      "No paid provider-pricing evidence is approved by this queued chore.",
+      "Any paid reviewer, paid model, paid oracle service, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists."
+    ],
+    "spend_classes": [
+      "local-only-default",
+      "one-off-paid-evaluation-blocked-without-approval",
+      "recurring-paid-routing-blocked-without-policy-promotion"
+    ],
+    "continuation_decisions": [
+      "If oracle-provenance verification depends on unavailable provider evidence, record unavailable/bootstrap evidence instead of treating absence as pass.",
+      "If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass."
+    ],
+    "stage_capability_profiles": [
+      "repo-pm-stage1-formation",
+      "test-writer-stage2",
+      "claude-implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4",
+      "landing-agent-stage5",
+      "closeout-agent-stage6"
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "kind": "chore",
+  "title": "Gate Determinism And Flake Gate",
+  "status": "Queued",
+  "non_product_work": "Require critical trust-layer gates to produce repeatable output, stable ordering, stable hashes, and explicit nondeterminism dispositions.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. The earlier verification-layer review identified Gate Determinism / Flake Gate as a hardening opportunity because trust-layer commands should be repeatable and should not let nondeterministic tests, provider-dependent evidence, or unstable ordering masquerade as trusted verification.",
+  "scope": [
+    "Define which Bandit gates and projections are determinism-critical.",
+    "Require stable ordering, stable hashes, deterministic machine-readable output, and bounded freshness rules for covered gates.",
+    "Require explicit disposition for nondeterministic tests, provider-dependent evidence, wall-clock-sensitive checks, and unavailable external reviewers.",
+    "Add repeat-run or snapshot comparison checks for covered local commands.",
+    "Keep this chore focused on deterministic CLI gates, validators, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy artifact defines determinism-critical gates, allowed nondeterminism sources, required dispositions, repeat-run expectations, and output stability requirements.",
+    "Covered commands produce stable machine-readable output for the same repo state or report a justified nondeterminism disposition.",
+    "Validation fails closed when a covered trusted claim depends on undispositioned flaky tests, provider-dependent evidence, unstable ordering, or unstable hashes.",
+    "Freshness-bounded external evidence remains allowed, but it must be recorded as external/provider-dependent and cannot silently replace deterministic local evidence.",
+    "`BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused tests proving covered outputs are stable across repeated runs.",
+    "Run tests proving unstable ordering, hash drift, and undispositioned nondeterminism fail closed.",
+    "Run tests proving provider-dependent evidence requires explicit freshness and availability disposition.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches shared validators or deterministic command output.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/gate-determinism-flake-gate.json",
+    "src/state/gate-determinism.ts",
+    "src/commands/validate.ts",
+    "test/gate-determinism.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns the deterministic gate policy, command selection, tests, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, Trust Verifier cutover, paid/external tooling, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not treat flaky or provider-dependent evidence as deterministic local proof.",
+      "Do not silently normalize unstable output without a recorded policy reason.",
+      "Do not approve Trust Verifier cutover, paid routing, merge, push, deploy, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-GAP-REPLAY-REGRESSION-CORPUS is resolved, blocked, or explicitly dispositioned"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "kind": "chore",
+  "title": "Replay Regression Corpus",
+  "status": "Queued",
+  "non_product_work": "Turn historical Bandit workflow failures into replay-only verification packets so current gates can prove they still catch old failure modes.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap after the Test Strength / Mutation Adequacy Gate and Verification Oracle Provenance Gate. The earlier verification-layer review identified a replay regression corpus as the next hardening opportunity: stale review hashes, provider timeouts, dirty worktrees, dropped bootstrap metadata, parser wording drift, weak reviewer dispositions, and similar known Bandit failures should become deterministic replay packets.",
+  "scope": [
+    "Define a repo-native replay regression corpus for historical Bandit workflow failures.",
+    "Classify replay packets by failure mode, source artifact, expected gate, expected verdict, and policy version.",
+    "Keep packets replay-only: they must not affect live work, reviewer routing, model routing, landing authority, or cost policy without a separate approved decision.",
+    "Add validation or trust-verifier compatibility behavior that can execute replay packets and prove current gates still fail closed on known failure modes.",
+    "Require explicit no-action/bootstrap disposition when a historical failure is not worth turning into a packet.",
+    "Keep this chore focused on replay packet policy, fixtures, validators, command output, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy or design artifact defines replay packet schema, failure-mode taxonomy, expected verdict semantics, source metadata, freshness/versioning, and replay-only boundaries.",
+    "At least the historically recurring Bandit failure classes are represented or explicitly dispositioned: stale review subject hash, provider timeout/refusal, dirty worktree, dropped bootstrap metadata, parser wording drift, weak reviewer disposition, and stale routing text.",
+    "Replay execution produces deterministic machine-readable output and fails closed when expected blockers are missed.",
+    "Replay packets cannot change live workflow state, claim authority, reviewer routing, model routing, landing authority, UAT, merge/push/deploy behavior, or cost policy.",
+    "Stage 4 review and Stage 5 landing evidence can reference replay corpus results without treating them as a replacement for required live evidence.",
+    "`BANDIT-GAP-REPLAY-REGRESSION-CORPUS` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused RED/GREEN tests for replay packet schema validation and deterministic replay output.",
+    "Run tests proving known failure packets fail closed when the relevant gate would miss the blocker.",
+    "Run tests proving replay execution is read-only and cannot mutate live Bandit state or routing.",
+    "Run tests proving stale, malformed, or unsupported replay packets fail closed with clear diagnostics.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches shared validators, trust verify, landing gates, templates, or command routing.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/replay-regression-corpus.json",
+    "docs/replay-packets/",
+    "src/state/replay-regression-corpus.ts",
+    "src/commands/replay-regression-corpus.ts",
+    "test/replay-regression-corpus.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns the replay packet policy, fixture selection from repo history, validator shape, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, Trust Verifier cutover, paid/external tooling, live reviewer/model routing, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not allow replay packets to mutate live workflow state.",
+      "Do not let replay corpus results replace required live review, UAT, landing, or operator-owned approvals.",
+      "Do not approve Trust Verifier cutover, paid routing, merge, push, deploy, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-068 is landed and closed out",
+    "BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE is resolved, blocked, or explicitly dispositioned",
+    "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE is resolved, blocked, or explicitly dispositioned",
+    "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL is resolved, blocked, or explicitly dispositioned"
+  ]
+}

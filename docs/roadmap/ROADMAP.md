@@ -22,17 +22,47 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Guarded CLI Action Requests
+- `[Gap]` `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` - Test Strength /
+  Mutation Adequacy Gate (queued after `BANDIT-068` lands and closes out)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- None currently queued. `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is
-  resolved with disposition `no_action` after Repo PM review.
+- `[Gap]` `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` - Risk-tiered
+  assertion-adequacy and mutation/property/adversarial test-strength gate for
+  critical deterministic trust-layer surfaces, queued behind active
+  `BANDIT-068`.
+- `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Oracle provenance
+  gate requiring covered pass/trusted/ready claims to name the evidence oracle
+  and reject circular self-attestation, queued behind the test-strength gate.
+- `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
+  distribution and CLI update notification channel, queued behind the
+  oracle-provenance gate unless explicitly reprioritized.
+- `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
+  Bandit workflow failures, queued behind the private install/update channel.
+- `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate output,
+  stable hashes, and explicit flake/provider-dependence dispositions, queued
+  behind the replay corpus.
+- `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
+  agreement and harmless-perturbation checks for derived trust surfaces, queued
+  behind the determinism gate.
+- `[Gap]` `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - Replay-only seeded
+  blocker and non-issue packets for reviewer calibration, queued behind
+  cross-projection checks.
+- `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
+  hashing for landing and trusted-verdict evidence, queued behind reviewer
+  calibration.
+- `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - Acceptance
+  criterion to verification artifact traceability, queued behind evidence bundle
+  attestation.
+
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
+`no_action` after Repo PM review.
 
 ### Phase 8 Product Queue
 
+- `[Slice]` `TBD` - Guarded CLI Action Requests
 - `[Slice]` `TBD` - Improvement Health Surface
 
 ## Completed Work

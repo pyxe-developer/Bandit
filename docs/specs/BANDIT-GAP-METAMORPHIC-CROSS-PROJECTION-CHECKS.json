@@ -1,0 +1,91 @@
+{
+  "kind": "chore",
+  "title": "Metamorphic Cross-Projection Checks",
+  "status": "Queued",
+  "non_product_work": "Require derived Bandit projections to agree when reading the same canonical artifacts and to preserve verdicts under harmless input perturbations.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. The earlier verification-layer review identified metamorphic and cross-projection checks as a hardening opportunity for derived surfaces such as cockpit status, session-context, land-check, and future trust verify outputs.",
+  "scope": [
+    "Define canonical artifact sources and derived projection surfaces that must agree.",
+    "Add cross-projection agreement checks for status, blockers, next action, active work item, and gate verdict summaries.",
+    "Add metamorphic checks for harmless ordering, whitespace, evidence-only commits, and equivalent input shape where applicable.",
+    "Fail closed when projections disagree on trust-relevant claims or when harmless perturbations change a covered verdict.",
+    "Keep this chore focused on projection consistency, validators, fixtures, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy artifact defines covered projections, canonical source artifacts, trust-relevant fields, harmless perturbations, and acceptable differences.",
+    "Covered projections agree on active work item, stage, next action, blockers, required operator input, queued gaps, and gate verdict summaries.",
+    "Validation or focused checks fail closed when projections disagree on trust-relevant claims.",
+    "Metamorphic tests prove harmless input changes do not alter covered verdicts or trusted status.",
+    "`BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused tests comparing cockpit status, session-context, roadmap/status parsing, land-check, and trust-verifier-compatible outputs where applicable.",
+    "Run metamorphic tests for harmless ordering, whitespace, and evidence-only input changes.",
+    "Run tests proving trust-relevant projection disagreement fails closed with clear diagnostics.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches shared projections or validators.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/metamorphic-cross-projection-checks.json",
+    "src/state/projection-consistency.ts",
+    "src/commands/validate.ts",
+    "test/metamorphic-cross-projection-checks.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns the projection-consistency policy, covered command selection, tests, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, Trust Verifier cutover, paid/external tooling, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not let projections become canonical workflow authority.",
+      "Do not mask disagreement between derived surfaces.",
+      "Do not approve Trust Verifier cutover, paid routing, merge, push, deploy, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE is resolved, blocked, or explicitly dispositioned"
+  ]
+}

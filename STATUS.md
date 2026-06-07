@@ -20,8 +20,25 @@ rows in the browser shell while preserving CLI authority and non-canonical
 browser presentation state.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
-source material is resolved with disposition `no_action`; no role-scoped
-bootstrap gap remains queued before Phase 8 cockpit work.
+source material is resolved with disposition `no_action`.
+
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued from operator
+direction on 2026-06-07. It should become the next bootstrap-gap chore after
+`BANDIT-068` lands and closes out; the current next action remains
+`BANDIT-068` Work Item PM plan-mode orchestration.
+
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued behind the
+test-strength gate as the next verification-layer hardening gap.
+
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued behind the
+oracle-provenance gate. It captures the private, non-public install/update
+posture: install Bandit across multiple private repos and alert from the CLI
+when a newer private update is available.
+
+The remaining verification-layer opportunities are queued behind the private
+install/update channel: replay regression corpus, gate determinism/flake gate,
+metamorphic cross-projection checks, reviewer calibration with seeded defects,
+evidence bundle attestation, and spec-to-evidence traceability matrix.
 
 Current stage: Stage 6 closed.
 

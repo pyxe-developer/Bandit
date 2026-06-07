@@ -1,0 +1,91 @@
+{
+  "kind": "chore",
+  "title": "Evidence Bundle Attestation",
+  "status": "Queued",
+  "non_product_work": "Hash and attest the full landing evidence bundle so trusted verdicts can be tied to source, tests, review, risk, policy, and command-version evidence.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. The earlier verification-layer review identified evidence bundle attestation as a hardening opportunity beyond review-subject hashes: landing should be able to identify the complete evidence bundle that supported the verdict.",
+  "scope": [
+    "Define a deterministic evidence bundle for covered landing and trusted-verdict claims.",
+    "Include source subject, test evidence, reviewer evidence, risk and supply-chain evidence, UAT where applicable, landing verdict, policy versions, command versions, and freshness metadata.",
+    "Produce stable bundle hashes and clear diagnostics when bundle inputs are missing, stale, unsupported, or changed.",
+    "Keep attestation read-only until a separate landing or trust-verifier cutover decision changes authority.",
+    "Keep this chore focused on bundle policy, hashing, validators, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy artifact defines evidence bundle membership, optional versus required evidence, hashing semantics, command/policy version capture, and freshness rules.",
+    "Covered landing/trusted claims can produce a deterministic bundle attestation with stable hash output.",
+    "Validation fails closed when a required bundle input is missing, stale, changed after review, unsupported, or mismatched with the landing verdict.",
+    "Bundle attestation remains read-only and does not replace existing gate authority or approve Trust Verifier cutover.",
+    "`BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused tests for bundle membership, hashing stability, and command/policy version capture.",
+    "Run tests proving missing, stale, changed, unsupported, or mismatched evidence fails closed.",
+    "Run tests proving attestation is read-only and does not replace existing gate authority.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches landing gates, review-subject hashes, trust verify, or validators.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/evidence-bundle-attestation.json",
+    "src/state/evidence-bundle-attestation.ts",
+    "src/commands/evidence-bundle.ts",
+    "test/evidence-bundle-attestation.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns evidence bundle policy, hashing mechanics, validators, and review routing. Halt only if implementation would approve Trust Verifier cutover, replace existing gate authority, change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, paid/external tooling, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not let bundle attestation replace landing authority or Trust Verifier cutover evidence.",
+      "Do not hide missing or stale evidence behind a bundle hash.",
+      "Do not approve merge, push, deploy, paid tooling, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS is resolved, blocked, or explicitly dispositioned"
+  ]
+}
