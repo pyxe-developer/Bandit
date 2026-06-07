@@ -18,11 +18,12 @@ cutover boundaries, and the Permanent Test Ownership Boundary.
 pass evidence, recorded CodeRabbit provider-timeout replacement evidence, and
 approved formation on 2026-06-07.
 
-**Active work item:** `BANDIT-071` (Stage 4 review recorded).
+**Active work item:** `BANDIT-071` (Stage 5 landing verdict recorded).
 
-The current stage is Stage 5: landing verdict required.
+The current stage is Stage 5: landing action required.
 
-**Current next action:** Record Stage 5 landing verdict for `BANDIT-071`.
+**Current next action:** Run `land-check` for `BANDIT-071`, then perform
+local-record landing if the gate passes.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -43,8 +44,9 @@ evidence, Work Item PM plan-mode evidence, and Stage 2 RED evidence under
 `docs/work/BANDIT-071/`. Stage 3 Claude implementation and PM acceptance
 evidence are recorded under `docs/work/BANDIT-071/`. Stage 4 review evidence,
 CodeRabbit timeout replacement evidence, Local Qwen non-blocking finding
-disposition, risk classification, and supply-chain gate evidence are recorded,
-and the next step is Stage 5 landing verdict.
+disposition, risk classification, and supply-chain gate evidence are recorded.
+Stage 5 landing verdict evidence is recorded, and the next step is `land-check`
+and local-record landing if the gate passes.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -76,16 +78,17 @@ report, PM acceptance, focused verification, full suite verification, and
 `implementation_recorded` coordination evidence are recorded. Stage 4
 CodeRabbit timeout, Local Qwen review, Qwen disposition, risk classification,
 supply-chain gate, aggregate review evidence, and `review_recorded`
-coordination evidence are recorded.
+coordination evidence are recorded. Stage 5 landing verdict evidence and
+`landing_verdict_recorded` coordination evidence are recorded.
 
-The next allowed action is Stage 5 landing verdict for `BANDIT-071`, followed
-by `land-check` and local-record landing if the gate passes. Do not merge,
-push, deploy, approve Trust Verifier cutover, replace or wrap old gates,
-approve public npm publishing, approve paid registry setup, approve external
-service setup, implement automatic self-update, execute guarded browser
-actions, local API work, State Index work, scheduler execution, claim execution,
-worktree execution, unrelated Phase 8 scope, or the next queued bootstrap gap
-before landing action evidence is recorded.
+The next allowed action is `land-check` for `BANDIT-071`, followed by
+local-record landing if the gate passes. Do not merge, push, deploy, approve
+Trust Verifier cutover, replace or wrap old gates, approve public npm
+publishing, approve paid registry setup, approve external service setup,
+implement automatic self-update, execute guarded browser actions, local API
+work, State Index work, scheduler execution, claim execution, worktree
+execution, unrelated Phase 8 scope, or the next queued bootstrap gap before
+landing action evidence is recorded.
 
 `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` remains queued behind the private
 install/update channel.

@@ -1,0 +1,19 @@
+{
+  "kind": "landing_verdict",
+  "work_item": "BANDIT-071",
+  "contract_version": "1",
+  "source_head": "4f8f9c309da6abc05945b382d2a9fb760ba21dd2",
+  "review_evidence": "docs/work/BANDIT-071/review-evidence.md",
+  "tests_status": "pass",
+  "clean_code_status": "pass",
+  "coderabbit_state": "bootstrap_gap",
+  "local_qwen_state": "non_blocking",
+  "escalated_review_state": "not_applicable",
+  "uat_status": "not_applicable",
+  "source_drift_status": "current",
+  "operator_input_status": "none_required",
+  "landing_agent_state": "pass",
+  "landing_agent_replacement_evidence": "none",
+  "final_verdict": "safe-to-land",
+  "rationale": "BANDIT-071 is safe to land locally as the bounded bootstrap-gap chore for Private Installable Distribution And Update Notification Channel. Aggregate Stage 4 review evidence records review_subject_hash b56500fea8ea6c64d016142af7c761c23d11bbe0b779e30a5f75e0286654ab05, focused private-install and update-channel tests, full npm test, typecheck, aggregate Bandit validation, npm audit with 0 vulnerabilities, risk classification, supply-chain gate validation, cockpit status, session-context, CodeRabbit provider timeout bootstrap evidence with no pass claimed, and Local Qwen non_blocking findings dispositioned without source repair. Clean-code status is pass because the implementation stays scoped to package metadata, installed bin runtime dependency resolution, one update-check command, one update-channel state helper, init seeding, policy/templates, and focused tests; it preserves the Permanent Test Ownership Boundary and Bootstrap Model-Family Separation. Supply-chain status is accepted elevated risk because tsx moved from devDependencies to dependencies and package-lock changed, with explicit audit evidence and no package-manager scripts, CI/release workflows, public npm publishing, paid registry setup, hosted update services, telemetry, automatic self-update, merge, push, deploy, external side effects, product UAT authority, or Trust Verifier cutover. UAT is not applicable because this non-product bootstrap chore changes local install/update mechanics rather than an operator-clickable product surface."
+}
