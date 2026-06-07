@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-064
-source_head: e0231ed50f3407c094ce3eaa29cea447908edb08
+source_head: 4e4ef034370f4f4a962d4230afea9e52fc9afb88
 review_evidence: docs/work/BANDIT-064/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -16,7 +16,7 @@ landing_agent_state: pass
 landing_agent_replacement_evidence:
   - none
 final_verdict: safe-to-land
-rationale: BANDIT-064 is safe to land locally. Required focused tests, typecheck, repo validation, risk classification, supply-chain gate, trust cutover-gate validation, Local Qwen review, and aggregate review evidence passed. CodeRabbit timed out and is recorded only as bootstrap-gap replacement evidence. The implementation approves no Trust Verifier cutover, selects no Trust Goal, replaces or wraps no old gate path, preserves old gate authority, and has operator pre-approval through landing.
+rationale: BANDIT-064 is safe to land locally. Required focused tests, typecheck, repo validation, risk classification, supply-chain gate, trust cutover-gate validation, refreshed Local Qwen review, and aggregate review evidence passed. CodeRabbit timed out and is recorded only as bootstrap-gap replacement evidence. The implementation approves no Trust Verifier cutover, selects no Trust Goal, replaces or wraps no old gate path, preserves old gate authority, and has operator pre-approval through landing.
 
 ## Clean-Code Compliance
 

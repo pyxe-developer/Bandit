@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-064
-source_head: fbe48a577d0fdd902e9e696ca7df07d82691d3fb
-review_subject_hash: eb52896f254fc5458ec12d983d3d75242de7d7b4818fe120cd2851c0a620f71a
+source_head: 4e4ef034370f4f4a962d4230afea9e52fc9afb88
+review_subject_hash: f09ff8f5994ea55914ad64437f02186c2c95ea20050e474b341033eff25e98c7
 verification_state: pass
 verification_evidence:
   - node --test test/trust-verifier-cutover-gate.test.mjs
@@ -24,7 +24,7 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: Layered risk classification selected pre_pr_coderabbit_plus_qwen; no high-risk signal, never-auto-landable surface, or unresolved reviewer finding requires escalated adversarial review.
 pm_disposition: pass
-pm_disposition_rationale: Local Qwen passed with no findings; CodeRabbit timed out and is recorded as provider-timeout/bootstrap-gap replacement evidence; deterministic PM inspection and focused verification found no unresolved blocker or non-blocking finding. The implementation records no approved cutover and preserves old gate authority.
+pm_disposition_rationale: Local Qwen passed with no findings and was refreshed after the review/landing evidence checkpoint; CodeRabbit timed out and is recorded as provider-timeout/bootstrap-gap replacement evidence; deterministic PM inspection and focused verification found no unresolved blocker or non-blocking finding. The implementation records no approved cutover and preserves old gate authority.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
@@ -38,7 +38,7 @@ bootstrap_gaps:
 
 `BANDIT-064` passes aggregate Stage 4 review. CodeRabbit provider timeout is
 accepted only as bootstrap-gap replacement evidence. Local Qwen passed with no
-findings, focused verification passed, layered risk classification and
+findings and was refreshed against current source, focused verification passed, layered risk classification and
 supply-chain gate evidence validate, and PM inspection found the implementation
 bounded to Trust Verifier Cutover Gate triage with no actual cutover approval.
 
