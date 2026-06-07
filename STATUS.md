@@ -17,12 +17,11 @@ Claude implementation evidence is recorded, and Codex PM Stage 3 acceptance is
 recorded. CodeRabbit timeout evidence, Local Qwen pass evidence, and layered
 risk/supply-chain policy evidence are recorded.
 
-Current stage: Stage 4 - Aggregate review evidence required.
+Current stage: Stage 5 - Landing verdict required.
 
-Next action: Record aggregate Stage 4 review evidence for `BANDIT-062` using
-CodeRabbit timeout evidence, refreshed Local Qwen non-blocking finding
-disposition, layered risk-classification and supply-chain gate evidence, and
-current review-subject hash.
+Next action: Record Stage 5 landing verdict evidence for `BANDIT-062` before
+landing action, closeout, next work item, Trust Verifier cutover, or unrelated
+work.
 
 No operator-owned input is required for that next action. Do not begin Trust
 Verifier cutover work, Work Item PM plan-mode orchestration work, or unrelated
@@ -50,7 +49,7 @@ brief/current-state grounding and before full orchestration.
 
 Last 5 items only:
 
-- `BANDIT-062` - Work Item Create Replacement Metadata Preservation (Stage 4)
+- `BANDIT-062` - Work Item Create Replacement Metadata Preservation (Stage 5)
 - `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued gap
 - `BANDIT-061` - Role Contract Artifact Input Write Surface (closed)
 - `BANDIT-GAP-ROLE-CONTRACT-ARTIFACT-INPUT-WRITE-SURFACE` - resolved by `BANDIT-061`
