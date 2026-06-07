@@ -4,22 +4,20 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-064` - Trust Verifier Cutover Gate Triage. Stage 1 brief is
-  created, formation is approved, and Work Item PM plan-mode evidence is
-  recorded; Stage 2 RED evidence is the next action.
+- None selected. `BANDIT-064` is landed and closed out.
 
-**Current next step:** Test Writer should create Stage 2 RED evidence for
-`BANDIT-064`, recording `docs/work/BANDIT-064/red-evidence.md` and any required
-artifact-input JSON before implementation begins.
+**Current next step:** Repo PM should triage the remaining
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material gap into a
+bounded work item or record an explicit no-action/deferred disposition before
+unrelated cockpit product work begins.
 
-Do not dispatch implementation, approve Trust Verifier cutover, replace or wrap
-old gates, or start unrelated product work before Stage 2 RED evidence and
-`red_recorded` are recorded.
+Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
+or wrap old gates, or start unrelated product work without separate
+operator-owned authorization and evidence.
 
 ## Next Work Item
 
-- None selected. Finish or explicitly block `BANDIT-064` before starting
-  another work item.
+- None selected.
 
 ## Planned Work
 
@@ -28,13 +26,9 @@ old gates, or start unrelated product work before Stage 2 RED evidence and
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` - active through
-  `BANDIT-064`; materialize the cutover gate contract and current
-  no-cutover-approved disposition before any later per-Trust-Goal cutover
-  decision.
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
-  orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
-  queue.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued source
+  material for future bounded role-scoped orchestration or trust-layer work; no
+  work item is selected yet.
 
 ### Deferred PRD Slices
 
@@ -112,3 +106,4 @@ bootstrap gaps are queued.
 - `BANDIT-061` - Role Contract Artifact Input Write Surface
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation
 - `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate
+- `BANDIT-064` - Trust Verifier Cutover Gate Triage

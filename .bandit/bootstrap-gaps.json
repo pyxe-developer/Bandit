@@ -826,8 +826,8 @@
     {
       "id": "BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE",
       "title": "Trust Verifier Cutover Gate needs explicit triage",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-063",
       "source_artifacts": [
         "AGENTS.md",
@@ -841,9 +841,9 @@
         "docs/specs/BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE.json"
       ],
       "linked_work_item": "BANDIT-064",
-      "rationale": "Current repo context and BANDIT-063 closeout identify Trust Verifier Cutover Gate triage as the next bootstrap-policy item after compatibility-mode trust verification, artifact-input path cleanup, replacement metadata preservation, and Work Item PM plan-mode orchestration. This gap is limited to materializing the cutover gate contract and current no-cutover-approved disposition; actual Trust Verifier cutover approval, old-gate replacement, or old-gate wrapping remains operator-owned and separately blocked.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-064."
+      "rationale": "BANDIT-064 materialized the Trust Verifier Cutover Gate contract as repo-native policy, added a fail-closed validator and `bandit trust cutover-gates validate` command, registered validation/init/path wiring, and recorded the current no-cutover-approved disposition. Actual Trust Verifier cutover approval, old-gate replacement, or old-gate wrapping remains operator-owned and separately blocked.",
+      "verification_target": "docs/work/BANDIT-064/retrospective.md",
+      "next_action": "Use the Trust Verifier Cutover Gate policy and validator before any future per-Trust-Goal cutover decision; do not approve cutover or replace/wrap old gates without separate operator-owned authorization and evidence."
     }
   ]
 }

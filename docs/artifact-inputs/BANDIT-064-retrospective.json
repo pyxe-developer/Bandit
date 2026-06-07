@@ -1,0 +1,42 @@
+{
+  "kind": "retrospective",
+  "work_item": "BANDIT-064",
+  "outcome": "`BANDIT-064` landed and closed out the Trust Verifier Cutover Gate Triage bootstrap-policy chore. The work records a repo-native cutover-gate policy artifact, adds a fail-closed validator and `bandit trust cutover-gates validate` command, registers validation/init/path wiring, and preserves the current no-cutover-approved disposition without approving Trust Verifier cutover.",
+  "what_worked": [
+    "RED evidence captured the exact missing command and policy contract before implementation began.",
+    "Bootstrap Model-Family Separation held: Codex authored RED evidence and Claude owned Stage 3 source implementation.",
+    "The implementation stayed narrow: one policy artifact, one validator, one command route, validation wiring, path registration, and init seeding.",
+    "Local Qwen refreshed against the evidence checkpoint and found no blocker or non-blocking findings.",
+    "CodeRabbit provider timeout was recorded honestly as bootstrap-gap replacement evidence, with no CodeRabbit pass claimed."
+  ],
+  "lessons_and_dispositions": [
+    {
+      "lesson": "Trust Verifier cutover needs an explicit gate before any old gate path can be replaced or wrapped.",
+      "disposition": "bootstrap_gap_resolved",
+      "rationale": "`BANDIT-064` adds the policy artifact and fail-closed validator that record no cutover is approved and reject implicit approval claims."
+    },
+    {
+      "lesson": "Triage evidence must not become cutover approval.",
+      "disposition": "explicit no-action decision",
+      "rationale": "The policy records `current_disposition: no_cutover_approved`; per-Trust-Goal cutover decisions remain separate operator-owned policy work."
+    }
+  ],
+  "structured_improvement_mining": [
+    {
+      "signal": "failed tool calls",
+      "finding": "`bandit land BANDIT-064 --action local-record` first refused a dirty worktree after Local Qwen refresh and evidence updates.",
+      "disposition": "explicit no-action decision - the evidence refresh was committed, landing gates were rerun, and local-record landing then passed"
+    },
+    {
+      "signal": "work-breakdown fit",
+      "finding": "The triage policy, validator, command, and focused tests formed a bounded bootstrap-policy chore.",
+      "disposition": "bootstrap_gap_resolved - `BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` is resolved by this landed work item"
+    }
+  ],
+  "improvement_chores": "No new immediate retrospective-derived improvement chore is created by this closeout. `BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` is resolved by `BANDIT-064`.",
+  "cross_model_tension": "No unresolved cross-model tension remains for `BANDIT-064`.",
+  "bootstrap_gaps_remaining": [
+    "`BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` is resolved by `BANDIT-064` closeout evidence.",
+    "`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains open as source material and future bounded work."
+  ]
+}
