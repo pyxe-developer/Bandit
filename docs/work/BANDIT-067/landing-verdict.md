@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-067
-source_head: 77b99121f5fc115ec1f049354f34718f58fdfb78
+source_head: ca00d21decd4fdea2723382bd6d6807472111105
 review_evidence: docs/work/BANDIT-067/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -16,7 +16,7 @@ landing_agent_state: pass
 landing_agent_replacement_evidence:
   - none
 final_verdict: safe-to-land
-rationale: BANDIT-067 is safe to land locally. Stage 4 review evidence records review_subject_hash 7a60f5a89688b69acb60668fd212c72db2fd143069d0b74f37a03bb5d9e96720, focused cockpit view-model tests, focused browser-shell tests, adjacent cockpit tests, full npm test, typecheck, Bandit validation, risk classification, supply-chain gate, and git diff whitespace evidence. CodeRabbit timed out, Local Qwen was unavailable, and Playwright MCP browser smoke was profile-locked; all three are recorded as bootstrap replacement evidence with no reviewer or browser-smoke pass claimed. CLI-owned product UAT is recorded in docs/work/BANDIT-067/uat-approval.md from operator pre-approval through landing and closeout. The implementation keeps CLI artifacts canonical, exposes the browser shell as derived presentation only, maps the live CLI cockpit-status payload into source-linked first-screen cues and Stage 0-6 gates, adds no JavaScript, forms, browser storage, local API, guarded browser actions, merge, push, deploy, dependency, lockfile, package script, external service, Trust Verifier cutover, or hidden workflow-authority surface.
+rationale: BANDIT-067 is safe to land locally. Stage 4 review evidence records review_subject_hash 99db60f5fd36f8fc3b0b4d87d3dad0c4ab17d3a9b9ebdd18d3c664a8b1361d04, focused cockpit view-model tests, focused browser-shell tests, adjacent cockpit tests, full npm test, typecheck, Bandit validation, risk classification, supply-chain gate, and git diff whitespace evidence. CodeRabbit timed out, Local Qwen was unavailable, and Playwright MCP browser smoke was profile-locked; all three are recorded as bootstrap replacement evidence with no reviewer or browser-smoke pass claimed. CLI-owned product UAT is recorded in docs/work/BANDIT-067/uat-approval.md from operator pre-approval through landing and closeout. The implementation keeps CLI artifacts canonical, exposes the browser shell as derived presentation only, maps the live CLI cockpit-status payload into source-linked first-screen cues and Stage 0-6 gates, adds no JavaScript, forms, browser storage, local API, guarded browser actions, merge, push, deploy, dependency, lockfile, package script, external service, Trust Verifier cutover, or hidden workflow-authority surface.
 
 ## Clean-Code Compliance
 

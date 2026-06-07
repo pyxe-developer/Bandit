@@ -5,9 +5,9 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-067` - Live Cockpit Status View From CLI Payload
-  (safe-to-land; local-record landing action required)
+  (landed; Stage 6 closeout required)
 
-**Current next step:** Run the local-record landing action for `BANDIT-067` and record landing action evidence.
+**Current next step:** Record Stage 6 retrospective, improvement disposition, and roadmap/status closeout for `BANDIT-067`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

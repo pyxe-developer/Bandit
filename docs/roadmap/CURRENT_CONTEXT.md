@@ -22,21 +22,21 @@ future product or trust-layer decision scopes them.
 Workflow Cockpit app shell and static preview while preserving CLI authority
 and presentation-only browser state.
 
-`BANDIT-067` has Stage 5 landing verdict evidence recorded as safe-to-land for
-Live Cockpit Status View From CLI Payload. Its brief, formation review evidence,
-Work Item PM plan-mode orchestration evidence, Test Writer-owned RED evidence,
-Claude implementation evidence, Writer report, PM acceptance review, reviewer
-bootstrap replacement evidence, layered risk classification, supply-chain gate,
-aggregate review evidence, UAT approval, and landing verdict are recorded under
+`BANDIT-067` is landed for Live Cockpit Status View From CLI Payload. Its
+brief, formation review evidence, Work Item PM plan-mode orchestration
+evidence, Test Writer-owned RED evidence, Claude implementation evidence,
+Writer report, PM acceptance review, reviewer bootstrap replacement evidence,
+layered risk classification, supply-chain gate, aggregate review evidence, UAT
+approval, landing verdict, and local-record landing action are recorded under
 `docs/work/BANDIT-067/` and `.bandit/policy/`. No independent CodeRabbit or
 Local Qwen pass is claimed because those providers were unavailable or timed
 out.
 
 **Active work item:** `BANDIT-067`.
 
-The current stage is Stage 5: Landing action required.
+The current stage is Stage 6: Closeout required.
 
-**Current next action:** Run the local-record landing action for `BANDIT-067` and record landing action evidence.
+**Current next action:** Record Stage 6 retrospective, improvement disposition, and roadmap/status closeout for `BANDIT-067` before starting any next work item.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -64,15 +64,15 @@ slice. Its source spec is
 `docs/specs/BANDIT-067-live-cockpit-status-view-from-cli-payload.json`; its
 brief, formation review artifacts, `formation_approved`,
 `orchestration_plan_recorded`, `red_recorded`, `implementation_recorded`,
-`review_recorded`, `feature_uat_approved`, and `landing_verdict_recorded`
+`review_recorded`, `feature_uat_approved`, `landing_verdict_recorded`, and `landed`
 coordination transitions are recorded under `docs/work/BANDIT-067/`.
 
-The next allowed action is to run land-check, auto-land-check, and the
-local-record landing action for `BANDIT-067` if checks pass. Do not merge, push,
-deploy, start the next work item, approve Trust Verifier cutover, guarded
-browser action execution, local API work, State Index work, scheduler
+The next allowed action is to record Stage 6 retrospective, structured
+improvement disposition, and roadmap/status closeout for `BANDIT-067`. Do not
+merge, push, deploy, start the next work item, approve Trust Verifier cutover,
+guarded browser action execution, local API work, State Index work, scheduler
 execution, claim execution, worktree execution, or unrelated Phase 8 scope
-before landing action evidence is recorded.
+before closeout evidence is recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before the next Phase 8

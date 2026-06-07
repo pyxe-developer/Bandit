@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-067
-source_head: 77b99121f5fc115ec1f049354f34718f58fdfb78
-review_subject_hash: 7a60f5a89688b69acb60668fd212c72db2fd143069d0b74f37a03bb5d9e96720
+source_head: ca00d21decd4fdea2723382bd6d6807472111105
+review_subject_hash: 99db60f5fd36f8fc3b0b4d87d3dad0c4ab17d3a9b9ebdd18d3c664a8b1361d04
 verification_state: pass
 verification_evidence:
   - node --test test/cockpit-view-model.test.mjs

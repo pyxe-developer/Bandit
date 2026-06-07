@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-067
-source_head: 77b99121f5fc115ec1f049354f34718f58fdfb78
+source_head: ca00d21decd4fdea2723382bd6d6807472111105
 environment: local-static-preview
 approval_status: pass
 approved_by: operator-pre-approved-2026-06-07
