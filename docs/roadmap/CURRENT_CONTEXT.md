@@ -92,6 +92,16 @@ Stage 3 Claude implementation evidence is recorded at
 recorded at `docs/work/BANDIT-063/stage3-pm-review.md`. The coordination log
 records both the Writer `implementation_recorded` transition and the PM
 acceptance transition.
+Stage 4 CodeRabbit review evidence is recorded at
+`docs/work/BANDIT-063/coderabbit-review.md` with zero findings; the raw
+CodeRabbit terminal output summary is recorded at
+`docs/artifact-inputs/BANDIT-063-coderabbit-review-output.jsonl`. Local Qwen
+review evidence is recorded at `docs/work/BANDIT-063/local-qwen-review.md`
+with non-blocking findings, and Codex PM disposition is recorded at
+`docs/work/BANDIT-063/qwen-finding-disposition.md`. Layered risk
+classification and supply-chain gate evidence are recorded at
+`.bandit/policy/risk-classifications/BANDIT-063-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-063-supply-chain-gate.json`.
 
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
@@ -100,25 +110,20 @@ resolved.
 
 **Active work item:** `BANDIT-063`.
 
-The current stage is Stage 4: pre-landing review required.
+The current stage is Stage 4: aggregate review evidence required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Stage 4 pre-landing review for `BANDIT-063`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next action:** Record aggregate Stage 4 review evidence for
+`BANDIT-063`, then run the Stage 5 landing verdict gate.
 
-Do not start Stage 5 landing, Trust Verifier cutover work, Pi/Aperture
+Do not start Stage 5 landing action, Trust Verifier cutover work, Pi/Aperture
 agent-scope schema/projection work, role input or execution packet work, or
-unrelated cockpit product work until Stage 4 review evidence is recorded and
-accepted. Stage 4 must include CodeRabbit review or honest provider-refusal
-evidence, Local Qwen adversarial review, aggregate review evidence, layered
-risk-classification and supply-chain gate evidence, and explicit disposition
-for any findings.
+unrelated cockpit product work until aggregate Stage 4 review evidence is
+recorded and accepted.
 
 ## Active Work
 
@@ -136,8 +141,10 @@ evidence is recorded at `docs/work/BANDIT-063/implementation-evidence.md`,
 `docs/work/BANDIT-063/writer-report.md`,
 `docs/artifact-inputs/BANDIT-063-implementation-evidence.json`, and
 `docs/role-runs/BANDIT-063/stage3-implementation.json`; Codex PM acceptance is
-recorded at `docs/work/BANDIT-063/stage3-pm-review.md`. Stage 4 pre-landing
-review is the next required gate before landing.
+recorded at `docs/work/BANDIT-063/stage3-pm-review.md`. Stage 4 CodeRabbit,
+Local Qwen, finding disposition, risk classification, and supply-chain gate
+evidence are recorded. Aggregate Stage 4 review evidence is the next required
+gate before landing.
 
 `BANDIT-062` is landed and closed out. Its Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
@@ -173,10 +180,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run Stage 4 pre-landing review for `BANDIT-063`: CodeRabbit pre-PR review,
-   Local Qwen adversarial review, aggregate review evidence, layered
-   risk-classification and supply-chain gate evidence, and explicit disposition
-   for any findings before Stage 5 landing.
+1. Record aggregate Stage 4 review evidence for `BANDIT-063`, then run the
+   Stage 5 landing verdict gate.
 2. Keep Work Item PM plan-mode orchestration bounded to the operator-directed
    gate: after brief/current-state grounding and before Stage 2 RED evidence or
    full orchestration.
@@ -195,9 +200,10 @@ resulting work can proceed or land.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 4 pre-landing review.
+No operator-owned input is required for the current aggregate Stage 4 review.
 Repo artifacts identify the active bootstrap-gap chore, accepted Stage 3
-implementation evidence, and the required review loop before Stage 5 landing.
+implementation evidence, completed reviewer/policy evidence, and the required
+aggregate review loop before Stage 5 landing.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

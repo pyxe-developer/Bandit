@@ -4,14 +4,13 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Stage 3
-  Claude implementation evidence is accepted; Stage 4 pre-landing review is
-  required.
+- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Stage 4
+  CodeRabbit, Local Qwen, finding disposition, risk classification, and
+  supply-chain gate evidence are recorded; aggregate review evidence is
+  required before Stage 5.
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-063`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next step:** Record aggregate Stage 4 review evidence for
+`BANDIT-063`, then run the Stage 5 landing verdict gate.
 
 ## Next Work Item
 

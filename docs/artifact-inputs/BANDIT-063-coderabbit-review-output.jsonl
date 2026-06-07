@@ -1,0 +1,8 @@
+{"type":"review_context","reviewType":"all","currentBranch":"main","baseBranch":"origin/main","baseCommit":"b63781221659c710b661f0cb7971c4911727277e","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","status":"connecting_to_coderabbit"}
+{"type":"status","status":"setting_up_review"}
+{"type":"status","status":"preparing_sandbox"}
+{"type":"status","status":"analyzing"}
+{"type":"status","status":"summarizing"}
+{"type":"status","status":"reviewing"}
+{"type":"complete","status":"review_completed","findings":0}
