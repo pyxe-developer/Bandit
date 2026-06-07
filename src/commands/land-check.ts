@@ -27,6 +27,7 @@ import { readSmellCatalog } from "../state/smell-triggers.js";
 import type { Stage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 import { readStage4EvidenceHeadPolicy } from "../state/stage4-evidence-head-policy.js";
 import { computeReviewSubjectHash } from "../state/review-subject-hash.js";
+import { landingTestStrengthProblems } from "../state/test-strength-gate.js";
 import type { UatApproval } from "../state/uat-approval.js";
 import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
@@ -112,6 +113,12 @@ export async function readLandingReadiness(
     escalatedReview,
     uatApproval
   );
+
+  if (landingVerdict.finalVerdict === "safe-to-land") {
+    readiness.problems.push(
+      ...(await landingTestStrengthProblems(repoRoot, workItemId))
+    );
+  }
 
   return {
     reviewEvidence,

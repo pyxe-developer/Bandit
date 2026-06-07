@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "covered_surfaces": [
+    "landing-gate",
+    "review-routing",
+    "claim-authority",
+    "state-transition",
+    "artifact-validator",
+    "evidence-freshness",
+    "role-coordination",
+    "serializer",
+    "guarded-authority-boundary"
+  ],
+  "acceptable_evidence_modes": [
+    "mutation",
+    "property_fault_injection",
+    "table_driven_adversarial",
+    "explicit_disposition"
+  ],
+  "risk_tiers": {
+    "high": {
+      "require_test_strength_evidence": true
+    }
+  }
+}

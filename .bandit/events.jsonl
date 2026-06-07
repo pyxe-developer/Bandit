@@ -290,3 +290,4 @@
 {"type":"bootstrap_gap_recorded","work_item":"none","message":"Queued BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL behind the oracle-provenance gate; next action remains BANDIT-068 Work Item PM plan-mode orchestration"}
 {"type":"bootstrap_gap_recorded","work_item":"none","message":"Queued remaining verification-layer opportunities behind the private install/update channel: replay regression corpus, gate determinism/flake gate, metamorphic cross-projection checks, reviewer calibration, evidence bundle attestation, and spec-to-evidence traceability; next action remains BANDIT-068 Work Item PM plan-mode orchestration"}
 {"type":"work_item_created","work_item":"BANDIT-069","message":"Created work item BANDIT-069 from docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json"}
+{"type":"artifact_created","work_item":"BANDIT-069","message":"Created red_evidence artifact at docs/work/BANDIT-069/red-evidence.md"}

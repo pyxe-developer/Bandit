@@ -33,6 +33,7 @@ export function getBanditPaths(repoRoot: string) {
     skillLifecyclePolicy: path.join(policyRoot, "skill-lifecycle-contracts.json"),
     stage4EvidenceHeadPolicy: path.join(policyRoot, "stage4-evidence-head.json"),
     supplyChainPolicy: path.join(policyRoot, "supply-chain-gate.json"),
+    testStrengthGatePolicy: path.join(policyRoot, "test-strength-gate.json"),
     trustVerifierCutoverGatesPolicy: path.join(
       policyRoot,
       "trust-verifier-cutover-gates.json"

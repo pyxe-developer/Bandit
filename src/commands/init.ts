@@ -38,6 +38,7 @@ import {
   writeDefaultSupplyChainGatePolicy,
   writeDefaultSupplyChainGateTemplate
 } from "../state/supply-chain-gate.js";
+import { writeDefaultTestStrengthGatePolicy } from "../state/test-strength-gate.js";
 import { writeDefaultTrustVerifierCutoverGatesPolicy } from "../state/trust-verifier-cutover-gates.js";
 
 export async function initBandit(repoRoot: string) {
@@ -94,6 +95,9 @@ export async function initBandit(repoRoot: string) {
   const supplyChainPolicyExists = await pathExists(paths.supplyChainPolicy);
   const supplyChainTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/supply-chain-gate.md`
+  );
+  const testStrengthGatePolicyExists = await pathExists(
+    paths.testStrengthGatePolicy
   );
   const trustVerifierCutoverGatesPolicyExists = await pathExists(
     paths.trustVerifierCutoverGatesPolicy
@@ -189,6 +193,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!supplyChainTemplateExists) {
     await writeDefaultSupplyChainGateTemplate(repoRoot);
+  }
+
+  if (!testStrengthGatePolicyExists) {
+    await writeDefaultTestStrengthGatePolicy(paths.testStrengthGatePolicy);
   }
 
   if (!trustVerifierCutoverGatesPolicyExists) {
