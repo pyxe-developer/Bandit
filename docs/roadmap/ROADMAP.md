@@ -4,13 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Stage 4
-  CodeRabbit, Local Qwen, finding disposition, risk classification, and
-  supply-chain gate evidence are recorded; aggregate review evidence is
-  required before Stage 5.
+- `[Gap]` `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate. Aggregate
+  Stage 4 review evidence is recorded; Stage 5 landing verdict evidence is
+  required.
 
-**Current next step:** Record aggregate Stage 4 review evidence for
-`BANDIT-063`, then run the Stage 5 landing verdict gate.
+**Current next step:** Record Stage 5 landing verdict evidence for
+`BANDIT-063` before any landing action.
 
 ## Next Work Item
 
