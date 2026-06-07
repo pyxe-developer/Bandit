@@ -906,8 +906,8 @@
     {
       "id": "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE",
       "title": "Verification Oracle Provenance Gate",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -919,10 +919,10 @@
         "docs/work/BANDIT-068/brief.md",
         "docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-070",
       "rationale": "Operator direction on 2026-06-07 identified Verification Oracle Provenance as the next verification-layer strengthening gap. Bandit records many verdicts and freshness checks, but covered pass/trusted/ready claims do not yet have to name the oracle they rely on or prove that oracle is independent enough for the trust decision. This gap should prevent circular self-attestation where a projection, validator, generated report, or command output becomes the evidence oracle for its own correctness.",
       "verification_target": null,
-      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Complete active chore BANDIT-070."
     },
     {
       "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",

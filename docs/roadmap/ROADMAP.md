@@ -4,17 +4,17 @@
 
 ## Current Work Item
 
-- none
+- `[Gap]` `BANDIT-070` - Verification Oracle Provenance Gate
+  (formation approved)
 
-**Current next step:** Create a bounded chore from
-`docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json` before
-unrelated Phase 8 product work.
+**Current next step:** Run Work Item PM plan-mode orchestration for
+`BANDIT-070` before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
 Pi/Aperture runtime work, choose local API or State Index timing, execute
 guarded browser actions, merge, push, deploy, or start unrelated Phase 8
-product work while queued bootstrap gaps remain.
+product work without separate authorization and evidence.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -22,8 +22,9 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Verification
-  Oracle Provenance Gate (queued; create bounded chore next)
+- `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
+  distribution and CLI update notification channel (queued after `BANDIT-070`
+  is landed/closed or explicitly dispositioned)
 
 ## Planned Work
 
@@ -31,7 +32,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 - `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Oracle provenance
   gate requiring covered pass/trusted/ready claims to name the evidence oracle
-  and reject circular self-attestation.
+  and reject circular self-attestation, active as `BANDIT-070`.
 - `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
   distribution and CLI update notification channel, queued behind the
   oracle-provenance gate unless explicitly reprioritized.

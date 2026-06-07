@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: none
+## Current Work Item: BANDIT-070 (formation approved)
 
 ## Current Status
 
@@ -14,14 +14,19 @@ Layer Pivot.
 test-strength policy, evidence template, validator, CLI command, init wiring,
 and `land-check` enforcement for covered high-risk surfaces.
 
-`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is the next queued bootstrap
-gap. It must be formed as a bounded chore before unrelated Phase 8 product
-work.
+`BANDIT-070` is formed and approved for
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE`. Stage 1 evidence is recorded
+under `docs/work/BANDIT-070/`: brief, coordination log, Local Qwen formation
+review, CodeRabbit provider-timeout replacement evidence, aggregate formation
+review, and `formation_approved`.
 
-Current stage: Interstitial: Work-item creation required.
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` remains queued behind
+`BANDIT-070`.
 
-Next action: Create a bounded chore from
-`docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json`.
+Current stage: Stage 1 formation approved.
+
+Next action: Run Work Item PM plan-mode orchestration for `BANDIT-070` before
+RED evidence.
 
 Required operator input: none currently required.
 
@@ -29,8 +34,8 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
+- `BANDIT-070` - Verification Oracle Provenance Gate (formation approved)
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate (closed)
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (closed)
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)
 - `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
-- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition
