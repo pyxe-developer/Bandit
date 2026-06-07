@@ -2,36 +2,33 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-066
+## Current Work Item: BANDIT-066 (closed)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-066` has Stage 2 RED evidence, Stage 3 implementation/PM acceptance,
-and aggregate Stage 4 review evidence recorded under `docs/work/BANDIT-066/`.
-The browser-served cockpit shell source and static preview are implemented, with
-CodeRabbit and Local Qwen provider limitations recorded as bootstrap replacement
-evidence rather than reviewer pass evidence.
+`BANDIT-066` is landed and closed out. It delivered the browser-served cockpit
+app shell and static preview while preserving CLI authority and non-canonical
+browser presentation state.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
 source material is resolved with disposition `no_action`; no role-scoped
 bootstrap gap remains queued before Phase 8 cockpit work.
 
-Current stage: Stage 5 - Landed / Stage 6 closeout required.
+Current stage: Stage 6 closed - next slice formation required.
 
-Next action: Record Stage 6 retrospective, improvement disposition, and
-roadmap/status closeout for `BANDIT-066` before starting any next work item.
+Next action: Create the next Phase 8 slice work item for Live Cockpit Status
+View From CLI Payload through Repo PM Stage 1 formation before RED evidence.
 
-Required operator input: none for the current closeout step. Product UAT is
-recorded in `docs/work/BANDIT-066/uat-approval.md`.
+Required operator input: none for the current formation step.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-066` - Browser-Served Cockpit App Shell (landed; closeout required)
+- `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition
 - `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract (closed)
 - `BANDIT-064` - Trust Verifier Cutover Gate Triage (closed)

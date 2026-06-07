@@ -4,11 +4,12 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-066` - Browser-Served Cockpit App Shell
+- `[Slice]` `BANDIT-066` - Browser-Served Cockpit App Shell (closed; no next
+  work item formed yet)
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and roadmap/status closeout for `BANDIT-066` before starting any next work
-item.
+**Current next step:** Create the next Phase 8 slice work item for Live Cockpit
+Status View From CLI Payload through Repo PM Stage 1 formation before RED
+evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -102,3 +103,4 @@ separate authorization and evidence.
 - `BANDIT-064` - Trust Verifier Cutover Gate Triage
 - `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition for remaining runtime/harness source material
+- `BANDIT-066` - Browser-Served Cockpit App Shell
