@@ -1,0 +1,23 @@
+{
+  "work_item": "BANDIT-064",
+  "stage": "stage2_red_evidence",
+  "owner": "test_writer",
+  "verdict": "pass",
+  "red_status": "failing_as_expected",
+  "recorded_at": "2026-06-07T14:14:52Z",
+  "test_surface": [
+    "test/trust-verifier-cutover-gate.test.mjs"
+  ],
+  "command": "node --test test/trust-verifier-cutover-gate.test.mjs",
+  "expected_failure": "bandit trust cutover-gates validate command and cutover-gate validator are missing",
+  "stage3_route": "claude_process_adapter_required_due_to_codex_authored_red_tests",
+  "forbidden_stage3_edits": [
+    "test/trust-verifier-cutover-gate.test.mjs",
+    "docs/work/BANDIT-064/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-064-red-evidence.json",
+    "test helpers",
+    "fixtures",
+    "acceptance mappings"
+  ],
+  "next_action": "Dispatch Stage 3 implementation to Claude through the bootstrap Process Adapter path."
+}
