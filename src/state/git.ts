@@ -59,7 +59,7 @@ function readGitStatus(
         return;
       }
 
-      resolve(stdout.trim());
+      resolve(stdout.trimEnd());
     });
   });
 }

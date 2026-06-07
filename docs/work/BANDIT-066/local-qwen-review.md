@@ -21,7 +21,7 @@ executable_evidence:
 structured_findings_json: []
 bootstrap_gaps:
   - local_qwen_unavailable
-review_subject_hash: f3ef89ae07d91ee679ef662e7ff9218e0b7b98891f11a96fb4cb5b966b2e8511
+review_subject_hash: 557b9a69544ad8e1593cdb69f70ec2b2bc30e7f9d45450dcb3ab12524e89df0d
 reviewed_at: 2026-06-07T17:41:00Z
 
 ## Command Evidence

@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-066
 source_head: eaee411c
-review_subject_hash: f3ef89ae07d91ee679ef662e7ff9218e0b7b98891f11a96fb4cb5b966b2e8511
+review_subject_hash: 557b9a69544ad8e1593cdb69f70ec2b2bc30e7f9d45450dcb3ab12524e89df0d
 verification_state: pass
 verification_evidence:
   - node --test test/cockpit-browser-shell.test.mjs
@@ -12,6 +12,7 @@ verification_evidence:
   - npm run bandit -- risk-classification validate --json
   - npm run bandit -- supply-chain-gate validate --json
   - node --test test/focused-session-context.test.mjs
+  - node --test test/landing-gates.test.mjs
   - node ./bin/bandit.mjs session-context current --json
   - Playwright static preview smoke at http://127.0.0.1:8767/index.html
 coderabbit_state: bootstrap_gap
@@ -24,9 +25,9 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: Layered risk classification selected pre_pr_coderabbit_plus_qwen; the change is medium-risk operator-facing browser presentation work but has no never-auto-landable surface, dependency/lockfile/package-script change, live API, browser storage, external side effect, merge/push/deploy, Trust Verifier cutover, or unresolved reviewer finding requiring escalated adversarial review.
 pm_disposition: pass
-pm_disposition_rationale: Stage 4 has no reviewer-supplied findings because both independent providers were unavailable or timed out. PM inspection, focused tests, typecheck, browser desktop/mobile smoke, session-context projection regression coverage, layered risk classification, and supply-chain gate evidence found no blocker. The implementation preserves CLI Authority, escapes generated HTML values, keeps static preview non-canonical, uses no JavaScript/forms/browser storage/live API, repairs the derived session-context product-slice projection without making it canonical, and records provider limitations as bootstrap replacement evidence rather than pass.
+pm_disposition_rationale: Stage 4 has no reviewer-supplied findings because both independent providers were unavailable or timed out. PM inspection, focused tests, typecheck, browser desktop/mobile smoke, session-context projection regression coverage, landing dirty-path regression coverage, layered risk classification, and supply-chain gate evidence found no blocker. The implementation preserves CLI Authority, escapes generated HTML values, keeps static preview non-canonical, uses no JavaScript/forms/browser storage/live API, repairs the derived session-context product-slice projection without making it canonical, preserves landing-time work-item package evidence handling, and records provider limitations as bootstrap replacement evidence rather than pass.
 non_blocking_findings_routing:
-  - no_action: no reviewer finding was returned; static-preview favicon/non-canonical notice issue and session-context product-slice projection issue were repaired before landing.
+  - no_action: no reviewer finding was returned; static-preview favicon/non-canonical notice issue, session-context product-slice projection issue, and landing dirty-path parsing issue were repaired before landing.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
@@ -45,11 +46,12 @@ dirty bootstrap worktree and direct non-interactive Qwen lacked configured
 auth. No independent reviewer pass is claimed.
 
 Codex PM accepts Stage 4 because deterministic verification and policy evidence
-cover the approved browser-shell scope and the mechanical projection repair:
-focused browser shell tests pass, adjacent cockpit tests pass, focused
-session-context tests pass, typecheck passes, risk classification validates,
-supply-chain gate validates, and Playwright desktop/mobile smoke loaded the
-static preview with no runtime console errors after repair.
+cover the approved browser-shell scope and the mechanical projection/landing
+repairs: focused browser shell tests pass, adjacent cockpit tests pass, focused
+session-context tests pass, landing-gate tests pass, typecheck passes, risk
+classification validates, supply-chain gate validates, and Playwright
+desktop/mobile smoke loaded the static preview with no runtime console errors
+after repair.
 
 ## Finding Disposition
 
@@ -57,8 +59,8 @@ static preview with no runtime console errors after repair.
   review output.
 - Local Qwen: no findings claimed because Qwen did not run a terminal review.
 - PM inspection: no blocker or non-blocking source repair required after the
-  Stage 3 static-preview repairs and the focused session-context projection
-  repair.
+  Stage 3 static-preview repairs, the focused session-context projection repair,
+  and the landing dirty-path parsing repair.
 
 ## Clean-Code Review
 
@@ -68,7 +70,8 @@ static preview with no runtime console errors after repair.
   Trust Verifier cutover.
 - Small surface area: pass - new source is limited to one browser shell module,
   two static preview files, a focused browser-shell test, one focused
-  session-context regression, and required evidence/policy artifacts.
+  session-context regression, one landing regression, and required
+  evidence/policy artifacts.
 - Explicit state: pass - shell authority, canonical owner, prohibited
   authority, mutation forms, accessibility, and responsive metadata are named.
 - Failure clarity: pass - disabled review action includes disabled semantics
@@ -85,6 +88,14 @@ static preview with no runtime console errors after repair.
 focused projection repair now allows active product slices to report
 `active_bootstrap_gap: null` while preserving active bootstrap-gap reporting for
 gap-linked chores and interstitial recovery.
+
+## Landing Repair Evidence
+
+`npm run bandit -- land BANDIT-066 --action local-record` initially blocked
+with `Landing blocked: worktree is dirty` even though only
+`docs/work/BANDIT-066/` evidence was dirty. The focused landing repair preserves
+leading git-status columns so modified work-item package files remain within the
+Landing Agent's configured `allowed_dirty_paths` boundary.
 
 ## Next Action
 

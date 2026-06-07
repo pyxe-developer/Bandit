@@ -561,6 +561,36 @@ test("land records landing action evidence for an eligible chore", async () => {
   assert.match(landingAction, new RegExp(sourceHead));
 });
 
+test("land allows modified work-item package files as landing-time evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  await writeWorkBrief(repo, "BANDIT-930", "Landing Agent Modified Work Package");
+  await writeRiskClassificationEvidence(repo, "BANDIT-930");
+  const sourceHead = await commitAll(repo, "Initial state");
+  const hash = await runBandit(repo, ["review-subject-hash", "BANDIT-930"]);
+  const reviewSubjectHash = readReviewSubjectHash(hash.stdout);
+  await writeReviewEvidence(repo, "BANDIT-930", {
+    sourceHead,
+    reviewSubjectHash
+  });
+  await writeLandingVerdict(repo, "BANDIT-930", { sourceHead });
+  await commitAll(repo, "Record landing verdict");
+  await writeLandingVerdict(repo, "BANDIT-930", { sourceHead });
+
+  const result = await runBandit(repo, [
+    "land",
+    "BANDIT-930",
+    "--action",
+    "local-record"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(
+    result.stdout,
+    /Landing action recorded: docs\/work\/BANDIT-930\/landing-action\.md/
+  );
+});
+
 test("land blocks feature slices without current UAT approval", async () => {
   const repo = await createInitializedRepo();
   await initGitRepo(repo);
