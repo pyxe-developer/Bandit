@@ -32,14 +32,16 @@ Gate Matrix slice, including source-linked Stage gate matrix rows and Evidence
 detail rows in the browser shell while preserving CLI authority and
 presentation-only browser state.
 
-`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued from operator
-direction on 2026-06-07. It should become the next bootstrap-gap chore after
-the active `BANDIT-068` slice lands and closes out; do not start it before the
-current slice boundary is satisfied.
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is active and linked to
+`BANDIT-069`. Repo PM created the bounded chore from
+`docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json`, repaired the
+Stage 1 brief/coordination prerequisite, recorded Local Qwen MLX adapter
+formation pass evidence, recorded CodeRabbit provider-timeout replacement
+evidence, and approved formation on 2026-06-07.
 
 `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is also queued from operator
 direction on 2026-06-07. It is ordered behind the test-strength gate and should
-not start until `BANDIT-068` is landed/closed and the test-strength gate is
+not start until `BANDIT-069` is landed/closed and the test-strength gate is
 resolved, blocked, or explicitly dispositioned.
 
 `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued from operator direction
@@ -53,16 +55,15 @@ recorded as queued bootstrap gaps behind the private install/update channel:
 Replay Regression Corpus, Gate Determinism And Flake Gate, Metamorphic
 Cross-Projection Checks, Reviewer Calibration With Seeded Defects, Evidence
 Bundle Attestation, and Spec-To-Evidence Traceability Matrix. They must not
-start before `BANDIT-068` is landed/closed and earlier queued gaps are resolved,
-blocked, or explicitly dispositioned.
+start before `BANDIT-069` is landed/closed and earlier queued gaps are
+resolved, blocked, or explicitly dispositioned.
 
-**Active work item:** `BANDIT-068` (formation approved).
-**Active work item:** `BANDIT-068` (closed).
+**Active work item:** `BANDIT-069` (formation approved).
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation approved.
 
-**Current next action:** Create the next Phase 8 Guarded CLI Action Requests
-slice through Repo PM Stage 1 formation before RED evidence.
+**Current next action:** Run Work Item PM plan-mode orchestration for
+`BANDIT-069` before RED evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -75,12 +76,11 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. CLI-owned product UAT for
-`BANDIT-068` is recorded under `docs/work/BANDIT-068/uat-approval.md`, the
-landing verdict is recorded under `docs/work/BANDIT-068/landing-verdict.md`,
-and local-record landing evidence is recorded under
-`docs/work/BANDIT-068/landing-action.md`. Stage 6 retrospective and
-improvement disposition are recorded under `docs/work/BANDIT-068/`.
+No operator-owned input is required for the next recorded action. `BANDIT-068`
+has closed with CLI-owned product UAT, landing verdict, local-record landing,
+retrospective, and improvement disposition evidence under `docs/work/BANDIT-068/`.
+`BANDIT-069` has Stage 1 formation evidence under `docs/work/BANDIT-069/`, and
+the next step is Work Item PM plan-mode orchestration before RED evidence.
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
 merge/push/deploy, change product or UAT direction, approve business tradeoffs,
@@ -104,17 +104,23 @@ Stage 5 landing verdict evidence, local-record landing action evidence,
 retrospective, and improvement disposition recorded under
 `docs/work/BANDIT-068/`.
 
-The next allowed action is Repo PM Stage 1 formation for the Guarded CLI Action
-Requests slice. Do not start RED evidence, implementation, merge, push, deploy,
-Trust Verifier cutover, guarded browser action execution, local API work, State
-Index work, scheduler execution, claim execution, worktree execution, or
-unrelated Phase 8 scope before the next work item is formed and approved.
+`BANDIT-069` has Stage 1 brief, coordination, Qwen formation review,
+CodeRabbit provider-timeout replacement evidence, aggregate formation review,
+and `formation_approved` coordination evidence recorded under
+`docs/work/BANDIT-069/`.
+
+The next allowed action is Work Item PM plan-mode orchestration for `BANDIT-069`.
+Do not start RED evidence, implementation, merge, push, deploy, Trust Verifier
+cutover, guarded browser action execution, local API work, State Index work,
+scheduler execution, claim execution, worktree execution, unrelated Phase 8
+scope, or the next queued bootstrap gap before the Work Item PM plan-mode gate
+is satisfied.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
-`no_action`. `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued after
-the active `BANDIT-068` slice and before the next unrelated Phase 8 cockpit
-product slice. `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued
-behind the test-strength gate as the next verification-layer hardening gap.
+`no_action`. `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is active and
+linked to `BANDIT-069` before the next unrelated Phase 8 cockpit product slice.
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued behind the
+test-strength gate as the next verification-layer hardening gap.
 `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued behind the
 oracle-provenance gate as the private install/update-channel hardening gap.
 `BANDIT-GAP-REPLAY-REGRESSION-CORPUS`,

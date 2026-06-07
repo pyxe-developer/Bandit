@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-068 (closed)
+## Current Work Item: BANDIT-069 (formation approved)
 
 ## Current Status
 
@@ -15,17 +15,16 @@ full Stage 0-6 gate strip in the browser shell while preserving CLI authority
 and non-canonical browser presentation state.
 
 `BANDIT-068` is landed and closed out for the Evidence Drilldown And Gate
-Matrix slice. It added source-linked Stage gate matrix rows and Evidence detail
-rows in the browser shell while preserving CLI authority and non-canonical
-browser presentation state.
+Matrix slice.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
 source material is resolved with disposition `no_action`.
 
-`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued from operator
-direction on 2026-06-07. It should become the next bootstrap-gap chore after
-`BANDIT-068` lands and closes out; the current next action remains
-`BANDIT-068` Work Item PM plan-mode orchestration.
+`BANDIT-069` is formed and approved for
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE`. Stage 1 evidence is recorded
+under `docs/work/BANDIT-069/`: brief, coordination log, Local Qwen formation
+review, CodeRabbit provider-timeout replacement evidence, aggregate formation
+review, and `formation_approved`.
 
 `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued behind the
 test-strength gate as the next verification-layer hardening gap.
@@ -40,10 +39,10 @@ install/update channel: replay regression corpus, gate determinism/flake gate,
 metamorphic cross-projection checks, reviewer calibration with seeded defects,
 evidence bundle attestation, and spec-to-evidence traceability matrix.
 
-Current stage: Stage 6 closed.
+Current stage: Stage 1 formation approved.
 
-Next action: Create the next Phase 8 Guarded CLI Action Requests slice through
-Repo PM Stage 1 formation before RED evidence.
+Next action: Run Work Item PM plan-mode orchestration for `BANDIT-069` before
+RED evidence.
 
 Required operator input: none currently required.
 
@@ -51,8 +50,8 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
+- `BANDIT-069` - Test Strength / Mutation Adequacy Gate (formation approved)
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (closed)
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)
 - `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition
-- `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract (closed)

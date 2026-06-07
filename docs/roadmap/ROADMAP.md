@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-068` - Evidence Drilldown And Gate Matrix
-  (closed)
+- `[Gap]` `BANDIT-069` - Test Strength / Mutation Adequacy Gate
+  (formation approved)
 
-**Current next step:** Create the next Phase 8 Guarded CLI Action Requests
-slice through Repo PM Stage 1 formation before RED evidence.
+**Current next step:** Run Work Item PM plan-mode orchestration for
+`BANDIT-069` before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -22,8 +22,9 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` - Test Strength /
-  Mutation Adequacy Gate (queued after `BANDIT-068` lands and closes out)
+- `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Verification
+  Oracle Provenance Gate (queued after `BANDIT-069` is landed/closed or
+  explicitly dispositioned)
 
 ## Planned Work
 
@@ -31,11 +32,10 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 - `[Gap]` `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` - Risk-tiered
   assertion-adequacy and mutation/property/adversarial test-strength gate for
-  critical deterministic trust-layer surfaces, queued behind active
-  `BANDIT-068`.
+  critical deterministic trust-layer surfaces, active as `BANDIT-069`.
 - `[Gap]` `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` - Oracle provenance
   gate requiring covered pass/trusted/ready claims to name the evidence oracle
-  and reject circular self-attestation, queued behind the test-strength gate.
+  and reject circular self-attestation, queued behind active `BANDIT-069`.
 - `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
   distribution and CLI update notification channel, queued behind the
   oracle-provenance gate unless explicitly reprioritized.
