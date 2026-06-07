@@ -4,17 +4,16 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-062` - active replacement-metadata serializer repair for
-  `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA`.
+- None. `BANDIT-062` is landed and closed out.
 
-**Current next step:** Record Stage 6 retrospective, improvement disposition,
-and bootstrap-gap disposition for `BANDIT-062` before starting any next work
-item.
+**Current next step:** Create or disposition a bounded chore spec and work item
+for `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` before Trust Verifier
+cutover, unrelated cockpit product work, or any next slice.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - add the Work Item
-  PM plan-mode gate before full orchestration.
+- `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - add the Work
+  Item PM plan-mode gate before full orchestration.
 
 ## Planned Work
 
@@ -23,7 +22,6 @@ item.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-062` - active serializer repair; Stage 6 closeout is next.
 - `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued Work Item
   PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
@@ -109,3 +107,4 @@ bootstrap gaps are queued.
 - `BANDIT-059` - Trust Verify Snapshot Foundation
 - `BANDIT-060` - Artifact Input Directory Split
 - `BANDIT-061` - Role Contract Artifact Input Write Surface
+- `BANDIT-062` - Work Item Create Replacement Metadata Preservation
