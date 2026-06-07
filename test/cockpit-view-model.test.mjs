@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   cockpitStatusFixture,
+  evidenceDrilldownStatusFixture,
   liveCockpitStatusFixture
 } from "./helpers/cockpit-status-fixture.mjs";
 
@@ -256,4 +257,39 @@ test("cockpit view model maps light queue context explicitly without becoming a 
       ]
     }
   );
+});
+
+test("cockpit view model exposes evidence drilldown rows and gate matrix as presentation-derived data", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+
+  const viewModel = buildCockpitViewModel(evidenceDrilldownStatusFixture());
+
+  assert.equal(viewModel.evidence_drilldown.kind, "cockpit_evidence_detail");
+  assert.deepEqual(
+    viewModel.evidence_drilldown.gate_matrix.map((row) => `${row.id}:${row.status}:${row.freshness_state}`),
+    [
+      "stage_0_context_readiness:pass:current",
+      "stage_1_brief:pass:current",
+      "stage_2_red_evidence:missing:missing",
+      "stage_3_implementation:missing:missing",
+      "stage_4_review:missing:stale",
+      "stage_5_landing:missing:missing",
+      "stage_6_retrospective:missing:missing"
+    ]
+  );
+  assert.deepEqual(
+    viewModel.evidence_drilldown.detail_rows.map((row) => row.id),
+    [
+      "review_evidence",
+      "landing_readiness",
+      "uat",
+      "coordination",
+      "bootstrap_gaps",
+      "stale_evidence",
+      "evidence_trust_signals"
+    ]
+  );
+  assert.equal(viewModel.evidence_drilldown.writes_repo_artifacts, false);
+  assert.equal(viewModel.evidence_drilldown.approves_uat, false);
+  assert.equal(viewModel.evidence_drilldown.decides_landing_safety, false);
 });

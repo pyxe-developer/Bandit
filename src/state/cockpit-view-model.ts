@@ -3,6 +3,10 @@ import {
   deriveCockpitActionAffordances,
   type CockpitActionAffordance
 } from "./cockpit-actions.ts";
+import {
+  buildCockpitEvidenceDetail,
+  type CockpitEvidenceDetail
+} from "./cockpit-evidence-detail.ts";
 
 type AttentionCategoryId =
   | "operator_input_required"
@@ -66,7 +70,7 @@ export type CockpitViewModel = {
     status: string;
     confidence: ConfidenceCue;
   }>;
-  evidence_drilldown: {
+  evidence_drilldown: CockpitEvidenceDetail & {
     sources: string[];
     shows_hash_state: boolean;
     shows_gate_basis: boolean;
@@ -126,6 +130,7 @@ export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
     },
     gate_strip: buildGateStrip(status),
     evidence_drilldown: {
+      ...buildCockpitEvidenceDetail(status),
       sources: buildEvidenceSources(status),
       shows_hash_state: true,
       shows_gate_basis: true

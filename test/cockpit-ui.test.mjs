@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { cockpitStatusFixture, desktopViewport } from "./helpers/cockpit-status-fixture.mjs";
+import {
+  cockpitStatusFixture,
+  desktopViewport,
+  evidenceDrilldownStatusFixture
+} from "./helpers/cockpit-status-fixture.mjs";
 
 async function loadViewModelModule() {
   return import("../src/state/cockpit-view-model.ts");
@@ -202,4 +206,76 @@ test("cockpit shell renders explicit light queue context without mutation contro
       "workstream_queue_management"
     ]
   });
+});
+
+test("cockpit shell renders dense gate matrix and evidence detail without hidden authority", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderCockpitShell } = await loadRenderModule();
+
+  const shell = renderCockpitShell(
+    buildCockpitViewModel(evidenceDrilldownStatusFixture()),
+    desktopViewport()
+  );
+
+  assert.deepEqual(
+    shell.gate_matrix.rows.map((row) => ({
+      id: row.id,
+      status: row.status,
+      freshness_state: row.freshness_state,
+      owner_or_authority_role: row.owner_or_authority_role
+    })),
+    [
+      {
+        id: "stage_0_context_readiness",
+        status: "pass",
+        freshness_state: "current",
+        owner_or_authority_role: "codex_pm"
+      },
+      {
+        id: "stage_1_brief",
+        status: "pass",
+        freshness_state: "current",
+        owner_or_authority_role: "codex_pm"
+      },
+      {
+        id: "stage_2_red_evidence",
+        status: "missing",
+        freshness_state: "missing",
+        owner_or_authority_role: "test_writer"
+      },
+      {
+        id: "stage_3_implementation",
+        status: "missing",
+        freshness_state: "missing",
+        owner_or_authority_role: "writer"
+      },
+      {
+        id: "stage_4_review",
+        status: "missing",
+        freshness_state: "stale",
+        owner_or_authority_role: "reviewer"
+      },
+      {
+        id: "stage_5_landing",
+        status: "missing",
+        freshness_state: "missing",
+        owner_or_authority_role: "landing_agent"
+      },
+      {
+        id: "stage_6_retrospective",
+        status: "missing",
+        freshness_state: "missing",
+        owner_or_authority_role: "codex_pm"
+      }
+    ]
+  );
+  assert.equal(shell.gate_matrix.aria_label, "Stage gate matrix");
+  assert.equal(shell.gate_matrix.source_paths_wrap, true);
+  assert.deepEqual(shell.gate_matrix.mutation_forms, []);
+  assert.equal(
+    shell.evidence_detail.rows.some((row) => row.id === "coordination" && row.status === "orchestration_plan_recorded"),
+    true
+  );
+  assert.deepEqual(shell.evidence_detail.mutation_forms, []);
+  assert.equal(shell.evidence_detail.canonical_state_owner, "repo_native_artifacts_via_bandit_cli");
 });

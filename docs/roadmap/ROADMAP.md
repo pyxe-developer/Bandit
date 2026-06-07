@@ -5,10 +5,10 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-068` - Evidence Drilldown And Gate Matrix
-  (formation approved)
+  (closed)
 
-**Current next step:** Run Work Item PM plan-mode orchestration for
-`BANDIT-068`.
+**Current next step:** Create the next Phase 8 Guarded CLI Action Requests
+slice through Repo PM Stage 1 formation before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -67,6 +67,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-068` - Evidence Drilldown And Gate Matrix
 - `BANDIT-001` - Repo-Native State And CLI Skeleton
 - `BANDIT-002` - Work Artifact Templates And Validation
 - `BANDIT-003` - PRD-To-Work Draft Command
