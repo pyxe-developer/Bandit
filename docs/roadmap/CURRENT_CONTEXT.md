@@ -27,22 +27,33 @@ View From CLI Payload slice, including source-linked first-screen cues and a
 full Stage 0-6 gate strip in the browser shell while preserving CLI authority
 and presentation-only browser state.
 
-**Active work item:** `BANDIT-067` (closed).
-
-The current stage is Stage 6: Closed / next work item formation required.
-
-**Current next action:** Create the next Phase 8 slice work item for Evidence
-Drilldown And Gate Matrix through Repo PM Stage 1 formation before RED
+`BANDIT-068` is formed and formation-approved. It is the Phase 8 Evidence
+Drilldown And Gate Matrix product slice. Stage 1 evidence is recorded under
+`docs/work/BANDIT-068/`, including Local Qwen formation review through the MLX
+OpenAI-compatible adapter route and CodeRabbit provider-timeout replacement
 evidence.
+
+**Active work item:** `BANDIT-068` (formation approved).
+
+The current stage is Stage 1: Formation approved / Work Item PM plan-mode
+orchestration required.
+
+**Current next action:** Run Work Item PM plan-mode orchestration for
+`BANDIT-068`.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
 and no merge/push/deploy behavior is authorized.
 
+Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and
+`bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at
+`http://127.0.0.1:8000/v1`. The direct `qwen` CLI is revoked for Bandit
+reviewer routing.
+
 ## Required Operator Input
 
-No operator-owned input is required for the current formation step. Halt for
-operator input if a future step would
+No operator-owned input is required for the current Work Item PM plan-mode
+orchestration step. Halt for operator input if a future step would
 approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
 or wrap an older gate path, merge/push/deploy, change product or UAT direction,
 approve business tradeoffs, approve explicit cost/risk posture, choose local
@@ -60,16 +71,18 @@ evidence is recorded at `docs/work/BANDIT-066/landing-action.md`.
 recorded under `docs/work/BANDIT-067/`, and local-record landing action
 evidence is recorded at `docs/work/BANDIT-067/landing-action.md`.
 
-The next allowed action is to create the Phase 8 Evidence Drilldown And Gate
-Matrix work item through Repo PM Stage 1 formation. Do not write RED evidence,
-implementation, review evidence, landing evidence, or UAT evidence for the next
-slice before formation is complete and approved.
+`BANDIT-068` is formed and formation-approved. Its Stage 1 brief, formation
+review artifacts, and coordination evidence are recorded under
+`docs/work/BANDIT-068/`. Do not write RED evidence, implementation, review
+evidence, landing evidence, or UAT evidence until Work Item PM plan-mode
+orchestration records the next stage packet.
 
-No next work item is active yet. Do not start RED evidence, implementation,
-review, landing, UAT, merge, push, deploy, Trust Verifier cutover, guarded
-browser action execution, local API work, State Index work, scheduler
-execution, claim execution, worktree execution, or unrelated Phase 8 scope
-before the next slice is formed and approved.
+The next allowed action is Work Item PM plan-mode orchestration for
+`BANDIT-068`. Do not start RED evidence, implementation, review, landing, UAT,
+merge, push, deploy, Trust Verifier cutover, guarded browser action execution,
+local API work, State Index work, scheduler execution, claim execution,
+worktree execution, or unrelated Phase 8 scope before the orchestration packet
+is recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before the next Phase 8

@@ -124,7 +124,7 @@
       "evidence_path": "docs/work/BANDIT-067/coderabbit-review.md"
     },
     {
-      "tool": "qwen --bare --approval-mode plan",
+      "tool": "local-qwen MLX OpenAI-compatible adapter via bin/omlx-chat-completions.mjs",
       "state": "bootstrap_gap",
       "risk": "medium",
       "evidence_path": "docs/work/BANDIT-067/local-qwen-review.md"

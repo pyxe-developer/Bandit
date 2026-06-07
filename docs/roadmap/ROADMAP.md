@@ -4,12 +4,11 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-067` - Live Cockpit Status View From CLI Payload
-  (closed; no next work item formed yet)
+- `[Slice]` `BANDIT-068` - Evidence Drilldown And Gate Matrix
+  (formation approved)
 
-**Current next step:** Create the next Phase 8 slice work item for Evidence
-Drilldown And Gate Matrix through Repo PM Stage 1 formation before RED
-evidence.
+**Current next step:** Run Work Item PM plan-mode orchestration for
+`BANDIT-068`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
@@ -17,9 +16,13 @@ Pi/Aperture runtime work, choose local API or State Index timing, execute
 guarded browser actions, merge, push, deploy, or start unformed work without
 separate authorization and evidence.
 
+Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
+`bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
+The direct `qwen` CLI is not an authorized Bandit reviewer path.
+
 ## Next Work Item
 
-- `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
+- `[Slice]` `TBD` - Guarded CLI Action Requests
 
 ## Planned Work
 
@@ -30,7 +33,6 @@ separate authorization and evidence.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Guarded CLI Action Requests
 - `[Slice]` `TBD` - Improvement Health Surface
 
 ## Completed Work
