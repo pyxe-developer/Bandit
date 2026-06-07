@@ -7,9 +7,8 @@
 - `[Gap]` `BANDIT-062` - active replacement-metadata serializer repair for
   `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA`.
 
-**Current next step:** Record Stage 5 landing verdict evidence for `BANDIT-062`
-before landing action, closeout, next work item, Trust Verifier cutover, or
-unrelated work.
+**Current next step:** Run the local-record landing action for `BANDIT-062` and
+record landing action evidence.
 
 ## Next Work Item
 
@@ -23,8 +22,8 @@ unrelated work.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-062` - active serializer repair; Stage 5 landing verdict is
-  next.
+- `[Gap]` `BANDIT-062` - active serializer repair; local-record landing action
+  is next.
 - `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued Work Item
   PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode

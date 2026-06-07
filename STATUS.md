@@ -17,11 +17,10 @@ Claude implementation evidence is recorded, and Codex PM Stage 3 acceptance is
 recorded. CodeRabbit timeout evidence, Local Qwen pass evidence, and layered
 risk/supply-chain policy evidence are recorded.
 
-Current stage: Stage 5 - Landing verdict required.
+Current stage: Stage 5 - Landing action required.
 
-Next action: Record Stage 5 landing verdict evidence for `BANDIT-062` before
-landing action, closeout, next work item, Trust Verifier cutover, or unrelated
-work.
+Next action: Run the local-record landing action for `BANDIT-062` and record
+landing action evidence.
 
 No operator-owned input is required for that next action. Do not begin Trust
 Verifier cutover work, Work Item PM plan-mode orchestration work, or unrelated
