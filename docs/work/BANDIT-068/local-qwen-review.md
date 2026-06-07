@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-068
-source_head: 9ca6442cf2729fb47d9e374f14b4875bf0a75746
+source_head: 87b62d120fd0f5d5ee0f5ffb86ca4063f2cb559f
 profile_id: local-qwen-baseline
 runtime: omlx-openai-compatible-adapter
 model: Qwen3.6-35B-A3B-MLX-8bit

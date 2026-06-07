@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-068 (landing action required)
+## Current Work Item: BANDIT-068 (Stage 6 closeout required)
 
 ## Current Status
 
@@ -16,16 +16,18 @@ and non-canonical browser presentation state.
 
 `BANDIT-068` is active for the Evidence Drilldown And Gate Matrix slice. Stage
 1 formation, Work Item PM orchestration, Stage 2 RED evidence, Stage 3 Claude
-implementation evidence, Stage 4 review evidence, CLI-owned product UAT, and
-Stage 5 landing verdict evidence are recorded.
+implementation evidence, Stage 4 review evidence, CLI-owned product UAT, Stage
+5 landing verdict evidence, and local-record landing action evidence are
+recorded.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
 source material is resolved with disposition `no_action`; no role-scoped
 bootstrap gap remains queued before Phase 8 cockpit work.
 
-Current stage: Stage 5 local-record landing action required.
+Current stage: Stage 6 closeout required.
 
-Next action: Run the local-record landing action for `BANDIT-068`.
+Next action: Record retrospective, improvement disposition, and closeout for
+`BANDIT-068`.
 
 Required operator input: none currently required.
 
@@ -33,7 +35,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-068` - Evidence Drilldown And Gate Matrix (landing action required)
+- `BANDIT-068` - Evidence Drilldown And Gate Matrix (Stage 6 closeout required)
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)
 - `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition

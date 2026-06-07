@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-068
-source_head: 9ca6442cf2729fb47d9e374f14b4875bf0a75746
+source_head: 87b62d120fd0f5d5ee0f5ffb86ca4063f2cb559f
 review_evidence: docs/work/BANDIT-068/review-evidence.md
 tests_status: pass
 clean_code_status: pass
