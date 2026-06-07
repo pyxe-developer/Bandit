@@ -680,8 +680,8 @@
     {
       "id": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
       "title": "Role-scoped workflow orchestration",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "open",
+      "disposition": "queued_chore_candidate",
       "source_work_item": "BANDIT-057",
       "source_artifacts": [
         "AGENTS.md",
@@ -697,12 +697,15 @@
         "docs/spikes/pi-aperture-agent-scope-and-harness-spike.md",
         "docs/work/BANDIT-057/retrospective.md",
         "docs/work/BANDIT-058/landing-action.md",
-        "docs/work/BANDIT-058/retrospective.md"
+        "docs/work/BANDIT-058/retrospective.md",
+        "docs/work/BANDIT-065/landing-action.md",
+        "docs/work/BANDIT-065/chore-disposition.md",
+        "docs/work/BANDIT-065/retrospective.md"
       ],
-      "linked_work_item": "BANDIT-065",
-      "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. The later harness-agnostic CLI trust-layer decision superseded the Pi/Aperture harness-specific implementation queue, so remaining role-scoped orchestration work is source material unless a future bounded trust-layer or orchestrator-prompt slice explicitly scopes it.",
-      "verification_target": "docs/work/BANDIT-058/retrospective.md",
-      "next_action": "Complete active chore BANDIT-065."
+      "linked_work_item": null,
+      "rationale": "BANDIT-057 delivered role entrypoints, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. BANDIT-065 delivered the harness-portable orchestrator prompt contract, policy/template/validator path, CLI validation command, focused tests, Stage 4 review evidence, Stage 5 landing evidence, local-record landing action evidence, and Stage 6 retrospective closeout through the narrow BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT gap. The accepted harness-agnostic CLI Trust Layer decision superseded Pi/Aperture runtime and live orchestration work as Bandit's load-bearing boundary, so remaining role input packets, execution packets, live A2A, work queues, scheduler, claim/worktree lifecycle, repair-continuation, and landing/closeout handoff ideas remain queued source-material candidates only until Repo PM either scopes a bounded trust-layer-compatible work item or records explicit no-action.",
+      "verification_target": null,
+      "next_action": "Repo PM should decide whether any remaining role-scoped runtime source material should become a bounded trust-layer-compatible work item, or record explicit no-action before unrelated cockpit product work begins."
     },
     {
       "id": "BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION",
@@ -846,6 +849,32 @@
       "rationale": "BANDIT-064 materialized the Trust Verifier Cutover Gate contract as repo-native policy, added a fail-closed validator and `bandit trust cutover-gates validate` command, registered validation/init/path wiring, and recorded the current no-cutover-approved disposition. Actual Trust Verifier cutover approval, old-gate replacement, or old-gate wrapping remains operator-owned and separately blocked.",
       "verification_target": "docs/work/BANDIT-064/retrospective.md",
       "next_action": "Use the Trust Verifier Cutover Gate policy and validator before any future per-Trust-Goal cutover decision; do not approve cutover or replace/wrap old gates without separate operator-owned authorization and evidence."
+    },
+    {
+      "id": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT",
+      "title": "Harness-portable orchestrator prompt contract",
+      "status": "resolved",
+      "disposition": "resolved",
+      "source_work_item": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/design/role-scoped-workflow-orchestration.md",
+        "docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md",
+        "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT.json",
+        "docs/work/BANDIT-065/brief.md",
+        "docs/work/BANDIT-065/red-evidence.md",
+        "docs/work/BANDIT-065/implementation-evidence.md",
+        "docs/work/BANDIT-065/review-evidence.md",
+        "docs/work/BANDIT-065/landing-action.md",
+        "docs/work/BANDIT-065/chore-disposition.md",
+        "docs/work/BANDIT-065/retrospective.md"
+      ],
+      "linked_work_item": "BANDIT-065",
+      "rationale": "BANDIT-065 delivered the harness-portable Work Item PM orchestrator prompt contract as adapter-facing guidance rather than workflow authority. The work added .bandit/policy/orchestrator-prompts.json, docs/templates/work-item-pm-orchestrator-prompt.md, a fail-closed validator, CLI command wiring, init/validate integration, focused tests, Stage 4 review evidence, Stage 5 landing evidence, local-record landing action evidence, and Stage 6 retrospective closeout.",
+      "verification_target": "docs/work/BANDIT-065/retrospective.md",
+      "next_action": "Use the orchestrator prompt contract as non-authoritative harness guidance while Bandit CLI evidence and gates remain canonical."
     }
   ]
 }

@@ -4,39 +4,31 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract under
-  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; local-record landing action
-  is recorded and Stage 6 closeout is required.
+- None selected. `BANDIT-065` is landed and closed out.
 
-**Current next step:** Record `BANDIT-065` retrospective, structured
-improvement mining, and durable disposition for the remaining
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material queue before any
-next work item starts.
+**Current next step:** Repo PM should decide whether the remaining
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source material should become a
+bounded trust-layer-compatible work item, or record explicit no-action before
+unrelated cockpit product work begins.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
-Pi/Aperture runtime work, or start unrelated product work without separate
-operator-owned authorization and evidence.
+Pi/Aperture runtime work, merge, push, deploy, or start unformed work without
+separate authorization and evidence.
 
 ## Next Work Item
 
-- None selected until `BANDIT-065` lands and closes out.
+- None selected.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-These are the active queue under the bootstrap-gap policy. They block unrelated
-cockpit feature work unless the operator explicitly changes priority.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued candidate
+  for remaining runtime/harness source material after `BANDIT-065`; no work
+  item is selected.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
-  `BANDIT-065`, bounded to a harness-portable orchestrator prompt contract and
-  validation path.
-
-### Deferred PRD Slices
-
-These remain planned cockpit/product work, but are not currently unblocked while
-bootstrap gaps are queued.
+### Phase 8 Product Queue
 
 - `[Slice]` `TBD` - Browser-Served Cockpit App Shell
 - `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
@@ -110,3 +102,4 @@ bootstrap gaps are queued.
 - `BANDIT-062` - Work Item Create Replacement Metadata Preservation
 - `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate
 - `BANDIT-064` - Trust Verifier Cutover Gate Triage
+- `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract

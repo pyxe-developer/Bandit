@@ -4,79 +4,84 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-065` is the active bounded bootstrap-gap chore under
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`. Repo PM created the
-Harness-Portable Orchestrator Prompt Contract brief at
-`docs/work/BANDIT-065/brief.md`, recorded Stage 1 formation review evidence at
-`docs/work/BANDIT-065/qwen-formation-review.md`,
-`docs/work/BANDIT-065/coderabbit-formation-review.md`, and
-`docs/work/BANDIT-065/formation-review.md`, and recorded the
-`formation_approved` transition in `docs/work/BANDIT-065/coordination-log.jsonl`.
-Work Item PM recorded plan-mode evidence at
-`docs/work/BANDIT-065/orchestration-plan.md`, and Test Writer recorded Stage 2
-RED evidence at `docs/work/BANDIT-065/red-evidence.md` with focused RED tests
-in `test/orchestrator-prompts.test.mjs`. Codex PM recorded a Stage 3 Claude
-Process Adapter dispatch attempt at `docs/work/BANDIT-065/dispatch.md` and
-`docs/work/BANDIT-065/dispatch-attempt.md`; the process produced no terminal
-output, source changes, writer report, or implementation evidence before it was
-terminated. A later Claude retry completed Stage 3 implementation and recorded
-`docs/work/BANDIT-065/writer-report.md` and
-`docs/work/BANDIT-065/implementation-evidence.md`; Codex PM accepted Stage 3 in
+`BANDIT-065` is landed and closed out. It delivered the bounded
+Harness-Portable Orchestrator Prompt Contract bootstrap-policy chore under
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`: repo-native orchestrator prompt
+policy at `.bandit/policy/orchestrator-prompts.json`, adapter-facing prompt
+template at `docs/templates/work-item-pm-orchestrator-prompt.md`, fail-closed
+validator support, `bandit orchestrator-prompts validate`, validation/init/path
+wiring, and focused test coverage.
+
+Stage 1 brief and formation review evidence are recorded under
+`docs/work/BANDIT-065/`. Work Item PM plan-mode evidence is recorded at
+`docs/work/BANDIT-065/orchestration-plan.md`. Stage 2 RED evidence is recorded
+at `docs/work/BANDIT-065/red-evidence.md`. Stage 3 implementation evidence is
+recorded at `docs/work/BANDIT-065/implementation-evidence.md`,
+`docs/work/BANDIT-065/writer-report.md`, and
 `docs/work/BANDIT-065/stage3-pm-review.md`. Stage 4 review evidence is recorded
-at `docs/work/BANDIT-065/review-evidence.md`; CodeRabbit provider timeout is
-recorded as bootstrap-gap replacement evidence, Local Qwen non-blocking findings
-were repaired and PM-dispositioned, and layered risk/supply-chain gates passed.
-Stage 5 landing verdict is recorded at
-`docs/work/BANDIT-065/landing-verdict.md`, and local-record landing action
-evidence is recorded at `docs/work/BANDIT-065/landing-action.md`.
+at `docs/work/BANDIT-065/review-evidence.md`, with CodeRabbit provider-timeout
+replacement evidence and Local Qwen non-blocking findings repaired and
+PM-dispositioned. Stage 5 safe-to-land verdict evidence is recorded at
+`docs/work/BANDIT-065/landing-verdict.md`. Local-record landing action evidence
+is recorded at `docs/work/BANDIT-065/landing-action.md`. Stage 6 chore
+disposition and retrospective evidence is recorded at
+`docs/work/BANDIT-065/chore-disposition.md` and
+`docs/work/BANDIT-065/retrospective.md`.
 
-This work item scopes only a non-authoritative, harness-portable Work Item PM
-orchestrator prompt contract and validation path. It does not approve Trust
-Verifier cutover, select a Trust Goal, replace or wrap old gate paths, generate
-role input packets, generate execution packets, restart Pi/Aperture runtime
-work, or start unrelated cockpit product work.
+The gap ledger marks
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT` resolved by
+`BANDIT-065`. The broader
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` umbrella remains an unlinked
+queued candidate for remaining runtime/harness source material. The
+trust-layer-compatible role-scoped workflow pieces are now landed:
+`BANDIT-057` role entrypoints/formation gate, `BANDIT-058` role contracts/run
+manifests, and `BANDIT-065` harness-portable orchestrator prompt contract.
+Remaining role input packets, execution packets, live A2A, work queues,
+scheduler, claim/worktree lifecycle, repair-continuation, and landing/closeout
+handoff ideas remain source material outside Bandit's load-bearing CLI
+trust-layer boundary unless a future product or trust-layer decision scopes a
+new bounded work item.
 
-**Active work item:** `BANDIT-065`.
+**Active work item:** none.
 
-The current stage is Stage 6: closeout required.
+The current stage is Interstitial: Repo PM next-work selection.
 
-**Current next action:** Record `BANDIT-065` retrospective, structured
-improvement mining, and durable disposition for the remaining
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material queue before any
-next work item starts.
+**Current next action:** Repo PM should decide whether the remaining
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source material should become a
+bounded trust-layer-compatible work item, or record explicit no-action before
+unrelated cockpit product work begins.
+
+No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
+no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
+and no merge/push/deploy behavior is authorized.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 6 closeout step unless
-closeout would change product direction, approve Trust Verifier cutover policy,
-select a Trust Goal for cutover, replace or wrap an older gate path,
+No operator-owned input is required for the current interstitial state.
+
+Halt for operator input if a future step would approve Trust Verifier cutover
+policy, select a Trust Goal for cutover, replace or wrap an older gate path,
 merge/push/deploy, change product or UAT direction, approve business tradeoffs,
 approve explicit cost/risk posture, or make another policy/product decision repo
 artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-065` is active, formation-approved, plan-mode recorded, RED recorded,
-Stage 3 implementation accepted, Stage 4 review recorded, and Stage 5 landing
-action recorded. Its brief, formation review artifacts, orchestration plan, RED
-evidence, dispatch packet, dispatch-attempt evidence, writer report,
-implementation evidence, Stage 3 PM review, review evidence, landing verdict,
-landing action, and coordination log are recorded under `docs/work/BANDIT-065/`.
-The active gap ledger entry links
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` to `BANDIT-065` as an
-`active_chore`.
+No active work item is selected.
 
-Do not start the next work item, Trust Verifier cutover, role input or execution
-packet implementation, Pi/Aperture runtime work, or unrelated cockpit product
-work before `BANDIT-065` Stage 6 retrospective, improvement mining, gap
-disposition, roadmap context closeout, and STATUS.md refresh are recorded.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` remains an unlinked queued
+candidate. No work item is linked to it.
 
-`BANDIT-064` is landed and closed out. Its Stage 1 through Stage 6 evidence is
-recorded under `docs/work/BANDIT-064/`, and local-record landing action
-evidence is recorded at `docs/work/BANDIT-064/landing-action.md`.
+`BANDIT-065` is landed and closed out. Its Stage 1 through Stage 6 evidence is
+recorded under `docs/work/BANDIT-065/`, and local-record landing action
+evidence is recorded at `docs/work/BANDIT-065/landing-action.md`.
 
-`BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` is resolved by `BANDIT-064`;
-the gap ledger points to `docs/work/BANDIT-064/retrospective.md`.
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT` is resolved
+by `BANDIT-065`; the gap ledger points to
+`docs/work/BANDIT-065/retrospective.md`.
+
+`BANDIT-064` is landed and closed out. It resolved
+`BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE`.
 
 `BANDIT-063` is landed and closed out. It resolved
 `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION`.
@@ -93,8 +98,3 @@ the gap ledger points to `docs/work/BANDIT-064/retrospective.md`.
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`.
-
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is active through `BANDIT-065`.
-The harness-agnostic trust-layer decision superseded the Pi/Aperture
-harness-specific implementation queue, so this work item is bounded to a
-trust-layer-compatible orchestrator-prompt contract.
