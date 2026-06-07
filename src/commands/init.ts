@@ -23,6 +23,10 @@ import {
   writeDefaultOperatorBoundaryPolicy,
   writeDefaultOperatorBoundaryTemplate
 } from "../state/operator-boundary.js";
+import {
+  writeDefaultOrchestratorPromptsPolicy,
+  writeDefaultOrchestratorPromptTemplate
+} from "../state/orchestrator-prompts.js";
 import { getBanditPaths } from "../state/paths.js";
 import {
   writeDefaultRiskClassificationPolicy,
@@ -68,6 +72,12 @@ export async function initBandit(repoRoot: string) {
   );
   const operatorBoundaryTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/operator-boundary.md`
+  );
+  const orchestratorPromptsPolicyExists = await pathExists(
+    paths.orchestratorPromptsPolicy
+  );
+  const orchestratorPromptTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/work-item-pm-orchestrator-prompt.md`
   );
   const riskClassificationPolicyExists = await pathExists(
     paths.riskClassificationPolicy
@@ -147,6 +157,14 @@ export async function initBandit(repoRoot: string) {
 
   if (!operatorBoundaryTemplateExists) {
     await writeDefaultOperatorBoundaryTemplate(repoRoot);
+  }
+
+  if (!orchestratorPromptsPolicyExists) {
+    await writeDefaultOrchestratorPromptsPolicy(paths.orchestratorPromptsPolicy);
+  }
+
+  if (!orchestratorPromptTemplateExists) {
+    await writeDefaultOrchestratorPromptTemplate(repoRoot);
   }
 
   if (!riskClassificationPolicyExists) {

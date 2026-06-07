@@ -21,6 +21,7 @@ import { listBootstrapGaps } from "./commands/gaps.js";
 import { landCheck } from "./commands/land-check.js";
 import { listWorkItems } from "./commands/list.js";
 import { operatorBoundary } from "./commands/operator-boundary.js";
+import { orchestratorPrompts } from "./commands/orchestrator-prompts.js";
 import { qwenReview } from "./commands/qwen-review.js";
 import { reviewSubjectHash } from "./commands/review-subject-hash.js";
 import { riskClassification } from "./commands/risk-classification.js";
@@ -54,7 +55,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>"
+        "  bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>"
     );
     process.exitCode = 1;
     return;
@@ -140,6 +141,12 @@ async function main() {
 
   if (command === "operator-boundary") {
     const result = await operatorBoundary(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "orchestrator-prompts") {
+    const result = await orchestratorPrompts(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }
@@ -325,7 +332,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust>`);
   process.exitCode = 1;
 }
 

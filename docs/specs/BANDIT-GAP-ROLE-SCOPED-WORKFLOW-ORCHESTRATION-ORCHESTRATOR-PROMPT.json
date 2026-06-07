@@ -1,0 +1,180 @@
+{
+  "kind": "chore",
+  "title": "Harness-Portable Orchestrator Prompt Contract",
+  "status": "Queued",
+  "non_product_work": "Create a bounded role-scoped workflow orchestration follow-on that defines a repo-native, harness-portable Work Item PM orchestrator prompt contract and validation path without making the prompt canonical workflow authority or implementing runtime role/execution packets.",
+  "origin": "Current repo context records no active work item after BANDIT-064 closeout and directs Repo PM to triage the remaining BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION source-material gap into a bounded work item or explicit disposition before unrelated cockpit product work. docs/design/role-scoped-workflow-orchestration.md and the BANDIT-057/BANDIT-058 retrospectives identify Execution And Role Input Packets as the next role-scoped source-material idea, but docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md supersedes Pi/Aperture runtime work and says an orchestrator prompt may guide a harness while Bandit CLI remains the trust authority. This chore scopes only that harness-portable prompt contract boundary.",
+  "scope": [
+    "Define a repo-native Work Item PM orchestrator prompt contract for formation-approved work items that any harness or Process Adapter may use as guidance for a coherent Stage 2 through Stage 6 session.",
+    "Keep the orchestrator prompt explicitly non-authoritative: it may instruct a runtime how to call Bandit CLI commands and how to preserve stage evidence, but it cannot replace the brief, coordination log, Work Item PM plan artifact, RED evidence, implementation evidence, review evidence, landing evidence, retrospective evidence, bootstrap-gap ledger, current context, roadmap, or Trust Verifier verdicts.",
+    "Require the prompt contract to preserve Repo PM, Work Item PM, Test Writer, Implementation Writer, Reviewer, Landing Agent, and Closeout Agent authority boundaries, including the Permanent Test Ownership Boundary and Bootstrap Model-Family Separation.",
+    "Require the prompt contract to anchor execution in current repo-derived context: the approved brief, `formation_approved` coordination evidence, `orchestration_plan_recorded` evidence when required, stage capability scope, token-cost failsafe boundaries, current bootstrap-gap state, and current operator-input status.",
+    "Require the prompt contract to direct every stage transition through existing or explicitly scoped Bandit evidence and validation commands rather than chat memory, live provider state, queue state, model memory, or harness-local status.",
+    "Add a local policy/template/validator surface, expected as `.bandit/policy/orchestrator-prompts.json`, `docs/templates/work-item-pm-orchestrator-prompt.md`, `src/state/orchestrator-prompts.ts`, `src/commands/orchestrator-prompts.ts`, and `test/orchestrator-prompts.test.mjs`, only as needed to enforce the prompt contract.",
+    "Make validation fail closed when an orchestrator prompt grants itself canonical workflow authority, skips formation or plan-mode gates, gives Work Item PM authority to write tests or implementation, lets Stage 3 edit tests, treats same-model RED and implementation as acceptable during bootstrap, bypasses reviewer or landing gates, mutates repo workflow state outside CLI commands, or depends on live network/provider state as trust evidence.",
+    "Preserve the harness-agnostic CLI Trust Layer boundary: the prompt is an adapter-facing guidance artifact; Bandit remains the deterministic CLI trust layer and existing gate commands remain authoritative until a separately approved Trust Verifier cutover exists.",
+    "Record CLEAN_CODE.md read evidence in Stage 1; CLEAN_CODE.md was read on 2026-06-07 before creating this spec, and clean-code compliance must be evaluated before landing.",
+    "Stage sequence expectation: Repo PM creates this Stage 1 brief, formation review is required before approval, Work Item PM may start only after `formation_approved`, Work Item PM plan-mode evidence remains required before Stage 2 where applicable, Stage 2 RED evidence must precede implementation, Stage 3 implementation must preserve test ownership, Stage 4 must run CodeRabbit and Local Qwen or record honest provider-refusal evidence, Stage 5 must record landing verdict/action evidence, and Stage 6 must record retrospective and gap disposition before any later work starts.",
+    "Stage capability scope for this chore: Codex PM/Repo PM owns Stage 1 brief creation, formation routing, and context-artifact synchronization; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation is assigned to Claude through the bootstrap Process Adapter path; Stage 3 Implementation Writer has no authority to edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, or retrospective evidence; reviewers own Stage 4 evidence; Landing Agent owns Stage 5 verdict/action evidence; Closeout Agent/Codex PM owns Stage 6 closeout evidence.",
+    "Token-cost failsafe boundary: use existing Token-Cost Failsafe policy for abnormal-run guardrails if paid, high-token, reviewer, or long-running execution becomes necessary; this chore must not approve new provider-pricing evidence, spend-class approval, paid reviewer promotion, recurring paid routing, or operator-owned cost/risk overrides.",
+    "Future-work scope: this chore must not implement generated execution packets, generated role input packets, live agent-to-agent channels, True Agent lifecycle, Pi/Aperture agent-scope schema or projection work, work queues, scheduler execution, claim authority, worktree lifecycle execution, diff-based write validation, same-agent repair continuation, landing/closeout handoff automation, Trust Verifier cutover, old gate replacement or wrapping, live evidence capture helpers, reviewer/test execution inside trust verification, cockpit product work, dependency or lockfile changes, external service setup, merge/push/deploy behavior, product UAT scope, installed global skill edits, or broader product/policy changes."
+  ],
+  "acceptance_criteria": [
+    "The chore brief exists at `docs/work/<ID>/brief.md` and links to `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` as the active bootstrap gap while making clear this is a bounded orchestrator-prompt contract slice, not full role-scoped runtime implementation.",
+    "Stage 1 brief evidence records `CLEAN_CODE.md` read evidence, source authority, scope and out-of-scope, stage capability scope, operator-input status, model-family separation, Permanent Test Ownership Boundary, required evidence, expected files, stage sequence, and forbidden actions.",
+    "Focused RED evidence proves the repo currently lacks a repo-native Work Item PM orchestrator prompt contract and validation path that preserve Bandit CLI authority while allowing harness-portable orchestration guidance.",
+    "A local prompt contract or policy artifact defines required prompt sections for current repo state, stage sequence, required evidence, role boundaries, validation commands, known blockers, stop conditions, forbidden actions, and CLI authority.",
+    "The contract requires prompts to consume only repo-derived local evidence as trust inputs and to treat live harness state, provider dashboards, model memory, queue state, and chat text as non-authoritative unless first materialized as local evidence.",
+    "Validation fails closed for prompts that skip Formation Gate evidence, skip Work Item PM plan-mode evidence when required, bypass RED-before-implementation sequencing, erode Test Writer or Implementation Writer ownership, allow Stage 3 test edits, allow same-model RED and implementation during bootstrap, bypass reviewer or landing gates, mutate workflow state outside CLI commands, or claim Trust Verifier cutover authority.",
+    "The orchestrator prompt contract remains adapter guidance and cannot replace canonical brief, coordination, work-item plan, RED, implementation, review, landing, retrospective, roadmap, current-context, bootstrap-gap, or trust-verifier authority.",
+    "The implementation preserves existing `work-item-pm start`, role contract, role-run manifest, coordination-log, stage-capability-scope, token-cost-failsafe, risk-classification, supply-chain-gate, input-quarantine, operator-boundary, and Trust Verifier Compatibility Period behavior unless a focused acceptance criterion requires a narrow validation integration.",
+    "The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude, and the Stage 3 Writer cannot edit tests, test helpers, fixtures, RED evidence, or acceptance mappings for this work item.",
+    "Stage 4 review evidence uses pre-PR CodeRabbit and Local Qwen at the current review-subject hash unless honest provider refusal or bootstrap-gap evidence is recorded.",
+    "Layered risk-classification and supply-chain gate evidence are recorded before landing because this chore touches local prompt/template/policy surfaces that guide future agent execution.",
+    "Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.",
+    "`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is not fully resolved by this chore unless Stage 6 closeout explicitly proves no remaining source-material work is queued or records an explicit no-action/deferred disposition for the rest of the umbrella.",
+    "No generated execution packet, generated role input packet, live A2A channel, True Agent lifecycle, Pi/Aperture agent-scope schema or projection, queue system, scheduler, claim authority, worktree lifecycle, diff-based write validation, same-agent repair continuation, landing/closeout handoff automation, Trust Verifier cutover, old gate replacement or wrapping, live evidence capture helper, cockpit product work, dependency or lockfile change, external service setup, merge/push/deploy behavior, product UAT scope, installed global skill edit, paid recurring route, or broader product/policy change is introduced."
+  ],
+  "verification_plan": [
+    "Run focused RED/GREEN tests proving missing orchestrator prompt policy/template evidence fails validation.",
+    "Run focused validation tests proving prompts cannot claim canonical workflow authority, skip formation, skip plan-mode evidence when required, bypass RED-before-implementation sequencing, erode role boundaries, allow Stage 3 test edits, allow same-model RED and implementation during bootstrap, bypass reviewer/landing gates, mutate workflow state outside CLI commands, or claim Trust Verifier cutover authority.",
+    "Run focused validation tests proving a compliant local Work Item PM orchestrator prompt contract passes with required sections, repo-derived evidence boundaries, CLI authority, stage sequence, stop conditions, and forbidden actions.",
+    "Run `node --test test/orchestrator-prompts.test.mjs` if the orchestrator prompt contract validator or command is added.",
+    "Run `node --test test/role-entrypoints-formation.test.mjs` if Work Item PM start/readiness behavior changes.",
+    "Run `node --test test/role-contracts.test.mjs test/role-run-manifests.test.mjs` if the prompt contract references role contracts or role-run manifest validation behavior.",
+    "Run `node --test test/coordination-log.test.mjs test/coordination-status.test.mjs` if coordination transition state or status derivation changes.",
+    "Run `node --test test/stage-capability-scope.test.mjs` if stage capability scope validation or rendered evidence is touched.",
+    "Run `node --test test/token-cost-failsafe.test.mjs` if token-cost failsafe references or rendered evidence are touched.",
+    "Run `node --test test/validate.test.mjs` if repo validation behavior is touched.",
+    "Run `npm test` if implementation touches shared command routing, validators, artifact renderers, work-item parsing, templates, bootstrap gaps, coordination history, cockpit status, session-context packets, risk classification, supply-chain gates, input quarantine, operator boundaries, token-cost failsafes, evidence freshness, role contracts, role-run manifests, model-family separation, or policy validation beyond focused tests.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `npm run bandit -- stage-capability-scope validate --json`.",
+    "Run `npm run bandit -- token-cost-failsafe validate --json`.",
+    "Run `npm run bandit -- evidence-freshness-slos validate --json`.",
+    "Run `npm run bandit -- risk-classification validate --json`.",
+    "Run `npm run bandit -- supply-chain-gate validate --json`.",
+    "Run `npm run bandit -- input-quarantine validate --json`.",
+    "Run `npm run bandit -- operator-boundary validate --json`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `node ./bin/bandit.mjs review-subject-hash <ID>` for aggregate review evidence freshness.",
+    "Run `npm run bandit -- coderabbit-review pre-pr <ID> --base origin/main` before Stage 4 closeout unless provider-refusal evidence is recorded.",
+    "Run `npm run bandit -- qwen-review <ID>` before Stage 4 closeout.",
+    "Run `npm run bandit -- land-check <ID>` before landing.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    ".bandit/policy/orchestrator-prompts.json",
+    "docs/templates/work-item-pm-orchestrator-prompt.md",
+    "src/commands/orchestrator-prompts.ts",
+    "src/state/orchestrator-prompts.ts",
+    "test/orchestrator-prompts.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No operator-owned input is required before creating this bounded bootstrap-gap chore or running formation review. Repo artifacts identify the next action as triage of BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION, the harness-agnostic trust-layer decision explicitly permits orchestrator prompts as guidance rather than authority, and Codex PM/Repo PM owns the technical shape of local prompt contract, validator, stage capability, test strategy, artifact structure, and review routing. Halt if the work would approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace or wrap an old gate path, change product direction, alter UAT policy, approve business tradeoffs, approve explicit cost/risk posture, approve provider-pricing evidence, approve spend-class policy, promote paid reviewer routing, create recurring paid model or reviewer policy, set up an external service, change live routing policy, change claim or worktree lifecycle authority, change dependency or lockfile policy, change merge/push/deploy authority, install or edit global skills, implement Pi/Aperture agent-scope runtime work, or expand into broader cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "work_item_pm_plan_mode",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "work_item_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not write RED evidence before Stage 1 brief and Formation Gate evidence exist.",
+      "Do not run Work Item PM execution before formation review and `formation_approved` transition evidence exist.",
+      "Do not let Work Item PM plan mode or an orchestrator prompt replace canonical workflow state or stage evidence.",
+      "Do not let Stage 3 Writer edit tests, test helpers, fixtures, RED evidence, or acceptance mappings.",
+      "Do not let an orchestrator prompt approve Trust Verifier cutover, replace or wrap old gates, mutate queues, mutate coordination state except by CLI command, mutate routing state, land work, close work, or make product/policy/cost/risk decisions.",
+      "Do not implement generated execution packets, generated role input packets, live A2A channels, True Agent lifecycle, Pi/Aperture agent-scope work, claim authority, worktree lifecycle execution, scheduler execution, diff-based write validation, repair continuation automation, landing/closeout handoff automation, merge, push, deploy, dependency changes, external services, installed global skill edits, or unrelated cockpit/product features in this chore."
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "Stage 1 Repo PM brief creation and formation review should use local-only default budget guidance.",
+      "Stage 2 RED evidence and Stage 3 implementation should use existing abnormal-run soft budget guidance; do not set brittle caps that force duplicate attempts.",
+      "Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly."
+    ],
+    "provider_pricing_evidence": [
+      "No new paid provider-pricing evidence is approved by this work-item brief.",
+      "Any paid reviewer, paid model, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists."
+    ],
+    "spend_classes": [
+      "local-only-default",
+      "one-off-paid-evaluation-blocked-without-approval",
+      "recurring-paid-routing-blocked-without-policy-promotion"
+    ],
+    "continuation_decisions": [
+      "If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass.",
+      "If token or cost failsafe trips, halt the expensive action and record the continuation decision before retrying."
+    ],
+    "stage_capability_profiles": [
+      "repo-pm-stage1-formation",
+      "work-item-pm-plan-mode",
+      "test-writer-stage2",
+      "claude-implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4",
+      "landing-agent-stage5",
+      "closeout-agent-stage6"
+    ]
+  }
+}

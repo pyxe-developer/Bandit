@@ -4,20 +4,23 @@
 
 ## Current Work Item
 
-- None selected. `BANDIT-064` is landed and closed out.
+- `[Gap]` `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract under
+  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; Stage 3 implementation is
+  accepted and Stage 4 review is required.
 
-**Current next step:** Repo PM should triage the remaining
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material gap into a
-bounded work item or record an explicit no-action/deferred disposition before
-unrelated cockpit product work begins.
+**Current next step:** Run Stage 4 pre-landing review for `BANDIT-065`:
+CodeRabbit pre-PR review or provider-refusal evidence, Local Qwen adversarial
+review, layered risk-classification and supply-chain gate evidence, finding
+dispositions if any, and aggregate review evidence before Stage 5 landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
-or wrap old gates, or start unrelated product work without separate
+or wrap old gates, generate role input or execution packets, restart
+Pi/Aperture runtime work, or start unrelated product work without separate
 operator-owned authorization and evidence.
 
 ## Next Work Item
 
-- None selected.
+- None selected until `BANDIT-065` lands and closes out.
 
 ## Planned Work
 
@@ -26,9 +29,9 @@ operator-owned authorization and evidence.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued source
-  material for future bounded role-scoped orchestration or trust-layer work; no
-  work item is selected yet.
+- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - active through
+  `BANDIT-065`, bounded to a harness-portable orchestrator prompt contract and
+  validation path.
 
 ### Deferred PRD Slices
 

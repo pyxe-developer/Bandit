@@ -18,6 +18,7 @@ import { validateLandingAgentContract } from "../state/landing-agent-contract.js
 import { validateLocalQwenReviewArtifacts } from "../state/local-qwen-review.js";
 import { validateModelFamilySeparation } from "../state/model-family-separation.js";
 import { validateOperatorBoundary } from "../state/operator-boundary.js";
+import { validateOrchestratorPromptsPolicy } from "../state/orchestrator-prompts.js";
 import { getBanditPaths } from "../state/paths.js";
 import { validateReviewEvidenceArtifacts } from "../state/review-evidence.js";
 import { validateLocalQwenProfile } from "../state/reviewer-profiles.js";
@@ -47,6 +48,7 @@ export async function validateBandit(repoRoot: string) {
   await validateWorkItems(repoRoot);
   await validateTemplates(repoRoot);
   await validateOperatorBoundary(repoRoot);
+  await validateOrchestratorPromptsPolicy(repoRoot);
   await validateInputQuarantineGate(repoRoot);
   await validateRiskClassificationGate(repoRoot);
   await validateSupplyChainGate(repoRoot);

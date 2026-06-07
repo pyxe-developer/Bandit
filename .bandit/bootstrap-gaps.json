@@ -680,8 +680,8 @@
     {
       "id": "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
       "title": "Role-scoped workflow orchestration",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "BANDIT-057",
       "source_artifacts": [
         "AGENTS.md",
@@ -691,16 +691,18 @@
         "docs/decisions/2026-06-01-explicit-role-entrypoints-and-formation-gate.md",
         "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION.json",
         "docs/specs/BANDIT-GAP-ROLE-CONTRACTS-RUN-MANIFESTS.json",
+        "docs/decisions/2026-06-05-harness-agnostic-cli-trust-layer.md",
+        "docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT.json",
         "docs/decisions/2026-06-01-true-agent-harness-pivot.md",
         "docs/spikes/pi-aperture-agent-scope-and-harness-spike.md",
         "docs/work/BANDIT-057/retrospective.md",
         "docs/work/BANDIT-058/landing-action.md",
         "docs/work/BANDIT-058/retrospective.md"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-065",
       "rationale": "BANDIT-057 delivered the first bounded slice of the role-scoped orchestration umbrella: replaced gap semantics, explicit Repo PM and Work Item PM entrypoints, role-required invocation refusal, Formation Gate validation, formation review requirements, formation-approved coordination state, and Work Item PM readiness checks. BANDIT-058 delivered the second bounded slice: governed role contract policy evidence, role-run manifest evidence, CLI validation, fail-closed authority and path-containment checks, role contract and role-run templates, and focused tests. The later harness-agnostic CLI trust-layer decision superseded the Pi/Aperture harness-specific implementation queue, so remaining role-scoped orchestration work is source material unless a future bounded trust-layer or orchestrator-prompt slice explicitly scopes it.",
       "verification_target": "docs/work/BANDIT-058/retrospective.md",
-      "next_action": "Hold as source material while artifact-input cleanup and Trust Verifier cutover work are resolved; do not start Pi/Aperture agent-scope implementation."
+      "next_action": "Complete active chore BANDIT-065."
     },
     {
       "id": "BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION",

@@ -1,0 +1,66 @@
+{
+  "contract_version": 1,
+  "policy_id": "orchestrator-prompts",
+  "prompt_contracts": [
+    {
+      "id": "work-item-pm",
+      "prompt_path": "docs/templates/work-item-pm-orchestrator-prompt.md",
+      "role": "work_item_pm_orchestrator_guidance",
+      "trust_inputs": {
+        "allowed": [
+          "docs/work/<ID>/brief.md",
+          "docs/work/<ID>/coordination-log.jsonl",
+          "docs/work/<ID>/orchestration-plan.md",
+          "docs/roadmap/CURRENT_CONTEXT.md",
+          "docs/roadmap/ROADMAP.md",
+          "STATUS.md",
+          ".bandit/bootstrap-gaps.json"
+        ],
+        "non_authoritative": [
+          "chat_text",
+          "model_memory",
+          "live_harness_state",
+          "provider_dashboard",
+          "queue_state"
+        ]
+      },
+      "authority_boundary": {
+        "prompt_is_authoritative": false,
+        "canonical_sources_replaced": [],
+        "cli_state_mutation": "cli_only"
+      },
+      "required_sections": [
+        "Current Repo State",
+        "Stage Sequence",
+        "Required Evidence",
+        "Role Boundaries",
+        "Verification Commands",
+        "Known Blockers",
+        "Stop Conditions",
+        "Forbidden Actions"
+      ],
+      "required_gates": [
+        "formation_approved",
+        "orchestration_plan_recorded",
+        "stage2_red_recorded",
+        "stage3_implementation_evidence",
+        "stage4_review_evidence",
+        "stage5_landing_verdict",
+        "stage5_landing_action",
+        "stage6_retrospective"
+      ],
+      "role_boundaries": {
+        "repo_pm_owns_formation": true,
+        "work_item_pm_owns_orchestration": true,
+        "test_writer_owns_red": true,
+        "implementation_writer_owns_source_only": true,
+        "stage3_writer_can_edit_tests": false,
+        "codex_red_requires_claude_stage3": true,
+        "reviewer_owns_review_evidence": true,
+        "landing_agent_owns_landing_verdict": true,
+        "closeout_agent_owns_retrospective": true
+      },
+      "forbidden_authority_claims": []
+    }
+  ]
+}
