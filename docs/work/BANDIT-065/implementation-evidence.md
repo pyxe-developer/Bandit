@@ -43,6 +43,34 @@ verdict: pass
 | `npm run bandit -- orchestrator-prompts validate --json` | pass — `verdict: "pass"`, `cli_authority_preserved: true`. |
 | `git diff --check` | pass — no whitespace errors. |
 
+## Fail-Closed Validator Confirmation
+
+`bandit orchestrator-prompts validate --json` is the strict contract validator
+for this work item. It fails closed for canonical workflow authority claims,
+missing required gates, role-boundary erosion, Stage 3 test-edit authority,
+same-model RED/implementation during bootstrap, reviewer or landing bypasses,
+non-CLI state mutation, and Trust Verifier cutover claims. The repo-wide
+`bandit validate` integration reports those orchestrator-prompt diagnostics as
+part of aggregate validation; it does not weaken the contract validator or make
+any failing prompt safe.
+
+## Clean-Code Evaluation
+
+- Spec alignment: pass - implementation is limited to the approved
+  harness-portable orchestrator prompt contract, validator, CLI route, init
+  seeding, and evidence.
+- Small surface area: pass - changes are bounded to the new policy/template,
+  validator, command wiring, path registry, init/validate integration, and the
+  focused RED/GREEN test.
+- Explicit state: pass - prompt authority, required gates, role boundaries,
+  forbidden actions, and trust inputs are represented as structured policy
+  fields rather than inferred prose.
+- Failure clarity: pass - invalid contracts emit field-specific diagnostics for
+  missing sections, authority claims, gate bypasses, role erosion, forbidden
+  actions, and Trust Verifier cutover claims.
+- No role erosion: pass - Stage 3 Writer did not edit Test Writer-owned
+  surfaces.
+
 ## Test-Surface Affirmation
 
 Zero test-surface edits. `test/orchestrator-prompts.test.mjs`, test helpers,
