@@ -75,6 +75,15 @@ manifest repairs are recorded at
 `docs/work/BANDIT-062/stage3-manifest-repair-dispatch.md` and
 `docs/work/BANDIT-062/stage3-base-revision-repair-dispatch.md`; Codex PM
 acceptance is recorded at `docs/work/BANDIT-062/stage3-pm-review.md`.
+CodeRabbit Stage 4 review timed out without a terminal provider verdict and is
+recorded at `docs/work/BANDIT-062/coderabbit-review.md` with partial JSONL at
+`docs/artifact-inputs/BANDIT-062-coderabbit-review-output.jsonl`. Local Qwen
+passed at `docs/work/BANDIT-062/local-qwen-review.md`. Layered
+risk-classification and supply-chain gate evidence are recorded at
+`.bandit/policy/risk-classifications/BANDIT-062-risk-classification.json` and
+`.bandit/policy/supply-chain-gates/BANDIT-062-supply-chain-gate.json`; those
+policy files changed the review subject, so a Local Qwen refresh is required
+before aggregate Stage 4 review evidence.
 
 `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is queued behind the
 replacement-metadata serializer gap. It records the operator-directed
@@ -90,17 +99,16 @@ resolved.
 
 **Active work item:** `BANDIT-062`.
 
-The current stage is Stage 4: Pre-landing review required.
+The current stage is Stage 4: Local Qwen refresh required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run Stage 4 pre-landing review for `BANDIT-062`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next action:** Rerun Local Qwen adversarial review for `BANDIT-062`
+after risk and supply-chain policy evidence changed the review subject, then
+record aggregate Stage 4 review evidence.
 
 Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
 schema/projection work, create role input or execution packet work, create Work
@@ -115,8 +123,10 @@ until `BANDIT-062` is landed and closed out.
 `docs/work/BANDIT-062/brief.md`, formation review artifacts are recorded, the
 coordination log records `brief_created` and `formation_approved`, Stage 2 RED
 evidence is recorded, Stage 3 Claude implementation evidence is recorded, and
-Codex PM Stage 3 acceptance is recorded. Stage 4 pre-landing review is the next
-required gate.
+Codex PM Stage 3 acceptance is recorded. CodeRabbit timeout evidence, initial
+Local Qwen pass evidence, and layered risk/supply-chain policy evidence are
+recorded. A Local Qwen refresh is the next required gate because policy evidence
+changed the review subject.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is active through
 `BANDIT-062`. It must be handled and closed out before Trust Verifier cutover
@@ -148,10 +158,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run Stage 4 pre-landing review for `BANDIT-062`: CodeRabbit pre-PR review,
-   Local Qwen adversarial review, aggregate review evidence, layered
-   risk-classification and supply-chain gate evidence, and explicit disposition
-   for any findings before Stage 5 landing.
+1. Rerun Local Qwen adversarial review for `BANDIT-062` after risk and
+   supply-chain policy evidence changed the review subject, then record
+   aggregate Stage 4 review evidence.
 2. Keep `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` queued behind the
    serializer gap so Work Item PM plan-mode orchestration can be enforced before
    Trust Verifier cutover or unrelated cockpit work.
@@ -171,11 +180,10 @@ resulting work can proceed or land.
 ## Required Operator Input
 
 No operator-owned input is required for the current Stage 4 action. Repo
-artifacts identify the active bootstrap-gap chore, accepted Stage 3
-implementation, and the required review loop: CodeRabbit pre-PR review, Local
-Qwen adversarial review, aggregate review evidence, layered risk-classification
-and supply-chain gate evidence, and explicit disposition for any findings before
-Stage 5 landing.
+artifacts identify accepted Stage 3 implementation, CodeRabbit timeout evidence,
+an initial Local Qwen pass, and the policy evidence that changed the review
+subject. The required next action is a Local Qwen refresh before aggregate Stage
+4 review evidence.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

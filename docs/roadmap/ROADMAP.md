@@ -7,10 +7,9 @@
 - `[Gap]` `BANDIT-062` - active replacement-metadata serializer repair for
   `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA`.
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-062`:
-CodeRabbit pre-PR review, Local Qwen adversarial review, aggregate review
-evidence, layered risk-classification and supply-chain gate evidence, and
-explicit disposition for any findings before Stage 5 landing.
+**Current next step:** Rerun Local Qwen adversarial review for `BANDIT-062`
+after risk and supply-chain policy evidence changed the review subject, then
+record aggregate Stage 4 review evidence.
 
 ## Next Work Item
 
@@ -24,8 +23,8 @@ explicit disposition for any findings before Stage 5 landing.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `BANDIT-062` - active serializer repair; Stage 4 pre-landing review
-  is next.
+- `[Gap]` `BANDIT-062` - active serializer repair; Local Qwen refresh and
+  aggregate Stage 4 review are next.
 - `[Gap]` `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` - queued Work Item
   PM plan-mode gate before full orchestration.
 - `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode

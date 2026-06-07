@@ -14,14 +14,14 @@ Layer Pivot.
 formation review are recorded, `repo-pm approve-formation BANDIT-062` recorded
 the `formation_approved` transition, Stage 2 RED evidence is recorded, Stage 3
 Claude implementation evidence is recorded, and Codex PM Stage 3 acceptance is
-recorded.
+recorded. CodeRabbit timeout evidence, Local Qwen pass evidence, and layered
+risk/supply-chain policy evidence are recorded.
 
-Current stage: Stage 4 - Pre-landing review required.
+Current stage: Stage 4 - Local Qwen refresh required.
 
-Next action: Run Stage 4 pre-landing review for `BANDIT-062`: CodeRabbit pre-PR
-review, Local Qwen adversarial review, aggregate review evidence, layered
-risk-classification and supply-chain gate evidence, and explicit disposition for
-any findings before Stage 5 landing.
+Next action: Rerun Local Qwen adversarial review for `BANDIT-062` after risk and
+supply-chain policy evidence changed the review subject, then record aggregate
+Stage 4 review evidence.
 
 No operator-owned input is required for that next action. Do not begin Trust
 Verifier cutover work, Work Item PM plan-mode orchestration work, or unrelated
