@@ -260,3 +260,4 @@
 {"type":"stage4_review_recorded","work_item":"BANDIT-062","message":"Recorded aggregate Stage 4 review evidence with current review-subject hash 330f449; next action is Stage 5 landing verdict evidence before landing action"}
 {"type":"artifact_created","work_item":"BANDIT-062","message":"Created landing_verdict artifact at docs/work/BANDIT-062/landing-verdict.md"}
 {"type":"stage5_landing_verdict_recorded","work_item":"BANDIT-062","message":"Recorded safe-to-land verdict for BANDIT-062; next action is local-record landing action before Stage 6 closeout"}
+{"type":"stage5_landing_action_recorded","work_item":"BANDIT-062","message":"Recorded local-record landing action for BANDIT-062 at docs/work/BANDIT-062/landing-action.md; next action is Stage 6 closeout"}

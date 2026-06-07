@@ -89,7 +89,8 @@ and Codex PM dispositioned them as no-source-repair at
 `docs/work/BANDIT-062/qwen-finding-disposition.md`. Aggregate Stage 4 review
 evidence is recorded at `docs/work/BANDIT-062/review-evidence.md`.
 Stage 5 safe-to-land verdict evidence is recorded at
-`docs/work/BANDIT-062/landing-verdict.md`.
+`docs/work/BANDIT-062/landing-verdict.md`. Local-record landing action evidence
+is recorded at `docs/work/BANDIT-062/landing-action.md`.
 
 `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` is queued behind the
 replacement-metadata serializer gap. It records the operator-directed
@@ -105,15 +106,16 @@ resolved.
 
 **Active work item:** `BANDIT-062`.
 
-The current stage is Stage 5: Landing action required.
+The current stage is Stage 6: Closeout required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Run the local-record landing action for `BANDIT-062`
-and record landing action evidence.
+**Current next action:** Record Stage 6 retrospective, improvement disposition,
+and bootstrap-gap disposition for `BANDIT-062` before starting any next work
+item.
 
 Do not create Trust Verifier cutover work, create Pi/Aperture agent-scope
 schema/projection work, create role input or execution packet work, create Work
@@ -132,7 +134,8 @@ Codex PM Stage 3 acceptance is recorded. CodeRabbit timeout evidence, initial
 Local Qwen pass evidence, and layered risk/supply-chain policy evidence are
 recorded. A refreshed Local Qwen review and finding disposition are recorded.
 Aggregate Stage 4 review evidence is recorded. Stage 5 landing verdict evidence
-is recorded. Local-record landing action evidence is the next required gate.
+is recorded. Local-record landing action evidence is recorded. Stage 6 closeout
+is the next required gate.
 
 `BANDIT-GAP-WORK-ITEM-CREATE-PRESERVE-REPLACED-GAP-METADATA` is active through
 `BANDIT-062`. It must be handled and closed out before Trust Verifier cutover
@@ -164,8 +167,8 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Run the local-record landing action for `BANDIT-062` and record landing
-   action evidence.
+1. Record Stage 6 retrospective, improvement disposition, and bootstrap-gap
+   disposition for `BANDIT-062` before starting any next work item.
 2. Keep `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` queued behind the
    serializer gap so Work Item PM plan-mode orchestration can be enforced before
    Trust Verifier cutover or unrelated cockpit work.
@@ -188,7 +191,7 @@ No operator-owned input is required for the current Stage 5 action. Repo
 artifacts identify accepted Stage 3 implementation, CodeRabbit timeout evidence,
 refreshed Local Qwen non-blocking finding disposition, current layered
 risk/supply-chain policy evidence, and aggregate Stage 4 review evidence. The
-required next action is local-record landing action evidence.
+required next action is Stage 6 closeout evidence.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path
