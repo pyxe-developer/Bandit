@@ -280,3 +280,5 @@
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-064","message":"Recorded Stage 6 retrospective and resolved BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE; next action is future bounded role-scoped workflow orchestration work before unrelated cockpit product work"}
 {"type":"work_item_created","work_item":"BANDIT-065","message":"Created work item BANDIT-065 from docs/specs/BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION-ORCHESTRATOR-PROMPT.json"}
 {"type":"stage6_closeout_recorded","work_item":"BANDIT-065","message":"Recorded Stage 6 retrospective, resolved the orchestrator-prompt subgap, and left BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION as a queued candidate for Repo PM disposition"}
+{"type":"work_item_created","work_item":"BANDIT-066","message":"Created work item BANDIT-066 from docs/specs/BANDIT-066-browser-served-cockpit-app-shell.json"}
+{"type":"artifact_created","work_item":"BANDIT-066","message":"Created red_evidence artifact at docs/work/BANDIT-066/red-evidence.md"}

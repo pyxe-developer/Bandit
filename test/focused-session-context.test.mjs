@@ -17,6 +17,8 @@ const interstitialNextAction =
   "Create the queued bootstrap-gap work item for " +
   "BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY before Worktree " +
   "Bootstrap Contract work or unrelated Phase 8 work.";
+const productSliceNextAction =
+  "Record CLI-owned product UAT for BANDIT-066 before Stage 5 landing verdict.";
 const historyMarker = "OLD-CLOSEOUT-DETAIL-SHOULD-STAY-BEHIND-POINTER";
 
 test("session-context current --json emits a focused non-canonical packet with source links", async () => {
@@ -170,6 +172,27 @@ test("session-context recovers closed-work/no-active-gap interstitial state", as
   assert.match(packet.forbidden_actions.join("\n"), /unrelated Phase 8 work/i);
 });
 
+test("session-context supports active product slices without active bootstrap gaps", async () => {
+  const repo = await createProductSliceSessionRepo();
+
+  const result = await runBandit(repo, ["session-context", "current", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const packet = JSON.parse(result.stdout);
+  assert.equal(packet.kind, "focused_session_context_packet");
+  assert.equal(packet.authority, "derived_non_canonical");
+  assert.equal(packet.active_work_item.id, "BANDIT-066");
+  assert.equal(packet.active_bootstrap_gap, null);
+  assert.equal(packet.current_stage.value, "Stage 5: Landing And UAT");
+  assert.equal(packet.exact_next_action.value, productSliceNextAction);
+  assert.equal(packet.required_operator_input.value, "required");
+  assert.deepEqual(packet.blockers, []);
+
+  const evidencePaths = packet.required_evidence_paths.map((entry) => entry.path);
+  assert.ok(evidencePaths.includes("docs/work/BANDIT-066/landing-verdict.md"));
+  assert.ok(evidencePaths.includes("docs/work/BANDIT-066/retrospective.md"));
+});
+
 test("session-context fails closed for missing or contradictory current-state authority", async (t) => {
   await t.test("missing AGENTS authority source", async () => {
     const repo = await createFocusedSessionRepo({ omitAgents: true });
@@ -257,6 +280,15 @@ async function createInterstitialSessionRepo(options = {}) {
     "docs/work/BANDIT-048/retrospective.md",
     "# BANDIT-048 Retrospective\n\nClosed out focused session context.\n"
   );
+
+  return repo;
+}
+
+async function createProductSliceSessionRepo(options = {}) {
+  const repo = await createTempRepo();
+  await runBandit(repo, ["init"]);
+  await writeProductSliceSessionSources(repo, options);
+  await writeWorkBrief(repo, "BANDIT-066", "Browser-Served Cockpit App Shell", "Review Recorded");
 
   return repo;
 }
@@ -466,6 +498,86 @@ actions, blocker state, required evidence paths, and source hierarchy.
   );
 }
 
+async function writeProductSliceSessionSources(repo, options) {
+  await writeArtifact(
+    repo,
+    "AGENTS.md",
+    `# AGENTS.md
+
+Codex is the PM and engineering manager.
+Feature slices require CLI-owned UAT before landing.
+`
+  );
+  await writeArtifact(
+    repo,
+    "CONTEXT.md",
+    `# Context
+
+Focused Session Context Packet:
+A CLI-derived task-scoped working packet with active work, exact next action,
+and optional bootstrap-gap context.
+`
+  );
+  await writeArtifact(repo, "CLEAN_CODE.md", "# Clean Code\n\nRead before every slice.\n");
+  await writeArtifact(
+    repo,
+    "docs/plans/BOOTSTRAP_METHODOLOGY.md",
+    "# Bootstrap Methodology\n\nEvery slice must land before the next begins.\n"
+  );
+  await writeArtifact(
+    repo,
+    "docs/verification/STAGE_RUBRICS.md",
+    "# Stage Rubrics\n\n## Stage 5: Landing And UAT\n\nFeature slices require UAT before landing.\n"
+  );
+  await writeArtifact(
+    repo,
+    "docs/evaluation/skills/bandit-cold-start.md",
+    "# Bandit Skill Cold-Start Evaluation Packet\n\nUse the Focused Session Context Packet and source-pointer deep reads.\n"
+  );
+  await writeArtifact(
+    repo,
+    ".bandit/policy/smell-triggers.json",
+    `${JSON.stringify({ version: 1, triggers: [] }, null, 2)}\n`
+  );
+  await writeArtifact(
+    repo,
+    ".bandit/bootstrap-gaps.json",
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION",
+            title: "Role-scoped workflow orchestration",
+            status: "resolved",
+            disposition: "no_action",
+            source_work_item: "BANDIT-057",
+            linked_work_item: null,
+            source_artifacts: ["CONTEXT.md"],
+            rationale: "Remaining source material is no-action for this product slice.",
+            verification_target: "docs/work/BANDIT-065/chore-disposition.md",
+            next_action: "Proceed to the Phase 8 Browser-Served Cockpit App Shell slice."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`
+  );
+
+  const roadmapNextAction = options.roadmapNextAction ?? productSliceNextAction;
+  await writeArtifact(
+    repo,
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    productSliceCurrentContextFixture()
+  );
+  await writeArtifact(
+    repo,
+    "docs/roadmap/ROADMAP.md",
+    productSliceRoadmapFixture(roadmapNextAction)
+  );
+}
+
 function currentContextFixture() {
   return `# Current Context
 
@@ -558,6 +670,45 @@ function interstitialRoadmapFixture(nextAction) {
 \`BANDIT-048\` - Focused Session Context Packets is landed and closed out.
 \`BANDIT-GAP-SESSION-CONTEXT-INTERSTITIAL-RECOVERY\` is the next queued
 bootstrap gap and has no active work item yet.
+`;
+}
+
+function productSliceCurrentContextFixture() {
+  return `# Current Context
+
+## Status
+
+**Phase:** 8 - Workflow Cockpit kickoff.
+
+**Current next action:** ${productSliceNextAction}
+
+\`BANDIT-066\` - Browser-Served Cockpit App Shell is active as a product slice.
+Review evidence is recorded and UAT is the next required gate.
+
+## Active Work
+
+**Active work item:** \`BANDIT-066\` - Browser-Served Cockpit App Shell.
+
+The current stage is Stage 5: Landing And UAT. Do not start closeout, the next
+product slice, or unrelated Phase 8 work before UAT, landing verdict, and
+landing action evidence are recorded.
+
+## Required Operator Input
+
+CLI-owned product UAT is required before landing the operator-facing browser shell.
+`;
+}
+
+function productSliceRoadmapFixture(nextAction) {
+  return `# Bandit Roadmap
+
+## Current Position
+
+**Current phase:** Phase 8 - Workflow Cockpit kickoff.
+
+**Current next step:** ${nextAction}
+
+\`BANDIT-066\` - Browser-Served Cockpit App Shell is active as a product slice.
 `;
 }
 

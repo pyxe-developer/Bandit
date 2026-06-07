@@ -4,33 +4,30 @@
 
 ## Current Work Item
 
-- None selected. `BANDIT-065` is landed and closed out.
+- `[Slice]` `BANDIT-066` - Browser-Served Cockpit App Shell
 
-**Current next step:** Repo PM should decide whether the remaining
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source material should become a
-bounded trust-layer-compatible work item, or record explicit no-action before
-unrelated cockpit product work begins.
+**Current next step:** Record CLI-owned product UAT for `BANDIT-066` before
+Stage 5 landing verdict.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart
-Pi/Aperture runtime work, merge, push, deploy, or start unformed work without
+Pi/Aperture runtime work, choose local API or State Index timing, execute
+guarded browser actions, merge, push, deploy, or start unformed work without
 separate authorization and evidence.
 
 ## Next Work Item
 
-- None selected.
+- `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - queued candidate
-  for remaining runtime/harness source material after `BANDIT-065`; no work
-  item is selected.
+- None currently queued. `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is
+  resolved with disposition `no_action` after Repo PM review.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Browser-Served Cockpit App Shell
 - `[Slice]` `TBD` - Live Cockpit Status View From CLI Payload
 - `[Slice]` `TBD` - Evidence Drilldown And Gate Matrix
 - `[Slice]` `TBD` - Guarded CLI Action Requests
@@ -103,3 +100,4 @@ separate authorization and evidence.
 - `BANDIT-063` - Work Item PM Plan Mode Orchestration Gate
 - `BANDIT-064` - Trust Verifier Cutover Gate Triage
 - `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract
+- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition for remaining runtime/harness source material

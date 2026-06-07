@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bandit Workflow Cockpit</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="cockpit.css">
+</head>
+<body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
+  <div class="static-preview-notice" role="note">Static preview — workflow authority lives in repo-native artifacts via the Bandit CLI, not in browser state.</div>
+  <div class="cockpit-layout">
+    <nav class="attention-nav" aria-label="Attention categories">
+      <h2>Attention</h2>
+      <ul>
+        <li><a class="attention-link" href="#active-work">operator_input_required</a></li>
+        <li><a class="attention-link" href="#active-work">blocked_or_stale</a></li>
+        <li><a class="attention-link" href="#active-work">landing_readiness</a></li>
+        <li><a class="attention-link" href="#active-work">improvement_health</a></li>
+        <li><a class="attention-link" href="#active-work">queue_context</a></li>
+      </ul>
+    </nav>
+    <main id="active-work">
+      <h1>Operator input required</h1>
+      <p class="work-item">BANDIT-066: Browser-Served Cockpit App Shell</p>
+      <p class="next-action">Write Stage 2 RED evidence for BANDIT-066.</p>
+      <p class="evidence-source">
+        <a class="source-link" href="docs/work/BANDIT-066/brief.md">docs/work/BANDIT-066/brief.md</a>
+      </p>
+      <section class="actions-section">
+        <h2>Actions</h2>
+        <button class="action-button" id="validate" role="button" data-command-family="bandit validate" aria-disabled="false">Validate</button>
+        <button class="action-button" id="qwen_review" role="button" data-command-family="bandit qwen-review" disabled aria-disabled="true" aria-describedby="qwen_review_reason">Qwen Review</button>
+        <span id="qwen_review_reason" class="disabled-reason">Stage 2 RED evidence is missing.</span>
+      </section>
+    </main>
+    <aside id="evidence_drilldown" aria-label="Evidence">
+      <h2>Evidence</h2>
+      <ul>
+        <li><a class="source-link" href="docs/work/BANDIT-066/brief.md">docs/work/BANDIT-066/brief.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-066/red-evidence.md">docs/work/BANDIT-066/red-evidence.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-066/formation-review.md">docs/work/BANDIT-066/formation-review.md</a></li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html>

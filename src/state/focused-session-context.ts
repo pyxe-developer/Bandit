@@ -244,7 +244,9 @@ export async function readFocusedSessionContext(
       id: activeWorkItemId,
       source: `docs/work/${activeWorkItemId}/brief.md`
     },
-    active_bootstrap_gap: { id: activeBootstrapGap.id, source: BOOTSTRAP_GAPS_PATH },
+    active_bootstrap_gap: activeBootstrapGap
+      ? { id: activeBootstrapGap.id, source: BOOTSTRAP_GAPS_PATH }
+      : null,
     current_stage: { value: currentStage, source: CURRENT_CONTEXT_PATH },
     exact_next_action: { value: nextAction, source: CURRENT_CONTEXT_PATH },
     required_operator_input: { value: requiredOperatorInput, source: CURRENT_CONTEXT_PATH },
@@ -552,16 +554,10 @@ function parseBootstrapGapsRaw(content: string): RawGap[] {
   });
 }
 
-function findActiveGap(gaps: RawGap[], activeWorkItemId: string): RawGap {
-  const linked = gaps.find(
+function findActiveGap(gaps: RawGap[], activeWorkItemId: string): RawGap | null {
+  return gaps.find(
     (gap) => gap.linked_work_item === activeWorkItemId && gap.status !== "resolved"
-  );
-  if (!linked) {
-    throw new Error(
-      `Session context blocked: no active bootstrap gap linked to ${activeWorkItemId}`
-    );
-  }
-  return linked;
+  ) ?? null;
 }
 
 function buildBlockers(gaps: RawGap[]) {
