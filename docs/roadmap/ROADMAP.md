@@ -5,13 +5,13 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract under
-  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; Stage 3 implementation is
-  accepted and Stage 4 review is required.
+  `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION`; local-record landing action
+  is recorded and Stage 6 closeout is required.
 
-**Current next step:** Run Stage 4 pre-landing review for `BANDIT-065`:
-CodeRabbit pre-PR review or provider-refusal evidence, Local Qwen adversarial
-review, layered risk-classification and supply-chain gate evidence, finding
-dispositions if any, and aggregate review evidence before Stage 5 landing.
+**Current next step:** Record `BANDIT-065` retrospective, structured
+improvement mining, and durable disposition for the remaining
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material queue before any
+next work item starts.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

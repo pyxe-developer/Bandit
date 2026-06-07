@@ -22,7 +22,13 @@ output, source changes, writer report, or implementation evidence before it was
 terminated. A later Claude retry completed Stage 3 implementation and recorded
 `docs/work/BANDIT-065/writer-report.md` and
 `docs/work/BANDIT-065/implementation-evidence.md`; Codex PM accepted Stage 3 in
-`docs/work/BANDIT-065/stage3-pm-review.md`.
+`docs/work/BANDIT-065/stage3-pm-review.md`. Stage 4 review evidence is recorded
+at `docs/work/BANDIT-065/review-evidence.md`; CodeRabbit provider timeout is
+recorded as bootstrap-gap replacement evidence, Local Qwen non-blocking findings
+were repaired and PM-dispositioned, and layered risk/supply-chain gates passed.
+Stage 5 landing verdict is recorded at
+`docs/work/BANDIT-065/landing-verdict.md`, and local-record landing action
+evidence is recorded at `docs/work/BANDIT-065/landing-action.md`.
 
 This work item scopes only a non-authoritative, harness-portable Work Item PM
 orchestrator prompt contract and validation path. It does not approve Trust
@@ -32,37 +38,38 @@ work, or start unrelated cockpit product work.
 
 **Active work item:** `BANDIT-065`.
 
-The current stage is Stage 4: pre-landing review required.
+The current stage is Stage 6: closeout required.
 
-**Current next action:** Run Stage 4 pre-landing review for `BANDIT-065`:
-CodeRabbit pre-PR review or provider-refusal evidence, Local Qwen adversarial
-review, layered risk-classification and supply-chain gate evidence, finding
-dispositions if any, and aggregate review evidence before Stage 5 landing.
+**Current next action:** Record `BANDIT-065` retrospective, structured
+improvement mining, and durable disposition for the remaining
+`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` source-material queue before any
+next work item starts.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Stage 4 review step.
-Halt for operator input if a future step would approve Trust Verifier cutover
-policy, select a Trust Goal for cutover, replace or wrap an older gate path,
+No operator-owned input is required for the current Stage 6 closeout step unless
+closeout would change product direction, approve Trust Verifier cutover policy,
+select a Trust Goal for cutover, replace or wrap an older gate path,
 merge/push/deploy, change product or UAT direction, approve business tradeoffs,
-approve explicit cost/risk posture, or make another policy/product decision
-repo artifacts cannot answer.
+approve explicit cost/risk posture, or make another policy/product decision repo
+artifacts cannot answer.
 
 ## Active Work
 
 `BANDIT-065` is active, formation-approved, plan-mode recorded, RED recorded,
-and Stage 3 implementation accepted. Its brief, formation review artifacts,
-orchestration plan, RED evidence, dispatch packet, dispatch-attempt evidence,
-writer report, implementation evidence, Stage 3 PM review, and coordination log
-are recorded under `docs/work/BANDIT-065/`.
+Stage 3 implementation accepted, Stage 4 review recorded, and Stage 5 landing
+action recorded. Its brief, formation review artifacts, orchestration plan, RED
+evidence, dispatch packet, dispatch-attempt evidence, writer report,
+implementation evidence, Stage 3 PM review, review evidence, landing verdict,
+landing action, and coordination log are recorded under `docs/work/BANDIT-065/`.
 The active gap ledger entry links
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` to `BANDIT-065` as an
 `active_chore`.
 
-Do not start landing, closeout, Trust Verifier cutover, role input or execution
+Do not start the next work item, Trust Verifier cutover, role input or execution
 packet implementation, Pi/Aperture runtime work, or unrelated cockpit product
-work before current Stage 4 review evidence and finding dispositions exist for
-`BANDIT-065`.
+work before `BANDIT-065` Stage 6 retrospective, improvement mining, gap
+disposition, roadmap context closeout, and STATUS.md refresh are recorded.
 
 `BANDIT-064` is landed and closed out. Its Stage 1 through Stage 6 evidence is
 recorded under `docs/work/BANDIT-064/`, and local-record landing action
