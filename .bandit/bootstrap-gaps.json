@@ -934,8 +934,8 @@
     {
       "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",
       "title": "Private Installable Distribution And Update Notification Channel",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -947,12 +947,19 @@
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/roadmap/ROADMAP.md",
         "docs/work/BANDIT-068/brief.md",
-        "docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json"
+        "docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json",
+        "docs/work/BANDIT-071/brief.md",
+        "docs/work/BANDIT-071/red-evidence.md",
+        "docs/work/BANDIT-071/implementation-evidence.md",
+        "docs/work/BANDIT-071/review-evidence.md",
+        "docs/work/BANDIT-071/landing-verdict.md",
+        "docs/work/BANDIT-071/landing-action.md",
+        "docs/work/BANDIT-071/retrospective.md"
       ],
       "linked_work_item": "BANDIT-071",
-      "rationale": "Operator direction on 2026-06-07 clarified that Bandit should not be public yet, but should be installable in multiple private repos and should alert from the CLI when private updates are available. Current package evidence shows a bin entry exists, but public publishing is blocked by private package metadata, packed install fails because the CLI depends on devDependency-only tsx, package contents are not scoped for distribution, and no private update-channel metadata or non-blocking update-check command exists.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-071."
+      "rationale": "BANDIT-071 delivered the Private Installable Distribution And Update Notification Channel as a repo-native private install/update policy, package scoping and runtime loader fix, init defaults, templates, update-check command, update-channel cache behavior, and focused verification. Bandit is now privately installable from packed or private sources and can emit data-minimal manual update notifications without public npm publishing, paid registry setup, hosted update services, telemetry, or automatic self-update behavior.",
+      "verification_target": "docs/work/BANDIT-071/retrospective.md",
+      "next_action": "Use the private packed/private install path and manual update-check channel for private Bandit consumers; keep public publishing, paid registry setup, hosted update services, telemetry, and automatic self-update out of scope until explicitly authorized."
     },
     {
       "id": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
@@ -973,7 +980,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Replay Regression Corpus records the need to turn historical Bandit workflow failures into deterministic replay packets so current validation and trust-verifier-compatible paths can prove they still catch old failure modes.",
       "verification_target": null,
-      "next_action": "After the queued oracle-provenance and private install/update gaps are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",

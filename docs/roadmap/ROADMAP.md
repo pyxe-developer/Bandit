@@ -5,18 +5,17 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-071` - Private Installable Distribution And Update
-  Notification Channel (Stage 5 landing action required)
+  Notification Channel (Stage 6 closeout complete; closed anchor)
 
-**Current next step:** Run `land-check` for `BANDIT-071`, then perform
-local-record landing if the gate passes.
+**Current next step:** Create a bounded chore from `docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before unrelated Phase 8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
-or wrap old gates, generate role input or execution packets, restart
-Pi/Aperture runtime work, choose local API or State Index timing, execute
-guarded browser actions, approve public npm publishing, approve paid private
-registry or external service setup, enable automatic self-update, merge, push,
-deploy, or start unrelated Phase 8 product work without separate authorization
-and evidence.
+or wrap old gates, generate role input or execution packets for unrelated work,
+restart Pi/Aperture runtime work, choose local API or State Index timing,
+execute guarded browser actions, approve public npm publishing, approve paid
+private registry or external service setup, enable automatic self-update,
+merge, push, deploy, or start unrelated Phase 8 product work without separate
+authorization and evidence.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -25,17 +24,14 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
-  Bandit workflow failures (queued after `BANDIT-071` is landed/closed or
-  explicitly dispositioned)
+  Bandit workflow failures.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` - Private installable
-  distribution and CLI update notification channel, active as `BANDIT-071`.
 - `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
-  Bandit workflow failures, queued behind the private install/update channel.
+  Bandit workflow failures.
 - `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate output,
   stable hashes, and explicit flake/provider-dependence dispositions, queued
   behind the replay corpus.
@@ -59,6 +55,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-071` - Private Installable Distribution And Update Notification Channel
 - `BANDIT-070` - Verification Oracle Provenance Gate
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix

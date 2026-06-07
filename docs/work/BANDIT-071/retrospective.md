@@ -1,0 +1,59 @@
+# BANDIT-071 Retrospective
+
+## Outcome
+
+`BANDIT-071` landed and closed out the Private Installable Distribution And Update Notification Channel bootstrap chore. The work makes Bandit privately installable from packed or private sources by scoping package contents, promoting the existing `tsx` loader to runtime dependency scope, resolving the installed bin through `createRequire`, and adding repo-local update-channel policy, init defaults, templates, update-check command behavior, cache handling, and focused tests. The implementation deliberately avoids public npm publishing, paid private registry setup, hosted update services, telemetry, automatic self-update, merge, push, deploy, and product UAT authority.
+
+## What Worked
+
+- Formation, plan-mode orchestration, Codex-authored RED evidence, Claude Stage 3 implementation, PM acceptance, Stage 4 review, landing, and closeout stayed grounded in repo-native artifacts.
+- Bootstrap Model-Family Separation held: Codex authored RED tests and Claude implemented Stage 3 source and chore surfaces only.
+- The Stage 3 Writer did not edit Test Writer-owned tests, fixtures, RED evidence, acceptance mappings, review evidence, landing evidence, or retrospective evidence.
+- Focused RED coverage caught the packed-install failure mode, package content scoping requirements, update-check command states, cache freshness behavior, and non-blocking update notification constraints.
+- The update channel stayed data-minimal and repo-local, with no workflow authority, telemetry, hosted update service, or automatic self-update behavior introduced.
+- The landing gate caught stale review-subject evidence after risk and supply-chain artifacts changed the review subject, and the refreshed Local Qwen pass gave current reviewer evidence before landing.
+
+## Lessons And Dispositions
+
+| Lesson | Disposition | Rationale |
+| --- | --- | --- |
+| Private installability needs package metadata, runtime dependency scope, installed-bin resolution, and packed-install smoke coverage, not only a package `bin` entry. | resolved | `package.json`, `package-lock.json`, `bin/bandit.mjs`, and focused private install tests now cover the installable package path. |
+| A useful update notification channel can remain repo-local and data-minimal while avoiding hosted services, telemetry, and automatic self-update behavior. | resolved | `update-check`, update-channel state, init defaults, policy, and templates provide explicit manual update guidance without external side effects. |
+| Review-subject hash refresh remains necessary after adding risk and supply-chain evidence because those policy artifacts are part of the Stage 4 review subject. | explicit no-action decision | The stale hash was caught by `land-check`; review evidence, landing verdict, and Local Qwen evidence were refreshed before local-record landing. |
+| CodeRabbit provider availability remains intermittent for local pre-PR review. | explicit no-action decision | The timeout is recorded as bootstrap replacement evidence with no CodeRabbit pass claim; refreshed Local Qwen, deterministic tests, npm audit, risk classification, supply-chain gate, PM review, and landing checks covered this bounded chore. |
+| Local Qwen can flag evidence-placement gaps before later-stage PM evidence is fully recorded. | explicit no-action decision | The first non-blocking findings were dispositioned as Stage 4 evidence-placement concerns, missing evidence was completed, and the refreshed Local Qwen review returned pass with no unresolved findings. |
+
+## Structured Improvement Mining
+
+| Signal | Finding | Disposition |
+| --- | --- | --- |
+| failed tool calls | CodeRabbit timed out after the bounded provider run, and the first post-verdict `land-check` failed on stale review-subject hash plus non-blocking finding routing. | explicit no-action decision - CodeRabbit timeout has bootstrap replacement evidence and the stale landing gate was resolved by refreshing Local Qwen, review evidence, and landing evidence |
+| overreasoning | The work did not expand into public npm publishing, paid private registry setup, hosted update services, telemetry, automatic self-update, merge, push, deploy, Trust Verifier cutover, or unrelated cockpit work. | explicit no-action decision - forbidden and queued scopes stayed out of this chore |
+| work-breakdown fit | The private install and update notification gap fit as one bounded bootstrap chore spanning package metadata, bin loading, update-check behavior, repo policy, templates, and focused tests. | resolved - close the active gap through BANDIT-071 |
+| agent-scope fit | Repo PM formation, Work Item PM orchestration, Test Writer RED, Claude Writer implementation, reviewers, Landing Agent, and Closeout Agent responsibilities stayed separated. | explicit no-action decision - role boundaries held |
+| tool-use rule pressure | Review-subject hash and Local Qwen evidence had to be refreshed after committing risk and supply-chain evidence so landing would not rely on stale Stage 4 evidence. | explicit no-action decision - the refreshed hash and Local Qwen pass are recorded in Stage 4 and landing evidence |
+| reviewer/model routing | Codex-authored RED routed Stage 3 implementation to Claude, CodeRabbit timed out, and Local Qwen first returned non-blocking process findings before a refreshed pass. | explicit no-action decision - model-family separation held and reviewer outcomes have recorded replacement or pass evidence |
+| tool invocation friction | `land-check` requires exact durable non-blocking routing prefixes and current review-subject hash evidence before accepting safe-to-land. | explicit no-action decision - strict parser behavior correctly prevented stale or ambiguous landing evidence |
+| recurring inefficiency | Landing action creation still requires manual coordination and route synchronization during closeout. | explicit no-action decision - current workflow policy expects Closeout Agent synchronization and validation caught no disagreement after updates |
+| cost or latency signals | No paid reviewer, dependency install beyond committed lockfile state, external service, hosted preview, merge, push, or deploy was introduced; CodeRabbit timeout cost was bounded by the 300-second command. | explicit no-action decision - no cost-policy or supply-chain follow-up is required |
+| unresolved uncertainty | The next queued target is known but no next work item is formed yet. | deferred to Repo PM - create a bounded chore from `docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before unrelated Phase 8 product work |
+
+## Improvement Chores
+
+No new retrospective-derived improvement chore is created by this closeout.
+
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is resolved by `BANDIT-071` after landing action and this Stage 6 closeout evidence.
+
+`BANDIT-GAP-REPLAY-REGRESSION-CORPUS` is the next queued bootstrap gap. The next recorded action is to create a bounded chore from `docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before proceeding to unrelated Phase 8 product work.
+
+The first Local Qwen non-blocking process findings were resolved inside Stage 4 by completing missing Stage 4 evidence and rerunning Local Qwen to a pass, rather than creating a duplicate gap.
+
+## Cross-Model Tension
+
+No unresolved cross-model tension remains for `BANDIT-071`. Claude source implementation was accepted after PM review, focused tests, full test suite, typecheck, aggregate Bandit validation, npm audit, risk classification, supply-chain gate validation, refreshed Local Qwen pass, CodeRabbit bootstrap replacement evidence, and landing checks. The initial Local Qwen non-blocking findings are preserved as historical PM disposition evidence and no source repair remains open.
+
+## Bootstrap Gaps Remaining
+
+- `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` is the next queued bootstrap gap.
+- `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` remains queued behind the replay corpus.
+- Metamorphic Cross-Projection Checks, Reviewer Calibration With Seeded Defects, Evidence Bundle Attestation, and Spec-To-Evidence Traceability Matrix remain queued behind the determinism gate.

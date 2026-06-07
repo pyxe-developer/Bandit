@@ -4,26 +4,19 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-070` is landed and closed out. It resolved
-`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` by adding the repo-native
-oracle-provenance policy, evidence template, validator, CLI command, init
-wiring, and `land-check` enforcement for covered high-risk safe-to-land claims
-while preserving historical aggregate validation compatibility, Trust Verifier
-cutover boundaries, and the Permanent Test Ownership Boundary.
+`BANDIT-071` is landed and closed out. It resolved
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` by making Bandit privately
+installable from packed or private sources, scoping package contents, promoting
+the installed CLI loader dependency to runtime scope, adding repo-local
+update-channel policy and templates, and providing non-blocking manual
+`update-check` notification behavior without public npm publishing, paid
+registry setup, hosted update services, telemetry, or automatic self-update.
 
-`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is active and linked to
-`BANDIT-071`. Repo PM created the bounded chore from
-`docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json`, repaired the Stage
-1 brief/coordination prerequisite, recorded Local Qwen MLX adapter formation
-pass evidence, recorded CodeRabbit provider-timeout replacement evidence, and
-approved formation on 2026-06-07.
+**Active work item:** `BANDIT-071` (Stage 6 closeout complete).
 
-**Active work item:** `BANDIT-071` (Stage 5 landing verdict recorded).
+The current stage is Stage 6: closeout complete.
 
-The current stage is Stage 5: landing action required.
-
-**Current next action:** Run `land-check` for `BANDIT-071`, then perform
-local-record landing if the gate passes.
+**Current next action:** Create a bounded chore from `docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before unrelated Phase 8 product work.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -36,17 +29,11 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-070`
-has closed with landing verdict, local-record landing, retrospective,
-improvement disposition, chore disposition, and bootstrap-gap disposition
-evidence under `docs/work/BANDIT-070/`. `BANDIT-071` has Stage 1 formation
-evidence, Work Item PM plan-mode evidence, and Stage 2 RED evidence under
-`docs/work/BANDIT-071/`. Stage 3 Claude implementation and PM acceptance
-evidence are recorded under `docs/work/BANDIT-071/`. Stage 4 review evidence,
-CodeRabbit timeout replacement evidence, Local Qwen non-blocking finding
-disposition, risk classification, and supply-chain gate evidence are recorded.
-Stage 5 landing verdict evidence is recorded, and the next step is `land-check`
-and local-record landing if the gate passes.
+No operator-owned input is required for the next recorded action. `BANDIT-071`
+has Stage 1 formation, Work Item PM plan-mode, Stage 2 RED, Stage 3
+implementation, Stage 4 review, Stage 5 landing verdict, local-record landing,
+Stage 6 retrospective, improvement disposition, chore disposition, and
+bootstrap-gap disposition evidence under `docs/work/BANDIT-071/`.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -59,39 +46,31 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-070` has Stage 1 formation, Work Item PM orchestration, Stage 2 RED,
-Stage 3 Claude implementation, Stage 4 review evidence, Stage 5 landing
-verdict, local-record landing action, Stage 6 retrospective, and
-improvement/chore disposition recorded under `docs/work/BANDIT-070/`.
+`BANDIT-071` has complete lifecycle evidence:
 
-`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is resolved by
-`BANDIT-070`; the gap ledger points to
-`docs/work/BANDIT-070/retrospective.md`.
+- Stage 1 formation evidence, formation reviews, and `formation_approved`.
+- Work Item PM orchestration plan and `orchestration_plan_recorded`.
+- Test Writer-owned RED tests and `red_recorded`.
+- Stage 3 Claude implementation, Writer report, PM acceptance, and
+  `implementation_recorded`.
+- Stage 4 CodeRabbit timeout replacement evidence, refreshed Local Qwen pass,
+  risk classification, supply-chain gate, aggregate review evidence, and
+  `review_recorded`.
+- Stage 5 landing verdict, `land-check` pass, local-record landing action, and
+  `landed`.
+- Stage 6 retrospective, improvement disposition, chore disposition,
+  gap-ledger resolution, route synchronization, and `closed`.
 
-`BANDIT-071` has Stage 1 brief, coordination, Qwen formation review,
-CodeRabbit provider-timeout replacement evidence, aggregate formation review,
-`formation_approved`, Work Item PM orchestration plan evidence, and
-`orchestration_plan_recorded` coordination evidence, Test Writer-owned RED
-tests, RED evidence, and `red_recorded` coordination evidence recorded under
-`docs/work/BANDIT-071/` and `test/`. Stage 3 Claude implementation, Writer
-report, PM acceptance, focused verification, full suite verification, and
-`implementation_recorded` coordination evidence are recorded. Stage 4
-CodeRabbit timeout, Local Qwen review, Qwen disposition, risk classification,
-supply-chain gate, aggregate review evidence, and `review_recorded`
-coordination evidence are recorded. Stage 5 landing verdict evidence and
-`landing_verdict_recorded` coordination evidence are recorded.
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is resolved by `BANDIT-071`; the
+gap ledger points to `docs/work/BANDIT-071/retrospective.md`.
 
-The next allowed action is `land-check` for `BANDIT-071`, followed by
-local-record landing if the gate passes. Do not merge, push, deploy, approve
-Trust Verifier cutover, replace or wrap old gates, approve public npm
-publishing, approve paid registry setup, approve external service setup,
-implement automatic self-update, execute guarded browser actions, local API
-work, State Index work, scheduler execution, claim execution, worktree
-execution, unrelated Phase 8 scope, or the next queued bootstrap gap before
-landing action evidence is recorded.
-
-`BANDIT-GAP-REPLAY-REGRESSION-CORPUS` remains queued behind the private
-install/update channel.
+`BANDIT-GAP-REPLAY-REGRESSION-CORPUS` is the next queued bootstrap gap and has
+no formed work item yet. Do not start unrelated Phase 8 product work, guarded
+browser actions, local API work, State Index work, scheduler execution, claim
+execution, worktree execution, public publishing, paid private registry setup,
+hosted update services, telemetry, automatic self-update, merge, push, deploy,
+or Trust Verifier cutover before the replay regression corpus chore is formed
+and approved through the normal Repo PM formation path.
 
 The remaining verification-layer opportunities are queued behind the replay
 corpus: Gate Determinism And Flake Gate, Metamorphic Cross-Projection Checks,
