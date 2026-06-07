@@ -1,0 +1,187 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-070",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/verification-oracle-provenance.json",
+      "surface": "oracle_provenance_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/verification-oracle-provenance.ts",
+      "surface": "oracle_provenance_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/verification-oracle-provenance.ts",
+      "surface": "oracle_provenance_cli_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/land-check.ts",
+      "surface": "landing_gate_integration",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "policy_initialization",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_policy_path_mapping",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/verification-oracle-provenance.md",
+      "surface": "oracle_provenance_evidence_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/verification-oracle-provenance.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "landing_gate_now_checks_oracle_provenance_for_covered_high_risk_safe_to_land_claims",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-070/implementation-evidence.md"
+    },
+    {
+      "signal_id": "dedicated_oracle_provenance_command_added",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "new_policy_and_template_written_by_init",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-070/implementation-evidence.md"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/verification-oracle-provenance.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs verification-oracle-provenance validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-070/stage3-pm-review.md"
+    },
+    {
+      "tool": "coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-070/coderabbit-review.md"
+    },
+    {
+      "tool": "local-qwen MLX OpenAI-compatible adapter via bin/omlx-chat-completions.mjs",
+      "state": "non_blocking_dispositioned",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-070/qwen-finding-disposition.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-070-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-070/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-TEST-BOUNDARY-VIOLATION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-070/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-070 is a bootstrap workflow-gate chore. It does not approve product direction, UAT, policy changes outside the formed gap, business tradeoffs, explicit cost/risk overrides, merge, push, deploy, external services, dependency changes, package-manager scripts, credentials, production data, or other never-auto-landable surfaces."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-070 changes landing-gate and CLI validation behavior, so risk is medium. The scope is bounded to a repo-native oracle-provenance policy, validator, dedicated CLI command, land-check integration, template, focused tests, and work-item evidence. It adds no dependency, lockfile, package-manager script, CI/release workflow, external side effect, production data, auth, payment, privacy, telemetry, merge, push, deploy, or Trust Verifier cutover surface. Focused tests, full tests, typecheck, Bandit validation, dedicated oracle-provenance validation, Local Qwen review, supplemental source-diff Qwen review, CodeRabbit timeout replacement evidence, risk classification, and supply-chain evidence cover the landing decision.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-070-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-070-supply-chain-gate.json",
+    ".bandit/policy/verification-oracle-provenance.json",
+    "docs/work/BANDIT-070/brief.md",
+    "docs/work/BANDIT-070/red-evidence.md",
+    "docs/work/BANDIT-070/implementation-evidence.md",
+    "docs/work/BANDIT-070/stage3-pm-review.md",
+    "docs/work/BANDIT-070/coderabbit-review.md",
+    "docs/work/BANDIT-070/local-qwen-review.md",
+    "docs/work/BANDIT-070/qwen-finding-disposition.md",
+    "src/state/verification-oracle-provenance.ts",
+    "src/commands/verification-oracle-provenance.ts",
+    "src/commands/land-check.ts",
+    "src/commands/init.ts",
+    "src/cli.ts",
+    "src/state/paths.ts",
+    "test/verification-oracle-provenance.test.mjs"
+  ]
+}

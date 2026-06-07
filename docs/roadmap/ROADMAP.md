@@ -5,9 +5,9 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-070` - Verification Oracle Provenance Gate
-  (Stage 3 implementation accepted)
+  (Stage 4 review recorded)
 
-**Current next step:** Run Stage 4 review for `BANDIT-070`.
+**Current next step:** Record Stage 5 landing verdict for `BANDIT-070`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

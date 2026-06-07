@@ -17,14 +17,14 @@ Boundary.
 Stage 1 brief/coordination prerequisite, recorded Local Qwen MLX adapter
 formation pass evidence, recorded CodeRabbit provider-timeout replacement
 evidence, approved formation on 2026-06-07, Work Item PM recorded plan-mode
-orchestration plus Stage 2 RED evidence, and Claude Implementation Writer
-completed Stage 3 with PM acceptance.
+orchestration plus Stage 2 RED evidence, Claude Implementation Writer completed
+Stage 3 with PM acceptance, and Stage 4 aggregate review passed.
 
-**Active work item:** `BANDIT-070` (Stage 3 implementation accepted).
+**Active work item:** `BANDIT-070` (Stage 4 review recorded).
 
-The current stage is Stage 3: implementation accepted.
+The current stage is Stage 4: review recorded.
 
-**Current next action:** Run Stage 4 review for `BANDIT-070`.
+**Current next action:** Record Stage 5 landing verdict for `BANDIT-070`.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -41,8 +41,8 @@ No operator-owned input is required for the next recorded action. `BANDIT-069`
 has closed with landing verdict, local-record landing, retrospective, and
 improvement disposition evidence under `docs/work/BANDIT-069/`. `BANDIT-070`
 has Stage 1 formation evidence, Work Item PM orchestration evidence, Stage 2
-RED evidence, and Stage 3 implementation evidence under
-`docs/work/BANDIT-070/`; the next step is Stage 4 review.
+RED evidence, Stage 3 implementation evidence, and Stage 4 review evidence
+under `docs/work/BANDIT-070/`; the next step is Stage 5 landing verdict.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -66,14 +66,15 @@ disposition recorded under `docs/work/BANDIT-069/`.
 `BANDIT-070` has Stage 1 brief, coordination, Qwen formation review,
 CodeRabbit provider-timeout replacement evidence, aggregate formation review,
 `formation_approved`, Work Item PM orchestration evidence, Stage 2 RED evidence,
-Stage 3 Claude implementation evidence, and PM acceptance recorded under
-`docs/work/BANDIT-070/`.
+Stage 3 Claude implementation evidence, PM acceptance, and Stage 4 review
+evidence recorded under `docs/work/BANDIT-070/`.
 
-The next allowed action is Stage 4 review for `BANDIT-070`. Do not merge, push,
-deploy, approve Trust Verifier cutover, replace or wrap old gates, execute
-guarded browser actions, start local API work, State Index work, scheduler
-execution, claim execution, worktree execution, unrelated Phase 8 scope, or the
-next queued bootstrap gap before Stage 4 review evidence is recorded.
+The next allowed action is Stage 5 landing verdict for `BANDIT-070`. Do not
+merge, push, deploy, approve Trust Verifier cutover, replace or wrap old gates,
+execute guarded browser actions, start local API work, State Index work,
+scheduler execution, claim execution, worktree execution, unrelated Phase 8
+scope, or the next queued bootstrap gap before landing verdict and landing
+action evidence are recorded.
 
 `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` remains queued behind the
 oracle-provenance gate. It records the private, non-public distribution
