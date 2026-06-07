@@ -2,16 +2,19 @@
 
 work_item: BANDIT-071
 reviewer: codex_pm
-reviewed_at: 2026-06-07T23:25:40Z
+reviewed_at: 2026-06-07T23:32:40Z
 source_review: docs/work/BANDIT-071/local-qwen-review.md
 verdict: pass
 
 ## Summary
 
-Local Qwen returned `non_blocking` findings. The findings identify process and
-evidence-placement gaps, not source defects. PM accepts the concerns as Stage 4
-evidence requirements and records concrete disposition below. No source repair
-is required.
+The first Local Qwen run returned `non_blocking` findings against incomplete
+Stage 4 evidence. The findings identified process and evidence-placement gaps,
+not source defects. PM accepted the concerns as Stage 4 evidence requirements,
+completed the missing evidence, and reran Local Qwen at source head `84565dc`.
+The refreshed Local Qwen review returned `pass` with no unresolved findings, so
+this artifact remains historical disposition evidence only. No source repair is
+required.
 
 ## Findings
 
@@ -23,13 +26,14 @@ is required.
 
 ## Cross-Model Tension
 
-Local Qwen is correct that Stage 4 should not rely on Writer evidence alone for
-full-suite and reviewer-route proof. PM resolves the tension by keeping Writer
-evidence scoped to Writer-owned verification while adding Stage 4 aggregate
-review evidence for full tests, derived status, review-subject hash,
-CodeRabbit timeout, Local Qwen disposition, risk classification, supply-chain
-gate, and no-source-repair rationale.
+Local Qwen was correct that Stage 4 should not rely on Writer evidence alone
+for full-suite and reviewer-route proof. PM resolved the tension by keeping
+Writer evidence scoped to Writer-owned verification while adding Stage 4
+aggregate review evidence for full tests, derived status, review-subject hash,
+CodeRabbit timeout, first-run Local Qwen disposition, risk classification,
+supply-chain gate, and no-source-repair rationale. The refreshed Local Qwen
+review then passed with no unresolved findings.
 
 ## Next Action
 
-Record aggregate Stage 4 review evidence for `BANDIT-071`.
+Use the refreshed Local Qwen pass as current Stage 4 evidence for `BANDIT-071`.
