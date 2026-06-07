@@ -17,11 +17,12 @@ Claude implementation evidence is recorded, and Codex PM Stage 3 acceptance is
 recorded. CodeRabbit timeout evidence, Local Qwen pass evidence, and layered
 risk/supply-chain policy evidence are recorded.
 
-Current stage: Stage 4 - Local Qwen refresh required.
+Current stage: Stage 4 - Aggregate review evidence required.
 
-Next action: Rerun Local Qwen adversarial review for `BANDIT-062` after risk and
-supply-chain policy evidence changed the review subject, then record aggregate
-Stage 4 review evidence.
+Next action: Record aggregate Stage 4 review evidence for `BANDIT-062` using
+CodeRabbit timeout evidence, refreshed Local Qwen non-blocking finding
+disposition, layered risk-classification and supply-chain gate evidence, and
+current review-subject hash.
 
 No operator-owned input is required for that next action. Do not begin Trust
 Verifier cutover work, Work Item PM plan-mode orchestration work, or unrelated
