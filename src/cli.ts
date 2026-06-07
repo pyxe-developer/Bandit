@@ -35,6 +35,8 @@ import { evidenceFreshnessSlos } from "./commands/evidence-freshness-slos.js";
 import { tokenCostFailsafe } from "./commands/token-cost-failsafe.js";
 import { uat } from "./commands/uat.js";
 import { sessionContext } from "./commands/session-context.js";
+import { updateCheck } from "./commands/update-check.js";
+import { emitCachedUpdateAlert } from "./state/update-channel.js";
 import { validateBandit } from "./commands/validate.js";
 import { verificationOracleProvenance } from "./commands/verification-oracle-provenance.js";
 import { eventDrivenWakeScheduler } from "./commands/event-driven-wake-scheduler.js";
@@ -49,6 +51,10 @@ import { createWorkItem } from "./commands/work-item-create.js";
 async function main() {
   const [command, ...args] = process.argv.slice(2);
 
+  if (command && command !== "update-check") {
+    await emitCachedUpdateAlert(process.cwd(), process.stderr);
+  }
+
   if (!command) {
     console.error(
       "role-required: specify a role entry point to invoke the workflow\n\n" +
@@ -57,7 +63,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>"
+        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>"
     );
     process.exitCode = 1;
     return;
@@ -84,6 +90,12 @@ async function main() {
   if (command === "validate") {
     const result = await validateBandit(process.cwd());
     console.log(result.message);
+    return;
+  }
+
+  if (command === "update-check") {
+    const result = await updateCheck(process.cwd(), args);
+    process.stdout.write(result.output);
     return;
   }
 
@@ -346,7 +358,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>`);
   process.exitCode = 1;
 }
 

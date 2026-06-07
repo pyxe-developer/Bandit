@@ -1,0 +1,77 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-071",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Focused Test Writer-owned tests define private installability, package allow-listing, update-channel state, update-check statuses, freshness-bounded cache behavior, data-minimal metadata, and non-blocking normal-CLI update alerts before production implementation. Current behavior packages repo-local work history and tests, installed bin execution depends on missing package-local tsx from devDependencies, update-check is not a known CLI command, and normal CLI commands do not emit cached update alerts.",
+  "test_command": "node --test test/private-install-update-channel.test.mjs\nnode --test test/update-channel.test.mjs",
+  "observed_output": [
+    "Subtest: package dry-run exposes only intentional private CLI distribution files",
+    "not ok 1 - package dry-run exposes only intentional private CLI distribution files",
+    "package includes 887 non-distribution files; first entries include .bandit/bootstrap-gaps.json, .bandit/events.jsonl, docs/work/BANDIT-001/brief.md, and test files",
+    "Subtest: packed private install runs bandit init, validate, and update-check without development node_modules",
+    "not ok 2 - packed private install runs bandit init, validate, and update-check without development node_modules",
+    "Error [ERR_MODULE_NOT_FOUND]: Cannot find module '<consumer>/node_modules/bandit-workflow/node_modules/tsx/dist/loader.mjs'",
+    "tests 2",
+    "pass 0",
+    "fail 2",
+    "Subtest: update-check reports unconfigured with deterministic data-minimal JSON",
+    "not ok 1 - update-check reports unconfigured with deterministic data-minimal JSON",
+    "Unknown command: update-check",
+    "Subtest: update-check reports current and update_available from configured private file source",
+    "not ok 2 - update-check reports current and update_available from configured private file source",
+    "Unknown command: update-check",
+    "Subtest: update-check reports disabled and unreachable as non-blocking statuses",
+    "not ok 3 - update-check reports disabled and unreachable as non-blocking statuses",
+    "Unknown command: update-check",
+    "Subtest: ordinary CLI commands use fresh cached update alerts without masking command exit status",
+    "not ok 4 - ordinary CLI commands use fresh cached update alerts without masking command exit status",
+    "The input did not match the regular expression /Bandit update available: 0\\.2\\.0/",
+    "tests 4",
+    "pass 0",
+    "fail 4"
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "A repo-native policy or design artifact records the selected private distribution channel, supported install command shape, version/ref semantics, update source, non-public boundary, and explicit out-of-scope publishing behavior.",
+      "evidence": "test/private-install-update-channel.test.mjs expects .bandit/policy/private-install-update-channel.json plus private-install/update templates in the package dry-run file list. Current package does not provide that distribution policy/template surface."
+    },
+    {
+      "criterion": "The package can be installed into a fresh private consumer repo from the selected private channel and bandit init exits successfully without relying on this development checkout's existing node_modules.",
+      "evidence": "test/private-install-update-channel.test.mjs packs the current package, installs it in a fresh temp consumer repo, and runs the installed bandit bin. Current installed execution fails with ERR_MODULE_NOT_FOUND for package-local tsx."
+    },
+    {
+      "criterion": "Package contents are intentionally scoped for CLI distribution; packed artifacts exclude unrelated active work history, tests, large design prototypes, or repo-local workflow state unless explicitly justified as install-time templates or defaults.",
+      "evidence": "test/private-install-update-channel.test.mjs inspects npm pack --dry-run --json and rejects .bandit/events.jsonl, .bandit/bootstrap-gaps.json, docs/work/**, and test/**. Current package includes 887 non-distribution files."
+    },
+    {
+      "criterion": "The CLI runtime no longer depends on a devDependency-only tsx loader in installed packages, or the selected build path otherwise proves installed CLI execution works from a packed/private install.",
+      "evidence": "The packed-install smoke test fails before init because bin/bandit.mjs imports node_modules/tsx/dist/loader.mjs from the installed package, where devDependencies are absent."
+    },
+    {
+      "criterion": "Installed repos can run bandit update-check or equivalent to compare their installed Bandit version/ref against the configured private update source and receive deterministic current, update_available, unconfigured, unreachable, or disabled status.",
+      "evidence": "test/update-channel.test.mjs covers unconfigured, current, update_available, disabled, and unreachable states with --json. Current CLI returns Unknown command: update-check."
+    },
+    {
+      "criterion": "Normal CLI commands emit a concise non-blocking update alert only when update checking is configured and a newer private release is known. Failed update checks do not block the requested command and do not mask the command's own exit status.",
+      "evidence": "test/update-channel.test.mjs writes a fresh update_available cache, reruns init, and expects stderr to include Bandit update available without changing the command's exit status; current stderr is empty."
+    },
+    {
+      "criterion": "Update checks are freshness-bounded and cache their last successful result so ordinary Bandit commands do not perform unbounded network work on every invocation.",
+      "evidence": "test/update-channel.test.mjs expects update-check to write .bandit/update-channel-cache.json and normal commands to use a fresh cached update_available result. Current command/cache behavior is absent."
+    },
+    {
+      "criterion": "Update metadata is repo-local, reviewable, and data-minimal; it does not send telemetry, repo contents, workflow state, or user activity to any external service.",
+      "evidence": "test/update-channel.test.mjs recursively rejects telemetry, repo_contents, workflow_state, user_activity, package_usage, model_call_metadata, review_packets, and hidden_identifier keys from update-check output and cache."
+    },
+    {
+      "criterion": "The install/update channel includes explicit commands or docs for updating an installed repo, such as npm install -D <private-source>@<tag> or the selected equivalent. Automatic self-update remains out of scope unless separately approved.",
+      "evidence": "test/update-channel.test.mjs expects update_available JSON/cache to carry an explicit npm install -D command from the private release manifest, not a self-mutating updater."
+    },
+    {
+      "criterion": "The implementation preserves Bandit's CLI authority, repo-native canonical artifacts, supply-chain gate expectations, layered risk classification, operator fail-closed boundary, Permanent Test Ownership Boundary, and Bootstrap Model-Family Separation.",
+      "evidence": "Codex authored test/private-install-update-channel.test.mjs, test/update-channel.test.mjs, and this RED evidence. Stage 3 must be dispatched to Claude and must not edit tests, fixtures, RED evidence, package allow-list acceptance mappings, update-channel acceptance mappings, formation evidence, review evidence, landing evidence, or retrospective evidence."
+    }
+  ],
+  "next_action": "Dispatch Stage 3 implementation for BANDIT-071 to Claude Implementation Writer through the bootstrap Process Adapter path. Implement the narrow private install/update channel: distribution policy/template/docs, package allow-list/runtime fix, update-channel state/cache helpers, update-check command, CLI alert hook, init/validate wiring only as needed, and focused implementation evidence. Keep Stage 3 away from tests, test helpers, fixtures, RED evidence, install-smoke evidence, package allow-list acceptance mappings, update-channel acceptance mappings, formation evidence, review evidence, landing evidence, retrospective evidence, public npm publishing, paid/private registry setup, automatic self-update, telemetry, external hosted services, merge/push/deploy behavior, Trust Verifier cutover, guarded browser action execution, and unrelated Phase 8 cockpit/product scope."
+}

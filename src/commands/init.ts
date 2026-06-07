@@ -1,4 +1,6 @@
-import { mkdir, stat } from "node:fs/promises";
+import { copyFile, mkdir, readdir, stat } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
@@ -225,6 +227,8 @@ export async function initBandit(repoRoot: string) {
     );
   }
 
+  await seedDistributionDefaults(repoRoot);
+
   if (alreadyInitialized) {
     await appendLifecycleEvent(paths.events, {
       type: "repo_init_skipped",
@@ -242,6 +246,77 @@ export async function initBandit(repoRoot: string) {
   });
 
   return { message: "Initialized Bandit state." };
+}
+
+const SEED_FILES = [
+  ".bandit/policy/smell-triggers.json",
+  ".bandit/reviewers/local-qwen.json"
+];
+
+// When Bandit runs as an installed dependency, a fresh consumer repo needs the
+// canonical starter templates and default reviewer/smell artifacts so that
+// `bandit init` followed by `bandit validate` succeeds. The Bandit development
+// checkout already commits these files, so seeding is scoped to installed
+// packages and never overwrites files the consumer already has.
+async function seedDistributionDefaults(repoRoot: string) {
+  const packageRoot = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    "../.."
+  );
+
+  if (!isInstalledPackage(packageRoot)) {
+    return;
+  }
+
+  await seedTemplates(packageRoot, repoRoot);
+
+  for (const relativePath of SEED_FILES) {
+    await copyMissingFile(
+      path.join(packageRoot, relativePath),
+      path.join(repoRoot, relativePath)
+    );
+  }
+}
+
+function isInstalledPackage(packageRoot: string): boolean {
+  return packageRoot.split(path.sep).includes("node_modules");
+}
+
+async function seedTemplates(packageRoot: string, repoRoot: string) {
+  const sourceDir = path.join(packageRoot, "docs/templates");
+  let templateFiles: string[];
+  try {
+    templateFiles = await readdir(sourceDir);
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return;
+    }
+    throw error;
+  }
+
+  for (const fileName of templateFiles) {
+    if (!fileName.endsWith(".md")) {
+      continue;
+    }
+
+    await copyMissingFile(
+      path.join(sourceDir, fileName),
+      path.join(repoRoot, "docs/templates", fileName)
+    );
+  }
+}
+
+async function copyMissingFile(source: string, destination: string) {
+  if (path.resolve(source) === path.resolve(destination)) {
+    return;
+  }
+
+  if (await pathExists(destination)) {
+    return;
+  }
+
+  await mkdir(path.dirname(destination), { recursive: true });
+  await copyFile(source, destination);
 }
 
 async function pathExists(filePath: string) {

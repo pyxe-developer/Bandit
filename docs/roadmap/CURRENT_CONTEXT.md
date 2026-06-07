@@ -18,12 +18,11 @@ cutover boundaries, and the Permanent Test Ownership Boundary.
 pass evidence, recorded CodeRabbit provider-timeout replacement evidence, and
 approved formation on 2026-06-07.
 
-**Active work item:** `BANDIT-071` (formation approved).
+**Active work item:** `BANDIT-071` (Stage 3 implementation recorded).
 
-The current stage is Stage 1: formation approved.
+The current stage is Stage 4: review required.
 
-**Current next action:** Run Work Item PM plan-mode orchestration for
-`BANDIT-071` before RED evidence.
+**Current next action:** Run Stage 4 review for `BANDIT-071`.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -40,8 +39,10 @@ No operator-owned input is required for the next recorded action. `BANDIT-070`
 has closed with landing verdict, local-record landing, retrospective,
 improvement disposition, chore disposition, and bootstrap-gap disposition
 evidence under `docs/work/BANDIT-070/`. `BANDIT-071` has Stage 1 formation
-evidence under `docs/work/BANDIT-071/`, and the next step is Work Item PM
-plan-mode orchestration before RED evidence.
+evidence, Work Item PM plan-mode evidence, and Stage 2 RED evidence under
+`docs/work/BANDIT-071/`. Stage 3 Claude implementation and PM acceptance
+evidence are recorded under `docs/work/BANDIT-071/`, and the next step is
+Stage 4 review.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -65,16 +66,23 @@ improvement/chore disposition recorded under `docs/work/BANDIT-070/`.
 
 `BANDIT-071` has Stage 1 brief, coordination, Qwen formation review,
 CodeRabbit provider-timeout replacement evidence, aggregate formation review,
-and `formation_approved` coordination evidence recorded under
-`docs/work/BANDIT-071/`.
+`formation_approved`, Work Item PM orchestration plan evidence, and
+`orchestration_plan_recorded` coordination evidence, Test Writer-owned RED
+tests, RED evidence, and `red_recorded` coordination evidence recorded under
+`docs/work/BANDIT-071/` and `test/`. Stage 3 Claude implementation, Writer
+report, PM acceptance, focused verification, full suite verification, and
+`implementation_recorded` coordination evidence are recorded.
 
-The next allowed action is Work Item PM plan-mode orchestration for
-`BANDIT-071`. Do not start RED evidence, implementation, merge, push, deploy,
-Trust Verifier cutover, old-gate replacement or wrapping, public npm
-publishing, paid registry setup, external service setup, automatic self-update,
-guarded browser action execution, local API work, State Index work, scheduler
-execution, claim execution, worktree execution, unrelated Phase 8 scope, or the
-next queued bootstrap gap before the Work Item PM plan-mode gate is satisfied.
+The next allowed action is Stage 4 review for `BANDIT-071`: CodeRabbit or
+provider-timeout replacement evidence, Local Qwen through the authorized MLX
+adapter route, risk classification, supply-chain gate, review-subject hash,
+finding dispositions if needed, and aggregate review evidence. Do not merge,
+push, deploy, approve Trust Verifier cutover, replace or wrap old gates,
+approve public npm publishing, approve paid registry setup, approve external
+service setup, implement automatic self-update, execute guarded browser
+actions, local API work, State Index work, scheduler execution, claim execution,
+worktree execution, unrelated Phase 8 scope, or the next queued bootstrap gap
+before Stage 4 review evidence is recorded and accepted.
 
 `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` remains queued behind the private
 install/update channel.

@@ -5,10 +5,9 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-071` - Private Installable Distribution And Update
-  Notification Channel (formation approved)
+  Notification Channel (Stage 4 review required)
 
-**Current next step:** Run Work Item PM plan-mode orchestration for
-`BANDIT-071` before RED evidence.
+**Current next step:** Run Stage 4 review for `BANDIT-071`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

@@ -7,14 +7,25 @@
   "bin": {
     "bandit": "./bin/bandit.mjs"
   },
+  "files": [
+    "bin",
+    "src",
+    "docs/templates",
+    ".bandit/policy/private-install-update-channel.json",
+    ".bandit/policy/smell-triggers.json",
+    ".bandit/reviewers/local-qwen.json",
+    "README.md"
+  ],
   "scripts": {
     "bandit": "node ./bin/bandit.mjs",
     "test": "node --test \"test/**/*.test.mjs\"",
     "typecheck": "tsc --noEmit"
   },
+  "dependencies": {
+    "tsx": "^4.20.0"
+  },
   "devDependencies": {
     "@types/node": "^24.0.0",
-    "tsx": "^4.20.0",
     "typescript": "^5.8.0"
   }
 }

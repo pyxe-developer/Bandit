@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 import { spawnSync } from "node:child_process";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const binPath = fileURLToPath(import.meta.url);
-const repoRoot = path.resolve(path.dirname(binPath), "..");
-const tsxLoaderPath = path.join(repoRoot, "node_modules/tsx/dist/loader.mjs");
-const cliPath = path.join(repoRoot, "src/cli.ts");
+const packageRoot = path.resolve(path.dirname(binPath), "..");
+const require = createRequire(import.meta.url);
+const tsxLoaderPath = require.resolve("tsx");
+const cliPath = path.join(packageRoot, "src/cli.ts");
 
 const result = spawnSync(
   process.execPath,

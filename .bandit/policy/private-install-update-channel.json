@@ -1,0 +1,67 @@
+{
+  "contract_version": 1,
+  "policy_id": "private-install-update-channel",
+  "work_item": "BANDIT-071",
+  "distribution_posture": "private_non_public",
+  "public_npm_publishing": "out_of_scope",
+  "selected_private_channel": {
+    "type": "private_git_tag",
+    "description": "Install Bandit into private consumer repos from a private Git source pinned to an explicit tag. A private npm registry tarball install is compatible but is not provisioned by this chore.",
+    "supported_install_command_shapes": [
+      "npm install -D git+ssh://<private-host>/<org>/bandit.git#<tag>",
+      "npm install -D <private-tarball>.tgz"
+    ],
+    "reproducibility": "Installs are pinned to an explicit version tag/ref so consumers control upgrades."
+  },
+  "version_ref_semantics": {
+    "installed_version": "package.json version of the installed Bandit package",
+    "current_source_ref": "Git tag or ref the consumer installed",
+    "comparison": "An update is available when the private release manifest latest_version or latest_ref differs from the installed version/ref."
+  },
+  "update_source": {
+    "type": "file",
+    "description": "Repo-local or operator-accessible private release manifest read from .bandit/update-channel.json update_source.path. No external service is contacted beyond the configured private source.",
+    "manifest_fields": [
+      "contract_version",
+      "package_name",
+      "latest_version",
+      "latest_ref",
+      "update_command"
+    ]
+  },
+  "update_check": {
+    "command": "bandit update-check [--json]",
+    "deterministic_statuses": [
+      "unconfigured",
+      "disabled",
+      "unreachable",
+      "current",
+      "update_available"
+    ],
+    "non_blocking_statuses": ["disabled", "unreachable"],
+    "freshness_bounded_cache": ".bandit/update-channel-cache.json",
+    "normal_cli_alert": "Normal CLI commands emit a concise non-blocking stderr alert only from a fresh cached update_available result and never mask the requested command's stdout, stderr, or exit status."
+  },
+  "data_minimization": {
+    "forbidden_payload": [
+      "telemetry",
+      "repo_contents",
+      "workflow_state",
+      "user_activity",
+      "package_usage",
+      "model_call_metadata",
+      "review_packets",
+      "hidden_identifier"
+    ],
+    "rule": "Update metadata is repo-local, reviewable, and data-minimal."
+  },
+  "out_of_scope": [
+    "public_npm_publishing",
+    "paid_private_registry_setup",
+    "hosted_external_update_service",
+    "automatic_self_update",
+    "telemetry",
+    "merge_push_deploy_automation"
+  ],
+  "non_canonical_authority": "Update metadata, cached update results, package registries, and consumer install state are advisory only; repo-native .bandit/ state and CLI commands remain authoritative."
+}
