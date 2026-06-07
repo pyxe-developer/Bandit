@@ -4,18 +4,19 @@
 
 ## Current Work Item
 
-- None. `BANDIT-063` is landed and closed out.
+- `[Gap]` `BANDIT-064` - Trust Verifier Cutover Gate Triage. Stage 1 brief is
+  created; formation review is the next action.
 
-**Current next step:** Triage the Trust Verifier Cutover Gate as the next
-bootstrap-policy item before unrelated cockpit product work; keep
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material until
-that dependency is resolved.
+**Current next step:** Run Stage 1 formation review for `BANDIT-064`.
+
+Do not write RED evidence, run `work-item-pm start`, approve Trust Verifier
+cutover, replace or wrap old gates, or start unrelated product work before
+formation approval.
 
 ## Next Work Item
 
-- `[Gap]` `TBD` - Trust Verifier Cutover Gate triage; decide the bounded
-  bootstrap-policy work item or explicit no-action/deferred disposition needed
-  before unrelated cockpit product work.
+- None selected. Finish or explicitly block `BANDIT-064` before starting
+  another work item.
 
 ## Planned Work
 
@@ -24,11 +25,10 @@ that dependency is resolved.
 These are the active queue under the bootstrap-gap policy. They block unrelated
 cockpit feature work unless the operator explicitly changes priority.
 
-- `[Gap]` `TBD` - Trust Verifier Cutover Gate; after compatibility-mode
-  evidence exists, artifact-input paths are clear, serializer replacement
-  metadata is preserved, and Work Item PM plan-mode orchestration is addressed,
-  decide per Trust Goal when `bandit trust verify` becomes the canonical
-  verifier or wrapper for an older gate path.
+- `[Gap]` `BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE` - active through
+  `BANDIT-064`; materialize the cutover gate contract and current
+  no-cutover-approved disposition before any later per-Trust-Goal cutover
+  decision.
 - `[Gap]` `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - source material for
   orchestrator-prompt patterns, no longer the next Pi/Aperture implementation
   queue.

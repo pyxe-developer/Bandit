@@ -113,55 +113,66 @@ Stage 6 retrospective, improvement disposition, and bootstrap-gap disposition
 evidence is recorded at `docs/work/BANDIT-063/retrospective.md`, and the gap
 ledger marks `BANDIT-GAP-WORK-ITEM-PM-PLAN-MODE-ORCHESTRATION` resolved.
 
+`BANDIT-064` is the active bootstrap-policy chore for
+`BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE`. The Stage 1 brief is created
+at `docs/work/BANDIT-064/brief.md` from
+`docs/specs/BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE.json`, and the gap
+ledger marks the gap active with linked work item `BANDIT-064`. The brief is
+bounded to materializing the Trust Verifier Cutover Gate contract and current
+no-cutover-approved disposition. It does not approve Trust Verifier cutover,
+select a Trust Goal for cutover, replace or wrap an old gate path, or start RED
+evidence, implementation, review, landing, closeout, role packet work, or
+unrelated cockpit product work.
+
 `BANDIT-059` is landed and closed out. It delivered the Trust Verify Snapshot
 Foundation bootstrap-gap chore under
 `BANDIT-GAP-TRUST-VERIFY-SNAPSHOT-FOUNDATION`, and the gap ledger marks it
 resolved.
 
-**Active work item:** none.
+**Active work item:** `BANDIT-064`.
 
-The current stage is Interstitial: Bootstrap-policy triage required.
+The current stage is Stage 1: Work-item brief created; formation review
+required.
 
 The accepted architecture boundary remains that Bandit is the deterministic CLI
 trust layer for agentic software delivery. Harnesses and orchestrator prompts
 may own live orchestration, agents, queues, auth, and status if they can call
 Bandit's CLI and produce CLI-verifiable evidence.
 
-**Current next action:** Triage the Trust Verifier Cutover Gate as the next
-bootstrap-policy item before unrelated cockpit product work; keep
-`BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material until
-that dependency is resolved.
+**Current next action:** Run Stage 1 formation review for `BANDIT-064`.
 
-Do not start unrelated cockpit product work, Pi/Aperture agent-scope
-schema/projection work, role input or execution packet work, or role-scoped
-workflow implementation until Trust Verifier cutover gate triage is recorded or
-explicitly dispositioned.
+Required formation evidence is `docs/work/BANDIT-064/qwen-formation-review.md`,
+`docs/work/BANDIT-064/coderabbit-formation-review.md`, and
+`docs/work/BANDIT-064/formation-review.md`; after passing formation review, the
+Repo PM may run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-064`.
+
+Do not write Stage 2 RED evidence, run `work-item-pm start`, write an
+orchestration plan, dispatch implementation, start Trust Verifier cutover,
+replace or wrap any old gate path, start unrelated cockpit product work,
+Pi/Aperture agent-scope schema/projection work, role input or execution packet
+work, or role-scoped workflow implementation until formation review passes and
+the `formation_approved` transition is recorded.
 
 ## Active Work
 
-**Active work item:** none.
+**Active work item:** `BANDIT-064`.
 
-No active work item is currently open. `BANDIT-063` is landed and closed out.
-Its Stage 1 brief is recorded at
-`docs/work/BANDIT-063/brief.md`. Formation review/approval evidence is recorded
-at `docs/work/BANDIT-063/qwen-formation-review.md`,
-`docs/work/BANDIT-063/coderabbit-formation-review.md`,
-`docs/work/BANDIT-063/formation-review.md`, and
-`docs/work/BANDIT-063/coordination-log.jsonl`. Stage 2 RED evidence is recorded
-at `docs/work/BANDIT-063/red-evidence.md` and
-`docs/artifact-inputs/BANDIT-063-red-evidence.json`. Stage 3 implementation
-evidence is recorded at `docs/work/BANDIT-063/implementation-evidence.md`,
-`docs/work/BANDIT-063/writer-report.md`,
-`docs/artifact-inputs/BANDIT-063-implementation-evidence.json`, and
-`docs/role-runs/BANDIT-063/stage3-implementation.json`; Codex PM acceptance is
-recorded at `docs/work/BANDIT-063/stage3-pm-review.md`. Stage 4 CodeRabbit,
-Local Qwen, finding disposition, risk classification, and supply-chain gate
-evidence are recorded. Aggregate Stage 4 review evidence is recorded at
-`docs/work/BANDIT-063/review-evidence.md`. Stage 5 safe-to-land verdict
-evidence is recorded at `docs/work/BANDIT-063/landing-verdict.md`.
-Local-record landing action evidence is recorded at
-`docs/work/BANDIT-063/landing-action.md`. Stage 6 retrospective closeout is
-recorded at `docs/work/BANDIT-063/retrospective.md`.
+`BANDIT-064` is queued at Stage 1 with its brief created at
+`docs/work/BANDIT-064/brief.md`. The linked active gap is
+`BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE`; `.bandit/events.jsonl`
+records `work_item_created` for `BANDIT-064`, and
+`.bandit/bootstrap-gaps.json` marks the gap `active_chore`. Formation review
+evidence is not recorded yet. The next action is formation review only.
+
+Do not start Stage 2 RED evidence, `work-item-pm start`, orchestration-plan
+drafting, implementation dispatch, Trust Verifier cutover, old-gate
+replacement/wrapping, role packet work, or unrelated cockpit product work
+before formation review passes and `formation_approved` is recorded.
+
+`BANDIT-063` is landed and closed out. Its Stage 1 brief, formation review,
+Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 review evidence,
+Stage 5 landing verdict/action evidence, and Stage 6 retrospective closeout are
+recorded under `docs/work/BANDIT-063/`.
 
 `BANDIT-062` is landed and closed out. Its Stage 1 brief, Stage 2 RED evidence,
 Stage 3 implementation evidence, Stage 4 review evidence, Stage 5 landing
@@ -197,10 +208,9 @@ resulting work can proceed or land.
 
 ## Priority
 
-1. Triage the Trust Verifier Cutover Gate as the next bootstrap-policy item
-   before unrelated cockpit product work; keep
-   `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` held as source material
-   until that dependency is resolved.
+1. Run formation review for `BANDIT-064` before RED evidence, implementation,
+   Trust Verifier cutover, old-gate replacement/wrapping, or unrelated cockpit
+   product work.
 2. Preserve the Work Item PM plan-mode gate: after brief/current-state
    grounding and before Stage 2 RED evidence or full orchestration.
 3. Preserve the Permanent Test Ownership Boundary and Bootstrap Model-Family
@@ -213,15 +223,15 @@ resulting work can proceed or land.
 6. Keep `bandit trust verify` in the Trust Verifier Compatibility Period until
    a later per-trust-goal cutover decision has reproducible parity evidence.
 7. Keep unrelated Phase 8 cockpit product work, role input packet work,
-   execution packet work, Pi/Aperture agent-scope work, and Trust Verifier
-   cutover blocked while bootstrap gaps remain queued or active.
+   execution packet work, Pi/Aperture agent-scope work, and actual Trust
+   Verifier cutover blocked while bootstrap gaps remain queued or active.
 
 ## Required Operator Input
 
-No operator-owned input is required for Trust Verifier Cutover Gate triage.
-Halt for operator input if the next step would approve Trust Verifier cutover
-policy, replace or wrap an older gate path, or make another policy decision
-that repo artifacts cannot answer.
+No operator-owned input is required for `BANDIT-064` formation review. Halt for
+operator input if the next step would approve Trust Verifier cutover policy,
+select a Trust Goal for cutover, replace or wrap an older gate path, or make
+another policy decision that repo artifacts cannot answer.
 
 Ask the operator only if the proposed work item would expand into product
 direction, UAT policy, workflow policy beyond explicit artifact-input path

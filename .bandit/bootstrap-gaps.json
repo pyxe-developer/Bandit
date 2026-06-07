@@ -822,6 +822,28 @@
       "rationale": "BANDIT-063 introduced a deterministic Work Item PM plan-mode gate after formation/current-state grounding and before RED evidence or broader orchestration. `work-item-pm start` now fails closed when `docs/work/<ID>/orchestration-plan.md` is missing or structurally incomplete, records append-only `orchestration_plan_recorded` coordination evidence when the gate is satisfied, and keeps the plan artifact advisory rather than canonical workflow state.",
       "verification_target": "docs/work/BANDIT-063/retrospective.md",
       "next_action": "Use the Work Item PM plan-mode gate for future work-item orchestration; keep broader semantic plan freshness validation as future policy/validator work only if explicitly scoped."
+    },
+    {
+      "id": "BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE",
+      "title": "Trust Verifier Cutover Gate needs explicit triage",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-063",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/plans/BOOTSTRAP_METHODOLOGY.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/work/BANDIT-063/retrospective.md",
+        "docs/specs/BANDIT-GAP-TRUST-VERIFIER-CUTOVER-GATE-TRIAGE.json"
+      ],
+      "linked_work_item": "BANDIT-064",
+      "rationale": "Current repo context and BANDIT-063 closeout identify Trust Verifier Cutover Gate triage as the next bootstrap-policy item after compatibility-mode trust verification, artifact-input path cleanup, replacement metadata preservation, and Work Item PM plan-mode orchestration. This gap is limited to materializing the cutover gate contract and current no-cutover-approved disposition; actual Trust Verifier cutover approval, old-gate replacement, or old-gate wrapping remains operator-owned and separately blocked.",
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-064."
     }
   ]
 }
