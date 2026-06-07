@@ -31,6 +31,7 @@ import { validateSupplyChainGate } from "../state/supply-chain-gate.js";
 import { validateArtifactInputsPolicy } from "../state/artifact-inputs.js";
 import { validateRoleContractsPolicy } from "../state/role-contracts.js";
 import { validateTokenCostFailsafePolicy } from "../state/token-cost-failsafe.js";
+import { validateTrustVerifierCutoverGates } from "../state/trust-verifier-cutover-gates.js";
 import { validateTemplates } from "../state/templates.js";
 import { validateUatApprovalArtifacts } from "../state/uat-approval.js";
 import { validateWorkItems } from "../state/work-items.js";
@@ -75,6 +76,7 @@ export async function validateBandit(repoRoot: string) {
   await validateCoordinationLogs(repoRoot);
   await validateRoleContractsPolicy(repoRoot);
   await validateArtifactInputsPolicy(repoRoot);
+  await validateTrustVerifierCutoverGates(repoRoot);
 
   return { message: "Bandit state is valid." };
 }

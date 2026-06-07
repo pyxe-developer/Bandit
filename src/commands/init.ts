@@ -34,6 +34,7 @@ import {
   writeDefaultSupplyChainGatePolicy,
   writeDefaultSupplyChainGateTemplate
 } from "../state/supply-chain-gate.js";
+import { writeDefaultTrustVerifierCutoverGatesPolicy } from "../state/trust-verifier-cutover-gates.js";
 
 export async function initBandit(repoRoot: string) {
   const paths = getBanditPaths(repoRoot);
@@ -83,6 +84,9 @@ export async function initBandit(repoRoot: string) {
   const supplyChainPolicyExists = await pathExists(paths.supplyChainPolicy);
   const supplyChainTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/supply-chain-gate.md`
+  );
+  const trustVerifierCutoverGatesPolicyExists = await pathExists(
+    paths.trustVerifierCutoverGatesPolicy
   );
 
   await mkdir(paths.stateRoot, { recursive: true });
@@ -167,6 +171,12 @@ export async function initBandit(repoRoot: string) {
 
   if (!supplyChainTemplateExists) {
     await writeDefaultSupplyChainGateTemplate(repoRoot);
+  }
+
+  if (!trustVerifierCutoverGatesPolicyExists) {
+    await writeDefaultTrustVerifierCutoverGatesPolicy(
+      paths.trustVerifierCutoverGatesPolicy
+    );
   }
 
   if (alreadyInitialized) {

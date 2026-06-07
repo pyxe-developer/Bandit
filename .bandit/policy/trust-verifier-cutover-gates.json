@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "compatibility_period": true,
+  "old_gates_authoritative": true,
+  "approved_trust_goals": [],
+  "cutover_gates": []
+}

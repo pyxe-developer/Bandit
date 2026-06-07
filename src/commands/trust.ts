@@ -1,5 +1,9 @@
 import { verifyTrustSnapshot, writeTrustReport } from "../state/trust-verify.js";
 import type { TrustReport } from "../state/trust-verify.js";
+import {
+  validateTrustVerifierCutoverGates,
+  type TrustVerifierCutoverGateReport
+} from "../state/trust-verifier-cutover-gates.js";
 
 const REFUSED_FLAGS: Record<string, string> = {
   "--replace-land-check":
@@ -11,13 +15,54 @@ const REFUSED_FLAGS: Record<string, string> = {
 export async function trust(repoRoot: string, args: string[]): Promise<{ output: string }> {
   const [subcommand, ...rest] = args;
 
-  if (subcommand !== "verify") {
-    throw new Error(
-      "Usage: bandit trust verify <snapshot.json> [--json] [--report <path>]"
-    );
+  if (subcommand === "verify") {
+    return trustVerify(repoRoot, rest);
   }
 
-  return trustVerify(repoRoot, rest);
+  if (subcommand === "cutover-gates") {
+    return trustCutoverGates(repoRoot, rest);
+  }
+
+  throw new Error(
+    "Usage: bandit trust <verify|cutover-gates> ...\n" +
+      "  bandit trust verify <snapshot.json> [--json] [--report <path>]\n" +
+      "  bandit trust cutover-gates validate [--json]"
+  );
+}
+
+async function trustCutoverGates(
+  repoRoot: string,
+  args: string[]
+): Promise<{ output: string }> {
+  const [action, ...options] = args;
+
+  if (action !== "validate" || options.some((option) => option !== "--json")) {
+    throw new Error("Usage: bandit trust cutover-gates validate [--json]");
+  }
+
+  const report = await validateTrustVerifierCutoverGates(repoRoot);
+
+  if (options.includes("--json")) {
+    return { output: `${JSON.stringify(report, null, 2)}\n` };
+  }
+
+  return { output: formatCutoverGateReport(report) };
+}
+
+function formatCutoverGateReport(
+  report: TrustVerifierCutoverGateReport
+): string {
+  const lines = [
+    `verdict: ${report.verdict}`,
+    `compatibility_period: ${report.compatibility_period}`,
+    `old_gates_authoritative: ${report.old_gates_authoritative}`,
+    `approved_trust_goals: ${
+      report.approved_trust_goals.length > 0
+        ? report.approved_trust_goals.join(", ")
+        : "(none)"
+    }`,
+  ];
+  return lines.join("\n") + "\n";
 }
 
 async function trustVerify(
