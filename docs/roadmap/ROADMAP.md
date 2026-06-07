@@ -5,9 +5,10 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-070` - Verification Oracle Provenance Gate
-  (Stage 4 review recorded)
+  (Stage 5 landing verdict recorded)
 
-**Current next step:** Record Stage 5 landing verdict for `BANDIT-070`.
+**Current next step:** Run `npm run bandit -- land-check BANDIT-070`, then
+perform local-record landing if the gate passes.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

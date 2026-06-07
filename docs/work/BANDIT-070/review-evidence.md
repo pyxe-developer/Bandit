@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-070
 source_head: fb4a4a34167c4b1020fefd2cb68c90d89b14c001
-review_subject_hash: 4c7116434acb575dbf92f4a2f6cdbfa471bb2fd2c2dde02d8f8fc4d9d6f3f3d5
+review_subject_hash: 01e932a22bef95d41cb06bd479e14d386f87d715eab26e67cf90a27821bb9538
 verification_state: pass
 verification_evidence:
   - node --test test/verification-oracle-provenance.test.mjs
@@ -24,7 +24,7 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: Layered risk classification selected pre_pr_coderabbit_plus_qwen. The change is medium-risk workflow-gate validation work but has no never-auto-landable surface, dependency or lockfile change, package-manager script change, CI/release workflow change, live API, external side effect, production data, auth, payment, privacy, telemetry, merge, push, deploy, or Trust Verifier cutover. Local Qwen findings were non-blocking and dispositioned with supplemental source-diff review evidence, so no escalated adversarial review is required.
 pm_disposition: pass
-pm_disposition_rationale: Stage 4 passes because focused oracle-provenance tests, full npm test, typecheck, aggregate Bandit validation, dedicated oracle-provenance validation, risk classification, supply-chain gate validation, and review-subject hash evidence all pass. CodeRabbit is recorded as a bootstrap gap because the provider timed out without terminal findings, so no pass is claimed. Local Qwen returned non-blocking findings; Codex PM dispositions them as no-action or resolved-by-supplemental-review because Stage 4 now supplies the skipped later-stage evidence and the supplemental source-diff Qwen review of implementation commit 6c4792a returned pass with no blocker. The Stage 3 Writer made no test-surface edits after Codex-authored RED evidence.
+pm_disposition_rationale: Stage 4 passes because focused oracle-provenance tests, full npm test, typecheck, aggregate Bandit validation, dedicated oracle-provenance validation, risk classification, supply-chain gate validation, and refreshed review-subject hash evidence all pass. CodeRabbit is recorded as a bootstrap gap because the provider timed out without terminal findings, so no pass is claimed. Local Qwen returned non-blocking findings; Codex PM dispositions them as no-action or resolved-by-supplemental-review because Stage 4 now supplies the skipped later-stage evidence and the supplemental source-diff Qwen review of implementation commit 6c4792a returned pass with no blocker. The Stage 3 Writer made no test-surface edits after Codex-authored RED evidence.
 non_blocking_findings_routing:
   - no_action: Stage 4 reviewer/projection commands were correctly skipped in Stage 3 evidence and are now recorded in Stage 4 evidence.
   - resolved_by_supplemental_review: The initial Local Qwen command reviewed an evidence-only diff; supplemental Qwen review through bin/omlx-chat-completions.mjs reviewed the 6c4792a implementation diff and returned pass.
