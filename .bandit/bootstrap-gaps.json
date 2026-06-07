@@ -875,6 +875,196 @@
       "rationale": "BANDIT-065 delivered the harness-portable Work Item PM orchestrator prompt contract as adapter-facing guidance rather than workflow authority. The work added .bandit/policy/orchestrator-prompts.json, docs/templates/work-item-pm-orchestrator-prompt.md, a fail-closed validator, CLI command wiring, init/validate integration, focused tests, Stage 4 review evidence, Stage 5 landing evidence, local-record landing action evidence, and Stage 6 retrospective closeout.",
       "verification_target": "docs/work/BANDIT-065/retrospective.md",
       "next_action": "Use the orchestrator prompt contract as non-authoritative harness guidance while Bandit CLI evidence and gates remain canonical."
+    },
+    {
+      "id": "BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE",
+      "title": "Test Strength / Mutation Adequacy Gate",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 identified a bootstrap gap in Bandit's verification policy: Stage 2 and later gates require behavior-focused tests, evidence, review, clean-code, risk, landing, and freshness checks, but do not make mutation adequacy or assertion strength a first-class gate. Critical deterministic trust-layer code should require mutation score evidence, property or fault-injection evidence, table-driven adversarial cases, or an explicit no-action/bootstrap-gap disposition so Bandit can ask whether tests would catch plausible wrong behavior, not just whether tests exist.",
+      "verification_target": null,
+      "next_action": "After the active BANDIT-068 slice lands and closes out, create a bounded chore from docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE",
+      "title": "Verification Oracle Provenance Gate",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 identified Verification Oracle Provenance as the next verification-layer strengthening gap. Bandit records many verdicts and freshness checks, but covered pass/trusted/ready claims do not yet have to name the oracle they rely on or prove that oracle is independent enough for the trust decision. This gap should prevent circular self-attestation where a projection, validator, generated report, or command output becomes the evidence oracle for its own correctness.",
+      "verification_target": null,
+      "next_action": "After the active BANDIT-068 slice lands and closes out and the queued test-strength gate is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",
+      "title": "Private Installable Distribution And Update Notification Channel",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "README.md",
+        "package.json",
+        "package-lock.json",
+        "bin/bandit.mjs",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 clarified that Bandit should not be public yet, but should be installable in multiple private repos and should alert from the CLI when private updates are available. Current package evidence shows a bin entry exists, but public publishing is blocked by private package metadata, packed install fails because the CLI depends on devDependency-only tsx, package contents are not scoped for distribution, and no private update-channel metadata or non-blocking update-check command exists.",
+      "verification_target": null,
+      "next_action": "After the active BANDIT-068 slice lands and closes out and the queued test-strength and oracle-provenance gates are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
+      "title": "Replay Regression Corpus",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Replay Regression Corpus records the need to turn historical Bandit workflow failures into deterministic replay packets so current validation and trust-verifier-compatible paths can prove they still catch old failure modes.",
+      "verification_target": null,
+      "next_action": "After the active BANDIT-068 slice lands and closes out and the queued test-strength, oracle-provenance, and private install/update gaps are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",
+      "title": "Gate Determinism And Flake Gate",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Gate Determinism And Flake Gate records the need for critical trust-layer gates to prove repeatable output, stable ordering, stable hashes, and explicit disposition for nondeterministic or provider-dependent evidence.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-REPLAY-REGRESSION-CORPUS is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS",
+      "title": "Metamorphic Cross-Projection Checks",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Metamorphic Cross-Projection Checks records the need for derived surfaces such as cockpit status, session-context, land-check, and future trust verify output to agree when reading the same canonical artifacts and to preserve verdicts under harmless input perturbations.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS",
+      "title": "Reviewer Calibration With Seeded Defects",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Reviewer Calibration With Seeded Defects records the need for replay-only reviewer packets with known blockers and known non-issues so Qwen, CodeRabbit, and escalated reviewers can be checked for drift without affecting live work.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION",
+      "title": "Evidence Bundle Attestation",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Evidence Bundle Attestation records the need to hash and attest the full landing evidence bundle, not only the source subject, so trusted verdicts can be tied to tests, review, risk, supply-chain, UAT where applicable, policy versions, command versions, and freshness evidence.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json before proceeding to the next unrelated Phase 8 product slice."
+    },
+    {
+      "id": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",
+      "title": "Spec-To-Evidence Traceability Matrix",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "OPERATOR-2026-06-07",
+      "source_artifacts": [
+        "AGENTS.md",
+        "CONTEXT.md",
+        "CLEAN_CODE.md",
+        "docs/verification/STAGE_RUBRICS.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/work/BANDIT-068/brief.md",
+        "docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json"
+      ],
+      "linked_work_item": null,
+      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Spec-To-Evidence Traceability Matrix records the need for each acceptance criterion to map to concrete verification evidence or explicit disposition so weak specs and unmapped claims are harder to land.",
+      "verification_target": null,
+      "next_action": "After BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json before proceeding to the next unrelated Phase 8 product slice."
     }
   ]
 }

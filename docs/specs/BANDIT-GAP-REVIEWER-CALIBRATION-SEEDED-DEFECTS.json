@@ -1,0 +1,93 @@
+{
+  "kind": "chore",
+  "title": "Reviewer Calibration With Seeded Defects",
+  "status": "Queued",
+  "non_product_work": "Use replay-only reviewer packets with known blockers and known non-issues to check whether reviewer gates still catch the right things.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. The earlier verification-layer review identified reviewer calibration with seeded defects as a hardening opportunity for Qwen, CodeRabbit, and any escalated reviewers.",
+  "scope": [
+    "Define replay-only reviewer calibration packets with gold-labeled blockers and non-issues.",
+    "Measure blocker recall, actionable precision, false-positive rate, useful finding yield, latency, and cost where available.",
+    "Keep calibration separated from live work and from automatic reviewer/model routing promotion.",
+    "Record reviewer drift, provider refusal, or inconclusive calibration as evidence without silently weakening live review gates.",
+    "Keep this chore focused on calibration policy, packets, scoring, command output, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy artifact defines calibration packet schema, gold labels, scoring metrics, reviewer eligibility, provider-refusal handling, and no-live-routing boundaries.",
+    "Calibration packets include known blockers and known non-issues stratified by Bandit workflow failure mode rather than generic coding tasks only.",
+    "Calibration output is deterministic where local and records provider-dependent evidence honestly where external reviewers are unavailable or inconclusive.",
+    "Calibration results cannot automatically promote, demote, or replace reviewer routing without a separate approved workflow trial or policy decision.",
+    "`BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused tests for calibration packet schema and gold-label validation.",
+    "Run tests proving seeded blockers and non-issues produce deterministic scoring from fixture reviewer outputs.",
+    "Run tests proving calibration cannot mutate live reviewer routing or landing authority.",
+    "Run tests proving provider-refusal and inconclusive calibration are recorded honestly.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches reviewer routing, reviewer evidence, calibration commands, or validators.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/reviewer-calibration.json",
+    "docs/reviewer-calibration-packets/",
+    "src/state/reviewer-calibration.ts",
+    "src/commands/reviewer-calibration.ts",
+    "test/reviewer-calibration.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns fixture packet design, local scoring, provider-refusal handling, and review routing. Halt only if implementation would approve paid reviewer/model routing, change recurring cost policy, change live reviewer routing, change product direction, UAT policy, business tradeoffs, Trust Verifier cutover, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not let calibration packets affect live work or reviewer routing by themselves.",
+      "Do not approve paid or recurring reviewer/model routing in this chore.",
+      "Do not approve Trust Verifier cutover, merge, push, deploy, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS is resolved, blocked, or explicitly dispositioned"
+  ]
+}

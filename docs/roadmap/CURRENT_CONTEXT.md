@@ -33,6 +33,30 @@ Drilldown And Gate Matrix product slice. Stage 1 evidence is recorded under
 OpenAI-compatible adapter route and CodeRabbit provider-timeout replacement
 evidence.
 
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued from operator
+direction on 2026-06-07. It should become the next bootstrap-gap chore after
+the active `BANDIT-068` slice lands and closes out; do not start it before the
+current slice boundary is satisfied.
+
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is also queued from operator
+direction on 2026-06-07. It is ordered behind the test-strength gate and should
+not start until `BANDIT-068` is landed/closed and the test-strength gate is
+resolved, blocked, or explicitly dispositioned.
+
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued from operator direction
+on 2026-06-07. It records the private, non-public distribution posture: Bandit
+should be installable in multiple private repos and the CLI should alert when a
+newer private update is available. It is ordered behind the oracle-provenance
+gate unless the operator explicitly reprioritizes the bootstrap-gap queue.
+
+The remaining verification-layer opportunities from the 2026-06-07 review are
+recorded as queued bootstrap gaps behind the private install/update channel:
+Replay Regression Corpus, Gate Determinism And Flake Gate, Metamorphic
+Cross-Projection Checks, Reviewer Calibration With Seeded Defects, Evidence
+Bundle Attestation, and Spec-To-Evidence Traceability Matrix. They must not
+start before `BANDIT-068` is landed/closed and earlier queued gaps are resolved,
+blocked, or explicitly dispositioned.
+
 **Active work item:** `BANDIT-068` (formation approved).
 
 The current stage is Stage 1: Formation approved / Work Item PM plan-mode
@@ -85,8 +109,19 @@ worktree execution, or unrelated Phase 8 scope before the orchestration packet
 is recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
-`no_action`; no bootstrap gap is currently queued before the next Phase 8
-cockpit product slice.
+`no_action`. `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued after
+the active `BANDIT-068` slice and before the next unrelated Phase 8 cockpit
+product slice. `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued
+behind the test-strength gate as the next verification-layer hardening gap.
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued behind the
+oracle-provenance gate as the private install/update-channel hardening gap.
+`BANDIT-GAP-REPLAY-REGRESSION-CORPUS`,
+`BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE`,
+`BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS`,
+`BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS`,
+`BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION`, and
+`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` are queued after the private
+install/update channel as the remaining verification-layer hardening backlog.
 
 `BANDIT-065` is landed and closed out. Its Stage 1 through Stage 6 evidence is
 recorded under `docs/work/BANDIT-065/`, and local-record landing action

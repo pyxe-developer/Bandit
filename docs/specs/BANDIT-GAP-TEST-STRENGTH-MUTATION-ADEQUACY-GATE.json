@@ -1,0 +1,176 @@
+{
+  "kind": "chore",
+  "title": "Test Strength / Mutation Adequacy Gate",
+  "status": "Queued",
+  "non_product_work": "Create a risk-tiered test-strength gate that asks whether critical tests would catch plausible wrong behavior, with mutation evidence, property or fault-injection evidence, table-driven adversarial cases, or explicit bootstrap/no-action disposition.",
+  "origin": "Operator direction on 2026-06-07 identified a bootstrap gap: Bandit requires behavior-focused RED tests, clean-code checks, review, risk classification, landing verdicts, and freshness checks, but mutation testing and assertion adequacy are not first-class gates. The missing policy lets Bandit prove tests exist and went red/green without systematically proving the tests would reject plausible broken implementations, especially for deterministic trust-layer code, landing gates, review routing, claim/lock/worktree behavior, state transitions, and artifact validators.",
+  "scope": [
+    "Define a repo-native Test Strength / Mutation Adequacy Gate for critical deterministic trust-layer work without turning it into a universal coverage mandate.",
+    "Classify when test-strength evidence is required, including landing gates, review routing, claim authority, claim/lock/worktree behavior, state transitions, artifact validators, evidence freshness/trust signals, role/coordination gates, serializer behavior, and guarded action or authority boundaries.",
+    "Require Stage 1 briefs touching covered surfaces to declare a test-strength strategy: mutation score evidence, property-style or fault-injection simulation, table-driven adversarial cases, or explicit no-action/bootstrap-gap disposition.",
+    "Strengthen Stage 2 RED evidence so it records that the RED failed for the intended behavior reason and explains how assertions reject plausible wrong implementations, not just missing behavior.",
+    "Require Stage 2 acceptance mapping to identify the plausible wrong behaviors, mutants, invariant violations, or adversarial cases each test family is meant to catch.",
+    "Define mutation evidence fields for target surface, command or runner, mutation score or equivalent result, threshold or disposition rule, surviving mutant disposition, excluded mutants, and freshness source when a mutation runner is used.",
+    "Allow property-style and fault-injection simulation as first-class alternatives for stateful or concurrency-sensitive trust-layer behavior, including claim safety, retry/idempotency, stale fencing token, projection/history disagreement, and serializer or worktree-lock failure scenarios.",
+    "Allow table-driven adversarial cases for deterministic validators and routing rules when mutation tooling is unavailable or excessive for the slice, as long as the cases target plausible wrong implementations.",
+    "Update reviewer and aggregate-review packet requirements so CodeRabbit, Local Qwen, and PM disposition ask whether the tests could pass with a broken implementation, separately from source quality and test presence.",
+    "Update landing or validation gates so covered high-risk surfaces fail closed when test-strength evidence is missing, stale, inadequate, or silently replaced by generic coverage claims.",
+    "Keep this chore focused on policy, templates, validators, command wiring, reviewer-packet language, package-script support if selected, and focused tests. Do not require mutation testing for every file, mandate line coverage, run external services, approve paid tooling, change product direction, or weaken existing Stage 2 model-family and test-ownership boundaries.",
+    "Preserve Permanent Test Ownership Boundary and Bootstrap Model-Family Separation: Stage 3 Writers cannot edit tests, test helpers, fixtures, RED evidence, mutation evidence, assertion-adequacy mappings, or acceptance mappings for their work item."
+  ],
+  "acceptance_criteria": [
+    "The chore brief exists at `docs/work/<ID>/brief.md` and links to `BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` as the active bootstrap gap once it becomes the next queued work item.",
+    "A repo-native policy artifact or equivalent validator defines covered risk tiers, covered trust-layer surfaces, acceptable evidence modes, required fields for mutation evidence, required fields for property/fault-injection evidence, required fields for table-driven adversarial evidence, and explicit no-action/bootstrap-gap disposition rules.",
+    "Stage 1 brief/spec validation requires covered high-risk surfaces to declare a test-strength strategy or explicit disposition before Stage 2 begins.",
+    "Stage 2 RED evidence validation requires intended-failure evidence and assertion-adequacy mapping for covered surfaces: the evidence must identify why the RED failed and which plausible wrong implementations the assertions would reject.",
+    "Mutation evidence, when selected, records the target surface, command or runner, score or equivalent result, threshold/disposition rule, surviving mutant disposition, excluded mutant rationale, and freshness source.",
+    "Property-style or fault-injection evidence, when selected, records invariants, generated or enumerated state space, injected failures, replay determinism, and the wrong-behavior classes rejected.",
+    "Table-driven adversarial evidence, when selected, records the adversarial cases, the plausible wrong implementation each case targets, and why the cases are sufficient for the selected risk tier.",
+    "Reviewer packet templates and aggregate Stage 4 evidence ask whether tests could pass with a broken implementation, require reviewer or PM disposition for weak assertions, and distinguish test adequacy findings from source-quality findings.",
+    "Landing, land-check, or repo validation consumes current test-strength evidence for covered high-risk surfaces and fails closed when evidence is missing, stale, contradictory, generic coverage-only, or unsupported by an explicit disposition.",
+    "The implementation does not add a blanket coverage mandate, require mutation testing everywhere, treat mutation score as the only acceptable evidence mode, approve paid/external mutation tooling, change UAT policy, approve Trust Verifier cutover, change merge/push/deploy authority, or expand unrelated Phase 8 cockpit/product scope.",
+    "If a package script or dev dependency is added for mutation testing, the work records supply-chain and layered-risk evidence and keeps the runner local, deterministic, and scoped to supported surfaces; unavailable runner behavior is recorded as bootstrap evidence rather than pass evidence.",
+    "The implementation preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation; Stage 3 Writers cannot edit test-strength evidence or other Test Writer-owned surfaces.",
+    "Stage 4 review uses CodeRabbit and Local Qwen or honest provider-refusal/bootstrap replacement evidence, with layered risk-classification, supply-chain, clean-code, and review-subject freshness evidence before landing.",
+    "`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is resolved only after landing action and retrospective closeout evidence exist for this bounded gate chore."
+  ],
+  "verification_plan": [
+    "Run focused tests proving covered high-risk trust-layer surfaces require test-strength strategy evidence or explicit disposition before Stage 2 proceeds.",
+    "Run focused Stage 2 evidence validation tests proving missing intended-failure reason, missing assertion-adequacy mapping, generic coverage-only claims, and unsupported evidence modes fail closed.",
+    "Run focused mutation-evidence validation tests for score/threshold fields, surviving mutant disposition, excluded mutant rationale, freshness source, and unavailable-runner bootstrap disposition.",
+    "Run focused property/fault-injection validation tests for invariants, deterministic replay, injected failure classes, and wrong-behavior coverage.",
+    "Run focused table-driven adversarial evidence tests proving each case maps to a plausible wrong implementation.",
+    "Run focused reviewer-packet or aggregate-review tests proving Stage 4 asks whether tests could pass with a broken implementation and preserves source-quality review as a separate concern.",
+    "Run focused landing or validation tests proving covered high-risk surfaces fail closed when test-strength evidence is missing, stale, inadequate, or contradictory.",
+    "Run mutation testing through the selected local package script if this chore adds one; otherwise record the no-run/bootstrap disposition and run the policy validator tests.",
+    "Run `npm test` if implementation touches shared validators, work-item parsing, Stage 2 evidence parsing, review evidence, landing gates, package scripts, policy validation, templates, bootstrap gaps, or current-state projections.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `node ./bin/bandit.mjs review-subject-hash <ID>` for aggregate review evidence freshness.",
+    "Run `npm run bandit -- coderabbit-review pre-pr <ID> --base origin/main` before Stage 4 closeout unless provider-refusal evidence is recorded.",
+    "Run `npm run bandit -- qwen-review <ID>` before Stage 4 closeout unless provider-refusal evidence is recorded.",
+    "Run `npm run bandit -- land-check <ID>` before landing.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    ".bandit/policy/test-strength-gate.json",
+    "docs/templates/test-strength-evidence.md",
+    "docs/templates/red-evidence.md",
+    "docs/templates/review-evidence.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "CLEAN_CODE.md",
+    "src/state/test-strength-gate.ts",
+    "src/commands/test-strength-gate.ts",
+    "src/commands/validate.ts",
+    "src/commands/land-check.ts",
+    "src/state/review-evidence.ts",
+    "src/state/coderabbit-review.ts",
+    "src/state/local-qwen-review.ts",
+    "package.json",
+    "package-lock.json",
+    "test/test-strength-gate.test.mjs",
+    "test/landing-gates.test.mjs",
+    "test/validate.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. The operator supplied the workflow-policy direction: Bandit needs a risk-tiered test-strength gate that asks whether critical tests catch plausible wrong behavior, with mutation evidence as one acceptable mode rather than a coverage mandate. Codex PM owns the technical shape of policy artifacts, validators, test strategy, package-script selection if local mutation tooling is selected, supply-chain evidence, reviewer packet wording, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, approve paid or external tooling, approve recurring paid model/reviewer routing, approve Trust Verifier cutover, alter merge/push/deploy authority, change dependency or lockfile policy outside the scoped local mutation-runner decision, or expand into unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not treat mutation score as a universal coverage mandate.",
+      "Do not let Stage 3 Writers edit tests, test helpers, fixtures, RED evidence, mutation evidence, assertion-adequacy mappings, or acceptance mappings.",
+      "Do not treat generic line coverage, snapshot churn, or test presence as test-strength evidence for covered high-risk surfaces.",
+      "Do not approve paid/external mutation tooling, Trust Verifier cutover, product UAT changes, merge, push, deploy, guarded action execution, or unrelated Phase 8 cockpit work in this chore."
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "Stage 1 Repo PM brief creation and formation review should use local-only default budget guidance.",
+      "Mutation or property/fault-injection runs should be scoped to covered surfaces and should record timeout or unavailable-runner disposition rather than forcing repeated full-suite attempts.",
+      "Stage 4 reviewer runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly."
+    ],
+    "provider_pricing_evidence": [
+      "No paid provider-pricing evidence is approved by this queued chore.",
+      "Any paid mutation service, paid reviewer, paid model, or recurring paid route remains blocked unless a separate approved provider-pricing and spend-class artifact exists."
+    ],
+    "spend_classes": [
+      "local-only-default",
+      "one-off-paid-evaluation-blocked-without-approval",
+      "recurring-paid-routing-blocked-without-policy-promotion"
+    ],
+    "continuation_decisions": [
+      "If mutation or property/fault-injection execution times out, halt the expensive action and record continuation or bootstrap evidence before retrying.",
+      "If CodeRabbit or another external reviewer times out, record explicit provider-refusal or continuation evidence instead of treating absence as pass."
+    ],
+    "stage_capability_profiles": [
+      "repo-pm-stage1-formation",
+      "test-writer-stage2",
+      "claude-implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4",
+      "landing-agent-stage5",
+      "closeout-agent-stage6"
+    ]
+  }
+}

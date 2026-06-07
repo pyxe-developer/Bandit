@@ -1,0 +1,93 @@
+{
+  "kind": "chore",
+  "title": "Spec-To-Evidence Traceability Matrix",
+  "status": "Queued",
+  "non_product_work": "Require acceptance criteria to map to concrete verification artifacts or explicit dispositions before a work item can land.",
+  "origin": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. The earlier verification-layer review identified spec-to-evidence traceability as a hardening opportunity because Bandit currently does this informally: each acceptance criterion should map to a test, invariant, reviewer check, UAT item, replay packet, or explicit disposition.",
+  "scope": [
+    "Define a machine-checkable traceability matrix for work-item acceptance criteria and verification artifacts.",
+    "Map each acceptance criterion to tests, invariants, reviewer checks, UAT items, replay packets, command evidence, or explicit no-action/bootstrap disposition.",
+    "Require traceability before landing for covered work and require Stage 4 reviewers to inspect weak or missing mappings.",
+    "Avoid coverage mandates; this gate validates claim-to-evidence mapping, not line coverage.",
+    "Keep this chore focused on templates, validators, reviewer packet language, docs, and tests."
+  ],
+  "acceptance_criteria": [
+    "The chore brief links to `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` as the active bootstrap gap once it becomes the next queued work item.",
+    "A policy or template defines traceability entry schema, supported evidence types, disposition values, required fields, and covered risk tiers.",
+    "Covered work items cannot land when acceptance criteria lack concrete verification mapping or explicit disposition.",
+    "Review evidence asks whether mapped tests and artifacts prove the stated behavior rather than only existing.",
+    "Traceability output distinguishes behavior evidence, implementation-detail evidence, UAT evidence, reviewer evidence, replay evidence, and explicit no-action/bootstrap dispositions.",
+    "`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is resolved only after landing action and retrospective closeout evidence exist."
+  ],
+  "verification_plan": [
+    "Run focused tests for traceability matrix parsing and validation.",
+    "Run tests proving missing, vague, unsupported, or behavior-mismatched evidence mappings fail closed.",
+    "Run tests proving explicit no-action/bootstrap dispositions are accepted only with concrete rationale.",
+    "Run tests proving reviewer packet templates include traceability-quality inspection.",
+    "Run `npm run typecheck`.",
+    "Run `npm run bandit -- validate`.",
+    "Run `npm run bandit -- gaps list`.",
+    "Run `node ./bin/bandit.mjs cockpit status --json`.",
+    "Run `node ./bin/bandit.mjs session-context current --json`.",
+    "Run `npm test` when implementation touches work-item templates, review evidence, landing gates, or validators.",
+    "Run `git diff --check`."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json",
+    "docs/work/<ID>/brief.md",
+    ".bandit/policy/spec-to-evidence-traceability.json",
+    "docs/templates/spec-to-evidence-traceability.md",
+    "src/state/spec-to-evidence-traceability.ts",
+    "src/commands/validate.ts",
+    "test/spec-to-evidence-traceability.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No further operator-owned input is required to queue this bootstrap-gap chore. Codex PM owns traceability policy, template shape, validators, tests, and review routing. Halt only if implementation would change product direction, UAT policy, business tradeoffs, explicit cost/risk posture, Trust Verifier cutover, paid/external tooling, merge/push/deploy authority, or unrelated cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "superpowers:verification-before-completion"
+    ],
+    "forbidden_actions": [
+      "Do not convert traceability into a line-coverage mandate.",
+      "Do not let implementation-detail evidence substitute for behavior evidence without explicit rationale.",
+      "Do not approve Trust Verifier cutover, paid routing, merge, push, deploy, or unrelated cockpit/product scope in this chore."
+    ]
+  },
+  "blocked_until": [
+    "BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION is resolved, blocked, or explicitly dispositioned"
+  ]
+}

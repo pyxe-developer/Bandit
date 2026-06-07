@@ -20,8 +20,25 @@ OpenAI-compatible adapter route through `bin/omlx-chat-completions.mjs`; the
 direct `qwen` CLI is revoked for Bandit reviewer routing.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
-source material is resolved with disposition `no_action`; no role-scoped
-bootstrap gap remains queued before Phase 8 cockpit work.
+source material is resolved with disposition `no_action`.
+
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is queued from operator
+direction on 2026-06-07. It should become the next bootstrap-gap chore after
+`BANDIT-068` lands and closes out; the current next action remains
+`BANDIT-068` Work Item PM plan-mode orchestration.
+
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is queued behind the
+test-strength gate as the next verification-layer hardening gap.
+
+`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` is queued behind the
+oracle-provenance gate. It captures the private, non-public install/update
+posture: install Bandit across multiple private repos and alert from the CLI
+when a newer private update is available.
+
+The remaining verification-layer opportunities are queued behind the private
+install/update channel: replay regression corpus, gate determinism/flake gate,
+metamorphic cross-projection checks, reviewer calibration with seeded defects,
+evidence bundle attestation, and spec-to-evidence traceability matrix.
 
 Current stage: Stage 1 formation approved - Work Item PM plan-mode
 orchestration required.
@@ -35,7 +52,7 @@ Required operator input: none for the current orchestration step.
 Last 5 items only:
 
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (formation approved)
-- `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)
-- `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
-- `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition
-- `BANDIT-065` - Harness-Portable Orchestrator Prompt Contract (closed)
+- `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - queued behind evidence bundle attestation
+- `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - queued behind reviewer calibration
+- `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - queued behind cross-projection checks
+- `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - queued behind determinism gate
