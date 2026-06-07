@@ -41,6 +41,8 @@ export function renderCockpitShell(
       source: confidenceSource(viewModel.primary_attention.confidence)
     },
     controls,
+    status_cues: viewModel.status_cues,
+    gate_strip: viewModel.gate_strip,
     links: buildLinks(viewModel),
     keyboard: {
       focus_order: [

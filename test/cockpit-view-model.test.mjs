@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { cockpitStatusFixture } from "./helpers/cockpit-status-fixture.mjs";
+import {
+  cockpitStatusFixture,
+  liveCockpitStatusFixture
+} from "./helpers/cockpit-status-fixture.mjs";
 
 async function loadViewModelModule() {
   return import("../src/state/cockpit-view-model.ts");
@@ -166,6 +169,56 @@ test("cockpit view model exposes derived guarded action affordances as one prese
     command_family: "bandit qwen-review",
     enabled: false,
     reason: "Stage 2 RED evidence is missing."
+  });
+});
+
+test("cockpit view model maps live CLI payload fields into first-screen status cues", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+
+  const viewModel = buildCockpitViewModel(liveCockpitStatusFixture());
+
+  assert.deepEqual(viewModel.active_work, {
+    id: "BANDIT-067",
+    stage: "stage_2_red_evidence",
+    next_action: "Write Test Writer-owned Stage 2 RED evidence for BANDIT-067 before implementation.",
+    source: "docs/work/BANDIT-067/brief.md"
+  });
+  assert.deepEqual(
+    viewModel.gate_strip.map((gate) => gate.id),
+    [
+      "stage_0_context_readiness",
+      "stage_1_brief",
+      "stage_2_red_evidence",
+      "stage_3_implementation",
+      "stage_4_review",
+      "stage_5_landing",
+      "stage_6_retrospective"
+    ]
+  );
+  assert.deepEqual(
+    viewModel.status_cues.map((cue) => cue.id),
+    [
+      "current_phase",
+      "active_work",
+      "next_action",
+      "operator_input",
+      "blockers_or_stale",
+      "landing_readiness",
+      "uat",
+      "bootstrap_gaps",
+      "coordination_state",
+      "improvement_health"
+    ]
+  );
+  assert.equal(
+    viewModel.status_cues.every((cue) => cue.source || cue.sources),
+    true
+  );
+  assert.deepEqual(viewModel.status_cues.find((cue) => cue.id === "coordination_state"), {
+    id: "coordination_state",
+    label: "Coordination",
+    status: "orchestration_plan_recorded",
+    source: "docs/work/BANDIT-067/coordination-log.jsonl"
   });
 });
 

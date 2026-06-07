@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { cockpitStatusFixture, desktopViewport } from "./helpers/cockpit-status-fixture.mjs";
+import {
+  cockpitStatusFixture,
+  desktopViewport,
+  liveCockpitStatusFixture
+} from "./helpers/cockpit-status-fixture.mjs";
 
 async function loadViewModelModule() {
   return import("../src/state/cockpit-view-model.ts");
@@ -77,4 +82,46 @@ test("browser cockpit shell exposes responsive and accessible shell constraints"
   assert.match(shell.css, /@media\s*\(max-width:\s*719px\)/);
   assert.match(shell.css, /overflow-wrap:\s*anywhere/);
   assert.match(shell.css, /:focus-visible/);
+});
+
+test("browser cockpit shell renders live CLI status fields on the first screen", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderBrowserCockpitShell } = await loadBrowserShellModule();
+
+  const shell = renderBrowserCockpitShell(
+    buildCockpitViewModel(liveCockpitStatusFixture()),
+    desktopViewport()
+  );
+
+  assert.match(shell.html, /Phase 8 - Workflow Cockpit kickoff/);
+  assert.match(shell.html, /BANDIT-067/);
+  assert.match(shell.html, /Write Test Writer-owned Stage 2 RED evidence/);
+  assert.match(shell.html, /none_required/);
+  assert.match(shell.html, /No blockers or stale evidence/);
+  assert.match(shell.html, /not_ready/);
+  assert.match(shell.html, /not_applicable/);
+  assert.match(shell.html, /bootstrap gaps[^<]*none/i);
+  assert.match(shell.html, /orchestration_plan_recorded/);
+  assert.match(shell.html, /pending_candidates/);
+  for (const gateId of [
+    "stage_0_context_readiness",
+    "stage_1_brief",
+    "stage_2_red_evidence",
+    "stage_3_implementation",
+    "stage_4_review",
+    "stage_5_landing",
+    "stage_6_retrospective"
+  ]) {
+    assert.match(shell.html, new RegExp(gateId));
+  }
+  assert.match(shell.html, /docs\/work\/BANDIT-067\/coordination-log\.jsonl/);
+});
+
+test("static cockpit preview is refreshed from the current live-status work item", async () => {
+  const html = await readFile("public/cockpit/index.html", "utf8");
+
+  assert.match(html, /BANDIT-067/);
+  assert.match(html, /Write Test Writer-owned Stage 2 RED evidence/);
+  assert.match(html, /docs\/work\/BANDIT-067\/coordination-log\.jsonl/);
+  assert.doesNotMatch(html, /BANDIT-066: Browser-Served Cockpit App Shell/);
 });

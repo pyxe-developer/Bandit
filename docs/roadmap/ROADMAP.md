@@ -5,10 +5,9 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-067` - Live Cockpit Status View From CLI Payload
-  (formation approved; Work Item PM plan-mode orchestration required)
+  (safe-to-land; local-record landing action required)
 
-**Current next step:** Start Work Item PM plan-mode orchestration for
-`BANDIT-067` before RED evidence.
+**Current next step:** Run the local-record landing action for `BANDIT-067` and record landing action evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

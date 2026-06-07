@@ -1,0 +1,199 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-067",
+  "changed_surfaces": [
+    {
+      "path": "src/state/cockpit-view-model.ts",
+      "surface": "cockpit_presentation_view_model",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cockpit/render.ts",
+      "surface": "browser_presentation_render_boundary",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cockpit/browser-shell.ts",
+      "surface": "browser_presentation_shell",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cockpit/preview-status-snapshot.ts",
+      "surface": "static_preview_snapshot",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cockpit/generate-cockpit-preview.ts",
+      "surface": "static_preview_generator",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "public/cockpit/index.html",
+      "surface": "static_browser_preview",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/cockpit-view-model.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/cockpit-browser-shell.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/helpers/cockpit-status-fixture.mjs",
+      "surface": "test_fixture",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [],
+  "blast_radius_signals": [
+    {
+      "signal_id": "operator_facing_browser_status_view_updated",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-067/implementation-evidence.md"
+    },
+    {
+      "signal_id": "browser_shell_non_authoritative",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "static_preview_no_javascript_or_mutation_forms",
+      "risk": "low",
+      "evidence_path": "public/cockpit/index.html"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/cockpit-view-model.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/cockpit-browser-shell.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/cockpit-ui.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/cockpit-status.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    },
+    {
+      "tool": "coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-067/coderabbit-review.md"
+    },
+    {
+      "tool": "qwen --bare --approval-mode plan",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-067/local-qwen-review.md"
+    },
+    {
+      "tool": "Playwright MCP static preview smoke",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-067/stage3-pm-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-067-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-067/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-UI-HIDDEN-AUTHORITY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-067/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-067 is an operator-facing browser presentation slice that requires CLI-owned product UAT before landing, but the code change itself does not approve product direction, UAT, policy, business tradeoffs, explicit cost/risk posture, merge, push, deploy, external services, or Trust Verifier cutover. The browser shell remains non-authoritative and the static preview contains no JavaScript or mutation controls."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-067 updates browser presentation of live CLI cockpit-status payload data. Risk is medium because it changes operator-facing UI and static preview output, but CLI authority and repo-native workflow state remain canonical, generated values are escaped, the static preview has no JavaScript or forms, local API and State Index work are absent, tests and typecheck pass, and reviewer provider unavailability is recorded as bootstrap replacement evidence rather than pass evidence.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-067-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-067-supply-chain-gate.json",
+    "docs/work/BANDIT-067/brief.md",
+    "docs/work/BANDIT-067/red-evidence.md",
+    "docs/work/BANDIT-067/implementation-evidence.md",
+    "docs/work/BANDIT-067/stage3-pm-review.md",
+    "docs/work/BANDIT-067/coderabbit-review.md",
+    "docs/work/BANDIT-067/local-qwen-review.md",
+    "docs/work/BANDIT-067/review-evidence.md",
+    "src/state/cockpit-view-model.ts",
+    "src/cockpit/render.ts",
+    "src/cockpit/browser-shell.ts",
+    "src/cockpit/preview-status-snapshot.ts",
+    "src/cockpit/generate-cockpit-preview.ts",
+    "public/cockpit/index.html",
+    "test/cockpit-view-model.test.mjs",
+    "test/cockpit-browser-shell.test.mjs"
+  ]
+}

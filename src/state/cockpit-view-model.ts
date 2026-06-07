@@ -286,14 +286,26 @@ function buildPrimaryAttention(status: CockpitStatus) {
   };
 }
 
+const COMPACT_GATE_STRIP_LENGTH = 4;
+
 function buildGateStrip(status: CockpitStatus) {
-  return Object.entries(status.gates)
-    .slice(0, 4)
-    .map(([gateId, gate]) => ({
-      id: gateId,
-      status: gate.status,
-      confidence: gateConfidence(gateId, gate)
-    }));
+  const gateEntries = Object.entries(status.gates);
+  const visibleGateEntries = rendersFullGateStrip(status)
+    ? gateEntries
+    : gateEntries.slice(0, COMPACT_GATE_STRIP_LENGTH);
+
+  return visibleGateEntries.map(([gateId, gate]) => ({
+    id: gateId,
+    status: gate.status,
+    confidence: gateConfidence(gateId, gate)
+  }));
+}
+
+// The live CLI payload carries coordination state, which marks the full
+// Stage 0 through Stage 6 live-status view. Payloads without coordination keep
+// the compact pre-coordination gate strip.
+function rendersFullGateStrip(status: CockpitStatus) {
+  return status.coordination !== null;
 }
 
 function gateConfidence(
@@ -339,6 +351,9 @@ function buildEvidenceSources(status: CockpitStatus) {
   ]);
 }
 
+const NO_BLOCKERS_OR_STALE_EVIDENCE = "No blockers or stale evidence";
+const COORDINATION_NOT_RECORDED = "not_recorded";
+
 function buildStatusCues(status: CockpitStatus): StatusCue[] {
   return [
     {
@@ -348,10 +363,35 @@ function buildStatusCues(status: CockpitStatus): StatusCue[] {
       source: status.current_phase.source
     },
     {
+      id: "active_work",
+      label: "Active work",
+      status: status.active_work_item.id,
+      source: status.active_work_item.source
+    },
+    {
       id: "next_action",
       label: "Next action",
-      status: status.next_action.agreement.status,
+      status: status.next_action.value,
       source: status.next_action.source
+    },
+    {
+      id: "operator_input",
+      label: "Operator input",
+      status: status.required_operator_input.value,
+      source: status.required_operator_input.source
+    },
+    buildBlockersOrStaleCue(status),
+    {
+      id: "landing_readiness",
+      label: "Landing",
+      status: status.landing_readiness.status,
+      source: status.landing_readiness.source
+    },
+    {
+      id: "uat",
+      label: "UAT",
+      status: status.uat.status,
+      source: status.uat.source
     },
     {
       id: "bootstrap_gaps",
@@ -359,12 +399,7 @@ function buildStatusCues(status: CockpitStatus): StatusCue[] {
       status: status.bootstrap_gaps.status,
       source: status.bootstrap_gaps.source
     },
-    {
-      id: "landing_readiness",
-      label: "Landing",
-      status: status.landing_readiness.status,
-      source: status.landing_readiness.source
-    },
+    buildCoordinationCue(status),
     {
       id: "improvement_health",
       label: "Improvements",
@@ -374,6 +409,42 @@ function buildStatusCues(status: CockpitStatus): StatusCue[] {
         : [status.improvement_health.source]
     }
   ];
+}
+
+function buildBlockersOrStaleCue(status: CockpitStatus): StatusCue {
+  const sources = uniqueStrings([
+    ...status.blockers.map((blocker) => blocker.source),
+    ...status.stale_evidence.map((evidence) => evidence.source)
+  ]);
+  const needsAttention =
+    status.blockers.length > 0 || status.stale_evidence.length > 0;
+
+  return {
+    id: "blockers_or_stale",
+    label: "Blockers or stale evidence",
+    status: needsAttention ? "needs_attention" : NO_BLOCKERS_OR_STALE_EVIDENCE,
+    sources: sources.length > 0
+      ? sources
+      : [status.required_operator_input.source]
+  };
+}
+
+function buildCoordinationCue(status: CockpitStatus): StatusCue {
+  if (status.coordination) {
+    return {
+      id: "coordination_state",
+      label: "Coordination",
+      status: status.coordination.current_state,
+      source: status.coordination.source
+    };
+  }
+
+  return {
+    id: "coordination_state",
+    label: "Coordination",
+    status: COORDINATION_NOT_RECORDED,
+    source: status.active_work_item.source
+  };
 }
 
 function readActiveStage(status: CockpitStatus) {

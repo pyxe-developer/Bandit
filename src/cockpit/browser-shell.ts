@@ -213,7 +213,45 @@ function buildActiveWorkMain(shell: CockpitShell): string {
         <h2>Actions</h2>
         ${controls}
       </section>
+      ${buildStatusCuesSection(shell)}
+      ${buildGateStripSection(shell)}
     </main>`;
+}
+
+function buildStatusCuesSection(shell: CockpitShell): string {
+  const items = shell.status_cues.map(buildStatusCueHtml).join("\n");
+
+  return `<section class="status-cues" aria-label="Live status">
+      <h2>Live status</h2>
+      <ul>
+${items}
+      </ul>
+    </section>`;
+}
+
+function buildStatusCueHtml(cue: CockpitShell["status_cues"][number]): string {
+  const source = cue.source ?? cue.sources?.[0];
+  const sourceLink = source
+    ? ` <a class="source-link" href="${escapeHtml(source)}">${escapeHtml(source)}</a>`
+    : "";
+
+  return `        <li class="status-cue"><span class="cue-text">${escapeHtml(cue.label)}: ${escapeHtml(cue.status)}</span>${sourceLink}</li>`;
+}
+
+function buildGateStripSection(shell: CockpitShell): string {
+  const items = shell.gate_strip
+    .map(
+      (gate) =>
+        `        <li class="gate"><span class="gate-text">${escapeHtml(gate.id)}: ${escapeHtml(gate.status)}</span></li>`
+    )
+    .join("\n");
+
+  return `<section class="gate-strip" aria-label="Stage gates">
+      <h2>Gates</h2>
+      <ul>
+${items}
+      </ul>
+    </section>`;
 }
 
 function buildControlHtml(control: RenderedControl): string {

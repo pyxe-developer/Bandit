@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Bandit Workflow Cockpit</title>
-  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="cockpit.css">
 </head>
 <body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
@@ -13,33 +12,69 @@
     <nav class="attention-nav" aria-label="Attention categories">
       <h2>Attention</h2>
       <ul>
-        <li><a class="attention-link" href="#active-work">operator_input_required</a></li>
-        <li><a class="attention-link" href="#active-work">blocked_or_stale</a></li>
-        <li><a class="attention-link" href="#active-work">landing_readiness</a></li>
-        <li><a class="attention-link" href="#active-work">improvement_health</a></li>
-        <li><a class="attention-link" href="#active-work">queue_context</a></li>
+        <li><a class="attention-link" href="#operator_input_required">Operator input required</a></li>
+        <li><a class="attention-link" href="#blocked_or_stale">Blocked or stale</a></li>
+        <li><a class="attention-link" href="#active_work_next_action">Active work</a></li>
+        <li><a class="attention-link" href="#landing_readiness">Landing readiness</a></li>
+        <li><a class="attention-link" href="#improvement_health">Improvement health</a></li>
+        <li><a class="attention-link" href="#queue_context">Queue context</a></li>
       </ul>
     </nav>
     <main id="active-work">
-      <h1>Operator input required</h1>
-      <p class="work-item">BANDIT-066: Browser-Served Cockpit App Shell</p>
-      <p class="next-action">Write Stage 2 RED evidence for BANDIT-066.</p>
+      <h1>Active work</h1>
+      <p class="work-item">BANDIT-067</p>
+      <p class="next-action">Write Test Writer-owned Stage 2 RED evidence for BANDIT-067 before implementation.</p>
       <p class="evidence-source">
-        <a class="source-link" href="docs/work/BANDIT-066/brief.md">docs/work/BANDIT-066/brief.md</a>
+        <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a>
       </p>
       <section class="actions-section">
         <h2>Actions</h2>
-        <button class="action-button" id="validate" role="button" data-command-family="bandit validate" aria-disabled="false">Validate</button>
-        <button class="action-button" id="qwen_review" role="button" data-command-family="bandit qwen-review" disabled aria-disabled="true" aria-describedby="qwen_review_reason">Qwen Review</button>
-        <span id="qwen_review_reason" class="disabled-reason">Stage 2 RED evidence is missing.</span>
+        <button class="action-button" id="validate_repo" role="button" data-command-family="bandit validate" aria-disabled="false">Validate</button>
+        <button class="action-button" id="inspect_evidence" role="button" data-command-family="bandit show" aria-disabled="false">Evidence</button>
+        <button class="action-button" id="run_review_gate" role="button" data-command-family="bandit qwen-review" disabled aria-disabled="true" aria-describedby="run_review_gate_reason">Review Gate</button>
+        <span id="run_review_gate_reason" class="disabled-reason">Stage 2 RED evidence is missing.</span>
+        <button class="action-button" id="check_landing_readiness" role="button" data-command-family="bandit land-check" disabled aria-disabled="true" aria-describedby="check_landing_readiness_reason">Landing Check</button>
+        <span id="check_landing_readiness_reason" class="disabled-reason">implementation evidence is not recorded</span>
+        <button class="action-button" id="record_uat" role="button" data-command-family="bandit uat" disabled aria-disabled="true" aria-describedby="record_uat_reason">Record UAT</button>
+        <span id="record_uat_reason" class="disabled-reason">UAT is unavailable until an operator-facing implementation exists.</span>
       </section>
+      <section class="status-cues" aria-label="Live status">
+      <h2>Live status</h2>
+      <ul>
+        <li class="status-cue"><span class="cue-text">Phase: Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li class="status-cue"><span class="cue-text">Active work: BANDIT-067</span> <a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
+        <li class="status-cue"><span class="cue-text">Next action: Write Test Writer-owned Stage 2 RED evidence for BANDIT-067 before implementation.</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li class="status-cue"><span class="cue-text">Operator input: none_required</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li class="status-cue"><span class="cue-text">Blockers or stale evidence: No blockers or stale evidence</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li class="status-cue"><span class="cue-text">Landing: not_ready</span> <a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">docs/work/BANDIT-067/implementation-evidence.md</a></li>
+        <li class="status-cue"><span class="cue-text">UAT: not_applicable</span> <a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
+        <li class="status-cue"><span class="cue-text">Bootstrap gaps: none</span> <a class="source-link" href=".bandit/bootstrap-gaps.json">.bandit/bootstrap-gaps.json</a></li>
+        <li class="status-cue"><span class="cue-text">Coordination: orchestration_plan_recorded</span> <a class="source-link" href="docs/work/BANDIT-067/coordination-log.jsonl">docs/work/BANDIT-067/coordination-log.jsonl</a></li>
+        <li class="status-cue"><span class="cue-text">Improvements: pending_candidates</span> <a class="source-link" href="docs/work/BANDIT-063/qwen-finding-disposition.md">docs/work/BANDIT-063/qwen-finding-disposition.md</a></li>
+      </ul>
+    </section>
+      <section class="gate-strip" aria-label="Stage gates">
+      <h2>Gates</h2>
+      <ul>
+        <li class="gate"><span class="gate-text">stage_0_context_readiness: pass</span></li>
+        <li class="gate"><span class="gate-text">stage_1_brief: pass</span></li>
+        <li class="gate"><span class="gate-text">stage_2_red_evidence: missing</span></li>
+        <li class="gate"><span class="gate-text">stage_3_implementation: missing</span></li>
+        <li class="gate"><span class="gate-text">stage_4_review: missing</span></li>
+        <li class="gate"><span class="gate-text">stage_5_landing: missing</span></li>
+        <li class="gate"><span class="gate-text">stage_6_retrospective: missing</span></li>
+      </ul>
+    </section>
     </main>
     <aside id="evidence_drilldown" aria-label="Evidence">
       <h2>Evidence</h2>
       <ul>
-        <li><a class="source-link" href="docs/work/BANDIT-066/brief.md">docs/work/BANDIT-066/brief.md</a></li>
-        <li><a class="source-link" href="docs/work/BANDIT-066/red-evidence.md">docs/work/BANDIT-066/red-evidence.md</a></li>
-        <li><a class="source-link" href="docs/work/BANDIT-066/formation-review.md">docs/work/BANDIT-066/formation-review.md</a></li>
+        <li><a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li><a class="source-link" href="docs/roadmap/ROADMAP.md">docs/roadmap/ROADMAP.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-067/red-evidence.md">docs/work/BANDIT-067/red-evidence.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-063/qwen-finding-disposition.md">docs/work/BANDIT-063/qwen-finding-disposition.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-067/coordination-log.jsonl">docs/work/BANDIT-067/coordination-log.jsonl</a></li>
       </ul>
     </aside>
   </div>
