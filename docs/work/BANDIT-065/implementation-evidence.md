@@ -27,7 +27,7 @@ verdict: pass
 - `docs/templates/work-item-pm-orchestrator-prompt.md` (new, seeded default)
 - `src/state/paths.ts` (modified — added `orchestratorPromptsPolicy`)
 - `src/commands/init.ts` (modified — seeds default policy/template)
-- `src/commands/validate.ts` (modified — includes lenient validator)
+- `src/commands/validate.ts` (modified - repo-wide validation reports orchestrator-prompt policy diagnostics without weakening the contract validator; `bandit orchestrator-prompts validate --json` remains fail-closed for authority claims, gate bypasses, and role erosion)
 - `src/cli.ts` (modified — routes command, updates usage strings)
 - `docs/work/BANDIT-065/writer-report.md` (new)
 - `docs/work/BANDIT-065/implementation-evidence.md` (this file)
