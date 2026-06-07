@@ -1,0 +1,58 @@
+# BANDIT-069 Retrospective
+
+## Outcome
+
+`BANDIT-069` landed and closed out the Test Strength / Mutation Adequacy Gate bootstrap chore. The work adds a repo-native test-strength policy, evidence template, validator, CLI command, init wiring, and `land-check` enforcement so covered high-risk surfaces cannot safely land without current assertion-adequacy and mutation/property/adversarial test-strength evidence. The implementation preserves historical aggregate validation compatibility and the Permanent Test Ownership Boundary.
+
+## What Worked
+
+- Formation, plan-mode orchestration, Codex-authored RED evidence, Claude Stage 3 source implementation, PM acceptance, Stage 4 review, landing, and closeout stayed grounded in repo-native artifacts.
+- Bootstrap Model-Family Separation held: Codex authored RED tests and Claude implemented Stage 3 source/chore surfaces only.
+- The Stage 3 Writer did not edit Test Writer-owned tests, fixtures, RED evidence, acceptance mappings, review evidence, landing evidence, or retrospective evidence.
+- Focused RED coverage caught the missing `test-strength-gate` command and missing `land-check` fail-closed behavior before implementation.
+- Local Qwen ran through the authorized MLX adapter route and produced non-blocking findings that were dispositioned explicitly.
+- Landing gates accepted evidence-only commits through the review-subject hash while preserving fail-closed review-subject freshness.
+
+## Lessons And Dispositions
+
+| Lesson | Disposition | Rationale |
+| --- | --- | --- |
+| Risk-tiered test-strength evidence can be enforced without making historical aggregate validation brittle. | resolved | `test-strength-gate validate <ID>` and `land-check` enforce the accepted gate for current work while `npm run bandit -- validate` remains compatible with historical artifacts. |
+| Codex-authored RED plus Claude implementation remains workable for bootstrap gate chores. | explicit no-action decision | Role boundaries held, Claude stayed off Test Writer surfaces, and deterministic tests plus PM review covered the implementation. |
+| CodeRabbit provider availability remains intermittent for local pre-PR review. | explicit no-action decision | The timeout is recorded as bootstrap replacement evidence with no pass claim; Local Qwen and deterministic verification covered this bounded chore. |
+| Freshness fields are useful but not a full oracle-provenance story. | deferred to queued gap | Automated oracle provenance and drift-hardening belongs to `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE`, the next queued bootstrap gap. |
+
+## Structured Improvement Mining
+
+| Signal | Finding | Disposition |
+| --- | --- | --- |
+| failed tool calls | CodeRabbit direct provider review timed out and `bandit land` refused a dirty event-log worktree until the artifact event was committed. | explicit no-action decision - provider timeout has replacement evidence and dirty-worktree refusal was expected landing-agent protection |
+| overreasoning | The work did not expand into Trust Verifier cutover, product UI, guarded action execution, merge, push, deploy, private install/update, or oracle-provenance scope. | explicit no-action decision - forbidden and queued scopes stayed out of this chore |
+| work-breakdown fit | The test-strength gate fit as a bounded bootstrap gap with policy, validator, CLI command, template, and landing-gate integration. | resolved - close the active gap through BANDIT-069 |
+| agent-scope fit | Repo PM formation, Work Item PM orchestration, Test Writer RED, Claude Writer implementation, reviewers, Landing Agent, and Closeout Agent responsibilities stayed separated. | explicit no-action decision - role boundaries held |
+| tool-use rule pressure | Review-subject hash had to be refreshed after staging new policy evidence because the hash command reads tracked paths. | explicit no-action decision - the refreshed hash is recorded in Stage 4 evidence and land-check validates it |
+| reviewer/model routing | Local Qwen returned non-blocking findings and CodeRabbit timed out without terminal findings. | explicit no-action decision - non-blocking findings have durable no-action routing and CodeRabbit has bootstrap replacement evidence |
+| tool invocation friction | Artifact creation appended `.bandit/events.jsonl`, which made the worktree dirty before landing. | explicit no-action decision - the event was committed separately before local-record landing |
+| recurring inefficiency | Roadmap and status projections stayed stale until closeout even though coordination evidence had advanced through stages. | explicit no-action decision - closeout updates synchronize parser-facing state after landing action evidence exists |
+| cost or latency signals | No paid reviewer, dependency install, external service, hosted preview, merge, push, or deploy was introduced; CodeRabbit timeout cost was bounded by the 300-second command. | explicit no-action decision - no cost-policy or supply-chain follow-up is required |
+| unresolved uncertainty | The next queued target is known but no next work item is formed yet. | deferred to Repo PM - create a bounded chore from `docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json` before unrelated Phase 8 product work |
+
+## Improvement Chores
+
+No new retrospective-derived improvement chore is created by this closeout.
+
+`BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE` is resolved by `BANDIT-069` after landing action and this Stage 6 closeout evidence.
+
+`BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` remains the next queued bootstrap gap. The next recorded action is to create a bounded chore from `docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json` before proceeding to unrelated Phase 8 product work.
+
+Local Qwen's freshness-source concern is deferred to that queued oracle/provenance work rather than creating a duplicate gap.
+
+## Cross-Model Tension
+
+No unresolved cross-model tension remains for `BANDIT-069`. Claude source implementation was accepted after PM review, focused tests, full test suite, typecheck, aggregate Bandit validation, dedicated test-strength validation, Local Qwen non-blocking review, CodeRabbit bootstrap replacement evidence, risk classification, supply-chain gate, and landing checks. Local Qwen returned three non-blocking findings; all are accepted no-action dispositions for this bounded chore.
+
+## Bootstrap Gaps Remaining
+
+- `BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE` is the next queued bootstrap gap.
+- `BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` remains queued behind the oracle-provenance gate.
+- Replay Regression Corpus, Gate Determinism And Flake Gate, Metamorphic Cross-Projection Checks, Reviewer Calibration With Seeded Defects, Evidence Bundle Attestation, and Spec-To-Evidence Traceability Matrix remain queued behind the private install/update channel.

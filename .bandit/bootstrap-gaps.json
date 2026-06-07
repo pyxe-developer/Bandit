@@ -879,8 +879,8 @@
     {
       "id": "BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE",
       "title": "Test Strength / Mutation Adequacy Gate",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -889,12 +889,19 @@
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/roadmap/ROADMAP.md",
         "docs/work/BANDIT-068/brief.md",
-        "docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json"
+        "docs/specs/BANDIT-GAP-TEST-STRENGTH-MUTATION-ADEQUACY-GATE.json",
+        "docs/work/BANDIT-069/brief.md",
+        "docs/work/BANDIT-069/red-evidence.md",
+        "docs/work/BANDIT-069/implementation-evidence.md",
+        "docs/work/BANDIT-069/review-evidence.md",
+        "docs/work/BANDIT-069/landing-verdict.md",
+        "docs/work/BANDIT-069/landing-action.md",
+        "docs/work/BANDIT-069/retrospective.md"
       ],
       "linked_work_item": "BANDIT-069",
-      "rationale": "Operator direction on 2026-06-07 identified a bootstrap gap in Bandit's verification policy: Stage 2 and later gates require behavior-focused tests, evidence, review, clean-code, risk, landing, and freshness checks, but do not make mutation adequacy or assertion strength a first-class gate. Critical deterministic trust-layer code should require mutation score evidence, property or fault-injection evidence, table-driven adversarial cases, or an explicit no-action/bootstrap-gap disposition so Bandit can ask whether tests would catch plausible wrong behavior, not just whether tests exist.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-069."
+      "rationale": "BANDIT-069 delivered the Test Strength / Mutation Adequacy Gate as a repo-native policy, evidence template, validator, CLI command, init wiring, and land-check integration. Covered high-risk surfaces now fail closed without current assertion-adequacy and mutation/property/adversarial test-strength evidence, while historical aggregate validation compatibility and the Permanent Test Ownership Boundary are preserved.",
+      "verification_target": "docs/work/BANDIT-069/retrospective.md",
+      "next_action": "Use node ./bin/bandit.mjs test-strength-gate validate <work-item-id> and land-check for future work items with covered high-risk surfaces."
     },
     {
       "id": "BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE",
@@ -915,7 +922,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 identified Verification Oracle Provenance as the next verification-layer strengthening gap. Bandit records many verdicts and freshness checks, but covered pass/trusted/ready claims do not yet have to name the oracle they rely on or prove that oracle is independent enough for the trust decision. This gap should prevent circular self-attestation where a projection, validator, generated report, or command output becomes the evidence oracle for its own correctness.",
       "verification_target": null,
-      "next_action": "After active BANDIT-069 lands and closes out or the test-strength gate is explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-VERIFICATION-ORACLE-PROVENANCE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL",
@@ -938,7 +945,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 clarified that Bandit should not be public yet, but should be installable in multiple private repos and should alert from the CLI when private updates are available. Current package evidence shows a bin entry exists, but public publishing is blocked by private package metadata, packed install fails because the CLI depends on devDependency-only tsx, package contents are not scoped for distribution, and no private update-channel metadata or non-blocking update-check command exists.",
       "verification_target": null,
-      "next_action": "After active BANDIT-069 and the queued oracle-provenance gate are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "After the queued oracle-provenance gate is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
@@ -959,7 +966,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Replay Regression Corpus records the need to turn historical Bandit workflow failures into deterministic replay packets so current validation and trust-verifier-compatible paths can prove they still catch old failure modes.",
       "verification_target": null,
-      "next_action": "After active BANDIT-069 and the queued oracle-provenance and private install/update gaps are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "After the queued oracle-provenance and private install/update gaps are addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",
