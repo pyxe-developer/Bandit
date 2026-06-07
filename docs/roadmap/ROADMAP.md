@@ -5,9 +5,9 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-071` - Private Installable Distribution And Update
-  Notification Channel (Stage 4 review required)
+  Notification Channel (Stage 5 landing verdict required)
 
-**Current next step:** Run Stage 4 review for `BANDIT-071`.
+**Current next step:** Record Stage 5 landing verdict for `BANDIT-071`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

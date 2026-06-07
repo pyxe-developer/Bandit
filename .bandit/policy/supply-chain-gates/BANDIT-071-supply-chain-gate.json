@@ -1,0 +1,117 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-071",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": "package.json",
+      "surface": "dependency_manifest",
+      "change_type": "runtime_dependency_scope_change",
+      "risk": "elevated",
+      "operator_supervision_required": false
+    },
+    {
+      "path": "package-lock.json",
+      "surface": "lockfile",
+      "change_type": "lockfile_drift",
+      "risk": "elevated",
+      "operator_supervision_required": false
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "changed",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [
+      {
+        "package": "tsx",
+        "change": "moved from devDependencies to dependencies",
+        "previous_scope": "devDependency",
+        "new_scope": "runtime dependency",
+        "version": "^4.20.0",
+        "rationale": "Installed Bandit bins need the tsx loader available in consumer repos without relying on this development checkout's node_modules."
+      }
+    ],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "pass",
+      "evidence_path": "docs/reviewer-captures/BANDIT-071-npm-audit-omit-dev.txt",
+      "unavailable_tool_disposition": ""
+    },
+    "rationale": "BANDIT-071 promotes an already-present development dependency to runtime scope so private packed installs can execute the CLI. No new package name, package-manager script, registry publication, hosted update service, or automatic self-update is added."
+  },
+  "lockfile_state": {
+    "state": "changed",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "Lockfile changes mirror the package.json scope move for tsx from development-only to runtime dependency.",
+    "drift_rationale": "Lockfile drift is expected and bounded to clearing dev-only markers for tsx and its transitive runtime packages so installed consumers receive the loader."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-071/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "No installed or repo-local agent skill surface changed for BANDIT-071.",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-071 touches dependency and lockfile surfaces but only promotes the existing tsx dependency to runtime scope for private package installability. `npm audit --omit=dev --audit-level=moderate` exits 0 with 0 vulnerabilities. The work adds no package-manager scripts, CI/release workflows, fetched prompts, external tool installs, public npm publishing, paid registry setup, hosted services, automatic self-update, telemetry, merge, push, or deploy authority. No operator-supervised supply-chain approval is required before local-record landing.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-071-supply-chain-gate.json",
+    "docs/reviewer-captures/BANDIT-071-npm-audit-omit-dev.txt",
+    "docs/reviewer-captures/BANDIT-071-npm-audit-omit-dev-exit-code.txt",
+    "docs/work/BANDIT-071/brief.md",
+    "docs/work/BANDIT-071/red-evidence.md",
+    "docs/work/BANDIT-071/implementation-evidence.md",
+    "docs/work/BANDIT-071/stage3-pm-review.md",
+    "docs/work/BANDIT-071/coderabbit-review.md",
+    "docs/work/BANDIT-071/local-qwen-review.md",
+    "docs/work/BANDIT-071/qwen-finding-disposition.md",
+    "package.json",
+    "package-lock.json",
+    "bin/bandit.mjs",
+    "src/cli.ts",
+    "src/commands/init.ts",
+    "src/commands/update-check.ts",
+    "src/state/paths.ts",
+    "src/state/update-channel.ts",
+    "test/private-install-update-channel.test.mjs",
+    "test/update-channel.test.mjs"
+  ]
+}

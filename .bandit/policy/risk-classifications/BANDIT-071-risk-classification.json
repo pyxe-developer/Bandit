@@ -1,0 +1,252 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-071",
+  "changed_surfaces": [
+    {
+      "path": "package.json",
+      "surface": "dependency_manifest",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "package-lock.json",
+      "surface": "lockfile",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "bin/bandit.mjs",
+      "surface": "installed_cli_runtime",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/update-channel.ts",
+      "surface": "update_channel_state",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/update-check.ts",
+      "surface": "update_check_cli_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "installed_consumer_init_seeding",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_state_path_mapping",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": ".bandit/policy/private-install-update-channel.json",
+      "surface": "private_distribution_policy",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/private-install-update-channel.md",
+      "surface": "private_distribution_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/update-channel.md",
+      "surface": "update_channel_template",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/private-install-update-channel.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/update-channel.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "public_npm_publishing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-071/brief.md"
+    },
+    {
+      "surface": "automatic_self_update",
+      "state": "excluded",
+      "evidence_path": ".bandit/policy/private-install-update-channel.json"
+    },
+    {
+      "surface": "telemetry_or_repo_contents_reporting",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "runtime_dependency_scope_changed_for_tsx",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-071/implementation-evidence.md"
+    },
+    {
+      "signal_id": "installed_cli_bin_loader_resolution_changed",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "package_files_allow_list_added",
+      "risk": "medium",
+      "evidence_path": "test/private-install-update-channel.test.mjs"
+    },
+    {
+      "signal_id": "update_channel_cache_written_to_repo_state",
+      "risk": "medium",
+      "evidence_path": "test/update-channel.test.mjs"
+    },
+    {
+      "signal_id": "installed_init_seeds_templates_and_reviewer_defaults_only_when_packaged",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-071/writer-report.md"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/private-install-update-channel.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/update-channel.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-071/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm audit --omit=dev --audit-level=moderate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/reviewer-captures/BANDIT-071-npm-audit-omit-dev.txt"
+    },
+    {
+      "tool": "coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-071/coderabbit-review.md"
+    },
+    {
+      "tool": "local-qwen MLX OpenAI-compatible adapter via bin/omlx-chat-completions.mjs",
+      "state": "non_blocking_dispositioned",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-071/qwen-finding-disposition.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_elevated_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-071-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-071/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-HIGH-RISK-SIGNAL-IGNORED",
+      "severity": "blocker",
+      "evidence_path": ".bandit/policy/risk-classification.json"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-TEST-BOUNDARY-VIOLATION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-071/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-071 changes private install packaging, an existing runtime dependency scope, update-check CLI behavior, repo-local update cache state, and installed-consumer init seeding. Supply-chain evidence, npm audit, focused install/update tests, full regression tests, Local Qwen review, and CodeRabbit timeout replacement evidence raise review depth without requiring operator-owned business, cost, publishing, external-service, merge, push, deploy, or automatic self-update approval."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-071 is medium-risk bootstrap distribution work. It touches dependency manifest and lockfile state by moving the already-present tsx package from devDependencies to runtime dependencies, narrows package contents through an allow-list, changes installed CLI loader resolution, adds a data-minimal update-check command/cache, and seeds templates/defaults only for installed packages. It does not add public publishing, paid registry, hosted update service, automatic self-update, telemetry, package-manager scripts, CI/release workflows, credentials, production data, merge, push, deploy, or Trust Verifier cutover. Focused packed-install/update-channel tests, full npm test, typecheck, Bandit validation, npm audit, Local Qwen review, CodeRabbit timeout replacement evidence, risk classification, and supply-chain gate evidence cover the landing decision.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-071-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-071-supply-chain-gate.json",
+    ".bandit/policy/private-install-update-channel.json",
+    "docs/reviewer-captures/BANDIT-071-npm-audit-omit-dev.txt",
+    "docs/work/BANDIT-071/brief.md",
+    "docs/work/BANDIT-071/red-evidence.md",
+    "docs/work/BANDIT-071/implementation-evidence.md",
+    "docs/work/BANDIT-071/stage3-pm-review.md",
+    "docs/work/BANDIT-071/coderabbit-review.md",
+    "docs/work/BANDIT-071/local-qwen-review.md",
+    "docs/work/BANDIT-071/qwen-finding-disposition.md",
+    "package.json",
+    "package-lock.json",
+    "bin/bandit.mjs",
+    "src/cli.ts",
+    "src/commands/init.ts",
+    "src/commands/update-check.ts",
+    "src/state/paths.ts",
+    "src/state/update-channel.ts",
+    "test/private-install-update-channel.test.mjs",
+    "test/update-channel.test.mjs"
+  ]
+}

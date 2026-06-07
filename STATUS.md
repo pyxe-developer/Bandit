@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-071 (Stage 4 review required)
+## Current Work Item: BANDIT-071 (Stage 5 landing verdict required)
 
 ## Current Status
 
@@ -27,12 +27,19 @@ implementation and PM acceptance evidence is recorded in
 `docs/work/BANDIT-071/writer-report.md`,
 `docs/work/BANDIT-071/implementation-evidence.md`,
 `docs/work/BANDIT-071/stage3-pm-review.md`, and `implementation_recorded`.
+Stage 4 review evidence is recorded in
+`docs/work/BANDIT-071/coderabbit-review.md`,
+`docs/work/BANDIT-071/local-qwen-review.md`,
+`docs/work/BANDIT-071/qwen-finding-disposition.md`,
+`.bandit/policy/risk-classifications/BANDIT-071-risk-classification.json`,
+`.bandit/policy/supply-chain-gates/BANDIT-071-supply-chain-gate.json`,
+`docs/work/BANDIT-071/review-evidence.md`, and `review_recorded`.
 
 `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` remains queued behind `BANDIT-071`.
 
-Current stage: Stage 4 review required.
+Current stage: Stage 5 landing verdict required.
 
-Next action: Run Stage 4 review for `BANDIT-071`.
+Next action: Record Stage 5 landing verdict for `BANDIT-071`.
 
 Required operator input: none currently required.
 
@@ -40,7 +47,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-071` - Private Installable Distribution And Update Notification Channel (Stage 4 review required)
+- `BANDIT-071` - Private Installable Distribution And Update Notification Channel (Stage 5 landing verdict required)
 - `BANDIT-070` - Verification Oracle Provenance Gate (closed)
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate (closed)
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (closed)
