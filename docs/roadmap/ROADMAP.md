@@ -5,10 +5,9 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-068` - Evidence Drilldown And Gate Matrix
-  (formation approved)
+  (landing action required)
 
-**Current next step:** Run Work Item PM plan-mode orchestration for
-`BANDIT-068`.
+**Current next step:** Run the local-record landing action for `BANDIT-068`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets, restart

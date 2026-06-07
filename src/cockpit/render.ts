@@ -69,6 +69,18 @@ export function renderCockpitShell(
       sources: viewModel.queue_context.sources,
       mutation_forms: [],
       excluded_authority: viewModel.queue_context.excluded_authority
+    },
+    gate_matrix: {
+      aria_label: "Stage gate matrix",
+      rows: viewModel.evidence_drilldown.gate_matrix,
+      source_paths_wrap: true,
+      mutation_forms: []
+    },
+    evidence_detail: {
+      aria_label: "Evidence detail",
+      rows: viewModel.evidence_drilldown.detail_rows,
+      mutation_forms: [],
+      canonical_state_owner: viewModel.canonical_state_owner
     }
   };
 }

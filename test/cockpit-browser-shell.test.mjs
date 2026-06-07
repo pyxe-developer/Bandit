@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   cockpitStatusFixture,
   desktopViewport,
+  evidenceDrilldownStatusFixture,
   liveCockpitStatusFixture
 } from "./helpers/cockpit-status-fixture.mjs";
 
@@ -124,4 +125,31 @@ test("static cockpit preview is refreshed from the current live-status work item
   assert.match(html, /Write Test Writer-owned Stage 2 RED evidence/);
   assert.match(html, /docs\/work\/BANDIT-067\/coordination-log\.jsonl/);
   assert.doesNotMatch(html, /BANDIT-066: Browser-Served Cockpit App Shell/);
+});
+
+test("browser cockpit shell renders source-linked gate matrix and evidence rows in desktop and mobile previews", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderBrowserCockpitShell } = await loadBrowserShellModule();
+  const viewModel = buildCockpitViewModel(evidenceDrilldownStatusFixture());
+
+  const desktop = renderBrowserCockpitShell(viewModel, desktopViewport());
+  const mobile = renderBrowserCockpitShell(viewModel, { width: 390, height: 844 });
+
+  for (const shell of [desktop, mobile]) {
+    assert.match(shell.html, /aria-label="Stage gate matrix"/);
+    assert.match(shell.html, /Stage 2 RED evidence/);
+    assert.match(shell.html, /missing_required_stage_evidence/);
+    assert.match(shell.html, /review_subject_hash_drift/);
+    assert.match(shell.html, /docs\/work\/BANDIT-068\/review-evidence\.md/);
+    assert.match(shell.html, /aria-label="Evidence detail"/);
+    assert.match(shell.html, /Landing readiness/);
+    assert.match(shell.html, /implementation evidence is not recorded/);
+    assert.match(shell.html, /orchestration_plan_recorded/);
+    assert.match(shell.html, /Artifact-specific Evidence Trust Signals/);
+    assert.doesNotMatch(shell.html, /<form\b|localStorage|sessionStorage|indexedDB|fetch\s*\(/i);
+    assert.equal(shell.responsive.text_overflow, false);
+    assert.deepEqual(shell.responsive.overlaps, []);
+  }
+  assert.equal(mobile.responsive.source_paths_wrap, true);
+  assert.equal(mobile.responsive.detail_rows_wrap, true);
 });

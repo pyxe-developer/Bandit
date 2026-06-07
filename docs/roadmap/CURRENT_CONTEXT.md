@@ -27,19 +27,18 @@ View From CLI Payload slice, including source-linked first-screen cues and a
 full Stage 0-6 gate strip in the browser shell while preserving CLI authority
 and presentation-only browser state.
 
-`BANDIT-068` is formed and formation-approved. It is the Phase 8 Evidence
-Drilldown And Gate Matrix product slice. Stage 1 evidence is recorded under
-`docs/work/BANDIT-068/`, including Local Qwen formation review through the MLX
-OpenAI-compatible adapter route and CodeRabbit provider-timeout replacement
-evidence.
+`BANDIT-068` is active. It is the Phase 8 Evidence Drilldown And Gate Matrix
+product slice. Stage 1 formation evidence, Work Item PM orchestration evidence,
+Stage 2 RED evidence, Stage 3 Claude implementation evidence, Stage 4 aggregate
+review evidence, CLI-owned product UAT evidence, and Stage 5 landing verdict
+evidence are recorded under `docs/work/BANDIT-068/`.
 
-**Active work item:** `BANDIT-068` (formation approved).
+**Active work item:** `BANDIT-068` (Stage 5 landing verdict recorded).
 
-The current stage is Stage 1: Formation approved / Work Item PM plan-mode
-orchestration required.
+The current stage is Stage 5: local-record landing action required.
 
-**Current next action:** Run Work Item PM plan-mode orchestration for
-`BANDIT-068`.
+**Current next action:** Run the local-record landing action for `BANDIT-068`
+and record landing action evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -52,14 +51,15 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the current Work Item PM plan-mode
-orchestration step. Halt for operator input if a future step would
-approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
-or wrap an older gate path, merge/push/deploy, change product or UAT direction,
-approve business tradeoffs, approve explicit cost/risk posture, choose local
-API shape, approve State Index timing, approve guarded action execution
-authority, approve external service setup, or make another policy/product
-decision repo artifacts cannot answer.
+No operator-owned input is currently required. CLI-owned product UAT for
+`BANDIT-068` is recorded under `docs/work/BANDIT-068/uat-approval.md`, and the
+landing verdict is recorded under `docs/work/BANDIT-068/landing-verdict.md`.
+Halt for operator input if a future step would approve Trust Verifier cutover
+policy, select a Trust Goal for cutover, replace or wrap an older gate path,
+merge/push/deploy, change product or UAT direction, approve business tradeoffs,
+approve explicit cost/risk posture, choose local API shape, approve State Index
+timing, approve guarded action execution authority, approve external service
+setup, or make another policy/product decision repo artifacts cannot answer.
 
 ## Active Work
 
@@ -71,18 +71,15 @@ evidence is recorded at `docs/work/BANDIT-066/landing-action.md`.
 recorded under `docs/work/BANDIT-067/`, and local-record landing action
 evidence is recorded at `docs/work/BANDIT-067/landing-action.md`.
 
-`BANDIT-068` is formed and formation-approved. Its Stage 1 brief, formation
-review artifacts, and coordination evidence are recorded under
-`docs/work/BANDIT-068/`. Do not write RED evidence, implementation, review
-evidence, landing evidence, or UAT evidence until Work Item PM plan-mode
-orchestration records the next stage packet.
+`BANDIT-068` has Stage 1 formation, Work Item PM orchestration, Stage 2 RED,
+Stage 3 Claude implementation, Stage 4 review evidence, CLI-owned product UAT,
+and Stage 5 landing verdict evidence recorded under `docs/work/BANDIT-068/`.
 
-The next allowed action is Work Item PM plan-mode orchestration for
-`BANDIT-068`. Do not start RED evidence, implementation, review, landing, UAT,
-merge, push, deploy, Trust Verifier cutover, guarded browser action execution,
-local API work, State Index work, scheduler execution, claim execution,
-worktree execution, or unrelated Phase 8 scope before the orchestration packet
-is recorded.
+The next allowed action is local-record landing for `BANDIT-068`. Do not start
+closeout, merge, push, deploy, Trust Verifier cutover, guarded browser action
+execution, local API work, State Index work, scheduler execution, claim
+execution, worktree execution, or unrelated Phase 8 scope before landing action
+evidence is recorded.
 
 `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` is resolved with disposition
 `no_action`; no bootstrap gap is currently queued before the next Phase 8

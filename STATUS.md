@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-068 (formation approved)
+## Current Work Item: BANDIT-068 (landing action required)
 
 ## Current Status
 
@@ -14,27 +14,26 @@ View From CLI Payload slice, including source-linked first-screen cues and a
 full Stage 0-6 gate strip in the browser shell while preserving CLI authority
 and non-canonical browser presentation state.
 
-`BANDIT-068` is formed and formation-approved for the Evidence Drilldown And
-Gate Matrix slice. Local Qwen formation review used the MLX
-OpenAI-compatible adapter route through `bin/omlx-chat-completions.mjs`; the
-direct `qwen` CLI is revoked for Bandit reviewer routing.
+`BANDIT-068` is active for the Evidence Drilldown And Gate Matrix slice. Stage
+1 formation, Work Item PM orchestration, Stage 2 RED evidence, Stage 3 Claude
+implementation evidence, Stage 4 review evidence, CLI-owned product UAT, and
+Stage 5 landing verdict evidence are recorded.
 
 The remaining `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` runtime/harness
 source material is resolved with disposition `no_action`; no role-scoped
 bootstrap gap remains queued before Phase 8 cockpit work.
 
-Current stage: Stage 1 formation approved - Work Item PM plan-mode
-orchestration required.
+Current stage: Stage 5 local-record landing action required.
 
-Next action: Run Work Item PM plan-mode orchestration for `BANDIT-068`.
+Next action: Run the local-record landing action for `BANDIT-068`.
 
-Required operator input: none for the current orchestration step.
+Required operator input: none currently required.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-068` - Evidence Drilldown And Gate Matrix (formation approved)
+- `BANDIT-068` - Evidence Drilldown And Gate Matrix (landing action required)
 - `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)
 - `BANDIT-066` - Browser-Served Cockpit App Shell (closed)
 - `BANDIT-GAP-ROLE-SCOPED-WORKFLOW-ORCHESTRATION` - no-action disposition

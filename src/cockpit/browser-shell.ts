@@ -13,6 +13,7 @@ type Accessibility = {
 type Responsive = {
   text_overflow: boolean;
   source_paths_wrap?: boolean;
+  detail_rows_wrap?: boolean;
   overlaps: never[];
 };
 
@@ -109,6 +110,33 @@ aside[aria-label="Evidence"] {
   margin-top: 4px;
 }
 
+.gate-matrix ul,
+.evidence-detail ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gate-matrix-row,
+.evidence-detail-row {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-border);
+  overflow-wrap: anywhere;
+}
+
+.gate-cell,
+.detail-cell {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.gate-owner,
+.detail-status {
+  color: var(--color-muted);
+}
+
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
@@ -119,6 +147,10 @@ aside[aria-label="Evidence"] {
     grid-template-columns: 1fr;
   }
   .action-button { min-height: 44px; }
+  .gate-matrix-row,
+  .evidence-detail-row {
+    grid-template-columns: 1fr;
+  }
 }
 `.trim();
 
@@ -162,7 +194,12 @@ function escapeHtml(value: string): string {
 
 function buildResponsive(isMobile: boolean): Responsive {
   if (isMobile) {
-    return { text_overflow: false, source_paths_wrap: true, overlaps: [] };
+    return {
+      text_overflow: false,
+      source_paths_wrap: true,
+      detail_rows_wrap: true,
+      overlaps: []
+    };
   }
   return { text_overflow: false, overlaps: [] };
 }
@@ -273,5 +310,60 @@ function buildEvidenceAside(shell: CockpitShell): string {
       <ul>
 ${sourceLinks}
       </ul>
+      ${buildGateMatrixSection(shell)}
+      ${buildEvidenceDetailSection(shell)}
     </aside>`;
+}
+
+function buildGateMatrixSection(shell: CockpitShell): string {
+  const rows = shell.gate_matrix.rows.map(buildGateMatrixRowHtml).join("\n");
+
+  return `<section class="gate-matrix" aria-label="${escapeHtml(shell.gate_matrix.aria_label)}">
+        <h3>Gate matrix</h3>
+        <ul>
+${rows}
+        </ul>
+      </section>`;
+}
+
+function buildGateMatrixRowHtml(
+  row: CockpitShell["gate_matrix"]["rows"][number]
+): string {
+  return `          <li class="gate-matrix-row">
+            <span class="gate-cell gate-label">${escapeHtml(row.label)}</span>
+            <span class="gate-cell gate-state">${escapeHtml(row.status)} / ${escapeHtml(row.freshness_state)}</span>
+            <span class="gate-cell gate-owner">${escapeHtml(row.owner_or_authority_role)}</span>
+            <span class="gate-cell gate-reason">${escapeHtml(row.reason)}</span>
+            <span class="gate-cell gate-repair">${escapeHtml(row.next_repair_route)}</span>
+            ${buildSourceLinks(row.sources)}
+          </li>`;
+}
+
+function buildEvidenceDetailSection(shell: CockpitShell): string {
+  const rows = shell.evidence_detail.rows.map(buildEvidenceDetailRowHtml).join("\n");
+
+  return `<section class="evidence-detail" aria-label="${escapeHtml(shell.evidence_detail.aria_label)}">
+        <h3>Evidence detail</h3>
+        <ul>
+${rows}
+        </ul>
+      </section>`;
+}
+
+function buildEvidenceDetailRowHtml(
+  row: CockpitShell["evidence_detail"]["rows"][number]
+): string {
+  return `          <li class="evidence-detail-row">
+            <span class="detail-cell detail-label">${escapeHtml(row.label)}</span>
+            <span class="detail-cell detail-status">${escapeHtml(row.status)}</span>
+            <span class="detail-cell detail-reason">${escapeHtml(row.reason)}</span>
+            ${buildSourceLinks(row.sources)}
+          </li>`;
+}
+
+function buildSourceLinks(sources: string[]): string {
+  const links = sources
+    .map(source => `<a class="source-link" href="${escapeHtml(source)}">${escapeHtml(source)}</a>`)
+    .join(" ");
+  return `<span class="detail-cell detail-sources">${links}</span>`;
 }
