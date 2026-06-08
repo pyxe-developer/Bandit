@@ -43,8 +43,25 @@ test("browser cockpit shell renders a served document with attention, evidence, 
   assert.match(shell.html, /Write Stage 2 RED evidence for BANDIT-033\./);
   assert.match(shell.html, /docs\/work\/BANDIT-033\/brief\.md/);
   assert.match(shell.html, /data-command-family="bandit validate"/);
+  assert.match(shell.html, /data-request-mode="cli_request_only"/);
+  assert.match(shell.html, /data-authority-owner="bandit_cli"/);
   assert.match(shell.html, /data-command-family="bandit qwen-review"[^>]+disabled/);
   assert.match(shell.html, /Stage 2 RED evidence is missing\./);
+});
+
+test("browser cockpit shell renders guarded request details with sources and unavailable routes", async () => {
+  const shell = await buildFixtureShell();
+
+  assert.match(shell.html, /Validate repo/);
+  assert.match(shell.html, /npm run bandit -- validate/);
+  assert.match(shell.html, /docs\/roadmap\/CURRENT_CONTEXT\.md/);
+  assert.match(shell.html, /Review gate/);
+  assert.match(shell.html, /npm run bandit -- qwen-review BANDIT-033/);
+  assert.match(shell.html, /docs\/work\/BANDIT-033\/red-evidence\.md/);
+  assert.match(shell.html, /Record RED and implementation evidence before requesting review\./);
+  assert.match(shell.html, /operator_owned_cli_uat/);
+  assert.match(shell.html, /Record CLI-owned product UAT only after the operator-facing implementation exists\./);
+  assert.doesNotMatch(shell.html, /<form\b|fetch\s*\(|localStorage|sessionStorage|indexedDB/i);
 });
 
 test("browser cockpit shell excludes hidden workflow authority and mutable browser state", async () => {

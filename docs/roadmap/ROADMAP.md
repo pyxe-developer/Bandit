@@ -9,14 +9,13 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (formation approved;
-  Work Item PM plan mode pending)
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (RED evidence recorded;
+  Stage 3 implementation pending)
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-078` (Guarded CLI Action Requests) before RED evidence. Do not create
-RED evidence or implementation until `docs/work/BANDIT-078/orchestration-plan.md`
-exists and `work-item-pm start BANDIT-078` records
-`orchestration_plan_recorded`.
+**Current next step:** Dispatch Stage 3 implementation for `BANDIT-078` to
+Claude-family Implementation Writer. Implement guarded action request metadata
+and rendering without editing Test Writer-owned tests, fixtures, RED evidence,
+or acceptance mappings.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

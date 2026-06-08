@@ -321,3 +321,4 @@
 {"type":"work_item_created","work_item":"BANDIT-076","message":"Created work item BANDIT-076 from docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json"}
 {"type":"work_item_created","work_item":"BANDIT-077","message":"Created work item BANDIT-077 from docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json"}
 {"type":"work_item_created","work_item":"BANDIT-078","message":"Created work item BANDIT-078 from docs/specs/BANDIT-078-guarded-cli-action-requests.json"}
+{"type":"artifact_created","work_item":"BANDIT-078","message":"Created red_evidence artifact at docs/work/BANDIT-078/red-evidence.md"}

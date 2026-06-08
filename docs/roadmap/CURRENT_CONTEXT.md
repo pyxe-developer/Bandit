@@ -4,20 +4,18 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-078` is formed for the Guarded CLI Action Requests Phase 8 product
-slice. Stage 1 brief, coordination `brief_created`, Qwen formation review,
-CodeRabbit formation review, aggregate formation review, and
-`formation_approved` evidence exist under `docs/work/BANDIT-078/`.
+`BANDIT-078` is active for the Guarded CLI Action Requests Phase 8 product
+slice. Stage 1 formation, Work Item PM plan-mode orchestration, and Stage 2 RED
+evidence exist under `docs/work/BANDIT-078/`.
 
-**Active work item:** `BANDIT-078` (formation approved; plan mode pending).
+**Active work item:** `BANDIT-078` (RED evidence recorded; Stage 3 implementation pending).
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 2: red_recorded.
 
-**Current next action:** Work Item PM should run plan-mode orchestration for
-`BANDIT-078` (Guarded CLI Action Requests) before RED evidence. Do not create
-RED evidence or implementation until `docs/work/BANDIT-078/orchestration-plan.md`
-exists and `work-item-pm start BANDIT-078` records
-`orchestration_plan_recorded`.
+**Current next action:** Dispatch Stage 3 implementation for `BANDIT-078` to
+Claude-family Implementation Writer. Implement guarded action request metadata
+and rendering without editing Test Writer-owned tests, fixtures, RED evidence,
+or acceptance mappings.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -48,7 +46,10 @@ repo artifacts cannot answer.
 - Source spec: `docs/specs/BANDIT-078-guarded-cli-action-requests.json`.
 - Brief: `docs/work/BANDIT-078/brief.md`.
 - Coordination log: `docs/work/BANDIT-078/coordination-log.jsonl` records
-  `brief_created` and `formation_approved`.
+  `brief_created`, `formation_approved`, `orchestration_plan_recorded`, and
+  `red_recorded`.
+- Orchestration plan: `docs/work/BANDIT-078/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-078/red-evidence.md`.
 - Qwen formation review: `docs/work/BANDIT-078/qwen-formation-review.md`
   records a pass through the authorized MLX adapter route.
 - CodeRabbit formation review: `docs/work/BANDIT-078/coderabbit-formation-review.md`
@@ -56,14 +57,14 @@ repo artifacts cannot answer.
 - Aggregate formation review: `docs/work/BANDIT-078/formation-review.md`
   records a pass.
 
-No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-`docs/work/BANDIT-078/orchestration-plan.md`, RED evidence, implementation
-evidence, review evidence, UAT evidence, landing evidence, retrospective
-evidence, guarded browser action execution, local API work, State Index work,
-scheduler execution, claim execution, worktree execution, public benchmark
-publication, paid reviewer/model routing, hosted replay services, telemetry,
-merge, push, deploy, Trust Verifier cutover, or unrelated product work from Repo
-PM Stage 1 formation.
+No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not edit
+Test Writer-owned tests, fixtures, RED evidence, or acceptance mappings during
+Stage 3. Do not create review evidence, UAT evidence, landing evidence,
+retrospective evidence, guarded browser action execution, local API work, State
+Index work, scheduler execution, claim execution, worktree execution, public
+benchmark publication, paid reviewer/model routing, hosted replay services,
+telemetry, merge, push, deploy, Trust Verifier cutover, or unrelated product
+work from Stage 3 implementation.
 
-The next required step is Work Item PM plan-mode orchestration for
+The next required step is Claude-family Stage 3 implementation for
 `BANDIT-078`.

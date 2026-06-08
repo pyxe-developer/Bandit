@@ -134,38 +134,108 @@ test("cockpit shell renders guarded controls from pre-derived action affordances
       action_affordances: [
         {
           id: "validate_repo",
-          label: "Validate",
+          label: "Validate repo",
           command_family: "bandit validate",
+          command_preview: "npm run bandit -- validate",
           enabled: true,
-          reason: "Read-only validation is available through CLI Authority."
+          presentation_state: "enabled",
+          reason: "Read-only validation is available through CLI Authority.",
+          source: {
+            label: "Current context",
+            path: "docs/roadmap/CURRENT_CONTEXT.md"
+          },
+          authority_owner: "bandit_cli",
+          role_gate: "codex_pm",
+          operator_gate: "none_required",
+          unavailable_route: "Run validation from the CLI; the browser is request-only.",
+          request_mode: "cli_request_only",
+          executes_in_browser: false,
+          writes_repo_artifacts: false,
+          mutates_workflow_state: false
         },
         {
           id: "inspect_evidence",
           label: "Evidence",
           command_family: "bandit show",
+          command_preview: "node ./bin/bandit.mjs cockpit status --json",
           enabled: true,
-          reason: "Evidence inspection is read-only and source-linked."
+          presentation_state: "enabled",
+          reason: "Evidence inspection is read-only and source-linked.",
+          source: {
+            label: "Active work brief",
+            path: "docs/work/BANDIT-033/brief.md"
+          },
+          authority_owner: "bandit_cli",
+          role_gate: "codex_pm",
+          operator_gate: "none_required",
+          unavailable_route: "Inspect evidence from the CLI; the browser is request-only.",
+          request_mode: "cli_request_only",
+          executes_in_browser: false,
+          writes_repo_artifacts: false,
+          mutates_workflow_state: false
         },
         {
           id: "run_review_gate",
           label: "Review Gate",
           command_family: "bandit qwen-review",
+          command_preview: "npm run bandit -- qwen-review BANDIT-033",
           enabled: true,
-          reason: "Pre-derived action affordance controls render state."
+          presentation_state: "enabled",
+          reason: "Pre-derived action affordance controls render state.",
+          source: {
+            label: "Stage 4 review evidence",
+            path: "docs/work/BANDIT-033/review-evidence.md"
+          },
+          authority_owner: "reviewer",
+          role_gate: "reviewer_after_implementation",
+          operator_gate: "none_required",
+          unavailable_route: "Record RED and implementation evidence before requesting review.",
+          request_mode: "cli_request_only",
+          executes_in_browser: false,
+          writes_repo_artifacts: false,
+          mutates_workflow_state: false
         },
         {
           id: "check_landing_readiness",
           label: "Landing Check",
           command_family: "bandit land-check",
+          command_preview: "npm run bandit -- land-check BANDIT-033",
           enabled: false,
-          reason: "implementation evidence is not recorded"
+          presentation_state: "disabled",
+          reason: "implementation evidence is not recorded",
+          source: {
+            label: "Implementation evidence",
+            path: "docs/work/BANDIT-033/implementation-evidence.md"
+          },
+          authority_owner: "landing_agent",
+          role_gate: "landing_agent_after_review",
+          operator_gate: "none_required",
+          unavailable_route: "Record current implementation and review evidence before land-check.",
+          request_mode: "cli_request_only",
+          executes_in_browser: false,
+          writes_repo_artifacts: false,
+          mutates_workflow_state: false
         },
         {
           id: "record_uat",
           label: "Record UAT",
           command_family: "bandit uat",
+          command_preview: "npm run bandit -- uat approve BANDIT-033",
           enabled: false,
-          reason: "UAT is unavailable until an operator-facing implementation exists."
+          presentation_state: "disabled",
+          reason: "UAT is unavailable until an operator-facing implementation exists.",
+          source: {
+            label: "Work item brief",
+            path: "docs/work/BANDIT-033/brief.md"
+          },
+          authority_owner: "operator",
+          role_gate: "operator_after_implementation",
+          operator_gate: "operator_owned_cli_uat",
+          unavailable_route: "Record CLI-owned product UAT only after the operator-facing implementation exists.",
+          request_mode: "cli_request_only",
+          executes_in_browser: false,
+          writes_repo_artifacts: false,
+          mutates_workflow_state: false
         }
       ]
     },
@@ -177,10 +247,45 @@ test("cockpit shell renders guarded controls from pre-derived action affordances
     role: "button",
     label: "Review Gate",
     command_family: "bandit qwen-review",
+    command_preview: "npm run bandit -- qwen-review BANDIT-033",
     disabled: false,
     "aria-disabled": "false",
-    reason: "Pre-derived action affordance controls render state."
+    reason: "Pre-derived action affordance controls render state.",
+    source: {
+      label: "Stage 4 review evidence",
+      path: "docs/work/BANDIT-033/review-evidence.md"
+    },
+    authority_owner: "reviewer",
+    role_gate: "reviewer_after_implementation",
+    operator_gate: "none_required",
+    unavailable_route: "Record RED and implementation evidence before requesting review.",
+    request_mode: "cli_request_only",
+    executes_in_browser: false,
+    writes_repo_artifacts: false,
+    mutates_workflow_state: false
   });
+});
+
+test("cockpit shell renders guarded action request metadata without execution authority", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderCockpitShell } = await loadRenderModule();
+
+  const shell = renderCockpitShell(buildCockpitViewModel(cockpitStatusFixture()), desktopViewport());
+  const reviewGate = shell.controls.find((control) => control.id === "run_review_gate");
+
+  assert.equal(reviewGate.command_preview, "npm run bandit -- qwen-review BANDIT-033");
+  assert.deepEqual(reviewGate.source, {
+    label: "Stage 2 RED evidence",
+    path: "docs/work/BANDIT-033/red-evidence.md"
+  });
+  assert.equal(reviewGate.authority_owner, "reviewer");
+  assert.equal(reviewGate.role_gate, "reviewer_after_implementation");
+  assert.equal(reviewGate.operator_gate, "none_required");
+  assert.equal(reviewGate.unavailable_route, "Record RED and implementation evidence before requesting review.");
+  assert.equal(reviewGate.request_mode, "cli_request_only");
+  assert.equal(reviewGate.executes_in_browser, false);
+  assert.equal(reviewGate.writes_repo_artifacts, false);
+  assert.equal(reviewGate.mutates_workflow_state, false);
 });
 
 test("cockpit shell renders explicit light queue context without mutation controls", async () => {
