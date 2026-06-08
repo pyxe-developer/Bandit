@@ -4,11 +4,10 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-072` - Replay Regression Corpus (closed; last closed anchor)
+- `[Gap]` `BANDIT-073` - Gate Determinism And Flake Gate (formation approved)
 
-**Current next step:** Repo PM should create a bounded chore from
-`docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json` before unrelated Phase
-8 product work.
+**Current next step:** Work Item PM should enter plan-mode orchestration for
+`BANDIT-073` before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -24,17 +23,14 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate
-  output, stable hashes, and explicit flake/provider-dependence dispositions,
-  queued behind the replay corpus.
+- `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
+  agreement and harmless-perturbation checks for derived trust surfaces, queued
+  behind the determinism gate.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate output,
-  stable hashes, and explicit flake/provider-dependence dispositions, queued
-  behind the replay corpus.
 - `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
   agreement and harmless-perturbation checks for derived trust surfaces,
   queued behind the determinism gate.

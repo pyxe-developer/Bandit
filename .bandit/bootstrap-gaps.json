@@ -992,8 +992,8 @@
     {
       "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",
       "title": "Gate Determinism And Flake Gate",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -1005,10 +1005,10 @@
         "docs/work/BANDIT-068/brief.md",
         "docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-073",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Gate Determinism And Flake Gate records the need for critical trust-layer gates to prove repeatable output, stable ordering, stable hashes, and explicit disposition for nondeterministic or provider-dependent evidence.",
       "verification_target": null,
-      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Complete active chore BANDIT-073."
     },
     {
       "id": "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS",
