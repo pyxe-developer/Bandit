@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "policy_version": 1,
+  "command_version": 1,
+  "id": "stale-review-subject-hash",
+  "failure_mode": "stale_review_subject_hash",
+  "source_artifacts": ["docs/work/BANDIT-019/retrospective.md"],
+  "expected_gate": "stage4_review",
+  "expected_verdict": "blocker",
+  "replay_only": {
+    "read_only": true,
+    "no_live_routing": true,
+    "no_policy_promotion": true
+  },
+  "simulated_gate": {
+    "verdict": "blocker",
+    "diagnostics": ["review subject hash mismatch"]
+  }
+}

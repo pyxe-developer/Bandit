@@ -38,6 +38,7 @@ import { sessionContext } from "./commands/session-context.js";
 import { updateCheck } from "./commands/update-check.js";
 import { emitCachedUpdateAlert } from "./state/update-channel.js";
 import { validateBandit } from "./commands/validate.js";
+import { replayRegressionCorpus } from "./commands/replay-regression-corpus.js";
 import { verificationOracleProvenance } from "./commands/verification-oracle-provenance.js";
 import { eventDrivenWakeScheduler } from "./commands/event-driven-wake-scheduler.js";
 import { repoPm } from "./commands/repo-pm.js";
@@ -347,6 +348,12 @@ async function main() {
 
   if (command === "trust") {
     const result = await trust(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "replay-regression-corpus") {
+    const result = await replayRegressionCorpus(process.cwd(), args);
     process.stdout.write(result.output);
     return;
   }

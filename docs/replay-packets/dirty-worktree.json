@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "policy_version": 1,
+  "command_version": 1,
+  "id": "dirty-worktree",
+  "failure_mode": "dirty_worktree",
+  "source_artifacts": ["docs/work/BANDIT-064/local-qwen-review.md"],
+  "expected_gate": "reviewer_runtime",
+  "expected_verdict": "blocker",
+  "replay_only": {
+    "read_only": true,
+    "no_live_routing": true,
+    "no_policy_promotion": true
+  },
+  "simulated_gate": {
+    "verdict": "blocker",
+    "diagnostics": ["dirty worktree blocks reviewer refresh"]
+  }
+}

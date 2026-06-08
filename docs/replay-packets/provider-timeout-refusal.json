@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "policy_version": 1,
+  "command_version": 1,
+  "id": "provider-timeout-refusal",
+  "failure_mode": "provider_timeout_refusal",
+  "source_artifacts": ["docs/work/BANDIT-072/coderabbit-formation-review.md"],
+  "expected_gate": "stage4_review",
+  "expected_verdict": "bootstrap_gap",
+  "replay_only": {
+    "read_only": true,
+    "no_live_routing": true,
+    "no_policy_promotion": true
+  },
+  "simulated_gate": {
+    "verdict": "bootstrap_gap",
+    "diagnostics": ["provider timeout recorded without claiming pass"]
+  }
+}

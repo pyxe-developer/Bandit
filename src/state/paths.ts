@@ -44,6 +44,10 @@ export function getBanditPaths(repoRoot: string) {
       policyRoot,
       "trust-verifier-cutover-gates.json"
     ),
+    replayRegressionCorpusPolicy: path.join(
+      policyRoot,
+      "replay-regression-corpus.json"
+    ),
     smellTriggers: path.join(policyRoot, "smell-triggers.json"),
     eventDrivenWakeSchedulerPolicy: path.join(
       policyRoot,

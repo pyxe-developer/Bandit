@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "packet_schema_version": 1,
+  "command_version": 1,
+  "required_failure_modes": [
+    "stale_review_subject_hash",
+    "provider_timeout_refusal",
+    "dirty_worktree",
+    "dropped_bootstrap_metadata",
+    "parser_wording_drift",
+    "weak_reviewer_disposition",
+    "stale_routing_text"
+  ],
+  "expected_verdicts": ["pass", "blocker", "non_blocking", "bootstrap_gap"],
+  "expected_gates": [
+    "stage4_review",
+    "stage5_landing",
+    "coordination_validate",
+    "session_context",
+    "reviewer_runtime"
+  ],
+  "replay_only": {
+    "read_only": true,
+    "no_live_routing": true,
+    "no_policy_promotion": true
+  },
+  "failure_mode_dispositions": [
+    {
+      "failure_mode": "dropped_bootstrap_metadata",
+      "disposition": "explicit_no_action",
+      "source_artifact": "docs/work/BANDIT-072/brief.md",
+      "rationale": "dropped_bootstrap_metadata is acknowledged in this focused replay fixture set"
+    },
+    {
+      "failure_mode": "parser_wording_drift",
+      "disposition": "explicit_no_action",
+      "source_artifact": "docs/work/BANDIT-072/brief.md",
+      "rationale": "parser_wording_drift is acknowledged in this focused replay fixture set"
+    },
+    {
+      "failure_mode": "weak_reviewer_disposition",
+      "disposition": "explicit_no_action",
+      "source_artifact": "docs/work/BANDIT-072/brief.md",
+      "rationale": "weak_reviewer_disposition is acknowledged in this focused replay fixture set"
+    },
+    {
+      "failure_mode": "stale_routing_text",
+      "disposition": "explicit_no_action",
+      "source_artifact": "docs/work/BANDIT-072/brief.md",
+      "rationale": "stale_routing_text is acknowledged in this focused replay fixture set"
+    }
+  ]
+}

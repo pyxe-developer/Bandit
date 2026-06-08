@@ -40,6 +40,7 @@ import {
   writeDefaultSupplyChainGatePolicy,
   writeDefaultSupplyChainGateTemplate
 } from "../state/supply-chain-gate.js";
+import { writeDefaultReplayRegressionCorpusPolicy } from "../state/replay-regression-corpus.js";
 import { writeDefaultTestStrengthGatePolicy } from "../state/test-strength-gate.js";
 import {
   writeDefaultVerificationOracleProvenancePolicy,
@@ -101,6 +102,9 @@ export async function initBandit(repoRoot: string) {
   const supplyChainPolicyExists = await pathExists(paths.supplyChainPolicy);
   const supplyChainTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/supply-chain-gate.md`
+  );
+  const replayRegressionCorpusPolicyExists = await pathExists(
+    paths.replayRegressionCorpusPolicy
   );
   const testStrengthGatePolicyExists = await pathExists(
     paths.testStrengthGatePolicy
@@ -205,6 +209,12 @@ export async function initBandit(repoRoot: string) {
 
   if (!supplyChainTemplateExists) {
     await writeDefaultSupplyChainGateTemplate(repoRoot);
+  }
+
+  if (!replayRegressionCorpusPolicyExists) {
+    await writeDefaultReplayRegressionCorpusPolicy(
+      paths.replayRegressionCorpusPolicy
+    );
   }
 
   if (!testStrengthGatePolicyExists) {
