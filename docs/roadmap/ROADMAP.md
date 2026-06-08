@@ -9,12 +9,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 1 formation blocked
-  on Local Qwen provider repair)
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (formation approved;
+  plan-mode orchestration required next)
 
-**Current next step:** Repair the authorized Local Qwen MLX endpoint for
-BANDIT-076 formation review, refresh qwen-formation-review.md and
-formation-review.md, then run repo-pm approve-formation BANDIT-076.
+**Current next step:** Work Item PM should start plan-mode orchestration for
+BANDIT-076 by drafting docs/work/BANDIT-076/orchestration-plan.md and running
+work-item-pm start BANDIT-076 before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,8 +30,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation formation approval after
-  Local Qwen provider repair.
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation plan-mode orchestration.
 
 ## Planned Work
 

@@ -1092,7 +1092,7 @@
       "linked_work_item": "BANDIT-076",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Evidence Bundle Attestation records the need to hash and attest the full landing evidence bundle, not only the source subject, so trusted verdicts can be tied to tests, review, risk, supply-chain, UAT where applicable, policy versions, command versions, and freshness evidence.",
       "verification_target": null,
-      "next_action": "Repair the authorized Local Qwen MLX endpoint for BANDIT-076 formation review, refresh qwen-formation-review.md and formation-review.md, then run repo-pm approve-formation BANDIT-076."
+      "next_action": "Work Item PM should start plan-mode orchestration for BANDIT-076 by drafting docs/work/BANDIT-076/orchestration-plan.md and running work-item-pm start BANDIT-076 before RED evidence."
     },
     {
       "id": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",

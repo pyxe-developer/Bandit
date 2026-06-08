@@ -4,11 +4,11 @@ contract_version: 1
 work_item: BANDIT-076
 reviewer: codex_pm
 review_type: aggregate_formation_review
-verdict: blocker
-findings_status: blocker
-findings_disposition: Local Qwen MLX adapter route is unavailable and cannot produce the required pass or dispositioned non-blocking findings; CodeRabbit timed out after the full 10-minute window and is accepted only as provider-timeout replacement evidence; deterministic Repo PM inspection found no brief-shape blockers
-source_head: fd16437
-reviewed_at: 2026-06-08T14:43:29Z
+verdict: pass
+findings_status: non_blocking
+findings_disposition: Local Qwen MLX adapter passed with no findings; CodeRabbit timed out after the full 10-minute window and is accepted only as provider-timeout replacement evidence; deterministic Repo PM inspection found no Stage 1 formation blockers
+source_head: 3d1f03a
+reviewed_at: 2026-06-08T15:09:36Z
 
 ## Operator Routing Correction
 
@@ -36,30 +36,20 @@ OpenAI-compatible endpoint at `http://127.0.0.1:8000/v1`.
 - Bootstrap gap queue respected: pass - `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` is active and linked to `BANDIT-076`; Spec-To-Evidence Traceability Matrix remains queued behind it.
 - evidence bundle attestation boundary preserved: pass - attestation can identify, normalize, hash, and report bundle membership but cannot mutate live gate verdicts, reviewer routing, model routing, landing authority, UAT authority, gap status, or workflow policy.
 - Trust Verifier cutover boundary preserved: pass - cutover, old-gate replacement, and old-gate wrapping remain out of scope and require separate authorization.
-- Local Qwen route preserved: blocker - the brief restricts Local Qwen to `.bandit/reviewers/local-qwen.json` through `bin/omlx-chat-completions.mjs`, but the authorized endpoint is unavailable and no Qwen reviewer verdict was produced.
+- Local Qwen route preserved: pass - Local Qwen returned a pass through `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs`; no direct `qwen` CLI evidence is used.
 - Permanent Test Ownership Boundary preserved: pass - the Stage 3 Writer cannot edit tests, helpers, fixtures, RED evidence, evidence-bundle acceptance mappings, source-artifact mappings, or acceptance mappings.
 - Bootstrap Model-Family Separation preserved: pass - Codex-authored RED evidence requires Claude-family Stage 3 implementation during bootstrap.
 
 ## Formation Evidence
 
-- `docs/work/BANDIT-076/qwen-formation-review.md` - `blocker`; the authorized Local Qwen MLX adapter route is unavailable and no Qwen pass or dispositioned non-blocking finding set exists.
+- `docs/work/BANDIT-076/qwen-formation-review.md` - `pass` through the MLX OpenAI-compatible adapter with no blockers or non-blocking findings.
 - `docs/work/BANDIT-076/coderabbit-formation-review.md` - `bootstrap_gap`; CodeRabbit provider timeout after the full 10-minute window during setup/analyzing/reviewing; no CodeRabbit pass claimed.
 - `docs/work/BANDIT-076/brief.md` - Stage 1 brief with non-product work, source provenance, scope, out-of-scope, acceptance criteria, verification plan, `CLEAN_CODE.md` read evidence, bootstrap-gap disposition, expected files, required evidence, role boundaries, stage capability scope, token-cost failsafe, source-of-truth/evidence-bundle boundary, first implementation order, smell triggers, forbidden actions, Local Qwen route restriction, and operator-input status.
-- `docs/work/BANDIT-076/coordination-log.jsonl` - initial `brief_created` transition with `formation_required`; `formation_approved` has not been recorded.
+- `docs/work/BANDIT-076/coordination-log.jsonl` - initial `brief_created` transition with `formation_required`, followed by a provider-repair `blocked` transition. `formation_approved` has not been recorded yet.
 
 ## Findings
 
-### F1 - Local Qwen Provider Unavailable
-
-Finding verdict: blocker
-
-Disposition: blocks formation approval. The endpoint at
-`http://127.0.0.1:8000/v1` is unavailable, the configured baseline cache is
-incomplete, and the complete local MLX community snapshot cannot be loaded by
-the installed `mlx-lm 0.26.0` server because `qwen3_5_moe` is unsupported. No
-direct `qwen` CLI evidence is allowed.
-
-### F2 - CodeRabbit Provider Timeout
+### CodeRabbit Provider Timeout
 
 Finding verdict: bootstrap_gap
 
@@ -67,16 +57,24 @@ Disposition: accepted only as provider-timeout replacement evidence. CodeRabbit
 reached setup/analyzing/reviewing but did not return a terminal review before
 the full required 10-minute timeout; no CodeRabbit pass is claimed.
 
+### Local Qwen Provider Restored
+
+Finding verdict: pass
+
+Disposition: the operator restarted the crashed server; endpoint and adapter
+preflights passed, and Local Qwen returned a Stage 1 formation pass through the
+authorized MLX adapter route.
+
 ## Summary
 
-`BANDIT-076` has a repaired Stage 1 brief and coordination prerequisite, but
-formation cannot be approved because Local Qwen did not return the required pass
-or dispositioned non-blocking findings through the authorized MLX adapter route.
+`BANDIT-076` has adequate Stage 1 formation evidence to proceed. The brief is
+narrow, source-backed, verifiable, clean-code/rubric evaluable, and preserves
+bootstrap-gap ordering, evidence-bundle read-only boundaries, no-gate-
+replacement constraints, Trust Verifier cutover boundaries, Permanent Test
+Ownership Boundary, Bootstrap Model-Family Separation, Local Qwen MLX adapter
+routing, and operator-owned product/UAT/policy/business/cost/risk boundaries.
 
-The next recorded action should be Repo PM repair of the Local Qwen provider
-route for `BANDIT-076` formation review, then refresh
-`docs/work/BANDIT-076/qwen-formation-review.md` and
-`docs/work/BANDIT-076/formation-review.md`, and only then run
+The next recorded action should be Repo PM approval via
 `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-076`. Work Item PM must
 not write an orchestration plan, write RED evidence, dispatch implementation,
 approve UAT, land work, merge, push, deploy, or start unrelated Phase 8 slices
