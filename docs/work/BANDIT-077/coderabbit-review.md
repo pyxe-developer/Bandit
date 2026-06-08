@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-077
-source_head: 3b7010890e92ea43c9bf71c70d32ccb84d47f266
+source_head: 564b912ff919be785583261f547579e20b3d22ea
 provider: coderabbit-cli
 review_target: local-diff:origin/main
 review_state: timeout

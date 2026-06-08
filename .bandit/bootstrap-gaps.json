@@ -1120,7 +1120,7 @@
       "linked_work_item": "BANDIT-077",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Spec-To-Evidence Traceability Matrix records the need for each acceptance criterion to map to concrete verification evidence or explicit disposition so weak specs and unmapped claims are harder to land.",
       "verification_target": null,
-      "next_action": "Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR or provider-timeout evidence, Local Qwen through the configured MLX adapter, risk classification, supply-chain gate, review-subject hash, traceability-quality review, and aggregate review evidence."
+      "next_action": "Record Stage 5 landing verdict for BANDIT-077, run land-check, and execute local-record landing action against the current source/evidence commit."
     }
   ]
 }

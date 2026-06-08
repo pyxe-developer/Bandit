@@ -1,0 +1,197 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-077",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/spec-to-evidence-traceability.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/spec-to-evidence-traceability.md",
+      "surface": "workflow_template",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/review-evidence.md",
+      "surface": "review_packet_template",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/spec-to-evidence-traceability.ts",
+      "surface": "workflow_policy_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/spec-to-evidence.ts",
+      "surface": "workflow_command_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/spec-to-evidence-traceability.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-077/brief.md"
+    },
+    {
+      "surface": "old_gate_replacement_or_wrapping",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-077/brief.md"
+    },
+    {
+      "surface": "live_reviewer_or_model_routing_change",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "surface": "paid_reviewer_model_routing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-077/brief.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "read_only_traceability_policy_added",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/spec-to-evidence-traceability.json"
+    },
+    {
+      "signal_id": "traceability_validator_and_command_added",
+      "risk": "medium",
+      "evidence_path": "src/state/spec-to-evidence-traceability.ts"
+    },
+    {
+      "signal_id": "review_packet_traceability_quality_fields_added",
+      "risk": "medium",
+      "evidence_path": "docs/templates/review-evidence.md"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/role-runs/BANDIT-077/stage3-implementation.json"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/spec-to-evidence-traceability.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs spec-to-evidence validate BANDIT-077 --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs coordination validate BANDIT-077",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-077/stage3-pm-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-077-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-077/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-077/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-077/coderabbit-review.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-077 is a non-product bootstrap-gap chore with all gates pre-approved through landing and closeout. It adds read-only traceability policy, deterministic validation, focused tests, CLI validation output, and review packet prompts. It does not approve Trust Verifier cutover, old-gate replacement, live reviewer/model routing, paid routing, hosted services, telemetry, product behavior, business policy, cost policy, merge, push, or deploy behavior."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-077 is medium workflow-risk because it adds a read-only spec-to-evidence traceability policy, validator, command, template, reviewer-packet fields, and focused tests for future landing and review hardening. The change is local, deterministic, fail-closed, covered by focused and full tests, preserves Test Writer ownership, and keeps traceability output separate from acceptance-criteria, landing, review, and Trust Verifier authority.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-077-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-077-supply-chain-gate.json",
+    ".bandit/policy/spec-to-evidence-traceability.json",
+    "docs/templates/spec-to-evidence-traceability.md",
+    "docs/templates/review-evidence.md",
+    "docs/work/BANDIT-077/brief.md",
+    "docs/work/BANDIT-077/red-evidence.md",
+    "docs/work/BANDIT-077/implementation-evidence.md",
+    "docs/work/BANDIT-077/stage3-pm-review.md",
+    "docs/work/BANDIT-077/writer-report.md",
+    "docs/work/BANDIT-077/coderabbit-review.md",
+    "docs/work/BANDIT-077/local-qwen-review.md",
+    "docs/role-runs/BANDIT-077/stage3-implementation.json",
+    "src/cli.ts",
+    "src/commands/spec-to-evidence.ts",
+    "src/state/spec-to-evidence-traceability.ts",
+    "test/spec-to-evidence-traceability.test.mjs"
+  ]
+}

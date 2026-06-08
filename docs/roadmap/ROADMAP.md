@@ -9,13 +9,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 4 review
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 5 landing
   required next)
 
-**Current next step:** Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR or
-provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
-classification, supply-chain gate, review-subject hash, traceability-quality
-review, and aggregate review evidence.
+**Current next step:** Record Stage 5 landing verdict for BANDIT-077, run
+land-check, and execute local-record landing action against the current
+source/evidence commit.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -31,7 +30,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 4 review.
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 5 landing.
 
 ## Planned Work
 

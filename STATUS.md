@@ -2,22 +2,20 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-077 (Stage 4 review required)
+## Current Work Item: BANDIT-077 (Stage 5 landing required)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-077` has accepted Stage 3 implementation evidence for
-Spec-To-Evidence Traceability Matrix. Stage 4 review is next.
+`BANDIT-077` has accepted Stage 4 review evidence for Spec-To-Evidence
+Traceability Matrix. Stage 5 landing is next.
 
-Current stage: Stage 4 review required.
+Current stage: Stage 5 landing required.
 
-Next action: Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR or
-provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
-classification, supply-chain gate, review-subject hash, traceability-quality
-review, and aggregate review evidence.
+Next action: Record Stage 5 landing verdict for BANDIT-077, run land-check, and
+execute local-record landing action against the current source/evidence commit.
 
 Required operator input: none currently required.
 

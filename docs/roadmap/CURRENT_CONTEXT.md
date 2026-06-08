@@ -4,20 +4,22 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-077` is in Stage 4 review for the Spec-To-Evidence Traceability Matrix
+`BANDIT-077` is in Stage 5 landing for the Spec-To-Evidence Traceability Matrix
 bootstrap chore. Stage 1 brief, Qwen formation review, CodeRabbit
 provider-timeout evidence, aggregate formation review, `formation_approved`,
 plan-mode, Stage 2 RED evidence, Stage 3 implementation evidence, writer
-report, and PM acceptance exist under `docs/work/BANDIT-077/`.
+report, PM acceptance, CodeRabbit provider-timeout review evidence, Local Qwen
+pass evidence, risk classification, supply-chain gate, review-subject hash, and
+aggregate Stage 4 review evidence exist under `docs/work/BANDIT-077/` and
+`.bandit/policy/`.
 
-**Active work item:** `BANDIT-077` (Stage 4 review required next).
+**Active work item:** `BANDIT-077` (Stage 5 landing required next).
 
-The current stage is Stage 4: review required.
+The current stage is Stage 5: landing required.
 
-**Current next action:** Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR
-or provider-timeout evidence, Local Qwen through the configured MLX adapter,
-risk classification, supply-chain gate, review-subject hash,
-traceability-quality review, and aggregate review evidence.
+**Current next action:** Record Stage 5 landing verdict for BANDIT-077, run
+land-check, and execute local-record landing action against the current
+source/evidence commit.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -65,13 +67,20 @@ repo artifacts cannot answer.
   `docs/work/BANDIT-077/stage3-pm-review.md`, and
   `docs/role-runs/BANDIT-077/stage3-implementation.json` record accepted
   Claude-family Stage 3 implementation evidence.
+- Review evidence: `docs/work/BANDIT-077/review-evidence.md`,
+  `docs/work/BANDIT-077/coderabbit-review.md`,
+  `docs/work/BANDIT-077/local-qwen-review.md`,
+  `.bandit/policy/risk-classifications/BANDIT-077-risk-classification.json`,
+  and `.bandit/policy/supply-chain-gates/BANDIT-077-supply-chain-gate.json`
+  record Stage 4 review evidence and finding dispositions.
 
 `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is active and linked to
-`BANDIT-077` in `.bandit/bootstrap-gaps.json`. Do not start landing, closeout,
-unrelated Phase 8 product work, guarded browser actions, local API work, State
-Index work, scheduler execution, claim execution, worktree execution, public
-benchmark publication, paid reviewer/model routing, hosted replay services,
-telemetry, merge, push, deploy, Trust Verifier cutover, or unrelated product
-work before Stage 4 review evidence and finding disposition are recorded.
+`BANDIT-077` in `.bandit/bootstrap-gaps.json`. Do not start closeout, unrelated
+Phase 8 product work, guarded browser actions, local API work, State Index work,
+scheduler execution, claim execution, worktree execution, public benchmark
+publication, paid reviewer/model routing, hosted replay services, telemetry,
+merge, push, deploy, Trust Verifier cutover, or unrelated product work before
+Stage 5 landing verdict, land-check, and local-record landing action are
+recorded.
 
-The next required step is Stage 4 review for `BANDIT-077`.
+The next required step is Stage 5 landing for `BANDIT-077`.
