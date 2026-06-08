@@ -4,23 +4,24 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-077` is in Stage 6 closeout for the Spec-To-Evidence Traceability Matrix
-bootstrap chore. Stage 1 brief, Qwen formation review, CodeRabbit
-provider-timeout evidence, aggregate formation review, `formation_approved`,
-plan-mode, Stage 2 RED evidence, Stage 3 implementation evidence, writer
-report, PM acceptance, CodeRabbit provider-timeout review evidence, Local Qwen
-pass evidence, risk classification, supply-chain gate, review-subject hash, and
-aggregate Stage 4 review evidence, Stage 5 landing verdict, and local-record
-landing action evidence exist under `docs/work/BANDIT-077/` and
-`.bandit/policy/`.
+`BANDIT-077` is closed for the Spec-To-Evidence Traceability Matrix bootstrap
+chore. Stage 1 brief, Qwen formation review, CodeRabbit provider-timeout
+evidence, aggregate formation review, `formation_approved`, plan-mode, Stage 2
+RED evidence, Stage 3 implementation evidence, writer report, PM acceptance,
+CodeRabbit provider-timeout review evidence, Local Qwen pass evidence, risk
+classification, supply-chain gate, review-subject hash, aggregate Stage 4
+review evidence, Stage 5 landing verdict, local-record landing action evidence,
+retrospective, improvement disposition, and bootstrap-gap disposition exist
+under `docs/work/BANDIT-077/` and `.bandit/policy/`.
 
-**Active work item:** `BANDIT-077` (Stage 6 closeout required next).
+**Active work item:** `BANDIT-077` (closed; last active derived-status anchor).
 
-The current stage is Stage 6: closeout required.
+The current stage is Stage 6: closed.
 
-**Current next action:** Record Stage 6 closeout for BANDIT-077: retrospective,
-structured improvement disposition, bootstrap-gap resolution, routing sync, and
-final validation.
+**Current next action:** Repo PM should triage and form the next Phase 8 product
+queue item, currently Guarded CLI Action Requests, only if roadmap/product
+direction is sufficient; otherwise ask the operator for the missing product
+direction.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -77,14 +78,17 @@ repo artifacts cannot answer.
 - Landing evidence: `docs/work/BANDIT-077/landing-verdict.md` and
   `docs/work/BANDIT-077/landing-action.md` record safe-to-land and
   local-record landing action evidence.
+- Closeout evidence: `docs/work/BANDIT-077/retrospective.md`,
+  `docs/work/BANDIT-077/chore-disposition.md`, and
+  `docs/work/BANDIT-077/improvement-disposition.md` record closeout and
+  bootstrap-gap resolution.
 
-`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is active and linked to
-`BANDIT-077` in `.bandit/bootstrap-gaps.json`. Do not start unrelated Phase 8
-product work, guarded browser actions, local API work, State Index work,
+`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is resolved and linked to
+`BANDIT-077` in `.bandit/bootstrap-gaps.json`. No open bootstrap gap remains.
+Do not start guarded browser actions, local API work, State Index work,
 scheduler execution, claim execution, worktree execution, public benchmark
 publication, paid reviewer/model routing, hosted replay services, telemetry,
-merge, push, deploy, Trust Verifier cutover, or unrelated product work before
-Stage 6 retrospective, improvement/gap disposition, routing sync, and final
-validation are recorded.
+merge, push, deploy, Trust Verifier cutover, or unrelated product work without
+separate authorization and evidence.
 
-The next required step is Stage 6 closeout for `BANDIT-077`.
+The next required step is Repo PM product-slice triage/formation.

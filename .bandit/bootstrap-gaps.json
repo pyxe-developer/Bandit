@@ -1104,8 +1104,8 @@
     {
       "id": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",
       "title": "Spec-To-Evidence Traceability Matrix",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -1118,9 +1118,9 @@
         "docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json"
       ],
       "linked_work_item": "BANDIT-077",
-      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Spec-To-Evidence Traceability Matrix records the need for each acceptance criterion to map to concrete verification evidence or explicit disposition so weak specs and unmapped claims are harder to land.",
-      "verification_target": null,
-      "next_action": "Record Stage 6 closeout for BANDIT-077: retrospective, structured improvement disposition, bootstrap-gap resolution, routing sync, and final validation."
+      "rationale": "BANDIT-077 delivered Spec-To-Evidence Traceability Matrix as a repo-native read-only policy, matrix template, validator, public CLI command, review-evidence traceability-quality fields, focused fail-closed tests, review evidence, landing action evidence, and Stage 6 closeout proof. The gate maps acceptance criteria to behavior, command, reviewer, UAT, replay, implementation-detail, or explicit disposition evidence without converting traceability into coverage, reviewer-count, Trust Verifier cutover, or workflow authority replacement.",
+      "verification_target": "docs/work/BANDIT-077/retrospective.md",
+      "next_action": "Use bandit spec-to-evidence validate <WORK_ITEM> --json for future covered work-item traceability checks; next work returns to Repo PM product-slice triage because no open bootstrap gap remains."
     }
   ]
 }

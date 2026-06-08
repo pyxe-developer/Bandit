@@ -4,17 +4,18 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (closed; last
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (closed; last
   active anchor)
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 6 closeout
-  required next)
+- No active work item is formed. `BANDIT-077` remains the last closed
+  derived-status anchor until Repo PM forms the next slice.
 
-**Current next step:** Record Stage 6 closeout for BANDIT-077: retrospective,
-structured improvement disposition, bootstrap-gap resolution, routing sync, and
-final validation.
+**Current next step:** Repo PM should triage and form the next Phase 8 product
+queue item, currently Guarded CLI Action Requests, only if roadmap/product
+direction is sufficient; otherwise ask the operator for the missing product
+direction.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,14 +31,13 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 6 closeout.
+- `[Slice]` `TBD` - Guarded CLI Action Requests formation/triage.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - Acceptance
-  criterion to verification artifact traceability, active as `BANDIT-077`.
+- None currently open.
 
 ### Phase 8 Product Queue
 
@@ -46,6 +46,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-077` - Spec-To-Evidence Traceability Matrix
 - `BANDIT-076` - Evidence Bundle Attestation
 - `BANDIT-075` - Reviewer Calibration With Seeded Defects
 - `BANDIT-074` - Metamorphic Cross-Projection Checks

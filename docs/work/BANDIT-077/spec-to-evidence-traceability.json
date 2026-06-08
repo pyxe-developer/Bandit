@@ -64,13 +64,15 @@
     {
       "criterion_id": "AC6",
       "criterion": "`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is resolved only after landing action and retrospective closeout evidence exist.",
-      "disposition": "bootstrap_gap",
-      "rationale": "Final gap resolution is intentionally a Stage 6 closeout check; before landing and retrospective evidence exist, the active ledger state must remain unresolved and this criterion cannot be marked complete.",
+      "evidence_type": "command",
       "source_artifacts": [
         ".bandit/bootstrap-gaps.json",
         "docs/work/BANDIT-077/landing-action.md",
-        "docs/work/BANDIT-077/retrospective.md"
-      ]
+        "docs/work/BANDIT-077/retrospective.md",
+        "node ./bin/bandit.mjs gaps list"
+      ],
+      "evidence_summary": "Stage 6 closeout records landing action evidence, retrospective evidence, and resolved bootstrap-gap ledger state before the gap is closed.",
+      "disposition": "none"
     }
   ]
 }
