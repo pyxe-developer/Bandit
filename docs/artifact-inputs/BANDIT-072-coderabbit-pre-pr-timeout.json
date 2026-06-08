@@ -1,0 +1,8 @@
+{
+  "sourceHead": "d099a051190e2bc6cb27ab1287e5272aeb3d3480",
+  "baseRevision": "origin/main",
+  "availabilityStatus": "available",
+  "reviewState": "timeout",
+  "verdict": "blocker",
+  "providerError": "CodeRabbit pre-PR provider path is unavailable in the current fixture-normalized CLI contract; no terminal review_completed event or actionable findings were returned for source head d099a051190e2bc6cb27ab1287e5272aeb3d3480. No CodeRabbit pass is claimed."
+}
