@@ -2,8 +2,8 @@
 
 contract_version: 1
 work_item: BANDIT-076
-source_head: eb7270e430de576101a614b4100e3183865f23de
-review_subject_hash: 7e74fe4e99845ecec964dd85f219f65c7849af93049729bb17eeaeea0b4ac96b
+source_head: b2c98141d046a74eb049b96b786f7dca89c0ce98
+review_subject_hash: 9fa6497a1b1bb28122b5e00c672ece60485aa077bd3428f6c6da24d29b6b800a
 verification_state: pass
 freshness_state: current
 verification_evidence:
@@ -29,7 +29,7 @@ escalated_review_required: false
 escalated_review_state: not_applicable
 escalated_review_rationale: Layered risk classification selected pre_pr_coderabbit_plus_qwen. BANDIT-076 is a non-product bootstrap-gap chore that adds a read-only evidence bundle policy, local deterministic validator, CLI attestation command, and focused tests. No high-risk product, dependency, CI/release, fetched-prompt, external tool install, credential, production data, telemetry, paid routing, merge, push, deploy, product UAT, live reviewer/model routing, or Trust Verifier cutover surface is present.
 pm_disposition: pass
-pm_disposition_rationale: Stage 4 passes because focused evidence-bundle tests, full npm test, typecheck, aggregate Bandit validation, role-run validation, risk classification, supply-chain gate validation, review-subject hash evidence, clean-code inspection, CodeRabbit timeout evidence with both emitted state-sync findings repaired, and Local Qwen oMLX pass evidence are current for review_subject_hash 7e74fe4e99845ecec964dd85f219f65c7849af93049729bb17eeaeea0b4ac96b. CodeRabbit did not return a pass; PM dispositioned the two major findings as repaired in docs/work/BANDIT-076/coderabbit-finding-disposition.md.
+pm_disposition_rationale: Stage 4 passes because focused evidence-bundle tests, full npm test, typecheck, aggregate Bandit validation, role-run validation, risk classification, supply-chain gate validation, review-subject hash evidence, clean-code inspection, CodeRabbit timeout evidence with both emitted state-sync findings repaired, and refreshed Local Qwen oMLX pass evidence are current for review_subject_hash 9fa6497a1b1bb28122b5e00c672ece60485aa077bd3428f6c6da24d29b6b800a. CodeRabbit did not return a pass; PM dispositioned the two major findings as repaired in docs/work/BANDIT-076/coderabbit-finding-disposition.md.
 non_blocking_findings_routing:
   - none
 operator_input_status: none_required
@@ -44,8 +44,8 @@ bootstrap_gaps:
   "artifact_type": "review_evidence",
   "work_item": "BANDIT-076",
   "freshness_state": "current",
-  "review_subject_hash": "7e74fe4e99845ecec964dd85f219f65c7849af93049729bb17eeaeea0b4ac96b",
-  "source_head": "eb7270e430de576101a614b4100e3183865f23de",
+  "review_subject_hash": "9fa6497a1b1bb28122b5e00c672ece60485aa077bd3428f6c6da24d29b6b800a",
+  "source_head": "b2c98141d046a74eb049b96b786f7dca89c0ce98",
   "source_artifacts": [
     "docs/work/BANDIT-076/coderabbit-review.md",
     "docs/work/BANDIT-076/coderabbit-finding-disposition.md",
