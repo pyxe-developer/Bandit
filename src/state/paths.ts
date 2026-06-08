@@ -48,6 +48,10 @@ export function getBanditPaths(repoRoot: string) {
       policyRoot,
       "replay-regression-corpus.json"
     ),
+    gateDeterminismFlakeGatePolicy: path.join(
+      policyRoot,
+      "gate-determinism-flake-gate.json"
+    ),
     smellTriggers: path.join(policyRoot, "smell-triggers.json"),
     eventDrivenWakeSchedulerPolicy: path.join(
       policyRoot,

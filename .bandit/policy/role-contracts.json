@@ -159,6 +159,7 @@
         "docs/templates/**",
         ".bandit/policy/role-contracts.json",
         ".bandit/policy/artifact-inputs.json",
+        ".bandit/policy/gate-determinism-flake-gate.json",
         "docs/artifact-inputs/**",
         "docs/reviewer-captures/.gitkeep",
         "docs/trust-snapshot-fixtures/.gitkeep",

@@ -38,6 +38,7 @@ import { sessionContext } from "./commands/session-context.js";
 import { updateCheck } from "./commands/update-check.js";
 import { emitCachedUpdateAlert } from "./state/update-channel.js";
 import { validateBandit } from "./commands/validate.js";
+import { canonicalJson } from "./state/gate-determinism.js";
 import { replayRegressionCorpus } from "./commands/replay-regression-corpus.js";
 import { verificationOracleProvenance } from "./commands/verification-oracle-provenance.js";
 import { eventDrivenWakeScheduler } from "./commands/event-driven-wake-scheduler.js";
@@ -90,6 +91,15 @@ async function main() {
 
   if (command === "validate") {
     const result = await validateBandit(process.cwd());
+    if (args.includes("--json")) {
+      process.stdout.write(
+        `${canonicalJson({
+          status: "pass",
+          gate_determinism_flake_gate: result.gateDeterminismFlakeGate
+        })}\n`
+      );
+      return;
+    }
     console.log(result.message);
     return;
   }

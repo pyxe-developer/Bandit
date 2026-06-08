@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "command_version": 1,
+  "determinism_critical_gates": [
+    "cockpit-status",
+    "session-context",
+    "validate"
+  ],
+  "allowed_nondeterminism_sources": [
+    "provider_dependent_evidence",
+    "wall_clock_sensitive",
+    "flaky_test",
+    "unavailable_external_reviewer"
+  ],
+  "covered_gates": [],
+  "nondeterminism_sources": [],
+  "nondeterminism_dispositions": [],
+  "external_evidence": []
+}

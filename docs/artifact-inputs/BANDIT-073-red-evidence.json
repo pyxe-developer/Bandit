@@ -1,0 +1,60 @@
+{
+  "kind": "red_evidence",
+  "work_item": "BANDIT-073",
+  "status": "pass",
+  "stage": "Stage 2: Test Design And RED Evidence",
+  "summary": "Focused Test Writer-owned tests define the Gate Determinism And Flake Gate behavior before implementation. The public interface is `bandit validate --json` for stable machine-readable aggregate validation output and plain `bandit validate` for fail-closed diagnostics. Current RED fails because `validate --json` still emits text output and because invalid gate-determinism policies with unstable output, undispositioned flakes, provider-dependent evidence without freshness metadata, and direct `qwen` CLI Local Qwen evidence are ignored instead of blocking validation.",
+  "test_command": "node --test test/gate-determinism.test.mjs",
+  "observed_output": [
+    "Subtest: validate --json emits stable gate determinism output for dispositioned local and provider evidence",
+    "not ok 1 - validate --json emits stable gate determinism output for dispositioned local and provider evidence",
+    "Unexpected token 'B', \"Bandit sta\"... is not valid JSON",
+    "Subtest: validate fails closed when a covered gate has unstable output ordering or hash drift",
+    "not ok 2 - validate fails closed when a covered gate has unstable output ordering or hash drift",
+    "Expected values to be strictly equal: 0 !== 1",
+    "Subtest: validate fails closed on undispositioned flakes and provider evidence without freshness metadata",
+    "not ok 3 - validate fails closed on undispositioned flakes and provider evidence without freshness metadata",
+    "Expected values to be strictly equal: 0 !== 1",
+    "Subtest: validate rejects direct qwen CLI evidence as Local Qwen proof",
+    "not ok 4 - validate rejects direct qwen CLI evidence as Local Qwen proof",
+    "Expected values to be strictly equal: 0 !== 1",
+    "tests 4",
+    "pass 0",
+    "fail 4"
+  ],
+  "acceptance_criteria_mapping": [
+    {
+      "criterion": "A policy artifact defines determinism-critical gates, allowed nondeterminism sources, required dispositions, repeat-run expectations, and output stability requirements.",
+      "evidence": "test/gate-determinism.test.mjs writes `.bandit/policy/gate-determinism-flake-gate.json` fixtures with `covered_gates`, `repeat_runs`, `expected_hash`, `nondeterminism_sources`, `nondeterminism_dispositions`, and `external_evidence`. Current validation ignores the policy."
+    },
+    {
+      "criterion": "Covered commands produce stable machine-readable output for the same repo state or report a justified nondeterminism disposition.",
+      "evidence": "The passing-path RED test runs `bandit validate --json` twice and expects byte-identical JSON containing a `gate_determinism_flake_gate` report with sorted stable hashes. Current output is plain text and cannot be parsed as JSON."
+    },
+    {
+      "criterion": "Validation fails closed when a covered trusted claim depends on undispositioned flaky tests, provider-dependent evidence, unstable ordering, or unstable hashes.",
+      "evidence": "Focused RED tests expect `bandit validate` to fail on output hash drift, unstable ordering, missing flake dispositions, provider evidence missing `captured_at`, missing `freshness.expires_at`, missing `availability_disposition`, and provider evidence that attempts to replace deterministic local proof. Current validation exits 0."
+    },
+    {
+      "criterion": "Freshness-bounded external evidence remains allowed, but it must be recorded as external/provider-dependent and cannot silently replace deterministic local evidence.",
+      "evidence": "The passing-path RED fixture includes CodeRabbit provider-timeout evidence with provider, source artifact, captured-at timestamp, freshness expiry, availability disposition, and `replaces_deterministic_local_proof: false`. The fail-closed fixture omits that metadata and expects validation refusal."
+    },
+    {
+      "criterion": "Run tests proving direct Qwen CLI routing is not accepted as Local Qwen evidence for Bandit gates.",
+      "evidence": "The direct-Qwen RED test writes Local Qwen provider evidence with `route: direct_qwen_cli` and expects diagnostics naming the authorized `.bandit/reviewers/local-qwen.json` plus `bin/omlx-chat-completions.mjs` path. Current validation exits 0."
+    },
+    {
+      "criterion": "Determinism checks remain read-only against canonical workflow state unless a later stage explicitly writes ordinary stage evidence under the approved Work Item surfaces.",
+      "evidence": "The tests operate on temp repos through public `bandit validate` commands and write only test fixture policy data; Stage 3 must keep gate checks read-only and must not mutate coordination, roadmap, review, landing, UAT, or gap state as part of validation."
+    },
+    {
+      "criterion": "The implementation preserves Bandit's CLI authority, repo-native canonical artifacts, source-of-truth/projection boundaries, operator fail-closed boundary, layered risk classification, supply-chain gate expectations, Permanent Test Ownership Boundary, and Bootstrap Model-Family Separation.",
+      "evidence": "Codex authored `test/gate-determinism.test.mjs` and this RED evidence. Stage 3 must be dispatched to Claude-family implementation and must not edit tests, test helpers, fixtures, RED evidence, gate determinism acceptance mappings, expected-output mappings, nondeterminism-disposition mappings, source-artifact mappings, formation evidence, review evidence, landing evidence, or retrospective evidence."
+    },
+    {
+      "criterion": "`BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` is resolved only after landing action and retrospective closeout evidence exist.",
+      "evidence": "Stage 2 only records RED evidence and does not update `.bandit/bootstrap-gaps.json` to resolved; closeout remains Stage 6 authority after landing action and retrospective evidence."
+    }
+  ],
+  "next_action": "Dispatch Stage 3 implementation for BANDIT-073 to Claude Implementation Writer through the bootstrap Process Adapter path. Implement the smallest gate determinism policy reader, stable JSON hashing, repeat-run snapshot comparison, external/provider evidence metadata checks, direct-Qwen-CLI refusal, `bandit validate --json` output, init default policy seeding, and aggregate validation wiring needed to make `test/gate-determinism.test.mjs` pass. Keep Stage 3 away from tests, test helpers, fixtures owned by Stage 2, RED evidence, gate determinism acceptance mappings, expected-output mappings, nondeterminism-disposition mappings, source-artifact mappings, formation evidence, review evidence, landing evidence, retrospective evidence, Trust Verifier cutover, old-gate replacement or wrapping, live reviewer/model routing, public benchmark publication, paid routing, hosted services, telemetry, merge, push, deploy, guarded browser action execution, and unrelated Phase 8 cockpit/product scope."
+}

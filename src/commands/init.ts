@@ -40,6 +40,7 @@ import {
   writeDefaultSupplyChainGatePolicy,
   writeDefaultSupplyChainGateTemplate
 } from "../state/supply-chain-gate.js";
+import { writeDefaultGateDeterminismFlakeGatePolicy } from "../state/gate-determinism.js";
 import { writeDefaultReplayRegressionCorpusPolicy } from "../state/replay-regression-corpus.js";
 import { writeDefaultTestStrengthGatePolicy } from "../state/test-strength-gate.js";
 import {
@@ -102,6 +103,9 @@ export async function initBandit(repoRoot: string) {
   const supplyChainPolicyExists = await pathExists(paths.supplyChainPolicy);
   const supplyChainTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/supply-chain-gate.md`
+  );
+  const gateDeterminismFlakeGatePolicyExists = await pathExists(
+    paths.gateDeterminismFlakeGatePolicy
   );
   const replayRegressionCorpusPolicyExists = await pathExists(
     paths.replayRegressionCorpusPolicy
@@ -209,6 +213,12 @@ export async function initBandit(repoRoot: string) {
 
   if (!supplyChainTemplateExists) {
     await writeDefaultSupplyChainGateTemplate(repoRoot);
+  }
+
+  if (!gateDeterminismFlakeGatePolicyExists) {
+    await writeDefaultGateDeterminismFlakeGatePolicy(
+      paths.gateDeterminismFlakeGatePolicy
+    );
   }
 
   if (!replayRegressionCorpusPolicyExists) {

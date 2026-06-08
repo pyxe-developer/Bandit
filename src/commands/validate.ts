@@ -10,6 +10,10 @@ import { validateConfig } from "../state/config.js";
 import { validateEscalatedReviewArtifacts } from "../state/escalated-review.js";
 import { validateEvidenceFreshnessSlosPolicy } from "../state/evidence-freshness-slos.js";
 import { validateEventLog } from "../state/events.js";
+import {
+  validateGateDeterminismFlakeGate,
+  type GateDeterminismFlakeGateReport
+} from "../state/gate-determinism.js";
 import { validateGitMutations } from "../state/git-mutations.js";
 import { validateHeartbeatPolicy } from "../state/heartbeat-policy.js";
 import { validateInputQuarantineGate } from "../state/input-quarantine.js";
@@ -79,9 +83,17 @@ export async function validateBandit(repoRoot: string) {
   await validateRoleContractsPolicy(repoRoot);
   await validateArtifactInputsPolicy(repoRoot);
   await validateTrustVerifierCutoverGates(repoRoot);
+  const gateDeterminismFlakeGate = await validateGateDeterminismFlakeGate(
+    repoRoot
+  );
 
-  return { message: "Bandit state is valid." };
+  return { message: "Bandit state is valid.", gateDeterminismFlakeGate };
 }
+
+export type BanditValidationResult = {
+  message: string;
+  gateDeterminismFlakeGate: GateDeterminismFlakeGateReport;
+};
 
 async function readRequiredFile(filePath: string, displayPath: string) {
   try {
