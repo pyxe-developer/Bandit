@@ -7,19 +7,18 @@
 `BANDIT-078` is active for the Guarded CLI Action Requests Phase 8 product
 slice. Stage 1 formation, Work Item PM plan-mode orchestration, and Stage 2 RED
 evidence exist under `docs/work/BANDIT-078/`. Stage 3 implementation is blocked
-because the restored-auth Claude-family Implementation Writer dispatch timed
-out after 900 seconds without source edits, Writer report, or implementation
-evidence.
+because the restored-auth Claude-family Implementation Writer dispatch and a
+shorter focused retry both timed out after 900 seconds without source edits,
+Writer report, or implementation evidence.
 
-**Active work item:** `BANDIT-078` (Stage 3 blocked on Claude dispatch timeout).
+**Active work item:** `BANDIT-078` (Stage 3 blocked on Claude dispatch timeout and policy exception input).
 
 The current stage is Stage 3: blocked.
 
-**Current next action:** Create a shorter Stage 3 Claude-family dispatch packet
-for BANDIT-078 that preserves model-family separation and zero test-surface
-authority, then retry Claude Implementation Writer; if the retry cannot produce
-source edits and Writer evidence, route the Stage 3 writer path to
-operator-owned policy exception input.
+**Current next action:** Operator must approve a scoped policy exception
+changing the Stage 3 implementation writer path for this Codex-authored RED
+slice. After the unblock path is recorded, resume Stage 3 implementation from
+the approved replacement route.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -32,10 +31,9 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. Operator input
-becomes required only if a focused Claude-family retry cannot produce source
-edits and Writer evidence and a scoped Stage 3 writer-path policy exception is
-needed.
+Operator-owned input is required for the next recorded action: approve a scoped
+policy exception changing the Stage 3 implementation writer path for this
+Codex-authored RED slice.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -58,6 +56,7 @@ repo artifacts cannot answer.
 - Orchestration plan: `docs/work/BANDIT-078/orchestration-plan.md`.
 - RED evidence: `docs/work/BANDIT-078/red-evidence.md`.
 - Stage 3 dispatch: `docs/work/BANDIT-078/stage3-dispatch.md`.
+- Stage 3 short dispatch: `docs/work/BANDIT-078/stage3-dispatch-short.md`.
 - Stage 3 dispatch attempt/blocker: `docs/work/BANDIT-078/stage3-dispatch-attempt.md`.
 - Qwen formation review: `docs/work/BANDIT-078/qwen-formation-review.md`
   records a pass through the authorized MLX adapter route.
@@ -75,6 +74,6 @@ worktree execution, public benchmark publication, paid reviewer/model routing,
 hosted replay services, telemetry, merge, push, deploy, Trust Verifier cutover,
 or unrelated product work while Stage 3 is blocked.
 
-The next required step is to create a shorter Stage 3 Claude-family dispatch
-packet for BANDIT-078 that preserves model-family separation and zero
-test-surface authority, then retry Claude Implementation Writer.
+The next required step is for the operator to approve a scoped policy exception
+changing the Stage 3 implementation writer path for this Codex-authored RED
+slice.

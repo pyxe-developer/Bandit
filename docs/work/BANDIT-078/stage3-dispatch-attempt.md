@@ -3,8 +3,8 @@
 ## Status
 
 `blocked`: Claude-family Implementation Writer authentication is restored, but
-the resumed Stage 3 dispatch timed out after 900 seconds without source edits,
-Writer report, or implementation evidence.
+both the full and shortened Stage 3 dispatch attempts timed out after 900
+seconds without source edits, Writer report, or implementation evidence.
 
 ## Attempt 1
 
@@ -36,14 +36,9 @@ writer path would require operator-owned policy input.
 
 ## Required Operator Input
 
-The current next action does not require operator input. Codex PM must create a
-shorter Stage 3 Claude-family dispatch packet that preserves model-family
-separation and zero test-surface authority, then retry Claude Implementation
-Writer.
-
-Operator input becomes required only if the focused retry cannot produce source
-edits and Writer evidence through an authorized Claude-family route; at that
-point the operator must approve a scoped policy exception changing the Stage 3
+Operator input is now required. The focused Claude-family retry could not
+produce source edits and Writer evidence through an authorized Claude-family
+route. The operator must approve a scoped policy exception changing the Stage 3
 implementation writer path for this Codex-authored RED slice.
 
 Do not start Stage 4 review, UAT, landing, closeout, guarded browser action
@@ -89,3 +84,39 @@ Codex PM cannot implement Stage 3 locally because Codex authored the Stage 2 RED
 tests and `docs/work/BANDIT-078/brief.md` requires a different model family for
 Stage 3 implementation. The next authorized PM action is to tighten the Stage 3
 Claude-family dispatch packet and retry once through the required Writer route.
+
+## Attempt 3
+
+- Time: 2026-06-08T20:03:27Z
+- Dispatch artifact: `docs/work/BANDIT-078/stage3-dispatch-short.md`
+- Command shape:
+
+```sh
+timeout 900 claude -p --model claude-sonnet-4-6 --output-format stream-json --verbose -- "$(cat docs/work/BANDIT-078/stage3-dispatch-short.md)"
+```
+
+## Observed Output
+
+The command authenticated, read the required evidence, emitted long internal
+analysis about the RED tests, then exited with code `124` when the 900-second
+wrapper elapsed. It did not emit a final Writer result, did not edit source
+files, did not create `docs/work/BANDIT-078/writer-report.md`, and did not
+create `docs/work/BANDIT-078/implementation-evidence.md`.
+
+`git status --short` after the timeout showed only the Codex PM-authored short
+dispatch packet:
+
+```text
+?? docs/work/BANDIT-078/stage3-dispatch-short.md
+```
+
+## Boundary Decision
+
+The recorded next action required a shorter Claude-family retry first. That
+retry is now complete and did not produce source edits or Writer evidence, so
+the Stage 3 writer path must route to operator-owned policy exception input.
+
+Exact next action: Operator must approve a scoped policy exception changing the
+Stage 3 implementation writer path for this Codex-authored RED slice. After the
+unblock path is recorded, resume Stage 3 implementation from the approved
+replacement route.

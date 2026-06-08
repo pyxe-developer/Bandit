@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-078 (Stage 3 blocked on Claude dispatch timeout)
+## Current Work Item: BANDIT-078 (Stage 3 blocked on Claude dispatch timeout and policy exception input)
 
 ## Current Status
 
@@ -11,19 +11,19 @@ Layer Pivot.
 
 `BANDIT-078` has Stage 1 formation, Work Item PM plan-mode orchestration, and
 Stage 2 RED evidence for Guarded CLI Action Requests. Stage 3 implementation is
-blocked because the restored-auth Claude dispatch timed out after 900 seconds
-without source edits, Writer report, or implementation evidence.
+blocked because the restored-auth Claude dispatch and a shorter focused retry
+both timed out after 900 seconds without source edits, Writer report, or
+implementation evidence.
 
 Current stage: Stage 3 blocked.
 
-Next action: Create a shorter Stage 3 Claude-family dispatch packet for
-BANDIT-078 that preserves model-family separation and zero test-surface
-authority, then retry Claude Implementation Writer; if the retry cannot produce
-source edits and Writer evidence, route the Stage 3 writer path to
-operator-owned policy exception input.
+Next action: Operator must approve a scoped policy exception changing the Stage
+3 implementation writer path for this Codex-authored RED slice. After the
+unblock path is recorded, resume Stage 3 implementation from the approved
+replacement route.
 
-Required operator input: none for the next recorded action; required only if a
-focused Claude-family retry cannot produce source edits and Writer evidence.
+Required operator input: approve a scoped policy exception changing the Stage 3
+implementation writer path for this Codex-authored RED slice.
 
 ## Recently Completed / In Progress
 

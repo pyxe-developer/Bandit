@@ -10,13 +10,12 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 3 blocked on
-  Claude dispatch timeout)
+  Claude dispatch timeout and policy exception input)
 
-**Current next step:** Create a shorter Stage 3 Claude-family dispatch packet
-for BANDIT-078 that preserves model-family separation and zero test-surface
-authority, then retry Claude Implementation Writer; if the retry cannot produce
-source edits and Writer evidence, route the Stage 3 writer path to
-operator-owned policy exception input.
+**Current next step:** Operator must approve a scoped policy exception changing
+the Stage 3 implementation writer path for this Codex-authored RED slice. After
+the unblock path is recorded, resume Stage 3 implementation from the approved
+replacement route.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
