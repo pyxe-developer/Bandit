@@ -1,0 +1,76 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-077",
+  "traceability": [
+    {
+      "criterion_id": "AC1",
+      "criterion": "The chore brief links to `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` as the active bootstrap gap once it becomes the next queued work item.",
+      "evidence_type": "command",
+      "source_artifacts": [
+        "docs/work/BANDIT-077/brief.md",
+        ".bandit/bootstrap-gaps.json",
+        "node ./bin/bandit.mjs cockpit status --json",
+        "node ./bin/bandit.mjs session-context current --json"
+      ],
+      "evidence_summary": "Cockpit and session-context output identify BANDIT-077 as the active work item for the active spec-to-evidence bootstrap gap.",
+      "disposition": "none"
+    },
+    {
+      "criterion_id": "AC2",
+      "criterion": "A policy or template defines traceability entry schema, supported evidence types, disposition values, required fields, and covered risk tiers.",
+      "evidence_type": "behavior_test",
+      "source_artifacts": [
+        ".bandit/policy/spec-to-evidence-traceability.json",
+        "docs/templates/spec-to-evidence-traceability.md",
+        "test/spec-to-evidence-traceability.test.mjs"
+      ],
+      "evidence_summary": "Focused tests require the policy and template to define schema fields, supported evidence types, dispositions, required fields, and covered risk tiers.",
+      "disposition": "none"
+    },
+    {
+      "criterion_id": "AC3",
+      "criterion": "Covered work items cannot land when acceptance criteria lack concrete verification mapping or explicit disposition.",
+      "evidence_type": "behavior_test",
+      "source_artifacts": [
+        "test/spec-to-evidence-traceability.test.mjs",
+        "src/state/spec-to-evidence-traceability.ts"
+      ],
+      "evidence_summary": "Focused tests prove missing acceptance-criterion mappings fail closed with explicit diagnostics before validation can pass.",
+      "disposition": "none"
+    },
+    {
+      "criterion_id": "AC4",
+      "criterion": "Review evidence asks whether mapped tests and artifacts prove the stated behavior rather than only existing.",
+      "evidence_type": "reviewer",
+      "source_artifacts": [
+        "docs/templates/review-evidence.md",
+        "test/spec-to-evidence-traceability.test.mjs"
+      ],
+      "evidence_summary": "Review evidence template fields and focused tests require traceability state, quality, and disposition inspection instead of artifact-presence checks only.",
+      "disposition": "none"
+    },
+    {
+      "criterion_id": "AC5",
+      "criterion": "Traceability output distinguishes behavior evidence, implementation-detail evidence, UAT evidence, reviewer evidence, replay evidence, and explicit no-action/bootstrap dispositions.",
+      "evidence_type": "behavior_test",
+      "source_artifacts": [
+        ".bandit/policy/spec-to-evidence-traceability.json",
+        "test/spec-to-evidence-traceability.test.mjs",
+        "src/state/spec-to-evidence-traceability.ts"
+      ],
+      "evidence_summary": "Focused tests exercise behavior evidence, command evidence, unsupported evidence, implementation-detail rationale, and explicit disposition handling.",
+      "disposition": "none"
+    },
+    {
+      "criterion_id": "AC6",
+      "criterion": "`BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is resolved only after landing action and retrospective closeout evidence exist.",
+      "disposition": "bootstrap_gap",
+      "rationale": "Final gap resolution is intentionally a Stage 6 closeout check; before landing and retrospective evidence exist, the active ledger state must remain unresolved and this criterion cannot be marked complete.",
+      "source_artifacts": [
+        ".bandit/bootstrap-gaps.json",
+        "docs/work/BANDIT-077/landing-action.md",
+        "docs/work/BANDIT-077/retrospective.md"
+      ]
+    }
+  ]
+}

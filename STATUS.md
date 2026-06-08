@@ -2,23 +2,22 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-077 (formation approved)
+## Current Work Item: BANDIT-077 (Stage 4 review required)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-077` is formation-approved for Spec-To-Evidence Traceability Matrix.
-Stage 1 brief, Local Qwen formation pass, CodeRabbit timeout evidence,
-aggregate formation review, and `formation_approved` coordination evidence
-exist.
+`BANDIT-077` has accepted Stage 3 implementation evidence for
+Spec-To-Evidence Traceability Matrix. Stage 4 review is next.
 
-Current stage: Stage 1 formation approved.
+Current stage: Stage 4 review required.
 
-Next action: Work Item PM should start plan-mode orchestration for BANDIT-077 by
-drafting docs/work/BANDIT-077/orchestration-plan.md and running work-item-pm
-start BANDIT-077 before RED evidence.
+Next action: Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR or
+provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
+classification, supply-chain gate, review-subject hash, traceability-quality
+review, and aggregate review evidence.
 
 Required operator input: none currently required.
 

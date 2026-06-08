@@ -4,19 +4,20 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-077` is formation-approved for the Spec-To-Evidence Traceability Matrix
+`BANDIT-077` is in Stage 4 review for the Spec-To-Evidence Traceability Matrix
 bootstrap chore. Stage 1 brief, Qwen formation review, CodeRabbit
-provider-timeout evidence, aggregate formation review, and `formation_approved`
-coordination evidence exist under `docs/work/BANDIT-077/`.
+provider-timeout evidence, aggregate formation review, `formation_approved`,
+plan-mode, Stage 2 RED evidence, Stage 3 implementation evidence, writer
+report, and PM acceptance exist under `docs/work/BANDIT-077/`.
 
-**Active work item:** `BANDIT-077` (formation approved; plan-mode orchestration
-required next).
+**Active work item:** `BANDIT-077` (Stage 4 review required next).
 
-The current stage is Stage 1: formation approved.
+The current stage is Stage 4: review required.
 
-**Current next action:** Work Item PM should start plan-mode orchestration for
-BANDIT-077 by drafting docs/work/BANDIT-077/orchestration-plan.md and running
-work-item-pm start BANDIT-077 before RED evidence.
+**Current next action:** Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR
+or provider-timeout evidence, Local Qwen through the configured MLX adapter,
+risk classification, supply-chain gate, review-subject hash,
+traceability-quality review, and aggregate review evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -54,15 +55,23 @@ repo artifacts cannot answer.
   records provider timeout/bootstrap replacement evidence with no pass claimed.
 - Aggregate formation review: `docs/work/BANDIT-077/formation-review.md`
   records a pass with CodeRabbit timeout disposition.
+- Orchestration plan: `docs/work/BANDIT-077/orchestration-plan.md` records Work
+  Item PM plan-mode gate evidence.
+- RED evidence: `docs/work/BANDIT-077/red-evidence.md` and
+  `test/spec-to-evidence-traceability.test.mjs` record Test Writer-owned RED
+  evidence.
+- Implementation evidence: `docs/work/BANDIT-077/implementation-evidence.md`,
+  `docs/work/BANDIT-077/writer-report.md`,
+  `docs/work/BANDIT-077/stage3-pm-review.md`, and
+  `docs/role-runs/BANDIT-077/stage3-implementation.json` record accepted
+  Claude-family Stage 3 implementation evidence.
 
 `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` is active and linked to
-`BANDIT-077` in `.bandit/bootstrap-gaps.json`. Do not start RED evidence,
-implementation, review, landing, closeout, unrelated Phase 8 product work,
-guarded browser actions, local API work, State Index work, scheduler execution,
-claim execution, worktree execution, public benchmark publication, paid
-reviewer/model routing, hosted replay services, telemetry, merge, push, deploy,
-Trust Verifier cutover, or unrelated product work before Work Item PM plan-mode
-orchestration is recorded.
+`BANDIT-077` in `.bandit/bootstrap-gaps.json`. Do not start landing, closeout,
+unrelated Phase 8 product work, guarded browser actions, local API work, State
+Index work, scheduler execution, claim execution, worktree execution, public
+benchmark publication, paid reviewer/model routing, hosted replay services,
+telemetry, merge, push, deploy, Trust Verifier cutover, or unrelated product
+work before Stage 4 review evidence and finding disposition are recorded.
 
-The next required step is Work Item PM plan-mode orchestration for
-`BANDIT-077`.
+The next required step is Stage 4 review for `BANDIT-077`.

@@ -1,0 +1,36 @@
+{
+  "contract_version": 1,
+  "policy_id": "spec-to-evidence-traceability",
+  "version": 1,
+  "covered_risk_tiers": [
+    "bootstrap_chore",
+    "low",
+    "material"
+  ],
+  "required_fields": [
+    "criterion_id",
+    "criterion",
+    "source_artifacts",
+    "evidence_summary"
+  ],
+  "supported_evidence_types": [
+    "behavior_test",
+    "command",
+    "invariant",
+    "uat",
+    "reviewer",
+    "replay",
+    "implementation_detail"
+  ],
+  "disposition_values": [
+    "none",
+    "bootstrap_gap",
+    "no_action"
+  ],
+  "authority": {
+    "read_only": true,
+    "can_mutate_acceptance_criteria": false,
+    "can_replace_landing_authority": false,
+    "can_approve_trust_verifier_cutover": false
+  }
+}

@@ -29,6 +29,7 @@ import { reviewerCalibration } from "./commands/reviewer-calibration.js";
 import { riskClassification } from "./commands/risk-classification.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
+import { specToEvidence } from "./commands/spec-to-evidence.js";
 import { skillLifecycle } from "./commands/skill-lifecycle.js";
 import { stageCapabilityScope } from "./commands/stage-capability-scope.js";
 import { supplyChainGate } from "./commands/supply-chain-gate.js";
@@ -67,7 +68,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance|evidence-bundle>"
+        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance|evidence-bundle|spec-to-evidence>"
     );
     process.exitCode = 1;
     return;
@@ -387,6 +388,20 @@ async function main() {
   if (command === "evidence-bundle") {
     const result = await evidenceBundle(process.cwd(), args);
     process.stdout.write(result.output);
+    return;
+  }
+
+  if (command === "spec-to-evidence") {
+    const result = await specToEvidence(process.cwd(), args);
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.code) {
+      process.exitCode = result.code;
+    }
     return;
   }
 

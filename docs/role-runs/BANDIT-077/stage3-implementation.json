@@ -1,0 +1,132 @@
+{
+  "contract_version": 1,
+  "manifest_id": "BANDIT-077-stage3-implementation",
+  "work_item_id": "BANDIT-077",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-implementation-writer-stage3",
+  "base_revision": "3b7010890e92ea43c9bf71c70d32ccb84d47f266",
+  "allowed_target_files": [
+    ".bandit/policy/spec-to-evidence-traceability.json",
+    "docs/templates/spec-to-evidence-traceability.md",
+    "docs/templates/review-evidence.md",
+    "src/state/spec-to-evidence-traceability.ts",
+    "src/commands/spec-to-evidence.ts",
+    "src/commands/validate.ts",
+    "src/commands/init.ts",
+    "src/cli.ts",
+    "docs/work/BANDIT-077/writer-report.md",
+    "docs/role-runs/BANDIT-077/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-077/red-evidence.md",
+    "docs/work/BANDIT-077/brief.md",
+    "docs/work/BANDIT-077/orchestration-plan.md",
+    "docs/work/BANDIT-077/coordination-log.jsonl",
+    "docs/work/BANDIT-077/qwen-formation-review.md",
+    "docs/work/BANDIT-077/coderabbit-formation-review.md",
+    "docs/work/BANDIT-077/formation-review.md",
+    "docs/work/BANDIT-077/review-evidence.md",
+    "docs/work/BANDIT-077/landing-verdict.md",
+    "docs/work/BANDIT-077/landing-action.md",
+    "docs/work/BANDIT-077/retrospective.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-077/stage3-dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-077/writer-report.md",
+  "validation_commands": [
+    "node --test test/spec-to-evidence-traceability.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate",
+    "node ./bin/bandit.mjs spec-to-evidence validate BANDIT-077 --json",
+    "node ./bin/bandit.mjs coordination validate BANDIT-077",
+    "npm test",
+    "git diff --check"
+  ],
+  "source_artifacts": [
+    "AGENTS.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-077/brief.md",
+    "docs/work/BANDIT-077/orchestration-plan.md",
+    "docs/work/BANDIT-077/stage3-dispatch.md",
+    "docs/work/BANDIT-077/red-evidence.md",
+    "test/spec-to-evidence-traceability.test.mjs",
+    "docs/templates/review-evidence.md",
+    "src/cli.ts",
+    "docs/templates/role-run-manifest.md"
+  ],
+  "files_changed": [
+    ".bandit/policy/spec-to-evidence-traceability.json",
+    "docs/templates/spec-to-evidence-traceability.md",
+    "docs/templates/review-evidence.md",
+    "src/state/spec-to-evidence-traceability.ts",
+    "src/commands/spec-to-evidence.ts",
+    "src/cli.ts",
+    "docs/work/BANDIT-077/writer-report.md",
+    "docs/role-runs/BANDIT-077/stage3-implementation.json"
+  ],
+  "test_surfaces_edited": [],
+  "repair": {
+    "recorded_at": "2026-06-08T17:32:00Z",
+    "trigger": "Codex PM acceptance gap: gate failed closed against existing Bandit chore brief shape (work_type: chore with prose acceptance bullets, no risk_tier line, no ACn identifiers).",
+    "red_test": "spec-to-evidence validate supports existing chore briefs with prose acceptance bullets",
+    "red_failure": "missing risk_tier in brief: docs/work/BANDIT-999/brief.md",
+    "source_change": "src/state/spec-to-evidence-traceability.ts: readRiskTier infers bootstrap_chore from work_type: chore when risk_tier is absent; readAcceptanceCriteria synthesizes deterministic AC1/AC2/... ids from prose acceptance bullets when ACn labels are absent.",
+    "authority_preserved": "derived read-only; no mutation of acceptance criteria, landing authority, Trust Verifier authority, reviewer/model routing, or gap status."
+  },
+  "validation_results": [
+    {
+      "command": "node --test test/spec-to-evidence-traceability.test.mjs",
+      "result": "pass",
+      "detail": "7/7 subtests passed, including the new chore-brief repair test"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass"
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "result": "pass",
+      "detail": "Bandit state is valid."
+    },
+    {
+      "command": "node ./bin/bandit.mjs spec-to-evidence validate BANDIT-077 --json",
+      "result": "pass",
+      "detail": "status: pass, covered_risk_tier: bootstrap_chore; real BANDIT-077 prose acceptance bullets synthesized to AC1-AC6 and mapped to the Test-Writer-owned docs/work/BANDIT-077/spec-to-evidence-traceability.json matrix. Brief and matrix remain unedited."
+    },
+    {
+      "command": "node ./bin/bandit.mjs coordination validate BANDIT-077",
+      "result": "pass",
+      "detail": "Coordination log is valid: BANDIT-077"
+    },
+    {
+      "command": "npm test",
+      "result": "pass",
+      "detail": "574/574 tests passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false,
+    "note": "Role-run evidence is append-only evidence. It cannot satisfy coordination history, review evidence, landing evidence, UAT approval, or retrospective authority."
+  },
+  "bootstrap_model_family_separation": "Codex authored Stage 2 RED evidence; Claude-family implementation writer is required for Stage 3. Verification escalation returns to Codex PM."
+}

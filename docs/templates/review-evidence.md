@@ -19,5 +19,8 @@ non_blocking_findings_routing:
 operator_input_status:
 uat_status:
 clean_code_status:
+traceability_state:
+traceability_quality:
+traceability_disposition:
 source_drift_status:
 bootstrap_gaps:

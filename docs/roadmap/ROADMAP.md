@@ -9,12 +9,13 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (formation
-  approved; plan-mode orchestration required next)
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 4 review
+  required next)
 
-**Current next step:** Work Item PM should start plan-mode orchestration for
-BANDIT-077 by drafting docs/work/BANDIT-077/orchestration-plan.md and running
-work-item-pm start BANDIT-077 before RED evidence.
+**Current next step:** Run Stage 4 review for BANDIT-077: CodeRabbit pre-PR or
+provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
+classification, supply-chain gate, review-subject hash, traceability-quality
+review, and aggregate review evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,8 +31,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix plan-mode
-  orchestration.
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 4 review.
 
 ## Planned Work
 
