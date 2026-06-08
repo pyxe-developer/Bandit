@@ -4,10 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-072` - Replay Regression Corpus (Stage 1 formation approved)
+- `[Gap]` `BANDIT-072` - Replay Regression Corpus (closed; last closed anchor)
 
-**Current next step:** Work Item PM plan-mode orchestration for `BANDIT-072`
-before RED evidence.
+**Current next step:** Repo PM should create a bounded chore from
+`docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json` before unrelated Phase
+8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -54,6 +55,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-072` - Replay Regression Corpus
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel
 - `BANDIT-070` - Verification Oracle Provenance Gate
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate

@@ -1,24 +1,25 @@
 # Current Context
 
-## Last Updated: 2026-06-07
+## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-072 (Stage 1 formation approved)
+## Current Work Item: BANDIT-072 (Stage 6 closed; last closed anchor)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-072` is formed for the Replay Regression Corpus bootstrap chore. Stage
-1 formation is approved with brief evidence, `brief_created` coordination,
-Local Qwen formation pass through the MLX adapter route, CodeRabbit
-provider-timeout bootstrap replacement evidence, aggregate formation review,
-and `formation_approved` coordination evidence.
+`BANDIT-072` is landed and closed out for the Replay Regression Corpus
+bootstrap chore. The closeout resolves `BANDIT-GAP-REPLAY-REGRESSION-CORPUS`
+with read-only replay policy, packet fixtures, deterministic validation,
+fail-closed schema/taxonomy checks, focused tests, review evidence, landing
+action, retrospective, and bootstrap-gap disposition.
 
-Current stage: Stage 1 formation approved.
+Current stage: Stage 6 closed.
 
-Next action: Work Item PM plan-mode orchestration for `BANDIT-072` before RED
-evidence.
+Next action: Repo PM should create a bounded chore from
+`docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json` before unrelated Phase
+8 product work.
 
 Required operator input: none currently required.
 
@@ -26,7 +27,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-072` - Replay Regression Corpus (formation approved)
+- `BANDIT-072` - Replay Regression Corpus (closed)
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel (closed)
 - `BANDIT-070` - Verification Oracle Provenance Gate (closed)
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate (closed)
