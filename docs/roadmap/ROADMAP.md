@@ -2,14 +2,14 @@
 
 **Current phase:** Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-## Current Work Item
+## Last Closed Work Item
 
-- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 5
-  landing required)
+- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (closed; last
+  active anchor)
 
-**Current next step:** Landing Agent should record the Stage 5 landing verdict
-for `BANDIT-075`, run land-check, and execute the local-record landing action
-before closeout.
+**Current next step:** Repo PM should create and form a bounded chore from
+`docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json` before unrelated Phase
+8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -26,8 +26,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
-  hashing for landing and trusted-verdict evidence, queued behind reviewer
-  calibration.
+  hashing for landing and trusted-verdict evidence.
 
 ## Planned Work
 
@@ -47,6 +46,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-075` - Reviewer Calibration With Seeded Defects
 - `BANDIT-074` - Metamorphic Cross-Projection Checks
 - `BANDIT-073` - Gate Determinism And Flake Gate
 - `BANDIT-072` - Replay Regression Corpus

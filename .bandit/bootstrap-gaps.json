@@ -1048,8 +1048,8 @@
     {
       "id": "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS",
       "title": "Reviewer Calibration With Seeded Defects",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -1059,12 +1059,19 @@
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/roadmap/ROADMAP.md",
         "docs/work/BANDIT-068/brief.md",
-        "docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json"
+        "docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json",
+        "docs/work/BANDIT-075/red-evidence.md",
+        "docs/work/BANDIT-075/implementation-evidence.md",
+        "docs/work/BANDIT-075/review-evidence.md",
+        "docs/work/BANDIT-075/landing-action.md",
+        "docs/work/BANDIT-075/retrospective.md",
+        "docs/work/BANDIT-075/chore-disposition.md",
+        "docs/work/BANDIT-075/improvement-disposition.md"
       ],
       "linked_work_item": "BANDIT-075",
-      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Reviewer Calibration With Seeded Defects records the need for replay-only reviewer packets with known blockers and known non-issues so Qwen, CodeRabbit, and escalated reviewers can be checked for drift without affecting live work.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-075."
+      "rationale": "BANDIT-075 delivered Reviewer Calibration With Seeded Defects as a repo-native replay-only policy, seeded Bandit workflow failure-mode packet, validation command, deterministic scoring output, provider-timeout evidence handling, direct-Qwen refusal, and focused tests. The calibration surface remains read-only and does not promote reviewers, change live reviewer/model routing, approve paid routing, replace old gates, grant Trust Verifier authority, merge, push, deploy, or expand unrelated product scope.",
+      "verification_target": "docs/work/BANDIT-075/retrospective.md",
+      "next_action": "Use reviewer-calibration validation as replay-only reviewer drift evidence; create a bounded chore from docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json before unrelated Phase 8 product work."
     },
     {
       "id": "BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION",
@@ -1085,7 +1092,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Evidence Bundle Attestation records the need to hash and attest the full landing evidence bundle, not only the source subject, so trusted verdicts can be tied to tests, review, risk, supply-chain, UAT where applicable, policy versions, command versions, and freshness evidence.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",
