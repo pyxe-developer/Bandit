@@ -9,13 +9,15 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (RED evidence recorded;
-  Stage 3 implementation pending)
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 3 blocked on
+  Claude authentication)
 
-**Current next step:** Dispatch Stage 3 implementation for `BANDIT-078` to
-Claude-family Implementation Writer. Implement guarded action request metadata
-and rendering without editing Test Writer-owned tests, fixtures, RED evidence,
-or acceptance mappings.
+**Current next step:** Operator must restore Claude authentication/profile
+access for the Stage 3 Implementation Writer or approve a scoped policy
+exception changing the Stage 3 implementation writer path for this
+Codex-authored RED slice. After the unblock path is provided, resume Stage 3
+from `docs/work/BANDIT-078/stage3-dispatch.md` or the approved replacement
+route.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
