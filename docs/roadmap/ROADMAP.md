@@ -9,12 +9,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 5 landing
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (Stage 6 closeout
   required next)
 
-**Current next step:** Record Stage 5 landing verdict for BANDIT-077, run
-land-check, and execute local-record landing action against the current
-source/evidence commit.
+**Current next step:** Record Stage 6 closeout for BANDIT-077: retrospective,
+structured improvement disposition, bootstrap-gap resolution, routing sync, and
+final validation.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,7 +30,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 5 landing.
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix Stage 6 closeout.
 
 ## Planned Work
 

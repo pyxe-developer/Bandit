@@ -2,20 +2,21 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-077 (Stage 5 landing required)
+## Current Work Item: BANDIT-077 (Stage 6 closeout required)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-077` has accepted Stage 4 review evidence for Spec-To-Evidence
-Traceability Matrix. Stage 5 landing is next.
+`BANDIT-077` has local-record landing action evidence for Spec-To-Evidence
+Traceability Matrix. Stage 6 closeout is next.
 
-Current stage: Stage 5 landing required.
+Current stage: Stage 6 closeout required.
 
-Next action: Record Stage 5 landing verdict for BANDIT-077, run land-check, and
-execute local-record landing action against the current source/evidence commit.
+Next action: Record Stage 6 closeout for BANDIT-077: retrospective, structured
+improvement disposition, bootstrap-gap resolution, routing sync, and final
+validation.
 
 Required operator input: none currently required.
 
