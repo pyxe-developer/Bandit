@@ -95,7 +95,9 @@ async function main() {
       process.stdout.write(
         `${canonicalJson({
           status: "pass",
-          gate_determinism_flake_gate: result.gateDeterminismFlakeGate
+          gate_determinism_flake_gate: result.gateDeterminismFlakeGate,
+          metamorphic_cross_projection_checks:
+            result.metamorphicCrossProjectionChecks
         })}\n`
       );
       return;

@@ -1,0 +1,25 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-074",
+  "artifact_type": "red_evidence",
+  "created_at": "2026-06-08T03:21:11Z",
+  "owner": "test_writer",
+  "test_files": [
+    "test/metamorphic-cross-projection-checks.test.mjs"
+  ],
+  "focused_command": "node --test test/metamorphic-cross-projection-checks.test.mjs",
+  "red_result": {
+    "exit_code": 1,
+    "failures": [
+      "validate --json does not emit metamorphic_cross_projection_checks report for an agreeing policy",
+      "validate exits 0 when covered projections disagree on trust-relevant next_action"
+    ]
+  },
+  "stage3_writer": "claude-family implementation writer",
+  "stage3_forbidden_surfaces": [
+    "test/metamorphic-cross-projection-checks.test.mjs",
+    "docs/work/BANDIT-074/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-074-red-evidence.json",
+    "test helpers, fixtures, perturbation fixtures, expected-output mappings, source-artifact mappings, and acceptance mappings"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-074",
+  "stage": "stage3_implementation",
+  "role": "implementation_writer",
+  "model_family": "claude",
+  "model_id": "claude-sonnet-4-6",
+  "recorded_at": "2026-06-08T03:30:00Z",
+  "verdict": "pass",
+  "files_changed": [
+    "src/state/projection-consistency.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    ".bandit/policy/metamorphic-cross-projection-checks.json"
+  ],
+  "test_surfaces_edited": [],
+  "focused_test_result": {
+    "command": "node --test test/metamorphic-cross-projection-checks.test.mjs",
+    "exit_code": 0,
+    "pass": 2,
+    "fail": 0
+  },
+  "typecheck_result": {
+    "command": "npm run typecheck",
+    "exit_code": 0
+  },
+  "validate_result": {
+    "command": "npm run bandit -- validate",
+    "exit_code": 0,
+    "output": "Bandit state is valid."
+  },
+  "git_diff_check_result": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "no_test_edit_evidence": "Stage 3 Writer did not touch test/metamorphic-cross-projection-checks.test.mjs, red-evidence.md, artifact-inputs, helpers, fixtures, or acceptance mappings.",
+  "bootstrap_model_family_separation": "Codex authored Stage 2 RED evidence; Claude-family implementation writer used for Stage 3 as required."
+}

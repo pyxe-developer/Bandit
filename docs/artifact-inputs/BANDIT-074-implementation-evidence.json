@@ -1,0 +1,41 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-074",
+  "artifact_type": "implementation_evidence",
+  "created_at": "2026-06-08T03:30:31Z",
+  "owner": "work_item_pm",
+  "writer": "claude-family implementation writer",
+  "writer_report": "docs/work/BANDIT-074/writer-report.md",
+  "role_run": "docs/role-runs/BANDIT-074/stage3-implementation.json",
+  "source_files": [
+    ".bandit/policy/metamorphic-cross-projection-checks.json",
+    "src/state/projection-consistency.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts"
+  ],
+  "stage2_surfaces_edited_by_stage3_writer": [],
+  "verification": [
+    {
+      "command": "node --test test/metamorphic-cross-projection-checks.test.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run bandit -- validate",
+      "exit_code": 0
+    },
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "summary": "551 pass, 0 fail"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "pm_acceptance_verdict": "pass"
+}

@@ -1,5 +1,9 @@
 import { readFile } from "node:fs/promises";
 import { validateAgentEvaluationHarness } from "../state/agent-evaluation-harness.js";
+import {
+  validateProjectionConsistency,
+  type MetamorphicCrossProjectionReport
+} from "../state/projection-consistency.js";
 import { validateAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { validateBootstrapGaps } from "../state/bootstrap-gaps.js";
 import { validateClaimAuthority } from "../state/claim-authority.js";
@@ -86,13 +90,20 @@ export async function validateBandit(repoRoot: string) {
   const gateDeterminismFlakeGate = await validateGateDeterminismFlakeGate(
     repoRoot
   );
+  const metamorphicCrossProjectionChecks =
+    await validateProjectionConsistency(repoRoot);
 
-  return { message: "Bandit state is valid.", gateDeterminismFlakeGate };
+  return {
+    message: "Bandit state is valid.",
+    gateDeterminismFlakeGate,
+    metamorphicCrossProjectionChecks
+  };
 }
 
 export type BanditValidationResult = {
   message: string;
   gateDeterminismFlakeGate: GateDeterminismFlakeGateReport;
+  metamorphicCrossProjectionChecks: MetamorphicCrossProjectionReport;
 };
 
 async function readRequiredFile(filePath: string, displayPath: string) {

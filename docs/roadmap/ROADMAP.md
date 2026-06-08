@@ -4,11 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 1 formation approved)
+- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 4 review required)
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-074` before RED evidence, implementation, review, landing, closeout, or
-later queued bootstrap-gap work.
+**Current next step:** Run Stage 4 review for `BANDIT-074`: CodeRabbit pre-PR or
+provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
+classification, supply-chain gate, finding dispositions, review-subject hash,
+and aggregate review evidence before landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

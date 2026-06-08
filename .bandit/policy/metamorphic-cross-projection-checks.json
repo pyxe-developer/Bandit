@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "command_version": 1,
+  "canonical_sources": [
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    ".bandit/bootstrap-gaps.json",
+    "docs/work/BANDIT-074/coordination-log.jsonl"
+  ],
+  "covered_projection_ids": [
+    "cockpit-status",
+    "session-context"
+  ],
+  "trust_relevant_fields": [
+    "active_work_item",
+    "current_stage",
+    "next_action",
+    "required_operator_input",
+    "queued_gaps",
+    "gate_verdicts"
+  ],
+  "acceptable_differences": [
+    {
+      "field": "current_stage",
+      "difference": "whitespace",
+      "rationale": "Markdown wrapping may change whitespace without changing stage semantics."
+    },
+    {
+      "field": "gate_verdicts",
+      "difference": "json_object_key_order",
+      "rationale": "JSON object key order is not semantically meaningful."
+    }
+  ],
+  "covered_projections": [],
+  "harmless_perturbations": []
+}
