@@ -2,24 +2,24 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-075 (Stage 4 review required)
+## Current Work Item: BANDIT-075 (Stage 5 landing required)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-075` is in Stage 4 review for the Reviewer Calibration With Seeded
+`BANDIT-075` is in Stage 5 landing for the Reviewer Calibration With Seeded
 Defects bootstrap chore. Plan-mode orchestration, RED evidence, implementation
-evidence, Writer report, role-run manifest, and PM clean-code acceptance exist.
+evidence, Writer report, role-run manifest, PM clean-code acceptance, aggregate
+review, CodeRabbit disposition, Local Qwen pass, risk classification, and
+supply-chain gate evidence exist.
 
-Current stage: Stage 4 review required.
+Current stage: Stage 5 landing required.
 
-Next action: Work Item PM should run Stage 4 review for `BANDIT-075` with
-CodeRabbit or provider-timeout evidence, Local Qwen through
-`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`, risk
-classification, supply-chain gate, review-subject hash, aggregate review
-evidence, and finding dispositions before landing.
+Next action: Landing Agent should record the Stage 5 landing verdict for
+`BANDIT-075`, run land-check, and execute the local-record landing action before
+closeout.
 
 Required operator input: none currently required.
 
@@ -27,7 +27,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 4 review required)
+- `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 5 landing required)
 - `BANDIT-074` - Metamorphic Cross-Projection Checks (closed)
 - `BANDIT-073` - Gate Determinism And Flake Gate (closed)
 - `BANDIT-072` - Replay Regression Corpus (closed)

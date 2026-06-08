@@ -4,14 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 4
-  review required)
+- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 5
+  landing required)
 
-**Current next step:** Work Item PM should run Stage 4 review for `BANDIT-075`
-with CodeRabbit or provider-timeout evidence, Local Qwen through
-`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`, risk
-classification, supply-chain gate, review-subject hash, aggregate review
-evidence, and finding dispositions before landing.
+**Current next step:** Landing Agent should record the Stage 5 landing verdict
+for `BANDIT-075`, run land-check, and execute the local-record landing action
+before closeout.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
