@@ -2,21 +2,24 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-076 (Stage 5 landing)
+## Current Work Item: BANDIT-076 (closed; last active anchor)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-076` completed Stage 4 review for Evidence Bundle Attestation. CodeRabbit
-timed out with two state-sync findings repaired, Local Qwen passed through the
-authorized adapter, and risk/supply-chain/review evidence is recorded.
+`BANDIT-076` is landed and closed out for Evidence Bundle Attestation.
+CodeRabbit timed out with two state-sync findings repaired, Local Qwen returned
+non-blocking observations with PM no-action routing, risk/supply-chain/review
+evidence is recorded, local-record landing action exists, and final bundle
+attestation passed.
 
-Current stage: Stage 5 landing required.
+Current stage: Stage 6 closeout complete.
 
-Next action: Record Stage 5 landing verdict for BANDIT-076, run land-check, and
-execute local-record landing action before closeout.
+Next action: Repo PM must create and form the next bounded chore from
+docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json before
+unrelated Phase 8 product work.
 
 Required operator input: none currently required.
 
@@ -24,8 +27,8 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
+- `BANDIT-076` - Evidence Bundle Attestation (closed)
 - `BANDIT-075` - Reviewer Calibration With Seeded Defects (closed)
 - `BANDIT-074` - Metamorphic Cross-Projection Checks (closed)
 - `BANDIT-073` - Gate Determinism And Flake Gate (closed)
 - `BANDIT-072` - Replay Regression Corpus (closed)
-- `BANDIT-071` - Private Installable Distribution And Update Notification Channel (closed)

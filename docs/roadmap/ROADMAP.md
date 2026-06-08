@@ -4,15 +4,17 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (closed; last
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (closed; last
   active anchor)
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 5 landing required)
+- None. Last active anchor remains `BANDIT-076` until the next bootstrap-gap
+  chore is formed.
 
-**Current next step:** Record Stage 5 landing verdict for BANDIT-076, run
-land-check, and execute local-record landing action before closeout.
+**Current next step:** Repo PM must create and form the next bounded chore from
+docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json before
+unrelated Phase 8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -28,17 +30,15 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation Stage 5 landing.
+- `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - create and form
+  the bounded chore.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
-  hashing for landing and trusted-verdict evidence, active as `BANDIT-076`.
 - `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - Acceptance
-  criterion to verification artifact traceability, queued behind evidence
-  bundle attestation.
+  criterion to verification artifact traceability, queued next.
 
 ### Phase 8 Product Queue
 
@@ -47,6 +47,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-076` - Evidence Bundle Attestation
 - `BANDIT-075` - Reviewer Calibration With Seeded Defects
 - `BANDIT-074` - Metamorphic Cross-Projection Checks
 - `BANDIT-073` - Gate Determinism And Flake Gate
