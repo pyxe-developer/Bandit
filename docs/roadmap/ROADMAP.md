@@ -4,11 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-073` - Gate Determinism And Flake Gate (closed; last closed anchor)
+- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 1 formation approved)
 
-**Current next step:** Repo PM should create a bounded chore from
-`docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json` before
-unrelated Phase 8 product work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-074` before RED evidence, implementation, review, landing, closeout, or
+later queued bootstrap-gap work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -24,19 +24,17 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
-  agreement and harmless-perturbation checks for derived trust surfaces.
+- `[Gap]` `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - Replay-only
+  seeded blocker and non-issue packets for reviewer calibration, queued behind
+  `BANDIT-074`.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
-  agreement and harmless-perturbation checks for derived trust surfaces,
-  queued behind the determinism gate.
 - `[Gap]` `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - Replay-only seeded
   blocker and non-issue packets for reviewer calibration, queued behind
-  cross-projection checks.
+  `BANDIT-074`.
 - `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
   hashing for landing and trusted-verdict evidence, queued behind reviewer
   calibration.

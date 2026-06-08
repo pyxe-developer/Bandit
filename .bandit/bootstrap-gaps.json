@@ -1020,8 +1020,8 @@
     {
       "id": "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS",
       "title": "Metamorphic Cross-Projection Checks",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -1033,10 +1033,10 @@
         "docs/work/BANDIT-068/brief.md",
         "docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-074",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Metamorphic Cross-Projection Checks records the need for derived surfaces such as cockpit status, session-context, land-check, and future trust verify output to agree when reading the same canonical artifacts and to preserve verdicts under harmless input perturbations.",
       "verification_target": null,
-      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Complete active chore BANDIT-074."
     },
     {
       "id": "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS",
