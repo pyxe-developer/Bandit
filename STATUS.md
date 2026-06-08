@@ -2,23 +2,21 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-076 (Stage 4 review)
+## Current Work Item: BANDIT-076 (Stage 5 landing)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-076` is in Stage 4 review for Evidence Bundle Attestation. Stage 2 RED
-evidence and Stage 3 Claude implementation/PM acceptance are recorded; focused
-tests, typecheck, full tests, role-run validation, and aggregate Bandit
-validation pass.
+`BANDIT-076` completed Stage 4 review for Evidence Bundle Attestation. CodeRabbit
+timed out with two state-sync findings repaired, Local Qwen passed through the
+authorized adapter, and risk/supply-chain/review evidence is recorded.
 
-Current stage: Stage 4 review in progress.
+Current stage: Stage 5 landing required.
 
-Next action: Continue Stage 4 review for BANDIT-076: record CodeRabbit timeout
-and finding disposition, run Local Qwen through the authorized adapter, and
-finalize risk, supply-chain, review-subject, and aggregate review evidence.
+Next action: Record Stage 5 landing verdict for BANDIT-076, run land-check, and
+execute local-record landing action before closeout.
 
 Required operator input: none currently required.
 

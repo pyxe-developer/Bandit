@@ -1,0 +1,178 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-076",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/evidence-bundle-attestation.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/evidence-bundle-attestation.ts",
+      "surface": "workflow_policy_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/evidence-bundle.ts",
+      "surface": "workflow_command_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/evidence-bundle-attestation.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-076/brief.md"
+    },
+    {
+      "surface": "old_gate_replacement_or_wrapping",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-076/brief.md"
+    },
+    {
+      "surface": "live_reviewer_or_model_routing_change",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    },
+    {
+      "surface": "paid_reviewer_model_routing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-076/brief.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "read_only_evidence_bundle_policy_added",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/evidence-bundle-attestation.json"
+    },
+    {
+      "signal_id": "bundle_attestation_command_added",
+      "risk": "medium",
+      "evidence_path": "src/commands/evidence-bundle.ts"
+    },
+    {
+      "signal_id": "fail_closed_incomplete_bundle_inputs",
+      "risk": "low",
+      "evidence_path": "test/evidence-bundle-attestation.test.mjs"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/role-runs/BANDIT-076/stage3-implementation.json"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/evidence-bundle-attestation.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs role-runs validate BANDIT-076 --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-076/stage3-pm-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-076-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-076/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-076/coderabbit-finding-disposition.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-076/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-076 is a non-product bootstrap-gap chore with all gates pre-approved through landing and closeout. It adds read-only evidence bundle policy, local deterministic validation, focused tests, and CLI attestation output. It does not approve Trust Verifier cutover, old-gate replacement, live reviewer/model routing, paid routing, hosted services, telemetry, product behavior, business policy, cost policy, merge, push, or deploy behavior."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-076 is medium workflow-risk because it adds a read-only evidence bundle attestation policy, validator, command, and focused tests for future landing/trusted-verdict hardening. The change is local, deterministic, fail-closed, covered by focused and full tests, preserves Test Writer ownership, and keeps bundle hashes separated from landing authority and Trust Verifier cutover authority.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-076-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-076-supply-chain-gate.json",
+    ".bandit/policy/evidence-bundle-attestation.json",
+    "docs/work/BANDIT-076/brief.md",
+    "docs/work/BANDIT-076/red-evidence.md",
+    "docs/work/BANDIT-076/implementation-evidence.md",
+    "docs/work/BANDIT-076/stage3-pm-review.md",
+    "docs/work/BANDIT-076/writer-report.md",
+    "docs/work/BANDIT-076/coderabbit-review.md",
+    "docs/work/BANDIT-076/coderabbit-finding-disposition.md",
+    "docs/work/BANDIT-076/local-qwen-review.md",
+    "docs/role-runs/BANDIT-076/stage3-implementation.json",
+    "src/cli.ts",
+    "src/commands/evidence-bundle.ts",
+    "src/state/evidence-bundle-attestation.ts",
+    "test/evidence-bundle-attestation.test.mjs"
+  ]
+}

@@ -4,19 +4,17 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-076` is in Stage 4 review for the Evidence Bundle Attestation bootstrap
-chore. Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED
-evidence, and Stage 3 Claude implementation/PM acceptance evidence exist under
-`docs/work/BANDIT-076/`.
+`BANDIT-076` is ready for Stage 5 landing for the Evidence Bundle Attestation
+bootstrap chore. Stage 1 formation, Work Item PM plan-mode orchestration, Stage
+2 RED evidence, Stage 3 Claude implementation/PM acceptance, and Stage 4 review
+evidence exist under `docs/work/BANDIT-076/`.
 
-**Active work item:** `BANDIT-076` (Stage 4 review in progress).
+**Active work item:** `BANDIT-076` (Stage 5 landing required).
 
-The current stage is Stage 4: review in progress.
+The current stage is Stage 5: landing required.
 
-**Current next action:** Continue Stage 4 review for BANDIT-076: record
-CodeRabbit timeout and finding disposition, run Local Qwen through the
-authorized adapter, and finalize risk, supply-chain, review-subject, and
-aggregate review evidence.
+**Current next action:** Record Stage 5 landing verdict for BANDIT-076, run
+land-check, and execute local-record landing action before closeout.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -62,17 +60,22 @@ repo artifacts cannot answer.
   `docs/work/BANDIT-076/stage3-pm-review.md`,
   `docs/work/BANDIT-076/writer-report.md`, and
   `docs/role-runs/BANDIT-076/stage3-implementation.json`.
+- Stage 4 evidence: `docs/work/BANDIT-076/coderabbit-review.md`,
+  `docs/work/BANDIT-076/coderabbit-finding-disposition.md`,
+  `docs/work/BANDIT-076/local-qwen-review.md`,
+  `.bandit/policy/risk-classifications/BANDIT-076-risk-classification.json`,
+  `.bandit/policy/supply-chain-gates/BANDIT-076-supply-chain-gate.json`, and
+  `docs/work/BANDIT-076/review-evidence.md`.
 
 `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` is active and linked to `BANDIT-076`
-in `.bandit/bootstrap-gaps.json`. Do not start landing, closeout, unrelated
-Phase 8 product work, guarded browser actions, local API work, State Index work,
+in `.bandit/bootstrap-gaps.json`. Do not start closeout, unrelated Phase 8
+product work, guarded browser actions, local API work, State Index work,
 scheduler execution, claim execution, worktree execution, public benchmark
 publication, paid reviewer/model routing, hosted replay services, telemetry,
 merge, push, deploy, Trust Verifier cutover, Spec-To-Evidence Traceability
-Matrix, or unrelated product work before Stage 4 review evidence is complete
-and current.
+Matrix, or unrelated product work before Stage 5 landing action evidence exists.
 
-The next required step is continuing Stage 4 review for `BANDIT-076`.
+The next required step is Stage 5 landing for `BANDIT-076`.
 
 The remaining verification-layer opportunity queued after Evidence Bundle
 Attestation is Spec-To-Evidence Traceability Matrix.

@@ -9,13 +9,10 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 4 review in
-  progress)
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 5 landing required)
 
-**Current next step:** Continue Stage 4 review for BANDIT-076: record
-CodeRabbit timeout and finding disposition, run Local Qwen through the
-authorized adapter, and finalize risk, supply-chain, review-subject, and
-aggregate review evidence.
+**Current next step:** Record Stage 5 landing verdict for BANDIT-076, run
+land-check, and execute local-record landing action before closeout.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -31,7 +28,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation Stage 4 review.
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation Stage 5 landing.
 
 ## Planned Work
 

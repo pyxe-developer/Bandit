@@ -1092,7 +1092,7 @@
       "linked_work_item": "BANDIT-076",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Evidence Bundle Attestation records the need to hash and attest the full landing evidence bundle, not only the source subject, so trusted verdicts can be tied to tests, review, risk, supply-chain, UAT where applicable, policy versions, command versions, and freshness evidence.",
       "verification_target": null,
-      "next_action": "Continue Stage 4 review for BANDIT-076: record CodeRabbit timeout and finding disposition, run Local Qwen through the authorized adapter, and finalize risk, supply-chain, review-subject, and aggregate review evidence."
+      "next_action": "Record Stage 5 landing verdict for BANDIT-076, run land-check, and execute local-record landing action before closeout."
     },
     {
       "id": "BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX",
