@@ -1,0 +1,19 @@
+{
+  "kind": "landing_verdict",
+  "work_item": "BANDIT-075",
+  "contract_version": "1",
+  "source_head": "0c137ca6adc75bcb31e0bb000a29448f6806bc1a",
+  "review_evidence": "docs/work/BANDIT-075/review-evidence.md",
+  "tests_status": "pass",
+  "clean_code_status": "pass",
+  "coderabbit_state": "bootstrap_gap",
+  "local_qwen_state": "pass",
+  "escalated_review_state": "not_applicable",
+  "uat_status": "not_applicable",
+  "source_drift_status": "current",
+  "operator_input_status": "none_required",
+  "landing_agent_state": "pass",
+  "landing_agent_replacement_evidence": "none",
+  "final_verdict": "safe-to-land",
+  "rationale": "BANDIT-075 is safe to land locally as the bounded bootstrap-gap chore for Reviewer Calibration With Seeded Defects. Aggregate Stage 4 review evidence records review_subject_hash 9808249dbdc7fc72ca22952096a754d1d3d7e31d7ca7533d3d5ebec15e032d07, focused reviewer-calibration tests, full npm test, typecheck, aggregate Bandit validation, reviewer-calibration validation, role-run validation, risk classification, supply-chain gate validation, completed CodeRabbit provider evidence with two minor findings dispositioned and no CodeRabbit pass claimed, and Local Qwen pass evidence through the authorized oMLX adapter. Clean-code status is pass because policy loading, boundary checks, packet validation, seeded-case schema checks, scoring, diagnostics, and CLI presentation remain separated, read-only, deterministic where local, and fail-closed. Supply-chain status is accepted low risk because no dependency manifest, lockfile, package-manager script, CI/release workflow, installed skill, fetched prompt, external tool install, executable generated content, external side-effecting automation, merge, push, deploy, product UAT authority, live reviewer/model routing, paid routing, public benchmark publication, hosted replay service, telemetry, or Trust Verifier cutover surface changed. UAT is not applicable because this non-product bootstrap chore adds local replay-only calibration rather than an operator-clickable product surface."
+}

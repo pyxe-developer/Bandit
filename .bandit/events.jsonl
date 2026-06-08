@@ -316,3 +316,4 @@
 {"type":"work_item_created","work_item":"BANDIT-075","message":"Created work item BANDIT-075 from docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json"}
 {"type":"artifact_created","work_item":"BANDIT-075","message":"Created red_evidence artifact at docs/work/BANDIT-075/red-evidence.md"}
 {"type":"artifact_created","work_item":"BANDIT-075","message":"Created implementation_evidence artifact at docs/work/BANDIT-075/implementation-evidence.md"}
+{"type":"artifact_created","work_item":"BANDIT-075","message":"Created landing_verdict artifact at docs/work/BANDIT-075/landing-verdict.md"}
