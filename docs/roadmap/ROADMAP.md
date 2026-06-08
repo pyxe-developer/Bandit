@@ -4,12 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (closed; last
-  closed derived-status anchor)
+- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 1
+  formation approved)
 
-**Current next step:** Repo PM must create and form the next bounded chore from
-`docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json` before
-unrelated Phase 8 product work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-075` before RED evidence, implementation, review, landing, closeout, or
+later queued bootstrap-gap work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -25,17 +25,14 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - Replay-only
-  seeded blocker and non-issue packets for reviewer calibration, queued behind
-  `BANDIT-074`.
+- `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
+  hashing for landing and trusted-verdict evidence, queued behind reviewer
+  calibration.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` - Replay-only seeded
-  blocker and non-issue packets for reviewer calibration, queued behind
-  `BANDIT-074`.
 - `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
   hashing for landing and trusted-verdict evidence, queued behind reviewer
   calibration.
@@ -50,8 +47,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
-- `BANDIT-073` - Gate Determinism And Flake Gate
 - `BANDIT-074` - Metamorphic Cross-Projection Checks
+- `BANDIT-073` - Gate Determinism And Flake Gate
 - `BANDIT-072` - Replay Regression Corpus
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel
 - `BANDIT-070` - Verification Oracle Provenance Gate

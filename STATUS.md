@@ -2,22 +2,24 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-074 (closed; last closed anchor)
+## Current Work Item: BANDIT-075 (Stage 1 formation approved)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-074` is landed and closed out for the Metamorphic Cross-Projection
-Checks bootstrap chore. The bootstrap-gap ledger resolves
-`BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS`.
+`BANDIT-075` is formed and approved for the Reviewer Calibration With Seeded
+Defects bootstrap chore. Stage 1 formation evidence exists with Local Qwen pass
+evidence through the authorized MLX adapter route, CodeRabbit provider-timeout
+replacement evidence after the full 10-minute window, aggregate formation
+review, and `formation_approved` coordination evidence.
 
-Current stage: Stage 6 closed; next gap formation required.
+Current stage: Stage 1 formation approved.
 
-Next action: Repo PM must create and form the next bounded chore from
-`docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json` before
-unrelated Phase 8 product work.
+Next action: Work Item PM should run plan-mode orchestration for `BANDIT-075`
+before RED evidence, implementation, review, landing, closeout, or later queued
+bootstrap-gap work.
 
 Required operator input: none currently required.
 
@@ -25,8 +27,8 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
+- `BANDIT-075` - Reviewer Calibration With Seeded Defects (formation approved)
 - `BANDIT-074` - Metamorphic Cross-Projection Checks (closed)
 - `BANDIT-073` - Gate Determinism And Flake Gate (closed)
 - `BANDIT-072` - Replay Regression Corpus (closed)
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel (closed)
-- `BANDIT-070` - Verification Oracle Provenance Gate (closed)
