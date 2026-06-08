@@ -9,12 +9,12 @@
 
 ## Current Work Item
 
-- None. Last active anchor remains `BANDIT-076` until the next bootstrap-gap
-  chore is formed.
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (formation
+  approved; plan-mode orchestration required next)
 
-**Current next step:** Repo PM must create and form the next bounded chore from
-docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json before
-unrelated Phase 8 product work.
+**Current next step:** Work Item PM should start plan-mode orchestration for
+BANDIT-077 by drafting docs/work/BANDIT-077/orchestration-plan.md and running
+work-item-pm start BANDIT-077 before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,15 +30,15 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - create and form
-  the bounded chore.
+- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix plan-mode
+  orchestration.
 
 ## Planned Work
 
 ### Blocking Gaps
 
 - `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - Acceptance
-  criterion to verification artifact traceability, queued next.
+  criterion to verification artifact traceability, active as `BANDIT-077`.
 
 ### Phase 8 Product Queue
 

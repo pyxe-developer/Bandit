@@ -2,24 +2,23 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-076 (closed; last active anchor)
+## Current Work Item: BANDIT-077 (formation approved)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-076` is landed and closed out for Evidence Bundle Attestation.
-CodeRabbit timed out with two state-sync findings repaired, Local Qwen returned
-non-blocking observations with PM no-action routing, risk/supply-chain/review
-evidence is recorded, local-record landing action exists, and final bundle
-attestation passed.
+`BANDIT-077` is formation-approved for Spec-To-Evidence Traceability Matrix.
+Stage 1 brief, Local Qwen formation pass, CodeRabbit timeout evidence,
+aggregate formation review, and `formation_approved` coordination evidence
+exist.
 
-Current stage: Stage 6 closeout complete.
+Current stage: Stage 1 formation approved.
 
-Next action: Repo PM must create and form the next bounded chore from
-docs/specs/BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX.json before
-unrelated Phase 8 product work.
+Next action: Work Item PM should start plan-mode orchestration for BANDIT-077 by
+drafting docs/work/BANDIT-077/orchestration-plan.md and running work-item-pm
+start BANDIT-077 before RED evidence.
 
 Required operator input: none currently required.
 
