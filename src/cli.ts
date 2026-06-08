@@ -12,6 +12,7 @@ import { coordination } from "./commands/coordination.js";
 import { coordinationAuthority } from "./commands/coordination-authority.js";
 import { draftWork } from "./commands/draft-work.js";
 import { escalatedReview } from "./commands/escalated-review.js";
+import { evidenceBundle } from "./commands/evidence-bundle.js";
 import { gitMutation } from "./commands/git-mutation.js";
 import { heartbeat } from "./commands/heartbeat.js";
 import { improvements } from "./commands/improvements.js";
@@ -66,7 +67,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>"
+        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance|evidence-bundle>"
     );
     process.exitCode = 1;
     return;
@@ -383,8 +384,14 @@ async function main() {
     return;
   }
 
+  if (command === "evidence-bundle") {
+    const result = await evidenceBundle(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance|evidence-bundle>`);
   process.exitCode = 1;
 }
 

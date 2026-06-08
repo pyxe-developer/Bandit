@@ -4,19 +4,19 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-076` is formation-approved for the Evidence Bundle Attestation
-bootstrap chore. Stage 1 brief, Qwen formation review, CodeRabbit
-provider-timeout evidence, aggregate formation review, and `formation_approved`
-coordination evidence exist under `docs/work/BANDIT-076/`.
+`BANDIT-076` is in Stage 4 review for the Evidence Bundle Attestation bootstrap
+chore. Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED
+evidence, and Stage 3 Claude implementation/PM acceptance evidence exist under
+`docs/work/BANDIT-076/`.
 
-**Active work item:** `BANDIT-076` (formation approved; plan-mode orchestration
-required next).
+**Active work item:** `BANDIT-076` (Stage 4 review in progress).
 
-The current stage is Stage 1: formation approved.
+The current stage is Stage 4: review in progress.
 
-**Current next action:** Work Item PM should start plan-mode orchestration for
-BANDIT-076 by drafting docs/work/BANDIT-076/orchestration-plan.md and running
-work-item-pm start BANDIT-076 before RED evidence.
+**Current next action:** Continue Stage 4 review for BANDIT-076: record
+CodeRabbit timeout and finding disposition, run Local Qwen through the
+authorized adapter, and finalize risk, supply-chain, review-subject, and
+aggregate review evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -29,10 +29,7 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. The operator
-restored the crashed Local Qwen server, and the refreshed formation review
-passed through `.bandit/reviewers/local-qwen.json` and
-`bin/omlx-chat-completions.mjs`.
+No operator-owned input is required for the next recorded action.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -58,18 +55,24 @@ repo artifacts cannot answer.
   records provider timeout/bootstrap replacement evidence with no pass claimed.
 - Aggregate formation review: `docs/work/BANDIT-076/formation-review.md`
   records a pass with CodeRabbit timeout disposition.
+- Orchestration plan: `docs/work/BANDIT-076/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-076/red-evidence.md` and
+  `test/evidence-bundle-attestation.test.mjs`.
+- Stage 3 evidence: `docs/work/BANDIT-076/implementation-evidence.md`,
+  `docs/work/BANDIT-076/stage3-pm-review.md`,
+  `docs/work/BANDIT-076/writer-report.md`, and
+  `docs/role-runs/BANDIT-076/stage3-implementation.json`.
 
 `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` is active and linked to `BANDIT-076`
-in `.bandit/bootstrap-gaps.json`. Do not start RED evidence, implementation,
-review, landing, closeout, unrelated Phase 8 product work, guarded browser
-actions, local API work, State Index work, scheduler execution, claim
-execution, worktree execution, public benchmark publication, paid reviewer/model
-routing, hosted replay services, telemetry, merge, push, deploy, Trust Verifier
-cutover, Spec-To-Evidence Traceability Matrix, or unrelated product work before
-Work Item PM plan-mode orchestration is recorded.
+in `.bandit/bootstrap-gaps.json`. Do not start landing, closeout, unrelated
+Phase 8 product work, guarded browser actions, local API work, State Index work,
+scheduler execution, claim execution, worktree execution, public benchmark
+publication, paid reviewer/model routing, hosted replay services, telemetry,
+merge, push, deploy, Trust Verifier cutover, Spec-To-Evidence Traceability
+Matrix, or unrelated product work before Stage 4 review evidence is complete
+and current.
 
-The next required step is Work Item PM plan-mode orchestration for
-`BANDIT-076`.
+The next required step is continuing Stage 4 review for `BANDIT-076`.
 
 The remaining verification-layer opportunity queued after Evidence Bundle
 Attestation is Spec-To-Evidence Traceability Matrix.

@@ -9,12 +9,13 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (formation approved;
-  plan-mode orchestration required next)
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 4 review in
+  progress)
 
-**Current next step:** Work Item PM should start plan-mode orchestration for
-BANDIT-076 by drafting docs/work/BANDIT-076/orchestration-plan.md and running
-work-item-pm start BANDIT-076 before RED evidence.
+**Current next step:** Continue Stage 4 review for BANDIT-076: record
+CodeRabbit timeout and finding disposition, run Local Qwen through the
+authorized adapter, and finalize risk, supply-chain, review-subject, and
+aggregate review evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -30,7 +31,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation plan-mode orchestration.
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation Stage 4 review.
 
 ## Planned Work
 

@@ -1,0 +1,125 @@
+{
+  "contract_version": 1,
+  "manifest_id": "BANDIT-076-stage3-implementation",
+  "work_item_id": "BANDIT-076",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-implementation-writer-stage3",
+  "base_revision": "cf5b0d9d8712624b59129694fbfd7f95241827a1",
+  "allowed_target_files": [
+    "src/state/evidence-bundle-attestation.ts",
+    "src/commands/evidence-bundle.ts",
+    "src/commands/init.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "docs/work/BANDIT-076/writer-report.md",
+    "docs/role-runs/BANDIT-076/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-076/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-076-red-evidence.json",
+    "docs/work/BANDIT-076/brief.md",
+    "docs/work/BANDIT-076/orchestration-plan.md",
+    "docs/work/BANDIT-076/coordination-log.jsonl",
+    "docs/work/BANDIT-076/qwen-formation-review.md",
+    "docs/work/BANDIT-076/coderabbit-formation-review.md",
+    "docs/work/BANDIT-076/formation-review.md",
+    "docs/work/BANDIT-076/review-evidence.md",
+    "docs/work/BANDIT-076/landing-verdict.md",
+    "docs/work/BANDIT-076/landing-action.md",
+    "docs/work/BANDIT-076/retrospective.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-076/stage3-dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-076/writer-report.md",
+  "validation_commands": [
+    "node --test test/evidence-bundle-attestation.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate",
+    "npm run bandit -- evidence-bundle attest BANDIT-076 --json",
+    "node ./bin/bandit.mjs coordination validate BANDIT-076",
+    "npm test",
+    "git diff --check"
+  ],
+  "source_artifacts": [
+    "AGENTS.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-076/brief.md",
+    "docs/work/BANDIT-076/orchestration-plan.md",
+    "docs/work/BANDIT-076/stage3-dispatch.md",
+    "docs/work/BANDIT-076/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-076-red-evidence.json",
+    "test/evidence-bundle-attestation.test.mjs",
+    "src/cli.ts",
+    "src/state/gate-determinism.ts",
+    "docs/templates/role-run-manifest.md"
+  ],
+  "files_changed": [
+    ".bandit/policy/evidence-bundle-attestation.json",
+    "src/state/evidence-bundle-attestation.ts",
+    "src/commands/evidence-bundle.ts",
+    "src/cli.ts"
+  ],
+  "test_surfaces_edited": [],
+  "focused_test_result": {
+    "command": "node --test test/evidence-bundle-attestation.test.mjs",
+    "exit_code": 0,
+    "pass": 6,
+    "fail": 0
+  },
+  "typecheck_result": {
+    "command": "npm run typecheck",
+    "exit_code": 0
+  },
+  "validate_result": {
+    "command": "npm run bandit -- validate",
+    "exit_code": 0,
+    "output": "Bandit state is valid."
+  },
+  "evidence_bundle_attest_result": {
+    "command": "npm run bandit -- evidence-bundle attest BANDIT-076 --json",
+    "exit_code": 1,
+    "disposition": "expected_fail_closed",
+    "note": "BANDIT-076 is mid-flight at Stage 3; review, landing, risk, and supply-chain bundle artifacts do not exist yet and red-evidence.md is prose rather than the structured bundle format, so attestation correctly fails closed with `missing required bundle input` diagnostics instead of hiding gaps behind a hash."
+  },
+  "coordination_validate_result": {
+    "command": "node ./bin/bandit.mjs coordination validate BANDIT-076",
+    "exit_code": 0,
+    "output": "Coordination log is valid: BANDIT-076"
+  },
+  "full_test_result": {
+    "command": "npm test",
+    "exit_code": 0,
+    "pass": 567,
+    "fail": 0
+  },
+  "git_diff_check_result": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "deviation_notes": [
+    "The Stage 3 dispatch authorized editing src/commands/init.ts and src/commands/validate.ts, but the implementation intentionally left them untouched. `validateBandit` wires each policy validator explicitly with no auto-discovery, and the evidence bundle is gated by its own dedicated `evidence-bundle attest` command rather than the live `bandit validate` state gate. Leaving init/validate untouched preserves the read-only/derived separation and keeps the diff to the smallest surface area, so allowed_target_files lists those dispatch-authorized surfaces while files_changed records only the files actually changed. This mirrors the BANDIT-075 precedent.",
+    "The Stage 3 dispatch authorized editing .bandit/policy/evidence-bundle-attestation.json, and the implementation created it to provide the canonical read-only real-repo bundle policy. files_changed records the actual policy write for PM review evidence."
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false,
+    "note": "Role-run evidence is append-only evidence. It cannot satisfy coordination history, review evidence, landing evidence, UAT approval, or retrospective authority. Canonical authority for those stages remains in the respective stage artifacts under docs/work/BANDIT-076/. The evidence-bundle attestation command is read-only derived evidence and cannot replace landing authority or Trust Verifier cutover authority."
+  },
+  "no_test_edit_evidence": "Stage 3 Writer did not touch test/evidence-bundle-attestation.test.mjs, test/helpers/**, docs/work/BANDIT-076/red-evidence.md, docs/artifact-inputs/BANDIT-076-red-evidence.json, fixtures, expected-output mappings, source-artifact mappings, or evidence-bundle acceptance mappings. The focused suite passed against unmodified tests.",
+  "bootstrap_model_family_separation": "Codex authored Stage 2 RED evidence; Claude-family implementation writer used for Stage 3 as required. Verification escalation returns to Codex PM."
+}

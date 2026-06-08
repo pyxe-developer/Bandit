@@ -1,0 +1,35 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-076",
+  "artifact_type": "red_evidence",
+  "freshness_state": "current",
+  "source_artifacts": [
+    "test/evidence-bundle-attestation.test.mjs",
+    "docs/work/BANDIT-076/red-evidence.md"
+  ],
+  "created_at": "2026-06-08T15:24:03Z",
+  "owner": "test_writer",
+  "test_files": [
+    "test/evidence-bundle-attestation.test.mjs"
+  ],
+  "focused_command": "node --test test/evidence-bundle-attestation.test.mjs",
+  "red_result": {
+    "exit_code": 1,
+    "failures": [
+      "evidence-bundle attest emits deterministic read-only bundle output for a complete chore",
+      "evidence-bundle attest rejects missing required bundle inputs",
+      "evidence-bundle attest rejects stale or changed-after-review evidence",
+      "evidence-bundle attest rejects unsupported and mismatched landing evidence",
+      "evidence-bundle attest requires UAT only when the work item is product-facing",
+      "evidence-bundle policy rejects authority expansion and optional required-evidence omission"
+    ],
+    "primary_failure_symptom": "Unknown command: evidence-bundle"
+  },
+  "stage3_writer": "claude-family implementation writer",
+  "stage3_forbidden_surfaces": [
+    "test/evidence-bundle-attestation.test.mjs",
+    "docs/work/BANDIT-076/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-076-red-evidence.json",
+    "test helpers, fixtures, expected-output mappings, source-artifact mappings, evidence-bundle acceptance mappings, and any other Test Writer-owned surface"
+  ]
+}

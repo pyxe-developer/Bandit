@@ -1,0 +1,44 @@
+{
+  "contract_version": 1,
+  "policy_id": "evidence-bundle-attestation",
+  "policy_version": 1,
+  "command_versions": {
+    "evidence-bundle": 1
+  },
+  "authority": {
+    "read_only": true,
+    "can_replace_landing_authority": false,
+    "can_replace_trust_verifier_cutover": false,
+    "can_mutate_review_routing": false,
+    "can_mutate_gap_status": false
+  },
+  "hashing": {
+    "algorithm": "sha256",
+    "canonicalization": "stable-json",
+    "stable_across_filesystem_order": true
+  },
+  "required_freshness_states": ["current"],
+  "fail_closed_reasons": [
+    "missing",
+    "stale",
+    "unsupported",
+    "changed_after_review",
+    "landing_verdict_mismatch",
+    "contradictory"
+  ],
+  "evidence_types": [
+    { "id": "source_subject", "requirement": "required", "freshness_required": true },
+    { "id": "red_evidence", "requirement": "required", "freshness_required": true },
+    { "id": "test_evidence", "requirement": "required", "freshness_required": true },
+    { "id": "implementation_evidence", "requirement": "required", "freshness_required": true },
+    { "id": "review_evidence", "requirement": "required", "freshness_required": true },
+    { "id": "risk_classification", "requirement": "required", "freshness_required": true },
+    { "id": "supply_chain_gate", "requirement": "required", "freshness_required": true },
+    { "id": "uat", "requirement": "conditional", "freshness_required": false },
+    { "id": "landing_verdict", "requirement": "required", "freshness_required": true },
+    { "id": "landing_action", "requirement": "required", "freshness_required": true },
+    { "id": "policy_versions", "requirement": "required", "freshness_required": true },
+    { "id": "command_versions", "requirement": "required", "freshness_required": true },
+    { "id": "freshness_metadata", "requirement": "required", "freshness_required": true }
+  ]
+}
