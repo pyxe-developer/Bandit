@@ -1,5 +1,6 @@
 import type { CockpitViewModel } from "../state/cockpit-view-model.js";
 import type { CockpitActionAffordance } from "../state/cockpit-actions.ts";
+import type { CockpitImprovementHealthSurface, ImprovementHealthRow } from "../state/cockpit-improvement-health.ts";
 import { renderCockpitShell } from "./render.ts";
 
 type Viewport = { width: number; height: number };
@@ -137,14 +138,16 @@ aside[aria-label="Evidence"] {
 }
 
 .gate-matrix ul,
-.evidence-detail ul {
+.evidence-detail ul,
+.improvement-health ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .gate-matrix-row,
-.evidence-detail-row {
+.evidence-detail-row,
+.improvement-health-row {
   display: grid;
   gap: 4px;
   padding: 8px 0;
@@ -199,7 +202,7 @@ export function renderBrowserCockpitShell(
     // affordances directly so the HTML keeps the full metadata even
     // when `shell.controls` is projected to the minimal legacy
     // shape for default-derived affordances.
-    html: buildHtml(cockpitShell, viewModel.action_affordances),
+    html: buildHtml(cockpitShell, viewModel.action_affordances, viewModel.improvement_health_surface),
     css: SHELL_CSS,
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: viewModel.prohibited_authority,
@@ -239,7 +242,8 @@ function buildResponsive(isMobile: boolean): Responsive {
 
 function buildHtml(
   shell: CockpitShell,
-  actionAffordances: CockpitActionAffordance[]
+  actionAffordances: CockpitActionAffordance[],
+  improvementHealthSurface: CockpitImprovementHealthSurface
 ): string {
   return `<!doctype html>
 <html lang="en">
@@ -252,7 +256,7 @@ function buildHtml(
 <body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
   <div class="cockpit-layout">
     ${buildAttentionNav(shell)}
-    ${buildActiveWorkMain(shell, actionAffordances)}
+    ${buildActiveWorkMain(shell, actionAffordances, improvementHealthSurface)}
     ${buildEvidenceAside(shell)}
   </div>
 </body>
@@ -274,7 +278,8 @@ ${items}
 
 function buildActiveWorkMain(
   shell: CockpitShell,
-  actionAffordances: CockpitActionAffordance[]
+  actionAffordances: CockpitActionAffordance[],
+  improvementHealthSurface: CockpitImprovementHealthSurface
 ): string {
   const controls = actionAffordances.map(buildControlHtml).join("\n        ");
 
@@ -291,6 +296,7 @@ function buildActiveWorkMain(
       </section>
       ${buildStatusCuesSection(shell)}
       ${buildGateStripSection(shell)}
+      ${buildImprovementHealthSection(improvementHealthSurface)}
     </main>`;
 }
 
@@ -416,4 +422,31 @@ function buildSourceLinks(sources: string[]): string {
     .map(source => `<a class="source-link" href="${escapeHtml(source)}">${escapeHtml(source)}</a>`)
     .join(" ");
   return `<span class="detail-cell detail-sources">${links}</span>`;
+}
+
+function buildImprovementHealthSection(surface: CockpitImprovementHealthSurface): string {
+  const rows = surface.rows.map(buildImprovementHealthRowHtml).join("\n");
+  return `<section class="improvement-health" aria-label="Improvement health">
+      <h2>Improvement health</h2>
+      <ul>
+${rows}
+      </ul>
+    </section>`;
+}
+
+function buildImprovementHealthRowHtml(row: ImprovementHealthRow): string {
+  const sourceLinks = row.source_artifacts
+    .map(s => `<a class="source-link" href="${escapeHtml(s)}">${escapeHtml(s)}</a>`)
+    .join(" ");
+
+  return `        <li class="improvement-health-row">
+          <span class="ih-id">${escapeHtml(row.id)}</span>
+          <span class="ih-status">status: ${escapeHtml(row.status)}</span>
+          <span class="ih-outcome">outcome: ${escapeHtml(row.outcome)}</span>
+          <span class="ih-state">state: ${escapeHtml(row.state)}</span>
+          <span class="ih-metric">${escapeHtml(row.metric)}</span>
+          <span class="ih-guardrail">guardrails: ${escapeHtml(row.guardrails.status)}, uncertainty: ${escapeHtml(row.guardrails.uncertainty)}</span>
+          <span class="ih-next-route">${escapeHtml(row.next_route)}</span>
+          <span class="ih-sources">${sourceLinks}</span>
+        </li>`;
 }

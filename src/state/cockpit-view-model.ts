@@ -7,6 +7,11 @@ import {
   buildCockpitEvidenceDetail,
   type CockpitEvidenceDetail
 } from "./cockpit-evidence-detail.ts";
+import {
+  buildCockpitImprovementHealthSurface,
+  type CockpitImprovementHealthSurface
+} from "./cockpit-improvement-health.ts";
+import type { ImprovementCandidate } from "./improvements.ts";
 
 type AttentionCategoryId =
   | "operator_input_required"
@@ -78,6 +83,7 @@ export type CockpitViewModel = {
   action_affordances: CockpitActionAffordance[];
   queue_context: LightQueueContext;
   status_cues: StatusCue[];
+  improvement_health_surface: CockpitImprovementHealthSurface;
   canonical_state_owner: "repo_native_artifacts_via_bandit_cli";
   prohibited_authority: string[];
   writes_repo_artifacts: false;
@@ -110,12 +116,28 @@ const QUEUE_CONTEXT_EXCLUDED_AUTHORITY = [
   "workstream_queue_management"
 ];
 
+type ImprovementHealthWithDetails = CockpitStatus["improvement_health"] & {
+  candidate_details?: ImprovementCandidate[];
+};
+
 export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
   const activeStage = readActiveStage(status);
   const queueContext = buildLightQueueContext(status);
   const attentionCategories = ATTENTION_CATEGORY_ORDER.map((categoryId) =>
     buildAttentionCategory(categoryId, status, queueContext)
   );
+
+  const extendedHealth = status.improvement_health as ImprovementHealthWithDetails;
+  const candidateDetails = extendedHealth.candidate_details ?? [];
+  const improvementHealthSurface = buildCockpitImprovementHealthSurface({
+    status: status.improvement_health.status,
+    source: status.improvement_health.source,
+    sources: status.improvement_health.sources,
+    candidates: candidateDetails,
+    candidate_id_fallback: candidateDetails.length === 0
+      ? status.improvement_health.candidates
+      : undefined
+  });
 
   return {
     kind: "attention_first_cockpit_view_model",
@@ -138,6 +160,7 @@ export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
     action_affordances: deriveCockpitActionAffordances(status),
     queue_context: queueContext,
     status_cues: buildStatusCues(status),
+    improvement_health_surface: improvementHealthSurface,
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: [
       "browser_storage",
