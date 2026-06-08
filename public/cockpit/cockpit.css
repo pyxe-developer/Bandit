@@ -77,6 +77,32 @@ aside[aria-label="Evidence"] {
   margin-top: 4px;
 }
 
+.command-preview {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.guard-meta {
+  display: block;
+  font-size: 0.8em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.unavailable-route {
+  display: block;
+  font-size: 0.8em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
 .gate-matrix ul,
 .evidence-detail ul {
   list-style: none;

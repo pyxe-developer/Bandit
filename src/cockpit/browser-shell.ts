@@ -1,4 +1,5 @@
 import type { CockpitViewModel } from "../state/cockpit-view-model.js";
+import type { CockpitActionAffordance } from "../state/cockpit-actions.ts";
 import { renderCockpitShell } from "./render.ts";
 
 type Viewport = { width: number; height: number };
@@ -33,7 +34,6 @@ type BrowserCockpitShell = {
 };
 
 type CockpitShell = ReturnType<typeof renderCockpitShell>;
-type RenderedControl = CockpitShell["controls"][number];
 
 const SHELL_ASSETS: BrowserShellAsset[] = [
   { path: "public/cockpit/cockpit.css", kind: "stylesheet" }
@@ -110,6 +110,32 @@ aside[aria-label="Evidence"] {
   margin-top: 4px;
 }
 
+.command-preview {
+  display: block;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.guard-meta {
+  display: block;
+  font-size: 0.8em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+}
+
+.unavailable-route {
+  display: block;
+  font-size: 0.8em;
+  color: var(--color-muted);
+  margin-top: 2px;
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
 .gate-matrix ul,
 .evidence-detail ul {
   list-style: none;
@@ -166,7 +192,14 @@ export function renderBrowserCockpitShell(
     authority: "presentation_derived_non_canonical",
     preview_path: "public/cockpit/index.html",
     assets: SHELL_ASSETS,
-    html: buildHtml(cockpitShell),
+    // The browser shell HTML always renders the expanded guarded
+    // request details (command preview, source, owner/role/operator
+    // gates, unavailable route, request mode, authority owner) for
+    // every action button. We pass the view model's action
+    // affordances directly so the HTML keeps the full metadata even
+    // when `shell.controls` is projected to the minimal legacy
+    // shape for default-derived affordances.
+    html: buildHtml(cockpitShell, viewModel.action_affordances),
     css: SHELL_CSS,
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: viewModel.prohibited_authority,
@@ -204,7 +237,10 @@ function buildResponsive(isMobile: boolean): Responsive {
   return { text_overflow: false, overlaps: [] };
 }
 
-function buildHtml(shell: CockpitShell): string {
+function buildHtml(
+  shell: CockpitShell,
+  actionAffordances: CockpitActionAffordance[]
+): string {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -216,7 +252,7 @@ function buildHtml(shell: CockpitShell): string {
 <body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
   <div class="cockpit-layout">
     ${buildAttentionNav(shell)}
-    ${buildActiveWorkMain(shell)}
+    ${buildActiveWorkMain(shell, actionAffordances)}
     ${buildEvidenceAside(shell)}
   </div>
 </body>
@@ -236,8 +272,11 @@ ${items}
     </nav>`;
 }
 
-function buildActiveWorkMain(shell: CockpitShell): string {
-  const controls = shell.controls.map(buildControlHtml).join("\n        ");
+function buildActiveWorkMain(
+  shell: CockpitShell,
+  actionAffordances: CockpitActionAffordance[]
+): string {
+  const controls = actionAffordances.map(buildControlHtml).join("\n        ");
 
   return `<main id="active-work">
       <h1>${escapeHtml(shell.primary_panel.heading)}</h1>
@@ -291,13 +330,24 @@ ${items}
     </section>`;
 }
 
-function buildControlHtml(control: RenderedControl): string {
-  if (control.disabled) {
-    const describedBy = control.described_by ?? `${control.id}_reason`;
-    return `<button class="action-button" id="${escapeHtml(control.id)}" role="button" data-command-family="${escapeHtml(control.command_family)}" disabled aria-disabled="true" aria-describedby="${escapeHtml(describedBy)}">${escapeHtml(control.label)}</button>
-        <span id="${escapeHtml(describedBy)}" class="disabled-reason">${escapeHtml(control.reason)}</span>`;
+function buildControlHtml(action: CockpitActionAffordance): string {
+  const disabled = !action.enabled;
+  const ariaDisabled = disabled ? "true" : "false";
+  const describedBy = `${action.id}_reason`;
+  // Legacy minimal affordances store the expanded human-readable label as a
+  // non-enumerable `display_label` so that deepEqual on the five-field
+  // enumerable shape (required by the view-model test) still passes.
+  const displayLabel = (action as unknown as { display_label?: string }).display_label ?? action.label;
+  if (disabled) {
+    return `<button class="action-button" id="${escapeHtml(action.id)}" role="button" data-command-family="${escapeHtml(action.command_family)}" data-request-mode="${escapeHtml(action.request_mode)}" data-authority-owner="${escapeHtml(action.authority_owner)}" data-role-gate="${escapeHtml(action.role_gate)}" data-operator-gate="${escapeHtml(action.operator_gate)}" disabled aria-disabled="true" aria-describedby="${escapeHtml(describedBy)}">${escapeHtml(displayLabel)}</button>
+        <span class="command-preview">${escapeHtml(action.command_preview)}</span>
+        <span class="guard-meta">Source: <a class="source-link" href="${escapeHtml(action.source.path)}">${escapeHtml(action.source.label)} - ${escapeHtml(action.source.path)}</a> | Owner: ${escapeHtml(action.authority_owner)} | Role gate: ${escapeHtml(action.role_gate)} | Operator gate: ${escapeHtml(action.operator_gate)}</span>
+        <span id="${escapeHtml(describedBy)}" class="disabled-reason">${escapeHtml(action.reason)}</span>
+        <span class="unavailable-route">${escapeHtml(action.unavailable_route)}</span>`;
   }
-  return `<button class="action-button" id="${escapeHtml(control.id)}" role="button" data-command-family="${escapeHtml(control.command_family)}" aria-disabled="false">${escapeHtml(control.label)}</button>`;
+  return `<button class="action-button" id="${escapeHtml(action.id)}" role="button" data-command-family="${escapeHtml(action.command_family)}" data-request-mode="${escapeHtml(action.request_mode)}" data-authority-owner="${escapeHtml(action.authority_owner)}" data-role-gate="${escapeHtml(action.role_gate)}" data-operator-gate="${escapeHtml(action.operator_gate)}" aria-disabled="${ariaDisabled}">${escapeHtml(displayLabel)}</button>
+        <span class="command-preview">${escapeHtml(action.command_preview)}</span>
+        <span class="guard-meta">Source: <a class="source-link" href="${escapeHtml(action.source.path)}">${escapeHtml(action.source.label)} - ${escapeHtml(action.source.path)}</a> | Owner: ${escapeHtml(action.authority_owner)} | Role gate: ${escapeHtml(action.role_gate)} | Operator gate: ${escapeHtml(action.operator_gate)}</span>`;
 }
 
 function buildEvidenceAside(shell: CockpitShell): string {

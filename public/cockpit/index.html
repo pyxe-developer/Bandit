@@ -29,14 +29,27 @@
       </p>
       <section class="actions-section">
         <h2>Actions</h2>
-        <button class="action-button" id="validate_repo" role="button" data-command-family="bandit validate" aria-disabled="false">Validate</button>
-        <button class="action-button" id="inspect_evidence" role="button" data-command-family="bandit show" aria-disabled="false">Evidence</button>
-        <button class="action-button" id="run_review_gate" role="button" data-command-family="bandit qwen-review" disabled aria-disabled="true" aria-describedby="run_review_gate_reason">Review Gate</button>
+        <button class="action-button" id="validate_repo" role="button" data-command-family="bandit validate" data-request-mode="cli_request_only" data-authority-owner="bandit_cli" data-role-gate="codex_pm" data-operator-gate="none_required" aria-disabled="false">Validate repo</button>
+        <span class="command-preview">npm run bandit -- validate</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">Current context - docs/roadmap/CURRENT_CONTEXT.md</a> | Owner: bandit_cli | Role gate: codex_pm | Operator gate: none_required</span>
+        <button class="action-button" id="inspect_evidence" role="button" data-command-family="bandit show" data-request-mode="cli_request_only" data-authority-owner="bandit_cli" data-role-gate="codex_pm" data-operator-gate="none_required" aria-disabled="false">Inspect evidence</button>
+        <span class="command-preview">node ./bin/bandit.mjs cockpit status --json</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/brief.md">Active work brief - docs/work/BANDIT-067/brief.md</a> | Owner: bandit_cli | Role gate: codex_pm | Operator gate: none_required</span>
+        <button class="action-button" id="run_review_gate" role="button" data-command-family="bandit qwen-review" data-request-mode="cli_request_only" data-authority-owner="reviewer" data-role-gate="reviewer_after_implementation" data-operator-gate="none_required" disabled aria-disabled="true" aria-describedby="run_review_gate_reason">Review gate</button>
+        <span class="command-preview">npm run bandit -- qwen-review BANDIT-067</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/red-evidence.md">Stage 2 RED evidence - docs/work/BANDIT-067/red-evidence.md</a> | Owner: reviewer | Role gate: reviewer_after_implementation | Operator gate: none_required</span>
         <span id="run_review_gate_reason" class="disabled-reason">Stage 2 RED evidence is missing.</span>
-        <button class="action-button" id="check_landing_readiness" role="button" data-command-family="bandit land-check" disabled aria-disabled="true" aria-describedby="check_landing_readiness_reason">Landing Check</button>
+        <span class="unavailable-route">Record RED and implementation evidence before requesting review.</span>
+        <button class="action-button" id="check_landing_readiness" role="button" data-command-family="bandit land-check" data-request-mode="cli_request_only" data-authority-owner="landing_agent" data-role-gate="landing_agent_after_review" data-operator-gate="none_required" disabled aria-disabled="true" aria-describedby="check_landing_readiness_reason">Landing check</button>
+        <span class="command-preview">npm run bandit -- land-check BANDIT-067</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">Implementation evidence - docs/work/BANDIT-067/implementation-evidence.md</a> | Owner: landing_agent | Role gate: landing_agent_after_review | Operator gate: none_required</span>
         <span id="check_landing_readiness_reason" class="disabled-reason">implementation evidence is not recorded</span>
-        <button class="action-button" id="record_uat" role="button" data-command-family="bandit uat" disabled aria-disabled="true" aria-describedby="record_uat_reason">Record UAT</button>
+        <span class="unavailable-route">Record current implementation and review evidence before land-check.</span>
+        <button class="action-button" id="record_uat" role="button" data-command-family="bandit uat" data-request-mode="cli_request_only" data-authority-owner="operator" data-role-gate="operator_after_implementation" data-operator-gate="operator_owned_cli_uat" disabled aria-disabled="true" aria-describedby="record_uat_reason">Record UAT</button>
+        <span class="command-preview">npm run bandit -- uat approve BANDIT-067</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/brief.md">Work item brief - docs/work/BANDIT-067/brief.md</a> | Owner: operator | Role gate: operator_after_implementation | Operator gate: operator_owned_cli_uat</span>
         <span id="record_uat_reason" class="disabled-reason">UAT is unavailable until an operator-facing implementation exists.</span>
+        <span class="unavailable-route">Record CLI-owned product UAT only after the operator-facing implementation exists.</span>
       </section>
       <section class="status-cues" aria-label="Live status">
       <h2>Live status</h2>

@@ -9,13 +9,15 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 3 blocked on
-  Claude dispatch timeout and policy exception input)
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 4 review
+  required)
 
-**Current next step:** Operator must approve a scoped policy exception changing
-the Stage 3 implementation writer path for this Codex-authored RED slice. After
-the unblock path is recorded, resume Stage 3 implementation from the approved
-replacement route.
+**Current next step:** Run Stage 4 review for `BANDIT-078`: request CodeRabbit
+pre-PR evidence or record provider-refusal evidence, run Local Qwen through
+`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`, record
+risk classification, supply-chain evidence, browser smoke evidence,
+review-subject hash, aggregate review evidence, and disposition every finding
+before landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

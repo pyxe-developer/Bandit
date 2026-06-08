@@ -5,20 +5,22 @@
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
 `BANDIT-078` is active for the Guarded CLI Action Requests Phase 8 product
-slice. Stage 1 formation, Work Item PM plan-mode orchestration, and Stage 2 RED
-evidence exist under `docs/work/BANDIT-078/`. Stage 3 implementation is blocked
-because the restored-auth Claude-family Implementation Writer dispatch and a
-shorter focused retry both timed out after 900 seconds without source edits,
-Writer report, or implementation evidence.
+slice. Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED
+evidence, and Stage 3 implementation evidence exist under
+`docs/work/BANDIT-078/`. Stage 3 implementation is accepted after MiniMax-M3
+and Claude writer repairs, with PM verification passing the focused cockpit
+suites, typecheck, and full `npm test`.
 
-**Active work item:** `BANDIT-078` (Stage 3 blocked on Claude dispatch timeout and policy exception input).
+**Active work item:** `BANDIT-078` (Stage 4 review required).
 
-The current stage is Stage 3: blocked.
+The current stage is Stage 4: review required.
 
-**Current next action:** Operator must approve a scoped policy exception
-changing the Stage 3 implementation writer path for this Codex-authored RED
-slice. After the unblock path is recorded, resume Stage 3 implementation from
-the approved replacement route.
+**Current next action:** Run Stage 4 review for `BANDIT-078`: request
+CodeRabbit pre-PR evidence or record provider-refusal evidence, run Local Qwen
+through `.bandit/reviewers/local-qwen.json` via
+`bin/omlx-chat-completions.mjs`, record risk classification, supply-chain
+evidence, browser smoke evidence, review-subject hash, aggregate review
+evidence, and disposition every finding before landing.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -31,9 +33,7 @@ reviewer routing.
 
 ## Required Operator Input
 
-Operator-owned input is required for the next recorded action: approve a scoped
-policy exception changing the Stage 3 implementation writer path for this
-Codex-authored RED slice.
+No operator-owned input is required for the next recorded action.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -51,13 +51,18 @@ repo artifacts cannot answer.
 - Source spec: `docs/specs/BANDIT-078-guarded-cli-action-requests.json`.
 - Brief: `docs/work/BANDIT-078/brief.md`.
 - Coordination log: `docs/work/BANDIT-078/coordination-log.jsonl` records
-  `brief_created`, `formation_approved`, `orchestration_plan_recorded`, and
-  `red_recorded`, then `blocked`.
+  `brief_created`, `formation_approved`, `orchestration_plan_recorded`,
+  `red_recorded`, and `implementation_recorded`.
 - Orchestration plan: `docs/work/BANDIT-078/orchestration-plan.md`.
 - RED evidence: `docs/work/BANDIT-078/red-evidence.md`.
 - Stage 3 dispatch: `docs/work/BANDIT-078/stage3-dispatch.md`.
 - Stage 3 short dispatch: `docs/work/BANDIT-078/stage3-dispatch-short.md`.
+- Stage 3 MiniMax fallback dispatch: `docs/work/BANDIT-078/stage3-minimax-dispatch.md`.
+- Stage 3 Claude label repair dispatch: `docs/work/BANDIT-078/stage3-claude-label-repair-dispatch.md`.
 - Stage 3 dispatch attempt/blocker: `docs/work/BANDIT-078/stage3-dispatch-attempt.md`.
+- Writer report: `docs/work/BANDIT-078/writer-report.md`.
+- Implementation evidence: `docs/work/BANDIT-078/implementation-evidence.md`.
+- Stage 3 PM review: `docs/work/BANDIT-078/stage3-pm-review.md`.
 - Qwen formation review: `docs/work/BANDIT-078/qwen-formation-review.md`
   records a pass through the authorized MLX adapter route.
 - CodeRabbit formation review: `docs/work/BANDIT-078/coderabbit-formation-review.md`
@@ -65,15 +70,12 @@ repo artifacts cannot answer.
 - Aggregate formation review: `docs/work/BANDIT-078/formation-review.md`
   records a pass.
 
-No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not edit
-Test Writer-owned tests, fixtures, RED evidence, or acceptance mappings during
-Stage 3. Do not create implementation evidence, review evidence, UAT evidence,
-landing evidence, retrospective evidence, guarded browser action execution,
-local API work, State Index work, scheduler execution, claim execution,
-worktree execution, public benchmark publication, paid reviewer/model routing,
-hosted replay services, telemetry, merge, push, deploy, Trust Verifier cutover,
-or unrelated product work while Stage 3 is blocked.
+No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
+UAT evidence, landing evidence, retrospective evidence, guarded browser action
+execution, local API work, State Index work, scheduler execution, claim
+execution, worktree execution, public benchmark publication, paid
+reviewer/model routing, hosted replay services, telemetry, merge, push, deploy,
+Trust Verifier cutover, or unrelated product work before Stage 4 review is
+recorded and every finding is repaired or dispositioned.
 
-The next required step is for the operator to approve a scoped policy exception
-changing the Stage 3 implementation writer path for this Codex-authored RED
-slice.
+The next required step is Stage 4 review for `BANDIT-078`.
