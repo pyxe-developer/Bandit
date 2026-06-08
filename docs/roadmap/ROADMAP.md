@@ -4,18 +4,18 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-077` - Spec-To-Evidence Traceability Matrix (closed; last
-  active anchor)
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (closed; last active
+  anchor)
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 5 landing and
-  UAT required)
+No active work item is formed. `BANDIT-078` remains the last closed
+derived-status anchor until Repo PM forms the next slice.
 
-**Current next step:** Record CLI-owned product UAT for `BANDIT-078` using the
-operator pre-approval, then record Stage 5 landing verdict, run `land-check`
-and `auto-land-check`, and execute local-record landing action against the
-current source/evidence commit.
+**Current next step:** Repo PM should triage and form the next Phase 8 product
+queue item, currently Improvement Health Surface, only if roadmap/product
+direction is sufficient; otherwise ask the operator for the missing product
+direction.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -45,6 +45,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-078` - Guarded CLI Action Requests
 - `BANDIT-077` - Spec-To-Evidence Traceability Matrix
 - `BANDIT-076` - Evidence Bundle Attestation
 - `BANDIT-075` - Reviewer Calibration With Seeded Defects

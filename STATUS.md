@@ -2,35 +2,32 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-078 (Stage 5 landing and UAT required)
+## Current Work Item: BANDIT-078 (closed; last active anchor)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-078` has Stage 1 formation, Work Item PM plan-mode orchestration, Stage
-2 RED evidence, Stage 3 implementation evidence, and Stage 4 aggregate review
-evidence for Guarded CLI Action Requests. Stage 4 passes with CodeRabbit
-timeout/bootstrap-gap evidence, authorized Local Qwen non-blocking findings
-dispositioned, risk classification, supply-chain gate, review-subject hash, and
-browser smoke evidence recorded.
+`BANDIT-078` has landed and closed the Guarded CLI Action Requests product
+slice with local-record landing action, CLI-owned UAT approval, retrospective,
+and improvement disposition recorded.
 
-Current stage: Stage 5 landing and UAT required.
+Current stage: Stage 6 closed.
 
-Next action: Record CLI-owned product UAT for `BANDIT-078` using the operator
-pre-approval, then record Stage 5 landing verdict, run `land-check` and
-`auto-land-check`, and execute local-record landing action against the current
-source/evidence commit.
+Next action: Repo PM should triage and form the next Phase 8 product queue
+item, currently Improvement Health Surface, only if roadmap/product direction
+is sufficient; otherwise ask the operator for the missing product direction.
 
-Required operator input: none; gates are pre-approved through landing and
-closeout by the automation prompt.
+Required operator input: none for the recorded next action. Repo PM must ask
+the operator if product direction is insufficient to form Improvement Health
+Surface.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-078` - Guarded CLI Action Requests (Stage 5 landing and UAT required)
+- `BANDIT-078` - Guarded CLI Action Requests (closed)
 - `BANDIT-077` - Spec-To-Evidence Traceability Matrix (closed)
 - `BANDIT-076` - Evidence Bundle Attestation (closed)
 - `BANDIT-075` - Reviewer Calibration With Seeded Defects (closed)
