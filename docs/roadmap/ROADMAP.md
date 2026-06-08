@@ -4,10 +4,12 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 5 landing required)
+- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (closed; last
+  closed derived-status anchor)
 
-**Current next step:** Record Stage 5 landing verdict for `BANDIT-074`, run
-`land-check`, and execute local-record landing action before closeout.
+**Current next step:** Repo PM must create and form the next bounded chore from
+`docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json` before
+unrelated Phase 8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -49,6 +51,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Completed Work
 
 - `BANDIT-073` - Gate Determinism And Flake Gate
+- `BANDIT-074` - Metamorphic Cross-Projection Checks
 - `BANDIT-072` - Replay Regression Corpus
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel
 - `BANDIT-070` - Verification Oracle Provenance Gate
