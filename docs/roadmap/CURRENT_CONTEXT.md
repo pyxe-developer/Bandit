@@ -7,19 +7,19 @@
 `BANDIT-078` is active for the Guarded CLI Action Requests Phase 8 product
 slice. Stage 1 formation, Work Item PM plan-mode orchestration, and Stage 2 RED
 evidence exist under `docs/work/BANDIT-078/`. Stage 3 implementation is blocked
-because the required Claude-family Implementation Writer dispatch failed with
-`401 Invalid authentication credentials`.
+because the restored-auth Claude-family Implementation Writer dispatch timed
+out after 900 seconds without source edits, Writer report, or implementation
+evidence.
 
-**Active work item:** `BANDIT-078` (Stage 3 blocked on Claude authentication).
+**Active work item:** `BANDIT-078` (Stage 3 blocked on Claude dispatch timeout).
 
 The current stage is Stage 3: blocked.
 
-**Current next action:** Operator must restore Claude authentication/profile
-access for the Stage 3 Implementation Writer or approve a scoped policy
-exception changing the Stage 3 implementation writer path for this
-Codex-authored RED slice. After the unblock path is provided, resume Stage 3
-from `docs/work/BANDIT-078/stage3-dispatch.md` or the approved replacement
-route.
+**Current next action:** Create a shorter Stage 3 Claude-family dispatch packet
+for BANDIT-078 that preserves model-family separation and zero test-surface
+authority, then retry Claude Implementation Writer; if the retry cannot produce
+source edits and Writer evidence, route the Stage 3 writer path to
+operator-owned policy exception input.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -32,10 +32,10 @@ reviewer routing.
 
 ## Required Operator Input
 
-Operator-owned input is required for the next recorded action: restore Claude
-authentication/profile access for the Stage 3 Implementation Writer, or approve
-a scoped policy exception changing the Stage 3 implementation writer path for
-this Codex-authored RED slice.
+No operator-owned input is required for the next recorded action. Operator input
+becomes required only if a focused Claude-family retry cannot produce source
+edits and Writer evidence and a scoped Stage 3 writer-path policy exception is
+needed.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -75,5 +75,6 @@ worktree execution, public benchmark publication, paid reviewer/model routing,
 hosted replay services, telemetry, merge, push, deploy, Trust Verifier cutover,
 or unrelated product work while Stage 3 is blocked.
 
-The next required step is operator-owned unblock input for the Stage 3
-Implementation Writer route.
+The next required step is to create a shorter Stage 3 Claude-family dispatch
+packet for BANDIT-078 that preserves model-family separation and zero
+test-surface authority, then retry Claude Implementation Writer.
