@@ -24,6 +24,7 @@ import { operatorBoundary } from "./commands/operator-boundary.js";
 import { orchestratorPrompts } from "./commands/orchestrator-prompts.js";
 import { qwenReview } from "./commands/qwen-review.js";
 import { reviewSubjectHash } from "./commands/review-subject-hash.js";
+import { reviewerCalibration } from "./commands/reviewer-calibration.js";
 import { riskClassification } from "./commands/risk-classification.js";
 import { routeWorkItem } from "./commands/route.js";
 import { showWorkItem } from "./commands/show.js";
@@ -65,7 +66,7 @@ async function main() {
         "  bandit repo-pm <create-work-item|approve-formation> [args]\n" +
         "  bandit work-item-pm <start> <work-item-id>\n\n" +
         "Commands:\n" +
-        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>"
+        "  bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>"
     );
     process.exitCode = 1;
     return;
@@ -280,6 +281,12 @@ async function main() {
     return;
   }
 
+  if (command === "reviewer-calibration") {
+    const result = await reviewerCalibration(process.cwd(), args);
+    process.stdout.write(result.output);
+    return;
+  }
+
   if (command === "skill-lifecycle") {
     const result = await skillLifecycle(process.cwd(), args);
     process.stdout.write(result.output);
@@ -377,7 +384,7 @@ async function main() {
   }
 
   const commandText = command ? `Unknown command: ${command}` : "Missing command";
-  console.error(`${commandText}\nUsage: bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>`);
+  console.error(`${commandText}\nUsage: bandit <init|validate|update-check|list|show|draft-work|work-item|artifact-inputs|artifact|route|land-check|land|auto-land-check|agent-evaluation|agent-observability|qwen-review|review-subject-hash|coderabbit-review|escalated-review|reviewer-calibration|skill-lifecycle|stage-capability-scope|heartbeat|git-mutation|improvements|input-quarantine|risk-classification|supply-chain-gate|test-strength-gate|operator-boundary|orchestrator-prompts|uat|gaps|coordination|coordination-authority|claim|cockpit|session-context|worktree-bootstrap|event-driven-wake-scheduler|token-cost-failsafe|evidence-freshness-slos|role-contracts|role-runs|trust|verification-oracle-provenance>`);
   process.exitCode = 1;
 }
 

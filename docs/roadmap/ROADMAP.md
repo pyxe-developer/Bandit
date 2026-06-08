@@ -4,12 +4,14 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 1
-  formation approved)
+- `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (Stage 4
+  review required)
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-075` before RED evidence, implementation, review, landing, closeout, or
-later queued bootstrap-gap work.
+**Current next step:** Work Item PM should run Stage 4 review for `BANDIT-075`
+with CodeRabbit or provider-timeout evidence, Local Qwen through
+`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`, risk
+classification, supply-chain gate, review-subject hash, aggregate review
+evidence, and finding dispositions before landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

@@ -1,0 +1,53 @@
+{
+  "contract_version": 1,
+  "packet_id": "BANDIT-075-reviewer-packet-001",
+  "packet_source": "repo_derived_bandit_failure_mode",
+  "failure_mode_category": "unauthorized_reviewer_route",
+  "source_artifacts": [
+    "docs/work/BANDIT-075/brief.md",
+    "docs/work/BANDIT-075/qwen-formation-review.md"
+  ],
+  "seeded_cases": [
+    {
+      "case_id": "seeded-blocker-direct-qwen",
+      "label": "blocker",
+      "expected_finding_class": "unauthorized_reviewer_route",
+      "severity": "blocker",
+      "rationale": "Direct qwen CLI reviewer evidence is forbidden."
+    },
+    {
+      "case_id": "seeded-non-issue-mlx-adapter",
+      "label": "non_issue",
+      "expected_finding_class": "authorized_mlx_adapter_route",
+      "severity": "none",
+      "rationale": "The configured MLX adapter route is authorized."
+    }
+  ],
+  "reviewer_outputs": [
+    {
+      "reviewer_id": "local-qwen-baseline",
+      "route": "mlx_openai_adapter",
+      "status": "completed",
+      "tool_friction": "none",
+      "latency_ms": 1200,
+      "cost_usd": 0,
+      "findings": [
+        {
+          "case_id": "seeded-blocker-direct-qwen",
+          "finding_class": "unauthorized_reviewer_route",
+          "severity": "blocker",
+          "actionable": true
+        }
+      ]
+    },
+    {
+      "reviewer_id": "coderabbit-cli",
+      "route": "coderabbit_cli",
+      "status": "provider_timeout",
+      "tool_friction": "provider_timeout_after_600s",
+      "latency_ms": null,
+      "cost_usd": null,
+      "findings": []
+    }
+  ]
+}

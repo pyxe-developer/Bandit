@@ -1,0 +1,124 @@
+{
+  "contract_version": 1,
+  "manifest_id": "BANDIT-075-stage3-implementation",
+  "work_item_id": "BANDIT-075",
+  "stage": "stage3_implementation",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-implementation-writer-stage3",
+  "base_revision": "fe7bea2237cfb20c283781aef6ea76ac611e4aee",
+  "allowed_target_files": [
+    "src/state/reviewer-calibration.ts",
+    "src/commands/reviewer-calibration.ts",
+    "src/commands/init.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "docs/work/BANDIT-075/writer-report.md",
+    "docs/role-runs/BANDIT-075/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/reviewer-calibration-packets/**",
+    "docs/work/BANDIT-075/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-075-red-evidence.json",
+    "docs/work/BANDIT-075/brief.md",
+    "docs/work/BANDIT-075/orchestration-plan.md",
+    "docs/work/BANDIT-075/coordination-log.jsonl",
+    "docs/work/BANDIT-075/qwen-formation-review.md",
+    "docs/work/BANDIT-075/coderabbit-formation-review.md",
+    "docs/work/BANDIT-075/formation-review.md",
+    "docs/work/BANDIT-075/review-evidence.md",
+    "docs/work/BANDIT-075/landing-verdict.md",
+    "docs/work/BANDIT-075/landing-action.md",
+    "docs/work/BANDIT-075/retrospective.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-075/stage3-dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-075/writer-report.md",
+  "validation_commands": [
+    "node --test test/reviewer-calibration.test.mjs",
+    "npm run typecheck",
+    "npm run bandit -- validate",
+    "npm run bandit -- reviewer-calibration validate --json",
+    "node ./bin/bandit.mjs coordination validate BANDIT-075",
+    "npm test",
+    "git diff --check"
+  ],
+  "source_artifacts": [
+    "AGENTS.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-075/brief.md",
+    "docs/work/BANDIT-075/stage3-dispatch.md",
+    "docs/work/BANDIT-075/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-075-red-evidence.json",
+    "test/reviewer-calibration.test.mjs",
+    "docs/reviewer-calibration-packets/BANDIT-075-reviewer-packet-001.json",
+    "src/cli.ts",
+    "src/state/reviewer-calibration.ts",
+    "src/commands/reviewer-calibration.ts",
+    "docs/templates/role-run-manifest.md"
+  ],
+  "files_changed": [
+    "src/state/reviewer-calibration.ts",
+    "src/commands/reviewer-calibration.ts",
+    "src/cli.ts",
+    ".bandit/policy/reviewer-calibration.json"
+  ],
+  "test_surfaces_edited": [],
+  "focused_test_result": {
+    "command": "node --test test/reviewer-calibration.test.mjs",
+    "exit_code": 0,
+    "pass": 10,
+    "fail": 0
+  },
+  "typecheck_result": {
+    "command": "npm run typecheck",
+    "exit_code": 0
+  },
+  "validate_result": {
+    "command": "npm run bandit -- validate",
+    "exit_code": 0,
+    "output": "Bandit state is valid."
+  },
+  "reviewer_calibration_validate_result": {
+    "command": "npm run bandit -- reviewer-calibration validate --json",
+    "exit_code": 0,
+    "status": "pass",
+    "packets": ["BANDIT-075-reviewer-packet-001"],
+    "primary_metric": "blocker_recall",
+    "provider_evidence_statuses": ["provider_timeout"]
+  },
+  "full_test_result": {
+    "command": "npm test",
+    "exit_code": 0,
+    "pass": 561,
+    "fail": 0
+  },
+  "git_diff_check_result": {
+    "command": "git diff --check",
+    "exit_code": 0
+  },
+  "deviation_notes": [
+    "The Stage 3 dispatch and brief authorized editing src/commands/init.ts and src/commands/validate.ts, but the implementation intentionally left them untouched. Reviewer calibration is a replay-only benchmark surface that the brief keeps separated from live work and from the canonical `bandit validate` live-state gate; its own `reviewer-calibration validate` command (a required validation command) gates the policy and packets. Leaving init/validate untouched preserves that separation and keeps the diff to the smallest surface area, so allowed_target_files lists those dispatch-authorized surfaces while files_changed records only the files actually changed.",
+    "The Stage 3 dispatch authorized editing .bandit/policy/reviewer-calibration.json, and the implementation did so to provide the real-repo replay-only policy. The current implementation_writer role contract does not yet include that specific policy path in allowed_write_surface_families (it lists only .bandit/policy/role-contracts.json, artifact-inputs.json, and gate-determinism-flake-gate.json), so allowed_target_files lists only contract-accepted targets while files_changed records the actual .bandit/policy/reviewer-calibration.json write for PM review evidence, mirroring the BANDIT-074 precedent."
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false,
+    "note": "Role-run evidence is append-only evidence. It cannot satisfy coordination history, review evidence, landing evidence, UAT approval, or retrospective authority. Canonical authority for those stages remains in the respective stage artifacts under docs/work/BANDIT-075/."
+  },
+  "no_test_edit_evidence": "Stage 3 Writer did not touch test/reviewer-calibration.test.mjs, docs/reviewer-calibration-packets/BANDIT-075-reviewer-packet-001.json, red-evidence.md, artifact-inputs, helpers, fixtures, gold labels, or acceptance mappings.",
+  "bootstrap_model_family_separation": "Codex authored Stage 2 RED evidence; Claude-family implementation writer used for Stage 3 as required. Verification escalation returns to Codex PM."
+}

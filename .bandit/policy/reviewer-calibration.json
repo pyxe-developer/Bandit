@@ -1,0 +1,67 @@
+{
+  "contract_version": 1,
+  "policy_id": "reviewer-calibration",
+  "replay_only": true,
+  "no_live_routing": true,
+  "automatic_reviewer_routing_changes": false,
+  "packet_schema": {
+    "required_fields": [
+      "packet_id",
+      "packet_source",
+      "failure_mode_category",
+      "source_artifacts",
+      "seeded_cases",
+      "reviewer_outputs"
+    ],
+    "required_seeded_case_fields": [
+      "case_id",
+      "label",
+      "expected_finding_class",
+      "severity",
+      "rationale"
+    ],
+    "allowed_labels": ["blocker", "non_issue"]
+  },
+  "packet_source_policy": {
+    "require_repo_derived_bandit_failure_modes": true,
+    "generic_only_first_harness_acceptance": false
+  },
+  "reviewer_eligibility": {
+    "allowed_routes": [
+      {
+        "reviewer_id": "local-qwen-baseline",
+        "route": "mlx_openai_adapter",
+        "config_path": ".bandit/reviewers/local-qwen.json",
+        "command": "node bin/omlx-chat-completions.mjs"
+      },
+      {
+        "reviewer_id": "coderabbit-cli",
+        "route": "coderabbit_cli",
+        "command": "coderabbit review --agent"
+      }
+    ],
+    "forbidden_routes": ["direct_qwen_cli"],
+    "provider_refusal_handling": "record_as_calibration_evidence_without_live_gate_waiver"
+  },
+  "scorecard": {
+    "primary_metric": "blocker_recall",
+    "required_metrics": [
+      "blocker_recall",
+      "actionable_precision",
+      "useful_finding_yield",
+      "false_positive_rate",
+      "tool_friction",
+      "latency",
+      "cost"
+    ],
+    "raw_finding_count_primary": false
+  },
+  "boundaries": {
+    "can_mutate_live_reviewer_routing": false,
+    "can_mutate_landing_authority": false,
+    "requires_separate_policy_promotion": true
+  },
+  "packets": [
+    "docs/reviewer-calibration-packets/BANDIT-075-reviewer-packet-001.json"
+  ]
+}
