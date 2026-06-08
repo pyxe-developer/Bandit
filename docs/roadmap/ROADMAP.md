@@ -9,13 +9,14 @@
 
 ## Current Work Item
 
-- No active work item is formed. `BANDIT-077` remains the last closed
-  derived-status anchor until Repo PM forms the next slice.
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (formation approved;
+  Work Item PM plan mode pending)
 
-**Current next step:** Repo PM should triage and form the next Phase 8 product
-queue item, currently Guarded CLI Action Requests, only if roadmap/product
-direction is sufficient; otherwise ask the operator for the missing product
-direction.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-078` (Guarded CLI Action Requests) before RED evidence. Do not create
+RED evidence or implementation until `docs/work/BANDIT-078/orchestration-plan.md`
+exists and `work-item-pm start BANDIT-078` records
+`orchestration_plan_recorded`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -31,7 +32,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Guarded CLI Action Requests formation/triage.
+- `[Slice]` `TBD` - Improvement Health Surface.
 
 ## Planned Work
 
@@ -41,7 +42,6 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Guarded CLI Action Requests
 - `[Slice]` `TBD` - Improvement Health Surface
 
 ## Completed Work
