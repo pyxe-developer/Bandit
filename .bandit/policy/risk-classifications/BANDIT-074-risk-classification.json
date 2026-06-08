@@ -1,0 +1,169 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-074",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/metamorphic-cross-projection-checks.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/projection-consistency.ts",
+      "surface": "workflow_policy_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "workflow_command_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/metamorphic-cross-projection-checks.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-074/brief.md"
+    },
+    {
+      "surface": "old_gate_replacement_or_wrapping",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-074/brief.md"
+    },
+    {
+      "surface": "live_reviewer_or_model_routing_change",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "validate_json_report_added",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-074/implementation-evidence.md"
+    },
+    {
+      "signal_id": "projection_consistency_policy_added",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/metamorphic-cross-projection-checks.json"
+    },
+    {
+      "signal_id": "fail_closed_projection_disagreement_validator",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/metamorphic-cross-projection-checks.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- role-runs validate BANDIT-074 --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-074/stage3-pm-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-074-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-074/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-074/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-074 is a non-product bootstrap-gap chore with all gates pre-approved through landing and closeout. It adds deterministic projection consistency validation and report behavior, does not approve Trust Verifier cutover, does not replace or wrap old gates, and does not change live reviewer/model routing, product behavior, business policy, cost policy, merge, push, or deploy behavior."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-074 is medium workflow-risk because it adds a validation policy artifact, projection consistency validator, and `validate --json` output for derived workflow projections. The change is local, read-only during validation, covered by focused and full test suites, preserves Test Writer ownership, and keeps Trust Verifier cutover, old-gate replacement, live routing, paid routing, hosted services, telemetry, merge, push, and deploy out of scope.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-074-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-074-supply-chain-gate.json",
+    ".bandit/policy/metamorphic-cross-projection-checks.json",
+    "docs/work/BANDIT-074/brief.md",
+    "docs/work/BANDIT-074/red-evidence.md",
+    "docs/work/BANDIT-074/implementation-evidence.md",
+    "docs/work/BANDIT-074/stage3-pm-review.md",
+    "docs/work/BANDIT-074/writer-report.md",
+    "docs/role-runs/BANDIT-074/stage3-implementation.json",
+    "src/cli.ts",
+    "src/commands/validate.ts",
+    "src/state/projection-consistency.ts",
+    "test/metamorphic-cross-projection-checks.test.mjs"
+  ]
+}

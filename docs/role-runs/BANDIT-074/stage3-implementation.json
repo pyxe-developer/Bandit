@@ -1,12 +1,70 @@
 {
   "contract_version": 1,
-  "work_item": "BANDIT-074",
+  "manifest_id": "BANDIT-074-stage3-implementation",
+  "work_item_id": "BANDIT-074",
   "stage": "stage3_implementation",
-  "role": "implementation_writer",
-  "model_family": "claude",
-  "model_id": "claude-sonnet-4-6",
-  "recorded_at": "2026-06-08T03:30:00Z",
-  "verdict": "pass",
+  "role_contract_ref": {
+    "role_id": "implementation_writer",
+    "version": "1.0.0"
+  },
+  "capability_profile": "claude-implementation-writer-stage3",
+  "subagent_identity": "claude-implementation-writer-stage3",
+  "base_revision": "0a991abe44c6c2bee041c2393f9446ddda00de11",
+  "allowed_target_files": [
+    "src/state/projection-consistency.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "docs/artifact-inputs/BANDIT-074-implementation-evidence.json",
+    "docs/work/BANDIT-074/implementation-evidence.md",
+    "docs/work/BANDIT-074/writer-report.md",
+    "docs/role-runs/BANDIT-074/stage3-implementation.json"
+  ],
+  "forbidden_file_patterns": [
+    "test/**",
+    "docs/work/BANDIT-074/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-074-red-evidence.json",
+    "docs/work/BANDIT-074/brief.md",
+    "docs/work/BANDIT-074/formation-review.md",
+    "docs/work/BANDIT-074/qwen-formation-review.md",
+    "docs/work/BANDIT-074/coderabbit-formation-review.md",
+    "docs/work/BANDIT-074/orchestration-plan.md",
+    "docs/work/BANDIT-074/coordination-log.jsonl",
+    "docs/work/BANDIT-074/coderabbit-review.md",
+    "docs/work/BANDIT-074/local-qwen-review.md",
+    "docs/work/BANDIT-074/review-evidence.md",
+    "docs/work/BANDIT-074/landing-verdict.md",
+    "docs/work/BANDIT-074/landing-action.md",
+    "docs/work/BANDIT-074/retrospective.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl"
+  ],
+  "required_input_packet_ref": "docs/work/BANDIT-074/stage3-dispatch.md",
+  "required_summary_path": "docs/work/BANDIT-074/writer-report.md",
+  "validation_commands": [
+    "node --test test/metamorphic-cross-projection-checks.test.mjs",
+    "npm run typecheck",
+    "npm test",
+    "npm run bandit -- validate",
+    "npm run bandit -- validate --json",
+    "git diff --check"
+  ],
+  "source_artifacts": [
+    "AGENTS.md",
+    "CLEAN_CODE.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/work/BANDIT-074/brief.md",
+    "docs/work/BANDIT-074/stage3-dispatch.md",
+    "docs/work/BANDIT-074/red-evidence.md",
+    "docs/artifact-inputs/BANDIT-074-red-evidence.json",
+    "test/metamorphic-cross-projection-checks.test.mjs",
+    "src/cli.ts",
+    "src/commands/validate.ts",
+    "src/state/projection-consistency.ts",
+    "docs/templates/role-run-manifest.md"
+  ],
   "files_changed": [
     "src/state/projection-consistency.ts",
     "src/commands/validate.ts",
@@ -32,6 +90,18 @@
   "git_diff_check_result": {
     "command": "git diff --check",
     "exit_code": 0
+  },
+  "deviation_notes": [
+    "The Stage 3 dispatch and brief explicitly authorized editing .bandit/policy/metamorphic-cross-projection-checks.json, and the implementation did so. The current implementation_writer role contract does not yet include that specific policy path in allowed_write_surface_families, so allowed_target_files lists only contract-accepted targets while files_changed records the actual policy write for PM review evidence."
+  ],
+  "authority_boundary": {
+    "append_only_evidence": true,
+    "projection_authority": "derived_non_canonical",
+    "can_satisfy_coordination_history": false,
+    "can_satisfy_review_or_landing_evidence": false,
+    "can_satisfy_uat": false,
+    "can_satisfy_retrospective": false,
+    "note": "Role-run evidence is append-only evidence. It cannot satisfy coordination history, review evidence, landing evidence, UAT approval, or retrospective authority. Canonical authority for those stages remains in the respective stage artifacts under docs/work/BANDIT-074/."
   },
   "no_test_edit_evidence": "Stage 3 Writer did not touch test/metamorphic-cross-projection-checks.test.mjs, red-evidence.md, artifact-inputs, helpers, fixtures, or acceptance mappings.",
   "bootstrap_model_family_separation": "Codex authored Stage 2 RED evidence; Claude-family implementation writer used for Stage 3 as required."

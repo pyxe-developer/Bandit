@@ -4,19 +4,18 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-074` has Stage 2 RED evidence and Stage 3 implementation evidence for
-the Metamorphic Cross-Projection Checks bootstrap chore. The focused
-cross-projection tests, typecheck, full test suite, `bandit validate`, and
-clean-code PM acceptance passed. Stage 4 review is the next required gate.
+`BANDIT-074` has Stage 2 RED, Stage 3 implementation, and Stage 4 aggregate
+review evidence for the Metamorphic Cross-Projection Checks bootstrap chore.
+CodeRabbit provider-timeout evidence, Local Qwen non-blocking review evidence,
+risk classification, supply-chain gate, review-subject hash, and clean-code PM
+review are recorded. Stage 5 landing is the next required gate.
 
-**Active work item:** `BANDIT-074` (Stage 4 review required).
+**Active work item:** `BANDIT-074` (Stage 5 landing required).
 
-The current stage is Stage 4: Review And Cross-Model Gates.
+The current stage is Stage 5: Landing And UAT.
 
-**Current next action:** Run Stage 4 review for `BANDIT-074`: CodeRabbit pre-PR
-or provider-timeout evidence, Local Qwen through the configured MLX adapter,
-risk classification, supply-chain gate, finding dispositions, review-subject
-hash, and aggregate review evidence before landing.
+**Current next action:** Record Stage 5 landing verdict for `BANDIT-074`, run
+`land-check`, and execute local-record landing action before closeout.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -31,7 +30,7 @@ reviewer routing.
 
 No operator-owned input is required for the next recorded action. `BANDIT-074`
 has plan-mode, RED, implementation, Writer report, role-run, clean-code PM
-acceptance, and `implementation_recorded` coordination evidence under
+acceptance, aggregate review, and `review_recorded` coordination evidence under
 `docs/work/BANDIT-074/`.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
@@ -57,6 +56,12 @@ repo artifacts cannot answer.
 - Implementation evidence: `docs/work/BANDIT-074/implementation-evidence.md`.
 - Writer report: `docs/work/BANDIT-074/writer-report.md`.
 - PM review: `docs/work/BANDIT-074/stage3-pm-review.md`.
+- Review evidence: `docs/work/BANDIT-074/review-evidence.md`.
+- CodeRabbit review: `docs/work/BANDIT-074/coderabbit-review.md` records
+  provider-timeout/bootstrap replacement evidence with no pass claimed.
+- Local Qwen review: `docs/work/BANDIT-074/local-qwen-review.md`.
+- Qwen finding disposition:
+  `docs/work/BANDIT-074/qwen-finding-disposition.md`.
 - Qwen formation review: `docs/work/BANDIT-074/qwen-formation-review.md`.
 - CodeRabbit formation review: `docs/work/BANDIT-074/coderabbit-formation-review.md`
   records provider timeout/bootstrap replacement evidence with no pass claimed.
@@ -67,11 +72,11 @@ repo artifacts cannot answer.
 product work, guarded browser actions, local API work, State Index work,
 scheduler execution, claim execution, worktree execution, public benchmark
 publication, paid reviewer/model routing, hosted replay services, telemetry,
-merge, push, deploy, Trust Verifier cutover, landing, closeout, or later queued
-bootstrap-gap work before Stage 4 review is complete and current for
+merge, push, deploy, Trust Verifier cutover, closeout, or later queued
+bootstrap-gap work before Stage 5 landing action evidence exists for
 `BANDIT-074`.
 
-The next required step is Stage 4 review for `BANDIT-074`.
+The next required step is Stage 5 landing for `BANDIT-074`.
 
 The remaining verification-layer opportunities queued after `BANDIT-074` are:
 Reviewer Calibration With Seeded Defects, Evidence Bundle Attestation, and

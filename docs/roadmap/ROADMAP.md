@@ -4,12 +4,10 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 4 review required)
+- `[Gap]` `BANDIT-074` - Metamorphic Cross-Projection Checks (Stage 5 landing required)
 
-**Current next step:** Run Stage 4 review for `BANDIT-074`: CodeRabbit pre-PR or
-provider-timeout evidence, Local Qwen through the configured MLX adapter, risk
-classification, supply-chain gate, finding dispositions, review-subject hash,
-and aggregate review evidence before landing.
+**Current next step:** Record Stage 5 landing verdict for `BANDIT-074`, run
+`land-check`, and execute local-record landing action before closeout.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
