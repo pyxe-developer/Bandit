@@ -7,9 +7,14 @@
 - `[Gap]` `BANDIT-075` - Reviewer Calibration With Seeded Defects (closed; last
   active anchor)
 
-**Current next step:** Repo PM should create and form a bounded chore from
-`docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json` before unrelated Phase
-8 product work.
+## Current Work Item
+
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation (Stage 1 formation blocked
+  on Local Qwen provider repair)
+
+**Current next step:** Repair the authorized Local Qwen MLX endpoint for
+BANDIT-076 formation review, refresh qwen-formation-review.md and
+formation-review.md, then run repo-pm approve-formation BANDIT-076.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -25,16 +30,15 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
-  hashing for landing and trusted-verdict evidence.
+- `[Gap]` `BANDIT-076` - Evidence Bundle Attestation formation approval after
+  Local Qwen provider repair.
 
 ## Planned Work
 
 ### Blocking Gaps
 
 - `[Gap]` `BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` - Full evidence bundle
-  hashing for landing and trusted-verdict evidence, queued behind reviewer
-  calibration.
+  hashing for landing and trusted-verdict evidence, active as `BANDIT-076`.
 - `[Gap]` `BANDIT-GAP-SPEC-TO-EVIDENCE-TRACEABILITY-MATRIX` - Acceptance
   criterion to verification artifact traceability, queued behind evidence
   bundle attestation.

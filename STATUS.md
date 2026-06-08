@@ -2,25 +2,26 @@
 
 ## Last Updated: 2026-06-08
 
-## Current Work Item: BANDIT-075 (closed; last active anchor)
+## Current Work Item: BANDIT-076 (Stage 1 formation blocked)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-075` is landed and closed for the Reviewer Calibration With Seeded
-Defects bootstrap chore. Plan-mode orchestration, RED evidence, implementation
-evidence, review evidence, landing action, retrospective, improvement
-disposition, bootstrap-gap resolution, and closeout evidence exist.
+`BANDIT-076` exists for Evidence Bundle Attestation. The Stage 1 brief and
+coordination prerequisite are repaired, but formation approval is blocked
+because the authorized Local Qwen MLX adapter route is unavailable.
 
-Current stage: Stage 6 closeout complete.
+Current stage: Stage 1 formation blocked.
 
-Next action: Repo PM should create and form a bounded chore from
-`docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json` before unrelated Phase
-8 product work.
+Next action: Repair the authorized Local Qwen MLX endpoint for BANDIT-076
+formation review, refresh qwen-formation-review.md and formation-review.md,
+then run repo-pm approve-formation BANDIT-076.
 
-Required operator input: none currently required.
+Required operator input: restore the authorized Local Qwen MLX endpoint at
+`http://127.0.0.1:8000/v1`, or explicitly authorize package/model environment
+repair.
 
 ## Recently Completed / In Progress
 

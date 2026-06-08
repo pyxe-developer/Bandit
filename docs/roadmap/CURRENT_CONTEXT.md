@@ -4,19 +4,18 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-075` is landed and closed for the Reviewer Calibration With Seeded
-Defects bootstrap chore. Plan-mode orchestration, RED evidence, implementation
-evidence, review evidence, landing action, retrospective, improvement
-disposition, bootstrap-gap resolution, and closeout evidence exist under
-`docs/work/BANDIT-075/`.
+`BANDIT-076` exists for the Evidence Bundle Attestation bootstrap chore.
+The Stage 1 brief is repaired and `brief_created` coordination evidence exists,
+but formation approval is blocked because the authorized Local Qwen MLX adapter
+route did not return a reviewer verdict.
 
-**Active work item:** `BANDIT-075` (closed; last active anchor).
+**Active work item:** `BANDIT-076` (blocked in Stage 1 formation review).
 
-The current stage is Stage 6: closeout complete.
+The current stage is Stage 1: formation blocked.
 
-**Current next action:** Repo PM should create and form a bounded chore from
-`docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json` before unrelated Phase
-8 product work.
+**Current next action:** Repair the authorized Local Qwen MLX endpoint for
+BANDIT-076 formation review, refresh qwen-formation-review.md and
+formation-review.md, then run repo-pm approve-formation BANDIT-076.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -29,15 +28,14 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. `BANDIT-074`
-has plan-mode, RED, implementation, Writer report, role-run, clean-code PM
-acceptance, aggregate review, landing action, retrospective, improvement
-disposition, bootstrap-gap resolution, and `closed` coordination evidence under
-`docs/work/BANDIT-074/`. `BANDIT-075` has plan-mode, RED, implementation,
-Writer report, role-run, PM acceptance, aggregate review, CodeRabbit
-disposition, Local Qwen pass, risk classification, supply-chain gate, landing
-action, retrospective, gap resolution, and closed coordination evidence under
-`docs/work/BANDIT-075/`.
+Operator-owned environment input is required before formation approval can
+continue: restore the authorized Local Qwen MLX endpoint at
+`http://127.0.0.1:8000/v1` for `BANDIT-076` formation review, or explicitly
+authorize package/model environment repair. Repo evidence shows the endpoint is
+down, the configured `unsloth/Qwen3.6-35B-A3B-MLX-8bit` cache is incomplete,
+and the complete local `mlx-community/Qwen3.6-35B-A3B-8bit` snapshot cannot be
+loaded by the installed `mlx-lm 0.26.0` server because `qwen3_5_moe` is
+unsupported.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -50,48 +48,30 @@ repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-075` current evidence:
+`BANDIT-076` current evidence:
 
-- Source spec: `docs/specs/BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS.json`.
-- Brief: `docs/work/BANDIT-075/brief.md`.
-- Coordination log: `docs/work/BANDIT-075/coordination-log.jsonl` records
-  `brief_created`, `formation_approved`, `orchestration_plan_recorded`,
-  `red_recorded`, and `implementation_recorded`.
-- Qwen formation review: `docs/work/BANDIT-075/qwen-formation-review.md`.
-- CodeRabbit formation review: `docs/work/BANDIT-075/coderabbit-formation-review.md`
+- Source spec: `docs/specs/BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION.json`.
+- Brief: `docs/work/BANDIT-076/brief.md`.
+- Coordination log: `docs/work/BANDIT-076/coordination-log.jsonl` records
+  `brief_created` and a `blocked` transition for Local Qwen provider repair.
+- Qwen formation review: `docs/work/BANDIT-076/qwen-formation-review.md`
+  records a blocker because the authorized MLX adapter route is unavailable.
+- CodeRabbit formation review: `docs/work/BANDIT-076/coderabbit-formation-review.md`
   records provider timeout/bootstrap replacement evidence with no pass claimed.
-- Aggregate formation review: `docs/work/BANDIT-075/formation-review.md`.
-- Orchestration plan: `docs/work/BANDIT-075/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-075/red-evidence.md`.
-- Seeded reviewer packet:
-  `docs/reviewer-calibration-packets/BANDIT-075-reviewer-packet-001.json`.
-- Stage 3 evidence: `docs/work/BANDIT-075/implementation-evidence.md`,
-  `docs/work/BANDIT-075/writer-report.md`,
-  `docs/role-runs/BANDIT-075/stage3-implementation.json`, and
-  `docs/work/BANDIT-075/stage3-pm-review.md`.
-- Stage 4 evidence: `docs/work/BANDIT-075/coderabbit-review.md`,
-  `docs/work/BANDIT-075/coderabbit-finding-disposition.md`,
-  `docs/work/BANDIT-075/local-qwen-review.md`,
-  `.bandit/policy/risk-classifications/BANDIT-075-risk-classification.json`,
-  `.bandit/policy/supply-chain-gates/BANDIT-075-supply-chain-gate.json`, and
-  `docs/work/BANDIT-075/review-evidence.md`.
-- Stage 5 and 6 evidence: `docs/work/BANDIT-075/landing-verdict.md`,
-  `docs/work/BANDIT-075/landing-action.md`,
-  `docs/work/BANDIT-075/retrospective.md`,
-  `docs/work/BANDIT-075/chore-disposition.md`,
-  `docs/work/BANDIT-075/improvement-disposition.md`, and
-  `.bandit/bootstrap-gaps.json`.
+- Aggregate formation review: `docs/work/BANDIT-076/formation-review.md`
+  records a blocker until Local Qwen provider evidence is refreshed.
 
-`BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS` is resolved and linked to
-`BANDIT-075` in `.bandit/bootstrap-gaps.json`. Do not start unrelated Phase 8
-product work, guarded browser actions, local API work, State Index work,
-scheduler execution, claim execution, worktree execution, public benchmark
-publication, paid reviewer/model routing, hosted replay services, telemetry,
-merge, push, deploy, Trust Verifier cutover, Spec-To-Evidence Traceability
-Matrix, or unrelated product work before the Evidence Bundle Attestation chore
-is created and formed.
+`BANDIT-GAP-EVIDENCE-BUNDLE-ATTESTATION` is active and linked to `BANDIT-076`
+in `.bandit/bootstrap-gaps.json`. Do not start Work Item PM plan mode, RED
+evidence, implementation, review, landing, closeout, unrelated Phase 8 product
+work, guarded browser actions, local API work, State Index work, scheduler
+execution, claim execution, worktree execution, public benchmark publication,
+paid reviewer/model routing, hosted replay services, telemetry, merge, push,
+deploy, Trust Verifier cutover, Spec-To-Evidence Traceability Matrix, or
+unrelated product work before `formation_approved` is recorded.
 
-The next required step is Repo PM formation for Evidence Bundle Attestation.
+The next required step is Local Qwen provider repair for `BANDIT-076` formation
+review.
 
 The remaining verification-layer opportunity queued after Evidence Bundle
 Attestation is Spec-To-Evidence Traceability Matrix.
