@@ -1,0 +1,198 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-072",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/policy/replay-regression-corpus.json",
+      "surface": "workflow_policy",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/replay-regression-corpus.ts",
+      "surface": "workflow_policy_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/replay-regression-corpus.ts",
+      "surface": "workflow_command_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "repo_initialization_policy_seed",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/replay-packets/",
+      "surface": "replay_regression_fixtures",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_command_routing",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "policy_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/replay-regression-corpus.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "live_workflow_routing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "surface": "policy_promotion_from_replay",
+      "state": "excluded",
+      "evidence_path": ".bandit/policy/replay-regression-corpus.json"
+    },
+    {
+      "surface": "reviewer_or_landing_replacement",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-072/implementation-evidence.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "read_only_replay_validator_added",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-072/implementation-evidence.md"
+    },
+    {
+      "signal_id": "historical_failure_mode_taxonomy_seeded",
+      "risk": "medium",
+      "evidence_path": ".bandit/policy/replay-regression-corpus.json"
+    },
+    {
+      "signal_id": "replay_packets_do_not_mutate_live_state",
+      "risk": "low",
+      "evidence_path": "test/replay-regression-corpus.test.mjs"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/replay-regression-corpus.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs replay-regression-corpus validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/stage3-pm-review.md"
+    },
+    {
+      "tool": "coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-072/coderabbit-review.md"
+    },
+    {
+      "tool": "npm run bandit -- qwen-review BANDIT-072",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-072/local-qwen-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-072-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-072/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-072/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-072 is a non-product bootstrap-gap chore with explicit operator pre-approval through landing. It adds a read-only replay regression corpus and validator; it does not change live routing, reviewer authority, landing authority, product behavior, business policy, cost policy, merge, push, deploy, or Trust Verifier cutover behavior."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-072 is medium workflow-risk because it adds a repo-native replay regression corpus, policy seed, CLI validation command, and historical failure-mode fixtures. The command is read-only, cannot mutate live workflow state, cannot promote replay results into policy, and cannot replace CodeRabbit, Local Qwen, risk, supply-chain, landing, or UAT gates. Focused replay tests, full npm test, typecheck, Bandit validation, replay validation, Local Qwen pass evidence, CodeRabbit timeout replacement evidence, risk classification, supply-chain gate evidence, and PM clean-code review cover the landing decision.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-072-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-072-supply-chain-gate.json",
+    ".bandit/policy/replay-regression-corpus.json",
+    "docs/replay-packets/dirty-worktree.json",
+    "docs/replay-packets/provider-timeout-refusal.json",
+    "docs/replay-packets/stale-review-subject-hash.json",
+    "docs/work/BANDIT-072/brief.md",
+    "docs/work/BANDIT-072/red-evidence.md",
+    "docs/work/BANDIT-072/implementation-evidence.md",
+    "docs/work/BANDIT-072/stage3-pm-review.md",
+    "docs/work/BANDIT-072/coderabbit-review.md",
+    "docs/work/BANDIT-072/local-qwen-review.md",
+    "src/cli.ts",
+    "src/commands/init.ts",
+    "src/commands/replay-regression-corpus.ts",
+    "src/state/paths.ts",
+    "src/state/replay-regression-corpus.ts",
+    "test/replay-regression-corpus.test.mjs"
+  ]
+}
