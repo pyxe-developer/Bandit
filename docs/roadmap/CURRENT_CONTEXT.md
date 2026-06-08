@@ -6,21 +6,20 @@
 
 `BANDIT-078` is active for the Guarded CLI Action Requests Phase 8 product
 slice. Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED
-evidence, and Stage 3 implementation evidence exist under
-`docs/work/BANDIT-078/`. Stage 3 implementation is accepted after MiniMax-M3
-and Claude writer repairs, with PM verification passing the focused cockpit
-suites, typecheck, and full `npm test`.
+evidence, Stage 3 implementation evidence, and Stage 4 aggregate review
+evidence exist under `docs/work/BANDIT-078/`. Stage 4 passes with CodeRabbit
+timeout/bootstrap-gap evidence, authorized Local Qwen non-blocking findings
+dispositioned, risk classification, supply-chain gate, review-subject hash,
+and browser smoke evidence recorded.
 
-**Active work item:** `BANDIT-078` (Stage 4 review required).
+**Active work item:** `BANDIT-078` (Stage 5 landing and UAT required).
 
-The current stage is Stage 4: review required.
+The current stage is Stage 5: landing and UAT required.
 
-**Current next action:** Run Stage 4 review for `BANDIT-078`: request
-CodeRabbit pre-PR evidence or record provider-refusal evidence, run Local Qwen
-through `.bandit/reviewers/local-qwen.json` via
-`bin/omlx-chat-completions.mjs`, record risk classification, supply-chain
-evidence, browser smoke evidence, review-subject hash, aggregate review
-evidence, and disposition every finding before landing.
+**Current next action:** Record CLI-owned product UAT for `BANDIT-078` using
+the operator pre-approval, then record Stage 5 landing verdict, run
+`land-check` and `auto-land-check`, and execute local-record landing action
+against the current source/evidence commit.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -33,7 +32,8 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action.
+No operator-owned input is required for the next recorded action; the operator
+pre-approved gates through landing and closeout in the automation prompt.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -52,7 +52,7 @@ repo artifacts cannot answer.
 - Brief: `docs/work/BANDIT-078/brief.md`.
 - Coordination log: `docs/work/BANDIT-078/coordination-log.jsonl` records
   `brief_created`, `formation_approved`, `orchestration_plan_recorded`,
-  `red_recorded`, and `implementation_recorded`.
+  `red_recorded`, `implementation_recorded`, and `review_recorded`.
 - Orchestration plan: `docs/work/BANDIT-078/orchestration-plan.md`.
 - RED evidence: `docs/work/BANDIT-078/red-evidence.md`.
 - Stage 3 dispatch: `docs/work/BANDIT-078/stage3-dispatch.md`.
@@ -63,6 +63,15 @@ repo artifacts cannot answer.
 - Writer report: `docs/work/BANDIT-078/writer-report.md`.
 - Implementation evidence: `docs/work/BANDIT-078/implementation-evidence.md`.
 - Stage 3 PM review: `docs/work/BANDIT-078/stage3-pm-review.md`.
+- CodeRabbit review evidence: `docs/work/BANDIT-078/coderabbit-review.md`
+  records timeout/bootstrap-gap evidence with no CodeRabbit pass claimed.
+- Local Qwen review: `docs/work/BANDIT-078/local-qwen-review.md` records
+  `non_blocking` through the authorized route.
+- Qwen finding disposition: `docs/work/BANDIT-078/qwen-finding-disposition.md`.
+- Browser smoke evidence: `docs/work/BANDIT-078/browser-smoke.md`.
+- Risk classification: `.bandit/policy/risk-classifications/BANDIT-078-risk-classification.json`.
+- Supply-chain gate: `.bandit/policy/supply-chain-gates/BANDIT-078-supply-chain-gate.json`.
+- Aggregate review evidence: `docs/work/BANDIT-078/review-evidence.md`.
 - Qwen formation review: `docs/work/BANDIT-078/qwen-formation-review.md`
   records a pass through the authorized MLX adapter route.
 - CodeRabbit formation review: `docs/work/BANDIT-078/coderabbit-formation-review.md`
@@ -71,11 +80,12 @@ repo artifacts cannot answer.
   records a pass.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-UAT evidence, landing evidence, retrospective evidence, guarded browser action
-execution, local API work, State Index work, scheduler execution, claim
-execution, worktree execution, public benchmark publication, paid
+retrospective evidence, guarded browser action execution, local API work, State
+Index work, scheduler execution, claim execution, worktree execution, public
+benchmark publication, paid
 reviewer/model routing, hosted replay services, telemetry, merge, push, deploy,
-Trust Verifier cutover, or unrelated product work before Stage 4 review is
-recorded and every finding is repaired or dispositioned.
+Trust Verifier cutover, or unrelated product work before Stage 5 landing action
+evidence exists.
 
-The next required step is Stage 4 review for `BANDIT-078`.
+The next required step is CLI-owned product UAT and Stage 5 landing for
+`BANDIT-078`.

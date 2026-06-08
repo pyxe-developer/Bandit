@@ -9,15 +9,13 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 4 review
-  required)
+- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (Stage 5 landing and
+  UAT required)
 
-**Current next step:** Run Stage 4 review for `BANDIT-078`: request CodeRabbit
-pre-PR evidence or record provider-refusal evidence, run Local Qwen through
-`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`, record
-risk classification, supply-chain evidence, browser smoke evidence,
-review-subject hash, aggregate review evidence, and disposition every finding
-before landing.
+**Current next step:** Record CLI-owned product UAT for `BANDIT-078` using the
+operator pre-approval, then record Stage 5 landing verdict, run `land-check`
+and `auto-land-check`, and execute local-record landing action against the
+current source/evidence commit.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
