@@ -992,8 +992,8 @@
     {
       "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",
       "title": "Gate Determinism And Flake Gate",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -1003,12 +1003,19 @@
         "docs/roadmap/CURRENT_CONTEXT.md",
         "docs/roadmap/ROADMAP.md",
         "docs/work/BANDIT-068/brief.md",
-        "docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json"
+        "docs/specs/BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE.json",
+        "docs/work/BANDIT-073/red-evidence.md",
+        "docs/work/BANDIT-073/implementation-evidence.md",
+        "docs/work/BANDIT-073/review-evidence.md",
+        "docs/work/BANDIT-073/landing-action.md",
+        "docs/work/BANDIT-073/retrospective.md",
+        "docs/work/BANDIT-073/chore-disposition.md",
+        "docs/work/BANDIT-073/improvement-disposition.md"
       ],
       "linked_work_item": "BANDIT-073",
-      "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Gate Determinism And Flake Gate records the need for critical trust-layer gates to prove repeatable output, stable ordering, stable hashes, and explicit disposition for nondeterministic or provider-dependent evidence.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-073."
+      "rationale": "BANDIT-073 delivered the Gate Determinism And Flake Gate as a repo-native policy, deterministic validate --json output, canonical JSON hashing, repeat-run hash comparison, provider-dependent evidence metadata checks, nondeterminism disposition checks, direct-Qwen-CLI refusal for Local Qwen proof, init seeding, and focused tests. The gate remains read-only and does not approve Trust Verifier cutover, old-gate replacement, reviewer promotion, merge, push, deploy, or unrelated product scope.",
+      "verification_target": "docs/work/BANDIT-073/retrospective.md",
+      "next_action": "Use gate-determinism-flake-gate validation as part of aggregate bandit validate; create a bounded chore from docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json before unrelated Phase 8 product work."
     },
     {
       "id": "BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS",
@@ -1029,7 +1036,7 @@
       "linked_work_item": null,
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Metamorphic Cross-Projection Checks records the need for derived surfaces such as cockpit status, session-context, land-check, and future trust verify output to agree when reading the same canonical artifacts and to preserve verdicts under harmless input perturbations.",
       "verification_target": null,
-      "next_action": "After BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE is addressed or explicitly dispositioned, create a bounded chore from docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json before proceeding to the next unrelated Phase 8 product slice."
     },
     {
       "id": "BANDIT-GAP-REVIEWER-CALIBRATION-SEEDED-DEFECTS",

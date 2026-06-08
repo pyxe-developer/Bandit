@@ -4,10 +4,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-073` - Gate Determinism And Flake Gate (formation approved)
+- `[Gap]` `BANDIT-073` - Gate Determinism And Flake Gate (closed; last closed anchor)
 
-**Current next step:** Work Item PM should enter plan-mode orchestration for
-`BANDIT-073` before RED evidence.
+**Current next step:** Repo PM should create a bounded chore from
+`docs/specs/BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS.json` before
+unrelated Phase 8 product work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -24,8 +25,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Gap]` `BANDIT-GAP-METAMORPHIC-CROSS-PROJECTION-CHECKS` - Cross-projection
-  agreement and harmless-perturbation checks for derived trust surfaces, queued
-  behind the determinism gate.
+  agreement and harmless-perturbation checks for derived trust surfaces.
 
 ## Planned Work
 
@@ -51,6 +51,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-073` - Gate Determinism And Flake Gate
 - `BANDIT-072` - Replay Regression Corpus
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel
 - `BANDIT-070` - Verification Oracle Provenance Gate
