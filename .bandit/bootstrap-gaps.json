@@ -964,8 +964,8 @@
     {
       "id": "BANDIT-GAP-REPLAY-REGRESSION-CORPUS",
       "title": "Replay Regression Corpus",
-      "status": "open",
-      "disposition": "queued_chore",
+      "status": "active",
+      "disposition": "active_chore",
       "source_work_item": "OPERATOR-2026-06-07",
       "source_artifacts": [
         "AGENTS.md",
@@ -977,10 +977,10 @@
         "docs/work/BANDIT-068/brief.md",
         "docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json"
       ],
-      "linked_work_item": null,
+      "linked_work_item": "BANDIT-072",
       "rationale": "Operator direction on 2026-06-07 asked to add the remaining verification-layer opportunities to the roadmap. Replay Regression Corpus records the need to turn historical Bandit workflow failures into deterministic replay packets so current validation and trust-verifier-compatible paths can prove they still catch old failure modes.",
       "verification_target": null,
-      "next_action": "Create a bounded chore from docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json before proceeding to the next unrelated Phase 8 product slice."
+      "next_action": "Complete active chore BANDIT-072."
     },
     {
       "id": "BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE",

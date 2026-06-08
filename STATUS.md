@@ -2,28 +2,23 @@
 
 ## Last Updated: 2026-06-07
 
-## Current Work Item: BANDIT-071 (Stage 6 closeout complete)
+## Current Work Item: BANDIT-072 (Stage 1 formation approved)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-071` is landed and closed. It resolved
-`BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL` with private packed/private install
-support, package content scoping, installed CLI loader dependency repair,
-repo-local update-channel policy/templates, non-blocking manual update-check
-behavior, landing action evidence, retrospective, improvement disposition,
-chore disposition, and gap-ledger disposition.
+`BANDIT-072` is formed for the Replay Regression Corpus bootstrap chore. Stage
+1 formation is approved with brief evidence, `brief_created` coordination,
+Local Qwen formation pass through the MLX adapter route, CodeRabbit
+provider-timeout bootstrap replacement evidence, aggregate formation review,
+and `formation_approved` coordination evidence.
 
-`BANDIT-GAP-REPLAY-REGRESSION-CORPUS` is the next queued bootstrap gap and has
-no formed work item yet.
+Current stage: Stage 1 formation approved.
 
-Current stage: Stage 6 closeout complete.
-
-Next action: Create a bounded chore from
-`docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before unrelated Phase 8
-product work.
+Next action: Work Item PM plan-mode orchestration for `BANDIT-072` before RED
+evidence.
 
 Required operator input: none currently required.
 
@@ -31,8 +26,8 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
+- `BANDIT-072` - Replay Regression Corpus (formation approved)
 - `BANDIT-071` - Private Installable Distribution And Update Notification Channel (closed)
 - `BANDIT-070` - Verification Oracle Provenance Gate (closed)
 - `BANDIT-069` - Test Strength / Mutation Adequacy Gate (closed)
 - `BANDIT-068` - Evidence Drilldown And Gate Matrix (closed)
-- `BANDIT-067` - Live Cockpit Status View From CLI Payload (closed)

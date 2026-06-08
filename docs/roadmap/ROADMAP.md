@@ -4,18 +4,18 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-071` - Private Installable Distribution And Update
-  Notification Channel (Stage 6 closeout complete; closed anchor)
+- `[Gap]` `BANDIT-072` - Replay Regression Corpus (Stage 1 formation approved)
 
-**Current next step:** Create a bounded chore from `docs/specs/BANDIT-GAP-REPLAY-REGRESSION-CORPUS.json` before unrelated Phase 8 product work.
+**Current next step:** Work Item PM plan-mode orchestration for `BANDIT-072`
+before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
 restart Pi/Aperture runtime work, choose local API or State Index timing,
-execute guarded browser actions, approve public npm publishing, approve paid
-private registry or external service setup, enable automatic self-update,
-merge, push, deploy, or start unrelated Phase 8 product work without separate
-authorization and evidence.
+execute guarded browser actions, approve public benchmark publication, approve
+paid reviewer/model routing, approve hosted replay services or external service
+setup, merge, push, deploy, or start unrelated Phase 8 product work without
+separate authorization and evidence.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -23,15 +23,14 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
-  Bandit workflow failures.
+- `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate
+  output, stable hashes, and explicit flake/provider-dependence dispositions,
+  queued behind the replay corpus.
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-REPLAY-REGRESSION-CORPUS` - Replay-only corpus of known
-  Bandit workflow failures.
 - `[Gap]` `BANDIT-GAP-GATE-DETERMINISM-FLAKE-GATE` - Deterministic gate output,
   stable hashes, and explicit flake/provider-dependence dispositions, queued
   behind the replay corpus.
