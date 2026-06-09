@@ -39,12 +39,32 @@ type StatusCue = {
   sources?: string[];
 };
 
+export type QueueContextRow = {
+  id: string;
+  label: string;
+  kind: string;
+  status: string;
+  relationship: string;
+  summary: string;
+  source_artifacts: string[];
+  deferred_reason?: string;
+};
+
+export type RecentTransition = {
+  work_item: string;
+  state: string;
+  status: "recorded" | "unavailable";
+  source: string;
+};
+
 type LightQueueContext = {
   kind: "light_queue_context";
   status: "clear" | "needs_attention";
   summary: string;
   sources: string[];
   excluded_authority: string[];
+  rows?: QueueContextRow[];
+  recent_transitions?: RecentTransition[];
 };
 
 export type CockpitViewModel = {
@@ -240,6 +260,12 @@ function buildAttentionCategory(
 }
 
 function buildLightQueueContext(status: CockpitStatus): LightQueueContext {
+  return status.queue_context_source
+    ? buildQueueContextFromSource(status)
+    : buildLegacyQueueContext(status);
+}
+
+function buildLegacyQueueContext(status: CockpitStatus): LightQueueContext {
   const bootstrapGapCount = status.bootstrap_gaps.gaps.length;
   const improvementCandidateCount = status.improvement_health.candidates.length;
 
@@ -256,6 +282,80 @@ function buildLightQueueContext(status: CockpitStatus): LightQueueContext {
     ]),
     excluded_authority: QUEUE_CONTEXT_EXCLUDED_AUTHORITY
   };
+}
+
+type QueueContextSourceItem = NonNullable<CockpitStatus["queue_context_source"]>["items"][number];
+
+function buildQueueContextFromSource(status: CockpitStatus): LightQueueContext {
+  const queueSource = status.queue_context_source!;
+  const items = queueSource.items;
+
+  return {
+    kind: "light_queue_context",
+    status: status.bootstrap_gaps.status === "open" ? "needs_attention" : "clear",
+    summary: buildQueueContextSummary(items),
+    sources: uniqueStrings([
+      queueSource.source,
+      status.next_action.source,
+      status.coordination?.source,
+      status.bootstrap_gaps.source
+    ]),
+    excluded_authority: QUEUE_CONTEXT_EXCLUDED_AUTHORITY,
+    rows: items.map((item) => ({
+      id: item.id,
+      label: item.label,
+      kind: item.kind,
+      status: item.status,
+      relationship: item.relationship,
+      summary: item.summary,
+      source_artifacts: item.source_artifacts,
+      deferred_reason: item.deferred_reason
+    })),
+    recent_transitions: buildRecentTransitions(status)
+  };
+}
+
+function buildQueueContextSummary(items: QueueContextSourceItem[]): string {
+  const activeAnchor = items.find((item) => item.status === "active_anchor");
+  const nextPlanned = items.filter((item) => item.status === "next_planned");
+  const deferred = items.filter((item) => item.status === "deferred");
+
+  const parts: string[] = [];
+
+  if (activeAnchor) {
+    parts.push(`${activeAnchor.id} active`);
+  }
+
+  if (nextPlanned.length > 0) {
+    const kind = nextPlanned[0]!.kind;
+    const kindLabel = nextPlanned.length === 1 ? kind : `${kind}s`;
+    parts.push(`${nextPlanned.length} next planned ${kindLabel}`);
+  }
+
+  if (deferred.length > 0) {
+    const itemLabel = deferred.length === 1 ? "item" : "items";
+    parts.push(`${deferred.length} deferred V0 closeout ${itemLabel}`);
+  }
+
+  return parts.join("; ") + ".";
+}
+
+function buildRecentTransitions(status: CockpitStatus): RecentTransition[] {
+  if (status.coordination) {
+    return [{
+      work_item: status.active_work_item.id,
+      state: status.coordination.current_state,
+      status: "recorded",
+      source: status.coordination.source
+    }];
+  }
+
+  return [{
+    work_item: status.active_work_item.id,
+    state: "not_recorded",
+    status: "unavailable",
+    source: status.active_work_item.source
+  }];
 }
 
 function formatBootstrapGapSummary(count: number) {

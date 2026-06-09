@@ -1,4 +1,4 @@
-import type { CockpitViewModel } from "../state/cockpit-view-model.js";
+import type { CockpitViewModel, QueueContextRow, RecentTransition } from "../state/cockpit-view-model.js";
 import type { CockpitActionAffordance } from "../state/cockpit-actions.ts";
 import type { CockpitImprovementHealthSurface, ImprovementHealthRow } from "../state/cockpit-improvement-health.ts";
 import { renderCockpitShell } from "./render.ts";
@@ -202,7 +202,7 @@ export function renderBrowserCockpitShell(
     // affordances directly so the HTML keeps the full metadata even
     // when `shell.controls` is projected to the minimal legacy
     // shape for default-derived affordances.
-    html: buildHtml(cockpitShell, viewModel.action_affordances, viewModel.improvement_health_surface),
+    html: buildHtml(cockpitShell, viewModel.action_affordances, viewModel.improvement_health_surface, viewModel.queue_context),
     css: SHELL_CSS,
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: viewModel.prohibited_authority,
@@ -243,7 +243,8 @@ function buildResponsive(isMobile: boolean): Responsive {
 function buildHtml(
   shell: CockpitShell,
   actionAffordances: CockpitActionAffordance[],
-  improvementHealthSurface: CockpitImprovementHealthSurface
+  improvementHealthSurface: CockpitImprovementHealthSurface,
+  queueContext: CockpitViewModel["queue_context"]
 ): string {
   return `<!doctype html>
 <html lang="en">
@@ -256,7 +257,7 @@ function buildHtml(
 <body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
   <div class="cockpit-layout">
     ${buildAttentionNav(shell)}
-    ${buildActiveWorkMain(shell, actionAffordances, improvementHealthSurface)}
+    ${buildActiveWorkMain(shell, actionAffordances, improvementHealthSurface, queueContext)}
     ${buildEvidenceAside(shell)}
   </div>
 </body>
@@ -279,7 +280,8 @@ ${items}
 function buildActiveWorkMain(
   shell: CockpitShell,
   actionAffordances: CockpitActionAffordance[],
-  improvementHealthSurface: CockpitImprovementHealthSurface
+  improvementHealthSurface: CockpitImprovementHealthSurface,
+  queueContext: CockpitViewModel["queue_context"]
 ): string {
   const controls = actionAffordances.map(buildControlHtml).join("\n        ");
 
@@ -297,6 +299,7 @@ function buildActiveWorkMain(
       ${buildStatusCuesSection(shell)}
       ${buildGateStripSection(shell)}
       ${buildImprovementHealthSection(improvementHealthSurface)}
+      ${buildQueueContextSection(queueContext)}
     </main>`;
 }
 
@@ -422,6 +425,51 @@ function buildSourceLinks(sources: string[]): string {
     .map(source => `<a class="source-link" href="${escapeHtml(source)}">${escapeHtml(source)}</a>`)
     .join(" ");
   return `<span class="detail-cell detail-sources">${links}</span>`;
+}
+
+function buildQueueContextSection(queueContext: CockpitViewModel["queue_context"]): string {
+  const rows = queueContext.rows;
+  if (!rows) return "";
+
+  const transitions = queueContext.recent_transitions ?? [];
+  const rowsHtml = rows.map(buildQueueRowHtml).join("\n");
+  const transitionsHtml = transitions.map(buildTransitionRowHtml).join("\n");
+
+  return `<section class="queue-context" aria-label="Queue and context">
+      <h2>Queue and context</h2>
+      <ul class="queue-rows">
+${rowsHtml}
+      </ul>
+      <ul class="recent-transitions">
+${transitionsHtml}
+      </ul>
+    </section>`;
+}
+
+function buildQueueRowHtml(row: QueueContextRow): string {
+  const sourceLinks = row.source_artifacts
+    .map((s) => `<a class="source-link" href="${escapeHtml(s)}">${escapeHtml(s)}</a>`)
+    .join(" ");
+  const deferredReasonHtml = row.deferred_reason
+    ? `\n          <span class="queue-deferred-reason">${escapeHtml(row.deferred_reason)}</span>`
+    : "";
+
+  return `        <li class="queue-row">
+          <span class="queue-id">${escapeHtml(row.id)}</span>
+          <span class="queue-label">${escapeHtml(row.label)}</span>
+          <span class="queue-status">${escapeHtml(row.status)}</span>
+          <span class="queue-relationship">${escapeHtml(row.relationship)}</span>${deferredReasonHtml}
+          <span class="queue-sources">${sourceLinks}</span>
+        </li>`;
+}
+
+function buildTransitionRowHtml(transition: RecentTransition): string {
+  return `        <li class="transition-row">
+          <span class="transition-work-item">${escapeHtml(transition.work_item)}</span>
+          <span class="transition-state">${escapeHtml(transition.state)}</span>
+          <span class="transition-status">${escapeHtml(transition.status)}</span>
+          <a class="source-link" href="${escapeHtml(transition.source)}">${escapeHtml(transition.source)}</a>
+        </li>`;
 }
 
 function buildImprovementHealthSection(surface: CockpitImprovementHealthSurface): string {

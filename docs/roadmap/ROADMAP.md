@@ -8,14 +8,14 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-080` - Queue & Context (Light) (formation approved; Work
-  Item PM plan mode pending)
+- `[Slice]` `BANDIT-080` - Queue & Context (Light) (implementation recorded;
+  Stage 4 review pending)
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-080` (Queue & Context (Light)) before RED evidence. Do not create RED
-evidence or implementation until `docs/work/BANDIT-080/orchestration-plan.md`
-exists and `work-item-pm start BANDIT-080` records
-`orchestration_plan_recorded`.
+**Current next step:** Run Stage 4 review for BANDIT-080: request/read
+CodeRabbit review or record provider-refusal/bootstrap evidence, run Local
+Qwen through the authorized .bandit/reviewers/local-qwen.json route, record
+risk classification, supply-chain gate, browser smoke evidence, and aggregate
+review evidence before landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

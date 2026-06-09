@@ -4,20 +4,19 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-080` is formed for the Queue & Context (Light) Phase 8 product slice.
-Stage 1 brief, coordination `brief_created`, Qwen formation review,
-CodeRabbit formation review, aggregate formation review, and
-`formation_approved` evidence exist under `docs/work/BANDIT-080/`.
+`BANDIT-080` is active for the Queue & Context (Light) Phase 8 product slice.
+Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED evidence,
+and Stage 3 implementation evidence exist under `docs/work/BANDIT-080/`.
 
-**Active work item:** `BANDIT-080` (formation approved; plan mode pending).
+**Active work item:** `BANDIT-080` (implementation recorded; Stage 4 review pending).
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 3: implementation_recorded.
 
-**Current next action:** Work Item PM should run plan-mode orchestration for
-`BANDIT-080` (Queue & Context (Light)) before RED evidence. Do not create RED
-evidence or implementation until `docs/work/BANDIT-080/orchestration-plan.md`
-exists and `work-item-pm start BANDIT-080` records
-`orchestration_plan_recorded`.
+**Current next action:** Run Stage 4 review for BANDIT-080: request/read
+CodeRabbit review or record provider-refusal/bootstrap evidence, run Local
+Qwen through the authorized .bandit/reviewers/local-qwen.json route, record
+risk classification, supply-chain gate, browser smoke evidence, and aggregate
+review evidence before landing.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -48,7 +47,14 @@ repo artifacts cannot answer.
 - Source spec: `docs/specs/BANDIT-080-queue-context-light.json`.
 - Brief: `docs/work/BANDIT-080/brief.md`.
 - Coordination log: `docs/work/BANDIT-080/coordination-log.jsonl` records
-  `brief_created` and `formation_approved`.
+  `brief_created`, `formation_approved`, `orchestration_plan_recorded`, and
+  `red_recorded`, and `implementation_recorded`.
+- Orchestration plan: `docs/work/BANDIT-080/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-080/red-evidence.md`.
+- RED tests: `test/cockpit-queue-context.test.mjs`.
+- Writer report: `docs/work/BANDIT-080/writer-report.md`.
+- Implementation evidence: `docs/work/BANDIT-080/implementation-evidence.md`.
+- PM acceptance: `docs/work/BANDIT-080/stage3-pm-review.md`.
 - Qwen formation review: `docs/work/BANDIT-080/qwen-formation-review.md`
   records a pass through the authorized MLX adapter route.
 - CodeRabbit formation review:
@@ -59,13 +65,11 @@ repo artifacts cannot answer.
   records a pass.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-RED evidence, implementation evidence, review evidence, UAT evidence, landing
-evidence, retrospective evidence, automatic improvement evaluation, guarded
-browser action execution, local API work, State Index work, scheduler
-execution, claim execution, worktree execution, public benchmark publication,
-paid reviewer/model routing, hosted replay services, telemetry, merge, push,
-deploy, Trust Verifier cutover, or unrelated product work from Repo PM Stage 1
-formation.
+UAT evidence, landing evidence, retrospective evidence, automatic improvement
+evaluation, guarded browser action execution, local API work, State Index work,
+scheduler execution, claim execution, worktree execution, public benchmark
+publication, paid reviewer/model routing, hosted replay services, telemetry,
+merge, push, deploy, Trust Verifier cutover, or unrelated product work from
+Stage 4 review.
 
-The next required step is Work Item PM plan-mode orchestration for
-`BANDIT-080`.
+The next required step is Stage 4 review for `BANDIT-080`.

@@ -130,6 +130,19 @@ export type CockpitStatus = {
   } | null;
   stale_evidence: StaleEvidence[];
   evidence_trust_signals?: CockpitEvidenceTrustSignals;
+  queue_context_source?: {
+    source: string;
+    items: Array<{
+      id: string;
+      label: string;
+      kind: string;
+      status: string;
+      relationship: string;
+      summary: string;
+      source_artifacts: string[];
+      deferred_reason?: string;
+    }>;
+  };
 };
 
 const CURRENT_CONTEXT_PATH = "docs/roadmap/CURRENT_CONTEXT.md";
