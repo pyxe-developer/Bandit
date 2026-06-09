@@ -143,6 +143,19 @@ export type CockpitStatus = {
       deferred_reason?: string;
     }>;
   };
+  operator_inbox_source?: {
+    source: string;
+    status: "available" | "empty" | "unavailable";
+    messages: Array<{
+      id: string;
+      work_item: string;
+      subject: string;
+      status: string;
+      required_input: string;
+      source_artifact: string;
+      created_at?: string;
+    }>;
+  };
 };
 
 const CURRENT_CONTEXT_PATH = "docs/roadmap/CURRENT_CONTEXT.md";

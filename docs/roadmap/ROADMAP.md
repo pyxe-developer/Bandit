@@ -9,11 +9,13 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
-  (formation approved)
+  (Stage 3 implementation recorded)
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-081`: create `docs/work/BANDIT-081/orchestration-plan.md`, then run
-`node ./bin/bandit.mjs work-item-pm start BANDIT-081` before RED evidence.
+**Current next step:** Run Stage 4 review for `BANDIT-081`: request/read
+CodeRabbit review or record provider-refusal/bootstrap evidence, run Local Qwen
+through the authorized `.bandit/reviewers/local-qwen.json` route, record risk
+classification, supply-chain gate, browser smoke evidence, and aggregate review
+evidence before landing.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,

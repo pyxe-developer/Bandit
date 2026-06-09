@@ -325,3 +325,4 @@
 {"type":"work_item_created","work_item":"BANDIT-079","message":"Created work item BANDIT-079 from docs/specs/BANDIT-079-improvement-health-surface.json"}
 {"type":"work_item_created","work_item":"BANDIT-080","message":"Created work item BANDIT-080 from docs/specs/BANDIT-080-queue-context-light.json"}
 {"type":"work_item_created","work_item":"BANDIT-081","message":"Created work item BANDIT-081 from docs/specs/BANDIT-081-operator-attention-inbox-surface.json"}
+{"type":"artifact_created","work_item":"BANDIT-081","message":"Created red_evidence artifact at docs/work/BANDIT-081/red-evidence.md"}

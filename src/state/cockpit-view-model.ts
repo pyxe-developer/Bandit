@@ -39,6 +39,47 @@ type StatusCue = {
   sources?: string[];
 };
 
+export type OperatorAttentionRow = {
+  id: string;
+  status: string;
+  decision_owner: string;
+  required_input: string;
+  next_route: string;
+  summary: string;
+  source_artifacts: string[];
+  freshness_state: "current" | "stale";
+  blocked_reason?: string;
+};
+
+export type OperatorAttentionSurface = {
+  kind: "operator_attention";
+  status: string;
+  summary: string;
+  rows: OperatorAttentionRow[];
+};
+
+export type OperatorInboxMessage = {
+  id: string;
+  work_item: string;
+  subject: string;
+  status: string;
+  required_input: string;
+  source_artifact: string;
+  created_at?: string;
+};
+
+export type OperatorInboxSurface = {
+  kind: "operator_inbox";
+  status: "available" | "empty" | "unavailable";
+  canonical_source: string;
+  summary?: string;
+  messages: OperatorInboxMessage[];
+  unavailable_reason?: string;
+  writes_inbox_artifacts: false;
+  resolves_messages: false;
+  notification_authority: false;
+};
+
 export type QueueContextRow = {
   id: string;
   label: string;
@@ -104,6 +145,8 @@ export type CockpitViewModel = {
   queue_context: LightQueueContext;
   status_cues: StatusCue[];
   improvement_health_surface: CockpitImprovementHealthSurface;
+  operator_attention: OperatorAttentionSurface;
+  operator_inbox: OperatorInboxSurface;
   canonical_state_owner: "repo_native_artifacts_via_bandit_cli";
   prohibited_authority: string[];
   writes_repo_artifacts: false;
@@ -181,6 +224,8 @@ export function buildCockpitViewModel(status: CockpitStatus): CockpitViewModel {
     queue_context: queueContext,
     status_cues: buildStatusCues(status),
     improvement_health_surface: improvementHealthSurface,
+    operator_attention: buildOperatorAttention(status),
+    operator_inbox: buildOperatorInbox(status),
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: [
       "browser_storage",
@@ -578,6 +623,152 @@ function buildCoordinationCue(status: CockpitStatus): StatusCue {
     label: "Coordination",
     status: COORDINATION_NOT_RECORDED,
     source: status.active_work_item.source
+  };
+}
+
+function buildOperatorAttention(status: CockpitStatus): OperatorAttentionSurface {
+  const rows: OperatorAttentionRow[] = [];
+
+  if (status.required_operator_input.value === "required") {
+    rows.push({
+      id: "operator_input",
+      status: "required",
+      decision_owner: "operator",
+      required_input: "required",
+      next_route: deriveOperatorInputNextRoute(status.next_action.value),
+      summary: status.next_action.value,
+      source_artifacts: [status.required_operator_input.source],
+      freshness_state: "current",
+      blocked_reason: undefined
+    });
+  }
+
+  status.blockers.forEach((blocker, index) => {
+    rows.push({
+      id: `blocker_${index + 1}`,
+      status: "blocked",
+      decision_owner: blocker.kind === "operator_input_required" ? "operator" : "codex_pm",
+      required_input: blocker.kind === "operator_input_required" ? "required" : "none_required",
+      next_route: "Resolve operator-owned input outside the browser cockpit",
+      summary: blocker.summary,
+      source_artifacts: blocker.source_artifacts ?? [blocker.source],
+      freshness_state: "current",
+      blocked_reason: "blocked"
+    });
+  });
+
+  status.stale_evidence.forEach((evidence, index) => {
+    rows.push({
+      id: `stale_${index + 1}`,
+      status: "stale",
+      decision_owner: "codex_pm",
+      required_input: "none_required",
+      next_route: `Refresh ${evidence.kind} evidence before landing`,
+      summary: `${evidence.kind} evidence is stale because ${evidence.basis}.`,
+      source_artifacts: [evidence.source],
+      freshness_state: "stale",
+      blocked_reason: evidence.basis
+    });
+  });
+
+  const inputCount = status.required_operator_input.value === "required" ? 1 : 0;
+  const blockerCount = status.blockers.length;
+  const staleCount = status.stale_evidence.length;
+  const needsAttention = inputCount > 0 || blockerCount > 0 || staleCount > 0;
+
+  return {
+    kind: "operator_attention",
+    status: needsAttention ? "needs_operator_attention" : "no_attention_required",
+    summary: buildOperatorAttentionSummary(inputCount, blockerCount, staleCount),
+    rows
+  };
+}
+
+function deriveOperatorInputNextRoute(nextAction: string): string {
+  const match = nextAction.match(/^(.+?)\s+is\s+required\b/i);
+  if (match?.[1]) {
+    return `${match[1]} evidence`;
+  }
+  return "Resolve operator-owned input";
+}
+
+function buildOperatorAttentionSummary(
+  inputCount: number,
+  blockerCount: number,
+  staleCount: number
+): string {
+  const parts: string[] = [];
+
+  if (inputCount > 0) {
+    parts.push(`${inputCount} operator-owned ${inputCount === 1 ? "input" : "inputs"}`);
+  }
+  if (blockerCount > 0) {
+    parts.push(`${blockerCount} ${blockerCount === 1 ? "blocker" : "blockers"}`);
+  }
+  if (staleCount > 0) {
+    parts.push(`${staleCount} stale evidence ${staleCount === 1 ? "item" : "items"}`);
+  }
+
+  if (parts.length === 0) {
+    return "No operator attention required.";
+  }
+
+  if (parts.length === 1) {
+    return `${parts[0]!} needs attention.`;
+  }
+
+  const last = parts[parts.length - 1]!;
+  const rest = parts.slice(0, -1).join(", ");
+  return `${rest}, and ${last} need attention.`;
+}
+
+function buildOperatorInbox(status: CockpitStatus): OperatorInboxSurface {
+  const inboxSource = status.operator_inbox_source;
+
+  if (!inboxSource) {
+    return {
+      kind: "operator_inbox",
+      status: "unavailable",
+      canonical_source: ".bandit/inbox",
+      summary: "Operator inbox source is unavailable.",
+      messages: [],
+      unavailable_reason: "no_source",
+      writes_inbox_artifacts: false,
+      resolves_messages: false,
+      notification_authority: false
+    };
+  }
+
+  if (inboxSource.status === "empty") {
+    return {
+      kind: "operator_inbox",
+      status: "empty",
+      canonical_source: inboxSource.source,
+      summary: "No repo-native operator inbox messages are present.",
+      messages: [],
+      unavailable_reason: "empty_inbox",
+      writes_inbox_artifacts: false,
+      resolves_messages: false,
+      notification_authority: false
+    };
+  }
+
+  return {
+    kind: "operator_inbox",
+    status: "available",
+    canonical_source: inboxSource.source,
+    messages: inboxSource.messages.map((msg) => ({
+      id: msg.id,
+      work_item: msg.work_item,
+      subject: msg.subject,
+      status: msg.status,
+      required_input: msg.required_input,
+      source_artifact: msg.source_artifact,
+      ...(msg.created_at !== undefined ? { created_at: msg.created_at } : {})
+    })),
+    writes_inbox_artifacts: false,
+    resolves_messages: false,
+    notification_authority: false
   };
 }
 

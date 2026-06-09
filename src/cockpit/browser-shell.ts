@@ -1,4 +1,4 @@
-import type { CockpitViewModel, QueueContextRow, RecentTransition } from "../state/cockpit-view-model.js";
+import type { CockpitViewModel, QueueContextRow, RecentTransition, OperatorAttentionRow, OperatorInboxMessage } from "../state/cockpit-view-model.js";
 import type { CockpitActionAffordance } from "../state/cockpit-actions.ts";
 import type { CockpitImprovementHealthSurface, ImprovementHealthRow } from "../state/cockpit-improvement-health.ts";
 import { renderCockpitShell } from "./render.ts";
@@ -19,6 +19,17 @@ type Responsive = {
   overlaps: never[];
 };
 
+type OperatorAttentionMeta = {
+  mutation_forms: never[];
+};
+
+type OperatorInboxMeta = {
+  mutation_forms: never[];
+  writes_inbox_artifacts: false;
+  resolves_messages: false;
+  notification_authority: false;
+};
+
 type BrowserCockpitShell = {
   kind: "browser_served_cockpit_shell";
   authority: "presentation_derived_non_canonical";
@@ -32,6 +43,9 @@ type BrowserCockpitShell = {
   viewport: "desktop" | "mobile";
   accessibility: Accessibility;
   responsive: Responsive;
+  operator_attention: OperatorAttentionMeta;
+  operator_inbox: OperatorInboxMeta;
+  layout: { responsive: Responsive };
 };
 
 type CockpitShell = ReturnType<typeof renderCockpitShell>;
@@ -171,6 +185,22 @@ aside[aria-label="Evidence"] {
   outline-offset: 2px;
 }
 
+.operator-attention ul,
+.operator-inbox ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.attention-row,
+.inbox-message {
+  display: grid;
+  gap: 4px;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-border);
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 719px) {
   .cockpit-layout {
     grid-template-columns: 1fr;
@@ -189,6 +219,7 @@ export function renderBrowserCockpitShell(
 ): BrowserCockpitShell {
   const cockpitShell = renderCockpitShell(viewModel, viewport);
   const isMobile = viewport.width < 720;
+  const responsive = buildResponsive(isMobile);
 
   return {
     kind: "browser_served_cockpit_shell",
@@ -202,7 +233,7 @@ export function renderBrowserCockpitShell(
     // affordances directly so the HTML keeps the full metadata even
     // when `shell.controls` is projected to the minimal legacy
     // shape for default-derived affordances.
-    html: buildHtml(cockpitShell, viewModel.action_affordances, viewModel.improvement_health_surface, viewModel.queue_context),
+    html: buildHtml(cockpitShell, viewModel.action_affordances, viewModel.improvement_health_surface, viewModel.queue_context, viewModel.operator_attention, viewModel.operator_inbox),
     css: SHELL_CSS,
     canonical_state_owner: "repo_native_artifacts_via_bandit_cli",
     prohibited_authority: viewModel.prohibited_authority,
@@ -212,7 +243,15 @@ export function renderBrowserCockpitShell(
       landmarks: ["navigation", "main", "complementary"],
       focus_order: cockpitShell.keyboard.focus_order
     },
-    responsive: buildResponsive(isMobile)
+    responsive,
+    operator_attention: { mutation_forms: [] },
+    operator_inbox: {
+      mutation_forms: [],
+      writes_inbox_artifacts: false,
+      resolves_messages: false,
+      notification_authority: false
+    },
+    layout: { responsive }
   };
 }
 
@@ -244,7 +283,9 @@ function buildHtml(
   shell: CockpitShell,
   actionAffordances: CockpitActionAffordance[],
   improvementHealthSurface: CockpitImprovementHealthSurface,
-  queueContext: CockpitViewModel["queue_context"]
+  queueContext: CockpitViewModel["queue_context"],
+  operatorAttention: CockpitViewModel["operator_attention"],
+  operatorInbox: CockpitViewModel["operator_inbox"]
 ): string {
   return `<!doctype html>
 <html lang="en">
@@ -257,7 +298,7 @@ function buildHtml(
 <body data-canonical-state-owner="repo_native_artifacts_via_bandit_cli">
   <div class="cockpit-layout">
     ${buildAttentionNav(shell)}
-    ${buildActiveWorkMain(shell, actionAffordances, improvementHealthSurface, queueContext)}
+    ${buildActiveWorkMain(shell, actionAffordances, improvementHealthSurface, queueContext, operatorAttention, operatorInbox)}
     ${buildEvidenceAside(shell)}
   </div>
 </body>
@@ -281,7 +322,9 @@ function buildActiveWorkMain(
   shell: CockpitShell,
   actionAffordances: CockpitActionAffordance[],
   improvementHealthSurface: CockpitImprovementHealthSurface,
-  queueContext: CockpitViewModel["queue_context"]
+  queueContext: CockpitViewModel["queue_context"],
+  operatorAttention: CockpitViewModel["operator_attention"],
+  operatorInbox: CockpitViewModel["operator_inbox"]
 ): string {
   const controls = actionAffordances.map(buildControlHtml).join("\n        ");
 
@@ -300,6 +343,8 @@ function buildActiveWorkMain(
       ${buildGateStripSection(shell)}
       ${buildImprovementHealthSection(improvementHealthSurface)}
       ${buildQueueContextSection(queueContext)}
+      ${buildOperatorAttentionSection(operatorAttention)}
+      ${buildOperatorInboxSection(operatorInbox)}
     </main>`;
 }
 
@@ -480,6 +525,59 @@ function buildImprovementHealthSection(surface: CockpitImprovementHealthSurface)
 ${rows}
       </ul>
     </section>`;
+}
+
+function buildOperatorAttentionSection(
+  operatorAttention: CockpitViewModel["operator_attention"]
+): string {
+  const rows = (operatorAttention.rows ?? [])
+    .map(buildOperatorAttentionRowHtml)
+    .join("\n");
+
+  return `<section class="operator-attention" aria-label="Operator attention">
+      <h2>Operator attention</h2>
+      <p class="attention-summary">${escapeHtml(operatorAttention.summary)}</p>
+      <ul class="attention-rows">
+${rows}
+      </ul>
+    </section>`;
+}
+
+function buildOperatorAttentionRowHtml(row: OperatorAttentionRow): string {
+  const sourceLinks = row.source_artifacts
+    .map((s) => `<a class="source-link" href="${escapeHtml(s)}">${escapeHtml(s)}</a>`)
+    .join(" ");
+
+  return `        <li class="attention-row">
+          <span class="attention-status">${escapeHtml(row.status)}</span>
+          <span class="attention-owner">${escapeHtml(row.decision_owner)}</span>
+          <span class="attention-summary">${escapeHtml(row.summary)}</span>
+          <span class="attention-route">${escapeHtml(row.next_route)}</span>
+          <span class="attention-sources">${sourceLinks}</span>
+        </li>`;
+}
+
+function buildOperatorInboxSection(
+  operatorInbox: CockpitViewModel["operator_inbox"]
+): string {
+  const messagesHtml = (operatorInbox.messages ?? [])
+    .map(buildOperatorInboxMessageHtml)
+    .join("\n");
+
+  return `<section class="operator-inbox" aria-label="Operator Inbox" data-canonical-source="${escapeHtml(operatorInbox.canonical_source)}">
+      <h2>Operator Inbox</h2>
+      <ul class="inbox-messages">
+${messagesHtml}
+      </ul>
+    </section>`;
+}
+
+function buildOperatorInboxMessageHtml(message: OperatorInboxMessage): string {
+  return `        <li class="inbox-message">
+          <span class="inbox-subject">${escapeHtml(message.subject)}</span>
+          <span class="inbox-status">${escapeHtml(message.status)}</span>
+          <a class="source-link" href="${escapeHtml(message.source_artifact)}">${escapeHtml(message.source_artifact)}</a>
+        </li>`;
 }
 
 function buildImprovementHealthRowHtml(row: ImprovementHealthRow): string {
