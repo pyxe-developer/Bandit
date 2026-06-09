@@ -1,0 +1,224 @@
+{
+  "kind": "slice",
+  "title": "Operator Attention / Operator Inbox Surface",
+  "status": "Brief Created",
+  "origin": "Phase 8 product queue after BANDIT-080 closed the Queue & Context (Light) product slice and no open bootstrap gaps remain. Source artifacts are docs/roadmap/CURRENT_CONTEXT.md, docs/roadmap/ROADMAP.md, docs/prds/BANDIT-PRD-003-attention-first-workflow-cockpit.md, docs/design/workflow-cockpit/design-review.md, docs/design/workflow-cockpit/design-system.md, docs/design/workflow-cockpit/prototype-source/, docs/design/workflow-cockpit-boundary.md, CONTEXT.md Operator Inbox glossary, docs/work/BANDIT-080/retrospective.md, docs/work/BANDIT-080/improvement-disposition.md, src/state/cockpit-status.ts, src/state/cockpit-view-model.ts, src/state/cockpit-actions.ts, src/state/cockpit-evidence-detail.ts, src/state/cockpit-improvement-health.ts, src/cockpit/render.ts, src/cockpit/browser-shell.ts, public/cockpit/index.html, CLEAN_CODE.md, and docs/verification/STAGE_RUBRICS.md.",
+  "goal": "Make the browser-served Workflow Cockpit expose a bounded Operator Attention / Operator Inbox surface that highlights operator-owned decisions, blocked inputs, and repo-native inbox messages from derived status and inbox artifacts without turning the cockpit into an approval store, notification authority, inbox writer, or workflow mutation surface.",
+  "scope": [
+    "Use existing repo-native status and coordination artifacts as authority inputs for operator attention, including required operator input, blockers, stale evidence, next action, action affordance state, and source paths from cockpit status/session context outputs.",
+    "Introduce or deepen a presentation-only operator-attention view-model boundary that summarizes operator-owned gates, blocked decisions, required inputs, stale or contradictory state, and next operator route with source artifacts and Evidence Trust Signals.",
+    "Introduce a read-only Operator Inbox presentation boundary for repo-native inbox messages, using `.bandit/inbox/*.md` or the currently approved repo-native inbox artifact location when files exist, while rendering an explicit empty or unavailable source state when no inbox files exist.",
+    "Keep Operator Inbox distinct from the cockpit's attention-category navigation: the cockpit may display or link messages, but the inbox artifact remains repo-native and canonical outside browser state.",
+    "Render a compact Operator Attention / Operator Inbox surface in the existing browser cockpit so the operator can see whether action is required, why it is required, which artifact owns the decision, and which CLI or repo-native route should be used next.",
+    "Show required, none_required, blocked, stale, contradictory, unavailable, empty-inbox, resolved, and source-missing states honestly instead of flattening them into a generic healthy state.",
+    "Keep generated/static payloads, browser process state, HTML, CSS, fixture data, screenshots, local cache, browser storage, and any preview output non-canonical and rebuildable from repo-native artifacts.",
+    "Include desktop and mobile verification for operator-attention cards, inbox message rows, source paths, required-input labels, blocked-state reasons, empty/unavailable states, and detail rows with no overlap or truncation.",
+    "Record CLI-owned product UAT evidence before landing because this slice changes the operator-facing cockpit surface.",
+    "Stage capability scope: Repo PM owns Stage 1 brief and formation; Work Item PM owns orchestration only after formation approval; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude-family Writer unless an operator-approved policy exception is recorded; Implementation Writer cannot edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, UAT evidence, or retrospective evidence; reviewers own Stage 4; Landing Agent owns Stage 5; Closeout Agent/Codex PM owns Stage 6.",
+    "Token-cost failsafe boundary: use existing token-cost failsafe policy for abnormal reviewer or browser QA execution; this slice approves no paid provider-pricing evidence, spend-class approval, paid reviewer promotion, recurring paid routing, merge, push, deploy, external service setup, hosted preview, public benchmark publication, or live action execution."
+  ],
+  "out_of_scope": [
+    "Do not create, edit, resolve, archive, or delete Operator Inbox artifacts from the browser, static preview, view model, or tests except through future explicit CLI-owned artifact contracts.",
+    "Do not implement a notification daemon, proactive alerts, background polling, local API endpoints, websocket updates, State Index persistence, SQLite, browser storage as workflow state, or server-side inbox/action behavior.",
+    "Do not infer operator approval, product UAT, policy approval, business tradeoff acceptance, cost/risk override, merge approval, push approval, deploy approval, benchmark publication approval, Trust Verifier cutover approval, or guarded action execution authority from inbox display.",
+    "Do not turn Operator Inbox into general agent context, chat history, reviewer scratchpad, workstream log, task tracker, backlog manager, or hidden approval store.",
+    "Do not implement work intake triage, queue prioritization controls, scheduler execution, claim leases, work-surface reservations, worktree lifecycle, local queue management, cross-repo aggregation, PR/CI orchestration, dynamic model routing, paid reviewer/model routing, hosted replay services, external telemetry, or unrelated Phase 8 product work.",
+    "Do not replace current roadmap, current-context, session-context, cockpit status, coordination, review, landing, UAT, retrospective, bootstrap-gap, risk-classification, supply-chain, artifact-create, work-item-create, Operator Inbox, or Trust Verifier authority."
+  ],
+  "acceptance_criteria": [
+    "The source spec and brief identify this as the Phase 8 product slice following BANDIT-080, authorized by PRD-003 user stories 1, 2, and 24, the accepted prototype Operator Inbox surface, roadmap/current-context state, and no open bootstrap gaps.",
+    "The cockpit exposes a bounded Operator Attention / Operator Inbox surface derived from repo-native status, coordination, and inbox artifacts, not from browser-owned workflow state.",
+    "A bounded view-model or helper maps operator attention into presentation-ready rows with status, decision owner, required input, next route, summary, source artifacts, freshness state, and unavailable or blocked reason when applicable.",
+    "A bounded inbox reader or adapter handles absent `.bandit/inbox/*.md` files as an explicit empty or unavailable state and handles fixture-backed inbox messages without treating fixture data as canonical.",
+    "The surface distinguishes operator input required, no operator input required, blocked, stale, contradictory, unavailable, empty-inbox, resolved, and source-missing states without presenting generic healthy or silently complete states.",
+    "The Operator Inbox display remains visually and semantically distinct from Attention Category navigation and includes source artifact links for each displayed message.",
+    "No browser/UI code invokes CLI commands, writes repo artifacts, records operator responses, records UAT, decides landing safety, grants approvals, merges, pushes, deploys, changes policy, schedules work, claims work, or treats generated operator-attention or inbox state as canonical.",
+    "The implementation keeps status ingestion, inbox parsing or absence detection, operator-attention derivation, evidence-detail mapping, browser rendering, and static preview generation separated enough for clean-code review.",
+    "Responsive verification covers desktop and mobile widths with no overlapping or truncated decision labels, inbox subjects, work item IDs, source paths, blocked reasons, required-input labels, or detail rows.",
+    "Accessibility verification covers semantic grouping, keyboard focus order, readable status cues, source-link reachability, and distinguishable required/blocked/stale/empty/unavailable states.",
+    "Product UAT is recorded through CLI-owned UAT evidence before landing the operator-facing Operator Attention / Operator Inbox surface.",
+    "Stage 4 review includes Local Qwen and CodeRabbit pre-PR evidence or honest provider-refusal/bootstrap replacement evidence, with layered risk-classification and supply-chain evidence because the slice touches browser-facing source and operator-decision presentation surfaces.",
+    "The slice does not choose local API shape, State Index timing, live polling, scheduler/claim/worktree behavior, PR/CI behavior, merge/push/deploy authority, external service setup, product policy changes, cost/risk overrides, public benchmark publication, Trust Verifier cutover, or unrelated Phase 8 feature scope."
+  ],
+  "test_plan": [
+    "Write RED tests proving required operator input, blockers, stale evidence, next action, action affordance state, and source paths map into operator-attention rows with decision owner, status, required input, next route, source artifacts, and unavailable or blocked reason.",
+    "Write RED tests proving absent `.bandit/inbox/*.md` files render as explicit empty or unavailable source state rather than fabricated messages.",
+    "Write RED tests proving fixture-backed inbox messages render with source artifact links, required-input classification, timestamp or status metadata when available, and no browser-owned resolution authority.",
+    "Write RED tests proving operator attention and Operator Inbox display stay distinct from Attention Category navigation and do not convert inbox entries into general agent context.",
+    "Write RED tests proving browser/UI modules do not execute CLI commands, mutate repo artifacts, use browser storage as workflow state, record operator responses, record UAT, grant approvals, schedule work, claim work, merge, push, deploy, change policy, or bypass CLI Authority.",
+    "Write render or DOM tests for operator-attention cards, inbox message rows, empty/unavailable states, source links, required-input labels, blocked reasons, focus order, and detail rows.",
+    "Add responsive verification for desktop and mobile viewports covering text fit, source-path wrapping, chip dimensions, decision labels, inbox subjects, blocked-reason text, and no overlap.",
+    "Add accessibility checks for landmarks around the operator-attention/inbox section, keyboard reachability, source-link reachability, contrast, and screen-reader distinguishability for required, blocked, stale, empty, and unavailable states.",
+    "Run focused cockpit operator-attention, cockpit view-model, evidence-detail, browser shell, static preview, and UI tests after implementation.",
+    "Run npm test if implementation touches shared cockpit status derivation, inbox parsing, command routing, validators, render, package scripts, static asset generation, templates, risk classification, supply-chain surfaces, or UAT/landing display.",
+    "Run npm run typecheck.",
+    "Run npm run bandit -- validate.",
+    "Run node ./bin/bandit.mjs cockpit status --json and node ./bin/bandit.mjs session-context current --json to verify current repo status remains source-linked.",
+    "Run a local browser or Playwright smoke test against the static preview before Stage 4/landing.",
+    "Run npm run bandit -- coderabbit-review pre-pr BANDIT-081 --base origin/main before Stage 4 closeout unless provider refusal evidence is recorded.",
+    "Run npm run bandit -- qwen-review BANDIT-081 before Stage 4 closeout unless provider refusal evidence is recorded.",
+    "Run npm run bandit -- review-subject-hash BANDIT-081 for aggregate review evidence freshness.",
+    "Record CLI-owned product UAT evidence before landing the operator-facing Operator Attention / Operator Inbox surface.",
+    "Run npm run bandit -- land-check BANDIT-081 before landing.",
+    "Run git diff --check."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-06-09 before creating this brief. The slice must keep status ingestion, inbox parsing or absence detection, operator-attention derivation, evidence-detail mapping, browser rendering, and static preview generation small, explicit, testable, and separated from canonical repo-state and Operator Inbox authority.",
+  "stage_rubric_checklist": [
+    "Stage 0: Context Readiness | pass | BANDIT-080 is landed and closed out with verification, landing verdict, landing-action evidence, UAT evidence, retrospective, improvement disposition, roadmap/status synchronization, and no open bootstrap gaps; roadmap and current context authorize Repo PM triage/formation of the Operator Attention / Operator Inbox surface if product direction is sufficient.",
+    "Stage 1: Work-Item Brief And Spec | pass | This spec defines goal, source authority, product scope, out-of-scope, acceptance criteria, test plan, CLEAN_CODE.md evidence, bootstrap-gap disposition, expected files, role boundaries, operator-input status, required evidence, forbidden actions, source-of-truth boundary, and UAT requirement.",
+    "Stage 2: Test Design And RED Evidence | required next | Test Writer must write operator-attention derivation, inbox empty/unavailable state, fixture-backed message rendering, source-traceability, authority-boundary, accessibility, and responsive RED evidence before implementation.",
+    "Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit any test surface.",
+    "Stage 4: Review And Cross-Model Gates | required later | CodeRabbit, Local Qwen, risk-classification, supply-chain, review-subject hash, browser smoke, and clean-code evidence are required or honestly dispositioned.",
+    "Stage 5: Landing And UAT | required later | CLI-owned product UAT, landing verdict/action, and local-record landing evidence are required before this operator-facing surface can land.",
+    "Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, current context, roadmap, STATUS, and bootstrap-gap ledger state are required before the next slice."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gap blocks this Phase 8 product slice.",
+    "The current repo may have no `.bandit/inbox/*.md` files; that is an empty-source condition for this presentation slice, not approval to invent inbox messages or write inbox artifacts.",
+    "Live CodeRabbit may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence and do not claim a CodeRabbit pass.",
+    "Local Qwen is available only through `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at `http://127.0.0.1:8000/v1`; the direct `qwen` CLI is not an authorized Bandit reviewer path. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another route.",
+    "Operator Inbox write/resolve/archive commands, notification delivery, local API, State Index, live polling, guarded action execution, scheduler, claim/worktree lifecycle, cross-repo behavior, merge, push, deploy, public benchmark publication, and Trust Verifier cutover remain future work outside this slice."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-081-operator-attention-inbox-surface.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/writer-report.md",
+    "docs/work/<ID>/stage3-pm-review.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/uat-approval.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "src/state/cockpit-status.ts",
+    "src/state/cockpit-view-model.ts",
+    "src/state/cockpit-evidence-detail.ts",
+    "src/state/cockpit-operator-attention.ts",
+    "src/cockpit/render.ts",
+    "src/cockpit/browser-shell.ts",
+    "src/cockpit/preview-status-snapshot.ts",
+    "public/cockpit/index.html",
+    "public/cockpit/cockpit.css",
+    "test/cockpit-operator-attention.test.mjs",
+    "test/cockpit-view-model.test.mjs",
+    "test/cockpit-evidence-detail.test.mjs",
+    "test/cockpit-browser-shell.test.mjs",
+    "test/cockpit-ui.test.mjs",
+    "test/helpers/cockpit-status-fixture.mjs",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "first_implementation_order": [
+    "Write RED tests for deriving operator-attention rows from required operator input, blockers, stale evidence, next action, action affordance state, and source artifacts.",
+    "Write RED tests for absent inbox artifacts, fixture-backed inbox message rendering, source links, required-input classification, and no browser-owned resolution authority.",
+    "Write RED tests for browser-shell rendering of operator attention and Operator Inbox rows with source traceability, required/blocked/stale/empty/unavailable distinctions, and no hidden workflow authority.",
+    "Implement the smallest operator-attention/inbox view-model boundary from existing repo-native inputs without changing canonical status, Operator Inbox, roadmap/current-context, cockpit status, or session-context authority.",
+    "Render the Operator Attention / Operator Inbox surface in the existing browser shell/static preview while preserving responsive, accessible, presentation-only behavior.",
+    "Verify desktop/mobile browser preview, focused tests, typecheck, Bandit validation, current cockpit/session-context outputs, review, UAT, landing, and closeout evidence in the normal stage order."
+  ],
+  "smell_triggers": [
+    "Any browser, preview file, fixture, generated JSON, local cache, browser storage, screenshot, State Index, operator-attention view model, inbox adapter, or UI component state becoming canonical workflow or Operator Inbox state is a blocker.",
+    "Any browser code that invokes CLI commands, writes repo artifacts, records operator responses, records UAT, decides landing safety, schedules work, claims work, merges, pushes, deploys, grants policy/cost/risk authority, publishes benchmark claims, or starts guarded action execution is a blocker.",
+    "Any operator-attention or inbox mapper that silently normalizes missing, stale, contradictory, unavailable, unsupported, operator-owned, empty, resolved, or blocked states into healthy/complete states is a blocker.",
+    "Any label or layout that implies approval storage, UAT acceptance, policy override, inbox resolution, notification delivery, backlog management, priority editing, work intake ownership, scheduler authority, claimability, workstream assignment, public benchmark proof, merge, push, deploy, Trust Verifier cutover, paid routing, or external service authority is a blocker.",
+    "Any live API, polling loop, State Index, scheduler, claim, worktree, PR/CI, external service, dependency, lockfile, package script, merge, push, deploy, benchmark publication, or unrelated Phase 8 feature work inside this slice is scope creep.",
+    "Any desktop or mobile overlap, truncation, inaccessible operator-required state, source-path unreadability, work-item ID unreadability, inbox-subject unreadability, blocked-reason ambiguity, or empty/unavailable cue ambiguity in critical operator flows is a product-quality blocker.",
+    "Any large mixed function that combines status parsing, inbox parsing, CLI execution, payload parsing, operator-attention derivation, coordination parsing, evidence normalization, static preview generation, and UI rendering is a clean-code blocker."
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/writer-report.md",
+    "docs/work/<ID>/stage3-pm-review.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/uat-approval.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create this Phase 8 Operator Attention / Operator Inbox Surface work item or complete Stage 1 formation because roadmap/current-context authorize Repo PM triage, PRD-003 user stories 1, 2, and 24 define operator attention and Operator Inbox separation, the accepted prototype includes an Operator Inbox surface, CONTEXT.md defines Operator Inbox as repo-native and not general worker context, BANDIT-080 is landed and closed, no bootstrap gaps remain open, and this spec keeps the slice presentation-only. CLI-owned product UAT is required before landing the operator-facing implementation. Halt for operator input if implementation would choose local API shape, State Index timing, live polling behavior, inbox write/resolve/archive semantics, notification delivery, guarded action execution authority, scheduler execution, claim/worktree lifecycle behavior, automatic merge/push/deploy authority, PR/CI orchestration, external service setup, benchmark publication, policy changes, business tradeoffs, explicit cost/risk approvals, Trust Verifier cutover, or genuinely ambiguous product scope.",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "work_item_pm_plan_mode",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "feature_uat",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "work_item_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent",
+      "operator"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review",
+      "frontend-design"
+    ],
+    "forbidden_actions": [
+      "Do not write RED evidence before Stage 1 brief and Formation Gate evidence exist.",
+      "Do not run Work Item PM execution before formation review and formation_approved transition evidence exist.",
+      "Do not let Stage 3 Writer edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, UAT evidence, or retrospective evidence.",
+      "Do not let CLI payload snapshots, inbox fixture messages, browser shell, static preview, fixture data, local cache, browser storage, State Index, operator-attention view model, inbox adapter, or generated UI state become canonical workflow or Operator Inbox authority.",
+      "Do not implement local API, live polling, browser-side CLI execution, guarded action execution, inbox write/resolve/archive behavior, notification delivery, scheduler, claim/worktree lifecycle, PR/CI, merge, push, deploy, external services, public benchmark publication, Trust Verifier cutover, paid routing, or unrelated cockpit features in this slice."
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "Stage 1 Repo PM brief creation and formation review use local-only default guidance.",
+      "Stage 2 RED evidence and Stage 3 implementation use existing abnormal-run soft budget guidance; do not set brittle caps that force duplicate attempts.",
+      "Stage 4 reviewer and browser QA runs may be long-running or provider-dependent and must record continuation or provider-refusal evidence honestly."
+    ],
+    "provider_pricing_evidence": [
+      "No new paid provider-pricing evidence is approved by this brief.",
+      "Any paid reviewer, paid model, recurring paid route, external hosted service, hosted preview, public benchmark publication, automatic evaluation service, notification service, or live action execution remains blocked without separate approval."
+    ],
+    "spend_classes": [
+      "local-only-default",
+      "one-off-paid-evaluation-blocked-without-approval",
+      "recurring-paid-routing-blocked-without-policy-promotion"
+    ],
+    "continuation_decisions": [
+      "If CodeRabbit, Local Qwen, or browser QA tooling times out, record explicit continuation or provider-refusal evidence instead of treating absence as pass.",
+      "If token or cost failsafe trips, halt the expensive action and record the continuation decision before retrying."
+    ],
+    "stage_capability_profiles": [
+      "repo-pm-stage1-formation",
+      "work-item-pm-plan-mode",
+      "test-writer-stage2",
+      "implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4",
+      "operator-uat-stage5",
+      "landing-agent-stage5",
+      "closeout-agent-stage6"
+    ]
+  }
+}

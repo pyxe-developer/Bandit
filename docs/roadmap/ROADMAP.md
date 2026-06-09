@@ -8,12 +8,12 @@
 
 ## Current Work Item
 
-- None formed. Keep `BANDIT-080` as the current derived-status anchor until
-  Repo PM forms the next slice.
+- `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
+  (formation approved)
 
-**Current next step:** Repo PM should triage and form the Operator Attention /
-Operator Inbox surface only if roadmap/product direction is sufficient;
-otherwise ask the operator for the missing product direction.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-081`: create `docs/work/BANDIT-081/orchestration-plan.md`, then run
+`node ./bin/bandit.mjs work-item-pm start BANDIT-081` before RED evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -29,7 +29,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Operator Attention / Operator Inbox surface
+- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
 
 ## Planned Work
 
@@ -39,7 +39,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - Operator Attention / Operator Inbox surface
+- `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
+  (current)
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
   the same PRD in Bandit and no-Bandit repos; no statistical or public
   benchmark claim.

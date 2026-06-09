@@ -4,25 +4,22 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-080` landed and closed the Queue & Context (Light) Phase 8 product
-slice. Its brief, orchestration plan, RED evidence, Claude implementation
-evidence, PM acceptance, CodeRabbit timeout evidence, Local Qwen non-blocking
-evidence, risk classification, supply-chain gate, browser smoke, review
-evidence, UAT, landing verdict, local-record landing action, retrospective, and
-improvement disposition are recorded under `docs/work/BANDIT-080/` and
-`.bandit/policy/`.
+`BANDIT-081` is formed and formation-approved for the Operator Attention /
+Operator Inbox Surface Phase 8 product slice. Its source spec, brief, Local
+Qwen formation review, CodeRabbit formation review, aggregate formation review,
+and coordination evidence are recorded under `docs/specs/` and
+`docs/work/BANDIT-081/`.
 
-**Active work item:** `BANDIT-080` (closed; retained as the current derived-status anchor until the next slice is formed).
+**Active work item:** `BANDIT-081` - Operator Attention / Operator Inbox Surface.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should triage and form the Operator Attention /
-Operator Inbox surface only if roadmap/product direction is sufficient;
-otherwise ask the operator for the missing product direction.
+**Current next action:** Work Item PM should run plan-mode orchestration for
+`BANDIT-081`: create `docs/work/BANDIT-081/orchestration-plan.md`, then run
+`node ./bin/bandit.mjs work-item-pm start BANDIT-081` before RED evidence.
 
 Do not start RED evidence, implementation, review, UAT, landing, or closeout
-for another work item until a new formed work item exists and the prior slice
-remains landed and closed.
+for `BANDIT-081` until Work Item PM plan mode records orchestration evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -35,9 +32,9 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for closeout. Operator input may be needed
-if Repo PM cannot derive sufficient product direction for the Operator
-Attention / Operator Inbox surface from roadmap artifacts.
+No operator-owned input is required for Work Item PM plan-mode orchestration.
+CLI-owned product UAT is required before landing because `BANDIT-081` changes
+the operator-facing cockpit surface.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -50,27 +47,21 @@ repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-080` closeout evidence:
+`BANDIT-081` formation evidence:
 
-- Brief: `docs/work/BANDIT-080/brief.md`.
-- Orchestration plan: `docs/work/BANDIT-080/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-080/red-evidence.md`.
-- Implementation evidence: `docs/work/BANDIT-080/implementation-evidence.md`.
-- Stage 3 PM review: `docs/work/BANDIT-080/stage3-pm-review.md`.
-- Review evidence: `docs/work/BANDIT-080/review-evidence.md`.
-- UAT approval: `docs/work/BANDIT-080/uat-approval.md`.
-- Landing verdict: `docs/work/BANDIT-080/landing-verdict.md`.
-- Landing action: `docs/work/BANDIT-080/landing-action.md`.
-- Retrospective: `docs/work/BANDIT-080/retrospective.md`.
-- Improvement disposition: `docs/work/BANDIT-080/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-080/coordination-log.jsonl` records
-  `closed`.
+- Source spec: `docs/specs/BANDIT-081-operator-attention-inbox-surface.json`.
+- Brief: `docs/work/BANDIT-081/brief.md`.
+- Local Qwen formation review: `docs/work/BANDIT-081/qwen-formation-review.md`.
+- CodeRabbit formation review: `docs/work/BANDIT-081/coderabbit-formation-review.md`.
+- Aggregate formation review: `docs/work/BANDIT-081/formation-review.md`.
+- Coordination log: `docs/work/BANDIT-081/coordination-log.jsonl` records
+  `formation_approved`.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-the next slice brief, RED evidence, implementation evidence, review evidence,
-UAT evidence, landing evidence, retrospective evidence, automatic improvement
-evaluation, guarded browser action execution, local API work, State Index work,
-scheduler execution, claim execution, worktree execution, public benchmark
-publication, paid reviewer/model routing, hosted replay services, telemetry,
-merge, push, deploy, Trust Verifier cutover, or unrelated product work until
-the next work item is explicitly formed.
+RED evidence, implementation evidence, review evidence, UAT evidence, landing
+evidence, retrospective evidence, automatic improvement evaluation, inbox
+write/resolve/archive behavior, notification delivery, guarded browser action
+execution, local API work, State Index work, scheduler execution, claim
+execution, worktree execution, public benchmark publication, paid reviewer/model
+routing, hosted replay services, telemetry, merge, push, deploy, Trust Verifier
+cutover, or unrelated product work until Work Item PM plan mode is recorded.
