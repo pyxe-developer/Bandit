@@ -405,8 +405,8 @@ test("cockpit shell identifies gate rows as Evidence Rows with non-color status 
 
   for (const row of shell.gate_matrix.rows) {
     assert.equal(row.presentation_pattern, "evidence_row");
-    assert.ok(row.status_label.length > 0);
-    assert.ok(row.freshness_label.length > 0);
+    assert.equal(row.status_label, row.status);
+    assert.equal(row.freshness_label, expectedFreshnessLabel(row.freshness_state));
     assert.ok(row.sources.length > 0);
   }
 
@@ -415,3 +415,9 @@ test("cockpit shell identifies gate rows as Evidence Rows with non-color status 
   assert.equal(missingStage.freshness_label, "missing evidence");
   assert.match(missingStage.next_repair_route, /Record Test Writer-owned RED evidence/);
 });
+
+function expectedFreshnessLabel(freshnessState) {
+  if (freshnessState === "current") return "evidence current";
+  if (freshnessState === "stale") return "stale evidence";
+  return "missing evidence";
+}

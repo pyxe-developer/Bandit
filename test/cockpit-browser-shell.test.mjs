@@ -97,9 +97,9 @@ test("browser cockpit shell exposes responsive and accessible shell constraints"
   assert.deepEqual(shell.responsive.overlaps, []);
   assert.match(shell.css, /--color-canvas:\s*#050506/);
   assert.match(shell.css, /--color-attention:\s*#ff7a59/);
-  assert.match(shell.css, /--color-pass:\s*#[0-9a-f]{6}/i);
-  assert.match(shell.css, /--color-blocker:\s*#[0-9a-f]{6}/i);
-  assert.match(shell.css, /--color-source-link:\s*#[0-9a-f]{6}/i);
+  assert.match(shell.css, /--color-pass:\s*#16a766/);
+  assert.match(shell.css, /--color-blocker:\s*#e66550/);
+  assert.match(shell.css, /--color-source-link:\s*#4a86e8/);
   assert.match(shell.css, /--space-1:\s*4px/);
   assert.match(shell.css, /font-family:\s*"Instrument Sans"/);
   assert.match(shell.css, /font-family:\s*"IBM Plex Mono"/);
