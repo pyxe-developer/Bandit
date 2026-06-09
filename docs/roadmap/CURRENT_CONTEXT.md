@@ -4,31 +4,28 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-082` has completed Stage 1 formation for the Work Intake Ledger And
-Followups Migration slice. Its source spec, repaired brief, Local Qwen
-formation review, CodeRabbit formation review, aggregate formation review, and
-coordination evidence are recorded under `docs/specs/` and
+`BANDIT-082` is the last closed work item. Its Work Intake Ledger And Followups
+Migration slice landed locally and closed with landing action, retrospective,
+improvement disposition, and closeout evidence recorded under
 `docs/work/BANDIT-082/`.
 
-`BANDIT-081` remains the last closed work item. Its landing action,
-retrospective, improvement disposition, and closeout evidence are recorded under
-`docs/work/BANDIT-081/`.
+**Active work item:** `BANDIT-082` - Work Intake Ledger And Followups
+Migration, retained as the last-closed derived-status anchor until the next
+slice is formed.
 
-**Active work item:** `BANDIT-082` - Work Intake Ledger And Followups Migration.
+The current stage is Stage 6: closeout complete.
 
-The current stage is Stage 1: formation approved.
-
-**Current next action:** Work Item PM should run plan-mode orchestration for
-`BANDIT-082` and create `docs/work/BANDIT-082/orchestration-plan.md` before RED
-evidence, implementation, review, landing, or closeout.
+**Current next action:** Repo PM should form the next intake-derived work item
+for `WIL-UI-POLISH`, Bandit Cockpit UI Polish From Attached Design, before
+forming the V0 Closeout Claude Code A/B Product-Value Trial or unrelated Phase
+8 work.
 
 Do not start unrelated Phase 8 product work, Trust Verifier cutover, merge,
 push, deploy, hosted replay service setup, paid reviewer/model routing, public
 benchmark publication, local API work, State Index work, guarded browser action
-execution, or unrelated Phase 8 product work before Work Item PM plan-mode
-orchestration for `BANDIT-082`. Do not form the V0 Closeout Claude Code A/B
-Product-Value Trial slice until the pre-Claude-bakeoff follow-up and UI-polish
-queue is formed or dispositioned.
+execution, or the V0 Closeout Claude Code A/B Product-Value Trial before Repo
+PM forms the next intake-derived `WIL-UI-POLISH` work item through normal Stage
+1 formation.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -54,27 +51,28 @@ repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-082` active evidence:
+`BANDIT-082` closeout evidence:
 
 - Source spec:
   `docs/specs/BANDIT-082-work-intake-ledger-and-followups-migration.json`.
 - Brief: `docs/work/BANDIT-082/brief.md`.
-- Local Qwen formation review: `docs/work/BANDIT-082/qwen-formation-review.md`.
-- CodeRabbit formation review:
-  `docs/work/BANDIT-082/coderabbit-formation-review.md`.
-- Aggregate formation review: `docs/work/BANDIT-082/formation-review.md`.
+- Orchestration plan: `docs/work/BANDIT-082/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-082/red-evidence.md`.
+- Implementation evidence: `docs/work/BANDIT-082/implementation-evidence.md`.
+- Review evidence: `docs/work/BANDIT-082/review-evidence.md`.
+- Landing verdict: `docs/work/BANDIT-082/landing-verdict.md`.
+- Landing action: `docs/work/BANDIT-082/landing-action.md`.
+- Retrospective: `docs/work/BANDIT-082/retrospective.md`.
+- Improvement disposition:
+  `docs/work/BANDIT-082/improvement-disposition.md`.
 - Coordination log: `docs/work/BANDIT-082/coordination-log.jsonl` records
-  `brief_created` and `formation_approved`.
+  `landed` and Stage 6 closeout.
+- Work Intake Ledger: `.bandit/work-intake-ledger.json`.
 
-No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. `BANDIT-082`
-is the active work item until it lands and closes. The roadmapped
-pre-Claude-bakeoff follow-up and UI-polish queue remains ahead of the V0
-Closeout Claude Code A/B Product-Value Trial.
-Do not create automatic improvement evaluation, inbox write/resolve/archive
-behavior, notification delivery, guarded browser action execution, local API
-work, State Index work, scheduler execution, claim execution, worktree
-execution, public benchmark publication, paid reviewer/model routing, hosted
-replay services, telemetry, merge, push, deploy, Trust Verifier cutover, RED
-evidence, implementation evidence, review evidence, landing evidence, UAT
-evidence, retrospective evidence, or unrelated product work before Work Item PM
-plan-mode orchestration records `docs/work/BANDIT-082/orchestration-plan.md`.
+No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`.
+
+The next proposal in the intake-derived pre-Claude-bakeoff lane is
+`WIL-UI-POLISH`, Bandit Cockpit UI Polish From Attached Design. It remains a
+proposal until Repo PM forms a normal Stage 1 work item. The V0 Closeout Claude
+Code A/B Product-Value Trial remains deferred behind the pre-Claude-bakeoff
+follow-up and UI-polish lane.
