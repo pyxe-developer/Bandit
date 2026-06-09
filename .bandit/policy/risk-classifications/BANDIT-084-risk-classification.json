@@ -1,0 +1,150 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-084",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "docs/work/BANDIT-084/claim-first-transition-disposition.md",
+      "surface": "work_item_policy_disposition_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/work/BANDIT-084/coordination-log.jsonl",
+      "surface": "work_item_lifecycle_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/work/BANDIT-084/review-evidence.md",
+      "surface": "work_item_review_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "claim_authority",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-084/claim-first-transition-disposition.md"
+    },
+    {
+      "surface": "scheduler_or_worktree_lifecycle",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-084/brief.md"
+    },
+    {
+      "surface": "merge_push_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-084/brief.md"
+    },
+    {
+      "surface": "product_uat_or_operator_owned_policy_override",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-084/claim-first-transition-disposition.md"
+    },
+    {
+      "surface": "paid_reviewer_model_routing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-084/brief.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "disposition_only_policy_triage",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/claim-first-transition-disposition.md"
+    },
+    {
+      "signal_id": "no_source_code_or_validator_change",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/implementation-evidence.md"
+    },
+    {
+      "signal_id": "operator_policy_gate_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/claim-first-transition-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node ./bin/bandit.mjs coordination validate BANDIT-084",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/implementation-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs work-intake validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/implementation-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/implementation-evidence.md"
+    },
+    {
+      "tool": "timeout 600 coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-084/coderabbit-review.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs qwen-review BANDIT-084",
+      "state": "non_blocking",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-084/local-qwen-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-084-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-084/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-WORK-AUTHORITY-LEAK",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-084/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-084 is a disposition-only triage chore. It does not approve universal claim-first policy, change claim authority, create claims, start scheduler/worktree behavior, mutate source code, merge, push, deploy, or require product UAT."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-084 is low workflow risk because it records a deferred policy disposition and lifecycle evidence only. The current accountable-actor policy remains unchanged, universal claim-first approval remains operator-owned, claim authority and projections are not mutated, CodeRabbit timeout is recorded honestly as bootstrap-gap evidence, and Local Qwen findings are dispositioned as non-blocking process notes.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-084-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-084-supply-chain-gate.json",
+    "docs/work/BANDIT-084/brief.md",
+    "docs/work/BANDIT-084/red-evidence.md",
+    "docs/work/BANDIT-084/implementation-evidence.md",
+    "docs/work/BANDIT-084/claim-first-transition-disposition.md",
+    "docs/work/BANDIT-084/coderabbit-review.md",
+    "docs/work/BANDIT-084/local-qwen-review.md",
+    "docs/work/BANDIT-084/qwen-finding-disposition.md",
+    "docs/work/BANDIT-084/review-evidence.md"
+  ]
+}
