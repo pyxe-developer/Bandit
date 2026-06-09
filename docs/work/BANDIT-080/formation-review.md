@@ -1,0 +1,124 @@
+# Aggregate Formation Review - BANDIT-080
+
+contract_version: 1
+work_item: BANDIT-080
+reviewer: codex_pm
+review_type: aggregate_formation_review
+verdict: pass
+findings_status: resolved
+findings_disposition: Local Qwen MLX adapter passed with no findings; CodeRabbit returned terminal review_completed evidence with three trivial out-of-subject findings against existing cockpit source files; Repo PM disposition records no Stage 1 formation blockers and no source edits before plan mode/RED evidence
+source_head: e90484e
+reviewed_at: 2026-06-09T00:33:30Z
+
+## Operator Routing Correction
+
+The direct `qwen` CLI is revoked as a Bandit reviewer path. It was installed
+only for evaluation and is not an authorized option for Bandit work.
+
+The only authorized Local Qwen route on this machine is
+`.bandit/reviewers/local-qwen.json` through `node
+bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at
+`http://127.0.0.1:8000/v1`.
+
+## Scope Check
+
+- work_type present and correct: pass - the brief records `work_type: slice`
+  and defines the Queue & Context (Light) cockpit product slice.
+- source provenance clear: pass - the brief traces to roadmap/current-context
+  state, accepted cockpit PRD/design artifacts, the prototype Queue & Context
+  artboard, `BANDIT-079` closeout evidence, current cockpit source,
+  `CLEAN_CODE.md`, and Stage Rubrics.
+- scope is narrow and bounded: pass - the slice is limited to presentation-only
+  queue/context derivation and rendering from existing repo-native artifacts
+  and derived CLI output.
+- acceptance criteria are verifiable: pass - criteria name roadmap queue
+  repair, row derivation, active/next/planned/deferred/missing-state
+  distinctions, recent coordination context, source traceability, authority
+  refusal, responsive behavior, accessibility, UAT, review, and forbidden
+  surfaces.
+- out-of-scope boundaries explicit: pass - backlog editing, work intake triage,
+  Operator Inbox implementation, A/B trial execution, benchmark publication,
+  local API, State Index, live polling, browser-side CLI execution, guarded
+  execution, scheduler/claim/worktree behavior, PR/CI, merge, push, deploy,
+  external services, policy changes, cost/risk overrides, Trust Verifier
+  cutover, and unrelated Phase 8 scope are excluded.
+- operator input status recorded: pass - no operator-owned input is needed for
+  Stage 1 formation; product/UAT/policy/business/cost/risk changes, benchmark
+  publication, guarded action execution authority, Trust Verifier cutover,
+  merge/push/deploy, and ambiguous scope remain halt conditions.
+- role boundary evidence present: pass - Repo PM, Work Item PM, Test Writer,
+  Implementation Writer, reviewers, Landing Agent, operator, and Closeout Agent
+  boundaries are named.
+- write-surface families declared: pass - expected files cover the source spec,
+  work package, cockpit view-model/evidence/render source, preview assets,
+  focused tests, and routing/status artifacts.
+- Test Writer boundary explicit: pass - Stage 2 tests, helpers, fixtures, RED
+  evidence, and acceptance mappings are Test Writer-owned.
+- Implementation Writer boundary explicit: pass - Stage 3 source
+  implementation uses a different model family if Codex authors RED evidence
+  and has no test-surface authority.
+- CLEAN_CODE.md read evidence present: pass - the brief records
+  `CLEAN_CODE.md` read evidence dated 2026-06-08 and makes clean-code
+  compliance evaluable before landing.
+- Formation Gate preserved: pass - `brief_created` coordination evidence
+  exists, formation review artifacts are recorded, and Work Item PM execution
+  remains blocked until `formation_approved`.
+- Bootstrap gap queue respected: pass - no open bootstrap gap blocks this Phase
+  8 product slice.
+- CLI Authority preserved: pass - the cockpit may display queue/context state
+  but no browser-side execution, roadmap mutation, artifact mutation, UAT
+  approval, landing decision, scheduling, claimability, merge, push, deploy,
+  benchmark publication, or policy override is authorized.
+- Trust Verifier cutover boundary preserved: pass - cutover, old-gate
+  replacement, and old-gate wrapping remain out of scope and require separate
+  authorization.
+- Local Qwen route preserved: pass - Local Qwen returned a pass through
+  `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs`; no
+  direct `qwen` CLI evidence is used.
+- Permanent Test Ownership Boundary preserved: pass - the Stage 3 Writer cannot
+  edit tests, helpers, fixtures, RED evidence, or acceptance mappings.
+- Bootstrap Model-Family Separation preserved: pass - Codex-authored RED
+  evidence requires different-model-family Stage 3 implementation unless an
+  operator-approved policy exception is recorded.
+
+## Formation Evidence
+
+- `docs/work/BANDIT-080/qwen-formation-review.md` - `pass` through the MLX
+  OpenAI-compatible adapter with no blockers or non-blocking findings.
+- `docs/work/BANDIT-080/coderabbit-formation-review.md` - `non_blocking`;
+  CodeRabbit returned terminal `review_completed` evidence with three trivial
+  findings against existing cockpit source files, all dispositioned as outside
+  the Stage 1 formation subject and not a reason to edit source before
+  plan-mode/RED evidence.
+- `docs/work/BANDIT-080/brief.md` - Stage 1 brief with product work, source
+  provenance, scope, out-of-scope, acceptance criteria, verification plan,
+  `CLEAN_CODE.md` read evidence, bootstrap-gap disposition, expected files,
+  required evidence, role boundaries, stage capability scope, token-cost
+  failsafe, first implementation order, smell triggers, forbidden actions,
+  Local Qwen route restriction, and operator-input status.
+- `docs/work/BANDIT-080/coordination-log.jsonl` - initial `brief_created`
+  transition with `formation_required`. `formation_approved` has not been
+  recorded yet.
+
+## Findings
+
+No Stage 1 formation blockers remain open.
+
+CodeRabbit returned three trivial readability findings against existing
+cockpit source files that are outside the `BANDIT-080` Stage 1 formation
+artifact subject. Repo PM disposition is resolved for formation: no source edit
+before Work Item PM plan mode and Stage 2 RED evidence.
+
+## Summary
+
+`BANDIT-080` has adequate Stage 1 formation evidence to proceed. The brief is
+narrow, source-backed, verifiable, clean-code/rubric evaluable, and preserves
+CLI Authority, product UAT separation, Permanent Test Ownership Boundary,
+Bootstrap Model-Family Separation, Local Qwen MLX adapter routing, and
+operator-owned product/UAT/policy/business/cost/risk boundaries.
+
+The next recorded action should be Repo PM approval via
+`node ./bin/bandit.mjs repo-pm approve-formation BANDIT-080`. Work Item PM must
+not write an orchestration plan, write RED evidence, dispatch implementation,
+approve UAT, land work, merge, push, deploy, or start unrelated Phase 8 slices
+until the CLI-owned `formation_approved` transition is recorded.

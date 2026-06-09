@@ -323,3 +323,4 @@
 {"type":"work_item_created","work_item":"BANDIT-078","message":"Created work item BANDIT-078 from docs/specs/BANDIT-078-guarded-cli-action-requests.json"}
 {"type":"artifact_created","work_item":"BANDIT-078","message":"Created red_evidence artifact at docs/work/BANDIT-078/red-evidence.md"}
 {"type":"work_item_created","work_item":"BANDIT-079","message":"Created work item BANDIT-079 from docs/specs/BANDIT-079-improvement-health-surface.json"}
+{"type":"work_item_created","work_item":"BANDIT-080","message":"Created work item BANDIT-080 from docs/specs/BANDIT-080-queue-context-light.json"}

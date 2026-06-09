@@ -1,0 +1,293 @@
+# BANDIT-080: Queue & Context (Light)
+
+## Status
+
+Brief Created
+
+work_type: slice
+
+## Product Work
+
+Create the next operator-facing Workflow Cockpit slice after `BANDIT-079`: a
+lightweight Queue & Context surface that makes the remaining Phase 8 cockpit
+trajectory and final V0 closeout planning visible without turning the cockpit
+into a backlog manager. The product value is restoring operator visibility into
+what comes next while preserving CLI Authority and repo-native roadmap/current
+context as the source of truth.
+
+## Origin
+
+This slice is authorized by the Phase 8 product queue after `BANDIT-079`
+landed and closed out the Improvement Health Surface product slice, and after
+the bootstrap-gap ledger reported no open gaps. Source authority comes from
+`docs/roadmap/CURRENT_CONTEXT.md`, `docs/roadmap/ROADMAP.md`,
+`docs/prds/BANDIT-PRD-003-attention-first-workflow-cockpit.md`,
+`docs/design/workflow-cockpit/design-review.md`,
+`docs/design/workflow-cockpit/design-system.md`,
+`docs/design/workflow-cockpit/prototype-source/`,
+`docs/design/workflow-cockpit-boundary.md`,
+`docs/work/BANDIT-079/retrospective.md`,
+`docs/work/BANDIT-079/improvement-disposition.md`,
+`src/state/cockpit-status.ts`, `src/state/cockpit-view-model.ts`,
+`src/state/cockpit-actions.ts`, `src/state/cockpit-evidence-detail.ts`,
+`src/state/cockpit-improvement-health.ts`, `src/cockpit/render.ts`,
+`src/cockpit/browser-shell.ts`, `public/cockpit/index.html`,
+`CLEAN_CODE.md`, and `docs/verification/STAGE_RUBRICS.md`.
+
+## Goal
+
+Make the browser-served Workflow Cockpit expose a lightweight Queue & Context surface that shows the current trajectory, next planned cockpit work, deferred V0 closeout work, and recent coordination context from repo-native artifacts without turning the cockpit into a backlog manager, scheduler, intake ledger, or independent planning authority.
+
+## Scope
+
+- Use repo-native roadmap/current-context artifacts, existing cockpit-status/session-context payloads, coordination evidence, bootstrap-gap state, and current cockpit view-model inputs as authority sources for a lightweight queue/context projection.
+- Deepen the presentation-only queue-context view-model boundary so it can show active anchor, next planned slice, near-following planned items, deferred V0 closeout items, source paths, status labels, and recent transition context without storing independent queue state.
+- Render a compact Queue & Context surface in the existing browser cockpit so the operator can understand what is coming after the active work without using the cockpit as a backlog manager.
+- Represent the next Phase 8 cockpit slice as Queue & Context (Light), then keep later Operator Attention/Operator Inbox and V0 closeout A/B trial entries visible as planned or deferred context only.
+- Record the operator-requested Claude Code A/B product-value trial as a final V0 closeout planning item in roadmap/status artifacts, without implementing the trial, creating test repos, publishing benchmark results, or calling it statistical proof in this slice.
+- Show queue unavailable, source missing, stale, contradictory, deferred, blocked, and not-yet-formed states honestly instead of synthesizing a complete backlog from incomplete evidence.
+- Keep generated/static payloads, browser process state, HTML, CSS, fixture data, screenshots, local cache, browser storage, and any preview output non-canonical and rebuildable from repo-native artifacts.
+- Include desktop and mobile verification for queue rows, source paths, planned/deferred labels, current-vs-next context, recent-transition rows, and explanatory copy with no overlap or truncation.
+- Record CLI-owned product UAT evidence before landing because this slice changes the operator-facing cockpit surface.
+- Stage capability scope: Repo PM owns Stage 1 brief and formation; Work Item PM owns orchestration only after formation approval; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation goes to Claude-family Writer unless an operator-approved policy exception is recorded; Implementation Writer cannot edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, UAT evidence, or retrospective evidence; reviewers own Stage 4; Landing Agent owns Stage 5; Closeout Agent/Codex PM owns Stage 6.
+- Token-cost failsafe boundary: use existing token-cost failsafe policy for abnormal reviewer or browser QA execution; this slice approves no paid provider-pricing evidence, spend-class approval, paid reviewer promotion, recurring paid routing, merge, push, deploy, external service setup, hosted preview, public benchmark publication, or live action execution.
+
+## Out Of Scope
+
+- Do not implement backlog editing, work intake triage, queue prioritization controls, kanban lanes, drag-and-drop planning, scheduler execution, claim leases, work-surface reservations, worktree lifecycle, local queue management, cross-repo aggregation, State Index persistence, SQLite, local API endpoints, live polling, websocket updates, or server-side workflow actions.
+- Do not create the Operator Inbox/Operator Attention implementation in this slice; it may appear only as a planned/deferred queue item sourced from PRD-003 and roadmap direction.
+- Do not run the Claude Code A/B trial, create the two fresh repos, choose the trial PRD, implement trial work, score trial results, publish benchmark claims, or use this slice to approve public benchmark publication.
+- Do not infer product direction beyond the accepted PRD/design artifacts and the operator-requested V0 closeout A/B trial; halt if implementation requires a new product priority, business tradeoff, cost/risk posture, external service setup, or benchmark publication decision.
+- Do not implement browser-side CLI execution, guarded action execution, UAT approval, landing approval, merge, push, deploy, production canary behavior, PR/CI orchestration, dynamic model routing, paid reviewer/model routing, hosted replay services, external telemetry, or Trust Verifier cutover.
+- Do not replace current roadmap, current-context, session-context, cockpit status, coordination, review, landing, UAT, retrospective, bootstrap-gap, risk-classification, supply-chain, artifact-create, work-item-create, or Trust Verifier authority.
+
+## Acceptance Criteria
+
+- The source spec and brief identify this as the Phase 8 product slice following BANDIT-079, authorized by PRD-003 user story 14, the accepted prototype Queue & Context artboard, roadmap/current-context state, and no open bootstrap gaps.
+- The roadmap no longer records the remaining Phase 8 product queue as only TBD; it names Queue & Context (Light) as the current formed slice and records later Operator Attention/Operator Inbox and V0 closeout A/B trial planning context without expanding this slice.
+- The cockpit exposes a lightweight queue/context surface derived from repo-native roadmap/current-context, session-context/cockpit-status, coordination, and bootstrap-gap evidence rather than browser-owned queue state.
+- A bounded view-model or helper maps queue/context evidence into presentation-ready rows with id or label, status, kind, summary, source artifacts, current-vs-next relationship, and unavailable or deferred reason when applicable.
+- The surface distinguishes active anchor, next planned, planned, deferred, blocked, missing-source, stale, contradictory, and unavailable states without flattening them into a generic backlog.
+- The Queue & Context UI communicates trajectory only: what is next and why, not backlog management, priority editing, intake ownership, scheduling, claimability, or workstream assignment.
+- Recent coordination context is shown only from recorded repo-native coordination or status evidence and links back to source artifacts; missing coordination evidence renders as unavailable rather than inferred.
+- No browser/UI code invokes CLI commands, writes repo artifacts, edits roadmap state, records UAT, decides landing safety, merges, pushes, deploys, changes policy, schedules work, claims work, or treats generated queue state as canonical.
+- The implementation keeps roadmap/current-context parsing or ingestion, queue derivation, evidence-detail mapping, browser rendering, and static preview generation separated enough for clean-code review.
+- Responsive verification covers desktop and mobile widths with no overlapping or truncated queue labels, work item IDs, source paths, planned/deferred chips, summary text, or recent-transition rows.
+- Accessibility verification covers semantic grouping, keyboard focus order, readable status cues, source-link reachability, and distinguishable active/next/planned/deferred/missing states.
+- Product UAT is recorded through CLI-owned UAT evidence before landing the operator-facing Queue & Context surface.
+- Stage 4 review includes Local Qwen and CodeRabbit pre-PR evidence or honest provider-refusal/bootstrap replacement evidence, with layered risk-classification and supply-chain evidence because the slice touches browser-facing source and planning-context presentation surfaces.
+- The slice does not choose local API shape, State Index timing, live polling, scheduler/claim/worktree behavior, PR/CI behavior, merge/push/deploy authority, external service setup, product policy changes, cost/risk overrides, public benchmark publication, Trust Verifier cutover, or unrelated Phase 8 feature scope.
+
+## Test Plan
+
+- Write RED tests proving roadmap/current-context and cockpit/session-context inputs map into lightweight queue rows with id or label, kind, status, summary, source artifacts, current-vs-next relationship, and unavailable/deferred reason.
+- Write RED tests proving active anchor, next planned, planned, deferred, blocked, missing-source, stale, contradictory, and unavailable states render distinctly and source-linked.
+- Write RED tests proving the V0 closeout Claude Code A/B trial can appear as a deferred planning item without running the trial, creating repos, publishing benchmark claims, or becoming statistical proof.
+- Write RED tests proving recent coordination context uses recorded repo-native evidence and fails closed when coordination evidence is missing or malformed.
+- Write RED tests proving browser/UI modules do not execute CLI commands, mutate repo artifacts, use browser storage as workflow state, edit roadmap state, record UAT, decide landing safety, merge, push, deploy, schedule work, claim work, change policy, or bypass CLI Authority.
+- Write render or DOM tests for queue rows, source links, planned/deferred chips, current/next labels, recent-transition rows, focus order, and missing/unavailable state labels.
+- Add responsive verification for desktop and mobile viewports covering text fit, source-path wrapping, chip dimensions, row density, current/next labels, and no overlap.
+- Add accessibility checks for landmarks around the queue/context section, keyboard reachability, source-link reachability, contrast, and screen-reader distinguishability for active, next, planned, deferred, and missing states.
+- Run focused cockpit queue/context, cockpit view-model, evidence-detail, browser shell, static preview, and UI tests after implementation.
+- Run npm test if implementation touches shared cockpit status derivation, roadmap/current-context parsing, command routing, validators, render, package scripts, static asset generation, templates, risk classification, supply-chain surfaces, or UAT/landing display.
+- Run npm run typecheck.
+- Run npm run bandit -- validate.
+- Run node ./bin/bandit.mjs cockpit status --json and node ./bin/bandit.mjs session-context current --json to verify current repo status remains source-linked.
+- Run a local browser or Playwright smoke test against the static preview before Stage 4/landing.
+- Run npm run bandit -- coderabbit-review pre-pr BANDIT-080 --base origin/main before Stage 4 closeout unless provider refusal evidence is recorded.
+- Run npm run bandit -- qwen-review BANDIT-080 before Stage 4 closeout unless provider refusal evidence is recorded.
+- Run npm run bandit -- review-subject-hash BANDIT-080 for aggregate review evidence freshness.
+- Record CLI-owned product UAT evidence before landing the operator-facing Queue & Context surface.
+- Run npm run bandit -- land-check BANDIT-080 before landing.
+- Run git diff --check.
+
+## Verification Plan
+
+- Stage 1 formation validation must pass after this brief, Qwen formation
+  review, CodeRabbit formation review or provider-timeout evidence, aggregate
+  formation review, and `formation_approved` coordination evidence are
+  recorded.
+- Stage 2 must produce RED evidence before implementation and map RED tests to
+  queue/context derivation, current/next/planned/deferred state,
+  coordination-context source traceability, missing-state fail-closed
+  rendering, browser authority boundaries, responsive behavior, and
+  accessibility states.
+- Stage 3 implementation must use a different model-family implementation
+  writer if Codex authors or materially edits Stage 2 RED tests, and the Stage
+  3 Writer has no authority to edit tests, test helpers, fixtures, RED
+  evidence, acceptance mappings, formation evidence, review evidence, landing
+  evidence, UAT evidence, or retrospective evidence.
+- Stage 4 must record Local Qwen, CodeRabbit pre-PR or provider-timeout
+  evidence, aggregate review evidence, review-subject hash, layered
+  risk-classification, supply-chain gate evidence, browser smoke evidence, and
+  clean-code review because browser-facing and planning-context presentation
+  surfaces may be touched.
+- Stage 5 must record CLI-owned product UAT approval, landing verdict,
+  land-check, auto-land-check when eligible, and local-record landing-action
+  evidence before any later slice begins.
+- Stage 6 must record retrospective, improvement or no-action dispositions,
+  updated `CURRENT_CONTEXT.md`, `ROADMAP.md`, and `STATUS.md`.
+
+## CLEAN_CODE.md Read Evidence
+
+CLEAN_CODE.md was read on 2026-06-08 before creating this brief. The slice must keep roadmap/current-context ingestion, queue-context derivation, evidence-detail mapping, browser rendering, and static preview generation small, explicit, testable, and separated from canonical repo-state authority.
+
+## Role Boundary Evidence
+
+- Repo PM owns Stage 1 brief creation, source-spec repair, formation review
+  routing, formation approval, and context synchronization.
+- Work Item PM owns orchestration only after `formation_approved`; it may not
+  write tests, implementation, reviewer evidence, landing evidence, UAT
+  evidence, or final repo-level closeout state.
+- Test Writer owns Stage 2 RED tests, test helpers, fixtures, RED evidence, and
+  acceptance mappings.
+- Implementation Writer owns Stage 3 source implementation only. If Codex
+  authors or materially edits Stage 2 RED tests, Stage 3 implementation must
+  use a different model-family implementation writer during bootstrap unless
+  an operator-approved policy exception is recorded.
+- Permanent Test Ownership Boundary: the Stage 3 Writer has no authority to
+  create, edit, delete, regenerate, format, or mechanically adjust tests, test
+  helpers, fixtures, RED evidence, or acceptance mappings for this Work Item.
+- Bootstrap Model-Family Separation: Codex-authored RED evidence requires
+  different-model-family Stage 3 implementation, and verification escalation
+  returns to Codex PM because the implementation writer authored the source
+  change.
+- Reviewers own Stage 4 review evidence. Landing Agent owns Stage 5 landing
+  verdict/action evidence. The operator owns product UAT approval. Closeout
+  Agent/Codex PM owns Stage 6 retrospective and closeout evidence.
+
+## Stage Capability Scope
+
+policy: `.bandit/policy/stage-capability-scope.json`
+
+- stages: `stage1_brief`, `formation_review`, `work_item_pm_plan_mode`,
+  `stage2_red_evidence`, `stage3_implementation`, `stage4_review`,
+  `feature_uat`, `stage5_landing`, `stage6_retrospective`.
+- authority roles: `codex_pm`, `repo_pm`, `work_item_pm`, `test_writer`,
+  `implementation_writer`, `reviewer`, `landing_agent`, `closeout_agent`,
+  `operator`.
+- required skills: `bandit`, `tdd`, `review`, `frontend-design`.
+- allowed tools: repo-local CLI commands, focused tests, typecheck, local
+  browser or Playwright smoke verification when implementation updates the
+  browser-served preview.
+- forbidden actions: do not write RED evidence before formation approval; do
+  not run Work Item PM execution before `formation_approved`; do not let Stage
+  3 Writer edit test surfaces; do not let CLI payload snapshots, roadmap
+  projections, queue rows, browser shell, static preview, fixture data, local
+  cache, browser storage, State Index, queue-context view model, or generated
+  UI state become canonical workflow authority; do not implement local API,
+  live polling, browser-side CLI execution, guarded action execution,
+  scheduler, claim/worktree lifecycle, PR/CI, merge, push, deploy, external
+  services, public benchmark publication, Trust Verifier cutover, paid routing,
+  or unrelated cockpit features in this slice.
+
+## Token-Cost Failsafe
+
+policy: `.bandit/policy/token-cost-failsafe.json`
+
+- Stage 1 formation uses local-only default guidance.
+- Stage 2, Stage 3, and browser QA should use existing abnormal-run soft budget
+  guidance and avoid brittle caps that force duplicate attempts.
+- Stage 4 reviewer runs must record provider timeout, refusal, or continuation
+  evidence honestly; absence of CodeRabbit or Local Qwen output is not pass
+  evidence.
+- No paid provider-pricing evidence, spend-class approval, paid reviewer
+  promotion, recurring paid routing, external hosted service, hosted preview,
+  public benchmark publication, guarded action execution, merge, push, or
+  deploy authority is approved by this brief.
+
+## Stage-Rubric Checklist
+
+- Stage 0: Context Readiness | pass | BANDIT-079 is landed and closed out with verification, landing verdict, landing-action evidence, UAT evidence, retrospective, improvement disposition, roadmap/status synchronization, and no open bootstrap gaps; roadmap and current context authorize Repo PM triage/formation of the next Phase 8 cockpit slice.
+- Stage 1: Work-Item Brief And Spec | pass | This spec defines goal, source authority, product scope, out-of-scope, acceptance criteria, test plan, CLEAN_CODE.md evidence, bootstrap-gap disposition, expected files, role boundaries, operator-input status, required evidence, forbidden actions, and UAT requirement.
+- Stage 2: Test Design And RED Evidence | required next | Test Writer must write queue/context derivation, current/next/planned/deferred state, recent coordination context, fail-closed missing-state rendering, source-traceability, and authority-boundary RED evidence before implementation.
+- Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit any test surface.
+- Stage 4: Review And Cross-Model Gates | required later | CodeRabbit, Local Qwen, risk-classification, supply-chain, review-subject hash, browser smoke, and clean-code evidence are required or honestly dispositioned.
+- Stage 5: Landing And UAT | required later | CLI-owned product UAT, landing verdict/action, and local-record landing evidence are required before this operator-facing queue/context surface can land.
+- Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, current context, roadmap, STATUS, and bootstrap-gap ledger state are required before the next slice.
+
+## Bootstrap Gaps
+
+- No open bootstrap gap blocks this Phase 8 product slice.
+- Live CodeRabbit may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence and do not claim a CodeRabbit pass.
+- Local Qwen is available only through `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at `http://127.0.0.1:8000/v1`; the direct `qwen` CLI is not an authorized Bandit reviewer path. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another route.
+- Operator Inbox implementation, the Claude Code A/B product-value trial, local API, State Index, live polling, guarded action execution, scheduler, claim/worktree lifecycle, cross-repo behavior, merge, push, deploy, public benchmark publication, and Trust Verifier cutover remain future work outside this slice.
+
+## Expected Files
+
+- docs/specs/BANDIT-080-queue-context-light.json
+- docs/work/BANDIT-080/brief.md
+- docs/work/BANDIT-080/qwen-formation-review.md
+- docs/work/BANDIT-080/coderabbit-formation-review.md
+- docs/work/BANDIT-080/formation-review.md
+- docs/work/BANDIT-080/coordination-log.jsonl
+- docs/work/BANDIT-080/red-evidence.md
+- docs/work/BANDIT-080/implementation-evidence.md
+- docs/work/BANDIT-080/writer-report.md
+- docs/work/BANDIT-080/stage3-pm-review.md
+- docs/work/BANDIT-080/coderabbit-review.md
+- docs/work/BANDIT-080/local-qwen-review.md
+- docs/work/BANDIT-080/review-evidence.md
+- docs/work/BANDIT-080/uat-approval.md
+- docs/work/BANDIT-080/landing-verdict.md
+- docs/work/BANDIT-080/landing-action.md
+- docs/work/BANDIT-080/retrospective.md
+- src/state/cockpit-status.ts
+- src/state/cockpit-view-model.ts
+- src/state/cockpit-evidence-detail.ts
+- src/cockpit/render.ts
+- src/cockpit/browser-shell.ts
+- src/cockpit/preview-status-snapshot.ts
+- public/cockpit/index.html
+- public/cockpit/cockpit.css
+- test/cockpit-queue-context.test.mjs
+- test/cockpit-view-model.test.mjs
+- test/cockpit-evidence-detail.test.mjs
+- test/cockpit-browser-shell.test.mjs
+- test/cockpit-ui.test.mjs
+- test/helpers/cockpit-status-fixture.mjs
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## First Implementation Order
+
+- Write RED tests for deriving lightweight queue/context rows from roadmap/current-context, cockpit/session-context, bootstrap-gap, and coordination evidence with source links and current/next/planned/deferred states.
+- Write RED tests for fail-closed rendering of missing, stale, contradictory, and unavailable queue/context evidence.
+- Write RED tests for browser-shell rendering of queue/context rows, recent transition context, planned/deferred labels, and no hidden workflow authority.
+- Implement the smallest queue/context view-model boundary from existing repo-native inputs without changing canonical roadmap/current-context, cockpit status, or session-context authority.
+- Render the Queue & Context surface in the existing browser shell/static preview while preserving responsive, accessible, presentation-only behavior.
+- Verify desktop/mobile browser preview, focused tests, typecheck, Bandit validation, current cockpit/session-context outputs, review, UAT, landing, and closeout evidence in the normal stage order.
+
+## Smell Triggers
+
+- Any browser, preview file, fixture, generated JSON, local cache, browser storage, screenshot, State Index, queue-context view model, or UI component state becoming canonical workflow state is a blocker.
+- Any browser code that invokes CLI commands, writes repo artifacts, edits roadmap/current-context state, records UAT, decides landing safety, schedules work, claims work, merges, pushes, deploys, grants policy/cost/risk authority, publishes benchmark claims, or starts guarded action execution is a blocker.
+- Any queue-context mapper that silently normalizes missing, stale, contradictory, unavailable, unsupported, operator-owned, not-yet-formed, deferred, or blocked states into a complete backlog is a blocker.
+- Any label or layout that implies backlog management, priority editing, work intake ownership, scheduler authority, claimability, workstream assignment, public benchmark proof, merge, push, deploy, Trust Verifier cutover, paid routing, or external service authority is a blocker.
+- Any live API, polling loop, State Index, scheduler, claim, worktree, PR/CI, external service, dependency, lockfile, package script, merge, push, deploy, benchmark publication, or unrelated Phase 8 feature work inside this slice is scope creep.
+- Any desktop or mobile overlap, truncation, inaccessible queue state, source-path unreadability, work-item ID unreadability, planned/deferred chip ambiguity, or current/next cue ambiguity in critical operator flows is a product-quality blocker.
+- Any large mixed function that combines roadmap parsing, CLI execution, payload parsing, queue derivation, coordination parsing, evidence normalization, static preview generation, and UI rendering is a clean-code blocker.
+
+## Required Evidence
+
+- docs/work/BANDIT-080/brief.md
+- docs/work/BANDIT-080/qwen-formation-review.md
+- docs/work/BANDIT-080/coderabbit-formation-review.md
+- docs/work/BANDIT-080/formation-review.md
+- docs/work/BANDIT-080/coordination-log.jsonl
+- docs/work/BANDIT-080/red-evidence.md
+- docs/work/BANDIT-080/implementation-evidence.md
+- docs/work/BANDIT-080/writer-report.md
+- docs/work/BANDIT-080/stage3-pm-review.md
+- docs/work/BANDIT-080/coderabbit-review.md
+- docs/work/BANDIT-080/local-qwen-review.md
+- docs/work/BANDIT-080/review-evidence.md
+- docs/work/BANDIT-080/uat-approval.md
+- docs/work/BANDIT-080/landing-verdict.md
+- docs/work/BANDIT-080/landing-action.md
+- docs/work/BANDIT-080/retrospective.md
+
+## Operator Input Status
+
+No operator-owned input is required to create this Phase 8 Queue & Context (Light) work item or complete Stage 1 formation because the roadmap/current-context authorize Repo PM triage, PRD-003 names the light queue/context area as a first cockpit surface, the accepted prototype includes Queue & Context (Light), BANDIT-079 is landed and closed, no bootstrap gaps remain open, and the operator supplied product direction to record a final V0 Claude Code A/B trial as a later closeout planning item. CLI-owned product UAT is required before landing the operator-facing implementation. Halt for operator input if implementation would choose local API shape, State Index timing, live polling behavior, guarded action execution authority, scheduler execution, claim/worktree lifecycle behavior, automatic merge/push/deploy authority, PR/CI orchestration, external service setup, benchmark publication, policy changes, business tradeoffs, explicit cost/risk approvals, Trust Verifier cutover, or genuinely ambiguous product scope.

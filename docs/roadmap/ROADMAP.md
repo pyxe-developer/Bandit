@@ -8,12 +8,14 @@
 
 ## Current Work Item
 
-- None formed. Keep `BANDIT-079` as the current derived-status anchor until
-  Repo PM forms the next slice.
+- `[Slice]` `BANDIT-080` - Queue & Context (Light) (formation approved; Work
+  Item PM plan mode pending)
 
-**Current next step:** Repo PM should triage and form the next Phase 8 cockpit
-product slice only if roadmap/product direction is sufficient; otherwise ask
-the operator for the missing product direction.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-080` (Queue & Context (Light)) before RED evidence. Do not create RED
+evidence or implementation until `docs/work/BANDIT-080/orchestration-plan.md`
+exists and `work-item-pm start BANDIT-080` records
+`orchestration_plan_recorded`.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -29,7 +31,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - next Phase 8 cockpit slice after Repo PM triage.
+- `[Slice]` `TBD` - Operator Attention / Operator Inbox surface after
+  `BANDIT-080` closeout, if repo artifacts still support that sequence.
 
 ## Planned Work
 
@@ -39,7 +42,12 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - next Phase 8 cockpit slice after Repo PM triage.
+- `[Slice]` `BANDIT-080` - Queue & Context (Light) (current)
+- `[Slice]` `TBD` - Operator Attention / Operator Inbox surface after
+  `BANDIT-080` closeout.
+- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
+  the same PRD in Bandit and no-Bandit repos; no statistical or public
+  benchmark claim.
 
 ## Completed Work
 
