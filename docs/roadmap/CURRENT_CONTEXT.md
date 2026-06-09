@@ -6,17 +6,15 @@
 
 `BANDIT-080` is active for the Queue & Context (Light) Phase 8 product slice.
 Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED evidence,
-Stage 3 implementation evidence, and Stage 4 aggregate review evidence exist
-under `docs/work/BANDIT-080/`.
+Stage 3 implementation evidence, Stage 4 aggregate review evidence, and Stage
+5 UAT plus landing verdict evidence exist under `docs/work/BANDIT-080/`.
 
-**Active work item:** `BANDIT-080` (review recorded; Stage 5 UAT pending).
+**Active work item:** `BANDIT-080` (landing verdict recorded; landing action pending).
 
-The current stage is Stage 4: review_recorded.
+The current stage is Stage 5: landing_verdict_recorded.
 
-**Current next action:** Record CLI-owned product UAT for BANDIT-080 using the
-operator pre-approval, then record Stage 5 landing verdict, run land-check and
-auto-land-check, and execute local-record landing action against the current
-source/evidence commit.
+**Current next action:** Run the local-record landing action for BANDIT-080 and
+record landing action evidence.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -48,7 +46,8 @@ repo artifacts cannot answer.
 - Brief: `docs/work/BANDIT-080/brief.md`.
 - Coordination log: `docs/work/BANDIT-080/coordination-log.jsonl` records
   `brief_created`, `formation_approved`, `orchestration_plan_recorded`,
-  `red_recorded`, `implementation_recorded`, and `review_recorded`.
+  `red_recorded`, `implementation_recorded`, `review_recorded`,
+  `feature_uat_approved`, and `landing_verdict_recorded`.
 - Orchestration plan: `docs/work/BANDIT-080/orchestration-plan.md`.
 - RED evidence: `docs/work/BANDIT-080/red-evidence.md`.
 - RED tests: `test/cockpit-queue-context.test.mjs`.
@@ -63,6 +62,8 @@ repo artifacts cannot answer.
 - Qwen finding disposition:
   `docs/work/BANDIT-080/qwen-finding-disposition.md`.
 - Browser smoke: `docs/work/BANDIT-080/browser-smoke.md`.
+- UAT approval: `docs/work/BANDIT-080/uat-approval.md`.
+- Landing verdict: `docs/work/BANDIT-080/landing-verdict.md`.
 - Risk classification:
   `.bandit/policy/risk-classifications/BANDIT-080-risk-classification.json`.
 - Supply-chain gate:
@@ -82,6 +83,8 @@ retrospective evidence, automatic improvement evaluation, guarded browser
 action execution, local API work, State Index work, scheduler execution, claim
 execution, worktree execution, public benchmark publication, paid
 reviewer/model routing, hosted replay services, telemetry, merge, push,
-deploy, Trust Verifier cutover, or unrelated product work from Stage 5 landing.
+deploy, Trust Verifier cutover, or unrelated product work before the local
+landing action is recorded.
 
-The next required step is Stage 5 UAT for `BANDIT-080`.
+The next required step is the Stage 5 local-record landing action for
+`BANDIT-080`.

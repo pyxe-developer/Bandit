@@ -2,7 +2,7 @@
 
 ## Last Updated: 2026-06-09
 
-## Current Work Item: BANDIT-080 (review recorded; Stage 5 UAT pending)
+## Current Work Item: BANDIT-080 (landing verdict recorded; landing action pending)
 
 ## Current Status
 
@@ -10,15 +10,14 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-080` has Stage 1 formation, Work Item PM plan-mode orchestration,
-Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 aggregate
-review evidence for Queue & Context (Light).
+Stage 2 RED evidence, Stage 3 implementation evidence, Stage 4 aggregate
+review evidence, and Stage 5 UAT plus landing verdict evidence for Queue &
+Context (Light).
 
-Current stage: Stage 4 review recorded.
+Current stage: Stage 5 landing verdict recorded.
 
-Next action: Record CLI-owned product UAT for BANDIT-080 using the operator
-pre-approval, then record Stage 5 landing verdict, run land-check and
-auto-land-check, and execute local-record landing action against the current
-source/evidence commit.
+Next action: Run the local-record landing action for BANDIT-080 and record
+landing action evidence.
 
 Required operator input: none currently required.
 
@@ -26,7 +25,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-080` - Queue & Context (Light) (review recorded)
+- `BANDIT-080` - Queue & Context (Light) (landing verdict recorded)
 - `BANDIT-079` - Improvement Health Surface (closed)
 - `BANDIT-078` - Guarded CLI Action Requests (closed)
 - `BANDIT-077` - Spec-To-Evidence Traceability Matrix (closed)

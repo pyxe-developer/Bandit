@@ -8,13 +8,11 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-080` - Queue & Context (Light) (review recorded; Stage 5
-  UAT pending)
+- `[Slice]` `BANDIT-080` - Queue & Context (Light) (landing verdict recorded;
+  landing action pending)
 
-**Current next step:** Record CLI-owned product UAT for BANDIT-080 using the
-operator pre-approval, then record Stage 5 landing verdict, run land-check and
-auto-land-check, and execute local-record landing action against the current
-source/evidence commit.
+**Current next step:** Run the local-record landing action for BANDIT-080 and
+record landing action evidence.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
