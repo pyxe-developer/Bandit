@@ -326,47 +326,114 @@ function buildQueueContextSource(input: {
 
   return {
     source: ROADMAP_PATH,
-    items: rows.map((row, index) => {
-      const active = row.id === input.activeWorkItemId;
-      const deferred = isDeferredQueueItem(row.label);
-      const missingSource = row.status === "missing_source";
-      const notYetFormed = row.id === "TBD" && !deferred;
-      const status = missingSource
-        ? "missing_source"
-        : active
-          ? activeQueueStatus(input)
-          : notYetFormed
-            ? "not_yet_formed"
-            : index === nextPlannedIndex
-              ? "next_planned"
-              : deferred
-                ? "deferred"
-                : "planned";
-      const relationship = missingSource
-        ? "unavailable"
-        : active
-          ? "current"
-          : notYetFormed && index === nextPlannedIndex
-            ? "next"
-            : status === "next_planned"
-              ? "next"
-              : status;
-      const sourceArtifacts = active && row.id !== "TBD"
-        ? [`docs/work/${row.id}/brief.md`, CURRENT_CONTEXT_PATH]
-        : [ROADMAP_PATH];
-
-      return {
-        id: row.id,
-        label: row.label,
-        kind: row.kind,
-        status,
-        relationship,
-        summary: queueItemSummary(row.label, status, row.id),
-        source_artifacts: sourceArtifacts,
-        ...(deferred ? { deferred_reason: deferredQueueReason(row.label) } : {})
-      };
-    })
+    items: rows.map((row, index) =>
+      mapQueueContextItem(row, {
+        index,
+        nextPlannedIndex,
+        activeWorkItemId: input.activeWorkItemId,
+        statusInput: input
+      })
+    )
   };
+}
+
+type RoadmapQueueItem = {
+  id: string;
+  label: string;
+  kind: string;
+  status?: string;
+};
+
+function mapQueueContextItem(
+  row: RoadmapQueueItem,
+  context: {
+    index: number;
+    nextPlannedIndex: number;
+    activeWorkItemId: string;
+    statusInput: {
+      blockers: CockpitBlocker[];
+      bootstrapGaps: BootstrapGapSummary;
+      staleEvidence: StaleEvidence[];
+    };
+  }
+) {
+  const active = row.id === context.activeWorkItemId;
+  const deferred = isDeferredQueueItem(row.label);
+  const status = deriveQueueStatus(row, {
+    active,
+    deferred,
+    index: context.index,
+    nextPlannedIndex: context.nextPlannedIndex,
+    statusInput: context.statusInput
+  });
+  const sourceArtifacts = active && row.id !== "TBD"
+    ? [`docs/work/${row.id}/brief.md`, CURRENT_CONTEXT_PATH]
+    : [ROADMAP_PATH];
+
+  return {
+    id: row.id,
+    label: row.label,
+    kind: row.kind,
+    status,
+    relationship: deriveQueueRelationship(status, active, context.index, context.nextPlannedIndex),
+    summary: queueItemSummary(row.label, status, row.id),
+    source_artifacts: sourceArtifacts,
+    ...(deferred ? { deferred_reason: deferredQueueReason(row.label) } : {})
+  };
+}
+
+function deriveQueueStatus(
+  row: RoadmapQueueItem,
+  context: {
+    active: boolean;
+    deferred: boolean;
+    index: number;
+    nextPlannedIndex: number;
+    statusInput: {
+      blockers: CockpitBlocker[];
+      bootstrapGaps: BootstrapGapSummary;
+      staleEvidence: StaleEvidence[];
+    };
+  }
+) {
+  if (row.status === "missing_source") {
+    return "missing_source";
+  }
+
+  if (context.active) {
+    return activeQueueStatus(context.statusInput);
+  }
+
+  if (row.id === "TBD" && !context.deferred) {
+    return "not_yet_formed";
+  }
+
+  if (context.index === context.nextPlannedIndex) {
+    return "next_planned";
+  }
+
+  return context.deferred ? "deferred" : "planned";
+}
+
+function deriveQueueRelationship(
+  status: string,
+  active: boolean,
+  index: number,
+  nextPlannedIndex: number
+) {
+  if (status === "missing_source") {
+    return "unavailable";
+  }
+
+  if (active) {
+    return "current";
+  }
+
+  if (status === "not_yet_formed" && index === nextPlannedIndex) {
+    return "next";
+  }
+
+  return status === "next_planned" ? "next" : status;
 }
 
 function missingQueueSourceRow(activeWorkItemId: string) {
@@ -382,10 +449,10 @@ function readRoadmapQueueItems(content: string) {
   const phaseQueue = readSection(content, "### Phase 8 Product Queue");
   const source = phaseQueue || readSection(content, "## Next Work Item");
   const seen = new Set<string>();
-  const items: Array<{ id: string; label: string; kind: string; status?: string }> = [];
+  const items: RoadmapQueueItem[] = [];
 
   for (const line of source.split(/\r?\n/)) {
-    const match = line.match(/^-\s+`\[(?<kind>[^\]]+)\]`\s+`(?<id>[^`]+)`\s+-\s+(?<label>.+)$/);
+    const match = line.match(/^\s*-\s+`\[(?<kind>[^\]]+)\]`\s+`(?<id>[^`]+)`\s+-\s+(?<label>.+)$/);
     if (!match?.groups) {
       continue;
     }
