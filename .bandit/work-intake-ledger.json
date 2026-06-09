@@ -143,9 +143,10 @@
       "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
       "suggested_work_item_type": "gap",
       "depends_on": [],
-      "scope_summary": "Coordination Primitive Completion Triage remains a proposal until Repo PM forms a work item.",
-      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
-      "intake_outcome": "accepted_to_queue",
+      "scope_summary": "Coordination Primitive Completion Triage is formed as BANDIT-086 and awaits Work Item PM plan-mode orchestration.",
+      "risk_product_scope_status": "formed as BANDIT-086 with no new coordination primitive implementation, scheduler, claim/worktree lifecycle, local API, State Index, guarded browser action execution, PR/CI/CD, merge, push, deploy, paid routing, hosted service, public benchmark publication, Trust Verifier cutover, cross-repo runtime behavior, or unrelated product work authorized",
+      "intake_outcome": "formed",
+      "formed_work_item": "BANDIT-086",
       "claimable": false,
       "transition_history": [
         {
@@ -154,6 +155,13 @@
           "from": "source_metadata",
           "to": "accepted_to_queue",
           "source": "BANDIT-082 migration"
+        },
+        {
+          "at": "2026-06-09T21:35:06Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "formed",
+          "source": "BANDIT-086 formation approval"
         }
       ]
     },
