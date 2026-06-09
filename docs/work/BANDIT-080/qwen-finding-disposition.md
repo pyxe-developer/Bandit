@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-080
-source_head: 82f3575fdbd84d9d886d64e5879dd23405783fb6
+source_head: 07d0e4d74065027bde25f58a53cbc07df147d008
 local_qwen_review: docs/work/BANDIT-080/local-qwen-review.md
 reviewer_verdict: non_blocking
 findings_status: dispositioned
@@ -13,8 +13,8 @@ pm_disposition: pass
 
 | Finding | Verdict | Disposition |
 |---|---|---|
-| `deriveQueueStatus` does not emit a separate `contradictory` row status. | `accepted_non_blocking` | `no_action` because contradictory roadmap/current-context authority is already handled one layer earlier by `readCockpitStatus`, which fails closed with a blocked command result when `CURRENT_CONTEXT.md` and `ROADMAP.md` disagree. The browser queue projection therefore never receives contradictory source evidence to normalize into a healthy row. Adding a contradictory row inside this light presentation slice would weaken the existing fail-closed CLI behavior by turning a command blocker into renderable UI state. |
-| Stale queue status is implemented but not directly covered by a queue-specific test. | `accepted_non_blocking` | `no_action` because `activeQueueStatus` maps stale evidence to `stale`, existing cockpit evidence-detail and view-model tests cover stale evidence propagation, and this slice already added focused live queue derivation plus missing-source fail-closed tests. A dedicated stale queue-row test can be added if a later slice broadens queue parsing or stale-state UI copy, but current behavior is simple and covered by adjacent stale-evidence gates. |
+| Contradictory state handling is deferred to CLI-level fail-closed behavior rather than browser queue rows. | `accepted_non_blocking` | `no_action` because contradictory roadmap/current-context authority is already handled one layer earlier by `readCockpitStatus`, which fails closed with a blocked command result when `CURRENT_CONTEXT.md` and `ROADMAP.md` disagree. The browser queue projection therefore never receives contradictory source evidence to normalize into a healthy row. Adding a contradictory row inside this light presentation slice would weaken the existing fail-closed CLI behavior by turning a command blocker into renderable UI state. |
+| Stale queue status is accepted as covered by adjacent stale-evidence gates and view-model tests. | `accepted_non_blocking` | `no_action` because `activeQueueStatus` maps stale evidence to `stale`, existing cockpit evidence-detail and view-model tests cover stale evidence propagation, and this slice already added focused live queue derivation plus missing-source fail-closed tests. A dedicated stale queue-row test can be added if a later slice broadens queue parsing or stale-state UI copy, but current behavior is simple and covered by adjacent stale-evidence gates. |
 
 ## PM Rationale
 
