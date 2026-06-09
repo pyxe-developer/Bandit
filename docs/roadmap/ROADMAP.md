@@ -8,20 +8,20 @@
 
 ## Current Work Item
 
-- None active; `BANDIT-081` remains the active derived-status anchor until the
-  next slice is formed.
+- `[Slice]` `BANDIT-082` - Work Intake Ledger And Followups Migration
+  (formation approved)
 
-**Current next step:** Repo PM should form the Work Intake Ledger And Followups
-Migration slice first, preserving `FOLLOWUPS.md` source metadata and queueing
-the triaged follow-up and UI-polish work items before the V0 Closeout Claude
-Code A/B Product-Value Trial.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-082` and create `docs/work/BANDIT-082/orchestration-plan.md` before RED
+evidence, implementation, review, landing, or closeout.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
 restart Pi/Aperture runtime work, choose local API or State Index timing,
 execute guarded browser actions, approve public benchmark publication, approve
 paid reviewer/model routing, approve hosted replay services or external service
-setup, merge, push, deploy, or start unrelated Phase 8 product work without
+setup, merge, push, deploy, create RED evidence, start implementation, start
+review, land, close out, or start unrelated Phase 8 product work without
 separate authorization and evidence.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
@@ -30,7 +30,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Work Intake Ledger And Followups Migration
+- `[Slice]` `TBD` - Bandit Cockpit UI Polish From Attached Design, pending
+  `BANDIT-082` landing and intake-derived queue validation.
 
 ## Planned Work
 
@@ -40,13 +41,10 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-The first seven entries are pre-Claude-bakeoff follow-up and UI-polish work; the
-Claude Product-Value Trial stays deferred behind this lane.
+`BANDIT-082` is the active migration slice. The remaining entries are
+pre-Claude-bakeoff follow-up and UI-polish work; the Claude Product-Value Trial
+stays deferred behind this lane.
 
-- `[Slice]` `TBD` - Work Intake Ledger And Followups Migration: migrate
-  `FOLLOWUPS.md` into a single intake/roadmap lane with preserved source
-  metadata; deprecate the standalone follow-up surface after validation proves
-  each entry has an outcome.
 - `[Slice]` `TBD` - Bandit Cockpit UI Polish From Attached Design: adapt the
   attached three-pane Evidence Row cockpit design while preserving CLI
   authority, repo-native source links, browser read-only boundaries, and normal
