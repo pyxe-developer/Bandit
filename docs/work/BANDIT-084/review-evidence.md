@@ -2,9 +2,9 @@
 
 contract_version: 1
 work_item: BANDIT-084
-source_head: b14763e8c971f1c7c1be77bbc4e74a30e43408b2
-review_subject_hash: 2cee679513d58a54d363376a3bf57cc50cf59b077ae4b5ca8d1d3f335d7307e2
-review_subject_hash_status: current_pending_tracked_evidence_refresh
+source_head: 54dcacb547b3e0a189a0a20625b0b71d169188f9
+review_subject_hash: 43cb966721e62d9b12ded08a80d6e67e410ad42bd93e78c67905eea4baf93113
+review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
   - docs/work/BANDIT-084/coderabbit-review.md records CodeRabbit timeout after the required 600-second wait window, coderabbit_verdict bootstrap_gap, findings_status unavailable, and no CodeRabbit pass claimed.
@@ -15,6 +15,7 @@ verification_evidence:
   - .bandit/policy/supply-chain-gates/BANDIT-084-supply-chain-gate.json records low supply-chain surface state with no dependency, lockfile, package-manager script, CI/release workflow, agent skill, fetched prompt, external tool install, or external side-effecting automation change.
   - node ./bin/bandit.mjs risk-classification validate --json passed and listed BANDIT-084 as auto-landing eligible with operator supervision not required.
   - node ./bin/bandit.mjs supply-chain-gate validate --json passed and listed BANDIT-084 as low supply-chain surface state with operator supervision not required.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-084 produced 43cb966721e62d9b12ded08a80d6e67e410ad42bd93e78c67905eea4baf93113 from review-subject policy v1 after BANDIT-084 risk and supply-chain evidence were tracked.
   - node ./bin/bandit.mjs coordination validate BANDIT-084 passed after Stage 3 PM acceptance.
   - node ./bin/bandit.mjs work-intake validate --json passed during Stage 3 PM acceptance.
   - git diff --check passed before aggregate review evidence.
