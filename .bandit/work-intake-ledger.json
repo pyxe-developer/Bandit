@@ -1,0 +1,262 @@
+{
+  "version": 1,
+  "authority": {
+    "source": "repo_native_work_intake_ledger",
+    "allowed_mutators": ["repo_pm", "future_work_intake_triage_skill"],
+    "read_only_consumers": [
+      "work_item_pm",
+      "implementation_writer",
+      "reviewer",
+      "retrospective",
+      "browser_cockpit",
+      "tests"
+    ],
+    "no_claim_authority": true,
+    "no_work_item_allocation": true,
+    "no_scheduler_authority": true,
+    "no_browser_mutation_authority": true
+  },
+  "entries": [
+    {
+      "id": "WIL-UI-POLISH",
+      "title": "Bandit Cockpit UI Polish From Attached Design",
+      "source_artifacts": [
+        "FOLLOWUPS.md",
+        "docs/design/workflow-cockpit/bandit-ui-polish-source.md"
+      ],
+      "source_anchor": "Add Bandit UI Polish From Attached Design",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "slice",
+      "depends_on": [],
+      "scope_summary": "Bandit Cockpit UI Polish From Attached Design remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-CLAIM-FIRST",
+      "title": "Claim-First Transition Policy Triage",
+      "source_artifacts": ["FOLLOWUPS.md"],
+      "source_anchor": "Revisit Claim Requirement After Bootstrap",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Claim-First Transition Policy Triage remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-REPO-WIDE-TRANSITION-INDEX",
+      "title": "Repo-Wide Transition Index Decision",
+      "source_artifacts": ["FOLLOWUPS.md"],
+      "source_anchor": "Consider Repo-Wide Transition Index",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Repo-Wide Transition Index Decision remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-COORDINATION-PRIMITIVE",
+      "title": "Coordination Primitive Completion Triage",
+      "source_artifacts": ["FOLLOWUPS.md"],
+      "source_anchor": "Schedule Coordination Primitive Implementation",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Coordination Primitive Completion Triage remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-PR-CICD-LANDING",
+      "title": "PR And CI/CD Landing Workflow Policy",
+      "source_artifacts": ["FOLLOWUPS.md"],
+      "source_anchor": "Move From Local Main Landing To PR And CI/CD Workflow",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "PR And CI/CD Landing Workflow Policy remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-INSTALLED-COPY-UPDATE",
+      "title": "Installed-Copy Update Path",
+      "source_artifacts": ["FOLLOWUPS.md"],
+      "source_anchor": "Push Bandit Updates To Installed Copies",
+      "origin_date": "2026-06-09",
+      "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Installed-Copy Update Path remains a proposal until Repo PM forms a work item.",
+      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-B022-HEARTBEAT-NEXT-ACTION-TOKENS",
+      "title": "Heartbeat Next-Action Token Mapping",
+      "source_work_item": "BANDIT-022",
+      "source_artifacts": [
+        "docs/work/BANDIT-022/local-qwen-review.md",
+        "docs/work/BANDIT-022/review-evidence.md",
+        "docs/work/BANDIT-022/follow-up-chores.md"
+      ],
+      "lesson": "Heartbeat bootstrap-gap next-action normalization should eventually use explicit action tokens instead of regex matching.",
+      "hypothesis": "Explicit token mapping will reduce future reviewer concern while preserving fail-closed behavior.",
+      "metric": "Future Local Qwen or aggregate Stage 4 reviews do not repeat the ambiguous next-action mapping finding for heartbeat inspection.",
+      "baseline": "BANDIT-022 landed with safe fallback behavior but Local Qwen requested stricter parsing as non-blocking hardening.",
+      "evaluation_window": "Evaluate when heartbeat parsing or UAT status parsing is next touched.",
+      "current_status": "queued_candidate",
+      "outcome": "pending",
+      "source_anchor": "Heartbeat Next-Action Token Mapping",
+      "origin_date": "2026-05-25",
+      "rationale": "Preserve non-blocking legacy follow-up candidate metadata.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Heartbeat Next-Action Token Mapping remains a legacy follow-up candidate.",
+      "risk_product_scope_status": "legacy hardening candidate; not claimable, not executable, and requires future triage",
+      "intake_outcome": "queued_candidate",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "queued_candidate",
+          "source": "BANDIT-022 follow-up migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-B022-UAT-APPROVAL-TOKENS",
+      "title": "Explicit UAT Approval Tokens",
+      "source_work_item": "BANDIT-022",
+      "source_artifacts": [
+        "docs/work/BANDIT-022/local-qwen-review.md",
+        "docs/work/BANDIT-022/review-evidence.md",
+        "docs/work/BANDIT-022/follow-up-chores.md"
+      ],
+      "lesson": "Heartbeat feature-slice UAT parsing can make approved states explicit instead of using a broad includes approved check.",
+      "hypothesis": "Explicit approved-state tokens will reduce future reviewer concern about status semantics while preserving fail-closed behavior for unknown or unapproved UAT states.",
+      "metric": "Future Local Qwen or aggregate Stage 4 reviews do not repeat the broad UAT approval parsing finding for heartbeat inspection.",
+      "baseline": "BANDIT-022 landed with fail-closed UAT behavior, but Local Qwen requested explicit approved statuses as non-blocking hardening.",
+      "evaluation_window": "Evaluate when heartbeat feature-slice eligibility or UAT status parsing is next touched.",
+      "current_status": "queued_candidate",
+      "outcome": "pending",
+      "source_anchor": "Explicit UAT Approval Tokens",
+      "origin_date": "2026-05-25",
+      "rationale": "Preserve non-blocking legacy follow-up candidate metadata.",
+      "suggested_work_item_type": "gap",
+      "depends_on": [],
+      "scope_summary": "Explicit UAT Approval Tokens remains a legacy follow-up candidate.",
+      "risk_product_scope_status": "legacy hardening candidate; not claimable, not executable, and requires future triage",
+      "intake_outcome": "queued_candidate",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "queued_candidate",
+          "source": "BANDIT-022 follow-up migration"
+        }
+      ]
+    },
+    {
+      "id": "WIL-V0-TRIAL",
+      "title": "V0 Closeout Claude Code A/B Product-Value Trial",
+      "source_artifacts": ["docs/roadmap/ROADMAP.md"],
+      "source_anchor": "V0 Closeout Claude Code A/B Product-Value Trial",
+      "origin_date": "2026-06-09",
+      "rationale": "Keep the product-value trial deferred behind the pre-Claude-bakeoff follow-up and UI-polish lane.",
+      "suggested_work_item_type": "slice",
+      "depends_on": [
+        "WIL-UI-POLISH",
+        "WIL-CLAIM-FIRST",
+        "WIL-REPO-WIDE-TRANSITION-INDEX",
+        "WIL-COORDINATION-PRIMITIVE",
+        "WIL-PR-CICD-LANDING",
+        "WIL-INSTALLED-COPY-UPDATE"
+      ],
+      "scope_summary": "Compare the same PRD in Bandit and no-Bandit repos after pre-Claude-bakeoff intake is cleared.",
+      "risk_product_scope_status": "product slice deferred; requires normal future formation and operator-owned product scope if repo artifacts are insufficient",
+      "intake_outcome": "deferred",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-09T10:45:27Z",
+          "actor": "repo_pm",
+          "from": "source_metadata",
+          "to": "deferred",
+          "source": "BANDIT-082 migration"
+        }
+      ]
+    }
+  ]
+}

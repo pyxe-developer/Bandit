@@ -52,6 +52,7 @@ import { trust } from "./commands/trust.js";
 import { workItemPm } from "./commands/work-item-pm.js";
 import { worktreeBootstrap } from "./commands/worktree-bootstrap.js";
 import { createWorkItem } from "./commands/work-item-create.js";
+import { workIntake } from "./commands/work-intake.js";
 
 async function main() {
   const [command, ...args] = process.argv.slice(2);
@@ -393,6 +394,20 @@ async function main() {
 
   if (command === "spec-to-evidence") {
     const result = await specToEvidence(process.cwd(), args);
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.code) {
+      process.exitCode = result.code;
+    }
+    return;
+  }
+
+  if (command === "work-intake") {
+    const result = await workIntake(process.cwd(), args);
     if (result.stdout) {
       process.stdout.write(result.stdout);
     }
