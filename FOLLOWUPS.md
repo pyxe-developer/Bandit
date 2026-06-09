@@ -5,11 +5,11 @@ but are not the current active Bandit work queue.
 
 ## Triage Status
 
-As of 2026-06-09, these open follow-ups are roadmapped as pre-Claude-bakeoff
-work in `docs/roadmap/ROADMAP.md`. The operator-requested UI polish source is
-also roadmapped before the Claude bakeoff. This file remains source metadata
-until the Work Intake Ledger migration validates that every entry has an intake
-outcome.
+As of 2026-06-09, BANDIT-082 migrated these follow-ups into the repo-native
+Work Intake Ledger at `.bandit/work-intake-ledger.json`. This file is retained
+as deprecated source metadata only; future proposal state, intake outcomes, and
+queue ordering are owned by the ledger and validated by
+`bandit work-intake validate`.
 
 - Revisit Claim Requirement After Bootstrap -> Claim-First Transition Policy
   Triage.
