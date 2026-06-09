@@ -27,7 +27,9 @@ Stage 3 implemented the narrow Queue & Context (Light) presentation boundary for
 - Testable behavior: pass. Focused queue, view-model, browser-shell, and typecheck verification passed.
 - Readable flow: pass. Queue context derivation, summary construction, transition fallback, and HTML rendering are separated into small helpers.
 - Locality: pass. No unrelated refactors or package changes were made.
-- Failure clarity: pass. Missing coordination fails closed as `not_recorded` / `unavailable`.
+- Failure clarity: pass. Missing coordination fails closed as `not_recorded` /
+  `unavailable`; Stage 4 repair adds live CLI `missing_source` /
+  `unavailable` behavior for absent roadmap queue evidence.
 - No role erosion: pass. Stage 3 did not edit tests or Stage 2 evidence.
 
 ## Source-Of-Truth Boundary Confirmation
@@ -44,3 +46,9 @@ The implementation treats roadmap/current-context, cockpit/session-context, coor
 ## Role Boundary Statement
 
 Stage 3 Writer did not edit tests, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, UAT evidence, or retrospective evidence.
+
+`test/cockpit-queue-context.test.mjs` was Stage 2 Test Writer RED evidence.
+The later `test/cockpit-status.test.mjs` live-regression additions were
+Stage 4 Codex PM repair evidence after live smoke found missing CLI
+`queue_context_source` derivation. Neither test change was authored by the
+Stage 3 implementation writer.

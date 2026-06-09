@@ -78,7 +78,6 @@
     "docs/work/BANDIT-080/stage3-pm-review.md",
     "docs/work/BANDIT-080/coderabbit-review.md",
     "docs/work/BANDIT-080/local-qwen-review.md",
-    "docs/work/BANDIT-080/qwen-finding-disposition.md",
     "docs/work/BANDIT-080/browser-smoke.md",
     "src/state/cockpit-status.ts",
     "src/state/cockpit-view-model.ts",

@@ -317,7 +317,11 @@ function buildQueueContextFromSource(status: CockpitStatus): LightQueueContext {
 
 function buildQueueContextSummary(items: QueueContextSourceItem[]): string {
   const activeAnchor = items.find((item) => item.status === "active_anchor");
-  const nextPlanned = items.filter((item) => item.status === "next_planned");
+  const nextPlanned = items.filter((item) =>
+    item.status === "next_planned" ||
+    item.status === "not_yet_formed" ||
+    item.relationship === "next"
+  );
   const deferred = items.filter((item) => item.status === "deferred");
 
   const parts: string[] = [];
@@ -337,7 +341,9 @@ function buildQueueContextSummary(items: QueueContextSourceItem[]): string {
     parts.push(`${deferred.length} deferred V0 closeout ${itemLabel}`);
   }
 
-  return parts.join("; ") + ".";
+  return parts.length > 0
+    ? parts.join("; ") + "."
+    : "Queue context unavailable from current roadmap evidence.";
 }
 
 function buildRecentTransitions(status: CockpitStatus): RecentTransition[] {

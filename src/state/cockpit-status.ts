@@ -320,11 +320,7 @@ function buildQueueContextSource(input: {
   const roadmapItems = readRoadmapQueueItems(input.roadmapContent);
   const rows = roadmapItems.length > 0
     ? roadmapItems
-    : [{
-        id: input.activeWorkItemId,
-        label: input.activeWorkItemTitle ?? input.activeWorkItemId,
-        kind: "slice"
-      }];
+    : [missingQueueSourceRow(input.activeWorkItemId)];
   const activeIndex = rows.findIndex((row) => row.id === input.activeWorkItemId);
   const nextPlannedIndex = rows.findIndex((row, index) => index > activeIndex);
 
@@ -333,18 +329,28 @@ function buildQueueContextSource(input: {
     items: rows.map((row, index) => {
       const active = row.id === input.activeWorkItemId;
       const deferred = isDeferredQueueItem(row.label);
-      const status = active
-        ? activeQueueStatus(input)
-        : index === nextPlannedIndex
-          ? "next_planned"
-          : deferred
-            ? "deferred"
-            : "planned";
-      const relationship = active
-        ? "current"
-        : status === "next_planned"
-          ? "next"
-          : status;
+      const missingSource = row.status === "missing_source";
+      const notYetFormed = row.id === "TBD" && !deferred;
+      const status = missingSource
+        ? "missing_source"
+        : active
+          ? activeQueueStatus(input)
+          : notYetFormed
+            ? "not_yet_formed"
+            : index === nextPlannedIndex
+              ? "next_planned"
+              : deferred
+                ? "deferred"
+                : "planned";
+      const relationship = missingSource
+        ? "unavailable"
+        : active
+          ? "current"
+          : notYetFormed && index === nextPlannedIndex
+            ? "next"
+            : status === "next_planned"
+              ? "next"
+              : status;
       const sourceArtifacts = active && row.id !== "TBD"
         ? [`docs/work/${row.id}/brief.md`, CURRENT_CONTEXT_PATH]
         : [ROADMAP_PATH];
@@ -355,7 +361,7 @@ function buildQueueContextSource(input: {
         kind: row.kind,
         status,
         relationship,
-        summary: queueItemSummary(row.label, status),
+        summary: queueItemSummary(row.label, status, row.id),
         source_artifacts: sourceArtifacts,
         ...(deferred ? { deferred_reason: deferredQueueReason(row.label) } : {})
       };
@@ -363,11 +369,20 @@ function buildQueueContextSource(input: {
   };
 }
 
+function missingQueueSourceRow(activeWorkItemId: string) {
+  return {
+    id: activeWorkItemId,
+    label: "Queue context unavailable",
+    kind: "slice",
+    status: "missing_source"
+  };
+}
+
 function readRoadmapQueueItems(content: string) {
   const phaseQueue = readSection(content, "### Phase 8 Product Queue");
   const source = phaseQueue || readSection(content, "## Next Work Item");
   const seen = new Set<string>();
-  const items: Array<{ id: string; label: string; kind: string }> = [];
+  const items: Array<{ id: string; label: string; kind: string; status?: string }> = [];
 
   for (const line of source.split(/\r?\n/)) {
     const match = line.match(/^-\s+`\[(?<kind>[^\]]+)\]`\s+`(?<id>[^`]+)`\s+-\s+(?<label>.+)$/);
@@ -429,7 +444,7 @@ function activeQueueStatus(input: {
   return "active_anchor";
 }
 
-function queueItemSummary(label: string, status: string) {
+function queueItemSummary(label: string, status: string, id: string) {
   if (status === "active_anchor") {
     return "Current formed Phase 8 cockpit slice.";
   }
@@ -446,8 +461,16 @@ function queueItemSummary(label: string, status: string) {
     return "Planned after the current slice closes, if repo artifacts still support the sequence.";
   }
 
+  if (status === "not_yet_formed") {
+    return `${label} is planned next context but ${id} is not yet formed as a work item.`;
+  }
+
   if (status === "deferred") {
     return "Deferred planning context only; this slice does not execute it.";
+  }
+
+  if (status === "missing_source") {
+    return "ROADMAP.md does not expose queue source rows; queue context is unavailable rather than synthesized.";
   }
 
   return `${label} remains planned context only.`;

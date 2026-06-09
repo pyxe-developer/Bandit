@@ -133,7 +133,7 @@ test("cockpit status exposes live queue context source from roadmap without brow
       {
         id: "TBD",
         label: "Operator Attention / Operator Inbox surface",
-        status: "next_planned",
+        status: "not_yet_formed",
         relationship: "next",
         source_artifacts: ["docs/roadmap/ROADMAP.md"],
         deferred_reason: undefined
@@ -148,6 +148,29 @@ test("cockpit status exposes live queue context source from roadmap without brow
       }
     ]
   );
+});
+
+test("cockpit status marks queue context unavailable when roadmap lacks queue rows", async () => {
+  const repo = await createCockpitRepo();
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.deepEqual(status.queue_context_source.items, [
+    {
+      id: "BANDIT-031",
+      label: "Queue context unavailable",
+      kind: "slice",
+      status: "missing_source",
+      relationship: "unavailable",
+      summary: "ROADMAP.md does not expose queue source rows; queue context is unavailable rather than synthesized.",
+      source_artifacts: [
+        "docs/work/BANDIT-031/brief.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ]
+    }
+  ]);
 });
 
 test("cockpit status aggregates improvement candidates from disposition artifacts", async () => {

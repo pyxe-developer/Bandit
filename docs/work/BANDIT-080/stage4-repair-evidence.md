@@ -19,16 +19,21 @@ but live CLI status produced no queue rows and the browser shell omitted
 - `src/state/cockpit-status.ts` now derives `queue_context_source` from
   repo-native `ROADMAP.md`, `CURRENT_CONTEXT.md`, active work evidence,
   blockers, stale evidence, and bootstrap-gap state.
+- Empty roadmap queue evidence now renders a `missing_source` /
+  `unavailable` row instead of synthesizing a healthy active queue row.
+- `TBD` roadmap items now render as `not_yet_formed` when they are planned
+  next context and not deferred closeout work.
 - `test/cockpit-status.test.mjs` now covers live queue-context derivation from
   a temp-repo roadmap fixture, including active, next planned, and deferred
-  rows.
+  rows, plus a fail-closed missing-source case.
 - The browser shell remains presentation-only; row fields are escaped and no
   CLI execution, form, fetch, browser storage, repo mutation, scheduling, UAT,
   landing, merge, push, deploy, or policy mutation path is introduced.
 
 ## Verification
 
-- `node --test test/cockpit-status.test.mjs` - pass, 14 tests.
+- `node --test test/cockpit-status.test.mjs` - pass, 15 tests after
+  fail-closed missing-source repair.
 - `node --test test/cockpit-queue-context.test.mjs` - pass, 3 tests.
 - `node --test test/cockpit-view-model.test.mjs` - pass, 8 tests.
 - `node --test test/cockpit-browser-shell.test.mjs` - pass, 7 tests.
@@ -45,3 +50,9 @@ but live CLI status produced no queue rows and the browser shell omitted
 Refresh Stage 4 reviewer evidence after the repair. CodeRabbit timeout evidence
 and Local Qwen evidence from the pre-repair source head must not be treated as
 current.
+
+## Role Boundary Note
+
+The Stage 4 regression in `test/cockpit-status.test.mjs` was added by Codex PM
+after review smoke found a live CLI derivation blocker. Stage 3 implementation
+remains Claude-authored source work, and the Stage 3 Writer did not edit tests.
