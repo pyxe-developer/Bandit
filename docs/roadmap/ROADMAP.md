@@ -11,9 +11,10 @@
 - None active; `BANDIT-081` remains the active derived-status anchor until the
   next slice is formed.
 
-**Current next step:** Repo PM should triage and form the V0 Closeout Claude
-Code A/B Product-Value Trial slice only if roadmap/product direction is
-sufficient; otherwise ask the operator for the missing product direction.
+**Current next step:** Repo PM should form the Work Intake Ledger And Followups
+Migration slice first, preserving `FOLLOWUPS.md` source metadata and queueing
+the triaged follow-up and UI-polish work items before the V0 Closeout Claude
+Code A/B Product-Value Trial.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -29,19 +30,48 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
+- `[Slice]` `TBD` - Work Intake Ledger And Followups Migration
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- None currently open.
+- None currently open in `.bandit/bootstrap-gaps.json`.
 
 ### Phase 8 Product Queue
 
+The first seven entries are pre-Claude-bakeoff follow-up and UI-polish work; the
+Claude Product-Value Trial stays deferred behind this lane.
+
+- `[Slice]` `TBD` - Work Intake Ledger And Followups Migration: migrate
+  `FOLLOWUPS.md` into a single intake/roadmap lane with preserved source
+  metadata; deprecate the standalone follow-up surface after validation proves
+  each entry has an outcome.
+- `[Slice]` `TBD` - Bandit Cockpit UI Polish From Attached Design: adapt the
+  attached three-pane Evidence Row cockpit design while preserving CLI
+  authority, repo-native source links, browser read-only boundaries, and normal
+  UAT/review/landing evidence.
+- `[Gap]` `TBD` - Claim-First Transition Policy Triage: decide whether every
+  post-bootstrap step transition requires an explicit actor claim, using landed
+  coordination-log and CAS claim-authority evidence; record policy, follow-up
+  scope, or no-action.
+- `[Gap]` `TBD` - Repo-Wide Transition Index Decision: determine whether a
+  derived repo-wide transition index is justified for cockpit, heartbeat, or
+  cross-work-item reporting; keep per-work-item ledgers canonical.
+- `[Gap]` `TBD` - Coordination Primitive Completion Triage: compare the
+  2026-05-24 coordination primitive follow-up against landed coordination-log
+  and core-state work; queue only missing command/state-machine slices or
+  explicit no-action decisions.
+- `[Gap]` `TBD` - PR And CI/CD Landing Workflow Policy: define remote
+  publication, PR workflow, CI checks, merge evidence, and deployment evidence
+  before replacing local-record landing.
+- `[Gap]` `TBD` - Installed-Copy Update Path: define preview, apply, verify,
+  and rollback behavior for installed Bandit skills, automation prompts, and
+  repo integration files.
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
-  the same PRD in Bandit and no-Bandit repos; no statistical or public
-  benchmark claim.
+  the same PRD in Bandit and no-Bandit repos after the pre-Claude-bakeoff
+  follow-up queue is formed or dispositioned; no statistical or public benchmark
+  claim.
 
 ## Completed Work
 

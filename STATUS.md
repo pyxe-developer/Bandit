@@ -12,9 +12,10 @@ Layer Pivot.
 `BANDIT-081` has landed and closed the Operator Attention / Operator Inbox
 Surface product slice. The current stage is Stage 6: closed.
 
-Next action: Repo PM should triage and form the V0 Closeout Claude Code A/B
-Product-Value Trial slice only if roadmap/product direction is sufficient;
-otherwise ask the operator for the missing product direction.
+Next action: Repo PM should form the Work Intake Ledger And Followups Migration
+slice first, preserving `FOLLOWUPS.md` source metadata and queueing the triaged
+follow-up and UI-polish work items before the V0 Closeout Claude Code A/B
+Product-Value Trial.
 
 Required operator input: none_required.
 

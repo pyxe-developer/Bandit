@@ -3,7 +3,35 @@
 This file captures product and workflow questions that should be revisited later
 but are not the current active Bandit work queue.
 
+## Triage Status
+
+As of 2026-06-09, these open follow-ups are roadmapped as pre-Claude-bakeoff
+work in `docs/roadmap/ROADMAP.md`. The operator-requested UI polish source is
+also roadmapped before the Claude bakeoff. This file remains source metadata
+until the Work Intake Ledger migration validates that every entry has an intake
+outcome.
+
+- Revisit Claim Requirement After Bootstrap -> Claim-First Transition Policy
+  Triage.
+- Add Bandit UI Polish From Attached Design -> Bandit Cockpit UI Polish From
+  Attached Design.
+- Consider Repo-Wide Transition Index -> Repo-Wide Transition Index Decision.
+- Schedule Coordination Primitive Implementation -> Coordination Primitive
+  Completion Triage.
+- Move From Local Main Landing To PR And CI/CD Workflow -> PR And CI/CD Landing
+  Workflow Policy.
+- Push Bandit Updates To Installed Copies -> Installed-Copy Update Path.
+
 ## Open
+
+### Add Bandit UI Polish From Attached Design
+
+- **Origin:** Operator request on 2026-06-09 with attached package `/Users/matthewflebbe/Downloads/Bandit Cockpit.zip`.
+- **Current decision:** Treat the attached static cockpit design as source material for a bounded Phase 8 product-polish slice, not as immediate browser authority or workflow mutation.
+- **Follow-up question:** How should the current Bandit cockpit adopt the attached three-pane Evidence Row visual polish while preserving CLI authority and repo-native source-of-truth boundaries?
+- **Why later:** Applying the design requires a normal slice with RED evidence, browser smoke, UAT, review, and landing evidence; it should not bypass the active pre-Claude-bakeoff routing lane.
+- **Expected evaluation point:** Before the V0 Closeout Claude Code A/B Product-Value Trial.
+- **Source note:** `docs/design/workflow-cockpit/bandit-ui-polish-source.md`.
 
 ### Revisit Claim Requirement After Bootstrap
 

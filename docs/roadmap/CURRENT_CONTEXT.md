@@ -18,15 +18,18 @@ improvement disposition, and coordination evidence are recorded under
 
 The current stage is Stage 6: closed.
 
-**Current next action:** Repo PM should triage and form the V0 Closeout Claude
-Code A/B Product-Value Trial slice only if roadmap/product direction is
-sufficient; otherwise ask the operator for the missing product direction.
+**Current next action:** Repo PM should form the Work Intake Ledger And
+Followups Migration slice first, preserving `FOLLOWUPS.md` source metadata and
+queueing the triaged follow-up and UI-polish work items before the V0 Closeout
+Claude Code A/B Product-Value Trial.
 
 Do not start unrelated Phase 8 product work, Trust Verifier cutover, merge,
 push, deploy, hosted replay service setup, paid reviewer/model routing, public
 benchmark publication, local API work, State Index work, or guarded browser
 action execution before Repo PM forms the next slice through normal Stage 1
-formation.
+formation. Do not form the V0 Closeout Claude Code A/B Product-Value Trial
+slice until the pre-Claude-bakeoff follow-up and UI-polish queue is formed or
+dispositioned.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -84,6 +87,8 @@ repo artifacts cannot answer.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. `BANDIT-081`
 remains the active derived-status anchor until Repo PM forms the next slice.
+The roadmapped pre-Claude-bakeoff follow-up and UI-polish queue now comes before
+the V0 Closeout Claude Code A/B Product-Value Trial.
 Do not create automatic improvement evaluation, inbox write/resolve/archive
 behavior, notification delivery, guarded browser action execution, local API
 work, State Index work, scheduler execution, claim execution, worktree
