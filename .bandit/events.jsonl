@@ -329,3 +329,4 @@
 {"type":"work_item_created","work_item":"BANDIT-082","message":"Created work item BANDIT-082 from docs/specs/BANDIT-082-work-intake-ledger-and-followups-migration.json"}
 {"type":"work_item_created","work_item":"BANDIT-083","message":"Created work item BANDIT-083 from docs/specs/BANDIT-083-bandit-cockpit-ui-polish-from-attached-design.json"}
 {"type":"work_item_created","work_item":"BANDIT-084","message":"Created work item BANDIT-084 from docs/specs/BANDIT-084-claim-first-transition-policy-triage.json"}
+{"type":"work_item_created","work_item":"BANDIT-085","message":"Created work item BANDIT-085 from docs/specs/BANDIT-085-repo-wide-transition-index-decision.json"}

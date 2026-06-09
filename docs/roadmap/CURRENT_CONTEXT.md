@@ -9,23 +9,24 @@ Triage chore landed locally and closed with landing action, retrospective,
 improvement disposition, and closeout evidence recorded under
 `docs/work/BANDIT-084/`.
 
-**Active work item:** `BANDIT-084` - Claim-First Transition Policy Triage.
+**Active work item:** `BANDIT-085` - Repo-Wide Transition Index Decision.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation approved.
 
-**Current next action:** Repo PM should form the next intake-derived gap work
-item for `WIL-REPO-WIDE-TRANSITION-INDEX`, Repo-Wide Transition Index Decision,
-before Coordination Primitive Completion Triage, PR And CI/CD Landing Workflow
-Policy, Installed-Copy Update Path, the V0 Closeout Claude Code A/B
-Product-Value Trial, or unrelated Phase 8 work.
+**Current next action:** Work Item PM should run plan-mode orchestration for
+`BANDIT-085`, Repo-Wide Transition Index Decision, before RED evidence,
+implementation, review, landing, closeout, Coordination Primitive Completion
+Triage, PR And CI/CD Landing Workflow Policy, Installed-Copy Update Path, the V0
+Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 work.
 
-Do not start Coordination Primitive Completion Triage, PR And CI/CD Landing
-Workflow Policy, Installed-Copy Update Path, the V0 Closeout Claude Code A/B
-Product-Value Trial, Trust Verifier cutover, merge, push, deploy, hosted replay
-service setup, paid reviewer/model routing, public benchmark publication, local
-API work, State Index work, guarded browser action execution, or unrelated
-Phase 8 product work before Repo PM forms or explicitly dispositions
-`WIL-REPO-WIDE-TRANSITION-INDEX`.
+Do not start RED evidence, implementation, Stage 4 review, landing, UAT,
+retrospective, Coordination Primitive Completion Triage, PR And CI/CD Landing
+Workflow Policy, Installed-Copy Update Path, Trust Verifier cutover, merge,
+push, deploy, hosted replay service setup, paid reviewer/model routing, public
+benchmark publication, local API work, State Index work, guarded browser action
+execution, the V0 Closeout Claude Code A/B Product-Value Trial, or unrelated
+Phase 8 product work before Work Item PM records plan-mode orchestration for
+`BANDIT-085`.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -40,39 +41,40 @@ reviewer routing.
 
 No operator-owned input is required for the next recorded action.
 
-Halt for operator input if a future step would approve universal claim-first
-policy, require every transition to have an explicit prior claim, change claim
-authority, force-resolve unsafe claim recovery, approve Trust Verifier cutover
-policy, select a Trust Goal for cutover, replace or wrap an older gate path,
+Halt for operator input if a future step would approve a canonical repo-wide
+transition ledger, approve State Index timing, approve local API work, approve
+scheduler execution, approve claim/worktree lifecycle behavior, approve guarded
+browser action execution authority, approve Trust Verifier cutover policy,
+select a Trust Goal for cutover, replace or wrap an older gate path,
 merge/push/deploy, change product or UAT direction, approve public benchmark
 publication, approve paid reviewer/model routing, approve hosted replay
 services or other external service setup, approve business tradeoffs, approve
-explicit cost/risk posture, approve live reviewer/model routing, approve
-guarded action execution authority, or make another policy/product decision
-repo artifacts cannot answer.
+explicit cost/risk posture, approve live reviewer/model routing, or make
+another policy/product decision repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-084` Stage 6 closeout evidence:
+`BANDIT-085` Stage 1 formation evidence:
 
-- Brief: `docs/work/BANDIT-084/brief.md`.
-- Orchestration plan: `docs/work/BANDIT-084/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-084/red-evidence.md`.
-- Implementation evidence: `docs/work/BANDIT-084/implementation-evidence.md`.
-- Disposition: `docs/work/BANDIT-084/claim-first-transition-disposition.md`.
-- Review evidence: `docs/work/BANDIT-084/review-evidence.md`.
-- Landing verdict: `docs/work/BANDIT-084/landing-verdict.md`.
-- Landing action: `docs/work/BANDIT-084/landing-action.md`.
-- Retrospective: `docs/work/BANDIT-084/retrospective.md`.
-- Improvement disposition: `docs/work/BANDIT-084/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-084/coordination-log.jsonl` records
-  `closed`.
+- Source spec:
+  `docs/specs/BANDIT-085-repo-wide-transition-index-decision.json`.
+- Brief: `docs/work/BANDIT-085/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-085/qwen-formation-review.md`.
+- CodeRabbit formation review:
+  `docs/work/BANDIT-085/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-085/formation-review.md`.
+- Coordination log: `docs/work/BANDIT-085/coordination-log.jsonl` records
+  `brief_created` and `formation_approved`.
 - Work Intake Ledger: `.bandit/work-intake-ledger.json` records
-  `WIL-CLAIM-FIRST` as closed as `BANDIT-084`.
+  `WIL-REPO-WIDE-TRANSITION-INDEX` as formed as `BANDIT-085`.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-084` does not approve universal claim-first policy. Current policy
-remains unchanged: accountable actors are required for transitions, and
-explicit prior claims are required only for delegated or asynchronous work
-unless a later operator-owned policy approval changes that boundary.
+`BANDIT-085` is decision/triage only. Formation does not implement or approve a
+repo-wide transition index, canonical shared transition authority, local API,
+State Index, scheduler, claim/worktree lifecycle, browser mutation authority,
+merge, push, deploy, approve paid routing, approve hosted services, approve
+public benchmark publication, approve Trust Verifier cutover, or start
+unrelated Phase 8 product work.

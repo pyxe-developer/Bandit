@@ -8,25 +8,27 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-084` - Claim-First Transition Policy Triage (closed anchor)
+- `[Gap]` `BANDIT-085` - Repo-Wide Transition Index Decision
+  (formation approved)
 
-**Current next step:** Repo PM should form the next intake-derived gap work
-item for `WIL-REPO-WIDE-TRANSITION-INDEX`, Repo-Wide Transition Index Decision,
-before Coordination Primitive Completion Triage, PR And CI/CD Landing Workflow
-Policy, Installed-Copy Update Path, the V0 Closeout Claude Code A/B
-Product-Value Trial, or unrelated Phase 8 work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-085`, Repo-Wide Transition Index Decision, before RED evidence,
+implementation, review, landing, closeout, Coordination Primitive Completion
+Triage, PR And CI/CD Landing Workflow Policy, Installed-Copy Update Path, the V0
+Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 work.
 
-Do not approve universal claim-first policy, change claim authority, approve
-Trust Verifier cutover, select a Trust Goal for cutover, replace or wrap old
-gates, generate role input or execution packets for unrelated work, restart
-Pi/Aperture runtime work, choose local API or State Index timing, execute
-guarded browser actions, approve public benchmark publication, approve paid
-reviewer/model routing, approve hosted replay services or external service
-setup, merge, push, deploy, form the V0 Closeout Claude Code A/B
-Product-Value Trial, start Coordination Primitive Completion Triage, start PR
-And CI/CD Landing Workflow Policy, start Installed-Copy Update Path, or start
-unrelated Phase 8 product work before Repo PM forms or explicitly dispositions
-`WIL-REPO-WIDE-TRANSITION-INDEX`.
+Do not approve a canonical repo-wide transition ledger, implement a repo-wide
+transition index, choose local API or State Index timing, approve scheduler
+execution, approve claim/worktree lifecycle behavior, approve guarded browser
+actions, approve Trust Verifier cutover, select a Trust Goal for cutover,
+replace or wrap old gates, generate role input or execution packets for
+unrelated work, restart Pi/Aperture runtime work, approve public benchmark
+publication, approve paid reviewer/model routing, approve hosted replay
+services or external service setup, merge, push, deploy, form the V0 Closeout
+Claude Code A/B Product-Value Trial, start Coordination Primitive Completion
+Triage, start PR And CI/CD Landing Workflow Policy, start Installed-Copy Update
+Path, or start unrelated Phase 8 product work before Work Item PM records
+plan-mode orchestration for `BANDIT-085`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -34,8 +36,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `TBD` - Repo-Wide Transition Index Decision, pending Repo PM
-  formation from `WIL-REPO-WIDE-TRANSITION-INDEX`.
+- `[Gap]` `TBD` - Coordination Primitive Completion Triage, pending after
+  `BANDIT-085` lands and closes or is explicitly blocked/dispositioned.
 
 ## Planned Work
 
@@ -48,11 +50,12 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 `BANDIT-082` migrated the pre-Claude-bakeoff follow-up and UI-polish work into
 `.bandit/work-intake-ledger.json`. `WIL-UI-POLISH` is closed as `BANDIT-083`.
 `WIL-CLAIM-FIRST` is closed as `BANDIT-084` with universal claim-first policy
-deferred. Remaining entries stay proposal-only until Repo PM forms them through
-normal Stage 1 formation or records explicit dispositions; the Claude
-Product-Value Trial stays deferred behind this lane.
+deferred. `WIL-REPO-WIDE-TRANSITION-INDEX` is formed as `BANDIT-085`.
+Remaining entries stay proposal-only until Repo PM forms them through normal
+Stage 1 formation or records explicit dispositions; the Claude Product-Value
+Trial stays deferred behind this lane.
 
-- `[Gap]` `TBD` - Repo-Wide Transition Index Decision: determine whether a
+- `[Gap]` `BANDIT-085` - Repo-Wide Transition Index Decision: determine whether a
   derived repo-wide transition index is justified for cockpit, heartbeat, or
   cross-work-item reporting; keep per-work-item ledgers canonical.
 - `[Gap]` `TBD` - Coordination Primitive Completion Triage: compare the
