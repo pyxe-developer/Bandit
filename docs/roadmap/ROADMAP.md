@@ -4,18 +4,17 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-085` - Repo-Wide Transition Index Decision (closed)
+- `[Gap]` `BANDIT-086` - Coordination Primitive Completion Triage (closed)
 
 ## Current Work Item
 
 - `[Gap]` `BANDIT-086` - Coordination Primitive Completion Triage
-  (formation approved)
+  (closed anchor)
 
-**Current next step:** Work Item PM should start plan-mode orchestration for
-`BANDIT-086` before RED evidence, implementation, review, landing, UAT,
-retrospective, PR And CI/CD Landing Workflow Policy, Installed-Copy Update
-Path, the V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase
-8 work.
+**Current next step:** Repo PM should form the next intake-derived gap work item
+for `WIL-PR-CICD-LANDING`, PR And CI/CD Landing Workflow Policy, before
+Installed-Copy Update Path, the V0 Closeout Claude Code A/B Product-Value
+Trial, or unrelated Phase 8 work.
 
 Do not approve new coordination primitive implementation, choose local API or
 State Index timing, approve scheduler execution, approve claim/worktree
@@ -24,10 +23,9 @@ cutover, select a Trust Goal for cutover, replace or wrap old gates, generate
 role input or execution packets for unrelated work, restart Pi/Aperture runtime
 work, approve public benchmark publication, approve paid reviewer/model
 routing, approve hosted replay services or external service setup, merge, push,
-deploy, form the V0 Closeout Claude Code A/B Product-Value Trial, start PR And
-CI/CD Landing Workflow Policy, start Installed-Copy Update Path, or start
-unrelated Phase 8 product work before Work Item PM records plan-mode
-orchestration for `BANDIT-086`.
+deploy, form the V0 Closeout Claude Code A/B Product-Value Trial, start
+Installed-Copy Update Path, or start unrelated Phase 8 product work before Repo
+PM forms the next intake-derived gap work item for `WIL-PR-CICD-LANDING`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -51,10 +49,11 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 `WIL-CLAIM-FIRST` is closed as `BANDIT-084` with universal claim-first policy
 deferred. `WIL-REPO-WIDE-TRANSITION-INDEX` is closed as `BANDIT-085` with
 repo-wide transition indexing deferred until named trigger conditions exist.
-`WIL-COORDINATION-PRIMITIVE` is formed as `BANDIT-086`. Remaining entries stay
-proposal-only until Repo PM forms them through normal Stage 1 formation or
-records explicit dispositions; the Claude Product-Value Trial stays deferred
-behind this lane.
+`WIL-COORDINATION-PRIMITIVE` is closed as `BANDIT-086` with new coordination
+primitive implementation deferred until named trigger conditions exist.
+Remaining entries stay proposal-only until Repo PM forms them through normal
+Stage 1 formation or records explicit dispositions; the Claude Product-Value
+Trial stays deferred behind this lane.
 
 - `[Gap]` `TBD` - PR And CI/CD Landing Workflow Policy: define remote
   publication, PR workflow, CI checks, merge evidence, and deployment evidence
@@ -69,6 +68,7 @@ behind this lane.
 
 ## Completed Work
 
+- `BANDIT-086` - Coordination Primitive Completion Triage
 - `BANDIT-085` - Repo-Wide Transition Index Decision
 - `BANDIT-084` - Claim-First Transition Policy Triage
 - `BANDIT-083` - Bandit Cockpit UI Polish From Attached Design
