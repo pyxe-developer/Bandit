@@ -467,6 +467,14 @@ public proof. Rigor alone does not get attention; **a legible, reproducible resu
 - **Wire real PR/CI landing (the deferred follow-up).** Local-record landing is the biggest
   gap between "impressive internal system" and "thing others can adopt." It's already
   roadmapped; prioritizing it unlocks the GitHub-native distribution in items above.
+- **Full automation with a per-gate AFK/HITL dial, configurable model-agnostic roles,
+  hook-driven orchestration, an onboarding wizard, baked-in doctrine, and a
+  doctrine-alignment skill for legacy repos.** This is a large enough vision to warrant its
+  own design — see the companion document
+  [`2026-06-09-bandit-automation-onboarding-design.md`](2026-06-09-bandit-automation-onboarding-design.md).
+  Key finding: most of the machinery (reviewer-profiles, model-family-separation,
+  event-driven-wake-scheduler, role-run-manifests, token-cost-failsafe, operator-boundary)
+  already exists; the work is a configuration + trigger + install layer, not new foundations.
 
 ---
 
