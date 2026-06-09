@@ -539,12 +539,24 @@ The required evidence packet before the Repo PM Coordinator may mechanically rel
 _Avoid_: blind timeout cleanup, assumed clean worktree, destructive stale release
 
 **Work Item Proposal**:
-A proposed unit of work that records source, rationale, suggested Work Item type, proposed dependency edges, scope, risk, and product-scope status before the Repo PM Coordinator triages it. It is not claimable work; `accepted_to_queue` records consensus for queueing, while `accepted_deferred` remains a non-claimable proposal until later promotion and materialization.
+A proposed unit of work that records source, rationale, suggested Work Item type, proposed dependency edges, scope, risk, and product-scope status before the Repo PM Coordinator triages it. It is not claimable work; `accepted_to_queue` records consensus for promotion into PRD-backed, roadmap-prioritized work, while `accepted_deferred` remains a non-claimable proposal until later promotion and materialization.
 _Avoid_: active work item, hidden follow-up, informal idea
 
 **Work Intake Ledger**:
-The single repo-native triage surface for Work Item Proposals from any source, including chores, retrospective improvement candidates, feature ideas, reviewer follow-ups, operator requests, spawned work, deferred cleanup, and product questions. It exposes each entry's current state while preserving decision history. Intake entries are not claimable until the Repo PM Coordinator materializes an `accepted_to_queue` decision into a real Work Item and the Work Item passes claimability checks.
+The single repo-native triage surface for Work Item Proposals from any source, including chores, retrospective improvement candidates, feature ideas, reviewer follow-ups, operator requests, spawned work, deferred cleanup, and product questions. It exposes each entry's current state while preserving decision history. Intake entries are not claimable or primary execution queue items; approved entries are promoted into PRD-backed, roadmap-prioritized work before the Repo PM Coordinator materializes them into normal Work Items.
 _Avoid_: follow-up file, chore-only backlog, hidden idea bucket
+
+**Work Intake Ledger Entry ID**:
+A stable `WIL-*` identifier for a Work Item Proposal while it remains in the Work Intake Ledger; it is replaced or linked by PRD-backed roadmap scope and then by a normal Work Item ID when Repo PM materializes the proposal into a slice or chore.
+_Avoid_: Work Item ID, claim ID, executable work item, hidden priority, formed work, roadmap label
+
+**Bandit Work Create Command**:
+The operator-facing `/bandit-work-create` entrypoint that follows the Repo PM formation prompt to turn the current roadmap-authorized PRD or next roadmap item into a normal Work Item and may complete formation through Formation Approved State when repo evidence is sufficient. Its initial authority sources are `docs/roadmap/ROADMAP.md` and `docs/roadmap/CURRENT_CONTEXT.md`; it may dereference PRD, spec, or Work Intake Ledger provenance only after those roadmap files identify the current or next work.
+_Avoid_: Stage 2 execution command, internal packet generator, backlog editor, ledger scanner, hidden prioritizer
+
+**Bandit Work Execute Command**:
+The operator-facing `/bandit-work-execute` entrypoint that follows the Work Item PM Orchestrator prompt to invoke authorized stage routes for a formed Work Item from Stage 2 through closure when possible, stopping only for blockers, operator-owned input, provider failure, or gate failure.
+_Avoid_: formation command, packet command, manual stage checklist, one-stage advance command, improvement scheduler
 
 **Work Intake Triage Skill**:
 A guided operator-review workflow that ranks Work Intake Ledger entries, walks the operator through selected entries one at a time, presents the opportunity and evidence, asks clarifying questions, and records consensus outcomes without turning proposed work into claimable work by default. It is invoked for any operator-facing request to review the Work Intake Ledger. It prioritizes low-effort/high-impact opportunities, triages new or untriaged entries first, and then offers accepted-deferred entries for optional revisit when earlier work changes their effort or impact. Its ranking is advisory; the operator may override the suggested order. It may record lightweight override learning signals when available, but those signals are not required for triage to proceed.
@@ -575,8 +587,8 @@ A generated compact context packet that lets a Work Item PM Orchestrator execute
 _Avoid_: full brief, roadmap history, raw review stream
 
 **Role Input Packet**:
-A generated role-specific context packet derived from approved formation evidence, role contracts, and decomposed rubrics.
-_Avoid_: hand-picked prompt context, full repository packet, raw stage dump
+A generated stage-scoped context packet for one Work Item role-run, derived from approved formation evidence, role contracts, and decomposed rubrics.
+_Avoid_: operator-facing command, generic ContextPacket, hand-picked prompt context, full repository packet, raw stage dump
 
 **Role Run Manifest**:
 A CLI-generated authorization record for one role-run attempt, including role contract, base revision, allowed writes, forbidden writes, inputs, summary path, and validation commands.
@@ -599,8 +611,8 @@ A directed relationship between Work Items whose type determines whether it affe
 _Avoid_: generic related link, implicit blocker, hidden parent-child meaning
 
 **Feature PRD**:
-A planning artifact that captures the product problem, solution, user stories, implementation decisions, testing decisions, and explicit out-of-scope boundaries before implementation is split into work.
-_Avoid_: ticket, vague feature request, implementation prompt
+A planning artifact under `docs/prds/` that captures the product problem, solution, user stories, implementation decisions, testing decisions, and explicit out-of-scope boundaries before implementation is decomposed onto `docs/roadmap/ROADMAP.md` and split into work.
+_Avoid_: ticket, vague feature request, implementation prompt, work-item JSON spec, WIL entry
 
 **Slice**:
 A bounded implementation unit for product or behavior-changing work that should move through planning, TDD, quality gates, review, and UAT.
@@ -1084,18 +1096,22 @@ _Avoid_: planner, architect
 - An **Explicit Role Entrypoint** must name Repo PM or Work Item PM before Bandit loads role-specific context or mutates workflow state.
 - A **Repo PM Coordinator** owns work formation and **Formation Review**; a **Work Item PM Orchestrator** starts only after a **Formation Approved State** exists.
 - A **Formation Gate** is enforced by **CLI Authority** using Repo PM-owned formation evidence and independent reviewer evidence.
+- A **Bandit Work Create Command** follows a Repo PM formation **Orchestrator Prompt** but records authority through CLI-validated Work Item formation artifacts and derives its initial current/next work decision from `docs/roadmap/ROADMAP.md` plus `docs/roadmap/CURRENT_CONTEXT.md`.
+- A **Bandit Work Execute Command** follows a Work Item PM **Orchestrator Prompt** but records authority through CLI-validated stage evidence and coordination transitions.
 - A **Work Item Execution Packet** is the default context for a **Work Item PM Orchestrator** after formation approval.
 - A **Role Input Packet** and **Role Run Manifest** scope each subagent invocation, while **Role Run Attempts** preserve the append-only execution record.
 - Until a GUI or cockpit notification surface exists, the **Repo PM Coordinator** records operator-visible coordination messages in the **Operator Inbox** rather than interrupting through a separate channel.
 - A **Feature PRD** is split into **Work Items** so product delivery and maintenance can use different workflows through **Slices** and **Chores**.
 - **Slices** and **Chores** are **Work Item** types.
 - A **Work Intake Ledger** holds **Work Item Proposals** before they become active work, approved deferred work, operator escalations, declined entries, or duplicate/superseded entries.
+- An approved **Feature PRD** is decomposed onto `docs/roadmap/ROADMAP.md`; approved **Work Intake Ledger** proposals are promoted into PRD-backed roadmap scope and renamed as normal Work Items before execution.
+- Operator-facing workflow command specifications, including **Bandit Work Create Command** and **Bandit Work Execute Command**, live first as **Feature PRDs** under `docs/prds/`; `docs/specs/` holds decomposed Work Item creation specs, and `docs/work/<ID>/` holds formed execution artifacts.
 - A **Work Intake Triage Skill** is the operator-facing path for resolving **Work Intake Ledger** entries into consensus outcomes.
 - Any operator-facing request to review the **Work Intake Ledger** invokes the **Work Intake Triage Skill** rather than direct ledger editing or ad hoc backlog review.
 - A **Work Intake Ledger** is maintained from agent-mediated operator workflows such as **Work Intake Triage Skill** and **grill-with-docs**; the operator is not expected to edit intake entries directly.
 - A **Work Intake Ledger** combines mutable current entry state with preserved transition history so agents can scan the current queue without losing decision provenance.
 - Only the **Repo PM Coordinator** and **Work Intake Triage Skill** may mutate **Work Intake Ledger** triage state. **Work Item PM Orchestrators**, workers, reviewers, retrospectives, and other agents may propose entries or transitions, but cannot mark proposals accepted, deferred, declined, superseded, or claimable.
-- The **Work Intake Triage Skill** may record `accepted_to_queue` consensus, but the **Repo PM Coordinator** materializes the accepted proposal by allocating a real Work Item ID, creating the initial artifact shell, linking it back to the proposal, and making it eligible for queueing and claimability checks.
+- The **Work Intake Triage Skill** may record `accepted_to_queue` consensus, but the **Repo PM Coordinator** materializes the accepted proposal only through roadmap-authorized work by allocating a real Work Item ID, creating the initial artifact shell, linking it back to proposal provenance, and making it eligible for queueing and claimability checks.
 - A **Work Item Proposal** is not a **Work Item** until the **Repo PM Coordinator** completes materialization of an `accepted_to_queue` decision.
 - A materialized **Work Item** is queued, not automatically claimable; claimability still requires no `recovery_required_claim` or `expired_claim`, unblocked dependencies, declared write surfaces, valid scope and acceptance criteria, no conflicting active claim, no **Work-Surface Deadlock**, and any required product, operator, or policy approval.
 - A queued **Work Item** that is not claimable stays queued with a **Claimability Report** of `claimability: blocked`; it does not move to a separate blocked-work queue.
@@ -1288,6 +1304,16 @@ _Avoid_: planner, architect
 - "bare `/bandit`" was used as a default dispatcher; resolved: Bandit requires an **Explicit Role Entrypoint** before loading role-specific context or doing work.
 - "brief exists" was used as if a Work Item were executable; resolved: a Work Item needs a **Formation Approved State** from the **Formation Gate** before Work Item PM execution starts.
 - "subagent prompt" was used as if it could grant authority; resolved: subagent authority comes from structured role contracts, **Role Input Packets**, **Role Run Manifests**, and validated **Role Run Attempts**.
+- "ContextPacket" could mean a **Focused Session Context Packet**, **Work Item Execution Packet**, or **Role Input Packet**; resolved: a per-stage packet for one Work Item role-run is a **Role Input Packet**.
+- "`WIL-*`" could look like an active Work Item or claim; resolved: it is a **Work Intake Ledger Entry ID** for a proposal that still needs Repo PM triage and normal Stage 1 formation before execution.
+- "approved WIL" could mean intake acceptance, roadmap priority, or execution readiness; resolved: `accepted_to_queue` promotes the proposal into PRD-backed roadmap scope, the WIL label is replaced or linked by a normal Work Item ID during materialization, and only a materialized Work Item with **Formation Approved State** becomes executable.
+- "`/bandit-work`" could be one command namespace or separate operator commands; resolved: keep separate **Bandit Work Create Command** and **Bandit Work Execute Command** entrypoints.
+- "`/bandit-work-create`" could stop at brief creation or continue through formation approval; resolved: it may run Repo PM formation through **Formation Approved State**, but must not start Stage 2 execution.
+- "`/bandit-work-create`" could scan intake state directly to choose what to form; resolved: it initially reads only `docs/roadmap/ROADMAP.md` and `docs/roadmap/CURRENT_CONTEXT.md` for current and next work, then follows any PRD, spec, or WIL provenance those files identify.
+- "`/bandit-work-execute`" could mean advance one stage; resolved: it should attempt end-to-end Stage 2 through closure execution for a formed Work Item, while internal stage packets and commands remain hidden from the operator.
+- "`bandit context <stage>`" could look like another operator workflow command; resolved: per-stage packet generation is internal support for **Bandit Work Execute Command**, not the operator-facing interface.
+- "through closure" could include Stage 7 evaluation; resolved: normal Work Item closure ends with Stage 6 closeout, while Stage 7 applies to due improvement evaluation work unless that is the formed Work Item being executed.
+- "`/bandit-work-execute`" could be a passive packet generator; resolved: it invokes authorized stage routes when available and records honest blockers or provider-failure evidence when they are not.
 - "first-class agents" were discussed while Codex and subprocesses remained the runtime; resolved, then superseded: Bandit no longer needs a **True-Agent Harness Pivot** as its next product path, because its load-bearing boundary is the harness-agnostic **Trust Layer**.
 - "Aperture" could be mistaken for the harness; resolved: Aperture is the **Aperture Model Plane**, while Pi is the **Pi Harness Plane**.
 - "Pi config" was discussed as a projection of repo-native scope, then as adopting Pi's default agent names, then as excluding **Repo PM Coordinator** from Pi; resolved: harness-native work defines every Bandit-named agent in the **Pi Canonical Agent Taxonomy**, while **Repo-Native Agent Scope** binds that taxonomy to Bandit workflow authority and evidence.
