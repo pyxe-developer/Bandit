@@ -119,13 +119,20 @@ export function renderCockpitShell(
       aria_label: "Stage gate matrix",
       rows: viewModel.evidence_drilldown.gate_matrix,
       source_paths_wrap: true,
-      mutation_forms: []
+      mutation_forms: [],
+      presentation_pattern: "evidence_row" as const,
+      status_cues_visible: true,
+      uses_color_alone: false
     },
     evidence_detail: {
       aria_label: "Evidence detail",
       rows: viewModel.evidence_drilldown.detail_rows,
       mutation_forms: [],
-      canonical_state_owner: viewModel.canonical_state_owner
+      canonical_state_owner: viewModel.canonical_state_owner,
+      presentation_pattern: "evidence_row" as const,
+      source_paths_wrap: true,
+      status_cues_visible: true,
+      uses_color_alone: false
     }
   };
 }

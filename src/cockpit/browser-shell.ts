@@ -57,14 +57,18 @@ const SHELL_ASSETS: BrowserShellAsset[] = [
 const SHELL_CSS = `
 :root {
   --color-canvas: #050506;
-  --color-primary: #ff7a59;
   --color-surface: #0e0e10;
   --color-text: #e8e8ec;
   --color-muted: #8a8a9a;
   --color-border: #1e1e24;
+  --color-attention: #ff7a59;
+  --color-pass: #16a766;
+  --color-blocker: #e66550;
+  --color-source-link: #4a86e8;
+  --space-1: 4px;
   --radius: 6px;
   --gap: 16px;
-  font-family: system-ui, sans-serif;
+  font-family: "Instrument Sans", system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -115,7 +119,7 @@ aside[aria-label="Evidence"] {
 .source-link {
   overflow-wrap: anywhere;
   word-break: break-all;
-  color: var(--color-primary);
+  color: var(--color-source-link);
 }
 
 .disabled-reason {
@@ -127,7 +131,7 @@ aside[aria-label="Evidence"] {
 
 .command-preview {
   display: block;
-  font-family: ui-monospace, monospace;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.85em;
   color: var(--color-muted);
   margin-top: 2px;
@@ -181,7 +185,7 @@ aside[aria-label="Evidence"] {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-attention);
   outline-offset: 2px;
 }
 
@@ -219,7 +223,7 @@ export function renderBrowserCockpitShell(
 ): BrowserCockpitShell {
   const cockpitShell = renderCockpitShell(viewModel, viewport);
   const isMobile = viewport.width < 720;
-  const responsive = buildResponsive(isMobile);
+  const responsive = buildResponsive();
 
   return {
     kind: "browser_served_cockpit_shell",
@@ -267,16 +271,13 @@ function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, char => HTML_ESCAPE_MAP[char] ?? char);
 }
 
-function buildResponsive(isMobile: boolean): Responsive {
-  if (isMobile) {
-    return {
-      text_overflow: false,
-      source_paths_wrap: true,
-      detail_rows_wrap: true,
-      overlaps: []
-    };
-  }
-  return { text_overflow: false, overlaps: [] };
+function buildResponsive(): Responsive {
+  return {
+    text_overflow: false,
+    source_paths_wrap: true,
+    detail_rows_wrap: true,
+    overlaps: []
+  };
 }
 
 function buildHtml(
@@ -433,9 +434,18 @@ ${rows}
 function buildGateMatrixRowHtml(
   row: CockpitShell["gate_matrix"]["rows"][number]
 ): string {
-  return `          <li class="gate-matrix-row">
+  // `status_label` and `freshness_label` are attached as non-enumerable
+  // presentation-extension properties on the row by
+  // `buildCockpitEvidenceDetail`. They are always present at runtime, so
+  // the non-null assertion is safe and keeps the presentation code
+  // locally narrow instead of pushing optional-handling into the HTML
+  // builder.
+  const statusLabel = row.status_label ?? row.status;
+  const freshnessLabel = row.freshness_label ?? row.freshness_state;
+  return `          <li class="evidence-row gate-matrix-row" data-evidence-state="${escapeHtml(row.status)}" data-freshness-state="${escapeHtml(row.freshness_state)}">
             <span class="gate-cell gate-label">${escapeHtml(row.label)}</span>
-            <span class="gate-cell gate-state">${escapeHtml(row.status)} / ${escapeHtml(row.freshness_state)}</span>
+            <span class="evidence-state-label">${escapeHtml(statusLabel)}</span>
+            <span class="evidence-freshness-label">${escapeHtml(freshnessLabel)}</span>
             <span class="gate-cell gate-owner">${escapeHtml(row.owner_or_authority_role)}</span>
             <span class="gate-cell gate-reason">${escapeHtml(row.reason)}</span>
             <span class="gate-cell gate-repair">${escapeHtml(row.next_repair_route)}</span>
@@ -457,7 +467,7 @@ ${rows}
 function buildEvidenceDetailRowHtml(
   row: CockpitShell["evidence_detail"]["rows"][number]
 ): string {
-  return `          <li class="evidence-detail-row">
+  return `          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">${escapeHtml(row.label)}</span>
             <span class="detail-cell detail-status">${escapeHtml(row.status)}</span>
             <span class="detail-cell detail-reason">${escapeHtml(row.reason)}</span>
@@ -474,7 +484,13 @@ function buildSourceLinks(sources: string[]): string {
 
 function buildQueueContextSection(queueContext: CockpitViewModel["queue_context"]): string {
   const rows = queueContext.rows;
-  if (!rows) return "";
+  if (!rows) {
+    // Return an HTML comment placeholder so the calling template does not
+    // leave a blank, indentation-only line in the generated HTML when the
+    // current snapshot does not expose queue rows. The comment is invisible
+    // in the rendered UI and preserves the presentation-only boundary.
+    return "<!-- no queue context rows -->";
+  }
 
   const transitions = queueContext.recent_transitions ?? [];
   const rowsHtml = rows.map(buildQueueRowHtml).join("\n");

@@ -384,3 +384,34 @@ test("cockpit shell renders dense gate matrix and evidence detail without hidden
   assert.deepEqual(shell.evidence_detail.mutation_forms, []);
   assert.equal(shell.evidence_detail.canonical_state_owner, "repo_native_artifacts_via_bandit_cli");
 });
+
+test("cockpit shell identifies gate rows as Evidence Rows with non-color status cues", async () => {
+  const { buildCockpitViewModel } = await loadViewModelModule();
+  const { renderCockpitShell } = await loadRenderModule();
+
+  const shell = renderCockpitShell(
+    buildCockpitViewModel(evidenceDrilldownStatusFixture()),
+    desktopViewport()
+  );
+
+  assert.equal(shell.gate_matrix.presentation_pattern, "evidence_row");
+  assert.equal(shell.gate_matrix.source_paths_wrap, true);
+  assert.equal(shell.gate_matrix.status_cues_visible, true);
+  assert.equal(shell.gate_matrix.uses_color_alone, false);
+  assert.equal(shell.evidence_detail.presentation_pattern, "evidence_row");
+  assert.equal(shell.evidence_detail.source_paths_wrap, true);
+  assert.equal(shell.evidence_detail.status_cues_visible, true);
+  assert.equal(shell.evidence_detail.uses_color_alone, false);
+
+  for (const row of shell.gate_matrix.rows) {
+    assert.equal(row.presentation_pattern, "evidence_row");
+    assert.ok(row.status_label.length > 0);
+    assert.ok(row.freshness_label.length > 0);
+    assert.ok(row.sources.length > 0);
+  }
+
+  const missingStage = shell.gate_matrix.rows.find((row) => row.id === "stage_2_red_evidence");
+  assert.equal(missingStage.status_label, "missing");
+  assert.equal(missingStage.freshness_label, "missing evidence");
+  assert.match(missingStage.next_repair_route, /Record Test Writer-owned RED evidence/);
+});

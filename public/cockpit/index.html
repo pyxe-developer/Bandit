@@ -22,8 +22,8 @@
     </nav>
     <main id="active-work">
       <h1>Active work</h1>
-      <p class="work-item">BANDIT-067</p>
-      <p class="next-action">Write Test Writer-owned Stage 2 RED evidence for BANDIT-067 before implementation.</p>
+      <p class="work-item">BANDIT-083</p>
+      <p class="next-action">Dispatch Stage 3 implementation for Bandit Cockpit UI Polish From Attached Design (BANDIT-083).</p>
       <p class="evidence-source">
         <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a>
       </p>
@@ -34,20 +34,20 @@
         <span class="guard-meta">Source: <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">Current context - docs/roadmap/CURRENT_CONTEXT.md</a> | Owner: bandit_cli | Role gate: codex_pm | Operator gate: none_required</span>
         <button class="action-button" id="inspect_evidence" role="button" data-command-family="bandit show" data-request-mode="cli_request_only" data-authority-owner="bandit_cli" data-role-gate="codex_pm" data-operator-gate="none_required" aria-disabled="false">Inspect evidence</button>
         <span class="command-preview">node ./bin/bandit.mjs cockpit status --json</span>
-        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/brief.md">Active work brief - docs/work/BANDIT-067/brief.md</a> | Owner: bandit_cli | Role gate: codex_pm | Operator gate: none_required</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-083/brief.md">Active work brief - docs/work/BANDIT-083/brief.md</a> | Owner: bandit_cli | Role gate: codex_pm | Operator gate: none_required</span>
         <button class="action-button" id="run_review_gate" role="button" data-command-family="bandit qwen-review" data-request-mode="cli_request_only" data-authority-owner="reviewer" data-role-gate="reviewer_after_implementation" data-operator-gate="none_required" disabled aria-disabled="true" aria-describedby="run_review_gate_reason">Review gate</button>
-        <span class="command-preview">npm run bandit -- qwen-review BANDIT-067</span>
-        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/red-evidence.md">Stage 2 RED evidence - docs/work/BANDIT-067/red-evidence.md</a> | Owner: reviewer | Role gate: reviewer_after_implementation | Operator gate: none_required</span>
-        <span id="run_review_gate_reason" class="disabled-reason">Stage 2 RED evidence is missing.</span>
+        <span class="command-preview">npm run bandit -- qwen-review BANDIT-083</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-083/red-evidence.md">Stage 2 RED evidence - docs/work/BANDIT-083/red-evidence.md</a> | Owner: reviewer | Role gate: reviewer_after_implementation | Operator gate: none_required</span>
+        <span id="run_review_gate_reason" class="disabled-reason">Stage 3 implementation evidence is missing; record implementation before review.</span>
         <span class="unavailable-route">Record RED and implementation evidence before requesting review.</span>
         <button class="action-button" id="check_landing_readiness" role="button" data-command-family="bandit land-check" data-request-mode="cli_request_only" data-authority-owner="landing_agent" data-role-gate="landing_agent_after_review" data-operator-gate="none_required" disabled aria-disabled="true" aria-describedby="check_landing_readiness_reason">Landing check</button>
-        <span class="command-preview">npm run bandit -- land-check BANDIT-067</span>
-        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">Implementation evidence - docs/work/BANDIT-067/implementation-evidence.md</a> | Owner: landing_agent | Role gate: landing_agent_after_review | Operator gate: none_required</span>
+        <span class="command-preview">npm run bandit -- land-check BANDIT-083</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-083/implementation-evidence.md">Implementation evidence - docs/work/BANDIT-083/implementation-evidence.md</a> | Owner: landing_agent | Role gate: landing_agent_after_review | Operator gate: none_required</span>
         <span id="check_landing_readiness_reason" class="disabled-reason">implementation evidence is not recorded</span>
         <span class="unavailable-route">Record current implementation and review evidence before land-check.</span>
         <button class="action-button" id="record_uat" role="button" data-command-family="bandit uat" data-request-mode="cli_request_only" data-authority-owner="operator" data-role-gate="operator_after_implementation" data-operator-gate="operator_owned_cli_uat" disabled aria-disabled="true" aria-describedby="record_uat_reason">Record UAT</button>
-        <span class="command-preview">npm run bandit -- uat approve BANDIT-067</span>
-        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-067/brief.md">Work item brief - docs/work/BANDIT-067/brief.md</a> | Owner: operator | Role gate: operator_after_implementation | Operator gate: operator_owned_cli_uat</span>
+        <span class="command-preview">npm run bandit -- uat approve BANDIT-083</span>
+        <span class="guard-meta">Source: <a class="source-link" href="docs/work/BANDIT-083/brief.md">Work item brief - docs/work/BANDIT-083/brief.md</a> | Owner: operator | Role gate: operator_after_implementation | Operator gate: operator_owned_cli_uat</span>
         <span id="record_uat_reason" class="disabled-reason">UAT is unavailable until an operator-facing implementation exists.</span>
         <span class="unavailable-route">Record CLI-owned product UAT only after the operator-facing implementation exists.</span>
       </section>
@@ -55,14 +55,14 @@
       <h2>Live status</h2>
       <ul>
         <li class="status-cue"><span class="cue-text">Phase: Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
-        <li class="status-cue"><span class="cue-text">Active work: BANDIT-067</span> <a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
-        <li class="status-cue"><span class="cue-text">Next action: Write Test Writer-owned Stage 2 RED evidence for BANDIT-067 before implementation.</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
+        <li class="status-cue"><span class="cue-text">Active work: BANDIT-083</span> <a class="source-link" href="docs/work/BANDIT-083/brief.md">docs/work/BANDIT-083/brief.md</a></li>
+        <li class="status-cue"><span class="cue-text">Next action: Dispatch Stage 3 implementation for Bandit Cockpit UI Polish From Attached Design (BANDIT-083).</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
         <li class="status-cue"><span class="cue-text">Operator input: none_required</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
         <li class="status-cue"><span class="cue-text">Blockers or stale evidence: No blockers or stale evidence</span> <a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
-        <li class="status-cue"><span class="cue-text">Landing: not_ready</span> <a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">docs/work/BANDIT-067/implementation-evidence.md</a></li>
-        <li class="status-cue"><span class="cue-text">UAT: not_applicable</span> <a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
+        <li class="status-cue"><span class="cue-text">Landing: not_ready</span> <a class="source-link" href="docs/work/BANDIT-083/implementation-evidence.md">docs/work/BANDIT-083/implementation-evidence.md</a></li>
+        <li class="status-cue"><span class="cue-text">UAT: not_applicable</span> <a class="source-link" href="docs/work/BANDIT-083/brief.md">docs/work/BANDIT-083/brief.md</a></li>
         <li class="status-cue"><span class="cue-text">Bootstrap gaps: none</span> <a class="source-link" href=".bandit/bootstrap-gaps.json">.bandit/bootstrap-gaps.json</a></li>
-        <li class="status-cue"><span class="cue-text">Coordination: orchestration_plan_recorded</span> <a class="source-link" href="docs/work/BANDIT-067/coordination-log.jsonl">docs/work/BANDIT-067/coordination-log.jsonl</a></li>
+        <li class="status-cue"><span class="cue-text">Coordination: orchestration_plan_recorded</span> <a class="source-link" href="docs/work/BANDIT-083/coordination-log.jsonl">docs/work/BANDIT-083/coordination-log.jsonl</a></li>
         <li class="status-cue"><span class="cue-text">Improvements: pending_candidates</span> <a class="source-link" href="docs/work/BANDIT-063/qwen-finding-disposition.md">docs/work/BANDIT-063/qwen-finding-disposition.md</a></li>
       </ul>
     </section>
@@ -71,11 +71,40 @@
       <ul>
         <li class="gate"><span class="gate-text">stage_0_context_readiness: pass</span></li>
         <li class="gate"><span class="gate-text">stage_1_brief: pass</span></li>
-        <li class="gate"><span class="gate-text">stage_2_red_evidence: missing</span></li>
+        <li class="gate"><span class="gate-text">stage_2_red_evidence: pass</span></li>
         <li class="gate"><span class="gate-text">stage_3_implementation: missing</span></li>
         <li class="gate"><span class="gate-text">stage_4_review: missing</span></li>
         <li class="gate"><span class="gate-text">stage_5_landing: missing</span></li>
         <li class="gate"><span class="gate-text">stage_6_retrospective: missing</span></li>
+      </ul>
+    </section>
+      <section class="improvement-health" aria-label="Improvement health">
+      <h2>Improvement health</h2>
+      <ul>
+        <li class="improvement-health-row">
+          <span class="ih-id">BANDIT-063-PLAN-STALENESS-HARDENING</span>
+          <span class="ih-status">status: candidate</span>
+          <span class="ih-outcome">outcome: pending</span>
+          <span class="ih-state">state: missing_metadata</span>
+          <span class="ih-metric">not available</span>
+          <span class="ih-guardrail">guardrails: missing_metadata, uncertainty: missing</span>
+          <span class="ih-next-route">Record workflow-trial guardrail metadata before presenting this as healthy.</span>
+          <span class="ih-sources"><a class="source-link" href="docs/work/BANDIT-063/qwen-finding-disposition.md">docs/work/BANDIT-063/qwen-finding-disposition.md</a></span>
+        </li>
+      </ul>
+    </section>
+      <!-- no queue context rows -->
+      <section class="operator-attention" aria-label="Operator attention">
+      <h2>Operator attention</h2>
+      <p class="attention-summary">No operator attention required.</p>
+      <ul class="attention-rows">
+
+      </ul>
+    </section>
+      <section class="operator-inbox" aria-label="Operator Inbox" data-canonical-source=".bandit/inbox">
+      <h2>Operator Inbox</h2>
+      <ul class="inbox-messages">
+
       </ul>
     </section>
     </main>
@@ -84,112 +113,119 @@
       <ul>
         <li><a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a></li>
         <li><a class="source-link" href="docs/roadmap/ROADMAP.md">docs/roadmap/ROADMAP.md</a></li>
-        <li><a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></li>
-        <li><a class="source-link" href="docs/work/BANDIT-067/red-evidence.md">docs/work/BANDIT-067/red-evidence.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-083/brief.md">docs/work/BANDIT-083/brief.md</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-083/red-evidence.md">docs/work/BANDIT-083/red-evidence.md</a></li>
         <li><a class="source-link" href="docs/work/BANDIT-063/qwen-finding-disposition.md">docs/work/BANDIT-063/qwen-finding-disposition.md</a></li>
-        <li><a class="source-link" href="docs/work/BANDIT-067/coordination-log.jsonl">docs/work/BANDIT-067/coordination-log.jsonl</a></li>
+        <li><a class="source-link" href="docs/work/BANDIT-083/coordination-log.jsonl">docs/work/BANDIT-083/coordination-log.jsonl</a></li>
       </ul>
       <section class="gate-matrix" aria-label="Stage gate matrix">
         <h3>Gate matrix</h3>
         <ul>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="pass" data-freshness-state="current">
             <span class="gate-cell gate-label">Stage 0 context readiness</span>
-            <span class="gate-cell gate-state">pass / current</span>
+            <span class="evidence-state-label">pass</span>
+            <span class="evidence-freshness-label">evidence current</span>
             <span class="gate-cell gate-owner">codex_pm</span>
             <span class="gate-cell gate-reason">none</span>
             <span class="gate-cell gate-repair">No repair required.</span>
             <span class="detail-cell detail-sources"><a class="source-link" href="docs/roadmap/CURRENT_CONTEXT.md">docs/roadmap/CURRENT_CONTEXT.md</a> <a class="source-link" href="docs/roadmap/ROADMAP.md">docs/roadmap/ROADMAP.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="pass" data-freshness-state="current">
             <span class="gate-cell gate-label">Stage 1 brief</span>
-            <span class="gate-cell gate-state">pass / current</span>
+            <span class="evidence-state-label">pass</span>
+            <span class="evidence-freshness-label">evidence current</span>
             <span class="gate-cell gate-owner">codex_pm</span>
             <span class="gate-cell gate-reason">none</span>
             <span class="gate-cell gate-repair">No repair required.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/brief.md">docs/work/BANDIT-083/brief.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="pass" data-freshness-state="current">
             <span class="gate-cell gate-label">Stage 2 RED evidence</span>
-            <span class="gate-cell gate-state">missing / missing</span>
+            <span class="evidence-state-label">pass</span>
+            <span class="evidence-freshness-label">evidence current</span>
             <span class="gate-cell gate-owner">test_writer</span>
-            <span class="gate-cell gate-reason">missing_required_stage_evidence</span>
-            <span class="gate-cell gate-repair">Record Test Writer-owned RED evidence before implementation.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/red-evidence.md">docs/work/BANDIT-067/red-evidence.md</a></span>
+            <span class="gate-cell gate-reason">none</span>
+            <span class="gate-cell gate-repair">No repair required.</span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/red-evidence.md">docs/work/BANDIT-083/red-evidence.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="missing" data-freshness-state="missing">
             <span class="gate-cell gate-label">Stage 3 implementation</span>
-            <span class="gate-cell gate-state">missing / missing</span>
+            <span class="evidence-state-label">missing</span>
+            <span class="evidence-freshness-label">missing evidence</span>
             <span class="gate-cell gate-owner">writer</span>
             <span class="gate-cell gate-reason">missing_required_stage_evidence</span>
             <span class="gate-cell gate-repair">Record Stage 3 implementation evidence.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">docs/work/BANDIT-067/implementation-evidence.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/implementation-evidence.md">docs/work/BANDIT-083/implementation-evidence.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="missing" data-freshness-state="missing">
             <span class="gate-cell gate-label">Stage 4 review</span>
-            <span class="gate-cell gate-state">missing / missing</span>
+            <span class="evidence-state-label">missing</span>
+            <span class="evidence-freshness-label">missing evidence</span>
             <span class="gate-cell gate-owner">reviewer</span>
             <span class="gate-cell gate-reason">missing_required_stage_evidence</span>
             <span class="gate-cell gate-repair">Record Stage 4 reviewer evidence.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/review-evidence.md">docs/work/BANDIT-067/review-evidence.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/review-evidence.md">docs/work/BANDIT-083/review-evidence.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="missing" data-freshness-state="missing">
             <span class="gate-cell gate-label">Stage 5 landing</span>
-            <span class="gate-cell gate-state">missing / missing</span>
+            <span class="evidence-state-label">missing</span>
+            <span class="evidence-freshness-label">missing evidence</span>
             <span class="gate-cell gate-owner">landing_agent</span>
             <span class="gate-cell gate-reason">missing_required_stage_evidence</span>
             <span class="gate-cell gate-repair">Record the Stage 5 landing verdict and action.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/landing-verdict.md">docs/work/BANDIT-067/landing-verdict.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/landing-verdict.md">docs/work/BANDIT-083/landing-verdict.md</a></span>
           </li>
-          <li class="gate-matrix-row">
+          <li class="evidence-row gate-matrix-row" data-evidence-state="missing" data-freshness-state="missing">
             <span class="gate-cell gate-label">Stage 6 retrospective</span>
-            <span class="gate-cell gate-state">missing / missing</span>
+            <span class="evidence-state-label">missing</span>
+            <span class="evidence-freshness-label">missing evidence</span>
             <span class="gate-cell gate-owner">codex_pm</span>
             <span class="gate-cell gate-reason">missing_required_stage_evidence</span>
             <span class="gate-cell gate-repair">Record the Stage 6 retrospective and closeout.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/retrospective.md">docs/work/BANDIT-067/retrospective.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/retrospective.md">docs/work/BANDIT-083/retrospective.md</a></span>
           </li>
         </ul>
       </section>
       <section class="evidence-detail" aria-label="Evidence detail">
         <h3>Evidence detail</h3>
         <ul>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Review evidence</span>
             <span class="detail-cell detail-status">missing</span>
             <span class="detail-cell detail-reason">missing_required_stage_evidence</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/review-evidence.md">docs/work/BANDIT-067/review-evidence.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/review-evidence.md">docs/work/BANDIT-083/review-evidence.md</a></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Landing readiness</span>
             <span class="detail-cell detail-status">not_ready</span>
             <span class="detail-cell detail-reason">implementation evidence is not recorded</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/implementation-evidence.md">docs/work/BANDIT-067/implementation-evidence.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/implementation-evidence.md">docs/work/BANDIT-083/implementation-evidence.md</a></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">UAT</span>
             <span class="detail-cell detail-status">not_applicable</span>
             <span class="detail-cell detail-reason">Feature UAT is required before landing once implementation exists.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/brief.md">docs/work/BANDIT-067/brief.md</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/brief.md">docs/work/BANDIT-083/brief.md</a></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Coordination</span>
             <span class="detail-cell detail-status">orchestration_plan_recorded</span>
             <span class="detail-cell detail-reason">Coordination state is recorded.</span>
-            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-067/coordination-log.jsonl">docs/work/BANDIT-067/coordination-log.jsonl</a></span>
+            <span class="detail-cell detail-sources"><a class="source-link" href="docs/work/BANDIT-083/coordination-log.jsonl">docs/work/BANDIT-083/coordination-log.jsonl</a></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Bootstrap gaps</span>
             <span class="detail-cell detail-status">none</span>
             <span class="detail-cell detail-reason">No open bootstrap gaps.</span>
             <span class="detail-cell detail-sources"><a class="source-link" href=".bandit/bootstrap-gaps.json">.bandit/bootstrap-gaps.json</a></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Stale evidence</span>
             <span class="detail-cell detail-status">clear</span>
             <span class="detail-cell detail-reason">No stale evidence.</span>
             <span class="detail-cell detail-sources"></span>
           </li>
-          <li class="evidence-detail-row">
+          <li class="evidence-row evidence-detail-row">
             <span class="detail-cell detail-label">Evidence Trust Signals</span>
             <span class="detail-cell detail-status">unavailable</span>
             <span class="detail-cell detail-reason">Artifact-specific Evidence Trust Signals are available for 0 stage gates.</span>

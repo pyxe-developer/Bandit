@@ -53,6 +53,8 @@ export type CockpitActionAffordance = {
 };
 
 const RED_EVIDENCE_MISSING_REASON = "Stage 2 RED evidence is missing.";
+const IMPLEMENTATION_EVIDENCE_MISSING_REASON =
+  "Stage 3 implementation evidence is missing; record implementation before review.";
 const UAT_UNAVAILABLE_REASON =
   "UAT is unavailable until an operator-facing implementation exists.";
 
@@ -380,12 +382,26 @@ function defineNonEnumerable(
 }
 
 function reviewGateIsAvailable(status: CockpitStatus) {
-  return status.gates.stage_2_red_evidence.status === "pass";
+  // The `run_review_gate` affordance is `role_gate: "reviewer_after_implementation"`
+  // and the `unavailable_route` already says "Record RED and implementation
+  // evidence before requesting review." Both Stage 2 RED evidence and
+  // Stage 3 implementation evidence must be `pass` before review can be
+  // requested. Enabling the request while Stage 3 is still `missing` would
+  // contradict the gate's own role and would let the static preview render
+  // a Review gate action that the work item does not yet authorize.
+  return (
+    status.gates.stage_2_red_evidence.status === "pass" &&
+    status.gates.stage_3_implementation.status === "pass"
+  );
 }
 
 function reviewGateReason(status: CockpitStatus) {
-  if (!reviewGateIsAvailable(status)) {
+  if (status.gates.stage_2_red_evidence.status !== "pass") {
     return RED_EVIDENCE_MISSING_REASON;
+  }
+
+  if (status.gates.stage_3_implementation.status !== "pass") {
+    return IMPLEMENTATION_EVIDENCE_MISSING_REASON;
   }
 
   return "Stage 4 review can be requested through CLI Authority.";

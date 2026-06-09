@@ -1,13 +1,17 @@
 :root {
   --color-canvas: #050506;
-  --color-primary: #ff7a59;
   --color-surface: #0e0e10;
   --color-text: #e8e8ec;
   --color-muted: #8a8a9a;
   --color-border: #1e1e24;
+  --color-attention: #ff7a59;
+  --color-pass: #16a766;
+  --color-blocker: #e66550;
+  --color-source-link: #4a86e8;
+  --space-1: 4px;
   --radius: 6px;
   --gap: 16px;
-  font-family: system-ui, sans-serif;
+  font-family: "Instrument Sans", system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -67,7 +71,7 @@ aside[aria-label="Evidence"] {
 .source-link {
   overflow-wrap: anywhere;
   word-break: break-all;
-  color: var(--color-primary);
+  color: var(--color-source-link);
 }
 
 .disabled-reason {
@@ -79,7 +83,7 @@ aside[aria-label="Evidence"] {
 
 .command-preview {
   display: block;
-  font-family: ui-monospace, monospace;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.85em;
   color: var(--color-muted);
   margin-top: 2px;
@@ -131,7 +135,7 @@ aside[aria-label="Evidence"] {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-attention);
   outline-offset: 2px;
 }
 

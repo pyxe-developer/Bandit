@@ -96,7 +96,13 @@ test("browser cockpit shell exposes responsive and accessible shell constraints"
   assert.equal(shell.responsive.source_paths_wrap, true);
   assert.deepEqual(shell.responsive.overlaps, []);
   assert.match(shell.css, /--color-canvas:\s*#050506/);
-  assert.match(shell.css, /--color-primary:\s*#ff7a59/);
+  assert.match(shell.css, /--color-attention:\s*#ff7a59/);
+  assert.match(shell.css, /--color-pass:\s*#[0-9a-f]{6}/i);
+  assert.match(shell.css, /--color-blocker:\s*#[0-9a-f]{6}/i);
+  assert.match(shell.css, /--color-source-link:\s*#[0-9a-f]{6}/i);
+  assert.match(shell.css, /--space-1:\s*4px/);
+  assert.match(shell.css, /font-family:\s*"Instrument Sans"/);
+  assert.match(shell.css, /font-family:\s*"IBM Plex Mono"/);
   assert.match(shell.css, /@media\s*\(max-width:\s*719px\)/);
   assert.match(shell.css, /overflow-wrap:\s*anywhere/);
   assert.match(shell.css, /:focus-visible/);
@@ -138,10 +144,11 @@ test("browser cockpit shell renders live CLI status fields on the first screen",
 test("static cockpit preview is refreshed from the current live-status work item", async () => {
   const html = await readFile("public/cockpit/index.html", "utf8");
 
-  assert.match(html, /BANDIT-067/);
-  assert.match(html, /Write Test Writer-owned Stage 2 RED evidence/);
-  assert.match(html, /docs\/work\/BANDIT-067\/coordination-log\.jsonl/);
-  assert.doesNotMatch(html, /BANDIT-066: Browser-Served Cockpit App Shell/);
+  assert.match(html, /BANDIT-083/);
+  assert.match(html, /Bandit Cockpit UI Polish From Attached Design/);
+  assert.match(html, /orchestration_plan_recorded/);
+  assert.match(html, /docs\/work\/BANDIT-083\/coordination-log\.jsonl/);
+  assert.doesNotMatch(html, /BANDIT-067/);
 });
 
 test("browser cockpit shell renders source-linked gate matrix and evidence rows in desktop and mobile previews", async () => {
@@ -154,17 +161,25 @@ test("browser cockpit shell renders source-linked gate matrix and evidence rows 
 
   for (const shell of [desktop, mobile]) {
     assert.match(shell.html, /aria-label="Stage gate matrix"/);
+    assert.match(shell.html, /class="evidence-row gate-matrix-row"/);
+    assert.match(shell.html, /data-evidence-state="missing"/);
+    assert.match(shell.html, /data-freshness-state="missing"/);
+    assert.match(shell.html, /class="evidence-state-label">missing<\/span>/);
+    assert.match(shell.html, /class="evidence-freshness-label">missing evidence<\/span>/);
     assert.match(shell.html, /Stage 2 RED evidence/);
     assert.match(shell.html, /missing_required_stage_evidence/);
     assert.match(shell.html, /review_subject_hash_drift/);
     assert.match(shell.html, /docs\/work\/BANDIT-068\/review-evidence\.md/);
     assert.match(shell.html, /aria-label="Evidence detail"/);
+    assert.match(shell.html, /class="evidence-row evidence-detail-row"/);
     assert.match(shell.html, /Landing readiness/);
     assert.match(shell.html, /implementation evidence is not recorded/);
     assert.match(shell.html, /orchestration_plan_recorded/);
     assert.match(shell.html, /Artifact-specific Evidence Trust Signals/);
     assert.doesNotMatch(shell.html, /<form\b|localStorage|sessionStorage|indexedDB|fetch\s*\(/i);
     assert.equal(shell.responsive.text_overflow, false);
+    assert.equal(shell.responsive.source_paths_wrap, true);
+    assert.equal(shell.responsive.detail_rows_wrap, true);
     assert.deepEqual(shell.responsive.overlaps, []);
   }
   assert.equal(mobile.responsive.source_paths_wrap, true);
