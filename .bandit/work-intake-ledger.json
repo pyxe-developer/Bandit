@@ -105,9 +105,9 @@
       "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
       "suggested_work_item_type": "gap",
       "depends_on": [],
-      "scope_summary": "Repo-Wide Transition Index Decision is formed as BANDIT-085 and is in Stage 1 formation-approved plan-mode handoff.",
-      "risk_product_scope_status": "formed as BANDIT-085 for decision/triage only; no repo-wide transition index implementation, canonical shared transition authority, local API, State Index, scheduler, claim/worktree lifecycle, merge, push, deploy, paid routing, hosted service, public benchmark publication, Trust Verifier cutover, or unrelated product work is authorized by formation",
-      "intake_outcome": "formed",
+      "scope_summary": "Repo-Wide Transition Index Decision landed and closed as BANDIT-085 with a deferred derived-only transition-index disposition.",
+      "risk_product_scope_status": "closed as BANDIT-085 with no repo-wide transition index implementation, canonical shared transition authority, local API, State Index, scheduler, claim/worktree lifecycle, merge, push, deploy, paid routing, hosted service, public benchmark publication, Trust Verifier cutover, or unrelated product work authorized",
+      "intake_outcome": "closed",
       "formed_work_item": "BANDIT-085",
       "claimable": false,
       "transition_history": [
@@ -124,6 +124,13 @@
           "from": "accepted_to_queue",
           "to": "formed",
           "source": "BANDIT-085 formation approval"
+        },
+        {
+          "at": "2026-06-09T19:54:34Z",
+          "actor": "closeout_agent",
+          "from": "formed",
+          "to": "closed",
+          "source": "BANDIT-085 Stage 6 closeout"
         }
       ]
     },

@@ -1,38 +1,20 @@
-# BANDIT-085: CodeRabbit Review Evidence
+# CodeRabbit Review: BANDIT-085
 
-## Verdict
-
-`bootstrap_gap` - CodeRabbit did not return a completed review within the
-required 600-second provider window.
-
-No CodeRabbit pass is claimed.
-
-## Command Evidence
-
-Command:
-
-```sh
-timeout 600 coderabbit review --agent --type uncommitted > .bandit/tmp/BANDIT-085-coderabbit-review/output.log 2>&1
-```
-
-Exit code: `124`
-
-Run completed: `2026-06-09T19:44:12Z`
-
-Captured log:
-
-- `.bandit/tmp/BANDIT-085-coderabbit-review/output.log`
-
-Observed provider phases in the captured log:
-
-- `connecting_to_review_service`
-- `setting_up`
-- `preparing_sandbox`
-- `summarizing`
-
-## Finding Disposition
-
-No actionable CodeRabbit findings were returned before timeout. Stage 4 review
-must rely on the recorded provider-timeout evidence plus Local Qwen and PM
-aggregate review. This timeout is evidence of provider unavailability for this
-review window, not a clean CodeRabbit review.
+contract_version: 1
+work_item: BANDIT-085
+source_head: 76a6d883cff1a53ba2ec2781afe9de0f52a47d65
+provider: coderabbit-cli
+review_target: local-diff:uncommitted
+review_state: timeout
+coderabbit_verdict: bootstrap_gap
+findings_status: unavailable
+findings_disposition: CodeRabbit timed out after the required 600-second wait window before returning completed review evidence; no CodeRabbit pass is claimed.
+operator_input_status: none_required
+source_drift_status: current
+executable_evidence:
+  - timeout 600 coderabbit review --agent --type uncommitted > .bandit/tmp/BANDIT-085-coderabbit-review/output.log 2>&1
+  - Captured output is stored under .bandit/tmp/BANDIT-085-coderabbit-review/output.log.
+  - Terminal status: timeout exit code 124 after 600 seconds.
+  - Observed provider phases: connecting_to_review_service, setting_up, preparing_sandbox, summarizing.
+bootstrap_gaps:
+  - coderabbit_timeout_without_terminal_review
