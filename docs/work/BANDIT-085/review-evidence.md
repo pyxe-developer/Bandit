@@ -35,8 +35,8 @@ escalated_review_rationale: BANDIT-085 is a bounded disposition-only triage chor
 pm_disposition: pass
 pm_disposition_rationale: Codex PM accepts Stage 4 because the triage disposition keeps per-work-item coordination logs canonical, defers any repo-wide transition index until named concrete trigger conditions exist, preserves operator-owned gates for canonical index authority, State Index, local API, scheduler, claim/worktree lifecycle, merge/push/deploy, paid routing, hosted service, and public benchmark decisions, and confirms all projections remain non-authoritative. CodeRabbit timeout is recorded honestly as bootstrap-gap evidence; Local Qwen's process findings are dispositioned without source or policy repair. Risk classification, supply-chain gate validation, coordination validation, work-intake validation, and diff hygiene pass.
 non_blocking_findings_routing:
-  - repaired_by_pm_verification: live cockpit, session-context, work-intake, and coordination commands were run by Work Item PM before Stage 5.
-  - no_action_current_slice: Stage 2 and Stage 3 artifacts were created only after formation_approved and orchestration_plan_recorded coordination evidence existed.
+  - no_action: live cockpit, session-context, work-intake, and coordination commands were run by Work Item PM before Stage 5, resolving the verification-gap finding inside the current slice.
+  - no_action: Stage 2 and Stage 3 artifacts were created only after formation_approved and orchestration_plan_recorded coordination evidence existed, so the Stage 1 timing note does not require a future chore.
 operator_input_status: none_required
 uat_status: not_applicable
 clean_code_status: pass
