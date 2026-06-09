@@ -1,0 +1,193 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-079",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/state/cockpit-improvement-health.ts",
+      "surface": "cockpit_improvement_health_presentation_projection",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/cockpit-view-model.ts",
+      "surface": "cockpit_view_model_projection",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cockpit/browser-shell.ts",
+      "surface": "browser_presentation_shell",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/cockpit-improvement-health.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "browser_side_cli_execution",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "surface": "local_api_or_state_index",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "surface": "automatic_improvement_evaluation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "surface": "merge_push_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "surface": "paid_reviewer_model_routing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "operator_facing_improvement_health_surface_updated",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-079/implementation-evidence.md"
+    },
+    {
+      "signal_id": "missing_metadata_fails_closed",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    },
+    {
+      "signal_id": "browser_shell_remains_non_authoritative",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/browser-smoke.md"
+    },
+    {
+      "signal_id": "permanent_test_ownership_boundary_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/cockpit-improvement-health.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/cockpit-view-model.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    },
+    {
+      "tool": "node --test test/cockpit-browser-shell.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/review-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/stage3-pm-review.md"
+    },
+    {
+      "tool": "coderabbit review --agent --base origin/main",
+      "state": "bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-079/coderabbit-review.md"
+    },
+    {
+      "tool": "local-qwen MLX OpenAI-compatible adapter via bin/omlx-chat-completions.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/local-qwen-review.md"
+    },
+    {
+      "tool": "static preview and live render browser smoke",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-079/browser-smoke.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-079-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-UI-HIDDEN-AUTHORITY",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-079/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-079/coderabbit-review.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-079 is an operator-facing browser presentation slice that requires CLI-owned product UAT before landing, but the code change itself does not approve product direction, UAT, policy, business tradeoffs, explicit cost/risk posture, merge, push, deploy, external services, or Trust Verifier cutover. The Improvement Health Surface remains presentation-only and the browser shell contains no browser-side CLI execution authority."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-079 is medium workflow risk because it changes an operator-facing cockpit presentation surface for improvement health. The implementation keeps CLI and repo artifacts canonical, presents full candidate details when available, fails closed to missing_metadata rows when live status only has candidate IDs, adds no local API or browser-side CLI execution, and is covered by focused tests, full npm test, typecheck, Local Qwen pass evidence, CodeRabbit timeout replacement evidence, risk/supply-chain gate evidence, and browser smoke evidence. Feature-slice auto-landing remains gated by current CLI-owned UAT evidence under .bandit/policy/auto-landing.json.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-079-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-079-supply-chain-gate.json",
+    "docs/work/BANDIT-079/brief.md",
+    "docs/work/BANDIT-079/red-evidence.md",
+    "docs/work/BANDIT-079/implementation-evidence.md",
+    "docs/work/BANDIT-079/stage3-pm-review.md",
+    "docs/work/BANDIT-079/coderabbit-review.md",
+    "docs/work/BANDIT-079/local-qwen-review.md",
+    "docs/work/BANDIT-079/browser-smoke.md",
+    "docs/work/BANDIT-079/review-evidence.md",
+    "src/state/cockpit-improvement-health.ts",
+    "src/state/cockpit-view-model.ts",
+    "src/cockpit/browser-shell.ts",
+    "test/cockpit-improvement-health.test.mjs"
+  ]
+}
