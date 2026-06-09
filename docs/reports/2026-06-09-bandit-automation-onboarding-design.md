@@ -7,6 +7,14 @@
 > Read-only design document. Defines a target architecture; it does not modify any
 > gate, policy, command, or workflow-state artifact.
 
+> **Revision 2026-06-09 (office-hours pass).** Build order is now **wedge-first** (§8): a
+> thin, read-only `bandit align` ships first as the adoption demo, ahead of the doctrine
+> bake. Four reframings are folded in: single-family **warns, not refuses** (§2.2); the baked
+> doctrine default is **deliberately thin** (§6); **`init --profile` leads** and per-gate is
+> the escape hatch (§3, §5); and `align` emits a **standalone gap-report artifact**, not the
+> internal bootstrap-gap ledger (§7). The hook dispatcher (§4) is reclassified as new
+> foundations, not composition (§1). Companion office-hours doc: `~/.gstack/projects/pyxe-developer-Bandit/matthewflebbe-claude-gates-workflow-exploration-hqz90c-design-20260609-091544.md`.
+
 ## 0. The Idea (operator's words, restated)
 
 Make Bandit *fully automatable* while letting each operator set **every gate** to either
@@ -18,7 +26,7 @@ hooks**. Add a skill that has Claude or Codex **align an existing codebase with 
 doctrine**. **Bake `CLEAN_CODE.md` and the rubrics into the CLI** instead of leaving them as
 loose files. Hook-driven prompts/scripts/skills = "magical."
 
-## 1. Why this is mostly composition, not new foundations
+## 1. Why this is mostly composition (with one real exception)
 
 Bandit already has the hard parts. This design is a **configuration + trigger + install**
 layer over existing primitives:
@@ -35,6 +43,12 @@ layer over existing primitives:
 
 The current `init` (`src/commands/init.ts`) is pure file-seeding — no interactive
 onboarding, no skill/hook install. That is the main missing piece.
+
+**One honest exception to "composition."** The config and policy layers above are genuine
+composition. But the **hook dispatcher (§4)** — resolve stage → next role → baked prompt →
+effective gate mode → invoke-or-emit, plus inferring a stage transition from
+`Stop`/`PostToolUse` (which fire on *every* tool call) — is *new orchestration glue*. Treat §4
+as new foundations and the most likely place this design fails, not as wiring.
 
 ## 2. Configurable Roles (model/family-agnostic)
 
@@ -82,12 +96,22 @@ role registry** (`bandit roles validate`):
 - `test-writer.family != implementation-writer.family` (per work item).
 - `reviewer-*.family != implementation-writer.family` (no self-review).
 - Escalation target of any role ≠ that role's own family.
-- **Onboarding refuses a config with fewer than two distinct families** — single-family
-  setups silently destroy cross-model tension (a core Bandit artifact). The wizard explains
-  this and requires at least one free second family (e.g. a second local model via the same
-  OpenAI-compatible adapter).
+- **Onboarding warns (does not refuse) on a single-family config.** Single-family setups
+  silently destroy cross-model tension (a core Bandit artifact), so the wizard shows a loud,
+  un-ignorable banner — *"cross-model tension is OFF — your reviews are self-review"* — and
+  makes adding a second family (e.g. a free second local model via the same OpenAI-compatible
+  adapter) the obvious one-step upgrade. A hard refusal would be an onboarding cliff for a
+  tire-kicker with one API key and no local GPU; the safety property is preserved by making it
+  *visible*, not by walling the door. Two-family separation stays **required** for any AFK
+  reviewer and every never-auto-landable surface — with one family you cannot satisfy
+  no-self-review, so those gates simply hold at HITL.
 
 ## 3. Per-Gate AFK ↔ HITL
+
+**Profiles are the front door; per-gate is the escape hatch.** First-run picks one **profile**
+— `init --profile lite|standard|strict` — which sets every gate's mode in a single choice.
+Per-gate `gate set` (below) is the documented power-user override on top of the profile. A new
+operator should never face thirty toggles to reach a safe default.
 
 ### 3.1 The mode resolver (safety-preserving)
 
@@ -122,9 +146,10 @@ normally-AFK gate to HITL when a blast-radius/static-analysis/supply-chain signa
 ### 3.2 CLI surface
 
 ```sh
+bandit init --profile standard                # PRIMARY: set every gate's mode in one choice
 bandit gate-modes show --json                 # effective mode per gate, with the controlling source
-bandit gate set reviewer-baseline --afk       # lower to autonomous (allowed)
-bandit gate set landing-feature-slice --hitl  # raise supervision (always allowed)
+bandit gate set reviewer-baseline --afk       # per-gate override (lower to autonomous, allowed)
+bandit gate set landing-feature-slice --hitl  # per-gate override (raise supervision, always allowed)
 bandit gate set uat --afk                      # REFUSED → prints operator-boundary floor
 ```
 
@@ -167,13 +192,15 @@ idempotently re-runnable). It walks, validates, then installs:
 
 1. **Project basics** — prefix, harness (Claude / Codex / other), landing mode
    (local-record now; PR/CI when that follow-up lands).
-2. **Role → family bindings** (§2) — enforces ≥2 families and the separation validator
-   *before* writing config.
+2. **Role → family bindings** (§2) — runs the separation validator and **warns (does not
+   block)** on a single-family config, offering the second-family upgrade inline (§2.2). Two
+   families stay required for AFK reviewers and never-auto-landable surfaces.
 3. **Endpoints & credentials** — local model endpoint (default
    `http://127.0.0.1:8000/v1`), escalated provider key env var, CodeRabbit token; a
    `bandit doctor` preflight pings each.
-4. **Per-gate AFK/HITL** (§3) — presented as a checklist; floor gates shown locked with the
-   reason.
+4. **AFK/HITL profile** (§3) — pick one `lite|standard|strict` profile as the primary choice;
+   an optional per-gate checklist follows for power users, with floor gates shown locked and
+   the reason.
 5. **Cost guardrails** — spend-class approvals, provider-pricing evidence capture, soft
    budget bands (feeds `token-cost-failsafe`).
 6. **Install** — only after validation passes: write configs → `bandit install-skills` →
@@ -197,9 +224,15 @@ smell Bandit warns against**. Invert it:
   bandit doctrine export                # (re)materialize CLEAN_CODE.md / STAGE_RUBRICS.md as derived docs
   bandit doctrine version               # pinned doctrine_version + drift vs installed CLI
   ```
+- The **baked default must be deliberately thin and non-ideological.** For an open-source
+  audience that will disagree with specific clean-code opinions, "doctrine compiled into the
+  binary" only works if the embedded floor is minimal; opinionated rules live in optional
+  profiles, not the always-on default. A heavy default means every adopter overrides it and the
+  bake buys friction instead of enforcement.
 - Consumer repos **pin a `doctrine_version`**; `bandit update-check` surfaces doctrine drift
   the same way it surfaces package updates. An operator override extension point
-  (`.bandit/doctrine.overrides.json`) keeps it customizable without forking the engine.
+  (`.bandit/doctrine.overrides.json`) keeps it customizable without forking the engine — and
+  stays *rare* precisely because the default is thin.
 
 This makes the rubric **always-on and machine-enforced** at every gate instead of
 depending on an agent choosing to open a markdown file.
@@ -207,11 +240,16 @@ depending on an agent choosing to open a markdown file.
 ## 7. Doctrine-Alignment Skill (the legacy-repo on-ramp)
 
 Add a `doctrine-aligner` role + `bandit align` command + a `bandit-align` skill. Point Claude
-or Codex (operator's choice — agnostic) at an *existing* non-Bandit codebase; it reads the
-**baked** doctrine and produces:
+or Codex (operator's choice — agnostic) at an *existing* non-Bandit codebase; it applies
+Bandit's own doctrine (the **baked** modules once §6 lands; the loose `CLEAN_CODE.md` /
+`STAGE_RUBRICS.md` in the thin slice-1 version, see §8) to the *target's* code and produces:
 
 - a gap report mapping the codebase against the clean-code rubric and smell catalog,
-- each gap written into the **bootstrap-gap ledger** (reusing the existing mechanism),
+- emitted as a **standalone gap-report artifact** (its own file + schema). The internal
+  **bootstrap-gap ledger** (`src/state/bootstrap-gaps.ts`) is the *wrong* sink for a foreign
+  repo — it is a closed-schema, path-validating, Bandit-internal governance log
+  (`validateGapReferences` requires every source path to exist in *this* repo). Ledger
+  integration is a later, separate decision, not part of the align report.
 - suggested improvement chores / slice briefs to close them,
 - optionally, a draft PR with low-risk mechanical alignments (clean worktree boundary, same
   landing-agent constraints — no merge/push/deploy).
@@ -219,15 +257,34 @@ or Codex (operator's choice — agnostic) at an *existing* non-Bandit codebase; 
 This is the **adoption wedge**: a new team runs `bandit align` and immediately sees Bandit's
 value applied to *their* code, not a toy.
 
-## 8. Suggested build order (each a normal Bandit slice)
+## 8. Suggested build order (wedge-first — each a normal Bandit slice)
 
-1. **Doctrine bake** (§6) — `doctrine show/check/export/version` + embedded modules. Unlocks
-   everything else and is self-contained.
-2. **Role registry + separation validator** (§2) — generalize reviewer-profiles.
-3. **Gate-mode resolver** (§3) — the AFK/HITL floor/ceiling computation + `gate set`.
-4. **Hook dispatcher + Claude adapter** (§4) — `bandit hook`, then `install-hooks`.
-5. **Interactive onboarding** (§5) — `init --interactive` + `bandit doctor` + `install-skills`.
-6. **Doctrine-alignment skill** (§7) — `bandit align`.
+Drawn as a linear list for readability, this is the **Approach-A-then-C** path from the
+office-hours review: slice 1 and slice 6 are the **demo spine** (`align`), slices 2-5 are the
+**engine spine**, and they stay independent until slice 6, where `align` graduates from
+*reporting* to *writing*. Ship the spreadable artifact first; let real reactions justify each
+engine slice.
+
+1. **`bandit align` — thin, read-only** (§7). Applies Bandit's own loose `CLEAN_CODE.md` /
+   `STAGE_RUBRICS.md` to a target repo's code, one `doctrine-aligner` role, emits a standalone
+   gap-report artifact. No bake, no registry, no hooks. This is the first-run "whoa" and the
+   adoption wedge — it ships **first, not last**. Its slice brief owns the one open piece: the
+   aligner finding schema (how doctrine prose becomes machine-checkable findings) and the
+   "whoa-grade" report bar.
+2. **Doctrine bake — thin default** (§6). `doctrine show/check/export/version` + embedded
+   modules with a deliberately minimal default. `align` switches from reading a loose file to
+   reading the module.
+3. **Role registry + separation validator** (§2) — generalize reviewer-profiles; single-family
+   warns, not refuses.
+4. **Gate-mode resolver + profiles + onboarding** (§3, §5) — `init --profile lite|standard|strict`
+   as the front door, per-gate `gate set` as the escape hatch, hard HITL floor enforced. The
+   interactive wizard (`init --interactive` + `bandit doctor` + `install-skills`) is the front
+   end of this slice.
+5. **Hook dispatcher + Claude adapter** (§4) — `bandit hook`, then `install-hooks`. Budget for
+   the stage-transition-detection heuristic explicitly; this is the new-foundations slice and
+   the real integration risk.
+6. **`bandit align` — writes** (§7). Graduates to drafting low-risk mechanical fixes through the
+   landing-agent constraints. The convergence demo where the demo spine rejoins the engine.
 
 Each lands under the existing stage rubrics, with skill-lifecycle contracts for every new
 skill and model-family-separation evidence baked into the role registry.
@@ -244,8 +301,16 @@ skill and model-family-separation evidence baked into the role registry.
 - **"Agnostic" claim eroding** → enforced by construction: roles bind to family *keys*,
   prompts are `doctrine://` refs, and the only constraint is separation. A vendor swap is a
   one-line config edit re-validated by `bandit roles validate`.
-- **Onboarding cliff** → the wizard + graduated `init --profile lite|standard|strict`
-  (prior report §6) make the rigor opt-in by depth.
+- **Onboarding cliff** → `init --profile lite|standard|strict` leads (one choice, not thirty
+  toggles, §3/§5) and single-family **warns instead of refusing** (§2.2); rigor stays opt-in by
+  depth, and a tire-kicker with one API key still gets in the door.
+- **Hook dispatcher is the real integration risk** → §4 is new orchestration glue, not
+  composition (§1). Inferring a stage transition from `Stop`/`PostToolUse` is heuristic; budget
+  for it explicitly and consider an explicit `bandit hook stage-advanced` contract the harness
+  emits rather than pure inference.
+- **Wedge rides on gap-report quality** → slice 1's whole first impression depends on one gap
+  report reading as insight, not lint. The slice brief must define the "whoa-grade" bar and the
+  aligner finding schema before build (§8).
 
 ## 10. Why this is the differentiator
 
