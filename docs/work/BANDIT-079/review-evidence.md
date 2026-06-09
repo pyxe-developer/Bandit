@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-079
 source_head: 8e008fcfe8c8602902f652621969905c7f6ab602
-review_subject_hash: 7bb66e1fc5a6b211faad2f2c71381ccefae05d474470ed221e00983f038e0d8d
+review_subject_hash: f776d0b7d25913632c236f32edd45eaf644e8d654187fd60b8d6f04324b8d56c
 verification_state: pass
 freshness_state: current
 verification_evidence:
@@ -38,7 +38,7 @@ pm_disposition_rationale: Stage 4 passes because the reviewed implementation pre
 non_blocking_findings_routing:
   - no_action: CodeRabbit timeout remains fail-closed bootstrap replacement evidence; no CodeRabbit pass or clean finding state is claimed.
 operator_input_status: none_required
-uat_status: required_before_landing
+uat_status: pass
 clean_code_status: pass
 source_drift_status: current
 bootstrap_gaps:
@@ -49,7 +49,7 @@ bootstrap_gaps:
   "artifact_type": "review_evidence",
   "work_item": "BANDIT-079",
   "freshness_state": "current",
-  "review_subject_hash": "7bb66e1fc5a6b211faad2f2c71381ccefae05d474470ed221e00983f038e0d8d",
+  "review_subject_hash": "f776d0b7d25913632c236f32edd45eaf644e8d654187fd60b8d6f04324b8d56c",
   "source_head": "8e008fcfe8c8602902f652621969905c7f6ab602",
   "source_artifacts": [
     "docs/work/BANDIT-079/coderabbit-review.md",
@@ -101,6 +101,6 @@ without browser-side workflow authority.
 
 ## Next Action
 
-Record CLI-owned product UAT for `BANDIT-079`, then record Stage 5 landing
-verdict, run `land-check` and `auto-land-check`, and execute the local-record
-landing action against the current source/evidence commit.
+Stage 5 UAT is recorded for `BANDIT-079`; run `land-check` and
+`auto-land-check`, then execute the local-record landing action against the
+current source/evidence commit.

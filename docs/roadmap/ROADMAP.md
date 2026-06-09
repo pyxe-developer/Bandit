@@ -4,18 +4,16 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-078` - Guarded CLI Action Requests (closed)
+- `[Slice]` `BANDIT-079` - Improvement Health Surface (closed)
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-079` - Improvement Health Surface (formation approved;
-  Work Item PM plan mode pending)
+- None formed. Keep `BANDIT-079` as the current derived-status anchor until
+  Repo PM forms the next slice.
 
-**Current next step:** Work Item PM should run plan-mode orchestration for
-`BANDIT-079` (Improvement Health Surface) before RED evidence. Do not create
-RED evidence or implementation until `docs/work/BANDIT-079/orchestration-plan.md`
-exists and `work-item-pm start BANDIT-079` records
-`orchestration_plan_recorded`.
+**Current next step:** Repo PM should triage and form the next Phase 8 cockpit
+product slice only if roadmap/product direction is sufficient; otherwise ask
+the operator for the missing product direction.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -31,7 +29,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - next Phase 8 cockpit slice after `BANDIT-079` closeout.
+- `[Slice]` `TBD` - next Phase 8 cockpit slice after Repo PM triage.
 
 ## Planned Work
 
@@ -41,10 +39,11 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - next Phase 8 cockpit slice after `BANDIT-079` closeout.
+- `[Slice]` `TBD` - next Phase 8 cockpit slice after Repo PM triage.
 
 ## Completed Work
 
+- `BANDIT-079` - Improvement Health Surface
 - `BANDIT-078` - Guarded CLI Action Requests
 - `BANDIT-077` - Spec-To-Evidence Traceability Matrix
 - `BANDIT-076` - Evidence Bundle Attestation
