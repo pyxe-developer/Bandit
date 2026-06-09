@@ -67,9 +67,10 @@
       "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
       "suggested_work_item_type": "gap",
       "depends_on": [],
-      "scope_summary": "Claim-First Transition Policy Triage remains a proposal until Repo PM forms a work item.",
-      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
-      "intake_outcome": "accepted_to_queue",
+      "scope_summary": "Claim-First Transition Policy Triage is formed as BANDIT-084 and is in Stage 1 formation-approved plan-mode handoff.",
+      "risk_product_scope_status": "formed as BANDIT-084 for triage only; no universal claim-first policy approval, claim-authority change, claim operation, scheduler, worktree, merge, push, deploy, paid routing, or unrelated product work is authorized by formation",
+      "intake_outcome": "formed",
+      "formed_work_item": "BANDIT-084",
       "claimable": false,
       "transition_history": [
         {
@@ -78,6 +79,13 @@
           "from": "source_metadata",
           "to": "accepted_to_queue",
           "source": "BANDIT-082 migration"
+        },
+        {
+          "at": "2026-06-09T17:43:09Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "formed",
+          "source": "BANDIT-084 formation approval"
         }
       ]
     },

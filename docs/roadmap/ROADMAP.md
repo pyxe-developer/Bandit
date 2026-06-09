@@ -9,25 +9,24 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-083` - Bandit Cockpit UI Polish From Attached Design
-  (closed; retained as last-closed derived-status anchor until the next work
-  item is formed)
+- `[Gap]` `BANDIT-084` - Claim-First Transition Policy Triage
+  (formation approved)
 
-**Current next step:** Repo PM should triage and form the next intake-derived
-gap work item for `WIL-CLAIM-FIRST`, Claim-First Transition Policy Triage,
-before Repo-Wide Transition Index Decision, Coordination Primitive Completion
-Triage, PR And CI/CD Landing Workflow Policy, Installed-Copy Update Path, the
-V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-084`, Claim-First Transition Policy Triage, before RED evidence,
+implementation, review, landing, closeout, the next intake-derived gap, the V0
+Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 work.
 
-Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
-or wrap old gates, generate role input or execution packets for unrelated work,
-restart Pi/Aperture runtime work, choose local API or State Index timing,
-execute guarded browser actions, approve public benchmark publication, approve
-paid reviewer/model routing, approve hosted replay services or external service
-setup, merge, push, deploy, form the V0 Closeout Claude Code A/B Product-Value
-Trial, or start unrelated Phase 8 product work before Repo PM triages and forms
-`WIL-CLAIM-FIRST` through normal Stage 1 formation or records an explicit
-no-action/deferred disposition.
+Do not approve universal claim-first policy, change claim authority, approve
+Trust Verifier cutover, select a Trust Goal for cutover, replace or wrap old
+gates, generate role input or execution packets for unrelated work, restart
+Pi/Aperture runtime work, choose local API or State Index timing, execute
+guarded browser actions, approve public benchmark publication, approve paid
+reviewer/model routing, approve hosted replay services or external service
+setup, merge, push, deploy, form the V0 Closeout Claude Code A/B
+Product-Value Trial, start the next intake-derived gap, or start unrelated
+Phase 8 product work before Work Item PM records plan-mode orchestration for
+`BANDIT-084`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -35,8 +34,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `TBD` - Claim-First Transition Policy Triage, pending after
-  Repo PM triage and Stage 1 formation from `WIL-CLAIM-FIRST`.
+- `[Gap]` `TBD` - Repo-Wide Transition Index Decision, pending after
+  `BANDIT-084` lands and closes or is explicitly blocked/dispositioned.
 
 ## Planned Work
 
@@ -47,15 +46,16 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ### Phase 8 Product Queue
 
 `BANDIT-082` migrated the pre-Claude-bakeoff follow-up and UI-polish work into
-`.bandit/work-intake-ledger.json`. `WIL-UI-POLISH` is now closed as
-`BANDIT-083`. Remaining entries stay proposal-only until Repo PM forms them
-through normal Stage 1 formation or records explicit dispositions; the Claude
-Product-Value Trial stays deferred behind this lane.
+`.bandit/work-intake-ledger.json`. `WIL-UI-POLISH` is closed as `BANDIT-083`.
+`WIL-CLAIM-FIRST` is formed as `BANDIT-084`. Remaining entries stay
+proposal-only until Repo PM forms them through normal Stage 1 formation or
+records explicit dispositions; the Claude Product-Value Trial stays deferred
+behind this lane.
 
-- `[Gap]` `TBD` - Claim-First Transition Policy Triage: decide whether every
-  post-bootstrap step transition requires an explicit actor claim, using landed
-  coordination-log and CAS claim-authority evidence; record policy, follow-up
-  scope, or no-action.
+- `[Gap]` `BANDIT-084` - Claim-First Transition Policy Triage: decide whether
+  every post-bootstrap step transition requires an explicit actor claim, using
+  landed coordination-log and CAS claim-authority evidence; record policy,
+  follow-up scope, no-action, or deferred disposition.
 - `[Gap]` `TBD` - Repo-Wide Transition Index Decision: determine whether a
   derived repo-wide transition index is justified for cockpit, heartbeat, or
   cross-work-item reporting; keep per-work-item ledgers canonical.
@@ -71,8 +71,8 @@ Product-Value Trial stays deferred behind this lane.
   repo integration files.
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
   the same PRD in Bandit and no-Bandit repos after the pre-Claude-bakeoff
-  follow-up queue is formed or dispositioned; no statistical or public benchmark
-  claim.
+  follow-up queue is formed or dispositioned; no statistical or public
+  benchmark claim.
 
 ## Completed Work
 
