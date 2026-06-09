@@ -29,9 +29,10 @@
       "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
       "suggested_work_item_type": "slice",
       "depends_on": [],
-      "scope_summary": "Bandit Cockpit UI Polish From Attached Design remains a proposal until Repo PM forms a work item.",
-      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
-      "intake_outcome": "accepted_to_queue",
+      "scope_summary": "Bandit Cockpit UI Polish From Attached Design is formed as BANDIT-083 and awaits Work Item PM plan-mode orchestration.",
+      "risk_product_scope_status": "formed as BANDIT-083; not claimable outside normal work-item coordination and still requires staged RED, implementation, review, UAT, landing, and closeout evidence",
+      "intake_outcome": "formed",
+      "formed_work_item": "BANDIT-083",
       "claimable": false,
       "transition_history": [
         {
@@ -40,6 +41,13 @@
           "from": "source_metadata",
           "to": "accepted_to_queue",
           "source": "BANDIT-082 migration"
+        },
+        {
+          "at": "2026-06-09T13:34:33Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "formed",
+          "source": "BANDIT-083 formation approval"
         }
       ]
     },

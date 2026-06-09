@@ -327,3 +327,4 @@
 {"type":"work_item_created","work_item":"BANDIT-081","message":"Created work item BANDIT-081 from docs/specs/BANDIT-081-operator-attention-inbox-surface.json"}
 {"type":"artifact_created","work_item":"BANDIT-081","message":"Created red_evidence artifact at docs/work/BANDIT-081/red-evidence.md"}
 {"type":"work_item_created","work_item":"BANDIT-082","message":"Created work item BANDIT-082 from docs/specs/BANDIT-082-work-intake-ledger-and-followups-migration.json"}
+{"type":"work_item_created","work_item":"BANDIT-083","message":"Created work item BANDIT-083 from docs/specs/BANDIT-083-bandit-cockpit-ui-polish-from-attached-design.json"}

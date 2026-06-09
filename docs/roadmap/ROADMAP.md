@@ -8,14 +8,13 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-082` - Work Intake Ledger And Followups Migration
-  (closed; retained as last-closed derived-status anchor until the next slice
-  is formed)
+- `[Slice]` `BANDIT-083` - Bandit Cockpit UI Polish From Attached Design
+  (Stage 1 formation approved)
 
-**Current next step:** Repo PM should form the next intake-derived work item
-for `WIL-UI-POLISH`, Bandit Cockpit UI Polish From Attached Design, before
-forming the V0 Closeout Claude Code A/B Product-Value Trial or unrelated Phase
-8 work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-083`, Bandit Cockpit UI Polish From Attached Design, before RED
+evidence, implementation, review, landing, closeout, the V0 Closeout Claude
+Code A/B Product-Value Trial, or unrelated Phase 8 work.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -23,8 +22,9 @@ restart Pi/Aperture runtime work, choose local API or State Index timing,
 execute guarded browser actions, approve public benchmark publication, approve
 paid reviewer/model routing, approve hosted replay services or external service
 setup, merge, push, deploy, form the V0 Closeout Claude Code A/B Product-Value
-Trial, or start unrelated Phase 8 product work before Repo PM forms the next
-intake-derived `WIL-UI-POLISH` work item through normal Stage 1 formation.
+Trial, start RED evidence, implementation, review, landing, closeout, or start
+unrelated Phase 8 product work before Work Item PM records plan-mode
+orchestration for `BANDIT-083`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -32,8 +32,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - Bandit Cockpit UI Polish From Attached Design, pending
-  Repo PM formation from `WIL-UI-POLISH`.
+- `[Gap]` `TBD` - Claim-First Transition Policy Triage, pending after
+  `BANDIT-083` lands and closes or is otherwise dispositioned.
 
 ## Planned Work
 
@@ -44,14 +44,12 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ### Phase 8 Product Queue
 
 `BANDIT-082` migrated the pre-Claude-bakeoff follow-up and UI-polish work into
-`.bandit/work-intake-ledger.json`. The remaining entries stay proposal-only
-until Repo PM forms them through normal Stage 1 formation; the Claude
-Product-Value Trial stays deferred behind this lane.
+`.bandit/work-intake-ledger.json`. `WIL-UI-POLISH` is now formed as
+`BANDIT-083`. Remaining entries stay proposal-only until Repo PM forms them
+through normal Stage 1 formation after the active slice lands and closes or is
+otherwise dispositioned; the Claude Product-Value Trial stays deferred behind
+this lane.
 
-- `[Slice]` `TBD` - Bandit Cockpit UI Polish From Attached Design: adapt the
-  attached three-pane Evidence Row cockpit design while preserving CLI
-  authority, repo-native source links, browser read-only boundaries, and normal
-  UAT/review/landing evidence.
 - `[Gap]` `TBD` - Claim-First Transition Policy Triage: decide whether every
   post-bootstrap step transition requires an explicit actor claim, using landed
   coordination-log and CAS claim-authority evidence; record policy, follow-up
