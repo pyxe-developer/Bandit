@@ -85,6 +85,71 @@ test("cockpit status reports bootstrap gaps, gates, improvements, and coordinati
   });
 });
 
+test("cockpit status exposes live queue context source from roadmap without browser authority", async () => {
+  const repo = await createCockpitRepo({
+    activeWorkItemId: "BANDIT-080",
+    activeWorkTitle: "Queue & Context (Light)",
+    roadmap: roadmapFixture({
+      nextAction: "Run Stage 4 review for BANDIT-080.",
+      queueItems: [
+        ["BANDIT-080", "Queue & Context (Light)"],
+        ["TBD", "Operator Attention / Operator Inbox surface after `BANDIT-080` closeout"],
+        ["TBD", "V0 Closeout Claude Code A/B Product-Value Trial: compare the same PRD without executing the trial"]
+      ]
+    }),
+    currentContext: currentContextFixture({
+      activeWorkItemId: "BANDIT-080",
+      activeWorkTitle: "Queue & Context (Light)",
+      nextAction: "Run Stage 4 review for BANDIT-080."
+    })
+  });
+
+  const result = await runBandit(repo, ["cockpit", "status", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const status = JSON.parse(result.stdout);
+  assert.equal(status.queue_context_source.source, "docs/roadmap/ROADMAP.md");
+  assert.deepEqual(
+    status.queue_context_source.items.map((item) => ({
+      id: item.id,
+      label: item.label,
+      status: item.status,
+      relationship: item.relationship,
+      source_artifacts: item.source_artifacts,
+      deferred_reason: item.deferred_reason
+    })),
+    [
+      {
+        id: "BANDIT-080",
+        label: "Queue & Context (Light)",
+        status: "active_anchor",
+        relationship: "current",
+        source_artifacts: [
+          "docs/work/BANDIT-080/brief.md",
+          "docs/roadmap/CURRENT_CONTEXT.md"
+        ],
+        deferred_reason: undefined
+      },
+      {
+        id: "TBD",
+        label: "Operator Attention / Operator Inbox surface",
+        status: "next_planned",
+        relationship: "next",
+        source_artifacts: ["docs/roadmap/ROADMAP.md"],
+        deferred_reason: undefined
+      },
+      {
+        id: "TBD",
+        label: "V0 Closeout Claude Code A/B Product-Value Trial",
+        status: "deferred",
+        relationship: "deferred",
+        source_artifacts: ["docs/roadmap/ROADMAP.md"],
+        deferred_reason: "deferred until after cockpit queue and operator attention slices"
+      }
+    ]
+  );
+});
+
 test("cockpit status aggregates improvement candidates from disposition artifacts", async () => {
   const repo = await createCockpitRepo();
   await writeArtifact(
@@ -370,7 +435,7 @@ async function createCockpitRepo(options = {}) {
   await writeArtifact(
     repo,
     "docs/roadmap/ROADMAP.md",
-    roadmapFixture({
+    options.roadmap ?? roadmapFixture({
       nextAction:
         options.roadmapNextAction ?? "Implement the read-only cockpit status foundation."
     })
@@ -481,7 +546,15 @@ No operator-owned input is required for this interstitial recovery task.
 `;
 }
 
-function roadmapFixture({ nextAction }) {
+function roadmapFixture({ nextAction, queueItems = [] }) {
+  const queue = queueItems.length === 0
+    ? ""
+    : `
+### Phase 8 Product Queue
+
+${queueItems.map(([id, label]) => `- \`[Slice]\` \`${id}\` - ${label}`).join("\n")}
+`;
+
   return `# Bandit Roadmap
 
 ## Current Position
@@ -489,6 +562,7 @@ function roadmapFixture({ nextAction }) {
 **Current phase:** Phase 8 - Workflow Cockpit kickoff.
 
 **Current next step:** ${nextAction}
+${queue}
 `;
 }
 

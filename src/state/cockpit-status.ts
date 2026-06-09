@@ -207,8 +207,10 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
     }
   );
 
+  let activeWorkBriefContent: string | undefined;
   if (!isInterstitial) {
     const activeWorkBrief = await readRequiredArtifact(repoRoot, `docs/work/${activeWorkItemId}/brief.md`);
+    activeWorkBriefContent = activeWorkBrief.content;
     assertActiveBrief(activeWorkItemId, activeWorkBrief.content);
   }
 
@@ -242,6 +244,8 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
         evidenceArtifactExistence
       })
     : undefined;
+  const blockers = readBlockers(currentContext.content, bootstrapGaps);
+  const coordination = await readCoordinationSummary(repoRoot, evidenceWorkItemId);
 
   return {
     kind: "workflow_cockpit_status",
@@ -269,7 +273,7 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
       value: readRequiredOperatorInput(currentContext.content),
       source: CURRENT_CONTEXT_PATH
     },
-    blockers: readBlockers(currentContext.content, bootstrapGaps),
+    blockers,
     bootstrap_gaps: bootstrapGaps,
     gates: readGateMatrix({
       paths: {
@@ -291,10 +295,179 @@ export async function readCockpitStatus(repoRoot: string): Promise<CockpitStatus
       source: briefPath
     },
     improvement_health: await readImprovementHealth(repoRoot),
-    coordination: await readCoordinationSummary(repoRoot, evidenceWorkItemId),
+    coordination,
     stale_evidence: staleEvidence,
-    evidence_trust_signals
+    evidence_trust_signals,
+    queue_context_source: buildQueueContextSource({
+      activeWorkItemId,
+      activeWorkItemTitle: readBriefTitle(activeWorkBriefContent),
+      roadmapContent: roadmap.content,
+      blockers,
+      bootstrapGaps,
+      staleEvidence
+    })
   };
+}
+
+function buildQueueContextSource(input: {
+  activeWorkItemId: string;
+  activeWorkItemTitle: string | null;
+  roadmapContent: string;
+  blockers: CockpitBlocker[];
+  bootstrapGaps: BootstrapGapSummary;
+  staleEvidence: StaleEvidence[];
+}): NonNullable<CockpitStatus["queue_context_source"]> {
+  const roadmapItems = readRoadmapQueueItems(input.roadmapContent);
+  const rows = roadmapItems.length > 0
+    ? roadmapItems
+    : [{
+        id: input.activeWorkItemId,
+        label: input.activeWorkItemTitle ?? input.activeWorkItemId,
+        kind: "slice"
+      }];
+  const activeIndex = rows.findIndex((row) => row.id === input.activeWorkItemId);
+  const nextPlannedIndex = rows.findIndex((row, index) => index > activeIndex);
+
+  return {
+    source: ROADMAP_PATH,
+    items: rows.map((row, index) => {
+      const active = row.id === input.activeWorkItemId;
+      const deferred = isDeferredQueueItem(row.label);
+      const status = active
+        ? activeQueueStatus(input)
+        : index === nextPlannedIndex
+          ? "next_planned"
+          : deferred
+            ? "deferred"
+            : "planned";
+      const relationship = active
+        ? "current"
+        : status === "next_planned"
+          ? "next"
+          : status;
+      const sourceArtifacts = active && row.id !== "TBD"
+        ? [`docs/work/${row.id}/brief.md`, CURRENT_CONTEXT_PATH]
+        : [ROADMAP_PATH];
+
+      return {
+        id: row.id,
+        label: row.label,
+        kind: row.kind,
+        status,
+        relationship,
+        summary: queueItemSummary(row.label, status),
+        source_artifacts: sourceArtifacts,
+        ...(deferred ? { deferred_reason: deferredQueueReason(row.label) } : {})
+      };
+    })
+  };
+}
+
+function readRoadmapQueueItems(content: string) {
+  const phaseQueue = readSection(content, "### Phase 8 Product Queue");
+  const source = phaseQueue || readSection(content, "## Next Work Item");
+  const seen = new Set<string>();
+  const items: Array<{ id: string; label: string; kind: string }> = [];
+
+  for (const line of source.split(/\r?\n/)) {
+    const match = line.match(/^-\s+`\[(?<kind>[^\]]+)\]`\s+`(?<id>[^`]+)`\s+-\s+(?<label>.+)$/);
+    if (!match?.groups) {
+      continue;
+    }
+
+    const { id: rawId, kind: rawKind, label: rawLabel } = match.groups;
+    if (!rawId || !rawKind || !rawLabel) {
+      continue;
+    }
+
+    const id = rawId.trim();
+    const label = rawLabel
+      .replace(/\s+\((?:current|closed|implementation recorded;[^)]*|stage [^)]*)\)\s*$/iu, "")
+      .replace(/\s+after\s+`[^`]+`.*$/u, "")
+      .replace(/\s+after\s*$/u, "")
+      .replace(/:.*$/u, "")
+      .trim();
+    const key = `${id}:${label}`;
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    items.push({
+      id,
+      label,
+      kind: rawKind.toLowerCase()
+    });
+  }
+
+  return items;
+}
+
+function readSection(content: string, heading: string) {
+  const start = content.indexOf(heading);
+  if (start === -1) {
+    return "";
+  }
+
+  const afterHeading = content.slice(start + heading.length);
+  const nextHeading = afterHeading.search(/\n#{1,3}\s+/u);
+  return nextHeading === -1 ? afterHeading : afterHeading.slice(0, nextHeading);
+}
+
+function activeQueueStatus(input: {
+  blockers: CockpitBlocker[];
+  bootstrapGaps: BootstrapGapSummary;
+  staleEvidence: StaleEvidence[];
+}) {
+  if (input.blockers.length > 0 || input.bootstrapGaps.status === "open") {
+    return "blocked";
+  }
+
+  if (input.staleEvidence.length > 0) {
+    return "stale";
+  }
+
+  return "active_anchor";
+}
+
+function queueItemSummary(label: string, status: string) {
+  if (status === "active_anchor") {
+    return "Current formed Phase 8 cockpit slice.";
+  }
+
+  if (status === "blocked") {
+    return "Current slice is blocked until repo-native evidence clears the blocker.";
+  }
+
+  if (status === "stale") {
+    return "Current slice has stale evidence and must refresh before landing.";
+  }
+
+  if (status === "next_planned") {
+    return "Planned after the current slice closes, if repo artifacts still support the sequence.";
+  }
+
+  if (status === "deferred") {
+    return "Deferred planning context only; this slice does not execute it.";
+  }
+
+  return `${label} remains planned context only.`;
+}
+
+function isDeferredQueueItem(label: string) {
+  return /closeout|trial|deferred/i.test(label);
+}
+
+function deferredQueueReason(label: string) {
+  if (/trial/i.test(label)) {
+    return "deferred until after cockpit queue and operator attention slices";
+  }
+
+  return `${label} is deferred by roadmap context.`;
+}
+
+function readBriefTitle(content: string | undefined) {
+  const match = content?.match(/^#\s+[^:]+:\s+(.+)$/m);
+  return match?.[1]?.trim() ?? null;
 }
 
 function buildCockpitTrustSignals(
