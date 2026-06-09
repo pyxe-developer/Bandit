@@ -4,17 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-080` is active for the Queue & Context (Light) Phase 8 product slice.
-Stage 1 formation, Work Item PM plan-mode orchestration, Stage 2 RED evidence,
-Stage 3 implementation evidence, Stage 4 aggregate review evidence, and Stage
-5 UAT plus landing verdict evidence exist under `docs/work/BANDIT-080/`.
+`BANDIT-080` landed and closed the Queue & Context (Light) Phase 8 product
+slice. Its brief, orchestration plan, RED evidence, Claude implementation
+evidence, PM acceptance, CodeRabbit timeout evidence, Local Qwen non-blocking
+evidence, risk classification, supply-chain gate, browser smoke, review
+evidence, UAT, landing verdict, local-record landing action, retrospective, and
+improvement disposition are recorded under `docs/work/BANDIT-080/` and
+`.bandit/policy/`.
 
-**Active work item:** `BANDIT-080` (landing verdict recorded; landing action pending).
+**Active work item:** `BANDIT-080` (closed; retained as the current derived-status anchor until the next slice is formed).
 
-The current stage is Stage 5: landing_verdict_recorded.
+The current stage is Stage 6: closed.
 
-**Current next action:** Run the local-record landing action for BANDIT-080 and
-record landing action evidence.
+**Current next action:** Repo PM should triage and form the Operator Attention /
+Operator Inbox surface only if roadmap/product direction is sufficient;
+otherwise ask the operator for the missing product direction.
+
+Do not start RED evidence, implementation, review, UAT, landing, or closeout
+for another work item until a new formed work item exists and the prior slice
+remains landed and closed.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -27,7 +35,9 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action.
+No operator-owned input is required for closeout. Operator input may be needed
+if Repo PM cannot derive sufficient product direction for the Operator
+Attention / Operator Inbox surface from roadmap artifacts.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -40,51 +50,27 @@ repo artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-080` current evidence:
+`BANDIT-080` closeout evidence:
 
-- Source spec: `docs/specs/BANDIT-080-queue-context-light.json`.
 - Brief: `docs/work/BANDIT-080/brief.md`.
-- Coordination log: `docs/work/BANDIT-080/coordination-log.jsonl` records
-  `brief_created`, `formation_approved`, `orchestration_plan_recorded`,
-  `red_recorded`, `implementation_recorded`, `review_recorded`,
-  `feature_uat_approved`, and `landing_verdict_recorded`.
 - Orchestration plan: `docs/work/BANDIT-080/orchestration-plan.md`.
 - RED evidence: `docs/work/BANDIT-080/red-evidence.md`.
-- RED tests: `test/cockpit-queue-context.test.mjs`.
-- Writer report: `docs/work/BANDIT-080/writer-report.md`.
 - Implementation evidence: `docs/work/BANDIT-080/implementation-evidence.md`.
-- PM acceptance: `docs/work/BANDIT-080/stage3-pm-review.md`.
-- CodeRabbit review evidence:
-  `docs/work/BANDIT-080/coderabbit-review.md` records a full-window provider
-  timeout as bootstrap-gap replacement evidence; no CodeRabbit pass is claimed.
-- Local Qwen review evidence: `docs/work/BANDIT-080/local-qwen-review.md`
-  records non-blocking findings through the authorized local reviewer route.
-- Qwen finding disposition:
-  `docs/work/BANDIT-080/qwen-finding-disposition.md`.
-- Browser smoke: `docs/work/BANDIT-080/browser-smoke.md`.
+- Stage 3 PM review: `docs/work/BANDIT-080/stage3-pm-review.md`.
+- Review evidence: `docs/work/BANDIT-080/review-evidence.md`.
 - UAT approval: `docs/work/BANDIT-080/uat-approval.md`.
 - Landing verdict: `docs/work/BANDIT-080/landing-verdict.md`.
-- Risk classification:
-  `.bandit/policy/risk-classifications/BANDIT-080-risk-classification.json`.
-- Supply-chain gate:
-  `.bandit/policy/supply-chain-gates/BANDIT-080-supply-chain-gate.json`.
-- Aggregate review evidence: `docs/work/BANDIT-080/review-evidence.md`.
-- Qwen formation review: `docs/work/BANDIT-080/qwen-formation-review.md`
-  records a pass through the authorized MLX adapter route.
-- CodeRabbit formation review:
-  `docs/work/BANDIT-080/coderabbit-formation-review.md` records terminal
-  `review_completed` evidence with three trivial out-of-subject findings
-  dispositioned as non-blocking for formation.
-- Aggregate formation review: `docs/work/BANDIT-080/formation-review.md`
-  records a pass.
+- Landing action: `docs/work/BANDIT-080/landing-action.md`.
+- Retrospective: `docs/work/BANDIT-080/retrospective.md`.
+- Improvement disposition: `docs/work/BANDIT-080/improvement-disposition.md`.
+- Coordination log: `docs/work/BANDIT-080/coordination-log.jsonl` records
+  `closed`.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-retrospective evidence, automatic improvement evaluation, guarded browser
-action execution, local API work, State Index work, scheduler execution, claim
-execution, worktree execution, public benchmark publication, paid
-reviewer/model routing, hosted replay services, telemetry, merge, push,
-deploy, Trust Verifier cutover, or unrelated product work before the local
-landing action is recorded.
-
-The next required step is the Stage 5 local-record landing action for
-`BANDIT-080`.
+the next slice brief, RED evidence, implementation evidence, review evidence,
+UAT evidence, landing evidence, retrospective evidence, automatic improvement
+evaluation, guarded browser action execution, local API work, State Index work,
+scheduler execution, claim execution, worktree execution, public benchmark
+publication, paid reviewer/model routing, hosted replay services, telemetry,
+merge, push, deploy, Trust Verifier cutover, or unrelated product work until
+the next work item is explicitly formed.

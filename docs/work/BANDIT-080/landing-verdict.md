@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-080
-source_head: 8cc64651b04ac39c603458bffd421310b764a258
+source_head: a245ae949bdf34d36bfb4273f40835857b9bd073
 review_evidence: docs/work/BANDIT-080/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -24,7 +24,7 @@ rationale: BANDIT-080 is safe to land locally as the Queue & Context Light produ
   "freshness_state": "current",
   "verdict": "safe-to-land",
   "review_subject_hash": "b72ad26f4ec3e783fecce6855b079c8e43dac05ca318fbc00464c1ce8f3babd0",
-  "source_head": "8cc64651b04ac39c603458bffd421310b764a258",
+  "source_head": "a245ae949bdf34d36bfb4273f40835857b9bd073",
   "source_artifacts": [
     "docs/work/BANDIT-080/review-evidence.md",
     "docs/work/BANDIT-080/uat-approval.md",
