@@ -1,8 +1,8 @@
 # Current Context
 
-## Last Updated: 2026-06-08
+## Last Updated: 2026-06-09
 
-## Current Work Item: BANDIT-080 (implementation recorded; Stage 4 review pending)
+## Current Work Item: BANDIT-080 (review recorded; Stage 5 UAT pending)
 
 ## Current Status
 
@@ -10,16 +10,15 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-080` has Stage 1 formation, Work Item PM plan-mode orchestration,
-Stage 2 RED evidence, and Stage 3 implementation evidence for Queue & Context
-(Light).
+Stage 2 RED evidence, Stage 3 implementation evidence, and Stage 4 aggregate
+review evidence for Queue & Context (Light).
 
-Current stage: Stage 3 implementation recorded.
+Current stage: Stage 4 review recorded.
 
-Next action: Run Stage 4 review for BANDIT-080: request/read CodeRabbit review
-or record provider-refusal/bootstrap evidence, run Local Qwen through the
-authorized .bandit/reviewers/local-qwen.json route, record risk classification,
-supply-chain gate, browser smoke evidence, and aggregate review evidence before
-landing.
+Next action: Record CLI-owned product UAT for BANDIT-080 using the operator
+pre-approval, then record Stage 5 landing verdict, run land-check and
+auto-land-check, and execute local-record landing action against the current
+source/evidence commit.
 
 Required operator input: none currently required.
 
@@ -27,7 +26,7 @@ Required operator input: none currently required.
 
 Last 5 items only:
 
-- `BANDIT-080` - Queue & Context (Light) (implementation recorded)
+- `BANDIT-080` - Queue & Context (Light) (review recorded)
 - `BANDIT-079` - Improvement Health Surface (closed)
 - `BANDIT-078` - Guarded CLI Action Requests (closed)
 - `BANDIT-077` - Spec-To-Evidence Traceability Matrix (closed)

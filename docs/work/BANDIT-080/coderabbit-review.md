@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-080
-source_head: f619f08fd67a9ab55830ac480efc663b4f51f5aa
+source_head: 59de83fbdbd2938b717528e7dd8addbf2d803b65
 provider: coderabbit-cli
 review_target: origin/main..HEAD
 review_state: timeout
@@ -12,8 +12,8 @@ findings_disposition: CodeRabbit did not emit a terminal review verdict or findi
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
-  - timeout 600 coderabbit review --agent --base origin/main -c AGENTS.md -c CLEAN_CODE.md -c docs/verification/STAGE_RUBRICS.md -c docs/plans/BOOTSTRAP_METHODOLOGY.md -c docs/work/BANDIT-080/brief.md -c docs/work/BANDIT-080/red-evidence.md -c docs/work/BANDIT-080/implementation-evidence.md -c docs/work/BANDIT-080/stage3-pm-review.md
-  - Captured output is stored under .bandit/tmp/BANDIT-080-coderabbit/.
+  - timeout 600 coderabbit review --agent --base origin/main -c AGENTS.md -c CLEAN_CODE.md -c docs/verification/STAGE_RUBRICS.md -c docs/plans/BOOTSTRAP_METHODOLOGY.md -c docs/work/BANDIT-080/brief.md -c docs/work/BANDIT-080/red-evidence.md -c docs/work/BANDIT-080/implementation-evidence.md -c docs/work/BANDIT-080/stage3-pm-review.md -c docs/work/BANDIT-080/stage4-repair-evidence.md -c docs/work/BANDIT-080/qwen-finding-disposition.md
+  - Captured output is stored under .bandit/tmp/BANDIT-080-coderabbit-refresh/.
   - The bounded run exited with code 124 after 600 seconds.
   - Output reached review_context, setup, analyzing, reviewing, and heartbeat states, but did not emit review_completed or findings.
 bootstrap_gaps:
