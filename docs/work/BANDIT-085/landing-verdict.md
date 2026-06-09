@@ -16,7 +16,7 @@ landing_agent_state: pass
 landing_agent_replacement_evidence:
   - none
 final_verdict: safe-to-land
-rationale: BANDIT-085 is safe to land locally as the Repo-Wide Transition Index Decision chore. Aggregate Stage 4 review evidence records review_subject_hash 61f22082dae2d7bc4a7f866444c7c5b33e1175f3755407c752b539bdac2c5c92, coordination validation, work-intake validation, risk classification validation, supply-chain gate validation, diff hygiene, CodeRabbit timeout evidence with no pass claimed, and authorized Local Qwen non_blocking evidence with PM disposition. The disposition keeps per-work-item coordination logs canonical, defers any repo-wide transition index until concrete trigger conditions exist, preserves the operator-owned policy gate for canonical authority, State Index, local API, scheduler, claim/worktree lifecycle, merge/push/deploy, paid routing, hosted service, and public benchmark decisions, and adds no source-code, validator, transition-index implementation, scheduler, API, dependency, lockfile, package-script, external-service, paid-routing, Trust Verifier, or product UAT surface.
+rationale: BANDIT-085 is safe to land locally as the Repo-Wide Transition Index Decision chore. Aggregate Stage 4 review evidence records review_subject_hash 5bb1f51012632ef887840d37c655ecba1c18df3f2c0b8a40f511547871842e72, coordination validation, work-intake validation, risk classification validation, supply-chain gate validation, diff hygiene, CodeRabbit timeout evidence with no pass claimed, and authorized Local Qwen non_blocking evidence with PM disposition. The disposition keeps per-work-item coordination logs canonical, defers any repo-wide transition index until concrete trigger conditions exist, preserves the operator-owned policy gate for canonical authority, State Index, local API, scheduler, claim/worktree lifecycle, merge/push/deploy, paid routing, hosted service, and public benchmark decisions, and adds no source-code, validator, transition-index implementation, scheduler, API, dependency, lockfile, package-script, external-service, paid-routing, Trust Verifier, or product UAT surface.
 
 ```json
 {
@@ -24,7 +24,7 @@ rationale: BANDIT-085 is safe to land locally as the Repo-Wide Transition Index 
   "work_item": "BANDIT-085",
   "freshness_state": "current",
   "verdict": "safe-to-land",
-  "review_subject_hash": "61f22082dae2d7bc4a7f866444c7c5b33e1175f3755407c752b539bdac2c5c92",
+  "review_subject_hash": "5bb1f51012632ef887840d37c655ecba1c18df3f2c0b8a40f511547871842e72",
   "source_head": "8706dd38b3763bea708849d9cf0a1f60c6816006",
   "source_artifacts": [
     "docs/work/BANDIT-085/review-evidence.md",

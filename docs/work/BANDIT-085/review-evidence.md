@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-085
 source_head: d56a20595ac5fb3380181f1ce6201a9ec33f1139
-review_subject_hash: 61f22082dae2d7bc4a7f866444c7c5b33e1175f3755407c752b539bdac2c5c92
+review_subject_hash: 5bb1f51012632ef887840d37c655ecba1c18df3f2c0b8a40f511547871842e72
 review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
@@ -15,7 +15,7 @@ verification_evidence:
   - .bandit/policy/supply-chain-gates/BANDIT-085-supply-chain-gate.json records low supply-chain surface state with no dependency, lockfile, package-manager script, CI/release workflow, agent skill, fetched prompt, external tool install, or external side-effecting automation change.
   - node ./bin/bandit.mjs risk-classification validate --json passed after BANDIT-085 risk evidence was tracked.
   - node ./bin/bandit.mjs supply-chain-gate validate --json passed after BANDIT-085 supply-chain evidence was tracked.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-085 produced 61f22082dae2d7bc4a7f866444c7c5b33e1175f3755407c752b539bdac2c5c92 from review-subject policy v1 after BANDIT-085 risk and supply-chain evidence were tracked.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-085 produced 5bb1f51012632ef887840d37c655ecba1c18df3f2c0b8a40f511547871842e72 from review-subject policy v1 after BANDIT-085 risk/supply-chain evidence and global release-authorized auto-landing policy entries were tracked.
   - node ./bin/bandit.mjs coordination validate BANDIT-085 passed after Stage 3 PM acceptance.
   - node ./bin/bandit.mjs work-intake validate --json passed during Stage 3 PM acceptance and again during Qwen finding disposition.
   - git diff --check passed before aggregate review evidence.
