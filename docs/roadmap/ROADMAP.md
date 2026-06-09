@@ -4,17 +4,16 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-080` - Queue & Context (Light) (closed)
+- `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface (closed)
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
-  (Stage 4 review recorded)
+- None active; `BANDIT-081` remains the active derived-status anchor until the
+  next slice is formed.
 
-**Current next step:** Record CLI-owned product UAT for `BANDIT-081` using the
-operator pre-approval, then record Stage 5 landing verdict, run `land-check` and
-`auto-land-check`, and execute local-record landing action against the current
-source/evidence commit.
+**Current next step:** Repo PM should triage and form the V0 Closeout Claude
+Code A/B Product-Value Trial slice only if roadmap/product direction is
+sufficient; otherwise ask the operator for the missing product direction.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
@@ -40,14 +39,13 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
-  (current)
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
   the same PRD in Bandit and no-Bandit repos; no statistical or public
   benchmark claim.
 
 ## Completed Work
 
+- `BANDIT-081` - Operator Attention / Operator Inbox Surface
 - `BANDIT-080` - Queue & Context (Light)
 - `BANDIT-079` - Improvement Health Surface
 - `BANDIT-078` - Guarded CLI Action Requests

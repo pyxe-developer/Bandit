@@ -4,28 +4,29 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-081` has completed Work Item PM plan-mode orchestration, Stage 2 RED
-evidence, Stage 3 implementation evidence, and Stage 4 aggregate review
-evidence for the Operator Attention / Operator Inbox Surface Phase 8 product
-slice. Its source spec, brief, formation reviews, orchestration plan, RED
-tests, RED evidence, Claude-family implementation, PM acceptance, CodeRabbit
-timeout/repaired-finding evidence, Local Qwen pass evidence, risk
-classification, supply-chain gate, browser smoke, aggregate review evidence,
-and coordination evidence are recorded under `docs/specs/`, `test/`, `src/`,
-`public/`, `.bandit/policy/`, and `docs/work/BANDIT-081/`.
+`BANDIT-081` has landed and closed the Operator Attention / Operator Inbox
+Surface Phase 8 product slice. Its source spec, brief, formation reviews,
+orchestration plan, RED tests, RED evidence, Claude-family implementation, PM
+acceptance, CodeRabbit timeout/repaired-finding evidence, Local Qwen pass
+evidence, risk classification, supply-chain gate, browser smoke, aggregate
+review evidence, UAT, landing verdict, landing action, retrospective,
+improvement disposition, and coordination evidence are recorded under
+`docs/specs/`, `test/`, `src/`, `public/`, `.bandit/policy/`, and
+`docs/work/BANDIT-081/`.
 
 **Active work item:** `BANDIT-081` - Operator Attention / Operator Inbox Surface.
 
-The current stage is Stage 4: review_recorded.
+The current stage is Stage 6: closed.
 
-**Current next action:** Record CLI-owned product UAT for `BANDIT-081` using the
-operator pre-approval, then record Stage 5 landing verdict, run `land-check` and
-`auto-land-check`, and execute local-record landing action against the current
-source/evidence commit.
+**Current next action:** Repo PM should triage and form the V0 Closeout Claude
+Code A/B Product-Value Trial slice only if roadmap/product direction is
+sufficient; otherwise ask the operator for the missing product direction.
 
-Do not close out `BANDIT-081` until CLI-owned UAT, landing verdict, land-check,
-auto-land-check, local-record landing action, retrospective, improvement
-disposition, routing sync, and final validation are complete.
+Do not start unrelated Phase 8 product work, Trust Verifier cutover, merge,
+push, deploy, hosted replay service setup, paid reviewer/model routing, public
+benchmark publication, local API work, State Index work, or guarded browser
+action execution before Repo PM forms the next slice through normal Stage 1
+formation.
 
 No Trust Verifier cutover is approved, no Trust Goal is selected for cutover,
 no old gate path is replaced or wrapped, no Pi/Aperture runtime work is active,
@@ -38,10 +39,7 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required. The automation prompt supplies operator
-pre-approval for gates through landing and closeout. CLI-owned product UAT will
-still be recorded before landing because `BANDIT-081` changes the
-operator-facing cockpit surface.
+No operator-owned input is required.
 
 Halt for operator input if a future step would approve Trust Verifier cutover
 policy, select a Trust Goal for cutover, replace or wrap an older gate path,
@@ -78,12 +76,17 @@ repo artifacts cannot answer.
 - Local Qwen review: `docs/work/BANDIT-081/local-qwen-review.md`.
 - Browser smoke: `docs/work/BANDIT-081/browser-smoke.md`.
 - Aggregate review evidence: `docs/work/BANDIT-081/review-evidence.md`.
+- UAT approval: `docs/work/BANDIT-081/uat-approval.md`.
+- Landing verdict: `docs/work/BANDIT-081/landing-verdict.md`.
+- Landing action: `docs/work/BANDIT-081/landing-action.md`.
+- Retrospective: `docs/work/BANDIT-081/retrospective.md`.
+- Improvement disposition: `docs/work/BANDIT-081/improvement-disposition.md`.
 
-No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. Do not create
-retrospective evidence, automatic improvement evaluation, inbox
-write/resolve/archive behavior, notification delivery, guarded browser action
-execution, local API work, State Index work, scheduler execution, claim
-execution, worktree execution, public benchmark publication, paid
-reviewer/model routing, hosted replay services, telemetry, merge, push, deploy,
-Trust Verifier cutover, or unrelated product work until Stage 5 landing is
-complete.
+No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`. `BANDIT-081`
+remains the active derived-status anchor until Repo PM forms the next slice.
+Do not create automatic improvement evaluation, inbox write/resolve/archive
+behavior, notification delivery, guarded browser action execution, local API
+work, State Index work, scheduler execution, claim execution, worktree
+execution, public benchmark publication, paid reviewer/model routing, hosted
+replay services, telemetry, merge, push, deploy, Trust Verifier cutover, or
+unrelated product work before the next slice is formed.

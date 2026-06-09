@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-081
-source_head: b490360c3996f94e7625dbbf8122b061009b1cf7
+source_head: 00785c0bc19a6905fe8cf07cb655680b779094fb
 review_evidence: docs/work/BANDIT-081/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -25,7 +25,7 @@ rationale: BANDIT-081 is safe to land locally as the Operator Attention / Operat
   "freshness_state": "current",
   "verdict": "safe-to-land",
   "review_subject_hash": "94ceb19f5586383099ef3dd71ec7a0abc726e23427cc4430abecb93832ecda03",
-  "source_head": "b490360c3996f94e7625dbbf8122b061009b1cf7",
+  "source_head": "00785c0bc19a6905fe8cf07cb655680b779094fb",
   "source_artifacts": [
     "docs/work/BANDIT-081/review-evidence.md",
     "docs/work/BANDIT-081/uat-approval.md",
