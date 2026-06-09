@@ -6,6 +6,7 @@ reviewer_verdict: non_blocking
 pm_disposition: dispositioned
 operator_input_status: none_required
 recorded_at: 2026-06-09T11:52:37Z
+refreshed_review_source_head: 3982b88c254f747451b34bbf087d39cb13896001
 
 ## Findings
 
@@ -25,9 +26,17 @@ recorded_at: 2026-06-09T11:52:37Z
    - disposition: satisfied_by_current_evidence
    - evidence: `docs/work/BANDIT-082/implementation-evidence.md` records the Claude timeout exit code 124, the partial files left behind, the fallback dispatch artifact, and the MiniMax-M3 writer report. The fallback was documented before Stage 4 review and remains visible in the committed source/evidence checkpoint.
 
+5. Refreshed Qwen packet saw only the repair commit diff, not the full implementation diff.
+   - disposition: no_source_repair
+   - evidence: The full implementation source and tests are committed in `c72c1b71ebdcc2452ef41d9a8346cf67d910765e`. `docs/work/BANDIT-082/implementation-evidence.md`, `docs/work/BANDIT-082/stage3-pm-review.md`, focused tests, `npx tsc --noEmit`, `npm run bandit -- validate`, work-intake validation/listing, and `git diff --check` cover the full review subject. The refreshed Qwen observation is a review-packet limitation, not a source defect.
+
+6. Refreshed Qwen requested visible proof that validation preceded FOLLOWUPS.md deprecation.
+   - disposition: satisfied_by_current_evidence
+   - evidence: Before this disposition, Codex PM reran `node --test test/work-intake-ledger.test.mjs`, `node --test test/work-intake-migration.test.mjs`, `node ./bin/bandit.mjs work-intake validate --json`, `npx tsc --noEmit`, `npm run bandit -- validate`, and `git diff --check`; all passed after the `FOLLOWUPS.md` deprecation metadata repair. The aggregate Stage 4 evidence records those commands.
+
 ## PM Decision
 
-No Local Qwen finding requires additional source repair beyond the
+No Local Qwen finding requires additional source repair beyond the completed
 `FOLLOWUPS.md` deprecation metadata update. Stage 4 may proceed after focused
 verification and refreshed review-subject evidence confirm the repaired subject
 is current.
