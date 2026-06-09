@@ -9,13 +9,12 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-081` - Operator Attention / Operator Inbox Surface
-  (Stage 3 implementation recorded)
+  (Stage 4 review recorded)
 
-**Current next step:** Run Stage 4 review for `BANDIT-081`: request/read
-CodeRabbit review or record provider-refusal/bootstrap evidence, run Local Qwen
-through the authorized `.bandit/reviewers/local-qwen.json` route, record risk
-classification, supply-chain gate, browser smoke evidence, and aggregate review
-evidence before landing.
+**Current next step:** Record CLI-owned product UAT for `BANDIT-081` using the
+operator pre-approval, then record Stage 5 landing verdict, run `land-check` and
+`auto-land-check`, and execute local-record landing action against the current
+source/evidence commit.
 
 Do not approve Trust Verifier cutover, select a Trust Goal for cutover, replace
 or wrap old gates, generate role input or execution packets for unrelated work,
