@@ -35,7 +35,7 @@ pm_disposition_rationale: Codex PM accepts Stage 4 because the implementation sa
 non_blocking_findings_routing:
   - no_action: Internal Stage 3 dispatch artifacts are legitimate workflow evidence for BANDIT-094 and are not product outputs; keep them in docs/work/BANDIT-094 for traceability.
   - no_action: The Local Qwen prompt transport limitation is a reviewer-channel observation; current PM verification and tests provide the code-level evidence required for this slice.
-  - follow_up: Add a future hardening chore to assert create-controller refuses or cannot express Trust Verifier cutover, old-gate replacement/wrapping, merge, push, and deploy intents at the command boundary.
+  - no_action: Extra Trust Verifier/deploy intent assertions are not opened as a separate chore because the current command has no input surface for those intents, focused tests already assert Stage 2+ artifacts are not created, and ROADMAP/CURRENT_CONTEXT continue to forbid those authorities. Reopen only if a future adapter adds user-provided intent text to create-controller.
 aggregate_verdict: pass
 findings_status: non_blocking_dispositioned
 operator_input_status: none_required

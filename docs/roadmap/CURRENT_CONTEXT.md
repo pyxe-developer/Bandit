@@ -4,25 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-093` is the last closed work item. It landed and closed the first
-`BANDIT-PRD-005` implementation slice: Roadmap Work Target Resolver.
+`BANDIT-094` is the last closed work item. It landed and closed the second
+`BANDIT-PRD-005` implementation slice: Repo PM Create Controller And Prompt
+Contract.
 
 **Active work item:** `BANDIT-094` - Repo PM Create Controller And Prompt Contract.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 6: closed.
 
-**Current next action:** Work Item PM should record plan-mode orchestration for BANDIT-094 before RED evidence.
+**Current next action:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
 
-Do not create RED evidence, implementation evidence, review-loop evidence,
-landing evidence, UAT evidence, retrospective evidence, closeout evidence,
-PRD-005.2 RED evidence, implementation work, PRD-005.3 execute-controller work,
-PRD-005.4 adapter work,
-V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
-cutover, merge, push, deploy, hosted service setup, paid reviewer/model
-routing, public benchmark publication, local API work, State Index work,
-guarded browser action execution, PR/CI/CD implementation, installed-copy
-update-path implementation, or unrelated Phase 8 product work before Work Item
-PM plan-mode orchestration for BANDIT-094 is recorded.
+Do not create PRD-005.3 RED evidence, implementation evidence, review-loop
+evidence, landing evidence, UAT evidence, retrospective evidence, closeout
+evidence, PRD-005.4 adapter work, V0 Closeout Claude Code A/B Product-Value
+Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
+service setup, paid reviewer/model routing, public benchmark publication,
+local API work, State Index work, guarded browser action execution, PR/CI/CD
+implementation, installed-copy update-path implementation, or unrelated Phase 8
+product work before Repo PM forms and approves the next work item.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -40,329 +40,54 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. The Local
-Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; `BANDIT-094` has
-formation approval with Local Qwen pass evidence and CodeRabbit timeout
-replacement evidence. The operator approved prioritizing `BANDIT-PRD-004` and
-`BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
+No operator-owned input is required for the next recorded action.
 
 Halt for operator input if a future step would expand landing autonomy, approve
-Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public package
-publishing, approve paid registry setup, approve hosted update services,
-approve telemetry, approve automatic self-update, approve credential handling,
-approve external repo mutation, approve installed global skill mutation,
-approve automation prompt mutation, approve merge/push/deploy authority,
-approve Trust Verifier cutover policy, select a Trust Goal for cutover, replace
-or wrap an older gate path, change product or UAT direction, approve business
-tradeoffs, approve explicit cost/risk posture, approve paid or live
-reviewer/model routing, or make another policy/product decision repo artifacts
-cannot answer.
+Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public
+package publishing, approve paid registry setup, approve hosted update
+services, approve telemetry, approve automatic self-update, approve credential
+handling, approve external repo mutation, approve installed global skill
+mutation, approve automation prompt mutation, approve merge/push/deploy
+authority, approve Trust Verifier cutover policy, select a Trust Goal for
+cutover, replace or wrap an older gate path, change product or UAT direction,
+approve business tradeoffs, approve explicit cost/risk posture, approve paid or
+live reviewer/model routing, or make another policy/product decision repo
+artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-094` active formation evidence:
+`BANDIT-094` closed evidence:
 
 - Source spec:
   `docs/specs/BANDIT-094-repo-pm-create-controller-and-prompt-contract.json`.
-- Brief: `docs/work/BANDIT-094/brief.md`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-094/qwen-formation-review.md`.
-- CodeRabbit formation timeout evidence:
-  `docs/work/BANDIT-094/coderabbit-formation-review.md`.
-- Aggregate formation review:
+- Brief and formation review:
+  `docs/work/BANDIT-094/brief.md`,
+  `docs/work/BANDIT-094/qwen-formation-review.md`,
+  `docs/work/BANDIT-094/coderabbit-formation-review.md`, and
   `docs/work/BANDIT-094/formation-review.md`.
-- Coordination log: `docs/work/BANDIT-094/coordination-log.jsonl`, current
-  state `formation_approved`.
+- Orchestration, RED, implementation, and PM acceptance:
+  `docs/work/BANDIT-094/orchestration-plan.md`,
+  `docs/work/BANDIT-094/red-evidence.md`,
+  `docs/work/BANDIT-094/implementation-evidence.md`,
+  `docs/work/BANDIT-094/writer-report.md`, and
+  `docs/work/BANDIT-094/stage3-pm-acceptance.md`.
+- Review, risk, and supply-chain evidence:
+  `docs/work/BANDIT-094/coderabbit-review.md`,
+  `docs/work/BANDIT-094/coderabbit-finding-disposition.md`,
+  `docs/work/BANDIT-094/local-qwen-review.md`,
+  `docs/work/BANDIT-094/review-evidence.md`,
+  `.bandit/policy/risk-classifications/BANDIT-094-risk-classification.json`,
+  and `.bandit/policy/supply-chain-gates/BANDIT-094-supply-chain-gate.json`.
+- Landing and closeout:
+  `docs/work/BANDIT-094/landing-verdict.md`,
+  `docs/work/BANDIT-094/landing-action.md`,
+  `docs/work/BANDIT-094/retrospective.md`, and
+  `docs/work/BANDIT-094/improvement-disposition.md`.
+- Coordination log:
+  `docs/work/BANDIT-094/coordination-log.jsonl`, current state `closed`.
 
-`BANDIT-093` closed evidence:
+## Next Work
 
-- Source spec:
-  `docs/specs/BANDIT-093-roadmap-work-target-resolver.json`.
-- Brief: `docs/work/BANDIT-093/brief.md`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-093/qwen-formation-review.md`.
-- CodeRabbit formation timeout evidence:
-  `docs/work/BANDIT-093/coderabbit-formation-review.md`.
-- Aggregate formation review:
-  `docs/work/BANDIT-093/formation-review.md`.
-- Orchestration plan:
-  `docs/work/BANDIT-093/orchestration-plan.md`.
-- RED evidence:
-  `docs/work/BANDIT-093/red-evidence.md`.
-- Stage 3 dispatch and fallback:
-  `docs/work/BANDIT-093/stage3-dispatch.md`,
-  `docs/work/BANDIT-093/stage3-claude-attempt.md`, and
-  `docs/work/BANDIT-093/stage3-minimax-dispatch.md`.
-- Writer report and implementation evidence:
-  `docs/work/BANDIT-093/writer-report.md` and
-  `docs/work/BANDIT-093/implementation-evidence.md`.
-- Stage 3 PM acceptance:
-  `docs/work/BANDIT-093/stage3-pm-acceptance.md`.
-- Stage 4 CodeRabbit timeout evidence:
-  `docs/work/BANDIT-093/coderabbit-review.md`.
-- Stage 4 Local Qwen review:
-  `docs/work/BANDIT-093/local-qwen-review.md`.
-- Stage 4 risk/supply-chain gate evidence:
-  `.bandit/policy/risk-classifications/BANDIT-093-risk-classification.json`
-  and `.bandit/policy/supply-chain-gates/BANDIT-093-supply-chain-gate.json`.
-- Aggregate Stage 4 review evidence:
-  `docs/work/BANDIT-093/review-evidence.md`.
-- Landing verdict and local landing action:
-  `docs/work/BANDIT-093/landing-verdict.md` and
-  `docs/work/BANDIT-093/landing-action.md`.
-- Retrospective and improvement disposition:
-  `docs/work/BANDIT-093/retrospective.md` and
-  `docs/work/BANDIT-093/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-093/coordination-log.jsonl`, current
-  state `closed`.
-
-`BANDIT-092` closed evidence:
-
-- Source spec:
-  `docs/specs/BANDIT-092-boundary-cell-movement-gate.json`.
-- Brief: `docs/work/BANDIT-092/brief.md`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-092/qwen-formation-review.md`.
-- CodeRabbit formation timeout evidence:
-  `docs/work/BANDIT-092/coderabbit-formation-review.md`.
-- Aggregate formation review:
-  `docs/work/BANDIT-092/formation-review.md`.
-- Orchestration plan:
-  `docs/work/BANDIT-092/orchestration-plan.md`.
-- RED evidence:
-  `docs/work/BANDIT-092/red-evidence.md`.
-- Stage 3 dispatch:
-  `docs/work/BANDIT-092/stage3-dispatch.md`.
-- Writer report:
-  `docs/work/BANDIT-092/writer-report.md`.
-- Implementation evidence:
-  `docs/work/BANDIT-092/implementation-evidence.md`.
-- Stage 3 PM review:
-  `docs/work/BANDIT-092/stage3-pm-review.md`.
-- Stage 4 CodeRabbit timeout evidence:
-  `docs/work/BANDIT-092/coderabbit-review.md`.
-- Local Qwen blocker resolution:
-  `docs/work/BANDIT-092/local-qwen-blocker.md`.
-- Stage 4 Local Qwen review:
-  `docs/work/BANDIT-092/local-qwen-review.md`.
-- Local Qwen finding disposition:
-  `docs/work/BANDIT-092/qwen-finding-disposition.md`.
-- Stage 4 risk/supply-chain gate evidence:
-  `.bandit/policy/risk-classifications/BANDIT-092-risk-classification.json`
-  and `.bandit/policy/supply-chain-gates/BANDIT-092-supply-chain-gate.json`.
-- Aggregate Stage 4 review evidence:
-  `docs/work/BANDIT-092/review-evidence.md`.
-- Landing verdict and local landing action:
-  `docs/work/BANDIT-092/landing-verdict.md` and
-  `docs/work/BANDIT-092/landing-action.md`.
-- Retrospective and improvement disposition:
-  `docs/work/BANDIT-092/retrospective.md` and
-  `docs/work/BANDIT-092/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-092/coordination-log.jsonl`, current
-  state `closed`.
-
-`BANDIT-091` closed evidence:
-
-- Source spec:
-  `docs/specs/BANDIT-091-escape-candidate-workflow.json`.
-- Brief: `docs/work/BANDIT-091/brief.md`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-091/qwen-formation-review.md`.
-- CodeRabbit formation timeout evidence:
-  `docs/work/BANDIT-091/coderabbit-formation-review.md`.
-- Aggregate formation review:
-  `docs/work/BANDIT-091/formation-review.md`.
-- Orchestration plan:
-  `docs/work/BANDIT-091/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-091/red-evidence.md`.
-- Stage 3 dispatch: `docs/work/BANDIT-091/stage3-dispatch.md`.
-- Claude timeout evidence: `docs/work/BANDIT-091/stage3-claude-timeout.md`.
-- MiniMax fallback dispatch: `docs/work/BANDIT-091/stage3-minimax-dispatch.md`.
-- Writer report: `docs/work/BANDIT-091/writer-report.md`.
-- Implementation evidence: `docs/work/BANDIT-091/implementation-evidence.md`.
-- Stage 3 PM acceptance: `docs/work/BANDIT-091/stage3-pm-acceptance.md`.
-- Stage 4 CodeRabbit timeout evidence:
-  `docs/work/BANDIT-091/coderabbit-review.md`.
-- Stage 4 Local Qwen review:
-  `docs/work/BANDIT-091/local-qwen-review.md`.
-- Stage 4 risk/supply-chain gate evidence:
-  `.bandit/policy/risk-classifications/BANDIT-091-risk-classification.json`
-  and `.bandit/policy/supply-chain-gates/BANDIT-091-supply-chain-gate.json`.
-- Aggregate Stage 4 review evidence:
-  `docs/work/BANDIT-091/review-evidence.md`.
-- Landing verdict: `docs/work/BANDIT-091/landing-verdict.md`.
-- Landing action: `docs/work/BANDIT-091/landing-action.md`.
-- Retrospective and improvement disposition:
-  `docs/work/BANDIT-091/retrospective.md` and
-  `docs/work/BANDIT-091/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-091/coordination-log.jsonl`, current
-  state `closed`.
-
-`BANDIT-090` closed evidence:
-
-- Source spec:
-  `docs/specs/BANDIT-090-attribution-join-key-wiring.json`.
-- Brief: `docs/work/BANDIT-090/brief.md`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-090/qwen-formation-review.md`.
-- CodeRabbit formation timeout evidence:
-  `docs/work/BANDIT-090/coderabbit-formation-review.md`.
-- Aggregate formation review:
-  `docs/work/BANDIT-090/formation-review.md`.
-- Orchestration plan:
-  `docs/work/BANDIT-090/orchestration-plan.md`.
-- RED evidence:
-  `docs/work/BANDIT-090/red-evidence.md`.
-- RED tests:
-  `test/landing-gates.test.mjs`.
-- Claude attempt evidence:
-  `docs/work/BANDIT-090/stage3-claude-attempt.md`.
-- MiniMax timeout evidence:
-  `docs/work/BANDIT-090/stage3-minimax-attempt-timeout.md`.
-- Stage 3 PM review:
-  `docs/work/BANDIT-090/stage3-pm-review.md`.
-- Stage 3 writer report:
-  `docs/work/BANDIT-090/writer-report.md`.
-- Stage 3 implementation evidence:
-  `docs/work/BANDIT-090/implementation-evidence.md`.
-- Stage 4 CodeRabbit timeout evidence:
-  `docs/work/BANDIT-090/coderabbit-review.md`.
-- Stage 4 Local Qwen review:
-  `docs/work/BANDIT-090/local-qwen-review.md`.
-- Supplemental Local Qwen full-packet review:
-  `docs/work/BANDIT-090/local-qwen-full-packet-review.md`.
-- Local Qwen finding disposition:
-  `docs/work/BANDIT-090/qwen-finding-disposition.md`.
-- Stage 4 risk/supply-chain gate evidence:
-  `.bandit/policy/risk-classifications/BANDIT-090-risk-classification.json`
-  and `.bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json`.
-- Aggregate Stage 4 review evidence:
-  `docs/work/BANDIT-090/review-evidence.md`.
-- Landing verdict and local landing action:
-  `docs/work/BANDIT-090/landing-verdict.md` and
-  `docs/work/BANDIT-090/landing-action.md`.
-- Retrospective and improvement disposition:
-  `docs/work/BANDIT-090/retrospective.md` and
-  `docs/work/BANDIT-090/improvement-disposition.md`.
-- Attribution Join Key implementation:
-  `docs/templates/attribution-join-key.md`,
-  `src/state/attribution-join-key.ts`, `src/commands/init.ts`,
-  `src/commands/validate.ts`, `src/commands/land-check.ts`,
-  `src/state/landing-verdicts.ts`, and `src/state/templates.ts`.
-- Coordination log: `docs/work/BANDIT-090/coordination-log.jsonl`, current
-  state `closed`.
-
-`BANDIT-089` closed evidence:
-
-- Source spec:
-  `docs/specs/BANDIT-089-trust-boundary-evidence-schema-contracts.json`.
-- Brief: `docs/work/BANDIT-089/brief.md`.
-- Orchestration plan: `docs/work/BANDIT-089/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-089/red-evidence.md`.
-- RED tests: `test/landing-gates.test.mjs`.
-- Claude attempt evidence: `docs/work/BANDIT-089/stage3-claude-attempt.md`.
-- MiniMax timeout evidence:
-  `docs/work/BANDIT-089/stage3-minimax-attempt-timeout.md`.
-- Stage 3 PM review: `docs/work/BANDIT-089/stage3-pm-review.md`.
-- Stage 3 writer report: `docs/work/BANDIT-089/writer-report.md`.
-- Stage 3 implementation evidence:
-  `docs/work/BANDIT-089/implementation-evidence.md`.
-- Boundary Contour policy: `.bandit/policy/boundary-contour.json`.
-- Boundary evidence templates:
-  `docs/templates/boundary-prediction-record.md` and
-  `docs/templates/notify-and-revert-artifact.md`.
-- Boundary autonomy implementation: `src/state/boundary-autonomy.ts`,
-  `src/commands/init.ts`, `src/commands/validate.ts`,
-  `src/commands/land-check.ts`, `src/state/landing-verdicts.ts`,
-  `src/state/paths.ts`, and `src/state/templates.ts`.
-- Local Qwen formation review:
-  `docs/work/BANDIT-089/qwen-formation-review.md`.
-- CodeRabbit formation review:
-  `docs/work/BANDIT-089/coderabbit-formation-review.md`.
-- Aggregate formation review:
-  `docs/work/BANDIT-089/formation-review.md`.
-- Stage 4 CodeRabbit timeout evidence:
-  `docs/work/BANDIT-089/coderabbit-review.md`.
-- Stage 4 Local Qwen review:
-  `docs/work/BANDIT-089/local-qwen-review.md`.
-- Stage 4 risk/supply-chain gate evidence:
-  `.bandit/policy/risk-classifications/BANDIT-089-risk-classification.json`
-  and `.bandit/policy/supply-chain-gates/BANDIT-089-supply-chain-gate.json`.
-- Aggregate Stage 4 review evidence:
-  `docs/work/BANDIT-089/review-evidence.md`.
-- Landing verdict and local landing action:
-  `docs/work/BANDIT-089/landing-verdict.md` and
-  `docs/work/BANDIT-089/landing-action.md`.
-- Retrospective and improvement disposition:
-  `docs/work/BANDIT-089/retrospective.md` and
-  `docs/work/BANDIT-089/improvement-disposition.md`.
-- Coordination log: `docs/work/BANDIT-089/coordination-log.jsonl`, current
-  state `closed`.
-- PRD decomposition:
-  `docs/prds/BANDIT-PRD-004-005-decomposition.md`.
-- Work Intake Ledger: `.bandit/work-intake-ledger.json` records
-  `WIL-INSTALLED-COPY-UPDATE` closed as `BANDIT-088`, plus PRD-backed
-  `PRD-004-TRUST-BOUNDARY-AUTONOMY` and
-  `PRD-005-BANDIT-WORK-COMMANDS` accepted ahead of `WIL-V0-TRIAL`.
-
-No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`.
-
-`BANDIT-089` implementation adds schema-only fail-closed trust-boundary
-evidence contracts and does not approve expanded landing autonomy,
-Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
-implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
-unrelated Phase 8 product work.
-
-`BANDIT-090` implementation adds fail-closed Attribution Join Key contracts,
-validation, template/init support, landing-verdict metadata parsing, aggregate
-validation integration, and land-check attribution requirements only when a
-landing verdict explicitly claims `notify_and_revert` or `auto_land` boundary
-autonomy. It does not approve expanded landing autonomy, escape workflow,
-boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
-A/B Product-Value Trial, or unrelated Phase 8 product work.
-
-`BANDIT-092` implementation added bounded Boundary Cell Movement evidence and
-confirmed-escape contraction checks. It did not approve expanded landing
-autonomy, apply a Boundary Contour update, execute Notify-And-Revert, execute
-rollback, approve Auto-Landing Scope, implement PRD-005, the V0 Closeout
-Claude Code A/B Product-Value Trial, Trust Verifier cutover, attribution
-gateway work, cockpit UI, local API, State Index, hosted services, telemetry,
-public benchmark publication, paid routing, merge, push, deploy, credential
-handling, dependency changes, package-script changes, CI/release workflow
-changes, external repo mutation, or unrelated Phase 8 work.
-
-`BANDIT-093` implementation added a bounded `BANDIT-PRD-005.1` resolver for
-roadmap/current-context work-target resolution, closed-work interstitial
-routing, fail-closed target-conflict diagnostics, stale-tail refusal, and
-PRD/spec/WIL provenance dereference only after roadmap authorization. It does
-not implement `/bandit-work-create`, `/bandit-work-execute`, create-controller
-work, execute-controller work, route registry work, role input packet assembly,
-prompt-contract normalization, Trust Verifier cutover, V0 trial work, cockpit
-UI, local API, State Index, hosted services, telemetry, public benchmark
-publication, paid routing, merge, push, deploy, credential handling,
-dependency changes, package-script changes, CI/release workflow changes,
-external repo mutation, or unrelated Phase 8 work.
-
-`BANDIT-094` formation defines a bounded `BANDIT-PRD-005.2` Repo PM Create
-Controller And Prompt Contract slice. It is scoped to Bandit-native Repo PM
-prompt contract normalization, prompt-contract validation, create-controller
-target resolution, explicit-source Work Item creation, derivable Stage 1
-repair, idempotent already-formed behavior, and fail-closed operator-input and
-reviewer-route boundaries. It does not implement PRD-005.3 execute-controller
-work, route registry work, role input packet assembly, PRD-005.4 slash-command
-adapters, public `bandit context <stage>` workflow command, Trust Verifier
-cutover, V0 trial work, cockpit UI, local API, State Index, hosted services,
-telemetry, public benchmark publication, paid routing, merge, push, deploy,
-credential handling, dependency changes, package-script changes, CI/release
-workflow changes, external repo mutation, or unrelated Phase 8 work.
-
-`BANDIT-091` implementation adds fail-closed Escape Candidate and Boundary
-Escape Disposition evidence contracts, template support, aggregate validation
-integration, and tests while preserving ordinary safe-to-land bootstrap flows
-when no escape workflow evidence exists. It does not approve expanded landing
-autonomy, Notify-And-Revert execution, Auto-Landing Scope, escape
-classification authority, boundary-cell movement, PRD-005 implementation, the
-V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 product
-work.
-
-The next recorded action is Work Item PM should record plan-mode orchestration for BANDIT-094 before RED evidence.
+The next planned work item is PRD-005.3 Work Item PM Execute Controller And
+Route Registry. Repo PM must form and approve that work item before Work Item
+PM orchestration, RED evidence, or implementation begins.
