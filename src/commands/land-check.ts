@@ -39,6 +39,7 @@ import {
 import {
   gatherLandingAttributionProblems
 } from "../state/attribution-join-key.js";
+import { gatherEscapeContractionProblems } from "../state/boundary-cell-movement.js";
 
 export async function landCheck(repoRoot: string, workItemId?: string) {
   if (!workItemId) {
@@ -166,6 +167,14 @@ export async function readLandingReadiness(
             boundaryPredictionRecord: bprPath
           },
           attributionJoinKeyPath
+        ))
+      );
+      readiness.problems.push(
+        ...(await gatherEscapeContractionProblems(
+          repoRoot,
+          workItemId,
+          bpr.authorizingBoundaryCell,
+          bpr.landingAutonomyLevel
         ))
       );
     }

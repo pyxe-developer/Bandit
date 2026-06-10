@@ -187,6 +187,23 @@ rationale:
 required_operator_input_status:
 evidence_reviewed:
 result:
+`,
+  "docs/templates/boundary-cell-movement.md": `# Boundary Cell Movement Template
+
+contract_version:
+work_item:
+source_head:
+boundary_contour_path:
+boundary_contour_version:
+cell_id:
+from_autonomy_level:
+to_autonomy_level:
+movement_direction:
+movement_reason:
+linked_workflow_trial:
+linked_boundary_escape_disposition:
+operator_decision_status:
+rationale:
 `
 };
 
@@ -1041,6 +1058,141 @@ test("land-check accepts ordinary safe-to-land without escape workflow evidence"
 
   assert.equal(result.code, 0, result.stderr);
   assert.match(result.stdout, /Final verdict: safe-to-land/);
+});
+
+test("validate fails closed when the boundary cell movement template is missing", async () => {
+  const repo = await createInitializedRepo({
+    omitTemplate: "docs/templates/boundary-cell-movement.md"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing required template: docs\/templates\/boundary-cell-movement\.md/
+  );
+});
+
+test("validate fails closed when boundary cell movement evidence has malformed source head", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-957", "Malformed Boundary Cell Movement");
+  await writeBoundaryCellMovement(repo, "BANDIT-957", {
+    sourceHead: "not-a-git-sha"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Cell Movement: source_head must be a 40-character hex git commit sha/
+  );
+});
+
+test("validate fails closed when boundary cell movement direction contradicts autonomy levels", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-958", "Contradictory Boundary Cell Movement");
+  await writeBoundaryCellMovement(repo, "BANDIT-958", {
+    fromAutonomyLevel: "operator_supervision",
+    toAutonomyLevel: "auto_land",
+    movementDirection: "contraction"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Cell Movement: movement_direction contraction contradicts from_autonomy_level operator_supervision and to_autonomy_level auto_land/
+  );
+});
+
+test("validate fails closed when autonomy expansion movement lacks workflow trial guardrails", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-959", "Expansion Without Trial Guardrails");
+  await writeBoundaryCellMovement(repo, "BANDIT-959", {
+    fromAutonomyLevel: "operator_supervision",
+    toAutonomyLevel: "notify_and_revert",
+    movementDirection: "expansion",
+    linkedWorkflowTrial: "",
+    operatorDecisionStatus: "not_required"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Cell Movement: expansion requires linked_workflow_trial evidence/
+  );
+});
+
+test("validate fails closed when zero escapes alone are used for boundary expansion", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-960", "Zero Escape Expansion");
+  await writeBoundaryCellMovement(repo, "BANDIT-960", {
+    fromAutonomyLevel: "operator_supervision",
+    toAutonomyLevel: "notify_and_revert",
+    movementDirection: "expansion",
+    linkedWorkflowTrial: "docs/work/BANDIT-960/workflow-trial.json",
+    operatorDecisionStatus: "approved",
+    movementReason: "zero_observed_escapes"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Cell Movement: zero observed escapes alone cannot justify autonomy expansion/
+  );
+});
+
+test("land-check requires contraction evidence after a confirmed boundary escape for autonomy claims", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-961", "Missing Escape Contraction");
+  await writeReviewEvidence(repo, "BANDIT-961", { sourceHead });
+  await writeRiskClassificationEvidence(repo, "BANDIT-961");
+  await writeBoundaryPredictionRecord(repo, "BANDIT-961", {
+    sourceHead,
+    reviewSubjectHash: "3".repeat(64),
+    riskTier: "trivial",
+    evidenceStrengthTier: "independent_review",
+    landingAutonomyLevel: "auto_land",
+    authorizingBoundaryCell: "trivial-independent-review"
+  });
+  await writeAttributionJoinKey(repo, "BANDIT-961", {
+    reviewSubjectHash: "3".repeat(64),
+    authorizingBoundaryCell: "trivial-independent-review",
+    landingAutonomyLevel: "auto_land"
+  });
+  await writeEscapeCandidate(repo, "BANDIT-961", {
+    sourceHead,
+    reviewSubjectHash: "3".repeat(64),
+    candidateStatus: "confirmed_escape"
+  });
+  await writeBoundaryEscapeDisposition(repo, "BANDIT-961", {
+    dispositionVerdict: "confirmed_escape"
+  });
+  await writeLandingVerdict(repo, "BANDIT-961", {
+    sourceHead,
+    landingAutonomyLevel: "auto_land",
+    boundaryPredictionRecord:
+      "docs/work/BANDIT-961/boundary-prediction.json",
+    attributionJoinKey:
+      "docs/work/BANDIT-961/landing-attribution-join-key.json"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-961"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Cell Movement: confirmed escape for cell trivial-independent-review requires contraction evidence before auto_land can proceed/
+  );
 });
 
 test("land-check fails closed when routing requires escalated review with no placeholder artifact", async () => {
@@ -2622,6 +2774,45 @@ async function writeBoundaryEscapeDisposition(repo, workItemId, options = {}) {
       result: options.result ?? options.dispositionVerdict ?? "confirmed_escape"
     }
   );
+}
+
+async function writeBoundaryCellMovement(repo, workItemId, options = {}) {
+  await writeJsonFile(repo, `docs/work/${workItemId}/boundary-cell-movement.json`, {
+    contract_version: 1,
+    work_item: workItemId,
+    source_head: options.sourceHead ?? "d".repeat(40),
+    boundary_contour_path:
+      options.boundaryContourPath ?? ".bandit/policy/boundary-contour.json",
+    boundary_contour_version:
+      options.boundaryContourVersion ?? "initial-conservative-v1",
+    cell_id: options.cellId ?? "low-reversible-independent-review",
+    from_autonomy_level: options.fromAutonomyLevel ?? "notify_and_revert",
+    to_autonomy_level: options.toAutonomyLevel ?? "operator_supervision",
+    movement_direction: options.movementDirection ?? "contraction",
+    movement_reason:
+      options.movementReason ?? "confirmed_boundary_escape_contraction",
+    linked_workflow_trial: options.linkedWorkflowTrial ?? "",
+    linked_boundary_escape_disposition:
+      options.linkedBoundaryEscapeDisposition ??
+      `docs/work/${workItemId}/boundary-escape-disposition.json`,
+    workflow_trial_guardrails:
+      options.workflowTrialGuardrails ?? {
+        predeclared_decision_criteria:
+          "Expansion only after operator-reviewed improvement decision.",
+        metric: "boundary_escape_rate",
+        baseline: "current contour",
+        minimum_detectable_effect:
+          "Single-operator evidence cannot prove low-frequency escape changes.",
+        evaluation_window: "next three eligible landings",
+        reevaluation_window: "one month after decision",
+        proxy_risk_notes: "Avoid optimizing only for zero observed escapes.",
+        improvement_decision: "operator_reviewed"
+      },
+    operator_decision_status: options.operatorDecisionStatus ?? "not_required",
+    rationale:
+      options.rationale ??
+      "RED fixture for Boundary Cell Movement evidence validation."
+  });
 }
 
 async function writeRiskClassificationEvidence(repo, workItemId) {

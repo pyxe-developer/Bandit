@@ -382,6 +382,25 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("evidence reviewed", /^evidence_reviewed:/im),
       metadata("result", /^result:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/boundary-cell-movement.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("boundary contour path", /^boundary_contour_path:/im),
+      metadata("boundary contour version", /^boundary_contour_version:/im),
+      metadata("cell ID", /^cell_id:/im),
+      metadata("from autonomy level", /^from_autonomy_level:/im),
+      metadata("to autonomy level", /^to_autonomy_level:/im),
+      metadata("movement direction", /^movement_direction:/im),
+      metadata("movement reason", /^movement_reason:/im),
+      metadata("linked workflow trial", /^linked_workflow_trial:/im),
+      metadata("linked boundary escape disposition", /^linked_boundary_escape_disposition:/im),
+      metadata("operator decision status", /^operator_decision_status:/im),
+      metadata("rationale", /^rationale:/im)
+    ]
   }
 ];
 
