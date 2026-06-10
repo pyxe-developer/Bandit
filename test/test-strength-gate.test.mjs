@@ -143,7 +143,7 @@ async function writeBasePolicies(repo) {
     profile_id: "local-qwen-baseline",
     version: 1,
     provider: "fixture",
-    provider_base_url: "http://127.0.0.1:8000/v1",
+    provider_base_url: "http://127.0.0.1:8001/v1",
     runtime: "command",
     command: {
       executable: process.execPath,

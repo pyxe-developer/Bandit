@@ -9,10 +9,9 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate
-  (Stage 4: blocked on Local Qwen reviewer availability)
+  (Stage 4: Local Qwen review pending after endpoint update)
 
-**Current next step:** Operator must restore the authorized Local Qwen oMLX
-OpenAI-compatible endpoint, then Work Item PM should rerun
+**Current next step:** Work Item PM should rerun
 `node ./bin/bandit.mjs qwen-review BANDIT-092`.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing

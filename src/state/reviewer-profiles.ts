@@ -48,7 +48,7 @@ const REQUIRED_FIELDS = [
   "unavailable_runtime_behavior"
 ];
 const EXPECTED_PROVIDERS = new Set(["mastra-code", "omlx-openai-compatible"]);
-const EXPECTED_PROVIDER_BASE_URL = "http://127.0.0.1:8000/v1";
+const EXPECTED_PROVIDER_BASE_URL = "http://127.0.0.1:8001/v1";
 const EXPECTED_MASTRACODE_MODEL = "omlx-local/Qwen3.6-35B-A3B-MLX-8bit";
 const EXPECTED_OMLX_MODEL = "Qwen3.6-35B-A3B-MLX-8bit";
 const EXPECTED_MASTRACODE_SETTINGS_PATH =

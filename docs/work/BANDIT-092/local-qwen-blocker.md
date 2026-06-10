@@ -49,7 +49,7 @@ Node.js v22.22.3
 
 Restore the authorized Local Qwen oMLX OpenAI-compatible endpoint configured in
 `.bandit/reviewers/local-qwen.json` so `bin/omlx-chat-completions.mjs` can
-successfully call the chat-completions route at `http://127.0.0.1:8000/v1`.
+successfully call the chat-completions route at `http://127.0.0.1:8001/v1`.
 
 ## Resume Condition
 

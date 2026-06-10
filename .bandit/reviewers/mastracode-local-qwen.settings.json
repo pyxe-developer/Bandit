@@ -2,7 +2,7 @@
   "customProviders": [
     {
       "name": "OMLX Local",
-      "url": "http://127.0.0.1:8000/v1",
+      "url": "http://127.0.0.1:8001/v1",
       "apiKey": "local",
       "models": ["Qwen3.6-35B-A3B-MLX-8bit"]
     }

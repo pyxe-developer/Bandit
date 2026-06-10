@@ -10,10 +10,9 @@ implementation slice: Boundary Cell Movement Gate.
 
 **Active work item:** `BANDIT-092` - Boundary Cell Movement Gate.
 
-The current stage is Stage 4: blocked on Local Qwen reviewer availability.
+The current stage is Stage 4: Local Qwen review pending after endpoint update.
 
-**Current next action:** Operator must restore the authorized Local Qwen oMLX
-OpenAI-compatible endpoint, then Work Item PM should rerun
+**Current next action:** Work Item PM should rerun
 `node ./bin/bandit.mjs qwen-review BANDIT-092`.
 
 Do not continue Stage 4 aggregate review, landing, closeout, PRD-005
@@ -36,16 +35,15 @@ work is active.
 
 Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at
-`http://127.0.0.1:8000/v1`. The direct `qwen` CLI is revoked for Bandit
+`http://127.0.0.1:8001/v1`. The direct `qwen` CLI is revoked for Bandit
 reviewer routing.
 
 ## Required Operator Input
 
-Operator-owned input is required for the next recorded action: restore the
-Local Qwen endpoint configured by `.bandit/reviewers/local-qwen.json` so
-`bin/omlx-chat-completions.mjs` returns chat-completions responses instead of
-`404 Not Found`. The operator approved prioritizing `BANDIT-PRD-004` and
-`BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
+No operator-owned input is required for the next recorded action. The Local
+Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; the tools were updated
+and a live adapter smoke passed. The operator approved prioritizing
+`BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
 
 Halt for operator input if a future step would expand landing autonomy, approve
 Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public package

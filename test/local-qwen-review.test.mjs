@@ -141,7 +141,7 @@ test("validate fails closed when the Mastra Code local Qwen profile uses the wro
   assert.equal(result.code, 1);
   assert.match(
     result.stderr,
-    /Local Qwen profile must use provider_base_url http:\/\/127\.0\.0\.1:8000\/v1/
+    /Local Qwen profile must use provider_base_url http:\/\/127\.0\.0\.1:8001\/v1/
   );
 });
 
@@ -163,7 +163,7 @@ test("committed local Qwen baseline profile uses the direct local oMLX route", a
     await readFile(path.join(repo, ".bandit/reviewers/local-qwen.json"), "utf8")
   );
   assert.equal(profile.provider, "omlx-openai-compatible");
-  assert.equal(profile.provider_base_url, "http://127.0.0.1:8000/v1");
+  assert.equal(profile.provider_base_url, "http://127.0.0.1:8001/v1");
   assert.equal(profile.command.executable, "node");
   assert.deepEqual(profile.command.args, [
     "bin/omlx-chat-completions.mjs",
@@ -183,7 +183,7 @@ test("committed Mastra Code settings keep local Qwen review off the Google-key O
   assert.deepEqual(settings.customProviders, [
     {
       name: "OMLX Local",
-      url: "http://127.0.0.1:8000/v1",
+      url: "http://127.0.0.1:8001/v1",
       apiKey: "local",
       models: ["Qwen3.6-35B-A3B-MLX-8bit"]
     }
@@ -841,7 +841,7 @@ async function writeLocalQwenProfile(repo, options = {}) {
     profile_id: "local-qwen-baseline",
     version: 1,
     provider: "mastra-code",
-    provider_base_url: "http://127.0.0.1:8000/v1",
+    provider_base_url: "http://127.0.0.1:8001/v1",
     runtime: "command",
     command: {
       executable: process.execPath,

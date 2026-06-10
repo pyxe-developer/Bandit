@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const DEFAULT_BASE_URL = "http://127.0.0.1:8000/v1";
+const DEFAULT_BASE_URL = "http://127.0.0.1:8001/v1";
 const MODEL = "Qwen3.6-35B-A3B-MLX-8bit";
 const REQUEST_TIMEOUT_MS = 180000;
 
