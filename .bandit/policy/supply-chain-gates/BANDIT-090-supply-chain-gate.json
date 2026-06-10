@@ -1,0 +1,88 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-090",
+  "artifact_type": "supply_chain_gate",
+  "freshness_state": "current",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md",
+      "unavailable_tool_disposition": "No dependency manifest, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, external side-effecting automation, unknown supply-chain surface, hosted service, telemetry, credential, merge, push, or deploy change is present in the BANDIT-090 implementation."
+    },
+    "rationale": "BANDIT-090 adds local templates, validators, command integration, and tests without changing dependency manifests or package-manager scripts."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-090/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "No installed or repo-local agent skill surface changed for BANDIT-090.",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": ""
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-090 does not touch dependency manifests, lockfiles, package-manager scripts, CI or release workflows, installed global skills, fetched prompts, external tool install paths, executable generated content, external side-effecting automation, unknown supply-chain surfaces, hosted services, telemetry, credentials, merge, push, or deploy behavior. The changed Attribution Join Key template, validator, init/validate/land-check integrations, and tests are repo-native local workflow evidence and do not introduce dependency execution or external code ingress.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json",
+    "docs/templates/attribution-join-key.md",
+    "docs/work/BANDIT-090/brief.md",
+    "docs/work/BANDIT-090/red-evidence.md",
+    "docs/work/BANDIT-090/implementation-evidence.md",
+    "docs/work/BANDIT-090/writer-report.md",
+    "src/state/attribution-join-key.ts",
+    "src/commands/init.ts",
+    "src/commands/land-check.ts",
+    "src/commands/validate.ts",
+    "src/state/landing-verdicts.ts",
+    "src/state/templates.ts",
+    "test/landing-gates.test.mjs"
+  ]
+}

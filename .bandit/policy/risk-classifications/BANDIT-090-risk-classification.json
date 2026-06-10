@@ -1,0 +1,207 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-090",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "docs/templates/attribution-join-key.md",
+      "surface": "workflow_template",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/attribution-join-key.ts",
+      "surface": "workflow_policy_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/land-check.ts",
+      "surface": "landing_gate",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/validate.ts",
+      "surface": "validation_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "repo_initialization",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/landing-verdicts.ts",
+      "surface": "landing_evidence_parser",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/templates.ts",
+      "surface": "template_contract_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/landing-gates.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "expanded_auto_landing_authority",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    },
+    {
+      "surface": "escape_candidate_workflow",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    },
+    {
+      "surface": "boundary_cell_movement",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    },
+    {
+      "surface": "prd_005_command_controller",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    },
+    {
+      "surface": "hosted_service_telemetry_or_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "landing_gate_attribution_join_key_required_for_boundary_autonomy_claims",
+      "risk": "medium",
+      "evidence_path": "src/commands/land-check.ts"
+    },
+    {
+      "signal_id": "fail_closed_attribution_tuple_validation_added",
+      "risk": "medium",
+      "evidence_path": "src/state/attribution-join-key.ts"
+    },
+    {
+      "signal_id": "ordinary_safe_to_land_flow_preserved_when_no_autonomy_claim",
+      "risk": "low",
+      "evidence_path": "test/landing-gates.test.mjs"
+    },
+    {
+      "signal_id": "stage3_writer_made_zero_test_surface_edits",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/writer-report.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test --test-name-pattern \"Attribution|attribution\" test/landing-gates.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    },
+    {
+      "tool": "node --test test/landing-gates.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-090/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-LAYERED-RISK-CLASSIFICATION-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/verification/STAGE_RUBRICS.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-090/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-ROLE-BOUNDARY",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-090/implementation-evidence.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-090 is an accepted PRD-004.2 local validator and landing-gate wiring slice. It adds fail-closed attribution evidence checks only when a landing verdict explicitly claims notify_and_revert or auto_land autonomy. It does not grant expanded landing autonomy, classify escapes, move boundary cells, execute rollback, change operator-facing product behavior, approve Trust Verifier cutover, approve paid/live routing, mutate external repos, merge, push, deploy, host services, add telemetry, or require UAT."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-090 is medium workflow-risk because it adds Attribution Join Key parsing, validation, template/init support, landing-verdict metadata parsing, and land-check attribution requirements for boundary-autonomy claims. The implementation is local, deterministic, fail-closed, tested, and explicitly preserves ordinary safe-to-land bootstrap flows when no autonomy claim exists. It is eligible for the existing repo-native local-record landing preflight after CodeRabbit timeout evidence, Local Qwen review, risk classification, supply-chain gate, clean-code review, and land-check pass. This does not claim the new PRD-004 landing_autonomy_level auto_land, does not expand landing authority, and does not start later PRD-004/005 work.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-090-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json",
+    "docs/templates/attribution-join-key.md",
+    "docs/work/BANDIT-090/brief.md",
+    "docs/work/BANDIT-090/red-evidence.md",
+    "docs/work/BANDIT-090/implementation-evidence.md",
+    "docs/work/BANDIT-090/writer-report.md",
+    "docs/work/BANDIT-090/coderabbit-review.md",
+    "docs/work/BANDIT-090/local-qwen-review.md",
+    "src/state/attribution-join-key.ts",
+    "src/commands/init.ts",
+    "src/commands/land-check.ts",
+    "src/commands/validate.ts",
+    "src/state/landing-verdicts.ts",
+    "src/state/templates.ts",
+    "test/landing-gates.test.mjs"
+  ]
+}
