@@ -11,14 +11,11 @@ Layer Pivot.
 
 `BANDIT-090` landed and closed the second `BANDIT-PRD-004` implementation
 slice: Attribution Join Key Wiring. `BANDIT-091` is the third
-`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow. Stage 3
-implementation evidence is recorded and the current stage is Stage 4: review
-required.
+`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow. Stage 4
+review evidence is recorded and the current stage is Stage 5: landing required.
 
-Next action: Run Stage 4 review loop for BANDIT-091: CodeRabbit review or
-timeout evidence, Local Qwen review through `.bandit/reviewers/local-qwen.json`
-and `bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
-finding dispositions, and aggregate review evidence.
+Next action: Write Stage 5 landing verdict for BANDIT-091, run land-check, and
+record the local landing action before closeout.
 
 Required operator input: none_required. The operator approved prioritizing
 `BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
@@ -27,7 +24,7 @@ Required operator input: none_required. The operator approved prioritizing
 
 Last 5 items only:
 
-- `BANDIT-091` - Escape Candidate Workflow (Stage 4 review required)
+- `BANDIT-091` - Escape Candidate Workflow (Stage 5 landing required)
 - `BANDIT-090` - Attribution Join Key Wiring (closed)
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts (closed)
 - `BANDIT-088` - Installed-Copy Update Path (closed)

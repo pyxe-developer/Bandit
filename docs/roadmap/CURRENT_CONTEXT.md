@@ -7,18 +7,14 @@
 `BANDIT-090` is the last closed work item. It landed and closed the second
 `BANDIT-PRD-004` implementation slice: Attribution Join Key Wiring. `BANDIT-091`
 is the active third `BANDIT-PRD-004` implementation slice: Escape Candidate
-Workflow, with Stage 3 implementation evidence recorded and Stage 4 review
-required.
+Workflow, with Stage 4 review evidence recorded and Stage 5 landing required.
 
 **Active work item:** `BANDIT-091` - Escape Candidate Workflow.
 
-The current stage is Stage 4: review required.
+The current stage is Stage 5: landing required.
 
-**Current next action:** Run Stage 4 review loop for BANDIT-091: CodeRabbit
-review or timeout evidence, Local Qwen review through
-`.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs`, risk
-classification, supply-chain gate, finding dispositions, and aggregate review
-evidence.
+**Current next action:** Write Stage 5 landing verdict for BANDIT-091, run
+land-check, and record the local landing action before closeout.
 
 Do not start landing, PRD-004.4, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
@@ -26,7 +22,7 @@ cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-`BANDIT-091` Stage 4 review evidence is recorded.
+`BANDIT-091` landing action evidence is recorded.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -82,8 +78,17 @@ cannot answer.
 - Writer report: `docs/work/BANDIT-091/writer-report.md`.
 - Implementation evidence: `docs/work/BANDIT-091/implementation-evidence.md`.
 - Stage 3 PM acceptance: `docs/work/BANDIT-091/stage3-pm-acceptance.md`.
+- Stage 4 CodeRabbit timeout evidence:
+  `docs/work/BANDIT-091/coderabbit-review.md`.
+- Stage 4 Local Qwen review:
+  `docs/work/BANDIT-091/local-qwen-review.md`.
+- Stage 4 risk/supply-chain gate evidence:
+  `.bandit/policy/risk-classifications/BANDIT-091-risk-classification.json`
+  and `.bandit/policy/supply-chain-gates/BANDIT-091-supply-chain-gate.json`.
+- Aggregate Stage 4 review evidence:
+  `docs/work/BANDIT-091/review-evidence.md`.
 - Coordination log: `docs/work/BANDIT-091/coordination-log.jsonl`, current
-  state `implementation_recorded`.
+  state `review_recorded`.
 
 `BANDIT-090` closed evidence:
 
@@ -208,5 +213,5 @@ autonomy. It does not approve expanded landing autonomy, escape workflow,
 boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
 A/B Product-Value Trial, or unrelated Phase 8 product work.
 
-`BANDIT-091` must record Stage 4 review evidence before landing, PRD-004.4,
+`BANDIT-091` must record landing action evidence before closeout, PRD-004.4,
 PRD-005, or the V0 Closeout Claude Code A/B Product-Value Trial can begin.
