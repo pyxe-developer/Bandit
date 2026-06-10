@@ -8,10 +8,10 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-093` - Roadmap Work Target Resolver
-  (Stage 6: closed)
+- `[Slice]` `BANDIT-094` - Repo PM Create Controller And Prompt Contract
+  (Stage 1: formation_approved)
 
-**Current next step:** Repo PM should form PRD-005.2 Repo PM Create Controller And Prompt Contract through `formation_approved` and stop before Stage 2.
+**Current next step:** Work Item PM should record plan-mode orchestration for BANDIT-094 before RED evidence.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -23,7 +23,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-formation for PRD-005.2 is approved.
+Work Item PM plan-mode orchestration for `BANDIT-094` is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -31,8 +31,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-005.2 Repo PM Create Controller And Prompt Contract,
-  pending `BANDIT-093` landing and closeout.
+- `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry,
+  pending `BANDIT-094` landing and closeout.
 
 ## Planned Work
 
@@ -57,8 +57,8 @@ conditions and operator-owned approvals exist. The operator reprioritized
 `BANDIT-PRD-004` and `BANDIT-PRD-005` ahead of the Claude Product-Value Trial
 on 2026-06-10.
 
-- `[Slice]` `TBD` - PRD-005.2 Repo PM Create Controller And Prompt Contract:
-  form work through `formation_approved` and stop before Stage 2.
+- `[Slice]` `BANDIT-094` - PRD-005.2 Repo PM Create Controller And Prompt
+  Contract: formation approved; Work Item PM plan-mode orchestration is next.
 - `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry:
   advance formed work through authorized routes, role packet assembly, and
   honest blocker/provider evidence.

@@ -7,22 +7,22 @@
 `BANDIT-093` is the last closed work item. It landed and closed the first
 `BANDIT-PRD-005` implementation slice: Roadmap Work Target Resolver.
 
-**Active work item:** `BANDIT-093` - Roadmap Work Target Resolver.
+**Active work item:** `BANDIT-094` - Repo PM Create Controller And Prompt Contract.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form PRD-005.2 Repo PM Create Controller And Prompt Contract through `formation_approved` and stop before Stage 2.
+**Current next action:** Work Item PM should record plan-mode orchestration for BANDIT-094 before RED evidence.
 
 Do not create RED evidence, implementation evidence, review-loop evidence,
 landing evidence, UAT evidence, retrospective evidence, closeout evidence,
-PRD-005.2 RED or implementation work, PRD-005.3 execute-controller work,
+PRD-005.2 RED evidence, implementation work, PRD-005.3 execute-controller work,
 PRD-005.4 adapter work,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before Work Item
-formation for PRD-005.2 is approved.
+PM plan-mode orchestration for BANDIT-094 is recorded.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -41,9 +41,9 @@ reviewer routing.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The Local
-Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; `BANDIT-093` landed and
-closed with Local Qwen pass evidence and CodeRabbit timeout replacement
-evidence. The operator approved prioritizing `BANDIT-PRD-004` and
+Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; `BANDIT-094` has
+formation approval with Local Qwen pass evidence and CodeRabbit timeout
+replacement evidence. The operator approved prioritizing `BANDIT-PRD-004` and
 `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
 
 Halt for operator input if a future step would expand landing autonomy, approve
@@ -59,6 +59,20 @@ reviewer/model routing, or make another policy/product decision repo artifacts
 cannot answer.
 
 ## Active Work
+
+`BANDIT-094` active formation evidence:
+
+- Source spec:
+  `docs/specs/BANDIT-094-repo-pm-create-controller-and-prompt-contract.json`.
+- Brief: `docs/work/BANDIT-094/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-094/qwen-formation-review.md`.
+- CodeRabbit formation timeout evidence:
+  `docs/work/BANDIT-094/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-094/formation-review.md`.
+- Coordination log: `docs/work/BANDIT-094/coordination-log.jsonl`, current
+  state `formation_approved`.
 
 `BANDIT-093` closed evidence:
 
@@ -317,7 +331,7 @@ public benchmark publication, paid routing, merge, push, deploy, credential
 handling, dependency changes, package-script changes, CI/release workflow
 changes, external repo mutation, or unrelated Phase 8 work.
 
-`BANDIT-093` formation defines a bounded `BANDIT-PRD-005.1` resolver slice for
+`BANDIT-093` implementation added a bounded `BANDIT-PRD-005.1` resolver for
 roadmap/current-context work-target resolution, closed-work interstitial
 routing, fail-closed target-conflict diagnostics, stale-tail refusal, and
 PRD/spec/WIL provenance dereference only after roadmap authorization. It does
@@ -329,6 +343,19 @@ publication, paid routing, merge, push, deploy, credential handling,
 dependency changes, package-script changes, CI/release workflow changes,
 external repo mutation, or unrelated Phase 8 work.
 
+`BANDIT-094` formation defines a bounded `BANDIT-PRD-005.2` Repo PM Create
+Controller And Prompt Contract slice. It is scoped to Bandit-native Repo PM
+prompt contract normalization, prompt-contract validation, create-controller
+target resolution, explicit-source Work Item creation, derivable Stage 1
+repair, idempotent already-formed behavior, and fail-closed operator-input and
+reviewer-route boundaries. It does not implement PRD-005.3 execute-controller
+work, route registry work, role input packet assembly, PRD-005.4 slash-command
+adapters, public `bandit context <stage>` workflow command, Trust Verifier
+cutover, V0 trial work, cockpit UI, local API, State Index, hosted services,
+telemetry, public benchmark publication, paid routing, merge, push, deploy,
+credential handling, dependency changes, package-script changes, CI/release
+workflow changes, external repo mutation, or unrelated Phase 8 work.
+
 `BANDIT-091` implementation adds fail-closed Escape Candidate and Boundary
 Escape Disposition evidence contracts, template support, aggregate validation
 integration, and tests while preserving ordinary safe-to-land bootstrap flows
@@ -338,4 +365,4 @@ classification authority, boundary-cell movement, PRD-005 implementation, the
 V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 product
 work.
 
-The next recorded action is Work Item PM should record plan-mode orchestration for BANDIT-093 before RED evidence.
+The next recorded action is Work Item PM should record plan-mode orchestration for BANDIT-094 before RED evidence.
