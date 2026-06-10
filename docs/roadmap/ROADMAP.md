@@ -4,15 +4,15 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-090` - Attribution Join Key Wiring (closed)
+- `[Slice]` `BANDIT-091` - Escape Candidate Workflow (closed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-091` - Escape Candidate Workflow
-  (Stage 5: landing required)
+  (Stage 6: closed anchor)
 
-**Current next step:** Run land-check for BANDIT-091 and execute local-record
-landing only if the landing gate passes.
+**Current next step:** Repo PM should form PRD-004.4 Boundary Cell Movement
+Gate as the next BANDIT-PRD-004 slice.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,7 +24,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-`BANDIT-091` landing action evidence is recorded.
+PRD-004.4 is formed through the Repo PM formation gate.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -79,6 +79,7 @@ on 2026-06-10.
 
 ## Completed Work
 
+- `BANDIT-091` - Escape Candidate Workflow
 - `BANDIT-090` - Attribution Join Key Wiring
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts
 - `BANDIT-088` - Installed-Copy Update Path

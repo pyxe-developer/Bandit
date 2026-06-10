@@ -4,17 +4,15 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-090` is the last closed work item. It landed and closed the second
-`BANDIT-PRD-004` implementation slice: Attribution Join Key Wiring. `BANDIT-091`
-is the active third `BANDIT-PRD-004` implementation slice: Escape Candidate
-Workflow, with Stage 5 landing verdict recorded and land-check required.
+`BANDIT-091` is the last closed work item. It landed and closed the third
+`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow.
 
-**Active work item:** `BANDIT-091` - Escape Candidate Workflow.
+**Active work item:** `BANDIT-091` - Escape Candidate Workflow (closed anchor).
 
-The current stage is Stage 5: landing required.
+The current stage is Stage 6: closed.
 
-**Current next action:** Run land-check for BANDIT-091 and execute local-record
-landing only if the landing gate passes.
+**Current next action:** Repo PM should form PRD-004.4 Boundary Cell Movement
+Gate as the next BANDIT-PRD-004 slice.
 
 Do not start landing, PRD-004.4, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
@@ -22,7 +20,7 @@ cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-`BANDIT-091` landing action evidence is recorded.
+the next work item is formed.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -88,8 +86,12 @@ cannot answer.
 - Aggregate Stage 4 review evidence:
   `docs/work/BANDIT-091/review-evidence.md`.
 - Landing verdict: `docs/work/BANDIT-091/landing-verdict.md`.
+- Landing action: `docs/work/BANDIT-091/landing-action.md`.
+- Retrospective and improvement disposition:
+  `docs/work/BANDIT-091/retrospective.md` and
+  `docs/work/BANDIT-091/improvement-disposition.md`.
 - Coordination log: `docs/work/BANDIT-091/coordination-log.jsonl`, current
-  state `landing_verdict_recorded`.
+  state `closed`.
 
 `BANDIT-090` closed evidence:
 
@@ -214,5 +216,14 @@ autonomy. It does not approve expanded landing autonomy, escape workflow,
 boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
 A/B Product-Value Trial, or unrelated Phase 8 product work.
 
-`BANDIT-091` must record landing action evidence before closeout, PRD-004.4,
-PRD-005, or the V0 Closeout Claude Code A/B Product-Value Trial can begin.
+`BANDIT-091` implementation adds fail-closed Escape Candidate and Boundary
+Escape Disposition evidence contracts, template support, aggregate validation
+integration, and tests while preserving ordinary safe-to-land bootstrap flows
+when no escape workflow evidence exists. It does not approve expanded landing
+autonomy, Notify-And-Revert execution, Auto-Landing Scope, escape
+classification authority, boundary-cell movement, PRD-005 implementation, the
+V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 product
+work.
+
+The next recorded action is Repo PM formation for PRD-004.4 Boundary Cell
+Movement Gate as the next `BANDIT-PRD-004` slice.

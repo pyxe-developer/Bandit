@@ -9,13 +9,11 @@
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-090` landed and closed the second `BANDIT-PRD-004` implementation
-slice: Attribution Join Key Wiring. `BANDIT-091` is the third
-`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow. Stage 5
-landing verdict is recorded and land-check is required.
+`BANDIT-091` landed and closed the third `BANDIT-PRD-004` implementation
+slice: Escape Candidate Workflow. The current stage is Stage 6: closed.
 
-Next action: Run land-check for BANDIT-091 and execute local-record landing
-only if the landing gate passes.
+Next action: Repo PM should form PRD-004.4 Boundary Cell Movement Gate as the
+next BANDIT-PRD-004 slice.
 
 Required operator input: none_required. The operator approved prioritizing
 `BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
@@ -24,7 +22,7 @@ Required operator input: none_required. The operator approved prioritizing
 
 Last 5 items only:
 
-- `BANDIT-091` - Escape Candidate Workflow (Stage 5 landing required)
+- `BANDIT-091` - Escape Candidate Workflow (closed)
 - `BANDIT-090` - Attribution Join Key Wiring (closed)
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts (closed)
 - `BANDIT-088` - Installed-Copy Update Path (closed)
