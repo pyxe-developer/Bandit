@@ -52,6 +52,7 @@ import { trust } from "./commands/trust.js";
 import { workItemPm } from "./commands/work-item-pm.js";
 import { worktreeBootstrap } from "./commands/worktree-bootstrap.js";
 import { createWorkItem } from "./commands/work-item-create.js";
+import { roadmapWorkTargets } from "./commands/roadmap-work-targets.js";
 import { workIntake } from "./commands/work-intake.js";
 
 async function main() {
@@ -408,6 +409,20 @@ async function main() {
 
   if (command === "work-intake") {
     const result = await workIntake(process.cwd(), args);
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.code) {
+      process.exitCode = result.code;
+    }
+    return;
+  }
+
+  if (command === "roadmap-work-targets") {
+    const result = await roadmapWorkTargets(process.cwd(), args);
     if (result.stdout) {
       process.stdout.write(result.stdout);
     }
