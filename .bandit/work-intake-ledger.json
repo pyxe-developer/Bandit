@@ -337,8 +337,8 @@
         "WIL-PR-CICD-LANDING",
         "WIL-INSTALLED-COPY-UPDATE"
       ],
-      "scope_summary": "Implement PRD-004 through bounded slices, starting with schema-only fail-closed Boundary Contour, Boundary Prediction Record, and Notify-And-Revert Artifact contracts before any landing autonomy expansion.",
-      "risk_product_scope_status": "approved PRD-backed work lane; not claimable from intake; normal Work Item formation, stage gates, reviews, and landing evidence are required before each slice executes",
+      "scope_summary": "Implement PRD-004 through bounded slices. PRD-004.4 Boundary Cell Movement Gate is formed as BANDIT-092 after PRD-004.1 through PRD-004.3 landed and closed.",
+      "risk_product_scope_status": "approved PRD-backed work lane; BANDIT-092 is formed but not landed; no autonomy expansion, actual boundary-cell movement, Notify-And-Revert execution, merge, push, deploy, or unrelated work is authorized",
       "intake_outcome": "accepted_to_queue",
       "claimable": false,
       "transition_history": [
@@ -355,6 +355,13 @@
           "from": "accepted_to_queue",
           "to": "accepted_to_queue",
           "source": "BANDIT-089 landed PRD-004.1; PRD-004 remains queued for PRD-004.2, PRD-004.3, and PRD-004.4"
+        },
+        {
+          "at": "2026-06-10T17:33:08Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-092 formation approved for PRD-004.4 Boundary Cell Movement Gate; PRD-004 remains active until BANDIT-092 lands and closes"
         }
       ]
     },

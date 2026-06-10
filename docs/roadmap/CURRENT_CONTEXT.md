@@ -4,23 +4,24 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-091` is the last closed work item. It landed and closed the third
-`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow.
+`BANDIT-092` is the active work item. Repo PM completed Stage 1 formation for
+the fourth `BANDIT-PRD-004` implementation slice: Boundary Cell Movement Gate.
 
-**Active work item:** `BANDIT-091` - Escape Candidate Workflow (closed anchor).
+**Active work item:** `BANDIT-092` - Boundary Cell Movement Gate.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form PRD-004.4 Boundary Cell Movement
-Gate as the next BANDIT-PRD-004 slice.
+**Current next action:** Work Item PM should run plan-mode orchestration for
+`BANDIT-092` before RED evidence.
 
-Do not start landing, PRD-004.4, PRD-005 implementation,
+Do not start RED evidence, implementation, review, landing, closeout,
+PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-the next work item is formed.
+Work Item PM plan-mode orchestration is recorded for `BANDIT-092`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -56,7 +57,21 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-091` current evidence:
+`BANDIT-092` current evidence:
+
+- Source spec:
+  `docs/specs/BANDIT-092-boundary-cell-movement-gate.json`.
+- Brief: `docs/work/BANDIT-092/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-092/qwen-formation-review.md`.
+- CodeRabbit formation timeout evidence:
+  `docs/work/BANDIT-092/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-092/formation-review.md`.
+- Coordination log: `docs/work/BANDIT-092/coordination-log.jsonl`, current
+  state `formation_approved`.
+
+`BANDIT-091` closed evidence:
 
 - Source spec:
   `docs/specs/BANDIT-091-escape-candidate-workflow.json`.
@@ -216,6 +231,17 @@ autonomy. It does not approve expanded landing autonomy, escape workflow,
 boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
 A/B Product-Value Trial, or unrelated Phase 8 product work.
 
+`BANDIT-092` formation defines a bounded movement-gate slice for
+Workflow Trial-backed Boundary Cell Movement evidence and confirmed-escape
+contraction checks. It does not approve expanded landing autonomy, apply a
+Boundary Contour update, execute Notify-And-Revert, execute rollback, approve
+Auto-Landing Scope, implement PRD-005, the V0 Closeout Claude Code A/B
+Product-Value Trial, Trust Verifier cutover, attribution gateway work, cockpit
+UI, local API, State Index, hosted services, telemetry, public benchmark
+publication, paid routing, merge, push, deploy, credential handling,
+dependency changes, package-script changes, CI/release workflow changes,
+external repo mutation, or unrelated Phase 8 work.
+
 `BANDIT-091` implementation adds fail-closed Escape Candidate and Boundary
 Escape Disposition evidence contracts, template support, aggregate validation
 integration, and tests while preserving ordinary safe-to-land bootstrap flows
@@ -225,5 +251,5 @@ classification authority, boundary-cell movement, PRD-005 implementation, the
 V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 product
 work.
 
-The next recorded action is Repo PM formation for PRD-004.4 Boundary Cell
-Movement Gate as the next `BANDIT-PRD-004` slice.
+The next recorded action is Work Item PM plan-mode orchestration for
+`BANDIT-092` before RED evidence.

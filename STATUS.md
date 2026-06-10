@@ -2,18 +2,19 @@
 
 ## Last Updated: 2026-06-10
 
-## Current Work Item: BANDIT-091
+## Current Work Item: BANDIT-092
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-091` landed and closed the third `BANDIT-PRD-004` implementation
-slice: Escape Candidate Workflow. The current stage is Stage 6: closed.
+`BANDIT-092` is formed and approved as the fourth `BANDIT-PRD-004`
+implementation slice: Boundary Cell Movement Gate. The current stage is
+Stage 1: formation_approved.
 
-Next action: Repo PM should form PRD-004.4 Boundary Cell Movement Gate as the
-next BANDIT-PRD-004 slice.
+Next action: Work Item PM should run plan-mode orchestration for `BANDIT-092`
+before RED evidence.
 
 Required operator input: none_required. The operator approved prioritizing
 `BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
