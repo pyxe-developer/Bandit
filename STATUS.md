@@ -11,11 +11,11 @@ Layer Pivot.
 
 `BANDIT-090` landed and closed the second `BANDIT-PRD-004` implementation
 slice: Attribution Join Key Wiring. `BANDIT-091` is the third
-`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow. Stage 4
-review evidence is recorded and the current stage is Stage 5: landing required.
+`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow. Stage 5
+landing verdict is recorded and land-check is required.
 
-Next action: Write Stage 5 landing verdict for BANDIT-091, run land-check, and
-record the local landing action before closeout.
+Next action: Run land-check for BANDIT-091 and execute local-record landing
+only if the landing gate passes.
 
 Required operator input: none_required. The operator approved prioritizing
 `BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.

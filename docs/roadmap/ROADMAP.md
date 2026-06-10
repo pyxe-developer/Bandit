@@ -11,8 +11,8 @@
 - `[Slice]` `BANDIT-091` - Escape Candidate Workflow
   (Stage 5: landing required)
 
-**Current next step:** Write Stage 5 landing verdict for BANDIT-091, run
-land-check, and record the local landing action before closeout.
+**Current next step:** Run land-check for BANDIT-091 and execute local-record
+landing only if the landing gate passes.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,

@@ -7,14 +7,14 @@
 `BANDIT-090` is the last closed work item. It landed and closed the second
 `BANDIT-PRD-004` implementation slice: Attribution Join Key Wiring. `BANDIT-091`
 is the active third `BANDIT-PRD-004` implementation slice: Escape Candidate
-Workflow, with Stage 4 review evidence recorded and Stage 5 landing required.
+Workflow, with Stage 5 landing verdict recorded and land-check required.
 
 **Active work item:** `BANDIT-091` - Escape Candidate Workflow.
 
 The current stage is Stage 5: landing required.
 
-**Current next action:** Write Stage 5 landing verdict for BANDIT-091, run
-land-check, and record the local landing action before closeout.
+**Current next action:** Run land-check for BANDIT-091 and execute local-record
+landing only if the landing gate passes.
 
 Do not start landing, PRD-004.4, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
@@ -87,8 +87,9 @@ cannot answer.
   and `.bandit/policy/supply-chain-gates/BANDIT-091-supply-chain-gate.json`.
 - Aggregate Stage 4 review evidence:
   `docs/work/BANDIT-091/review-evidence.md`.
+- Landing verdict: `docs/work/BANDIT-091/landing-verdict.md`.
 - Coordination log: `docs/work/BANDIT-091/coordination-log.jsonl`, current
-  state `review_recorded`.
+  state `landing_verdict_recorded`.
 
 `BANDIT-090` closed evidence:
 
