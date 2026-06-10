@@ -42,6 +42,7 @@ import { validateBoundaryAutonomyTemplates } from "../state/boundary-autonomy.js
 import {
   validateAttributionJoinKeyArtifacts
 } from "../state/attribution-join-key.js";
+import { validateBoundaryEscapeArtifacts } from "../state/boundary-escape.js";
 import { validateRoleContractsPolicy } from "../state/role-contracts.js";
 import { validateTokenCostFailsafePolicy } from "../state/token-cost-failsafe.js";
 import { validateTrustVerifierCutoverGates } from "../state/trust-verifier-cutover-gates.js";
@@ -93,6 +94,7 @@ export async function validateBandit(repoRoot: string) {
   await validateTrustVerifierCutoverGates(repoRoot);
   await validateBoundaryAutonomyTemplates(repoRoot);
   await validateAttributionJoinKeyArtifacts(repoRoot);
+  await validateBoundaryEscapeArtifacts(repoRoot);
   const gateDeterminismFlakeGate = await validateGateDeterminismFlakeGate(
     repoRoot
   );

@@ -158,6 +158,34 @@ evaluation_packets:
 rollback_criteria:
 stage_bindings:
 installed_skill_drift:
+`,
+  "docs/templates/escape-candidate.md": `# Escape Candidate Template
+
+contract_version:
+work_item:
+source_head:
+review_subject_hash:
+boundary_prediction_record:
+attribution_join_key:
+observed_outcome:
+expected_boundary_outcome:
+escape_signal:
+touched_surface:
+evidence_artifacts:
+reporter:
+candidate_status:
+`,
+  "docs/templates/boundary-escape-disposition.md": `# Boundary Escape Disposition Template
+
+contract_version:
+work_item:
+candidate:
+attribution_status:
+disposition_verdict:
+rationale:
+required_operator_input_status:
+evidence_reviewed:
+result:
 `
 };
 

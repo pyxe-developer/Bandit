@@ -159,6 +159,34 @@ evaluation_packets:
 rollback_criteria:
 stage_bindings:
 installed_skill_drift:
+`,
+  "docs/templates/escape-candidate.md": `# Escape Candidate Template
+
+contract_version:
+work_item:
+source_head:
+review_subject_hash:
+boundary_prediction_record:
+attribution_join_key:
+observed_outcome:
+expected_boundary_outcome:
+escape_signal:
+touched_surface:
+evidence_artifacts:
+reporter:
+candidate_status:
+`,
+  "docs/templates/boundary-escape-disposition.md": `# Boundary Escape Disposition Template
+
+contract_version:
+work_item:
+candidate:
+attribution_status:
+disposition_verdict:
+rationale:
+required_operator_input_status:
+evidence_reviewed:
+result:
 `
 };
 
@@ -951,6 +979,68 @@ test("land-check rejects a landing attribution join key with a mismatched author
     result.stderr,
     /Attribution Join Key: authorizing_boundary_cell low-reversible-independent-review does not match Boundary Prediction Record authorizing_boundary_cell trivial-independent-review/
   );
+});
+
+test("validate fails closed when the escape candidate template is missing", async () => {
+  const repo = await createInitializedRepo({
+    omitTemplate: "docs/templates/escape-candidate.md"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing required template: docs\/templates\/escape-candidate\.md/
+  );
+});
+
+test("validate fails closed when an escape candidate has a malformed evidence artifact hash", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-954", "Malformed Escape Candidate");
+  await writeEscapeCandidate(repo, "BANDIT-954", {
+    evidenceHash: "not-a-sha256-hash"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Escape Candidate: evidence_artifacts\[0\]\.hash must be a sha256 hex digest/
+  );
+});
+
+test("validate fails closed when a boundary escape disposition has inconsistent operator input state", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-955", "Inconsistent Escape Disposition");
+  await writeEscapeCandidate(repo, "BANDIT-955");
+  await writeBoundaryEscapeDisposition(repo, "BANDIT-955", {
+    dispositionVerdict: "operator_input_required",
+    requiredOperatorInputStatus: "none_required"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Escape Disposition: operator_input_required requires required_operator_input_status required/
+  );
+});
+
+test("land-check accepts ordinary safe-to-land without escape workflow evidence", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-956", "Ordinary Safe To Land");
+  await writeReviewEvidence(repo, "BANDIT-956", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-956", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-956"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stdout, /Final verdict: safe-to-land/);
 });
 
 test("land-check fails closed when routing requires escalated review with no placeholder artifact", async () => {
@@ -2471,6 +2561,66 @@ async function writeAttributionJoinKey(repo, workItemId, options = {}) {
       2
     )}\n`,
     "utf8"
+  );
+}
+
+async function writeEscapeCandidate(repo, workItemId, options = {}) {
+  await writeJsonFile(repo, `docs/work/${workItemId}/escape-candidate.json`, {
+    contract_version: 1,
+    work_item: workItemId,
+    source_head: options.sourceHead ?? "a".repeat(40),
+    review_subject_hash: options.reviewSubjectHash ?? "b".repeat(64),
+    boundary_prediction_record:
+      options.boundaryPredictionRecord ??
+      `docs/work/${workItemId}/boundary-prediction.json`,
+    attribution_join_key:
+      options.attributionJoinKey ??
+      `docs/work/${workItemId}/landing-attribution-join-key.json`,
+    observed_outcome: options.observedOutcome ?? "landed_with_source_drift",
+    expected_boundary_outcome:
+      options.expectedBoundaryOutcome ?? "safe_to_land_without_escape",
+    escape_signal: options.escapeSignal ?? "source_drift_after_review",
+    touched_surface: {
+      path:
+        options.touchedSurfacePath ??
+        `docs/work/${workItemId}/landing-verdict.md`,
+      surface: options.touchedSurface ?? "landing_evidence"
+    },
+    evidence_artifacts: [
+      {
+        path:
+          options.evidenceArtifactPath ??
+          `docs/work/${workItemId}/review-evidence.md`,
+        hash: options.evidenceHash ?? "c".repeat(64),
+        freshness_state: options.freshnessState ?? "current"
+      }
+    ],
+    reporter: options.reporter ?? "codex_pm",
+    candidate_status: options.candidateStatus ?? "candidate"
+  });
+}
+
+async function writeBoundaryEscapeDisposition(repo, workItemId, options = {}) {
+  await writeJsonFile(
+    repo,
+    `docs/work/${workItemId}/boundary-escape-disposition.json`,
+    {
+      contract_version: 1,
+      work_item: workItemId,
+      candidate:
+        options.candidate ?? `docs/work/${workItemId}/escape-candidate.json`,
+      attribution_status: options.attributionStatus ?? "attributed_to_boundary",
+      disposition_verdict: options.dispositionVerdict ?? "confirmed_escape",
+      rationale:
+        options.rationale ??
+        "Repo-native evidence links the observed outcome to boundary evidence.",
+      required_operator_input_status:
+        options.requiredOperatorInputStatus ?? "none_required",
+      evidence_reviewed: [
+        options.evidenceReviewed ?? `docs/work/${workItemId}/escape-candidate.json`
+      ],
+      result: options.result ?? options.dispositionVerdict ?? "confirmed_escape"
+    }
   );
 }
 

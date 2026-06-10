@@ -1,0 +1,10 @@
+contract_version:
+work_item:
+candidate:
+attribution_status:
+disposition_verdict:
+rationale:
+required_operator_input_status:
+evidence_reviewed:
+  -
+result:

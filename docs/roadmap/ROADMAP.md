@@ -9,10 +9,13 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-091` - Escape Candidate Workflow
-  (Stage 2: RED evidence required)
+  (Stage 4: review required)
 
-**Current next step:** Test Writer should create Stage 2 RED evidence for
-BANDIT-091 before any implementation.
+**Current next step:** Run Stage 4 review loop for BANDIT-091: CodeRabbit review
+or timeout evidence, Local Qwen review through
+`.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs`, risk
+classification, supply-chain gate, finding dispositions, and aggregate review
+evidence.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,7 +27,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-`BANDIT-091` RED evidence is recorded.
+`BANDIT-091` Stage 4 review evidence is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.

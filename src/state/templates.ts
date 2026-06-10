@@ -350,6 +350,38 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("artifact state", /^artifact_state:/im),
       metadata("attribution join hash", /^attribution_join_hash:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/escape-candidate.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("review subject hash", /^review_subject_hash:/im),
+      metadata("boundary prediction record", /^boundary_prediction_record:/im),
+      metadata("attribution join key", /^attribution_join_key:/im),
+      metadata("observed outcome", /^observed_outcome:/im),
+      metadata("expected boundary outcome", /^expected_boundary_outcome:/im),
+      metadata("escape signal", /^escape_signal:/im),
+      metadata("touched surface", /^touched_surface:/im),
+      metadata("evidence artifacts", /^evidence_artifacts:/im),
+      metadata("reporter", /^reporter:/im),
+      metadata("candidate status", /^candidate_status:/im)
+    ]
+  },
+  {
+    displayPath: "docs/templates/boundary-escape-disposition.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("candidate", /^candidate:/im),
+      metadata("attribution status", /^attribution_status:/im),
+      metadata("disposition verdict", /^disposition_verdict:/im),
+      metadata("rationale", /^rationale:/im),
+      metadata("required operator input status", /^required_operator_input_status:/im),
+      metadata("evidence reviewed", /^evidence_reviewed:/im),
+      metadata("result", /^result:/im)
+    ]
   }
 ];
 
