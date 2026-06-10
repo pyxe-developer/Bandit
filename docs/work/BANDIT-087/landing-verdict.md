@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-087
-source_head: 81026138edfb7c6f95c104ca97f0b0e12f743876
+source_head: d93d5733cb5bccf2e02e1fbdb23055404a7392c8
 review_evidence: docs/work/BANDIT-087/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -25,7 +25,7 @@ rationale: BANDIT-087 is safe to land locally as a PR And CI/CD Landing Workflow
   "freshness_state": "current",
   "verdict": "safe-to-land",
   "review_subject_hash": "291847e683034deaa7c227ea7943b312a2453ca6fe947234d2d204d929437f81",
-  "source_head": "81026138edfb7c6f95c104ca97f0b0e12f743876",
+  "source_head": "d93d5733cb5bccf2e02e1fbdb23055404a7392c8",
   "source_artifacts": [
     "docs/work/BANDIT-087/review-evidence.md",
     ".bandit/policy/risk-classification.json",
