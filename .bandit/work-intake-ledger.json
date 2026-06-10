@@ -319,12 +319,15 @@
       ]
     },
     {
-      "id": "WIL-V0-TRIAL",
-      "title": "V0 Closeout Claude Code A/B Product-Value Trial",
-      "source_artifacts": ["docs/roadmap/ROADMAP.md"],
-      "source_anchor": "V0 Closeout Claude Code A/B Product-Value Trial",
-      "origin_date": "2026-06-09",
-      "rationale": "Keep the product-value trial deferred behind the pre-Claude-bakeoff follow-up and UI-polish lane.",
+      "id": "PRD-004-TRUST-BOUNDARY-AUTONOMY",
+      "title": "BANDIT-PRD-004 Trust-Boundary Autonomy",
+      "source_artifacts": [
+        "docs/prds/BANDIT-PRD-004-trust-boundary-autonomy.md",
+        "docs/prds/BANDIT-PRD-004-005-decomposition.md"
+      ],
+      "source_anchor": "BANDIT-PRD-004",
+      "origin_date": "2026-06-10",
+      "rationale": "Operator direction on 2026-06-10 reprioritized BANDIT-PRD-004 implementation before the V0 Closeout Claude Code A/B Product-Value Trial.",
       "suggested_work_item_type": "slice",
       "depends_on": [
         "WIL-UI-POLISH",
@@ -333,6 +336,66 @@
         "WIL-COORDINATION-PRIMITIVE",
         "WIL-PR-CICD-LANDING",
         "WIL-INSTALLED-COPY-UPDATE"
+      ],
+      "scope_summary": "Implement PRD-004 through bounded slices, starting with schema-only fail-closed Boundary Contour, Boundary Prediction Record, and Notify-And-Revert Artifact contracts before any landing autonomy expansion.",
+      "risk_product_scope_status": "approved PRD-backed work lane; not claimable from intake; normal Work Item formation, stage gates, reviews, and landing evidence are required before each slice executes",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-10T03:11:42Z",
+          "actor": "repo_pm",
+          "from": "operator_direction",
+          "to": "accepted_to_queue",
+          "source": "Operator requested BANDIT-PRD-004 implementation before WIL-V0-TRIAL"
+        }
+      ]
+    },
+    {
+      "id": "PRD-005-BANDIT-WORK-COMMANDS",
+      "title": "BANDIT-PRD-005 Bandit Work Commands",
+      "source_artifacts": [
+        "docs/prds/BANDIT-PRD-005-bandit-work-commands.md",
+        "docs/prds/BANDIT-PRD-004-005-decomposition.md"
+      ],
+      "source_anchor": "BANDIT-PRD-005",
+      "origin_date": "2026-06-10",
+      "rationale": "Operator direction on 2026-06-10 approved and reprioritized BANDIT-PRD-005 implementation before the V0 Closeout Claude Code A/B Product-Value Trial.",
+      "suggested_work_item_type": "slice",
+      "depends_on": [
+        "PRD-004-TRUST-BOUNDARY-AUTONOMY"
+      ],
+      "scope_summary": "Implement PRD-005 through bounded slices after PRD-004 base boundary evidence exists, starting with roadmap/current-context work-target resolution before operator-facing create/execute command adapters.",
+      "risk_product_scope_status": "approved PRD-backed work lane; not claimable from intake; normal Work Item formation, stage gates, reviews, and landing evidence are required before each slice executes",
+      "intake_outcome": "accepted_to_queue",
+      "claimable": false,
+      "transition_history": [
+        {
+          "at": "2026-06-10T03:11:42Z",
+          "actor": "repo_pm",
+          "from": "draft_ready_for_agent",
+          "to": "accepted_to_queue",
+          "source": "Operator requested BANDIT-PRD-005 implementation before WIL-V0-TRIAL"
+        }
+      ]
+    },
+    {
+      "id": "WIL-V0-TRIAL",
+      "title": "V0 Closeout Claude Code A/B Product-Value Trial",
+      "source_artifacts": ["docs/roadmap/ROADMAP.md"],
+      "source_anchor": "V0 Closeout Claude Code A/B Product-Value Trial",
+      "origin_date": "2026-06-09",
+      "rationale": "Keep the product-value trial deferred behind the pre-Claude-bakeoff follow-up/UI-polish lane and the operator-prioritized PRD-004/PRD-005 implementation lanes.",
+      "suggested_work_item_type": "slice",
+      "depends_on": [
+        "WIL-UI-POLISH",
+        "WIL-CLAIM-FIRST",
+        "WIL-REPO-WIDE-TRANSITION-INDEX",
+        "WIL-COORDINATION-PRIMITIVE",
+        "WIL-PR-CICD-LANDING",
+        "WIL-INSTALLED-COPY-UPDATE",
+        "PRD-004-TRUST-BOUNDARY-AUTONOMY",
+        "PRD-005-BANDIT-WORK-COMMANDS"
       ],
       "scope_summary": "Compare the same PRD in Bandit and no-Bandit repos after pre-Claude-bakeoff intake is cleared.",
       "risk_product_scope_status": "product slice deferred; requires normal future formation and operator-owned product scope if repo artifacts are insufficient",

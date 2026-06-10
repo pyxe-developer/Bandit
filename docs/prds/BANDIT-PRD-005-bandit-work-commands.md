@@ -2,13 +2,14 @@
 
 ## Status
 
-Draft ready-for-agent PRD from the operator-guided command-design
-conversation. This is a repo-native planning artifact; no GitHub issue is
-required unless the operator explicitly asks for one.
+Accepted for implementation after the operator's 2026-06-10 direction to
+implement `BANDIT-PRD-004` and `BANDIT-PRD-005` before the V0 Closeout Claude
+Code A/B Product-Value Trial.
 
-This PRD is not yet decomposed onto the roadmap. After operator approval, it
-should be decomposed into roadmap-prioritized Work Items before any
-implementation slice is formed.
+This PRD is decomposed in
+`docs/prds/BANDIT-PRD-004-005-decomposition.md`. Each slice still requires
+normal Work Item formation, stage gates, review, landing, and closeout before
+the next slice begins.
 
 ## Source Inputs
 

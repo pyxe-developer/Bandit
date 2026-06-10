@@ -333,3 +333,6 @@
 {"type":"work_item_created","work_item":"BANDIT-086","message":"Created work item BANDIT-086 from docs/specs/BANDIT-086-coordination-primitive-completion-triage.json"}
 {"type":"work_item_created","work_item":"BANDIT-087","message":"Created work item BANDIT-087 from docs/specs/BANDIT-087-pr-and-cicd-landing-workflow-policy.json"}
 {"type":"work_item_created","work_item":"BANDIT-088","message":"Created work item BANDIT-088 from docs/specs/BANDIT-088-installed-copy-update-path.json"}
+{"type":"work_item_created","work_item":"BANDIT-089","message":"Created work item BANDIT-089 from docs/specs/BANDIT-089-trust-boundary-evidence-schema-contracts.json"}
+{"type":"repo_init_skipped","work_item":null,"message":"Bandit repo-native state already existed"}
+{"type":"repo_init_skipped","work_item":null,"message":"Bandit repo-native state already existed"}

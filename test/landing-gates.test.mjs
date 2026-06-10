@@ -789,6 +789,87 @@ test("land-check accepts explicit bootstrap gaps with replacement evidence durin
   assert.match(result.stdout, /Manual PM review replaces unavailable final gates/);
 });
 
+test("validate fails closed when boundary contour policy data is malformed", async () => {
+  const repo = await createInitializedRepo();
+  await writeBoundaryContourPolicy(repo, {
+    contract_version: 1,
+    policy_id: "boundary-contour",
+    contour_version: "test-invalid",
+    default_movement_policy: "asymmetric",
+    risk_tiers: ["material_risk"],
+    evidence_strength_tiers: ["independent_review"],
+    landing_autonomy_levels: ["auto_land"],
+    cells: [
+      {
+        cell_id: "material-risk-auto-land",
+        risk_tier: "material_risk",
+        minimum_evidence_strength_tier: "independent_review",
+        landing_autonomy_level: "auto_land",
+        requires_rollback_path: false,
+        requires_operator_supervision: false,
+        never_auto_landable: false,
+        movement_policy: "expandable_without_trial",
+        rationale: "Invalid RED fixture: material-risk work must not auto-land."
+      }
+    ]
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Boundary Contour cell material-risk-auto-land cannot grant auto_land to material_risk/
+  );
+});
+
+test("land-check requires boundary prediction evidence for auto-land autonomy claims", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-908", "Missing Boundary Prediction");
+  await writeReviewEvidence(repo, "BANDIT-908", { sourceHead });
+  await writeLandingVerdict(repo, "BANDIT-908", {
+    sourceHead,
+    landingAutonomyLevel: "auto_land"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-908"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing Boundary Prediction Record: docs\/work\/BANDIT-908\/boundary-prediction\.json/
+  );
+});
+
+test("land-check requires notify-and-revert artifact evidence for notify-and-revert claims", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-909", "Missing Notify And Revert Artifact");
+  await writeReviewEvidence(repo, "BANDIT-909", { sourceHead });
+  await writeBoundaryPredictionRecord(repo, "BANDIT-909", {
+    sourceHead,
+    reviewSubjectHash: "0".repeat(64),
+    landingAutonomyLevel: "notify_and_revert"
+  });
+  await writeLandingVerdict(repo, "BANDIT-909", {
+    sourceHead,
+    landingAutonomyLevel: "notify_and_revert",
+    boundaryPredictionRecord:
+      "docs/work/BANDIT-909/boundary-prediction.json"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-909"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing Notify-And-Revert Artifact: docs\/work\/BANDIT-909\/notify-and-revert-artifact\.json/
+  );
+});
+
 test("land-check fails closed when routing requires escalated review with no placeholder artifact", async () => {
   const repo = await createInitializedRepo({
     smellCatalog: escalatedSmellCatalog
@@ -2078,6 +2159,12 @@ async function writeAutoLandingPolicy(repo, overrides = {}) {
   await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
 }
 
+async function writeBoundaryContourPolicy(repo, policy) {
+  const destination = path.join(repo, ".bandit/policy/boundary-contour.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, `${JSON.stringify(policy, null, 2)}\n`, "utf8");
+}
+
 async function writeStage4EvidenceHeadPolicy(repo, overrides = {}) {
   const policy = {
     version: 1,
@@ -2173,6 +2260,18 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
 }
 
 async function writeLandingVerdict(repo, workItemId, options = {}) {
+  const boundaryLines = [];
+  if (options.landingAutonomyLevel) {
+    boundaryLines.push(
+      `landing_autonomy_level: ${options.landingAutonomyLevel}`
+    );
+  }
+  if (options.boundaryPredictionRecord) {
+    boundaryLines.push(
+      `boundary_prediction_record: ${options.boundaryPredictionRecord}`
+    );
+  }
+
   const workDir = path.join(repo, "docs/work", workItemId);
   await mkdir(workDir, { recursive: true });
   await writeFile(
@@ -2194,9 +2293,49 @@ operator_input_status: none_required
 landing_agent_state: bootstrap_gap
 landing_agent_replacement_evidence:
   - Manual PM review replaces unavailable final gates during bootstrap.
+${boundaryLines.length > 0 ? `${boundaryLines.join("\n")}\n` : ""}
 final_verdict: ${options.finalVerdict ?? "safe-to-land"}
 rationale: Evidence is explicit and unavailable final gates are recorded as bootstrap gaps.
 `,
+    "utf8"
+  );
+}
+
+async function writeBoundaryPredictionRecord(repo, workItemId, options = {}) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "boundary-prediction.json"),
+    `${JSON.stringify(
+      {
+        contract_version: 1,
+        work_item: workItemId,
+        source_head: options.sourceHead ?? "unknown",
+        review_subject_hash: options.reviewSubjectHash ?? "unknown",
+        boundary_contour_version: "initial-conservative-v1",
+        boundary_contour_path: ".bandit/policy/boundary-contour.json",
+        risk_tier: "low_reversible",
+        evidence_strength_tier: "independent_review",
+        landing_autonomy_level:
+          options.landingAutonomyLevel ?? "notify_and_revert",
+        authorizing_boundary_cell: "low-reversible-independent-review",
+        risk_classification_evidence: [
+          `docs/risk/layered/${workItemId}-risk-classification.json`
+        ],
+        relied_on_evidence_artifacts: [
+          {
+            path: `docs/work/${workItemId}/review-evidence.md`,
+            hash: "test-fixture-hash",
+            freshness_state: "current"
+          }
+        ],
+        predicted_safety_outcome: "no_boundary_escape_expected",
+        operator_supervision_status: "not_required",
+        rationale: "RED fixture for boundary prediction record validation."
+      },
+      null,
+      2
+    )}\n`,
     "utf8"
   );
 }

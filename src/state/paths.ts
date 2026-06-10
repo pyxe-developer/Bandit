@@ -56,6 +56,7 @@ export function getBanditPaths(repoRoot: string) {
     eventDrivenWakeSchedulerPolicy: path.join(
       policyRoot,
       "event-driven-wake-scheduler.json"
-    )
+    ),
+    boundaryContourPolicy: path.join(policyRoot, "boundary-contour.json")
   };
 }

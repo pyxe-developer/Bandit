@@ -1,7 +1,8 @@
-import { copyFile, mkdir, readdir, stat } from "node:fs/promises";
+import { copyFile, mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
+import { writeDefaultBoundaryContourPolicy } from "../state/boundary-autonomy.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
 import {
@@ -121,6 +122,9 @@ export async function initBandit(repoRoot: string) {
   );
   const trustVerifierCutoverGatesPolicyExists = await pathExists(
     paths.trustVerifierCutoverGatesPolicy
+  );
+  const boundaryContourPolicyExists = await pathExists(
+    paths.boundaryContourPolicy
   );
 
   await mkdir(paths.stateRoot, { recursive: true });
@@ -244,6 +248,72 @@ export async function initBandit(repoRoot: string) {
   if (!trustVerifierCutoverGatesPolicyExists) {
     await writeDefaultTrustVerifierCutoverGatesPolicy(
       paths.trustVerifierCutoverGatesPolicy
+    );
+  }
+
+  if (!boundaryContourPolicyExists) {
+    await writeDefaultBoundaryContourPolicy(paths.boundaryContourPolicy);
+  }
+
+  // Ensure PRD-004 boundary evidence templates exist. These are created by
+  // seedDistributionDefaults for installed packages. For the source checkout,
+  // seedDistributionDefaults is skipped but the templates are already committed.
+  // For fresh temp repos, write them explicitly to guarantee validate passes.
+  const boundaryPredictionTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/boundary-prediction-record.md`
+  );
+  if (!boundaryPredictionTemplateExists) {
+    await mkdir(`${repoRoot}/docs/templates`, { recursive: true });
+    await writeFile(
+      `${repoRoot}/docs/templates/boundary-prediction-record.md`,
+      `contract_version:
+work_item:
+source_head:
+review_subject_hash:
+boundary_contour_version:
+boundary_contour_path:
+risk_tier:
+evidence_strength_tier:
+landing_autonomy_level:
+authorizing_boundary_cell:
+risk_classification_evidence:
+  -
+relied_on_evidence_artifacts:
+  - path:
+    hash:
+    freshness_state:
+predicted_safety_outcome:
+operator_supervision_status:
+rationale:
+`,
+      "utf8"
+    );
+  }
+
+  const notifyAndRevertTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/notify-and-revert-artifact.md`
+  );
+  if (!notifyAndRevertTemplateExists) {
+    await mkdir(`${repoRoot}/docs/templates`, { recursive: true });
+    await writeFile(
+      `${repoRoot}/docs/templates/notify-and-revert-artifact.md`,
+      `contract_version:
+work_item:
+source_head:
+landing_autonomy_level: notify_and_revert
+rollback_path:
+  command:
+  verification:
+operator_attention_reason:
+follow_up_or_expiry:
+  state:
+  follow_up_work_item:
+  expiry_date:
+boundary_prediction_record: docs/work/<work_item_id>/boundary-prediction.json
+source_drift_status:
+rationale:
+`,
+      "utf8"
     );
   }
 

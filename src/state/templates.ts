@@ -292,6 +292,41 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("escalation targets", /^escalation_targets:/im),
       metadata("evidence paths", /^evidence_paths:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/boundary-prediction-record.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("review subject hash", /^review_subject_hash:/im),
+      metadata("boundary contour version", /^boundary_contour_version:/im),
+      metadata("boundary contour path", /^boundary_contour_path:/im),
+      metadata("risk tier", /^risk_tier:/im),
+      metadata("evidence strength tier", /^evidence_strength_tier:/im),
+      metadata("landing autonomy level", /^landing_autonomy_level:/im),
+      metadata("authorizing boundary cell", /^authorizing_boundary_cell:/im),
+      metadata("risk classification evidence", /^risk_classification_evidence:/im),
+      metadata("relied on evidence artifacts", /^relied_on_evidence_artifacts:/im),
+      metadata("predicted safety outcome", /^predicted_safety_outcome:/im),
+      metadata("operator supervision status", /^operator_supervision_status:/im),
+      metadata("rationale", /^rationale:/im)
+    ]
+  },
+  {
+    displayPath: "docs/templates/notify-and-revert-artifact.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("source head", /^source_head:/im),
+      metadata("landing autonomy level", /^landing_autonomy_level:/im),
+      metadata("rollback path", /^rollback_path:/im),
+      metadata("operator attention reason", /^operator_attention_reason:/im),
+      metadata("follow up or expiry", /^follow_up_or_expiry:/im),
+      metadata("boundary prediction record", /^boundary_prediction_record:/im),
+      metadata("source drift status", /^source_drift_status:/im),
+      metadata("rationale", /^rationale:/im)
+    ]
   }
 ];
 

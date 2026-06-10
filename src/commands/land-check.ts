@@ -32,6 +32,9 @@ import { landingOracleProvenanceProblems } from "../state/verification-oracle-pr
 import type { UatApproval } from "../state/uat-approval.js";
 import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
+import {
+  gatherBoundaryAutonomyProblems
+} from "../state/boundary-autonomy.js";
 
 export async function landCheck(repoRoot: string, workItemId?: string) {
   if (!workItemId) {
@@ -121,6 +124,22 @@ export async function readLandingReadiness(
     );
     readiness.problems.push(
       ...(await landingOracleProvenanceProblems(repoRoot, workItemId))
+    );
+  }
+
+  // Boundary autonomy gating: require Boundary Prediction Record when
+  // landing verdict claims auto_land or notify_and_revert autonomy.
+  // Do not block ordinary safe-to-land flows that have no autonomy claim.
+  if (
+    landingVerdict.landingAutonomyLevel === "auto_land" ||
+    landingVerdict.landingAutonomyLevel === "notify_and_revert"
+  ) {
+    readiness.problems.push(
+      ...(await gatherBoundaryAutonomyProblems(
+        repoRoot,
+        workItemId,
+        landingVerdict.landingAutonomyLevel
+      ))
     );
   }
 

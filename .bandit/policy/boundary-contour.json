@@ -1,0 +1,127 @@
+{
+  "contract_version": 1,
+  "policy_id": "boundary-contour",
+  "contour_version": "initial-conservative-v1",
+  "default_movement_policy": "asymmetric",
+  "risk_tiers": [
+    "trivial",
+    "low_reversible",
+    "material_risk",
+    "never_auto_landable"
+  ],
+  "evidence_strength_tiers": [
+    "author_assertion",
+    "author_controlled_checks",
+    "independent_automated",
+    "independent_review",
+    "decorrelated_adversarial",
+    "operator_supervised_or_proven_track_record"
+  ],
+  "landing_autonomy_levels": [
+    "block",
+    "operator_supervision",
+    "notify_and_revert",
+    "auto_land"
+  ],
+  "cells": [
+    {
+      "cell_id": "trivial-author-assertion",
+      "risk_tier": "trivial",
+      "minimum_evidence_strength_tier": "author_assertion",
+      "landing_autonomy_level": "operator_supervision",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Trivial docs-only changes with author assertion may proceed under operator_supervision."
+    },
+    {
+      "cell_id": "trivial-independent-automated",
+      "risk_tier": "trivial",
+      "minimum_evidence_strength_tier": "independent_automated",
+      "landing_autonomy_level": "auto_land",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Trivial changes with automated independent checks may auto-land."
+    },
+    {
+      "cell_id": "trivial-independent-review",
+      "risk_tier": "trivial",
+      "minimum_evidence_strength_tier": "independent_review",
+      "landing_autonomy_level": "auto_land",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Trivial changes with independent review may auto-land."
+    },
+    {
+      "cell_id": "low-reversible-author-controlled-checks",
+      "risk_tier": "low_reversible",
+      "minimum_evidence_strength_tier": "author_controlled_checks",
+      "landing_autonomy_level": "operator_supervision",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Low-reversible work with author-controlled checks may proceed under operator_supervision."
+    },
+    {
+      "cell_id": "low-reversible-independent-review",
+      "risk_tier": "low_reversible",
+      "minimum_evidence_strength_tier": "independent_review",
+      "landing_autonomy_level": "notify_and_revert",
+      "requires_rollback_path": true,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Low-reversible work with independent review may reach notify_and_revert only with explicit rollback path."
+    },
+    {
+      "cell_id": "low-reversible-decorrelated-adversarial",
+      "risk_tier": "low_reversible",
+      "minimum_evidence_strength_tier": "decorrelated_adversarial",
+      "landing_autonomy_level": "notify_and_revert",
+      "requires_rollback_path": true,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Low-reversible work with decorrelated adversarial review may reach notify_and_revert with rollback path."
+    },
+    {
+      "cell_id": "low-reversible-operator-supervised",
+      "risk_tier": "low_reversible",
+      "minimum_evidence_strength_tier": "operator_supervised_or_proven_track_record",
+      "landing_autonomy_level": "operator_supervision",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": false,
+      "never_auto_landable": false,
+      "movement_policy": "expandable_without_trial",
+      "rationale": "Low-reversible work with operator supervision or proven track record remains under operator_supervision."
+    },
+    {
+      "cell_id": "material-risk-all-tiers",
+      "risk_tier": "material_risk",
+      "minimum_evidence_strength_tier": "author_assertion",
+      "landing_autonomy_level": "operator_supervision",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": true,
+      "never_auto_landable": false,
+      "movement_policy": "operator_required",
+      "rationale": "Material-risk work caps at operator_supervision regardless of evidence strength. notify_and_revert and auto_land are forbidden."
+    },
+    {
+      "cell_id": "never-auto-landable-all",
+      "risk_tier": "never_auto_landable",
+      "minimum_evidence_strength_tier": "author_assertion",
+      "landing_autonomy_level": "block",
+      "requires_rollback_path": false,
+      "requires_operator_supervision": true,
+      "never_auto_landable": true,
+      "movement_policy": "operator_required",
+      "rationale": "Never-auto-landable surfaces are hard exclusions. notify_and_revert and auto_land are forbidden."
+    }
+  ]
+}

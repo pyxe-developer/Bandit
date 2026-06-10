@@ -8,24 +8,23 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-088` - Installed-Copy Update Path
-  (Stage 6: closeout complete; retained as active derived-status anchor)
+- `[Slice]` `BANDIT-089` - Trust Boundary Evidence Schema Contracts
+  (Stage 4: review recorded; Stage 5 landing next)
 
-**Current next step:** Repo PM should form the next intake-derived slice target,
-`WIL-V0-TRIAL` - V0 Closeout Claude Code A/B Product-Value Trial, or record an
-explicit Repo PM disposition if formation finds missing operator-owned product
-direction.
+**Current next step:** Write Stage 5 landing verdict for `BANDIT-089`, run
+land-check, and record the local landing action before closeout.
 
-Do not approve public package publishing, paid registry setup, hosted update
-services, telemetry, automatic self-update, credential handling, external repo
-mutation, installed global skill mutation, automation prompt mutation,
-merge/push/deploy authority, Trust Verifier cutover, old-gate replacement or
-wrapping, local API or State Index timing, scheduler execution, claim/worktree
-lifecycle behavior, guarded browser actions, generate role input or execution
-packets for unrelated work, restart Pi/Aperture runtime work, implement V0
-Closeout Claude Code A/B Product-Value Trial, implement Installed-Copy Update
-Path, or start unrelated Phase 8 product work before Repo PM forms the next
-slice target or records an explicit disposition.
+Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
+Scope for a new boundary cell, public package publishing, paid registry setup,
+hosted update services, telemetry, automatic self-update, credential handling,
+external repo mutation, installed global skill mutation, automation prompt
+mutation, merge/push/deploy authority, Trust Verifier cutover, old-gate
+replacement or wrapping, local API or State Index timing, scheduler execution,
+claim/worktree lifecycle behavior, guarded browser actions, generate role input
+or execution packets for unrelated work, restart Pi/Aperture runtime work,
+implement V0 Closeout Claude Code A/B Product-Value Trial, implement
+Installed-Copy Update Path, start closeout evidence, or start unrelated Phase 8
+product work before the local landing action is recorded for `BANDIT-089`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -33,8 +32,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial, pending
-  Repo PM formation or explicit disposition.
+- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring, pending
+  `BANDIT-089` landing and closeout.
 
 ## Planned Work
 
@@ -55,13 +54,33 @@ primitive implementation deferred until named trigger conditions exist.
 implementation deferred until named trigger conditions and operator-owned
 approvals exist. `WIL-INSTALLED-COPY-UPDATE` is closed as `BANDIT-088` with
 installed-copy update-path implementation deferred until named trigger
-conditions and operator-owned approvals exist. The Claude Product-Value Trial
-is the next recorded formation target or explicit disposition target.
+conditions and operator-owned approvals exist. The operator reprioritized
+`BANDIT-PRD-004` and `BANDIT-PRD-005` ahead of the Claude Product-Value Trial
+on 2026-06-10.
 
+- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring: connect landing,
+  model/tool, and escape evidence through the structured attribution tuple.
+- `[Slice]` `TBD` - PRD-004.3 Escape Candidate Workflow: classify escape
+  candidates, run Codex PM attribution review, and record confirmed escape or
+  no-escape dispositions.
+- `[Slice]` `TBD` - PRD-004.4 Boundary Cell Movement Gate: constrain
+  boundary-cell movement to Workflow Trial-backed decisions and fail-closed
+  contraction on confirmed escapes.
+- `[Slice]` `TBD` - PRD-005.1 Roadmap Work Target Resolver: resolve current and
+  next work from roadmap/current-context authority before dereferencing PRD,
+  spec, or WIL provenance.
+- `[Slice]` `TBD` - PRD-005.2 Repo PM Create Controller And Prompt Contract:
+  form work through `formation_approved` and stop before Stage 2.
+- `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry:
+  advance formed work through authorized routes, role packet assembly, and
+  honest blocker/provider evidence.
+- `[Slice]` `TBD` - PRD-005.4 Operator Command Adapters: add the thin
+  `/bandit-work-create` and `/bandit-work-execute` invocation layer after the
+  deep controllers are tested.
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
-  the same PRD in Bandit and no-Bandit repos after the pre-Claude-bakeoff
-  follow-up queue is formed or dispositioned; no statistical or public
-  benchmark claim.
+  the same PRD in Bandit and no-Bandit repos after PRD-004/005 implementation
+  lanes are landed, closed, blocked on operator-owned input, or explicitly
+  dispositioned; no statistical or public benchmark claim.
 
 ## Completed Work
 

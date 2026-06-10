@@ -32,6 +32,8 @@ export type LandingVerdict = {
   landingAgentReplacementEvidence: string[];
   finalVerdict: string;
   rationale: string;
+  landingAutonomyLevel: string;
+  boundaryPredictionRecord: string;
 };
 
 type OptionalArtifact = {
@@ -167,7 +169,9 @@ function parseLandingVerdict(
     landingAgentState,
     landingAgentReplacementEvidence,
     finalVerdict,
-    rationale: readScalar(fields, "rationale")
+    rationale: readScalar(fields, "rationale"),
+    landingAutonomyLevel: readScalar(fields, "landing_autonomy_level") ?? "",
+    boundaryPredictionRecord: readScalar(fields, "boundary_prediction_record") ?? ""
   };
 }
 

@@ -4,28 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-088` is the last closed work item. Its Installed-Copy Update Path
-triage chore landed locally and closed with landing action, retrospective,
-improvement disposition, and closeout evidence recorded under
-`docs/work/BANDIT-088/`.
+`BANDIT-088` is the last closed work item. `BANDIT-089` is formed,
+formation-approved, plan-mode recorded, RED evidence recorded, Stage 3
+implementation recorded, and Stage 4 review recorded as the first
+`BANDIT-PRD-004` implementation slice.
 
-**Active work item:** `BANDIT-088` - Installed-Copy Update Path.
+**Active work item:** `BANDIT-089` - Trust Boundary Evidence Schema Contracts.
 
-The current stage is Stage 6: closeout complete.
+The current stage is Stage 4: review recorded.
 
-**Current next action:** Repo PM should form the next intake-derived slice
-target, `WIL-V0-TRIAL` - V0 Closeout Claude Code A/B Product-Value Trial, or
-record an explicit Repo PM disposition if formation finds missing
-operator-owned product direction.
+**Current next action:** Write Stage 5 landing verdict for `BANDIT-089`, run
+land-check, and record the local landing action before closeout.
 
-Do not start V0 Closeout Claude Code A/B Product-Value Trial implementation,
-RED evidence, Stage 3 dispatch, review-loop evidence, landing evidence,
-retrospective evidence, Trust Verifier cutover, merge, push, deploy, hosted
-service setup, paid reviewer/model routing, public benchmark publication,
-local API work, State Index work, guarded browser action execution, PR/CI/CD
-implementation, installed-copy update-path implementation, or unrelated Phase
-8 product work before Repo PM forms the next slice target or records an
-explicit disposition.
+Do not start retrospective evidence, PRD-005 implementation,
+V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
+cutover, merge, push, deploy, hosted service setup, paid reviewer/model
+routing, public benchmark publication, local API work, State Index work,
+guarded browser action execution, PR/CI/CD implementation, installed-copy
+update-path implementation, or unrelated Phase 8 product work before Stage 4
+review evidence is landed for `BANDIT-089`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -43,9 +40,12 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action.
+No operator-owned input is required for the next recorded action. The operator
+approved prioritizing `BANDIT-PRD-004` and `BANDIT-PRD-005` before
+`WIL-V0-TRIAL` on 2026-06-10.
 
-Halt for operator input if a future step would approve public package
+Halt for operator input if a future step would expand landing autonomy, approve
+Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public package
 publishing, approve paid registry setup, approve hosted update services,
 approve telemetry, approve automatic self-update, approve credential handling,
 approve external repo mutation, approve installed global skill mutation,
@@ -58,40 +58,57 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-088` Stage 6 closeout evidence:
+`BANDIT-089` Stage 3 implementation evidence:
 
 - Source spec:
-  `docs/specs/BANDIT-088-installed-copy-update-path.json`.
-- Brief: `docs/work/BANDIT-088/brief.md`.
-- Orchestration plan: `docs/work/BANDIT-088/orchestration-plan.md`.
-- RED evidence: `docs/work/BANDIT-088/red-evidence.md`.
-- Disposition: `docs/work/BANDIT-088/installed-copy-update-path-disposition.md`.
-- Stage 3 evidence: `docs/work/BANDIT-088/implementation-evidence.md`.
-- Writer report: `docs/work/BANDIT-088/writer-report.md`.
-- CodeRabbit provider-timeout evidence:
-  `docs/work/BANDIT-088/coderabbit-review.md`.
-- Local Qwen review: `docs/work/BANDIT-088/local-qwen-review.md`.
-- Aggregate review evidence: `docs/work/BANDIT-088/review-evidence.md`.
-- Landing verdict: `docs/work/BANDIT-088/landing-verdict.md`.
-- Landing action: `docs/work/BANDIT-088/landing-action.md`.
-- Retrospective: `docs/work/BANDIT-088/retrospective.md`.
-- Improvement disposition:
-  `docs/work/BANDIT-088/improvement-disposition.md`.
+  `docs/specs/BANDIT-089-trust-boundary-evidence-schema-contracts.json`.
+- Brief: `docs/work/BANDIT-089/brief.md`.
+- Orchestration plan: `docs/work/BANDIT-089/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-089/red-evidence.md`.
+- RED tests: `test/landing-gates.test.mjs`.
+- Claude attempt evidence: `docs/work/BANDIT-089/stage3-claude-attempt.md`.
+- MiniMax timeout evidence:
+  `docs/work/BANDIT-089/stage3-minimax-attempt-timeout.md`.
+- Stage 3 PM review: `docs/work/BANDIT-089/stage3-pm-review.md`.
+- Stage 3 writer report: `docs/work/BANDIT-089/writer-report.md`.
+- Stage 3 implementation evidence:
+  `docs/work/BANDIT-089/implementation-evidence.md`.
+- Boundary Contour policy: `.bandit/policy/boundary-contour.json`.
+- Boundary evidence templates:
+  `docs/templates/boundary-prediction-record.md` and
+  `docs/templates/notify-and-revert-artifact.md`.
+- Boundary autonomy implementation: `src/state/boundary-autonomy.ts`,
+  `src/commands/init.ts`, `src/commands/validate.ts`,
+  `src/commands/land-check.ts`, `src/state/landing-verdicts.ts`,
+  `src/state/paths.ts`, and `src/state/templates.ts`.
 - Local Qwen formation review:
-  `docs/work/BANDIT-088/qwen-formation-review.md`.
+  `docs/work/BANDIT-089/qwen-formation-review.md`.
 - CodeRabbit formation review:
-  `docs/work/BANDIT-088/coderabbit-formation-review.md`.
+  `docs/work/BANDIT-089/coderabbit-formation-review.md`.
 - Aggregate formation review:
-  `docs/work/BANDIT-088/formation-review.md`.
-- Coordination log: `docs/work/BANDIT-088/coordination-log.jsonl`.
+  `docs/work/BANDIT-089/formation-review.md`.
+- Stage 4 CodeRabbit timeout evidence:
+  `docs/work/BANDIT-089/coderabbit-review.md`.
+- Stage 4 Local Qwen review:
+  `docs/work/BANDIT-089/local-qwen-review.md`.
+- Stage 4 risk/supply-chain gate evidence:
+  `.bandit/policy/risk-classifications/BANDIT-089-risk-classification.json`
+  and `.bandit/policy/supply-chain-gates/BANDIT-089-supply-chain-gate.json`.
+- Aggregate Stage 4 review evidence:
+  `docs/work/BANDIT-089/review-evidence.md`.
+- Coordination log: `docs/work/BANDIT-089/coordination-log.jsonl`, current
+  state `review_recorded`.
+- PRD decomposition:
+  `docs/prds/BANDIT-PRD-004-005-decomposition.md`.
 - Work Intake Ledger: `.bandit/work-intake-ledger.json` records
-  `WIL-INSTALLED-COPY-UPDATE` closed as `BANDIT-088`.
+  `WIL-INSTALLED-COPY-UPDATE` closed as `BANDIT-088`, plus PRD-backed
+  `PRD-004-TRUST-BOUNDARY-AUTONOMY` and
+  `PRD-005-BANDIT-WORK-COMMANDS` accepted ahead of `WIL-V0-TRIAL`.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-088` closeout does not implement or approve public publishing, hosted
-update services, telemetry, automatic self-update, paid registry setup,
-consumer-repo mutation, installed global skill mutation, automation prompt
-mutation, credential handling, merge, push, deploy, old-gate replacement,
-Trust Verifier cutover, PR/CI/CD implementation, the V0 Closeout Claude Code
-A/B Product-Value Trial, or unrelated Phase 8 product work.
+`BANDIT-089` implementation adds schema-only fail-closed trust-boundary
+evidence contracts and does not approve expanded landing autonomy,
+Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
+implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
+unrelated Phase 8 product work.
