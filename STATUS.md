@@ -10,12 +10,12 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-089` landed and closed the first `BANDIT-PRD-004` implementation
-slice: Trust Boundary Evidence Schema Contracts. `BANDIT-090` is formed and
-orchestration-ready as the second `BANDIT-PRD-004` implementation slice. The
-current stage is Stage 4: review required.
+slice: Trust Boundary Evidence Schema Contracts. `BANDIT-090` has Stage 4
+review evidence recorded and accepted as the second `BANDIT-PRD-004`
+implementation slice. The current stage is Stage 5: landing verdict required.
 
-Next action: Run Stage 4 review for `BANDIT-090` using CodeRabbit or honest
-provider-timeout evidence plus Local Qwen through the authorized MLX route.
+Next action: Write Stage 5 landing verdict for `BANDIT-090`, run land-check,
+and record the local landing action before closeout.
 
 Required operator input: none_required. The operator approved prioritizing
 `BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
@@ -24,7 +24,7 @@ Required operator input: none_required. The operator approved prioritizing
 
 Last 5 items only:
 
-- `BANDIT-090` - Attribution Join Key Wiring (Stage 4 review required)
+- `BANDIT-090` - Attribution Join Key Wiring (Stage 5 landing verdict required)
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts (closed)
 - `BANDIT-088` - Installed-Copy Update Path (closed)
 - `BANDIT-087` - PR And CI/CD Landing Workflow Policy (closed)

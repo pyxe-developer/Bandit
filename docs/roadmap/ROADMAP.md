@@ -9,11 +9,10 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-090` - Attribution Join Key Wiring
-  (Stage 4: review required)
+  (Stage 5: landing verdict required)
 
-**Current next step:** Run Stage 4 review for `BANDIT-090` using CodeRabbit
-or honest provider-timeout evidence plus Local Qwen through the authorized MLX
-route.
+**Current next step:** Write Stage 5 landing verdict for `BANDIT-090`, run
+land-check, and record the local landing action before closeout.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -25,7 +24,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-`BANDIT-090` Stage 4 review evidence is recorded and accepted.
+`BANDIT-090` landing verdict and local landing action evidence are recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.

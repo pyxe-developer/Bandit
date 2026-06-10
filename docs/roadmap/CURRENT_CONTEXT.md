@@ -4,26 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-089` is the last closed work item. `BANDIT-090` is formed and
-orchestration-ready as the second `BANDIT-PRD-004` implementation slice:
+`BANDIT-089` is the last closed work item. `BANDIT-090` is review-recorded as
+the second `BANDIT-PRD-004` implementation slice:
 Attribution Join Key Wiring.
 
 **Active work item:** `BANDIT-090` - Attribution Join Key Wiring.
 
-The current stage is Stage 4: review required.
+The current stage is Stage 5: landing verdict required.
 
-**Current next action:** Run Stage 4 review for `BANDIT-090` using CodeRabbit
-or honest provider-timeout evidence plus Local Qwen through the authorized MLX
-route.
+**Current next action:** Write Stage 5 landing verdict for `BANDIT-090`, run
+land-check, and record the local landing action before closeout.
 
-Do not start landing evidence, retrospective evidence, PRD-004.3, PRD-004.4,
-PRD-005 implementation,
+Do not start retrospective evidence, PRD-004.3, PRD-004.4, PRD-005
+implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-`BANDIT-090` Stage 4 review evidence is recorded and accepted.
+`BANDIT-090` landing verdict and local landing action evidence are recorded.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -86,13 +85,26 @@ cannot answer.
   `docs/work/BANDIT-090/writer-report.md`.
 - Stage 3 implementation evidence:
   `docs/work/BANDIT-090/implementation-evidence.md`.
+- Stage 4 CodeRabbit timeout evidence:
+  `docs/work/BANDIT-090/coderabbit-review.md`.
+- Stage 4 Local Qwen review:
+  `docs/work/BANDIT-090/local-qwen-review.md`.
+- Supplemental Local Qwen full-packet review:
+  `docs/work/BANDIT-090/local-qwen-full-packet-review.md`.
+- Local Qwen finding disposition:
+  `docs/work/BANDIT-090/qwen-finding-disposition.md`.
+- Stage 4 risk/supply-chain gate evidence:
+  `.bandit/policy/risk-classifications/BANDIT-090-risk-classification.json`
+  and `.bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json`.
+- Aggregate Stage 4 review evidence:
+  `docs/work/BANDIT-090/review-evidence.md`.
 - Attribution Join Key implementation:
   `docs/templates/attribution-join-key.md`,
   `src/state/attribution-join-key.ts`, `src/commands/init.ts`,
   `src/commands/validate.ts`, `src/commands/land-check.ts`,
   `src/state/landing-verdicts.ts`, and `src/state/templates.ts`.
 - Coordination log: `docs/work/BANDIT-090/coordination-log.jsonl`, current
-  state `implementation_recorded`.
+  state `review_recorded`.
 
 `BANDIT-089` closed evidence:
 
@@ -155,7 +167,5 @@ Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
 implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
 unrelated Phase 8 product work.
 
-`BANDIT-090` must run Stage 4 review with CodeRabbit or honest
-provider-timeout evidence, Local Qwen through the authorized MLX route, review
-subject hash, risk/supply-chain evidence, aggregate review evidence, and PM
-disposition before any landing evidence or later PRD-004/005 work.
+`BANDIT-090` must write a Stage 5 landing verdict, run `land-check`, and
+record the local landing action before closeout or any later PRD-004/005 work.
