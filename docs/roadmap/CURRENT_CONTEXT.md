@@ -7,20 +7,22 @@
 `BANDIT-092` is the last closed work item. It landed and closed the fourth
 `BANDIT-PRD-004` implementation slice: Boundary Cell Movement Gate.
 
-**Active work item:** `BANDIT-092` - Boundary Cell Movement Gate (closed anchor).
+**Active work item:** `BANDIT-093` - Roadmap Work Target Resolver.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form PRD-005.1 Roadmap Work Target
-Resolver as the first `BANDIT-PRD-005` slice.
+**Current next action:** Work Item PM should record plan-mode orchestration for BANDIT-093 before RED evidence.
 
-Do not continue PRD-005 implementation,
+Do not create RED evidence, implementation evidence, review-loop evidence,
+landing evidence, UAT evidence, retrospective evidence, closeout evidence,
+PRD-005.2 create-controller work, PRD-005.3 execute-controller work,
+PRD-005.4 adapter work,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
-update-path implementation, or unrelated Phase 8 product work before
-PRD-005.1 is formed through the Repo PM formation gate.
+update-path implementation, or unrelated Phase 8 product work before Work Item
+PM plan-mode orchestration for `BANDIT-093` is recorded.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -39,9 +41,10 @@ reviewer routing.
 ## Required Operator Input
 
 No operator-owned input is required for the next recorded action. The Local
-Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; the tools were updated
-and a live adapter smoke passed. The operator approved prioritizing
-`BANDIT-PRD-004` and `BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
+Qwen endpoint now runs at `http://127.0.0.1:8001/v1`; `BANDIT-093` formation
+passed through Local Qwen and CodeRabbit timeout replacement evidence. The
+operator approved prioritizing `BANDIT-PRD-004` and `BANDIT-PRD-005` before
+`WIL-V0-TRIAL` on 2026-06-10.
 
 Halt for operator input if a future step would expand landing autonomy, approve
 Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public package
@@ -57,7 +60,21 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-092` current evidence:
+`BANDIT-093` current evidence:
+
+- Source spec:
+  `docs/specs/BANDIT-093-roadmap-work-target-resolver.json`.
+- Brief: `docs/work/BANDIT-093/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-093/qwen-formation-review.md`.
+- CodeRabbit formation timeout evidence:
+  `docs/work/BANDIT-093/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-093/formation-review.md`.
+- Coordination log: `docs/work/BANDIT-093/coordination-log.jsonl`, current
+  state `formation_approved`.
+
+`BANDIT-092` closed evidence:
 
 - Source spec:
   `docs/specs/BANDIT-092-boundary-cell-movement-gate.json`.
@@ -262,12 +279,23 @@ autonomy. It does not approve expanded landing autonomy, escape workflow,
 boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
 A/B Product-Value Trial, or unrelated Phase 8 product work.
 
-`BANDIT-092` formation defines a bounded movement-gate slice for
-Workflow Trial-backed Boundary Cell Movement evidence and confirmed-escape
-contraction checks. It does not approve expanded landing autonomy, apply a
-Boundary Contour update, execute Notify-And-Revert, execute rollback, approve
-Auto-Landing Scope, implement PRD-005, the V0 Closeout Claude Code A/B
-Product-Value Trial, Trust Verifier cutover, attribution gateway work, cockpit
+`BANDIT-092` implementation added bounded Boundary Cell Movement evidence and
+confirmed-escape contraction checks. It did not approve expanded landing
+autonomy, apply a Boundary Contour update, execute Notify-And-Revert, execute
+rollback, approve Auto-Landing Scope, implement PRD-005, the V0 Closeout
+Claude Code A/B Product-Value Trial, Trust Verifier cutover, attribution
+gateway work, cockpit UI, local API, State Index, hosted services, telemetry,
+public benchmark publication, paid routing, merge, push, deploy, credential
+handling, dependency changes, package-script changes, CI/release workflow
+changes, external repo mutation, or unrelated Phase 8 work.
+
+`BANDIT-093` formation defines a bounded `BANDIT-PRD-005.1` resolver slice for
+roadmap/current-context work-target resolution, closed-work interstitial
+routing, fail-closed target-conflict diagnostics, stale-tail refusal, and
+PRD/spec/WIL provenance dereference only after roadmap authorization. It does
+not implement `/bandit-work-create`, `/bandit-work-execute`, create-controller
+work, execute-controller work, route registry work, role input packet assembly,
+prompt-contract normalization, Trust Verifier cutover, V0 trial work, cockpit
 UI, local API, State Index, hosted services, telemetry, public benchmark
 publication, paid routing, merge, push, deploy, credential handling,
 dependency changes, package-script changes, CI/release workflow changes,
@@ -282,5 +310,4 @@ classification authority, boundary-cell movement, PRD-005 implementation, the
 V0 Closeout Claude Code A/B Product-Value Trial, or unrelated Phase 8 product
 work.
 
-The next recorded action is Work Item PM plan-mode orchestration for
-`BANDIT-092` before RED evidence.
+The next recorded action is Work Item PM should record plan-mode orchestration for BANDIT-093 before RED evidence.

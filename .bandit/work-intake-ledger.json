@@ -337,8 +337,8 @@
         "WIL-PR-CICD-LANDING",
         "WIL-INSTALLED-COPY-UPDATE"
       ],
-      "scope_summary": "Implement PRD-004 through bounded slices. PRD-004.4 Boundary Cell Movement Gate is formed as BANDIT-092 after PRD-004.1 through PRD-004.3 landed and closed.",
-      "risk_product_scope_status": "approved PRD-backed work lane; BANDIT-092 is formed but not landed; no autonomy expansion, actual boundary-cell movement, Notify-And-Revert execution, merge, push, deploy, or unrelated work is authorized",
+      "scope_summary": "Implemented PRD-004 through bounded slices. PRD-004.4 Boundary Cell Movement Gate landed and closed as BANDIT-092 after PRD-004.1 through PRD-004.3 landed and closed.",
+      "risk_product_scope_status": "approved PRD-backed work lane closed through BANDIT-092; no autonomy expansion, actual boundary-cell movement, Notify-And-Revert execution, merge, push, deploy, or unrelated work was authorized",
       "intake_outcome": "accepted_to_queue",
       "claimable": false,
       "transition_history": [
@@ -362,6 +362,13 @@
           "from": "accepted_to_queue",
           "to": "accepted_to_queue",
           "source": "BANDIT-092 formation approved for PRD-004.4 Boundary Cell Movement Gate; PRD-004 remains active until BANDIT-092 lands and closes"
+        },
+        {
+          "at": "2026-06-10T19:45:09Z",
+          "actor": "closeout_agent",
+          "from": "accepted_to_queue",
+          "to": "closed",
+          "source": "BANDIT-092 landed and closed PRD-004.4 Boundary Cell Movement Gate; PRD-004 implementation lane is complete"
         }
       ]
     },
@@ -379,8 +386,8 @@
       "depends_on": [
         "PRD-004-TRUST-BOUNDARY-AUTONOMY"
       ],
-      "scope_summary": "Implement PRD-005 through bounded slices after PRD-004 base boundary evidence exists, starting with roadmap/current-context work-target resolution before operator-facing create/execute command adapters.",
-      "risk_product_scope_status": "approved PRD-backed work lane; not claimable from intake; normal Work Item formation, stage gates, reviews, and landing evidence are required before each slice executes",
+      "scope_summary": "Implement PRD-005 through bounded slices after PRD-004 base boundary evidence exists. PRD-005.1 Roadmap Work Target Resolver is formed as BANDIT-093 before operator-facing create/execute command adapters.",
+      "risk_product_scope_status": "approved PRD-backed work lane; BANDIT-093 is formation_approved but not landed; normal Work Item gates, reviews, and landing evidence are required before each slice executes",
       "intake_outcome": "accepted_to_queue",
       "claimable": false,
       "transition_history": [
@@ -390,6 +397,13 @@
           "from": "draft_ready_for_agent",
           "to": "accepted_to_queue",
           "source": "Operator requested BANDIT-PRD-005 implementation before WIL-V0-TRIAL"
+        },
+        {
+          "at": "2026-06-10T20:13:46Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-093 formation approved for PRD-005.1 Roadmap Work Target Resolver; PRD-005 remains active until BANDIT-093 lands and closes"
         }
       ]
     },

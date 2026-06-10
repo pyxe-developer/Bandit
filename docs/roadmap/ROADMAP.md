@@ -8,11 +8,10 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate
-  (Stage 6: closed anchor)
+- `[Slice]` `BANDIT-093` - Roadmap Work Target Resolver
+  (Stage 1: formation_approved)
 
-**Current next step:** Repo PM should form PRD-005.1 Roadmap Work Target
-Resolver as the first `BANDIT-PRD-005` slice.
+**Current next step:** Work Item PM should record plan-mode orchestration for BANDIT-093 before RED evidence.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,7 +23,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-PRD-005.1 is formed through the Repo PM formation gate.
+Work Item PM plan-mode orchestration for `BANDIT-093` is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -32,8 +31,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-005.1 Roadmap Work Target Resolver, pending
-  Repo PM formation.
+- `[Slice]` `TBD` - PRD-005.2 Repo PM Create Controller And Prompt Contract,
+  pending `BANDIT-093` landing and closeout.
 
 ## Planned Work
 
@@ -58,9 +57,6 @@ conditions and operator-owned approvals exist. The operator reprioritized
 `BANDIT-PRD-004` and `BANDIT-PRD-005` ahead of the Claude Product-Value Trial
 on 2026-06-10.
 
-- `[Slice]` `TBD` - PRD-005.1 Roadmap Work Target Resolver: resolve current and
-  next work from roadmap/current-context authority before dereferencing PRD,
-  spec, or WIL provenance.
 - `[Slice]` `TBD` - PRD-005.2 Repo PM Create Controller And Prompt Contract:
   form work through `formation_approved` and stop before Stage 2.
 - `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry:

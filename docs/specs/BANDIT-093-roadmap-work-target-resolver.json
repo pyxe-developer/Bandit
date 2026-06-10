@@ -1,0 +1,176 @@
+{
+  "kind": "slice",
+  "title": "Roadmap Work Target Resolver",
+  "status": "Brief Created",
+  "goal": "Implement the first BANDIT-PRD-005 slice: a deterministic roadmap/current-context work-target resolver that identifies the current or next authorized work target before any PRD, spec, or Work Intake Ledger provenance is dereferenced.",
+  "scope": [
+    "Use BANDIT-PRD-005 and docs/prds/BANDIT-PRD-004-005-decomposition.md as source authority for PRD-005.1 after BANDIT-092 landed and closed PRD-004.4.",
+    "Add a Bandit-native resolver that reads docs/roadmap/ROADMAP.md and docs/roadmap/CURRENT_CONTEXT.md as the priority authority surfaces and returns a deterministic current or next work target with status, type, title, priority relationship, source artifact paths, and provenance pointers.",
+    "Make the resolver fail closed when ROADMAP.md and CURRENT_CONTEXT.md disagree on the current or next authorized work target, including stale closed-work tail text that conflicts with the current next action.",
+    "Allow PRD, spec, or WIL provenance dereference only after ROADMAP.md and CURRENT_CONTEXT.md identify the work target. The Work Intake Ledger may be used as source metadata, not as a primary scheduler or hidden priority queue.",
+    "Support closed-work interstitial routing where the prior work item is closed and the next roadmap item is not yet formed, returning a not_yet_formed target rather than inventing an active work item.",
+    "Expose the resolver through a deterministic CLI or internal command surface suitable for later Repo PM create-controller use, without implementing /bandit-work-create, /bandit-work-execute, role input packet assembly, or execution orchestration in this slice.",
+    "Preserve CLI authority, repo-native canonical state, and derived-only cockpit/session-context status. Do not make WIL entries, PRD files, specs, cockpit views, session-context packets, or resolver output independent workflow authority.",
+    "Record CLEAN_CODE.md read evidence in the brief and require implementation to keep roadmap parsing, context parsing, target reconciliation, provenance dereference, diagnostics, and tests small and explicit."
+  ],
+  "out_of_scope": [
+    "Do not implement the Repo PM create controller, /bandit-work-create adapter, Work Item PM execute controller, /bandit-work-execute adapter, stage route registry, role input packet assembler, blocker/provider evidence recorder, or prompt-contract normalization in this slice.",
+    "Do not create a public bandit context <stage> workflow command.",
+    "Do not turn .bandit/work-intake-ledger.json into a claimable queue, scheduler, or priority authority.",
+    "Do not create or approve future PRD-005.2, PRD-005.3, PRD-005.4, V0 trial, or unrelated Phase 8 work items.",
+    "Do not approve Trust Verifier cutover, replace or wrap old gate paths, change landing autonomy, approve Notify-And-Revert or Auto-Landing Scope, change UAT policy, approve paid/live reviewer or model routing, approve merge/push/deploy authority, mutate external repositories, add hosted services, add telemetry, add credential handling, change dependencies, change package scripts, or change CI/release workflow."
+  ],
+  "acceptance_criteria": [
+    "The resolver returns a deterministic current or next work target from ROADMAP.md and CURRENT_CONTEXT.md, including target title, work type, status, priority relationship, source artifact paths, and provenance pointers.",
+    "The resolver handles the closed-work interstitial state where the previous work item is closed and the next roadmap item is not yet formed, returning PRD-005.1-style not_yet_formed target data rather than claiming an active Work Item exists.",
+    "The resolver fails closed with clear diagnostics when ROADMAP.md and CURRENT_CONTEXT.md disagree on the current or next authorized work target.",
+    "The resolver ignores stale historical tail text or rejects it explicitly when it conflicts with the current next action; it may not silently use stale wording to route Work Item PM execution for closed work.",
+    "The resolver dereferences PRD, spec, WIL, or mixed provenance only after roadmap/current-context authority names that target.",
+    "The resolver refuses to scan .bandit/work-intake-ledger.json as a primary scheduler or hidden queue.",
+    "The resolver supports PRD-backed and WIL-backed roadmap targets as provenance classes while keeping normal Work Item IDs as the execution artifact identity once materialized.",
+    "Aggregate Bandit validation or focused resolver validation covers matching targets, mismatched targets, missing roadmap/current-context target data, closed-work interstitial targets, PRD-backed provenance, WIL-backed provenance, and no-hidden-WIL-scheduler behavior.",
+    "Implementation keeps resolver parsing and reconciliation logic readable, deterministic, and separated from future create-controller and execute-controller behavior.",
+    "The work preserves role boundaries: Test Writer owns RED evidence and test edits; if Codex authors Stage 2 tests, Stage 3 implementation is routed to Claude or another non-Codex model family; reviewers own Stage 4; Landing Agent owns Stage 5; Closeout Agent owns Stage 6.",
+    "Stage 4 review uses Local Qwen only through .bandit/reviewers/local-qwen.json and node bin/omlx-chat-completions.mjs, CodeRabbit or honest provider-timeout/refusal evidence, aggregate review evidence, risk classification, and supply-chain evidence before landing.",
+    "The work item does not start PRD-005.2, PRD-005.3, PRD-005.4, /bandit-work-create, /bandit-work-execute, V0 Closeout Claude Code A/B Product-Value Trial, Trust Verifier cutover, cockpit UI, local API, State Index, hosted services, telemetry, public benchmark publication, paid routing, merge, push, deploy, or unrelated Phase 8 work."
+  ],
+  "test_plan": [
+    "Stage 2 Test Writer writes RED tests for successful roadmap/current-context target resolution in current-work and next-work states.",
+    "Stage 2 Test Writer writes RED tests for the closed-work interstitial state where BANDIT-092 is closed and PRD-005.1 is the next not_yet_formed target.",
+    "Stage 2 Test Writer writes RED tests proving conflicting ROADMAP.md and CURRENT_CONTEXT.md target text fails closed with a clear diagnostic.",
+    "Stage 2 Test Writer writes RED tests proving stale historical tail wording cannot route execution for a closed work item when the current next action names Repo PM formation.",
+    "Stage 2 Test Writer writes RED tests for PRD-backed, spec-backed, and WIL-backed provenance dereference only after roadmap/current-context authorization.",
+    "Stage 2 Test Writer writes RED tests proving the resolver does not scan .bandit/work-intake-ledger.json as a primary scheduler.",
+    "Run focused resolver tests after implementation.",
+    "Run npm run typecheck.",
+    "Run npm test if shared state parsing, cockpit/session-context, validation, or roadmap parsing behavior changes.",
+    "Run npm run bandit -- validate.",
+    "Run node ./bin/bandit.mjs cockpit status --json and node ./bin/bandit.mjs session-context current --json after context artifacts are updated.",
+    "Run git diff --check."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-06-10 before creating this source spec. The slice must keep roadmap/current-context parsing, target reconciliation, provenance dereference, diagnostics, and tests small and explicit; avoid hidden workflow authority; preserve role boundaries; and avoid mixing create-controller, execute-controller, route registry, role packet, cockpit, or slash-command adapter behavior into this resolver slice.",
+  "stage_rubric_checklist": [
+    "Stage 0: Context Readiness | pass | BANDIT-092 landed and closed with landing action, retrospective, improvement disposition, synchronized roadmap/current-context/status, no open bootstrap gaps, and Repo PM formation for PRD-005.1 recorded as the next action.",
+    "Stage 1: Work-Item Brief And Spec | pass | This spec defines goal, source authority, scope, out of scope, acceptance criteria, test plan, clean-code read evidence, no-gap disposition, expected files, required evidence, role boundaries, operator-input status, source-of-truth boundary, forbidden actions, implementation order, and smell triggers.",
+    "Stage 2: Test Design And RED Evidence | required next | Test Writer must produce RED tests for roadmap/current-context target resolution, closed-work interstitial state, conflict refusal, stale-tail refusal, provenance dereference after authorization, and no hidden Work Intake Ledger scheduling.",
+    "Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit RED tests, test helpers, fixtures, acceptance mappings, or Test Writer-owned evidence.",
+    "Stage 4: Review And Cross-Model Gates | required later | Local Qwen through the authorized MLX route, CodeRabbit or honest provider-timeout/refusal evidence, aggregate review, review-subject hash, risk/supply-chain checks where applicable, and clean-code review are required before landing.",
+    "Stage 5: Landing And UAT | required later | Landing verdict, land-check, local-record landing action, and clean-code compliance evidence are required; product UAT is not applicable unless the implementation changes an operator-facing product surface.",
+    "Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, current context, roadmap, and STATUS updates are required before PRD-005.2, V0 trial, or unrelated next work begins."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gap blocks this PRD-005.1 implementation slice.",
+    "Live CodeRabbit may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence and do not claim a CodeRabbit pass.",
+    "Local Qwen is authorized only through .bandit/reviewers/local-qwen.json and bin/omlx-chat-completions.mjs against the MLX OpenAI-compatible endpoint at http://127.0.0.1:8001/v1. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another reviewer route.",
+    "No Trust Verifier cutover, old-gate replacement or wrapping, PRD-005 create/execute controller, slash-command adapter, local API, State Index, hosted service, telemetry, paid route, merge, push, deploy, external repo mutation, credential handling, dependency change, package-script change, CI/release workflow change, or unrelated Phase 8 authority is approved by this slice."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-093-roadmap-work-target-resolver.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "src/state/roadmap-work-targets.ts",
+    "src/commands/roadmap-work-targets.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "test/roadmap-work-targets.test.mjs",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/writer-report.md",
+    "docs/work/<ID>/stage3-pm-review.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "first_implementation_order": [
+    "Repo PM creates the work item and records formation review evidence before Work Item PM execution.",
+    "Work Item PM records orchestration-plan.md only after formation_approved and before RED evidence.",
+    "Test Writer writes failing tests for target resolution, closed-work interstitial routing, roadmap/current-context conflict refusal, stale-tail refusal, provenance dereference after authorization, and no hidden Work Intake Ledger scheduling.",
+    "Implementation Writer adds the minimal resolver state module, diagnostics, optional CLI/internal command surface, validation wiring, and tests needed to satisfy RED tests, without editing Test Writer-owned files if Codex authored the RED tests.",
+    "Codex PM verifies focused tests, typecheck, full tests as needed, Bandit validation, cockpit/session-context derived status, clean-code compliance, and evidence freshness before Stage 4 review.",
+    "Reviewers run Local Qwen through the authorized MLX route and CodeRabbit or honest provider-timeout/refusal evidence; PM dispositions any non-blocking findings before landing.",
+    "Landing Agent writes landing verdict/action; Closeout Agent records retrospective, improvement/no-action disposition, and synchronizes current context, roadmap, STATUS, and intake state."
+  ],
+  "smell_triggers": [
+    "Any implementation that treats .bandit/work-intake-ledger.json as primary priority authority or a hidden scheduler is a blocker.",
+    "Any implementation that dereferences PRD, spec, or WIL provenance before ROADMAP.md and CURRENT_CONTEXT.md identify the target is a blocker.",
+    "Any implementation that silently chooses between conflicting ROADMAP.md and CURRENT_CONTEXT.md target text is a blocker.",
+    "Any implementation that routes execution for closed work from stale historical tail wording is a blocker.",
+    "Any implementation that creates or starts PRD-005.2, PRD-005.3, PRD-005.4, V0 trial, or unrelated work is scope creep.",
+    "Any implementation that starts the Repo PM create controller, Work Item PM execute controller, slash-command adapters, stage route registry, role input packet assembler, or provider/blocker recorder is scope creep.",
+    "Any implementation that creates a public bandit context <stage> workflow command is scope creep.",
+    "Any implementation that lets resolver output, cockpit/session-context output, PRD files, specs, or WIL entries become independent canonical workflow authority is a blocker.",
+    "Any large mixed function that combines roadmap parsing, work-item creation, formation review, execution orchestration, reviewer routing, landing, and closeout is a clean-code blocker."
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create and form this PRD-005.1 Roadmap Work Target Resolver slice because BANDIT-PRD-005 is accepted for implementation, BANDIT-092 landed and closed the PRD-004 prerequisite lane, the operator directed PRD-004/005 implementation before WIL-V0-TRIAL, and this slice implements deterministic resolver behavior without approving new product direction, UAT policy, landing autonomy, Trust Verifier cutover, paid/live routing, merge/push/deploy authority, hosted services, telemetry, external side effects, credential handling, or slash-command adapters. Halt for operator input if later work would approve /bandit-work-create or /bandit-work-execute operator-facing behavior beyond the accepted PRD, change product or UAT direction, approve paid or live reviewer/model routing, approve hosted services, approve telemetry, approve merge/push/deploy authority, approve Trust Verifier cutover, replace or wrap old gates, approve external side effects, or resolve genuinely ambiguous product, business, policy, UAT, or explicit cost/risk scope.",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "Stage 1"
+    ],
+    "authority_roles": [
+      "repo_pm"
+    ],
+    "required_skills": [
+      "bandit"
+    ],
+    "forbidden_actions": [
+      "orchestration-plan",
+      "red-evidence",
+      "implementation",
+      "review-loop",
+      "landing",
+      "retrospective",
+      "prd-005-create-controller",
+      "prd-005-execute-controller",
+      "slash-command-adapter",
+      "trust-verifier-cutover",
+      "merge-push-deploy"
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "formation_review"
+    ],
+    "provider_pricing_evidence": [
+      "not_applicable_local_qwen",
+      "not_applicable_coderabbit_cli"
+    ],
+    "spend_classes": [
+      "local_or_included"
+    ],
+    "continuation_decisions": [
+      "CodeRabbit formation review must receive the full 600-second prompt-required timeout before provider-timeout replacement evidence is recorded.",
+      "Local Qwen unavailability is fail-closed and requires operator help rather than an alternate reviewer path."
+    ],
+    "stage_capability_profiles": [
+      "stage1_formation_only"
+    ]
+  }
+}
