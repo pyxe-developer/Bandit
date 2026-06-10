@@ -4,24 +4,26 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-092` is the active work item. Repo PM completed Stage 1 formation for
-the fourth `BANDIT-PRD-004` implementation slice: Boundary Cell Movement Gate.
+`BANDIT-092` is the active work item. Stage 2 RED, Stage 3 implementation, and
+CodeRabbit Stage 4 review are recorded for the fourth `BANDIT-PRD-004`
+implementation slice: Boundary Cell Movement Gate.
 
 **Active work item:** `BANDIT-092` - Boundary Cell Movement Gate.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 4: blocked on Local Qwen reviewer availability.
 
-**Current next action:** Work Item PM should run plan-mode orchestration for
-`BANDIT-092` before RED evidence.
+**Current next action:** Operator must restore the authorized Local Qwen oMLX
+OpenAI-compatible endpoint, then Work Item PM should rerun
+`node ./bin/bandit.mjs qwen-review BANDIT-092`.
 
-Do not start RED evidence, implementation, review, landing, closeout,
-PRD-005 implementation,
+Do not continue Stage 4 aggregate review, landing, closeout, PRD-005
+implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-Work Item PM plan-mode orchestration is recorded for `BANDIT-092`.
+current Local Qwen Stage 4 evidence is recorded for `BANDIT-092`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -39,9 +41,11 @@ reviewer routing.
 
 ## Required Operator Input
 
-No operator-owned input is required for the next recorded action. The operator
-approved prioritizing `BANDIT-PRD-004` and `BANDIT-PRD-005` before
-`WIL-V0-TRIAL` on 2026-06-10.
+Operator-owned input is required for the next recorded action: restore the
+Local Qwen endpoint configured by `.bandit/reviewers/local-qwen.json` so
+`bin/omlx-chat-completions.mjs` returns chat-completions responses instead of
+`404 Not Found`. The operator approved prioritizing `BANDIT-PRD-004` and
+`BANDIT-PRD-005` before `WIL-V0-TRIAL` on 2026-06-10.
 
 Halt for operator input if a future step would expand landing autonomy, approve
 Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public package
@@ -68,8 +72,24 @@ cannot answer.
   `docs/work/BANDIT-092/coderabbit-formation-review.md`.
 - Aggregate formation review:
   `docs/work/BANDIT-092/formation-review.md`.
+- Orchestration plan:
+  `docs/work/BANDIT-092/orchestration-plan.md`.
+- RED evidence:
+  `docs/work/BANDIT-092/red-evidence.md`.
+- Stage 3 dispatch:
+  `docs/work/BANDIT-092/stage3-dispatch.md`.
+- Writer report:
+  `docs/work/BANDIT-092/writer-report.md`.
+- Implementation evidence:
+  `docs/work/BANDIT-092/implementation-evidence.md`.
+- Stage 3 PM review:
+  `docs/work/BANDIT-092/stage3-pm-review.md`.
+- Stage 4 CodeRabbit review:
+  `docs/work/BANDIT-092/coderabbit-review.md`.
+- Local Qwen blocker evidence:
+  `docs/work/BANDIT-092/local-qwen-blocker.md`.
 - Coordination log: `docs/work/BANDIT-092/coordination-log.jsonl`, current
-  state `formation_approved`.
+  state `blocked`.
 
 `BANDIT-091` closed evidence:
 
