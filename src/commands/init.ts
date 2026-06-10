@@ -28,7 +28,8 @@ import {
 } from "../state/operator-boundary.js";
 import {
   writeDefaultOrchestratorPromptsPolicy,
-  writeDefaultOrchestratorPromptTemplate
+  writeDefaultOrchestratorPromptTemplate,
+  writeDefaultRepoPmPromptTemplate
 } from "../state/orchestrator-prompts.js";
 import { getBanditPaths } from "../state/paths.js";
 import {
@@ -88,6 +89,9 @@ export async function initBandit(repoRoot: string) {
   );
   const orchestratorPromptTemplateExists = await pathExists(
     `${repoRoot}/docs/templates/work-item-pm-orchestrator-prompt.md`
+  );
+  const repoPmPromptTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/repo-pm-formation-prompt.md`
   );
   const riskClassificationPolicyExists = await pathExists(
     paths.riskClassificationPolicy
@@ -193,6 +197,10 @@ export async function initBandit(repoRoot: string) {
 
   if (!orchestratorPromptTemplateExists) {
     await writeDefaultOrchestratorPromptTemplate(repoRoot);
+  }
+
+  if (!repoPmPromptTemplateExists) {
+    await writeDefaultRepoPmPromptTemplate(repoRoot);
   }
 
   if (!riskClassificationPolicyExists) {

@@ -109,7 +109,11 @@ const IMPROVEMENT_FIELDS = [
   "outcome"
 ];
 
-export async function createWorkItem(repoRoot: string, args: string[]) {
+export async function createWorkItem(
+  repoRoot: string,
+  args: string[],
+  options: { explicitId?: string } = {}
+) {
   if (args[0] !== "create" || !args[1] || args.length !== 2) {
     throw new Error("Usage: bandit work-item create <spec-path>");
   }
@@ -121,7 +125,9 @@ export async function createWorkItem(repoRoot: string, args: string[]) {
   const rawSpec = await readSpec(specLocation.absolutePath, specLocation.displayPath);
   await requireStageCapabilityScopeIfPolicyHasStages(repoRoot, rawSpec);
   const spec = validateSpec(rawSpec);
-  const id = await allocateNextWorkItemId(repoRoot, config.workItemPrefix);
+  const id = options.explicitId
+    ? requireExplicitWorkItemId(options.explicitId, config.workItemPrefix)
+    : await allocateNextWorkItemId(repoRoot, config.workItemPrefix);
   const plannedWorkItem = planWorkItem(repoRoot, id, spec);
   const nextGapLedger = spec.bootstrapGap
     ? await planBootstrapGapLink(repoRoot, spec.bootstrapGap, id)
@@ -326,6 +332,19 @@ function readOptionalImprovementString(
   return typeof value === "string" && value.trim().length > 0
     ? value
     : undefined;
+}
+
+function requireExplicitWorkItemId(
+  explicitId: string,
+  workItemPrefix: string
+): string {
+  const pattern = new RegExp(`^${escapeRegExp(workItemPrefix)}-\\d{3,}$`);
+  if (!pattern.test(explicitId)) {
+    throw new Error(
+      `Explicit work item id ${explicitId} must match ${workItemPrefix}-NNN format`
+    );
+  }
+  return explicitId;
 }
 
 async function allocateNextWorkItemId(repoRoot: string, workItemPrefix: string) {

@@ -61,6 +61,81 @@
         "closeout_agent_owns_retrospective": true
       },
       "forbidden_authority_claims": []
+    },
+    {
+      "id": "repo-pm",
+      "prompt_path": "docs/templates/repo-pm-formation-prompt.md",
+      "role": "repo_pm_formation_guidance",
+      "trust_inputs": {
+        "allowed": [
+          "AGENTS.md",
+          "CONTEXT.md",
+          "CLEAN_CODE.md",
+          "docs/verification/STAGE_RUBRICS.md",
+          "docs/roadmap/CURRENT_CONTEXT.md",
+          "docs/roadmap/ROADMAP.md",
+          "STATUS.md",
+          "docs/prds/BANDIT-PRD-005-bandit-work-commands.md",
+          "docs/specs/<ID>.json",
+          ".bandit/bootstrap-gaps.json",
+          ".bandit/reviewers/local-qwen.json"
+        ],
+        "non_authoritative": [
+          "chat_text",
+          "model_memory",
+          "live_harness_state",
+          "provider_dashboard",
+          "work_intake_ledger_priority",
+          "slash_command_text"
+        ]
+      },
+      "authority_boundary": {
+        "prompt_is_authoritative": false,
+        "canonical_sources_replaced": [],
+        "cli_state_mutation": "cli_only"
+      },
+      "required_sections": [
+        "Required Reads",
+        "Context And Boundary",
+        "Target Resolution",
+        "Formation Flow",
+        "Review Evidence",
+        "Operator Input Boundaries",
+        "Stop Conditions",
+        "Forbidden Actions"
+      ],
+      "required_gates": [
+        "stage0_context_readiness",
+        "brief_created",
+        "qwen_formation_review",
+        "coderabbit_formation_review_or_timeout",
+        "aggregate_formation_review",
+        "formation_approved",
+        "stage2_not_started"
+      ],
+      "role_boundaries": {
+        "repo_pm_owns_formation": true,
+        "work_item_pm_owns_orchestration": false,
+        "test_writer_owns_red": false,
+        "implementation_writer_owns_source_only": false,
+        "stage3_writer_can_edit_tests": false,
+        "codex_red_requires_claude_stage3": true,
+        "reviewer_owns_review_evidence": true,
+        "landing_agent_owns_landing_verdict": false,
+        "closeout_agent_owns_retrospective": false
+      },
+      "local_qwen_route": {
+        "profile": ".bandit/reviewers/local-qwen.json",
+        "adapter": "node bin/omlx-chat-completions.mjs",
+        "direct_qwen_cli_allowed": false,
+        "ollama_allowed": false
+      },
+      "forbidden_foreign_sources": [
+        "SeekWins",
+        "WI-00",
+        "Ollama"
+      ],
+      "forbidden_authority_claims": []
     }
   ]
 }
