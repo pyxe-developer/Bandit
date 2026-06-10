@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-088
-source_head: 118d942d602f1dabfff168944a4a356999068f38
+source_head: b021b7f01fda60f934a112cb36ec9348e53196fc
 review_evidence: docs/work/BANDIT-088/review-evidence.md
 tests_status: pass
 clean_code_status: pass
@@ -25,7 +25,7 @@ rationale: BANDIT-088 is safe to land locally as an Installed-Copy Update Path t
   "freshness_state": "current",
   "verdict": "safe-to-land",
   "review_subject_hash": "e5043e25bb5326714fcc582249575398873fb397e41551e1312c16df221f6753",
-  "source_head": "118d942d602f1dabfff168944a4a356999068f38",
+  "source_head": "b021b7f01fda60f934a112cb36ec9348e53196fc",
   "source_artifacts": [
     "docs/work/BANDIT-088/review-evidence.md",
     ".bandit/policy/risk-classification.json",

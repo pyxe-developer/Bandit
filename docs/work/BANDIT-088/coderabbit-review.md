@@ -2,7 +2,7 @@
 
 contract_version: 1
 work_item: BANDIT-088
-source_head: 118d942d602f1dabfff168944a4a356999068f38
+source_head: b021b7f01fda60f934a112cb36ec9348e53196fc
 provider: coderabbit-cli
 review_target: uncommitted
 review_state: timeout

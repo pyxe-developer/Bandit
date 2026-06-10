@@ -4,25 +4,28 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-087` is the last closed work item. Its PR And CI/CD Landing Workflow
-Policy triage chore landed locally and closed with landing action,
-retrospective, improvement disposition, and closeout evidence recorded under
-`docs/work/BANDIT-087/`.
+`BANDIT-088` is the last closed work item. Its Installed-Copy Update Path
+triage chore landed locally and closed with landing action, retrospective,
+improvement disposition, and closeout evidence recorded under
+`docs/work/BANDIT-088/`.
 
 **Active work item:** `BANDIT-088` - Installed-Copy Update Path.
 
-The current stage is Stage 1: formation approved.
+The current stage is Stage 6: closeout complete.
 
-**Current next action:** Work Item PM should run plan-mode orchestration for
-`BANDIT-088` before RED evidence.
+**Current next action:** Repo PM should form the next intake-derived slice
+target, `WIL-V0-TRIAL` - V0 Closeout Claude Code A/B Product-Value Trial, or
+record an explicit Repo PM disposition if formation finds missing
+operator-owned product direction.
 
-Do not start Installed-Copy Update Path implementation, RED evidence, Stage 3
-dispatch, review-loop evidence, landing evidence, retrospective evidence, the
-V0 Closeout Claude Code A/B Product-Value Trial, Trust Verifier cutover,
-merge, push, deploy, hosted service setup, paid reviewer/model routing, public
-benchmark publication, local API work, State Index work, guarded browser action
-execution, PR/CI/CD implementation, or unrelated Phase 8 product work before
-Work Item PM records plan-mode orchestration for `BANDIT-088`.
+Do not start V0 Closeout Claude Code A/B Product-Value Trial implementation,
+RED evidence, Stage 3 dispatch, review-loop evidence, landing evidence,
+retrospective evidence, Trust Verifier cutover, merge, push, deploy, hosted
+service setup, paid reviewer/model routing, public benchmark publication,
+local API work, State Index work, guarded browser action execution, PR/CI/CD
+implementation, installed-copy update-path implementation, or unrelated Phase
+8 product work before Repo PM forms the next slice target or records an
+explicit disposition.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -55,11 +58,25 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-088` Stage 1 formation evidence:
+`BANDIT-088` Stage 6 closeout evidence:
 
 - Source spec:
   `docs/specs/BANDIT-088-installed-copy-update-path.json`.
 - Brief: `docs/work/BANDIT-088/brief.md`.
+- Orchestration plan: `docs/work/BANDIT-088/orchestration-plan.md`.
+- RED evidence: `docs/work/BANDIT-088/red-evidence.md`.
+- Disposition: `docs/work/BANDIT-088/installed-copy-update-path-disposition.md`.
+- Stage 3 evidence: `docs/work/BANDIT-088/implementation-evidence.md`.
+- Writer report: `docs/work/BANDIT-088/writer-report.md`.
+- CodeRabbit provider-timeout evidence:
+  `docs/work/BANDIT-088/coderabbit-review.md`.
+- Local Qwen review: `docs/work/BANDIT-088/local-qwen-review.md`.
+- Aggregate review evidence: `docs/work/BANDIT-088/review-evidence.md`.
+- Landing verdict: `docs/work/BANDIT-088/landing-verdict.md`.
+- Landing action: `docs/work/BANDIT-088/landing-action.md`.
+- Retrospective: `docs/work/BANDIT-088/retrospective.md`.
+- Improvement disposition:
+  `docs/work/BANDIT-088/improvement-disposition.md`.
 - Local Qwen formation review:
   `docs/work/BANDIT-088/qwen-formation-review.md`.
 - CodeRabbit formation review:
@@ -68,13 +85,13 @@ cannot answer.
   `docs/work/BANDIT-088/formation-review.md`.
 - Coordination log: `docs/work/BANDIT-088/coordination-log.jsonl`.
 - Work Intake Ledger: `.bandit/work-intake-ledger.json` records
-  `WIL-INSTALLED-COPY-UPDATE` formed as `BANDIT-088`.
+  `WIL-INSTALLED-COPY-UPDATE` closed as `BANDIT-088`.
 
 No open bootstrap gap remains in `.bandit/bootstrap-gaps.json`.
 
-`BANDIT-088` formation does not implement or approve public publishing, hosted
+`BANDIT-088` closeout does not implement or approve public publishing, hosted
 update services, telemetry, automatic self-update, paid registry setup,
 consumer-repo mutation, installed global skill mutation, automation prompt
-mutation, credential handling, merge, push, deploy, Trust Verifier cutover,
-PR/CI/CD implementation, the V0 Closeout Claude Code A/B Product-Value Trial,
-or unrelated Phase 8 product work.
+mutation, credential handling, merge, push, deploy, old-gate replacement,
+Trust Verifier cutover, PR/CI/CD implementation, the V0 Closeout Claude Code
+A/B Product-Value Trial, or unrelated Phase 8 product work.

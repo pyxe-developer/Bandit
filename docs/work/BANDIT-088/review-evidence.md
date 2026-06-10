@@ -3,7 +3,7 @@
 contract_version: 1
 work_item: BANDIT-088
 stage: Stage 4 Review And Cross-Model Gates
-source_head: 118d942d602f1dabfff168944a4a356999068f38
+source_head: b021b7f01fda60f934a112cb36ec9348e53196fc
 review_subject_hash: e5043e25bb5326714fcc582249575398873fb397e41551e1312c16df221f6753
 review_subject_policy: v1
 verification_state: pass
