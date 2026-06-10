@@ -9,10 +9,11 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate
-  (Stage 5: landing verdict pending)
+  (Stage 6: closeout pending)
 
-**Current next step:** Work Item PM should prepare the Stage 5 landing verdict
-for `BANDIT-092`, then run land-check and local-record landing.
+**Current next step:** Closeout Agent should record the `BANDIT-092`
+retrospective, improvement disposition, roadmap/context/status refresh, and
+final validation.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,7 +25,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-current Stage 5 landing verdict and land-check pass are recorded for
+current Stage 6 closeout artifacts and final validation are recorded for
 `BANDIT-092`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
