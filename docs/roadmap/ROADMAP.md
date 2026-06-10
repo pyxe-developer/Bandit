@@ -4,14 +4,14 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate (closed)
+- `[Slice]` `BANDIT-093` - Roadmap Work Target Resolver (closed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-093` - Roadmap Work Target Resolver
-  (Stage 1: formation_approved)
+  (Stage 6: closed)
 
-**Current next step:** Work Item PM should record plan-mode orchestration for BANDIT-093 before RED evidence.
+**Current next step:** Repo PM should form PRD-005.2 Repo PM Create Controller And Prompt Contract through `formation_approved` and stop before Stage 2.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -23,7 +23,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-Work Item PM plan-mode orchestration for `BANDIT-093` is recorded.
+formation for PRD-005.2 is approved.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -72,6 +72,7 @@ on 2026-06-10.
 
 ## Completed Work
 
+- `BANDIT-093` - Roadmap Work Target Resolver
 - `BANDIT-092` - Boundary Cell Movement Gate
 - `BANDIT-091` - Escape Candidate Workflow
 - `BANDIT-090` - Attribution Join Key Wiring
