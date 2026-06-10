@@ -348,6 +348,13 @@
           "from": "operator_direction",
           "to": "accepted_to_queue",
           "source": "Operator requested BANDIT-PRD-004 implementation before WIL-V0-TRIAL"
+        },
+        {
+          "at": "2026-06-10T04:27:30Z",
+          "actor": "closeout_agent",
+          "from": "accepted_to_queue",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-089 landed PRD-004.1; PRD-004 remains queued for PRD-004.2, PRD-004.3, and PRD-004.4"
         }
       ]
     },

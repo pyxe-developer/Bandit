@@ -4,25 +4,24 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-088` is the last closed work item. `BANDIT-089` is formed,
-formation-approved, plan-mode recorded, RED evidence recorded, Stage 3
-implementation recorded, and Stage 4 review recorded as the first
-`BANDIT-PRD-004` implementation slice.
+`BANDIT-089` is the last closed work item. It landed and closed the first
+`BANDIT-PRD-004` implementation slice: Trust Boundary Evidence Schema
+Contracts.
 
-**Active work item:** `BANDIT-089` - Trust Boundary Evidence Schema Contracts.
+**Active work item:** none.
 
-The current stage is Stage 4: review recorded.
+The current stage is Interstitial: Work-item creation required.
 
-**Current next action:** Write Stage 5 landing verdict for `BANDIT-089`, run
-land-check, and record the local landing action before closeout.
+**Current next action:** Repo PM should form PRD-004.2 Attribution Join Key
+Wiring as the next BANDIT-PRD-004 slice.
 
-Do not start retrospective evidence, PRD-005 implementation,
+Do not start PRD-004.3, PRD-004.4, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before Stage 4
-review evidence is landed for `BANDIT-089`.
+PRD-004.2 formation is recorded and approved.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -58,7 +57,9 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-089` Stage 3 implementation evidence:
+No active work item is currently open.
+
+`BANDIT-089` closed evidence:
 
 - Source spec:
   `docs/specs/BANDIT-089-trust-boundary-evidence-schema-contracts.json`.
@@ -96,8 +97,14 @@ cannot answer.
   and `.bandit/policy/supply-chain-gates/BANDIT-089-supply-chain-gate.json`.
 - Aggregate Stage 4 review evidence:
   `docs/work/BANDIT-089/review-evidence.md`.
+- Landing verdict and local landing action:
+  `docs/work/BANDIT-089/landing-verdict.md` and
+  `docs/work/BANDIT-089/landing-action.md`.
+- Retrospective and improvement disposition:
+  `docs/work/BANDIT-089/retrospective.md` and
+  `docs/work/BANDIT-089/improvement-disposition.md`.
 - Coordination log: `docs/work/BANDIT-089/coordination-log.jsonl`, current
-  state `review_recorded`.
+  state `closed`.
 - PRD decomposition:
   `docs/prds/BANDIT-PRD-004-005-decomposition.md`.
 - Work Intake Ledger: `.bandit/work-intake-ledger.json` records
@@ -112,3 +119,6 @@ evidence contracts and does not approve expanded landing autonomy,
 Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
 implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
 unrelated Phase 8 product work.
+
+The next slice is PRD-004.2 Attribution Join Key Wiring: connect landing,
+model/tool, and escape evidence through the structured attribution tuple.

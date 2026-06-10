@@ -4,15 +4,14 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-088` - Installed-Copy Update Path (closed)
+- `[Slice]` `BANDIT-089` - Trust Boundary Evidence Schema Contracts (closed)
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-089` - Trust Boundary Evidence Schema Contracts
-  (Stage 4: review recorded; Stage 5 landing next)
+- None currently active.
 
-**Current next step:** Write Stage 5 landing verdict for `BANDIT-089`, run
-land-check, and record the local landing action before closeout.
+**Current next step:** Repo PM should form PRD-004.2 Attribution Join Key
+Wiring as the next BANDIT-PRD-004 slice.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -23,8 +22,8 @@ replacement or wrapping, local API or State Index timing, scheduler execution,
 claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, start closeout evidence, or start unrelated Phase 8
-product work before the local landing action is recorded for `BANDIT-089`.
+Installed-Copy Update Path, or start unrelated Phase 8 product work before
+PRD-004.2 formation is recorded and approved.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -32,8 +31,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring, pending
-  `BANDIT-089` landing and closeout.
+- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring: connect landing,
+  model/tool, and escape evidence through the structured attribution tuple.
 
 ## Planned Work
 
@@ -58,8 +57,6 @@ conditions and operator-owned approvals exist. The operator reprioritized
 `BANDIT-PRD-004` and `BANDIT-PRD-005` ahead of the Claude Product-Value Trial
 on 2026-06-10.
 
-- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring: connect landing,
-  model/tool, and escape evidence through the structured attribution tuple.
 - `[Slice]` `TBD` - PRD-004.3 Escape Candidate Workflow: classify escape
   candidates, run Codex PM attribution review, and record confirmed escape or
   no-escape dispositions.
@@ -84,6 +81,7 @@ on 2026-06-10.
 
 ## Completed Work
 
+- `BANDIT-089` - Trust Boundary Evidence Schema Contracts
 - `BANDIT-088` - Installed-Copy Update Path
 - `BANDIT-087` - PR And CI/CD Landing Workflow Policy
 - `BANDIT-086` - Coordination Primitive Completion Triage
