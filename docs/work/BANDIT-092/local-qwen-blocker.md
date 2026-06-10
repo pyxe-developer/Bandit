@@ -1,4 +1,4 @@
-# Local Qwen Blocker - BANDIT-092
+# Local Qwen Blocker Resolution - BANDIT-092
 
 contract_version: 1
 work_item: BANDIT-092
@@ -6,23 +6,28 @@ stage: Stage 4 review
 author: work_item_pm
 timestamp: 2026-06-10T19:07:02Z
 source_head: 1f81cd5e7a6c222724504b400186751f4fe6ae9e
-verdict: blocker
-blocked_owner: operator
-operator_input_status: operator_input_required
+verdict: resolved
+blocked_owner: none
+operator_input_status: none_required
+resolved_at: 2026-06-10T20:04:00Z
+resolution_source_head: d99aad8e4abea2770c7d8595389d3d76402ca986
 
 ## Summary
 
-Stage 4 is blocked because the required Local Qwen reviewer route is
-unavailable. The Work Item PM must not substitute another reviewer path while
-the authorized `.bandit/reviewers/local-qwen.json` route is down.
+Stage 4 was previously blocked because the required Local Qwen reviewer route
+returned 404 through the authorized `.bandit/reviewers/local-qwen.json` path.
+The operator later identified the correct oMLX OpenAI-compatible endpoint as
+`http://127.0.0.1:8001/v1`; commit
+`d99aad8e4abea2770c7d8595389d3d76402ca986` updated the repo-local reviewer
+tools to that endpoint.
 
-## Command
+## Historical Failing Command
 
 ```sh
 node ./bin/bandit.mjs qwen-review BANDIT-092
 ```
 
-## Result
+## Historical Result
 
 The command exited with status `1`.
 
@@ -38,6 +43,16 @@ Error: oMLX chat completions failed with 404: {"detail":"Not Found"}
 Node.js v22.22.3
 ```
 
+## Resolution Evidence
+
+- `curl http://127.0.0.1:8001/v1/models` returned HTTP `200`.
+- `printf ... | timeout 90 node bin/omlx-chat-completions.mjs` returned
+  `{"reply":"OK"}` through the authorized adapter.
+- `.bandit/reviewers/local-qwen.json`,
+  `.bandit/reviewers/mastracode-local-qwen.settings.json`,
+  `bin/omlx-chat-completions.mjs`, and `src/state/reviewer-profiles.ts` now
+  reference `http://127.0.0.1:8001/v1`.
+
 ## Evidence Already Recorded
 
 - `docs/work/BANDIT-092/coderabbit-review.md` records a terminal CodeRabbit
@@ -47,13 +62,11 @@ Node.js v22.22.3
 
 ## Required Operator Input
 
-Restore the authorized Local Qwen oMLX OpenAI-compatible endpoint configured in
-`.bandit/reviewers/local-qwen.json` so `bin/omlx-chat-completions.mjs` can
-successfully call the chat-completions route at `http://127.0.0.1:8001/v1`.
+None. The Local Qwen endpoint is reachable through the authorized adapter.
 
 ## Resume Condition
 
-Rerun:
+Rerun from a clean worktree:
 
 ```sh
 node ./bin/bandit.mjs qwen-review BANDIT-092
