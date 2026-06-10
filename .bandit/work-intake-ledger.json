@@ -219,9 +219,10 @@
       "rationale": "Migrate existing FOLLOWUPS.md source metadata into the repo-native intake lane before Claude bakeoff work.",
       "suggested_work_item_type": "gap",
       "depends_on": [],
-      "scope_summary": "Installed-Copy Update Path remains a proposal until Repo PM forms a work item.",
-      "risk_product_scope_status": "proposal only; not claimable, not executable, and requires normal future formation",
-      "intake_outcome": "accepted_to_queue",
+      "scope_summary": "Installed-Copy Update Path is formed as BANDIT-088 with Stage 1 formation approved.",
+      "risk_product_scope_status": "formed as BANDIT-088 with no public publishing, hosted update service, telemetry, automatic self-update, paid registry setup, consumer-repo mutation, installed global skill mutation, automation prompt mutation, merge, push, deploy, Trust Verifier cutover, or unrelated Phase 8 work authorized",
+      "intake_outcome": "formed",
+      "formed_work_item": "BANDIT-088",
       "claimable": false,
       "transition_history": [
         {
@@ -230,6 +231,13 @@
           "from": "source_metadata",
           "to": "accepted_to_queue",
           "source": "BANDIT-082 migration"
+        },
+        {
+          "at": "2026-06-10T01:40:53Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "formed",
+          "source": "BANDIT-088 formation approval"
         }
       ]
     },

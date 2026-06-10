@@ -332,3 +332,4 @@
 {"type":"work_item_created","work_item":"BANDIT-085","message":"Created work item BANDIT-085 from docs/specs/BANDIT-085-repo-wide-transition-index-decision.json"}
 {"type":"work_item_created","work_item":"BANDIT-086","message":"Created work item BANDIT-086 from docs/specs/BANDIT-086-coordination-primitive-completion-triage.json"}
 {"type":"work_item_created","work_item":"BANDIT-087","message":"Created work item BANDIT-087 from docs/specs/BANDIT-087-pr-and-cicd-landing-workflow-policy.json"}
+{"type":"work_item_created","work_item":"BANDIT-088","message":"Created work item BANDIT-088 from docs/specs/BANDIT-088-installed-copy-update-path.json"}

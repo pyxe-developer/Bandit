@@ -8,23 +8,22 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-087` - PR And CI/CD Landing Workflow Policy
-  (closed anchor)
+- `[Gap]` `BANDIT-088` - Installed-Copy Update Path
+  (Stage 1: formation approved)
 
-**Current next step:** Repo PM should form the next intake-derived gap work
-item for `WIL-INSTALLED-COPY-UPDATE`, Installed-Copy Update Path, before the V0
-Closeout Claude Code A/B Product-Value Trial or unrelated Phase 8 work.
+**Current next step:** Work Item PM should run plan-mode orchestration for
+`BANDIT-088` before RED evidence.
 
-Do not approve PR/CI/CD policy, remote publication, GitHub credential usage,
-branch-protection changes, CI provider configuration, merge/push/deploy
-authority, deployment/canary behavior, hosted services, public benchmark
-publication, paid reviewer/model routing, Trust Verifier cutover, old-gate
-replacement or wrapping, local API or State Index timing, scheduler execution,
-claim/worktree lifecycle behavior, guarded browser actions, generate role
-input or execution packets for unrelated work, restart Pi/Aperture runtime
-work, form the V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, or start unrelated Phase 8 product work before Repo
-PM forms Installed-Copy Update Path through normal Stage 1 formation.
+Do not approve public package publishing, paid registry setup, hosted update
+services, telemetry, automatic self-update, credential handling, external repo
+mutation, installed global skill mutation, automation prompt mutation,
+merge/push/deploy authority, Trust Verifier cutover, old-gate replacement or
+wrapping, local API or State Index timing, scheduler execution, claim/worktree
+lifecycle behavior, guarded browser actions, generate role input or execution
+packets for unrelated work, restart Pi/Aperture runtime work, form the V0
+Closeout Claude Code A/B Product-Value Trial, implement Installed-Copy Update
+Path, or start unrelated Phase 8 product work before Work Item PM records
+plan-mode orchestration for `BANDIT-088`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -32,8 +31,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Gap]` `TBD` - Installed-Copy Update Path, pending after `BANDIT-087`
-  closeout or explicit disposition.
+- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial, pending
+  after `BANDIT-088` closeout or explicit disposition.
 
 ## Planned Work
 
@@ -52,13 +51,10 @@ repo-wide transition indexing deferred until named trigger conditions exist.
 primitive implementation deferred until named trigger conditions exist.
 `WIL-PR-CICD-LANDING` is closed as `BANDIT-087` with PR/CI/CD landing
 implementation deferred until named trigger conditions and operator-owned
-approvals exist. Remaining entries stay proposal-only until Repo PM forms them
-through normal Stage 1 formation or records explicit dispositions; the Claude
-Product-Value Trial stays deferred behind this lane.
+approvals exist. `WIL-INSTALLED-COPY-UPDATE` is formed as `BANDIT-088` with
+Stage 1 formation approved. The Claude Product-Value Trial stays deferred
+behind this lane.
 
-- `[Gap]` `TBD` - Installed-Copy Update Path: define preview, apply, verify,
-  and rollback behavior for installed Bandit skills, automation prompts, and
-  repo integration files.
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
   the same PRD in Bandit and no-Bandit repos after the pre-Claude-bakeoff
   follow-up queue is formed or dispositioned; no statistical or public

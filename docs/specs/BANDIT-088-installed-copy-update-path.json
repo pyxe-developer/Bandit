@@ -1,0 +1,186 @@
+{
+  "kind": "chore",
+  "title": "Installed-Copy Update Path",
+  "status": "Brief Created",
+  "non_product_work": "Triage the intake-derived WIL-INSTALLED-COPY-UPDATE proposal by reviewing Bandit's current private install/update channel, installed-package seeding behavior, skill lifecycle contract, installed skill drift evidence, and follow-up source material, then record a bounded update-path recommendation, explicit deferred disposition, no-action decision, or operator-owned approval question without publishing, self-updating, mutating consumer repositories, or pushing global skill and automation prompt changes in this work item.",
+  "origin": "CURRENT_CONTEXT.md, ROADMAP.md, .bandit/work-intake-ledger.json, FOLLOWUPS.md, README.md, .bandit/policy/private-install-update-channel.json, .bandit/policy/skill-lifecycle-contracts.json, docs/evaluation/skills/bandit-installed-skill-drift.md, docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json, and BANDIT-087 closeout evidence identify WIL-INSTALLED-COPY-UPDATE as the next intake-derived gap after BANDIT-087 landed and closed. FOLLOWUPS.md records the source question from the 2026-05-25 post-bootstrap parallel workstreams and global PM heartbeat skill discussion: how should Bandit publish or push updates to installed Bandit skills, automation prompts, and repo integration files so global workflow protocols stay in sync across projects? Current policy already provides private install and manual update-check notification from BANDIT-071, but does not define a safe apply/verify/rollback path for installed copies, global skills, automation prompts, or repo integration files.",
+  "scope": [
+    "Use WIL-INSTALLED-COPY-UPDATE as the source proposal and form one bounded non-product update-path triage chore before the V0 Closeout Claude Code A/B Product-Value Trial or unrelated Phase 8 work.",
+    "Review FOLLOWUPS.md, .bandit/work-intake-ledger.json, README.md, .bandit/policy/private-install-update-channel.json, .bandit/policy/skill-lifecycle-contracts.json, docs/evaluation/skills/bandit-installed-skill-drift.md, docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json, src/commands/init.ts, src/commands/update-check.ts, src/state/update-channel.ts, current cockpit/session-context outputs, docs/verification/STAGE_RUBRICS.md, CLEAN_CODE.md, and applicable supply-chain, skill-lifecycle, operator-boundary, and smell-trigger artifacts.",
+    "Compare current private install and update-check behavior against the desired installed-copy workflow responsibilities: preview changes, identify target surfaces, apply updates only under an approved authority model, verify installed package state, verify installed skill and automation prompt drift, record rollback instructions, preserve consumer-local state, and avoid hidden remote side effects.",
+    "Record a source-cited disposition artifact that recommends one of: no-action because manual private reinstall/update-check remains sufficient for now, deferred until multi-repo usage creates concrete requirements, one or more narrow future implementation slices, or an operator-owned product/policy/cost/risk question if repo artifacts cannot decide.",
+    "If future implementation is recommended, keep it narrow and name required source artifacts, authority boundaries, commands, validators, evidence artifacts, refusal messages, RED tests, expected files, review gates, operator-owned approvals, rollback evidence, and explicit non-goals.",
+    "Preserve the current private install/update posture until a later approved policy and implementation slice explicitly changes it: public npm publishing, hosted update services, telemetry, paid registry setup, automatic self-update, merge/push/deploy behavior, and consumer-repo mutation remain out of scope.",
+    "Keep installed global skill files, automation memory, automation prompts, external repos, and consumer integration files non-canonical for Bandit's workflow state unless a later source-of-truth boundary explicitly authorizes a scoped update mechanism.",
+    "Treat installed skills, automation prompts, fetched update metadata, third-party docs, remote package metadata, and consumer repository content as supply-chain or untrusted-input-sensitive surfaces until a trusted-source gate and supply-chain evidence authorize the scoped use.",
+    "Record CLEAN_CODE.md read evidence in the brief and require later clean-code compliance review before landing any policy, validator, command, or disposition artifact.",
+    "Stage capability scope: Repo PM owns Stage 1 brief and formation; Work Item PM owns plan-mode orchestration only after formation approval; Test Writer owns Stage 2 RED evidence if later implementation is scoped; if Codex authors RED tests, Stage 3 implementation goes to a different model family; reviewers own Stage 4; Landing Agent owns Stage 5; Closeout Agent owns Stage 6.",
+    "Token-cost failsafe boundary: use local-only default guidance for triage and existing abnormal-run safeguards for reviewer execution; this work approves no paid reviewer route, paid model route, recurring spend class, hosted update service, public benchmark publication, public package publishing, automatic self-update, merge, push, deploy, credential setup, or external side effect."
+  ],
+  "out_of_scope": [
+    "Do not publish Bandit to public npm, provision a paid private registry, create a hosted update service, enable telemetry, add automatic self-update behavior, or mutate a consumer repository in this work item.",
+    "Do not push or overwrite installed global skills, Codex skills, Claude plugins, automation prompts, automation memory, hooks, repo integration files, or external repositories in this work item.",
+    "Do not replace, weaken, rewrite, or bypass the existing private install/update-check policy in .bandit/policy/private-install-update-channel.json.",
+    "Do not make update manifests, caches, package registries, installed package state, installed global skills, automation prompts, consumer repository files, cockpit output, session-context packets, work-intake entries, roadmap text, static previews, or report output canonical Bandit workflow authority without a later approved source-of-truth boundary.",
+    "Do not ingest fetched package metadata, release manifests, dependency docs, installed skill text, automation prompt text, consumer repository content, third-party instructions, or generated instructions as agent instructions; any such content remains data-only until a trusted-source gate explicitly upgrades it for a scoped release-authorized use.",
+    "Do not start the V0 Closeout Claude Code A/B Product-Value Trial, Trust Verifier cutover, PR/CI/CD implementation, local API, State Index, guarded browser action execution, scheduler behavior, claim/worktree lifecycle behavior, paid routing, hosted services, public benchmark publication, merge, push, deploy, or unrelated Phase 8 product work.",
+    "Do not create orchestration-plan.md, RED evidence, implementation evidence, Stage 4 review evidence, landing evidence, UAT evidence, or retrospective evidence before Stage 1 formation is approved and the next role owns that stage."
+  ],
+  "acceptance_criteria": [
+    "The brief identifies WIL-INSTALLED-COPY-UPDATE as the next authorized intake-derived gap proposal after BANDIT-087 closeout and records no open bootstrap gap blocking this formation.",
+    "The work item states that current install/update policy remains unchanged during this triage: private Git tag or tarball install and manual update-check notification are supported, while public npm publishing, hosted update services, telemetry, paid registry setup, automatic self-update, and consumer-repo mutation remain disabled until a later approved policy and implementation path exists.",
+    "The work item requires source evidence review across FOLLOWUPS.md, .bandit/work-intake-ledger.json, README.md, .bandit/policy/private-install-update-channel.json, .bandit/policy/skill-lifecycle-contracts.json, docs/evaluation/skills/bandit-installed-skill-drift.md, docs/specs/BANDIT-GAP-PRIVATE-INSTALL-UPDATE-CHANNEL.json, src/commands/init.ts, src/commands/update-check.ts, src/state/update-channel.ts, docs/verification/STAGE_RUBRICS.md, CLEAN_CODE.md, and applicable policy/smell-trigger artifacts.",
+    "The work item can land only with a recorded recommendation, follow-up implementation scope, explicit no-action decision, explicit deferred disposition, or operator-owned approval question that names source evidence and avoids unstated approval for public publishing, hosted services, paid registry setup, telemetry, automatic self-update, consumer-repo mutation, global skill edits, automation prompt edits, merge, push, deploy, or Trust Verifier cutover.",
+    "If future implementation is recommended, the recommendation must identify exact authority boundaries for preview, apply, verify, rollback, update manifest trust, consumer-local state preservation, installed skill drift checks, automation prompt drift checks, repo integration file updates, supply-chain evidence, input quarantine, refusal paths, expected tests, review gates, expected files, and explicit non-goals.",
+    "If future implementation is not justified, the work item must record why manual private reinstall and update-check notification remain sufficient for current Bandit bootstrap needs and which trigger conditions would reopen installed-copy update-path work.",
+    "If operator-owned policy, public publishing, paid registry, hosted service, telemetry, automatic self-update, credential, external repo mutation, merge/push/deploy, cost/risk, Trust Verifier, or product-direction approval is needed, the work item must halt at that operator-owned gate and state the exact decision needed instead of guessing.",
+    "No Stage 1 artifact approves or implements public package publishing, hosted update service setup, paid registry setup, telemetry, automatic self-update, credential handling, global installed skill mutation, automation prompt mutation, consumer-repo file mutation, merge, push, deploy, public benchmark publication, or Trust Verifier cutover.",
+    "The work item preserves Permanent Test Ownership Boundary and Bootstrap Model-Family Separation for any later RED/implementation stages.",
+    "Stage 4 review must use Local Qwen only through .bandit/reviewers/local-qwen.json via node bin/omlx-chat-completions.mjs, CodeRabbit with a full 10-minute formation/review timeout allowance where applicable, or honest provider-timeout/refusal evidence without claiming a pass.",
+    "Layered risk-classification, supply-chain, input-quarantine, skill-lifecycle, and operator-boundary evidence are required before landing if later implementation touches package distribution, package manifests, lockfiles, package scripts, installed skills, automation prompts, hooks, templates, external tool install paths, fetched update metadata, consumer-repo integration files, CI/release workflow, merge/push/deploy behavior, or release-authorized update automation.",
+    "The work item does not start the V0 Closeout Claude Code A/B Product-Value Trial, Trust Verifier cutover, PR/CI/CD implementation, local API, State Index, guarded browser action execution, scheduler behavior, claim/worktree lifecycle, paid routing, hosted services, public benchmark publication, merge, push, deploy, or unrelated Phase 8 product work."
+  ],
+  "verification_plan": [
+    "Run Stage 1 formation validation after brief creation, brief repair, Local Qwen formation review, CodeRabbit formation review or provider-timeout evidence, aggregate formation review, and formation_approved coordination evidence.",
+    "For later Stage 2, write RED or disposition evidence proving the installed-copy update-path decision cites source artifacts, preserves current private install/update-check boundaries, and fails closed on unstated update apply, global skill edit, automation prompt edit, public publishing, hosted service, telemetry, credential, merge, push, or deploy approval.",
+    "For later Stage 2, write tests for any proposed update-path policy artifact, preview command, apply command, verification command, rollback artifact, install-manifest validator, skill-drift validator, automation-prompt drift validator, repo integration update validator, supply-chain rule, input-quarantine rule, operator-boundary rule, or disposition artifact before implementation; if no implementation is recommended, record explicit no-action or deferred disposition evidence instead.",
+    "Run focused update-channel tests if implementation touches update-check, update-channel state, update manifests, update-cache behavior, status rendering, or alert behavior.",
+    "Run focused init/distribution tests if implementation touches installed-package seeding, package contents, templates, default policy files, bin behavior, or fresh consumer repo initialization.",
+    "Run focused skill-lifecycle tests if implementation touches installed skill drift evidence, skill lifecycle contracts, load-bearing skill policy, skill install/update validation, or skill rollback criteria.",
+    "Run focused supply-chain/input-quarantine/operator-boundary tests if implementation touches package manifests, lockfiles, package-manager scripts, external tool installs, fetched manifests, installed skill text, automation prompt text, hooks, consumer repository files, CI/release workflow, or any external content ingestion.",
+    "Run work-intake validation/listing tests if this work item changes intake ledger state or future work-intake routing.",
+    "Run npm run typecheck if any source code changes are introduced.",
+    "Run npm test if implementation touches shared state, command routing, validators, artifact renderers, init, update-channel, skill lifecycle, supply-chain policy, input quarantine, operator boundary, work intake, cockpit/session-context projection, package metadata, or package scripts.",
+    "Run npm run bandit -- validate.",
+    "Run node ./bin/bandit.mjs work-intake validate --json.",
+    "Run node ./bin/bandit.mjs cockpit status --json.",
+    "Run node ./bin/bandit.mjs session-context current --json.",
+    "Run node ./bin/bandit.mjs coordination validate <ID> after coordination evidence exists.",
+    "Run git diff --check.",
+    "Before landing in later stages, run Local Qwen through the authorized MLX adapter route, CodeRabbit or honest timeout/refusal evidence, review-subject hash, risk classification, supply-chain gate, input-quarantine, skill-lifecycle, and operator-boundary validation where applicable, landing verdict, land-check, local-record landing action unless a later approved policy changes the supported action, retrospective, and improvement/no-action disposition evidence."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-06-10 before creating this source spec. The chore must keep installed-copy update-path review, decision recording, follow-up scoping, no-action disposition, and any later validator or command design small, explicit, testable, and separated from package distribution authority, installed global skill mutation, automation prompt mutation, consumer-repo mutation, credential handling, hosted services, merge/push/deploy authority, cockpit projections, and product authority.",
+  "stage_rubric_checklist": [
+    "Stage 0: Context Readiness | pass | BANDIT-087 is landed and closed with landing verdict, landing action, retrospective, improvement disposition, work-intake closeout, and synchronized current context, roadmap, and status; no open bootstrap gap blocks formation.",
+    "Stage 1: Work-Item Brief And Spec | pass | This spec defines non-product work, origin/source authority, bounded scope, out-of-scope boundaries, acceptance criteria, verification plan, CLEAN_CODE.md read evidence, no-gap disposition, expected files, required evidence, role boundaries, operator-input status, source-of-truth boundary, stage capability scope, token-cost failsafe, forbidden actions, first implementation order, and smell triggers.",
+    "Stage 2: Test Design And RED Evidence | required next | Test Writer must produce RED or disposition evidence before any implementation and cover source-cited installed-copy update-path triage, current private install/update-check preservation, update apply authority, installed skill and automation prompt drift handling, input-quarantine/supply-chain boundaries, and fail-closed unstated external mutation approval.",
+    "Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit any Test Writer-owned surface.",
+    "Stage 4: Review And Cross-Model Gates | required later | Local Qwen through the MLX adapter route, CodeRabbit or honest provider-timeout/refusal evidence, aggregate review, review-subject hash, and risk/supply-chain/input-quarantine/skill-lifecycle/operator-boundary gates where applicable are required before landing.",
+    "Stage 5: Landing And UAT | required later | Landing verdict, land-check, auto-land-check when eligible, and local-record landing evidence are required; product UAT is not applicable unless later implementation changes an operator-facing product surface.",
+    "Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, intake-ledger closeout, current context, roadmap, and STATUS updates are required before the V0 trial or any next item begins."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gap blocks this intake-derived update-path triage chore.",
+    "WIL-INSTALLED-COPY-UPDATE is not a bootstrap-gap ledger entry; it is an accepted Work Intake Ledger proposal being formed through normal Stage 1.",
+    "Live CodeRabbit may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence and do not claim a CodeRabbit pass.",
+    "Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at `http://127.0.0.1:8000/v1`. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another route.",
+    "Public npm publishing, paid registry setup, hosted update services, telemetry, automatic self-update, global installed skill edits, automation prompt edits, consumer-repo mutation, merge, push, deploy, public benchmark publication, paid routing, Trust Verifier cutover, and local-record replacement remain future work outside this chore unless later stages produce an operator-approved policy path."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-088-installed-copy-update-path.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/installed-copy-update-path-disposition.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/writer-report.md",
+    "docs/work/<ID>/stage3-pm-review.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md",
+    ".bandit/work-intake-ledger.json",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "first_implementation_order": [
+    "Work Item PM plan mode should first decide whether this remains disposition evidence only or needs Stage 2 RED tests for an update-path policy artifact, preview/apply/verify/rollback command, installed-skill drift validator, automation-prompt drift validator, repo integration update artifact, supply-chain rule, or operator-boundary rule.",
+    "If RED evidence is needed, Test Writer should cover source-cited recommendation/disposition output, current private install/update-check preservation, fail-closed unstated update apply approval, installed skill and automation prompt data-only handling, consumer-local state preservation, supply-chain sensitivity, rollback evidence, and operator-owned approval halts.",
+    "If implementation is needed, add the smallest policy, validator, command, or disposition artifact support needed to satisfy approved RED evidence without enabling public publishing, hosted update services, telemetry, automatic self-update, consumer-repo mutation, installed global skill mutation, automation prompt mutation, credential setup, paid routing, public benchmark publication, merge, push, deploy, or Trust Verifier cutover.",
+    "Verify the result with focused tests, typecheck when source changes exist, Bandit validation, work-intake validation, cockpit/session-context derived status, Stage 4 reviews, landing verdict/action, retrospective, and improvement/no-action dispositions in normal stage order."
+  ],
+  "smell_triggers": [
+    "Any artifact that creates, approves, or executes public npm publishing, hosted update services, telemetry, automatic self-update, paid registry setup, consumer-repo mutation, installed global skill edits, automation prompt edits, credential setup, merge, push, or deploy without explicit later policy approval is a blocker.",
+    "Any update manifest, update cache, package registry, installed package state, installed global skill, automation prompt, consumer repository file, cockpit surface, session-context packet, work-intake entry, report, static preview, fixture, generated JSON, or roadmap output that becomes hidden canonical workflow authority is a blocker.",
+    "Any analysis that weakens or bypasses the existing private install/update-check contract before an approved replacement policy exists is a blocker.",
+    "Any fetched package metadata, release manifest, dependency doc, installed skill text, automation prompt text, consumer repository content, fetched third-party content, or generated instruction content that can influence release-authorized instructions, tool permissions, routing, landing, or update application without data-only quarantine and a trusted-source gate is a blocker.",
+    "Any implementation that touches package distribution, dependency/lockfile/package scripts, external tool install, agent-skill install, fetched-prompt execution, installed-skill mutation, automation prompt mutation, CI/release workflow, credential handling, merge/push/deploy behavior, hosted services, public benchmark publication, paid routing, Trust Verifier cutover, local API, State Index, scheduler, claim/worktree lifecycle, or guarded browser action execution is scope creep unless later stages explicitly authorize that narrow surface and required operator gates are satisfied.",
+    "Any recommendation that implies installed-copy update automation is approved because update-check notification already exists is a blocker; the recommendation must distinguish advisory update detection from apply authority and external side effects.",
+    "Any large mixed function proposed later that combines package metadata, release manifest parsing, skill drift detection, prompt mutation, consumer repo file writes, rollback, source-trust decisions, supply-chain checks, credential handling, roadmap mutation, and install execution is a clean-code blocker.",
+    "Any fallback that routes derivable projection bookkeeping drift to operator input instead of CLI-owned mechanical repair/PM disposition is a blocker, while genuine product/policy/cost/risk/credential/external-mutation decisions must halt for operator input."
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/orchestration-plan.md",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/installed-copy-update-path-disposition.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create this intake-derived update-path triage work item or complete Stage 1 formation because CURRENT_CONTEXT.md, ROADMAP.md, .bandit/work-intake-ledger.json, FOLLOWUPS.md, README.md, .bandit/policy/private-install-update-channel.json, CLEAN_CODE.md, and Stage Rubrics identify a bounded evidence-review and disposition scope. Halt for operator input if later work would approve public package publishing, approve paid registry setup, approve hosted update services, approve telemetry, approve automatic self-update, approve credential handling, approve external repo mutation, approve installed global skill mutation, approve automation prompt mutation, approve merge/push/deploy authority, approve Trust Verifier cutover, replace or wrap old gates, change product or UAT direction, approve business tradeoffs, approve explicit cost/risk posture, or resolve genuinely ambiguous scope.",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "work_item_pm_plan_mode",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "work_item_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent",
+      "operator"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review"
+    ],
+    "forbidden_actions": [
+      "Do not write RED evidence before Stage 1 brief, formation review, and formation_approved transition evidence exist.",
+      "Do not run Work Item PM execution before formation_approved.",
+      "Do not let Stage 3 Writer edit tests, test helpers, fixtures, RED evidence, acceptance mappings, formation evidence, review evidence, landing evidence, UAT evidence, retrospective evidence, or policy acceptance criteria.",
+      "Do not implement or approve public npm publishing, hosted update services, telemetry, automatic self-update, paid registry setup, consumer-repo mutation, installed global skill mutation, automation prompt mutation, credential setup, merge, push, deploy, Trust Verifier cutover, local API, State Index, scheduler behavior, claim/worktree lifecycle, guarded browser action execution, or unrelated Phase 8 product work in this update-path triage chore.",
+      "Do not replace private install/update-check as the current install channel or let external package/update metadata become canonical workflow authority."
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "Stage 1 Repo PM formation uses local-only default guidance.",
+      "Stage 2 RED evidence and Stage 3 implementation use existing abnormal-run soft budget guidance if implementation becomes authorized.",
+      "Reviewer runs may be long-running or provider-dependent and must record continuation, timeout, or refusal evidence honestly."
+    ],
+    "provider_pricing_evidence": [
+      "No paid provider-pricing evidence is approved by this brief.",
+      "Any paid reviewer, paid model, recurring paid route, paid registry, hosted service, public package publishing, public benchmark publication, merge, push, deploy, external service, or recurring high-token policy remains blocked without separate approval."
+    ],
+    "review_timeout_policy": "CodeRabbit formation/review should receive the prompt-required full 10-minute timeout allowance when invoked; Local Qwen uses the configured MLX adapter timeout and must fail closed if unavailable."
+  }
+}
