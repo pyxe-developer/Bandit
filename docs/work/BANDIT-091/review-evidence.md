@@ -4,7 +4,7 @@ contract_version: 1
 work_item: BANDIT-091
 stage: Stage 4 Review And Cross-Model Gates
 source_head: 9c2f33173f1545ec3bab5bd6520c6854a01300be
-review_subject_hash: 18d1b300a7fcbdf996850b695022cffba79b785ffa4cb216103f868cdb996ecb
+review_subject_hash: 40ee40b89c850565f11e9a1ce8116d151f2fd41a6635c1d9061542f887e67ca6
 review_subject_policy: v1
 verification_state: pass
 verification_evidence:
@@ -12,9 +12,9 @@ verification_evidence:
   - docs/work/BANDIT-091/local-qwen-review.md records authorized Local Qwen review through .bandit/reviewers/local-qwen.json via node bin/omlx-chat-completions.mjs with reviewer_verdict pass and no findings.
   - .bandit/policy/risk-classifications/BANDIT-091-risk-classification.json records selected_review_depth pre_pr_coderabbit_plus_qwen, operator_supervision not required, and repo-native local-record landing preflight eligibility without claiming a PRD-004 auto_land authority expansion.
   - .bandit/policy/supply-chain-gates/BANDIT-091-supply-chain-gate.json records no touched dependency, lockfile, package-manager script, CI/release workflow, agent skill, fetched prompt, external tool install, executable generated content, external side-effecting automation, unknown supply-chain surface, hosted service, telemetry, credential, merge, push, or deploy behavior.
-  - node ./bin/bandit.mjs risk-classification validate --json passed with status pass.
-  - node ./bin/bandit.mjs supply-chain-gate validate --json passed with status pass.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-091 produced 18d1b300a7fcbdf996850b695022cffba79b785ffa4cb216103f868cdb996ecb from review-subject policy v1 after BANDIT-091 risk and supply-chain evidence were committed.
+  - node ./bin/bandit.mjs risk-classification validate --json passed with status pass and reported BANDIT-091:not_required plus BANDIT-091:eligible after the release-authorized decision registry was refreshed.
+  - node ./bin/bandit.mjs supply-chain-gate validate --json passed with status pass and reported BANDIT-091:low, BANDIT-091:not_required, and BANDIT-091:eligible after the release-authorized decision registry was refreshed.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-091 produced 40ee40b89c850565f11e9a1ce8116d151f2fd41a6635c1d9061542f887e67ca6 from review-subject policy v1 after BANDIT-091 risk and supply-chain release-authorized decision registry entries were refreshed.
 coderabbit_state: bootstrap_gap
 coderabbit_replacement_evidence:
   - docs/work/BANDIT-091/coderabbit-review.md records provider_timeout after the required 600-second run; no CodeRabbit pass or findings payload is claimed.
@@ -42,14 +42,15 @@ bootstrap_gaps:
 `node ./bin/bandit.mjs review-subject-hash BANDIT-091` returned:
 
 ```text
-Review subject hash: 18d1b300a7fcbdf996850b695022cffba79b785ffa4cb216103f868cdb996ecb
+Review subject hash: 40ee40b89c850565f11e9a1ce8116d151f2fd41a6635c1d9061542f887e67ca6
 Review subject policy: v1
 ```
 
-The `BANDIT-091` risk and supply-chain evidence was committed before this hash
-was computed so the review subject includes the Stage 2 RED evidence, Stage 3
-implementation evidence, source, tests, templates, Local Qwen evidence, and
-policy gate artifacts covered by review-subject policy v1.
+The `BANDIT-091` risk and supply-chain release-authorized decision registry
+entries were refreshed before this hash was computed so the review subject
+includes the Stage 2 RED evidence, Stage 3 implementation evidence, source,
+tests, templates, Local Qwen evidence, and policy gate artifacts covered by
+review-subject policy v1.
 
 ## CodeRabbit
 
@@ -113,7 +114,8 @@ Command:
 node ./bin/bandit.mjs risk-classification validate --json
 ```
 
-Result: `status: pass`.
+Result: `status: pass`; `BANDIT-091:not_required`; `BANDIT-091:eligible` for
+repo-native local-record landing preflight.
 
 This eligibility applies only to the existing repo-native local-record landing
 preflight. The landing verdict must not claim PRD-004 `auto_land` autonomy and
@@ -135,7 +137,8 @@ Command:
 node ./bin/bandit.mjs supply-chain-gate validate --json
 ```
 
-Result: `status: pass`.
+Result: `status: pass`; `BANDIT-091:low`; `BANDIT-091:not_required`;
+`BANDIT-091:eligible`.
 
 ## Clean-Code Evaluation
 

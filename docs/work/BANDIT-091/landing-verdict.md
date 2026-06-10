@@ -16,7 +16,7 @@ landing_agent_state: pass
 landing_agent_replacement_evidence:
   - none
 final_verdict: safe-to-land
-rationale: BANDIT-091 is safe to land locally as the PRD-004.3 Escape Candidate Workflow slice. Aggregate Stage 4 review evidence records review_subject_hash 18d1b300a7fcbdf996850b695022cffba79b785ffa4cb216103f868cdb996ecb, CodeRabbit provider-timeout replacement evidence without claiming a pass, authorized Local Qwen pass with no findings, risk classification pass with repo-native local-record landing preflight eligibility and no PRD-004 auto_land authority expansion, supply-chain gate pass, coordination validation, and no required UAT or operator input. The implementation adds fail-closed optional Escape Candidate and Boundary Escape Disposition artifact validation, template support, aggregate validate integration, and regression tests while preserving ordinary safe-to-land bootstrap flows when no escape workflow evidence exists. It adds no expanded landing autonomy, Notify-And-Revert execution, Auto-Landing Scope, escape classification authority, boundary-cell movement, PRD-005 controller work, V0 Closeout Claude Code A/B Product-Value Trial work, Trust Verifier cutover, attribution gateway work, cockpit UI, local API, State Index, hosted service, telemetry, public benchmark publication, paid routing, merge, push, deploy, credential handling, dependency, lockfile, package-script, CI/release workflow, external repo mutation, or unrelated Phase 8 work.
+rationale: BANDIT-091 is safe to land locally as the PRD-004.3 Escape Candidate Workflow slice. Aggregate Stage 4 review evidence records review_subject_hash 40ee40b89c850565f11e9a1ce8116d151f2fd41a6635c1d9061542f887e67ca6, CodeRabbit provider-timeout replacement evidence without claiming a pass, authorized Local Qwen pass with no findings, risk classification pass with repo-native local-record landing preflight eligibility and no PRD-004 auto_land authority expansion, supply-chain gate pass, coordination validation, and no required UAT or operator input. The implementation adds fail-closed optional Escape Candidate and Boundary Escape Disposition artifact validation, template support, aggregate validate integration, and regression tests while preserving ordinary safe-to-land bootstrap flows when no escape workflow evidence exists. It adds no expanded landing autonomy, Notify-And-Revert execution, Auto-Landing Scope, escape classification authority, boundary-cell movement, PRD-005 controller work, V0 Closeout Claude Code A/B Product-Value Trial work, Trust Verifier cutover, attribution gateway work, cockpit UI, local API, State Index, hosted service, telemetry, public benchmark publication, paid routing, merge, push, deploy, credential handling, dependency, lockfile, package-script, CI/release workflow, external repo mutation, or unrelated Phase 8 work.
 
 ```json
 {
@@ -24,7 +24,7 @@ rationale: BANDIT-091 is safe to land locally as the PRD-004.3 Escape Candidate 
   "work_item": "BANDIT-091",
   "freshness_state": "current",
   "verdict": "safe-to-land",
-  "review_subject_hash": "18d1b300a7fcbdf996850b695022cffba79b785ffa4cb216103f868cdb996ecb",
+  "review_subject_hash": "40ee40b89c850565f11e9a1ce8116d151f2fd41a6635c1d9061542f887e67ca6",
   "source_head": "9c2f33173f1545ec3bab5bd6520c6854a01300be",
   "landing_autonomy_level": "none",
   "source_artifacts": [

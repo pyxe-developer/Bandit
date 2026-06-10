@@ -265,6 +265,11 @@
       "work_item": "BANDIT-090",
       "decision_kind": "auto_landing",
       "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json"
+    },
+    {
+      "work_item": "BANDIT-091",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-091-supply-chain-gate.json"
     }
   ]
 }
