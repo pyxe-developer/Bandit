@@ -5,24 +5,24 @@
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
 `BANDIT-092` is the active work item. Stage 2 RED, Stage 3 implementation, and
-CodeRabbit Stage 4 review are recorded for the fourth `BANDIT-PRD-004`
+aggregate Stage 4 review are recorded for the fourth `BANDIT-PRD-004`
 implementation slice: Boundary Cell Movement Gate.
 
 **Active work item:** `BANDIT-092` - Boundary Cell Movement Gate.
 
-The current stage is Stage 4: Local Qwen review pending after endpoint update.
+The current stage is Stage 5: landing verdict pending.
 
-**Current next action:** Work Item PM should rerun
-`node ./bin/bandit.mjs qwen-review BANDIT-092`.
+**Current next action:** Work Item PM should prepare the Stage 5 landing
+verdict for `BANDIT-092`, then run land-check and local-record landing.
 
-Do not continue Stage 4 aggregate review, landing, closeout, PRD-005
-implementation,
+Do not continue Stage 5 landing action, closeout, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-current Local Qwen Stage 4 evidence is recorded for `BANDIT-092`.
+current Stage 5 landing verdict and land-check pass are recorded for
+`BANDIT-092`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -82,12 +82,21 @@ cannot answer.
   `docs/work/BANDIT-092/implementation-evidence.md`.
 - Stage 3 PM review:
   `docs/work/BANDIT-092/stage3-pm-review.md`.
-- Stage 4 CodeRabbit review:
+- Stage 4 CodeRabbit timeout evidence:
   `docs/work/BANDIT-092/coderabbit-review.md`.
-- Local Qwen blocker evidence:
+- Local Qwen blocker resolution:
   `docs/work/BANDIT-092/local-qwen-blocker.md`.
+- Stage 4 Local Qwen review:
+  `docs/work/BANDIT-092/local-qwen-review.md`.
+- Local Qwen finding disposition:
+  `docs/work/BANDIT-092/qwen-finding-disposition.md`.
+- Stage 4 risk/supply-chain gate evidence:
+  `.bandit/policy/risk-classifications/BANDIT-092-risk-classification.json`
+  and `.bandit/policy/supply-chain-gates/BANDIT-092-supply-chain-gate.json`.
+- Aggregate Stage 4 review evidence:
+  `docs/work/BANDIT-092/review-evidence.md`.
 - Coordination log: `docs/work/BANDIT-092/coordination-log.jsonl`, current
-  state `blocked`.
+  state `review_recorded`.
 
 `BANDIT-091` closed evidence:
 
