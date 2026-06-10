@@ -1,0 +1,160 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-087",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md",
+      "surface": "work_item_policy_disposition_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/work/BANDIT-087/coordination-log.jsonl",
+      "surface": "work_item_lifecycle_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/work/BANDIT-087/review-evidence.md",
+      "surface": "work_item_review_evidence",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "pr_creation_remote_publication_ci_orchestration",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    },
+    {
+      "surface": "github_credentials_branch_protection_or_ci_provider_config",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    },
+    {
+      "surface": "merge_push_deploy_or_deploy_canary",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    },
+    {
+      "surface": "local_record_replacement_or_trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    },
+    {
+      "surface": "hosted_services_paid_routing_public_benchmark",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/brief.md"
+    },
+    {
+      "surface": "product_uat_or_operator_owned_policy_override",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "disposition_only_pr_cicd_policy_triage",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    },
+    {
+      "signal_id": "no_source_code_policy_or_remote_action_change",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/implementation-evidence.md"
+    },
+    {
+      "signal_id": "operator_authority_gate_preserved",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node ./bin/bandit.mjs coordination validate BANDIT-087",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/implementation-evidence.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs work-intake validate --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/implementation-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/implementation-evidence.md"
+    },
+    {
+      "tool": "timeout 600 coderabbit review --agent --type uncommitted",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/coderabbit-review.md"
+    },
+    {
+      "tool": "node bin/omlx-chat-completions.mjs -",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-087/local-qwen-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-087-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-WORK-AUTHORITY-LEAK",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-087/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SUPPLY-CHAIN-OR-CI-RELEASE",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-087 is a disposition-only triage chore. It does not approve PR/CI/CD policy, remote publication, GitHub credential usage, branch-protection changes, CI provider configuration, merge/push/deploy authority, deployment/canary behavior, hosted services, paid routing, public benchmark publication, Trust Verifier cutover, local-record replacement, product or UAT direction, or business/cost/risk overrides."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-087 is low workflow risk because it records deferred PR/CI/CD landing workflow policy triage and lifecycle evidence only. The local-record Landing Agent contract remains unchanged, future PR/CI/CD landing work remains conditional and operator-gated, CodeRabbit completed with zero findings, and Local Qwen returned informational notes only.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-087-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-087-supply-chain-gate.json",
+    "docs/work/BANDIT-087/brief.md",
+    "docs/work/BANDIT-087/red-evidence.md",
+    "docs/work/BANDIT-087/implementation-evidence.md",
+    "docs/work/BANDIT-087/pr-cicd-landing-policy-disposition.md",
+    "docs/work/BANDIT-087/coderabbit-review.md",
+    "docs/work/BANDIT-087/local-qwen-review.md",
+    "docs/work/BANDIT-087/review-evidence.md"
+  ]
+}
