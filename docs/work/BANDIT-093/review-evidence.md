@@ -3,19 +3,19 @@
 contract_version: 1
 work_item: BANDIT-093
 stage: Stage 4 Review And Cross-Model Gates
-source_head: b7d58c66425678cc23fe41b68bfe70d594a466d1
-review_subject_hash: 194faed89c21fec96fae66c4434eab6ff16c4ad0d9b6a93bb6a55f3d4bb3a9b7
+source_head: 37cb621e80d991df3e837a9ca8bed802fc67fa71
+review_subject_hash: 015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490
 review_subject_policy: v1
-review_subject_hash_status: current_for_intent_to_add_worktree
+review_subject_hash_status: current
 verification_state: pass
 verification_evidence:
   - docs/work/BANDIT-093/coderabbit-review.md records a CodeRabbit provider timeout after the required 600-second run over the uncommitted local diff; no CodeRabbit pass is claimed.
-  - docs/work/BANDIT-093/local-qwen-review.md records authorized Local Qwen review through .bandit/reviewers/local-qwen.json via node bin/omlx-chat-completions.mjs with reviewer_verdict pass and zero findings.
+  - docs/work/BANDIT-093/local-qwen-review.md records authorized Local Qwen review through .bandit/reviewers/local-qwen.json via node bin/omlx-chat-completions.mjs with reviewer_verdict pass and zero findings, plus a refresh pass after risk and supply-chain release decision registries were updated for BANDIT-093.
   - .bandit/policy/risk-classifications/BANDIT-093-risk-classification.json records selected_review_depth pre_pr_coderabbit_plus_qwen, operator_supervision not required, and local-record landing eligibility without claiming workflow authority expansion.
   - .bandit/policy/supply-chain-gates/BANDIT-093-supply-chain-gate.json records no touched dependency, lockfile, package-manager script, CI/release workflow, agent skill, fetched prompt, external tool install, executable generated content, external side-effecting automation, unknown supply-chain surface, hosted service, telemetry, credential, merge, push, or deploy behavior.
   - node ./bin/bandit.mjs risk-classification validate --json passed.
   - node ./bin/bandit.mjs supply-chain-gate validate --json passed.
-  - node ./bin/bandit.mjs review-subject-hash BANDIT-093 produced 194faed89c21fec96fae66c4434eab6ff16c4ad0d9b6a93bb6a55f3d4bb3a9b7 from review-subject policy v1 after new BANDIT-093 files were marked intent-to-add so untracked source and evidence were included in the hash path set.
+  - node ./bin/bandit.mjs review-subject-hash BANDIT-093 produced 015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490 from review-subject policy v1 after the focused source/evidence commit and risk/supply-chain registry entries.
   - node --test test/roadmap-work-targets.test.mjs passed 6/6.
   - npm run typecheck passed.
   - npm test passed 618/618.
@@ -41,26 +41,26 @@ clean_code_status: pass
 traceability_state: pass
 traceability_quality: acceptance_criteria_to_tests_and_review_evidence
 traceability_disposition: BANDIT-093 acceptance criteria map to RED tests, Stage 3 implementation evidence, Local Qwen review, CodeRabbit timeout replacement evidence, risk classification, supply-chain gate, and aggregate Stage 4 verification.
-source_drift_status: current_for_intent_to_add_worktree
+source_drift_status: current
 bootstrap_gaps:
   - CodeRabbit provider timeout replacement evidence is recorded in docs/work/BANDIT-093/coderabbit-review.md.
-post_commit_refresh_required:
-  - Recompute review-subject hash after the focused source/evidence commit because the current hash used intent-to-add paths to include new files before they were committed.
-  - Re-run risk-classification and supply-chain-gate validation after the focused source/evidence commit so validator summaries surface BANDIT-093 from committed policy artifacts.
+post_commit_refresh_status:
+  - completed: review-subject hash refreshed after focused source/evidence commit 37cb621e80d991df3e837a9ca8bed802fc67fa71 and risk/supply-chain registry entries; current hash is 015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490.
+  - completed: risk-classification and supply-chain-gate validation passed after the registry entries and now report BANDIT-093 eligible.
 
 ## Review Subject
 
 `node ./bin/bandit.mjs review-subject-hash BANDIT-093` returned:
 
 ```text
-Review subject hash: 194faed89c21fec96fae66c4434eab6ff16c4ad0d9b6a93bb6a55f3d4bb3a9b7
+Review subject hash: 015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490
 Review subject policy: v1
 ```
 
-The new source, tests, work-item evidence, risk classification, and
-supply-chain gate files were marked intent-to-add before this hash was
-computed so the hash path set included the untracked BANDIT-093 files. Stage 5
-must refresh this hash after the focused source/evidence commit.
+The hash was refreshed after focused source/evidence commit
+`37cb621e80d991df3e837a9ca8bed802fc67fa71` and after the risk/supply-chain
+registry entries required by `land-check`; the current hash is
+`015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490`.
 
 ## CodeRabbit
 
@@ -93,7 +93,10 @@ timeout 180 node bin/omlx-chat-completions.mjs < .bandit/tmp/BANDIT-093-local-qw
 
 Result: Local Qwen completed through the committed `.bandit/reviewers/local-qwen.json`
 route and `bin/omlx-chat-completions.mjs` against the local oMLX endpoint. It
-returned pass with zero findings.
+returned pass with zero findings. After risk and supply-chain registry entries
+changed the review-subject hash, Local Qwen reran against
+`.bandit/tmp/BANDIT-093-local-qwen/refresh-prompt.md` and again returned pass
+with zero findings.
 
 ## Risk And Supply Chain
 
@@ -108,5 +111,4 @@ node ./bin/bandit.mjs risk-classification validate --json
 node ./bin/bandit.mjs supply-chain-gate validate --json
 ```
 
-Both commands passed. Their JSON summaries currently list committed policy
-artifacts only; Stage 5 must refresh after the focused source/evidence commit.
+Both commands passed after the registry entries and report BANDIT-093 eligible.

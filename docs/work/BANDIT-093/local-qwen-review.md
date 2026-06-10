@@ -9,12 +9,13 @@ model: Qwen3.6-35B-A3B-MLX-8bit
 run_status: completed
 reviewer_verdict: pass
 findings_status: none
-findings_disposition: Local Qwen returned a pass verdict with zero findings for the current BANDIT-093 source and evidence packet.
+findings_disposition: Local Qwen returned a pass verdict with zero findings for the current BANDIT-093 source and evidence packet, then a refresh pass with zero findings after the risk and supply-chain release decision registries were updated for BANDIT-093.
 operator_input_status: none_required
 source_drift_status: current
 executable_evidence:
   - printf smoke prompt piped to `timeout 180 node bin/omlx-chat-completions.mjs` exited 0.
   - Full review packet from `.bandit/tmp/BANDIT-093-local-qwen/prompt.md` piped to `timeout 180 node bin/omlx-chat-completions.mjs` exited 0.
+  - Refresh packet from `.bandit/tmp/BANDIT-093-local-qwen/refresh-prompt.md` piped to `timeout 180 node bin/omlx-chat-completions.mjs` exited 0 after review-subject hash changed to 015565ac28fc0769d7fdb2aca2137348aa98afaafc7e8f70585ec8e05b081490.
   - The committed reviewer profile used for this route is `.bandit/reviewers/local-qwen.json`, which points to `node bin/omlx-chat-completions.mjs {{prompt_stdin}}`.
 structured_findings_json: []
 bootstrap_gaps:
@@ -40,6 +41,12 @@ Full review:
 timeout 180 node bin/omlx-chat-completions.mjs < .bandit/tmp/BANDIT-093-local-qwen/prompt.md
 ```
 
+Refresh review after policy registry entries:
+
+```sh
+timeout 180 node bin/omlx-chat-completions.mjs < .bandit/tmp/BANDIT-093-local-qwen/refresh-prompt.md
+```
+
 ## Reviewer Output
 
 ```json
@@ -47,6 +54,16 @@ timeout 180 node bin/omlx-chat-completions.mjs < .bandit/tmp/BANDIT-093-local-qw
   "verdict": "pass",
   "findings": [],
   "summary": "The implementation strictly adheres to the BANDIT-093 brief and clean-code constraints. Fail-closed diagnostics are explicit and triggered only on direct roadmap/current-context mismatches. Stale historical tail text is explicitly stripped during parsing and marked as ignored in the resolution output, preventing silent routing of closed work. WIL is strictly isolated to provenance-only dereference after roadmap authorization, with no hidden scheduling or priority-queue behavior. Scope is tightly bounded to the read-only resolver and thin CLI adapter; no create/execute controllers, slash commands, external services, or future PRD work are introduced. Role boundaries are preserved (Stage 3 writer did not edit Stage 2 tests), and the codebase maintains small, explicit parsing and reconciliation functions. All focused tests pass, TypeScript compilation succeeds, and the full test suite remains green with no regressions."
+}
+```
+
+Refresh output:
+
+```json
+{
+  "verdict": "pass",
+  "findings": [],
+  "summary": "Registry edits for BANDIT-093 are standard auto-landing entries without hidden authority, review bypass, or scope expansion. Evidence is current, review-subject hash refreshed, and policy validation passed. The implementation is a bounded read-only resolver with fail-closed behavior on disagreement or missing data. Smell triggers are acknowledged and handled via recorded waivers/bootstrap gaps. Safe to land."
 }
 ```
 
