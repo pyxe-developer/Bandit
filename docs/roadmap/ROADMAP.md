@@ -8,10 +8,12 @@
 
 ## Current Work Item
 
-- None currently active.
+- `[Slice]` `BANDIT-090` - Attribution Join Key Wiring
+  (Stage 4: review required)
 
-**Current next step:** Repo PM should form PRD-004.2 Attribution Join Key
-Wiring as the next BANDIT-PRD-004 slice.
+**Current next step:** Run Stage 4 review for `BANDIT-090` using CodeRabbit
+or honest provider-timeout evidence plus Local Qwen through the authorized MLX
+route.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -23,7 +25,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-PRD-004.2 formation is recorded and approved.
+`BANDIT-090` Stage 4 review evidence is recorded and accepted.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -31,8 +33,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-004.2 Attribution Join Key Wiring: connect landing,
-  model/tool, and escape evidence through the structured attribution tuple.
+- `[Slice]` `TBD` - PRD-004.3 Escape Candidate Workflow, pending
+  `BANDIT-090` landing and closeout.
 
 ## Planned Work
 

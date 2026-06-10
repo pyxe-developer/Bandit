@@ -33,8 +33,12 @@ import type { UatApproval } from "../state/uat-approval.js";
 import { readUatApproval } from "../state/uat-approval.js";
 import { readWorkItem } from "../state/work-items.js";
 import {
-  gatherBoundaryAutonomyProblems
+  gatherBoundaryAutonomyProblems,
+  readOptionalBoundaryPredictionRecord
 } from "../state/boundary-autonomy.js";
+import {
+  gatherLandingAttributionProblems
+} from "../state/attribution-join-key.js";
 
 export async function landCheck(repoRoot: string, workItemId?: string) {
   if (!workItemId) {
@@ -127,9 +131,9 @@ export async function readLandingReadiness(
     );
   }
 
-  // Boundary autonomy gating: require Boundary Prediction Record when
-  // landing verdict claims auto_land or notify_and_revert autonomy.
-  // Do not block ordinary safe-to-land flows that have no autonomy claim.
+  // Boundary autonomy gating: require Boundary Prediction Record and
+  // Attribution Join Key when landing verdict claims auto_land or notify_and_revert
+  // autonomy. Do not block ordinary safe-to-land flows that have no autonomy claim.
   if (
     landingVerdict.landingAutonomyLevel === "auto_land" ||
     landingVerdict.landingAutonomyLevel === "notify_and_revert"
@@ -141,6 +145,30 @@ export async function readLandingReadiness(
         landingVerdict.landingAutonomyLevel
       ))
     );
+
+    // Attribution join key gating: when a Boundary Prediction Record is present,
+    // require a valid Attribution Join Key that cross-checks with the BPR fields.
+    // Honor attributionJoinKey from landing verdict when present; otherwise use
+    // the conventional landing attribution path.
+    const bpr = await readOptionalBoundaryPredictionRecord(repoRoot, workItemId);
+    if (bpr) {
+      const attributionJoinKeyPath = landingVerdict.attributionJoinKey || undefined;
+      const bprPath = `docs/work/${workItemId}/boundary-prediction.json`;
+      readiness.problems.push(
+        ...(await gatherLandingAttributionProblems(
+          repoRoot,
+          workItemId,
+          {
+            authorizingBoundaryCell: bpr.authorizingBoundaryCell,
+            landingAutonomyLevel: bpr.landingAutonomyLevel,
+            reviewSubjectHash: bpr.reviewSubjectHash,
+            workItem: bpr.workItem,
+            boundaryPredictionRecord: bprPath
+          },
+          attributionJoinKeyPath
+        ))
+      );
+    }
   }
 
   return {

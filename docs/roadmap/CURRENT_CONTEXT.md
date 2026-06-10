@@ -4,24 +4,26 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-089` is the last closed work item. It landed and closed the first
-`BANDIT-PRD-004` implementation slice: Trust Boundary Evidence Schema
-Contracts.
+`BANDIT-089` is the last closed work item. `BANDIT-090` is formed and
+orchestration-ready as the second `BANDIT-PRD-004` implementation slice:
+Attribution Join Key Wiring.
 
-**Active work item:** none.
+**Active work item:** `BANDIT-090` - Attribution Join Key Wiring.
 
-The current stage is Interstitial: Work-item creation required.
+The current stage is Stage 4: review required.
 
-**Current next action:** Repo PM should form PRD-004.2 Attribution Join Key
-Wiring as the next BANDIT-PRD-004 slice.
+**Current next action:** Run Stage 4 review for `BANDIT-090` using CodeRabbit
+or honest provider-timeout evidence plus Local Qwen through the authorized MLX
+route.
 
-Do not start PRD-004.3, PRD-004.4, PRD-005 implementation,
+Do not start landing evidence, retrospective evidence, PRD-004.3, PRD-004.4,
+PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
-update-path implementation, or unrelated Phase 8 product work before Stage 4
-PRD-004.2 formation is recorded and approved.
+update-path implementation, or unrelated Phase 8 product work before
+`BANDIT-090` Stage 4 review evidence is recorded and accepted.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -57,7 +59,40 @@ cannot answer.
 
 ## Active Work
 
-No active work item is currently open.
+`BANDIT-090` current evidence:
+
+- Source spec:
+  `docs/specs/BANDIT-090-attribution-join-key-wiring.json`.
+- Brief: `docs/work/BANDIT-090/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-090/qwen-formation-review.md`.
+- CodeRabbit formation timeout evidence:
+  `docs/work/BANDIT-090/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-090/formation-review.md`.
+- Orchestration plan:
+  `docs/work/BANDIT-090/orchestration-plan.md`.
+- RED evidence:
+  `docs/work/BANDIT-090/red-evidence.md`.
+- RED tests:
+  `test/landing-gates.test.mjs`.
+- Claude attempt evidence:
+  `docs/work/BANDIT-090/stage3-claude-attempt.md`.
+- MiniMax timeout evidence:
+  `docs/work/BANDIT-090/stage3-minimax-attempt-timeout.md`.
+- Stage 3 PM review:
+  `docs/work/BANDIT-090/stage3-pm-review.md`.
+- Stage 3 writer report:
+  `docs/work/BANDIT-090/writer-report.md`.
+- Stage 3 implementation evidence:
+  `docs/work/BANDIT-090/implementation-evidence.md`.
+- Attribution Join Key implementation:
+  `docs/templates/attribution-join-key.md`,
+  `src/state/attribution-join-key.ts`, `src/commands/init.ts`,
+  `src/commands/validate.ts`, `src/commands/land-check.ts`,
+  `src/state/landing-verdicts.ts`, and `src/state/templates.ts`.
+- Coordination log: `docs/work/BANDIT-090/coordination-log.jsonl`, current
+  state `implementation_recorded`.
 
 `BANDIT-089` closed evidence:
 
@@ -120,5 +155,7 @@ Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
 implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
 unrelated Phase 8 product work.
 
-The next slice is PRD-004.2 Attribution Join Key Wiring: connect landing,
-model/tool, and escape evidence through the structured attribution tuple.
+`BANDIT-090` must run Stage 4 review with CodeRabbit or honest
+provider-timeout evidence, Local Qwen through the authorized MLX route, review
+subject hash, risk/supply-chain evidence, aggregate review evidence, and PM
+disposition before any landing evidence or later PRD-004/005 work.

@@ -34,6 +34,7 @@ export type LandingVerdict = {
   rationale: string;
   landingAutonomyLevel: string;
   boundaryPredictionRecord: string;
+  attributionJoinKey: string;
 };
 
 type OptionalArtifact = {
@@ -171,7 +172,8 @@ function parseLandingVerdict(
     finalVerdict,
     rationale: readScalar(fields, "rationale"),
     landingAutonomyLevel: readScalar(fields, "landing_autonomy_level") ?? "",
-    boundaryPredictionRecord: readScalar(fields, "boundary_prediction_record") ?? ""
+    boundaryPredictionRecord: readScalar(fields, "boundary_prediction_record") ?? "",
+    attributionJoinKey: readScalar(fields, "attribution_join_key") ?? ""
   };
 }
 

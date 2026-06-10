@@ -317,6 +317,38 @@ rationale:
     );
   }
 
+  const attributionJoinKeyTemplateExists = await pathExists(
+    `${repoRoot}/docs/templates/attribution-join-key.md`
+  );
+  if (!attributionJoinKeyTemplateExists) {
+    await mkdir(`${repoRoot}/docs/templates`, { recursive: true });
+    await writeFile(
+      `${repoRoot}/docs/templates/attribution-join-key.md`,
+      `contract_version:
+artifact_kind:
+artifact_path:
+work_item:
+actor_identity:
+role_or_profile:
+model:
+model_version:
+profile_hash:
+review_subject_hash:
+evidence_artifact_hashes:
+  - path:
+    hash:
+touched_surface:
+boundary_prediction_record:
+authorizing_boundary_cell:
+landing_autonomy_level:
+purpose:
+artifact_state:
+attribution_join_hash:
+`,
+      "utf8"
+    );
+  }
+
   await seedDistributionDefaults(repoRoot);
 
   if (alreadyInitialized) {

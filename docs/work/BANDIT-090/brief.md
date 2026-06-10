@@ -1,0 +1,216 @@
+# BANDIT-090: Attribution Join Key Wiring
+
+## Status
+
+Brief Created
+
+work_type: slice
+
+## Origin
+
+`BANDIT-PRD-004` is accepted product and policy direction for
+trust-boundary autonomy. The operator directed Repo PM on 2026-06-10 to
+implement `BANDIT-PRD-004` and `BANDIT-PRD-005` before the V0 Closeout Claude
+Code A/B Product-Value Trial. `BANDIT-089` landed and closed the prerequisite
+schema-only Boundary Contour, Boundary Prediction Record, and
+Notify-And-Revert Artifact evidence contracts. `docs/prds/BANDIT-PRD-004-005-decomposition.md`,
+`.bandit/work-intake-ledger.json`, `docs/roadmap/CURRENT_CONTEXT.md`,
+`docs/roadmap/ROADMAP.md`, and `STATUS.md` record `BANDIT-090` as the next
+`BANDIT-PRD-004` implementation slice and keep `BANDIT-PRD-005` plus
+`WIL-V0-TRIAL` deferred behind this slice boundary.
+
+## Goal
+
+Implement the second BANDIT-PRD-004 slice: structured Attribution Join Key contracts and validation wiring for boundary-learning evidence surfaces that can know their fields directly, without introducing a model gateway dependency.
+
+## Scope
+
+- Use BANDIT-PRD-004 and docs/prds/BANDIT-PRD-004-005-decomposition.md as source authority for PRD-004.2 after BANDIT-089 landed and closed PRD-004.1.
+- Define a repo-native Attribution Join Key tuple contract with fields for actor identity, role or profile, model and version when applicable, profile hash when applicable, work item, review subject hash, evidence artifact hashes, touched surface, Boundary Prediction Record, authorizing boundary cell, landing autonomy level, and artifact-specific purpose or state.
+- Add schema/template support for an attribution join key embedded or referenced by landing, model-call, tool-call, and future escape evidence artifacts, while allowing each artifact to record only the subset of tuple fields it can know directly.
+- Add deterministic validation helpers that fail closed for malformed attribution tuple fields when an artifact claims an attribution join key, including blank actor/work-item/review-subject fields, malformed evidence artifact hashes, missing touched surface where required, and inconsistent Boundary Prediction Record or authorizing boundary cell references.
+- Add a deterministic attribution_join_hash helper derived from the canonical tuple for indexing and lookup, while keeping the structured tuple canonical evidence.
+- Wire landing evidence validation so landing verdicts that reference a Boundary Prediction Record or claim notify_and_revert/auto_land autonomy can also carry or reference a valid landing attribution join key.
+- Preserve ordinary safe-to-land bootstrap flows that do not claim PRD-004 boundary autonomy and do not carry Attribution Join Key evidence.
+- Preserve CLI authority, repo-native canonical state, and derived-only cockpit/session-context status. No model gateway, live model-call capture, telemetry, local API, State Index, cockpit UI, hosted service, paid route, merge, push, deploy, or PRD-005 controller work is in scope.
+- Record CLEAN_CODE.md read evidence in the brief and require the implementation to keep tuple parsing, hash derivation, landing integration, tests, and templates small, explicit, and separated from future escape classification and boundary movement policy.
+
+## Out Of Scope
+
+- Do not introduce a model-call gateway, local proxy, wrapper, telemetry backend, hosted service, or provider integration.
+- Do not implement Escape Candidate, Confirmed Boundary Escape, Codex PM attribution review, boundary-cell movement, Workflow Trial movement, Notify-And-Revert execution, rollback execution, or asynchronous operator attention delivery.
+- Do not require Attribution Join Key evidence for existing ordinary safe-to-land bootstrap flows unless the artifact explicitly claims an attribution join key or PRD-004 boundary-autonomy evidence.
+- Do not expand Notify-And-Revert or Auto-Landing Scope, approve a new boundary cell, change UAT policy, change reviewer routing, change risk-classification policy, change supply-chain policy, replace Trust Verifier behavior, or start BANDIT-PRD-005 implementation.
+- Do not start the V0 Closeout Claude Code A/B Product-Value Trial, cockpit UI, local API, State Index, hosted services, telemetry, public benchmark publication, paid routing, merge, push, deploy, credential handling, dependency changes, lockfile changes, package-script changes, CI/release workflow changes, external repo mutation, or unrelated Phase 8 work.
+
+## Acceptance Criteria
+
+- The slice adds an Attribution Join Key tuple contract as repo-native structured evidence and documents that the tuple is canonical while attribution_join_hash is derived.
+- The tuple contract supports the PRD-004 field families: actor identity, model and version, profile hash, work item, Review Subject Hash, evidence artifact hashes, touched surface, Boundary Prediction Record, authorizing boundary cell, and artifact-specific purpose or state.
+- Validation accepts partial tuple subsets only when the artifact kind cannot know the omitted fields directly, and it records the artifact kind that justifies the subset.
+- Validation rejects malformed attribution tuple data when present, including blank work item, actor identity, review subject hash, touched surface where required, Boundary Prediction Record mismatch, authorizing boundary cell mismatch, unsupported artifact kind, and malformed evidence artifact hashes.
+- A deterministic attribution_join_hash is derived from the canonical tuple in a stable field order and changes when any canonical tuple field changes.
+- Landing evidence that claims notify_and_revert or auto_land autonomy, or references a Boundary Prediction Record, can validate an associated landing Attribution Join Key without requiring a model gateway.
+- Existing ordinary safe-to-land bootstrap flows remain unblocked when no PRD-004 boundary-autonomy evidence or Attribution Join Key evidence is claimed.
+- The implementation keeps attribution tuple parsing/hash derivation, templates, landing integration, and tests separated from future model-call capture, tool-call capture, escape workflow, and boundary movement policy.
+- The work preserves role boundaries: Test Writer owns RED evidence and test edits; if Codex authors Stage 2 tests, Stage 3 implementation is routed to Claude or another non-Codex model family; reviewers own Stage 4; Landing Agent owns Stage 5; Closeout Agent owns Stage 6.
+- Stage 4 review uses Local Qwen only through .bandit/reviewers/local-qwen.json and node bin/omlx-chat-completions.mjs, CodeRabbit or honest provider-timeout/refusal evidence, and aggregate review evidence before landing.
+- The work item does not start PRD-004.3, PRD-004.4, PRD-005, the V0 Closeout Claude Code A/B Product-Value Trial, Trust Verifier cutover, cockpit UI, local API, State Index, hosted services, telemetry, public benchmark publication, paid routing, merge, push, deploy, or unrelated Phase 8 work.
+
+## Test Plan
+
+- Stage 2 Test Writer writes RED tests for attribution tuple validation covering valid landing tuple, valid model-call subset, valid tool-call subset, missing required fields, unsupported artifact kind, malformed evidence artifact hash, Boundary Prediction Record mismatch, authorizing boundary cell mismatch, and stable attribution_join_hash derivation.
+- Stage 2 Test Writer writes RED tests proving landing evidence that claims notify_and_revert or auto_land autonomy can require a valid Attribution Join Key alongside the existing Boundary Prediction Record gate.
+- Stage 2 Test Writer writes RED tests proving ordinary safe-to-land bootstrap verdicts remain unblocked when no PRD-004 boundary-autonomy or attribution evidence is claimed.
+- Run focused attribution/landing-gate tests after implementation.
+- Run npm run typecheck.
+- Run npm test if shared validators, landing gates, artifact parsers, or validate command behavior changes.
+- Run npm run bandit -- validate.
+- Run node ./bin/bandit.mjs cockpit status --json and node ./bin/bandit.mjs session-context current --json after context artifacts are updated.
+- Run git diff --check.
+
+## Verification Plan
+
+- Run `node ./bin/bandit.mjs repo-pm approve-formation BANDIT-090` after
+  Local Qwen formation review, CodeRabbit formation review or provider-timeout
+  evidence, aggregate formation review, and coordination evidence exist.
+- Run `node ./bin/bandit.mjs coordination validate BANDIT-090` after every
+  accepted step transition.
+- Run focused Stage 2 RED tests before implementation to prove attribution
+  tuple validation, `attribution_join_hash` determinism, Boundary Prediction
+  Record consistency, landing integration, and ordinary safe-to-land
+  non-regression.
+- Run focused implementation tests, `npm run typecheck`, `npm test` when
+  shared validators or landing gates change, `npm run bandit -- validate`,
+  `node ./bin/bandit.mjs cockpit status --json`,
+  `node ./bin/bandit.mjs session-context current --json`, and
+  `git diff --check` before Stage 4 review and landing.
+- Before landing, run Local Qwen through the authorized MLX adapter route,
+  CodeRabbit or honest provider-timeout/refusal evidence, aggregate review
+  evidence, review-subject hash, clean-code compliance review, landing verdict,
+  land-check, local-record landing action, retrospective, and improvement or
+  no-action disposition.
+
+## CLEAN_CODE.md Read Evidence
+
+CLEAN_CODE.md was read on 2026-06-10 before creating this source spec. The slice must keep Attribution Join Key tuple parsing, hash derivation, landing integration, tests, and templates small and explicit; avoid hidden workflow authority; preserve role boundaries; and avoid mixing model gateway, escape workflow, boundary movement, cockpit, or PRD-005 controller behavior into this wiring slice.
+
+## Role Boundary Evidence
+
+- Repo PM owns Stage 1 source-spec creation, brief repair, formation review
+  routing, formation approval, PRD decomposition, work-intake synchronization,
+  and repo-level context synchronization.
+- Work Item PM owns plan-mode orchestration only after `formation_approved`;
+  it may not write tests, implementation, reviewer evidence, landing evidence,
+  UAT evidence, or final repo-level closeout state.
+- Test Writer owns Stage 2 RED tests, test helpers, fixtures, RED evidence,
+  and acceptance mappings for attribution tuple validation,
+  `attribution_join_hash` determinism, Boundary Prediction Record consistency,
+  landing integration, and ordinary safe-to-land non-regression.
+- Implementation Writer owns Stage 3 source implementation only. If Codex
+  authors or materially edits Stage 2 RED tests, Stage 3 implementation must
+  use a different model family during bootstrap unless an operator-approved
+  policy exception is recorded.
+- Permanent Test Ownership Boundary: the Stage 3 Writer has no authority to
+  create, edit, delete, regenerate, format, or mechanically adjust tests, test
+  helpers, fixtures, RED evidence, acceptance mappings, formation evidence,
+  review evidence, landing evidence, UAT evidence, retrospective evidence, or
+  policy acceptance criteria for this Work Item.
+- Reviewers own Stage 4 review evidence. Landing Agent owns Stage 5 landing
+  verdict/action evidence. Closeout Agent owns Stage 6 retrospective and
+  improvement/no-action disposition evidence. The operator owns any decision
+  that expands landing autonomy, approves Notify-And-Revert or Auto-Landing
+  Scope for a new boundary cell, changes product or UAT direction, approves
+  public benchmark claims, approves paid/live reviewer or model routing,
+  approves hosted services, approves telemetry, approves merge/push/deploy
+  authority, approves Trust Verifier cutover, approves external side effects,
+  or resolves genuinely ambiguous product, business, policy, or explicit
+  cost/risk scope.
+
+## Stage-Rubric Checklist
+
+- Stage 0: Context Readiness | pass | BANDIT-089 landed and closed with landing action, retrospective, improvement disposition, synchronized roadmap/current-context/status, and no open bootstrap gaps; operator direction keeps PRD-004/005 ahead of WIL-V0-TRIAL.
+- Stage 1: Work-Item Brief And Spec | pass | This spec defines goal, scope, out of scope, acceptance criteria, test plan, clean-code read evidence, no-gap disposition, expected files, required evidence, role boundaries, operator-input status, source-of-truth boundary, forbidden actions, implementation order, and smell triggers.
+- Stage 2: Test Design And RED Evidence | required next | Test Writer must produce RED tests for attribution tuple validation, attribution_join_hash determinism, boundary-record consistency, landing integration, and ordinary safe-to-land non-regression before implementation.
+- Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit RED tests, test helpers, fixtures, acceptance mappings, or Test Writer-owned evidence.
+- Stage 4: Review And Cross-Model Gates | required later | Local Qwen through the authorized MLX adapter route, CodeRabbit or honest provider-timeout/refusal evidence, aggregate review, review-subject hash, risk/supply-chain/input-quarantine checks where applicable, and clean-code review are required before landing.
+- Stage 5: Landing And UAT | required later | Landing verdict, land-check, local-record landing action, and clean-code compliance evidence are required; product UAT is not applicable unless the implementation changes an operator-facing product surface.
+- Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, current context, roadmap, and STATUS updates are required before any PRD-004.3, PRD-004.4, PRD-005, V0 trial, or unrelated next item begins.
+
+## Bootstrap Gaps
+
+- No open bootstrap gap blocks this PRD-004.2 implementation slice.
+- Live CodeRabbit may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence and do not claim a CodeRabbit pass.
+- Local Qwen is authorized only through .bandit/reviewers/local-qwen.json and bin/omlx-chat-completions.mjs against the MLX OpenAI-compatible endpoint at http://127.0.0.1:8000/v1. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another reviewer route.
+- No model gateway, live model-call capture, Trust Verifier cutover, expanded auto-landing authority, Notify-And-Revert execution, public benchmark publication, merge, push, deploy, paid routing, hosted service, telemetry, local API, State Index, or cockpit UI authority is approved by this slice.
+
+## Expected Files
+
+- docs/specs/BANDIT-090-attribution-join-key-wiring.json
+- docs/work/BANDIT-090/brief.md
+- docs/work/BANDIT-090/qwen-formation-review.md
+- docs/work/BANDIT-090/coderabbit-formation-review.md
+- docs/work/BANDIT-090/formation-review.md
+- docs/work/BANDIT-090/coordination-log.jsonl
+- docs/work/BANDIT-090/orchestration-plan.md
+- docs/work/BANDIT-090/red-evidence.md
+- docs/templates/attribution-join-key.md
+- src/state/attribution-join-key.ts
+- src/commands/land-check.ts
+- src/commands/validate.ts
+- src/state/boundary-autonomy.ts
+- src/state/templates.ts
+- test/landing-gates.test.mjs
+- docs/work/BANDIT-090/implementation-evidence.md
+- docs/work/BANDIT-090/writer-report.md
+- docs/work/BANDIT-090/stage3-pm-review.md
+- docs/work/BANDIT-090/coderabbit-review.md
+- docs/work/BANDIT-090/local-qwen-review.md
+- docs/work/BANDIT-090/review-evidence.md
+- docs/work/BANDIT-090/landing-verdict.md
+- docs/work/BANDIT-090/landing-action.md
+- docs/work/BANDIT-090/retrospective.md
+- docs/work/BANDIT-090/improvement-disposition.md
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## First Implementation Order
+
+- Repo PM creates the work item and records formation review evidence before Work Item PM execution.
+- Work Item PM records orchestration-plan.md only after formation_approved and before RED evidence.
+- Test Writer writes failing tests for attribution tuple validation, attribution_join_hash determinism, landing integration, boundary-record consistency, and ordinary safe-to-land non-regression.
+- Implementation Writer adds the minimal template, validator helpers, hash derivation, validate integration, and land-check integration needed to satisfy RED tests, without editing Test Writer-owned files if Codex authored the RED tests.
+- Codex PM verifies focused tests, typecheck, full tests as needed, Bandit validation, cockpit/session-context derived status, clean-code compliance, and evidence freshness before Stage 4 review.
+- Reviewers run Local Qwen through the authorized MLX route and CodeRabbit or honest provider-timeout/refusal evidence; PM dispositions any non-blocking findings before landing.
+- Landing Agent writes landing verdict/action; Closeout Agent records retrospective, improvement/no-action disposition, and synchronizes current context, roadmap, STATUS, and intake state.
+
+## Smell Triggers
+
+- Any implementation that introduces a model gateway, telemetry backend, hosted service, provider integration, paid routing, or live model-call capture is scope creep.
+- Any implementation that treats attribution_join_hash as canonical evidence instead of derived lookup data is a blocker.
+- Any implementation that requires Attribution Join Key evidence for ordinary safe-to-land bootstrap flows that do not claim PRD-004 boundary-autonomy or attribution evidence is a blocker.
+- Any implementation that accepts malformed actor identity, work item, review subject hash, evidence artifact hash, Boundary Prediction Record reference, authorizing boundary cell, or touched surface where required is a blocker.
+- Any implementation that starts escape candidate workflow, confirmed boundary escape workflow, boundary-cell movement, Workflow Trial movement, PRD-005 command-controller work, Trust Verifier cutover, cockpit UI, local API, State Index, hosted service, telemetry, paid routing, merge, push, deploy, public benchmark publication, or unrelated Phase 8 work is scope creep.
+- Any large mixed function that combines tuple parsing, hash derivation, land-check policy, model-call capture, tool-call capture, escape classification, operator inbox delivery, and boundary movement decisions is a clean-code blocker.
+- Any fallback that routes derivable malformed local attribution/template drift to operator input instead of fail-closed validation diagnostics is a blocker, while genuine autonomy expansion, product, UAT, business, policy, explicit cost/risk, or ambiguous scope decisions must halt for operator input.
+
+## Required Evidence
+
+- docs/work/BANDIT-090/brief.md
+- docs/work/BANDIT-090/qwen-formation-review.md
+- docs/work/BANDIT-090/coderabbit-formation-review.md
+- docs/work/BANDIT-090/formation-review.md
+- docs/work/BANDIT-090/coordination-log.jsonl
+- docs/work/BANDIT-090/orchestration-plan.md
+- docs/work/BANDIT-090/red-evidence.md
+- docs/work/BANDIT-090/implementation-evidence.md
+- docs/work/BANDIT-090/review-evidence.md
+- docs/work/BANDIT-090/landing-verdict.md
+- docs/work/BANDIT-090/landing-action.md
+- docs/work/BANDIT-090/retrospective.md
+- docs/work/BANDIT-090/improvement-disposition.md
+
+## Operator Input Status
+
+No operator-owned input is required to create and form this PRD-004.2 attribution wiring slice because BANDIT-PRD-004 is accepted, BANDIT-089 landed the prerequisite schema-only boundary evidence contracts, the operator directed PRD-004/005 implementation before WIL-V0-TRIAL, and the slice explicitly avoids expanding landing autonomy or adding model gateway behavior. Halt for operator input if later work would expand Notify-And-Revert or Auto-Landing Scope, change boundary-cell movement policy, change product or UAT direction, approve public benchmark claims, approve paid or live reviewer/model routing, approve hosted services, approve telemetry, approve merge/push/deploy authority, approve Trust Verifier cutover, approve external side effects, or resolve genuinely ambiguous product, business, policy, or explicit cost/risk scope.

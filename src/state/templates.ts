@@ -327,6 +327,29 @@ const TEMPLATE_CONTRACTS: TemplateContract[] = [
       metadata("source drift status", /^source_drift_status:/im),
       metadata("rationale", /^rationale:/im)
     ]
+  },
+  {
+    displayPath: "docs/templates/attribution-join-key.md",
+    requirements: [
+      metadata("contract version", /^contract_version:/im),
+      metadata("artifact kind", /^artifact_kind:/im),
+      metadata("artifact path", /^artifact_path:/im),
+      metadata("work item", /^work_item:/im),
+      metadata("actor identity", /^actor_identity:/im),
+      metadata("role or profile", /^role_or_profile:/im),
+      metadata("model", /^model:/im),
+      metadata("model version", /^model_version:/im),
+      metadata("profile hash", /^profile_hash:/im),
+      metadata("review subject hash", /^review_subject_hash:/im),
+      metadata("evidence artifact hashes", /^evidence_artifact_hashes:/im),
+      metadata("touched surface", /^touched_surface:/im),
+      metadata("boundary prediction record", /^boundary_prediction_record:/im),
+      metadata("authorizing boundary cell", /^authorizing_boundary_cell:/im),
+      metadata("landing autonomy level", /^landing_autonomy_level:/im),
+      metadata("purpose", /^purpose:/im),
+      metadata("artifact state", /^artifact_state:/im),
+      metadata("attribution join hash", /^attribution_join_hash:/im)
+    ]
   }
 ];
 

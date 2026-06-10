@@ -870,6 +870,89 @@ test("land-check requires notify-and-revert artifact evidence for notify-and-rev
   );
 });
 
+test("validate fails closed when an attribution join key has a malformed evidence artifact hash", async () => {
+  const repo = await createInitializedRepo();
+  await writeWorkBrief(repo, "BANDIT-951", "Malformed Attribution Join Key");
+  await writeAttributionJoinKey(repo, "BANDIT-951", {
+    evidenceHash: "not-a-sha256-hash"
+  });
+
+  const result = await runBandit(repo, ["validate"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Attribution Join Key: evidence_artifact_hashes\[0\]\.hash must be a sha256 hex digest/
+  );
+});
+
+test("land-check requires a landing attribution join key for auto-land boundary claims", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-952", "Missing Landing Attribution Join Key");
+  await writeReviewEvidence(repo, "BANDIT-952", { sourceHead });
+  await writeBoundaryPredictionRecord(repo, "BANDIT-952", {
+    sourceHead,
+    reviewSubjectHash: "1".repeat(64),
+    riskTier: "trivial",
+    evidenceStrengthTier: "independent_review",
+    landingAutonomyLevel: "auto_land",
+    authorizingBoundaryCell: "trivial-independent-review"
+  });
+  await writeLandingVerdict(repo, "BANDIT-952", {
+    sourceHead,
+    landingAutonomyLevel: "auto_land",
+    boundaryPredictionRecord:
+      "docs/work/BANDIT-952/boundary-prediction.json"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-952"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Missing Attribution Join Key: docs\/work\/BANDIT-952\/landing-attribution-join-key\.json/
+  );
+});
+
+test("land-check rejects a landing attribution join key with a mismatched authorizing boundary cell", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-953", "Mismatched Attribution Boundary Cell");
+  await writeReviewEvidence(repo, "BANDIT-953", { sourceHead });
+  await writeBoundaryPredictionRecord(repo, "BANDIT-953", {
+    sourceHead,
+    reviewSubjectHash: "2".repeat(64),
+    riskTier: "trivial",
+    evidenceStrengthTier: "independent_review",
+    landingAutonomyLevel: "auto_land",
+    authorizingBoundaryCell: "trivial-independent-review"
+  });
+  await writeAttributionJoinKey(repo, "BANDIT-953", {
+    reviewSubjectHash: "2".repeat(64),
+    authorizingBoundaryCell: "low-reversible-independent-review",
+    landingAutonomyLevel: "auto_land"
+  });
+  await writeLandingVerdict(repo, "BANDIT-953", {
+    sourceHead,
+    landingAutonomyLevel: "auto_land",
+    boundaryPredictionRecord:
+      "docs/work/BANDIT-953/boundary-prediction.json",
+    attributionJoinKey:
+      "docs/work/BANDIT-953/landing-attribution-join-key.json"
+  });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-953"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Attribution Join Key: authorizing_boundary_cell low-reversible-independent-review does not match Boundary Prediction Record authorizing_boundary_cell trivial-independent-review/
+  );
+});
+
 test("land-check fails closed when routing requires escalated review with no placeholder artifact", async () => {
   const repo = await createInitializedRepo({
     smellCatalog: escalatedSmellCatalog
@@ -2271,6 +2354,9 @@ async function writeLandingVerdict(repo, workItemId, options = {}) {
       `boundary_prediction_record: ${options.boundaryPredictionRecord}`
     );
   }
+  if (options.attributionJoinKey) {
+    boundaryLines.push(`attribution_join_key: ${options.attributionJoinKey}`);
+  }
 
   const workDir = path.join(repo, "docs/work", workItemId);
   await mkdir(workDir, { recursive: true });
@@ -2314,11 +2400,13 @@ async function writeBoundaryPredictionRecord(repo, workItemId, options = {}) {
         review_subject_hash: options.reviewSubjectHash ?? "unknown",
         boundary_contour_version: "initial-conservative-v1",
         boundary_contour_path: ".bandit/policy/boundary-contour.json",
-        risk_tier: "low_reversible",
-        evidence_strength_tier: "independent_review",
+        risk_tier: options.riskTier ?? "low_reversible",
+        evidence_strength_tier:
+          options.evidenceStrengthTier ?? "independent_review",
         landing_autonomy_level:
           options.landingAutonomyLevel ?? "notify_and_revert",
-        authorizing_boundary_cell: "low-reversible-independent-review",
+        authorizing_boundary_cell:
+          options.authorizingBoundaryCell ?? "low-reversible-independent-review",
         risk_classification_evidence: [
           `docs/risk/layered/${workItemId}-risk-classification.json`
         ],
@@ -2332,6 +2420,52 @@ async function writeBoundaryPredictionRecord(repo, workItemId, options = {}) {
         predicted_safety_outcome: "no_boundary_escape_expected",
         operator_supervision_status: "not_required",
         rationale: "RED fixture for boundary prediction record validation."
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+}
+
+async function writeAttributionJoinKey(repo, workItemId, options = {}) {
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "landing-attribution-join-key.json"),
+    `${JSON.stringify(
+      {
+        contract_version: 1,
+        artifact_kind: options.artifactKind ?? "landing",
+        artifact_path:
+          options.artifactPath ?? `docs/work/${workItemId}/landing-verdict.md`,
+        work_item: workItemId,
+        actor_identity: options.actorIdentity ?? "landing_agent",
+        role_or_profile: options.roleOrProfile ?? "landing_agent",
+        model: options.model ?? "",
+        model_version: options.modelVersion ?? "",
+        profile_hash: options.profileHash ?? "",
+        review_subject_hash: options.reviewSubjectHash ?? "0".repeat(64),
+        evidence_artifact_hashes: [
+          {
+            path:
+              options.evidenceArtifactPath ??
+              `docs/work/${workItemId}/review-evidence.md`,
+            hash: options.evidenceHash ?? "a".repeat(64)
+          }
+        ],
+        touched_surface: options.touchedSurface ?? "landing_evidence",
+        boundary_prediction_record:
+          options.boundaryPredictionRecord ??
+          `docs/work/${workItemId}/boundary-prediction.json`,
+        authorizing_boundary_cell:
+          options.authorizingBoundaryCell ?? "trivial-independent-review",
+        landing_autonomy_level: options.landingAutonomyLevel ?? "auto_land",
+        purpose:
+          options.purpose ?? "landing_boundary_autonomy_evidence",
+        artifact_state: options.artifactState ?? "current",
+        attribution_join_hash:
+          options.attributionJoinHash ?? "incorrect-red-fixture-hash"
       },
       null,
       2
