@@ -4,25 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-089` is the last closed work item. `BANDIT-090` is review-recorded as
-the second `BANDIT-PRD-004` implementation slice:
-Attribution Join Key Wiring.
+`BANDIT-090` is the last closed work item. It landed and closed the second
+`BANDIT-PRD-004` implementation slice: Attribution Join Key Wiring. `BANDIT-091`
+is formation-approved with plan-mode orchestration recorded as the third
+`BANDIT-PRD-004` implementation slice: Escape Candidate Workflow.
 
-**Active work item:** `BANDIT-090` - Attribution Join Key Wiring.
+**Active work item:** `BANDIT-091` - Escape Candidate Workflow.
 
-The current stage is Stage 5: landing verdict required.
+The current stage is Stage 2: RED evidence required.
 
-**Current next action:** Write Stage 5 landing verdict for `BANDIT-090`, run
-land-check, and record the local landing action before closeout.
+**Current next action:** Test Writer should create Stage 2 RED evidence for
+BANDIT-091 before any implementation.
 
-Do not start retrospective evidence, PRD-004.3, PRD-004.4, PRD-005
-implementation,
+Do not start implementation, PRD-004.4, PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
 cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-`BANDIT-090` landing verdict and local landing action evidence are recorded.
+`BANDIT-091` RED evidence is recorded.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -58,7 +58,23 @@ cannot answer.
 
 ## Active Work
 
-`BANDIT-090` current evidence:
+`BANDIT-091` current evidence:
+
+- Source spec:
+  `docs/specs/BANDIT-091-escape-candidate-workflow.json`.
+- Brief: `docs/work/BANDIT-091/brief.md`.
+- Local Qwen formation review:
+  `docs/work/BANDIT-091/qwen-formation-review.md`.
+- CodeRabbit formation timeout evidence:
+  `docs/work/BANDIT-091/coderabbit-formation-review.md`.
+- Aggregate formation review:
+  `docs/work/BANDIT-091/formation-review.md`.
+- Orchestration plan:
+  `docs/work/BANDIT-091/orchestration-plan.md`.
+- Coordination log: `docs/work/BANDIT-091/coordination-log.jsonl`, current
+  state `orchestration_plan_recorded`.
+
+`BANDIT-090` closed evidence:
 
 - Source spec:
   `docs/specs/BANDIT-090-attribution-join-key-wiring.json`.
@@ -98,13 +114,19 @@ cannot answer.
   and `.bandit/policy/supply-chain-gates/BANDIT-090-supply-chain-gate.json`.
 - Aggregate Stage 4 review evidence:
   `docs/work/BANDIT-090/review-evidence.md`.
+- Landing verdict and local landing action:
+  `docs/work/BANDIT-090/landing-verdict.md` and
+  `docs/work/BANDIT-090/landing-action.md`.
+- Retrospective and improvement disposition:
+  `docs/work/BANDIT-090/retrospective.md` and
+  `docs/work/BANDIT-090/improvement-disposition.md`.
 - Attribution Join Key implementation:
   `docs/templates/attribution-join-key.md`,
   `src/state/attribution-join-key.ts`, `src/commands/init.ts`,
   `src/commands/validate.ts`, `src/commands/land-check.ts`,
   `src/state/landing-verdicts.ts`, and `src/state/templates.ts`.
 - Coordination log: `docs/work/BANDIT-090/coordination-log.jsonl`, current
-  state `review_recorded`.
+  state `closed`.
 
 `BANDIT-089` closed evidence:
 
@@ -167,5 +189,14 @@ Notify-And-Revert or Auto-Landing Scope, Trust Verifier cutover, PRD-005
 implementation, the V0 Closeout Claude Code A/B Product-Value Trial, or
 unrelated Phase 8 product work.
 
-`BANDIT-090` must write a Stage 5 landing verdict, run `land-check`, and
-record the local landing action before closeout or any later PRD-004/005 work.
+`BANDIT-090` implementation adds fail-closed Attribution Join Key contracts,
+validation, template/init support, landing-verdict metadata parsing, aggregate
+validation integration, and land-check attribution requirements only when a
+landing verdict explicitly claims `notify_and_revert` or `auto_land` boundary
+autonomy. It does not approve expanded landing autonomy, escape workflow,
+boundary-cell movement, PRD-005 implementation, the V0 Closeout Claude Code
+A/B Product-Value Trial, or unrelated Phase 8 product work.
+
+`BANDIT-091` must record Stage 2 RED evidence before implementation,
+PRD-004.4, PRD-005, or the V0 Closeout Claude Code A/B Product-Value Trial can
+begin.

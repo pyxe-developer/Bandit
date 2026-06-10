@@ -4,15 +4,15 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-089` - Trust Boundary Evidence Schema Contracts (closed)
+- `[Slice]` `BANDIT-090` - Attribution Join Key Wiring (closed)
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-090` - Attribution Join Key Wiring
-  (Stage 5: landing verdict required)
+- `[Slice]` `BANDIT-091` - Escape Candidate Workflow
+  (Stage 2: RED evidence required)
 
-**Current next step:** Write Stage 5 landing verdict for `BANDIT-090`, run
-land-check, and record the local landing action before closeout.
+**Current next step:** Test Writer should create Stage 2 RED evidence for
+BANDIT-091 before any implementation.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,7 +24,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-`BANDIT-090` landing verdict and local landing action evidence are recorded.
+`BANDIT-091` RED evidence is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -32,8 +32,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-004.3 Escape Candidate Workflow, pending
-  `BANDIT-090` landing and closeout.
+- `[Slice]` `TBD` - PRD-004.4 Boundary Cell Movement Gate, pending
+  `BANDIT-091` landing and closeout.
 
 ## Planned Work
 
@@ -58,9 +58,6 @@ conditions and operator-owned approvals exist. The operator reprioritized
 `BANDIT-PRD-004` and `BANDIT-PRD-005` ahead of the Claude Product-Value Trial
 on 2026-06-10.
 
-- `[Slice]` `TBD` - PRD-004.3 Escape Candidate Workflow: classify escape
-  candidates, run Codex PM attribution review, and record confirmed escape or
-  no-escape dispositions.
 - `[Slice]` `TBD` - PRD-004.4 Boundary Cell Movement Gate: constrain
   boundary-cell movement to Workflow Trial-backed decisions and fail-closed
   contraction on confirmed escapes.
@@ -82,6 +79,7 @@ on 2026-06-10.
 
 ## Completed Work
 
+- `BANDIT-090` - Attribution Join Key Wiring
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts
 - `BANDIT-088` - Installed-Copy Update Path
 - `BANDIT-087` - PR And CI/CD Landing Workflow Policy
