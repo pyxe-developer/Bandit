@@ -4,16 +4,15 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-091` - Escape Candidate Workflow (closed)
+- `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate (closed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-092` - Boundary Cell Movement Gate
-  (Stage 6: closeout pending)
+  (Stage 6: closed anchor)
 
-**Current next step:** Closeout Agent should record the `BANDIT-092`
-retrospective, improvement disposition, roadmap/context/status refresh, and
-final validation.
+**Current next step:** Repo PM should form PRD-005.1 Roadmap Work Target
+Resolver as the first `BANDIT-PRD-005` slice.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -25,8 +24,7 @@ claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
 Installed-Copy Update Path, or start unrelated Phase 8 product work before
-current Stage 6 closeout artifacts and final validation are recorded for
-`BANDIT-092`.
+PRD-005.1 is formed through the Repo PM formation gate.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -35,7 +33,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `TBD` - PRD-005.1 Roadmap Work Target Resolver, pending
-  `BANDIT-092` landing and closeout.
+  Repo PM formation.
 
 ## Planned Work
 
@@ -78,6 +76,7 @@ on 2026-06-10.
 
 ## Completed Work
 
+- `BANDIT-092` - Boundary Cell Movement Gate
 - `BANDIT-091` - Escape Candidate Workflow
 - `BANDIT-090` - Attribution Join Key Wiring
 - `BANDIT-089` - Trust Boundary Evidence Schema Contracts

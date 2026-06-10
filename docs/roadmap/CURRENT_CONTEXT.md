@@ -4,17 +4,15 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-092` is the active work item. Stage 2 RED, Stage 3 implementation, and
-aggregate Stage 4 review are recorded for the fourth `BANDIT-PRD-004`
-implementation slice: Boundary Cell Movement Gate.
+`BANDIT-092` is the last closed work item. It landed and closed the fourth
+`BANDIT-PRD-004` implementation slice: Boundary Cell Movement Gate.
 
-**Active work item:** `BANDIT-092` - Boundary Cell Movement Gate.
+**Active work item:** `BANDIT-092` - Boundary Cell Movement Gate (closed anchor).
 
-The current stage is Stage 6: closeout pending.
+The current stage is Stage 6: closed.
 
-**Current next action:** Closeout Agent should record the `BANDIT-092`
-retrospective, improvement disposition, roadmap/context/status refresh, and
-final validation.
+**Current next action:** Repo PM should form PRD-005.1 Roadmap Work Target
+Resolver as the first `BANDIT-PRD-005` slice.
 
 Do not continue PRD-005 implementation,
 V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
@@ -22,8 +20,7 @@ cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work,
 guarded browser action execution, PR/CI/CD implementation, installed-copy
 update-path implementation, or unrelated Phase 8 product work before
-current Stage 6 closeout artifacts and final validation are recorded for
-`BANDIT-092`.
+PRD-005.1 is formed through the Repo PM formation gate.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -99,8 +96,11 @@ cannot answer.
 - Landing verdict and local landing action:
   `docs/work/BANDIT-092/landing-verdict.md` and
   `docs/work/BANDIT-092/landing-action.md`.
+- Retrospective and improvement disposition:
+  `docs/work/BANDIT-092/retrospective.md` and
+  `docs/work/BANDIT-092/improvement-disposition.md`.
 - Coordination log: `docs/work/BANDIT-092/coordination-log.jsonl`, current
-  state `landed`.
+  state `closed`.
 
 `BANDIT-091` closed evidence:
 
