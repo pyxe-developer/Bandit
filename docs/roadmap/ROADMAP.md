@@ -9,12 +9,12 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-096` - Work Item PM Execute Controller And Route Registry
-  (Stage 6: closed; retained as the current derived-status anchor until the
-  next work item is formed)
+- `[Slice]` `BANDIT-097` - PRD-005.4 Operator Command Adapters
+  (Stage 1: formation_approved; Work Item PM plan-mode orchestration required
+  before RED evidence)
 
-**Current next step:** Repo PM should form the next work item for PRD-005.4
-Operator Command Adapters.
+**Current next step:** Work Item PM should record plan-mode orchestration for
+BANDIT-097 before RED evidence.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -25,9 +25,8 @@ replacement or wrapping, local API or State Index timing, scheduler execution,
 claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, create PRD-005.4 RED or implementation work, or
-start unrelated Phase 8 product work before Repo PM forms and approves the
-PRD-005.4 work item.
+Installed-Copy Update Path, or start unrelated Phase 8 product work before
+BANDIT-097 records Work Item PM plan-mode orchestration.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -35,8 +34,9 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - PRD-005.4 Operator Command Adapters
-  (not_yet_formed)
+- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
+  (deferred until PRD-004/005 implementation lanes are landed, closed, blocked
+  on operator-owned input, or explicitly dispositioned)
 
 ## Planned Work
 
@@ -46,9 +46,6 @@ No open bootstrap gap remains.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - PRD-005.4 Operator Command Adapters: add the thin
-  `/bandit-work-create` and `/bandit-work-execute` invocation layer after the
-  deep controllers are tested.
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
   the same PRD in Bandit and no-Bandit repos after PRD-004/005 implementation
   lanes are landed, closed, blocked on operator-owned input, or explicitly

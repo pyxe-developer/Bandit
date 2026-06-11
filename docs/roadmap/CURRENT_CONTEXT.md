@@ -7,22 +7,21 @@
 `BANDIT-096` is the last closed work item. It landed and closed the PRD-005.3
 Work Item PM Execute Controller And Route Registry slice.
 
-**Active work item:** `BANDIT-096` - Work Item PM Execute Controller And Route
-Registry.
+**Active work item:** `BANDIT-097` - PRD-005.4 Operator Command Adapters.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form the next work item for PRD-005.4
-Operator Command Adapters.
+**Current next action:** Work Item PM should record plan-mode orchestration for
+BANDIT-097 before RED evidence.
 
-Do not create PRD-005.4 RED evidence, implementation evidence, review-loop
+Do not create BANDIT-097 RED evidence, implementation evidence, review-loop
 evidence, landing evidence, UAT evidence, retrospective evidence, closeout
 evidence, V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust
 Verifier cutover, merge, push, deploy, hosted service setup, paid
 reviewer/model routing, public benchmark publication, local API work, State
 Index work, guarded browser action execution, PR/CI/CD implementation,
 installed-copy update-path implementation, or unrelated Phase 8 product work
-before Repo PM forms and approves the PRD-005.4 work item.
+before Work Item PM records plan-mode orchestration for `BANDIT-097`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -58,22 +57,21 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-096` is the current closed-anchor source:
+`BANDIT-097` formation evidence is the current slice-boundary source:
 
-- `docs/work/BANDIT-096/brief.md`
-- `docs/work/BANDIT-096/red-evidence.md`
-- `docs/work/BANDIT-096/implementation-evidence.md`
-- `docs/work/BANDIT-096/review-evidence.md`
-- `docs/work/BANDIT-096/landing-verdict.md`
-- `docs/work/BANDIT-096/landing-action.md`
-- `docs/work/BANDIT-096/retrospective.md`
-- `docs/work/BANDIT-096/improvement-disposition.md`
-- `docs/work/BANDIT-096/coordination-log.jsonl`, current state `closed`
+- `docs/specs/BANDIT-097-operator-command-adapters.json`
+- `docs/work/BANDIT-097/brief.md`
+- `docs/work/BANDIT-097/qwen-formation-review.md`
+- `docs/work/BANDIT-097/coderabbit-formation-review.md`
+- `docs/work/BANDIT-097/formation-review.md`
+- `docs/work/BANDIT-097/coordination-log.jsonl`, current state
+  `formation_approved`
 
 ## Next Work
 
-The next action is Repo PM formation for PRD-005.4 Operator Command Adapters.
+The next action is Work Item PM plan-mode orchestration for `BANDIT-097`.
 
-PRD-005.4 must not begin RED evidence, implementation, review, landing, or
-closeout until Repo PM creates the work item, formation reviews exist, and
-formation is approved.
+`BANDIT-097` must record `docs/work/BANDIT-097/orchestration-plan.md` and the
+Work Item PM plan-mode coordination transition before RED evidence, V0 trial
+work, Trust Verifier cutover, local API work, State Index work, cockpit action
+work, or unrelated Phase 8 product work.
