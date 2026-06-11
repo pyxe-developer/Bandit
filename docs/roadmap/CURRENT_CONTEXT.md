@@ -8,22 +8,23 @@
 gap repair for Repo PM create-controller closed-anchor routing after
 `BANDIT-094`.
 
-**Active work item:** `BANDIT-095` - Repo PM Create Controller Closed Anchor
-Routing.
+**Active work item:** `BANDIT-096` - Work Item PM Execute Controller And Route
+Registry.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form the next work item for PRD-005.3
-Work Item PM Execute Controller And Route Registry.
+**Current next action:** Work Item PM should record plan-mode orchestration for
+BANDIT-096 before RED evidence.
 
-Do not create PRD-005.3 RED evidence, implementation evidence, review-loop
+Do not create BANDIT-096 RED evidence, implementation evidence, review-loop
 evidence, landing evidence, UAT evidence, retrospective evidence, closeout
 evidence, PRD-005.4 adapter work, V0 Closeout Claude Code A/B Product-Value
 Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
 service setup, paid reviewer/model routing, public benchmark publication, local
 API work, State Index work, guarded browser action execution, PR/CI/CD
 implementation, installed-copy update-path implementation, or unrelated Phase 8
-product work before Repo PM forms the PRD-005.3 work item.
+product work before Work Item PM records plan-mode orchestration for
+`BANDIT-096`.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -41,6 +42,8 @@ reviewer routing.
 
 ## Required Operator Input
 
+none_required.
+
 No operator-owned input is required for the next recorded action.
 
 Halt for operator input if a future step would expand landing autonomy, approve
@@ -57,20 +60,21 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-095` closed evidence is the current slice-boundary source:
+`BANDIT-096` formation evidence is the current slice-boundary source:
 
-- `docs/work/BANDIT-095/landing-action.md`
-- `docs/work/BANDIT-095/retrospective.md`
-- `docs/work/BANDIT-095/improvement-disposition.md`
-- `docs/work/BANDIT-095/coordination-log.jsonl`, current state `closed`
-- `.bandit/bootstrap-gaps.json`, gap
-  `BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING` resolved
+- `docs/specs/BANDIT-096-work-item-pm-execute-controller-and-route-registry.json`
+- `docs/work/BANDIT-096/brief.md`
+- `docs/work/BANDIT-096/qwen-formation-review.md`
+- `docs/work/BANDIT-096/coderabbit-formation-review.md`
+- `docs/work/BANDIT-096/formation-review.md`
+- `docs/work/BANDIT-096/coordination-log.jsonl`, current state
+  `formation_approved`
 
 ## Next Work
 
-The next action is Repo PM formation for PRD-005.3 Work Item PM Execute
-Controller And Route Registry.
+The next action is Work Item PM plan-mode orchestration for `BANDIT-096`.
 
-PRD-005.3 must be formed before Work Item PM execution, PRD-005.4 operator
-command adapters, V0 trial work, Trust Verifier cutover, or unrelated Phase 8
-product work.
+`BANDIT-096` must record `docs/work/BANDIT-096/orchestration-plan.md` and the
+Work Item PM plan-mode coordination transition before RED evidence, PRD-005.4
+operator command adapters, V0 trial work, Trust Verifier cutover, or unrelated
+Phase 8 product work.
