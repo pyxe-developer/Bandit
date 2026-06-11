@@ -341,3 +341,4 @@
 {"type":"work_item_created","work_item":"BANDIT-092","message":"Created work item BANDIT-092 from docs/specs/BANDIT-092-boundary-cell-movement-gate.json"}
 {"type":"work_item_created","work_item":"BANDIT-093","message":"Created work item BANDIT-093 from docs/specs/BANDIT-093-roadmap-work-target-resolver.json"}
 {"type":"work_item_created","work_item":"BANDIT-094","message":"Created work item BANDIT-094 from docs/specs/BANDIT-094-repo-pm-create-controller-and-prompt-contract.json"}
+{"type":"work_item_created","work_item":"BANDIT-095","message":"Created work item BANDIT-095 from docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json"}

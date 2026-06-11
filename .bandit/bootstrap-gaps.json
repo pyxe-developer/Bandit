@@ -1121,6 +1121,26 @@
       "rationale": "BANDIT-077 delivered Spec-To-Evidence Traceability Matrix as a repo-native read-only policy, matrix template, validator, public CLI command, review-evidence traceability-quality fields, focused fail-closed tests, review evidence, landing action evidence, and Stage 6 closeout proof. The gate maps acceptance criteria to behavior, command, reviewer, UAT, replay, implementation-detail, or explicit disposition evidence without converting traceability into coverage, reviewer-count, Trust Verifier cutover, or workflow authority replacement.",
       "verification_target": "docs/work/BANDIT-077/retrospective.md",
       "next_action": "Use bandit spec-to-evidence validate <WORK_ITEM> --json for future covered work-item traceability checks; next work returns to Repo PM product-slice triage because no open bootstrap gap remains."
+    },
+    {
+      "id": "BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING",
+      "title": "Repo PM Create Controller Closed Anchor Routing",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "BANDIT-094",
+      "source_artifacts": [
+        "docs/work/BANDIT-094/brief.md",
+        "docs/work/BANDIT-094/implementation-evidence.md",
+        "docs/work/BANDIT-094/landing-action.md",
+        "docs/work/BANDIT-094/retrospective.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json"
+      ],
+      "linked_work_item": "BANDIT-095",
+      "rationale": "After BANDIT-094 landed and closed the Repo PM Create Controller slice, `node ./bin/bandit.mjs repo-pm create-controller --json` failed in the valid closed-current-work interstitial state with `Current work item BANDIT-094 is not formation_approved; refusing to re-allocate or skip formation review.` Repo routing correctly records BANDIT-094 closed and PRD-005.3 as the next unformed target, so the controller needs a bounded repair before PRD-005.3 proceeds.",
+      "verification_target": null,
+      "next_action": "Complete active chore BANDIT-095."
     }
   ]
 }

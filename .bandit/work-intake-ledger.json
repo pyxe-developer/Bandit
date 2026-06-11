@@ -386,8 +386,8 @@
       "depends_on": [
         "PRD-004-TRUST-BOUNDARY-AUTONOMY"
       ],
-      "scope_summary": "Implement PRD-005 through bounded slices after PRD-004 base boundary evidence exists. PRD-005.1 Roadmap Work Target Resolver landed and closed as BANDIT-093; PRD-005.2 Repo PM Create Controller And Prompt Contract is formed as BANDIT-094 before execute-controller and operator-facing command adapters.",
-      "risk_product_scope_status": "approved PRD-backed work lane; BANDIT-094 is formation_approved but not landed; normal Work Item gates, reviews, and landing evidence are required before each slice executes",
+      "scope_summary": "Implement PRD-005 through bounded slices after PRD-004 base boundary evidence exists. PRD-005.1 Roadmap Work Target Resolver landed and closed as BANDIT-093; PRD-005.2 Repo PM Create Controller And Prompt Contract landed and closed as BANDIT-094; PRD-005.3 is deferred behind active repair chore BANDIT-095 for create-controller closed-anchor routing.",
+      "risk_product_scope_status": "approved PRD-backed work lane; BANDIT-095 is an active bootstrap-gap repair blocking PRD-005.3 formation until it lands and closes; normal Work Item gates, reviews, and landing evidence are required before each slice executes",
       "intake_outcome": "accepted_to_queue",
       "claimable": false,
       "transition_history": [
@@ -411,6 +411,20 @@
           "from": "accepted_to_queue",
           "to": "accepted_to_queue",
           "source": "BANDIT-094 formation approved for PRD-005.2 Repo PM Create Controller And Prompt Contract; PRD-005 remains active until BANDIT-094 lands and closes"
+        },
+        {
+          "at": "2026-06-10T23:39:14Z",
+          "actor": "closeout_agent",
+          "from": "accepted_to_queue",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-094 landed and closed PRD-005.2; PRD-005.3 became the next planned product slice"
+        },
+        {
+          "at": "2026-06-11T11:03:37Z",
+          "actor": "repo_pm",
+          "from": "accepted_to_queue",
+          "to": "accepted_to_queue",
+          "source": "BANDIT-095 formation approved for create-controller closed-anchor routing repair; PRD-005.3 remains deferred until BANDIT-095 lands and closes"
         }
       ]
     },

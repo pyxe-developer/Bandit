@@ -8,12 +8,11 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-094` - Repo PM Create Controller And Prompt Contract
-  (Stage 6: closed; retained as the derived-status anchor until the next work
-  item is formed)
+- `[Gap]` `BANDIT-095` - Repo PM Create Controller Closed Anchor Routing
+  (Stage 1: formation_approved)
 
-**Current next step:** Repo PM should form the next work item for PRD-005.3
-Work Item PM Execute Controller And Route Registry.
+**Current next step:** Work Item PM should record plan-mode orchestration for
+BANDIT-095 before RED evidence.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,8 +23,8 @@ replacement or wrapping, local API or State Index timing, scheduler execution,
 claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, or start unrelated Phase 8 product work before Repo
-PM forms and approves the next work item.
+Installed-Copy Update Path, create PRD-005.3 work, or start unrelated Phase 8
+product work before `BANDIT-095` lands and closes.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -34,19 +33,21 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry
-  (not yet formed)
+  (deferred until `BANDIT-095` lands and closes)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- None currently open in `.bandit/bootstrap-gaps.json`.
+- `[Gap]` `BANDIT-095` - Repo PM Create Controller Closed Anchor Routing:
+  repair the create controller so a closed current-work anchor can route to the
+  roadmap/current-context authorized next unformed target.
 
 ### Phase 8 Product Queue
 
 - `[Slice]` `TBD` - PRD-005.3 Work Item PM Execute Controller And Route Registry:
   advance formed work through authorized routes, role packet assembly, and
-  honest blocker/provider evidence.
+  honest blocker/provider evidence after `BANDIT-095` closes.
 - `[Slice]` `TBD` - PRD-005.4 Operator Command Adapters: add the thin
   `/bandit-work-create` and `/bandit-work-execute` invocation layer after the
   deep controllers are tested.

@@ -1,0 +1,166 @@
+{
+  "kind": "chore",
+  "title": "Repo PM Create Controller Closed Anchor Routing",
+  "status": "Brief Created",
+  "non_product_work": "Repair the Repo PM create controller so it handles the valid closed-current-work interstitial state where ROADMAP.md retains the last closed work item as the current anchor and CURRENT_CONTEXT.md records a next unformed roadmap target.",
+  "origin": "During the 2026-06-11 Repo PM brief-creation run after BANDIT-094 closeout, `node ./bin/bandit.mjs repo-pm create-controller --json` failed with `Current work item BANDIT-094 is not formation_approved; refusing to re-allocate or skip formation review.` Live repo artifacts agreed that BANDIT-094 was closed and the exact next action was Repo PM formation for PRD-005.3 Work Item PM Execute Controller And Route Registry. BANDIT-094 acceptance criteria required the create controller to handle a closed current work item plus next unformed roadmap target, so this is a bounded bootstrap gap in the just-landed controller path.",
+  "scope": [
+    "Add focused RED evidence proving `repo-pm create-controller --json` fails in the current live closed-anchor state after BANDIT-094 closeout instead of selecting the next unformed PRD-005.3 target.",
+    "Repair the create-controller target selection so a closed current work item retained as a derived-status anchor does not block creation of the roadmap/current-context authorized next unformed target.",
+    "Preserve idempotent current-target behavior for active or formation_approved current Work Items; do not reallocate an unclosed, unformed, or contradictory current Work Item.",
+    "Preserve fail-closed behavior for roadmap/current-context disagreement, missing explicit source spec, operator-owned input, missing authorized Local Qwen route, ambiguous target scope, and duplicate Work Item allocation.",
+    "Preserve CLI authority and source hierarchy: ROADMAP.md and CURRENT_CONTEXT.md remain priority authority, Work Intake Ledger remains provenance only, and cockpit/session-context output remains derived non-canonical.",
+    "Record CLEAN_CODE.md read evidence in Stage 1; CLEAN_CODE.md was read on 2026-06-11 before creating this brief, and clean-code compliance must be evaluated before landing.",
+    "Stage capability scope: Repo PM owns Stage 1 formation; Test Writer owns Stage 2 RED evidence; if Codex authors or materially edits Stage 2 RED tests, Stage 3 implementation is assigned to a different model family during bootstrap; Stage 3 Writer has no authority to edit tests, fixtures, RED evidence, or acceptance mappings; reviewers own Stage 4 evidence; Landing Agent owns Stage 5 verdict/action evidence; Closeout Agent owns Stage 6 retrospective and improvement/no-action disposition evidence.",
+    "Future-work scope: this chore must not implement PRD-005.3 execute-controller behavior, stage route registry, role input packet assembly, provider/blocker evidence recorder, PRD-005.4 operator adapters, public `bandit context <stage>` command, cockpit action execution, local API, State Index, hosted service, telemetry, merge, push, deploy, Trust Verifier cutover, old-gate replacement or wrapping, paid/live reviewer routing, dependency or lockfile changes, or unrelated Phase 8 product work."
+  ],
+  "acceptance_criteria": [
+    "The chore brief exists at docs/work/<ID>/brief.md and links to BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING as the active bootstrap gap created from BANDIT-094 closeout and the failed create-controller run.",
+    "Stage 1 brief evidence records CLEAN_CODE.md read evidence, source authority, stage capability scope, operator-input status, Permanent Test Ownership Boundary, Bootstrap Model-Family Separation, source-of-truth/projection boundary, expected files, required evidence, and forbidden actions.",
+    "Focused RED evidence proves the current failure: with BANDIT-094 closed and PRD-005.3 recorded as the next action, `repo-pm create-controller --json` refuses on closed BANDIT-094 instead of selecting the next unformed target.",
+    "The implementation selects the next unformed roadmap/current-context target when the current work item is closed and closeout evidence satisfies the slice boundary.",
+    "The implementation does not select the next target when the current Work Item is active, lacks required closeout evidence, lacks landing action, or has contradictory coordination/current-context/roadmap evidence.",
+    "The implementation preserves existing creation safety: explicit source spec matching, explicit work-item id allocation, no overwrite, missing-source refusal, operator-owned input refusal, and authorized Local Qwen route refusal still fail closed before writes.",
+    "The implementation preserves already-formed idempotency: if the resolved target is already formation_approved, the controller reports the existing Work Item and Work Item PM plan-mode next action without creating a duplicate.",
+    "The implementation keeps Work Intake Ledger, prompt contracts, cockpit status, session-context packets, PRDs, and specs from becoming independent priority or workflow authority.",
+    "Aggregate Bandit validation or focused create-controller validation covers closed-anchor next-target routing, active-current refusal, missing source spec, operator-input refusal, Local Qwen route refusal, idempotent already-formed behavior, and no Stage 2 artifact creation.",
+    "Layered risk-classification and supply-chain gate evidence are recorded before landing if the implementation touches command routing, validators, policy, prompt templates, or workflow gate behavior.",
+    "Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.",
+    "BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING is resolved only after landing action and retrospective closeout evidence exist for this bounded repair chore.",
+    "No PRD-005.3 execute-controller behavior, route registry, role input packet assembly, provider/blocker recorder, PRD-005.4 adapter, public context command, Trust Verifier cutover, old-gate replacement or wrapping, local API, State Index, cockpit action execution, hosted service, telemetry, merge, push, deploy, dependency change, package-script change, CI/release workflow change, external repo mutation, or unrelated Phase 8 work is introduced."
+  ],
+  "verification_plan": [
+    "Run focused create-controller RED/GREEN tests for the closed-current-anchor plus next-unformed-target state.",
+    "Run focused create-controller tests for active-current refusal, missing source spec, operator-owned input refusal, Local Qwen authorized-route refusal, idempotent already-formed behavior, explicit ID allocation, and no Stage 2 artifact creation.",
+    "Run focused roadmap-work-target resolver tests if resolver current/next relationship handling changes.",
+    "Run focused coordination tests if closed-state or formation-approved transition checks change.",
+    "Run node --test test/work-create-controller.test.mjs.",
+    "Run node --test test/roadmap-work-targets.test.mjs if resolver behavior is touched.",
+    "Run node --test test/role-entrypoints-formation.test.mjs if Repo PM creation routing or formation readiness behavior is touched.",
+    "Run npm run typecheck.",
+    "Run npm test if implementation touches shared CLI routing, validation, formation gate, coordination log, roadmap resolver, cockpit/session-context, risk classification, supply-chain gate, input quarantine, operator-boundary, prompt contracts, or policy validation beyond focused tests.",
+    "Run npm run bandit -- validate.",
+    "Run node ./bin/bandit.mjs cockpit status --json.",
+    "Run node ./bin/bandit.mjs session-context current --json.",
+    "Run node ./bin/bandit.mjs review-subject-hash <ID> for aggregate review evidence freshness before Stage 4 closeout.",
+    "Run npm run bandit -- coderabbit-review pre-pr <ID> --base origin/main before Stage 4 closeout, unless provider refusal or timeout evidence is recorded.",
+    "Run npm run bandit -- qwen-review <ID> before Stage 4 closeout.",
+    "Run npm run bandit -- land-check <ID> before landing.",
+    "Run git diff --check."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json",
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/writer-report.md",
+    "docs/work/<ID>/stage3-pm-acceptance.md",
+    "docs/work/<ID>/coderabbit-review.md",
+    "docs/work/<ID>/local-qwen-review.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md",
+    "src/state/work-create-controller.ts",
+    "src/state/roadmap-work-targets.ts",
+    "src/commands/work-create-controller.ts",
+    "src/commands/repo-pm.ts",
+    "src/commands/validate.ts",
+    "src/cli.ts",
+    "test/work-create-controller.test.mjs",
+    "test/roadmap-work-targets.test.mjs",
+    "test/role-entrypoints-formation.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/events.jsonl",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "required_evidence": [
+    "docs/work/<ID>/brief.md",
+    "docs/work/<ID>/qwen-formation-review.md",
+    "docs/work/<ID>/coderabbit-formation-review.md",
+    "docs/work/<ID>/formation-review.md",
+    "docs/work/<ID>/coordination-log.jsonl",
+    "docs/work/<ID>/red-evidence.md",
+    "docs/work/<ID>/implementation-evidence.md",
+    "docs/work/<ID>/review-evidence.md",
+    "docs/work/<ID>/landing-verdict.md",
+    "docs/work/<ID>/landing-action.md",
+    "docs/work/<ID>/retrospective.md",
+    "docs/work/<ID>/improvement-disposition.md"
+  ],
+  "operator_input_status": "No operator-owned input is required before creating this bootstrap-gap chore or running formation review. Repo artifacts identify the failed create-controller behavior, the PRD-005.2 acceptance criterion it violates, the closed BANDIT-094 slice boundary evidence, the current next action for PRD-005.3, current Stage Rubric requirements, CLEAN_CODE.md authority, Formation Gate boundary, Stage Capability Scope boundary, Token-Cost Failsafe boundary, and Codex PM/Repo PM authority to route routine controller-repair mechanics. Halt only if implementation would change product direction, UAT policy, workflow policy beyond repairing the accepted create-controller contract, business tradeoffs, explicit cost/risk posture, provider-pricing approval, spend-class approval, paid reviewer promotion, recurring paid routing policy, external service setup, live routing policy, claim authority, worktree lifecycle authority, installed global skill contents, dependency or lockfile policy, merge/push/deploy authority, Trust Verifier cutover policy, old-gate replacement or wrapping, or broader cockpit/product scope.",
+  "bootstrap_gap": "BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "stage1_brief",
+      "formation_review",
+      "stage2_red_evidence",
+      "stage3_implementation",
+      "stage4_review",
+      "stage5_landing",
+      "stage6_retrospective"
+    ],
+    "authority_roles": [
+      "codex_pm",
+      "repo_pm",
+      "work_item_pm",
+      "test_writer",
+      "implementation_writer",
+      "reviewer",
+      "landing_agent",
+      "closeout_agent"
+    ],
+    "required_skills": [
+      "bandit",
+      "tdd",
+      "review"
+    ],
+    "forbidden_actions": [
+      "prd-005-execute-controller",
+      "stage-route-registry",
+      "role-input-packet-assembly",
+      "provider-blocker-recorder",
+      "prd-005-operator-adapter",
+      "public-context-command",
+      "cockpit-action",
+      "local-api",
+      "state-index",
+      "trust-verifier-cutover",
+      "old-gate-replacement-or-wrapping",
+      "merge-push-deploy"
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "formation_review",
+      "stage3_implementation",
+      "stage4_review"
+    ],
+    "provider_pricing_evidence": [
+      "not_applicable_local_qwen",
+      "not_applicable_coderabbit_cli"
+    ],
+    "spend_classes": [
+      "local_or_included"
+    ],
+    "continuation_decisions": [
+      "CodeRabbit formation review must receive the full 600-second prompt-required timeout before provider-timeout replacement evidence is recorded.",
+      "Local Qwen unavailability is fail-closed and requires operator help rather than an alternate reviewer path.",
+      "Any paid, live, or recurring model/reviewer route remains blocked unless a separate approved provider-pricing and spend-class artifact exists."
+    ],
+    "stage_capability_profiles": [
+      "stage1_formation_only",
+      "claude-implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4"
+    ]
+  }
+}
