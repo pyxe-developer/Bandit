@@ -4,16 +4,17 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-095` - Repo PM Create Controller Closed Anchor Routing (closed)
+- `[Slice]` `BANDIT-096` - Work Item PM Execute Controller And Route Registry
+  (closed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-096` - Work Item PM Execute Controller And Route Registry
-  (Stage 1: formation_approved; Work Item PM plan-mode orchestration required
-  before RED evidence)
+  (Stage 6: closed; retained as the current derived-status anchor until the
+  next work item is formed)
 
-**Current next step:** Work Item PM should record plan-mode orchestration for
-BANDIT-096 before RED evidence.
+**Current next step:** Repo PM should form the next work item for PRD-005.4
+Operator Command Adapters.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -24,8 +25,9 @@ replacement or wrapping, local API or State Index timing, scheduler execution,
 claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, create PRD-005.4 work, or start unrelated Phase 8
-product work before BANDIT-096 records Work Item PM plan-mode orchestration.
+Installed-Copy Update Path, create PRD-005.4 RED or implementation work, or
+start unrelated Phase 8 product work before Repo PM forms and approves the
+PRD-005.4 work item.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -54,6 +56,7 @@ No open bootstrap gap remains.
 
 ## Completed Work
 
+- `BANDIT-096` - Work Item PM Execute Controller And Route Registry
 - `BANDIT-095` - Repo PM Create Controller Closed Anchor Routing
 - `BANDIT-094` - Repo PM Create Controller And Prompt Contract
 - `BANDIT-093` - Roadmap Work Target Resolver

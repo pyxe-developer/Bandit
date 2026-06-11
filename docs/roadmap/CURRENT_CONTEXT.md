@@ -4,27 +4,25 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-095` is the last closed work item. It landed and closed the bootstrap
-gap repair for Repo PM create-controller closed-anchor routing after
-`BANDIT-094`.
+`BANDIT-096` is the last closed work item. It landed and closed the PRD-005.3
+Work Item PM Execute Controller And Route Registry slice.
 
 **Active work item:** `BANDIT-096` - Work Item PM Execute Controller And Route
 Registry.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 6: closed.
 
-**Current next action:** Work Item PM should record plan-mode orchestration for
-BANDIT-096 before RED evidence.
+**Current next action:** Repo PM should form the next work item for PRD-005.4
+Operator Command Adapters.
 
-Do not create BANDIT-096 RED evidence, implementation evidence, review-loop
+Do not create PRD-005.4 RED evidence, implementation evidence, review-loop
 evidence, landing evidence, UAT evidence, retrospective evidence, closeout
-evidence, PRD-005.4 adapter work, V0 Closeout Claude Code A/B Product-Value
-Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
-service setup, paid reviewer/model routing, public benchmark publication, local
-API work, State Index work, guarded browser action execution, PR/CI/CD
-implementation, installed-copy update-path implementation, or unrelated Phase 8
-product work before Work Item PM records plan-mode orchestration for
-`BANDIT-096`.
+evidence, V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust
+Verifier cutover, merge, push, deploy, hosted service setup, paid
+reviewer/model routing, public benchmark publication, local API work, State
+Index work, guarded browser action execution, PR/CI/CD implementation,
+installed-copy update-path implementation, or unrelated Phase 8 product work
+before Repo PM forms and approves the PRD-005.4 work item.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -60,21 +58,22 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-096` formation evidence is the current slice-boundary source:
+`BANDIT-096` is the current closed-anchor source:
 
-- `docs/specs/BANDIT-096-work-item-pm-execute-controller-and-route-registry.json`
 - `docs/work/BANDIT-096/brief.md`
-- `docs/work/BANDIT-096/qwen-formation-review.md`
-- `docs/work/BANDIT-096/coderabbit-formation-review.md`
-- `docs/work/BANDIT-096/formation-review.md`
-- `docs/work/BANDIT-096/coordination-log.jsonl`, current state
-  `formation_approved`
+- `docs/work/BANDIT-096/red-evidence.md`
+- `docs/work/BANDIT-096/implementation-evidence.md`
+- `docs/work/BANDIT-096/review-evidence.md`
+- `docs/work/BANDIT-096/landing-verdict.md`
+- `docs/work/BANDIT-096/landing-action.md`
+- `docs/work/BANDIT-096/retrospective.md`
+- `docs/work/BANDIT-096/improvement-disposition.md`
+- `docs/work/BANDIT-096/coordination-log.jsonl`, current state `closed`
 
 ## Next Work
 
-The next action is Work Item PM plan-mode orchestration for `BANDIT-096`.
+The next action is Repo PM formation for PRD-005.4 Operator Command Adapters.
 
-`BANDIT-096` must record `docs/work/BANDIT-096/orchestration-plan.md` and the
-Work Item PM plan-mode coordination transition before RED evidence, PRD-005.4
-operator command adapters, V0 trial work, Trust Verifier cutover, or unrelated
-Phase 8 product work.
+PRD-005.4 must not begin RED evidence, implementation, review, landing, or
+closeout until Repo PM creates the work item, formation reviews exist, and
+formation is approved.
