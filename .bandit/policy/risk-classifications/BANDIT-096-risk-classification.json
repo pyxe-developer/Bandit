@@ -1,0 +1,222 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-096",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/state/work-execute-controller.ts",
+      "surface": "execute_controller_or_route_registry",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/stage-route-registry.ts",
+      "surface": "execute_controller_or_route_registry",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/role-input-packets.ts",
+      "surface": "workflow_support_packet_builder",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/provider-blocker-evidence.ts",
+      "surface": "provider_blocker_evidence",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/work-execute-controller.ts",
+      "surface": "internal_cli_controller_stub",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/work-execute-controller.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/stage-route-registry.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/role-input-packets.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/provider-blocker-evidence.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "operator_adapter_or_slash_command",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-096/brief.md"
+    },
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-096/brief.md"
+    },
+    {
+      "surface": "hosted_service_telemetry_or_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "surface": "public_context_command_or_canonical_packet_authority",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-096/red-evidence.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "execute_controller_foundation_is_internal_and_plan_mode_gated",
+      "risk": "medium",
+      "evidence_path": "src/state/work-execute-controller.ts"
+    },
+    {
+      "signal_id": "stage_routes_preserve_authorized_reviewer_paths_and_forbidden_fallbacks",
+      "risk": "medium",
+      "evidence_path": "src/state/stage-route-registry.ts"
+    },
+    {
+      "signal_id": "role_input_packets_are_derived_non_canonical",
+      "risk": "medium",
+      "evidence_path": "src/state/role-input-packets.ts"
+    },
+    {
+      "signal_id": "provider_blocker_evidence_distinguishes_timeout_error_malformed_operator_input_stale_evidence_review_blocker_and_success",
+      "risk": "medium",
+      "evidence_path": "src/state/provider-blocker-evidence.ts"
+    },
+    {
+      "signal_id": "coderabbit_provider_timeout_recorded_as_bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-096/coderabbit-review.md"
+    },
+    {
+      "signal_id": "local_qwen_returned_non_blocking_with_pm_disposition",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-096/local-qwen-finding-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/work-execute-controller.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/stage-route-registry.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/role-input-packets.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/provider-blocker-evidence.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-096/coderabbit-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-096-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-096/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-096/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-NON-BLOCKING-REVIEW-FINDINGS",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-096/local-qwen-finding-disposition.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-096 is bounded to an internal Work Item PM execute-controller foundation, route registry, role input packet assembly, provider/blocker evidence helpers, and tests. It does not implement the PRD-005.4 operator adapter, Trust Verifier cutover, merge, push, deploy, dependency changes, CI/release workflows, hosted services, telemetry, paid routing, or product-facing UAT."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-096 is medium workflow-risk because it adds internal execute-controller and route-registry foundations that influence later orchestration routing. The slice stays internal, keeps packets derived_non_canonical, preserves authorized Local Qwen routing, records CodeRabbit timeout as bootstrap_gap replacement evidence, and dispositions Local Qwen non-blocking findings without source repair.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-096-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-096-supply-chain-gate.json",
+    "docs/work/BANDIT-096/brief.md",
+    "docs/work/BANDIT-096/red-evidence.md",
+    "docs/work/BANDIT-096/implementation-evidence.md",
+    "docs/work/BANDIT-096/writer-report.md",
+    "docs/work/BANDIT-096/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-096/coderabbit-review.md",
+    "docs/work/BANDIT-096/local-qwen-review.md",
+    "docs/work/BANDIT-096/local-qwen-finding-disposition.md",
+    "src/state/work-execute-controller.ts",
+    "src/state/stage-route-registry.ts",
+    "src/state/role-input-packets.ts",
+    "src/state/provider-blocker-evidence.ts",
+    "src/commands/work-execute-controller.ts",
+    "test/work-execute-controller.test.mjs",
+    "test/stage-route-registry.test.mjs",
+    "test/role-input-packets.test.mjs",
+    "test/provider-blocker-evidence.test.mjs"
+  ]
+}
