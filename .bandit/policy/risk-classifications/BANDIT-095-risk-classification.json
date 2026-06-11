@@ -1,0 +1,164 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-095",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/state/roadmap-work-targets.ts",
+      "surface": "workflow_projection_resolver",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/work-create-controller.ts",
+      "surface": "workflow_creation_controller",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/roadmap-work-targets.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/work-create-controller.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "execute_controller_or_route_registry",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-095/brief.md"
+    },
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-095/brief.md"
+    },
+    {
+      "surface": "hosted_service_telemetry_or_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "surface": "hidden_work_scheduler",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-095/implementation-evidence.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "closed_anchor_routing_is_limited_to_roadmap_current_and_next",
+      "risk": "medium",
+      "evidence_path": "src/state/roadmap-work-targets.ts"
+    },
+    {
+      "signal_id": "closed_anchor_creation_requires_previous_slice_boundary_evidence",
+      "risk": "medium",
+      "evidence_path": "src/state/work-create-controller.ts"
+    },
+    {
+      "signal_id": "stage3_writer_made_zero_test_surface_edits",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "signal_id": "coderabbit_provider_timeout_recorded_as_bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-095/coderabbit-review.md"
+    },
+    {
+      "signal_id": "local_qwen_returned_pass_with_no_findings",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/local-qwen-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/work-create-controller.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/roadmap-work-targets.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/role-entrypoints-formation.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-095/coderabbit-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-095-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-095/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-095/coderabbit-review.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-095 is bounded to Repo PM create-controller closed-anchor routing repair. It does not implement execute-controller behavior, route registries, Trust Verifier cutover, merge, push, deploy, dependency changes, CI/release workflows, hosted services, telemetry, paid routing, or product-facing UAT."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-095 is medium workflow-risk because it changes parser-sensitive roadmap/current-context routing and work-item creation gating. The implementation routes from a closed current-work anchor to the next authorized roadmap target only when previous-slice landing, retrospective, improvement-disposition, and closed coordination evidence exist. CodeRabbit timed out and is recorded as bootstrap_gap replacement evidence; Local Qwen completed through the authorized route with pass and zero findings.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-095-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-095-supply-chain-gate.json",
+    "docs/work/BANDIT-095/brief.md",
+    "docs/work/BANDIT-095/red-evidence.md",
+    "docs/work/BANDIT-095/implementation-evidence.md",
+    "docs/work/BANDIT-095/writer-report.md",
+    "docs/work/BANDIT-095/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-095/coderabbit-review.md",
+    "docs/work/BANDIT-095/local-qwen-review.md",
+    "src/state/roadmap-work-targets.ts",
+    "src/state/work-create-controller.ts",
+    "test/roadmap-work-targets.test.mjs",
+    "test/work-create-controller.test.mjs"
+  ]
+}
