@@ -1,25 +1,26 @@
 # Bandit
 
-Bandit is a repo-native workflow improvement engine for agentic software
-delivery.
+Bandit is a repo-native trust layer for agentic software delivery.
 
-The goal is not just to run coding agents. The goal is to make agentic
-workflows measurably better over time: safer landings, better routing, fewer
-repair loops, clearer decisions, and durable learning from retrospectives,
-reviews, and cross-model tension.
+It helps a repository run AI-assisted work through explicit workflow stages:
+context restoration, work formation, test design, implementation, review,
+landing, retrospective, and improvement capture. The point is not just to run
+coding agents. The point is to make agentic workflows easier to trust and
+improve over time.
+
+Bandit is currently private. Public npm publishing, paid private registry setup,
+hosted update services, telemetry, automatic self-update, external repo
+mutation, and merge/push/deploy authority are not part of the current install
+channel.
 
 ## Requirements
 
 - Node.js and npm.
 - Access to this private repository, a private Git tag, or a packed tarball.
-- For adversarial review workflows, the configured Local Qwen reviewer endpoint
-  is repo-local policy under `.bandit/reviewers/local-qwen.json`.
+- For adversarial review workflows, the configured Local Qwen endpoint used by
+  this repository's policy.
 
-Bandit is currently private. Public npm publishing, paid private registry setup,
-hosted update services, telemetry, and automatic self-update are not part of the
-current install channel.
-
-## Use From This Checkout
+## First-Time Use From This Checkout
 
 Install dependencies:
 
@@ -27,16 +28,24 @@ Install dependencies:
 npm install
 ```
 
-Run the local CLI through the repository script:
+Validate the checkout:
 
 ```sh
 npm run bandit -- validate
+npm run typecheck
+npm test
+```
+
+Run the local CLI through the repository script:
+
+```sh
 npm run bandit -- list
 npm run bandit -- cockpit status --json
 npm run bandit -- session-context current --json
 ```
 
-Initialize state from this checkout when needed:
+Initialize state only when starting from a repository that does not already have
+Bandit state:
 
 ```sh
 npm run bandit -- init
@@ -67,7 +76,8 @@ Then run the installed CLI:
 ```sh
 npx bandit init
 npx bandit validate
-npx bandit update-check --json
+npx bandit cockpit status --json
+npx bandit session-context current --json
 ```
 
 If the consumer repository prefers npm scripts, add one:
@@ -78,11 +88,52 @@ npm run bandit -- validate
 ```
 
 The private package intentionally includes only the CLI/runtime surfaces,
-starter templates, selected policy defaults, and this README. It excludes
-active work history, tests, and repo-local workflow state from the packed
-distribution.
+starter templates, selected policy defaults, Local Qwen reviewer policy, and
+this README. It excludes active work history, tests, and repo-local workflow
+state from the packed distribution.
 
-## Update Checks
+## Current Operator Commands
+
+Use `npm run bandit -- <command>` from this checkout, or `npx bandit <command>`
+from a consumer repository where Bandit is installed.
+
+Common first-time commands:
+
+```sh
+bandit init
+bandit validate
+bandit list
+bandit show <work-item-id>
+bandit cockpit status --json
+bandit session-context current --json
+bandit update-check --json
+```
+
+Role-oriented workflow entry points:
+
+```sh
+bandit repo-pm create-work-item
+bandit repo-pm approve-formation <work-item-id>
+bandit work-item-pm start <work-item-id>
+```
+
+The current convenience adapters for local operator workflows are:
+
+```sh
+bandit work-create --json
+bandit work-execute --json
+```
+
+`work-create` delegates to the Repo PM create-controller and stops before Stage
+2 work. `work-execute` delegates to the Work Item PM execute-controller and
+reports the next authorized route or blocker for the active formed work item.
+Both commands emit non-canonical operator-facing output; durable workflow state
+continues to live in the repository artifacts managed by the CLI.
+
+Running `bandit` with no command prints usage and the role entry points.
+`--help` is not currently a supported flag.
+
+## Manual Update Checks
 
 Bandit supports manual, non-blocking update checks against a private file
 manifest. Configure `.bandit/update-channel.json` in the consumer repository:
@@ -129,49 +180,3 @@ Statuses are deterministic: `unconfigured`, `disabled`, `unreachable`,
 `.bandit/update-channel-cache.json`; normal CLI commands may print a concise
 stderr update alert from a fresh cached `update_available` result, but update
 checks never mutate the package or mask the requested command's exit status.
-
-## Common Commands
-
-Use `npm run bandit -- <command>` from this checkout, or `npx bandit <command>`
-from a consumer repository where Bandit is installed.
-
-```sh
-bandit init
-bandit validate
-bandit update-check [--json]
-bandit list
-bandit show <work-item-id>
-bandit gaps list
-bandit cockpit status --json
-bandit session-context current --json
-bandit repo-pm <create-work-item|approve-formation> [args]
-bandit work-item-pm start <work-item-id>
-```
-
-Running `bandit` with no command prints the full current command list.
-
-## Source Of Truth
-
-For source-checkout development, current workflow state lives in repo artifacts,
-not in this README:
-
-- [Status](STATUS.md)
-- [Current Context](docs/roadmap/CURRENT_CONTEXT.md)
-- [Roadmap](docs/roadmap/ROADMAP.md)
-- [Stage Rubrics](docs/verification/STAGE_RUBRICS.md)
-- [Clean Code Rubric](CLEAN_CODE.md)
-- [Glossary](CONTEXT.md)
-
-Before starting or continuing Bandit work, restore context from those artifacts
-and follow the active work item, stage rubrics, and slice-boundary rules.
-
-## Founding Artifacts
-
-- [Product PRD](docs/prds/BANDIT-PRD-001-founding-product.md)
-- [Architecture](docs/architecture/founding-architecture.md)
-- [V0 Plan](docs/plans/V0_PLAN.md)
-- [Rubric-Driven Verification](docs/verification/RUBRIC_DRIVEN_VERIFICATION.md)
-- [Bandit Skill Source](skills/bandit/SKILL.md)
-- [Founding Decisions](docs/decisions/2026-05-24-founding-decisions.md)
-- [Improvement Metrics Catalog](docs/improvement/metrics-catalog.md)
-- [Retrospective Chore Schema](docs/improvement/retrospective-chore-schema.md)
