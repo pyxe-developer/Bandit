@@ -4,32 +4,26 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-094` is the last closed work item. It landed and closed the second
-`BANDIT-PRD-005` implementation slice: Repo PM Create Controller And Prompt
-Contract.
-
-`BANDIT-095` is the active work item. Repo PM formed it as a bootstrap-gap
-repair after the newly landed create controller refused the valid closed-anchor
-state instead of routing from closed `BANDIT-094` to the next unformed
-PRD-005.3 target.
+`BANDIT-095` is the last closed work item. It landed and closed the bootstrap
+gap repair for Repo PM create-controller closed-anchor routing after
+`BANDIT-094`.
 
 **Active work item:** `BANDIT-095` - Repo PM Create Controller Closed Anchor
 Routing.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 6: closed.
 
-**Current next action:** Work Item PM should record plan-mode orchestration for
-BANDIT-095 before RED evidence.
+**Current next action:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
 
-Do not create PRD-005.3 Work Item PM Execute Controller And Route Registry
-briefs, RED evidence, implementation evidence, review-loop evidence, landing
-evidence, UAT evidence, retrospective evidence, closeout evidence, PRD-005.4
-adapter work, V0 Closeout Claude Code A/B Product-Value Trial implementation,
-Trust Verifier cutover, merge, push, deploy, hosted service setup, paid
-reviewer/model routing, public benchmark publication, local API work, State
-Index work, guarded browser action execution, PR/CI/CD implementation,
-installed-copy update-path implementation, or unrelated Phase 8 product work
-before `BANDIT-095` lands and closes.
+Do not create PRD-005.3 RED evidence, implementation evidence, review-loop
+evidence, landing evidence, UAT evidence, retrospective evidence, closeout
+evidence, PRD-005.4 adapter work, V0 Closeout Claude Code A/B Product-Value
+Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
+service setup, paid reviewer/model routing, public benchmark publication, local
+API work, State Index work, guarded browser action execution, PR/CI/CD
+implementation, installed-copy update-path implementation, or unrelated Phase 8
+product work before Repo PM forms the PRD-005.3 work item.
 
 No public package publishing is approved, no paid registry setup is approved,
 no hosted update service is approved, no telemetry is approved, no automatic
@@ -63,33 +57,20 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-095` formation evidence:
+`BANDIT-095` closed evidence is the current slice-boundary source:
 
-- Source spec:
-  `docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json`.
-- Brief and formation review:
-  `docs/work/BANDIT-095/brief.md`,
-  `docs/work/BANDIT-095/qwen-formation-review.md`,
-  `docs/work/BANDIT-095/coderabbit-formation-review.md`, and
-  `docs/work/BANDIT-095/formation-review.md`.
-- Coordination log:
-  `docs/work/BANDIT-095/coordination-log.jsonl`, current state
-  `formation_approved`.
-- Active bootstrap gap:
-  `BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING` in
-  `.bandit/bootstrap-gaps.json`.
-
-`BANDIT-094` closed evidence remains the prior slice-boundary source:
-
-- `docs/work/BANDIT-094/landing-action.md`
-- `docs/work/BANDIT-094/retrospective.md`
-- `docs/work/BANDIT-094/improvement-disposition.md`
-- `docs/work/BANDIT-094/coordination-log.jsonl`, current state `closed`
+- `docs/work/BANDIT-095/landing-action.md`
+- `docs/work/BANDIT-095/retrospective.md`
+- `docs/work/BANDIT-095/improvement-disposition.md`
+- `docs/work/BANDIT-095/coordination-log.jsonl`, current state `closed`
+- `.bandit/bootstrap-gaps.json`, gap
+  `BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING` resolved
 
 ## Next Work
 
-The next action is Work Item PM plan-mode orchestration for `BANDIT-095`.
+The next action is Repo PM formation for PRD-005.3 Work Item PM Execute
+Controller And Route Registry.
 
-After `BANDIT-095` lands and closes, Repo PM should return to PRD-005.3 Work
-Item PM Execute Controller And Route Registry formation before PRD-005.4, V0
-trial work, or unrelated Phase 8 product work.
+PRD-005.3 must be formed before Work Item PM execution, PRD-005.4 operator
+command adapters, V0 trial work, Trust Verifier cutover, or unrelated Phase 8
+product work.

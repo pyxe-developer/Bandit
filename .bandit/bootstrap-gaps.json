@@ -1125,8 +1125,8 @@
     {
       "id": "BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING",
       "title": "Repo PM Create Controller Closed Anchor Routing",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-094",
       "source_artifacts": [
         "docs/work/BANDIT-094/brief.md",
@@ -1138,9 +1138,9 @@
         "docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json"
       ],
       "linked_work_item": "BANDIT-095",
-      "rationale": "After BANDIT-094 landed and closed the Repo PM Create Controller slice, `node ./bin/bandit.mjs repo-pm create-controller --json` failed in the valid closed-current-work interstitial state with `Current work item BANDIT-094 is not formation_approved; refusing to re-allocate or skip formation review.` Repo routing correctly records BANDIT-094 closed and PRD-005.3 as the next unformed target, so the controller needs a bounded repair before PRD-005.3 proceeds.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-095."
+      "rationale": "BANDIT-095 repaired Repo PM create-controller closed-anchor routing. The resolver now treats a closed current ROADMAP work item as a closed anchor for the next authorized target, and the create controller validates landing-action, retrospective, improvement-disposition, and closed coordination evidence before creating the next work item.",
+      "verification_target": "docs/work/BANDIT-095/retrospective.md",
+      "next_action": "Repo PM should form PRD-005.3 Work Item PM Execute Controller And Route Registry."
     }
   ]
 }
