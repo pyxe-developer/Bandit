@@ -1,0 +1,170 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-097",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/commands/bandit-work-create.ts",
+      "surface": "operator_adapter_or_slash_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/bandit-work-execute.ts",
+      "surface": "operator_adapter_or_slash_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_routing",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/bandit-work-command-adapters.test.mjs",
+      "surface": "tests",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "trust_verifier_cutover",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-097/brief.md"
+    },
+    {
+      "surface": "hosted_service_telemetry_or_deploy",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-097/stage3-pm-acceptance.md"
+    },
+    {
+      "surface": "public_context_command_or_canonical_packet_authority",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-097/red-evidence.md"
+    },
+    {
+      "surface": "merge_push_deploy_or_destructive_operation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-097/implementation-evidence.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "operator_adapters_are_thin_wrappers_over_existing_controllers",
+      "risk": "medium",
+      "evidence_path": "src/commands/bandit-work-create.ts"
+    },
+    {
+      "signal_id": "execute_adapter_requires_formation_approved_before_stage_2_route",
+      "risk": "medium",
+      "evidence_path": "src/commands/bandit-work-execute.ts"
+    },
+    {
+      "signal_id": "adapter_outputs_are_derived_non_canonical",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-097/implementation-evidence.md"
+    },
+    {
+      "signal_id": "coderabbit_provider_timeout_recorded_as_bootstrap_gap",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-097/coderabbit-review.md"
+    },
+    {
+      "signal_id": "local_qwen_returned_non_blocking_with_pm_disposition",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-097/local-qwen-finding-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/bandit-work-command-adapters.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-097/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/work-create-controller.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-097/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/work-execute-controller.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-097/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-097/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-097/coderabbit-review.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-097-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-OPERATOR-ADAPTER",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-097/brief.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-097/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-NON-BLOCKING-REVIEW-FINDINGS",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-097/local-qwen-finding-disposition.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-097 is bounded to local CLI operator adapters that delegate to existing repo-native controllers. It does not add authentication, authorization, payments, production data, dependency changes, CI/release workflows, hosted services, telemetry, credentials, merge, push, deploy, or destructive behavior."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-097 is medium workflow-risk because it exposes two operator-facing CLI adapters. The implementation remains local, fail-closed, controller-delegating, and non-canonical; required review evidence includes CodeRabbit timeout replacement evidence, authorized Local Qwen review with PM disposition, focused tests, and typecheck.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-097-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-097-supply-chain-gate.json",
+    "docs/work/BANDIT-097/brief.md",
+    "docs/work/BANDIT-097/red-evidence.md",
+    "docs/work/BANDIT-097/implementation-evidence.md",
+    "docs/work/BANDIT-097/writer-report.md",
+    "docs/work/BANDIT-097/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-097/coderabbit-review.md",
+    "docs/work/BANDIT-097/local-qwen-review.md",
+    "docs/work/BANDIT-097/local-qwen-finding-disposition.md",
+    "src/commands/bandit-work-create.ts",
+    "src/commands/bandit-work-execute.ts",
+    "src/cli.ts",
+    "test/bandit-work-command-adapters.test.mjs"
+  ]
+}
