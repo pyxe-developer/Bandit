@@ -54,6 +54,8 @@ import { worktreeBootstrap } from "./commands/worktree-bootstrap.js";
 import { createWorkItem } from "./commands/work-item-create.js";
 import { roadmapWorkTargets } from "./commands/roadmap-work-targets.js";
 import { workIntake } from "./commands/work-intake.js";
+import { banditWorkCreate } from "./commands/bandit-work-create.js";
+import { banditWorkExecute } from "./commands/bandit-work-execute.js";
 
 async function main() {
   const [command, ...args] = process.argv.slice(2);
@@ -423,6 +425,34 @@ async function main() {
 
   if (command === "roadmap-work-targets") {
     const result = await roadmapWorkTargets(process.cwd(), args);
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.code) {
+      process.exitCode = result.code;
+    }
+    return;
+  }
+
+  if (command === "work-create") {
+    const result = await banditWorkCreate(process.cwd(), args);
+    if (result.stdout) {
+      process.stdout.write(result.stdout);
+    }
+    if (result.stderr) {
+      process.stderr.write(result.stderr);
+    }
+    if (result.code) {
+      process.exitCode = result.code;
+    }
+    return;
+  }
+
+  if (command === "work-execute") {
+    const result = await banditWorkExecute(process.cwd(), args);
     if (result.stdout) {
       process.stdout.write(result.stdout);
     }
