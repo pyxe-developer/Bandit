@@ -28,6 +28,7 @@ export type RoadmapWorkTargetResolution = {
   reconciliation: { status: "pass" };
   hidden_scheduler_used: false;
   stale_tail_status?: "ignored";
+  closed_anchor?: { id: string };
 };
 
 export type ResolveResult =
@@ -77,6 +78,10 @@ function parseRoadmap(content: string): ParsedRoadmap {
     currentItem: currentSection ? parseRoadmapItem(currentSection) : null,
     nextItem: nextSection ? parseRoadmapItem(nextSection) : null
   };
+}
+
+function isClosedAnchorStatus(status: string): boolean {
+  return status.trimStart().toLowerCase().startsWith("closed");
 }
 
 function parseCurrentContext(content: string): ParsedCurrentContext {
@@ -257,6 +262,29 @@ export async function resolveRoadmapWorkTarget(repoRoot: string): Promise<Resolv
   const parsedRoadmap = parseRoadmap(roadmapContent);
 
   if (parsedRoadmap.currentItem !== null) {
+    if (isClosedAnchorStatus(parsedRoadmap.currentItem.status)) {
+      const closedId = parsedRoadmap.currentItem.id;
+      if (parsedRoadmap.nextItem === null) {
+        return {
+          ok: false,
+          diagnostic:
+            "Roadmap work target blocked: ROADMAP.md does not identify an authorized current or next work target"
+        };
+      }
+      const target = await buildNextTarget(repoRoot, parsedRoadmap.nextItem);
+      return {
+        ok: true,
+        resolution: {
+          kind: "roadmap_work_target_resolution",
+          authority: "derived_non_canonical",
+          target,
+          reconciliation: { status: "pass" },
+          hidden_scheduler_used: false,
+          closed_anchor: { id: closedId }
+        }
+      };
+    }
+
     if (
       parsedContext.activeWorkItemId !== null &&
       parsedContext.activeWorkItemId !== parsedRoadmap.currentItem.id

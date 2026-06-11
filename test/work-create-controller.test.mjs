@@ -69,6 +69,73 @@ test("Repo PM create controller reports already formed work idempotently", async
   assert.equal(await pathExists(repo, "docs/work/BANDIT-095/brief.md"), false);
 });
 
+test("Repo PM create controller creates next target from a closed current-work anchor", async () => {
+  const repo = await createControllerRepo({
+    currentContext: closedAnchorCurrentContextFixture(),
+    roadmap: closedAnchorRoadmapFixture()
+  });
+  await writeClosedWorkItem(repo, "BANDIT-094", "Repo PM Create Controller And Prompt Contract");
+  await writeSourceSpec(
+    repo,
+    "BANDIT-095-work-item-pm-execute-controller-and-route-registry",
+    validSliceSpec({
+      title: "Work Item PM Execute Controller And Route Registry",
+      goal: "Implement PRD-005.3 Work Item PM execute-controller routing.",
+      scope: ["BANDIT-PRD-005.3 Work Item PM Execute Controller And Route Registry."]
+    })
+  );
+  await writeLocalQwenProfile(repo);
+
+  const result = await runBandit(repo, [
+    "repo-pm",
+    "create-controller",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.status, "brief_created");
+  assert.equal(payload.work_item, "BANDIT-095");
+  assert.equal(payload.target.relationship, "next");
+  assert.equal(payload.target.title, "PRD-005.3 Work Item PM Execute Controller And Route Registry");
+  assert.equal(payload.stage2_started, false);
+  assert.match(payload.next_action, /formation review/i);
+
+  assert.equal(await pathExists(repo, "docs/work/BANDIT-095/brief.md"), true);
+  assert.equal(await pathExists(repo, "docs/work/BANDIT-095/coordination-log.jsonl"), true);
+  assert.equal(await pathExists(repo, "docs/work/BANDIT-095/red-evidence.md"), false);
+  assert.equal(await pathExists(repo, "docs/work/BANDIT-095/implementation-evidence.md"), false);
+});
+
+test("Repo PM create controller refuses closed-anchor routing without landing action evidence", async () => {
+  const repo = await createControllerRepo({
+    currentContext: closedAnchorCurrentContextFixture(),
+    roadmap: closedAnchorRoadmapFixture()
+  });
+  await writeIncompleteClosedWorkItem(repo, "BANDIT-094", "Repo PM Create Controller And Prompt Contract");
+  await writeSourceSpec(
+    repo,
+    "BANDIT-095-work-item-pm-execute-controller-and-route-registry",
+    validSliceSpec({
+      title: "Work Item PM Execute Controller And Route Registry",
+      goal: "Implement PRD-005.3 Work Item PM execute-controller routing.",
+      scope: ["BANDIT-PRD-005.3 Work Item PM Execute Controller And Route Registry."]
+    })
+  );
+  await writeLocalQwenProfile(repo);
+
+  const result = await runBandit(repo, [
+    "repo-pm",
+    "create-controller",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /closed current work item BANDIT-094/i);
+  assert.match(result.stderr, /landing-action\.md/i);
+  assert.equal(await pathExists(repo, "docs/work/BANDIT-095/brief.md"), false);
+});
+
 test("Repo PM create controller refuses when roadmap target has no explicit source spec", async () => {
   const repo = await createControllerRepo();
   await writeLocalQwenProfile(repo);
@@ -258,11 +325,11 @@ findings_disposition: no_action_required
   );
 }
 
-async function writeSourceSpec(repo, id) {
-  await writeJson(repo, `docs/specs/${id}.json`, validSliceSpec());
+async function writeSourceSpec(repo, id, spec = validSliceSpec()) {
+  await writeJson(repo, `docs/specs/${id}.json`, spec);
 }
 
-function validSliceSpec() {
+function validSliceSpec(overrides = {}) {
   return {
     kind: "slice",
     title: "Repo PM Create Controller And Prompt Contract",
@@ -286,7 +353,8 @@ function validSliceSpec() {
       authority_roles: ["repo_pm"],
       required_skills: ["bandit"],
       forbidden_actions: ["red-evidence", "implementation", "landing"]
-    }
+    },
+    ...overrides
   };
 }
 
@@ -410,6 +478,93 @@ function roadmapActive094() {
 - \`[Slice]\` \`TBD\` - PRD-005.3 Work Item PM Execute Controller And Route Registry,
   pending \`BANDIT-094\` landing and closeout.
 `;
+}
+
+function closedAnchorCurrentContextFixture() {
+  return `# Current Context
+
+## Status
+
+**Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
+
+\`BANDIT-094\` is the last closed work item.
+
+**Active work item:** \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract.
+
+The current stage is Stage 6: closed.
+
+**Current next action:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
+
+## Required Operator Input
+
+none_required.
+`;
+}
+
+function closedAnchorRoadmapFixture() {
+  return `# Roadmap
+
+**Current phase:** Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
+
+## Last Closed Work Item
+
+- \`[Slice]\` \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract (closed)
+
+## Current Work Item
+
+- \`[Slice]\` \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract
+  (Stage 6: closed; retained as the derived-status anchor until the next work
+  item is formed)
+
+**Current next step:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
+
+## Next Work Item
+
+- \`[Slice]\` \`TBD\` - PRD-005.3 Work Item PM Execute Controller And Route Registry
+  (not yet formed)
+`;
+}
+
+async function writeIncompleteClosedWorkItem(repo, id, title) {
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/brief.md`,
+    `# ${id}: ${title}
+
+work_type: slice
+`
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/retrospective.md`,
+    "# Retrospective\n\nClosed.\n"
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/improvement-disposition.md`,
+    "# Improvement Disposition\n\nNo action.\n"
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/coordination-log.jsonl`,
+    `${JSON.stringify({
+      version: 1,
+      event_type: "step_transition",
+      work_item: id,
+      sequence: 1,
+      timestamp: "2026-06-10T00:00:00Z",
+      actor: "closeout_agent",
+      source: "fixture",
+      state: "closed",
+      evidence: [`docs/work/${id}/retrospective.md`],
+      safe_triggers: ["next_work_item_formation_allowed"],
+      next_action: "Repo PM should create PRD-005.3 Work Item PM Execute Controller And Route Registry.",
+      accountable_actor: "repo_pm",
+      accepted_block: null
+    })}\n`
+  );
 }
 
 async function writeArtifact(repo, relativePath, content) {

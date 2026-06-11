@@ -72,6 +72,37 @@ test("roadmap work target resolver returns a not-yet-formed interstitial target"
   ]);
 });
 
+test("roadmap work target resolver returns next target when current roadmap item is a closed anchor", async () => {
+  const repo = await createResolverRepo({
+    activeWorkItemId: "BANDIT-094",
+    activeWorkTitle: "Repo PM Create Controller And Prompt Contract",
+    currentContext: closedAnchorCurrentContextFixture(),
+    roadmap: closedAnchorRoadmapFixture()
+  });
+  await writeClosedWorkItem(repo, "BANDIT-094", "Repo PM Create Controller And Prompt Contract");
+
+  const result = await runBandit(repo, [
+    "roadmap-work-targets",
+    "resolve",
+    "--json"
+  ]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.equal(report.target.id, "TBD");
+  assert.equal(report.target.title, "PRD-005.3 Work Item PM Execute Controller And Route Registry");
+  assert.equal(report.target.status, "not_yet_formed");
+  assert.equal(report.target.relationship, "next");
+  assert.deepEqual(report.target.source_artifacts, ["docs/roadmap/ROADMAP.md"]);
+  assert.deepEqual(report.target.provenance_pointers, [
+    {
+      class: "prd",
+      id: "BANDIT-PRD-005.3",
+      path: "docs/prds/BANDIT-PRD-005-bandit-work-commands.md"
+    }
+  ]);
+});
+
 test("roadmap work target resolver fails closed on roadmap and current-context disagreement", async () => {
   const repo = await createResolverRepo({
     roadmap: currentRoadmapFixture({
@@ -235,6 +266,55 @@ work_type: slice
   );
 }
 
+async function writeClosedWorkItem(repo, id, title) {
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/brief.md`,
+    `# ${id}: ${title}
+
+## Status
+
+Brief Created
+
+work_type: slice
+`
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/landing-action.md`,
+    "# Landing Action\n\ncommit_sha: fixture\n"
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/retrospective.md`,
+    "# Retrospective\n\nClosed.\n"
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/improvement-disposition.md`,
+    "# Improvement Disposition\n\nNo action.\n"
+  );
+  await writeArtifact(
+    repo,
+    `docs/work/${id}/coordination-log.jsonl`,
+    `${JSON.stringify({
+      version: 1,
+      event_type: "step_transition",
+      work_item: id,
+      sequence: 1,
+      timestamp: "2026-06-10T00:00:00Z",
+      actor: "closeout_agent",
+      source: "fixture",
+      state: "closed",
+      evidence: [`docs/work/${id}/retrospective.md`],
+      safe_triggers: ["next_work_item_formation_allowed"],
+      next_action: "Repo PM should form the next work item for PRD-005.3 Work Item PM Execute Controller And Route Registry.",
+      accountable_actor: "repo_pm",
+      accepted_block: null
+    })}\n`
+  );
+}
+
 function currentContextFixture(options = {}) {
   const nextAction =
     options.nextAction ??
@@ -335,6 +415,49 @@ function roadmapWithoutQueueFixture() {
 - \`[Slice]\` \`BANDIT-093\` - Roadmap Work Target Resolver (closed)
 
 **Current next step:** Repo PM should inspect the roadmap before selecting future work.
+`;
+}
+
+function closedAnchorCurrentContextFixture() {
+  return `# Current Context
+
+## Status
+
+**Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
+
+\`BANDIT-094\` is the last closed work item.
+
+**Active work item:** \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract.
+
+The current stage is Stage 6: closed.
+
+**Current next action:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
+`;
+}
+
+function closedAnchorRoadmapFixture() {
+  return `# Roadmap
+
+**Current phase:** Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
+
+## Last Closed Work Item
+
+- \`[Slice]\` \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract (closed)
+
+## Current Work Item
+
+- \`[Slice]\` \`BANDIT-094\` - Repo PM Create Controller And Prompt Contract
+  (Stage 6: closed; retained as the derived-status anchor until the next work
+  item is formed)
+
+**Current next step:** Repo PM should form the next work item for PRD-005.3
+Work Item PM Execute Controller And Route Registry.
+
+## Next Work Item
+
+- \`[Slice]\` \`TBD\` - PRD-005.3 Work Item PM Execute Controller And Route Registry
+  (not yet formed)
 `;
 }
 

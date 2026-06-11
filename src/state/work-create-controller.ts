@@ -1,4 +1,4 @@
-import { appendFile, readdir, readFile } from "node:fs/promises";
+import { appendFile, readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { createWorkItem } from "../commands/work-item-create.js";
 import {
@@ -47,12 +47,13 @@ export async function runRepoPmCreateController(
   }
 
   const target = resolution.resolution.target;
+  const closedAnchor = resolution.resolution.closed_anchor ?? null;
 
   if (target.relationship === "current") {
     return handleCurrentTarget(repoRoot, target);
   }
 
-  return handleNextTarget(repoRoot, target);
+  return handleNextTarget(repoRoot, target, closedAnchor);
 }
 
 async function handleCurrentTarget(
@@ -96,8 +97,23 @@ async function handleCurrentTarget(
 
 async function handleNextTarget(
   repoRoot: string,
-  target: WorkTarget
+  target: WorkTarget,
+  closedAnchor: { id: string } | null = null
 ): Promise<RepoPmCreateControllerOutcome> {
+  if (closedAnchor !== null) {
+    const boundaryError = await checkClosedAnchorSliceBoundary(repoRoot, closedAnchor.id);
+    if (boundaryError !== null) {
+      return {
+        ok: false,
+        error: {
+          kind: "repo_pm_create_controller_error",
+          diagnostic: boundaryError,
+          stage2_started: false
+        }
+      };
+    }
+  }
+
   const explicitSource = await findExplicitSourceSpec(repoRoot, target);
 
   if (!explicitSource) {
@@ -374,22 +390,21 @@ async function extractCurrentContextNextAction(
   return match && match[1] ? match[1].trim() : null;
 }
 
-async function isCoordinationLogFormationApproved(
+async function readCoordinationLogLatestState(
   repoRoot: string,
   workItemId: string
-): Promise<boolean> {
+): Promise<string | null> {
   const logPath = path.join(repoRoot, "docs/work", workItemId, "coordination-log.jsonl");
   let content: string;
   try {
     content = await readFile(logPath, "utf8");
   } catch {
-    return false;
+    return null;
   }
 
   let latestSequence = -1;
   let latestState: string | null = null;
-  const lines = content.split(/\r?\n/);
-  for (const line of lines) {
+  for (const line of content.split(/\r?\n/)) {
     const trimmed = line.trim();
     if (!trimmed) continue;
     let parsed: unknown;
@@ -406,7 +421,60 @@ async function isCoordinationLogFormationApproved(
     latestState = typeof parsed.state === "string" ? parsed.state : null;
   }
 
-  return latestState === "formation_approved";
+  return latestState;
+}
+
+async function isCoordinationLogFormationApproved(
+  repoRoot: string,
+  workItemId: string
+): Promise<boolean> {
+  return (await readCoordinationLogLatestState(repoRoot, workItemId)) === "formation_approved";
+}
+
+async function isCoordinationLogClosed(
+  repoRoot: string,
+  workItemId: string
+): Promise<boolean> {
+  return (await readCoordinationLogLatestState(repoRoot, workItemId)) === "closed";
+}
+
+async function fileExists(filePath: string): Promise<boolean> {
+  try {
+    await stat(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function checkClosedAnchorSliceBoundary(
+  repoRoot: string,
+  closedId: string
+): Promise<string | null> {
+  const requiredArtifacts = [
+    `docs/work/${closedId}/landing-action.md`,
+    `docs/work/${closedId}/retrospective.md`,
+    `docs/work/${closedId}/improvement-disposition.md`
+  ];
+
+  const missing: string[] = [];
+  for (const artifact of requiredArtifacts) {
+    if (!(await fileExists(path.join(repoRoot, artifact)))) {
+      missing.push(path.basename(artifact));
+    }
+  }
+
+  if (!(await isCoordinationLogClosed(repoRoot, closedId))) {
+    missing.push("coordination transition: closed");
+  }
+
+  if (missing.length === 0) return null;
+
+  return (
+    `Closed current work item ${closedId} is missing required slice-boundary evidence: ` +
+    `${missing.join(", ")}. ` +
+    `Ensure ${closedId} has complete closeout before routing to the next target.`
+  );
 }
 
 function parseCreatedWorkItemId(output: string): string | null {
