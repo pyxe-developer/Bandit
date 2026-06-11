@@ -4,17 +4,19 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-096` - Work Item PM Execute Controller And Route Registry
+- `[Slice]` `BANDIT-097` - PRD-005.4 Operator Command Adapters
   (closed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-097` - PRD-005.4 Operator Command Adapters
-  (Stage 1: formation_approved; Work Item PM plan-mode orchestration required
-  before RED evidence)
+  (Stage 6: closed; retained as the active derived-status anchor until the next
+  slice is formed)
 
-**Current next step:** Work Item PM should record plan-mode orchestration for
-BANDIT-097 before RED evidence.
+**Current next step:** Repo PM should form the next work item for the deferred
+V0 Closeout Claude Code A/B Product-Value Trial only after confirming PRD-004/005
+implementation lanes are landed, closed, blocked on operator-owned input, or
+explicitly dispositioned.
 
 Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
 Scope for a new boundary cell, public package publishing, paid registry setup,
@@ -25,8 +27,8 @@ replacement or wrapping, local API or State Index timing, scheduler execution,
 claim/worktree lifecycle behavior, guarded browser actions, generate role input
 or execution packets for unrelated work, restart Pi/Aperture runtime work,
 implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, or start unrelated Phase 8 product work before
-BANDIT-097 records Work Item PM plan-mode orchestration.
+Installed-Copy Update Path, or start unrelated Phase 8 product work before the
+next work item is formed and approved.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -53,6 +55,7 @@ No open bootstrap gap remains.
 
 ## Completed Work
 
+- `BANDIT-097` - PRD-005.4 Operator Command Adapters
 - `BANDIT-096` - Work Item PM Execute Controller And Route Registry
 - `BANDIT-095` - Repo PM Create Controller Closed Anchor Routing
 - `BANDIT-094` - Repo PM Create Controller And Prompt Contract
