@@ -1162,8 +1162,8 @@
     {
       "id": "BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING",
       "title": "Public Consumer Onboarding Hardening",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-12",
       "source_artifacts": [
         "AGENTS.md",
@@ -1173,9 +1173,9 @@
         "docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json"
       ],
       "linked_work_item": "BANDIT-099",
-      "rationale": "Operator review after BANDIT-098 closeout showed remaining day-1 onboarding gaps: starter AGENTS.md is still Codex-specific despite Bandit's model-agnostic product rule; Bandit does not give first-time users guidance for governance strictness and role/model choices; README.md is packaged but not scaffolded or linked by `bandit init`; and first-time command examples still include bare `bandit` commands that do not work in a newly installed consumer repo before npx, npm exec, npm scripts, or PATH/global setup.",
-      "verification_target": "docs/work/BANDIT-099/review-evidence.md",
-      "next_action": "Write Landing Agent verdict for BANDIT-099, run land-check, and execute local-record landing action only if the landing gate passes."
+      "rationale": "BANDIT-099 repaired the remaining public consumer onboarding gap by making starter governance model-agnostic, adding day-1 onboarding guidance from `bandit init`, preserving existing consumer README files with `docs/BANDIT_ONBOARDING.md`, and making first-time public README command examples install-aware. Focused tests, packed consumer quickstart tests, full-suite verification, typecheck, package dry-run, Stage 4 review evidence, risk classification, supply-chain gate, local-record landing, and Stage 6 closeout evidence are recorded.",
+      "verification_target": "docs/work/BANDIT-099/retrospective.md",
+      "next_action": "Repo PM should form the next work item for the deferred V0 Closeout Claude Code A/B Product-Value Trial only after confirming repo artifacts still authorize that product slice and no open bootstrap gap takes precedence."
     }
   ]
 }

@@ -4,17 +4,16 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-098` - Public Consumer Install Quickstart And Governance
-  Scaffold (closed)
+- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening
-  (Stage 5: Landing)
+- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening (closed anchor)
 
-**Current next step:** Write Landing Agent verdict for `BANDIT-099`, run
-land-check, and execute local-record landing action only if the landing gate
-passes.
+**Current next step:** Repo PM should form the next work item for the deferred
+V0 Closeout Claude Code A/B Product-Value Trial only after confirming repo
+artifacts still authorize that product slice and no open bootstrap gap takes
+precedence.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -27,7 +26,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before Stage 5 landing action evidence is recorded for `BANDIT-099`.
+work before Repo PM formation exists and is approved for the next work item.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -36,17 +35,14 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
-  (deferred until `BANDIT-099` lands or is explicitly blocked/dispositioned)
+  (deferred until Repo PM formation confirms the slice boundary and no open
+  bootstrap gap takes precedence)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` - remaining
-  public consumer onboarding gaps after `BANDIT-098`: model-agnostic starter
-  governance, strictness and role/model choice guidance, README or onboarding
-  scaffold from `bandit init`, and first-time command examples that work before
-  bare `bandit` is on PATH; active chore is `BANDIT-099`.
+No active blocking bootstrap gap is recorded.
 
 ### Phase 8 Product Queue
 
@@ -57,6 +53,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-099` - Public Consumer Onboarding Hardening
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
 - `BANDIT-097` - PRD-005.4 Operator Command Adapters
 - `BANDIT-096` - Work Item PM Execute Controller And Route Registry
@@ -71,5 +68,3 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 - `BANDIT-087` - PR And CI/CD Landing Workflow Policy
 - `BANDIT-086` - Coordination Primitive Completion Triage
 - `BANDIT-085` - Repo-Wide Transition Index Decision
-- `BANDIT-084` - Claim-First Transition Policy Triage
-- `BANDIT-083` - Bandit Cockpit UI Polish From Attached Design

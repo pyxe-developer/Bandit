@@ -9,11 +9,14 @@
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-099` is the active bootstrap-gap chore for Public Consumer Onboarding
-Hardening. Current stage: Stage 5 Landing.
+`BANDIT-099` is closed. It landed the Public Consumer Onboarding Hardening
+bootstrap-gap chore and resolved
+`BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING`.
 
-Next action: Write Landing Agent verdict for `BANDIT-099`, run land-check, and
-execute local-record landing action only if the landing gate passes.
+Next action: Repo PM should form the next work item for the deferred V0
+Closeout Claude Code A/B Product-Value Trial only after confirming repo
+artifacts still authorize that product slice and no open bootstrap gap takes
+precedence.
 
 Required operator input: none_required.
 
@@ -21,8 +24,7 @@ Required operator input: none_required.
 
 Last 5 items only:
 
-- `BANDIT-099` - Public Consumer Onboarding Hardening
-  (Stage 5: Landing)
+- `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
   (closed)
 - `BANDIT-097` - PRD-005.4 Operator Command Adapters (closed)
