@@ -39,13 +39,21 @@ Operator review after BANDIT-098 closeout on 2026-06-12 identified four remainin
 - Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
 - `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` is resolved only after landing action and retrospective closeout evidence exist for this bounded chore.
 
+## CLEAN_CODE.md Read Evidence
+
+`CLEAN_CODE.md` was read before recording this queued chore. The implementation
+must stay scoped to consumer onboarding, init scaffolding, README command
+guidance, and focused tests; preserve no-overwrite behavior; keep model/provider
+authority explicit; and turn any accepted non-blocking concern into a tagged
+follow-up or explicit no-action disposition.
+
 ## Verification Plan
 
-- Run focused RED evidence showing the current starter AGENTS.md and starter clean-code/rubric text are Codex-specific where the consumer contract should be model-agnostic.
-- Run focused RED evidence showing current first-time command examples include bare `bandit` commands before npm script, npm exec, npx, global install, or PATH setup.
-- Run focused RED evidence showing `bandit init` does not create or link a README/onboarding guide that helps a consumer choose strictness and role/model configuration.
-- Run focused tests for model-agnostic starter governance artifacts.
-- Run focused tests for README or onboarding-guide creation and no-overwrite behavior.
+- Capture focused RED evidence showing the current starter AGENTS.md and starter clean-code/rubric text are Codex-specific where the consumer contract should be model-agnostic.
+- Capture focused RED evidence showing current first-time command examples include bare `bandit` commands before npm script, npm exec, npx, global install, or PATH setup.
+- Capture focused RED evidence showing `bandit init` does not create or link a README/onboarding guide that helps a consumer choose strictness and role/model configuration.
+- Execute focused tests for model-agnostic starter governance artifacts.
+- Exercise README or onboarding-guide creation and no-overwrite behavior.
 - Run a packed-install consumer test in a fresh temporary repo that executes the documented first-time command sequence.
 - Run `node --test test/init.test.mjs` if init behavior changes.
 - Run `node --test test/public-consumer-install-quickstart.test.mjs` if public quickstart behavior changes.

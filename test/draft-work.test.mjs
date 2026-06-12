@@ -122,13 +122,13 @@ test("draft-work creates improvement chores with retrospective-derived metadata"
   const result = await runBandit(repo, ["draft-work", prdPath]);
 
   assert.equal(result.code, 0, result.stderr);
-  assert.match(result.stdout, /Created work item draft: BANDIT-001/);
+  assert.match(result.stdout, /Created work item draft: BANDIT-002/);
 
   const brief = await readFile(
-    path.join(repo, "docs/work/BANDIT-001/brief.md"),
+    path.join(repo, "docs/work/BANDIT-002/brief.md"),
     "utf8"
   );
-  assert.match(brief, /^# BANDIT-001: Evaluate Review Latency Trial$/m);
+  assert.match(brief, /^# BANDIT-002: Evaluate Review Latency Trial$/m);
   assertRequiredHeadings(brief, [
     "Non-Product Work",
     "Origin",
@@ -364,8 +364,8 @@ test("draft-work validates every planned item before writing any draft", async (
 
   assert.equal(result.code, 1);
   assert.match(result.stderr, /Draft item 2 missing required field: scope/);
-  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-001")), false);
   assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-002")), false);
+  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-003")), false);
 });
 
 async function createInitializedRepo() {

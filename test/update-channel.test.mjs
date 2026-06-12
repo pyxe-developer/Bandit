@@ -91,6 +91,108 @@ test("update-check reports disabled and unreachable as non-blocking statuses", a
   assert.deepEqual(findForbiddenKeys(payload), []);
 });
 
+test("update-check rejects malformed manifest versions before rendering commands", async () => {
+  const maliciousVersions = [
+    "0.2.0; malicious",
+    "0.2.0 `malicious`",
+    "0.2.0 $(malicious)",
+    "0.2.0 | malicious",
+    "0.2.0\nmalicious",
+    "0.2.0 & malicious",
+    "0.2.0 > malicious",
+    "0.2.0 < malicious"
+  ];
+
+  for (const latestVersion of maliciousVersions) {
+    const repo = await initializedRepo();
+    const manifest = path.join(repo, "bandit-release.json");
+    await writeJson(manifest, {
+      contract_version: 1,
+      package_name: "bandit-workflow",
+      latest_version: latestVersion,
+      latest_ref: "v0.2.0"
+    });
+    await writeUpdateChannel(repo, { manifest });
+
+    const result = await runBandit(repo, ["update-check", "--json"]);
+
+    assert.equal(result.code, 0, result.stderr);
+    const payload = JSON.parse(result.stdout);
+    assert.equal(payload.status, "unreachable", latestVersion);
+    assert.equal(payload.update_available, false, latestVersion);
+    assert.equal("update_command" in payload, false, latestVersion);
+    assert.deepEqual(findForbiddenKeys(payload), []);
+  }
+});
+
+test("update-check rejects manifest package-name mismatches before rendering commands", async () => {
+  const repo = await initializedRepo();
+  const manifest = path.join(repo, "bandit-release.json");
+  await writeJson(manifest, {
+    contract_version: 1,
+    package_name: "other-safe-package",
+    latest_version: "0.2.0",
+    latest_ref: "v0.2.0"
+  });
+  await writeUpdateChannel(repo, { manifest });
+
+  const result = await runBandit(repo, ["update-check", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.status, "unreachable");
+  assert.equal(payload.update_available, false);
+  assert.equal("update_command" in payload, false);
+  assert.deepEqual(findForbiddenKeys(payload), []);
+});
+
+test("update-check ignores unsafe manifest update commands", async () => {
+  const unsafeCommands = [
+    "npm install -D bandit-workflow@0.2.0; malicious",
+    "npm install -D bandit-workflow@0.2.0 | malicious",
+    "npm install -D bandit-workflow@0.2.0 `malicious`",
+    "npm install -D bandit-workflow@0.2.0 $(malicious)",
+    "npm install -D bandit-workflow@0.2.0\nmalicious",
+    "npm install -D bandit-workflow@0.2.0 & malicious"
+  ];
+
+  for (const updateCommand of unsafeCommands) {
+    const repo = await initializedRepo();
+    const manifest = path.join(repo, "bandit-release.json");
+    await writeJson(manifest, {
+      contract_version: 1,
+      package_name: "bandit-workflow",
+      latest_version: "0.2.0",
+      latest_ref: "v0.2.0",
+      update_command: updateCommand
+    });
+    await writeUpdateChannel(repo, { manifest });
+
+    const result = await runBandit(repo, ["update-check", "--json"]);
+
+    assert.equal(result.code, 0, result.stderr);
+    const payload = JSON.parse(result.stdout);
+    assert.equal(payload.status, "update_available", updateCommand);
+    assert.equal(payload.update_available, true, updateCommand);
+    assert.equal(
+      payload.update_command,
+      "npm install -D bandit-workflow@0.2.0",
+      updateCommand
+    );
+
+    const cache = await readJson(path.join(repo, ".bandit/update-channel-cache.json"));
+    assert.equal(
+      cache.update_command,
+      "npm install -D bandit-workflow@0.2.0",
+      updateCommand
+    );
+    assert.doesNotMatch(result.stdout, /malicious/);
+    assert.doesNotMatch(result.stderr, /malicious/);
+    assert.deepEqual(findForbiddenKeys(payload), []);
+    assert.deepEqual(findForbiddenKeys(cache), []);
+  }
+});
+
 test("ordinary CLI commands use fresh cached update alerts without masking command exit status", async () => {
   const repo = await initializedRepo();
   await writeUpdateChannel(repo, {

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -454,6 +454,10 @@ async function createCockpitRepo(options = {}) {
       "docs/roadmap/CURRENT_CONTEXT.md",
       options.currentContext ?? currentContextFixture()
     );
+  } else {
+    await rm(path.join(repo, "docs/roadmap/CURRENT_CONTEXT.md"), {
+      force: true
+    });
   }
   await writeArtifact(
     repo,

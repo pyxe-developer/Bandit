@@ -89,10 +89,10 @@ test("work-item create creates chore and improvement-chore briefs", async () => 
   assert.equal(improvement.code, 0, improvement.stderr);
 
   const choreBrief = await readFile(
-    path.join(repo, "docs/work/BANDIT-001/brief.md"),
+    path.join(repo, "docs/work/BANDIT-002/brief.md"),
     "utf8"
   );
-  assert.match(choreBrief, /^# BANDIT-001: Create Chore Brief$/m);
+  assert.match(choreBrief, /^# BANDIT-002: Create Chore Brief$/m);
   assertRequiredHeadings(choreBrief, [
     "Non-Product Work",
     "Origin",
@@ -105,10 +105,10 @@ test("work-item create creates chore and improvement-chore briefs", async () => 
   ]);
 
   const improvementBrief = await readFile(
-    path.join(repo, "docs/work/BANDIT-002/brief.md"),
+    path.join(repo, "docs/work/BANDIT-003/brief.md"),
     "utf8"
   );
-  assert.match(improvementBrief, /^# BANDIT-002: Create Improvement Chore$/m);
+  assert.match(improvementBrief, /^# BANDIT-003: Create Improvement Chore$/m);
   assert.match(improvementBrief, /source_work_item:/);
   assert.match(improvementBrief, /hypothesis:/);
   assert.match(improvementBrief, /evaluation_window:/);
@@ -128,8 +128,8 @@ test("work-item create appends lifecycle evidence for the created work item", as
   assert.deepEqual((await readEvents(repo)).slice(-1), [
     {
       type: "work_item_created",
-      work_item: "BANDIT-001",
-      message: "Created work item BANDIT-001 from docs/specs/create-chore.json"
+      work_item: "BANDIT-002",
+      message: "Created work item BANDIT-002 from docs/specs/create-chore.json"
     }
   ]);
 });
@@ -162,7 +162,7 @@ test("work-item create links an eligible bootstrap gap to the active chore", asy
   );
   assert.equal(ledger.gaps[0].status, "active");
   assert.equal(ledger.gaps[0].disposition, "active_chore");
-  assert.equal(ledger.gaps[0].linked_work_item, "BANDIT-001");
+  assert.equal(ledger.gaps[0].linked_work_item, "BANDIT-002");
   assert.equal(ledger.gaps[1].status, "open");
   assert.equal(ledger.gaps[1].linked_work_item, null);
 
@@ -248,7 +248,7 @@ test("work-item create fails closed for malformed specs before writing files", a
     result.stderr,
     /Work item spec missing required field: acceptance_criteria/
   );
-  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-001")), false);
+  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-002")), false);
 });
 
 test("work-item create refuses occupied output paths before writing files", async () => {
@@ -322,7 +322,7 @@ test("work-item create refuses ineligible bootstrap gaps before writing files", 
     result.stderr,
     /Bootstrap gap BANDIT-GAP-WORK-ITEM-CREATE-COMMAND is not eligible for work-item creation/
   );
-  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-001")), false);
+  assert.equal(await pathExists(path.join(repo, "docs/work/BANDIT-002")), false);
 });
 
 async function createInitializedRepo() {

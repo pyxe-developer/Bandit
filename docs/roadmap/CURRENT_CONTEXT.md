@@ -85,5 +85,8 @@ artifacts cannot answer.
 The next action is formation review for `BANDIT-099`.
 
 Run required formation review artifacts, then `repo-pm approve-formation` for
-`BANDIT-099` if formation review is non-blocking. Do not begin RED evidence or
-implementation before formation is approved.
+`BANDIT-099` if formation review is non-blocking. After formation approval,
+`BANDIT-099` advances to RED evidence, implementation, UAT when applicable, and
+landing; only after landing does the queue become eligible for V0 Closeout, and
+the Claude Code A/B Product-Value Trial remains deferred until `BANDIT-099`
+lands.

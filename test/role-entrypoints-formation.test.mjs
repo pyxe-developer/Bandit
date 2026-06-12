@@ -116,17 +116,17 @@ test("repo-pm create-work-item preserves work-item creation safety and artifacts
   ]);
 
   assert.equal(result.code, 0, result.stderr);
-  assert.match(result.stdout, /Created work item: BANDIT-001/);
+  assert.match(result.stdout, /Created work item: BANDIT-002/);
   assert.equal(
-    await pathExists(path.join(repo, "docs/work/BANDIT-001/brief.md")),
+    await pathExists(path.join(repo, "docs/work/BANDIT-002/brief.md")),
     true
   );
   const events = await readEvents(repo);
   assert.deepEqual(events.slice(-1), [
     {
       type: "work_item_created",
-      work_item: "BANDIT-001",
-      message: "Created work item BANDIT-001 from docs/specs/create-gap-chore.json"
+      work_item: "BANDIT-002",
+      message: "Created work item BANDIT-002 from docs/specs/create-gap-chore.json"
     }
   ]);
 });

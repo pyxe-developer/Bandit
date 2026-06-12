@@ -4,6 +4,9 @@ import { getBanditPaths } from "./paths.js";
 
 const UPDATE_CHECK_KIND = "bandit_update_check";
 const CONTRACT_VERSION = 1;
+const BANDIT_PACKAGE_NAME = "bandit-workflow";
+const SAFE_PACKAGE_VERSION_PATTERN =
+  /^v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 
 export type UpdateStatus =
   | "unconfigured"
@@ -141,8 +144,7 @@ function comparisonResult(
     latest_version: manifest.latestVersion,
     latest_ref: manifest.latestRef,
     update_command:
-      manifest.updateCommand ??
-      `npm install -D bandit-workflow@${manifest.latestVersion}`
+      manifest.updateCommand ?? fallbackUpdateCommand(manifest.latestVersion)
   };
 }
 
@@ -189,11 +191,44 @@ async function readFileReleaseManifest(
     return null;
   }
 
+  const packageName = readOptionalString(parsed, "package_name");
+  if (packageName && packageName !== BANDIT_PACKAGE_NAME) {
+    return null;
+  }
+
+  if (!isSafePackageVersion(latestVersion)) {
+    return null;
+  }
+
   return {
     latestVersion,
     latestRef,
-    updateCommand: readOptionalString(parsed, "update_command")
+    updateCommand: readSafeUpdateCommand(parsed, latestVersion)
   };
+}
+
+function isSafePackageVersion(version: string): boolean {
+  return SAFE_PACKAGE_VERSION_PATTERN.test(version);
+}
+
+function readSafeUpdateCommand(
+  manifest: RawRecord,
+  latestVersion: string
+): string | null {
+  const command = readOptionalString(manifest, "update_command");
+  if (!command) {
+    return null;
+  }
+
+  const allowedCommands = new Set([
+    fallbackUpdateCommand(latestVersion),
+    `npm install --save-dev ${BANDIT_PACKAGE_NAME}@${latestVersion}`
+  ]);
+  return allowedCommands.has(command) ? command : null;
+}
+
+function fallbackUpdateCommand(latestVersion: string): string {
+  return `npm install -D ${BANDIT_PACKAGE_NAME}@${latestVersion}`;
 }
 
 async function writeUpdateCache(

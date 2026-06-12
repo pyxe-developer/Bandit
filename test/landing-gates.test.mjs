@@ -2461,6 +2461,10 @@ async function writeTemplates(repo, options = {}) {
     await mkdir(path.dirname(destination), { recursive: true });
     await writeFile(destination, content, "utf8");
   }
+
+  if (options.omitTemplate) {
+    await rm(path.join(repo, options.omitTemplate), { force: true });
+  }
 }
 
 async function writeSmellCatalog(repo, catalog) {
