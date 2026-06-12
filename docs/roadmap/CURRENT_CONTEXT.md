@@ -7,25 +7,24 @@
 `BANDIT-100` is the last closed work item. It landed and closed the
 Project-profile contract and identity-clean init slice from `BANDIT-PRD-006`.
 
-**Active work item:** `BANDIT-100` - Project-profile contract and
-identity-clean init (closed anchor).
+**Active work item:** `BANDIT-104` - Work-execute route should derive current
+stage from coordination state.
 
-It is retained only as the derived-status anchor until the next work item is
-formed.
+`BANDIT-104` is the active bootstrap-gap chore formed from
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form the queued bootstrap-gap chore for
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
-`BANDIT-101`.
+**Current next action:** Work Item PM should record plan-mode orchestration for
+`BANDIT-104` before RED evidence.
 
 Do not start `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude
 Code A/B Product-Value Trial implementation, Trust Verifier cutover, merge,
 push, deploy, hosted service setup, paid reviewer/model routing, public
 benchmark publication, local API work, State Index work, guarded browser
 action execution, PR/CI/CD implementation, installed-copy update-path
-implementation, or unrelated Phase 8 product work while the queued
-work-execute bootstrap gap remains open.
+implementation, or unrelated Phase 8 product work while `BANDIT-104` remains
+active.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -73,13 +72,20 @@ artifacts cannot answer.
 - `docs/work/BANDIT-100/improvement-disposition.md`
 - `docs/work/BANDIT-100/coordination-log.jsonl`
 
-One bootstrap gap is queued from `BANDIT-100` Stage 2:
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`. It must become the next
-Repo PM target unless it is explicitly blocked on operator-owned input or
-dispositioned as no-action.
+One bootstrap gap from `BANDIT-100` Stage 2 is active under `BANDIT-104`:
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
+
+## Active Work
+
+`BANDIT-104` has required Stage 1 formation evidence:
+
+- `docs/work/BANDIT-104/brief.md`
+- `docs/work/BANDIT-104/qwen-formation-review.md`
+- `docs/work/BANDIT-104/coderabbit-formation-review.md`
+- `docs/work/BANDIT-104/formation-review.md`
+- `docs/work/BANDIT-104/coordination-log.jsonl`
 
 ## Next Work
 
-Repo PM should form the queued bootstrap-gap chore for
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
-`BANDIT-101`.
+Work Item PM should record plan-mode orchestration for `BANDIT-104` before RED
+evidence.

@@ -350,3 +350,4 @@
 {"type":"work_item_drafted","work_item":"BANDIT-101","message":"Drafted work item BANDIT-101 from BANDIT-PRD-006"}
 {"type":"work_item_drafted","work_item":"BANDIT-102","message":"Drafted work item BANDIT-102 from BANDIT-PRD-006"}
 {"type":"work_item_drafted","work_item":"BANDIT-103","message":"Drafted work item BANDIT-103 from BANDIT-PRD-006"}
+{"type":"work_item_created","work_item":"BANDIT-104","message":"Created work item BANDIT-104 from docs/specs/BANDIT-104-work-execute-stage-route-advancement.json"}
