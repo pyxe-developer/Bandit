@@ -20,7 +20,6 @@ export async function workExecuteController(
   }
   const workItem = JSON.parse(raw) as WorkItem;
   validateWorkExecuteControllerSelection([workItem]);
-  const requestedStage = args[2] ?? "stage_2_red";
-  const action = resolveWorkExecuteControllerAction({ workItem, requestedStage });
+  const action = resolveWorkExecuteControllerAction({ workItem });
   process.stdout.write(JSON.stringify(action, null, 2) + "\n");
 }

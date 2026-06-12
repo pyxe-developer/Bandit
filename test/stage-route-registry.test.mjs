@@ -32,9 +32,9 @@ test("stage route registry maps authorized stage routes and evidence outputs", (
   });
 
   assert.deepEqual(getStageRoute("stage_3_implementation").process_adapter, {
-    first_choice: "claude",
-    fallback: "minimax_m3",
-    fallback_after: "claude_auth_failure_or_20_minute_timeout"
+    first_choice: "minimax_m3",
+    fallback: "claude",
+    fallback_after: "minimax_m3_failure_or_20_minute_timeout"
   });
   assert.equal(getStageRoute("stage_4_review").reviewer_routes.local_qwen.command, "node bin/omlx-chat-completions.mjs");
   assert.equal(getStageRoute("stage_4_review").reviewer_routes.local_qwen.profile, ".bandit/reviewers/local-qwen.json");

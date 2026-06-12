@@ -11,10 +11,11 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from coordination state
-  (Stage 1: formation_approved)
+  (Stage 4: blocked on CodeRabbit provider timeout)
 
-**Current next step:** Work Item PM should record plan-mode orchestration for
-`BANDIT-104` before RED evidence.
+**Current next step:** Rerun CodeRabbit review for `BANDIT-104` and obtain
+terminal successful CodeRabbit evidence before Local Qwen, aggregate review,
+landing, or closeout.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or

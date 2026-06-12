@@ -154,6 +154,36 @@ test("work-execute adapter delegates to the Stage 2 route after plan-mode eviden
   assert.equal(payload.next_safe_command, "bandit work-execute");
 });
 
+test("work-execute adapter derives the Stage 3 route from red_recorded coordination state", async () => {
+  const repo = await createAdapterRepo({
+    currentContext: currentContextRedRecorded097(),
+    roadmap: roadmapActive097("Stage 2: red_recorded")
+  });
+  await writeFormedWorkItem(repo, "BANDIT-097", {
+    orchestrationPlan: true,
+    orchestrationRecorded: true,
+    redEvidence: true,
+    redRecorded: true
+  });
+
+  const result = await runBandit(repo, ["work-execute", "--json"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  const payload = JSON.parse(result.stdout);
+  assert.equal(payload.kind, "bandit_work_execute_result");
+  assert.equal(payload.delegate, "work_item_pm_execute_controller");
+  assert.equal(payload.status, "ready");
+  assert.equal(payload.work_item, "BANDIT-097");
+  assert.equal(payload.stage_reached, "Stage 3: implementation_required");
+  assert.equal(payload.required_operator_input, "none_required");
+  assert.equal(payload.route.stage, "stage_3_implementation");
+  assert.equal(payload.route.authority_role, "implementation_writer");
+  assert.equal(payload.route.process_adapter.first_choice, "minimax_m3");
+  assert.equal(payload.canonical_state_owner, "repo_native_artifacts");
+  assert.equal(payload.role_input_packet.authority, "derived_non_canonical");
+  assert.equal(payload.next_safe_command, "bandit work-execute");
+});
+
 test("operator adapters keep command separation and do not expose public context command", async () => {
   const repo = await createAdapterRepo();
 
@@ -299,6 +329,36 @@ async function writeFormedWorkItem(repo, id, options = {}) {
     })}\n`;
   }
 
+  if (options.redEvidence) {
+    await writeArtifact(
+      repo,
+      `docs/work/${id}/red-evidence.md`,
+      `# ${id} RED Evidence\n\nverdict: pass\ncoordination_state: red_recorded_pending\n`
+    );
+  }
+
+  if (options.redRecorded) {
+    log += `${JSON.stringify({
+      version: 1,
+      event_type: "step_transition",
+      work_item: id,
+      sequence: 4,
+      timestamp: "2026-06-10T00:03:00Z",
+      actor: "test_writer",
+      source: "fixture",
+      state: "red_recorded",
+      evidence: [
+        `docs/work/${id}/red-evidence.md`,
+        "test/work-execute-controller.test.mjs",
+        "test/stage-route-registry.test.mjs"
+      ],
+      safe_triggers: ["implementation_required"],
+      next_action: `Dispatch Stage 3 implementation to MiniMax-M3 for ${id} without test-surface edits.`,
+      accountable_actor: "implementation_writer",
+      accepted_block: null
+    })}\n`;
+  }
+
   await writeArtifact(repo, `docs/work/${id}/coordination-log.jsonl`, log);
 }
 
@@ -367,6 +427,15 @@ function currentContextOrchestrationRecorded097() {
     "formation_approved",
     "orchestration_plan_recorded"
   );
+}
+
+function currentContextRedRecorded097() {
+  return currentContextActive097()
+    .replace("formation_approved", "red_recorded")
+    .replace(
+      "Work Item PM should record plan-mode orchestration for BANDIT-097 before RED evidence.",
+      "Dispatch Stage 3 implementation to MiniMax-M3 for BANDIT-097 without test-surface edits."
+    );
 }
 
 function roadmapActive097(stage = "Stage 1: formation_approved") {

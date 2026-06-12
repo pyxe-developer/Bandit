@@ -49,9 +49,9 @@ const STAGE_ROUTES: StageRoute[] = [
     route_type: "model_family_separated",
     command: null,
     process_adapter: {
-      first_choice: "claude",
-      fallback: "minimax_m3",
-      fallback_after: "claude_auth_failure_or_20_minute_timeout"
+      first_choice: "minimax_m3",
+      fallback: "claude",
+      fallback_after: "minimax_m3_failure_or_20_minute_timeout"
     },
     expected_evidence: [
       "docs/work/<ID>/implementation-evidence.md",

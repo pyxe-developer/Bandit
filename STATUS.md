@@ -9,11 +9,12 @@
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-104` is formation_approved for the active work-execute stage-route
-advancement bootstrap-gap chore.
+`BANDIT-104` is blocked in Stage 4 review for the active work-execute
+stage-route advancement bootstrap-gap chore.
 
-Next action: Work Item PM should record plan-mode orchestration for
-`BANDIT-104` before RED evidence.
+Next action: Rerun CodeRabbit review for `BANDIT-104` and obtain terminal
+successful CodeRabbit evidence before Local Qwen, aggregate review, landing, or
+closeout.
 
 Required operator input: none_required.
 
@@ -25,7 +26,7 @@ Active bootstrap gap:
 Last 5 items only:
 
 - `BANDIT-104` - Work-execute route should derive current stage from
-  coordination state (formation_approved)
+  coordination state (Stage 4 blocked on CodeRabbit provider timeout)
 - `BANDIT-100` - Project-profile contract and identity-clean init (closed)
 - `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold

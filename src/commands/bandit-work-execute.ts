@@ -62,6 +62,10 @@ export async function banditWorkExecute(
   const orchestrationPlanExists = await fileExists(
     path.join(repoRoot, orchestrationPlanRelPath)
   );
+  const redEvidenceRelPath = "docs/work/" + workItemId + "/red-evidence.md";
+  const redEvidenceExists = await fileExists(
+    path.join(repoRoot, redEvidenceRelPath)
+  );
   const latestState =
     (await readLatestCoordinationState(repoRoot, workItemId)) ?? "formation_approved";
 
@@ -71,13 +75,12 @@ export async function banditWorkExecute(
     evidence: {
       brief: "docs/work/" + workItemId + "/brief.md",
       orchestration_plan: orchestrationPlanExists ? orchestrationPlanRelPath : null,
-      red_evidence: null
+      red_evidence: redEvidenceExists ? redEvidenceRelPath : null
     }
   };
 
   const action = resolveWorkExecuteControllerAction({
-    workItem,
-    requestedStage: "stage_2_red"
+    workItem
   });
 
   if (action.status === "blocked") {
@@ -103,7 +106,7 @@ export async function banditWorkExecute(
     delegate: "work_item_pm_execute_controller",
     status: "ready",
     work_item: workItemId,
-    stage_reached: "Stage 2: ready_for_red",
+    stage_reached: action.stage_reached,
     required_operator_input: "none_required",
     route: action.route,
     canonical_state_owner: action.canonical_state_owner,

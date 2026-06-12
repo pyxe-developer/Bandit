@@ -13,10 +13,11 @@ stage from coordination state.
 `BANDIT-104` is the active bootstrap-gap chore formed from
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 4: blocked on CodeRabbit provider timeout.
 
-**Current next action:** Work Item PM should record plan-mode orchestration for
-`BANDIT-104` before RED evidence.
+**Current next action:** Rerun CodeRabbit review for `BANDIT-104` and obtain
+terminal successful CodeRabbit evidence before Local Qwen, aggregate review,
+landing, or closeout.
 
 Do not start `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude
 Code A/B Product-Value Trial implementation, Trust Verifier cutover, merge,
@@ -87,5 +88,5 @@ One bootstrap gap from `BANDIT-100` Stage 2 is active under `BANDIT-104`:
 
 ## Next Work
 
-Work Item PM should record plan-mode orchestration for `BANDIT-104` before RED
-evidence.
+Rerun CodeRabbit review for `BANDIT-104` and obtain terminal successful
+CodeRabbit evidence before Local Qwen, aggregate review, landing, or closeout.
