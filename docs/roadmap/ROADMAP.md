@@ -10,10 +10,10 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening
-  (Stage 1: brief_created)
+  (Stage 1: formation_approved)
 
-**Current next step:** Run formation review and approve formation for
-`BANDIT-099` before Work Item PM execution.
+**Current next step:** Work Item PM should record plan-mode orchestration for
+`BANDIT-099` before RED evidence.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -26,7 +26,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before formation is approved for `BANDIT-099`.
+work before Work Item PM plan-mode orchestration is recorded for `BANDIT-099`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.

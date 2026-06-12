@@ -12,6 +12,13 @@ Repair the remaining public consumer onboarding gaps left after BANDIT-098: star
 
 Operator review after BANDIT-098 closeout on 2026-06-12 identified four remaining onboarding gaps: the starter AGENTS contract still names Codex as PM/engineering manager even though Bandit is model agnostic; the user has no clear onboarding guidance for how to use Bandit, including governance strictness and role/model selection; README.md is packaged but not created or linked as a starter artifact by `bandit init`; and first-time command examples still include bare `bandit` commands that do not work in a newly installed consumer repo before npx, npm exec, npm scripts, or PATH setup.
 
+## Out Of Scope
+
+- Public npm publish automation, publish credential handling, paid registry setup, hosted update services, telemetry, automatic self-update, or external repo mutation beyond explicit local starter-onboarding files.
+- Installed global skill mutation, automation prompt mutation, merge/push/deploy authority, Trust Verifier cutover, old-gate replacement or wrapping, local API work, State Index work, guarded browser action execution, V0 Closeout Claude Code A/B Product-Value Trial implementation, or unrelated Phase 8 product work.
+- Replacing Bandit's role taxonomy with provider-specific defaults; this chore may explain role/model choices, but it must keep starter governance model-agnostic and operator-configurable.
+- Weakening no-overwrite behavior for consumer-owned README.md or governance files.
+
 ## Scope
 
 - Make starter governance artifacts model-agnostic: AGENTS.md, CLEAN_CODE.md, stage rubrics, and onboarding copy must refer to Bandit roles and configured agents/providers rather than declaring Codex as the repository PM or default authority.
@@ -61,10 +68,38 @@ Operator review after BANDIT-098 closeout on 2026-06-12 identified four remainin
 - Run `node ./bin/bandit.mjs land-check BANDIT-099` before landing.
 - Run `git diff --check`.
 
+## CLEAN_CODE.md Read Evidence
+
+CLEAN_CODE.md was read on 2026-06-12 before repairing this Stage 1 brief. This chore must keep onboarding, init scaffolding, package allow-list, README command guidance, and tests small and explicit; preserve source-of-truth and no-hidden-authority boundaries; preserve role boundaries; preserve the Permanent Test Ownership Boundary; and avoid mixing public publish automation, hosted services, telemetry, Trust Verifier cutover, merge/push/deploy, local API, State Index, guarded browser action execution, V0 trial implementation, or unrelated Phase 8 behavior into this onboarding-hardening slice.
+
+## Stage-Rubric Checklist
+
+- Stage 0: Context Readiness | pass | BANDIT-098 landed and closed with landing action, retrospective, improvement disposition, synchronized roadmap/current-context/status, and `BANDIT-099` is the active bootstrap-gap chore at `brief_created`.
+- Stage 1: Work-Item Brief And Spec | pass after formation review | This brief defines non-product work, source authority, scope, out of scope, acceptance criteria, verification plan, clean-code read evidence, active bootstrap-gap disposition, expected files, required evidence, role boundaries, operator-input status, stage capability scope, forbidden actions, implementation order, and smell triggers.
+- Stage 2: Test Design And RED Evidence | required next after formation approval | Test Writer must produce RED evidence for model-agnostic starter governance, executable first-time command examples, onboarding/README init availability, no-overwrite behavior, and packed-install consumer verification.
+- Stage 3: Implementation Clean-Code Rubric | required later | Implementation must route to a different model family if Codex authors RED tests and must not edit tests, test helpers, fixtures, RED evidence, acceptance mappings, or Test Writer-owned evidence.
+- Stage 4: Review And Cross-Model Gates | required later | CodeRabbit review or honest provider-timeout/refusal evidence, Local Qwen through the authorized MLX adapter route, layered risk classification, supply-chain gate, aggregate review, review-subject hash, and clean-code review are required before landing.
+- Stage 5: Landing And UAT | required later | Landing verdict, land-check, local-record landing action, and clean-code compliance evidence are required; product UAT is not active unless implementation adds a user-facing workflow surface beyond local onboarding/docs/init behavior.
+- Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, bootstrap-gap resolution, current context, roadmap, and STATUS updates are required before V0 trial, Trust Verifier cutover, or unrelated next work begins.
+
+## Bootstrap Gaps
+
+- Active bootstrap gap: `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING`.
+- CodeRabbit formation or Stage 4 review may time out or be unavailable; if so, record provider-timeout/bootstrap replacement evidence after the full prompt-required wait and do not claim a CodeRabbit pass.
+- Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at `http://127.0.0.1:8001/v1`. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another reviewer route.
+- No public npm publish automation, credential handling, paid registry setup, hosted update service, telemetry, automatic self-update, external repo mutation, installed global skill mutation, automation prompt mutation, merge/push/deploy, Trust Verifier cutover, old-gate replacement or wrapping, local API, State Index, guarded browser action execution, V0 trial implementation, or unrelated Phase 8 work is approved by this chore.
+
+## Bootstrap Gap Or No-Gap Disposition
+
+`BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` is active and linked to this chore. It remains unresolved until Stage 5 landing action and Stage 6 retrospective/improvement disposition closeout evidence are recorded. No other open bootstrap gap is authorized ahead of this active chore in the current repo state.
+
 ## Expected Files
 
 - docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json
 - docs/work/BANDIT-099/brief.md
+- docs/work/BANDIT-099/qwen-formation-review.md
+- docs/work/BANDIT-099/coderabbit-formation-review.md
+- docs/work/BANDIT-099/formation-review.md
 - docs/work/BANDIT-099/coordination-log.jsonl
 - docs/work/BANDIT-099/red-evidence.md
 - docs/work/BANDIT-099/implementation-evidence.md
@@ -88,9 +123,39 @@ Operator review after BANDIT-098 closeout on 2026-06-12 identified four remainin
 - docs/roadmap/ROADMAP.md
 - STATUS.md
 
+## Stage 1 Boundary For Expected Files
+
+Only the source spec, brief, formation review artifacts, coordination log, bootstrap-gap ledger, roadmap/current-context, and STATUS routing may be created or edited during Repo PM Stage 1 formation.
+
+Later listed RED, implementation, review-loop, landing, UAT, retrospective, and closeout artifacts are expected downstream surfaces for Work Item PM, Test Writer, Implementation Writer, reviewers, Landing Agent, and Closeout Agent. Repo PM must not create `orchestration-plan.md`, RED evidence, implementation evidence, Stage 4 review evidence, landing evidence, UAT evidence, retrospective evidence, closeout evidence, V0 trial evidence, Trust Verifier cutover evidence, or unrelated Phase 8 evidence in this run.
+
+## First Implementation Order
+
+1. Repo PM records formation review evidence and approves formation before Work Item PM execution.
+2. Work Item PM records or verifies plan-mode orchestration only after `formation_approved` and before RED evidence.
+3. Test Writer writes failing tests for model-agnostic starter governance, onboarding/README init availability, no-overwrite behavior, first-time command examples, package allow-list, and packed-install consumer command execution.
+4. Implementation Writer makes the minimal README/template/init/package/test changes needed to satisfy RED evidence, without editing Test Writer-owned files if Codex authored the RED tests.
+5. Codex PM verifies focused tests, typecheck, full tests as needed, Bandit validation, cockpit/session-context derived status, clean-code compliance, layered risk classification, supply-chain gate evidence, review-subject hash, CodeRabbit, Local Qwen, land-check, and `git diff --check`.
+6. Landing Agent writes landing verdict/action; Closeout Agent records retrospective, improvement/no-action disposition, bootstrap-gap resolution, and synchronized current context, roadmap, and STATUS state.
+
+## Smell Triggers
+
+- Any implementation that keeps Codex-specific starter governance where Bandit roles or configured providers should be model-agnostic is a product and clean-code blocker.
+- Any copy-pasteable first-time command block that uses bare `bandit` before npx, npm exec, npm script, global install, or PATH setup is a blocker.
+- Any implementation that overwrites an existing consumer README.md or governance artifact without explicit no-overwrite behavior is a blocker.
+- Any implementation that makes starter onboarding dependent on private Bandit repo history, chat context, hosted services, telemetry, paid routing, or public publish automation is a blocker.
+- Any implementation that treats README, templates, cockpit projections, or onboarding text as canonical workflow state instead of CLI-owned repo-native artifacts is a blocker.
+- Any implementation that uses direct `qwen` CLI, Ollama, paid/live reviewer routes, or another ad hoc reviewer route as Local Qwen evidence is a blocker.
+- Any implementation that reports CodeRabbit timeout, provider error, malformed output, missing route, stale evidence, review blockers, or gate failure as success is a blocker.
+- Any implementation that lets an Implementation Writer edit tests, test helpers, fixtures, RED evidence, acceptance mappings, or Test Writer-owned evidence is a blocker.
+- Any implementation that auto-approves product direction, UAT, policy, business tradeoffs, explicit cost/risk posture, Trust Verifier cutover, old-gate replacement/wrapping, merge/push/deploy, paid/live reviewer routing, hosted service, telemetry, external mutation, installed global skill mutation, automation prompt mutation, credential handling, public package publishing, paid registry setup, hosted update service, automatic self-update, or ambiguous scope is a blocker.
+
 ## Required Evidence
 
 - docs/work/BANDIT-099/brief.md
+- docs/work/BANDIT-099/qwen-formation-review.md
+- docs/work/BANDIT-099/coderabbit-formation-review.md
+- docs/work/BANDIT-099/formation-review.md
 - docs/work/BANDIT-099/coordination-log.jsonl
 - docs/work/BANDIT-099/red-evidence.md
 - docs/work/BANDIT-099/implementation-evidence.md
@@ -103,6 +168,14 @@ Operator review after BANDIT-098 closeout on 2026-06-12 identified four remainin
 ## Operator Input Status
 
 No further operator-owned input is required before forming this bootstrap-gap chore. The operator supplied the product expectation: Bandit is model agnostic, day-1 users need onboarding guidance for strictness and role/model choices, README guidance should be available from init, and first-time commands must use invocations that actually work in a consumer repo. Codex PM owns the technical boundary, scaffold contents, command shape, package allow-list, test strategy, and review routing. Halt only if implementation would add public npm publish automation, handle publish credentials, approve paid registry setup, approve hosted update services, approve telemetry, approve automatic self-update, mutate external repos outside explicit local onboarding files, mutate installed global skills or automation prompts, add merge/push/deploy authority, approve Trust Verifier cutover, replace or wrap old gates, change product or UAT direction, approve business tradeoffs, approve explicit cost/risk posture, approve paid/live reviewer routing, or expand into unrelated Phase 8 product scope.
+
+## Permanent Test Ownership Boundary
+
+The Stage 3 Implementation Writer has no authority to edit tests, test helpers, fixtures, RED evidence, acceptance mappings, or Test Writer-owned evidence for `BANDIT-099`, regardless of harness, model family, provider, or convenience. Any implementation attempt that changes those surfaces must be rejected or routed back to Test Writer/Work Item PM before Stage 3 evidence can be accepted.
+
+## Bootstrap Model-Family Separation
+
+If Codex authors or materially edits the Stage 2 RED tests for `BANDIT-099`, Stage 3 implementation must route to the bootstrap Claude Writer path. Codex may inspect and accept or reject Stage 3 evidence as PM, but Codex-authored RED tests cannot be followed by Codex-authored Stage 3 implementation.
 
 ## Stage Capability Scope
 
@@ -145,6 +218,24 @@ forbidden_actions:
 - state-index
 - guarded-browser-action-execution
 - unrelated-phase-8-product-work
+
+## Forbidden Actions
+
+- Create `docs/work/BANDIT-099/orchestration-plan.md`, RED evidence, implementation evidence, Stage 4 review evidence, landing evidence, UAT evidence, retrospective evidence, or closeout evidence during Repo PM Stage 1 formation.
+- Run implementation writers, edit production implementation for this chore, create Trust Verifier cutover evidence, merge, push, deploy, publish, mutate installed global skills, mutate automation prompts, or start unrelated Phase 8 work before formation is approved.
+- Use direct `qwen` CLI, Ollama, paid/live reviewer routes, or another ad hoc reviewer route as Local Qwen evidence.
+- Treat CodeRabbit timeout or provider failure as pass evidence.
+
+## Skill Lifecycle Contracts
+
+- `bandit`: required for Stage 1 formation, downstream routing, validation, cockpit status, session-context, review-subject hash, review commands, and land-check. Owner: Bandit repo policy. Rollback: revert the slice before landing or route a bootstrap-gap repair if a command contract regresses.
+- `tdd`: required for Stage 2 RED evidence and acceptance mapping before implementation. Owner: Bandit Test Writer boundary. Rollback: invalidate Stage 2 evidence and rerun from a clean Test Writer packet if tests are ambiguous, brittle, or weakened.
+- `review`: required for CodeRabbit, Local Qwen, PM disposition, and escalated review if smell triggers require it. Owner: Bandit reviewer policy and Repo PM disposition. Rollback: treat stale, failed, unavailable, or unresolved review evidence as blocking until rerun or honestly recorded as a bootstrap gap when policy allows.
+- Existing lifecycle policy reference: `.bandit/policy/skill-lifecycle-contracts.json`; this brief records the slice-local lifecycle application and any missing centralized lifecycle metadata remains future hardening scope, not authority to skip review or test gates.
+
+## Evidence Freshness SLO
+
+All test, review, landing, cockpit, session-context, package dry-run, packed-install, risk/supply-chain, and review-subject-hash evidence for `BANDIT-099` must be current under `.bandit/policy/evidence-freshness-slos.json` before Stage 4 aggregation and Stage 5 landing. Any source change after reviewer or landing evidence requires a freshness check and rerun or explicit stale-evidence disposition before landing.
 
 ## Token-Cost Failsafe
 

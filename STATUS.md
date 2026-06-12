@@ -10,10 +10,10 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-099` is the active bootstrap-gap chore for Public Consumer Onboarding
-Hardening. Current stage: Stage 1 brief_created.
+Hardening. Current stage: Stage 1 formation_approved.
 
-Next action: Run formation review and approve formation for `BANDIT-099`
-before Work Item PM execution.
+Next action: Work Item PM should record plan-mode orchestration for
+`BANDIT-099` before RED evidence.
 
 Required operator input: none_required.
 
@@ -21,7 +21,8 @@ Required operator input: none_required.
 
 Last 5 items only:
 
-- `BANDIT-099` - Public Consumer Onboarding Hardening (Stage 1 brief_created)
+- `BANDIT-099` - Public Consumer Onboarding Hardening
+  (Stage 1: formation_approved)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
   (closed)
 - `BANDIT-097` - PRD-005.4 Operator Command Adapters (closed)

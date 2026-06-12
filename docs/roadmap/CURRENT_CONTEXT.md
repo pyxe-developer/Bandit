@@ -9,10 +9,10 @@ Consumer Install Quickstart And Governance Scaffold bootstrap-gap chore.
 
 **Active work item:** `BANDIT-099` - Public Consumer Onboarding Hardening.
 
-The current stage is Stage 1: brief_created.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Run formation review and approve formation for
-`BANDIT-099` before Work Item PM execution.
+**Current next action:** Work Item PM should record plan-mode orchestration for
+`BANDIT-099` before RED evidence.
 
 Do not create RED evidence, implementation dispatch, UAT evidence, landing
 evidence, retrospective evidence, V0 Closeout Claude Code A/B Product-Value
@@ -20,7 +20,8 @@ Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
 service setup, paid reviewer/model routing, public benchmark publication,
 local API work, State Index work, guarded browser action execution, PR/CI/CD
 implementation, installed-copy update-path implementation, or unrelated Phase
-8 product work before formation is approved for `BANDIT-099`.
+8 product work before Work Item PM plan-mode orchestration is recorded for
+`BANDIT-099`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -69,7 +70,11 @@ artifacts cannot answer.
 
 - `docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json`
 - `docs/work/BANDIT-099/brief.md`
-- `docs/work/BANDIT-099/coordination-log.jsonl`, current state `brief_created`
+- `docs/work/BANDIT-099/qwen-formation-review.md`
+- `docs/work/BANDIT-099/coderabbit-formation-review.md`
+- `docs/work/BANDIT-099/formation-review.md`
+- `docs/work/BANDIT-099/coordination-log.jsonl`, current state
+  `formation_approved`
 - `.bandit/bootstrap-gaps.json`,
   `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` current state `active`
 
@@ -82,8 +87,8 @@ artifacts cannot answer.
 
 ## Next Work
 
-The next action is formation review for `BANDIT-099`.
+The next action is Work Item PM plan-mode orchestration for `BANDIT-099`.
 
-Run required formation review artifacts, then `repo-pm approve-formation` for
-`BANDIT-099` if formation review is non-blocking. Do not begin RED evidence or
-implementation before formation is approved.
+Run Work Item PM plan-mode orchestration for `BANDIT-099` before RED evidence.
+Do not begin RED evidence or implementation before the orchestration plan is
+recorded.

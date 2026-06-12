@@ -1175,7 +1175,7 @@
       "linked_work_item": "BANDIT-099",
       "rationale": "Operator review after BANDIT-098 closeout showed remaining day-1 onboarding gaps: starter AGENTS.md is still Codex-specific despite Bandit's model-agnostic product rule; Bandit does not give first-time users guidance for governance strictness and role/model choices; README.md is packaged but not scaffolded or linked by `bandit init`; and first-time command examples still include bare `bandit` commands that do not work in a newly installed consumer repo before npx, npm exec, npm scripts, or PATH/global setup.",
       "verification_target": "docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json",
-      "next_action": "Complete active chore BANDIT-099."
+      "next_action": "Work Item PM should record plan-mode orchestration for BANDIT-099 before RED evidence."
     }
   ]
 }
