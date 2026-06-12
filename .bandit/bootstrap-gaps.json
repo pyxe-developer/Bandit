@@ -1158,6 +1158,24 @@
       "rationale": "BANDIT-098 repaired the public consumer install quickstart and governance scaffold gap by updating README command guidance, package metadata and packaging allow-list posture, advisory install/update policy templates, and `bandit init` starter governance seeding for AGENTS.md, CONTEXT.md, CLEAN_CODE.md, bootstrap methodology, stage rubrics, roadmap/current-context, STATUS.md, and a parser-friendly starter work-item brief while preserving existing files.",
       "verification_target": "docs/work/BANDIT-098/retrospective.md",
       "next_action": "Use the BANDIT-098 public consumer quickstart and `bandit init` starter governance scaffold for consumer-repo setup; Repo PM should form the next authorized product slice only after confirming no open bootstrap gap takes precedence."
+    },
+    {
+      "id": "BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING",
+      "title": "Public Consumer Onboarding Hardening",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "OPERATOR-2026-06-12",
+      "source_artifacts": [
+        "AGENTS.md",
+        "README.md",
+        "src/commands/init.ts",
+        "test/public-consumer-install-quickstart.test.mjs",
+        "docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json"
+      ],
+      "linked_work_item": "BANDIT-099",
+      "rationale": "Operator review after BANDIT-098 closeout showed remaining day-1 onboarding gaps: starter AGENTS.md is still Codex-specific despite Bandit's model-agnostic product rule; Bandit does not give first-time users guidance for governance strictness and role/model choices; README.md is packaged but not scaffolded or linked by `bandit init`; and first-time command examples still include bare `bandit` commands that do not work in a newly installed consumer repo before npx, npm exec, npm scripts, or PATH/global setup.",
+      "verification_target": "docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json",
+      "next_action": "Complete active chore BANDIT-099."
     }
   ]
 }

@@ -1,0 +1,168 @@
+# BANDIT-099: Public Consumer Onboarding Hardening
+
+## Status
+
+Queued
+
+## Non-Product Work
+
+Repair the remaining public consumer onboarding gaps left after BANDIT-098: starter governance must be model-agnostic, README guidance must be scaffolded or explicitly linked from init, first-time command examples must use invocation forms that work before PATH/global setup, and day-1 onboarding must guide the operator through governance strictness and role/model choices.
+
+## Origin
+
+Operator review after BANDIT-098 closeout on 2026-06-12 identified four remaining onboarding gaps: the starter AGENTS contract still names Codex as PM/engineering manager even though Bandit is model agnostic; the user has no clear onboarding guidance for how to use Bandit, including governance strictness and role/model selection; README.md is packaged but not created or linked as a starter artifact by `bandit init`; and first-time command examples still include bare `bandit` commands that do not work in a newly installed consumer repo before npx, npm exec, npm scripts, or PATH setup.
+
+## Scope
+
+- Make starter governance artifacts model-agnostic: AGENTS.md, CLEAN_CODE.md, stage rubrics, and onboarding copy must refer to Bandit roles and configured agents/providers rather than declaring Codex as the repository PM or default authority.
+- Define and implement a day-1 onboarding guidance surface for consumer repos that explains how to choose Bandit strictness, role ownership, reviewer availability, and model/provider routing without creating hosted services, telemetry, paid routing, or publish automation.
+- Decide whether `bandit init` should scaffold a README.md, a Bandit-specific onboarding README, or an explicit pointer from existing README/governance files; implement the selected no-overwrite behavior.
+- Remove or quarantine bare `bandit ...` first-time command examples from README and starter docs unless they are explicitly behind npm script, npm exec, npx, global install, or PATH setup prerequisites.
+- Add focused tests or a packed-install consumer test proving the documented first-time commands work in a fresh consumer repo.
+- Preserve existing no-overwrite behavior for consumer-owned README.md and governance files.
+- Keep this chore focused on public consumer onboarding, starter documentation, init scaffolding, README command guidance, and tests.
+
+## Acceptance Criteria
+
+- The corrective work item brief exists at `docs/work/BANDIT-099/brief.md` and links to `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` as the active bootstrap gap.
+- Starter `AGENTS.md` produced by `bandit init` is model-agnostic and does not declare Codex as the PM or engineering manager for arbitrary consumer repos.
+- Starter clean-code and stage-rubric text does not imply Codex-only governance where Bandit roles, configured providers, or operator-selected agents are intended.
+- Consumer onboarding guidance explains the decisions a first-time operator must make: governance strictness, role ownership, model/provider selection for implementation and review roles, Local Qwen availability, fallback behavior, and which decisions remain operator-owned.
+- The onboarding guidance is available immediately after `bandit init` in a fresh consumer repo without requiring private Bandit repo history or chat context.
+- `bandit init` handles README onboarding with explicit no-overwrite behavior: it creates a starter README or Bandit onboarding document when safe, or preserves an existing README and writes a clear Bandit-specific pointer elsewhere.
+- First-time public README command blocks use `npx --no-install bandit`, `npm exec -- bandit`, or a documented npm script until a global/PATH setup is explicitly established.
+- No copy-pasteable first-time command block contains bare `bandit init`, `bandit validate`, `bandit cockpit status --json`, `bandit session-context current --json`, or `bandit update-check --json` without an explicit prerequisite that makes bare `bandit` available.
+- Focused tests or packed-install tests prove the day-1 documented command sequence succeeds in a fresh consumer repo.
+- Focused tests prove no-overwrite behavior for an existing consumer README.md and existing governance artifacts.
+- The package allow-list includes any new starter onboarding template required by `bandit init` and still excludes active Bandit work history and private local state.
+- Layered risk classification and supply-chain gate evidence are recorded before landing because this work touches package distribution, install docs, CLI init/onboarding behavior, and governance files.
+- Clean-code compliance is evaluated before landing; any accepted non-blocking concern becomes a tagged follow-up or explicit no-action decision.
+- `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` is resolved only after landing action and retrospective closeout evidence exist for this bounded chore.
+
+## Verification Plan
+
+- Run focused RED evidence showing the current starter AGENTS.md and starter clean-code/rubric text are Codex-specific where the consumer contract should be model-agnostic.
+- Run focused RED evidence showing current first-time command examples include bare `bandit` commands before npm script, npm exec, npx, global install, or PATH setup.
+- Run focused RED evidence showing `bandit init` does not create or link a README/onboarding guide that helps a consumer choose strictness and role/model configuration.
+- Run focused tests for model-agnostic starter governance artifacts.
+- Run focused tests for README or onboarding-guide creation and no-overwrite behavior.
+- Run a packed-install consumer test in a fresh temporary repo that executes the documented first-time command sequence.
+- Run `node --test test/init.test.mjs` if init behavior changes.
+- Run `node --test test/public-consumer-install-quickstart.test.mjs` if public quickstart behavior changes.
+- Run `node --test test/private-install-update-channel.test.mjs` if package allow-list behavior changes.
+- Run `npm run typecheck`.
+- Run `npm test` if implementation touches shared CLI startup, init, validation, package metadata, templates, cockpit status, session-context, roadmap parsing, or command routing.
+- Run `npm run bandit -- validate`.
+- Run `node ./bin/bandit.mjs cockpit status --json`.
+- Run `node ./bin/bandit.mjs session-context current --json`.
+- Run `node ./bin/bandit.mjs review-subject-hash BANDIT-099` for aggregate review evidence freshness before Stage 4 closeout.
+- Run CodeRabbit review before Stage 4 closeout unless provider-refusal or timeout evidence is recorded.
+- Run authorized Local Qwen review before Stage 4 closeout.
+- Run `node ./bin/bandit.mjs land-check BANDIT-099` before landing.
+- Run `git diff --check`.
+
+## Expected Files
+
+- docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json
+- docs/work/BANDIT-099/brief.md
+- docs/work/BANDIT-099/coordination-log.jsonl
+- docs/work/BANDIT-099/red-evidence.md
+- docs/work/BANDIT-099/implementation-evidence.md
+- docs/work/BANDIT-099/writer-report.md
+- docs/work/BANDIT-099/stage3-pm-acceptance.md
+- docs/work/BANDIT-099/coderabbit-review.md
+- docs/work/BANDIT-099/local-qwen-review.md
+- docs/work/BANDIT-099/review-evidence.md
+- docs/work/BANDIT-099/landing-verdict.md
+- docs/work/BANDIT-099/landing-action.md
+- docs/work/BANDIT-099/retrospective.md
+- docs/work/BANDIT-099/improvement-disposition.md
+- README.md
+- package.json
+- src/commands/init.ts
+- test/init.test.mjs
+- test/public-consumer-install-quickstart.test.mjs
+- test/private-install-update-channel.test.mjs
+- .bandit/bootstrap-gaps.json
+- docs/roadmap/CURRENT_CONTEXT.md
+- docs/roadmap/ROADMAP.md
+- STATUS.md
+
+## Required Evidence
+
+- docs/work/BANDIT-099/brief.md
+- docs/work/BANDIT-099/coordination-log.jsonl
+- docs/work/BANDIT-099/red-evidence.md
+- docs/work/BANDIT-099/implementation-evidence.md
+- docs/work/BANDIT-099/review-evidence.md
+- docs/work/BANDIT-099/landing-verdict.md
+- docs/work/BANDIT-099/landing-action.md
+- docs/work/BANDIT-099/retrospective.md
+- docs/work/BANDIT-099/improvement-disposition.md
+
+## Operator Input Status
+
+No further operator-owned input is required before forming this bootstrap-gap chore. The operator supplied the product expectation: Bandit is model agnostic, day-1 users need onboarding guidance for strictness and role/model choices, README guidance should be available from init, and first-time commands must use invocations that actually work in a consumer repo. Codex PM owns the technical boundary, scaffold contents, command shape, package allow-list, test strategy, and review routing. Halt only if implementation would add public npm publish automation, handle publish credentials, approve paid registry setup, approve hosted update services, approve telemetry, approve automatic self-update, mutate external repos outside explicit local onboarding files, mutate installed global skills or automation prompts, add merge/push/deploy authority, approve Trust Verifier cutover, replace or wrap old gates, change product or UAT direction, approve business tradeoffs, approve explicit cost/risk posture, approve paid/live reviewer routing, or expand into unrelated Phase 8 product scope.
+
+## Stage Capability Scope
+
+policy: .bandit/policy/stage-capability-scope.json
+stages:
+- stage1_brief
+- formation_review
+- stage2_red_evidence
+- stage3_implementation
+- stage4_review
+- stage5_landing
+- stage6_retrospective
+authority_roles:
+- codex_pm
+- repo_pm
+- work_item_pm
+- test_writer
+- implementation_writer
+- reviewer
+- landing_agent
+- closeout_agent
+required_skills:
+- bandit
+- tdd
+- review
+forbidden_actions:
+- npm-publish-automation
+- publish-credential-handling
+- paid-registry-setup
+- hosted-update-service
+- telemetry
+- automatic-self-update
+- external-repo-mutation-outside-explicit-local-onboarding
+- installed-global-skill-mutation
+- automation-prompt-mutation
+- merge-push-deploy
+- trust-verifier-cutover
+- old-gate-replacement-or-wrapping
+- local-api
+- state-index
+- guarded-browser-action-execution
+- unrelated-phase-8-product-work
+
+## Token-Cost Failsafe
+
+policy: .bandit/policy/token-cost-failsafe.json
+soft_budget_bands:
+- formation_review
+- stage3_implementation
+- stage4_review
+provider_pricing_evidence:
+- not_applicable_local_qwen
+- not_applicable_coderabbit_cli
+spend_classes:
+- local_or_included
+continuation_decisions:
+- CodeRabbit formation and Stage 4 review should receive the prompt-required timeout before timeout replacement evidence is recorded.
+- Local Qwen unavailability is fail-closed and requires operator help rather than an alternate reviewer path.
+- Any paid, live, or recurring model/reviewer route remains blocked unless a separate approved provider-pricing and spend-class artifact exists.
+stage_capability_profiles:
+- stage1_formation_only
+- claude-implementation-writer-stage3
+- qwen-and-coderabbit-review-stage4

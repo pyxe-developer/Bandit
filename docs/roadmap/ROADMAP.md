@@ -9,13 +9,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-098` - Public Consumer Install Quickstart And Governance
-  Scaffold (closed anchor)
+- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening
+  (Stage 1: brief_created)
 
-**Current next step:** Repo PM should form the next work item for the deferred
-V0 Closeout Claude Code A/B Product-Value Trial only after confirming repo
-artifacts still authorize that product slice and no open bootstrap gap takes
-precedence.
+**Current next step:** Run formation review and approve formation for
+`BANDIT-099` before Work Item PM execution.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -28,7 +26,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before Repo PM formation exists and is approved for the next work item.
+work before formation is approved for `BANDIT-099`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -37,14 +35,17 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
-  (deferred until Repo PM formation confirms the slice boundary and no open
-  bootstrap gap takes precedence)
+  (deferred until `BANDIT-099` lands or is explicitly blocked/dispositioned)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-No active blocking bootstrap gap is recorded.
+- `[Gap]` `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` - remaining
+  public consumer onboarding gaps after `BANDIT-098`: model-agnostic starter
+  governance, strictness and role/model choice guidance, README or onboarding
+  scaffold from `bandit init`, and first-time command examples that work before
+  bare `bandit` is on PATH; active chore is `BANDIT-099`.
 
 ### Phase 8 Product Queue
 
