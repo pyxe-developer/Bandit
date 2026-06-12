@@ -4,34 +4,25 @@
 
 ## Last Closed Work Item
 
-- `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
+- `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from
+  coordination state
   (closed; retained as the derived-status anchor until the next work item is
   formed)
 
 ## Current Work Item
 
 - `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from coordination state
-  (Stage 5: landing verdict and land-check required)
+  (Stage 6: closed; derived-status anchor only)
 
-Stage 4 is the pre-landing review gate. Stage 5 may begin only after all of
-these artifacts are current: CodeRabbit terminal review evidence
-(`docs/work/BANDIT-104/coderabbit-review.md`) AND authorized Local Qwen review
-(`docs/work/BANDIT-104/local-qwen-review.md`) AND required escalation evidence
-when policy smells trigger it, otherwise an explicit not-applicable rationale
-(`docs/work/BANDIT-104/review-evidence.md`) AND risk plus supply-chain gate
-evidence (`.bandit/policy/risk-classifications/BANDIT-104-risk-classification.json`
-and `.bandit/policy/supply-chain-gates/BANDIT-104-supply-chain-gate.json`) AND
-repaired or dispositioned findings with current aggregate review evidence
-(`docs/work/BANDIT-104/coderabbit-finding-disposition.md` and
-`docs/work/BANDIT-104/review-evidence.md`). New reviewer findings loop back to
-repair and refresh until all required Stage 4 artifacts are non-blocking. For
-`BANDIT-104`, the earlier CodeRabbit provider timeout was superseded by
-terminal CodeRabbit findings for the committed checkpoint; Stage 3 completion
-evidence remains in `docs/work/BANDIT-104/implementation-evidence.md`.
+`BANDIT-104` resolved
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` by deriving
+`work-execute --json` routing from append-only coordination state, preserving
+the Work Item PM plan-mode gate, and failing closed for unsupported or
+contradictory states.
 
-**Current next step:** Create the `BANDIT-104` landing verdict, run
-`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
-landing action before closeout.
+**Current next step:** Repo PM should form BANDIT-101 - Typed reviewer
+adapters with honest degradation - only after confirming repo artifacts still
+authorize that slice and no new open bootstrap gap takes precedence.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -44,7 +35,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work while `BANDIT-104` remains active.
+work while `BANDIT-104` remains the derived-status anchor.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -53,24 +44,22 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation
-  (blocked until `BANDIT-104` is landed and closed, blocked on operator-owned
-  input, or explicitly dispositioned as no-action)
+  (next formation target; do not begin RED evidence or implementation until
+  Repo PM formation is recorded and approved)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-- `[Gap]` `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` - active as
-  `BANDIT-104`; recorded when `work-execute --json` returned stale Stage 2
-  routing after RED evidence was already recorded.
+- none. `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` was resolved by
+  `BANDIT-104`.
 
 ### Phase 8 Product Queue
 
 - `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation:
   generalize adversarial reviewer adapters and make no-reviewer state an
-  explicit landing-blocking gap. Blocked until the queued work-execute
-  bootstrap gap is resolved, blocked on operator-owned input, or explicitly
-  dispositioned as no-action.
+  explicit landing-blocking gap. Next formation target if repo artifacts still
+  authorize it and no new open bootstrap gap takes precedence.
 - `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
   shims: generate neutral role-contract surfaces plus Pi shims.
 - `[Slice]` `BANDIT-103` - Policy tiering: core invariants plus opt-in tiers:
@@ -82,6 +71,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-104` - Work-execute route should derive current stage from coordination state
 - `BANDIT-100` - Project-profile contract and identity-clean init
 - `BANDIT-099` - Public Consumer Onboarding Hardening
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold

@@ -4,28 +4,29 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-100` is the last closed work item. It landed and closed the
-Project-profile contract and identity-clean init slice from `BANDIT-PRD-006`.
+`BANDIT-104` is the last closed work item. It landed and closed the
+work-execute stage-route advancement bootstrap-gap chore.
 
 **Active work item:** `BANDIT-104` - Work-execute route should derive current
-stage from coordination state.
+stage from coordination state. This closed work item remains the derived-status
+anchor until the next work item is formed.
 
-`BANDIT-104` is the active bootstrap-gap chore formed from
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` is resolved by `BANDIT-104`.
 
-The current stage is Stage 5: landing verdict and land-check required.
+The current stage is Stage 6: closed.
 
-**Current next action:** Create the `BANDIT-104` landing verdict, run
-`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
-landing action before closeout.
+**Current next action:** Repo PM should form BANDIT-101 - Typed reviewer
+adapters with honest degradation - only after confirming repo artifacts still
+authorize that slice and no new open bootstrap gap takes precedence.
 
-Do not start `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude
-Code A/B Product-Value Trial implementation, Trust Verifier cutover, merge,
-push, deploy, hosted service setup, paid reviewer/model routing, public
-benchmark publication, local API work, State Index work, guarded browser
-action execution, PR/CI/CD implementation, installed-copy update-path
-implementation, or unrelated Phase 8 product work while `BANDIT-104` remains
-active.
+Do not begin RED evidence, implementation, review, landing, or closeout for
+`BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude Code A/B
+Product-Value Trial implementation, Trust Verifier cutover, merge, push, deploy,
+hosted service setup, paid reviewer/model routing, public benchmark
+publication, local API work, State Index work, guarded browser action
+execution, PR/CI/CD implementation, installed-copy update-path implementation,
+or unrelated Phase 8 product work while `BANDIT-104` remains the derived-status
+anchor.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -61,33 +62,26 @@ artifacts cannot answer.
 
 ## Last Closed Work
 
-`BANDIT-100` is closed with required landing and closeout evidence:
+`BANDIT-104` is closed with required landing and closeout evidence:
 
-- `docs/work/BANDIT-100/brief.md`
-- `docs/work/BANDIT-100/red-evidence.md`
-- `docs/work/BANDIT-100/implementation-evidence.md`
-- `docs/work/BANDIT-100/review-evidence.md`
-- `docs/work/BANDIT-100/landing-verdict.md`
-- `docs/work/BANDIT-100/landing-action.md`
-- `docs/work/BANDIT-100/retrospective.md`
-- `docs/work/BANDIT-100/improvement-disposition.md`
-- `docs/work/BANDIT-100/coordination-log.jsonl`
-
-One bootstrap gap from `BANDIT-100` Stage 2 is active under `BANDIT-104`:
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
+- `docs/work/BANDIT-104/brief.md`
+- `docs/work/BANDIT-104/red-evidence.md`
+- `docs/work/BANDIT-104/implementation-evidence.md`
+- `docs/work/BANDIT-104/review-evidence.md`
+- `docs/work/BANDIT-104/landing-verdict.md`
+- `docs/work/BANDIT-104/landing-action.md`
+- `docs/work/BANDIT-104/retrospective.md`
+- `docs/work/BANDIT-104/improvement-disposition.md`
+- `docs/work/BANDIT-104/coordination-log.jsonl`
+- `.bandit/bootstrap-gaps.json`
 
 ## Active Work
 
-`BANDIT-104` has required Stage 1 formation evidence:
-
-- `docs/work/BANDIT-104/brief.md`
-- `docs/work/BANDIT-104/qwen-formation-review.md`
-- `docs/work/BANDIT-104/coderabbit-formation-review.md`
-- `docs/work/BANDIT-104/formation-review.md`
-- `docs/work/BANDIT-104/coordination-log.jsonl`
+No active in-progress work item exists. `BANDIT-104` remains the active
+derived-status anchor until Repo PM forms the next work item.
 
 ## Next Work
 
-Create the `BANDIT-104` landing verdict, run
-`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
-landing action before closeout.
+Repo PM should form BANDIT-101 - Typed reviewer adapters with honest
+degradation - only after confirming repo artifacts still authorize that slice
+and no new open bootstrap gap takes precedence.

@@ -1180,8 +1180,8 @@
     {
       "id": "BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT",
       "title": "Work Execute Stage Route Advancement",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "BANDIT-100",
       "source_artifacts": [
         "src/commands/bandit-work-execute.ts",
@@ -1191,9 +1191,9 @@
         "docs/roadmap/CURRENT_CONTEXT.md"
       ],
       "linked_work_item": "BANDIT-104",
-      "rationale": "During BANDIT-100 Stage 3 routing, `node ./bin/bandit.mjs coordination status BANDIT-100 --json`, cockpit status, and session-context all reported `red_recorded` with Stage 3 dispatch as the next action, but `node ./bin/bandit.mjs work-execute --json` still reported `Stage 2: ready_for_red`. The command hardcodes `requestedStage: \"stage_2_red\"` and does not advance route selection from current coordination state. This is recorded as a queued bootstrap-gap chore rather than hidden in the product slice.",
-      "verification_target": null,
-      "next_action": "Complete active chore BANDIT-104."
+      "rationale": "BANDIT-104 repaired work-execute route derivation so `node ./bin/bandit.mjs work-execute --json` derives the next executable route from accepted append-only coordination state instead of a hardcoded Stage 2 assumption. The implementation preserves the Work Item PM plan-mode gate, maps `orchestration_plan_recorded` to Stage 2 RED, maps `red_recorded` to Stage 3 implementation, fails closed for unsupported or contradictory states, and landed with focused controller/adapter/route-registry tests, full-suite verification, typecheck, CodeRabbit terminal pass, authorized Local Qwen pass, risk classification, supply-chain gate, aggregate review evidence, land-check, local-record landing, and Stage 6 closeout evidence.",
+      "verification_target": "docs/work/BANDIT-104/retrospective.md",
+      "next_action": "Repo PM should form BANDIT-101 - Typed reviewer adapters with honest degradation - only after confirming repo artifacts still authorize that slice and no new open bootstrap gap takes precedence."
     }
   ]
 }
