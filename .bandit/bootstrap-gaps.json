@@ -1145,8 +1145,8 @@
     {
       "id": "BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART",
       "title": "Public Consumer Install Quickstart And Governance Scaffold",
-      "status": "active",
-      "disposition": "active_chore",
+      "status": "resolved",
+      "disposition": "resolved",
       "source_work_item": "OPERATOR-2026-06-11",
       "source_artifacts": [
         "README.md",
@@ -1155,9 +1155,9 @@
         "docs/reports/public-consumer-install-command-audit-2026-06-11.md"
       ],
       "linked_work_item": "BANDIT-098",
-      "rationale": "Operator testing showed README install and validation commands are not reliable for arbitrary consumer repos. Audit evidence shows repos without package.json can install Bandit into a parent directory, npm publishing is not complete, README uses unsafe shell placeholders and bare bandit commands, and post-init cockpit/session-context commands require governance artifacts that init does not scaffold, including AGENTS.md, CONTEXT.md, CLEAN_CODE.md, bootstrap methodology, stage rubrics, roadmap/current-context, and STATUS.md.",
-      "verification_target": "docs/reports/public-consumer-install-command-audit-2026-06-11.md",
-      "next_action": "Complete active chore BANDIT-098."
+      "rationale": "BANDIT-098 repaired the public consumer install quickstart and governance scaffold gap by updating README command guidance, package metadata and packaging allow-list posture, advisory install/update policy templates, and `bandit init` starter governance seeding for AGENTS.md, CONTEXT.md, CLEAN_CODE.md, bootstrap methodology, stage rubrics, roadmap/current-context, STATUS.md, and a parser-friendly starter work-item brief while preserving existing files.",
+      "verification_target": "docs/work/BANDIT-098/retrospective.md",
+      "next_action": "Use the BANDIT-098 public consumer quickstart and `bandit init` starter governance scaffold for consumer-repo setup; Repo PM should form the next authorized product slice only after confirming no open bootstrap gap takes precedence."
     }
   ]
 }

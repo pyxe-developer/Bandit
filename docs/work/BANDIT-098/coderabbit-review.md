@@ -8,11 +8,11 @@ reviewer: coderabbit
 review_type: uncommitted
 provider: coderabbit-cli
 review_target: uncommitted-local-diff
-review_state: timeout_after_repair
+review_state: bootstrap_gap
 coderabbit_verdict: bootstrap_gap
 timestamp: 2026-06-12T01:55:43Z
 verdict: bootstrap_gap
-findings_status: dispositioned
+findings_status: resolved
 findings_disposition: Initial CodeRabbit findings were repaired or dispositioned in docs/work/BANDIT-098/coderabbit-finding-disposition.md; refreshed CodeRabbit run timed out after the full Stage 4 provider window without emitting new findings. No CodeRabbit pass is claimed.
 operator_input_status: none_required
 source_drift_status: current
