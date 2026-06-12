@@ -57,7 +57,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
   bootstrap gap is resolved, blocked on operator-owned input, or explicitly
   dispositioned as no-action.
 - `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
-  shims: generate neutral role-contract surfaces plus Claude Code shims.
+  shims: generate neutral role-contract surfaces plus Pi shims.
 - `[Slice]` `BANDIT-103` - Policy tiering: core invariants plus opt-in tiers:
   default new consumers to core policy and keep Bandit-internal policy out of
   the packed distribution.
