@@ -66,6 +66,51 @@ test("init creates starter governance artifacts for day-1 cockpit and session co
   assert.equal(sessionPayload.required_operator_input.value, "none_required");
 });
 
+test("init creates model-agnostic starter governance artifacts", async () => {
+  const repo = await createTempRepo();
+
+  const init = await runBandit(repo, ["init"]);
+
+  assert.equal(init.code, 0, init.stderr);
+
+  const agents = await readFile(path.join(repo, "AGENTS.md"), "utf8");
+  const cleanCode = await readFile(path.join(repo, "CLEAN_CODE.md"), "utf8");
+  const stageRubrics = await readFile(
+    path.join(repo, "docs/verification/STAGE_RUBRICS.md"),
+    "utf8"
+  );
+  const starterGovernance = [agents, cleanCode, stageRubrics].join("\n");
+
+  assert.doesNotMatch(agents, /Codex is the PM and engineering manager/);
+  assert.doesNotMatch(agents, /Codex owns routine technical routing decisions/);
+  assert.doesNotMatch(starterGovernance, /\bCodex PM\b/);
+  assert.match(starterGovernance, /configured (agents|providers|roles)/i);
+});
+
+test("init creates day-1 onboarding guidance in a fresh consumer repo", async () => {
+  const repo = await createTempRepo();
+
+  const init = await runBandit(repo, ["init"]);
+
+  assert.equal(init.code, 0, init.stderr);
+
+  const readme = await readFile(path.join(repo, "README.md"), "utf8");
+  assert.match(readme, /Bandit/i);
+  assert.match(readme, /governance strictness/i);
+  assert.match(readme, /role ownership/i);
+  assert.match(readme, /model\/provider/i);
+  assert.match(readme, /Local Qwen/i);
+  assert.match(readme, /operator-owned/i);
+  assert.match(
+    readme,
+    /npx --no-install bandit init|npm exec -- bandit init|npm run bandit -- init/
+  );
+  assert.doesNotMatch(
+    readme,
+    /^bandit (init|validate|cockpit status --json|session-context current --json|update-check --json)$/m
+  );
+});
+
 test("init preserves existing starter governance artifacts", async () => {
   const repo = await createTempRepo();
   const sentinels = {
@@ -85,6 +130,31 @@ test("init preserves existing starter governance artifacts", async () => {
   for (const [relativePath, contents] of Object.entries(sentinels)) {
     assert.equal(await readFile(path.join(repo, relativePath), "utf8"), contents);
   }
+});
+
+test("init preserves an existing README and writes Bandit onboarding guidance elsewhere", async () => {
+  const repo = await createTempRepo();
+  const existingReadme = "# Existing Product\n\nKeep this README.\n";
+  await writeRepoFile(repo, "README.md", existingReadme);
+
+  const init = await runBandit(repo, ["init"]);
+
+  assert.equal(init.code, 0, init.stderr);
+  assert.equal(
+    await readFile(path.join(repo, "README.md"), "utf8"),
+    existingReadme
+  );
+
+  const onboarding = await readFile(
+    path.join(repo, "docs/BANDIT_ONBOARDING.md"),
+    "utf8"
+  );
+  assert.match(onboarding, /Bandit/i);
+  assert.match(onboarding, /governance strictness/i);
+  assert.match(onboarding, /role ownership/i);
+  assert.match(onboarding, /model\/provider/i);
+  assert.match(onboarding, /Local Qwen/i);
+  assert.match(onboarding, /operator-owned/i);
 });
 
 test("init is idempotent and appends lifecycle events without overwriting existing events", async () => {

@@ -9,19 +9,22 @@ Consumer Install Quickstart And Governance Scaffold bootstrap-gap chore.
 
 **Active work item:** `BANDIT-099` - Public Consumer Onboarding Hardening.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 4: Review.
 
-**Current next action:** Work Item PM should record plan-mode orchestration for
-`BANDIT-099` before RED evidence.
+**Current next action:** Run Stage 4 review for `BANDIT-099`: CodeRabbit
+pre-PR review or honest provider-refusal/bootstrap-gap evidence after the
+required wait window, Local Qwen through `.bandit/reviewers/local-qwen.json`
+via `bin/omlx-chat-completions.mjs`, layered risk classification, supply-chain
+gate, aggregate review evidence, review-subject hash, and disposition of every
+finding before landing.
 
-Do not create RED evidence, implementation dispatch, UAT evidence, landing
-evidence, retrospective evidence, V0 Closeout Claude Code A/B Product-Value
-Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
-service setup, paid reviewer/model routing, public benchmark publication,
-local API work, State Index work, guarded browser action execution, PR/CI/CD
-implementation, installed-copy update-path implementation, or unrelated Phase
-8 product work before Work Item PM plan-mode orchestration is recorded for
-`BANDIT-099`.
+Do not create UAT evidence, landing evidence, retrospective evidence, V0
+Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
+cutover, merge, push, deploy, hosted service setup, paid reviewer/model
+routing, public benchmark publication, local API work, State Index work,
+guarded browser action execution, PR/CI/CD implementation, installed-copy
+update-path implementation, or unrelated Phase 8 product work before Stage 4
+review evidence is recorded for `BANDIT-099`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -66,15 +69,21 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-099` Stage 1 formation evidence is the current active-work source:
+`BANDIT-099` Stage 4 review is the current active-work source:
 
 - `docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json`
 - `docs/work/BANDIT-099/brief.md`
 - `docs/work/BANDIT-099/qwen-formation-review.md`
 - `docs/work/BANDIT-099/coderabbit-formation-review.md`
 - `docs/work/BANDIT-099/formation-review.md`
+- `docs/work/BANDIT-099/orchestration-plan.md`
+- `docs/work/BANDIT-099/red-evidence.md`
+- `docs/work/BANDIT-099/implementation-evidence.md`
+- `docs/work/BANDIT-099/writer-report.md`
+- `docs/work/BANDIT-099/test-baseline-repair-evidence.md`
+- `docs/work/BANDIT-099/stage3-pm-acceptance.md`
 - `docs/work/BANDIT-099/coordination-log.jsonl`, current state
-  `formation_approved`
+  `implementation_recorded`
 - `.bandit/bootstrap-gaps.json`,
   `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` current state `active`
 
@@ -87,8 +96,11 @@ artifacts cannot answer.
 
 ## Next Work
 
-The next action is Work Item PM plan-mode orchestration for `BANDIT-099`.
+The next action is Stage 4 review for `BANDIT-099`.
 
-Run Work Item PM plan-mode orchestration for `BANDIT-099` before RED evidence.
-Do not begin RED evidence or implementation before the orchestration plan is
-recorded.
+Run CodeRabbit pre-PR review or honest provider-refusal/bootstrap-gap evidence
+after the required wait window, Local Qwen through
+`.bandit/reviewers/local-qwen.json` via `bin/omlx-chat-completions.mjs`,
+layered risk classification, supply-chain gate, aggregate review evidence,
+review-subject hash, and disposition of every finding before landing. Do not
+begin Stage 5 landing before Stage 4 review evidence is recorded.

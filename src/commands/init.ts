@@ -398,12 +398,11 @@ Operating instructions for agents working in this Bandit-governed repository.
 
 ## Role
 
-Codex is the PM and engineering manager for this repository.
-
-Codex owns routine technical routing decisions: which skill to use, which agent
-should run, when work should be split, when review should escalate, and whether
-a gate is satisfied. Do not ask the operator to make ordinary code-safety or
-model-routing decisions when repo evidence and policy are sufficient.
+The Work Item PM role is held by your operator-selected PM agent. Configured agents and providers carry out routine technical routing decisions: which skill
+to use, which agent should run, when work should be split, when review should
+escalate, and whether a gate is satisfied. Do not ask the operator to make
+ordinary code-safety or model-routing decisions when repo evidence and policy
+are sufficient.
 
 Ask the operator for product direction, UAT, business tradeoffs, explicit
 cost/risk overrides, policy changes, and genuinely ambiguous scope.
@@ -476,14 +475,14 @@ future agents worse.
 
 Before every slice:
 
-- Codex PM must read this file.
+- The Work Item PM must read this file.
 - The slice brief must record that \`CLEAN_CODE.md\` was read.
 - The spec and acceptance criteria must be shaped so clean-code compliance can
   be evaluated.
 
 Before every slice lands:
 
-- Codex PM must perform a clean-code compliance check.
+- The Work Item PM must perform a clean-code compliance check.
 - The landing evidence must answer whether the slice complies with this rubric.
 - Any blocker-level clean-code finding must be fixed before landing.
 - Any accepted non-blocking clean-code concern must become a tagged improvement
@@ -509,7 +508,7 @@ Before every slice lands:
 9. **Failure clarity**: refusals, blocked gates, stale evidence, and
    unavailable agents fail closed with clear messages.
 10. **No role erosion**: Test Writer, Implementation Writer, Reviewer, Landing
-    Agent, and Codex PM boundaries are preserved.
+    Agent, and Work Item PM boundaries are preserved.
 11. **Improvement capture**: any workflow lesson is converted into a tagged
     improvement chore or explicit no-action decision.
 `;
@@ -579,7 +578,7 @@ const STARTER_STAGE_RUBRICS_MD = `# Stage Rubrics
 
 ## Purpose
 
-Bandit verification is stage-based. Each stage has a rubric that Codex PM,
+Bandit verification is stage-based. Each stage has a rubric that configured PM roles,
 specialized verifiers, and reviewers can use to decide whether work may
 proceed.
 
@@ -759,6 +758,54 @@ fresh repository so \`bandit validate\`, \`bandit cockpit status --json\`, and
 No operator-owned input is required.
 `;
 
+const STARTER_ONBOARDING_MD = `# Bandit Onboarding
+
+This repository uses [Bandit](https://github.com/pyxe-developer/Bandit), a
+repo-native trust layer for agentic software delivery.
+
+## What Bandit Governs
+
+Bandit enforces explicit workflow stages for all agentic work. Every stage
+requires durable evidence before it proceeds.
+
+- **Governance strictness**: each stage gate must pass before work advances.
+- **Role ownership**: configured agents, providers, and operator-selected role
+  owners are declared in \`AGENTS.md\`.
+- **Model/provider choices**: your configured providers and local models are set
+  by operator-owned decisions recorded in your repository governance files.
+- **Local Qwen**: Bandit uses Local Qwen as the baseline adversarial reviewer
+  for every PR. Configure your local endpoint in
+  \`.bandit/reviewers/local-qwen.json\`.
+- **Operator-owned decisions**: product direction, UAT, business tradeoffs,
+  cost/risk overrides, and policy changes require explicit operator input.
+
+## Getting Started
+
+Install Bandit as a dev dependency:
+
+\`\`\`sh
+npm install -D bandit-workflow
+\`\`\`
+
+Initialize Bandit state in this repository:
+
+\`\`\`sh
+npx --no-install bandit init
+\`\`\`
+
+Validate the initialized state:
+
+\`\`\`sh
+npx --no-install bandit validate
+\`\`\`
+
+Check the workflow cockpit:
+
+\`\`\`sh
+npx --no-install bandit cockpit status --json
+\`\`\`
+`;
+
 const STARTER_GOVERNANCE_FILES: ReadonlyArray<{
   relativePath: string;
   contents: string;
@@ -794,6 +841,17 @@ async function seedStarterGovernance(repoRoot: string) {
     }
     await mkdir(path.dirname(destination), { recursive: true });
     await writeFile(destination, file.contents, "utf8");
+  }
+
+  const readmePath = path.join(repoRoot, "README.md");
+  if (await pathExists(readmePath)) {
+    const onboardingPath = path.join(repoRoot, "docs/BANDIT_ONBOARDING.md");
+    if (!(await pathExists(onboardingPath))) {
+      await mkdir(path.dirname(onboardingPath), { recursive: true });
+      await writeFile(onboardingPath, STARTER_ONBOARDING_MD, "utf8");
+    }
+  } else {
+    await writeFile(readmePath, STARTER_ONBOARDING_MD, "utf8");
   }
 }
 

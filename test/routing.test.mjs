@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -236,6 +236,9 @@ const validSmellCatalog = {
 
 test("validate fails closed when the smell trigger catalog is missing", async () => {
   const repo = await createInitializedRepo();
+  await rm(path.join(repo, ".bandit/policy/smell-triggers.json"), {
+    force: true
+  });
 
   const result = await runBandit(repo, ["validate"]);
 
@@ -418,6 +421,9 @@ async function writeValidTemplates(optionsRepo, options = {}) {
     const destination = path.join(optionsRepo, templatePath);
     await mkdir(path.dirname(destination), { recursive: true });
     await writeFile(destination, content, "utf8");
+  }
+  if (options.omitTemplate) {
+    await rm(path.join(optionsRepo, options.omitTemplate), { force: true });
   }
 }
 

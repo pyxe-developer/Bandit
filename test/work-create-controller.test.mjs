@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import {
@@ -178,6 +178,9 @@ Product direction required before creating this target.
 
 test("Repo PM create controller refuses missing authorized Local Qwen route", async () => {
   const repo = await createControllerRepo();
+  await rm(path.join(repo, ".bandit/reviewers/local-qwen.json"), {
+    force: true
+  });
   await writeSourceSpec(repo, "BANDIT-094-repo-pm-create-controller-and-prompt-contract");
 
   const result = await runBandit(repo, [

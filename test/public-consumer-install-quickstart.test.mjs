@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -8,6 +8,40 @@ import { fileURLToPath } from "node:url";
 
 const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
+
+test("public README first-time command examples use install-aware invocations", async () => {
+  const readme = await readFile(path.join(repoRoot, "README.md"), "utf8");
+
+  for (const command of [
+    "init",
+    "validate",
+    "cockpit status --json",
+    "session-context current --json",
+    "update-check --json"
+  ]) {
+    assert.doesNotMatch(
+      readme,
+      new RegExp(`^bandit ${escapeRegExp(command)}$`, "m")
+    );
+    assert.doesNotMatch(
+      readme,
+      new RegExp(`^npx bandit ${escapeRegExp(command)}$`, "m")
+    );
+  }
+
+  assert.match(
+    readme,
+    /npx --no-install bandit init|npm exec -- bandit init|npm run bandit -- init/
+  );
+  assert.match(
+    readme,
+    /npx --no-install bandit validate|npm exec -- bandit validate|npm run bandit -- validate/
+  );
+  assert.match(
+    readme,
+    /npx --no-install bandit update-check --json|npm exec -- bandit update-check --json|npm run bandit -- update-check --json/
+  );
+});
 
 test(
   "packed consumer quickstart initializes a governed repo with local npx commands",
@@ -78,6 +112,10 @@ function npmExecBandit(cwd, banditArgs) {
     cwd,
     timeout: 120_000
   });
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function execFileResult(command, args, options = {}) {

@@ -806,6 +806,10 @@ async function createInitializedRepo(options = {}) {
 
   if (!options.omitProfile) {
     await writeLocalQwenProfile(repo, options.profileOptions);
+  } else {
+    await rm(path.join(repo, ".bandit/reviewers/local-qwen.json"), {
+      force: true
+    });
   }
 
   await writeSmellCatalog(repo, validSmellCatalog);

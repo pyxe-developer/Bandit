@@ -84,10 +84,10 @@ npm install -D /tmp/bandit-pack/<printed-tarball-name>.tgz
 Then run the installed CLI:
 
 ```sh
-npx bandit init
-npx bandit validate
-npx bandit cockpit status --json
-npx bandit session-context current --json
+npx --no-install bandit init
+npx --no-install bandit validate
+npx --no-install bandit cockpit status --json
+npx --no-install bandit session-context current --json
 ```
 
 If the consumer repository prefers npm scripts, add one:
@@ -104,19 +104,20 @@ from the packed distribution.
 
 ## Current Operator Commands
 
-Use `npm run bandit -- <command>` from this checkout, or `npx bandit <command>`
-from a consumer repository where Bandit is installed.
+Use `npm run bandit -- <command>` from this checkout, or
+`npx --no-install bandit <command>` from a consumer repository where Bandit is
+installed.
 
-Common first-time commands:
+Common first-time commands (from a consumer repo with Bandit installed):
 
 ```sh
-bandit init
-bandit validate
-bandit list
-bandit show <work-item-id>
-bandit cockpit status --json
-bandit session-context current --json
-bandit update-check --json
+npx --no-install bandit init
+npx --no-install bandit validate
+npx --no-install bandit list
+npx --no-install bandit show <work-item-id>
+npx --no-install bandit cockpit status --json
+npx --no-install bandit session-context current --json
+npx --no-install bandit update-check --json
 ```
 
 Role-oriented workflow entry points:
@@ -182,7 +183,7 @@ The release manifest should be data-minimal:
 Run:
 
 ```sh
-npx bandit update-check --json
+npx --no-install bandit update-check --json
 ```
 
 Statuses are deterministic: `unconfigured`, `disabled`, `unreachable`,

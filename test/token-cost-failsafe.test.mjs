@@ -379,7 +379,7 @@ test("work-item create renders token-cost failsafe scope into generated briefs",
 
   assert.equal(result.code, 0, result.stderr);
   const brief = await readFile(
-    path.join(repo, "docs/work/BANDIT-001/brief.md"),
+    path.join(repo, "docs/work/BANDIT-002/brief.md"),
     "utf8"
   );
   assert.match(brief, /^## Token-Cost Failsafe$/m);
