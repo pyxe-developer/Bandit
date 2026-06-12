@@ -13,7 +13,7 @@ check_cadence_seconds:
 update_source:
 alert:
 
-## Release Manifest (private update source)
+## Release Manifest
 
 contract_version:
 package_name:

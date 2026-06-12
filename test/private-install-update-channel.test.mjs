@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const thisFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(thisFile), "..");
 
-test("package dry-run exposes only intentional private CLI distribution files", async () => {
+test("package dry-run exposes only intentional public CLI distribution files", async () => {
   const result = await execFileResult("npm", ["pack", "--dry-run", "--json"], {
     cwd: repoRoot
   });
@@ -37,13 +37,15 @@ test("package dry-run exposes only intentional private CLI distribution files", 
   );
   assert.ok(files.includes("bin/bandit.mjs"));
   assert.ok(files.includes("package.json"));
-  assert.ok(files.includes(".bandit/policy/private-install-update-channel.json"));
-  assert.ok(files.includes("docs/templates/private-install-update-channel.md"));
+  assert.ok(files.includes(".bandit/policy/install-update-channel.json"));
+  assert.ok(files.includes("docs/templates/install-update-channel.md"));
   assert.ok(files.includes("docs/templates/update-channel.md"));
+  assert.equal(files.includes(".bandit/policy/private-install-update-channel.json"), false);
+  assert.equal(files.includes("docs/templates/private-install-update-channel.md"), false);
 });
 
 test(
-  "packed private install runs bandit init, validate, and update-check without development node_modules",
+  "packed install runs bandit init, validate, and update-check without development node_modules",
   { timeout: 120_000 },
   async () => {
     const packDir = await mkdtemp(path.join(tmpdir(), "bandit-pack-"));

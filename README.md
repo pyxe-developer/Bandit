@@ -8,15 +8,17 @@ landing, retrospective, and improvement capture. The point is not just to run
 coding agents. The point is to make agentic workflows easier to trust and
 improve over time.
 
-Bandit is currently private. Public npm publishing, paid private registry setup,
-hosted update services, telemetry, automatic self-update, external repo
-mutation, and merge/push/deploy authority are not part of the current install
-channel.
+Bandit is open source under the MIT license. The package is intended to be
+discoverable and installable by other teams; public npm publishing is allowed by
+current policy, while publish credentials, hosted update services, telemetry,
+automatic self-update, external repo mutation, and merge/push/deploy authority
+remain out of scope for the CLI itself.
 
 ## Requirements
 
 - Node.js and npm.
-- Access to this private repository, a private Git tag, or a packed tarball.
+- Access to this repository, a Git tag, the npm package once published, or a
+  packed tarball.
 - For adversarial review workflows, the configured Local Qwen endpoint used by
   this repository's policy.
 
@@ -55,13 +57,21 @@ npm run bandit -- validate
 In this development checkout, `init` usually reports that Bandit state already
 exists because `.bandit/` state is committed as repo-native workflow evidence.
 
-## Private Install
+## Install
 
-Install Bandit into another private repository from an explicit private Git tag:
+Install Bandit from npm once a public release is published:
 
 ```sh
-npm install -D git+ssh://<private-host>/<org>/bandit.git#<tag>
+npm install -D bandit-workflow
 ```
+
+Until then, install from the public GitHub repository:
+
+```sh
+npm install -D github:pyxe-developer/Bandit#main
+```
+
+For repeatable installs, pin a release tag or full commit SHA once one exists.
 
 Or install from a packed tarball:
 
@@ -87,10 +97,10 @@ npm pkg set scripts.bandit="bandit"
 npm run bandit -- validate
 ```
 
-The private package intentionally includes only the CLI/runtime surfaces,
-starter templates, selected policy defaults, Local Qwen reviewer policy, and
-this README. It excludes active work history, tests, and repo-local workflow
-state from the packed distribution.
+The package intentionally includes only the CLI/runtime surfaces, starter
+templates, selected policy defaults, Local Qwen reviewer policy, and this
+README. It excludes active work history, tests, and repo-local workflow state
+from the packed distribution.
 
 ## Current Operator Commands
 
@@ -135,7 +145,7 @@ Running `bandit` with no command prints usage and the role entry points.
 
 ## Manual Update Checks
 
-Bandit supports manual, non-blocking update checks against a private file
+Bandit supports manual, non-blocking update checks against a file-based release
 manifest. Configure `.bandit/update-channel.json` in the consumer repository:
 
 ```json
@@ -144,12 +154,12 @@ manifest. Configure `.bandit/update-channel.json` in the consumer repository:
   "enabled": true,
   "package_name": "bandit-workflow",
   "installed_version": "0.0.0",
-  "source_channel": "private_git_tag",
+  "source_channel": "public_npm",
   "current_source_ref": "v0.0.0",
   "check_cadence_seconds": 3600,
   "update_source": {
     "type": "file",
-    "path": "/path/to/private-bandit-release.json"
+    "path": "/path/to/bandit-release.json"
   },
   "alert": {
     "enabled": true
@@ -157,7 +167,7 @@ manifest. Configure `.bandit/update-channel.json` in the consumer repository:
 }
 ```
 
-The private release manifest should be data-minimal:
+The release manifest should be data-minimal:
 
 ```json
 {
@@ -165,7 +175,7 @@ The private release manifest should be data-minimal:
   "package_name": "bandit-workflow",
   "latest_version": "0.1.0",
   "latest_ref": "v0.1.0",
-  "update_command": "npm install -D git+ssh://<private-host>/<org>/bandit.git#v0.1.0"
+  "update_command": "npm install -D bandit-workflow@0.1.0"
 }
 ```
 

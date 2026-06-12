@@ -142,7 +142,7 @@ function comparisonResult(
     latest_ref: manifest.latestRef,
     update_command:
       manifest.updateCommand ??
-      `npm install -D <private-source>#${manifest.latestRef}`
+      `npm install -D bandit-workflow@${manifest.latestVersion}`
   };
 }
 

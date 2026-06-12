@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { createTempRepo, runBandit } from "./helpers/bandit-cli.mjs";
@@ -25,6 +25,66 @@ test("init creates repo-native config and lifecycle event log", async () => {
     work_item: null,
     message: "Initialized Bandit repo-native state"
   });
+});
+
+test("init creates starter governance artifacts for day-1 cockpit and session context", async () => {
+  const repo = await createTempRepo();
+
+  const init = await runBandit(repo, ["init"]);
+
+  assert.equal(init.code, 0, init.stderr);
+  for (const artifact of [
+    "AGENTS.md",
+    "CONTEXT.md",
+    "CLEAN_CODE.md",
+    "docs/plans/BOOTSTRAP_METHODOLOGY.md",
+    "docs/verification/STAGE_RUBRICS.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ]) {
+    await assertExists(repo, artifact);
+  }
+
+  const validate = await runBandit(repo, ["validate"]);
+  assert.equal(validate.code, 0, validate.stderr);
+
+  const cockpit = await runBandit(repo, ["cockpit", "status", "--json"]);
+  assert.equal(cockpit.code, 0, cockpit.stderr);
+  const cockpitPayload = JSON.parse(cockpit.stdout);
+  assert.equal(cockpitPayload.kind, "workflow_cockpit_status");
+  assert.equal(cockpitPayload.required_operator_input.value, "none_required");
+
+  const session = await runBandit(repo, [
+    "session-context",
+    "current",
+    "--json"
+  ]);
+  assert.equal(session.code, 0, session.stderr);
+  const sessionPayload = JSON.parse(session.stdout);
+  assert.equal(sessionPayload.kind, "focused_session_context_packet");
+  assert.equal(sessionPayload.required_operator_input.value, "none_required");
+});
+
+test("init preserves existing starter governance artifacts", async () => {
+  const repo = await createTempRepo();
+  const sentinels = {
+    "AGENTS.md": "# Custom Agents\n\nDo not replace.\n",
+    "CLEAN_CODE.md": "# Custom Clean Code\n\nDo not replace.\n",
+    "docs/roadmap/CURRENT_CONTEXT.md": "# Custom Current Context\n\nDo not replace.\n",
+    "STATUS.md": "# Custom Status\n\nDo not replace.\n"
+  };
+
+  for (const [relativePath, contents] of Object.entries(sentinels)) {
+    await writeRepoFile(repo, relativePath, contents);
+  }
+
+  const init = await runBandit(repo, ["init"]);
+
+  assert.equal(init.code, 0, init.stderr);
+  for (const [relativePath, contents] of Object.entries(sentinels)) {
+    assert.equal(await readFile(path.join(repo, relativePath), "utf8"), contents);
+  }
 });
 
 test("init is idempotent and appends lifecycle events without overwriting existing events", async () => {
@@ -55,3 +115,13 @@ test("init is idempotent and appends lifecycle events without overwriting existi
     message: "Bandit repo-native state already existed"
   });
 });
+
+async function assertExists(repo, relativePath) {
+  await access(path.join(repo, relativePath));
+}
+
+async function writeRepoFile(repo, relativePath, contents) {
+  const destination = path.join(repo, relativePath);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, contents, "utf8");
+}

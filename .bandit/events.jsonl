@@ -344,3 +344,4 @@
 {"type":"work_item_created","work_item":"BANDIT-095","message":"Created work item BANDIT-095 from docs/specs/BANDIT-GAP-REPO-PM-CREATE-CONTROLLER-CLOSED-ANCHOR-ROUTING.json"}
 {"type":"work_item_created","work_item":"BANDIT-096","message":"Created work item BANDIT-096 from docs/specs/BANDIT-096-work-item-pm-execute-controller-and-route-registry.json"}
 {"type":"work_item_created","work_item":"BANDIT-097","message":"Created work item BANDIT-097 from docs/specs/BANDIT-097-operator-command-adapters.json"}
+{"type":"work_item_created","work_item":"BANDIT-098","message":"Created work item BANDIT-098 from docs/specs/BANDIT-098-public-consumer-install-quickstart-and-governance-scaffold.json"}

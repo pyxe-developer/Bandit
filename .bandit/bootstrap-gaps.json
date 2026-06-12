@@ -1141,6 +1141,23 @@
       "rationale": "BANDIT-095 repaired Repo PM create-controller closed-anchor routing. The resolver now treats a closed current ROADMAP work item as a closed anchor for the next authorized target, and the create controller validates landing-action, retrospective, improvement-disposition, and closed coordination evidence before creating the next work item.",
       "verification_target": "docs/work/BANDIT-095/retrospective.md",
       "next_action": "Repo PM should form PRD-005.3 Work Item PM Execute Controller And Route Registry."
+    },
+    {
+      "id": "BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART",
+      "title": "Public Consumer Install Quickstart And Governance Scaffold",
+      "status": "active",
+      "disposition": "active_chore",
+      "source_work_item": "OPERATOR-2026-06-11",
+      "source_artifacts": [
+        "README.md",
+        "package.json",
+        ".bandit/policy/install-update-channel.json",
+        "docs/reports/public-consumer-install-command-audit-2026-06-11.md"
+      ],
+      "linked_work_item": "BANDIT-098",
+      "rationale": "Operator testing showed README install and validation commands are not reliable for arbitrary consumer repos. Audit evidence shows repos without package.json can install Bandit into a parent directory, npm publishing is not complete, README uses unsafe shell placeholders and bare bandit commands, and post-init cockpit/session-context commands require governance artifacts that init does not scaffold, including AGENTS.md, CONTEXT.md, CLEAN_CODE.md, bootstrap methodology, stage rubrics, roadmap/current-context, and STATUS.md.",
+      "verification_target": "docs/reports/public-consumer-install-command-audit-2026-06-11.md",
+      "next_action": "Complete active chore BANDIT-098."
     }
   ]
 }

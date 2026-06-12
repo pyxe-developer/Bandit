@@ -1,20 +1,22 @@
 # Current Context
 
-## Last Updated: 2026-06-11
+## Last Updated: 2026-06-12
 
-## Current Work Item: BANDIT-097
+## Current Work Item: BANDIT-098
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-097` is closed. It is the PRD-005.4 Operator Command Adapters slice.
+`BANDIT-098` is the active bootstrap-gap chore for Public Consumer Install
+Quickstart And Governance Scaffold. Current stage: Stage 4 review.
 
-Next action: Repo PM should form the next work item for the deferred V0
-Closeout Claude Code A/B Product-Value Trial only after confirming PRD-004/005
-implementation lanes are landed, closed, blocked on operator-owned input, or
-explicitly dispositioned.
+Next action: Run Stage 4 review for `BANDIT-098`: CodeRabbit review or honest
+provider-refusal/bootstrap-gap evidence after the required wait window, Local
+Qwen through `.bandit/reviewers/local-qwen.json` via
+`bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
+aggregate review evidence, and disposition of every finding before landing.
 
 Required operator input: none_required.
 

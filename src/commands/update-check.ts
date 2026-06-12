@@ -30,7 +30,7 @@ function formatHumanReadable(result: UpdateCheckResult): string {
   } else if (result.status === "disabled") {
     lines.push("Update checking is disabled for this repo.");
   } else if (result.status === "unreachable") {
-    lines.push("Configured private update source is unreachable.");
+    lines.push("Configured update source is unreachable.");
   }
 
   return `${lines.join("\n")}\n`;

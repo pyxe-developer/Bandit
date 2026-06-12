@@ -9,26 +9,27 @@
 
 ## Current Work Item
 
-- `[Slice]` `BANDIT-097` - PRD-005.4 Operator Command Adapters
-  (Stage 6: closed; retained as the active derived-status anchor until the next
-  slice is formed)
+- `[Gap]` `BANDIT-098` - Public Consumer Install Quickstart And Governance
+  Scaffold (Stage 4: review)
 
-**Current next step:** Repo PM should form the next work item for the deferred
-V0 Closeout Claude Code A/B Product-Value Trial only after confirming PRD-004/005
-implementation lanes are landed, closed, blocked on operator-owned input, or
-explicitly dispositioned.
+**Current next step:** Run Stage 4 review for `BANDIT-098`: CodeRabbit review
+or honest provider-refusal/bootstrap-gap evidence after the required wait
+window, Local Qwen through `.bandit/reviewers/local-qwen.json` via
+`bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
+aggregate review evidence, and disposition of every finding before landing.
 
-Do not approve expanded landing autonomy, Notify-And-Revert or Auto-Landing
-Scope for a new boundary cell, public package publishing, paid registry setup,
-hosted update services, telemetry, automatic self-update, credential handling,
-external repo mutation, installed global skill mutation, automation prompt
-mutation, merge/push/deploy authority, Trust Verifier cutover, old-gate
-replacement or wrapping, local API or State Index timing, scheduler execution,
-claim/worktree lifecycle behavior, guarded browser actions, generate role input
-or execution packets for unrelated work, restart Pi/Aperture runtime work,
-implement V0 Closeout Claude Code A/B Product-Value Trial, implement
-Installed-Copy Update Path, or start unrelated Phase 8 product work before the
-next work item is formed and approved.
+The operator approved a public, open-source install/discovery posture on
+2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
+Auto-Landing Scope for a new boundary cell, public npm publish automation,
+credential handling, paid registry setup, hosted update services, telemetry,
+automatic self-update, external repo mutation, installed global skill mutation,
+automation prompt mutation, merge/push/deploy authority, Trust Verifier
+cutover, old-gate replacement or wrapping, local API or State Index timing,
+scheduler execution, claim/worktree lifecycle behavior, guarded browser
+actions, generate role input or execution packets for unrelated work, restart
+Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
+Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
+work before Stage 4 review is complete for `BANDIT-098`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -37,14 +38,19 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 ## Next Work Item
 
 - `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
-  (deferred until PRD-004/005 implementation lanes are landed, closed, blocked
-  on operator-owned input, or explicitly dispositioned)
+  (deferred until `BANDIT-098` lands or is explicitly blocked/dispositioned)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-No open bootstrap gap remains.
+- `[Gap]` `BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART` - README public
+  install and command examples are not reliably executable in arbitrary
+  consumer repos, and `bandit init` does not scaffold starter governance
+  artifacts such as `AGENTS.md`, `CLEAN_CODE.md`, stage rubrics, roadmap/current
+  context, and `STATUS.md`; audit evidence is in
+  `docs/reports/public-consumer-install-command-audit-2026-06-11.md`; active
+  chore is `BANDIT-098`.
 
 ### Phase 8 Product Queue
 

@@ -1,0 +1,87 @@
+{
+  "contract_version": 1,
+  "policy_id": "install-update-channel",
+  "work_item": "operator-direction-2026-06-11",
+  "distribution_posture": "open_source_public",
+  "license": "MIT",
+  "public_discovery": "approved",
+  "public_npm_publishing": "allowed_when_operator_performs_or_approves_release",
+  "selected_channels": {
+    "public_npm": {
+      "package_name": "bandit-workflow",
+      "supported_install_command_shapes": [
+        "npm install -D bandit-workflow",
+        "npm install -D bandit-workflow@<version>"
+      ]
+    },
+    "public_git_tag": {
+      "repository": "https://github.com/pyxe-developer/Bandit",
+      "supported_install_command_shapes": [
+        "npm install -D github:pyxe-developer/Bandit#main",
+        "npm install -D github:pyxe-developer/Bandit#v0.1.0",
+        "npm install -D git+https://github.com/pyxe-developer/Bandit.git#v0.1.0"
+      ],
+      "reproducibility": "Consumers should pin an explicit version, tag, or commit for repeatable installs."
+    },
+    "packed_tarball": {
+      "supported_install_command_shapes": [
+        "npm pack --pack-destination /tmp/bandit-pack",
+        "npm install -D /tmp/bandit-pack/<printed-tarball-name>.tgz"
+      ]
+    }
+  },
+  "publish_authority": {
+    "npm_publish_automation": "out_of_scope",
+    "credential_handling": "operator_owned",
+    "release_tag_creation": "operator_owned_or_separate_approved_slice"
+  },
+  "version_ref_semantics": {
+    "installed_version": "package.json version of the installed Bandit package",
+    "current_source_ref": "npm version, Git tag, Git commit, or tarball identifier the consumer installed",
+    "comparison": "An update is available when the release manifest latest_version or latest_ref differs from the installed version/ref."
+  },
+  "update_source": {
+    "type": "file",
+    "description": "Repo-local, checked-in, or operator-accessible release manifest read from .bandit/update-channel.json update_source.path. No hosted service is required.",
+    "manifest_fields": {
+      "required": ["latest_version", "latest_ref"],
+      "optional": ["contract_version", "package_name", "update_command"],
+      "reader_behavior": "readFileReleaseManifest requires latest_version and latest_ref, uses update_command when present, and ignores optional metadata fields that are not needed for deterministic update-check output."
+    }
+  },
+  "update_check": {
+    "command": "bandit update-check [--json]",
+    "deterministic_statuses": [
+      "unconfigured",
+      "disabled",
+      "unreachable",
+      "current",
+      "update_available"
+    ],
+    "non_blocking_statuses": ["disabled", "unreachable"],
+    "freshness_bounded_cache": ".bandit/update-channel-cache.json",
+    "normal_cli_alert": "Normal CLI commands emit a concise non-blocking stderr alert only from a fresh cached update_available result and never mask the requested command's stdout, stderr, or exit status."
+  },
+  "data_minimization": {
+    "forbidden_payload": [
+      "telemetry",
+      "repo_contents",
+      "workflow_state",
+      "user_activity",
+      "package_usage",
+      "model_call_metadata",
+      "review_packets",
+      "hidden_identifier"
+    ],
+    "rule": "Update metadata is repo-local, reviewable, and data-minimal."
+  },
+  "out_of_scope": [
+    "hosted_external_update_service",
+    "automatic_self_update",
+    "telemetry",
+    "credential_handling",
+    "external_repo_mutation",
+    "merge_push_deploy_automation"
+  ],
+  "non_canonical_authority": "Update metadata, cached update results, package registries, and consumer install state are advisory only; repo-native .bandit/ state and CLI commands remain authoritative."
+}

@@ -7,32 +7,40 @@
 `BANDIT-097` is the last closed work item. It landed and closed the PRD-005.4
 Operator Command Adapters slice.
 
-**Active work item:** `BANDIT-097` - PRD-005.4 Operator Command Adapters.
+**Active work item:** `BANDIT-098` - Public Consumer Install Quickstart And
+Governance Scaffold.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 4: review.
 
-**Current next action:** Repo PM should form the next work item for the deferred
-V0 Closeout Claude Code A/B Product-Value Trial only after confirming PRD-004/005
-implementation lanes are landed, closed, blocked on operator-owned input, or
-explicitly dispositioned.
+**Current next action:** Run Stage 4 review for `BANDIT-098`: CodeRabbit review
+or honest provider-refusal/bootstrap-gap evidence after the required wait
+window, Local Qwen through `.bandit/reviewers/local-qwen.json` via
+`bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
+aggregate review evidence, and disposition of every finding before landing.
 
-Do not create RED evidence, implementation evidence, review-loop evidence,
-landing evidence, UAT evidence, retrospective evidence, closeout evidence, V0
-Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
-cutover, merge, push, deploy, hosted service setup, paid reviewer/model routing,
-public benchmark publication, local API work, State Index work, guarded browser
-action execution, PR/CI/CD implementation, installed-copy update-path
-implementation, or unrelated Phase 8 product work before Repo PM forms and
-approves the next work item.
+Do not create landing evidence, UAT evidence, retrospective evidence, closeout
+evidence, V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust
+Verifier cutover, merge, push, deploy, hosted service setup, paid reviewer/model
+routing, public benchmark publication, local API work, State Index work, guarded
+browser action execution, PR/CI/CD implementation, installed-copy update-path
+implementation, or unrelated Phase 8 product work before Stage 4 review is
+complete for `BANDIT-098`.
 
-No public package publishing is approved, no paid registry setup is approved,
-no hosted update service is approved, no telemetry is approved, no automatic
-self-update is approved, no credential handling is approved, no external repo
-mutation is approved, no installed global skill mutation is approved, no
-automation prompt mutation is approved, no merge/push/deploy authority is
-approved, no Trust Verifier cutover is approved, no Trust Goal is selected for
-cutover, no old gate path is replaced or wrapped, and no Pi/Aperture runtime
-work is active.
+The operator approved a public, open-source install/discovery posture on
+2026-06-11. Public npm publishing is allowed when the operator performs or
+separately approves the release, but no publish automation, paid registry setup,
+hosted update service, telemetry, automatic self-update, credential handling,
+external repo mutation, installed global skill mutation, automation prompt
+mutation, merge/push/deploy authority, Trust Verifier cutover, Trust Goal
+selection, old gate replacement/wrapping, or Pi/Aperture runtime work is active.
+
+Operator testing on 2026-06-11 exposed a public consumer install and governance
+scaffold gap: the README command surface is not reliably executable in arbitrary
+repos, and `bandit init` does not create starter `AGENTS.md`, `CLEAN_CODE.md`,
+stage-rubric, bootstrap-methodology, roadmap/current-context, or `STATUS.md`
+surfaces required for a meaningfully Bandit-governed repo. The gap is recorded
+as `BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART` with audit evidence at
+`docs/reports/public-consumer-install-command-audit-2026-06-11.md`.
 
 Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at
@@ -46,10 +54,10 @@ none_required.
 No operator-owned input is required for the next recorded action.
 
 Halt for operator input if a future step would expand landing autonomy, approve
-Notify-And-Revert or Auto-Landing Scope for a new boundary cell, approve public
-package publishing, approve paid registry setup, approve hosted update
-services, approve telemetry, approve automatic self-update, approve credential
-handling, approve external repo mutation, approve installed global skill
+Notify-And-Revert or Auto-Landing Scope for a new boundary cell, add public npm
+publish automation, handle publish credentials, approve paid registry setup,
+approve hosted update services, approve telemetry, approve automatic
+self-update, approve external repo mutation, approve installed global skill
 mutation, approve automation prompt mutation, approve merge/push/deploy
 authority, approve Trust Verifier cutover policy, select a Trust Goal for
 cutover, replace or wrap an older gate path, change product or UAT direction,
@@ -59,7 +67,30 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-097` closeout evidence is the current slice-boundary source:
+`BANDIT-098` Stage 4 review evidence is the current active-work source:
+
+- `docs/specs/BANDIT-098-public-consumer-install-quickstart-and-governance-scaffold.json`
+- `docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART.json`
+- `docs/reports/public-consumer-install-command-audit-2026-06-11.md`
+- `docs/work/BANDIT-098/brief.md`
+- `docs/work/BANDIT-098/qwen-formation-review.md`
+- `docs/work/BANDIT-098/coderabbit-formation-review.md`
+- `docs/work/BANDIT-098/formation-review.md`
+- `docs/work/BANDIT-098/orchestration-plan.md`
+- `docs/work/BANDIT-098/red-evidence.md`
+- `docs/work/BANDIT-098/stage3-dispatch.md`
+- `docs/work/BANDIT-098/stage3-minimax-dispatch.md`
+- `docs/work/BANDIT-098/stage3-dispatch-attempt.md`
+- `docs/work/BANDIT-098/stage3-retry-dispatch.md`
+- `docs/work/BANDIT-098/implementation-evidence.md`
+- `docs/work/BANDIT-098/writer-report.md`
+- `docs/work/BANDIT-098/stage3-pm-acceptance.md`
+- `docs/work/BANDIT-098/coordination-log.jsonl`, current state
+  `implementation_recorded`
+- `.bandit/bootstrap-gaps.json`, `BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART`
+  current state `active`
+
+`BANDIT-097` closeout evidence remains the prior slice-boundary source:
 
 - `docs/specs/BANDIT-097-operator-command-adapters.json`
 - `docs/work/BANDIT-097/brief.md`
@@ -75,11 +106,11 @@ artifacts cannot answer.
 
 ## Next Work
 
-The next action is Repo PM formation for the deferred V0 Closeout Claude Code
-A/B Product-Value Trial, if Repo PM confirms the PRD-004/005 implementation
-lanes are landed, closed, blocked on operator-owned input, or explicitly
-dispositioned.
+The next action is Stage 4 review for `BANDIT-098`.
 
-The next work item must be formed and approved before RED evidence, V0 trial
-work, Trust Verifier cutover, local API work, State Index work, cockpit action
-work, or unrelated Phase 8 product work.
+Run CodeRabbit review or honest provider-refusal/bootstrap-gap evidence after
+the required wait window, Local Qwen through `.bandit/reviewers/local-qwen.json`
+via `bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
+aggregate review evidence, and disposition of every finding before landing,
+V0 trial work, Trust Verifier cutover, local API work, State Index work, cockpit
+action work, or unrelated Phase 8 product work.

@@ -1,8 +1,26 @@
 {
   "name": "bandit-workflow",
   "version": "0.0.0",
-  "private": true,
+  "description": "Repo-native trust layer for agentic software delivery workflows.",
   "license": "MIT",
+  "keywords": [
+    "agentic-workflows",
+    "ai-coding",
+    "software-delivery",
+    "workflow-verification",
+    "trust-layer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pyxe-developer/Bandit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pyxe-developer/Bandit/issues"
+  },
+  "homepage": "https://github.com/pyxe-developer/Bandit#readme",
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "bin": {
     "bandit": "./bin/bandit.mjs"
@@ -11,7 +29,8 @@
     "bin",
     "src",
     "docs/templates",
-    ".bandit/policy/private-install-update-channel.json",
+    "!docs/templates/private-install-update-channel.md",
+    ".bandit/policy/install-update-channel.json",
     ".bandit/policy/smell-triggers.json",
     ".bandit/reviewers/local-qwen.json",
     "README.md"

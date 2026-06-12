@@ -29,9 +29,9 @@ test("update-check reports unconfigured with deterministic data-minimal JSON", a
   assert.deepEqual(findForbiddenKeys(payload), []);
 });
 
-test("update-check reports current and update_available from configured private file source", async () => {
+test("update-check reports current and update_available from configured file source", async () => {
   const repo = await initializedRepo();
-  const manifest = path.join(repo, "private-bandit-release.json");
+  const manifest = path.join(repo, "bandit-release.json");
   await writeReleaseManifest(manifest, {
     latest_version: "0.0.0",
     latest_ref: "v0.0.0"
@@ -94,7 +94,7 @@ test("update-check reports disabled and unreachable as non-blocking statuses", a
 test("ordinary CLI commands use fresh cached update alerts without masking command exit status", async () => {
   const repo = await initializedRepo();
   await writeUpdateChannel(repo, {
-    manifest: path.join(repo, "private-bandit-release.json")
+    manifest: path.join(repo, "bandit-release.json")
   });
   await writeJson(path.join(repo, ".bandit/update-channel-cache.json"), {
     contract_version: 1,
@@ -105,7 +105,7 @@ test("ordinary CLI commands use fresh cached update alerts without masking comma
     latest_ref: "v0.2.0",
     checked_at: "2026-06-07T22:45:00.000Z",
     freshness_expires_at: "2999-01-01T00:00:00.000Z",
-    update_command: "npm install -D git+ssh://git@example.com/private/bandit.git#v0.2.0"
+    update_command: "npm install -D bandit-workflow@0.2.0"
   });
 
   const initAgain = await runBandit(repo, ["init"]);
@@ -134,7 +134,7 @@ async function writeUpdateChannel(repo, options) {
     enabled: options.enabled ?? true,
     package_name: "bandit-workflow",
     installed_version: "0.0.0",
-    source_channel: "private_git_tag",
+    source_channel: "public_npm",
     current_source_ref: "v0.0.0",
     check_cadence_seconds: 3600,
     update_source: {
@@ -153,7 +153,7 @@ async function writeReleaseManifest(filePath, overrides = {}) {
     package_name: "bandit-workflow",
     latest_version: overrides.latest_version,
     latest_ref: overrides.latest_ref,
-    update_command: `npm install -D git+ssh://git@example.com/private/bandit.git#${overrides.latest_ref}`
+    update_command: `npm install -D bandit-workflow@${overrides.latest_version}`
   });
 }
 
