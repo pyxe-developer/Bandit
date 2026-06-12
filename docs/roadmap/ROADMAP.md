@@ -9,10 +9,10 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
-  (Stage 1: formation_approved)
+  (Stage 3: implementation_recorded)
 
-**Current next step:** Work Item PM plan-mode orchestration for BANDIT-100
-before RED evidence.
+**Current next step:** Run Stage 4 CodeRabbit evidence, authorized Local Qwen
+review, risk classification, and aggregate review evidence for `BANDIT-100`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -25,7 +25,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before `BANDIT-100` Work Item PM plan-mode orchestration is recorded.
+work before `BANDIT-100` Stage 4 review evidence is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -33,20 +33,25 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation
-  (draft; blocked until `BANDIT-100` lands and closes)
+- `[Gap]` `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` -
+  Work-execute route should derive current stage from coordination state
+  (queued; blocked until `BANDIT-100` lands and closes)
 
 ## Planned Work
 
 ### Blocking Gaps
 
-No active blocking bootstrap gap is recorded.
+- `[Gap]` `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` - queued after
+  `BANDIT-100` closeout; recorded when `work-execute --json` returned stale
+  Stage 2 routing after RED evidence was already recorded.
 
 ### Phase 8 Product Queue
 
 - `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation:
   generalize adversarial reviewer adapters and make no-reviewer state an
-  explicit landing-blocking gap.
+  explicit landing-blocking gap. Blocked until the queued work-execute
+  bootstrap gap is resolved, blocked on operator-owned input, or explicitly
+  dispositioned as no-action.
 - `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
   shims: generate neutral role-contract surfaces plus Claude Code shims.
 - `[Slice]` `BANDIT-103` - Policy tiering: core invariants plus opt-in tiers:

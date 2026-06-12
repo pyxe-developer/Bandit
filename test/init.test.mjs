@@ -27,6 +27,37 @@ test("init creates repo-native config and lifecycle event log", async () => {
   });
 });
 
+test("init --profile rejects malformed profiles with field diagnostics", async () => {
+  const repo = await createTempRepo();
+  await writeRepoFile(
+    repo,
+    "bad-profile.json",
+    JSON.stringify(
+      {
+        contract_version: 1,
+        name: "ACME Product",
+        work_item_prefix: "acme",
+        starter_work_item: { title: "Consumer Onboarding Starter" },
+        roadmap_seed: { current_phase: "ACME Bootstrap" },
+        reviewers: [],
+        policy_tiers: ["core"],
+        harnesses: ["codex"]
+      },
+      null,
+      2
+    )
+  );
+
+  const result = await runBandit(repo, [
+    "init",
+    "--profile",
+    "bad-profile.json"
+  ]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /work_item_prefix/);
+});
+
 test("init creates starter governance artifacts for day-1 cockpit and session context", async () => {
   const repo = await createTempRepo();
 
@@ -67,6 +98,54 @@ test("init creates starter governance artifacts for day-1 cockpit and session co
   const sessionPayload = JSON.parse(session.stdout);
   assert.equal(sessionPayload.kind, "focused_session_context_packet");
   assert.equal(sessionPayload.required_operator_input.value, "none_required");
+});
+
+test("init --profile scaffolds a consumer repo under its configured identity", async () => {
+  const repo = await createTempRepo();
+  await writeAcmeProfile(repo, "acme-profile.json");
+
+  const init = await runBandit(repo, [
+    "init",
+    "--profile",
+    "acme-profile.json"
+  ]);
+
+  assert.equal(init.code, 0, init.stderr);
+  assert.match(init.stdout, /Initialized Bandit state/);
+
+  const config = await readFile(path.join(repo, ".bandit/config.toml"), "utf8");
+  assert.match(config, /work_item_prefix = "ACME"/);
+
+  const expectedArtifacts = [
+    "docs/work/ACME-001/brief.md",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md",
+    "docs/templates/project-profile.md"
+  ];
+  for (const artifact of expectedArtifacts) {
+    await assertExists(repo, artifact);
+  }
+
+  const scaffold = (
+    await Promise.all(
+      [
+        "docs/work/ACME-001/brief.md",
+        "docs/roadmap/CURRENT_CONTEXT.md",
+        "docs/roadmap/ROADMAP.md",
+        "STATUS.md"
+      ].map((artifact) => readFile(path.join(repo, artifact), "utf8"))
+    )
+  ).join("\n");
+
+  assert.match(scaffold, /ACME-001/);
+  assert.doesNotMatch(scaffold, /BANDIT-001/);
+  assert.doesNotMatch(scaffold, /Phase 0 - Consumer Onboarding/);
+  assert.doesNotMatch(scaffold, /Bandit's active work history/);
+  assert.doesNotMatch(scaffold, /internal roadmap queue/);
+
+  const validate = await runBandit(repo, ["validate"]);
+  assert.equal(validate.code, 0, validate.stderr);
 });
 
 test("init creates model-agnostic starter governance artifacts", async () => {
@@ -202,4 +281,45 @@ async function writeRepoFile(repo, relativePath, contents) {
   const destination = path.join(repo, relativePath);
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, contents, "utf8");
+}
+
+async function writeAcmeProfile(repo, relativePath) {
+  await writeRepoFile(
+    repo,
+    relativePath,
+    JSON.stringify(
+      {
+        contract_version: 1,
+        name: "ACME Product",
+        work_item_prefix: "ACME",
+        starter_work_item: {
+          number: 1,
+          title: "Consumer Onboarding Starter",
+          current_stage: "Stage 1: starter_ready",
+          next_action: "Complete Stage 1 brief formation for ACME-001."
+        },
+        roadmap_seed: {
+          current_phase: "ACME Bootstrap",
+          planned_work: [
+            {
+              kind: "slice",
+              id: "ACME-002",
+              title: "First Delivery Slice"
+            }
+          ]
+        },
+        reviewers: [
+          {
+            id: "local-qwen-baseline",
+            provider: "local_qwen",
+            required: true
+          }
+        ],
+        policy_tiers: ["core"],
+        harnesses: ["codex"]
+      },
+      null,
+      2
+    )
+  );
 }

@@ -1176,6 +1176,24 @@
       "rationale": "BANDIT-099 repaired the remaining public consumer onboarding gap by making starter governance model-agnostic, adding day-1 onboarding guidance from `bandit init`, preserving existing consumer README files with `docs/BANDIT_ONBOARDING.md`, and making first-time public README command examples install-aware. Focused tests, packed consumer quickstart tests, full-suite verification, typecheck, package dry-run, Stage 4 review evidence, risk classification, supply-chain gate, local-record landing, and Stage 6 closeout evidence are recorded.",
       "verification_target": "docs/work/BANDIT-099/retrospective.md",
       "next_action": "Repo PM should form the next work item for the deferred V0 Closeout Claude Code A/B Product-Value Trial only after confirming repo artifacts still authorize that product slice and no open bootstrap gap takes precedence."
+    },
+    {
+      "id": "BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT",
+      "title": "Work Execute Stage Route Advancement",
+      "status": "open",
+      "disposition": "queued_chore",
+      "source_work_item": "BANDIT-100",
+      "source_artifacts": [
+        "src/commands/bandit-work-execute.ts",
+        "src/state/work-execute-controller.ts",
+        "docs/work/BANDIT-100/coordination-log.jsonl",
+        "docs/work/BANDIT-100/red-evidence.md",
+        "docs/roadmap/CURRENT_CONTEXT.md"
+      ],
+      "linked_work_item": null,
+      "rationale": "During BANDIT-100 Stage 3 routing, `node ./bin/bandit.mjs coordination status BANDIT-100 --json`, cockpit status, and session-context all reported `red_recorded` with Stage 3 dispatch as the next action, but `node ./bin/bandit.mjs work-execute --json` still reported `Stage 2: ready_for_red`. The command hardcodes `requestedStage: \"stage_2_red\"` and does not advance route selection from current coordination state. This is recorded as a queued bootstrap-gap chore rather than hidden in the product slice.",
+      "verification_target": null,
+      "next_action": "After BANDIT-100 lands and closes, Repo PM should form a bounded chore that makes work-execute derive the next route from current coordination state and refuses stale stage routing."
     }
   ]
 }

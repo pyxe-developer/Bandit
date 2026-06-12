@@ -91,7 +91,18 @@ async function main() {
   }
 
   if (command === "init") {
-    const result = await initBandit(process.cwd());
+    const profileFlagIndex = args.indexOf("--profile");
+    let profilePath: string | undefined;
+    if (profileFlagIndex !== -1) {
+      const candidate = args[profileFlagIndex + 1];
+      if (typeof candidate !== "string" || candidate.length === 0) {
+        console.error("bandit init --profile requires a profile path argument");
+        process.exitCode = 1;
+        return;
+      }
+      profilePath = candidate;
+    }
+    const result = await initBandit(process.cwd(), profilePath);
     console.log(result.message);
     return;
   }

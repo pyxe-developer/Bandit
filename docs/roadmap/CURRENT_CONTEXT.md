@@ -15,19 +15,20 @@ into `BANDIT-100` through `BANDIT-103`; only `BANDIT-100` is active.
 **Active work item:** `BANDIT-100` - Project-profile contract and
 identity-clean init.
 
-The current stage is Stage 1: formation_approved.
+The current stage is Stage 3: implementation_recorded.
 
-**Current next action:** Work Item PM plan-mode orchestration for BANDIT-100
-before RED evidence.
+**Current next action:** Run Stage 4 CodeRabbit evidence, authorized Local
+Qwen review, risk classification, and aggregate review evidence for
+`BANDIT-100`.
 
-Do not create RED evidence, implementation dispatch, UAT evidence, landing
-evidence, retrospective evidence, `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0
-Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
-cutover, merge, push, deploy, hosted service setup, paid reviewer/model
-routing, public benchmark publication, local API work, State Index work,
-guarded browser action execution, PR/CI/CD implementation, installed-copy
-update-path implementation, or unrelated Phase 8 product work before
-`BANDIT-100` Work Item PM plan-mode orchestration is recorded.
+Do not create UAT evidence, landing evidence, retrospective evidence,
+`BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude Code A/B
+Product-Value Trial implementation, Trust Verifier cutover, merge, push,
+deploy, hosted service setup, paid reviewer/model routing, public benchmark
+publication, local API work, State Index work, guarded browser action
+execution, PR/CI/CD implementation, installed-copy update-path implementation,
+or unrelated Phase 8 product work before `BANDIT-100` Stage 4 review evidence
+is recorded.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -67,12 +68,20 @@ artifacts cannot answer.
 
 - `docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md`
 - `docs/work/BANDIT-100/brief.md`, current status
-  `Stage 1: formation_approved`
+  `Stage 3: implementation_recorded`
 - `docs/work/BANDIT-100/qwen-formation-review.md`
 - `docs/work/BANDIT-100/coderabbit-formation-review.md`
 - `docs/work/BANDIT-100/formation-review.md`
+- `docs/work/BANDIT-100/red-evidence.md`, current status
+  `Stage 2: red_recorded`
+- `docs/work/BANDIT-100/writer-report.md`, current status
+  `Stage 3: implementation_recorded`
+- `docs/work/BANDIT-100/implementation-evidence.md`, current status
+  `Stage 3: implementation_recorded`
+- `docs/work/BANDIT-100/stage3-pm-acceptance.md`, current status
+  `Stage 3: implementation_recorded`
 - `docs/work/BANDIT-100/coordination-log.jsonl`, current state
-  `formation_approved`
+  `implementation_recorded`
 
 `BANDIT-101`, `BANDIT-102`, and `BANDIT-103` are draft queued slices from the
 same PRD. They must not become active until `BANDIT-100` has required
@@ -80,15 +89,18 @@ verification or recorded bootstrap gaps, landing verdict, landing action
 evidence, retrospective/improvement dispositions, and synchronized routing
 files.
 
-No active bootstrap gap is recorded; `.bandit/bootstrap-gaps.json` currently
-contains only resolved gaps.
+One bootstrap gap is queued from `BANDIT-100` Stage 2:
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`. It must become the next
+Repo PM target after `BANDIT-100` lands and closes unless it is explicitly
+blocked on operator-owned input or dispositioned as no-action.
 
 ## Next Work
 
-The next action is Work Item PM plan-mode orchestration for `BANDIT-100`
-before RED evidence.
+The next action is Stage 4 review for `BANDIT-100`: CodeRabbit evidence or
+honest timeout/refusal evidence after the required window, authorized Local
+Qwen review through `.bandit/reviewers/local-qwen.json`, risk classification,
+and aggregate review evidence.
 
-After `BANDIT-100` lands and closes, Repo PM should activate the next PRD-006
-drafted slice one at a time, starting with `BANDIT-101` Typed reviewer
-adapters with honest degradation, unless a newly opened bootstrap gap takes
-precedence.
+After `BANDIT-100` lands and closes, Repo PM should form or route the queued
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` bootstrap gap before
+activating the next PRD-006 drafted slice.

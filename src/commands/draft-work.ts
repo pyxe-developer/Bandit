@@ -121,7 +121,7 @@ export async function draftWork(repoRoot: string, featurePrdPath?: string) {
     prdLocation.absolutePath,
     prdLocation.displayPath
   );
-  const sourcePrd = parseSourcePrd(prdContent, prdLocation.displayPath);
+  const sourcePrd = parseSourcePrd(prdContent, prdLocation.displayPath, config.workItemPrefix);
   const draftEnvelope = parseDraftEnvelope(prdContent);
   const draftItems = validateDraftItems(draftEnvelope);
   const nextIds = await allocateWorkItemIds(
@@ -194,8 +194,12 @@ async function readFeaturePrd(filePath: string, displayPath: string) {
   }
 }
 
-function parseSourcePrd(content: string, displayPath: string): SourcePrd {
-  const header = content.match(/^# (BANDIT-PRD-\d+): .+$/m);
+function parseSourcePrd(content: string, displayPath: string, workItemPrefix: string): SourcePrd {
+  const pattern =
+    workItemPrefix === "BANDIT"
+      ? /^# (BANDIT-PRD-\d+): .+$/m
+      : new RegExp(`^# ((BANDIT-PRD|${escapeRegExp(workItemPrefix)}-PRD)-\\d+): .+$`, "m");
+  const header = content.match(pattern);
 
   if (!header) {
     throw new Error("Malformed Feature PRD: missing ID-bearing H1");

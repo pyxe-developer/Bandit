@@ -176,6 +176,66 @@ test("draft-work creates valid work items when the configured prefix includes di
   assert.equal(validate.code, 0, validate.stderr);
 });
 
+test("draft-work parses configured PRD prefix while preserving BANDIT PRD back-compat", async () => {
+  const repo = await createInitializedRepo();
+  await writeFile(
+    path.join(repo, ".bandit/config.toml"),
+    'state_version = 1\nwork_item_prefix = "ACME"\n',
+    "utf8"
+  );
+
+  await writeFeaturePrd(
+    repo,
+    "docs/prds/ACME-PRD-1-project-profile.md",
+    {
+      items: [
+        validSliceDraft({
+          title: "Profile Native Slice",
+          goal: "Draft work from a configured project PRD prefix."
+        })
+      ]
+    },
+    { prdId: "ACME-PRD-1" }
+  );
+
+  const acmeResult = await runBandit(repo, [
+    "draft-work",
+    "docs/prds/ACME-PRD-1-project-profile.md"
+  ]);
+
+  assert.equal(acmeResult.code, 0, acmeResult.stderr);
+  assert.match(acmeResult.stdout, /Created work item draft: ACME-001/);
+
+  const acmeBrief = await readFile(
+    path.join(repo, "docs/work/ACME-001/brief.md"),
+    "utf8"
+  );
+  assert.match(acmeBrief, /Source PRD.*ACME-PRD-1/);
+
+  await writeFeaturePrd(repo, "docs/prds/BANDIT-PRD-912-backcompat.md", {
+    items: [
+      validSliceDraft({
+        title: "Bandit Backcompat Slice",
+        goal: "Draft work from a BANDIT PRD while using a configured work item prefix."
+      })
+    ]
+  });
+
+  const banditResult = await runBandit(repo, [
+    "draft-work",
+    "docs/prds/BANDIT-PRD-912-backcompat.md"
+  ]);
+
+  assert.equal(banditResult.code, 0, banditResult.stderr);
+  assert.match(banditResult.stdout, /Created work item draft: ACME-002/);
+
+  const banditBrief = await readFile(
+    path.join(repo, "docs/work/ACME-002/brief.md"),
+    "utf8"
+  );
+  assert.match(banditBrief, /Source PRD.*BANDIT-PRD-912/);
+});
+
 test("draft-work fails closed when the PRD path is omitted", async () => {
   const repo = await createInitializedRepo();
 

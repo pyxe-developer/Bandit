@@ -2,6 +2,7 @@ import { copyFile, mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
+import { type ProjectProfile, readProjectProfile } from "../state/project-profile.js";
 import { writeDefaultBoundaryContourPolicy } from "../state/boundary-autonomy.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
@@ -51,7 +52,11 @@ import {
 } from "../state/verification-oracle-provenance.js";
 import { writeDefaultTrustVerifierCutoverGatesPolicy } from "../state/trust-verifier-cutover-gates.js";
 
-export async function initBandit(repoRoot: string) {
+export async function initBandit(repoRoot: string, profilePath?: string) {
+  const profile = profilePath
+    ? await loadProfile(repoRoot, profilePath)
+    : null;
+
   const paths = getBanditPaths(repoRoot);
   const alreadyInitialized = await pathExists(paths.config);
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
@@ -368,8 +373,15 @@ attribution_join_hash:
     return { message: "Bandit state already initialized." };
   }
 
-  await seedStarterGovernance(repoRoot);
-  await writeDefaultConfig(paths.config);
+  if (profile) {
+    await seedProfileGovernance(repoRoot, profile);
+    await writeProfileConfig(paths.config, profile.workItemPrefix);
+    await writeProfileTemplate(repoRoot);
+  } else {
+    await seedStarterGovernance(repoRoot);
+    await writeDefaultConfig(paths.config);
+  }
+
   await appendLifecycleEvent(paths.events, {
     type: "repo_initialized",
     work_item: null,
@@ -377,6 +389,259 @@ attribution_join_hash:
   });
 
   return { message: "Initialized Bandit state." };
+}
+
+async function loadProfile(
+  repoRoot: string,
+  profilePath: string
+): Promise<ProjectProfile> {
+  const absolutePath = path.isAbsolute(profilePath)
+    ? profilePath
+    : path.resolve(repoRoot, profilePath);
+  return readProjectProfile(absolutePath);
+}
+
+async function writeProfileConfig(configPath: string, workItemPrefix: string) {
+  const content = `state_version = 1\nwork_item_prefix = "${workItemPrefix}"\n`;
+  await writeFile(configPath, content, { flag: "wx" });
+}
+
+const PROJECT_PROFILE_TEMPLATE = `# project-profile.md
+#
+# Project profile template for Bandit-governed repositories.
+# Copy this file, fill in the fields, and pass it to \`bandit init --profile <file>\`.
+#
+# Profile is a JSON file. Save as <your-project>-profile.json before running init.
+
+{
+  "contract_version": 1,
+  "name": "Your Project Name",
+  "work_item_prefix": "PROJ",
+  "starter_work_item": {
+    "number": 1,
+    "title": "Consumer Onboarding Starter",
+    "current_stage": "Stage 1: starter_ready",
+    "next_action": "Complete Stage 1 brief formation for PROJ-001."
+  },
+  "roadmap_seed": {
+    "current_phase": "Project Bootstrap",
+    "planned_work": [
+      { "kind": "slice", "id": "PROJ-002", "title": "First Delivery Slice" }
+    ]
+  },
+  "reviewers": [
+    { "id": "local-qwen-baseline", "provider": "local_qwen", "required": true }
+  ],
+  "policy_tiers": ["core"],
+  "harnesses": ["codex"]
+}
+`;
+
+async function writeProfileTemplate(repoRoot: string) {
+  const templatePath = path.join(repoRoot, "docs/templates/project-profile.md");
+  if (await pathExists(templatePath)) {
+    return;
+  }
+  await mkdir(path.dirname(templatePath), { recursive: true });
+  await writeFile(templatePath, PROJECT_PROFILE_TEMPLATE, "utf8");
+}
+
+function buildProfileStarterBrief(starterId: string, title: string): string {
+  return `# ${starterId}: ${title}
+
+## Status
+
+Starter ready.
+
+## Goal
+
+Provide a project-specific starter work item so \`bandit validate\`,
+\`bandit cockpit status --json\`, and \`bandit session-context current --json\`
+all succeed on day 1.
+
+## Scope
+
+- Create \`docs/work/${starterId}/brief.md\` as a starter work item brief.
+- Preserve any existing user-owned governance files.
+
+## Acceptance Criteria
+
+- The brief exists and parses as a non-closed active work item.
+
+## Required Operator Input
+
+No operator-owned input is required.
+`;
+}
+
+function buildProfileCurrentContext(
+  starterId: string,
+  title: string,
+  currentPhase: string,
+  nextAction: string,
+  currentStage: string
+): string {
+  return `# Current Context
+
+## Status
+
+**Phase:** ${currentPhase}.
+
+**Current next action:** ${nextAction}
+
+\`${starterId}\` is the starter work item. Stage 1 brief
+formation is the next required gate.
+
+## Active Work
+
+**Active work item:** \`${starterId}\` - ${title}.
+
+The current stage is ${currentStage}. Do not start Stage 2 test design,
+Stage 3 implementation, or unrelated work before the Stage 1 brief is recorded.
+
+## Required Operator Input
+
+No operator-owned input is required for the starter onboarding step.
+`;
+}
+
+function buildProfileRoadmap(
+  starterId: string,
+  title: string,
+  currentPhase: string,
+  nextAction: string,
+  plannedWork: ProjectProfile["roadmapSeed"]["plannedWork"]
+): string {
+  const plannedSection =
+    plannedWork.length > 0
+      ? plannedWork
+          .map(
+            (entry) =>
+              `- \`[${entry.kind === "slice" ? "Slice" : "Gap"}]\` \`${entry.id}\` - ${entry.title}.`
+          )
+          .join("\n")
+      : "(none planned yet)";
+
+  return `# Roadmap
+
+## Current Position
+
+**Current phase:** ${currentPhase}.
+
+**Current next step:** ${nextAction}
+
+\`${starterId}\` is the starter work item. Stage 1 brief
+formation is the next required gate.
+
+## Next Work Item
+
+- \`[Slice]\` \`${starterId}\` - ${title}.
+
+## Planned Work
+
+${plannedSection}
+
+## Completed Work
+
+(none yet)
+`;
+}
+
+function buildProfileStatus(
+  starterId: string,
+  title: string,
+  currentStage: string,
+  nextAction: string
+): string {
+  return `# Status
+
+## Current Work Item
+
+**Current work item:** \`${starterId}\` - ${title}.
+
+**Current status:** ${currentStage}.
+
+**Next action:** ${nextAction}
+
+**Required operator input:** none_required.
+
+## Last Five Recent Items
+
+1. \`${starterId}\` - ${title} (active).
+`;
+}
+
+async function seedProfileGovernance(
+  repoRoot: string,
+  profile: ProjectProfile
+) {
+  const prefix = profile.workItemPrefix;
+  const num = profile.starterWorkItem.number;
+  const starterId = `${prefix}-${String(num).padStart(3, "0")}`;
+  const { title, currentStage, nextAction } = profile.starterWorkItem;
+  const { currentPhase, plannedWork } = profile.roadmapSeed;
+
+  const governanceFiles = [
+    { relativePath: "AGENTS.md", contents: STARTER_AGENTS_MD },
+    { relativePath: "CONTEXT.md", contents: STARTER_CONTEXT_MD },
+    { relativePath: "CLEAN_CODE.md", contents: STARTER_CLEAN_CODE_MD },
+    {
+      relativePath: "docs/plans/BOOTSTRAP_METHODOLOGY.md",
+      contents: STARTER_BOOTSTRAP_METHODOLOGY_MD
+    },
+    {
+      relativePath: "docs/verification/STAGE_RUBRICS.md",
+      contents: STARTER_STAGE_RUBRICS_MD
+    },
+    {
+      relativePath: "docs/roadmap/CURRENT_CONTEXT.md",
+      contents: buildProfileCurrentContext(
+        starterId,
+        title,
+        currentPhase,
+        nextAction,
+        currentStage
+      )
+    },
+    {
+      relativePath: "docs/roadmap/ROADMAP.md",
+      contents: buildProfileRoadmap(
+        starterId,
+        title,
+        currentPhase,
+        nextAction,
+        plannedWork
+      )
+    },
+    {
+      relativePath: "STATUS.md",
+      contents: buildProfileStatus(starterId, title, currentStage, nextAction)
+    },
+    {
+      relativePath: `docs/work/${starterId}/brief.md`,
+      contents: buildProfileStarterBrief(starterId, title)
+    }
+  ];
+
+  for (const file of governanceFiles) {
+    const destination = path.join(repoRoot, file.relativePath);
+    if (await pathExists(destination)) {
+      continue;
+    }
+    await mkdir(path.dirname(destination), { recursive: true });
+    await writeFile(destination, file.contents, "utf8");
+  }
+
+  const readmePath = path.join(repoRoot, "README.md");
+  if (await pathExists(readmePath)) {
+    const onboardingPath = path.join(repoRoot, "docs/BANDIT_ONBOARDING.md");
+    if (!(await pathExists(onboardingPath))) {
+      await mkdir(path.dirname(onboardingPath), { recursive: true });
+      await writeFile(onboardingPath, STARTER_ONBOARDING_MD, "utf8");
+    }
+  } else {
+    await writeFile(readmePath, STARTER_ONBOARDING_MD, "utf8");
+  }
 }
 
 const SEED_FILES = [
