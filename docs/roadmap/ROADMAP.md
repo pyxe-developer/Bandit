@@ -8,12 +8,11 @@
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening (closed anchor)
+- `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
+  (Stage 1: formation_approved)
 
-**Current next step:** Repo PM should form the next work item for the deferred
-V0 Closeout Claude Code A/B Product-Value Trial only after confirming repo
-artifacts still authorize that product slice and no open bootstrap gap takes
-precedence.
+**Current next step:** Work Item PM plan-mode orchestration for BANDIT-100
+before RED evidence.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -26,7 +25,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before Repo PM formation exists and is approved for the next work item.
+work before `BANDIT-100` Work Item PM plan-mode orchestration is recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -34,9 +33,8 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial
-  (deferred until Repo PM formation confirms the slice boundary and no open
-  bootstrap gap takes precedence)
+- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation
+  (draft; blocked until `BANDIT-100` lands and closes)
 
 ## Planned Work
 
@@ -46,10 +44,17 @@ No active blocking bootstrap gap is recorded.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: compare
-  the same PRD in Bandit and no-Bandit repos after PRD-004/005 implementation
-  lanes are landed, closed, blocked on operator-owned input, or explicitly
-  dispositioned; no statistical or public benchmark claim.
+- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation:
+  generalize adversarial reviewer adapters and make no-reviewer state an
+  explicit landing-blocking gap.
+- `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
+  shims: generate neutral role-contract surfaces plus Claude Code shims.
+- `[Slice]` `BANDIT-103` - Policy tiering: core invariants plus opt-in tiers:
+  default new consumers to core policy and keep Bandit-internal policy out of
+  the packed distribution.
+- `[Slice]` `TBD` - V0 Closeout Claude Code A/B Product-Value Trial: deferred
+  until PRD-006 slices are landed, closed, blocked on operator-owned input, or
+  explicitly dispositioned; no statistical or public benchmark claim.
 
 ## Completed Work
 

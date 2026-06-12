@@ -7,24 +7,27 @@
 `BANDIT-099` is the last closed work item. It landed and closed the Public
 Consumer Onboarding Hardening bootstrap-gap chore.
 
-**Active work item:** `BANDIT-099` - Public Consumer Onboarding Hardening
-(closed anchor).
+Operator direction on 2026-06-12 moved `BANDIT-PRD-006` ahead of the deferred
+V0 Closeout Claude Code A/B Product-Value Trial. `bandit draft-work
+docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md` decomposed the PRD
+into `BANDIT-100` through `BANDIT-103`; only `BANDIT-100` is active.
 
-The current stage is Stage 6: closed.
+**Active work item:** `BANDIT-100` - Project-profile contract and
+identity-clean init.
 
-**Current next action:** Repo PM should form the next work item for the
-deferred V0 Closeout Claude Code A/B Product-Value Trial only after confirming
-repo artifacts still authorize that product slice and no open bootstrap gap
-takes precedence.
+The current stage is Stage 1: formation_approved.
+
+**Current next action:** Work Item PM plan-mode orchestration for BANDIT-100
+before RED evidence.
 
 Do not create RED evidence, implementation dispatch, UAT evidence, landing
-evidence, retrospective evidence, V0 Closeout Claude Code A/B Product-Value
-Trial implementation, Trust Verifier cutover, merge, push, deploy, hosted
-service setup, paid reviewer/model routing, public benchmark publication,
-local API work, State Index work, guarded browser action execution, PR/CI/CD
-implementation, installed-copy update-path implementation, or unrelated Phase
-8 product work before Repo PM formation exists and is approved for the next
-work item.
+evidence, retrospective evidence, `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0
+Closeout Claude Code A/B Product-Value Trial implementation, Trust Verifier
+cutover, merge, push, deploy, hosted service setup, paid reviewer/model
+routing, public benchmark publication, local API work, State Index work,
+guarded browser action execution, PR/CI/CD implementation, installed-copy
+update-path implementation, or unrelated Phase 8 product work before
+`BANDIT-100` Work Item PM plan-mode orchestration is recorded.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -34,11 +37,6 @@ handling, external repo mutation, installed global skill mutation, automation
 prompt mutation, merge/push/deploy authority, Trust Verifier cutover, Trust
 Goal selection, old gate replacement/wrapping, or Pi/Aperture runtime work is
 active.
-
-Operator review on 2026-06-12 exposed remaining public consumer onboarding
-gaps after `BANDIT-098`. `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` is
-resolved by `BANDIT-099`, with closeout evidence at
-`docs/work/BANDIT-099/retrospective.md`.
 
 Local Qwen is authorized only through `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint at
@@ -65,40 +63,32 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-099` closed-work evidence is the current derived-status anchor:
+`BANDIT-100` is the active Stage 1 slice:
 
-- `docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json`
-- `docs/work/BANDIT-099/brief.md`
-- `docs/work/BANDIT-099/qwen-formation-review.md`
-- `docs/work/BANDIT-099/coderabbit-formation-review.md`
-- `docs/work/BANDIT-099/formation-review.md`
-- `docs/work/BANDIT-099/orchestration-plan.md`
-- `docs/work/BANDIT-099/red-evidence.md`
-- `docs/work/BANDIT-099/stage3-dispatch.md`
-- `docs/work/BANDIT-099/stage3-repair-dispatch.md`
-- `docs/work/BANDIT-099/implementation-evidence.md`
-- `docs/work/BANDIT-099/writer-report.md`
-- `docs/work/BANDIT-099/test-baseline-repair-evidence.md`
-- `docs/work/BANDIT-099/stage3-pm-acceptance.md`
-- `docs/work/BANDIT-099/coderabbit-review.md`
-- `docs/work/BANDIT-099/local-qwen-review.md`
-- `docs/work/BANDIT-099/local-qwen-finding-disposition.md`
-- `.bandit/policy/risk-classifications/BANDIT-099-risk-classification.json`
-- `.bandit/policy/supply-chain-gates/BANDIT-099-supply-chain-gate.json`
-- `docs/work/BANDIT-099/review-evidence.md`
-- `docs/work/BANDIT-099/landing-verdict.md`
-- `docs/work/BANDIT-099/landing-action.md`
-- `docs/work/BANDIT-099/retrospective.md`
-- `docs/work/BANDIT-099/improvement-disposition.md`
-- `docs/work/BANDIT-099/coordination-log.jsonl`, current state `closed`
-- `.bandit/bootstrap-gaps.json`,
-  `BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING` current state `resolved`
+- `docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md`
+- `docs/work/BANDIT-100/brief.md`, current status
+  `Stage 1: formation_approved`
+- `docs/work/BANDIT-100/qwen-formation-review.md`
+- `docs/work/BANDIT-100/coderabbit-formation-review.md`
+- `docs/work/BANDIT-100/formation-review.md`
+- `docs/work/BANDIT-100/coordination-log.jsonl`, current state
+  `formation_approved`
+
+`BANDIT-101`, `BANDIT-102`, and `BANDIT-103` are draft queued slices from the
+same PRD. They must not become active until `BANDIT-100` has required
+verification or recorded bootstrap gaps, landing verdict, landing action
+evidence, retrospective/improvement dispositions, and synchronized routing
+files.
+
+No active bootstrap gap is recorded; `.bandit/bootstrap-gaps.json` currently
+contains only resolved gaps.
 
 ## Next Work
 
-The next action is Repo PM formation for the deferred V0 Closeout Claude Code
-A/B Product-Value Trial, if current repo artifacts still authorize that slice
-and no open bootstrap gap takes precedence.
+The next action is Work Item PM plan-mode orchestration for `BANDIT-100`
+before RED evidence.
 
-Do not begin RED evidence or implementation for that deferred product slice
-until formation exists and is approved.
+After `BANDIT-100` lands and closes, Repo PM should activate the next PRD-006
+drafted slice one at a time, starting with `BANDIT-101` Typed reviewer
+adapters with honest degradation, unless a newly opened bootstrap gap takes
+precedence.

@@ -346,3 +346,7 @@
 {"type":"work_item_created","work_item":"BANDIT-097","message":"Created work item BANDIT-097 from docs/specs/BANDIT-097-operator-command-adapters.json"}
 {"type":"work_item_created","work_item":"BANDIT-098","message":"Created work item BANDIT-098 from docs/specs/BANDIT-098-public-consumer-install-quickstart-and-governance-scaffold.json"}
 {"type":"work_item_created","work_item":"BANDIT-099","message":"Created work item BANDIT-099 from docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-ONBOARDING-HARDENING.json"}
+{"type":"work_item_drafted","work_item":"BANDIT-100","message":"Drafted work item BANDIT-100 from BANDIT-PRD-006"}
+{"type":"work_item_drafted","work_item":"BANDIT-101","message":"Drafted work item BANDIT-101 from BANDIT-PRD-006"}
+{"type":"work_item_drafted","work_item":"BANDIT-102","message":"Drafted work item BANDIT-102 from BANDIT-PRD-006"}
+{"type":"work_item_drafted","work_item":"BANDIT-103","message":"Drafted work item BANDIT-103 from BANDIT-PRD-006"}
