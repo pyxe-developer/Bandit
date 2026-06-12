@@ -11,11 +11,27 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from coordination state
-  (Stage 4: blocked on CodeRabbit provider timeout)
+  (Stage 4: CodeRabbit pass recorded; Local Qwen review required)
 
-**Current next step:** Rerun CodeRabbit review for `BANDIT-104` and obtain
-terminal successful CodeRabbit evidence before Local Qwen, aggregate review,
-landing, or closeout.
+Stage 4 is the pre-landing review gate. Stage 5 may begin only after all of
+these artifacts are current: CodeRabbit terminal review evidence
+(`docs/work/BANDIT-104/coderabbit-review.md`) AND authorized Local Qwen review
+(`docs/work/BANDIT-104/local-qwen-review.md`) AND required escalation evidence
+when policy smells trigger it, otherwise an explicit not-applicable rationale
+(`docs/work/BANDIT-104/review-evidence.md`) AND risk plus supply-chain gate
+evidence (`.bandit/policy/risk-classifications/BANDIT-104-risk-classification.json`
+and `.bandit/policy/supply-chain-gates/BANDIT-104-supply-chain-gate.json`) AND
+repaired or dispositioned findings with current aggregate review evidence
+(`docs/work/BANDIT-104/coderabbit-finding-disposition.md` and
+`docs/work/BANDIT-104/review-evidence.md`). New reviewer findings loop back to
+repair and refresh until all required Stage 4 artifacts are non-blocking. For
+`BANDIT-104`, the earlier CodeRabbit provider timeout was superseded by
+terminal CodeRabbit findings for the committed checkpoint; Stage 3 completion
+evidence remains in `docs/work/BANDIT-104/implementation-evidence.md`.
+
+**Current next step:** Run authorized Local Qwen review for `BANDIT-104`
+through `.bandit/reviewers/local-qwen.json` before aggregate review, landing,
+or closeout.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or

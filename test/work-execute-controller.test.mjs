@@ -55,8 +55,7 @@ test("execute controller accepts a single formed work item at executable coordin
 
 test("execute controller requires plan-mode evidence before RED route", () => {
   const action = resolveWorkExecuteControllerAction({
-    workItem: formedWorkItem,
-    requestedStage: "stage_2_red"
+    workItem: formedWorkItem
   });
 
   assert.equal(action.status, "blocked");
@@ -73,12 +72,11 @@ test("execute controller selects authorized routes after plan-mode evidence", ()
     workItem: {
       ...formedWorkItem,
       coordination_state: "orchestration_plan_recorded",
-      evidence: {
-        ...formedWorkItem.evidence,
-        orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md"
-      }
-    },
-    requestedStage: "stage_2_red"
+    evidence: {
+      ...formedWorkItem.evidence,
+      orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md"
+    }
+    }
   });
 
   assert.equal(action.status, "ready");
@@ -86,6 +84,27 @@ test("execute controller selects authorized routes after plan-mode evidence", ()
   assert.equal(action.route.authority_role, "test_writer");
   assert.equal(action.canonical_state_owner, "repo_native_artifacts");
   assert.equal(action.role_input_packet.authority, "derived_non_canonical");
+});
+
+test("execute controller blocks formation-approved items until plan-mode transition is recorded", () => {
+  const action = resolveWorkExecuteControllerAction({
+    workItem: {
+      ...formedWorkItem,
+      coordination_state: "formation_approved",
+      evidence: {
+        ...formedWorkItem.evidence,
+        orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md"
+      }
+    }
+  });
+
+  assert.equal(action.status, "blocked");
+  assert.equal(action.stop_condition, "orchestration_plan_not_recorded");
+  assert.equal(action.next_command, "node ./bin/bandit.mjs work-item-pm start BANDIT-096");
+  assert.deepEqual(action.required_evidence, [
+    "docs/work/BANDIT-096/orchestration-plan.md",
+    "docs/work/BANDIT-096/coordination-log.jsonl"
+  ]);
 });
 
 test("execute controller derives Stage 3 implementation route from red_recorded coordination state", () => {
@@ -98,8 +117,7 @@ test("execute controller derives Stage 3 implementation route from red_recorded 
         orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md",
         red_evidence: "docs/work/BANDIT-096/red-evidence.md"
       }
-    },
-    requestedStage: "stage_2_red"
+    }
   });
 
   assert.equal(action.status, "ready");
@@ -117,8 +135,7 @@ test("execute controller fails closed for unsupported or contradictory coordinat
         ...formedWorkItem.evidence,
         orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md"
       }
-    },
-    requestedStage: "stage_2_red"
+    }
   });
 
   assert.equal(unsupported.status, "blocked");
@@ -137,8 +154,7 @@ test("execute controller fails closed for unsupported or contradictory coordinat
         orchestration_plan: "docs/work/BANDIT-096/orchestration-plan.md",
         red_evidence: null
       }
-    },
-    requestedStage: "stage_2_red"
+    }
   });
 
   assert.equal(contradictory.status, "blocked");

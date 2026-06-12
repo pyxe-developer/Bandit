@@ -13,6 +13,24 @@ stage2_red_evidence: docs/work/BANDIT-104/red-evidence.md
 coordination_state_at_implementation: red_recorded
 coordination_log_sequence_at_implementation: 4
 
+## Stage 4 Boundary Note
+
+This artifact is Stage 3 implementation evidence. The `verdict: pass` value
+above applies only to MiniMax-M3 source delivery and Stage 3 verification.
+Stage 4 is the pre-landing review gate: CodeRabbit review, authorized Local
+Qwen review, any required escalation, risk and supply-chain gates, finding
+dispositions, and aggregate `docs/work/BANDIT-104/review-evidence.md`.
+
+The CodeRabbit committed review for `BANDIT-104` completed after the earlier
+provider-timeout checkpoint and returned findings. The current Stage 4 state is
+CodeRabbit findings repaired pending review refresh; see
+`docs/work/BANDIT-104/coderabbit-review.md` and
+`docs/work/BANDIT-104/coderabbit-finding-disposition.md`.
+
+The live `work-execute --json` projection recorded below is Stage 3 provenance
+from the `red_recorded` coordination state. It is not a claim that the work
+item remains in Stage 3 after Stage 4 review begins.
+
 ## Stage 3 Route
 
 Codex authored the Stage 2 RED evidence for `BANDIT-104`

@@ -54,7 +54,9 @@ function stageReachedFor(stage: string): string {
     case "stage_3_implementation":
       return "Stage 3: implementation_required";
     default:
-      return `Unknown stage: ${stage}`;
+      throw new Error(
+        `Missing stage_reached label for authorized stage route: ${stage}`
+      );
   }
 }
 
@@ -70,13 +72,13 @@ function readyAction(route: StageRoute): ReadyAction {
 
 function blockedAction(
   stopCondition: string,
-  workItem: WorkItem,
-  requiredEvidence: string[]
+  requiredEvidence: string[],
+  nextCommand = NEXT_SAFE_COMMAND
 ): BlockedAction {
   return {
     status: "blocked",
     stop_condition: stopCondition,
-    next_command: NEXT_SAFE_COMMAND,
+    next_command: nextCommand,
     required_evidence: requiredEvidence
   };
 }
@@ -130,11 +132,20 @@ export function resolveWorkExecuteControllerAction(params: {
   // advance through fails closed with unsupported_coordination_state
   // rather than fabricating readiness.
   switch (workItem.coordination_state) {
+    case "formation_approved":
+      return blockedAction(
+        "orchestration_plan_not_recorded",
+        [
+          `docs/work/${workItem.id}/orchestration-plan.md`,
+          `docs/work/${workItem.id}/coordination-log.jsonl`
+        ],
+        `${START_PM_COMMAND_PREFIX} ${workItem.id}`
+      );
     case "orchestration_plan_recorded":
       return readyAction(getStageRoute("stage_2_red"));
     case "red_recorded":
       if (!workItem.evidence.red_evidence) {
-        return blockedAction("missing_red_evidence", workItem, [
+        return blockedAction("missing_red_evidence", [
           `docs/work/${workItem.id}/red-evidence.md`,
           `docs/work/${workItem.id}/coordination-log.jsonl`
         ]);
@@ -143,7 +154,6 @@ export function resolveWorkExecuteControllerAction(params: {
     default:
       return blockedAction(
         "unsupported_coordination_state",
-        workItem,
         [`docs/work/${workItem.id}/coordination-log.jsonl`]
       );
   }
