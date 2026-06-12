@@ -51,6 +51,35 @@ preserving existing user-owned files.
 - Risk and supply-chain registry entries had to be added explicitly for this
   bootstrap gap before validation could pass.
 
+## Structured Improvement Mining
+
+| Category | Observation | Disposition |
+| --- | --- | --- |
+| Failed tool calls | CodeRabbit wrapper hit a zsh `status` conflict, and the refreshed run reached provider timeout without a clean pass. | Keep provider failure evidence as non-pass review evidence and preserve wrapper failure artifacts. |
+| Overreasoning | The PM had to distinguish role-boundary evidence repairs from Test Writer-owned RED edits. | Keep role-boundary dispositions explicit instead of rewriting RED artifacts after Stage 3. |
+| Work-breakdown fit | The install quickstart and starter governance scope was correctly bounded, but onboarding hardening remains too large for a closeout tweak. | Record `BANDIT-099` as the follow-up gap rather than expanding `BANDIT-098`. |
+| Agent-scope fit | Claude could implement the different-family Stage 3 path, but required retry and PM-run verification. | Keep retry evidence and route future consumer onboarding implementation through the governed writer path. |
+| Tool-use rule pressure | Writer shell approval blocked local test execution. | PM verification remains required when a writer cannot run tests, with commands recorded in acceptance evidence. |
+| Reviewer/model routing | CodeRabbit and Local Qwen surfaced different concerns; neither should be treated as interchangeable. | Preserve both reviewer outputs and per-finding PM dispositions. |
+| Tool invocation friction | Local Qwen required a clean checkpoint before review. | Keep review checkpoints planned before invoking dirty-worktree-refusing reviewers. |
+| Recurring inefficiency | Registry, policy, and evidence schema repairs appeared late in Stage 4/5. | no_action - Current package/init verification already includes policy, dry-run package, and validator checks; creating a separate improvement chore from this retrospective is out of scope. |
+| Cost/latency signals | CodeRabbit refresh consumed the full provider window without a pass. | Record timeout as bootstrap-gap evidence and avoid representing it as successful review. |
+| Unresolved uncertainty | Day-1 consumer onboarding still needs model-agnostic role guidance and first-command hardening. | Track as `BANDIT-099` with explicit scope and acceptance criteria. |
+
+## Cross-Model Tension
+
+- Codex PM/Test Writer owned the Stage 1/2 shaping, so Stage 3 implementation
+  was routed to Claude for model-family separation.
+- Claude required retry evidence before durable Stage 3 acceptance; PM supplied
+  focused verification because the writer environment could not execute tests.
+- CodeRabbit found actionable policy and evidence issues, but its wrapper also
+  exposed the zsh `status` conflict and the refreshed run timed out, so the
+  disposition remains `bootstrap_gap` rather than reviewer pass.
+- Local Qwen required a clean checkpoint and returned findings that were useful
+  but narrower than the CodeRabbit review surface.
+- The durable resolution was not to average reviewer outputs; it was to record
+  each route, failure mode, finding, and PM disposition in the work package.
+
 ## Lessons And Dispositions
 
 | Lesson | Disposition | Evidence |

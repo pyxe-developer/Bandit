@@ -16,16 +16,16 @@ implementation writer route did not produce source edits or Stage 3 evidence.
 - Command: `timeout 900 claude -p --model claude-sonnet-4-6 --output-format stream-json --verbose --no-session-persistence --permission-mode acceptEdits --tools "Read,Edit,Bash" < docs/work/BANDIT-098/stage3-dispatch.md`
 - Result: no source edits, no `writer-report.md`, and no
   `implementation-evidence.md` before the no-progress run was stopped.
-- Follow-up command: stdin continuation with a 480 second timeout against
+- Follow-up command: stdin continuation with a 480-second timeout against
   `docs/work/BANDIT-098/stage3-dispatch.md`.
 - Follow-up result: timed out with exit code `124`; no source edits and no
   Stage 3 writer artifacts were produced.
 - Failure mode: the run did not produce file edits or durable writer evidence
   within the active dispatch window. No-progress was measured by unchanged git
   status and absence of the two required Stage 3 artifacts.
-- Retry choice: the 480 second follow-up was a bounded diagnostic retry after
+- Retry choice: the 480-second follow-up was a bounded diagnostic retry after
   the first run showed no file progress; the later successful retry used the
-  full 20 minute Claude window required by the orchestration plan.
+  full 20-minute Claude window required by the orchestration plan.
 
 ### MiniMax-M3
 
@@ -34,7 +34,7 @@ implementation writer route did not produce source edits or Stage 3 evidence.
 - Dispatch command: `timeout 900 pi --provider minimax --model MiniMax-M3 --approve --no-session --tools read,bash,edit,write,grep,find,ls -p @docs/work/BANDIT-098/stage3-minimax-dispatch.md "Execute this dispatch packet."`
 - Dispatch result: timed out with exit code `124`; no source edits and no Stage
   3 writer artifacts were produced.
-- Timeout rationale: MiniMax-M3 used the documented 900 second fallback window
+- Timeout rationale: MiniMax-M3 used the documented 900-second fallback window
   from the orchestration prompt after Claude did not complete the first Stage 3
   route. Exit code `124` came from the timeout harness.
 - Partial output: no durable source edits, `writer-report.md`, or

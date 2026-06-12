@@ -31,18 +31,21 @@ test surfaces remain exactly as authored by the Test Writer (Codex):
 
 ### AC: Governance scaffold artifacts created in fresh consumer repo
 
-`initBandit()` in `src/commands/init.ts` calls `seedStarterGovernance(repoRoot)`
-at line 361, after `seedDistributionDefaults(repoRoot)` at line 360 and before
-the `alreadyInitialized` check at line 363.
+`initBandit()` in `src/commands/init.ts` calls
+`seedDistributionDefaults(repoRoot)` before the idempotent already-initialized
+return. For fresh repositories, it then calls `seedStarterGovernance(repoRoot)`
+before writing `.bandit/config.toml` and the initialization lifecycle event.
 
 `seedStarterGovernance` (lines 789-798) iterates over `STARTER_GOVERNANCE_FILES`
 (a `ReadonlyArray<{ relativePath, contents }>`) and for each entry:
+
 1. Resolves the full path in the consumer repo
 2. Skips the write if the file already exists (`pathExists` guard at line 792)
 3. Creates the parent directory with `mkdir(..., { recursive: true })`
 4. Writes file contents with `writeFile`
 
 Files created (`STARTER_GOVERNANCE_FILES` lines 762-787):
+
 - `AGENTS.md`
 - `CONTEXT.md`
 - `CLEAN_CODE.md`
@@ -60,9 +63,9 @@ internal roadmap queue, reviewer evidence, or private local assumptions.
 
 The `pathExists` guard in `seedStarterGovernance` skips every existing file
 without modification. Test case "init preserves existing starter governance
-artifacts" in `test/init.test.mjs` pre-creates `AGENTS.md`, `CLEAN_CODE.md`,
-`docs/roadmap/CURRENT_CONTEXT.md`, and `STATUS.md` with custom content and
-verifies those contents are unchanged after `bandit init`.
+artifacts" in `test/init.test.mjs` pre-creates the starter governance files
+with custom content and verifies those contents are unchanged after
+`bandit init`.
 
 ### AC: cockpit status exits 0 with required_operator_input.value none_required
 
@@ -85,33 +88,33 @@ verifies those contents are unchanged after `bandit init`.
 
 `readRequiredOperatorInput` uses regex `/No operator-owned input is required/i`
 (cockpit-status.ts line 919), which matches the CURRENT_CONTEXT content.
-Returns `"none_required"`. Payload includes `required_operator_input.value: "none_required"`. OK.
+Returns `"none_required"`. Payload includes
+`required_operator_input.value: "none_required"`. OK.
 
 ### AC: session-context exits 0 with required_operator_input.value none_required
 
 `readFocusedSessionContext` in `src/state/focused-session-context.ts` requires:
+
 - `AGENTS.md`: created by `seedStarterGovernance`. OK.
 - `docs/roadmap/CURRENT_CONTEXT.md`: created with all required labeled fields. OK.
 - `docs/roadmap/ROADMAP.md`: created with `**Current next step:**`. OK.
 - `.bandit/bootstrap-gaps.json`: empty gaps, no blockers. OK.
 
 `requireCurrentStage` (focused-session-context.ts lines 502-503) matches regex
-`/The current stage is (Stage [^.]+)\./` against the CURRENT_CONTEXT content which
-contains "The current stage is Stage 1: starter_ready." Extracts "Stage 1: starter_ready". OK.
+`/The current stage is (Stage [^.]+)\./` against the CURRENT_CONTEXT content,
+which contains "The current stage is Stage 1: starter_ready." Extracts
+"Stage 1: starter_ready". OK.
 
 `readRequiredOperatorInput` returns `"none_required"`. OK.
 
 ### AC: Package allow-list correct for public distribution
 
-`package.json` `files` array (verified by reading the file):
-```
-"bin", "src", "docs/templates",
-"!docs/templates/private-install-update-channel.md",
-".bandit/policy/install-update-channel.json",
-".bandit/policy/smell-triggers.json",
-".bandit/reviewers/local-qwen.json",
-"README.md"
-```
+`package.json` `files` array (verified by reading the file) includes `bin`,
+`src`, public `docs/templates/*.md` entries, `.bandit/policy/install-update-channel.json`,
+`.bandit/policy/smell-triggers.json`, `.bandit/reviewers/local-qwen.json`, and
+`README.md`. The private template `docs/templates/private-install-update-channel.md`
+is omitted from that allow-list, and `.npmignore` repeats the exclusion as a
+redundant guard.
 
 Assertions from `test/private-install-update-channel.test.mjs` lines 39-44:
 - `files.includes(".bandit/policy/install-update-channel.json")` → true. OK.
@@ -155,7 +158,7 @@ All satisfied by `initBandit`. OK.
 
 Commands attempted but blocked by permission mode:
 
-```
+```sh
 node --test test/init.test.mjs
 node --test test/public-consumer-install-quickstart.test.mjs
 npm run typecheck

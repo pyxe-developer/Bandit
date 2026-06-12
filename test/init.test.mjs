@@ -41,9 +41,12 @@ test("init creates starter governance artifacts for day-1 cockpit and session co
     "docs/verification/STAGE_RUBRICS.md",
     "docs/roadmap/CURRENT_CONTEXT.md",
     "docs/roadmap/ROADMAP.md",
-    "STATUS.md"
+    "STATUS.md",
+    "docs/work/BANDIT-001/brief.md"
   ]) {
     await assertExists(repo, artifact);
+    const content = await readFile(path.join(repo, artifact), "utf8");
+    assert.ok(content.trim().length > 0, `${artifact} should not be empty`);
   }
 
   const validate = await runBandit(repo, ["validate"]);
@@ -115,9 +118,14 @@ test("init preserves existing starter governance artifacts", async () => {
   const repo = await createTempRepo();
   const sentinels = {
     "AGENTS.md": "# Custom Agents\n\nDo not replace.\n",
+    "CONTEXT.md": "# Custom Context\n\nDo not replace.\n",
     "CLEAN_CODE.md": "# Custom Clean Code\n\nDo not replace.\n",
+    "docs/plans/BOOTSTRAP_METHODOLOGY.md": "# Custom Methodology\n\nDo not replace.\n",
+    "docs/verification/STAGE_RUBRICS.md": "# Custom Rubrics\n\nDo not replace.\n",
     "docs/roadmap/CURRENT_CONTEXT.md": "# Custom Current Context\n\nDo not replace.\n",
-    "STATUS.md": "# Custom Status\n\nDo not replace.\n"
+    "docs/roadmap/ROADMAP.md": "# Custom Roadmap\n\nDo not replace.\n",
+    "STATUS.md": "# Custom Status\n\nDo not replace.\n",
+    "docs/work/BANDIT-001/brief.md": "# Custom Starter\n\nDo not replace.\n"
   };
 
   for (const [relativePath, contents] of Object.entries(sentinels)) {

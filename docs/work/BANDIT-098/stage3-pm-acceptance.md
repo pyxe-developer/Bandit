@@ -19,8 +19,12 @@ The Stage 3 Implementation Writer delivered the formed `BANDIT-098` scope:
 - Update-channel wording no longer assumes a private install source.
 - Required `implementation-evidence.md` and `writer-report.md` artifacts exist.
 
-No Test Writer-owned files were edited by the Stage 3 Writer. RED files remain
-owned by the Stage 2 Test Writer.
+No Test Writer-owned files were edited by the Stage 3 Writer. RED ownership
+remained with the Stage 2 Test Writer for
+`docs/work/BANDIT-098/red-evidence.md`, `test/init.test.mjs`,
+`test/public-consumer-install-quickstart.test.mjs`,
+`test/private-install-update-channel.test.mjs`, and
+`test/update-channel.test.mjs`.
 
 ## Writer Route
 

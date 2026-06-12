@@ -12,6 +12,7 @@ selected_channels:
     supported_install_command_shapes:
   public_git_tag:
     repository:
+    development_channels:
     supported_install_command_shapes:
     reproducibility:
   packed_tarball:
@@ -24,11 +25,13 @@ update_source:
     required:
     optional:
     reader_behavior:
-update_check_command:
-deterministic_statuses:
-non_blocking_statuses:
-freshness_bounded_cache:
-normal_cli_alert:
+update_check:
+  command:
+  deterministic_statuses:
+  non_blocking_statuses:
+  non_blocking_statuses_note:
+  freshness_bounded_cache:
+  normal_cli_alert:
 data_minimization:
 out_of_scope:
 non_canonical_authority:

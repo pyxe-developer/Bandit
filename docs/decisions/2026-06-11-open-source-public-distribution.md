@@ -29,11 +29,11 @@ once released, from a public Git tag, or from a packed tarball.
 - Publishing a release in this decision.
 - Adding npm publish automation.
 - Handling or storing publish credentials.
-- Adding hosted update services.
-- Adding telemetry.
-- Adding automatic self-update behavior.
+- Providing hosted update services.
+- Collecting telemetry.
+- Implementing automatic self-update behavior.
 - Mutating consumer repositories outside explicit CLI commands.
-- Adding merge, push, deploy, or release-tag automation.
+- Automating merge, push, deploy, or release-tag actions.
 
 ## Rationale
 

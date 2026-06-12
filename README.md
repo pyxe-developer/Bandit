@@ -168,6 +168,13 @@ manifest. Configure `.bandit/update-channel.json` in the consumer repository:
 }
 ```
 
+`type: "file"` currently reads a local filesystem path. If you publish the
+release manifest through a GitHub Release, GitHub Pages, or a CDN, keep that
+source publicly accessible over HTTPS for public consumers, prefer immutable
+release-tagged URLs, and copy or generate a reviewed local manifest file that
+`update_source.path` points to. Future remote readers must handle CORS and
+availability explicitly before using hosted manifests directly.
+
 The release manifest should be data-minimal:
 
 ```json

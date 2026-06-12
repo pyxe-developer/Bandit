@@ -6,6 +6,7 @@ stage: Stage 4 Review
 actor: work_item_pm
 created_at: 2026-06-12T01:55:43Z
 verdict: pass
+coderabbit_verdict: bootstrap_gap
 
 ## Reviewer Evidence
 

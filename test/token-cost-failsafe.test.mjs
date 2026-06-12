@@ -378,8 +378,10 @@ test("work-item create renders token-cost failsafe scope into generated briefs",
   const result = await runBandit(repo, ["work-item", "create", specPath]);
 
   assert.equal(result.code, 0, result.stderr);
+  const createdMatch = result.stdout.match(/Created work item: (BANDIT-\d{3,})/);
+  assert.ok(createdMatch, result.stdout);
   const brief = await readFile(
-    path.join(repo, "docs/work/BANDIT-002/brief.md"),
+    path.join(repo, "docs/work", createdMatch[1], "brief.md"),
     "utf8"
   );
   assert.match(brief, /^## Token-Cost Failsafe$/m);

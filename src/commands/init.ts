@@ -358,7 +358,6 @@ attribution_join_hash:
   }
 
   await seedDistributionDefaults(repoRoot);
-  await seedStarterGovernance(repoRoot);
 
   if (alreadyInitialized) {
     await appendLifecycleEvent(paths.events, {
@@ -369,6 +368,7 @@ attribution_join_hash:
     return { message: "Bandit state already initialized." };
   }
 
+  await seedStarterGovernance(repoRoot);
   await writeDefaultConfig(paths.config);
   await appendLifecycleEvent(paths.events, {
     type: "repo_initialized",

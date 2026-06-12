@@ -235,10 +235,7 @@ const validSmellCatalog = {
 };
 
 test("validate fails closed when the smell trigger catalog is missing", async () => {
-  const repo = await createInitializedRepo();
-  await rm(path.join(repo, ".bandit/policy/smell-triggers.json"), {
-    force: true
-  });
+  const repo = await createInitializedRepo({ omitSmellCatalog: true });
 
   const result = await runBandit(repo, ["validate"]);
 
@@ -408,6 +405,11 @@ async function createInitializedRepo(options = {}) {
   await runBandit(repo, ["init"]);
   await writeValidTemplates(repo, options);
   await writeLocalQwenProfile(repo);
+  if (options.omitSmellCatalog) {
+    await rm(path.join(repo, ".bandit/policy/smell-triggers.json"), {
+      force: true
+    });
+  }
 
   return repo;
 }
@@ -422,6 +424,7 @@ async function writeValidTemplates(optionsRepo, options = {}) {
     await mkdir(path.dirname(destination), { recursive: true });
     await writeFile(destination, content, "utf8");
   }
+
   if (options.omitTemplate) {
     await rm(path.join(optionsRepo, options.omitTemplate), { force: true });
   }

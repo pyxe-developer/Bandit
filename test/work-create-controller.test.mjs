@@ -177,10 +177,7 @@ Product direction required before creating this target.
 });
 
 test("Repo PM create controller refuses missing authorized Local Qwen route", async () => {
-  const repo = await createControllerRepo();
-  await rm(path.join(repo, ".bandit/reviewers/local-qwen.json"), {
-    force: true
-  });
+  const repo = await createControllerRepo({ omitQwenProfile: true });
   await writeSourceSpec(repo, "BANDIT-094-repo-pm-create-controller-and-prompt-contract");
 
   const result = await runBandit(repo, [
@@ -199,6 +196,11 @@ async function createControllerRepo(options = {}) {
   const repo = await createTempRepo();
   const init = await runBandit(repo, ["init"]);
   assert.equal(init.code, 0, init.stderr);
+  if (options.omitQwenProfile) {
+    await rm(path.join(repo, ".bandit/reviewers/local-qwen.json"), {
+      force: true
+    });
+  }
 
   await writeArtifact(
     repo,
