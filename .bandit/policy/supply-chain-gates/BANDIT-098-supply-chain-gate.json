@@ -1,0 +1,93 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-098",
+  "artifact_type": "supply_chain_gate",
+  "freshness_state": "current",
+  "changed_supply_chain_surfaces": [
+    {
+      "path": "package.json",
+      "surface": "dependency_manifest",
+      "risk": "medium",
+      "operator_supervision_required": false,
+      "state": "metadata_changed_without_dependency_or_script_change"
+    }
+  ],
+  "dependency_manifest_state": {
+    "state": "metadata_changed_no_dependency_change",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-098/stage3-pm-acceptance.md",
+      "unavailable_tool_disposition": "No dependency, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, hosted service, telemetry, credential, merge, push, deploy, or publish automation change is present in BANDIT-098."
+    },
+    "rationale": "package.json changed public package metadata, publishConfig, and files allow-list only. No dependencies, scripts, lockfiles, or package-manager execution behavior changed."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency version or package-manager script change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-098/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "No installed or repo-local agent skill surface changed for BANDIT-098.",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": "docs/decisions/2026-06-11-open-source-public-distribution.md"
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-098 changes public install/update metadata and package allow-listing but does not add dependencies, package scripts, lockfile changes, CI/release workflows, credentials, hosted update services, telemetry, automatic self-update, external side effects, publish automation, merge, push, or deploy behavior. Public npm publishing remains operator-owned and out of scope.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-098-supply-chain-gate.json",
+    "docs/decisions/2026-06-11-open-source-public-distribution.md",
+    "docs/work/BANDIT-098/brief.md",
+    "docs/work/BANDIT-098/implementation-evidence.md",
+    "docs/work/BANDIT-098/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-098/coderabbit-review.md",
+    "README.md",
+    "package.json",
+    ".bandit/policy/install-update-channel.json",
+    "docs/templates/install-update-channel.md"
+  ]
+}

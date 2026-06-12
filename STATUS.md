@@ -10,13 +10,11 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-098` is the active bootstrap-gap chore for Public Consumer Install
-Quickstart And Governance Scaffold. Current stage: Stage 4 review.
+Quickstart And Governance Scaffold. Current stage: Stage 5 landing.
 
-Next action: Run Stage 4 review for `BANDIT-098`: CodeRabbit review or honest
-provider-refusal/bootstrap-gap evidence after the required wait window, Local
-Qwen through `.bandit/reviewers/local-qwen.json` via
-`bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
-aggregate review evidence, and disposition of every finding before landing.
+Next action: Run Stage 5 landing for `BANDIT-098`: write landing verdict,
+confirm UAT not applicable, run land-check, record local landing action, and do
+not start unrelated work before landing action evidence exists.
 
 Required operator input: none_required.
 

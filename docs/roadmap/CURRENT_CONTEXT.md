@@ -10,21 +10,19 @@ Operator Command Adapters slice.
 **Active work item:** `BANDIT-098` - Public Consumer Install Quickstart And
 Governance Scaffold.
 
-The current stage is Stage 4: review.
+The current stage is Stage 5: landing.
 
-**Current next action:** Run Stage 4 review for `BANDIT-098`: CodeRabbit review
-or honest provider-refusal/bootstrap-gap evidence after the required wait
-window, Local Qwen through `.bandit/reviewers/local-qwen.json` via
-`bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
-aggregate review evidence, and disposition of every finding before landing.
+**Current next action:** Run Stage 5 landing for `BANDIT-098`: write landing
+verdict, confirm UAT not applicable, run land-check, record local landing
+action, and do not start unrelated work before landing action evidence exists.
 
 Do not create landing evidence, UAT evidence, retrospective evidence, closeout
 evidence, V0 Closeout Claude Code A/B Product-Value Trial implementation, Trust
 Verifier cutover, merge, push, deploy, hosted service setup, paid reviewer/model
 routing, public benchmark publication, local API work, State Index work, guarded
 browser action execution, PR/CI/CD implementation, installed-copy update-path
-implementation, or unrelated Phase 8 product work before Stage 4 review is
-complete for `BANDIT-098`.
+implementation, or unrelated Phase 8 product work before landing action evidence
+exists for `BANDIT-098`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -67,7 +65,7 @@ artifacts cannot answer.
 
 ## Active Work
 
-`BANDIT-098` Stage 4 review evidence is the current active-work source:
+`BANDIT-098` Stage 5 landing evidence is the current active-work source:
 
 - `docs/specs/BANDIT-098-public-consumer-install-quickstart-and-governance-scaffold.json`
 - `docs/specs/BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART.json`
@@ -85,8 +83,15 @@ artifacts cannot answer.
 - `docs/work/BANDIT-098/implementation-evidence.md`
 - `docs/work/BANDIT-098/writer-report.md`
 - `docs/work/BANDIT-098/stage3-pm-acceptance.md`
+- `docs/work/BANDIT-098/coderabbit-review.md`
+- `docs/work/BANDIT-098/coderabbit-finding-disposition.md`
+- `docs/work/BANDIT-098/local-qwen-review.md`
+- `docs/work/BANDIT-098/local-qwen-finding-disposition.md`
+- `.bandit/policy/risk-classifications/BANDIT-098-risk-classification.json`
+- `.bandit/policy/supply-chain-gates/BANDIT-098-supply-chain-gate.json`
+- `docs/work/BANDIT-098/review-evidence.md`
 - `docs/work/BANDIT-098/coordination-log.jsonl`, current state
-  `implementation_recorded`
+  `review_recorded`
 - `.bandit/bootstrap-gaps.json`, `BANDIT-GAP-PUBLIC-CONSUMER-INSTALL-QUICKSTART`
   current state `active`
 
@@ -106,11 +111,9 @@ artifacts cannot answer.
 
 ## Next Work
 
-The next action is Stage 4 review for `BANDIT-098`.
+The next action is Stage 5 landing for `BANDIT-098`.
 
-Run CodeRabbit review or honest provider-refusal/bootstrap-gap evidence after
-the required wait window, Local Qwen through `.bandit/reviewers/local-qwen.json`
-via `bin/omlx-chat-completions.mjs`, risk classification, supply-chain gate,
-aggregate review evidence, and disposition of every finding before landing,
-V0 trial work, Trust Verifier cutover, local API work, State Index work, cockpit
-action work, or unrelated Phase 8 product work.
+Write the landing verdict, confirm UAT is not applicable, run land-check, record
+local landing action, and do not start V0 trial work, Trust Verifier cutover,
+local API work, State Index work, cockpit action work, or unrelated Phase 8
+product work before landing action evidence exists.
