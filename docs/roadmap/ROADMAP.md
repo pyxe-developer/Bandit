@@ -11,7 +11,7 @@
 ## Current Work Item
 
 - `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from coordination state
-  (Stage 4: CodeRabbit pass recorded; Local Qwen review required)
+  (Stage 5: landing verdict and land-check required)
 
 Stage 4 is the pre-landing review gate. Stage 5 may begin only after all of
 these artifacts are current: CodeRabbit terminal review evidence
@@ -29,9 +29,9 @@ repair and refresh until all required Stage 4 artifacts are non-blocking. For
 terminal CodeRabbit findings for the committed checkpoint; Stage 3 completion
 evidence remains in `docs/work/BANDIT-104/implementation-evidence.md`.
 
-**Current next step:** Run authorized Local Qwen review for `BANDIT-104`
-through `.bandit/reviewers/local-qwen.json` before aggregate review, landing,
-or closeout.
+**Current next step:** Create the `BANDIT-104` landing verdict, run
+`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
+landing action before closeout.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or

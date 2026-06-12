@@ -1,0 +1,155 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-104",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/state/work-execute-controller.ts",
+      "surface": "workflow_route_projection_controller",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/bandit-work-execute.ts",
+      "surface": "operator_cli_projection_adapter",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/work-execute-controller.ts",
+      "surface": "internal_controller_debug_adapter",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/stage-route-registry.ts",
+      "surface": "stage_route_registry",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/work-execute-controller.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/bandit-work-command-adapters.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/stage-route-registry.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "authentication_sessions_authorization_payment_or_billing",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-104/brief.md"
+    },
+    {
+      "surface": "production_data_schema_migration_or_destructive_operation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-104/brief.md"
+    },
+    {
+      "surface": "dependency_or_fetched_prompt_execution",
+      "state": "excluded",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-104-supply-chain-gate.json"
+    },
+    {
+      "surface": "merge_push_deploy_or_publish_automation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-104/implementation-evidence.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "work_execute_route_projection_changes_operator_next_stage",
+      "risk": "medium",
+      "evidence_path": "src/state/work-execute-controller.ts"
+    },
+    {
+      "signal_id": "stage_route_registry_changes_implementation_writer_selection",
+      "risk": "medium",
+      "evidence_path": "src/state/stage-route-registry.ts"
+    },
+    {
+      "signal_id": "coordination_state_remains_canonical_authority",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/implementation-evidence.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/bandit-work-command-adapters.test.mjs test/work-execute-controller.test.mjs test/stage-route-registry.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-104-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-104/red-evidence.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-104/coderabbit-finding-disposition.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-104 changes local workflow route projection and stage routing only. It does not touch credentials, production data, dependency manifests, package scripts, CI/release workflows, external side effects, hosted services, telemetry, publish automation, merge, push, or deploy behavior. Medium parser/controller risk is covered by focused RED tests, full npm test, CodeRabbit pass evidence, and authorized Local Qwen pass evidence."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  }
+}

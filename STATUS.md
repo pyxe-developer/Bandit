@@ -9,14 +9,14 @@
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-104` is in Stage 4 review for the active work-execute stage-route
-advancement bootstrap-gap chore. CodeRabbit findings from the committed
-checkpoint have been repaired or dispositioned; the third CodeRabbit refresh
-returned `findings: 0`.
+`BANDIT-104` is in Stage 5 landing for the active work-execute stage-route
+advancement bootstrap-gap chore. Stage 4 review passed with CodeRabbit,
+authorized Local Qwen, risk classification, supply-chain gate, and aggregate
+review evidence recorded.
 
-Next action: Run authorized Local Qwen review for `BANDIT-104` through
-`.bandit/reviewers/local-qwen.json` before aggregate review, landing, or
-closeout.
+Next action: Create the `BANDIT-104` landing verdict, run
+`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
+landing action before closeout.
 
 Required operator input: none_required.
 
@@ -28,8 +28,7 @@ Active bootstrap gap:
 Last 5 items only:
 
 - `BANDIT-104` - Work-execute route should derive current stage from
-  coordination state (Stage 4 CodeRabbit pass recorded; Local Qwen review
-  required)
+  coordination state (Stage 5 landing verdict and land-check required)
 - `BANDIT-100` - Project-profile contract and identity-clean init (closed)
 - `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold

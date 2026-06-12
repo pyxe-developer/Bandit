@@ -13,11 +13,11 @@ stage from coordination state.
 `BANDIT-104` is the active bootstrap-gap chore formed from
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
 
-The current stage is Stage 4: CodeRabbit pass recorded; Local Qwen review required.
+The current stage is Stage 5: landing verdict and land-check required.
 
-**Current next action:** Run authorized Local Qwen review for `BANDIT-104`
-through `.bandit/reviewers/local-qwen.json` before aggregate review, landing,
-or closeout.
+**Current next action:** Create the `BANDIT-104` landing verdict, run
+`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
+landing action before closeout.
 
 Do not start `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude
 Code A/B Product-Value Trial implementation, Trust Verifier cutover, merge,
@@ -88,6 +88,6 @@ One bootstrap gap from `BANDIT-100` Stage 2 is active under `BANDIT-104`:
 
 ## Next Work
 
-Run authorized Local Qwen review for `BANDIT-104` through
-`.bandit/reviewers/local-qwen.json` before aggregate review, landing, or
-closeout.
+Create the `BANDIT-104` landing verdict, run
+`node ./bin/bandit.mjs land-check BANDIT-104`, and record the approved local
+landing action before closeout.
