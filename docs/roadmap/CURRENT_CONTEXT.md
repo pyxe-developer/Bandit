@@ -4,31 +4,28 @@
 
 **Phase:** 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust Layer Pivot.
 
-`BANDIT-099` is the last closed work item. It landed and closed the Public
-Consumer Onboarding Hardening bootstrap-gap chore.
-
-Operator direction on 2026-06-12 moved `BANDIT-PRD-006` ahead of the deferred
-V0 Closeout Claude Code A/B Product-Value Trial. `bandit draft-work
-docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md` decomposed the PRD
-into `BANDIT-100` through `BANDIT-103`; only `BANDIT-100` is active.
+`BANDIT-100` is the last closed work item. It landed and closed the
+Project-profile contract and identity-clean init slice from `BANDIT-PRD-006`.
 
 **Active work item:** `BANDIT-100` - Project-profile contract and
-identity-clean init.
+identity-clean init (closed anchor).
 
-The current stage is Stage 4: review_recorded.
+It is retained only as the derived-status anchor until the next work item is
+formed.
 
-**Current next action:** Create the Stage 5 landing verdict for `BANDIT-100`,
-run `land-check`, refresh source/head evidence if required, and record
-local-record landing action.
+The current stage is Stage 6: closed.
 
-Do not create retrospective evidence, `BANDIT-101`, `BANDIT-102`,
-`BANDIT-103`, V0 Closeout Claude Code A/B Product-Value Trial implementation,
-Trust Verifier cutover, merge, push, deploy, hosted service setup, paid
-reviewer/model routing, public benchmark publication, local API work, State
-Index work, guarded browser action execution, PR/CI/CD implementation,
-installed-copy update-path implementation, or unrelated Phase 8 product work
-before `BANDIT-100` landing verdict and local-record landing action are
-recorded.
+**Current next action:** Repo PM should form the queued bootstrap-gap chore for
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
+`BANDIT-101`.
+
+Do not start `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude
+Code A/B Product-Value Trial implementation, Trust Verifier cutover, merge,
+push, deploy, hosted service setup, paid reviewer/model routing, public
+benchmark publication, local API work, State Index work, guarded browser
+action execution, PR/CI/CD implementation, installed-copy update-path
+implementation, or unrelated Phase 8 product work while the queued
+work-execute bootstrap gap remains open.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -62,50 +59,27 @@ approve business tradeoffs, approve explicit cost/risk posture, approve paid
 or live reviewer/model routing, or make another policy/product decision repo
 artifacts cannot answer.
 
-## Active Work
+## Last Closed Work
 
-`BANDIT-100` is the active Stage 1 slice:
+`BANDIT-100` is closed with required landing and closeout evidence:
 
-- `docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md`
-- `docs/work/BANDIT-100/brief.md`, current status
-  `Stage 4: review_recorded`
-- `docs/work/BANDIT-100/qwen-formation-review.md`
-- `docs/work/BANDIT-100/coderabbit-formation-review.md`
-- `docs/work/BANDIT-100/formation-review.md`
-- `docs/work/BANDIT-100/red-evidence.md`, current status
-  `Stage 2: red_recorded`
-- `docs/work/BANDIT-100/writer-report.md`, current status
-  `Stage 3: implementation_recorded`
-- `docs/work/BANDIT-100/implementation-evidence.md`, current status
-  `Stage 3: implementation_recorded`
-- `docs/work/BANDIT-100/stage3-pm-acceptance.md`, current status
-  `Stage 3: implementation_recorded`
-- `docs/work/BANDIT-100/coderabbit-review.md`, current status
-  `Stage 4: review_recorded`
-- `docs/work/BANDIT-100/local-qwen-review.md`, current status
-  `Stage 4: review_recorded`
-- `docs/work/BANDIT-100/review-evidence.md`, current status
-  `Stage 4: review_recorded`
-- `docs/work/BANDIT-100/coordination-log.jsonl`, current state
-  `review_recorded`
-
-`BANDIT-101`, `BANDIT-102`, and `BANDIT-103` are draft queued slices from the
-same PRD. They must not become active until `BANDIT-100` has required
-verification or recorded bootstrap gaps, landing verdict, landing action
-evidence, retrospective/improvement dispositions, and synchronized routing
-files.
+- `docs/work/BANDIT-100/brief.md`
+- `docs/work/BANDIT-100/red-evidence.md`
+- `docs/work/BANDIT-100/implementation-evidence.md`
+- `docs/work/BANDIT-100/review-evidence.md`
+- `docs/work/BANDIT-100/landing-verdict.md`
+- `docs/work/BANDIT-100/landing-action.md`
+- `docs/work/BANDIT-100/retrospective.md`
+- `docs/work/BANDIT-100/improvement-disposition.md`
+- `docs/work/BANDIT-100/coordination-log.jsonl`
 
 One bootstrap gap is queued from `BANDIT-100` Stage 2:
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`. It must become the next
-Repo PM target after `BANDIT-100` lands and closes unless it is explicitly
-blocked on operator-owned input or dispositioned as no-action.
+Repo PM target unless it is explicitly blocked on operator-owned input or
+dispositioned as no-action.
 
 ## Next Work
 
-The next action is Stage 5 landing for `BANDIT-100`: create the landing
-verdict, run `land-check`, refresh source/head evidence if required, and record
-local-record landing action.
-
-After `BANDIT-100` lands and closes, Repo PM should form or route the queued
-`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` bootstrap gap before
-activating the next PRD-006 drafted slice.
+Repo PM should form the queued bootstrap-gap chore for
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
+`BANDIT-101`.

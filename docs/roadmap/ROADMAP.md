@@ -4,16 +4,19 @@
 
 ## Last Closed Work Item
 
-- `[Gap]` `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
+- `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
+  (closed; retained as the derived-status anchor until the next work item is
+  formed)
 
 ## Current Work Item
 
 - `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
-  (Stage 4: review_recorded)
+  (Stage 6: closed; retained as the derived-status anchor until the next work
+  item is formed)
 
-**Current next step:** Create the Stage 5 landing verdict for `BANDIT-100`,
-run `land-check`, refresh source/head evidence if required, and record
-local-record landing action.
+**Current next step:** Repo PM should form the queued bootstrap-gap chore for
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
+`BANDIT-101`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -26,8 +29,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before `BANDIT-100` landing verdict and local-record landing action are
-recorded.
+work while the queued work-execute bootstrap gap remains open.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -37,7 +39,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 - `[Gap]` `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` -
   Work-execute route should derive current stage from coordination state
-  (queued; blocked until `BANDIT-100` lands and closes)
+  (queued)
 
 ## Planned Work
 
@@ -65,6 +67,7 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Completed Work
 
+- `BANDIT-100` - Project-profile contract and identity-clean init
 - `BANDIT-099` - Public Consumer Onboarding Hardening
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
 - `BANDIT-097` - PRD-005.4 Operator Command Adapters
@@ -79,4 +82,3 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 - `BANDIT-088` - Installed-Copy Update Path
 - `BANDIT-087` - PR And CI/CD Landing Workflow Policy
 - `BANDIT-086` - Coordination Primitive Completion Triage
-- `BANDIT-085` - Repo-Wide Transition Index Decision

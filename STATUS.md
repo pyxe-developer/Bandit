@@ -2,32 +2,29 @@
 
 ## Last Updated: 2026-06-12
 
-## Current Work Item: BANDIT-100
+## Current Work Item: BANDIT-100 (closed anchor)
 
 ## Current Status
 
 Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
-`BANDIT-PRD-006` has been decomposed into four drafted slices:
-`BANDIT-100` through `BANDIT-103`. `BANDIT-100` is active at Stage 4:
-review_recorded.
+`BANDIT-100` is closed. No active work item is currently formed.
 
-Next action: Create the Stage 5 landing verdict for BANDIT-100, run
-land-check, refresh source/head evidence if required, and record local-record
-landing action.
+Next action: Repo PM should form the queued bootstrap-gap chore for
+`BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` before starting
+`BANDIT-101`.
 
 Required operator input: none_required.
 
-Queued after BANDIT-100 closeout:
+Queued bootstrap gap:
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT`.
 
 ## Recently Completed / In Progress
 
 Last 5 items only:
 
-- `BANDIT-100` - Project-profile contract and identity-clean init
-  (Stage 4: review_recorded)
+- `BANDIT-100` - Project-profile contract and identity-clean init (closed)
 - `BANDIT-099` - Public Consumer Onboarding Hardening (closed)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
   (closed)
