@@ -1,0 +1,202 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-100",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "src/commands/init.ts",
+      "surface": "repo_initialization_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/project-profile.ts",
+      "surface": "project_profile_schema_and_validator",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/draft-work.ts",
+      "surface": "work_item_drafting_parser",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/cli.ts",
+      "surface": "cli_argument_dispatch",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "docs/templates/project-profile.md",
+      "surface": "profile_template_and_external_agent_guidance",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/init.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/draft-work.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "public_npm_publish_automation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-100/brief.md"
+    },
+    {
+      "surface": "credential_handling",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-100/brief.md"
+    },
+    {
+      "surface": "hosted_update_service_or_telemetry",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-100/brief.md"
+    },
+    {
+      "surface": "merge_push_deploy_or_destructive_operation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "surface": "dependency_or_fetched_prompt_execution",
+      "state": "excluded",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-100-supply-chain-gate.json"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "profile_init_scaffolds_consumer_identity",
+      "risk": "medium",
+      "evidence_path": "src/commands/init.ts"
+    },
+    {
+      "signal_id": "project_profile_schema_rejects_malformed_fields",
+      "risk": "medium",
+      "evidence_path": "src/state/project-profile.ts"
+    },
+    {
+      "signal_id": "draft_work_accepts_configured_prd_prefix_with_backcompat",
+      "risk": "medium",
+      "evidence_path": "src/commands/draft-work.ts"
+    },
+    {
+      "signal_id": "coderabbit_provider_timeout_recorded_without_pass_claim",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-100/coderabbit-review.md"
+    },
+    {
+      "signal_id": "local_qwen_review_passed_authorized_route",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/local-qwen-review.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/init.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/draft-work.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm run bandit -- validate",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-100/stage3-pm-acceptance.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-100-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-100/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-100/red-evidence.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-SCHEMA-MIGRATION",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-100/implementation-evidence.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-100 changes local init scaffolding, project-profile validation, draft-work PRD prefix parsing, and a shipped profile template. It does not migrate existing persisted data, publish packages, handle credentials, contact hosted services, add telemetry, mutate external repos, merge, push, deploy, or perform destructive operations. Schema and parser risks are covered by focused RED tests plus Local Qwen review."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-100 is medium workflow and consumer-bootstrap risk because it changes project initialization, a new project-profile schema, and PRD header parsing. The implementation remains local, deterministic, repo-native, and covered by focused parser/init/draft-work tests, full-suite verification, TypeScript typecheck, CodeRabbit timeout evidence with repaired finding, and authorized Local Qwen pass evidence.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-100-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-100-supply-chain-gate.json",
+    "docs/work/BANDIT-100/brief.md",
+    "docs/work/BANDIT-100/red-evidence.md",
+    "docs/work/BANDIT-100/implementation-evidence.md",
+    "docs/work/BANDIT-100/writer-report.md",
+    "docs/work/BANDIT-100/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-100/coderabbit-review.md",
+    "docs/work/BANDIT-100/coderabbit-finding-disposition.md",
+    "docs/work/BANDIT-100/local-qwen-review.md",
+    "src/cli.ts",
+    "src/commands/init.ts",
+    "src/state/project-profile.ts",
+    "src/commands/draft-work.ts",
+    "docs/templates/project-profile.md",
+    "test/init.test.mjs",
+    "test/draft-work.test.mjs"
+  ]
+}

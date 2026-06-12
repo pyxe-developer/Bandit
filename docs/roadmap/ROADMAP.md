@@ -9,10 +9,11 @@
 ## Current Work Item
 
 - `[Slice]` `BANDIT-100` - Project-profile contract and identity-clean init
-  (Stage 3: implementation_recorded)
+  (Stage 4: review_recorded)
 
-**Current next step:** Run Stage 4 CodeRabbit evidence, authorized Local Qwen
-review, risk classification, and aggregate review evidence for `BANDIT-100`.
+**Current next step:** Create the Stage 5 landing verdict for `BANDIT-100`,
+run `land-check`, refresh source/head evidence if required, and record
+local-record landing action.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -25,7 +26,8 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work before `BANDIT-100` Stage 4 review evidence is recorded.
+work before `BANDIT-100` landing verdict and local-record landing action are
+recorded.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
