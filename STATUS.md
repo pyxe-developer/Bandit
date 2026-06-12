@@ -10,14 +10,10 @@ Bandit is in Phase 8 - Workflow Cockpit kickoff / Harness-Agnostic CLI Trust
 Layer Pivot.
 
 `BANDIT-099` is the active bootstrap-gap chore for Public Consumer Onboarding
-Hardening. Current stage: Stage 4 Review.
+Hardening. Current stage: Stage 5 Landing.
 
-Next action: Run Stage 4 review for `BANDIT-099`: CodeRabbit pre-PR review or
-honest provider-refusal/bootstrap-gap evidence after the required wait window,
-Local Qwen through `.bandit/reviewers/local-qwen.json` via
-`bin/omlx-chat-completions.mjs`, layered risk classification, supply-chain
-gate, aggregate review evidence, review-subject hash, and disposition of every
-finding before landing.
+Next action: Write Landing Agent verdict for `BANDIT-099`, run land-check, and
+execute local-record landing action only if the landing gate passes.
 
 Required operator input: none_required.
 
@@ -26,7 +22,7 @@ Required operator input: none_required.
 Last 5 items only:
 
 - `BANDIT-099` - Public Consumer Onboarding Hardening
-  (Stage 4: Review)
+  (Stage 5: Landing)
 - `BANDIT-098` - Public Consumer Install Quickstart And Governance Scaffold
   (closed)
 - `BANDIT-097` - PRD-005.4 Operator Command Adapters (closed)

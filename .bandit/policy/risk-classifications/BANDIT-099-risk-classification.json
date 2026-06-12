@@ -1,0 +1,172 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-099",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": "README.md",
+      "surface": "public_install_documentation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "repo_initialization_command",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/init.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/public-consumer-install-quickstart.test.mjs",
+      "surface": "packed_consumer_test",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "public_npm_publish_automation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-099/brief.md"
+    },
+    {
+      "surface": "credential_handling",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-099/brief.md"
+    },
+    {
+      "surface": "hosted_update_service_or_telemetry",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-099/brief.md"
+    },
+    {
+      "surface": "merge_push_deploy_or_destructive_operation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "init_seeds_consumer_onboarding_files",
+      "risk": "medium",
+      "evidence_path": "src/commands/init.ts"
+    },
+    {
+      "signal_id": "starter_files_preserve_existing_user_owned_content",
+      "risk": "medium",
+      "evidence_path": "test/init.test.mjs"
+    },
+    {
+      "signal_id": "public_readme_command_examples_are_copy_pasteable",
+      "risk": "medium",
+      "evidence_path": "test/public-consumer-install-quickstart.test.mjs"
+    },
+    {
+      "signal_id": "coderabbit_provider_timeout_recorded_without_pass_claim",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-099/coderabbit-review.md"
+    },
+    {
+      "signal_id": "local_qwen_non_blocking_finding_dispositioned",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-099/local-qwen-finding-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/init.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/public-consumer-install-quickstart.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "node --test test/private-install-update-channel.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/test-baseline-repair-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    },
+    {
+      "tool": "npm pack --dry-run --json",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-099/stage3-pm-acceptance.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-099-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-CODERABBIT-WAIVER",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-099/coderabbit-review.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-NON-BLOCKING-REVIEW-FINDINGS",
+      "severity": "non_blocking",
+      "evidence_path": "docs/work/BANDIT-099/local-qwen-finding-disposition.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-099 changes local init scaffolding, public README command examples, and test baselines only. It does not publish packages, handle credentials, contact hosted update services, add telemetry, mutate external repos, merge, push, deploy, or perform destructive operations."
+  },
+  "auto_landing": {
+    "eligible": true,
+    "refusal_rationale": "none"
+  },
+  "rationale": "BANDIT-099 is medium workflow and distribution-adjacent risk because it changes public onboarding and the init command's starter guidance. The implementation remains local, deterministic, no-overwrite, and repo-native; public publishing, credential handling, hosted services, telemetry, and external mutation remain out of scope.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-099-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-099-supply-chain-gate.json",
+    "docs/work/BANDIT-099/brief.md",
+    "docs/work/BANDIT-099/red-evidence.md",
+    "docs/work/BANDIT-099/implementation-evidence.md",
+    "docs/work/BANDIT-099/writer-report.md",
+    "docs/work/BANDIT-099/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-099/coderabbit-review.md",
+    "docs/work/BANDIT-099/local-qwen-review.md",
+    "docs/work/BANDIT-099/local-qwen-finding-disposition.md",
+    "README.md",
+    "src/commands/init.ts",
+    "test/init.test.mjs",
+    "test/public-consumer-install-quickstart.test.mjs",
+    "test/private-install-update-channel.test.mjs"
+  ]
+}
