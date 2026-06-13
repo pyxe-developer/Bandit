@@ -7,17 +7,15 @@
 `BANDIT-104` is the last closed work item. It landed and closed the
 work-execute stage-route advancement bootstrap-gap chore.
 
-**Active work item:** `BANDIT-104` - Work-execute route should derive current
-stage from coordination state. This closed work item remains the derived-status
-anchor until the next work item is formed.
+**Active work item:** `BANDIT-101` - Typed reviewer adapters with honest
+degradation.
 
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` is resolved by `BANDIT-104`.
 
-The current stage is Stage 6: closed.
+The current stage is Stage 1: formation_approved.
 
-**Current next action:** Repo PM should form BANDIT-101 - Typed reviewer
-adapters with honest degradation - only after confirming repo artifacts still
-authorize that slice and no new open bootstrap gap takes precedence.
+**Current next action:** Work Item PM should record plan-mode orchestration for
+BANDIT-101 before RED evidence.
 
 Do not begin RED evidence, implementation, review, landing, or closeout for
 `BANDIT-101`, `BANDIT-102`, `BANDIT-103`, V0 Closeout Claude Code A/B
@@ -25,8 +23,8 @@ Product-Value Trial implementation, Trust Verifier cutover, merge, push, deploy,
 hosted service setup, paid reviewer/model routing, public benchmark
 publication, local API work, State Index work, guarded browser action
 execution, PR/CI/CD implementation, installed-copy update-path implementation,
-or unrelated Phase 8 product work while `BANDIT-104` remains the derived-status
-anchor.
+or unrelated Phase 8 product work before Work Item PM records plan-mode
+orchestration for `BANDIT-101`.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Public npm publishing is allowed when the operator performs or
@@ -77,11 +75,15 @@ artifacts cannot answer.
 
 ## Active Work
 
-No active in-progress work item exists. `BANDIT-104` remains the active
-derived-status anchor until Repo PM forms the next work item.
+`BANDIT-101` is formation-approved with required Stage 1 evidence:
+
+- `docs/work/BANDIT-101/brief.md`
+- `docs/work/BANDIT-101/coordination-log.jsonl`
+- `docs/work/BANDIT-101/qwen-formation-review.md`
+- `docs/work/BANDIT-101/coderabbit-formation-review.md`
+- `docs/work/BANDIT-101/formation-review.md`
 
 ## Next Work
 
-Repo PM should form BANDIT-101 - Typed reviewer adapters with honest
-degradation - only after confirming repo artifacts still authorize that slice
-and no new open bootstrap gap takes precedence.
+Work Item PM should record plan-mode orchestration for BANDIT-101 before RED
+evidence.

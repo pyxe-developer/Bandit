@@ -1,0 +1,203 @@
+{
+  "kind": "slice",
+  "title": "Typed reviewer adapters with honest degradation",
+  "status": "Brief Created",
+  "goal": "Adversarial review works with any OpenAI-compatible endpoint, CLI command, or human reviewer, and the absence of a reviewer is an explicit recorded gap that blocks landing rather than a silent weakening.",
+  "scope": [
+    "Use docs/prds/BANDIT-PRD-006-consumer-agnostic-bootstrap.md as source authority for the second PRD-006 slice after BANDIT-100 landed the project-profile dependency and BANDIT-104 resolved the intervening work-execute route bootstrap gap.",
+    "Define a typed reviewer adapter contract with initial adapter types openai_compatible, cli_command, and human.",
+    "Validate reviewer adapter entries from the project profile or generated reviewer config with type-specific required fields and actionable diagnostics.",
+    "Generate or preserve profile-driven reviewer scaffolding under .bandit/reviewers/ without hardcoding Bandit's own Local Qwen identity as the only possible reviewer.",
+    "Generalize the current Local Qwen review path so the existing .bandit/reviewers/local-qwen.json route continues to run unchanged as an openai_compatible adapter through bin/omlx-chat-completions.mjs.",
+    "Make an empty reviewers list an explicit bootstrap gap or no-reviewer state that blocks landing gates until a reviewer exists or the gap is explicitly dispositioned.",
+    "Add a human reviewer adapter path that produces or validates review evidence satisfying the same gate contract without pretending a model review ran.",
+    "Keep reviewer evidence, reviewer config, bootstrap gap state, and landing-gate decisions repo-native and explicit; no cockpit, cache, prompt, or generated profile output may become independent workflow authority."
+  ],
+  "out_of_scope": [
+    "Do not add same-harness self-review defaults.",
+    "Do not change reviewer quality calibration, reviewer benchmark scoring, paid reviewer promotion thresholds, or recurring paid reviewer policy.",
+    "Do not add hosted reviewer services, telemetry, external reviewer service setup, paid/live reviewer routing, provider-pricing evidence, spend-class approval, public benchmark publication, or automatic policy promotion.",
+    "Do not change Local Qwen's authorized route away from .bandit/reviewers/local-qwen.json through node bin/omlx-chat-completions.mjs.",
+    "Do not implement harness-neutral AGENTS.md generation, harness shims, policy tiers, V0 Closeout Claude Code A/B Product-Value Trial work, local API, State Index, guarded browser actions, Trust Verifier cutover, old-gate replacement or wrapping, merge, push, deploy, public npm publish automation, credential handling, hosted update services, automatic self-update, installed global skill mutation, automation prompt mutation, dependency changes, lockfile changes, package-script changes, CI/release workflow changes, external repo mutation, claim authority, worktree lifecycle, or unrelated Phase 8 work.",
+    "Do not start RED evidence, implementation, review-loop evidence, landing evidence, UAT evidence, retrospective evidence, or closeout evidence during Repo PM Stage 1 formation."
+  ],
+  "acceptance_criteria": [
+    "Each reviewer adapter type validates at init or profile/config load with type-specific required fields and diagnostics naming the offending field.",
+    "The existing Local Qwen review flow runs unchanged as an openai_compatible adapter using .bandit/reviewers/local-qwen.json and node bin/omlx-chat-completions.mjs.",
+    "A profile or config with reviewers: [] records an explicit no-reviewer bootstrap gap or no-reviewer state that land-check treats as blocking until dispositioned.",
+    "A human adapter produces or validates a review-evidence path that satisfies the same gate contract without claiming Local Qwen, CodeRabbit, or another model reviewer ran.",
+    "Reviewer adapter config and generated .bandit/reviewers/ files are data/config surfaces, not hidden workflow authority; landing gates still consume explicit review evidence and gap disposition.",
+    "Focused tests cover adapter validation, scaffold output, Local Qwen regression routing, empty-reviewer landing blockade, disposition unblock behavior, and human-reviewer evidence validation.",
+    "The implementation preserves CLI Authority, repo-native source-of-truth boundaries, Permanent Test Ownership Boundary, Bootstrap Model-Family Separation, authorized Local Qwen routing, and fail-closed reviewer evidence semantics.",
+    "The slice does not change reviewer benchmarking, paid reviewer routing, harness shims, policy tiers, Trust Verifier cutover, public publishing, dependencies, merge/push/deploy authority, external repo mutation, or unrelated Phase 8 product scope."
+  ],
+  "test_plan": [
+    "Stage 2 Test Writer writes RED tests for openai_compatible, cli_command, and human adapter validation, including missing required fields and actionable diagnostic text.",
+    "Stage 2 Test Writer writes RED tests for profile-driven reviewer scaffold output under .bandit/reviewers/.",
+    "Stage 2 Test Writer writes a Local Qwen regression proving the current .bandit/reviewers/local-qwen.json route still invokes node bin/omlx-chat-completions.mjs as an openai_compatible adapter.",
+    "Stage 2 Test Writer writes a landing-gate test proving reviewers: [] or equivalent no-reviewer state blocks land-check until dispositioned.",
+    "Stage 2 Test Writer writes a human-adapter evidence test proving manual review evidence can satisfy the same gate contract without model-review claims.",
+    "Run focused reviewer-adapter, init/profile, Local Qwen routing, and landing-gate tests after implementation.",
+    "Run npm run typecheck.",
+    "Run npm test if implementation touches shared CLI startup, profile parsing, reviewer commands, landing gates, bootstrap gaps, validation, risk classification, supply-chain gates, cockpit/session-context, or package scaffolding behavior.",
+    "Run npm run bandit -- validate.",
+    "Run node ./bin/bandit.mjs cockpit status --json and node ./bin/bandit.mjs session-context current --json after routing artifacts are updated.",
+    "Run CodeRabbit review and authorized Local Qwen review before landing, with honest provider-timeout/refusal evidence if allowed by the active stage policy.",
+    "Run node ./bin/bandit.mjs land-check <ID> before landing.",
+    "Run git diff --check."
+  ],
+  "clean_code_read_evidence": "CLEAN_CODE.md was read on 2026-06-12 before creating this source spec and repairing BANDIT-101 Stage 1 formation. This slice must keep reviewer adapter validation, scaffold generation, Local Qwen route reuse, no-reviewer gap recording, human review evidence, landing-gate integration, diagnostics, and tests small and explicit; avoid hidden authority; preserve role boundaries; and avoid mixing harness shims, policy tiers, reviewer benchmark policy, paid/live routing, Trust Verifier cutover, merge/push/deploy, dependency, package-script, CI/release workflow, or unrelated Phase 8 behavior into this slice.",
+  "stage_rubric_checklist": [
+    "Stage 0: Context Readiness | pass | BANDIT-104 is closed with verification, landing verdict, landing action, retrospective, improvement disposition, synchronized CURRENT_CONTEXT.md, ROADMAP.md, STATUS.md, and no open bootstrap gap ahead of BANDIT-101.",
+    "Stage 1: Work-Item Brief And Spec | pass | This spec defines goal, source authority, scope, out of scope, acceptance criteria, test plan, clean-code read evidence, no-gap disposition, expected files, required evidence, role boundaries, operator-input status, source-of-truth boundary, forbidden actions, implementation order, and smell triggers.",
+    "Stage 2: Test Design And RED Evidence | required next | Test Writer must produce RED tests for adapter validation, scaffold output, Local Qwen regression, empty-reviewer landing blockade, disposition unblock behavior, and human-reviewer evidence validation.",
+    "Stage 3: Implementation Clean-Code Rubric | required later | Implementation must be routed to a different model family if Codex authors RED tests and must not edit tests, test helpers, fixtures, RED evidence, acceptance mappings, or Test Writer-owned evidence.",
+    "Stage 4: Review And Cross-Model Gates | required later | Local Qwen through the authorized MLX route, CodeRabbit terminal evidence or policy-accepted provider failure evidence, aggregate review, review-subject hash, risk/supply-chain checks where applicable, and clean-code review are required before landing.",
+    "Stage 5: Landing And UAT | required later | Landing verdict, land-check, local-record landing action, clean-code compliance evidence, and product UAT if operator-facing reviewer setup behavior requires it are required before closeout.",
+    "Stage 6: Retrospective And Improvement Capture | required later | Retrospective, improvement/no-action dispositions, current context, roadmap, STATUS, and gap/intake-state updates are required before BANDIT-102, BANDIT-103, V0 trial work, Trust Verifier cutover, or unrelated next work begins."
+  ],
+  "bootstrap_gaps": [
+    "No open bootstrap gap blocks this PRD-006 reviewer-adapter slice.",
+    "Only one real in-house live OpenAI-compatible reviewer endpoint, Local Qwen, is available for live verification in this slice; additional endpoint diversity is out of scope unless Stage 4 evidence records a new bounded follow-up.",
+    "Live CodeRabbit formation or Stage 4 review may time out or be unavailable; do not claim a CodeRabbit pass without terminal evidence.",
+    "Local Qwen is authorized only through .bandit/reviewers/local-qwen.json and bin/omlx-chat-completions.mjs against the MLX OpenAI-compatible endpoint at http://127.0.0.1:8001/v1. If the endpoint or adapter is unavailable, stop and ask the operator for help rather than substituting another reviewer route."
+  ],
+  "expected_files": [
+    "docs/specs/BANDIT-101-typed-reviewer-adapters-with-honest-degradation.json",
+    "docs/work/BANDIT-101/brief.md",
+    "docs/work/BANDIT-101/coordination-log.jsonl",
+    "docs/work/BANDIT-101/qwen-formation-review.md",
+    "docs/work/BANDIT-101/coderabbit-formation-review.md",
+    "docs/work/BANDIT-101/formation-review.md",
+    "docs/work/BANDIT-101/red-evidence.md",
+    "docs/work/BANDIT-101/implementation-evidence.md",
+    "docs/work/BANDIT-101/writer-report.md",
+    "docs/work/BANDIT-101/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-101/coderabbit-review.md",
+    "docs/work/BANDIT-101/local-qwen-review.md",
+    "docs/work/BANDIT-101/review-evidence.md",
+    "docs/work/BANDIT-101/landing-verdict.md",
+    "docs/work/BANDIT-101/landing-action.md",
+    "docs/work/BANDIT-101/retrospective.md",
+    "docs/work/BANDIT-101/improvement-disposition.md",
+    "src/state/reviewer-adapters.ts",
+    "src/state/project-profile.ts",
+    "src/commands/init.ts",
+    "src/commands/qwen-review.ts",
+    "src/commands/land-check.ts",
+    "src/commands/validate.ts",
+    "docs/templates/local-qwen-review.md",
+    "test/reviewer-adapters.test.mjs",
+    "test/local-qwen-review.test.mjs",
+    "test/landing-gates.test.mjs",
+    ".bandit/bootstrap-gaps.json",
+    ".bandit/reviewers/local-qwen.json",
+    "docs/roadmap/CURRENT_CONTEXT.md",
+    "docs/roadmap/ROADMAP.md",
+    "STATUS.md"
+  ],
+  "first_implementation_order": [
+    "Repo PM repairs or creates Stage 1 formation artifacts and approves formation before Work Item PM execution.",
+    "Work Item PM records plan-mode orchestration only after formation_approved and before RED evidence.",
+    "Test Writer writes failing tests for adapter validation, scaffold output, Local Qwen regression, no-reviewer landing blockade and disposition, and human adapter evidence.",
+    "Implementation Writer adds the minimal reviewer adapter validation, scaffold, Local Qwen route reuse, no-reviewer gap, human evidence, command wiring, and landing-gate integration needed to satisfy RED tests, without editing Test Writer-owned files if Codex authored the RED tests.",
+    "Codex PM verifies focused tests, typecheck, full tests as needed, Bandit validation, cockpit/session-context derived status, clean-code compliance, and evidence freshness before Stage 4 review.",
+    "Reviewers run Local Qwen through the authorized MLX route and CodeRabbit terminal evidence or policy-accepted provider-failure evidence; PM dispositions any findings before landing.",
+    "Landing Agent writes landing verdict/action; Closeout Agent records retrospective, improvement/no-action disposition, and synchronizes current context, roadmap, STATUS, and gap/intake state."
+  ],
+  "smell_triggers": [
+    "Reviewer identity hardcoded outside .bandit/reviewers/ is a scope and clean-code warning unless explicitly limited to backwards compatibility.",
+    "A landing path that passes with zero review evidence and no dispositioned no-reviewer gap is a blocker.",
+    "Endpoint assumptions baked into review prompts, commands, or landing gates instead of typed adapter config are blockers.",
+    "Any direct qwen CLI, Ollama, paid/live reviewer, or ad hoc local reviewer route treated as Local Qwen evidence is a blocker.",
+    "Any CodeRabbit timeout, provider error, malformed output, missing route, missing operator-owned input, stale evidence, review blocker, or gate failure reported as pass evidence is a blocker.",
+    "Any implementation that lets reviewer config, generated templates, profile docs, cockpit/session-context output, or command output become canonical workflow authority is a blocker.",
+    "Any Implementation Writer edit to tests, test helpers, fixtures, RED evidence, acceptance mappings, or Test Writer-owned evidence is a blocker.",
+    "Any expansion into reviewer benchmarking, paid reviewer promotion, harness shims, policy tiers, Trust Verifier cutover, merge/push/deploy, dependencies, package scripts, lockfiles, CI/release workflows, hosted services, telemetry, public publishing automation, external repo mutation, installed global skill mutation, automation prompt mutation, claim authority, worktree lifecycle, or unrelated Phase 8 work is scope creep.",
+    "Any large mixed function that combines profile parsing, adapter validation, scaffold writes, review invocation, gap mutation, landing-gate parsing, evidence rendering, and diagnostics without small explicit boundaries is a clean-code blocker."
+  ],
+  "required_evidence": [
+    "docs/work/BANDIT-101/brief.md",
+    "docs/work/BANDIT-101/coordination-log.jsonl",
+    "docs/work/BANDIT-101/qwen-formation-review.md",
+    "docs/work/BANDIT-101/coderabbit-formation-review.md",
+    "docs/work/BANDIT-101/formation-review.md",
+    "docs/work/BANDIT-101/red-evidence.md",
+    "docs/work/BANDIT-101/implementation-evidence.md",
+    "docs/work/BANDIT-101/review-evidence.md",
+    "docs/work/BANDIT-101/landing-verdict.md",
+    "docs/work/BANDIT-101/landing-action.md",
+    "docs/work/BANDIT-101/retrospective.md",
+    "docs/work/BANDIT-101/improvement-disposition.md"
+  ],
+  "operator_input_status": "No operator-owned input is required to create and form this PRD-006 reviewer-adapter slice because the operator approved the public consumer onboarding direction, BANDIT-PRD-006 is accepted source authority, BANDIT-100 landed the project-profile prerequisite, BANDIT-104 resolved the intervening work-execute route gap, no open bootstrap gap takes precedence, and this slice implements typed reviewer adapter plumbing without approving paid/live routing, hosted services, reviewer benchmark policy, public publishing automation, merge/push/deploy authority, Trust Verifier cutover, old-gate replacement/wrapping, product direction changes, UAT decisions, business tradeoffs, or explicit cost/risk overrides. Halt for operator input if later work would approve paid or live reviewer/model routing, provider pricing, hosted services, telemetry, credential handling, public npm publish automation, automatic self-update, external repo mutation, installed global skill mutation, automation prompt mutation, merge/push/deploy authority, Trust Verifier cutover, old-gate replacement/wrapping, product or UAT direction changes, business tradeoffs, explicit cost/risk posture, or genuinely ambiguous scope.",
+  "stage_capability_scope": {
+    "policy": ".bandit/policy/stage-capability-scope.json",
+    "stages": [
+      "Stage 1"
+    ],
+    "authority_roles": [
+      "repo_pm"
+    ],
+    "required_skills": [
+      "bandit",
+      "bandit-stage1-formation"
+    ],
+    "forbidden_actions": [
+      "orchestration-plan",
+      "red-evidence",
+      "implementation",
+      "review-loop",
+      "landing",
+      "uat",
+      "retrospective",
+      "closeout",
+      "paid-live-routing",
+      "reviewer-benchmark-policy",
+      "harness-shims",
+      "policy-tiers",
+      "trust-verifier-cutover",
+      "old-gate-replacement-or-wrapping",
+      "merge-push-deploy",
+      "public-publish-automation",
+      "credential-handling",
+      "hosted-services",
+      "telemetry",
+      "automatic-self-update",
+      "external-repo-mutation",
+      "installed-global-skill-mutation",
+      "automation-prompt-mutation",
+      "dependency-change",
+      "lockfile-change",
+      "package-script-change",
+      "ci-release-workflow-change",
+      "unrelated-phase-8-work"
+    ]
+  },
+  "token_cost_failsafe": {
+    "policy": ".bandit/policy/token-cost-failsafe.json",
+    "soft_budget_bands": [
+      "formation_review",
+      "stage3_implementation",
+      "stage4_review"
+    ],
+    "provider_pricing_evidence": [
+      "not_applicable_local_qwen",
+      "not_applicable_coderabbit_cli"
+    ],
+    "spend_classes": [
+      "local_or_included"
+    ],
+    "continuation_decisions": [
+      "CodeRabbit formation review must receive the full 600-second prompt-required timeout before any failed attempt is recorded.",
+      "Repo PM must retry CodeRabbit formation review up to two more times after a timeout and stop for operator assistance if all three attempts fail to produce terminal evidence.",
+      "Local Qwen unavailability is fail-closed and requires operator help rather than an alternate reviewer path.",
+      "Any paid, live, or recurring model/reviewer route remains blocked unless a separate approved provider-pricing and spend-class artifact exists."
+    ],
+    "stage_capability_profiles": [
+      "stage1_formation_only",
+      "claude-implementation-writer-stage3",
+      "qwen-and-coderabbit-review-stage4"
+    ]
+  }
+}

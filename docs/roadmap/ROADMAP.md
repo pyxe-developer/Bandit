@@ -6,13 +6,12 @@
 
 - `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from
   coordination state
-  (closed; retained as the derived-status anchor until the next work item is
-  formed)
+  (closed)
 
 ## Current Work Item
 
-- `[Gap]` `BANDIT-104` - Work-execute route should derive current stage from coordination state
-  (Stage 6: closed; derived-status anchor only)
+- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation
+  (Stage 1: formation_approved; Work Item PM plan-mode orchestration next)
 
 `BANDIT-104` resolved
 `BANDIT-GAP-WORK-EXECUTE-STAGE-ROUTE-ADVANCEMENT` by deriving
@@ -20,9 +19,8 @@
 the Work Item PM plan-mode gate, and failing closed for unsupported or
 contradictory states.
 
-**Current next step:** Repo PM should form BANDIT-101 - Typed reviewer
-adapters with honest degradation - only after confirming repo artifacts still
-authorize that slice and no new open bootstrap gap takes precedence.
+**Current next step:** Work Item PM should record plan-mode orchestration for
+BANDIT-101 before RED evidence.
 
 The operator approved a public, open-source install/discovery posture on
 2026-06-11. Do not approve expanded landing autonomy, Notify-And-Revert or
@@ -35,7 +33,7 @@ scheduler execution, claim/worktree lifecycle behavior, guarded browser
 actions, generate role input or execution packets for unrelated work, restart
 Pi/Aperture runtime work, implement V0 Closeout Claude Code A/B Product-Value
 Trial, implement Installed-Copy Update Path, or start unrelated Phase 8 product
-work while `BANDIT-104` remains the derived-status anchor.
+work before Work Item PM records plan-mode orchestration for `BANDIT-101`.
 
 Local Qwen reviewer routing must use `.bandit/reviewers/local-qwen.json` and
 `bin/omlx-chat-completions.mjs` against the MLX OpenAI-compatible endpoint.
@@ -43,9 +41,9 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ## Next Work Item
 
-- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation
-  (next formation target; do not begin RED evidence or implementation until
-  Repo PM formation is recorded and approved)
+- `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
+  shims
+  (deferred until `BANDIT-101` lands and closes)
 
 ## Planned Work
 
@@ -56,10 +54,6 @@ The direct `qwen` CLI is not an authorized Bandit reviewer path.
 
 ### Phase 8 Product Queue
 
-- `[Slice]` `BANDIT-101` - Typed reviewer adapters with honest degradation:
-  generalize adversarial reviewer adapters and make no-reviewer state an
-  explicit landing-blocking gap. Next formation target if repo artifacts still
-  authorize it and no new open bootstrap gap takes precedence.
 - `[Slice]` `BANDIT-102` - Harness-neutral AGENTS.md and generated harness
   shims: generate neutral role-contract surfaces plus Pi shims.
 - `[Slice]` `BANDIT-103` - Policy tiering: core invariants plus opt-in tiers:
