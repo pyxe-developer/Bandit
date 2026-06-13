@@ -1,0 +1,17 @@
+{"type":"review_context","reviewType":"uncommitted","currentBranch":"main","baseBranch":"origin/main","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","phase":"connecting","status":"connecting_to_review_service"}
+{"type":"status","phase":"setup","status":"setting_up"}
+{"type":"status","phase":"setup","status":"preparing_sandbox"}
+{"type":"status","phase":"analyzing","status":"summarizing"}
+{"type":"status","phase":"analyzing","status":"tools_completed"}
+{"type":"status","phase":"analyzing","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"finding","severity":"major","fileName":"src/commands/init.ts","codegenInstructions":"Verify each finding against current code. Fix only still-valid issues, skip the rest with a brief reason, keep changes minimal, and validate.\n\nIn @src/commands/init.ts around lines 76 - 96, The code currently performs profile scaffolding (pairTypedProfileReviewers, validateTypedProfileReviewers, scaffoldReviewerAdapter, recordNoReviewerBootstrapGap) before the \"already initialized\" skip guard, allowing writes even when init should be a no-op; move or gate this entire profile-handling block so the existing \"already initialized\" check (the skip guard later in init) runs first and prevents any calls to pairTypedProfileReviewers, validateTypedProfileReviewers, scaffoldReviewerAdapter, or recordNoReviewerBootstrapGap when the guard indicates initialization should be skipped (i.e., reuse the same condition/flag the later skip guard uses rather than duplicating logic).","suggestions":[]}
+{"type":"finding","severity":"major","fileName":"test/reviewer-adapters.test.mjs","codegenInstructions":"Verify each finding against current code. Fix only still-valid issues, skip the rest with a brief reason, keep changes minimal, and validate.\n\nIn @test/reviewer-adapters.test.mjs around lines 249 - 286, The test \"Local Qwen profile fixture remains an openai-compatible reviewer adapter\" currently only writes and re-reads the fixture and never exercises the init flow; change the test to invoke the init flow (run the equivalent of `bandit init --profile local-qwen-baseline` or call the library/init function that performs profile initialization) against the temp repo after writing the original fixture, then read the file back and assert that type/provider/provider_base_url/command fields remain unchanged; keep the existing assertions and ensure the test cleans up or uses the same temp repo setup so it verifies that init does not rewrite/alter local-qwen.json.","suggestions":[]}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"complete","status":"review_completed","findings":2}

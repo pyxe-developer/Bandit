@@ -35,9 +35,28 @@ export type ProjectProfile = {
   harnesses: string[];
 };
 
+export type ProjectProfileWithRawReviewers = {
+  profile: ProjectProfile;
+  rawReviewerEntries: unknown[];
+};
+
 const VALID_PREFIX_PATTERN = /^[A-Z][A-Z0-9]*$/;
 
 export async function readProjectProfile(filePath: string): Promise<ProjectProfile> {
+  return parseProjectProfile(await readProfileJson(filePath));
+}
+
+export async function readProjectProfileWithRawReviewers(
+  filePath: string
+): Promise<ProjectProfileWithRawReviewers> {
+  const raw = await readProfileJson(filePath);
+  return {
+    profile: parseProjectProfile(raw),
+    rawReviewerEntries: readRawReviewerEntries(raw),
+  };
+}
+
+async function readProfileJson(filePath: string): Promise<unknown> {
   let raw: unknown;
   try {
     const text = await readFile(filePath, "utf8");
@@ -48,7 +67,7 @@ export async function readProjectProfile(filePath: string): Promise<ProjectProfi
     }
     throw error;
   }
-  return parseProjectProfile(raw);
+  return raw;
 }
 
 export function parseProjectProfile(raw: unknown): ProjectProfile {
@@ -193,7 +212,7 @@ function requireRoadmapSeed(obj: Record<string, unknown>) {
 
 function requireReviewers(obj: Record<string, unknown>) {
   if (!Array.isArray(obj.reviewers)) {
-    throw new Error("Invalid profile field: reviewers");
+    throw new Error("Invalid profile field: reviewers (must be an array)");
   }
   for (const [index, entry] of obj.reviewers.entries()) {
     if (!isRecord(entry)) {
@@ -244,6 +263,17 @@ function parseReviewer(value: unknown): ReviewerDeclaration {
     provider: String(value.provider ?? ""),
     required: Boolean(value.required),
   };
+}
+
+export function readRawReviewerEntries(raw: unknown): unknown[] {
+  if (!isRecord(raw) || !("reviewers" in raw)) {
+    return [];
+  }
+  if (!Array.isArray(raw.reviewers)) {
+    throw new Error("Invalid profile field: reviewers (must be an array)");
+  }
+
+  return raw.reviewers;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

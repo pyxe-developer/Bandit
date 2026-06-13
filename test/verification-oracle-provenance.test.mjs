@@ -162,6 +162,7 @@ async function writeBasePolicies(repo) {
     ]
   });
   await writeJson(repo, ".bandit/reviewers/local-qwen.json", {
+    type: "openai_compatible",
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     version: 1,

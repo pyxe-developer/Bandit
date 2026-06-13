@@ -1,0 +1,11 @@
+{"type":"review_context","reviewType":"uncommitted","currentBranch":"main","baseBranch":"origin/main","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","phase":"connecting","status":"connecting_to_review_service"}
+{"type":"status","phase":"setup","status":"setting_up"}
+{"type":"status","phase":"setup","status":"preparing_sandbox"}
+{"type":"status","phase":"analyzing","status":"summarizing"}
+{"type":"status","phase":"analyzing","status":"tools_completed"}
+{"type":"status","phase":"analyzing","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"finding","severity":"minor","fileName":"docs/work/BANDIT-101/writer-report.md","codegenInstructions":"Verify each finding against current code. Fix only still-valid issues, skip the rest with a brief reason, keep changes minimal, and validate.\n\nIn @docs/work/BANDIT-101/writer-report.md around lines 214 - 217, Update the spec-alignment table cell that currently reads “Stage 1 acceptance criteria” to reference the correct stage/target: replace it with “Stage 3 acceptance criteria” or “work‑item/slice acceptance criteria” (whichever matches the verified target) so the Rubric item \"Spec alignment\" accurately reflects Stage 3 evidence; ensure the wording follows the docs/verification/STAGE_RUBRICS.md convention.","suggestions":["| Rubric item | Result |\n| --- | --- |\n| Spec alignment | pass. The implementation satisfies the approved work-item acceptance criteria for typed adapter validation, scaffold output, Local Qwen regression, no-reviewer landing blockade, disposition unblock, and human review evidence. |\n| Small surface area | pass. Only the files listed above were touched. No unrelated refactors. |"]}
+{"type":"complete","status":"review_completed","findings":1}

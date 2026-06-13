@@ -48,6 +48,28 @@ export async function readBootstrapGaps(repoRoot: string) {
   return parseBootstrapGapLedger(content);
 }
 
+/**
+ * readOptionalBootstrapGaps returns an empty ledger when the file is missing.
+ * Use it during init or read-only missing-ledger-tolerant paths; use
+ * readBootstrapGaps when a missing ledger is an error.
+ */
+export async function readOptionalBootstrapGaps(
+  repoRoot: string
+): Promise<BootstrapGapLedger> {
+  const paths = getBanditPaths(repoRoot);
+  let content: string;
+  try {
+    content = await readFile(paths.bootstrapGaps, "utf8");
+  } catch (error) {
+    if (isMissingPathError(error)) {
+      return { version: 1, gaps: [] };
+    }
+    throw error;
+  }
+
+  return parseBootstrapGapLedger(content);
+}
+
 export async function writeDefaultBootstrapGapLedger(filePath: string) {
   const ledger = { version: 1, gaps: [] } satisfies BootstrapGapLedger;
   await writeFile(filePath, `${JSON.stringify(ledger, null, 2)}\n`, "utf8");

@@ -1,0 +1,223 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-101",
+  "artifact_type": "risk_classification",
+  "freshness_state": "current",
+  "changed_surfaces": [
+    {
+      "path": ".bandit/reviewers/local-qwen.json",
+      "surface": "repo_native_reviewer_adapter_config",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/init.ts",
+      "surface": "profile_driven_init_reviewer_scaffolding",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/commands/land-check.ts",
+      "surface": "landing_gate_review_evidence_validation",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/reviewer-adapters.ts",
+      "surface": "typed_reviewer_adapter_validator_and_scaffolder",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/human-review.ts",
+      "surface": "human_review_evidence_parser",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/bootstrap-gaps.ts",
+      "surface": "bootstrap_gap_lookup",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/project-profile.ts",
+      "surface": "project_profile_raw_reviewer_reader",
+      "risk": "medium",
+      "never_auto_landable": false
+    },
+    {
+      "path": "src/state/paths.ts",
+      "surface": "repo_native_path_registry",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/reviewer-adapters.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    },
+    {
+      "path": "test/landing-gates.test.mjs",
+      "surface": "test_baseline",
+      "risk": "low",
+      "never_auto_landable": false
+    }
+  ],
+  "hard_exclusions": [
+    {
+      "surface": "public_npm_publish_automation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-101/brief.md"
+    },
+    {
+      "surface": "credential_handling",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-101/brief.md"
+    },
+    {
+      "surface": "hosted_update_service_or_telemetry",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-101/brief.md"
+    },
+    {
+      "surface": "merge_push_deploy_or_destructive_operation",
+      "state": "excluded",
+      "evidence_path": "docs/work/BANDIT-101/stage3-pm-acceptance.md"
+    },
+    {
+      "surface": "dependency_or_fetched_prompt_execution",
+      "state": "excluded",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-101-supply-chain-gate.json"
+    }
+  ],
+  "blast_radius_signals": [
+    {
+      "signal_id": "typed_reviewer_adapter_validation_fails_closed",
+      "risk": "medium",
+      "evidence_path": "src/state/reviewer-adapters.ts"
+    },
+    {
+      "signal_id": "init_scaffolds_reviewer_adapter_files_from_profile",
+      "risk": "medium",
+      "evidence_path": "src/commands/init.ts"
+    },
+    {
+      "signal_id": "land_check_blocks_no_reviewer_and_bad_human_evidence",
+      "risk": "medium",
+      "evidence_path": "src/commands/land-check.ts"
+    },
+    {
+      "signal_id": "local_qwen_review_profile_remains_authorized_openai_compatible_adapter",
+      "risk": "low",
+      "evidence_path": ".bandit/reviewers/local-qwen.json"
+    },
+    {
+      "signal_id": "coderabbit_findings_repaired_before_final_rerun",
+      "risk": "medium",
+      "evidence_path": "docs/work/BANDIT-101/coderabbit-finding-disposition.md"
+    }
+  ],
+  "static_analysis_signals": [
+    {
+      "tool": "node --test test/reviewer-adapters.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/implementation-evidence.md"
+    },
+    {
+      "tool": "node --test test/local-qwen-review.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/implementation-evidence.md"
+    },
+    {
+      "tool": "node --test test/landing-gates.test.mjs",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/implementation-evidence.md"
+    },
+    {
+      "tool": "npm run typecheck",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/implementation-evidence.md"
+    },
+    {
+      "tool": "npm test",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/writer-report.md"
+    },
+    {
+      "tool": "node ./bin/bandit.mjs coordination validate BANDIT-101",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/implementation-evidence.md"
+    },
+    {
+      "tool": "git diff --check",
+      "state": "pass",
+      "risk": "low",
+      "evidence_path": "docs/work/BANDIT-101/writer-report.md"
+    }
+  ],
+  "source_trust_state": {
+    "state": "trusted_local_repo",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "input_quarantine_state": {
+    "state": "pass",
+    "evidence_path": ".bandit/policy/input-quarantine.json"
+  },
+  "supply_chain_state": {
+    "state": "accepted_low_risk",
+    "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-101-supply-chain-gate.json"
+  },
+  "smell_trigger_inputs": [
+    {
+      "smell_id": "BANDIT-SMELL-PARSER-VALIDATOR",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-101/red-evidence.md"
+    },
+    {
+      "smell_id": "BANDIT-SMELL-WORKFLOW-GATE-MISSING",
+      "severity": "blocker",
+      "evidence_path": "docs/work/BANDIT-101/brief.md"
+    }
+  ],
+  "selected_review_depth": "pre_pr_coderabbit_plus_qwen",
+  "operator_supervision": {
+    "required": false,
+    "route": "none",
+    "rationale": "BANDIT-101 changes repo-native reviewer adapter validation, init scaffolding, and landing-gate evidence checks. It does not touch dependencies, lockfiles, package-manager scripts, CI, credentials, hosted services, telemetry, external repos, merge, push, deploy, or destructive operations. Parser and gate risks must be covered by focused RED tests, full-suite verification, CodeRabbit, and Local Qwen before landing."
+  },
+  "auto_landing": {
+    "eligible": false,
+    "refusal_rationale": "CodeRabbit and Local Qwen review evidence are not yet terminal pass/current; restore eligibility only after Stage 4 review is complete."
+  },
+  "rationale": "BANDIT-101 is medium workflow risk because reviewer adapter configuration and review-evidence landing gates are trust-bearing workflow surfaces. The implementation is local, deterministic, repo-native, fail-closed for missing reviewers or malformed human review evidence, and covered by focused adapter, Local Qwen, and landing-gate tests plus full-suite verification.",
+  "evidence_paths": [
+    ".bandit/policy/risk-classification.json",
+    ".bandit/policy/risk-classifications/BANDIT-101-risk-classification.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-101-supply-chain-gate.json",
+    "docs/work/BANDIT-101/brief.md",
+    "docs/work/BANDIT-101/red-evidence.md",
+    "docs/work/BANDIT-101/implementation-evidence.md",
+    "docs/work/BANDIT-101/writer-report.md",
+    "docs/work/BANDIT-101/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-101/coderabbit-finding-disposition.md",
+    "docs/work/BANDIT-101/local-qwen-review.md",
+    ".bandit/reviewers/local-qwen.json",
+    "src/commands/init.ts",
+    "src/commands/land-check.ts",
+    "src/state/bootstrap-gaps.ts",
+    "src/state/human-review.ts",
+    "src/state/paths.ts",
+    "src/state/project-profile.ts",
+    "src/state/reviewer-adapters.ts",
+    "test/reviewer-adapters.test.mjs",
+    "test/landing-gates.test.mjs"
+  ]
+}

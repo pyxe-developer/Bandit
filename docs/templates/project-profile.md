@@ -31,7 +31,18 @@ Save the JSON below as `<your-project>-profile.json` before running init.
     ]
   },
   "reviewers": [
-    { "id": "local-qwen-baseline", "provider": "local_qwen", "required": true }
+    {
+      "id": "local-qwen-baseline",
+      "type": "openai_compatible",
+      "provider": "omlx-openai-compatible",
+      "required": true,
+      "provider_base_url": "http://127.0.0.1:8001/v1",
+      "model": "Qwen3.6-35B-A3B-MLX-8bit",
+      "command": {
+        "executable": "node",
+        "args": ["bin/omlx-chat-completions.mjs", "{{prompt_stdin}}"]
+      }
+    }
   ],
   "policy_tiers": ["core"],
   "harnesses": ["codex"]
@@ -45,7 +56,7 @@ Save the JSON below as `<your-project>-profile.json` before running init.
 - `work_item_prefix`: Uppercase letters and digits, starting with a letter (e.g. `PROJ`, `MYCO2`). Used as the prefix for all work item IDs in this repo.
 - `starter_work_item`: Seed data for the project's first work item brief. Must include `title`. `number` defaults to `1`.
 - `roadmap_seed`: Seed data for `docs/roadmap/ROADMAP.md`. Must include `current_phase`.
-- `reviewers`: Array of reviewer declarations. Each entry must have `id`, `provider`, and `required`.
+- `reviewers`: Array of reviewer declarations. Each entry must have `id`, `type`, `provider`, and `required`, plus type-specific fields such as `provider_base_url` for `openai_compatible`.
 - `policy_tiers`: Array of strings naming the policy tiers active for this project (e.g. `["core"]`).
 - `harnesses`: Array of strings naming the test harnesses in use (e.g. `["codex"]`).
 

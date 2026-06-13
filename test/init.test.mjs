@@ -311,8 +311,15 @@ async function writeAcmeProfile(repo, relativePath) {
         reviewers: [
           {
             id: "local-qwen-baseline",
-            provider: "local_qwen",
-            required: true
+            type: "openai_compatible",
+            provider: "omlx-openai-compatible",
+            required: true,
+            provider_base_url: "http://127.0.0.1:8001/v1",
+            model: "Qwen3.6-35B-A3B-MLX-8bit",
+            command: {
+              executable: "node",
+              args: ["bin/omlx-chat-completions.mjs", "{{prompt_stdin}}"]
+            }
           }
         ],
         policy_tiers: ["core"],

@@ -2,7 +2,17 @@ import { copyFile, mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { writeDefaultAgentEvaluationPolicy } from "../state/agent-evaluation-harness.js";
-import { type ProjectProfile, readProjectProfile } from "../state/project-profile.js";
+import {
+  type ProjectProfile,
+  readProjectProfile,
+  readProjectProfileWithRawReviewers
+} from "../state/project-profile.js";
+import {
+  type ReviewerAdapterInput,
+  recordNoReviewerBootstrapGap,
+  scaffoldReviewerAdapter,
+  validateTypedReviewerAdapter
+} from "../state/reviewer-adapters.js";
 import { writeDefaultBoundaryContourPolicy } from "../state/boundary-autonomy.js";
 import { writeDefaultAutoLandingPolicy } from "../state/auto-landing-policy.js";
 import { writeDefaultBootstrapGapLedger } from "../state/bootstrap-gaps.js";
@@ -53,12 +63,16 @@ import {
 import { writeDefaultTrustVerifierCutoverGatesPolicy } from "../state/trust-verifier-cutover-gates.js";
 
 export async function initBandit(repoRoot: string, profilePath?: string) {
-  const profile = profilePath
-    ? await loadProfile(repoRoot, profilePath)
+  const profileSourcePath = profilePath ?? null;
+  const loadedProfile = profileSourcePath
+    ? await loadProfile(repoRoot, profileSourcePath)
     : null;
+  const profile = loadedProfile?.profile ?? null;
+  const rawReviewerEntries = loadedProfile?.rawReviewerEntries ?? [];
 
   const paths = getBanditPaths(repoRoot);
   const alreadyInitialized = await pathExists(paths.config);
+
   const bootstrapGapsExist = await pathExists(paths.bootstrapGaps);
   const agentEvaluationPolicyExists = await pathExists(
     paths.agentEvaluationPolicy
@@ -373,6 +387,28 @@ attribution_join_hash:
     return { message: "Bandit state already initialized." };
   }
 
+  if (profile && profileSourcePath) {
+    const typedReviewerPairs = pairTypedProfileReviewers(
+      profileSourcePath,
+      profile.reviewers,
+      rawReviewerEntries
+    );
+    const typedReviewers = validateTypedProfileReviewers(
+      profileSourcePath,
+      typedReviewerPairs
+    );
+    if (profile.reviewers.length === 0) {
+      await recordNoReviewerBootstrapGap(
+        repoRoot,
+        `${profile.workItemPrefix}-${String(profile.starterWorkItem.number).padStart(3, "0")}`
+      );
+    } else {
+      for (const reviewer of typedReviewers) {
+        await scaffoldReviewerAdapter(repoRoot, reviewer);
+      }
+    }
+  }
+
   if (profile) {
     await seedProfileGovernance(repoRoot, profile);
     await writeProfileConfig(paths.config, profile.workItemPrefix);
@@ -394,11 +430,113 @@ attribution_join_hash:
 async function loadProfile(
   repoRoot: string,
   profilePath: string
-): Promise<ProjectProfile> {
+): Promise<{
+  profile: ProjectProfile;
+  rawReviewerEntries: unknown[];
+}> {
   const absolutePath = path.isAbsolute(profilePath)
     ? profilePath
     : path.resolve(repoRoot, profilePath);
-  return readProjectProfile(absolutePath);
+  return readProjectProfileWithRawReviewers(absolutePath);
+}
+
+type TypedReviewerPair = {
+  declared: ProjectProfile["reviewers"][number];
+  raw: Record<string, unknown>;
+};
+
+function pairTypedProfileReviewers(
+  profilePath: string,
+  declaredReviewers: ProjectProfile["reviewers"],
+  rawEntries: unknown[]
+): TypedReviewerPair[] {
+  return declaredReviewers.map((declared, index) => {
+    const raw = rawEntries[index];
+    if (!isRecord(raw)) {
+      throw new Error(
+        `Invalid profile field: reviewers[${index}] (missing raw reviewer entry for typed validation in ${profilePath})`
+      );
+    }
+    return { declared, raw };
+  });
+}
+
+function validateTypedProfileReviewers(
+  profilePath: string,
+  reviewerPairs: TypedReviewerPair[]
+): Array<{
+  id: string;
+  type: "openai_compatible" | "cli_command" | "human";
+  provider: string;
+  required: boolean;
+  [field: string]: unknown;
+}> {
+  if (reviewerPairs.length === 0) {
+    return [];
+  }
+
+  return reviewerPairs.map(({ declared, raw }, index) => {
+    if (
+      raw.id !== declared.id ||
+      raw.provider !== declared.provider ||
+      raw.required !== declared.required
+    ) {
+      throw new Error(
+        `Invalid profile field: reviewers[${index}] (parsed reviewer entry diverged from raw reviewer entry in ${profilePath})`
+      );
+    }
+    const id = readReviewerInputString(raw, "id", profilePath, index);
+    const type = readReviewerInputString(raw, "type", profilePath, index);
+    const provider = readReviewerInputString(raw, "provider", profilePath, index);
+    const required = readReviewerInputBoolean(
+      raw,
+      "required",
+      profilePath,
+      index
+    );
+    const reviewerInput: ReviewerAdapterInput = {
+      ...raw,
+      id,
+      type,
+      provider,
+      required
+    };
+    return validateTypedReviewerAdapter(reviewerInput, index);
+  });
+}
+
+function readReviewerInputString(
+  raw: Record<string, unknown>,
+  field: string,
+  profilePath: string,
+  index: number
+) {
+  const value = raw[field];
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new Error(
+      `Invalid profile field: reviewers[${index}].${field} (must be a non-empty string in ${profilePath})`
+    );
+  }
+  return value;
+}
+
+function readReviewerInputBoolean(
+  raw: Record<string, unknown>,
+  field: string,
+  profilePath: string,
+  index: number
+) {
+  const value = raw[field];
+  if (typeof value !== "boolean") {
+    throw new Error(
+      `Invalid profile field: reviewers[${index}].${field} (must be a boolean in ${profilePath})`
+    );
+  }
+  return value;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 async function writeProfileConfig(configPath: string, workItemPrefix: string) {
@@ -430,7 +568,18 @@ const PROJECT_PROFILE_TEMPLATE = `# project-profile.md
     ]
   },
   "reviewers": [
-    { "id": "local-qwen-baseline", "provider": "local_qwen", "required": true }
+    {
+      "id": "local-qwen-baseline",
+      "type": "openai_compatible",
+      "provider": "omlx-openai-compatible",
+      "required": true,
+      "provider_base_url": "http://127.0.0.1:8001/v1",
+      "model": "Qwen3.6-35B-A3B-MLX-8bit",
+      "command": {
+        "executable": "node",
+        "args": ["bin/omlx-chat-completions.mjs", "{{prompt_stdin}}"]
+      }
+    }
   ],
   "policy_tiers": ["core"],
   "harnesses": ["codex"]

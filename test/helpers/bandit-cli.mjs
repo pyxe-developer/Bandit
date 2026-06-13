@@ -85,6 +85,7 @@ bootstrap_gaps:
 
 export async function writeLocalQwenProfile(repo, overrides = {}) {
   const profile = {
+    type: "openai_compatible",
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     version: 1,

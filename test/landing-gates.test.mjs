@@ -834,6 +834,397 @@ test("land-check accepts explicit bootstrap gaps with replacement evidence durin
   assert.match(result.stdout, /Manual PM review replaces unavailable final gates/);
 });
 
+test("land-check blocks safe-to-land while the no-reviewer bootstrap gap is open", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-980", "No Reviewer Gap Landing");
+  await writeNoReviewerGap(repo, "BANDIT-980");
+  await writeReviewEvidence(repo, "BANDIT-980", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "No reviewer is configured for this repository."
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-980", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-980"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /No reviewer is configured|BANDIT-GAP-NO-REVIEWER-CONFIGURED/
+  );
+});
+
+test("land-check validates human review replacement evidence before landing", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-981", "Malformed Human Review Evidence");
+  await writeHumanReviewEvidence(repo, "BANDIT-981", {
+    sourceHead,
+    omitLine: "reviewer_verdict"
+  });
+  await writeReviewEvidence(repo, "BANDIT-981", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-981/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-981", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-981"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Human review evidence missing required field: reviewer_verdict/
+  );
+});
+
+test("land-check rejects unsupported human review source drift status", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-991", "Unknown Human Review Drift");
+  await writeHumanReviewEvidence(repo, "BANDIT-991", {
+    sourceHead,
+    sourceDriftStatus: "unknown"
+  });
+  await writeReviewEvidence(repo, "BANDIT-991", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-991/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-991", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-991"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Unsupported human review source_drift_status: unknown/
+  );
+});
+
+test("land-check accepts current human review evidence without model-review claims", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-982", "Valid Human Review Evidence");
+  await writeHumanReviewEvidence(repo, "BANDIT-982", { sourceHead });
+  await writeReviewEvidence(repo, "BANDIT-982", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-982/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-982", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-982"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(
+    result.stdout,
+    /Human review evidence: docs\/work\/BANDIT-982\/human-review\.md/
+  );
+  assert.doesNotMatch(result.stdout, /Local Qwen evidence:/);
+});
+
+test("land-check fails closed when bootstrap gap ledger is absent", async () => {
+  const repo = await createInitializedRepo();
+  await rm(path.join(repo, ".bandit/bootstrap-gaps.json"), { force: true });
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-985", "Human Review Without Gap Ledger");
+  await writeHumanReviewEvidence(repo, "BANDIT-985", { sourceHead });
+  await writeReviewEvidence(repo, "BANDIT-985", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-985/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-985", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-985"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /Missing bootstrap gap ledger/);
+});
+
+test("land-check blocks declared no-reviewer gap when the ledger entry is missing", async () => {
+  const repo = await createInitializedRepo();
+  await writeFile(
+    path.join(repo, ".bandit/bootstrap-gaps.json"),
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-OTHER",
+            title: "Other bootstrap gap",
+            status: "open",
+            disposition: "queued_chore",
+            source_work_item: "BANDIT-986",
+            source_artifacts: ["docs/work/BANDIT-986/brief.md"],
+            linked_work_item: null,
+            rationale: "Fixture gap that must not satisfy no-reviewer checks.",
+            verification_target: null,
+            next_action: "Resolve the unrelated fixture gap."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-986", "Declared No Reviewer Gap Without Ledger");
+  await writeReviewEvidence(repo, "BANDIT-986", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "No reviewer is configured for this repository."
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-986", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-986"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /No reviewer is configured|BANDIT-GAP-NO-REVIEWER-CONFIGURED/
+  );
+});
+
+test("land-check accepts a declared no-reviewer gap after terminal ledger disposition", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-987", "Dispositioned No Reviewer Gap");
+  await writeFile(
+    path.join(repo, ".bandit/bootstrap-gaps.json"),
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-NO-REVIEWER-CONFIGURED",
+            title: "No reviewer adapter configured",
+            status: "resolved",
+            disposition: "resolved",
+            source_work_item: "BANDIT-987",
+            source_artifacts: ["docs/work/BANDIT-987/brief.md"],
+            linked_work_item: null,
+            rationale: "No-reviewer gap has current disposition evidence.",
+            verification_target: null,
+            next_action: "No no-reviewer follow-up required."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+  await writeReviewEvidence(repo, "BANDIT-987", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "No reviewer is configured for this repository."
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-987", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-987"]);
+
+  assert.equal(result.code, 0, result.stderr);
+  assert.doesNotMatch(result.stderr, /BANDIT-GAP-NO-REVIEWER-CONFIGURED/);
+});
+
+test("land-check fails closed when no-reviewer gap status is unknown", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-988", "Unknown No Reviewer Status");
+  await writeFile(
+    path.join(repo, ".bandit/bootstrap-gaps.json"),
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-NO-REVIEWER-CONFIGURED",
+            title: "No reviewer adapter configured",
+            status: "unknown",
+            disposition: "resolved",
+            source_work_item: "BANDIT-988",
+            source_artifacts: ["docs/work/BANDIT-988/brief.md"],
+            linked_work_item: null,
+            rationale: "Malformed status must not close the no-reviewer gap.",
+            verification_target: null,
+            next_action: "Repair the bootstrap-gap status before landing."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+  await writeReviewEvidence(repo, "BANDIT-988", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "No reviewer is configured for this repository."
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-988", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-988"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /BANDIT-GAP-NO-REVIEWER-CONFIGURED/);
+});
+
+test("land-check blocks duplicate no-reviewer gaps when any entry is open", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-990", "Duplicate No Reviewer Gap");
+  await writeFile(
+    path.join(repo, ".bandit/bootstrap-gaps.json"),
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-NO-REVIEWER-CONFIGURED",
+            title: "No reviewer adapter configured",
+            status: "resolved",
+            disposition: "resolved",
+            source_work_item: "BANDIT-990",
+            source_artifacts: ["docs/work/BANDIT-990/brief.md"],
+            linked_work_item: null,
+            rationale: "Older terminal no-reviewer disposition.",
+            verification_target: null,
+            next_action: "No no-reviewer follow-up required."
+          },
+          {
+            id: "BANDIT-GAP-NO-REVIEWER-CONFIGURED",
+            title: "No reviewer adapter configured",
+            status: "open",
+            disposition: "queued_chore",
+            source_work_item: "BANDIT-990",
+            source_artifacts: ["docs/work/BANDIT-990/brief.md"],
+            linked_work_item: null,
+            rationale: "New empty reviewer profile reopened the gap.",
+            verification_target: null,
+            next_action:
+              "Configure a reviewer adapter or explicitly disposition the no-reviewer gap before landing."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+  await writeReviewEvidence(repo, "BANDIT-990", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "No reviewer is configured for this repository."
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-990", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-990"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /BANDIT-GAP-NO-REVIEWER-CONFIGURED/);
+});
+
+test("land-check blocks open no-reviewer gap even with human review replacement", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-989", "Open No Reviewer Gap With Human Review");
+  await writeNoReviewerGap(repo, "BANDIT-989");
+  await writeHumanReviewEvidence(repo, "BANDIT-989", { sourceHead });
+  await writeReviewEvidence(repo, "BANDIT-989", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-989/human-review.md"
+    ],
+    bootstrapGaps: ["BANDIT-GAP-NO-REVIEWER-CONFIGURED"]
+  });
+  await writeLandingVerdict(repo, "BANDIT-989", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-989"]);
+
+  assert.equal(result.code, 1);
+  assert.match(result.stderr, /BANDIT-GAP-NO-REVIEWER-CONFIGURED/);
+});
+
+test("land-check blocks safe-to-land when human review replacement evidence has a blocker verdict", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-983", "Blocking Human Review Evidence");
+  await writeHumanReviewEvidence(repo, "BANDIT-983", {
+    sourceHead,
+    reviewerVerdict: "blocker"
+  });
+  await writeReviewEvidence(repo, "BANDIT-983", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-983/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-983", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-983"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Human review evidence blocks safe-to-land: reviewer_verdict blocker/
+  );
+});
+
+test("land-check blocks safe-to-land when human review replacement evidence is stale", async () => {
+  const repo = await createInitializedRepo();
+  await initGitRepo(repo);
+  const sourceHead = await commitAll(repo, "Initial state");
+  await writeWorkBrief(repo, "BANDIT-984", "Stale Human Review Evidence");
+  await writeHumanReviewEvidence(repo, "BANDIT-984", {
+    sourceHead,
+    sourceDriftStatus: "stale"
+  });
+  await writeReviewEvidence(repo, "BANDIT-984", {
+    sourceHead,
+    localQwenReplacementEvidence: [
+      "docs/work/BANDIT-984/human-review.md"
+    ]
+  });
+  await writeLandingVerdict(repo, "BANDIT-984", { sourceHead });
+
+  const result = await runBandit(repo, ["land-check", "BANDIT-984"]);
+
+  assert.equal(result.code, 1);
+  assert.match(
+    result.stderr,
+    /Human review evidence is stale: source_drift_status stale/
+  );
+});
+
 test("validate fails closed when boundary contour policy data is malformed", async () => {
   const repo = await createInitializedRepo();
   await writeBoundaryContourPolicy(repo, {
@@ -2540,6 +2931,18 @@ async function writeLandingAgentContract(repo, overrides = {}) {
 async function writeReviewEvidence(repo, workItemId, options = {}) {
   const nonBlockingFindingsRouting =
     options.nonBlockingFindingsRouting?.map((entry) => `  - ${entry}`) ?? [];
+  const coderabbitReplacementEvidence =
+    options.coderabbitReplacementEvidence ?? [
+      "Manual PM review replaces unavailable final gates during bootstrap."
+    ];
+  const localQwenReplacementEvidence =
+    options.localQwenReplacementEvidence ?? [
+      "Local Qwen runtime is unavailable during bootstrap."
+    ];
+  const bootstrapGaps =
+    options.bootstrapGaps ?? [
+      "Manual PM review replaces unavailable final gates during bootstrap."
+    ];
   const contentLines = [
     `# Review Evidence: ${workItemId}`,
     "",
@@ -2554,10 +2957,10 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     "  - node --test test/landing-gates.test.mjs",
     `coderabbit_state: ${options.coderabbitState ?? "bootstrap_gap"}`,
     "coderabbit_replacement_evidence:",
-    "  - Manual PM review replaces unavailable final gates during bootstrap.",
+    ...coderabbitReplacementEvidence.map((entry) => `  - ${entry}`),
     `local_qwen_state: ${options.localQwenState ?? "bootstrap_gap"}`,
     "local_qwen_replacement_evidence:",
-    "  - Local Qwen runtime is unavailable during bootstrap.",
+    ...localQwenReplacementEvidence.map((entry) => `  - ${entry}`),
     `escalated_review_required: ${options.escalatedReviewRequired ?? false}`,
     `escalated_review_state: ${options.escalatedReviewState ?? "not_applicable"}`,
     `escalated_review_rationale: ${options.escalatedReviewRationale ?? "No smell trigger requires escalation beyond the baseline bootstrap gap."}`,
@@ -2574,7 +2977,7 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
     "clean_code_status: pass",
     `source_drift_status: ${options.sourceDriftStatus ?? "current"}`,
     "bootstrap_gaps:",
-    "  - Manual PM review replaces unavailable final gates during bootstrap."
+    ...bootstrapGaps.map((entry) => `  - ${entry}`)
   ].filter(
     (line) => line !== null && !line.startsWith(`${options.omitLine}:`)
   );
@@ -2583,6 +2986,67 @@ async function writeReviewEvidence(repo, workItemId, options = {}) {
   await mkdir(workDir, { recursive: true });
   await writeFile(
     path.join(workDir, "review-evidence.md"),
+    `${contentLines.join("\n")}\n`,
+    "utf8"
+  );
+}
+
+async function writeNoReviewerGap(repo, workItemId) {
+  const destination = path.join(repo, ".bandit/bootstrap-gaps.json");
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(
+    destination,
+    `${JSON.stringify(
+      {
+        version: 1,
+        gaps: [
+          {
+            id: "BANDIT-GAP-NO-REVIEWER-CONFIGURED",
+            title: "No reviewer adapter configured",
+            status: "open",
+            disposition: "queued_chore",
+            source_work_item: workItemId,
+            source_artifacts: [`docs/work/${workItemId}/brief.md`],
+            linked_work_item: null,
+            rationale:
+              "Profile reviewers were empty, so no adversarial reviewer can satisfy the landing gate.",
+            verification_target: null,
+            next_action:
+              "Configure a reviewer adapter or explicitly disposition the no-reviewer gap before landing."
+          }
+        ]
+      },
+      null,
+      2
+    )}\n`,
+    "utf8"
+  );
+}
+
+async function writeHumanReviewEvidence(repo, workItemId, options = {}) {
+  const contentLines = [
+    `# Human Review Evidence: ${workItemId}`,
+    "",
+    "contract_version: 1",
+    `work_item: ${workItemId}`,
+    `source_head: ${options.sourceHead ?? "unknown"}`,
+    "adapter_type: human",
+    "reviewer_id: staff-review",
+    "review_state: completed",
+    `reviewer_verdict: ${options.reviewerVerdict ?? "pass"}`,
+    "findings_status: no_findings",
+    "findings_disposition: no_action_required",
+    "operator_input_status: none_required",
+    `source_drift_status: ${options.sourceDriftStatus ?? "current"}`,
+    "evidence_summary: Staff reviewer approved this fixture."
+  ].filter(
+    (line) => line !== null && !line.startsWith(`${options.omitLine}:`)
+  );
+
+  const workDir = path.join(repo, "docs/work", workItemId);
+  await mkdir(workDir, { recursive: true });
+  await writeFile(
+    path.join(workDir, "human-review.md"),
     `${contentLines.join("\n")}\n`,
     "utf8"
   );

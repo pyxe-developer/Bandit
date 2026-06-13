@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 export type LocalQwenProfile = {
+  type: "openai_compatible";
   contractVersion: number;
   profileId: string;
   version: number;
@@ -33,6 +34,7 @@ export type LocalQwenProfile = {
 
 const LOCAL_QWEN_PROFILE_PATH = ".bandit/reviewers/local-qwen.json";
 const REQUIRED_FIELDS = [
+  "type",
   "contract_version",
   "profile_id",
   "version",
@@ -83,6 +85,10 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
 
   if (profile.contract_version !== 1) {
     throw new Error(`Unsupported local Qwen profile contract version: ${String(profile.contract_version)}`);
+  }
+
+  if (profile.type !== "openai_compatible") {
+    throw new Error("Local Qwen profile type must be openai_compatible");
   }
 
   if (profile.profile_id !== "local-qwen-baseline") {
@@ -164,6 +170,7 @@ function validateProfileShape(profile: unknown): LocalQwenProfile {
   }
 
   return {
+    type: "openai_compatible",
     contractVersion: 1,
     profileId: "local-qwen-baseline",
     version: requirePositiveNumber(profile.version, "version"),

@@ -1,0 +1,7 @@
+{"type":"review_context","reviewType":"uncommitted","currentBranch":"main","baseBranch":"origin/main","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","phase":"connecting","status":"connecting_to_review_service"}
+{"type":"status","phase":"setup","status":"setting_up"}
+{"type":"status","phase":"setup","status":"preparing_sandbox"}
+{"type":"status","phase":"analyzing","status":"summarizing"}
+{"type":"status","phase":"analyzing","status":"tools_completed"}
+{"type":"error","errorType":"timeout","message":"Review timed out (ID: d20c1e80-3f1c-47e3-aa95-98f51be71abe)","recoverable":false,"details":{"reviewId":"d20c1e80-3f1c-47e3-aa95-98f51be71abe"}}

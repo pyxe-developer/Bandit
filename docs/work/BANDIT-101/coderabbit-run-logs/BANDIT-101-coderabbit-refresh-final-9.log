@@ -1,0 +1,15 @@
+{"type":"review_context","reviewType":"uncommitted","currentBranch":"main","baseBranch":"origin/main","workingDirectory":"/Users/matthewflebbe/Bandit"}
+{"type":"status","phase":"connecting","status":"connecting_to_review_service"}
+{"type":"status","phase":"setup","status":"setting_up"}
+{"type":"status","phase":"setup","status":"preparing_sandbox"}
+{"type":"status","phase":"analyzing","status":"summarizing"}
+{"type":"status","phase":"analyzing","status":"tools_completed"}
+{"type":"status","phase":"analyzing","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"finding","severity":"major","fileName":"docs/work/BANDIT-101/coderabbit-review.md","codegenInstructions":"Verify each finding against current code. Fix only still-valid issues, skip the rest with a brief reason, keep changes minimal, and validate.\n\nIn @docs/work/BANDIT-101/coderabbit-review.md around lines 1 - 78, The Stage 4 CodeRabbit evidence is blocked because the artifact shows locally_resolved_pending_refresh and a blocker verdict; run a terminal CodeRabbit refresh that reproduces a zero-unresolved-findings run, investigate and fix non-deterministic findings (check for racey tests, environment-dependent logic, or uncommitted diffs), then update this document: set findings_status to terminal (e.g., resolved), update coderabbit_verdict to safe-to-land (or needs-repair if still failing), replace the runs table / executable_evidence with the final terminal run logs, and annotate the Coordination Note and Current State to reflect the terminal review outcome so Stage 4 can be accepted.","suggestions":[]}
+{"type":"finding","severity":"trivial","fileName":"docs/work/BANDIT-101/writer-report.md","codegenInstructions":"Verify each finding against current code. Fix only still-valid issues, skip the rest with a brief reason, keep changes minimal, and validate.\n\nIn @docs/work/BANDIT-101/writer-report.md around lines 179 - 211, Replace the tentative \"Suggested dispositions\" paragraph under the \"Test-Surface Edit Boundary\" section with a short, explicit deferment to the Work Item PM: remove the writer-authored disposition suggestions (the bulleted suggestions) and instead add a single sentence stating that final attribution and boundary disposition for any test-surface edits are owned and must be decided by the Work Item PM (referencing PM acceptance in stage3-pm-acceptance.md) and that the writer is not making policy decisions; keep the rest of the section intact.","suggestions":[]}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"heartbeat","status":"reviewing"}
+{"type":"complete","status":"review_completed","findings":2}

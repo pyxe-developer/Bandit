@@ -3,12 +3,17 @@ import {
   readCurrentGitHead
 } from "../state/git.js";
 import {
+  readBootstrapGaps
+} from "../state/bootstrap-gaps.js";
+import {
   codeRabbitReviewHasBlockingFindings,
   type CodeRabbitReviewEvidence,
   readOptionalParsedCodeRabbitReview
 } from "../state/coderabbit-review.js";
 import type { EscalatedReviewEvidence } from "../state/escalated-review.js";
 import { readOptionalParsedEscalatedReview } from "../state/escalated-review.js";
+import type { HumanReviewEvidence } from "../state/human-review.js";
+import { humanReviewDisplayPath, tryReadHumanReview } from "../state/human-review.js";
 import type { LandingVerdict } from "../state/landing-verdicts.js";
 import { readLandingVerdict } from "../state/landing-verdicts.js";
 import {
@@ -109,6 +114,22 @@ export async function readLandingReadiness(
     reviewEvidence,
     landingVerdict
   );
+  const humanReviewPath = firstHumanReviewReplacementPath(
+    reviewEvidence.localQwenReplacementEvidence,
+    workItemId
+  );
+  let humanReview: HumanReviewEvidence | null = null;
+  let humanReviewParseError: string | null = null;
+  if (humanReviewPath) {
+    const result = await tryReadHumanReview(repoRoot, workItemId);
+    humanReview = result.evidence;
+    humanReviewParseError = result.error;
+  }
+  const bootstrapGapLedger = await readBootstrapGaps(repoRoot);
+  const openNoReviewerGap = hasOpenNoReviewerGap(
+    bootstrapGapLedger,
+    reviewEvidence.bootstrapGaps
+  );
   const readiness = await evaluateLandingReadiness(
     repoRoot,
     reviewEvidence,
@@ -120,7 +141,11 @@ export async function readLandingReadiness(
     escalatedReviewRequired,
     routingDecision?.selectedRoute ?? null,
     escalatedReview,
-    uatApproval
+    uatApproval,
+    humanReview,
+    humanReviewPath,
+    openNoReviewerGap,
+    humanReviewParseError
   );
 
   if (landingVerdict.finalVerdict === "safe-to-land") {
@@ -197,6 +222,9 @@ export type LandingReadiness = {
   escalatedReviewRequired: boolean;
   escalatedReview: EscalatedReviewEvidence | null;
   uatApproval: UatApproval | null;
+  humanReview: HumanReviewEvidence | null;
+  humanReviewClaimsLocalQwenPath: boolean;
+  openNoReviewerGap: boolean;
   problems: string[];
 };
 
@@ -211,7 +239,11 @@ async function evaluateLandingReadiness(
   escalatedReviewRequired: boolean,
   selectedEscalatedReviewRoute: string | null,
   escalatedReview: EscalatedReviewEvidence | null,
-  uatApproval: UatApproval | null
+  uatApproval: UatApproval | null,
+  humanReview: HumanReviewEvidence | null,
+  humanReviewPath: string | null,
+  openNoReviewerGap: boolean,
+  humanReviewParseError: string | null
 ): Promise<LandingReadiness> {
   const problems: string[] = [];
   const readGitChangedPaths = createCachedGitChangedPathsReader();
@@ -321,7 +353,11 @@ async function evaluateLandingReadiness(
         escalatedReviewRequired,
         selectedEscalatedReviewRoute,
         escalatedReview,
-        uatApproval
+        uatApproval,
+        humanReview,
+        humanReviewPath,
+        openNoReviewerGap,
+        humanReviewParseError
       )
     );
   }
@@ -336,6 +372,9 @@ async function evaluateLandingReadiness(
     escalatedReviewRequired,
     escalatedReview,
     uatApproval,
+    humanReview,
+    humanReviewClaimsLocalQwenPath: humanReviewPath !== null,
+    openNoReviewerGap,
     problems
   };
 }
@@ -377,12 +416,39 @@ function safeToLandProblems(
   escalatedReviewRequired: boolean,
   selectedEscalatedReviewRoute: string | null,
   escalatedReview: EscalatedReviewEvidence | null,
-  uatApproval: UatApproval | null
+  uatApproval: UatApproval | null,
+  humanReview: HumanReviewEvidence | null,
+  humanReviewPath: string | null,
+  openNoReviewerGap: boolean,
+  humanReviewParseError: string | null
 ) {
   const problems: string[] = [];
 
   if (staleEvidence) {
     problems.push("safe-to-land cannot proceed with stale source evidence");
+  }
+
+  if (openNoReviewerGap) {
+    problems.push(
+      "No reviewer is configured for this repository (BANDIT-GAP-NO-REVIEWER-CONFIGURED)"
+    );
+  }
+
+  if (humanReviewPath && !humanReview) {
+    problems.push(
+      humanReviewParseError ??
+        `Missing or malformed human review evidence: ${humanReviewPath}`
+    );
+  }
+
+  if (humanReview?.reviewerVerdict === "blocker") {
+    problems.push("Human review evidence blocks safe-to-land: reviewer_verdict blocker");
+  }
+
+  if (humanReview && humanReview.sourceDriftStatus !== "current") {
+    problems.push(
+      `Human review evidence is stale: source_drift_status ${humanReview.sourceDriftStatus}`
+    );
   }
 
   if (
@@ -501,13 +567,18 @@ function formatLandingCheck(
     `CodeRabbit: ${reviewEvidence.coderabbitState}`,
     ...formatCodeRabbitReviewLines(readiness.codeRabbitReview),
     `Local Qwen: ${reviewEvidence.localQwenState}`,
-    ...formatLocalQwenReviewLines(readiness.localQwenReview),
+    ...formatLocalQwenReviewLines(
+      readiness.localQwenReview,
+      readiness.humanReviewClaimsLocalQwenPath
+    ),
+    ...formatHumanReviewLines(readiness.humanReview),
     `Escalated review: ${reviewEvidence.escalatedReviewState}`,
     ...formatEscalatedReviewLines(readiness.escalatedReview),
     `UAT: ${landingVerdict.uatStatus}`,
     ...formatUatApprovalLines(readiness.uatApproval),
     `Clean code: ${landingVerdict.cleanCodeStatus}`,
     `Landing agent: ${landingVerdict.landingAgentState}`,
+    ...formatNoReviewerGapLine(readiness.openNoReviewerGap),
     "Bootstrap gaps:",
     ...reviewEvidence.bootstrapGaps.map((gap) => `  - ${gap}`),
     `Final verdict: ${landingVerdict.finalVerdict}`
@@ -738,7 +809,14 @@ function formatCodeRabbitReviewLines(
   ];
 }
 
-function formatLocalQwenReviewLines(localQwenReview: LocalQwenReviewEvidence | null) {
+function formatLocalQwenReviewLines(
+  localQwenReview: LocalQwenReviewEvidence | null,
+  humanReviewClaimsLocalQwenPath: boolean
+) {
+  if (humanReviewClaimsLocalQwenPath) {
+    return [];
+  }
+
   if (!localQwenReview) {
     return [];
   }
@@ -747,6 +825,22 @@ function formatLocalQwenReviewLines(localQwenReview: LocalQwenReviewEvidence | n
     `Local Qwen evidence: ${localQwenReview.displayPath}`,
     `Local Qwen profile: ${localQwenReview.profileId}`
   ];
+}
+
+function formatHumanReviewLines(humanReview: HumanReviewEvidence | null) {
+  if (!humanReview) {
+    return [];
+  }
+
+  return [`Human review evidence: ${humanReview.displayPath}`];
+}
+
+function formatNoReviewerGapLine(openNoReviewerGap: boolean) {
+  if (!openNoReviewerGap) {
+    return [];
+  }
+
+  return ["No reviewer gap: open (BANDIT-GAP-NO-REVIEWER-CONFIGURED)"];
 }
 
 function formatEscalatedReviewLines(
@@ -824,6 +918,53 @@ async function isReviewSourceStale(
 
 function isPassingOrBootstrapGap(value: string) {
   return value === "pass" || value === "bootstrap_gap";
+}
+
+function firstHumanReviewReplacementPath(
+  replacementEvidence: Array<unknown>,
+  workItemId: string
+): string | null {
+  const expectedPath = humanReviewDisplayPath(workItemId);
+  for (const entry of replacementEvidence) {
+    // Review-evidence parsing may surface malformed entries; skip them defensively.
+    if (typeof entry !== "string") {
+      continue;
+    }
+
+    const trimmed = entry.trim();
+    if (!trimmed) {
+      continue;
+    }
+
+    if (trimmed === expectedPath) {
+      return expectedPath;
+    }
+  }
+
+  return null;
+}
+
+function hasOpenNoReviewerGap(
+  ledger:
+    | { gaps: Array<{ id: string; status: string; disposition: string }> }
+    | null
+    | undefined,
+  declaredGapIds: string[]
+): boolean {
+  const targetId = "BANDIT-GAP-NO-REVIEWER-CONFIGURED";
+
+  const matchingGaps =
+    ledger?.gaps?.filter((entry) => entry.id === targetId) ?? [];
+  if (matchingGaps.length === 0) {
+    // Missing ledger entry falls back to explicit review-evidence declarations.
+    return declaredGapIds.includes(targetId);
+  }
+
+  // Any duplicate non-terminal or malformed status remains blocking regardless
+  // of older terminal entries or disposition text.
+  return matchingGaps.some(
+    (gap) => gap.status !== "resolved" && gap.status !== "replaced"
+  );
 }
 
 function isGateCurrentOrBootstrapGap(value: string, replacementEvidence: string[]) {

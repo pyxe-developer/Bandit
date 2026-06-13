@@ -10,6 +10,7 @@ export function getBanditPaths(repoRoot: string) {
     config: path.join(stateRoot, "config.toml"),
     events: path.join(stateRoot, "events.jsonl"),
     bootstrapGaps: path.join(stateRoot, "bootstrap-gaps.json"),
+    reviewersDir: path.join(stateRoot, "reviewers"),
     updateChannel: path.join(stateRoot, "update-channel.json"),
     updateChannelCache: path.join(stateRoot, "update-channel-cache.json"),
     agentEvaluationPolicy: path.join(

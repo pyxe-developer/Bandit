@@ -237,6 +237,7 @@ test("reviewer calibration is read-only for live reviewer and landing policies",
   const repo = await createInitializedRepo();
   await writeCompleteCalibrationEvidence(repo);
   await writeJson(repo, qwenProfilePath, {
+    type: "openai_compatible",
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     route: "mlx_openai_adapter"

@@ -841,6 +841,7 @@ async function writeSmellCatalog(repo, catalog) {
 
 async function writeLocalQwenProfile(repo, options = {}) {
   const profile = {
+    type: "openai_compatible",
     contract_version: 1,
     profile_id: "local-qwen-baseline",
     version: 1,

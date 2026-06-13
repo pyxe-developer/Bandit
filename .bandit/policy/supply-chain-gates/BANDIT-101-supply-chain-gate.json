@@ -1,0 +1,95 @@
+{
+  "contract_version": 1,
+  "work_item": "BANDIT-101",
+  "artifact_type": "supply_chain_gate",
+  "freshness_state": "current",
+  "changed_supply_chain_surfaces": [],
+  "dependency_manifest_state": {
+    "state": "not_touched",
+    "package_manager": "npm",
+    "manifests": [
+      "package.json"
+    ],
+    "direct_dependency_changes": [],
+    "version_or_pin_changes": [],
+    "sca_or_equivalent": {
+      "state": "unavailable_with_disposition",
+      "evidence_path": "docs/work/BANDIT-101/stage3-pm-acceptance.md",
+      "unavailable_tool_disposition": "No dependency, dependency version, package-manager script, lockfile, CI or release workflow, fetched prompt, external tool install, executable generated content, hosted service, telemetry, credential, merge, push, deploy, or publish automation change is present in BANDIT-101."
+    },
+    "rationale": "BANDIT-101 changes local CLI source, reviewer adapter configuration, tests, and work-item evidence only. package.json and package scripts are not changed."
+  },
+  "lockfile_state": {
+    "state": "not_touched",
+    "lockfiles": [
+      "package-lock.json"
+    ],
+    "manifest_rationale": "No dependency manifest or package-manager script change is present.",
+    "drift_rationale": "No lockfile-only drift is present."
+  },
+  "package_manager_scripts": {
+    "state": "not_touched",
+    "scripts": [],
+    "review_evidence_path": "docs/work/BANDIT-101/coderabbit-review.md"
+  },
+  "ci_release_workflows": {
+    "state": "not_touched",
+    "workflows": []
+  },
+  "agent_skills": {
+    "state": "not_touched",
+    "skills": [],
+    "owner": "Codex PM",
+    "freshness_rule": "No installed or repo-local agent skill surface changed for BANDIT-101.",
+    "revocation_path": "not_applicable"
+  },
+  "fetched_prompts": {
+    "state": "not_touched",
+    "prompt_sources": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "external_tool_installs": {
+    "state": "not_touched",
+    "install_paths": [],
+    "input_quarantine_refs": [],
+    "trusted_source_gate_refs": []
+  },
+  "input_quarantine_refs": [
+    ".bandit/policy/input-quarantine.json"
+  ],
+  "trusted_source_gate_refs": [],
+  "operator_supervised_approval": {
+    "required": false,
+    "state": "not_required",
+    "evidence_path": "docs/work/BANDIT-101/brief.md"
+  },
+  "auto_landing": {
+    "eligible": false,
+    "refusal_rationale": "CodeRabbit and Local Qwen review evidence are not yet terminal pass/current; restore eligibility only after Stage 4 review is complete."
+  },
+  "rationale": "BANDIT-101 adds typed reviewer adapter config and local landing-gate validation without changing dependency manifests, lockfiles, package-manager scripts, CI/release workflows, skills, fetched prompts, external tool installation, executable generated content, credentials, telemetry, hosted services, publish automation, merge, push, or deploy behavior.",
+  "evidence_paths": [
+    ".bandit/policy/supply-chain-gate.json",
+    ".bandit/policy/supply-chain-gates/BANDIT-101-supply-chain-gate.json",
+    "docs/work/BANDIT-101/brief.md",
+    "docs/work/BANDIT-101/implementation-evidence.md",
+    "docs/work/BANDIT-101/stage3-pm-acceptance.md",
+    "docs/work/BANDIT-101/coderabbit-review.md",
+    "docs/templates/project-profile.md",
+    ".bandit/reviewers/local-qwen.json",
+    "src/commands/init.ts",
+    "src/commands/land-check.ts",
+    "src/commands/qwen-review.ts",
+    "src/commands/validate.ts",
+    "src/state/bootstrap-gaps.ts",
+    "src/state/human-review.ts",
+    "src/state/paths.ts",
+    "src/state/project-profile.ts",
+    "src/state/reviewer-profiles.ts",
+    "src/state/reviewer-adapters.ts",
+    "test/work-create-controller.test.mjs",
+    "test/reviewer-adapters.test.mjs",
+    "test/landing-gates.test.mjs"
+  ]
+}
