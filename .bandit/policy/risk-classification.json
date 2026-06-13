@@ -337,6 +337,11 @@
       "evidence_path": ".bandit/policy/risk-classifications/BANDIT-100-risk-classification.json"
     },
     {
+      "work_item": "BANDIT-101",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/risk-classifications/BANDIT-101-risk-classification.json"
+    },
+    {
       "work_item": "BANDIT-104",
       "decision_kind": "auto_landing",
       "evidence_path": ".bandit/policy/risk-classifications/BANDIT-104-risk-classification.json"

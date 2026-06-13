@@ -114,7 +114,7 @@
       "evidence_path": ".bandit/reviewers/local-qwen.json"
     },
     {
-      "signal_id": "coderabbit_findings_repaired_before_final_rerun",
+      "signal_id": "coderabbit_findings_repaired_or_pm_dispositioned_for_frozen_subject",
       "risk": "medium",
       "evidence_path": "docs/work/BANDIT-101/coderabbit-finding-disposition.md"
     }
@@ -194,8 +194,8 @@
     "rationale": "BANDIT-101 changes repo-native reviewer adapter validation, init scaffolding, and landing-gate evidence checks. It does not touch dependencies, lockfiles, package-manager scripts, CI, credentials, hosted services, telemetry, external repos, merge, push, deploy, or destructive operations. Parser and gate risks must be covered by focused RED tests, full-suite verification, CodeRabbit, and Local Qwen before landing."
   },
   "auto_landing": {
-    "eligible": false,
-    "refusal_rationale": "CodeRabbit and Local Qwen review evidence are not yet terminal pass/current; restore eligibility only after Stage 4 review is complete."
+    "eligible": true,
+    "rationale": "CodeRabbit is terminal for the frozen review subject, material critical/major findings are repaired or PM-dispositioned, Local Qwen completed through the authorized local adapter with non-blocking findings only, and aggregate Stage 4 evidence records durable PM disposition before landing."
   },
   "rationale": "BANDIT-101 is medium workflow risk because reviewer adapter configuration and review-evidence landing gates are trust-bearing workflow surfaces. The implementation is local, deterministic, repo-native, fail-closed for missing reviewers or malformed human review evidence, and covered by focused adapter, Local Qwen, and landing-gate tests plus full-suite verification.",
   "evidence_paths": [

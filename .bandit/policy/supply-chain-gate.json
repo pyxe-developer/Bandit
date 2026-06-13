@@ -317,6 +317,11 @@
       "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-100-supply-chain-gate.json"
     },
     {
+      "work_item": "BANDIT-101",
+      "decision_kind": "auto_landing",
+      "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-101-supply-chain-gate.json"
+    },
+    {
       "work_item": "BANDIT-104",
       "decision_kind": "auto_landing",
       "evidence_path": ".bandit/policy/supply-chain-gates/BANDIT-104-supply-chain-gate.json"

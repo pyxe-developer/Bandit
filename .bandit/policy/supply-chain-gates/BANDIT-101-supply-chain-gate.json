@@ -65,8 +65,8 @@
     "evidence_path": "docs/work/BANDIT-101/brief.md"
   },
   "auto_landing": {
-    "eligible": false,
-    "refusal_rationale": "CodeRabbit and Local Qwen review evidence are not yet terminal pass/current; restore eligibility only after Stage 4 review is complete."
+    "eligible": true,
+    "rationale": "Stage 4 review evidence is terminal/current for local-record landing. BANDIT-101 does not change dependency manifests, lockfiles, package-manager scripts, CI/release workflows, agent skills, fetched prompts, external tool installs, credentials, telemetry, hosted services, publish automation, merge, push, or deploy behavior."
   },
   "rationale": "BANDIT-101 adds typed reviewer adapter config and local landing-gate validation without changing dependency manifests, lockfiles, package-manager scripts, CI/release workflows, skills, fetched prompts, external tool installation, executable generated content, credentials, telemetry, hosted services, publish automation, merge, push, or deploy behavior.",
   "evidence_paths": [
